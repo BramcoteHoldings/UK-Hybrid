@@ -1,0 +1,105 @@
+Insight Build 9.1.0
+
+Changes
+=======
+Entirely New Look.
+Look and Feel adapts to Operating System.
+Various Bug fixes.
+Added Ribbon Tool bar
+
+
+New Features
+============
+Ability to Discount Bill
+Ability to Discount Fee
+Provision to add Notes to a time entry
+Enhanced Time Sheet - displays time recorded based on Daily, Monthly and Yearly.
+Document Preview pane in Matter Documents tab
+Ability to send document as PDF from Matter Document tab.
+When sending email, if contacts defined on matter a list is presented to use as part of To in email.
+Option to have BPay at matter level
+Option to create matter number at Branch level.
+In Creditors, running total of selected invoices displayed.
+Ability to spell check Bill - If dictionary option installed
+New module to allow transfer of funds between bank accounts.
+Enhanced Controlled Monies Module.
+Controlled Monies displayed on Matter.
+Ability to add documents at Contact/Client level.
+All Bills for Client displayed in Client screen.
+Ability to create master matter for billing purposes.  Requires bill Template.
+Ability to add additional email addresses to contact.
+Ability to customize grids by removing columns.
+When creating Bill, any unposted time is shown on the screen.
+Added option to Employee to allow posting of time entries at time of closing Insight.
+
+Build 14
+========
+New
+---
+- If system option set (Maintenance->System->Mail Setting Default->Save email attachments separately), 
+  attachments from email will be extracted from email and saved as sub-items of the email.
+- Ability to record address details on receipt when payor is not client or contact.
+
+
+Fix
+---
+- Fixed issue with Time Sheet caused by once the number of units are recorded the focus stays on that cell.  
+  The effect of this is that the change is not recorded corretly by the time sheet and an error can occur.
+- Fix to Matter Trust Ledger so that it correctly displays matter impacted by Journal when there are more than 1 
+  Journals with the same number but for different banks.
+- Fixed Access Violation when presenting cheque into locked period.
+
+Build 13
+========
+New
+---
+- Added ability to save Time/Fee notes in Documents.  Will appear in documents tab of Matter. (See Employee->Options)
+
+Fix
+---
+- Fixed issue with Bill screen not displaying individual items correctly.
+- Fix to Matter Trust Ledger.  Transactions not always displayed in correct chronological order.
+
+
+
+Build 1 - 12
+============
+New
+---
+- Added Ribbon Tool bar.
+- Added New tab to Matter screen for Client Details.  (Removed Client Details from Contact Tab.)
+- Added ability to store client picture in Contact (Phonebook) and client screens.
+- Able to make a Bank In-Active.
+- Matter Ledgers tab re-arranged.
+- Added functionality to cusomize visibility of toolbar buttons by employee.  (See Employee->Matter Options)
+
+
+CHANGE TO VERSION 9.1
+
+
+Build 43
+========
+New
+---
+Given Names and Last Name in Contact creation screen are now mandatory.
+Street Address in Contact creation is now mandatory.
+Ability to group Reports into Monthly, Quarterly, Yearly. 
+
+
+Fix
+---
+Added additional validation to Receipt Creation to prevent negative amount entered when doing Trust.
+Fixed issue with Receipt Creation "Keep receipt form open after posting?" option not keeping form open.
+Fixed Disbursement Recovery form where Import button did not enable under certain circumstances.
+Fixed error when deleting Safe Custody Packet.
+
+
+
+Build 1 - 42
+============
+New
+---
+Added Author code to list of unposted time when creating bill.
+Added breakdown of tax amount when using discount at time of Bill Creation.
+Removed Timer from top section of Time Sheet.
+Put Bill Creation button back in toolbar on Matter screen.

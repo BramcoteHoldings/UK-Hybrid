@@ -1,0 +1,208 @@
+<!--
+This is the Want script for building axiomation
+-->
+<project name="axiomation"
+         basedir="."
+         default="dist">
+
+  <property name="axiomation.master" value="${autonumber}" />
+  <property name="axiombase"         value="${basedir}\axiom6" />
+  <property name="bin"               value="${axiombase}\bin" />
+  <property name="dcu"               value="${axiombase}\dcu" />
+  <property name="components"        value="${basedir}\components" />
+  <property name="dof"               value="${axiombase}\axiom.dof" />
+
+
+  <tstamp>
+    <format property="when"      pattern="yyyy,mm,dd,HH,nn,ss" />
+    <format property="date.tag"  pattern="yyyy-mm-dd" />
+  </tstamp>
+
+  <!-- Here Clean CVS directories -->
+  
+  <target name="clean" >
+    <echo message="cleaning cvs files" />
+    <!-- delete dir="${axiombase}/**" /-->
+  </target>
+
+  <!-- Here CVS update -->
+  <target name="cvsout" >
+    <echo message="getting files from cvs" />
+
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="checkout" />
+      <arg value="-R" />
+      <arg value="axiom6" />
+    </exec>
+
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="checkout" />
+      <arg value="-R" />
+      <arg value="components" />
+    </exec>
+
+    <echo message="files obtained" />
+  </target>
+
+
+  <!-- Here Get build versions -->
+  <target name="versioninfo">
+    <property name="old.version"  value="?{axiom6/axiom.dof:Version Info Keys:FileVersion}" />
+    <property name="old.build"    value="?{axiom6/axiom.dof:Version Info:Build}" />
+
+    
+    <property name="version.CompanyName"      value="?{axiom6/axiom.dof:Version Info Keys:CompanyName}" />
+    <property name="version.FileDescription"  value="?{axiom6/axiom.dof:Version Info Keys:FileDescription}" />
+    <property name="version.InternalName"     value="?{axiom6/axiom.dof:Version Info Keys:InternalName}" />
+    <property name="version.LegalCopyright"   value="?{axiom6/axiom.dof:Version Info Keys:LegalCopyright}" />
+    <property name="version.LegalTrademarks"  value="?{axiom6/axiom.dof:Version Info Keys:LegalTrademarks}" />
+    <property name="version.OriginalFilename" value="?{axiom6/axiom.dof:Version Info Keys:OriginalFilename}" />
+    <property name="version.ProductName"      value="?{axiom6/axiom.dof:Version Info Keys:ProductName}" />
+    <property name="version.ProductVersion"   value="?{axiom6/axiom.dof:Version Info Keys:ProductVersion}" />
+    <property name="version.Comments"         value="?{axiom6/axiom.dof:Version Info Keys:Comments}" />
+
+
+    <property name="build" value="={1 + ${old.build}}" if="axiomation.master" />
+    <property name="build" value="${old.build}"    unless="axiomation.master" />
+
+    <regexp property="version.version" text="${old.version}" pattern="\.[0-9]*$" subst=".${build}" />
+    <regexp property="comma.version" pattern="\." subst="," text="${version.version}" />
+    
+    <echo message="build                    = ${build}" />
+    <echo message="version                  = ${version.version}" />
+    <echo message="commaversion             = ${comma.version}" />
+    <echo message="version.CompanyName      = ${version.CompanyName}" />
+    <echo message="version.FileDescription  = ${version.FileDescription}" />
+    <echo message="version.InternalName     = ${version.InternalName}" />
+    <echo message="version.LegalCopyright   = ${version.LegalCopyright}" />
+    <echo message="version.LegalTrademarks  = ${version.LegalTrademarks}" />
+    <echo message="version.OriginalFilename = ${version.OriginalFilename}" />
+    <echo message="version.ProductName      = ${version.ProductName}" />
+    <echo message="version.ProductVersion   = ${version.ProductVersion}" />
+    <echo message="version.Comments         = ${version.Comments}" />
+
+    <echo input="${axiombase}\axiomationversion.template.rc" file="${axiombase}\axiomationversion.rc" />
+
+    <echo message="Updating .dof with new version" />
+    <ini file="axiom6/axiom.dof" if="axiomation.master" >
+      <write section="Version Info Keys" key="FileVersion" value="${version.Version}" />                  
+      <write section="Version Info"      key="Build"       value="${build}" />
+    </ini>
+
+  </target>
+
+  <target name="prepare" >
+    <mkdir dir="${dcu}" />
+    <mkdir dir="${bin}" />
+  </target>
+
+
+  <target name="resources" depends="prepare,versioninfo">
+    <brcc file="${axiombase}/axiomationversion.rc" output="${axiombase}/axiom.res" />
+  </target>
+
+    <patternset id="sources" >
+      <include  name="${axiombase}/**" />
+      <include  name="${axiombase}" />
+      <include  name="${components}/**" />
+      <include  name="C:\Program Files\Borland\Delphi6/odac/lib" />
+      <include  name="C:\Program Files\Borland\Delphi6/source/**" />
+      <include  name="C:\Program Files\Borland\Delphi6\Ocx/**" />
+    </patternset>
+
+    <patternset id="resources" >
+      <include name="${bin}" />
+      <include name="${axiombase}" />
+    </patternset>
+
+  <target name="build" depends="prepare,versioninfo,resources">
+
+    <dcc basedir="${axiombase}" source="Axiom.dpr"  >
+      <exeoutput path="${bin}"  />
+      <dcuoutput path="${dcu}"      />
+      <build     value="true" />
+      <optimize  value="true" />
+
+      <define name="NOMULTISELECT" />
+
+      <unitpath     refid="sources"   />
+      <includepath  refid="sources"   />
+      <resourcepath refid="resources" />
+    </dcc>
+  </target>
+
+  <target name="updatecvs" if="axiomation.master">
+    <property name="old.build"    value="?{axiom6/axiom.dof:Version Info:Build}" />
+    <property name="release" value="={1 + ${old.build}}" if="axiomation.master" />
+    <property name="release" value="${old.build}"    unless="axiomation.master" />
+
+    <echo message="tagging for cvs for version ${release}"/>
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="tag" />
+      <arg value="-R" />
+      <arg value="Version${release}" />
+      <arg value="axiom6" />
+    </exec>
+
+    <echo message="updating cvs"/>
+
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="commit" />
+      <arg value="-m" />
+      <arg value="version${release}" />
+      <arg value="axiom6" />
+    </exec>
+
+    <echo message="releasing cvs"/>
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="release" />
+      <arg value="axiom6" />
+    </exec>
+    <exec executable="cvs.exe" >
+      <arg value="-Q" />
+      <arg value="-z9" />
+      <arg value="-d" />
+      <arg value=":pserver:mdredge@ttdev:3000/opt/colateral" />
+      <arg value="release" />
+      <arg value="components" />
+    </exec>
+  </target>
+
+  <target name="release" if="axiomation.master">
+    <property name="old.build"    value="?{axiom6/axiom.dof:Version Info:Build}" />
+    <property name="release" value="={1 + ${old.build}}" if="axiomation.master" />
+    <property name="release" value="${old.build}"    unless="axiomation.master" />
+
+    <property name="dest"    value="\\mel_maude\axiom\releases\${release}" />
+    <echo message="destination path = ${dest}" />
+    <mkdir dir="${dest}" />
+    <copy todir="${dest}" >
+      <fileset dir="${bin}">
+        <exclude name="**/*.ini" />
+        <exclude name="**/*.dll" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="dist" depends="cvsout, prepare,versioninfo,resources,build, updatecvs, release" />
+</project>

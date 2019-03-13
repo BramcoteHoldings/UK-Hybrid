@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015/05/08 23:38:01.000.457,D:\Insight_XE4\Components\rbODAC.dproj=D:\Components-XE4\rbODAC.dproj</Transaction>
+    <Transaction>2015/05/08 23:39:54.000.907,D:\Insight_XE4\Components\daODAC\daODAC107\rbODAC107.dproj=D:\Insight_XE4\Components\rbODAC.dproj</Transaction>
+    <Transaction>2015/05/08 23:40:49.000.020,=D:\Insight_XE4\Components\daODAC\daODAC107\daODAC.pas</Transaction>
+  </Transactions>
+</BorlandProject>

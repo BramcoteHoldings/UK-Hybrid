@@ -1,0 +1,26 @@
+BDE/IBX/ADO/ODAC/SDAC/MyDAC/IBDAC/PgDAC/LiteDAC/AnyDAC/FireDAC/FIBPlus Migration Wizard log
+
+Created at: 29/09/2015 5:53:07 PM
+
+Initializing unit list
+
+Creating backup folder
+
+Allocating temporary folder
+
+Processing file: G:\Insight_XE4_Source\trunk\AccountPayable.pas
+
+19 change(s)
+
+Processing file: G:\Insight_XE4_Source\trunk\AccountPayable.DFM
+
+18 change(s)
+
+Replacing original files with changed versions
+
+Backup file: G:\Insight_XE4_Source\trunk\RBackup\RExpert.reu
+
+Removing temporary folder
+
+Replace procedure was performed sucessfully.
+

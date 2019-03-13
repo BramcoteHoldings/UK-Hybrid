@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015/05/08 23:38:01.000.457,D:\Components-XE4\rbODAC.dproj=D:\Insight_XE4\Components\rbODAC.dproj</Transaction>
+    <Transaction>2015/09/30 12:23:07.005,G:\Insight_XE4_Source\trunk\Components\rbUniDAC.dproj=G:\Insight_XE4_Source\trunk\Components\rbODAC.dproj</Transaction>
+    <Transaction>2015/09/30 12:23:38.895,=G:\Insight_XE4_Source\trunk\Components\daUniDac.pas</Transaction>
+    <Transaction>2015/09/30 12:23:48.385,D:\Components-XE4\daODAC.pas=</Transaction>
+    <Transaction>2015/09/30 12:23:54.875,G:\Insight_XE4_Source\trunk\Components\daUniDac.pas=</Transaction>
+    <Transaction>2015/09/30 12:24:15.125,=G:\Components-XE4\daUniDac.pas</Transaction>
+    <Transaction>2015/09/30 12:24:29.638,=unidacvcl180.dcp</Transaction>
+    <Transaction>2015/09/30 12:24:29.647,=unidac180.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

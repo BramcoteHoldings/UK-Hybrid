@@ -1,0 +1,123 @@
+﻿[Main]
+Version=2
+
+[cbTaxType: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+ItemIndex=2
+
+[chkBill: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkDeposit: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkFunds: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkHeld: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkInvoiceSupplied: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkNoExit: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[chkPrint: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="True"
+
+[chkUrgent: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Checked="False"
+
+[cmbAuthor: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+EditValue="ABC"
+
+[cmbBank: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+EditValue="G1"
+
+[cmbBills: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+EditValue=""
+
+[cmbExpenseType: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+
+[cmbInvoice: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+EditValue=""
+
+[cxCBAccountType: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+
+[dfSlipNo: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text=""
+
+[dtpReqDate: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Date=43360
+
+[mmoNotes: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+
+[mmoNotes/Lines: TMemoStrings]
+=
+
+[neAmount: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+EditValue=0
+
+[tbDesc: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="Asaas"
+
+[tbFile: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="180708"
+
+[tbLedger: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text=""
+
+[tbPayee: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text="Active Property Conveyancing"
+
+[teChequeNo: TcxPropertiesStoreComponent]
+=
+SourceDPI=96
+Text=""
+

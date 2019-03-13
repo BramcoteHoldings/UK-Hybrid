@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/6.0/XMLDataBinding">
+  <xs:element name="AnswerSet" type="AnswerSetType"/>
+  <xs:complexType name="AnswerSetType"><xs:annotation>
+      <xs:appinfo xdb:docElement="AnswerSet"/>
+    </xs:annotation>
+    
+    <xs:sequence>
+      <xs:element name="Answer" type="AnswerType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="title" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="AnswerType">
+    <xs:sequence>
+      <xs:element name="TFValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="NumValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="TextValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="DateValue" type="xs:string" minOccurs="0"/>
+      <xs:element name="MCValue" type="xs:integer" minOccurs="0"/>
+      <xs:element name="ClauseLibValue" type="xs:integer" minOccurs="0"/>
+      <xs:element name="ClauseSelValue" type="ClauseSelValueType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="ClauseSelValueType">
+    <xs:simpleContent>
+      <xs:restriction base="xs:string">
+        <xs:attribute name="title" type="xs:string"/>
+        <xs:attribute name="filename" type="xs:string"/>
+        <xs:attribute name="description" type="xs:string"/>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

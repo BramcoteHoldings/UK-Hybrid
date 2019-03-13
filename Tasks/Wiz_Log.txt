@@ -1,0 +1,82 @@
+BDE/IBX/ADO/ODAC/SDAC/MyDAC/IBDAC/PgDAC/LiteDAC/AnyDAC/FireDAC/FIBPlus Migration Wizard log
+
+Created at: 17/03/2014 13:37:28
+
+Initializing unit list
+
+Creating backup folder
+
+Allocating temporary folder
+
+Processing file: D:\Insight_XE2\Tasks\TaskDecisions.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskExplorer.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskItemNew.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskItemSearch.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskNew.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\Tasks.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskSearch.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskTempNew.pas
+
+1 change(s)
+
+Processing file: D:\Insight_XE2\Tasks\TaskDecisions.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskExplorer.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskItemNew.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskItemSearch.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskNew.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\Tasks.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskSearch.DFM
+
+No changes
+
+Processing file: D:\Insight_XE2\Tasks\TaskTempNew.DFM
+
+No changes
+
+Replacing original files with changed versions
+
+Backup file: D:\Insight_XE2\Tasks\RBackup\RExpert.reu
+
+Removing temporary folder
+
+Replace procedure was performed sucessfully.
+

@@ -1,0 +1,7 @@
+
+
+1.   Create a sub-directory named Dictionaries off Axiom application directory
+
+2.   Place the attached files in that directory.
+
+

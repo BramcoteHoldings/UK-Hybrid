@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2015/03/23 11:14:24.686,=rtl.dcp</Transaction>
+    <Transaction>2015/03/23 11:18:47.597,=D:\Insight_XE2\Components\Tx4oleLib_TLB.pas</Transaction>
+    <Transaction>2015/03/23 11:18:47.629,=vcl.dcp</Transaction>
+    <Transaction>2015/03/23 11:18:47.634,=vcldb.dcp</Transaction>
+    <Transaction>2015/03/23 11:18:47.638,=dbrtl.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

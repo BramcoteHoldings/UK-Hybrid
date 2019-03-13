@@ -1,0 +1,32 @@
+* Templating/Stencilling in INSIGHT
+** To remember....
+If there is *only* one template/stencil available, it should be auto loaded when the user selects 'Add/Edit'.
+
+** Details
+
+Table details
+t5g
+
+template_name
+template_descr
+amount
+template_modified
+template_modby
+
+* Security Entries
+Created the following entries
+
+- Template.Alloc
+- Template.Cheque
+- Template.Fee
+- Template.NMemo
+- Template.Receipt
+- Template.Sundry
+- Template.TransItem
+
+* EmpSecurity Entries
+
+
+
+* To Do
+Review Tab Order....

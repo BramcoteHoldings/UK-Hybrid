@@ -1,0 +1,33 @@
+MAINICON ICON axiomation.ico
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION ${comma.version}
+PRODUCTVERSION ${comma.version}
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS 0x4L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904B0"
+    BEGIN
+      VALUE "CompanyName",      "${version.CompanyName}\0"
+      VALUE "FileDescription",  "${version.FileDescription}\0"
+      VALUE "FileVersion",      "${version.Version}\0"
+      VALUE "InternalName",     "${version.InternalName}\0"
+      VALUE "LegalCopyright",   "${version.LegalCopyRight}\0"
+      VALUE "LegalTrademarks",  "${version.LegalTrademarks}\0"
+      VALUE "OriginalFilename", "${version.OriginalFilename}\0"
+      VALUE "ProductName",      "${version.ProductName}\0"
+      VALUE "ProductVersion",   "${version.ProductVersion}\0"
+      VALUE "Comments",         "${version.Comments}\0"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809,1200
+  END
+END
+

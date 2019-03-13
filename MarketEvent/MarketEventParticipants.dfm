@@ -1,0 +1,3344 @@
+object frmMarketEventParticipants: TfrmMarketEventParticipants
+  Left = 373
+  Top = 92
+  Caption = 'Event Participants'
+  ClientHeight = 722
+  ClientWidth = 1112
+  Color = clBtnFace
+  Constraints.MinHeight = 562
+  Constraints.MinWidth = 485
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel3: TPanel
+    Left = 0
+    Top = 28
+    Width = 1112
+    Height = 209
+    Align = alTop
+    BevelEdges = []
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitWidth = 1102
+    object Label1: TLabel
+      Left = 18
+      Top = 11
+      Width = 29
+      Height = 13
+      Caption = 'Event'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Bevel1: TBevel
+      Left = 65
+      Top = 17
+      Width = 404
+      Height = 8
+      Shape = bsTopLine
+      Style = bsRaised
+    end
+    object Panel2: TPanel
+      Left = 25
+      Top = 24
+      Width = 442
+      Height = 133
+      BevelOuter = bvNone
+      TabOrder = 0
+      object Label3: TLabel
+        Left = 37
+        Top = 14
+        Width = 31
+        Height = 13
+        Caption = 'Event:'
+      end
+      object Label4: TLabel
+        Left = 41
+        Top = 41
+        Width = 27
+        Height = 13
+        Caption = 'Date:'
+      end
+      object Label5: TLabel
+        Left = 257
+        Top = 41
+        Width = 26
+        Height = 13
+        Caption = 'Time:'
+      end
+      object Label6: TLabel
+        Left = 21
+        Top = 69
+        Width = 47
+        Height = 13
+        Caption = 'Location:'
+      end
+      object tbEvent: TcxDBTextEdit
+        Left = 80
+        Top = 10
+        DataBinding.DataField = 'EVENT'
+        DataBinding.DataSource = dmMarketEventDataModule.dstbEvent
+        Style.Color = clMoneyGreen
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 4
+        Width = 337
+      end
+      object cbEvent: TcxLookupComboBox
+        Left = 79
+        Top = 9
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'EVENT_ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'EVENT'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListSource = dmMarketEventDataModule.dstbEvent
+        Properties.OnCloseUp = cxLookupComboBox1PropertiesCloseUp
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 0
+        Width = 337
+      end
+      object tbEventDate: TcxDBTextEdit
+        Left = 79
+        Top = 37
+        DataBinding.DataField = 'EVENT_DATE'
+        DataBinding.DataSource = dmMarketEventDataModule.dsEventDtls
+        Properties.ReadOnly = True
+        Style.Color = clMoneyGreen
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 1
+        Width = 121
+      end
+      object tbEventTime: TcxDBTextEdit
+        Left = 295
+        Top = 37
+        DataBinding.DataField = 'EVENT_TIME'
+        DataBinding.DataSource = dmMarketEventDataModule.dsEventDtls
+        Properties.ReadOnly = True
+        Style.Color = clMoneyGreen
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 2
+        Width = 121
+      end
+      object cxDBMemo1: TcxDBMemo
+        Left = 79
+        Top = 65
+        DataBinding.DataField = 'EVENT_LOCATION'
+        DataBinding.DataSource = dmMarketEventDataModule.dsEventDtls
+        Properties.ReadOnly = True
+        Style.Color = clMoneyGreen
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 3
+        Height = 62
+        Width = 337
+      end
+    end
+    object cxDBCurrencyEdit1: TcxDBCurrencyEdit
+      Left = 104
+      Top = 158
+      DataBinding.DataField = 'EVENT_BUDGET'
+      DataBinding.DataSource = dmMarketEventDataModule.dsEventDtls
+      Properties.ReadOnly = True
+      Style.Color = clMoneyGreen
+      TabOrder = 1
+      Width = 121
+    end
+    object cxLabel1: TcxLabel
+      Left = 48
+      Top = 159
+      Caption = 'Budget:'
+      Transparent = True
+    end
+    object cxDBCurrencyEdit2: TcxDBCurrencyEdit
+      Left = 104
+      Top = 186
+      DataBinding.DataField = 'COST_PER_PERSON'
+      DataBinding.DataSource = dmMarketEventDataModule.dsEventDtls
+      Properties.ReadOnly = True
+      Style.Color = clMoneyGreen
+      TabOrder = 3
+      Width = 121
+    end
+    object cxLabel2: TcxLabel
+      Left = 14
+      Top = 187
+      Caption = 'Cost per head:'
+      Properties.Alignment.Horz = taRightJustify
+      Transparent = True
+      AnchorX = 93
+    end
+    object lblInviteeCost: TcxLabel
+      Left = 246
+      Top = 187
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -12
+      Style.Font.Name = 'Segoe UI'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+    end
+    object lblTotalCost: TcxLabel
+      Left = 246
+      Top = 160
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -12
+      Style.Font.Name = 'Segoe UI'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 237
+    Width = 1112
+    Height = 485
+    Align = alClient
+    BevelEdges = []
+    BevelOuter = bvNone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    ExplicitWidth = 1102
+    ExplicitHeight = 455
+    object grdParticipants: TcxGrid
+      Left = 0
+      Top = 59
+      Width = 1112
+      Height = 426
+      Align = alClient
+      TabOrder = 0
+      LookAndFeel.Kind = lfFlat
+      LookAndFeel.NativeStyle = True
+      ExplicitWidth = 1102
+      ExplicitHeight = 396
+      object tvParticipants: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.Images = ilstToolbar
+        Navigator.Buttons.First.Visible = False
+        Navigator.Buttons.Insert.ImageIndex = 0
+        Navigator.Buttons.Edit.ImageIndex = 10
+        Navigator.Buttons.GotoBookmark.Visible = False
+        Navigator.Buttons.Filter.Visible = False
+        DataController.DataSource = dsEventParticipants
+        DataController.Filter.MaxValueListCount = 1000
+        DataController.Filter.Active = True
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Kind = skCount
+            FieldName = 'EVENT_PART_ID'
+            Column = tvParticipantsSEARCH
+          end>
+        DataController.Summary.SummaryGroups = <>
+        Filtering.ColumnPopup.MaxDropDownItemCount = 12
+        OptionsBehavior.GoToNextCellOnEnter = True
+        OptionsBehavior.IncSearch = True
+        OptionsBehavior.PullFocusing = True
+        OptionsCustomize.ColumnHidingOnGrouping = False
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsSelection.HideFocusRectOnExit = False
+        OptionsSelection.InvertSelect = False
+        OptionsView.CellEndEllipsis = True
+        OptionsView.CellAutoHeight = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        OptionsView.HeaderEndEllipsis = True
+        OptionsView.Indicator = True
+        Preview.Column = tvParticipantsNOTES
+        Preview.MaxLineCount = 2
+        Preview.Visible = True
+        object tvParticipantsNNAME: TcxGridDBColumn
+          DataBinding.FieldName = 'NNAME'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Visible = False
+          Options.Filtering = False
+          VisibleForCustomization = False
+          Width = 126
+        end
+        object tvParticipantsSEARCH: TcxGridDBColumn
+          Caption = 'Participant'
+          DataBinding.FieldName = 'SEARCH'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Alignment.Horz = taLeftJustify
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+              Kind = bkGlyph
+            end>
+          Properties.ClearKey = 46
+          Properties.ReadOnly = True
+          Properties.OnButtonClick = cxGrid1DBTableView1SEARCHPropertiesButtonClick
+          Width = 180
+        end
+        object tvParticipantsACCEPTED: TcxGridDBColumn
+          Caption = 'Accepted'
+          DataBinding.FieldName = 'ACCEPTED'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taLeftJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.ImmediatePost = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ReadOnly = False
+          Properties.ValueChecked = 'Y'
+          Properties.ValueGrayed = ''
+          Properties.ValueUnchecked = 'N'
+          Properties.OnEditValueChanged = grdParticipantsACCEPTEDPropertiesEditValueChanged
+          HeaderAlignmentHorz = taCenter
+          MinWidth = 16
+          Options.Filtering = False
+          Width = 108
+        end
+        object tvParticipantsATTENDED: TcxGridDBColumn
+          Caption = 'Attended'
+          DataBinding.FieldName = 'ATTENDED'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taLeftJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.ImmediatePost = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ReadOnly = False
+          Properties.ValueChecked = 'Y'
+          Properties.ValueGrayed = ''
+          Properties.ValueUnchecked = 'N'
+          HeaderAlignmentHorz = taCenter
+          MinWidth = 16
+          Options.Filtering = False
+          Width = 99
+        end
+        object tvParticipantsDECLINED: TcxGridDBColumn
+          Caption = 'Declined'
+          DataBinding.FieldName = 'DECLINED'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taLeftJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.ImmediatePost = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ReadOnly = False
+          Properties.ValueChecked = 'Y'
+          Properties.ValueGrayed = ''
+          Properties.ValueUnchecked = 'N'
+          HeaderAlignmentHorz = taCenter
+          MinWidth = 16
+          Options.Filtering = False
+          Width = 86
+        end
+        object tvParticipantsPRINTED: TcxGridDBColumn
+          Caption = 'Printed'
+          DataBinding.FieldName = 'PRINTED'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taLeftJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.ImmediatePost = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ReadOnly = False
+          Properties.ValueChecked = 'Y'
+          Properties.ValueGrayed = ''
+          Properties.ValueUnchecked = 'N'
+          HeaderAlignmentHorz = taCenter
+          MinWidth = 16
+          Options.Filtering = False
+          Width = 89
+        end
+        object tvParticipantsALT_SEARCH: TcxGridDBColumn
+          Caption = 'Alt Address'
+          DataBinding.FieldName = 'ALT_SEARCH'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Alignment.Horz = taLeftJustify
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+              Kind = bkGlyph
+            end>
+          Properties.ReadOnly = True
+          Properties.OnButtonClick = cxGrid1DBTableView1ALT_SEARCHPropertiesButtonClick
+          Options.Filtering = False
+          Width = 177
+        end
+        object tvParticipantsTITLE: TcxGridDBColumn
+          Caption = 'Title'
+          DataBinding.FieldName = 'SALUTATION'
+          Options.Editing = False
+          Options.Filtering = False
+          Options.Focusing = False
+          Width = 103
+        end
+        object tvParticipantsGIVENNAMES: TcxGridDBColumn
+          Caption = 'Name'
+          DataBinding.FieldName = 'GIVENNAMES'
+          Options.Editing = False
+          Options.Focusing = False
+          Width = 92
+        end
+        object tvParticipantsLASTNAME: TcxGridDBColumn
+          Caption = 'Surname'
+          DataBinding.FieldName = 'LASTNAME'
+          Options.Editing = False
+          Options.Focusing = False
+          Width = 80
+        end
+        object tvParticipantsEMAIL: TcxGridDBColumn
+          Caption = 'Email'
+          DataBinding.FieldName = 'EMAIL'
+          Options.Editing = False
+          Options.Focusing = False
+          Width = 67
+        end
+        object tvParticipantsNOTES: TcxGridDBColumn
+          Caption = 'Notes'
+          DataBinding.FieldName = 'NOTES'
+          PropertiesClassName = 'TcxMemoProperties'
+          Properties.Alignment = taLeftJustify
+          Properties.MaxLength = 250
+          Properties.ReadOnly = False
+          Options.Filtering = False
+          Width = 120
+        end
+        object tvParticipantsALT_NAME: TcxGridDBColumn
+          Caption = 'Alt Name'
+          DataBinding.FieldName = 'ALT_NAME'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+              Kind = bkGlyph
+            end>
+          Visible = False
+          Options.Filtering = False
+          VisibleForCustomization = False
+          Width = 155
+        end
+        object tvParticipantsEVENT_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'EVENT_ID'
+          PropertiesClassName = 'TcxMaskEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.MaxLength = 0
+          Properties.ReadOnly = False
+          Visible = False
+          Options.Filtering = False
+          VisibleForCustomization = False
+          Width = 105
+        end
+        object tvParticipantsEVENT_PART_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'EVENT_PART_ID'
+          PropertiesClassName = 'TcxMaskEditProperties'
+          Properties.Alignment.Horz = taRightJustify
+          Properties.MaxLength = 0
+          Properties.ReadOnly = False
+          Visible = False
+          Options.Filtering = False
+          VisibleForCustomization = False
+          Width = 147
+        end
+        object tvParticipantsCREATED: TcxGridDBColumn
+          DataBinding.FieldName = 'CREATED'
+          PropertiesClassName = 'TcxDateEditProperties'
+          Properties.Alignment.Horz = taLeftJustify
+          Properties.DateButtons = [btnClear, btnToday]
+          Properties.DateOnError = deToday
+          Visible = False
+          Options.Filtering = False
+          VisibleForCustomization = False
+          Width = 176
+        end
+        object tvParticipantsWORKPHONE: TcxGridDBColumn
+          Caption = 'Phone'
+          DataBinding.FieldName = 'WORKPHONE'
+        end
+      end
+      object grdParticipantsLevel1: TcxGridLevel
+        GridView = tvParticipants
+      end
+    end
+    object dxBarDockControl2: TdxBarDockControl
+      Left = 0
+      Top = 31
+      Width = 1112
+      Height = 28
+      Align = dalTop
+      AllowDocking = False
+      BarManager = dxBarManager1
+      ExplicitWidth = 1102
+    end
+    object Panel5: TPanel
+      Left = 0
+      Top = 0
+      Width = 1112
+      Height = 31
+      Align = alTop
+      BevelEdges = []
+      BevelOuter = bvNone
+      TabOrder = 2
+      ExplicitWidth = 1102
+      object Label2: TLabel
+        Left = 18
+        Top = 8
+        Width = 61
+        Height = 13
+        Caption = 'Participants'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Bevel2: TBevel
+        Left = 95
+        Top = 14
+        Width = 372
+        Height = 8
+        Shape = bsTopLine
+        Style = bsRaised
+      end
+    end
+  end
+  object ActionManager1: TActionManager
+    ActionBars = <
+      item
+      end>
+    Left = 497
+    Top = 277
+    StyleName = 'XP Style'
+    object actEventPrior: TDataSetPrior
+      Category = 'Dataset'
+      Caption = '&Prior'
+      Hint = 'Prior'
+      ImageIndex = 1
+      DataSource = dmMarketEventDataModule.dsEventParticipants
+    end
+    object actEventNext: TDataSetNext
+      Category = 'Dataset'
+      Caption = '&Next'
+      Hint = 'Next'
+      ImageIndex = 2
+      DataSource = dmMarketEventDataModule.dsEventParticipants
+    end
+    object actEventInsert: TDataSetInsert
+      Category = 'Dataset'
+      Caption = '&Add'
+      Hint = 'Insert'
+      ImageIndex = 4
+      OnExecute = actEventInsertExecute
+      DataSource = dsEventParticipants
+    end
+    object actEventEdit: TDataSetEdit
+      Category = 'Dataset'
+      Caption = '&Edit'
+      Hint = 'Edit'
+      ImageIndex = 6
+      DataSource = dmMarketEventDataModule.dsEventParticipants
+    end
+    object actEventDelete: TDataSetDelete
+      Category = 'Dataset'
+      Caption = '&Delete'
+      Hint = 'Delete'
+      ImageIndex = 5
+      DataSource = dsEventParticipants
+    end
+    object actEventPost: TDataSetPost
+      Category = 'Dataset'
+      Caption = '&Save'
+      Hint = 'Post'
+      ImageIndex = 7
+      DataSource = dsEventParticipants
+    end
+    object actEventCancel: TDataSetCancel
+      Category = 'Dataset'
+      Caption = '&Cancel'
+      Hint = 'Cancel'
+      ImageIndex = 8
+      DataSource = dsEventParticipants
+    end
+    object actRefresh: TDataSetRefresh
+      Category = 'Dataset'
+      Caption = '&Refresh'
+      Hint = 'Refresh'
+      ImageIndex = 9
+      OnExecute = actRefreshExecute
+      DataSource = dsEventParticipants
+    end
+  end
+  object ilstToolbar: TImageList
+    Left = 953
+    Top = 48
+    Bitmap = {
+      494C010111001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000005000000001002000000000000050
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000E6E6E619B2B2B24D9292926D8D8D8D729B9B9B64C7C7C738F9F9
+      F906000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FCFC
+      FC0391919F6E2B2B6BD4050563FA000065FF000060FF00004FFF16163DE96262
+      629DD4D4D42B0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F4F4F40B6060
+      909F000084FF00008EFF00008EFF00008FFF00008CFF000088FF000081FF0101
+      54FF34343CCBC2C2C23D00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000FDFDFD025A5A9AA50000
+      96FF000097FF00009BFF00009FFF0000A0FF00009DFF000097FF00008FFF0000
+      88FF000062FF36363EC9D6D6D629000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000008F8FB7700101A3FF0808
+      9EFF9999D4FF6868D0FF0000ACFF0000AEFF0000A9FF4848B8FFB7B7E3FF2727
+      A5FF00008CFF010152FF7171718E000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000DDDDEF222828ABD90000ABFF2828
+      A3FFDEDED2FFFEFEFFFF6464D4FF0000B3FF4646C0FFE7E7ECFFFFFFF7FF5E5E
+      B7FF00009AFF020287FF2E2E45D1000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000009797E5690606B0FD0303B9FF0000
+      C2FF4C4CA7FFE6E6D9FFFCFCFFFF9E9EE6FFE8E9F4FFFFFFF1FF7575B9FF0606
+      B1FF0101ABFF0202A0FF12135DED000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000005859D0AB0808BBFF0707C8FF0505
+      D1FF0000C8FF5353B6FFF2F2EDFFFFFFFFFFFFFFFCFF7575C9FF0000BEFF0101
+      C3FF0303B8FF0303ACFF0F0F6EF2000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000004B4BD2BC0C0CC9FF0D0DD8FF0B0B
+      DCFF0000D6FF3C3DCEFFEEEFEDFFFFFFFFFFFFFFFDFF5858DBFF0000CAFF0303
+      CBFF0606C5FF0606B8FF111178F1000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000007272E6931414D8FF1717EAFF0B0B
+      F1FF4343DBFFE4E4EAFFFDFDF5FFBABAD4FFEAEAE8FFFEFEFFFF6363E5FF0303
+      D7FF0A0ACFFF0A0AC3FF21217FE2000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000BBBBF7452525E5F22222FBFF3F3F
+      E9FFDCDCE5FFFDFDEEFF7373C5FF0303D7FF5151B0FFE3E3D6FFFFFFFEFF6161
+      E5FF0808DBFF0F0FCAFF4F4F85B2000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F3F3FD0C5E5EF1AF3232FFFF5252
+      EDFFB3B3C2FF7777CAFF0000EAFF0000ECFF0000E8FF5252B4FFADADB0FF4D4D
+      E1FF1818EDFF1818B1F5B6B6B949000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000D6D6FC293E3EFBE75353
+      FFFF6868EFFF5757F9FF3838FFFF2525FDFF2929FFFF3838FCFF4242EBFF3232
+      FFFF1F1FE9FF7E7EA78400000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000C2C2FC404848
+      FDE66E6EFFFF9191FFFF9393FFFF8484FFFF7676FFFF6767FFFF5151FFFF3030
+      FBFD7C7CB488FEFEFE0100000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000DCDC
+      FE246D6DFCB16868FEF68787FFFF9292FFFF7676FFFF5353FFFF5151F2D2A6A6
+      CD5C000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1F81E0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00008060600080606000FF00FF00FF00FF008060600080606000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000000000000000FF
+      FF0000FFFF0000FFFF0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000008080800042424200996633000000
+      0000000000000000000000000000000000000000000000000000000000008060
+      6000A4A0A000A4A0A000806060008060600080606000F0FBFF00806060008060
+      6000806060000000000000000000000000000000000000000000000000000000
+      0000000000000000000084840000848400000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FFFF0000FFFF0000FFFF000000000000000000000000
+      00007B7B7B007B7B7B007B7B7B00000000000000000000000000000000000000
+      0000000000000000000000000000000000005F5F5F003939390099663300CC99
+      660000000000000000000000000000000000000000000000000080606000C0DC
+      C000A4A0A000A4A0A000A4A0A000404040004040400080606000C0C0C000F0FB
+      FF00C0C0C0008060600080606000806060000000000000000000000000000000
+      00000000000000000000848400008484000000000000FFFF0000000000000000
+      000000000000000000000000000000000000000000000000FF000000FF000000
+      FF00000000007B7B7B007B7B7B007B7B7B007B7B7B007B7B7B007B7B7B007B7B
+      7B007B7B7B0000000000FFFFFF00000000000000000000000000000000000000
+      000000000000000000000000000000000000000000006666330099663300CC66
+      3300CC9966000000000000000000000000000000000080606000C0DCC000C0C0
+      C000A4A0A000A4A0A000A4A0A000404040000000000000000000000000000000
+      000080808000C0C0C00080606000FF00FF000000000000000000000000000000
+      000000000000848400008484000000000000FFFF0000FFFF0000000000000000
+      000000000000000000000000000000000000000000000000FF000000FF000000
+      FF000000FF000000000000000000000000000000000000000000000000000000
+      0000FFFFFF0000000000FFFFFF00000000006666660066666600666666006666
+      660066666600666666006666660066666600000000000000000099663300CC66
+      3300CC996600CC996600000000000000000080606000C0C0C000C0C0C000A4A0
+      A000C0DCC000C0C0C000C0C0C000C0C0C000A4A0A000A4A0A000406060000000
+      0000000000000000000080606000808080000000000000000000000000000000
+      000000000000848400008484000000000000FFFF0000FFFF000000000000FFFF
+      0000FFFF000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF00000000006666660039393900393939003366
+      330066663300666633006666330099663300CC99660000000000000000006666
+      3300CC663300CC996600000000000000000080606000C0C0C000A4A0A000F0FB
+      FF00F0FBFF00F0FBFF00F0FBFF00C0DCC000C0DCC000C0C0C000C0C0C000C0C0
+      C000A4A0A0004060600080808000808080000000000000000000000000000000
+      0000848400008484000000000000FFFF0000FFFF0000FFFF000000000000FFFF
+      0000FFFF000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF00000000006666660039393900666633009966
+      3300CC663300CC996600CC999900CC9999000000000000000000000000000000
+      000099663300CC996600CC9966000000000080606000A4A0A000F0FBFF00F0FB
+      FF00F0FBFF00C0DCC000A4A0A000A4A0A000C0C0C000C0C0C000C0DCC000C0DC
+      C000C0C0C000C0C0C000A4A0A000806060000000000000000000000000000000
+      0000848400008484000000000000FFFF000000000000FFFF0000FFFF0000FFFF
+      0000FFFF000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF0000000000666666003939390099663300CC66
+      3300CC9966007777770000000000000000000000000000000000000000000000
+      000042424200CC993300CC99660000000000000000008060600080606000F0FB
+      FF00C0C0C00080808000A4A0A000A4A0A000A4A0A000A4A0A000A4A0A000A4A0
+      A000C0C0C000C0C0C000C0C0C000806060000000000000000000000000008484
+      00008484000000000000FFFF0000FFFF000000000000FFFF0000FFFF0000FFFF
+      0000FFFF000000000000000000000000000000000000FFFFFF007B7B7B007B7B
+      7B00FFFFFF007B7B7B007B7B7B00FFFFFF007B7B7B00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF0000000000666666003939390099663300CC99
+      3300CC996600CC99660077777700000000000000000000000000000000000000
+      00004D4D4D00CC663300CC996600000000000000000000000000000000008060
+      6000C0A060008060600080606000808080008060600080808000A4A0A000A4A0
+      A000C0C0C000C0C0C00080606000000000000000000000000000000000000000
+      00000000000000000000FFFF00000000000000000000FFFF0000FFFF00000000
+      0000FFFF000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF00000000006666660039393900CC663300CC99
+      3300CC993300CC663300CC663300777777000000000000000000000000007777
+      770042424200CC663300CC996600000000000000000000000000000000000000
+      0000C0A06000F0CAA600F0CAA600F0CAA600C0A06000C0A06000C0A060008080
+      8000806060008060600000000000000000000000000000000000000000008484
+      00008484000084840000000000008484000000000000FFFF0000FFFF00000000
+      0000FFFF000000000000000000000000000000000000FFFFFF007B7B7B007B7B
+      7B00FFFFFF007B7B7B007B7B7B007B7B7B00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF00000000006666660039393900CC9966000000
+      0000CC663300CC663300CC663300996633009966330077777700666666004D4D
+      4D0066663300CC996600CC996600000000000000000000000000000000000000
+      0000C0A06000F0CAA600F0CAA600F0CAA600F0CAA600F0CAA600C0A060000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000FFFF0000000000000000
+      0000FFFF000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000FFFFFF0000000000FFFFFF00000000006666660033663300CC9999000000
+      000000000000CC663300CC663300CC663300CC66330099663300666633006666
+      3300CC663300CC9966000000000000000000000000000000000000000000C0A0
+      6000F0CAA600F0CAA600F0CAA600F0CAA600F0CAA600C0A06000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000084840000848400008484000000000000848400000000
+      0000FFFF00000000000000000000000000000000000000000000FFFFFF000000
+      0000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000
+      0000FFFFFF000000000000000000000000006666660066663300F0CAA6000000
+      0000000000000000000000000000CC663300CC663300CC663300CC663300CC99
+      6600CC996600000000000000000000000000000000000000000000000000C0A0
+      6000F0CAA600F0CAA600F0CAA600F0CAA600F0CAA600C0A06000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000FFFF000000000000000000000000000000000000000000007B7B7B000000
+      00007B7B7B00000000007B7B7B00000000007B7B7B00000000007B7B7B000000
+      00000000000000000000000000000000000000000000CC999900F0CAA6000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000C0A06000F0FB
+      FF00F0FBFF00F0CAA600F0CAA600F0CAA600F0CAA600C0A06000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000848400008484
+      0000000000000000000000000000000000007B7B7B00000000007B7B7B000000
+      00007B7B7B00000000007B7B7B00000000007B7B7B00000000007B7B7B000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000C0A06000C0A0
+      6000C0A06000F0FBFF00F0CAA600F0CAA600C0A0600000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C0A06000C0A06000C0A060000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000FF000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000FF000000FF000000FF0000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000FF0000000000000000000000
+      00000000FF00000000000000000000000000000000000000FF00000000000000
+      000000000000000000007F7F7F00000000000000000000000000000000000000
+      000000FF000000FF000000FF0000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000FF00000084000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      8400000084000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000BDBDBD000000000000000000000000000000
+      000000000000000000000000000000000000000000000000FF00000000000000
+      00000000FF0000000000000000000000000000000000000000000000FF000000
+      0000000000007F7F7F000000FF000000000000000000000000000000000000FF
+      000000FF000000FF000000FF000000FF00000000000000000000000000000000
+      000000000000000000000000000000000000000000000000FF00000084000000
+      8400000000000000000000000000000000000000000000000000000084000000
+      84000000FF000000000000000000000000000000000000000000000000000000
+      000000000000BDBDBD00000000000000000000000000BDBDBD00000000000000
+      000000000000000000000000000000000000000000007F7F7F000000FF007F7F
+      7F000000FF0000000000000000000000000000000000000000007F7F7F000000
+      FF007F7F7F000000FF000000000000000000000000000000000000FF000000FF
+      000000FF000000FF000000FF000000FF00000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000000000FF000000
+      8400000084000000000000000000000000000000000000008400000084000000
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000BDBDBD000000000000000000000000007B7B
+      7B000000000000000000000000000000000000000000000000000000FF000000
+      FF00000000000000000000000000000000000000000000000000000000000000
+      FF000000FF00000000000000000000000000000000000084000000FF000000FF
+      0000000000000000000000FF000000FF000000FF000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      FF000000840000008400000000000000000000008400000084000000FF000000
+      000000000000000000000000000000000000FF000000FF000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00007B7B7B0000000000000000000000000000000000000000000000FF000000
+      FF00000000000000FF000000000000000000000000000000FF00000000000000
+      FF000000FF000000000000000000000000000084000000FF0000000000000000
+      000000000000000000000000000000FF000000FF000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000FF00000084000000840000008400000084000000FF00000000000000
+      000000000000000000000000000000000000FF00000000000000000000000000
+      0000000000000000000000000000BDBDBD00BDBDBD00000000007B7B7B000000
+      000000000000000000007B7B7B0000000000000000000000FF000000FF000000
+      FF000000FF0000000000000000000000000000000000000000000000FF000000
+      FF000000FF000000FF000000FF00000000000000000000000000000000000000
+      000000000000000000000000000000FF000000FF000000FF0000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000840000008400000084000000840000000000000000000000
+      000000000000000000000000000000000000FF00000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000FF00000000000000FF000000
+      FF00000000000000000000000000000000000000000000000000000000000000
+      00000000FF000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF0000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000840000008400000084000000840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000007B7B7B0000000000000000000000000000000000000000000000
+      FF000000FF000000000000000000000000000000000000000000000000000000
+      00000000FF000000FF0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000FF000000FF00000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000008400000084000000FF000000FF000000840000008400000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      FF000000FF000000000000000000000000000000000000000000000000000000
+      00000000FF000000FF0000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000000084000000FF
+      0000000000000000000000000000000000000000000000000000000000000000
+      8400000084000000FF0000000000000000000000FF0000008400000084000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000084
+      000000FF00000000000000000000000000000000000000000000000084000000
+      84000000FF00000000000000000000000000000000000000FF00000084000000
+      8400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000FF000000FF00000000000000000000000084000000FF000000
+      FF000000000000000000000000000000000000000000000000000000FF000000
+      8400000084000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF000084840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF000084840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FF000000FF000000FF0000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000848484008484840084848400000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF000084840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF000084840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF000084840000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000FFFF0000FFFF0000848400000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FFFF0000FFFF00008484000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000FFFFFF000000000000000000000000000000000000000000FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000FFFF000084840000000000000000000000000000FFFF0000FFFF000084
+      8400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      000000FFFF00008484000000000000000000000000000000000000FFFF000084
+      8400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFF000000000000000000000000000000000000000000FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      000000FFFF0000FFFF0000848400000000000000000000FFFF0000FFFF000084
+      8400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF000000000000000000000000000000000000000000000000000000
+      00000000000000FFFF0000FFFF0000FFFF0000FFFF0000FFFF00008484000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FFFFFF00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000FFFFFF000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFF0000000000000000000000000000000000000000000000
+      000000000000FFFFFF0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFF0000000000000000000000000000000000000000000000
+      0000FFFFFF000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FFFFFF00000000000000000000000000000000000000
+      0000FFFFFF000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FFFFFF00000000000000000000000000FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000FFFFFF00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FFFFFF000000000000000000FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000FFFFFF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FFFFFF00000000000000000000000000000000000000
+      0000FFFFFF000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FFFFFF0000000000000000000000000000000000000000000000
+      000000000000FFFFFF0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFFF
+      FF00000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000FFFFFF00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000040000000500000000100010000000000800200000000000000000000
+      000000000000000000000000FFFFFF00F80F000000000000E007000000000000
+      C003000000000000800100000000000080010000000000000001000000000000
+      0001000000000000000100000000000000010000000000000001000000000000
+      000100000000000000010000000000008003000000000000C003000000000000
+      E00F000000000000F01F000000000000FFFFFFE3FFFFF03FFC7FFC41FF1FE007
+      F83F8800FF0FC000F81F0000FF878000F007000000C30000F003000000630000
+      E003000000F10000E003000003F18000C003000001F1E001C003000000E1F003
+      C00300001001F01FE00300001803E03FF80300011E07E03FFC0300019FFFC03F
+      FF83000DFFFFC07FFFC3D553FFFFF8FFFFFFFFFFFFFF8000FFFFFFFFFEBF5555
+      F9FFFFFFFA9F0000F0FF9FE7EBCF76BCF0FF8FC7EEE7B6D8E07F8787EBB386C2
+      C07FC30F96E9CEE6843FE01F11B4CAA61E3FF03F3E1886C0FE1FF87F3C7B4EF6
+      FF1FF03F3CC9E6F2FF8FE01FE99FE6F2FFC7C30FF1FFFEFEFFE38787E7FF0000
+      FFF88FC7CFFF5555FFFFFFFFDFFF0000FEFFFEFDFFFFFFFFFE7FFE7DC007FE7F
+      FE3FFE3DBFEBFC3FFE1FFE1D0005FC3FFE0FFE0D7E31FE7FFE07FE057E35FC3F
+      FE03FE010006FC3FFE07FE057FEAFC3FFE0FFE0D8014FC1FFE1FFE1DC00AF20F
+      FE3FFE3DE001E107FE7FFE7DE007E187FEFFFEFDF007E007FFFFFFFFF003F00F
+      FFFFFFFFF803F81FFFFFFFFFFFFFFFFFFFFFFFFFBF7FFF7FFFFFFFFFBE7FFE7F
+      C007FFF9BC7FFC7FC007E7FFB87FF87FC007C3F3B07FF07FC007C3E7A07FE07F
+      C007E1C7807FC07FC007F08FA07FE07FC007F81FB07FF07FC007FC3FB87FF87F
+      C007F81FBC7FFC7FC007F09FBE7FFE7FC00FC1C7BF7FFF7FC01F83E3FFFFFFFF
+      C03F8FF1FFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
+  end
+  object dxBarManager1: TdxBarManager
+    AllowReset = False
+    AutoDockColor = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    CanCustomize = False
+    Categories.Strings = (
+      'Main'
+      'Default'
+      'DB Navigator')
+    Categories.ItemsVisibles = (
+      2
+      2
+      2)
+    Categories.Visibles = (
+      True
+      True
+      True)
+    DockColor = clBtnFace
+    ImageOptions.Images = ilstToolbar
+    LookAndFeel.NativeStyle = True
+    NotDocking = [dsBottom]
+    PopupMenuLinks = <>
+    UseSystemFont = True
+    Left = 874
+    Top = 95
+    PixelsPerInch = 96
+    DockControlHeights = (
+      0
+      0
+      28
+      0)
+    object dxBarManager1Bar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      Caption = 'ParticipantToolbar'
+      CaptionButtons = <>
+      DockControl = dxBarDockControl2
+      DockedDockControl = dxBarDockControl2
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 632
+      FloatTop = 150
+      FloatClientWidth = 24
+      FloatClientHeight = 227
+      IsMainMenu = True
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton1'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton4'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton3'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarDBNavRefresh1'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton5'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnFilter'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton6'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnMultipleParticipants'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton7'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnBulkEmails'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarSubItem1'
+        end>
+      MultiLine = True
+      NotDocking = [dsNone]
+      OldName = 'ParticipantToolbar'
+      OneOnRow = True
+      Row = 0
+      ShowMark = False
+      SizeGrip = False
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object dxBarManager1Bar2: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      Caption = 'Main Toolbar'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsTop
+      FloatLeft = 1073
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton13'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton12'
+        end>
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      UseRecentItems = False
+      Visible = True
+      WholeRow = True
+    end
+    object dxBarButton12: TdxBarButton
+      Align = iaRight
+      Caption = 'Close'
+      Category = 0
+      Hint = 'Close'
+      Visible = ivAlways
+      ImageIndex = 16
+      PaintStyle = psCaptionGlyph
+      OnClick = dxBarButton12Click
+    end
+    object dxBarButton13: TdxBarButton
+      Caption = 'Copy List to New Event'
+      Category = 0
+      Hint = 'Copy List to New Event'
+      Visible = ivAlways
+      OnClick = dxBarButton13Click
+    end
+    object dxBarButton1: TdxBarButton
+      Action = actEventInsert
+      Category = 1
+      ImageIndex = 0
+      PaintStyle = psCaptionGlyph
+    end
+    object dxBarButton2: TdxBarButton
+      Action = actEventEdit
+      Category = 1
+      ImageIndex = 10
+    end
+    object dxBarButton3: TdxBarButton
+      Action = actEventDelete
+      Category = 1
+      ImageIndex = 1
+      PaintStyle = psCaptionGlyph
+    end
+    object dxBarButton4: TdxBarButton
+      Action = actEventPost
+      Category = 1
+      ImageIndex = 8
+      PaintStyle = psCaptionGlyph
+    end
+    object dxBarButton5: TdxBarButton
+      Action = actEventCancel
+      Category = 1
+      ImageIndex = 9
+      PaintStyle = psCaptionGlyph
+    end
+    object dxBarButton6: TdxBarButton
+      Caption = 'View Participant Details'
+      Category = 1
+      Hint = 'View Participant Details'
+      Visible = ivAlways
+      ImageIndex = 13
+      PaintStyle = psCaptionGlyph
+      OnClick = btnOpenPBClick
+    end
+    object dxBarButton7: TdxBarButton
+      Caption = 'Generate merge file'
+      Category = 1
+      Hint = 'Generate merge file'
+      Visible = ivAlways
+      ImageIndex = 12
+      PaintStyle = psCaptionGlyph
+      OnClick = btnLetterClick
+    end
+    object dxBarButton8: TdxBarButton
+      Caption = 'Print'
+      Category = 1
+      Hint = 'Print'
+      Visible = ivAlways
+      ImageIndex = 15
+      OnClick = dxBarButton8Click
+    end
+    object dxBarSubItem1: TdxBarSubItem
+      Caption = 'Print'
+      Category = 1
+      Visible = ivAlways
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton8'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarButton9'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarButton10'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarButton11'
+        end>
+    end
+    object dxBarButton9: TdxBarButton
+      Caption = 'Export To Excel'
+      Category = 1
+      Hint = 'Export To Excel'
+      Visible = ivAlways
+      OnClick = dxBarButton9Click
+    end
+    object dxBarButton10: TdxBarButton
+      Caption = 'Export To Text'
+      Category = 1
+      Hint = 'Export To Text'
+      Visible = ivAlways
+      OnClick = dxBarButton10Click
+    end
+    object dxBarButton11: TdxBarButton
+      Caption = 'Export To HTML'
+      Category = 1
+      Hint = 'Export To HTML'
+      Visible = ivAlways
+      OnClick = dxBarButton11Click
+    end
+    object btnMultipleParticipants: TdxBarButton
+      Caption = 'Add Multiple Participants'
+      Category = 1
+      Hint = 'Add Multiple Participants'
+      Visible = ivAlways
+      OnClick = btnMultipleParticipantsClick
+    end
+    object btnBulkEmails: TdxBarButton
+      Caption = 'Bulk Emails'
+      Category = 1
+      Hint = 'Bulk Emails'
+      Visible = ivAlways
+      OnClick = btnBulkEmailsClick
+    end
+    object btnFilter: TdxBarButton
+      Caption = 'Bulk Deletion Filter'
+      Category = 1
+      Hint = 'Bulk Deletion Filter'
+      Visible = ivAlways
+      OnClick = btnFilterClick
+    end
+    object dxBarDBNavPrev1: TdxBarDBNavButton
+      Category = 2
+      Enabled = False
+      Visible = ivAlways
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        424D360400000000000036000000280000001000000010000000010020000000
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C0008080
+        80FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000808080FF000000FF0000
+        00FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000808080FF000000FF000000FF000000FF0000
+        00FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000808080FF000000FF000000FF000000FF000000FF000000FF0000
+        00FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000808080FF000000FF000000FF000000FF0000
+        00FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000808080FF000000FF0000
+        00FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C0008080
+        80FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000}
+      BarDBNavigator = dxBarDBNavigator1
+      NavButton = dxbnPrior
+    end
+    object dxBarDBNavNext1: TdxBarDBNavButton
+      Category = 2
+      Enabled = False
+      Visible = ivAlways
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        424D360400000000000036000000280000001000000010000000010020000000
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF808080FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF808080FFC0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF000000FF000000FF808080FFC0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF000000FF000000FF000000FF0000
+        00FF808080FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF000000FF000000FF808080FFC0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF808080FFC0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF808080FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000}
+      BarDBNavigator = dxBarDBNavigator1
+      NavButton = dxbnNext
+    end
+    object dxBarDBNavRefresh1: TdxBarDBNavButton
+      Action = actRefresh
+      Category = 2
+      Enabled = False
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        424D360400000000000036000000280000001000000010000000010020000000
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000808080FF000000FF808080FFC0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000808080FF000000FF000000FF808080FFC0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF808080FFC0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000808080FF000000FF808080FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000000000FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000000000FF000000FFC0C0C000C0C0C000C0C0C000000000FF000000FF0000
+        00FF000000FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000000000FF000000FF808080FFC0C0C000C0C0C000C0C0C000808080FF0000
+        00FF000000FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000808080FF000000FF000000FF808080FFC0C0C000808080FF000000FF0000
+        00FF000000FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000000000FF000000FF000000FF000000FF000000FF000000FF0000
+        00FF808080FF000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000808080FF000000FF000000FF000000FF808080FFC0C0
+        C000C0C0C000000000FFC0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+        C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000}
+      PaintStyle = psCaptionGlyph
+      BarDBNavigator = dxBarDBNavigator1
+      NavButton = dxbnRefresh
+    end
+  end
+  object dxBarDBNavigator1: TdxBarDBNavigator
+    BarManager = dxBarManager1
+    CategoryName = 'DB Navigator'
+    ConfirmDelete = True
+    DataSource = dmMarketEventDataModule.dsEventParticipants
+    DBCheckLinks = <>
+    VisibleButtons = [dxbnPrior, dxbnNext, dxbnRefresh]
+    Left = 390
+    Top = 283
+  end
+  object dxComponentPrinter1: TdxComponentPrinter
+    CurrentLink = dxComponentPrinter1Link1
+    PreviewOptions.VisibleOptions = [pvoPageBackground, pvoPageSetup, pvoPreferences, pvoPrint, pvoPrintStyles, pvoPageMargins]
+    Version = 0
+    Left = 863
+    Top = 41
+    PixelsPerInch = 96
+    object dxComponentPrinter1Link1: TdxCustomContainerReportLink
+      Active = True
+      Component = Panel3
+      PrinterPage.DMPaper = 9
+      PrinterPage.Footer = 6350
+      PrinterPage.GrayShading = True
+      PrinterPage.Header = 6350
+      PrinterPage.Margins.Bottom = 12700
+      PrinterPage.Margins.Left = 6700
+      PrinterPage.Margins.Right = 6700
+      PrinterPage.Margins.Top = 12700
+      PrinterPage.Orientation = poLandscape
+      PrinterPage.PageOrder = poDownThenOver
+      PrinterPage.PageSize.X = 210000
+      PrinterPage.PageSize.Y = 297000
+      PrinterPage._dxMeasurementUnits_ = 0
+      PrinterPage._dxLastMU_ = 2
+      ReportDocument.CreationDate = 43279.441328472230000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Times New Roman'
+      Font.Style = []
+      PixelsPerInch = 96
+      BuiltInReportLink = True
+      HiddenComponents = {}
+      ExcludedComponents = {}
+      AggregatedReportLinks = {}
+    end
+  end
+  object dsClientReport: TUniDataSource
+    DataSet = qryClientReport
+    Left = 785
+    Top = 401
+  end
+  object qryClientReport: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT * FROM PHONEBOOK')
+    Active = True
+    Left = 729
+    Top = 403
+  end
+  object plClientReport: TppDBPipeline
+    DataSource = dsClientReport
+    UserName = 'plClientReport'
+    Left = 764
+    Top = 333
+    object plClientReportppField1: TppField
+      FieldAlias = 'NNAME'
+      FieldName = 'NNAME'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 0
+      Position = 0
+    end
+    object plClientReportppField2: TppField
+      FieldAlias = 'NCLIENT'
+      FieldName = 'NCLIENT'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 1
+    end
+    object plClientReportppField3: TppField
+      FieldAlias = 'SEARCH'
+      FieldName = 'SEARCH'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 2
+    end
+    object plClientReportppField4: TppField
+      FieldAlias = 'TITLE'
+      FieldName = 'TITLE'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 3
+    end
+    object plClientReportppField5: TppField
+      FieldAlias = 'GENDER'
+      FieldName = 'GENDER'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 4
+    end
+    object plClientReportppField6: TppField
+      FieldAlias = 'SALUTATION'
+      FieldName = 'SALUTATION'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 5
+    end
+    object plClientReportppField7: TppField
+      FieldAlias = 'ADDRESS'
+      FieldName = 'ADDRESS'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 6
+    end
+    object plClientReportppField8: TppField
+      FieldAlias = 'SUBURB'
+      FieldName = 'SUBURB'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 7
+    end
+    object plClientReportppField9: TppField
+      FieldAlias = 'STATE'
+      FieldName = 'STATE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 8
+    end
+    object plClientReportppField10: TppField
+      FieldAlias = 'POSTCODE'
+      FieldName = 'POSTCODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 9
+    end
+    object plClientReportppField11: TppField
+      FieldAlias = 'WORKPHONE'
+      FieldName = 'WORKPHONE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 10
+    end
+    object plClientReportppField12: TppField
+      FieldAlias = 'HOMEPHONE'
+      FieldName = 'HOMEPHONE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 11
+    end
+    object plClientReportppField13: TppField
+      FieldAlias = 'DX'
+      FieldName = 'DX'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 12
+    end
+    object plClientReportppField14: TppField
+      FieldAlias = 'DXLOC'
+      FieldName = 'DXLOC'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 13
+    end
+    object plClientReportppField15: TppField
+      FieldAlias = 'FAX'
+      FieldName = 'FAX'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 14
+    end
+    object plClientReportppField16: TppField
+      FieldAlias = 'CODE'
+      FieldName = 'CODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 15
+    end
+    object plClientReportppField17: TppField
+      FieldAlias = 'SPARTY'
+      FieldName = 'SPARTY'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 16
+    end
+    object plClientReportppField18: TppField
+      FieldAlias = 'SOLICITOR'
+      FieldName = 'SOLICITOR'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 17
+    end
+    object plClientReportppField19: TppField
+      FieldAlias = 'REAL_ESTATE'
+      FieldName = 'REAL_ESTATE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 18
+    end
+    object plClientReportppField20: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'REFERRALS'
+      FieldName = 'REFERRALS'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 19
+    end
+    object plClientReportppField21: TppField
+      FieldAlias = 'NOTE'
+      FieldName = 'NOTE'
+      FieldLength = 2000
+      DisplayWidth = 2000
+      Position = 20
+    end
+    object plClientReportppField22: TppField
+      FieldAlias = 'NAME'
+      FieldName = 'NAME'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 21
+    end
+    object plClientReportppField23: TppField
+      FieldAlias = 'SHORTNAME'
+      FieldName = 'SHORTNAME'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 22
+    end
+    object plClientReportppField24: TppField
+      FieldAlias = 'LONGNAME'
+      FieldName = 'LONGNAME'
+      FieldLength = 150
+      DisplayWidth = 150
+      Position = 23
+    end
+    object plClientReportppField25: TppField
+      FieldAlias = 'MOD_DATE'
+      FieldName = 'MOD_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 24
+    end
+    object plClientReportppField26: TppField
+      FieldAlias = 'MOD_BY'
+      FieldName = 'MOD_BY'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 25
+    end
+    object plClientReportppField27: TppField
+      FieldAlias = 'TYPE'
+      FieldName = 'TYPE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 26
+    end
+    object plClientReportppField28: TppField
+      FieldAlias = 'COUNTRY'
+      FieldName = 'COUNTRY'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 27
+    end
+    object plClientReportppField29: TppField
+      FieldAlias = 'ACN'
+      FieldName = 'ACN'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 28
+    end
+    object plClientReportppField30: TppField
+      FieldAlias = 'OCCUPATION'
+      FieldName = 'OCCUPATION'
+      FieldLength = 250
+      DisplayWidth = 250
+      Position = 29
+    end
+    object plClientReportppField31: TppField
+      FieldAlias = 'DOB'
+      FieldName = 'DOB'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 30
+    end
+    object plClientReportppField32: TppField
+      FieldAlias = 'EMAIL'
+      FieldName = 'EMAIL'
+      FieldLength = 80
+      DisplayWidth = 80
+      Position = 31
+    end
+    object plClientReportppField33: TppField
+      FieldAlias = 'WWW'
+      FieldName = 'WWW'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 32
+    end
+    object plClientReportppField34: TppField
+      FieldAlias = 'MOBILE'
+      FieldName = 'MOBILE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 33
+    end
+    object plClientReportppField35: TppField
+      FieldAlias = 'NNAMEMASTER'
+      FieldName = 'NNAMEMASTER'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 34
+    end
+    object plClientReportppField36: TppField
+      FieldAlias = 'POSTALADDRESS'
+      FieldName = 'POSTALADDRESS'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 35
+    end
+    object plClientReportppField37: TppField
+      FieldAlias = 'POSTALSUBURB'
+      FieldName = 'POSTALSUBURB'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 36
+    end
+    object plClientReportppField38: TppField
+      FieldAlias = 'POSTALSTATE'
+      FieldName = 'POSTALSTATE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 37
+    end
+    object plClientReportppField39: TppField
+      FieldAlias = 'POSTALPOSTCODE'
+      FieldName = 'POSTALPOSTCODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 38
+    end
+    object plClientReportppField40: TppField
+      FieldAlias = 'POSTALCOUNTRY'
+      FieldName = 'POSTALCOUNTRY'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 39
+    end
+    object plClientReportppField41: TppField
+      FieldAlias = 'WHICHADDRESS'
+      FieldName = 'WHICHADDRESS'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 40
+    end
+    object plClientReportppField42: TppField
+      FieldAlias = 'DEFAULT_REF'
+      FieldName = 'DEFAULT_REF'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 41
+    end
+    object plClientReportppField43: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ANTDISBS'
+      FieldName = 'ANTDISBS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 42
+    end
+    object plClientReportppField44: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ANTDRS'
+      FieldName = 'ANTDRS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 43
+    end
+    object plClientReportppField45: TppField
+      FieldAlias = 'GIVENNAMES'
+      FieldName = 'GIVENNAMES'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 44
+    end
+    object plClientReportppField46: TppField
+      FieldAlias = 'LASTNAME'
+      FieldName = 'LASTNAME'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 45
+    end
+    object plClientReportppField47: TppField
+      FieldAlias = 'CREATED'
+      FieldName = 'CREATED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 46
+    end
+    object plClientReportppField48: TppField
+      FieldAlias = 'MODIFIED'
+      FieldName = 'MODIFIED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 47
+    end
+    object plClientReportppField49: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'INDUSTRYCODE'
+      FieldName = 'INDUSTRYCODE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 48
+    end
+    object plClientReportppField50: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'REFERRALCODE'
+      FieldName = 'REFERRALCODE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 49
+    end
+    object plClientReportppField51: TppField
+      FieldAlias = 'REFERREDBY'
+      FieldName = 'REFERREDBY'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 50
+    end
+    object plClientReportppField52: TppField
+      FieldAlias = 'REFERRALMAINTAINER'
+      FieldName = 'REFERRALMAINTAINER'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 51
+    end
+    object plClientReportppField53: TppField
+      FieldAlias = 'MODIFIED_BY'
+      FieldName = 'MODIFIED_BY'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 52
+    end
+    object plClientReportppField54: TppField
+      FieldAlias = 'CUST_ADDRESS'
+      FieldName = 'CUST_ADDRESS'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 53
+    end
+    object plClientReportppField55: TppField
+      FieldAlias = 'CUST_SUBURB'
+      FieldName = 'CUST_SUBURB'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 54
+    end
+    object plClientReportppField56: TppField
+      FieldAlias = 'CUST_STATE'
+      FieldName = 'CUST_STATE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 55
+    end
+    object plClientReportppField57: TppField
+      FieldAlias = 'CUST_POSTCODE'
+      FieldName = 'CUST_POSTCODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 56
+    end
+    object plClientReportppField58: TppField
+      FieldAlias = 'CUST_COUNTRY'
+      FieldName = 'CUST_COUNTRY'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 57
+    end
+    object plClientReportppField59: TppField
+      FieldAlias = 'ABN'
+      FieldName = 'ABN'
+      FieldLength = 14
+      DisplayWidth = 14
+      Position = 58
+    end
+    object plClientReportppField60: TppField
+      FieldAlias = 'REFERREDBY_NNAME'
+      FieldName = 'REFERREDBY_NNAME'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 59
+    end
+    object plClientReportppField61: TppField
+      FieldAlias = 'REFERREDBY_NCLIENT'
+      FieldName = 'REFERREDBY_NCLIENT'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 60
+    end
+    object plClientReportppField62: TppField
+      FieldAlias = 'REFERREDBY_EMP'
+      FieldName = 'REFERREDBY_EMP'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 61
+    end
+    object plClientReportppField63: TppField
+      FieldAlias = 'LAST_STATEMENT_DATE'
+      FieldName = 'LAST_STATEMENT_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 62
+    end
+    object plClientReportppField64: TppField
+      FieldAlias = 'REFERRALTYPE'
+      FieldName = 'REFERRALTYPE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 63
+    end
+    object plClientReportppField65: TppField
+      FieldAlias = 'CLIENTID'
+      FieldName = 'CLIENTID'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 64
+    end
+    object plClientReportppField66: TppField
+      FieldAlias = 'ARCHIVED'
+      FieldName = 'ARCHIVED'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 65
+    end
+    object plClientReportppField67: TppField
+      FieldAlias = 'ARCHIVED_BY'
+      FieldName = 'ARCHIVED_BY'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 66
+    end
+    object plClientReportppField68: TppField
+      FieldAlias = 'ARCHIVED_WHEN'
+      FieldName = 'ARCHIVED_WHEN'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 67
+    end
+    object plClientReportppField69: TppField
+      FieldAlias = 'DUMMY'
+      FieldName = 'DUMMY'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 68
+    end
+    object plClientReportppField70: TppField
+      FieldAlias = 'FULL_NAME_ADDRESS'
+      FieldName = 'FULL_NAME_ADDRESS'
+      FieldLength = 1500
+      DisplayWidth = 1500
+      Position = 69
+    end
+    object plClientReportppField71: TppField
+      FieldAlias = 'DUMMY1'
+      FieldName = 'DUMMY1'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 70
+    end
+    object plClientReportppField72: TppField
+      FieldAlias = 'EMAIL1'
+      FieldName = 'EMAIL1'
+      FieldLength = 80
+      DisplayWidth = 80
+      Position = 71
+    end
+    object plClientReportppField73: TppField
+      FieldAlias = 'EMAIL2'
+      FieldName = 'EMAIL2'
+      FieldLength = 80
+      DisplayWidth = 80
+      Position = 72
+    end
+    object plClientReportppField74: TppField
+      FieldAlias = 'WHICHEMAILADDRESS'
+      FieldName = 'WHICHEMAILADDRESS'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 73
+    end
+    object plClientReportppField75: TppField
+      FieldAlias = 'CREATED_BY'
+      FieldName = 'CREATED_BY'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 74
+    end
+    object plClientReportppField76: TppField
+      FieldAlias = 'RELATIONSHIP_TYPE'
+      FieldName = 'RELATIONSHIP_TYPE'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 75
+    end
+    object plClientReportppField77: TppField
+      FieldAlias = 'RELATIONSHIP_STATUS'
+      FieldName = 'RELATIONSHIP_STATUS'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 76
+    end
+    object plClientReportppField78: TppField
+      FieldAlias = 'RELATIONSHIP_ACTION'
+      FieldName = 'RELATIONSHIP_ACTION'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 77
+    end
+    object plClientReportppField79: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'FIRM_SIZE'
+      FieldName = 'FIRM_SIZE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 78
+    end
+    object plClientReportppField80: TppField
+      FieldAlias = 'SYSTEM1'
+      FieldName = 'SYSTEM1'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 79
+    end
+    object plClientReportppField81: TppField
+      FieldAlias = 'SYSTEM2'
+      FieldName = 'SYSTEM2'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 80
+    end
+    object plClientReportppField82: TppField
+      FieldAlias = 'IMPORTED'
+      FieldName = 'IMPORTED'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 81
+    end
+    object plClientReportppField83: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'TURNOVER'
+      FieldName = 'TURNOVER'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 82
+    end
+    object plClientReportppField84: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'DMS_KEY'
+      FieldName = 'DMS_KEY'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 83
+    end
+    object plClientReportppField85: TppField
+      FieldAlias = 'CHARGE_INTEREST'
+      FieldName = 'CHARGE_INTEREST'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 84
+    end
+    object plClientReportppField86: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'INT_RATE_TO_CHG'
+      FieldName = 'INT_RATE_TO_CHG'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 85
+    end
+    object plClientReportppField87: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'DEBTOR_TERMS'
+      FieldName = 'DEBTOR_TERMS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 86
+    end
+    object plClientReportppField88: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'DEBTOR_DISCOUNT'
+      FieldName = 'DEBTOR_DISCOUNT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 87
+    end
+    object plClientReportppField89: TppField
+      FieldAlias = 'INVITE_TO_EVENTS'
+      FieldName = 'INVITE_TO_EVENTS'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 88
+    end
+    object plClientReportppField90: TppField
+      FieldAlias = 'SEND_NEWSLETTER'
+      FieldName = 'SEND_NEWSLETTER'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 89
+    end
+    object plClientReportppField91: TppField
+      FieldAlias = 'SEND_MAIL'
+      FieldName = 'SEND_MAIL'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 90
+    end
+    object plClientReportppField92: TppField
+      FieldAlias = 'TAXNO'
+      FieldName = 'TAXNO'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 91
+    end
+    object plClientReportppField93: TppField
+      FieldAlias = 'IS_CLIENT'
+      FieldName = 'IS_CLIENT'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 92
+    end
+    object plClientReportppField94: TppField
+      FieldAlias = 'IS_CREDITOR'
+      FieldName = 'IS_CREDITOR'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 93
+    end
+    object plClientReportppField95: TppField
+      FieldAlias = 'NCREDITOR'
+      FieldName = 'NCREDITOR'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 94
+    end
+    object plClientReportppField96: TppField
+      FieldAlias = 'CREDITORID'
+      FieldName = 'CREDITORID'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 95
+    end
+    object plClientReportppField97: TppField
+      FieldAlias = 'DIRECTPHONE'
+      FieldName = 'DIRECTPHONE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 96
+    end
+    object plClientReportppField98: TppField
+      FieldAlias = 'IMPORT_NOTE'
+      FieldName = 'IMPORT_NOTE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 97
+    end
+    object plClientReportppField99: TppField
+      FieldAlias = 'PARTNER'
+      FieldName = 'PARTNER'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 98
+    end
+    object plClientReportppField100: TppField
+      FieldAlias = 'FULL_ADDRESS'
+      FieldName = 'FULL_ADDRESS'
+      FieldLength = 1500
+      DisplayWidth = 1500
+      Position = 99
+    end
+  end
+  object rptClient: TppReport
+    AutoStop = False
+    DataPipeline = plClientReport
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 296900
+    PrinterSetup.mmPaperWidth = 209900
+    PrinterSetup.PaperSize = 9
+    Units = utMillimeters
+    AllowPrintToFile = True
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    BeforePrint = rptClientBeforePrint
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = False
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zs100Percent
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Segoe UI'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    Left = 825
+    Top = 332
+    Version = '16.03'
+    mmColumnWidth = 0
+    DataPipelineName = 'plClientReport'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 30163
+      mmPrintPosition = 0
+      object ppSystemVariable1: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable1'
+        VarType = vtPrintDateTime
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 1058
+        mmTop = 529
+        mmWidth = 35983
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppSystemVariable2: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable2'
+        VarType = vtPageNoDesc
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 183886
+        mmTop = 529
+        mmWidth = 11113
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label1'
+        Caption = 'Event Participants Report'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 5028
+        mmLeft = 73819
+        mmTop = 6085
+        mmWidth = 51594
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Anchors = [atLeft, atBottom]
+        ParentWidth = True
+        Position = lpBottom
+        Weight = 0.750000000000000000
+        mmHeight = 1058
+        mmLeft = 0
+        mmTop = 28840
+        mmWidth = 197200
+        BandType = 0
+        LayerName = Foreground
+      end
+      object lblEntity: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblEntity'
+        Caption = 'lblEntity'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4995
+        mmLeft = 90263
+        mmTop = 1588
+        mmWidth = 16595
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        Caption = 'Search'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 275
+        mmTop = 16669
+        mmWidth = 10626
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label5'
+        Caption = 'Name'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 4149
+        mmTop = 21167
+        mmWidth = 8678
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label6'
+        Caption = 'Contact'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 3810
+        mmTop = 25400
+        mmWidth = 11853
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label7'
+        Caption = 'Address'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 64601
+        mmTop = 16669
+        mmWidth = 12700
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label8'
+        Caption = 'Suburb'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 128694
+        mmTop = 16669
+        mmWidth = 11134
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label9'
+        Caption = 'State'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 133975
+        mmTop = 21167
+        mmWidth = 7789
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        Caption = 'Postcode'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 133636
+        mmTop = 25665
+        mmWidth = 14351
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label11'
+        Caption = 'Phone'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 186288
+        mmTop = 16669
+        mmWidth = 9737
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel12: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label12'
+        Caption = 'Fax'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 190511
+        mmTop = 21167
+        mmWidth = 5503
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel13: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label13'
+        Caption = 'e-Mail'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormField = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3810
+        mmLeft = 186902
+        mmTop = 25665
+        mmWidth = 9059
+        BandType = 0
+        LayerName = Foreground
+      end
+      object lblSelection: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblSelection'
+        OnGetText = lblSelectionGetText
+        Caption = 'lblSelection'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        FormField = False
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4022
+        mmLeft = 90021
+        mmTop = 11377
+        mmWidth = 17865
+        BandType = 0
+        LayerName = Foreground
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 17727
+      mmPrintPosition = 0
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText1'
+        DataField = 'SEARCH'
+        DataPipeline = plClientReport
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 3768
+        mmLeft = 529
+        mmTop = 1058
+        mmWidth = 61383
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText2'
+        DataField = 'ADDRESS'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 65088
+        mmTop = 529
+        mmWidth = 62442
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        DataField = 'SUBURB'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 129117
+        mmTop = 794
+        mmWidth = 32279
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText4'
+        DataField = 'WORKPHONE'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 3768
+        mmLeft = 173832
+        mmTop = 1058
+        mmWidth = 22225
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText5'
+        DataField = 'FAX'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 3768
+        mmLeft = 176742
+        mmTop = 5821
+        mmWidth = 19315
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText6'
+        DataField = 'NAME'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 4233
+        mmTop = 5821
+        mmWidth = 65881
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText7: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText7'
+        DataField = 'TITLE'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 4233
+        mmTop = 11377
+        mmWidth = 85725
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText8: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText8'
+        DataField = 'STATE'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 134409
+        mmTop = 5821
+        mmWidth = 24342
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText9: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText9'
+        DataField = 'POSTCODE'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4233
+        mmLeft = 134144
+        mmTop = 11377
+        mmWidth = 13758
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText10'
+        DataField = 'EMAIL'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'plClientReport'
+        mmHeight = 4298
+        mmLeft = 153459
+        mmTop = 11377
+        mmWidth = 42598
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line2'
+        Anchors = [atLeft, atBottom]
+        ParentWidth = True
+        Weight = 0.750000000000000000
+        mmHeight = 529
+        mmLeft = 0
+        mmTop = 16933
+        mmWidth = 197200
+        BandType = 4
+        LayerName = Foreground
+      end
+    end
+    object ppSummaryBand1: TppSummaryBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 4763
+      mmPrintPosition = 0
+      object ppDBCalc1: TppDBCalc
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBCalc1'
+        DataField = 'SEARCH'
+        DataPipeline = plClientReport
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DBCalcType = dcCount
+        DataPipelineName = 'plClientReport'
+        mmHeight = 3704
+        mmLeft = 61648
+        mmTop = 265
+        mmWidth = 17198
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label2'
+        Caption = 'Total Number of Clients Printed:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        FormField = False
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3704
+        mmLeft = 22490
+        mmTop = 265
+        mmWidth = 37042
+        BandType = 7
+        LayerName = Foreground
+      end
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
+  object qryEventParticipants: TUniQuery
+    UpdatingTable = 'event_participant'
+    KeyFields = 'EVENT_PART_ID'
+    SQLInsert.Strings = (
+      'INSERT INTO EVENT_PARTICIPANT'
+      
+        '  (EVENT_PART_ID, EVENT_ID, NNAME, ATTENDED, ACCEPTED, DECLINED,' +
+        ' PRINTED, ALT_NAME, NOTES, SEARCH, ALT_SEARCH, CREATED, DATE_MOD' +
+        'IFIED, ALT_PRINTED)'
+      'VALUES'
+      
+        '  (:EVENT_PART_ID, :EVENT_ID, :NNAME, :ATTENDED, :ACCEPTED, :DEC' +
+        'LINED, :PRINTED, :ALT_NAME, :NOTES, :SEARCH, :ALT_SEARCH, :CREAT' +
+        'ED, :DATE_MODIFIED, :ALT_PRINTED)')
+    SQLDelete.Strings = (
+      'DELETE FROM EVENT_PARTICIPANT'
+      'WHERE'
+      '  EVENT_PART_ID = :Old_EVENT_PART_ID')
+    SQLUpdate.Strings = (
+      'UPDATE EVENT_PARTICIPANT'
+      'SET'
+      
+        '  EVENT_PART_ID = :EVENT_PART_ID, EVENT_ID = :EVENT_ID, NNAME = ' +
+        ':NNAME, ATTENDED = :ATTENDED, ACCEPTED = :ACCEPTED, DECLINED = :' +
+        'DECLINED, PRINTED = :PRINTED, ALT_NAME = :ALT_NAME, NOTES = :NOT' +
+        'ES, SEARCH = :SEARCH, ALT_SEARCH = :ALT_SEARCH, CREATED = :CREAT' +
+        'ED, DATE_MODIFIED = :DATE_MODIFIED, ALT_PRINTED = :ALT_PRINTED'
+      'WHERE'
+      '  EVENT_PART_ID = :Old_EVENT_PART_ID')
+    SQLLock.Strings = (
+      
+        'SELECT EVENT_PART_ID, EVENT_ID, NNAME, ATTENDED, ACCEPTED, DECLI' +
+        'NED, PRINTED, ALT_NAME, NOTES, SEARCH, ALT_SEARCH, CREATED, DATE' +
+        '_MODIFIED, ALT_PRINTED FROM EVENT_PARTICIPANT'
+      'WHERE'
+      '  EVENT_PART_ID = :Old_EVENT_PART_ID'
+      'FOR UPDATE NOWAIT')
+    SQLRefresh.Strings = (
+      
+        'SELECT EVENT_PART_ID, EVENT_ID, NNAME, ATTENDED, ACCEPTED, DECLI' +
+        'NED, PRINTED, ALT_NAME, NOTES, SEARCH, ALT_SEARCH, CREATED, DATE' +
+        '_MODIFIED, ALT_PRINTED FROM EVENT_PARTICIPANT'
+      'WHERE'
+      '  EVENT_PART_ID = :EVENT_PART_ID')
+    SQLRecCount.Strings = (
+      'SELECT Count(*) FROM ('
+      'SELECT * FROM EVENT_PARTICIPANT'
+      ''
+      ')')
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select '
+      '  event_participant.event_part_id,event_participant.attended,'
+      '  event_participant.accepted,event_participant.declined,'
+      '  event_participant.printed,event_participant.nname,'
+      '  event_participant.alt_name,'
+      '  p.search "p_search",'
+      '  p1.search "alt_search",'
+      '  event_participant.notes, '
+      '  event_participant.event_id,'
+      '  event_participant.search,'
+      '  p.email,'
+      '  p.salutation,'
+      '  p.givennames,'
+      '  p.lastname,'
+      '  p.workphone,'
+      '  event_participant.created,'
+      '  event_participant.alt_search,'
+      '  event_participant.alt_printed,'
+      '  event_participant.date_modified,'
+      '  event_participant.rowid'
+      'from  '
+      '  event_participant,'
+      '  phonebook p,'
+      '  phonebook p1 '
+      'where event_participant.event_id = :event_id'
+      'and event_participant.nname = p.nname'
+      'and event_participant.alt_name = p1.nname (+)')
+    SpecificOptions.Strings = (
+      'Oracle.KeySequence=SEQ_EVENT_PARTIC_ID')
+    IndexFieldNames = 'EVENT_PART_ID'
+    AfterOpen = qryEventParticipantsAfterOpen
+    AfterPost = qryEventParticipantsAfterPost
+    AfterDelete = qryEventParticipantsAfterDelete
+    AfterRefresh = qryEventParticipantsAfterRefresh
+    Left = 589
+    Top = 74
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'event_id'
+        Value = nil
+      end>
+  end
+  object dsEventParticipants: TUniDataSource
+    DataSet = qryEventParticipants
+    Left = 588
+    Top = 125
+  end
+end

@@ -1,0 +1,103 @@
+DBS ORA-01920: user name 'DBS' conflicts with another user or role name
+ORA-06512: at "AXIOM.ADD_AXIOM_USER", line 50
+ORA-06512: at line 2
+  begin
+  ADD_AXIOM_USER(:USERNAME, :U_PASSWORD);
+end;
+:USERNAME(VARCHAR[3],IN)='dbs' 
+:U_PASSWORD(VARCHAR[3],IN)='dbs' 12/07/2011 2:05:47 PM
+ ORA-01017: invalid username/password; logon denied
+   12/07/2011 3:05:42 PM
+DBS ORA-01920: user name 'DBS' conflicts with another user or role name
+ORA-06512: at "AXIOM.ADD_AXIOM_USER", line 50
+ORA-06512: at line 2
+  begin
+  ADD_AXIOM_USER(:USERNAME, :U_PASSWORD);
+end;
+:USERNAME(VARCHAR[3],IN)='dbs' 
+:U_PASSWORD(VARCHAR[3],IN)='dbs' 12/07/2011 3:17:19 PM
+DBS ORA-01920: user name 'DBS' conflicts with another user or role name
+ORA-06512: at "AXIOM.ADD_AXIOM_USER", line 50
+ORA-06512: at line 2
+  begin
+  ADD_AXIOM_USER(:USERNAME, :U_PASSWORD);
+end;
+:USERNAME(VARCHAR[3],IN)='dbs' 
+:U_PASSWORD(VARCHAR[3],IN)='dbs' 12/07/2011 3:20:31 PM
+ NET: Service unavailable   14/07/2011 2:58:55 PM
+DBS ORA-04092: cannot ROLLBACK in a trigger
+ORA-06512: at "AXIOM.TRG_CHECK_FEE_TOTAL", line 27
+ORA-29278: SMTP transient error: 421 Service not available
+ORA-04088: error during execution of trigger 'AXIOM.TRG_CHECK_FEE_TOTAL'
+  INSERT INTO FEE (CREATED, DESCR, MINS, AUTHOR, PARTNER, RATE,
+  AMOUNT, NMATTER, BILLED, BANK_ACCT, NMEMO, 
+  DEPT, EMP_TYPE, UNITS, INVOICEDATE, NCLIENT, FILEID,
+  TAXCODE, TAX, PRIVATE, TYPE)
+VALUES
+  (:CREATED, :DESCR, 0, :AUTHOR, :PARTNER, 0,
+  :AMOUNT, :NMATTER, 'Y', :BANK_ACCT, :NMEMO, 
+  :DEPT, :EMP_TYPE, 0, :INVOICEDATE, :NCLIENT, :FILEID,
+  :TAXCODE, :TAX, 'Y', 'wo')
+:CREATED(DATE,IN)='27/07/2011' 
+:DESCR(VARCHAR[7],IN)='not pay' 
+:AUTHOR(VARCHAR[3],IN)='ABC' 
+:PARTNER(VARCHAR[3],IN)='ABO' 
+:AMOUNT(FLOAT,IN)=-1090.91 
+:NMATTER(INTEGER,IN)=11 
+:BANK_ACCT(VARCHAR[2],IN)='01' 
+:NMEMO(INTEGER,IN)=371 
+:DEPT(VARCHAR[3],IN)='ADM' 
+:EMP_TYPE(VARCHAR[3],IN)='SAD' 
+:INVOICEDATE(DATE,IN)='27/07/2011' 
+:NCLIENT(INTEGER,IN)=5 
+:FILEID(VARCHAR[6],IN)='600011' 
+:TAXCODE(VARCHAR[5],IN)='GSTIN' 
+:TAX(FLOAT,IN)=-109.09 27/07/2011 10:41:53 AM
+DBS ORA-00933: SQL command not properly ended
+ORA-06512: at "AXIOM.TABLEVALUEEMBED", line 45
+  SELECT C.NMEMO,C.TAXCODE,C.TRUST, C.FILEID,C.TAX,C.BILLED,C.ANTICIPATED,C.NMATTER,C.AMOUNT,C.NCHEQREQ,C.HELD,C.NOTE,C.PAYEE,C.REQDATE,c.DESCR,C.BANK,c.AUTHOR,c.URGENT,decode(C.HELD,'Y','Held','W','Waiting',null) as HOLD,decode(C.FILEID,NULL,tablevalueembed('chart','code',C.LEDGER,'component_coe_display')  ,C.FILEID) as cREFNO, C.CONVERTED, C.INVOICESUPPLIED, C.REFNO, C.BILLNO, C.NCHEQUE,C.REV_NCHEQREQ, forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ,nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, C.ROWID FROM CHEQREQ C ,(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL GROUP BY NCHEQREQ) CHEQ ,(select sum(amount) as amount,ncheqreq from cheqreq_trans group by ncheqreq) tr where c.ncheqreq = cheq.ncheqreq (+) and c.ncheqreq = tr.ncheqreq (+) and C.REQDATE >= :P_DateFrom and C.REQDATE <= :P_DateTo  AND C.AMOUNT > 0 AND C.CONVERTED = 'N'  AND C.REV_NCHEQREQ IS NULL  ORDER BY C.REQDATE
+:P_DateFrom(DATE)=27/07/2011 
+:P_DateTo(DATE)=27/07/2011 27/07/2011 4:36:17 PM
+DBS ORA-00907: missing right parenthesis
+  SELECT C.NMEMO,C.TAXCODE,C.TRUST, C.FILEID,C.TAX,C.BILLED,C.ANTICIPATED,C.NMATTER,C.AMOUNT,C.NCHEQREQ,C.HELD,C.NOTE,C.PAYEE,C.REQDATE,c.DESCR,C.BANK,c.AUTHOR,c.URGENT,decode(C.HELD,'Y','Held','W','Waiting',null) as HOLD,decode(C.FILEID,NULL,tablevalueembed(''chart'',''code'',C.LEDGER,''component_coe_display'')  ,C.FILEID) as cREFNO, C.CONVERTED, C.INVOICESUPPLIED, C.REFNO, C.BILLNO, C.NCHEQUE,C.REV_NCHEQREQ, forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ,nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, C.ROWID FROM CHEQREQ C ,(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL GROUP BY NCHEQREQ) CHEQ ,(select sum(amount) as amount,ncheqreq from cheqreq_trans group by ncheqreq) tr where c.ncheqreq = cheq.ncheqreq (+) and c.ncheqreq = tr.ncheqreq (+) and C.REQDATE >= :P_DateFrom and C.REQDATE <= :P_DateTo  AND C.AMOUNT > 0 AND C.CONVERTED = 'N'  AND C.REV_NCHEQREQ IS NULL  ORDER BY C.REQDATE
+:P_DateFrom(DATE)=27/07/2011 
+:P_DateTo(DATE)=27/07/2011 27/07/2011 4:40:35 PM
+DBS ORA-00907: missing right parenthesis
+  SELECT C.NMEMO,C.TAXCODE,C.TRUST, C.FILEID,C.TAX,C.BILLED,C.ANTICIPATED,C.NMATTER,C.AMOUNT,C.NCHEQREQ,C.HELD,C.NOTE,C.PAYEE,C.REQDATE,c.DESCR,C.BANK,c.AUTHOR,c.URGENT,decode(C.HELD,'Y','Held','W','Waiting',null) as HOLD,decode(C.FILEID,NULL,tablevalue(''chart'',''code'',C.LEDGER,''component_coe_display''),C.FILEID) as cREFNO, C.CONVERTED, C.INVOICESUPPLIED, C.REFNO, C.BILLNO, C.NCHEQUE,C.REV_NCHEQREQ, forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ,nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, C.ROWID FROM CHEQREQ C ,(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL GROUP BY NCHEQREQ) CHEQ ,(select sum(amount) as amount,ncheqreq from cheqreq_trans group by ncheqreq) tr where c.ncheqreq = cheq.ncheqreq (+) and c.ncheqreq = tr.ncheqreq (+) and C.REQDATE <= :P_DateTo  AND C.AMOUNT > 0 AND C.CONVERTED = 'N'  AND C.REV_NCHEQREQ IS NULL  ORDER BY C.REQDATE
+:P_DateTo(DATE)=27/07/2011 27/07/2011 4:41:38 PM
+DBS ORA-00933: SQL command not properly ended
+ORA-06512: at "AXIOM.TABLEVALUE", line 45
+  SELECT C.NMEMO,C.TAXCODE,C.TRUST, C.FILEID,C.TAX,C.BILLED,C.ANTICIPATED,C.NMATTER,C.AMOUNT,C.NCHEQREQ,C.HELD,C.NOTE,C.PAYEE,C.REQDATE,c.DESCR,C.BANK,c.AUTHOR,c.URGENT,decode(C.HELD,'Y','Held','W','Waiting',null) as HOLD,decode(C.FILEID,NULL,tablevalue('chart','code',C.LEDGER,'component_coe_display'),C.FILEID) as cREFNO, C.CONVERTED, C.INVOICESUPPLIED, C.REFNO, C.BILLNO, C.NCHEQUE,C.REV_NCHEQREQ, forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ,nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, C.ROWID FROM CHEQREQ C ,(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL GROUP BY NCHEQREQ) CHEQ ,(select sum(amount) as amount,ncheqreq from cheqreq_trans group by ncheqreq) tr where c.ncheqreq = cheq.ncheqreq (+) and c.ncheqreq = tr.ncheqreq (+) and C.REQDATE <= :P_DateTo  AND C.AMOUNT > 0 AND C.CONVERTED = 'N'  AND C.REV_NCHEQREQ IS NULL  ORDER BY C.REQDATE
+:P_DateTo(DATE)=27/07/2011 27/07/2011 4:42:51 PM
+DBS ORA-00933: SQL command not properly ended
+ORA-06512: at "AXIOM.TABLEVALUE", line 45
+  SELECT C.NMEMO,C.TAXCODE,C.TRUST, C.FILEID,C.TAX,C.BILLED,C.ANTICIPATED,C.NMATTER,C.AMOUNT,C.NCHEQREQ,C.HELD,C.NOTE,C.PAYEE,C.REQDATE,c.DESCR,C.BANK,c.AUTHOR,c.URGENT,decode(C.HELD,'Y','Held','W','Waiting',null) as HOLD,DECODE (c.fileid, NULL, tablevalue('chart','code',''||c.ledger||'','component_code_display'), c.fileid) AS crefno, C.CONVERTED, C.INVOICESUPPLIED, C.REFNO, C.BILLNO, C.NCHEQUE,C.REV_NCHEQREQ, forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ,nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, C.ROWID FROM CHART CT, CHEQREQ C ,(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL GROUP BY NCHEQREQ) CHEQ ,(select sum(amount) as amount,ncheqreq from cheqreq_trans group by ncheqreq) tr where c.ncheqreq = cheq.ncheqreq (+) and c.ncheqreq = tr.ncheqreq (+) AND C.LEDGER = CT.CODE(+) and C.REQDATE >= :P_DateFrom and C.REQDATE <= :P_DateTo  AND C.AMOUNT > 0 AND C.CONVERTED = 'N'  AND C.REV_NCHEQREQ IS NULL  ORDER BY C.REQDATE
+:P_DateFrom(DATE)=25/07/2011 
+:P_DateTo(DATE)=31/07/2011 28/07/2011 1:20:00 PM
+AES ORA-01086: savepoint 'LOCK_QRYINVOICE' never established
+  SELECT round(:TaxAmt,2) as TaxAmt from dual
+:TaxAmt(FLOAT)=811.2 1/08/2011 3:50:26 PM
+DBS ORA-20003: ORU-10036: object getactiveusers is invalid and cannot be described
+ORA-06512: at "SYS.DBMS_DESCRIBE", line 147
+ORA-06512: at line 1
+  begin
+  :RESULT := GETUNAMES;
+end;
+:RESULT(FLOAT,OUT)=<NULL> 2/08/2011 10:41:30 AM
+AES ORA-01086: savepoint 'LOCK_QRYINVOICE' never established
+  SELECT DEBTORS FROM MATTER WHERE FILEID = :FILEID
+:FILEID(VARCHAR[4])='BF04' 2/08/2011 6:09:01 PM
+AES ORA-01086: savepoint 'LOCK_QRYINVOICE' never established
+  SELECT DEBTORS FROM MATTER WHERE FILEID = :FILEID
+:FILEID(VARCHAR[4])='LM77' 2/08/2011 6:10:37 PM
+DBS ORA-01086: savepoint 'LOCK_QRYINVOICE' never established
+  SELECT DEBTORS FROM MATTER WHERE FILEID = :FILEID
+:FILEID(VARCHAR[6])='600023' 5/08/2011 3:07:53 PM
+DBS ORA-00904: "MATTER_MULTILINE_TABS": invalid identifier
+  SELECT MATTER_MULTILINE_TABS FROM EMPLOYEE WHERE CODE = :LookupField
+:LookupField(VARCHAR[3])='DBS' 8/08/2011 2:11:40 PM
+ ORA-01017: invalid username/password; logon denied
+   10/08/2011 8:41:56 PM
+ NET: Connection timed out   10/08/2011 8:49:09 PM
+ NET: Invalid SID   10/08/2011 8:51:09 PM
+ NET: Invalid SID   10/08/2011 8:51:28 PM

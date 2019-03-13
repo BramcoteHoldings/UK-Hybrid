@@ -1,0 +1,248 @@
+
+     INNOVA SOFTWARE LICENSE STATEMENT AND LIMITED WARRANTY
+                       for CALENDAR WORKS
+
+                   IMPORTANT - READ CAREFULLY
+
+This license statement and limited warranty constitutes a legal agreement
+("License Agreement") between you (either as an individual or a single
+entity) ("you") and Bohatcom Pty Limited ACN 002-301-322 trading as Innova
+Software ("Innova Software") for the software product Calendar Works
+("Software"), including any software, media, accompanying on-line or
+printed documentation, serial numbers, authorisation and unlocking codes
+or keys.
+
+BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE TO BE
+BOUND BY ALL OF THE TERMS AND CONDITIONS OF THE LICENSE AGREEMENT.
+
+If you are the original purchaser of the Software and you do not agree
+with the terms and conditions of the License Agreement, promptly return
+the unused Software to the place from which you obtained it for a full
+refund if applicable.
+
+Upon your acceptance of the terms and conditions of the License Agreement,
+Innova Software grants you the right to use the Software in the manner
+provided below.
+
+This Software is owned by Innova Software and is protected by copyright
+law and international copyright treaty.  Therefore, you must treat this
+Software like any other copyrighted material (e.g., a book), except that
+you may either make one copy of the Software solely for backup or archival
+purposes or transfer the Software to a single hard disk provided you keep
+the original solely for backup or archival purposes.
+
+You must not sell, give, loan or otherwise transfer the software (or any
+copy) to another person or entity. Except as provided in the License
+Agreement, you may not transfer, rent, lease, lend, copy, modify,
+translate, sublicense, time-share or electronically transmit or receive
+the Software, media or documentation,  serial numbers, authorisation and
+unlocking codes or keys.
+
+You acknowledge that the Software in source code form remains a
+confidential trade secret of Innova Software and therefore you agree not
+to modify the Software or attempt to reverse engineer, decompile, or
+disassemble the Software, except and only to the extent that such activity
+is expressly permitted by applicable law notwithstanding this limitation.
+
+If you have purchased an upgrade version of the Software, it constitutes a
+single product with the Innova Software software that you upgraded.
+
+ADDITIONAL LICENSE TERMS FOR CALENDAR WORKS
+If you have purchased the Software and are using a registered copy of the
+Software, Innova Software grants to you as an individual, a personal,
+non-exclusive license to install and use the Software for the sole
+purposes of designing, developing, testing, and deploying application
+programs which you create.
+
+If you have not purchased the Software or are using an unregistered copy
+of the Software you are deemed to be using a trial version of the
+Software. Innova Software grants to you as an individual, a personal,
+non-exclusive license to install and use the trial version of the Software
+for the sole purpose of evaluating the Software for use in programs which
+you may create. Under no circumstances may you distribute or deploy
+programs created with a trial version of the Software.
+
+You may install a copy of the Software on a computer and freely move the
+Software from one computer to another, provided that you are the only
+individual using the Software.  If you are an entity, Innova Software
+grants you the right to designate one individual within your organization
+("Named User") to have the right to use the Software in the manner
+provided above.
+
+GENERAL TERMS THAT APPLY TO COMPILED PROGRAMS AND REDISTRIBUTABLES
+You may write and compile (including byte-code compile) your own
+application programs using the Software, including any libraries included
+for such purpose with the Software. You may reproduce and distribute, in
+executable form only, programs which you create using the Software without
+additional license or fees, subject to all of the conditions in this
+statement.
+
+The Software includes certain files ("Redistributables") intended for
+distribution by you to the users of programs you create.
+
+The Redistributables for the Software are :-
+1. CalWork.DPL
+2. CalWork.BPL
+
+Subject to all of the conditions in this statement, you may reproduce and
+distribute exact copies of the Redistributables, provided that such copies
+are made from the original copy of the Software or the copy transferred to
+the single hard disk.  Copies of Redistributables may only be distributed
+with and for the sole purpose of executing application programs permitted
+under this statement that you have created using the Software.  Under no
+circumstances may any copies of Redistributables be distributed
+separately.  Regardless of any modifications which you make and regardless
+of how you might compile, link, and/or package your programs, under no
+circumstances may the libraries (including runtime libraries), source code
+(if it has been supplied), Redistributables, and/or other files of the
+Software (including any portions thereof) be used for developing programs
+by anyone other than you.  Only you as the licensed user (or the Named
+User for your entity) have the right to use the libraries (including
+runtime libraries), Redistributables, or other files of the Software (or
+any portions thereof) for developing programs created with the Software.
+In particular, you may not share copies of the Redistributables with other
+co-developers.  You may not reproduce or distribute any Innova Software
+documentation without Innova Software's permission.
+
+
+The license granted in this statement for you to create your own compiled
+programs and distribute your programs and the Redistributables (if any) is
+subject to all of the following conditions:
+
+(i) all copies of the programs you create must bear a valid copyright
+notice, either your own or the Innova Software copyright notice that
+appears on the Software;
+
+(ii) you may not remove or alter any Innova Software copyright, trademark
+or other proprietary rights notice contained in any portion of Innova
+Software libraries, source code (if it has been supplied),
+Redistributables or other files that bear such a notice;
+
+(iii) Innova Software provides no warranty at all to any person, other
+than the Limited Warranty provided to the original purchaser of the
+Software, and you will remain solely responsible to anyone receiving your
+programs for support, service, upgrades, or technical or other assistance,
+and such recipients will have no right to contact Innova Software for such
+services or assistance;
+
+(iv) you will indemnify and hold Innova Software, its related companies
+and its suppliers, harmless from and against any claims or liabilities
+arising out of the use, reproduction or distribution of your programs;
+
+(v) programs you distribute must be written using a licensed, registered
+copy of the Software;
+
+(vi) your programs must add primary and substantial functionality, and may
+not be merely a set or subset of any of the libraries (including runtime
+libraries), source code, Redistributables or other files of the Software;
+
+(vii) you must not produce derivative works of the Software, including but
+not limited to Delphi and C++ Builder components, Active X controls,
+dynamic link libraries (DLL's), or other components or libraries, which
+are based on or use the software;
+
+(viii) you must not use the Software to create products which compete with
+the Software;
+
+(ix) regardless of any modifications which you make and regardless of how
+you might compile, link, or package your programs, the libraries
+(including runtime libraries), source code, Redistributables, and/or other
+files of the Software (including any portions thereof) may not be used in
+programs created by your end users (i.e., users of your programs) and may
+not be further redistributed by your end users;
+
+(x) you may not use Innova Software's or any of its suppliers' names,
+logos, or trademarks to market your programs, except to state that your
+program was written using the Software.
+
+All Innova Software libraries, source code, Redistributables and other
+files remain Innova Software's exclusive property. Regardless of any
+modifications that you make, you may not distribute any files
+(particularly Innova Software source code and other non-executable files)
+except those that Innova Software has expressly designated as
+Redistributables.  Nothing in the License Agreement permits you to derive
+the source code of files that Innova Software has provided to you in
+executable form only, or to reproduce, modify, use, or distribute the
+source code of such files.
+
+Contact Innova Software for the applicable royalties due and other
+licensing terms for all other uses and/or distribution of the
+Redistributables.
+
+LIMITED WARRANTY
+Subject to the following paragraph :-
+
+INNOVA SOFTWARE SHALL NOT BE RESPONSIBLE IN TORT OR IN CONTRACT FOR ANY
+LOSS OR DAMAGE HOWSOEVER CAUSED TO THE PROPERTY OR PERSON OF YOURSELF OR
+ANY THIRD PARTY AS A RESULT OF ANY DEFECT IN THE SOFTWARE WHETHER PATENT
+OR LATENT OR AS A RESULT OF ANY FAULT, NEGLIGENCE, WRONGFUL ACT OR
+OMISSION OF INNOVA SOFTWARE OR ANY OF ITS SERVANTS, EMPLOYEES, CONTRACTS
+AND AGENTS, AND YOU INDEMNIFY INNOVA SOFTWARE AGAINST ANY CLAIMS MADE
+AGAINST IT BY ANY THIRD PARTY ARISING OUT OF ANY SUCH DEFAULT OR FAULT,
+NEGLIGENCE, WRONGFUL ACT OR OMISSION AND SUBJECT TO THE FOLLOWING
+PARAGRAPH BELOW IN NO EVENT SHALL INNOVA SOFTWARE BE LIABLE FOR ANY CLAIMS
+OR DAMAGES INCLUDING, BUT NOT LIMITED TO CLAIMS OF FAULTY DESIGN,
+NEGLIGENT OR MISLEADING ADVICE, DAMAGES ARISING FROM LOSS OR USE OF THE
+SOFTWARE AND/OR SUPPLY OF SERVICES; AND ANY INDIRECT, SPECIAL OR
+CONSEQUENTIAL DAMAGES OR INJURY TO ANY PERSON, CORPORATION OR OTHER ENTITY
+BY REASON OF THE SALE OF THE SOFTWARE AND/OR PROVISION OF SERVICES
+PURSUANT TO THESE TERMS AND CONDITIONS.
+
+In the event that the Software supplied and/or provision of services
+pursuant to this agreement are supplied to you as a consumer of goods or
+services within the meaning of that term in the Trade Practices Act 1974
+as amended and/or similar State legislation you will have the benefit of
+certain non- excludable rights and remedies in respect of the Software or
+services and nothing in these terms and conditions excludes or restricts
+or modifies any condition, warranty, right or remedy which pursuant to the
+Trade Practices Act or similar legislation is so conferred. However it is
+acknowledged by you that such software and/or services are not ordinarily
+required for personal, domestic or household use or consumption and Innova
+Software limits its liability (in the event of you being a consumer) to
+payment of an amount equal to the lowest of :-
+
+(i) The cost of replacing the Software
+(ii) The cost of repair of the Software
+(iii) The cost of having the Software repaired or replaced
+
+In the event that division 2A of the Trade Practices Act 1974 is
+applicable and Innova Software is deemed to be a manufacturer supplying
+goods to a customer or persons who acquire title to the goods through or
+under the customer and the good is not ordinarily acquired for personal,
+domestic or household use or consumption then Innova Software hereby
+limits its liability to payment of an amount equal to the lowest of  :-
+
+(i) The cost of replacing the Software
+(ii) The cost of repair of the Software
+(iii) The cost of having the Software repaired or replaced
+
+HIGH RISK ACTIVITIES
+The Software is not fault-tolerant and is not designed, manufactured or
+intended for use or resale as on-line control equipment in hazardous
+environments requiring fail-safe performance, such as in the operation of
+nuclear facilities, aircraft navigation or communication systems, air
+traffic control, direct life support machines, or weapons systems, in
+which the failure of the Software could lead directly to death, personal
+injury, or severe physical or environmental damage ("High Risk
+Activities"). Innova Software and its suppliers specifically disclaim any
+express or implied warranty of fitness for High Risk Activities.
+
+GENERAL PROVISIONS
+This statement may only be modified in writing signed by you and an
+authorized officer of Innova Software.
+
+Each article, paragraph, sub-paragraph, term and condition of this
+agreement, or any portions thereof, shall be considered severable. If, for
+any reason, any portion of this agreement is determined to be invalid,
+contrary, or in conflict, to any applicable present or future law, rural
+or regulation that ruling shall not impair the operation of, or have any
+other effect upon, any other portions of this agreement; all of which
+shall remain binding on the parties and continue to be given full force
+and effect.
+
+This statement shall be construed, interpreted and governed by the laws of
+the State of New South Wales, AUSTRALIA.  This statement gives you
+specific legal rights; you may have others which vary from state to state
+and from country to country.  Innova Software reserves all rights not
+specifically granted in this statement.
+

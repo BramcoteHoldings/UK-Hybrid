@@ -1,0 +1,2034 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1CE7716A-2E7B-47E8-8A23-92126A230F08}</ProjectGuid>
+        <MainSource>Insight.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Release</Config>
+        <TargetedPlatforms>3</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>18.4</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
+        <Cfg_1_Win64>true</Cfg_1_Win64>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+        <Cfg_2_Win64>true</Cfg_2_Win64>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VCL_Custom_Styles>&quot;Iceberg Classico|VCLSTYLE|$(PUBLIC)\Documents\RAD Studio\11.0\Styles\IcebergClassico.vsf&quot;</VCL_Custom_Styles>
+        <Icon_MainIcon>Insight_Icon2.ico</Icon_MainIcon>
+        <Manifest_File>None</Manifest_File>
+        <VerInfo_MajorVer>9</VerInfo_MajorVer>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <VerInfo_Locale>2057</VerInfo_Locale>
+        <DCC_UNSAFE_CAST>true</DCC_UNSAFE_CAST>
+        <DCC_UnitSearchPath>$(DELPHI)\Source\ToolsAPI;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_K>false</DCC_K>
+        <DCC_UNSAFE_TYPE>true</DCC_UNSAFE_TYPE>
+        <DCC_F>false</DCC_F>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_S>false</DCC_S>
+        <DCC_Description>BHL Insight</DCC_Description>
+        <DCC_UNSAFE_CODE>true</DCC_UNSAFE_CODE>
+        <DCC_Define>NOMULTISELECT;$(DCC_Define)</DCC_Define>
+        <DCC_N>true</DCC_N>
+        <VerInfo_Build>33</VerInfo_Build>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VCLTee;System.Win;Macapi;FMX;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_E>false</DCC_E>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Professional Practice Management;FileVersion=9.0.0.33;InternalName=Insight;LegalCopyright=(c) 2010-2013 Bramcote Holdings Pty Ltd as Trustee;LegalTrademarks=BHL Insight;OriginalFilename=Insight;ProductName=Insight;ProductVersion=9.0;Comments=(c) 2010-2013 Bramcote Holdings Pty Ltd as Trustee</VerInfo_Keys>
+        <SanitizedProjectName>Insight</SanitizedProjectName>
+        <Custom_Styles>&quot;Iceberg Classico|VCLSTYLE|$(BDSCOMMONDIR)\Styles\IcebergClassico.vsf&quot;</Custom_Styles>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_Release>26</VerInfo_Release>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Build>15</VerInfo_Build>
+        <DCC_UsePackage>vcl;ResizeKitPKD16;rtl;ExcelExportPackXE4;dclExcelExportPackXE4;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_ExeOutput>.\Bin\Platform\win32</DCC_ExeOutput>
+        <DCC_DcuOutput>..\dcu\platform\win32</DCC_DcuOutput>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.15;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_UsePackage>vcl;rtl;ExcelExportPackXE4;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_DcuOutput>..\dcu\platform\win64</DCC_DcuOutput>
+        <DCC_ExeOutput>.\bin\platform\win64</DCC_ExeOutput>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.1.2;InternalName=;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.0.0.0;Comments=64-bit Windows platform;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_Build>2</VerInfo_Build>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Build>42</VerInfo_Build>
+        <VerInfo_Release>26</VerInfo_Release>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.42;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_ExeOutput>.\Bin\Platform\win64</DCC_ExeOutput>
+        <VerInfo_Build>2</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=9.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <VerInfo_Build>38</VerInfo_Build>
+        <VerInfo_Release>26</VerInfo_Release>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <DCC_MapFile>3</DCC_MapFile>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.38;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+        <VerInfo_Build>2</VerInfo_Build>
+        <DCC_MapFile>3</DCC_MapFile>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=BHL Insight Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <BT_BuildType>Debug</BT_BuildType>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="Matters.pas">
+            <Form>frmMatters</Form>
+        </DCCReference>
+        <DCCReference Include="Clients.pas">
+            <Form>frmClients</Form>
+        </DCCReference>
+        <DCCReference Include="PhoneBook.pas">
+            <Form>frmPhoneBook</Form>
+        </DCCReference>
+        <DCCReference Include="BankRecEdit.pas">
+            <Form>frmBankRecEdit</Form>
+        </DCCReference>
+        <DCCReference Include="IGraph.pas">
+            <Form>frmInvoiceGraph</Form>
+        </DCCReference>
+        <DCCReference Include="CashPay.pas">
+            <Form>frmCashpay</Form>
+        </DCCReference>
+        <DCCReference Include="MiscFunc.pas"/>
+        <DCCReference Include="NSearch.pas">
+            <Form>frmPhoneBookSearch</Form>
+        </DCCReference>
+        <DCCReference Include="TransitNew.pas">
+            <Form>frmTransitNew</Form>
+        </DCCReference>
+        <DCCReference Include="CheqReqNew.pas">
+            <Form>frmCheqReqNew</Form>
+        </DCCReference>
+        <DCCReference Include="Process.pas">
+            <Form>frmProcess</Form>
+        </DCCReference>
+        <DCCReference Include="Employees.pas">
+            <Form>frmEmployees</Form>
+        </DCCReference>
+        <DCCReference Include="CSearch.pas">
+            <Form>frmClientSearch</Form>
+        </DCCReference>
+        <DCCReference Include="PhoneBookNew.pas">
+            <Form>frmPhoneBookNew</Form>
+        </DCCReference>
+        <DCCReference Include="SafeCustodyNew.pas">
+            <Form>frmSafeCustodyNew</Form>
+        </DCCReference>
+        <DCCReference Include="Journal.pas">
+            <Form>frmJournal</Form>
+        </DCCReference>
+        <DCCReference Include="Journals.pas">
+            <Form>frmJournals</Form>
+        </DCCReference>
+        <DCCReference Include="Reports.pas">
+            <Form>frmReports</Form>
+        </DCCReference>
+        <DCCReference Include="SundryError.pas">
+            <Form>frmSundryError</Form>
+        </DCCReference>
+        <DCCReference Include="Bank.pas">
+            <Form>frmBank</Form>
+        </DCCReference>
+        <DCCReference Include="BankNew.pas">
+            <Form>frmBankNew</Form>
+        </DCCReference>
+        <DCCReference Include="PettyCash.pas">
+            <Form>frmPettyCash</Form>
+        </DCCReference>
+        <DCCReference Include="EmpLaunch.pas">
+            <Form>frmEmpLaunch</Form>
+        </DCCReference>
+        <DCCReference Include="ScaleCosts.pas">
+            <Form>frmScaleCosts</Form>
+        </DCCReference>
+        <DCCReference Include="ScaleCostNew.pas">
+            <Form>frmScaleCostNew</Form>
+        </DCCReference>
+        <DCCReference Include="ChequePrint.pas">
+            <Form>frmChequePrint</Form>
+        </DCCReference>
+        <DCCReference Include="LedgerNew.pas">
+            <Form>frmLedgerNew</Form>
+        </DCCReference>
+        <DCCReference Include="Ledgers.pas">
+            <Form>frmLedgers</Form>
+        </DCCReference>
+        <DCCReference Include="InvoiceDebitNote.pas">
+            <Form>frmInvoiceDebit</Form>
+        </DCCReference>
+        <DCCReference Include="Billing\WriteOffs.pas">
+            <Form>frmWriteOff</Form>
+        </DCCReference>
+        <DCCReference Include="EntityChange.pas">
+            <Form>frmEntityChange</Form>
+        </DCCReference>
+        <DCCReference Include="TransitSearch.pas">
+            <Form>frmTransitSearch</Form>
+        </DCCReference>
+        <DCCReference Include="RelateNew.pas">
+            <Form>frmRelateNew</Form>
+        </DCCReference>
+        <DCCReference Include="BankDeposit.pas">
+            <Form>frmBankDeposit</Form>
+        </DCCReference>
+        <DCCReference Include="ReceiptPrint.pas">
+            <Form>frmReceiptPrint</Form>
+        </DCCReference>
+        <DCCReference Include="EntityNew.pas">
+            <Form>frmEntityNew</Form>
+        </DCCReference>
+        <DCCReference Include="Entitys.pas">
+            <Form>frmEntity</Form>
+        </DCCReference>
+        <DCCReference Include="MaintAncestor.pas">
+            <Form>frmMaint</Form>
+        </DCCReference>
+        <DCCReference Include="MaintAncestorNoRep.pas">
+            <Form>frmMaintNoRep</Form>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryType.pas">
+            <Form>frmDiaryType</Form>
+        </DCCReference>
+        <DCCReference Include="Postcode.pas">
+            <Form>frmPostcode</Form>
+        </DCCReference>
+        <DCCReference Include="EmpDept.pas">
+            <Form>frmEmpDept</Form>
+        </DCCReference>
+        <DCCReference Include="EmpType.pas">
+            <Form>frmEmpType</Form>
+        </DCCReference>
+        <DCCReference Include="MatterType.pas">
+            <Form>frmMatterType</Form>
+        </DCCReference>
+        <DCCReference Include="MatterAssociate.pas">
+            <Form>frmMatterAssociate</Form>
+        </DCCReference>
+        <DCCReference Include="ChequePresent.pas">
+            <Form>frmChequePresent</Form>
+        </DCCReference>
+        <DCCReference Include="InvoiceSearch.pas">
+            <Form>frmInvoiceSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Archival.pas">
+            <Form>frmArchival</Form>
+        </DCCReference>
+        <DCCReference Include="WriteMerge.pas">
+            <Form>frmWriteMerge</Form>
+        </DCCReference>
+        <DCCReference Include="PhonebookGroups.pas">
+            <Form>frmPhonebookGroups</Form>
+        </DCCReference>
+        <DCCReference Include="MatterTaskNew.pas">
+            <Form>frmMatterTaskNew</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\FieldTypes.pas">
+            <Form>frmFieldTypes</Form>
+        </DCCReference>
+        <DCCReference Include="DataReportNew.pas">
+            <Form>frmDataReportNew</Form>
+        </DCCReference>
+        <DCCReference Include="Password.pas">
+            <Form>frmPassword</Form>
+        </DCCReference>
+        <DCCReference Include="matterstatus.pas">
+            <Form>frmMatterStatus</Form>
+        </DCCReference>
+        <DCCReference Include="SundryList.pas">
+            <Form>frmSundryList</Form>
+        </DCCReference>
+        <DCCReference Include="PostcodeSearch.pas">
+            <Form>frmPostcodeSearch</Form>
+        </DCCReference>
+        <DCCReference Include="JournalReverse.pas">
+            <Form>frmJournalReverse</Form>
+        </DCCReference>
+        <DCCReference Include="ClientNoteNew.pas">
+            <Form>frmClientNoteNew</Form>
+        </DCCReference>
+        <DCCReference Include="ReceiptReverse.pas">
+            <Form>frmReceiptReverse</Form>
+        </DCCReference>
+        <DCCReference Include="ChequeReverse.pas">
+            <Form>frmChequeReverse</Form>
+        </DCCReference>
+        <DCCReference Include="YearEnd2.pas">
+            <Form>frmYearEnd2</Form>
+        </DCCReference>
+        <DCCReference Include="FeeCodes.pas">
+            <Form>frmFeeCode</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerCheqReq.pas">
+            <Form>frmRptLedgerCheqReq</Form>
+        </DCCReference>
+        <DCCReference Include="PettyJournal.pas">
+            <Form>frmPettyJournal</Form>
+        </DCCReference>
+        <DCCReference Include="ClientGroups.pas">
+            <Form>frmClientGroups</Form>
+        </DCCReference>
+        <DCCReference Include="MaisterAnalysis.pas">
+            <Form>frmMaisterAnalysis</Form>
+        </DCCReference>
+        <DCCReference Include="MonitorImport.pas">
+            <Form>frmMonitorImport</Form>
+        </DCCReference>
+        <DCCReference Include="GenericSearch.pas">
+            <Form>frmGenericSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Maintenance\SystemFile.pas">
+            <Form>frmSystemFile</Form>
+        </DCCReference>
+        <DCCReference Include="Security.pas">
+            <Form>frmSecurity</Form>
+        </DCCReference>
+        <DCCReference Include="LedgerBudget.pas">
+            <Form>frmLedgerBudget</Form>
+        </DCCReference>
+        <DCCReference Include="CodeRules.pas">
+            <Form>frmCodeRules</Form>
+        </DCCReference>
+        <DCCReference Include="CashRcp.pas">
+            <Form>frmCashRcp</Form>
+        </DCCReference>
+        <DCCReference Include="msearch.pas">
+            <Form>frmMatterSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Cheque.pas">
+            <Form>frmCheque</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerFees.pas">
+            <Form>frmRptLedgerFees</Form>
+        </DCCReference>
+        <DCCReference Include="JournalMatter.pas">
+            <Form>frmJournalMatter</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerCombo.pas">
+            <Form>frmRptLedgerCombo</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerTrust.pas">
+            <Form>frmRptLedgerTrust</Form>
+        </DCCReference>
+        <DCCReference Include="WaitAnimate.pas">
+            <Form>frmWaitAnimate</Form>
+        </DCCReference>
+        <DCCReference Include="SundryBatch.pas">
+            <Form>frmSundryBatch</Form>
+        </DCCReference>
+        <DCCReference Include="TrustJournal.pas">
+            <Form>frmTrustJournal</Form>
+        </DCCReference>
+        <DCCReference Include="WriteOffDisb.pas">
+            <Form>frmWriteOffDisb</Form>
+        </DCCReference>
+        <DCCReference Include="MiscClasses.pas"/>
+        <DCCReference Include="RptLedgerDisb.pas">
+            <Form>frmRptLedgerDisb</Form>
+        </DCCReference>
+        <DCCReference Include="fmxutils.pas"/>
+        <DCCReference Include="RptLedgerDebt.pas">
+            <Form>frmRptLedgerDebt</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerTransit.pas">
+            <Form>frmRptTransitRegister</Form>
+        </DCCReference>
+        <DCCReference Include="PhonebookImport.pas">
+            <Form>frmPhonebookImport</Form>
+        </DCCReference>
+        <DCCReference Include="Sounds.pas">
+            <Form>frmSounds</Form>
+        </DCCReference>
+        <DCCReference Include="YearEnd1.pas">
+            <Form>frmYearEnd1</Form>
+        </DCCReference>
+        <DCCReference Include="About.pas">
+            <Form>frmAbout</Form>
+        </DCCReference>
+        <DCCReference Include="BankDepositQuery.pas">
+            <Form>frmBankDepositQuery</Form>
+        </DCCReference>
+        <DCCReference Include="PresentedConfirmation.pas">
+            <Form>frmPresentedConf</Form>
+        </DCCReference>
+        <DCCReference Include="AxiomData.pas">
+            <Form>dmAxiom</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DataFormOtherParties.pas">
+            <Form>frmDataFormOtherParties</Form>
+        </DCCReference>
+        <DCCReference Include="UserStatementEditor.pas">
+            <Form>frmUserStatementEditor</Form>
+        </DCCReference>
+        <DCCReference Include="SingleFieldEdit.pas">
+            <Form>frmSingleFieldEdit</Form>
+        </DCCReference>
+        <DCCReference Include="TaxTypes.pas">
+            <Form>frmTaxTypes</Form>
+        </DCCReference>
+        <DCCReference Include="BASGroups.pas">
+            <Form>frmBASGroups</Form>
+        </DCCReference>
+        <DCCReference Include="DataFieldMemoEdit.pas">
+            <Form>frmDataFieldMemoEdit</Form>
+        </DCCReference>
+        <DCCReference Include="ReceiptDistribute.pas">
+            <Form>frmReceiptDistribute</Form>
+        </DCCReference>
+        <DCCReference Include="ChartTypes.pas">
+            <Form>frmChartTypes</Form>
+        </DCCReference>
+        <DCCReference Include="CheqReqReverse.pas">
+            <Form>frmCheqReqReverse</Form>
+        </DCCReference>
+        <DCCReference Include="JournalDisbDebt.pas">
+            <Form>frmJournalDisbDebt</Form>
+        </DCCReference>
+        <DCCReference Include="MultiSelect.pas">
+            <Form>frmMultiSelect</Form>
+        </DCCReference>
+        <DCCReference Include="PrecCategories.pas">
+            <Form>frmPrecCategories</Form>
+        </DCCReference>
+        <DCCReference Include="ImageManager.pas">
+            <Form>frmImageManager</Form>
+        </DCCReference>
+        <DCCReference Include="SQLDesigner.pas">
+            <Form>frmSQLDesigner</Form>
+        </DCCReference>
+        <DCCReference Include="Branches.pas">
+            <Form>frmBranches</Form>
+        </DCCReference>
+        <DCCReference Include="PhoneMessage.pas">
+            <Form>frmPhoneMessage</Form>
+        </DCCReference>
+        <DCCReference Include="SundryTypeGroups.pas">
+            <Form>frmSundryTypeGroups</Form>
+        </DCCReference>
+        <DCCReference Include="CheqReqPrint.pas">
+            <Form>frmCheqReqPrint</Form>
+        </DCCReference>
+        <DCCReference Include="DocSearch.pas">
+            <Form>frmDocSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Genders.pas">
+            <Form>frmGenders</Form>
+        </DCCReference>
+        <DCCReference Include="DocNew.pas">
+            <Form>frmDocNew</Form>
+        </DCCReference>
+        <DCCReference Include="MatterPartyRelate.pas">
+            <Form>frmMatterPartyRelate</Form>
+        </DCCReference>
+        <DCCReference Include="RelateDict.pas">
+            <Form>frmRelateDict</Form>
+        </DCCReference>
+        <DCCReference Include="SundryNew.pas">
+            <Form>frmSundryNew</Form>
+        </DCCReference>
+        <DCCReference Include="ChequeUpCredAlloc.pas">
+            <Form>frmChequeUpCredAlloc</Form>
+        </DCCReference>
+        <DCCReference Include="citfunc.pas"/>
+        <DCCReference Include="jurisdiction.pas">
+            <Form>frmJurisdiction</Form>
+        </DCCReference>
+        <DCCReference Include="feebasis.pas">
+            <Form>frmFeeBasis</Form>
+        </DCCReference>
+        <DCCReference Include="printer.pas">
+            <Form>frmPrinter</Form>
+        </DCCReference>
+        <DCCReference Include="BatchReport.pas">
+            <Form>frmBatchReport</Form>
+        </DCCReference>
+        <DCCReference Include="TableCache.pas">
+            <Form>dmTableCache</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="signature.pas">
+            <Form>frmSignature</Form>
+        </DCCReference>
+        <DCCReference Include="SundryType.pas">
+            <Form>frmSundryType</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerSundry.pas">
+            <Form>frmRptLedgerSundry</Form>
+        </DCCReference>
+        <DCCReference Include="QuickCodeSearch.pas">
+            <Form>frmQuickCodeSearch</Form>
+        </DCCReference>
+        <DCCReference Include="resettransaction.pas">
+            <Form>frmResetTransaction</Form>
+        </DCCReference>
+        <DCCReference Include="receiptInfo.pas">
+            <Form>frmReceiptInfo</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkflowTaskTemplates.pas">
+            <Form>fmWorkFlowTaskTemplates</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowDataModule.pas">
+            <Form>dmWorkFlowDataModule</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowDocTemplates.pas">
+            <Form>fmWorkFlowDocTemplates</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowNewTaskItemDialog.pas">
+            <Form>fmWorkFlowNewTaskItemDialog</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowAddDocTemplateDialog.pas">
+            <Form>fmWorkFlowAddDocTemplateDialog</Form>
+        </DCCReference>
+        <DCCReference Include="DocCopyMoveFileDialog.pas">
+            <Form>fmDocCopyMoveFileDialog</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowTask.pas"/>
+        <DCCReference Include="WorkFlow\WorkflowMatterTasks.pas">
+            <Form>fmWorkFlowMatterTasks</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowMergeDocument.pas">
+            <Form>fmWorkFlowMergeDocument</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowTaskNotes.pas">
+            <Form>fmWorkFlowTaskNotes</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowNoteEntryDialog.pas">
+            <Form>fmWorkFlowNoteEntryDialog</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowTaskDef.pas"/>
+        <DCCReference Include="WorkFlow\WorkFlowDocumentMerge.pas"/>
+        <DCCReference Include="WorkFlow\WorkFlowDocumentMergeOptions.pas">
+            <Form>fmWorkFlowDocumentMergeOptionsDialog</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WaitFormAppStop.pas">
+            <Form>fmWaitForAppStop</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowTCPCommunication.pas">
+            <Form>fmWorkFlowTCPCommunication</Form>
+        </DCCReference>
+        <DCCReference Include="WorkFlow\WorkFlowXML.pas"/>
+        <DCCReference Include="CheqreqHistoryForm.pas">
+            <Form>frmCheqreqHistory</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowAdminDocs.pas">
+            <Form>fmWorkFlowAdminDocs</Form>
+        </DCCReference>
+        <DCCReference Include="UnrollAcctsDlg.pas">
+            <Form>frmUnrollAccounts</Form>
+        </DCCReference>
+        <DCCReference Include="UnlockAcctsDlg.pas">
+            <Form>frmUnlockAccounts</Form>
+        </DCCReference>
+        <DCCReference Include="RollupAcctsDlg.pas">
+            <Form>frmRollupAccounts</Form>
+        </DCCReference>
+        <DCCReference Include="LockAcctsDlg.pas">
+            <Form>frmLockAccounts</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowAddAdminDocTemplateDialog.pas">
+            <Form>fmWorkFlowAddAdminDocTemplateDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowToDo.pas">
+            <Form>fmWorkFlowToDo</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\EmployeeFindDialog.pas">
+            <Form>fmEmployeeFindDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\DateEditDialog.pas">
+            <Form>fmDateEditDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowNewTaskDialog.pas">
+            <Form>fmWorkFlowNewTaskDialog</Form>
+        </DCCReference>
+        <DCCReference Include="ReleaseNotes.pas">
+            <Form>fmReleaseNotes</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowIManageMerge.pas"/>
+        <DCCReference Include="Budgets.pas">
+            <Form>fmBudgets</Form>
+        </DCCReference>
+        <DCCReference Include="BudgetEntryDialog.pas">
+            <Form>fmBudgetEntryDialog</Form>
+        </DCCReference>
+        <DCCReference Include="EditContactNoteDialog.pas">
+            <Form>fmEditContactNoteDialog</Form>
+        </DCCReference>
+        <DCCReference Include="AxiomLogin.pas">
+            <Form>frmLogin</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowHotDocsMerge.pas"/>
+        <DCCReference Include="Workflow\WorkFlowHotDocsXML.pas"/>
+        <DCCReference Include="Workflow\WorkFlowGenDocuments.pas">
+            <Form>fmWorkFlowGenDocuments</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDataChangedDialog.pas">
+            <Form>fmWorkFlowDataChangedDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowEditDataFormDialog.pas">
+            <Form>fmWorkFlowEditDataFormDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowFieldTranslate.pas">
+            <Form>fmWorkFlowFieldTranslate</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDocumentGroupsDialog.pas">
+            <Form>fmWorkFlowDocumentGroupsDialog</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDataModuleMerge.pas">
+            <Form>dmWorkFlowDataModuleMerge</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDataModuleRun.pas">
+            <Form>dmWorkFlowDataModuleRun</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDataModuleDocs.pas">
+            <Form>dmWorkFlowDataModuleDocs</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowDataModuleTasks.pas">
+            <Form>dmWorkFlowDataModuleTasks</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="DebtorStatusList.pas">
+            <Form>fmDebtorStatusList</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventEventTypes.pas">
+            <Form>fmMarketEventEventTypes</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventDataModule.pas">
+            <Form>dmMarketEventDataModule</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Forcepay.pas">
+            <Form>frmForcePay</Form>
+        </DCCReference>
+        <DCCReference Include="documenttypelist.pas">
+            <Form>frmDocumentTypeList</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerUnconCheqReq.pas">
+            <Form>frmRptLedgerUnconCheqReq</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEvent.pas">
+            <Form>frmMarketEvent</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketAddParticipant.pas">
+            <Form>frmMarketAddParticipant</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventParticipants.pas">
+            <Form>frmMarketEventParticipants</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventList.pas">
+            <Form>frmEventList</Form>
+        </DCCReference>
+        <DCCReference Include="SolicitorCode.pas">
+            <Form>frmSolicitorCode</Form>
+        </DCCReference>
+        <DCCReference Include="CourtAddress.pas">
+            <Form>frmCourtAddress</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventExportFile.pas">
+            <Form>frmMarketEventExportFile</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\IndustryNew.pas">
+            <Form>frmIndustryNew</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\InterestNew.pas">
+            <Form>frmInterestNew</Form>
+        </DCCReference>
+        <DCCReference Include="RptLedgerCreditors.pas">
+            <Form>frmRptLedgerCreditors</Form>
+        </DCCReference>
+        <DCCReference Include="MarketReferralOther.pas">
+            <Form>frmMarketReferralOther</Form>
+        </DCCReference>
+        <DCCReference Include="InvoiceReverse.pas">
+            <Form>frmInvoiceReverse</Form>
+        </DCCReference>
+        <DCCReference Include="Desktop.pas">
+            <Form>frmDesktop</Form>
+        </DCCReference>
+        <DCCReference Include="SolicitorCodeNew.pas">
+            <Form>frmSolicitorCodeNew</Form>
+        </DCCReference>
+        <DCCReference Include="CheqReqInvoiceDebit.pas">
+            <Form>frmCheqReqInvoiceDebit</Form>
+        </DCCReference>
+        <DCCReference Include="browser.pas">
+            <Form>frmBrowser</Form>
+        </DCCReference>
+        <DCCReference Include="BulkCheques.pas">
+            <Form>frmBulkCheques</Form>
+        </DCCReference>
+        <DCCReference Include="teams.pas">
+            <Form>frmTeams</Form>
+        </DCCReference>
+        <DCCReference Include="EFTFile.pas">
+            <Form>frmEFTFileGeneration</Form>
+        </DCCReference>
+        <DCCReference Include="Controlled Monies\DepositAccount.pas">
+            <Form>frmDepositAccount</Form>
+        </DCCReference>
+        <DCCReference Include="BatchChequePrint.pas">
+            <Form>frmBatchChequePrint</Form>
+        </DCCReference>
+        <DCCReference Include="SetFeeBasis.pas">
+            <Form>frmSetFeeBasis</Form>
+        </DCCReference>
+        <DCCReference Include="Controlled Monies\InvestmentTransactions.pas">
+            <Form>frmInvestmentTransactions</Form>
+        </DCCReference>
+        <DCCReference Include="MatterLabelPrint.pas">
+            <Form>frmMatterLabelPrint</Form>
+        </DCCReference>
+        <DCCReference Include="EmployeeBudget.pas">
+            <Form>frmEmployeeBudget</Form>
+        </DCCReference>
+        <DCCReference Include="MatterNotesFrm.pas">
+            <Form>frmMatterNotes</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowWorldoxMerge.pas"/>
+        <DCCReference Include="feeauthority.pas">
+            <Form>frmFeeAuthority</Form>
+        </DCCReference>
+        <DCCReference Include="OutlookDiaryNew.pas">
+            <Form>frmOutLookDiaryNew</Form>
+        </DCCReference>
+        <DCCReference Include="MatterLabel.pas"/>
+        <DCCReference Include="ReportAdd.pas">
+            <Form>frmAddReport</Form>
+        </DCCReference>
+        <DCCReference Include="AttachEmailToMatter.pas">
+            <Form>frmAttachEmailToMatter</Form>
+        </DCCReference>
+        <DCCReference Include="ArchiveType.pas">
+            <Form>frmArchiveType</Form>
+        </DCCReference>
+        <DCCReference Include="CheqImport.pas">
+            <Form>frmChequeImport</Form>
+        </DCCReference>
+        <DCCReference Include="EmailListener.pas">
+            <Form>frmEmailMsgListener</Form>
+        </DCCReference>
+        <DCCReference Include="DBGenEditor.pas">
+            <Form>frmDBGenEditor</Form>
+        </DCCReference>
+        <DCCReference Include="matternotes.pas">
+            <Form>frmNotesMatter</Form>
+        </DCCReference>
+        <DCCReference Include="CriticalAlert.pas">
+            <Form>frmCritialAlert</Form>
+        </DCCReference>
+        <DCCReference Include="DocDescrEdit.pas">
+            <Form>frmDocDescription</Form>
+        </DCCReference>
+        <DCCReference Include="browseproperties.pas">
+            <Form>frmBrowserProps</Form>
+        </DCCReference>
+        <DCCReference Include="BrowserOrgFavourites.pas">
+            <Form>frmBrowserOrgFavourites</Form>
+        </DCCReference>
+        <DCCReference Include="EditText.pas">
+            <Form>frmEditText</Form>
+        </DCCReference>
+        <DCCReference Include="Controlled Monies\InvestmentTransactionNew.pas">
+            <Form>frmInvestmentTransactionNew</Form>
+        </DCCReference>
+        <DCCReference Include="SafeCustodyNewPacket.pas">
+            <Form>frmSafeCustodyNewPacket</Form>
+        </DCCReference>
+        <DCCReference Include="SubBill.pas">
+            <Form>frmSubBill</Form>
+        </DCCReference>
+        <DCCReference Include="Phonebook_Status.pas">
+            <Form>frmPhonebook_Status</Form>
+        </DCCReference>
+        <DCCReference Include="RecordMovement.pas">
+            <Form>frmRecordMovement</Form>
+        </DCCReference>
+        <DCCReference Include="chequerenumber.pas">
+            <Form>frmChequeRenumber</Form>
+        </DCCReference>
+        <DCCReference Include="SafeCustMovementDtls.pas">
+            <Form>frmMovementDetails</Form>
+        </DCCReference>
+        <DCCReference Include="EmployeeList.pas">
+            <Form>frmEmployeeList</Form>
+        </DCCReference>
+        <DCCReference Include="UserLogins.pas">
+            <Form>frmUserSessions</Form>
+        </DCCReference>
+        <DCCReference Include="BudgetImport.pas">
+            <Form>frmBudgetImport</Form>
+        </DCCReference>
+        <DCCReference Include="GLReportGrp.pas">
+            <Form>frmGLReportGrp</Form>
+        </DCCReference>
+        <DCCReference Include="ExpenseAllocation.pas">
+            <Form>frmExpenseAllocations</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowParties.pas">
+            <Form>frmWorkFlowParties</Form>
+        </DCCReference>
+        <DCCReference Include="CrystalReportDef.pas">
+            <Form>frmCrystalReportDef</Form>
+        </DCCReference>
+        <DCCReference Include="InvoiceScan.pas">
+            <Form>frmInvScan</Form>
+        </DCCReference>
+        <DCCReference Include="SecureMatters.pas">
+            <Form>frmSecureMatters</Form>
+        </DCCReference>
+        <DCCReference Include="bankstatementimp.pas">
+            <Form>frmBankStmntImport</Form>
+        </DCCReference>
+        <DCCReference Include="Splashscreen.pas">
+            <Form>frmSplashScreen</Form>
+        </DCCReference>
+        <DCCReference Include="MatterNotesAdd.pas">
+            <Form>frmMatterNotesAdd</Form>
+        </DCCReference>
+        <DCCReference Include="MatterNoteTypes.pas">
+            <Form>frmMatterNoteTypes</Form>
+        </DCCReference>
+        <DCCReference Include="WebFavourites.pas">
+            <Form>frmFavourites</Form>
+        </DCCReference>
+        <DCCReference Include="DocDescription.pas">
+            <Form>frmDocumentDescription</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowInformsMerge.pas"/>
+        <DCCReference Include="GenExport.pas">
+            <Form>frmExport</Form>
+        </DCCReference>
+        <DCCReference Include="rptViewer.pas">
+            <Form>frmReportViewer</Form>
+        </DCCReference>
+        <DCCReference Include="SendSMS.pas">
+            <Form>frmSendSMS</Form>
+        </DCCReference>
+        <DCCReference Include="MatterNew.pas">
+            <Form>spb</Form>
+        </DCCReference>
+        <DCCReference Include="recurring_fees.pas">
+            <Form>frmRecurringFees</Form>
+        </DCCReference>
+        <DCCReference Include="invoicelist.pas">
+            <Form>frmInvoiceList</Form>
+        </DCCReference>
+        <DCCReference Include="InvoiceChangeDueDate.pas">
+            <Form>frmInvoiceChangeDue</Form>
+        </DCCReference>
+        <DCCReference Include="SoftlogImport.pas">
+            <Form>frmSoftlogImport</Form>
+        </DCCReference>
+        <DCCReference Include="GenEditor.pas">
+            <Form>frmGenEditor</Form>
+        </DCCReference>
+        <DCCReference Include="BulkMailer.pas">
+            <Form>frmBulkMailer</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\MatterReportBuilder.pas">
+            <Form>frmMatterReportBuilder</Form>
+        </DCCReference>
+        <DCCReference Include="SettingsMaint.pas">
+            <Form>frmEmpSettingsMaint</Form>
+        </DCCReference>
+        <DCCReference Include="DocMatterLoad.pas"/>
+        <DCCReference Include="DataReport.pas">
+            <Form>frmDataReport</Form>
+        </DCCReference>
+        <DCCReference Include="MatterNotesRptFrm.pas">
+            <Form>frmRptMatterNotes</Form>
+        </DCCReference>
+        <DCCReference Include="MasterBill.pas">
+            <Form>frmMasterBill</Form>
+        </DCCReference>
+        <DCCReference Include="DocumentImportDirSelection.pas">
+            <Form>frmSelectDirectory</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\Dashboard.pas">
+            <Form>frmDashboard</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\Dashboard_Ind.pas">
+            <Form>frmDashboard_Ind</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\Dashboard_Team.pas">
+            <Form>frmDashboard_Team</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\DashboardFirmDataModule.pas">
+            <Form>dmDashboardFirm</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Dashboard\DashboardIndDataModule.pas">
+            <Form>dmDashboardInd</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Dashboard\DashboardTeamDataModule.pas">
+            <Form>dmDasboardTeam</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Workflow\MSWordMerge.pas"/>
+        <DCCReference Include="home.pas">
+            <Form>frmHome</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="BHLSupport.pas">
+            <Form>frmBHLSupport</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Collections\debtorDocumentMerge.pas">
+            <Form>frmDebtorDocumentMerge</Form>
+        </DCCReference>
+        <DCCReference Include="Collections\DebtorTaskDue.pas">
+            <Form>frmDebtorTaskDue</Form>
+        </DCCReference>
+        <DCCReference Include="Collections\DebtorTaskNew.pas">
+            <Form>frmDebtorTasknew</Form>
+        </DCCReference>
+        <DCCReference Include="Collections\DebtorTaskTemplate.pas">
+            <Form>frmDebtorTaskTemplate</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkflowType.pas">
+            <Form>frmWorkflowType</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\FeesBilledBreakdown.pas">
+            <Form>frmFeesBilledBreakdown</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\FeesRecBreakdown.pas">
+            <Form>frmFeesRecBreakdown</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\BreakDown_UnbilledWIP.pas">
+            <Form>frmUnbilledWIP</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\BreakDown_UnbilledWIP_Firm.pas">
+            <Form>frmUnbilledWIPFirm</Form>
+        </DCCReference>
+        <DCCReference Include="Dashboard\Breakdown_WIP.pas">
+            <Form>frmWIPBreakdown</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\WorkFlowCopyTemplate.pas">
+            <Form>frmCopyTemplate</Form>
+        </DCCReference>
+        <DCCReference Include="DocumentCopyAsk.pas">
+            <Form>frmDocumentCopyAsk</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\CopyEventParticipants.pas">
+            <Form>frmCopyEventParticipants</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketRelationshipStatus.pas">
+            <Form>frmMarketRelationshipStatus</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketRelationshipAction.pas">
+            <Form>frmMarketRelationshipAction</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketRelationshipTypes.pas">
+            <Form>frmMarketRelationshipTypes</Form>
+        </DCCReference>
+        <DCCReference Include="MarketEvent\MarketEventFilter.pas">
+            <Form>frmFilter</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Maintenance\ResearchSites.pas">
+            <Form>frmResearchList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskNew.pas">
+            <Form>frmTaskNew</Form>
+        </DCCReference>
+        <DCCReference Include="Tasks\Tasks.pas">
+            <Form>frmTasks</Form>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskDecisions.pas">
+            <Form>frmTaskDecision</Form>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskTempNew.pas">
+            <Form>frmTaskTempNew</Form>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskSearch.pas">
+            <Form>frmTaskSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskItemSearch.pas">
+            <Form>frmTaskItemSearch</Form>
+        </DCCReference>
+        <DCCReference Include="Workflow\MatterDataForm.pas">
+            <Form>frmMatterDataForm</Form>
+        </DCCReference>
+        <DCCReference Include="Advertising\AdMaint.pas">
+            <Form>frmAdvertising</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Maintenance\AdvRegion.pas">
+            <Form>frmAdvRegionMaint</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Workflow\DataFieldRules.pas">
+            <Form>frmDataFieldRules</Form>
+        </DCCReference>
+        <DCCReference Include="Advertising\AdvSupplier.pas">
+            <Form>frmAdvSupplierMaint</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Advertising\AdvMedia.pas">
+            <Form>frmAdMediaMaint</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Advertising\AdvSubMedia.pas">
+            <Form>frmAdvSubMediaMaint</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dtSearchDocSearch.pas">
+            <Form>frmdtSearch</Form>
+        </DCCReference>
+        <DCCReference Include="dtengine_TLB.pas"/>
+        <DCCReference Include="AccountType.pas">
+            <Form>frmAccountType</Form>
+        </DCCReference>
+        <DCCReference Include="Controlled Monies\Investment_Request.pas"/>
+        <DCCReference Include="Maintenance\CountryList.pas">
+            <Form>frmCountryList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Maintenance\eMailList.pas">
+            <Form>frmEmailList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="LEDES1998BI.pas">
+            <Form>frmLEDES1998BI</Form>
+        </DCCReference>
+        <DCCReference Include="JournalBill.pas">
+            <Form>frmJournalBill</Form>
+        </DCCReference>
+        <DCCReference Include="BankTransfer.pas">
+            <Form>frmTransferMoney</Form>
+        </DCCReference>
+        <DCCReference Include="HelpForm.pas">
+            <Form>fmHelpForm</Form>
+        </DCCReference>
+        <DCCReference Include="CustomProcedures.pas">
+            <Form>frmCustomProcedure</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="documentcenter.pas">
+            <Form>frmDocumentCenter</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="client_img_view.pas">
+            <Form>frmClient_img_view</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EmailTemplates.pas">
+            <Form>frmEmailTemplates</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EmailTemplateAddEdit.pas">
+            <Form>frmEmailTemplateAddEdit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="FileCopyDisplay.pas">
+            <Form>frmFileCopyDisp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="doc_folder_sel.pas">
+            <Form>frmdoc_folder_sel</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Workflow\CopyMoveFileDialog.pas">
+            <Form>fmCopyMoveFileDialog</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="BankRec.pas">
+            <Form>frmBankRec</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="LabelSelect.pas">
+            <Form>frmLabelSelect</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="LEDES1998B.pas">
+            <Form>frmLEDES1998B</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Workflow\HotDocs_TLB.pas"/>
+        <DCCReference Include="Time\FeeEditQuick.pas">
+            <Form>frmFeeEditQuick</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\FeeListDataModule.pas">
+            <Form>dmFeeList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Time\FeeEnquiry.pas">
+            <Form>frmFeeListNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\FeeNew.pas">
+            <Form>frmFeeNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\TimeDiary.pas">
+            <Form>frmTimeDiary</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\TimeSht.pas">
+            <Form>frmTimeSheet</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\TimeDiaryNew.pas">
+            <Form>frmTimeDiaryNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="BankRecAddition.pas">
+            <Form>frmBankRecAddition</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="infotrack\ITrackMatterDetails.pas"/>
+        <DCCReference Include="ArchiveBatch.pas">
+            <Form>frmArchiveBatch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="prac_num.pas">
+            <Form>frmPracNum</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Prac_num_process.pas">
+            <Form>frmProcessPracNum</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\WriteOffWIP.pas">
+            <Form>frmWIPWriteOff</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Diary\Diary.pas">
+            <Form>frmDiary99</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryNew.pas">
+            <Form>frmDiaryNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryNotify.pas">
+            <Form>frmDiaryNotify</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryJur.pas">
+            <Form>frmDiaryJur</Form>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryLoc.pas">
+            <Form>frmDiaryLoc</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Diary\DiaryEvt.pas">
+            <Form>frmDiaryEvt</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Collections\DebtorNotesEntry.pas">
+            <Form>frmDebtorNotesEntry</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tasks\TaskItemNew.pas">
+            <Form>frmTaskItemNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Components\uHostPreview.pas"/>
+        <DCCReference Include="DebtorNotes.pas">
+            <Form>frmDebtorNotes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Workflow\DataForm.pas">
+            <Form>frmDataForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\FeeNotes.pas">
+            <Form>frmFeeNotes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="EntityGroups.pas">
+            <Form>frmEntityGroups</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ExpenseTemplates.pas">
+            <Form>frmExpenseTemplates</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ExpTemplateSelection.pas">
+            <Form>frmExpenseTemplateSelection</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\bill_narration.pas">
+            <Form>frmBillNarrations</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\Bill_narration_edit.pas">
+            <Form>frmNarrationEdit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillCreateAsk.pas">
+            <Form>frmBillCreateAsk</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillCredit.pas">
+            <Form>frmBillCredit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillCreditTypes.pas">
+            <Form>frmBillCreditTypes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\billfeelist.pas">
+            <Form>frmBillFeeList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillGLPosting.pas">
+            <Form>frmBillGLPostings</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillNew.pas">
+            <Form>frmInvoice</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\Bills.pas">
+            <Form>frmBills</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\BillTemplatePrint.pas">
+            <Form>dmBillTemplate</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Billing\BillTemplates.pas">
+            <Form>frmBillTemplates</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\Bulkbills.pas">
+            <Form>frmBulkBills</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Billing\InvPost.pas">
+            <Form>frmInvPost</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Receipt.pas">
+            <Form>frmReceipt</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ReceiptReqNew.pas">
+            <Form>frmReceiptReqNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Projects\ProjectNew.pas">
+            <Form>frmProjectNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Projects\Projects.pas">
+            <Form>frmProjects</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Maintenance\cxOutlook2WaySynchronize.pas"/>
+        <DCCReference Include="Projects\ProjectMatter.pas">
+            <Form>frmProjectMatter</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="DisbSearch.pas">
+            <Form>frmDisbSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tasks\NewTask.pas">
+            <Form>frmNewTask</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Projects\project_chart.pas">
+            <Form>frmProjectChart</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Tasks\NewTaskNew.pas">
+            <Form>frmNewTaskNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="PrecedentSearchList.pas">
+            <Form>frmPrecedentSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="TemplateSelect.pas">
+            <Form>FrmSelectTemplate</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ReceiptReqs.pas">
+            <Form>frmReceiptReqs</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ReceiptReqNarrative.pas">
+            <Form>frmReceiptReqNarrative</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CheqReqs.pas">
+            <Form>frmCheqReqs</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Maintenance\OptionsUser.pas">
+            <Form>frmOptionsUser</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\AccountCreate.pas">
+            <Form>dmAccountCreate</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Creditors\AccountNew.pas">
+            <Form>frmAccountNew</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\AccountPayable.pas">
+            <Form>frmAcctPayable</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\CreditorAccountsSearch.pas">
+            <Form>frmCreditorAccountsSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\CreditorMerge.pas">
+            <Form>frmCreditorMerge</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\CreditorMergeProgress.pas">
+            <Form>frmCreditorMergeProgress</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\Creditors.pas">
+            <Form>frmCreditors</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\CreditorSearch.pas">
+            <Form>frmCreditorSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="FolderTemplate.pas">
+            <Form>frmDoc_Fldr_Tmpl</Form>
+        </DCCReference>
+        <DCCReference Include="SaveScreens\ScreenSave.pas"/>
+        <DCCReference Include="SaveScreens\StencilSelect.pas">
+            <Form>FrmSelectStencil</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Conflicts\ConflictSearch.pas">
+            <Form>frmConflictSearch</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Conflicts\SelectConflictDocName.pas">
+            <Form>FrmConflictDocName</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="BHLStrUtils.pas"/>
+        <DCCReference Include="Conflicts\ConflictSelect.pas">
+            <Form>FrmConflictSelect</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Unlock.pas">
+            <Form>frmUnlock</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Time\FeeType.pas">
+            <Form>frmFeeType</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="MatterPositionRpt.pas">
+            <Form>frmPositionReport</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="ChequeRev.pas">
+            <Form>dmChequeRev</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Document Search\SearchIndexConfig.pas">
+            <Form>frmIndexConfig</Form>
+        </DCCReference>
+        <DCCReference Include="Document Search\ListBoxConcept.pas">
+            <Form>frmdtSearchMaintain</Form>
+        </DCCReference>
+        <DCCReference Include="Scheduler\cxSchedulerEventEditor.pas">
+            <Form>cxSchedulerEventEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="Billing\AlterBilledTaxAmount.pas">
+            <Form>frmAdjustBilledTax</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="LoggingSnippet.pas"/>
+        <DCCReference Include="Workflow\GenericDocNoMerge.pas"/>
+        <None Include="ModelSupport_Insight\default.txvpck"/>
+        <None Include="ModelSupport_Insight\default.txaPackage"/>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">Insight.dpr</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">True</VersionInfo>
+                    <VersionInfo Name="MajorVer">8</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">1</VersionInfo>
+                    <VersionInfo Name="Build">784</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">2057</VersionInfo>
+                    <VersionInfo Name="CodePage">1200</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName">BHL Software Pty Ltd</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileDescription">Insight Professional Practice Management</VersionInfoKeys>
+                    <VersionInfoKeys Name="FileVersion">8.0.1.784</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName">Insight</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalCopyright">(c) 2010 Bramcote Holdings Pty Ltd as Trustee</VersionInfoKeys>
+                    <VersionInfoKeys Name="LegalTrademarks">BHL Insight</VersionInfoKeys>
+                    <VersionInfoKeys Name="OriginalFilename">Insight</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductName">Insight</VersionInfoKeys>
+                    <VersionInfoKeys Name="ProductVersion">8.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments">(c) 2010 Bramcote Holdings Pty Ltd as Trustee</VersionInfoKeys>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlackRS25.bpl">ExpressSkins - Black Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlueprintRS25.bpl">ExpressSkins - Blueprint Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlueRS25.bpl">ExpressSkins - Blue Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinCaramelRS25.bpl">ExpressSkins - Caramel Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinCoffeeRS25.bpl">ExpressSkins - Coffee Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDarkRoomRS25.bpl">ExpressSkins - Darkroom Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDarkSideRS25.bpl">ExpressSkins - DarkSide Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDevExpressDarkStyleRS25.bpl">ExpressSkins - DevExpressDarkStyle Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDevExpressStyleRS25.bpl">ExpressSkins - DevExpressStyle Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinFoggyRS25.bpl">ExpressSkins - Foggy Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinGlassOceansRS25.bpl">ExpressSkins - GlassOceans Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinHighContrastRS25.bpl">ExpressSkins - HighContrast Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkiniMaginaryRS25.bpl">ExpressSkins - iMaginary Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLilianRS25.bpl">ExpressSkins - Lilian Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLiquidSkyRS25.bpl">ExpressSkins - LiquidSky Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLondonLiquidSkyRS25.bpl">ExpressSkins - LondonLiquidSky Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMcSkinRS25.bpl">ExpressSkins - McSkin Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMetropolisDarkRS25.bpl">ExpressSkins - MetropolisDark Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMetropolisRS25.bpl">ExpressSkins - Metropolis Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMoneyTwinsRS25.bpl">ExpressSkins - MoneyTwins Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007BlackRS25.bpl">ExpressSkins - Office2007Black Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007BlueRS25.bpl">ExpressSkins - Office2007Blue Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007GreenRS25.bpl">ExpressSkins - Office2007Green Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007PinkRS25.bpl">ExpressSkins - Office2007Pink Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007SilverRS25.bpl">ExpressSkins - Office2007Silver Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010BlackRS25.bpl">ExpressSkins - Office2010Black Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010BlueRS25.bpl">ExpressSkins - Office2010Blue Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010SilverRS25.bpl">ExpressSkins - Office2010Silver Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013DarkGrayRS25.bpl">ExpressSkins - Office2013DarkGray Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013LightGrayRS25.bpl">ExpressSkins - Office2013LightGray Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013WhiteRS25.bpl">ExpressSkins - Office2013White Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2016ColorfulRS25.bpl">ExpressSkins - Office2016Colorful Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2016DarkRS25.bpl">ExpressSkins - Office2016Dark Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinPumpkinRS25.bpl">ExpressSkins - Pumpkin Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSevenClassicRS25.bpl">ExpressSkins - SevenClassic Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSevenRS25.bpl">ExpressSkins - Seven Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSharpPlusRS25.bpl">ExpressSkins - SharpPlus Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSharpRS25.bpl">ExpressSkins - Sharp Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSilverRS25.bpl">ExpressSkins - Silver Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSpringTimeRS25.bpl">ExpressSkins - Springtime Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinStardustRS25.bpl">ExpressSkins - Stardust Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSummer2008RS25.bpl">ExpressSkins - Summer2008 Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinTheAsphaltWorldRS25.bpl">ExpressSkins - TheAsphaltWorld Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinTheBezierRS25.bpl">ExpressSkins - TheBezier Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinValentineRS25.bpl">ExpressSkins - Valentine Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013BlueRS25.bpl">ExpressSkins - VisualStudio2013Blue Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013DarkRS25.bpl">ExpressSkins - VisualStudio2013Dark Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013LightRS25.bpl">ExpressSkins - VisualStudio2013Light Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVS2010RS25.bpl">ExpressSkins - VS2010 Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinWhiteprintRS25.bpl">ExpressSkins - Whiteprint Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinXmas2008BlueRS25.bpl">ExpressSkins - Xmas2008Blue Skin by Developer Express Inc.</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+            </Platforms>
+            <Deployment Version="3">
+                <DeployFile LocalName="bin\platform\win64\Insight.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Bin\Platform\win32\Insight.rsm" Configuration="Release" Class="DebugSymbols"/>
+                <DeployFile LocalName="Bin\Platform\win32\Insight.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>Insight.rsm</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="bin\platform\win64\Insight.rsm" Configuration="Debug" Class="DebugSymbols"/>
+                <DeployFile LocalName="Bin\Platform\win32\Insight.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Insight.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployClass Name="AdditionalDebugSymbols">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidLibnativeMipsFile">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\mips</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidServiceOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashImageDef">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStyles">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_DefaultAppIcon">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon144">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xxhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon36">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-ldpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-mdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon72">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-hdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_LauncherIcon96">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xhdpi</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage426">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-small</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-normal</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-large</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteDir>res\drawable-xlarge</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DebugSymbols">
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyFramework">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="DependencyPackage">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.bpl</Extensions>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="File">
+                    <Platform Name="Android">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources\StartUp\</RemoteDir>
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1024">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch1536">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch2048">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPad_Launch768">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch320">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="iPhone_Launch640x1136">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectAndroidManifest">
+                    <Platform Name="Android">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceDebug">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSEntitlements">
+                    <Platform Name="iOSDevice32">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSInfoPList">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectiOSResource">
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXEntitlements">
+                    <Platform Name="OSX32">
+                        <RemoteDir>..\</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXInfoPList">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectOSXResource">
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Required="true" Name="ProjectOutput">
+                    <Platform Name="Android">
+                        <RemoteDir>library\lib\armeabi-v7a</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSDevice64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Linux64">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="ProjectUWPManifest">
+                    <Platform Name="Win32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="UWP_DelphiLogo150">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="Win64">
+                        <RemoteDir>Assets</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+            </Deployment>
+            <ModelSupport>True</ModelSupport>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+    <Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+    <Import Condition="Exists('$(MSBuildProjectName).deployproj')" Project="$(MSBuildProjectName).deployproj"/>
+</Project>
