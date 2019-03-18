@@ -28,7 +28,6 @@ object frmDisbSearch: TfrmDisbSearch
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = cxPageControl1Change
     ClientRectBottom = 539
     ClientRectLeft = 4
@@ -37,6 +36,10 @@ object frmDisbSearch: TfrmDisbSearch
     object tabGrid: TcxTabSheet
       Caption = 'Display Grid'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdDisbSearch: TcxGrid
         Left = 0
         Top = 0
@@ -191,6 +194,10 @@ object frmDisbSearch: TfrmDisbSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         614
         513)

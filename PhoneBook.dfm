@@ -30,8 +30,6 @@ object frmPhoneBook: TfrmPhoneBook
     BevelOuter = bvNone
     Caption = 'pBottom'
     TabOrder = 0
-    ExplicitTop = 192
-    ExplicitHeight = 540
     DesignSize = (
       1164
       536)
@@ -45,7 +43,6 @@ object frmPhoneBook: TfrmPhoneBook
       Properties.ActivePage = tsDocuments
       Properties.CustomButtons.Buttons = <>
       OnChange = pcBottomChange
-      ExplicitHeight = 525
       ClientRectBottom = 517
       ClientRectLeft = 4
       ClientRectRight = 1145
@@ -383,6 +380,7 @@ object frmPhoneBook: TfrmPhoneBook
           Font.Name = 'Segoe UI'
           Font.Style = []
           TabOrder = 6
+          Zoom = 100
         end
         object eStreetSuburb: TDBEdit
           Left = 107
@@ -408,6 +406,7 @@ object frmPhoneBook: TfrmPhoneBook
           Font.Name = 'Segoe UI'
           Font.Style = []
           TabOrder = 8
+          Zoom = 100
         end
         object pnlDX: TPanel
           Left = 0
@@ -500,6 +499,7 @@ object frmPhoneBook: TfrmPhoneBook
           Font.Name = 'Segoe UI'
           Font.Style = []
           TabOrder = 10
+          Zoom = 100
         end
         object eCustomSuburb: TDBEdit
           Left = 440
@@ -801,8 +801,6 @@ object frmPhoneBook: TfrmPhoneBook
           StyleHot.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 7
-          ExplicitWidth = 847
-          ExplicitHeight = 171
         end
       end
       object tsAdditional: TcxTabSheet
@@ -1437,8 +1435,6 @@ object frmPhoneBook: TfrmPhoneBook
           StyleHot.LookAndFeel.Kind = lfOffice11
           StyleHot.LookAndFeel.NativeStyle = False
           TabOrder = 0
-          ExplicitWidth = 1142
-          ExplicitHeight = 498
           Height = 491
           Width = 1141
         end
@@ -1500,7 +1496,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Relationships'
         ImageIndex = 5
         OnShow = rsRelationshipsShow
-        ExplicitHeight = 469
         object dbgrRelationship: TcxGrid
           Left = 0
           Top = 0
@@ -1593,14 +1588,8 @@ object frmPhoneBook: TfrmPhoneBook
           Colors.UnfocusedColor = clMedGray
           DefaultNodeHeight = 20
           Header.AutoSizeIndex = -1
-          Header.Font.Charset = DEFAULT_CHARSET
-          Header.Font.Color = clWindowText
-          Header.Font.Height = -11
-          Header.Font.Name = 'Segoe UI'
-          Header.Font.Style = []
           Header.Options = [hoAutoResize, hoVisible]
           Header.Style = hsPlates
-          HintAnimation = hatNone
           LineMode = lmBands
           TabOrder = 0
           TreeOptions.AnimationOptions = [toAnimatedToggle]
@@ -1624,7 +1613,7 @@ object frmPhoneBook: TfrmPhoneBook
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
-              Width = 857
+              Width = 861
               WideText = 'Value'
             end>
         end
@@ -1652,14 +1641,8 @@ object frmPhoneBook: TfrmPhoneBook
           Colors.UnfocusedColor = clMedGray
           DefaultNodeHeight = 20
           Header.AutoSizeIndex = -1
-          Header.Font.Charset = DEFAULT_CHARSET
-          Header.Font.Color = clWindowText
-          Header.Font.Height = -11
-          Header.Font.Name = 'Segoe UI'
-          Header.Font.Style = []
           Header.Options = [hoAutoResize, hoVisible]
           Header.Style = hsPlates
-          HintAnimation = hatNone
           TabOrder = 0
           TreeOptions.AnimationOptions = [toAnimatedToggle]
           TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScroll, toAutoScrollOnExpand, toAutoSpanColumns, toAutoTristateTracking, toAutoDeleteMovedNodes]
@@ -1682,7 +1665,7 @@ object frmPhoneBook: TfrmPhoneBook
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
-              Width = 837
+              Width = 841
               WideText = 'Value'
             end>
         end
@@ -1746,7 +1729,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Tasks'
         ImageIndex = 9
         OnShow = tsTrackingShow
-        ExplicitHeight = 469
         object dxBarDockControl2: TdxBarDockControl
           Left = 0
           Top = 0
@@ -2288,10 +2270,6 @@ object frmPhoneBook: TfrmPhoneBook
       object tsDocuments: TcxTabSheet
         Caption = 'Documents'
         ImageIndex = 13
-        ExplicitLeft = 3
-        ExplicitTop = 24
-        ExplicitWidth = 1142
-        ExplicitHeight = 498
         object grdDocs: TcxGrid
           Left = 0
           Top = 0
@@ -2300,8 +2278,6 @@ object frmPhoneBook: TfrmPhoneBook
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1142
-          ExplicitHeight = 466
           object tvDocs: TcxGridDBBandedTableView
             OnDblClick = tvDocsDblClick
             Navigator.Buttons.CustomButtons = <>
@@ -2543,8 +2519,6 @@ object frmPhoneBook: TfrmPhoneBook
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitTop = 466
-          ExplicitWidth = 1142
           DesignSize = (
             1141
             32)
@@ -2571,7 +2545,6 @@ object frmPhoneBook: TfrmPhoneBook
             NumGlyphs = 2
             TabOrder = 0
             OnClick = btnDocDeleteClick
-            ExplicitLeft = 968
           end
           object btnPrecSearch: TBitBtn
             Left = 1052
@@ -2590,7 +2563,6 @@ object frmPhoneBook: TfrmPhoneBook
               00088000000000000088880F00080F0008888800000800000888888000888000
               88888880F08880F0888888800088800088888888888888888888}
             TabOrder = 1
-            ExplicitLeft = 1053
           end
           object btnDocAdd: TBitBtn
             Left = 886
@@ -2610,7 +2582,6 @@ object frmPhoneBook: TfrmPhoneBook
               8888880FFFFFF008888888000000008888888888888888888888}
             TabOrder = 2
             OnClick = btnDocAddClick
-            ExplicitLeft = 887
           end
           object btnDocEdit: TcxButton
             Left = 802
@@ -2659,7 +2630,6 @@ object frmPhoneBook: TfrmPhoneBook
             OptionsImage.Spacing = 5
             TabOrder = 3
             OnClick = btnDocEditClick
-            ExplicitLeft = 803
           end
           object btnDocPrint: TcxButton
             Left = 700
@@ -2672,7 +2642,6 @@ object frmPhoneBook: TfrmPhoneBook
             OptionsImage.Spacing = 5
             TabOrder = 4
             OnClick = btnDocPrintClick
-            ExplicitLeft = 701
           end
           object edDocSearch: TcxTextEdit
             Left = 173
@@ -2708,7 +2677,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Contact Notes'
         ImageIndex = 14
         TabVisible = False
-        ExplicitHeight = 469
         object ContactNotesDock: TdxBarDockControl
           Left = 0
           Top = 0
@@ -2795,7 +2763,6 @@ object frmPhoneBook: TfrmPhoneBook
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 24
     object Bevel2: TBevel
       Left = 5
       Top = 56
@@ -2947,7 +2914,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 115
       Width = 386
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'LONGNAME'
       DataSource = dsPhoneBook
@@ -2957,7 +2924,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 89
       Width = 386
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'SHORTNAME'
       DataSource = dsPhoneBook
@@ -2967,7 +2934,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 61
       Width = 386
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'NAME'
       DataSource = dsPhoneBook
@@ -2977,7 +2944,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 347
       Top = 29
       Width = 151
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'LASTNAME'
       DataSource = dsPhoneBook
@@ -2987,7 +2954,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 182
       Top = 29
       Width = 162
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'GIVENNAMES'
       DataSource = dsPhoneBook
@@ -2997,7 +2964,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 29
       Width = 65
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'SALUTATION'
       DataSource = dsPhoneBook
@@ -3007,7 +2974,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 616
       Top = 104
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'HOMEPHONE'
       DataSource = dsPhoneBook
@@ -3017,7 +2984,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 616
       Top = 2
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'WORKPHONE'
       DataSource = dsPhoneBook
@@ -3027,7 +2994,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 616
       Top = 29
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'MOBILE'
       DataSource = dsPhoneBook
@@ -3037,7 +3004,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 616
       Top = 78
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'FAX'
       DataSource = dsPhoneBook
@@ -3047,7 +3014,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 2
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'GENDER_DESCR'
       DataSource = dsPhoneBook
@@ -3077,7 +3044,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 616
       Top = 54
       Width = 171
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'DIRECTPHONE'
       DataSource = dsPhoneBook
@@ -3087,7 +3054,7 @@ object frmPhoneBook: TfrmPhoneBook
       Left = 114
       Top = 143
       Width = 386
-      Height = 28
+      Height = 23
       Color = clInfoBk
       DataField = 'CONTACT'
       DataSource = dsPhoneBook
@@ -7186,6 +7153,7 @@ object frmPhoneBook: TfrmPhoneBook
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -7211,15 +7179,22 @@ object frmPhoneBook: TfrmPhoneBook
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -7234,13 +7209,15 @@ object frmPhoneBook: TfrmPhoneBook
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 928
     Top = 48
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plPhoneBookRpt'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -7248,13 +7225,15 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         OnGetText = ppLabel3GetText
+        Border.mmPadding = 0
         Caption = 'Label3'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Times New Roman'
         Font.Size = 16
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 6646
         mmLeft = 3969
@@ -7267,6 +7246,7 @@ object frmPhoneBook: TfrmPhoneBook
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 125942
@@ -7301,13 +7281,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Phone Book Entry'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 3969
@@ -7319,6 +7301,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -7337,13 +7320,15 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Type / Gender:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7357,13 +7342,15 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'First Name:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7377,13 +7364,15 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Last Name:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7396,13 +7385,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Home:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7415,13 +7406,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Work:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7434,13 +7427,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Mobile:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7453,13 +7448,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Fax:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7472,13 +7469,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Street Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 6350
@@ -7490,13 +7489,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Postal Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 106892
@@ -7508,13 +7509,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel15: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label15'
+        Border.mmPadding = 0
         Caption = 'Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7527,13 +7530,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel16: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label16'
+        Border.mmPadding = 0
         Caption = 'Town:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7546,13 +7551,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel17: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label17'
+        Border.mmPadding = 0
         Caption = 'Post Code:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7565,13 +7572,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel18: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label18'
+        Border.mmPadding = 0
         Caption = 'State:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7584,13 +7593,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel19: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label19'
+        Border.mmPadding = 0
         Caption = 'Country:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -7603,13 +7614,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel20: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label20'
+        Border.mmPadding = 0
         Caption = 'Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7622,13 +7635,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel21: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label21'
+        Border.mmPadding = 0
         Caption = 'Town:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7641,13 +7656,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel22: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label22'
+        Border.mmPadding = 0
         Caption = 'Post Code:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7660,13 +7677,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel23: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label23'
+        Border.mmPadding = 0
         Caption = 'State:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7679,13 +7698,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel24: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label24'
+        Border.mmPadding = 0
         Caption = 'Country:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -7699,6 +7720,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText9'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'MOBILE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7719,6 +7741,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'FAX'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7739,6 +7762,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'WORKPHONE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7759,6 +7783,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'HOMEPHONE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7779,6 +7804,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'LONGNAME'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7799,6 +7825,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'GENDER_DESCR'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7819,6 +7846,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'SALUTATION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7839,6 +7867,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'GIVENNAMES'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7859,6 +7888,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'LASTNAME'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7878,6 +7908,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'NAME'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7898,6 +7929,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'SHORTNAME'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7918,6 +7950,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'ADDRESS'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7938,6 +7971,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'SUBURB'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7958,6 +7992,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTCODE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7978,6 +8013,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText15'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'STATE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -7998,6 +8034,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText16'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'COUNTRY'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8018,6 +8055,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText17'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTALADDRESS'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8038,6 +8076,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText18'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTALSUBURB'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8058,6 +8097,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText19'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTALPOSTCODE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8078,6 +8118,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText20'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTALSTATE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8098,6 +8139,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText21'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'POSTALCOUNTRY'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8117,6 +8159,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Weight = 1.500000000000000000
@@ -8131,6 +8174,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText22'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'DOB'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8151,6 +8195,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText23'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'ACN'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8171,6 +8216,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText24'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'EMAIL'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8191,6 +8237,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText25'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'WWW'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8211,6 +8258,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText26'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'DEFAULT_REF'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8231,6 +8279,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText27'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'OCCUPATION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8251,6 +8300,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText28'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8270,13 +8320,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel25: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label25'
+        Border.mmPadding = 0
         Caption = 'Date of Birth:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -8289,13 +8341,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel27: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label27'
+        Border.mmPadding = 0
         Caption = 'Email Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -8308,13 +8362,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel28: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label28'
+        Border.mmPadding = 0
         Caption = 'Web Site Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -8327,13 +8383,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel29: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label29'
+        Border.mmPadding = 0
         Caption = 'Default Ref:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -8346,13 +8404,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel31: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label31'
+        Border.mmPadding = 0
         Caption = 'Code:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -8386,6 +8446,7 @@ object frmPhoneBook: TfrmPhoneBook
           DataPipeline = plGroupingsRpt
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
@@ -8396,24 +8457,27 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plGroupingsRpt'
           object ppTitleBand1: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 7408
             mmPrintPosition = 0
             object ppLabel32: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label32'
+              Border.mmPadding = 0
               Caption = 'Groupings:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 3704
               mmLeft = 2910
@@ -8425,6 +8489,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLine3: TppLine
               DesignLayer = ppDesignLayer2
               UserName = 'Line3'
+              Border.mmPadding = 0
               Pen.Width = 2
               ParentWidth = True
               Position = lpBottom
@@ -8440,6 +8505,7 @@ object frmPhoneBook: TfrmPhoneBook
           object ppDetailBand2: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 7408
@@ -8447,6 +8513,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppDBText29: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText29'
+              Border.mmPadding = 0
               DataField = 'CATEGORY'
               DataPipeline = plGroupingsRpt
               Font.Charset = DEFAULT_CHARSET
@@ -8467,6 +8534,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppDBText30: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText30'
+              Border.mmPadding = 0
               DataField = 'OTHERPARTY'
               DataPipeline = plGroupingsRpt
               Font.Charset = DEFAULT_CHARSET
@@ -8487,13 +8555,15 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLabel33: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label33'
+              Border.mmPadding = 0
               Caption = 'Category:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 3810
@@ -8506,13 +8576,15 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLabel34: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label34'
+              Border.mmPadding = 0
               Caption = 'Other Party:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 3810
               mmLeft = 106363
@@ -8535,6 +8607,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText32'
         OnGetText = ppDBText32GetText
+        Border.mmPadding = 0
         DataField = 'GENDER_OCCUPATIONCAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8556,6 +8629,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText31'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'GENDER_ACNCAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8597,6 +8671,7 @@ object frmPhoneBook: TfrmPhoneBook
           DataPipeline = plRelationshipsRpt
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
@@ -8607,24 +8682,27 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plRelationshipsRpt'
           object ppTitleBand2: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 8731
             mmPrintPosition = 0
             object ppLabel26: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label26'
+              Border.mmPadding = 0
               Caption = 'Relationships:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 2911
@@ -8636,6 +8714,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLine4: TppLine
               DesignLayer = ppDesignLayer3
               UserName = 'Line4'
+              Border.mmPadding = 0
               Pen.Width = 2
               ParentWidth = True
               Position = lpBottom
@@ -8651,6 +8730,7 @@ object frmPhoneBook: TfrmPhoneBook
           object ppDetailBand3: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 8996
@@ -8658,6 +8738,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppDBText33: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText33'
+              Border.mmPadding = 0
               DataField = 'SEARCH'
               DataPipeline = plRelationshipsRpt
               Font.Charset = DEFAULT_CHARSET
@@ -8678,6 +8759,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppDBText38: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText38'
+              Border.mmPadding = 0
               DataField = 'RELATIONSHIP'
               DataPipeline = plRelationshipsRpt
               Font.Charset = DEFAULT_CHARSET
@@ -8697,13 +8779,15 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLabel7: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label7'
+              Border.mmPadding = 0
               Caption = 'Relationship:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 3810
@@ -8716,13 +8800,15 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLabel12: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label12'
+              Border.mmPadding = 0
               Caption = 'Name:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 3810
               mmLeft = 61913
@@ -8734,6 +8820,7 @@ object frmPhoneBook: TfrmPhoneBook
             object ppDBText39: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText39'
+              Border.mmPadding = 0
               DataField = 'ADDRESS'
               DataPipeline = plRelationshipsRpt
               Font.Charset = DEFAULT_CHARSET
@@ -8754,13 +8841,15 @@ object frmPhoneBook: TfrmPhoneBook
             object ppLabel30: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label30'
+              Border.mmPadding = 0
               Caption = 'Address:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Name = 'Segoe UI'
               Font.Size = 9
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 3810
               mmLeft = 124090
@@ -8783,6 +8872,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText34'
         OnGetText = ppDBText34GetText
+        Border.mmPadding = 0
         DataField = 'GENDER_CLIENTNAMECAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8804,6 +8894,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText35'
         OnGetText = ppDBText35GetText
+        Border.mmPadding = 0
         DataField = 'GENDER_SHORTNAMECAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8825,6 +8916,7 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'DBText36'
         OnGetText = ppDBText36GetText
+        Border.mmPadding = 0
         DataField = 'GENDER_TITLECAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8847,6 +8939,7 @@ object frmPhoneBook: TfrmPhoneBook
         UserName = 'DBText37'
         OnGetText = ppDBText37GetText
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'GENDER_LONGNAMECAPTION'
         DataPipeline = plPhoneBookRpt
         Font.Charset = DEFAULT_CHARSET
@@ -8867,12 +8960,14 @@ object frmPhoneBook: TfrmPhoneBook
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 9790
       mmPrintPosition = 0
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Weight = 1.500000000000000000
@@ -8886,6 +8981,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -8904,12 +9000,14 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
         OnGetText = ppLabel6GetText
+        Border.mmPadding = 0
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3683
         mmLeft = 3969
@@ -10085,6 +10183,7 @@ object frmPhoneBook: TfrmPhoneBook
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
@@ -10111,15 +10210,22 @@ object frmPhoneBook: TfrmPhoneBook
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -10134,26 +10240,30 @@ object frmPhoneBook: TfrmPhoneBook
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 418
     Top = 578
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 197379
     DataPipelineName = 'ppDocList'
     object ppHeaderBand4: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 21696
       mmPrintPosition = 0
       object ppLabel55: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label55'
+        Border.mmPadding = 0
         Caption = 'Document List'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 16
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 6773
@@ -10167,13 +10277,15 @@ object frmPhoneBook: TfrmPhoneBook
         DesignLayer = ppDesignLayer4
         UserName = 'Label56'
         OnGetText = ppLabel56GetText
+        Border.mmPadding = 0
         Caption = 'Label56'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5122
         mmLeft = 15081
@@ -10185,6 +10297,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLine11: TppLine
         DesignLayer = ppDesignLayer4
         UserName = 'Line11'
+        Border.mmPadding = 0
         ParentWidth = True
         Position = lpBottom
         Weight = 0.750000000000000000
@@ -10198,13 +10311,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel57: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label57'
+        Border.mmPadding = 0
         Caption = 'ID'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 1588
@@ -10216,13 +10331,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel58: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label58'
+        Border.mmPadding = 0
         Caption = 'Document Name'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 14552
@@ -10234,13 +10351,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel59: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label59'
+        Border.mmPadding = 0
         Caption = 'Created'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 75406
@@ -10252,13 +10371,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel60: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label60'
+        Border.mmPadding = 0
         Caption = 'By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 96573
@@ -10270,13 +10391,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel61: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label61'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 106363
@@ -10288,13 +10411,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel62: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label62'
+        Border.mmPadding = 0
         Caption = 'Modified'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 198438
@@ -10306,13 +10431,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel63: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label63'
+        Border.mmPadding = 0
         Caption = 'By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 220398
@@ -10324,13 +10451,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel65: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label65'
+        Border.mmPadding = 0
         Caption = 'Sent to'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 230188
@@ -10342,13 +10471,15 @@ object frmPhoneBook: TfrmPhoneBook
       object ppLabel66: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label66'
+        Border.mmPadding = 0
         Caption = 'Client:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5122
         mmLeft = 1588
@@ -10361,6 +10492,7 @@ object frmPhoneBook: TfrmPhoneBook
     object ppDetailBand5: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6615
       mmPrintPosition = 0
@@ -10382,6 +10514,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText40: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText31'
+        Border.mmPadding = 0
         DataField = 'DOCID'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10402,6 +10535,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText41: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText32'
+        Border.mmPadding = 0
         DataField = 'DOC_NAME'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10421,6 +10555,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText42: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText33'
+        Border.mmPadding = 0
         DataField = 'D_CREATE'
         DataPipeline = ppDocList
         DisplayFormat = 'dd/mm/yyyy'
@@ -10441,6 +10576,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText43: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText34'
+        Border.mmPadding = 0
         DataField = 'AUTH1'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10460,6 +10596,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText44: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText35'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10479,6 +10616,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText45: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText36'
+        Border.mmPadding = 0
         DataField = 'D_MODIF'
         DataPipeline = ppDocList
         DisplayFormat = 'dd/mm/yyyy'
@@ -10499,6 +10637,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText46: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText37'
+        Border.mmPadding = 0
         DataField = 'AUTH2'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10518,6 +10657,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppDBText47: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText38'
+        Border.mmPadding = 0
         DataField = 'EMAIL_SENT_TO'
         DataPipeline = ppDocList
         Font.Charset = DEFAULT_CHARSET
@@ -10537,12 +10677,14 @@ object frmPhoneBook: TfrmPhoneBook
     end
     object ppFooterBand2: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 9790
       mmPrintPosition = 0
       object ppLine10: TppLine
         DesignLayer = ppDesignLayer4
         UserName = 'Line10'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -10555,6 +10697,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppSystemVariable5: TppSystemVariable
         DesignLayer = ppDesignLayer4
         UserName = 'SystemVariable5'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -10572,6 +10715,7 @@ object frmPhoneBook: TfrmPhoneBook
       object ppSystemVariable6: TppSystemVariable
         DesignLayer = ppDesignLayer4
         UserName = 'SystemVariable6'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -10588,15 +10732,17 @@ object frmPhoneBook: TfrmPhoneBook
       end
     end
     object raCodeModule2: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D650611
-        44657461696C4265666F72655072696E740B50726F6772616D54797065070B74
-        7450726F63656475726506536F75726365065C70726F63656475726520446574
-        61696C4265666F72655072696E743B0D0A626567696E0D0A2020202053686170
-        65312E56697369626C65203A3D202844657461696C2E436F756E74206D6F6420
-        3229203D20313B0D0A656E643B0D0A0D436F6D706F6E656E744E616D65060644
-        657461696C094576656E744E616D65060B4265666F72655072696E7407457665
-        6E7449440218084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DetailBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DetailBeforePrint;'#13#10'begin'#13#10'    Shape1.Visible := (Deta' +
+          'il.Count mod 2) = 1;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Detail'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 24
+      end
     end
     object ppDesignLayers4: TppDesignLayers
       object ppDesignLayer4: TppDesignLayer

@@ -15,7 +15,7 @@ object frmCreditorMerge: TfrmCreditorMerge
   Position = poOwnerFormCenter
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 15
   object lblText: TLabel
     Left = 18
     Top = 20

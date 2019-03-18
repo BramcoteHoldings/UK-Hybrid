@@ -638,6 +638,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Address'
       ImageIndex = 1
       OnShow = tsAddressShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object tsAddresses: TcxPageControl
         Left = 0
         Top = 0
@@ -654,6 +658,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tsMainAddress: TcxTabSheet
           Caption = 'Main Address'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           DesignSize = (
             536
             507)
@@ -1145,6 +1153,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             'nance->Options->Display Names tab.'
           Caption = 'Custom Address'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label16: TLabel
             Left = 53
             Top = 24
@@ -1300,6 +1312,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsPhone: TcxTabSheet
       Caption = 'Phonebook/Internet'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -1782,6 +1798,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Additional'
       ImageIndex = 3
       OnShow = tsAdditionalShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -2239,6 +2259,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object mNotes: TcxDBRichEdit
         Left = 0
         Top = 0
@@ -2253,6 +2277,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsGroups: TcxTabSheet
       Caption = 'Groups'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbGroups: TcxCheckListBox
         Left = 0
         Top = 0
@@ -2273,6 +2301,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Client'
       ImageIndex = 6
       OnShow = tsClientShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 55
         Top = 24
@@ -2654,8 +2686,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43531.419444675930000000
-        Time = 43531.419444675930000000
+        Date = 43540.419444675930000000
+        Time = 43540.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -2677,6 +2709,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tabClientTemplates: TcxTabSheet
           Caption = 'Templates'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           DesignSize = (
             525
             135)
@@ -2860,6 +2896,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tabDebtor: TcxTabSheet
           Caption = 'Debtor'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label21: TLabel
             Left = 43
             Top = 8
@@ -3025,6 +3065,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Creditor'
       ImageIndex = 7
       OnShow = tsCreditorShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label13: TLabel
         Left = 36
         Top = 84
@@ -3100,6 +3144,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsCustomData: TcxTabSheet
       Caption = 'Custom Data'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3139,7 +3187,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAllowFocus]
             Position = 1
-            Width = 366
+            Width = 370
             WideText = 'Value'
           end>
       end
@@ -3147,6 +3195,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsMatterData: TcxTabSheet
       Caption = 'Matter Data'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtMatterData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3184,7 +3236,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
             Position = 1
-            Width = 396
+            Width = 400
             WideText = 'Value'
           end>
       end
@@ -3247,6 +3299,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsEventList: TcxTabSheet
       Caption = 'Events'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdEventList: TcxGrid
         Left = 0
         Top = 0
@@ -3550,6 +3606,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsMarketing: TcxTabSheet
       Caption = 'Marketing'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grpInterest: TGroupBox
         Left = 9
         Top = 198
@@ -3775,6 +3835,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsCRM: TcxTabSheet
       Caption = 'CRM'
       ImageIndex = 13
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label31: TLabel
         Left = 26
         Top = 20

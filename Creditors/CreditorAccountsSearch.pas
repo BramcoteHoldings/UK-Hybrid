@@ -4,7 +4,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, ExtCtrls,
+  StdCtrls, ComCtrls, Db, Buttons, ExtCtrls,
   NumberEdit, OracleUniProvider, Uni, DBAccess, ToolWin, ImgList,
   cxLookAndFeelPainters, cxStyles, cxCustomData, cxGraphics, cxFilter,
   cxData, cxDataStorage, cxEdit, cxDBData, cxCurrencyEdit, dxBar,
@@ -12,7 +12,7 @@ uses
   cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxButtons, cxTextEdit,
   cxGroupBox, cxContainer, cxRadioGroup, cxPC, Menus, cxPCdxBarPopupMenu,
   cxLookAndFeels, MemDS, dxCore, cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TfrmCreditorAccountsSearch = class(TForm)

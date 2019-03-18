@@ -2,28 +2,27 @@ unit PhoneBookNew;
 
 interface
 
+uses
+  Windows, Forms, Messages, SysUtils,  dxBarBuiltInMenu, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.Menus, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxTextEdit, cxMaskEdit, cxCalendar, cxCheckBox, Uni, Vcl.Dialogs, stringz,
+  cxGrid, dxBar, cxClasses, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ExtCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.Controls, DBAccess, MemDS, System.Classes,
+  System.Actions, Vcl.ActnList, Vcl.StdCtrls, Vcl.DBCtrls,
+  cxDBExtLookupComboBox, cxDBLabel, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridCustomView, VirtualTrees, cxLabel,
+  cxImageComboBox, cxDBEdit, Vcl.ComCtrls, DBDateTimePicker, cxImage,
+  cxGroupBox, Vcl.CheckLst, cxCheckListBox, cxMemo, cxRichEdit, cxDBRichEdit,
+  Vcl.Graphics, cxDropDownEdit, cxCustomListBox, cxListBox, cxButtons,
+  cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, Vcl.Buttons,
+  Vcl.Mask, cxPC, synpdf, uRwMapiInterfaces, SyncObjs, System.Character;
+
 //  9 Nov 2017 DW - added Entity Group code
 
 
-uses
-  Windows, Messages, Classes, Graphics, Controls,
-  StdCtrls, ExtCtrls, Forms, ComCtrls, ActnList, OracleUniProvider, Uni,
-  DBAccess, Mask, DBCtrls,  Buttons, ImgList, CheckLst, VirtualTrees, stringz,
-  SyncObjs, Grids, DBGrids, ToolWin, ActnMan, Menus, cxStyles, cxCustomData,
-  cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB,
-  cxDBData, cxTextEdit, cxMaskEdit, cxCalendar, cxCheckBox, cxControls,
-  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxDBLabel,
-  cxDBExtLookupComboBox, dxBar, cxGridLevel, cxGrid, cxImageComboBox, cxDBEdit,
-  cxLabel, cxCheckListBox, cxDropDownEdit, cxButtons,
-  cxButtonEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  cxClasses, cxGridCustomTableView, cxGridTableView,
-  cxGridDBTableView, cxGridCustomView, Vcl.XPStyleActnCtrls, MemDS,
-  System.Actions, uRwMapiSession, uRwMapiInterfaces, cxImage, cxGroupBox,
-  Vcl.Dialogs, DBDateTimePicker, System.Character, synpdf, SysUtils,
-  cxPCdxBarPopupMenu, cxPC, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxCustomListBox,
-  cxDBCheckListBox, dxDPIAwareUtils, cxListBox, cxMemo, cxRichEdit,
-  cxDBRichEdit, System.ImageList, dxDateRanges;
+
 
 type
   TLikeData = class(TCollectionItem)

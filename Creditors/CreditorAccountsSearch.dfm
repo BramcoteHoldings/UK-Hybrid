@@ -7,7 +7,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -15,12 +15,12 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object pageSearch: TcxPageControl
     Left = 0
-    Top = 30
+    Top = 28
     Width = 584
-    Height = 490
+    Height = 492
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -31,14 +31,10 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     OnChange = pageSearchChange
-    ExplicitLeft = 5
-    ExplicitTop = 41
-    ExplicitWidth = 572
-    ExplicitHeight = 473
-    ClientRectBottom = 486
+    ClientRectBottom = 488
     ClientRectLeft = 4
     ClientRectRight = 580
-    ClientRectTop = 29
+    ClientRectTop = 26
     object tabGrid: TcxTabSheet
       Margins.Left = 4
       Margins.Top = 4
@@ -46,18 +42,14 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       Margins.Bottom = 4
       Caption = 'Display Grid'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         576
-        457)
+        462)
       object dbgrAccounts: TcxGrid
         Left = 7
         Top = 10
         Width = 564
-        Height = 406
+        Height = 411
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -136,7 +128,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       end
       object btnCancel: TcxButton
         Left = 479
-        Top = 422
+        Top = 427
         Width = 91
         Height = 31
         Margins.Left = 4
@@ -151,7 +143,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D560A00000000000036000000280000002400000012000000010020000000
-          0000000000004D1000004D100000000000000000000000808000008080000080
+          000000000000C40E0000C40E0000000000000000000000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
@@ -241,7 +233,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       end
       object btnOK: TcxButton
         Left = 377
-        Top = 422
+        Top = 427
         Width = 91
         Height = 31
         Margins.Left = 4
@@ -255,7 +247,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+          000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -301,11 +293,11 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       Margins.Bottom = 4
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitWidth = 564
-      ExplicitHeight = 440
+      ExplicitTop = 28
+      ExplicitHeight = 460
       DesignSize = (
         576
-        457)
+        462)
       object rgOwing: TcxRadioGroup
         Left = 13
         Top = 17
@@ -347,8 +339,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label8: TLabel
           Left = 18
           Top = 29
-          Width = 48
-          Height = 17
+          Width = 43
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -358,8 +350,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label9: TLabel
           Left = 18
           Top = 61
-          Width = 66
-          Height = 17
+          Width = 60
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -369,8 +361,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label10: TLabel
           Left = 18
           Top = 91
-          Width = 52
-          Height = 17
+          Width = 48
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -380,8 +372,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label11: TLabel
           Left = 18
           Top = 123
-          Width = 45
-          Height = 17
+          Width = 44
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -461,8 +453,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label12: TLabel
           Left = 19
           Top = 24
-          Width = 54
-          Height = 17
+          Width = 48
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -472,8 +464,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label13: TLabel
           Left = 18
           Top = 53
-          Width = 37
-          Height = 17
+          Width = 35
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -484,7 +476,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
           Left = 95
           Top = 19
           Width = 147
-          Height = 25
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -525,8 +517,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         object Label14: TLabel
           Left = 18
           Top = 29
-          Width = 37
-          Height = 17
+          Width = 35
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -550,7 +542,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       end
       object btnClear: TcxButton
         Left = 471
-        Top = 415
+        Top = 420
         Width = 91
         Height = 30
         Margins.Left = 4
@@ -563,7 +555,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+          000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF000000FFFF0000FFFF0000FFFF0000FFFF0000FFFFFF00
@@ -599,8 +591,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         OptionsImage.Spacing = 5
         TabOrder = 4
         OnClick = btnClearAllClick
-        ExplicitLeft = 459
-        ExplicitTop = 398
+        ExplicitTop = 418
       end
     end
   end
@@ -629,7 +620,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   object cxStyleRepository1: TcxStyleRepository
     Left = 442
     Top = 64
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]
       Color = clInfoBk
@@ -659,7 +650,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -676,11 +667,11 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
     UseSystemFont = False
     Left = 366
     Top = 75
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False

@@ -4,14 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, OracleUniProvider, Uni, DBAccess, MemDS, cxLookAndFeelPainters,
+  Db, OracleUniProvider, Uni, DBAccess, MemDS, cxLookAndFeelPainters,
   StdCtrls, cxButtons, cxControls, cxContainer, cxEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, ExtCtrls, cxStyles, cxCustomData, cxGraphics,
   cxFilter, cxData, cxDataStorage, cxDBData, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxClasses,
   cxGridLevel, cxGrid, cxLookAndFeels, Vcl.Menus, cxNavigator,
-  DateUtils;
+  DateUtils, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog;
 
 type
   TfrmDiaryNotify = class(TForm)
@@ -44,7 +45,6 @@ type
     procedure btnOpenEventClick(Sender: TObject);
     procedure btnDismissClick(Sender: TObject);
     procedure btnSnoozeClick(Sender: TObject);
-    procedure dbgrDiaryNotifyCellClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -182,11 +182,5 @@ begin
    Self.Close;
 end;
 
-procedure TfrmDiaryNotify.dbgrDiaryNotifyCellClick(Column: TColumn);
-begin
-  lblEvent.Caption := qryDiaryNotify.FieldByName('DESCR').AsString;
-  lblTime.Caption := qryDiaryNotify.FieldByName('START_DT').AsString;
-  lblLocation.Caption := qryDiaryNotify.FieldByName('LOCATION').AsString;
-end;
 
 end.

@@ -2,18 +2,18 @@ unit Archival;
 
 interface
 
-uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  citfunc,StdCtrls, Buttons, Db, MemDS,  OracleUniProvider, Uni, DBAccess, DBCtrls,
-  cxLookAndFeelPainters, cxButtons, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  cxCheckBox, cxControls, cxContainer, cxEdit, cxLabel, cxGroupBox,
-  cxButtonEdit, cxCalendar, Variants, cxGraphics, Menus, cxLookAndFeels,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxDBData,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxGridCustomView, cxGrid, cxMemo, cxRichEdit, DateUtils,
-  ComCtrls, dxCore, ExtCtrls, cxDateUtils, cxNavigator,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+uses Forms, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, Vcl.Menus, Vcl.ComCtrls, dxCore, cxDateUtils, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxCalendar, cxTextEdit, cxDBLookupComboBox, Uni, DBAccess, MemDS,
+  Vcl.ExtCtrls, cxButtonEdit, cxMemo, cxRichEdit, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomView, cxGrid, cxDropDownEdit, cxGroupBox, cxMaskEdit,
+  cxLookupEdit, cxDBLookupEdit, Vcl.StdCtrls, cxButtons, cxCheckBox,
+  Vcl.Controls, cxLabel, System.Classes, Variants, DateUtils, SysUtils;
+
+  
 
 type
   TfrmArchival = class(TForm)

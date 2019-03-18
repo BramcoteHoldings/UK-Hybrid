@@ -10,7 +10,7 @@ object frmConflictSearch: TfrmConflictSearch
   Constraints.MinWidth = 936
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -15
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -24,12 +24,12 @@ object frmConflictSearch: TfrmConflictSearch
   OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 120
-  TextHeight = 20
+  TextHeight = 15
   object Label33: TLabel
     Left = 11
     Top = 36
-    Width = 32
-    Height = 20
+    Width = 24
+    Height = 15
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -39,8 +39,8 @@ object frmConflictSearch: TfrmConflictSearch
   end
   object sbarFilter: TStatusBar
     Left = 0
-    Top = 661
-    Width = 1286
+    Top = 669
+    Width = 1288
     Height = 23
     Margins.Left = 4
     Margins.Top = 4
@@ -58,9 +58,9 @@ object frmConflictSearch: TfrmConflictSearch
   end
   object pageSearch: TcxPageControl
     Left = 0
-    Top = 32
-    Width = 1286
-    Height = 629
+    Top = 28
+    Width = 1288
+    Height = 641
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -73,11 +73,10 @@ object frmConflictSearch: TfrmConflictSearch
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
-    ClientRectBottom = 625
+    ClientRectBottom = 637
     ClientRectLeft = 4
-    ClientRectRight = 1282
-    ClientRectTop = 32
+    ClientRectRight = 1284
+    ClientRectTop = 26
     object tabGrid: TcxTabSheet
       Margins.Left = 4
       Margins.Top = 4
@@ -86,10 +85,12 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Conficts'
       ImageIndex = 0
       OnShow = tabGridShow
+      ExplicitTop = 31
+      ExplicitHeight = 606
       object Panel1: TPanel
         Left = 0
-        Top = 538
-        Width = 1278
+        Top = 556
+        Width = 1280
         Height = 55
         Margins.Left = 4
         Margins.Top = 4
@@ -98,14 +99,15 @@ object frmConflictSearch: TfrmConflictSearch
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitTop = 551
         DesignSize = (
-          1278
+          1280
           55)
         object Label9: TLabel
           Left = 0
           Top = 19
-          Width = 128
-          Height = 20
+          Width = 103
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -135,7 +137,7 @@ object frmConflictSearch: TfrmConflictSearch
           Width = 173
         end
         object bnCancel: TcxButton
-          Left = 1166
+          Left = 1168
           Top = 15
           Width = 106
           Height = 36
@@ -150,7 +152,7 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsImage.Glyph.SourceDPI = 96
           OptionsImage.Glyph.Data = {
             424D560A00000000000036000000280000002400000012000000010020000000
-            0000000000007412000074120000000000000000000000808000008080000080
+            000000000000C40E0000C40E0000000000000000000000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
@@ -238,7 +240,7 @@ object frmConflictSearch: TfrmConflictSearch
           OnClick = aFileExitExecute
         end
         object btnCreateClient: TcxButton
-          Left = 422
+          Left = 424
           Top = 12
           Width = 108
           Height = 36
@@ -255,7 +257,7 @@ object frmConflictSearch: TfrmConflictSearch
           OnClick = btnCreateClientClick
         end
         object btnCreateMatter: TcxButton
-          Left = 538
+          Left = 540
           Top = 12
           Width = 109
           Height = 36
@@ -274,14 +276,15 @@ object frmConflictSearch: TfrmConflictSearch
       object dbGrConflicts: TcxGrid
         Left = 0
         Top = 0
-        Width = 1278
-        Height = 538
+        Width = 1280
+        Height = 556
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 551
         object vConflicts: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellDblClick = vConflictsCellDblClick
@@ -383,18 +386,16 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Filter'
       ImageIndex = 1
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 31
+      ExplicitHeight = 606
       DesignSize = (
-        1278
-        593)
+        1280
+        611)
       object Label14: TLabel
         Left = 40
-        Top = 535
-        Width = 113
-        Height = 20
+        Top = 553
+        Width = 90
+        Height = 15
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -403,13 +404,13 @@ object frmConflictSearch: TfrmConflictSearch
         Caption = '&Search for Client '
         FocusControl = edtClientSearch
         Transparent = True
-        ExplicitTop = 756
+        ExplicitTop = 548
       end
       object Label21: TLabel
         Left = 287
-        Top = 535
-        Width = 94
-        Height = 20
+        Top = 553
+        Width = 74
+        Height = 15
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -418,7 +419,7 @@ object frmConflictSearch: TfrmConflictSearch
         Caption = 'S&earch for File'
         FocusControl = edtFileSearch
         Transparent = True
-        ExplicitTop = 756
+        ExplicitTop = 548
       end
       object cbShowRecentlyAccessed: TcxCheckBox
         Left = 683
@@ -438,26 +439,26 @@ object frmConflictSearch: TfrmConflictSearch
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        Width = 94
+        Width = 74
       end
       object edtClientSearch: TEdit
         Left = 40
-        Top = 555
+        Top = 573
         Width = 173
-        Height = 28
+        Height = 23
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Anchors = [akLeft, akBottom]
         TabOrder = 1
-        ExplicitTop = 554
+        ExplicitTop = 568
       end
       object edtFileSearch: TEdit
         Left = 287
-        Top = 555
+        Top = 573
         Width = 137
-        Height = 28
+        Height = 23
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -465,7 +466,7 @@ object frmConflictSearch: TfrmConflictSearch
         Anchors = [akLeft, akBottom]
         CharCase = ecUpperCase
         TabOrder = 2
-        ExplicitTop = 554
+        ExplicitTop = 568
       end
       object gbOpened: TcxGroupBox
         Left = 681
@@ -484,8 +485,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label19: TLabel
           Left = 12
           Top = 24
-          Width = 35
-          Height = 20
+          Width = 28
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -496,8 +497,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label20: TLabel
           Left = 12
           Top = 60
-          Width = 44
-          Height = 20
+          Width = 34
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -509,7 +510,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 20
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -523,7 +524,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 55
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -634,8 +635,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label27: TLabel
           Left = 12
           Top = 31
-          Width = 35
-          Height = 20
+          Width = 28
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -646,8 +647,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label28: TLabel
           Left = 12
           Top = 64
-          Width = 44
-          Height = 20
+          Width = 34
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -659,7 +660,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 24
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -673,7 +674,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 60
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -723,8 +724,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label30: TLabel
           Left = 12
           Top = 33
-          Width = 35
-          Height = 20
+          Width = 28
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -735,8 +736,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label29: TLabel
           Left = 12
           Top = 67
-          Width = 44
-          Height = 20
+          Width = 34
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -748,7 +749,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 27
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -762,7 +763,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 61
           Width = 120
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -812,8 +813,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label10: TLabel
           Left = 7
           Top = 28
-          Width = 110
-          Height = 20
+          Width = 89
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -824,8 +825,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label18: TLabel
           Left = 7
           Top = 216
-          Width = 69
-          Height = 20
+          Width = 56
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -836,8 +837,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblTrust: TLabel
           Left = 7
           Top = 184
-          Width = 31
-          Height = 20
+          Width = 26
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -848,8 +849,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label15: TLabel
           Left = 7
           Top = 153
-          Width = 116
-          Height = 20
+          Width = 92
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -860,8 +861,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label13: TLabel
           Left = 7
           Top = 123
-          Width = 71
-          Height = 20
+          Width = 55
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -872,8 +873,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label12: TLabel
           Left = 7
           Top = 92
-          Width = 97
-          Height = 20
+          Width = 78
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -884,8 +885,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label11: TLabel
           Left = 7
           Top = 61
-          Width = 53
-          Height = 20
+          Width = 41
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -897,7 +898,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 23
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -928,7 +929,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 55
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -959,7 +960,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 87
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -990,7 +991,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 119
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1021,7 +1022,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 148
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1052,7 +1053,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 180
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1083,7 +1084,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 153
           Top = 212
           Width = 94
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1128,8 +1129,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label5: TLabel
           Left = 12
           Top = 27
-          Width = 76
-          Height = 20
+          Width = 60
+          Height = 15
           Hint = 'Enter any part of a Description to filter by that description.'
           Margins.Left = 4
           Margins.Top = 4
@@ -1141,8 +1142,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label23: TLabel
           Left = 12
           Top = 60
-          Width = 117
-          Height = 20
+          Width = 94
+          Height = 15
           Hint = 
             'Enter any part of the Reference number used by your Client to lo' +
             'cate matters using that reference.'
@@ -1156,8 +1157,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label16: TLabel
           Left = 12
           Top = 127
-          Width = 51
-          Height = 20
+          Width = 42
+          Height = 15
           Hint = 
             'Enter any part of the Contact Name to locate matters associated ' +
             'with that contact.'
@@ -1171,8 +1172,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label25: TLabel
           Left = 12
           Top = 156
-          Width = 41
-          Height = 20
+          Width = 32
+          Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
             'ring within the notes field.'
@@ -1186,8 +1187,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label22: TLabel
           Left = 12
           Top = 187
-          Width = 39
-          Height = 20
+          Width = 31
+          Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
             'ring within the notes field.'
@@ -1201,8 +1202,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label7: TLabel
           Left = 11
           Top = 219
-          Width = 77
-          Height = 20
+          Width = 62
+          Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
             'ring within the notes field.'
@@ -1217,7 +1218,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 23
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1229,7 +1230,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 55
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1241,7 +1242,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 87
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1253,7 +1254,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 119
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1265,7 +1266,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 148
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1277,7 +1278,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 180
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1289,7 +1290,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 207
           Top = 212
           Width = 181
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1301,7 +1302,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 11
           Top = 87
           Width = 188
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1315,8 +1316,8 @@ object frmConflictSearch: TfrmConflictSearch
         end
       end
       object bnClearAll: TcxButton
-        Left = 1162
-        Top = 547
+        Left = 1164
+        Top = 565
         Width = 108
         Height = 39
         Hint = 'Clear All'
@@ -1330,7 +1331,7 @@ object frmConflictSearch: TfrmConflictSearch
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360800000000000036000000280000002000000010000000010020000000
-          0000000000007412000074120000000000000000000000808000008080000080
+          000000000000C40E0000C40E0000000000000000000000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
@@ -1399,7 +1400,7 @@ object frmConflictSearch: TfrmConflictSearch
         OptionsImage.NumGlyphs = 2
         OptionsImage.Spacing = 7
         TabOrder = 9
-        ExplicitTop = 546
+        ExplicitTop = 560
       end
       object fraEqual: TcxGroupBox
         Left = 11
@@ -1418,8 +1419,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblPartner: TLabel
           Left = 12
           Top = 21
-          Width = 46
-          Height = 20
+          Width = 38
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1430,8 +1431,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblController: TLabel
           Left = 12
           Top = 55
-          Width = 66
-          Height = 20
+          Width = 53
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1442,8 +1443,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblAuthor: TLabel
           Left = 12
           Top = 87
-          Width = 45
-          Height = 20
+          Width = 37
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1454,8 +1455,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblOperator: TLabel
           Left = 12
           Top = 120
-          Width = 60
-          Height = 20
+          Width = 47
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1466,8 +1467,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label6: TLabel
           Left = 12
           Top = 187
-          Width = 65
-          Height = 20
+          Width = 53
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1478,8 +1479,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label3: TLabel
           Left = 275
           Top = 21
-          Width = 31
-          Height = 20
+          Width = 25
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1490,8 +1491,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label4: TLabel
           Left = 275
           Top = 55
-          Width = 54
-          Height = 20
+          Width = 43
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1502,8 +1503,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label24: TLabel
           Left = 275
           Top = 87
-          Width = 45
-          Height = 20
+          Width = 37
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1514,8 +1515,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label1: TLabel
           Left = 275
           Top = 120
-          Width = 74
-          Height = 20
+          Width = 60
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1526,8 +1527,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label2: TLabel
           Left = 275
           Top = 152
-          Width = 40
-          Height = 20
+          Width = 32
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1538,8 +1539,8 @@ object frmConflictSearch: TfrmConflictSearch
         object lblParaLegal: TLabel
           Left = 13
           Top = 152
-          Width = 68
-          Height = 20
+          Width = 54
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1954,8 +1955,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label26: TLabel
           Left = 11
           Top = 27
-          Width = 34
-          Height = 20
+          Width = 28
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1966,8 +1967,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label31: TLabel
           Left = 243
           Top = 27
-          Width = 39
-          Height = 20
+          Width = 31
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1978,8 +1979,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label32: TLabel
           Left = 700
           Top = 27
-          Width = 38
-          Height = 20
+          Width = 29
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -1990,8 +1991,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label34: TLabel
           Left = 12
           Top = 59
-          Width = 16
-          Height = 20
+          Width = 13
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2016,8 +2017,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label38: TLabel
           Left = 441
           Top = 59
-          Width = 68
-          Height = 20
+          Width = 53
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2040,7 +2041,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 75
           Top = 21
           Width = 132
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2093,7 +2094,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 73
           Top = 55
           Width = 134
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2149,8 +2150,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label35: TLabel
           Left = 12
           Top = 31
-          Width = 35
-          Height = 20
+          Width = 28
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2161,8 +2162,8 @@ object frmConflictSearch: TfrmConflictSearch
         object Label36: TLabel
           Left = 261
           Top = 31
-          Width = 44
-          Height = 20
+          Width = 34
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2174,7 +2175,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 99
           Top = 24
           Width = 134
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2188,7 +2189,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 347
           Top = 24
           Width = 136
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -2791,7 +2792,7 @@ object frmConflictSearch: TfrmConflictSearch
   object StyleRepository: TcxStyleRepository
     Left = 968
     Top = 164
-    PixelsPerInch = 120
+    PixelsPerInch = 96
     object styBand: TcxStyle
       AssignedValues = [svColor]
       Color = clSilver
@@ -2835,7 +2836,7 @@ object frmConflictSearch: TfrmConflictSearch
     AllowReset = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     CanCustomize = False
@@ -2860,11 +2861,11 @@ object frmConflictSearch: TfrmConflictSearch
     UseSystemFont = False
     Left = 447
     Top = 19
-    PixelsPerInch = 120
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      32
+      28
       0)
     object dxBarManager1Bar2: TdxBar
       AllowClose = False
@@ -2883,7 +2884,7 @@ object frmConflictSearch: TfrmConflictSearch
       FloatClientHeight = 44
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -3047,6 +3048,7 @@ object frmConflictSearch: TfrmConflictSearch
     DataPipeline = plConflicts
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -3072,15 +3074,22 @@ object frmConflictSearch: TfrmConflictSearch
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3095,13 +3104,15 @@ object frmConflictSearch: TfrmConflictSearch
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 299
     Top = 260
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plConflicts'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 25000
       mmPrintPosition = 0
@@ -3109,6 +3120,7 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Position = lpBottom
         Weight = 0.750000000000000000
@@ -3125,13 +3137,15 @@ object frmConflictSearch: TfrmConflictSearch
         OnGetText = ppLabel4GetText
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Conflicts Listing'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4784
@@ -3146,6 +3160,7 @@ object frmConflictSearch: TfrmConflictSearch
         UserName = 'Variable1'
         OnGetText = ppVariable1GetText
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         Font.Charset = DEFAULT_CHARSET
@@ -3166,6 +3181,7 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3185,13 +3201,15 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Printed:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -3205,6 +3223,7 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtDateTime
         DisplayFormat = 'dd-mmm-yyyy h:nn:ss AM/PM'
         Font.Charset = DEFAULT_CHARSET
@@ -3225,6 +3244,7 @@ object frmConflictSearch: TfrmConflictSearch
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 6138
@@ -3250,6 +3270,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBMemo1: TppDBMemo
           DesignLayer = ppDesignLayer1
           UserName = 'DBMemo1'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'CLIENTNAME'
           DataPipeline = plConflicts
@@ -3277,6 +3298,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBMemo3: TppDBMemo
           DesignLayer = ppDesignLayer1
           UserName = 'DBMemo3'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'CAT'
           DataPipeline = plConflicts
@@ -3304,6 +3326,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBMemo2: TppDBMemo
           DesignLayer = ppDesignLayer1
           UserName = 'DBMemo2'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'DATAFIELDNAME'
           DataPipeline = plConflicts
@@ -3331,6 +3354,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBMemo4: TppDBMemo
           DesignLayer = ppDesignLayer1
           UserName = 'DBMemo4'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'MATTERDESC'
           DataPipeline = plConflicts
@@ -3358,6 +3382,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBText1: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'DATA'
           DataPipeline = plConflicts
           Font.Charset = DEFAULT_CHARSET
@@ -3377,6 +3402,7 @@ object frmConflictSearch: TfrmConflictSearch
         object dbMatterNo: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'dbMatterNo'
+          Border.mmPadding = 0
           DataField = 'MatterNo'
           DataPipeline = plConflicts
           Font.Charset = DEFAULT_CHARSET
@@ -3397,6 +3423,7 @@ object frmConflictSearch: TfrmConflictSearch
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
@@ -3405,13 +3432,15 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label101'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Search Count:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4868
         mmLeft = 1693
@@ -3424,6 +3453,7 @@ object frmConflictSearch: TfrmConflictSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -3436,6 +3466,7 @@ object frmConflictSearch: TfrmConflictSearch
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'CAT'
         DataPipeline = plConflicts
         Font.Charset = DEFAULT_CHARSET
@@ -3456,6 +3487,7 @@ object frmConflictSearch: TfrmConflictSearch
     end
     object ppPageStyle1: TppPageStyle
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       EndPage = 0
       SinglePage = 0
       StartPage = 0
@@ -3478,6 +3510,7 @@ object frmConflictSearch: TfrmConflictSearch
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 11430
         mmPrintPosition = 0
@@ -3487,13 +3520,15 @@ object frmConflictSearch: TfrmConflictSearch
           OnGetText = ppLblIsConflictGroupGetText
           AutoSize = False
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           Caption = 'Confirmed as not conflicting'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3810
           mmLeft = 1483
@@ -3508,13 +3543,15 @@ object frmConflictSearch: TfrmConflictSearch
           UserName = 'Label1'
           AutoSize = False
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           Caption = 'Where Found'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3810
           mmLeft = 1483
@@ -3527,13 +3564,15 @@ object frmConflictSearch: TfrmConflictSearch
         object ppLabel8: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label6'
+          Border.mmPadding = 0
           Caption = 'Field Data'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 157698
@@ -3548,13 +3587,15 @@ object frmConflictSearch: TfrmConflictSearch
           UserName = 'Label7'
           AutoSize = False
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           Caption = 'Field Name'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3810
           mmLeft = 133788
@@ -3569,13 +3610,15 @@ object frmConflictSearch: TfrmConflictSearch
           UserName = 'Label2'
           AutoSize = False
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           Caption = 'Client Name'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3810
           mmLeft = 26456
@@ -3590,13 +3633,15 @@ object frmConflictSearch: TfrmConflictSearch
           UserName = 'Label3'
           AutoSize = False
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           Caption = 'Matter Description'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3810
           mmLeft = 87646
@@ -3609,13 +3654,15 @@ object frmConflictSearch: TfrmConflictSearch
         object ppLabel9: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label8'
+          Border.mmPadding = 0
           Caption = 'Matter Number'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial Narrow'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           WordWrap = True
           mmHeight = 8467
@@ -3629,6 +3676,7 @@ object frmConflictSearch: TfrmConflictSearch
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 9313
@@ -3636,6 +3684,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppLine3: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line3'
+          Border.mmPadding = 0
           Pen.Width = 2
           Weight = 1.200000047683716000
           mmHeight = 3175
@@ -3649,13 +3698,15 @@ object frmConflictSearch: TfrmConflictSearch
         object ppLabel10: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label9'
+          Border.mmPadding = 0
           Caption = 'Label9'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4868
           mmLeft = 1691
@@ -3668,6 +3719,7 @@ object frmConflictSearch: TfrmConflictSearch
         object ppDBCalc2: TppDBCalc
           DesignLayer = ppDesignLayer1
           UserName = 'DBCalc2'
+          Border.mmPadding = 0
           DataPipeline = plConflicts
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -3689,15 +3741,17 @@ object frmConflictSearch: TfrmConflictSearch
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D650611
-        44657461696C4265666F72655072696E740B50726F6772616D54797065070B74
-        7450726F63656475726506536F75726365065D70726F63656475726520446574
-        61696C4265666F72655072696E743B0D0A626567696E0D0A7B20202053686170
-        65312E56697369626C65203A3D202844657461696C2E436F756E74206D6F6420
-        3229203D20313B7D0D0A656E643B0D0A0D436F6D706F6E656E744E616D650606
-        44657461696C094576656E744E616D65060B4265666F72655072696E74074576
-        656E7449440218084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DetailBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DetailBeforePrint;'#13#10'begin'#13#10'{   Shape1.Visible := (Deta' +
+          'il.Count mod 2) = 1;}'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Detail'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 24
+      end
     end
     object TppDesignLayers
       object ppDesignLayer2: TppDesignLayer
@@ -3919,15 +3973,14 @@ object frmConflictSearch: TfrmConflictSearch
     end
   end
   object vtConflicts: TVirtualTable
-    Options = [voPersistentData, voStored, voSkipUnSupportedFieldTypes]
     Left = 192
     Top = 312
-    Data = {03000000000000000000}
+    Data = {04000000000000000000}
   end
   object cxEditRepository1: TcxEditRepository
     Left = 920
     Top = 296
-    PixelsPerInch = 120
+    PixelsPerInch = 96
     object cxEditRepository1CheckBoxItem1: TcxEditRepositoryCheckBoxItem
       Properties.ValueChecked = 'Y'
       Properties.ValueUnchecked = 'N'

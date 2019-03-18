@@ -3,34 +3,29 @@ unit Desktop;
 interface
 
 uses
-  System.Classes, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dxBar, dxBarExtItems,
-  dxBarExtDBItems, Data.DB, DBAccess, Uni, Vcl.ExtCtrls, MemDS, Vcl.Dialogs,
-  Vcl.Menus, Vcl.ImgList, cxSplitter, cxDropDownEdit, cxLookupEdit,
-  cxDBLookupEdit, cxDBLookupComboBox, Vcl.StdCtrls, cxTreeView, dxNavBarCollns,
-  dxNavBarBase, dxNavBar, dxDockPanel, cxTextEdit, Vcl.Styles.Ext,
-  cxMaskEdit, cxButtonEdit, dxStatusBar, Vcl.MPlayer, Vcl.Forms,
-  System.INIFiles, System.SysUtils, Windows, Registry, Messages, Vcl.graphics,
-  Vcl.Buttons, vcl.themes, AppEvnts, System.Actions, XML.Win.msxmldom,
-  dxRibbonGallery, dxRibbonSkins, dxRibbon, dxBarApplicationMenu, Variants,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
-  cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGridLevel, cxGridCustomView, cxGrid, cxSchedulerStorage,
-  cxSchedulerDBStorage, cxSchedulercxGridConnection, cxSchedulerDialogs,
-  cxImageComboBox, cxMemo, cxCalendar, cxCheckBox, cxColorComboBox,
-  cxProgressBar, cxBarEditItem, cxLabel, cxRadioGroup, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxRibbonCustomizationForm, dxSkinsCore, WorkflowMergeDocument, System.Win.ComObj,
-  dxDPIAwareUtils, cxPropertiesStore, ConflictSearch,
-  cxScheduler, cxSchedulerCustomControls,
+  vcl.Dialogs, System.Classes, Vcl.ActnList, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxBarBuiltInMenu, cxPC, Vcl.Menus,
+  cxStyles, cxScheduler, cxSchedulerStorage, cxSchedulerCustomControls,
   cxSchedulerCustomResourceView, cxSchedulerDayView, cxSchedulerAgendaView,
   cxSchedulerDateNavigator, cxSchedulerHolidays, cxSchedulerTimeGridView,
   cxSchedulerUtils, cxSchedulerWeekView, cxSchedulerYearView,
-  cxSchedulerGanttView, cxSchedulerRecurrence,
-  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
-  System.ImageList, dxDateRanges, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, cxPC, Vcl.ComCtrls, dxDockControl,
-  cxEditRepositoryItems, cxClasses, Vcl.Controls
+  cxSchedulerGanttView, cxSchedulerRecurrence, VCL.Forms,
+  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, cxTextEdit, cxMemo,
+  cxCalendar, cxImageComboBox, cxCheckBox, cxColorComboBox, cxProgressBar,
+  Vcl.ComCtrls, dxRibbonSkins, dxRibbonCustomizationForm, cxSchedulerDBStorage,
+  cxSchedulercxGridConnection, dxBarApplicationMenu, dxRibbon, dxDockControl,
+  cxEditRepositoryItems, dxBar, cxBarEditItem, dxRibbonGallery, dxBarExtItems,
+  dxBarExtDBItems, cxClasses, Data.DB, DBAccess, Uni, Vcl.ExtCtrls, MemDS,
+  System.ImageList, Vcl.ImgList, Vcl.Controls, cxSplitter,
+  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxTreeView,
+  dxNavBarCollns, dxNavBarBase, dxNavBar, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridCustomView, cxGrid, Vcl.StdCtrls, Vcl.Buttons,
+  dxDockPanel, cxMaskEdit, cxButtonEdit, dxStatusBar, Vcl.MPlayer, System.SysUtils,
+  VCL.Graphics, Variants, WorkflowMergeDocument, Registry , ConflictSearch, ComObj,
+   XML.Win.msxmldom, Styles.Ext, cxSchedulerDialogs, Windows, VCL.Themes,
+  cxLabel
   {, Cromis.DirectoryWatch};
 
 {$DEFINE AXIOM}
@@ -719,7 +714,7 @@ var
 implementation
 
 uses
-  {AutoCost, AutoInv,} Archival, ArchiveBatch,{ ArchiveBoxMgmt, Archives,
+  {AutoCost, AutoInv,} Archival, {ArchiveBatch, ArchiveBoxMgmt, Archives,
   Archivesearch,} Bank, BankDeposit, BankRec, BASGroups, BillCredit, About,
   BillCreditTypes, BillTemplates, Bills, CashPay, CashRcp, CheqReqNew, CheqReqs,
   Cheque, ChequePresent, Clients, ClientGroups, EntityChange, FeeBasis,
@@ -740,7 +735,7 @@ uses
   WorkFlowToDo, Budgets, NSearch, citfunc,
   DebtorStatusList, MarketEventEventTypes, documenttypelist, marketevent,
   marketeventparticipants, marketeventlist, SolicitorCode, CourtAddress,
-  IndustryNew, InterestNew, FeeEnquiry, Toolkit, unlock,
+  IndustryNew, InterestNew, FeeEnquiry, {Toolkit,} unlock,
   MarketReferralOther, TimeDiary, MSearch, ReleaseNotes, browser,
   EmpType, {DiaryEvents,} BatchChequePrint,DebtorTaskTemplate,DebtorTaskDue,
   AccountPayable,DepositAccount,InvestmentTransactions, Teams, DebtorNotesEntry, Dashboard,
@@ -753,8 +748,8 @@ uses
   AdvMedia, AdvSubMedia, CountryList, CreditorSearch, MatterNew, Vcl.Styles,
   Vcl.Styles.FormStyleHooks, BankTransfer, CSearch,
   documentcenter, emailtemplates, WriteOffWIP, BankRecEdit, prac_num, debtortaskcodes,
-  EntityGroups, ExpenseTemplates, NewTaskNew, ReceiptReqNew, PrecedentSearchList,
-  Phonebook_Status, EmployeeFindDialog, ReceiptReqs, ReceiptReqNarrative,
+  EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
+  Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
   WinAPI.ShellAPI, SearchIndexConfig;
 
@@ -3455,7 +3450,7 @@ begin
         ChooseArchive;
       end;   }
 
-      IDXARCHIVEBATCH: FindorCreate(TfrmArchiveBatch, iProgramID).Show;
+//      IDXARCHIVEBATCH: FindorCreate(TfrmArchiveBatch, iProgramID).Show;
 
 //      IDXAUTOCOST: FindorCreate(TfrmAutoCost, iProgramID).Show;
 
@@ -3866,13 +3861,13 @@ begin
     IDXCOURTADDRESS:         FindorCreate(TfrmCourtAddress, iProgramID).Show;
     IDXINDUSTRY:             FindorCreate(TfrmIndustryNew, iProgramID).Show;
     IDXINTEREST:             FindorCreate(TfrmInterestNew, iProgramID).Show;
-    IDXTOOLKIT:              //FindorCreate(TfrmToolkit, iProgramID).ShowModal;
-      with TfrmToolkit.Create(frmDesktop) do
+//    IDXTOOLKIT:              //FindorCreate(TfrmToolkit, iProgramID).ShowModal;
+{      with TfrmToolkit.Create(frmDesktop) do
       begin
         Tag := iProgramID;
         ShowModal;
         frmToolkit.Free;
-      end;
+      end;  }
 
 //    IDXARCHIVESEARCH:        FindorCreate(TfrmArchiveSearch, iProgramID).Show;
     IDXMARKETREFERRAL:       FindorCreate(TfrmMarketReferralOther, iProgramID).Show;
@@ -4040,16 +4035,16 @@ begin
     IDXDEBTORTASKCODES: FindOrCreate(TfrmDebtorTaskCodes, iProgramID).Show;
     IDXENTITYGROUP: FindOrCreate(TfrmEntityGroups, iProgramID).Show;
     IDXEXPENSETEMPLATE: FindOrCreate(TfrmExpenseTemplates, iProgramID).Show;
-    IDXRECEIPTREQNEW: begin
+{    IDXRECEIPTREQNEW: begin
                        with TfrmReceiptReqNew.Create(frmDesktop) do
                        begin
                           Tag := iProgramID;
                           ShowModal;
                         end;        //FindOrCreate(TfrmReceiptReqNew, iProgramID).Show;
-                    end;
+                    end;          }
     IDXPHONEBOOKSTATUS: FindOrCreate(TfrmPhonebook_Status, iProgramID).Show;
-    IDXRECEIPTREQS: FindOrCreate(TfrmReceiptReqs, iProgramID).Show;
-    IDXNARRATIVE: FindOrCreate(TfrmReceiptReqNarrative, iProgramID).Show;
+//    IDXRECEIPTREQS: FindOrCreate(TfrmReceiptReqs, iProgramID).Show;
+//    IDXNARRATIVE: FindOrCreate(TfrmReceiptReqNarrative, iProgramID).Show;
     IDXDOCFOLDERTMPL: FindOrCreate(TfrmDoc_Fldr_Tmpl, iProgramID).Show;
     IDXDOCINDEXUSERS: FindOrCreate(TfrmIndexConfig, iProgramID).Show;
   end;

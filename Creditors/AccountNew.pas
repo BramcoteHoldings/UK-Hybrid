@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
+  StdCtrls, ComCtrls, DBCtrls, Menus, Buttons,
   ExtCtrls, OracleUniProvider, Uni, DBAccess, MemDS, NumberEdit, DateTimeAccount,
   cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
   cxEdit, cxDBData, cxDropDownEdit, cxButtonEdit, cxTextEdit,
@@ -20,7 +20,7 @@ uses
   cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
   dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorLnks, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPSContainerLnk;
+  dxPScxExtEditorProducers, dxPSCore, dxPSContainerLnk, dxDateRanges, Data.DB;
 
 const
   colTYPE = 0;

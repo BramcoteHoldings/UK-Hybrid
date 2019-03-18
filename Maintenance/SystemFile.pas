@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, System.SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, DBCtrls, Db, Buttons, ComCtrls, Grids, DBGrids,
+  StdCtrls, Mask, DBCtrls, Db, Buttons, ComCtrls,
   OracleUniProvider, Uni, DBAccess, ExtCtrls, Variants, OutlookIntegrator,
   cxLabel, cxControls, cxContainer, cxEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
@@ -20,7 +20,7 @@ uses
   JvExMask, JvToolEdit, JvDBLookup, MemDS, cxNavigator, JvSpin, JvDBSpinEdit,
   DBDateTimePicker, JvMaskEdit, JvCheckedMaskEdit, JvDatePickerEdit,
   JvDBDatePickerEdit, dxBarBuiltInMenu, dxDPIAwareUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog{, Cromis.DirectoryWatch};
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges{, Cromis.DirectoryWatch};
 
 const
   C_EMP = 'sys';
@@ -550,8 +550,6 @@ type
     procedure cbAppNameChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure qrySettingsBeforeInsert(DataSet: TDataSet);
-    procedure dbgDataFieldMappingKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure pcMainChange(Sender: TObject);
     procedure pcMainChanging(Sender: TObject; var AllowChange: Boolean);
     procedure dbgUserStatementsDblClick(Sender: TObject);
@@ -877,24 +875,6 @@ begin
       edtCreditor.Text := FieldByName('NAME').AsString;
       Close;
    end;
-end;
-
-procedure TfrmSystemFile.dbgDataFieldMappingKeyUp(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
-begin
-  if (TDBGrid(Sender).DataSource.DataSet.State <> dsEdit) and (TDBGrid(Sender).DataSource.DataSet.State <> dsInsert) then
-  begin
-    case Key of
-      VK_DELETE: begin
-        if MessageDlg('Are you sure you want to delete this entry?', mtConfirmation,
-          [mbYes, mbNo], 0) = mrYes then
-            TDBGrid(Sender).DataSource.DataSet.Delete;
-      end;
-      VK_INSERT: begin
-        TDBGrid(Sender).DataSource.DataSet.Insert;
-      end;
-    end;
-  end;
 end;
 
 procedure TfrmSystemFile.pcMainChange(Sender: TObject);

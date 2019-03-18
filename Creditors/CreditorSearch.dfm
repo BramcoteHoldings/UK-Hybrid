@@ -29,12 +29,11 @@ object frmCreditorSearch: TfrmCreditorSearch
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfFlat
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pageSearchChange
     ClientRectBottom = 642
     ClientRectLeft = 4
     ClientRectRight = 724
-    ClientRectTop = 29
+    ClientRectTop = 28
     object tabGrid: TcxTabSheet
       Caption = 'Creditors'
       ImageIndex = 0
@@ -72,7 +71,7 @@ object frmCreditorSearch: TfrmCreditorSearch
           Visible = False
         end
         object btnOK: TcxButton
-          Left = 523
+          Left = 524
           Top = 5
           Width = 92
           Height = 30
@@ -84,7 +83,7 @@ object frmCreditorSearch: TfrmCreditorSearch
           OptionsImage.Glyph.SourceDPI = 96
           OptionsImage.Glyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
-            0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+            000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -122,7 +121,7 @@ object frmCreditorSearch: TfrmCreditorSearch
           ExplicitLeft = 522
         end
         object btnCancel: TcxButton
-          Left = 624
+          Left = 625
           Top = 5
           Width = 91
           Height = 30
@@ -133,7 +132,7 @@ object frmCreditorSearch: TfrmCreditorSearch
           OptionsImage.Glyph.SourceDPI = 96
           OptionsImage.Glyph.Data = {
             424D560A00000000000036000000280000002400000012000000010020000000
-            0000000000004D1000004D100000000000000000000000808000008080000080
+            000000000000C40E0000C40E0000000000000000000000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000080
@@ -250,7 +249,7 @@ object frmCreditorSearch: TfrmCreditorSearch
         Left = 0
         Top = 0
         Width = 720
-        Height = 574
+        Height = 575
         Align = alClient
         TabOrder = 1
         LookAndFeel.NativeStyle = True
@@ -466,7 +465,7 @@ object frmCreditorSearch: TfrmCreditorSearch
   object cxStyleRepository1: TcxStyleRepository
     Left = 431
     Top = 125
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]
       Color = clInfoBk

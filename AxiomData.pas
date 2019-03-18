@@ -4,18 +4,17 @@ interface
 
 uses
   Word2010, Vcl.OleServer, UniProvider, OracleUniProvider, uRwEasyMAPI,
-  VCL.uRwMAPISession, VirtualTable, Data.DB, ppComm, ppRelatv, ppDB,
-  ppDBPipe, Uni, DASQLMonitor, UniSQLMonitor,
-  DBAccess, Vcl.ImgList, Vcl.Controls, MemDS, System.Classes, Windows, cxControls,
-  WinAPI.Messages, System.SysUtils, glComponentUtil, System.IniFiles,
-  uRwMapiInterfaces, Vcl.Forms, Vcl.Graphics,VCL.Dialogs, OraCall, Word2000,
-  system.DateUtils, cxStyles, cxClasses,
-  cxContainer, cxEdit, Ora, uRwMAPIMsgStoreEvents, DAScript, UniScript,
-  MemData, ppParameter, ppDesignLayer, ppBands, ppCtrls, ppMemo, ppStrtch,
-  ppRegion, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppTypes,
-  System.Character, System.IOUtils, System.Types, dxSpellCheckerCore,
-  dxSpellChecker, JvComponentBase, JvPropertyStore, JvProgramVersionCheck,
-  cxLookAndFeels, System.ImageList;
+  VCL.uRwMAPISession, VirtualTable, dxSpellCheckerCore, cxLookAndFeels,
+  dxSpellChecker, ppParameter, ppDesignLayer, ppBands, ppCtrls, ppMemo,
+  ppStrtch, ppRegion, ppPrnabl, ppClass, ppCache, ppProd, ppReport, DBAccess,
+  Uni, DAScript, UniScript, OraCall, Ora, cxStyles, Data.DB, ppDB, ppComm,
+  ppRelatv, ppDBPipe, cxClasses, cxContainer, cxEdit, DASQLMonitor,
+  UniSQLMonitor, System.ImageList, Vcl.ImgList, Vcl.Controls, MemDS,
+  System.Classes, WinAPI.Messages, uRwMAPIMsgStoreEvents,
+  Word2000, glComponentUtil, System.IniFiles, uRwMapiInterfaces,
+  System.Character, System.IOUtils, System.Types, cxControls,
+  Windows, VCL.Dialogs, system.DateUtils, MemData, System.SysUtils,
+  Vcl.Graphics, Vcl.Forms, ppTypes;
 
 
 const

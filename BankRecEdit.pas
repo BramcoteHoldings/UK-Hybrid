@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBGrids, Menus, Buttons,
+  StdCtrls, ComCtrls, Db, Menus, Buttons,
   ExtCtrls, MemDS, OracleUniProvider, Uni, DBAccess, Variants,
   cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
   cxEdit, cxDBData, cxTextEdit, cxDropDownEdit, cxButtonEdit, cxMaskEdit,
@@ -15,7 +15,7 @@ uses
   ppDB, ppDBPipe, ppParameter, ppCtrls, ppBands, ppPrnabl, ppClass, ppVar,
   ppCache, ppComm, ppRelatv, ppProd, ppReport, VCL.Themes, cxNavigator,
   cxDateUtils, ppDesignLayer,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   // Transaction types

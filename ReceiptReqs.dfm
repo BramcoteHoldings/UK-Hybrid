@@ -1651,7 +1651,8 @@ object frmReceiptReqs: TfrmReceiptReqs
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1721,15 +1722,22 @@ object frmReceiptReqs: TfrmReceiptReqs
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1744,19 +1752,22 @@ object frmReceiptReqs: TfrmReceiptReqs
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 840
     Top = 226
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqs'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 34396
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1774,13 +1785,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 1852
@@ -1792,6 +1805,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1811,13 +1825,15 @@ object frmReceiptReqs: TfrmReceiptReqs
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4657
@@ -1831,13 +1847,15 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Cheque Requests'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -1850,13 +1868,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Required'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 794
@@ -1868,13 +1888,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Matter/Ledger'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 20638
@@ -1886,13 +1908,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Status'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 20638
@@ -1904,13 +1928,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 42863
@@ -1922,13 +1948,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Payee'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 54504
@@ -1940,13 +1968,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 54504
@@ -1958,13 +1988,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Req By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 102129
@@ -1976,13 +2008,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3598
@@ -1995,13 +2029,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label12'
+        Border.mmPadding = 0
         Caption = 'Received'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3598
@@ -2014,13 +2050,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Paid'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3598
@@ -2033,13 +2071,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Payable'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3598
@@ -2052,6 +2092,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Position = lpBottom
@@ -2066,6 +2107,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLine3: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line3'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Weight = 1.500000000000000000
@@ -2080,6 +2122,7 @@ object frmReceiptReqs: TfrmReceiptReqs
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 10319
@@ -2087,6 +2130,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'REQDATE'
         DataPipeline = plCheqReqs
         DisplayFormat = 'dd/mm/yyyy'
@@ -2108,6 +2152,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2128,6 +2173,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'HOLD'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2148,6 +2194,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'BANK'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2168,6 +2215,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'PAYEE'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2187,6 +2235,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2208,6 +2257,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'AUTHOR'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2228,6 +2278,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'TAXCODE'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2248,6 +2299,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2270,6 +2322,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
+        Border.mmPadding = 0
         DataField = 'REC'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2292,6 +2345,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'PAID'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2313,6 +2367,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
+        Border.mmPadding = 0
         DataField = 'TAX'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2334,6 +2389,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
+        Border.mmPadding = 0
         DataField = 'REC_TAX'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2355,6 +2411,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText15: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText15'
+        Border.mmPadding = 0
         DataField = 'PAID_TAX'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2377,6 +2434,7 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Variable1'
         AutoSize = False
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -2399,6 +2457,7 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Variable5'
         AutoSize = False
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -2420,12 +2479,14 @@ object frmReceiptReqs: TfrmReceiptReqs
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 11906
       mmPrintPosition = 0
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Weight = 1.500000000000000000
@@ -2439,13 +2500,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel15: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label15'
+        Border.mmPadding = 0
         Caption = 'Totals'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 1323
@@ -2458,6 +2521,7 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Variable2'
         AutoSize = False
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 2
         DataType = dtCurrency
@@ -2481,6 +2545,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable3: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'Variable3'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -2504,6 +2569,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable4: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'Variable4'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -2527,6 +2593,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2547,6 +2614,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc2: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc2'
+        Border.mmPadding = 0
         DataField = 'TAX'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2567,6 +2635,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc3: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc3'
+        Border.mmPadding = 0
         DataField = 'REC'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2588,6 +2657,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc4: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc4'
+        Border.mmPadding = 0
         DataField = 'REC_TAX'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2609,6 +2679,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc5: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc5'
+        Border.mmPadding = 0
         DataField = 'PAID'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2629,6 +2700,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc6: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc6'
+        Border.mmPadding = 0
         DataField = 'PAID_TAX'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
@@ -2649,6 +2721,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable6: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'Variable6'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 3
         Font.Charset = DEFAULT_CHARSET
@@ -2669,6 +2742,7 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Variable7'
         AutoSize = False
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 4
         DataType = dtCurrency
@@ -2691,138 +2765,177 @@ object frmReceiptReqs: TfrmReceiptReqs
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060D54726156617250726F6772616D094368696C645479706502110B50726F
-        6772616D4E616D6506095661726961626C65730B50726F6772616D5479706507
-        0B747450726F63656475726506536F7572636506F770726F6365647572652056
-        61726961626C65733B0D0A7661720D0A2020416D74546F74616C203A20437572
-        72656E63793B0D0A2020416D74546F74616C546178203A2043757272656E6379
-        3B0D0A2020526563546F74616C3A2043757272656E63793B0D0A202052656374
-        6F74616C546178203A2043757272656E63793B0D0A202050616964546F74616C
-        203A2043757272656E63793B0D0A202050616964546F74616C546178203A2043
-        757272656E63793B0D0A202050617961626C65203A2043757272656E63793B0D
-        0A202050617961626C65546178203A2043757272656E63793B0D0A0D0A626567
-        696E0D0A0D0A656E643B0D0A084361726574506F730102000200000001060F54
-        72614576656E7448616E646C65720B50726F6772616D4E616D65060F56617269
-        61626C65314F6E43616C630B50726F6772616D54797065070B747450726F6365
-        6475726506536F75726365068F70726F636564757265205661726961626C6531
-        4F6E43616C63287661722056616C75653A2056617269616E74293B0D0A626567
-        696E0D0A202056616C7565203A3D20706C43686571526571735B27524543275D
-        2D20706C43686571526571735B2750414944275D3B0D0A202050617961626C65
-        203A3D2050617961626C65202B2056616C75653B0D0A656E643B0D0A0D436F6D
-        706F6E656E744E616D6506095661726961626C6531094576656E744E616D6506
-        064F6E43616C63074576656E7449440221084361726574506F73010200020000
-        0001060F5472614576656E7448616E646C65720B50726F6772616D4E616D6506
-        0E444254657874364F6E5072696E740B50726F6772616D54797065070B747450
-        726F63656475726506536F7572636506F570726F636564757265204442546578
-        74364F6E5072696E743B0D0A7661720D0A2020204C696E654E6F3A20696E7465
-        6765723B0D0A626567696E0D0A202020444254657874362E486569676874203A
-        3D20343B0D0A2020206966204C656E67746828706C43686571526571735B2744
-        45534352275D29203E203235207468656E0D0A202020626567696E0D0A202020
-        20204C696E654E6F203A3D20284C656E67746828706C43686571526571735B27
-        4445534352275D292F3235293B0D0A2020202020444254657874362E48656967
-        6874203A3D2034202A20284C696E654E6F2B31293B0D0A202020656E643B0D0A
-        656E643B0D0A0D436F6D706F6E656E744E616D65060744425465787436094576
-        656E744E616D6506074F6E5072696E74074576656E7449440220084361726574
-        506F730102000200000001060F5472614576656E7448616E646C65720B50726F
-        6772616D4E616D65060F5661726961626C65324F6E43616C630B50726F677261
-        6D54797065070B747450726F63656475726506536F75726365066E70726F6365
-        64757265205661726961626C65324F6E43616C63287661722056616C75653A20
-        56617269616E74293B0D0A626567696E0D0A0D0A202056616C7565203A3D2020
-        20444243616C63312E56616C7565202B20444243616C63322E56616C75653B0D
-        0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506095661726961626C
-        6532094576656E744E616D6506064F6E43616C63074576656E74494402210843
-        61726574506F730102000200000001060F5472614576656E7448616E646C6572
-        0B50726F6772616D4E616D65060E444254657874394F6E5072696E740B50726F
-        6772616D54797065070B747450726F63656475726506536F75726365065A7072
-        6F63656475726520444254657874394F6E5072696E743B0D0A626567696E0D0A
-        202020416D74546F74616C203A3D2020416D74546F74616C202B20706C436865
-        71526571735B27414D4F554E54275D3B0D0A656E643B0D0A0D436F6D706F6E65
-        6E744E616D65060744425465787439094576656E744E616D6506074F6E507269
-        6E74074576656E7449440220084361726574506F730102000200000001060F54
-        72614576656E7448616E646C65720B50726F6772616D4E616D65060F44425465
-        787431334F6E5072696E740B50726F6772616D54797065070B747450726F6365
-        6475726506536F75726365065E70726F6365647572652044425465787431334F
-        6E5072696E743B0D0A626567696E0D0A202020416D74546F74616C546178203A
-        3D20416D74546F74616C546178202B2020706C43686571526571735B27544158
-        275D3B0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506084442546578
-        743133094576656E744E616D6506074F6E5072696E74074576656E7449440220
-        084361726574506F730102000200000001060F5472614576656E7448616E646C
-        65720B50726F6772616D4E616D65060F5661726961626C65334F6E43616C630B
-        50726F6772616D54797065070B747450726F63656475726506536F7572636506
-        7070726F636564757265205661726961626C65334F6E43616C63287661722056
-        616C75653A2056617269616E74293B0D0A626567696E0D0A0D0A202020205661
-        6C7565203A3D202020444243616C63332E56616C7565202B20444243616C6334
-        2E56616C75653B0D0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506
-        095661726961626C6533094576656E744E616D6506064F6E43616C6307457665
-        6E7449440221084361726574506F730102000200000001060F5472614576656E
-        7448616E646C65720B50726F6772616D4E616D65060F44425465787431304F6E
-        5072696E740B50726F6772616D54797065070B747450726F6365647572650653
-        6F75726365065770726F6365647572652044425465787431304F6E5072696E74
-        3B0D0A626567696E0D0A202020526563546F74616C203A3D20526563546F7461
-        6C202B20706C43686571526571735B27524543275D3B0D0A656E643B0D0A0D43
-        6F6D706F6E656E744E616D6506084442546578743130094576656E744E616D65
-        06074F6E5072696E74074576656E7449440220084361726574506F7301020002
-        00000001060F5472614576656E7448616E646C65720B50726F6772616D4E616D
-        65060F44425465787431344F6E5072696E740B50726F6772616D54797065070B
-        747450726F63656475726506536F75726365066370726F636564757265204442
-        5465787431344F6E5072696E743B0D0A626567696E0D0A20202020526563546F
-        74616C546178203A3D20526563546F74616C546178202B2020706C4368657152
-        6571735B275245435F544158275D3B0D0A656E643B0D0A0D436F6D706F6E656E
-        744E616D6506084442546578743134094576656E744E616D6506074F6E507269
-        6E74074576656E7449440220084361726574506F730102000200000001060F54
-        72614576656E7448616E646C65720B50726F6772616D4E616D65060F44425465
-        787431314F6E5072696E740B50726F6772616D54797065070B747450726F6365
-        6475726506536F75726365065A70726F6365647572652044425465787431314F
-        6E5072696E743B0D0A626567696E0D0A20202050616964546F74616C203A3D20
-        50616964546F74616C202B20706C43686571526571735B2750414944275D3B0D
-        0A656E643B0D0A0D436F6D706F6E656E744E616D650608444254657874313109
-        4576656E744E616D6506074F6E5072696E74074576656E744944022008436172
-        6574506F730102000200000001060F5472614576656E7448616E646C65720B50
-        726F6772616D4E616D65060F44425465787431354F6E5072696E740B50726F67
-        72616D54797065070B747450726F63656475726506536F75726365066470726F
-        6365647572652044425465787431354F6E5072696E743B0D0A626567696E0D0A
-        20202050616964546F74616C546178203A3D2050616964546F74616C54617820
-        2B20706C43686571526571735B27504149445F544158275D3B0D0A656E643B0D
-        0A0D436F6D706F6E656E744E616D6506084442546578743135094576656E744E
-        616D6506074F6E5072696E74074576656E7449440220084361726574506F7301
-        02000200000001060F5472614576656E7448616E646C65720B50726F6772616D
-        4E616D65060F5661726961626C65354F6E43616C630B50726F6772616D547970
-        65070B747450726F63656475726506536F7572636506A170726F636564757265
-        205661726961626C65354F6E43616C63287661722056616C75653A2056617269
-        616E74293B0D0A626567696E0D0A0D0A202056616C7565203A3D2020706C4368
-        6571526571735B275245435F544158275D202D20706C43686571526571735B27
-        504149445F544158275D3B0D0A202050617961626C65546178203A3D20506179
-        61626C65546178202B2056616C75653B0D0A656E643B0D0A0D436F6D706F6E65
-        6E744E616D6506095661726961626C6535094576656E744E616D6506064F6E43
-        616C63074576656E7449440221084361726574506F730102000200000001060F
-        5472614576656E7448616E646C65720B50726F6772616D4E616D650611526570
-        6F72744265666F72655072696E740B50726F6772616D54797065070B74745072
-        6F63656475726506536F7572636506C670726F636564757265205265706F7274
-        4265666F72655072696E743B0D0A626567696E0D0A202020416D74546F74616C
-        203A3D20303B0D0A2020416D74546F74616C546178203A3D20303B0D0A202052
-        6563546F74616C3A3D20303B0D0A2020526563746F74616C546178203A3D2030
-        3B0D0A202050616964546F74616C203A3D20303B0D0A202050616964546F7461
-        6C546178203A3D20303B0D0A202050617961626C65203A3D303B0D0A20205061
-        7961626C65546178203A3D20303B0D0A656E643B0D0A0D436F6D706F6E656E74
-        4E616D6506065265706F7274094576656E744E616D65060B4265666F72655072
-        696E74074576656E7449440201084361726574506F730102000200000001060F
-        5472614576656E7448616E646C65720B50726F6772616D4E616D65060F566172
-        6961626C65344F6E43616C630B50726F6772616D54797065070B747450726F63
-        656475726506536F75726365067070726F636564757265205661726961626C65
-        344F6E43616C63287661722056616C75653A2056617269616E74293B0D0A6265
-        67696E0D0A0D0A2020202056616C7565203A3D202020444243616C63352E5661
-        6C7565202B20444243616C63362E56616C75653B0D0A0D0A656E643B0D0A0D43
-        6F6D706F6E656E744E616D6506095661726961626C6534094576656E744E616D
-        6506064F6E43616C63074576656E7449440221084361726574506F7301020002
-        00000001060F5472614576656E7448616E646C65720B50726F6772616D4E616D
-        65060F5661726961626C65374F6E43616C630B50726F6772616D54797065070B
-        747450726F63656475726506536F75726365066370726F636564757265205661
-        726961626C65374F6E43616C63287661722056616C75653A2056617269616E74
-        293B0D0A626567696E0D0A0D0A202056616C7565203A3D2050617961626C6520
-        2B2050617961626C655461783B0D0A0D0A656E643B0D0A0D436F6D706F6E656E
-        744E616D6506095661726961626C6537094576656E744E616D6506064F6E4361
-        6C63074576656E7449440221084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraVarProgram'
+        raProgram.ChildType = 17
+        raProgram.ProgramName = 'Variables'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variables;'#13#10'var'#13#10'  AmtTotal : Currency;'#13#10'  AmtTotalTax' +
+          ' : Currency;'#13#10'  RecTotal: Currency;'#13#10'  RectotalTax : Currency;'#13#10 +
+          '  PaidTotal : Currency;'#13#10'  PaidTotalTax : Currency;'#13#10'  Payable :' +
+          ' Currency;'#13#10'  PayableTax : Currency;'#13#10#13#10'begin'#13#10#13#10'end;'#13#10
+      end
+      object raProgramInfo2: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable1OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable1OnCalc(var Value: Variant);'#13#10'begin'#13#10'  Value :' +
+          '= plCheqReqs['#39'REC'#39']- plCheqReqs['#39'PAID'#39'];'#13#10'  Payable := Payable +' +
+          ' Value;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable1'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
+      object raProgramInfo3: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText6OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText6OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   D' +
+          'BText6.Height := 4;'#13#10'   if Length(plCheqReqs['#39'DESCR'#39']) > 25 then' +
+          #13#10'   begin'#13#10'     LineNo := (Length(plCheqReqs['#39'DESCR'#39'])/25);'#13#10'  ' +
+          '   DBText6.Height := 4 * (LineNo+1);'#13#10'   end;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText6'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo4: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable2OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable2OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
+          ' :=   DBCalc1.Value + DBCalc2.Value;'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable2'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
+      object raProgramInfo5: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText9OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText9OnPrint;'#13#10'begin'#13#10'   AmtTotal :=  AmtTotal + plC' +
+          'heqReqs['#39'AMOUNT'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText9'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo6: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText13OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText13OnPrint;'#13#10'begin'#13#10'   AmtTotalTax := AmtTotalTax' +
+          ' +  plCheqReqs['#39'TAX'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText13'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo7: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable3OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable3OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'    Val' +
+          'ue :=   DBCalc3.Value + DBCalc4.Value;'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable3'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
+      object raProgramInfo8: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText10OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText10OnPrint;'#13#10'begin'#13#10'   RecTotal := RecTotal + plC' +
+          'heqReqs['#39'REC'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText10'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo9: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText14OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText14OnPrint;'#13#10'begin'#13#10'    RecTotalTax := RecTotalTa' +
+          'x +  plCheqReqs['#39'REC_TAX'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText14'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo10: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText11OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText11OnPrint;'#13#10'begin'#13#10'   PaidTotal := PaidTotal + p' +
+          'lCheqReqs['#39'PAID'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText11'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo11: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText15OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText15OnPrint;'#13#10'begin'#13#10'   PaidTotalTax := PaidTotalT' +
+          'ax + plCheqReqs['#39'PAID_TAX'#39'];'#13#10'end;'#13#10
+        raProgram.ComponentName = 'DBText15'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+      end
+      object raProgramInfo12: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable5OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable5OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
+          ' :=  plCheqReqs['#39'REC_TAX'#39'] - plCheqReqs['#39'PAID_TAX'#39'];'#13#10'  PayableT' +
+          'ax := PayableTax + Value;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable5'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
+      object raProgramInfo13: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'ReportBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure ReportBeforePrint;'#13#10'begin'#13#10'   AmtTotal := 0;'#13#10'  AmtTot' +
+          'alTax := 0;'#13#10'  RecTotal:= 0;'#13#10'  RectotalTax := 0;'#13#10'  PaidTotal :' +
+          '= 0;'#13#10'  PaidTotalTax := 0;'#13#10'  Payable :=0;'#13#10'  PayableTax := 0;'#13#10 +
+          'end;'#13#10
+        raProgram.ComponentName = 'Report'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 1
+      end
+      object raProgramInfo14: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable4OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable4OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'    Val' +
+          'ue :=   DBCalc5.Value + DBCalc6.Value;'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable4'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
+      object raProgramInfo15: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable7OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable7OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
+          ' := Payable + PayableTax;'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable7'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -3704,7 +3817,8 @@ object frmReceiptReqs: TfrmReceiptReqs
     DataPipeline = plCheqReqsEffect
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3774,15 +3888,22 @@ object frmReceiptReqs: TfrmReceiptReqs
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3797,19 +3918,22 @@ object frmReceiptReqs: TfrmReceiptReqs
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 847
     Top = 312
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqsEffect'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 32015
       mmPrintPosition = 0
       object ppSystemVariable3: TppSystemVariable
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3827,13 +3951,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel16: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 1852
@@ -3845,6 +3971,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppSystemVariable4: TppSystemVariable
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3863,13 +3990,15 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer2
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4487
@@ -3883,13 +4012,15 @@ object frmReceiptReqs: TfrmReceiptReqs
         DesignLayer = ppDesignLayer2
         UserName = 'Label3'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Effects of Requests for Trust Cheques'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 22
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 9102
@@ -3902,13 +4033,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel19: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Ref'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 794
@@ -3920,13 +4053,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel23: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Payee'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 20902
@@ -3938,13 +4073,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel25: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 73554
@@ -3956,13 +4093,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel26: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -3975,13 +4114,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel28: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Pre Trust'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -3994,13 +4135,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel29: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Post Trust'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -4013,6 +4156,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLine4: TppLine
         DesignLayer = ppDesignLayer2
         UserName = 'Line1'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Position = lpBottom
@@ -4028,6 +4172,7 @@ object frmReceiptReqs: TfrmReceiptReqs
     object ppDetailBand2: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
@@ -4035,6 +4180,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plCheqReqsEffect
         Font.Charset = DEFAULT_CHARSET
@@ -4055,6 +4201,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText19: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'PAYEE'
         DataPipeline = plCheqReqsEffect
         Font.Charset = DEFAULT_CHARSET
@@ -4074,6 +4221,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText21: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plCheqReqsEffect
         Font.Charset = DEFAULT_CHARSET
@@ -4094,6 +4242,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBText23: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plCheqReqsEffect
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4116,6 +4265,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable8: TppVariable
         DesignLayer = ppDesignLayer2
         UserName = 'Variable1'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -4138,6 +4288,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable9: TppVariable
         DesignLayer = ppDesignLayer2
         UserName = 'Variable9'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -4159,12 +4310,14 @@ object frmReceiptReqs: TfrmReceiptReqs
     end
     object ppSummaryBand2: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 36513
       mmPrintPosition = 0
       object ppLine6: TppLine
         DesignLayer = ppDesignLayer2
         UserName = 'Line2'
+        Border.mmPadding = 0
         Pen.Width = 2
         ParentWidth = True
         Weight = 1.500000000000000000
@@ -4178,13 +4331,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel30: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label15'
+        Border.mmPadding = 0
         Caption = 'Total of Amounts'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 45244
@@ -4196,6 +4351,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppDBCalc7: TppDBCalc
         DesignLayer = ppDesignLayer2
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plCheqReqsEffect
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4217,13 +4373,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel20: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label20'
+        Border.mmPadding = 0
         Caption = 'No of Matters that will be overdrawn'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 45244
@@ -4235,13 +4393,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel21: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label21'
+        Border.mmPadding = 0
         Caption = 'Total of Amount Matters will be overdrawn'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 45244
@@ -4253,13 +4413,15 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppLabel22: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label22'
+        Border.mmPadding = 0
         Caption = 'Authorised By: ________________________'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 14
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5842
         mmLeft = 85196
@@ -4271,6 +4433,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable10: TppVariable
         DesignLayer = ppDesignLayer2
         UserName = 'Variable10'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtInteger
@@ -4292,6 +4455,7 @@ object frmReceiptReqs: TfrmReceiptReqs
       object ppVariable11: TppVariable
         DesignLayer = ppDesignLayer2
         UserName = 'Variable11'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -4312,18 +4476,17 @@ object frmReceiptReqs: TfrmReceiptReqs
       end
     end
     object raCodeModule2: TraCodeModule
-      ProgramStream = {
-        01060D54726156617250726F6772616D094368696C645479706502110B50726F
-        6772616D4E616D6506095661726961626C65730B50726F6772616D5479706507
-        0B747450726F63656475726506536F7572636506F770726F6365647572652056
-        61726961626C65733B0D0A7661720D0A2020416D74546F74616C203A20437572
-        72656E63793B0D0A2020416D74546F74616C546178203A2043757272656E6379
-        3B0D0A2020526563546F74616C3A2043757272656E63793B0D0A202052656374
-        6F74616C546178203A2043757272656E63793B0D0A202050616964546F74616C
-        203A2043757272656E63793B0D0A202050616964546F74616C546178203A2043
-        757272656E63793B0D0A202050617961626C65203A2043757272656E63793B0D
-        0A202050617961626C65546178203A2043757272656E63793B0D0A0D0A626567
-        696E0D0A0D0A656E643B0D0A084361726574506F730102000200000000}
+      object raProgramInfo16: TraProgramInfo
+        raClassName = 'TraVarProgram'
+        raProgram.ChildType = 17
+        raProgram.ProgramName = 'Variables'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variables;'#13#10'var'#13#10'  AmtTotal : Currency;'#13#10'  AmtTotalTax' +
+          ' : Currency;'#13#10'  RecTotal: Currency;'#13#10'  RectotalTax : Currency;'#13#10 +
+          '  PaidTotal : Currency;'#13#10'  PaidTotalTax : Currency;'#13#10'  Payable :' +
+          ' Currency;'#13#10'  PayableTax : Currency;'#13#10#13#10'begin'#13#10#13#10'end;'#13#10
+      end
     end
     object ppDesignLayers2: TppDesignLayers
       object ppDesignLayer2: TppDesignLayer

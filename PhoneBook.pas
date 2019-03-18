@@ -3,29 +3,27 @@ unit PhoneBook;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DBActns, ActnList, ComCtrls, ImgList, ExtCtrls, ActnMan,
-  ActnMenus,  ActnCtrls, DB,
-  OracleUniProvider, Uni, DBAccess, MemDS,
-  StdCtrls, Mask, DBCtrls, VirtualTrees, CheckLst,
-  Grids, DBGrids, NSearch, OleServer,
-  Outlook2000, stringz, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
-  cxEdit, cxDBData, cxMaskEdit, cxCalendar, cxCheckBox, cxTextEdit, cxMemo,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGridLevel, cxGrid, dxBar, Menus,
-  cxCurrencyEdit, cxDBEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxCheckListBox, cxContainer, cxPC, cxLabel, cxDBLabel,
-  cxListView, cxGroupBox, cxListBox, uRwMapiMsgStoreEvents,
-  uRwMapiSession, dxBarExtItems, ppComm, ppRelatv, ppProd, ppClass,
-  ppReport, ppCtrls, ppVar, ppPrnabl, ppBands, ppCache, ppStrtch, ppSubRpt,
-  ppDB, ppDBPipe, cxLookAndFeelPainters, cxButtonEdit, XPStyleActnCtrls,
-  OutlookXP, cxLookAndFeels, cxGridBandedTableView,
-  cxGridDBBandedTableView, cxButtons, Buttons, ppParameter, ppModule,
-  raCodMod, FmxUtils, Math, ppFileUtils, ppIniStorage, cxImageComboBox,
-  cxPCdxBarPopupMenu, ppDesignLayer, uRwMapiInterfaces, uRwMapiFormManager,
-  cxNavigator, System.Actions, cxBarEditItem, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxCustomListBox,
-  dxDPIAwareUtils;
+   Windows, Forms,  sysUtils, Dialogs, Graphics, dxBarBuiltInMenu,
+   cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxStyles, cxCustomData, cxFilter,
+  cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxTextEdit, cxCheckBox, cxImageComboBox, Vcl.Menus, uRwMAPIFormManager,
+  Vcl.ExtCtrls, raCodMod, ppModule, ppDB, ppDBPipe, ppParameter, ppBands,
+  ppDesignLayer, ppReport, ppStrtch, ppSubRpt, ppCtrls, ppVar, ppPrnabl,
+  ppClass, ppCache, ppComm, ppRelatv, ppProd, Vcl.DBActns, System.Classes,
+  System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, dxBar,
+  cxBarEditItem, dxBarExtItems, cxClasses, stringz, DBAccess, Uni, MemDS,
+  System.ImageList, Vcl.ImgList, Vcl.Controls, cxDBLabel, Vcl.DBCtrls, cxLabel,
+  cxButtons, Vcl.StdCtrls, Vcl.Buttons, cxGridBandedTableView,
+  cxGridDBBandedTableView, cxListBox, VirtualTrees, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
+  cxGrid, cxMemo, cxDBEdit, cxMaskEdit, cxButtonEdit, cxCustomListBox,
+  cxCheckListBox, cxCurrencyEdit, Vcl.ComCtrls, Vcl.Mask, cxPC, ppFileUtils,
+  Outlook2000, uRwMapiInterfaces, Variants, ppIniStorage, Math;
+
+
+
 
 const PHONEBOOKCHECKTABLES: array[0..16] of string = ('PHONEBOOK','MATTER','MATTER','NMEMO','SUBBILLS','CREDITOR', 'CHEQUE','RECEIPT','MATTERPARTY','CHEQREQ','DIARY','EVENT_HISTORY','EVENT_PARTICIPANT','MATTERCONTACTACTINGFOR','MATTERCONTACTACTINGFOR','MATTERPARTYARCHIVE','WORKFLOWGENDOCUMENTPARTIES');
 const PHONEBOOKCHECKFIELDS: array[0..16] of string = ('NNAMEMASTER','NCONTACT','NBILL_TO','NBILL_TO','NBILL_TO','NNAME','NNAME','NNAME','NNAME','NNAME','NNAME','NNAME','NNAME','NNAME','ACTINGFORNNAME','NNAME','NNAME');
@@ -879,7 +877,6 @@ type
     FLastSearch: String;
     FFormCaption: String;
     FRecentActions: TList;
-    FPhoneBookSearch: TfrmPhoneBookSearch;
     FLimitToNMatter: Integer;
     FShowAllMatterData: Boolean;
     FShowFieldNames: Boolean;
@@ -937,7 +934,9 @@ uses PhoneBookNew, AxiomData, citfunc, Desktop, ComOBJ, MiscFunc,
      , uRwBoxes
      , uRwMapiMessage
      , uRwMapiProps
-     , Clients;
+     , Clients
+     , NSearch
+     , FMXUtils;
 
 {$R *.dfm}
 
@@ -953,6 +952,9 @@ type
     FieldCaption: String;
     FieldValue: String;
   end;
+
+var
+   FPhoneBookSearch: TfrmPhoneBookSearch;
 
 
 procedure TfrmPhoneBook.aNewExecute(Sender: TObject);

@@ -46,7 +46,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, ComCtrls, Grids, cxGraphics, cxControls, cxLookAndFeels,
+  Db, StdCtrls, ComCtrls, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxPSGlbl, dxPSUtl, dxPSEngn,
   dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
   dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
@@ -62,7 +62,8 @@ uses
   ppVar, ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport,
   System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ImgList,
   dxBar, cxClasses, Uni, MemDS, DBAccess, cxProgressBar, dxStatusBar, ppFileUtils,
-  ppIniStorage, Variants, cxGridDBDataDefinitions;
+  ppIniStorage, Variants, cxGridDBDataDefinitions, dxDateRanges,
+  dxPScxEditorLnks, System.ImageList;
 
 const
   isREQUISITION = 0;

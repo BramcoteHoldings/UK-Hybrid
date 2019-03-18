@@ -3,29 +3,27 @@ unit Creditors;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls, ComCtrls, ToolWin, Db,
-  Menus, Buttons, NumberLabel, ImgList, OracleUniProvider, Uni, DBAccess,
-  MemDS, NumberEdit, NSearch, dxBar, dxBarDBNav, cxStyles, cxGraphics, cxFilter,
-  cxData, cxDataStorage, cxEdit, cxDBData, cxTextEdit, cxCurrencyEdit, cxCalendar,
-  cxSplitter, cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxControls,
-  cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxPC, cxMaskEdit,
-  cxCheckBox, cxContainer, cxLabel, cxDBLabel, cxDBEdit, cxDropDownEdit,
-  cxLookupEdit, variants, cxButtonEdit, ppDB, ppCtrls, ppReport, ppPrnabl,
-  ppClass, ppStrtch, ppSubRpt, ppBands, ppCache, ppDBPipe, ppComm, ppRelatv,
-  ppProd, ppParameter, ppVar, ppModule, raCodMod, DelphiTwain, JPEG, cxImage,
-  cxBlobEdit, AxiomData, cxLookAndFeelPainters, cxButtons, cxLookAndFeels,
-  ppFileUtils, ppIniStorage, cxMemo, cxPCdxBarPopupMenu, ppDesignLayer,
-  cxGridCustomPopupMenu, cxGridPopupMenu, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg,
-  dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
-  dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils, cxGridExportLink,
-  cxNavigator, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
-  dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, dxPSDBTCLnk, dxLayoutContainer,
-  dxLayoutControl, cxCustomData, dxPScxSchedulerLnk, dxPScxDBEditorLnks,
-  dxPSTextLnk, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
-  System.ImageList;
+  Forms, Messages, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxBarBuiltInMenu, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxTextEdit, cxCalendar, cxCurrencyEdit, cxCheckBox, cxBlobEdit, dxPSGlbl,
+  dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
+  dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport,
+  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
+  dxPScxExtEditorProducers, dxBar, dxBarDBNav, cxClasses, Vcl.Dialogs, dxPSCore,
+  dxPScxCommon, ppDB, ppDBPipe, ppParameter, ppDesignLayer, ppModule, raCodMod,
+  ppBands, ppCtrls, ppClass, ppVar, ppPrnabl, ppCache, ppComm, ppRelatv, ppProd,
+  ppReport, DBAccess, Uni, MemDS, System.ImageList, Vcl.ImgList, Vcl.Controls,
+  cxDBLabel, Vcl.StdCtrls, Vcl.DBCtrls, cxDropDownEdit, cxDBEdit, cxMaskEdit,
+  cxLabel, Vcl.Mask, NumberLabel, cxSplitter, Vcl.Buttons, Vcl.ComCtrls,
+  Vcl.ExtCtrls, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, cxImage, System.Classes,
+  AxiomData, SysUtils, ppFileUtils, ppIniStorage, Variants, cxGridExportLink, Windows;
+
+
 
 const
   UM_CHECK = WM_USER + 10000;
@@ -378,7 +376,8 @@ uses
   AccountNew, CheqReqPrint, Cheque, PhoneBookNew, CreditorSearch,
   Desktop, InvoiceDebitNote, InvoiceReverse, MiscFunc, PostcodeSearch, Reports,
   CreditorAccountsSearch, citfunc, CreditorMerge,
-  CreditorMergeProgress, InvoiceChangeDueDate, ShellAPI, InvoiceScan, InvoiceAmountChange;
+  CreditorMergeProgress, InvoiceChangeDueDate, ShellAPI, InvoiceScan, InvoiceAmountChange,
+  NSearch;
 
 {$R *.DFM}
 

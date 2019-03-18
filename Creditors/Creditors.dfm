@@ -513,6 +513,10 @@ object frmCreditors: TfrmCreditors
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 10
         Top = 10
@@ -541,7 +545,7 @@ object frmCreditors: TfrmCreditors
         Left = 178
         Top = 78
         Width = 27
-        Height = 13
+        Height = 15
         Alignment = taRightJustify
         Caption = '$0.00'
         DecimalPlaces = 2
@@ -576,7 +580,7 @@ object frmCreditors: TfrmCreditors
         Left = 178
         Top = 107
         Width = 27
-        Height = 13
+        Height = 15
         Alignment = taRightJustify
         Caption = '$0.00'
         DecimalPlaces = 2
@@ -611,7 +615,7 @@ object frmCreditors: TfrmCreditors
         Left = 178
         Top = 136
         Width = 27
-        Height = 13
+        Height = 15
         Alignment = taRightJustify
         Caption = '$0.00'
         DecimalPlaces = 2
@@ -752,6 +756,10 @@ object frmCreditors: TfrmCreditors
     object tabAddress: TcxTabSheet
       Caption = 'Address'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lblPhoneBookKey: TLabel
         Left = 1
         Top = 15
@@ -2298,7 +2306,7 @@ object frmCreditors: TfrmCreditors
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Creditor Transactions Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

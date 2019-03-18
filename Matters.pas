@@ -3,53 +3,47 @@ unit Matters;
 interface
 
 uses
-  fmxutils, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ppRichTx, ppModule, raCodMod, ppStrtch, ppCtrls, ppParameter, ppBands,
-  ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppDB, ppComm, ppRelatv,
-  ppDBPipe, ActnList, XPStyleActnCtrls, ActnMan, DAScript, ImgList, OracleUniProvider,
-  Uni, DBAccess, MemDS, ExtCtrls, Series, DbChart, DBCtrls, Mask, VirtualTrees,
-  Grids, Buttons, matterlabel, matternotesfrm,WorkFlowGenDocuments,
-  WorkFlowMergeDocument, WorkFlowDocumentMerge,
-  WorkFlowMatterTasks, BillNew, cxGridExportLink, dxNavBarCollns,
-  dxPScxDBEditorLnks, dxPSTextLnk, dxPScxSchedulerLnk, uRwMapiInterfaces,
-  ppFileUtils, ppIniStorage, Variants, ComObj, UniScript,
-  uRwMAPIFormManager, vcl.Themes, vcl.styles, vcl.Styles.Ext,
-  cxNavigator, uRwMAPIMsgStoreEvents, cxScheduler, cxSchedulerStorage,
+  fmxutils, Windows, SysUtils, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer,  VCL.Graphics,
+  cxEdit, dxBarBuiltInMenu, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxCalendar, cxTextEdit, cxDBLookupComboBox, cxCurrencyEdit, cxCheckBox,
+  cxRichEdit, cxMemo, cxImageComboBox, cxHyperLinkEdit, cxColorComboBox,
+  cxProgressBar, Vcl.Menus, cxPC, cxScheduler, cxSchedulerStorage,
   cxSchedulerCustomControls, cxSchedulerCustomResourceView, cxSchedulerDayView,
-  cxSchedulerDateNavigator, cxSchedulerHolidays, cxSchedulerTimeGridView,
-  cxSchedulerUtils, cxSchedulerWeekView, cxSchedulerYearView,
-  cxSchedulerGanttView, cxGridChartView, cxGridDBChartView,
-  {DebenuPDFLibrary1014, gtPDFDoc,} cxSchedulercxGridConnection,
-  cxDBNavigator, dxScreenTip, System.Actions,
-  DBDateTimePicker, ppDBBDE, cxPCdxBarPopupMenu,
-  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
-  cxEdit, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, Data.DB,
-  cxDBData, cxCalendar, cxTextEdit, cxDBLookupComboBox, cxCurrencyEdit,
-  cxCheckBox, cxMemo, cxImageComboBox, cxHyperLinkEdit, Vcl.Menus, cxPC,
-  dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev,
-  dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
-  dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
-  dxPSDBTCLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
-  dxPSGraphicLnk, dxPSTCLnk, dxDockControl, dxBar,
-  dxBarDBNav, cxClasses, dxPSCore, dxPScxCommon, ppMemo, ppRegion, ppReport,
-  ppSubRpt, ppDesignLayer, Vcl.ComCtrls, Vcl.StdCtrls, TitlePanel,
-  cxGridBandedTableView, cxGridDBBandedTableView, cxLabel, cxProgressBar,
-  dxDockPanel, cxButtons, cxRichEdit, cxDBRichEdit, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
-  cxGrid, cxDropDownEdit, cxDBEdit, cxDBLabel, cxButtonEdit, cxGroupBox,
-  cxMaskEdit, cxLookupEdit, cxDBLookupEdit, cxImage,
-  Registry, ITrackMatterDetails,
-  AxiomData, ppTypes, Ora, cxGridDBDataDefinitions, StrUtils, uHostPreview,
-  cxRadioGroup, DateUtils, dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  cxImageList, dxorgcedadv, dxorgchr, dxdborgc, cxSplitter,
-  cxSchedulerAgendaView, cxSchedulerRecurrence,
-  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
-  cxSchedulerDBStorage, cxSchedulerEventEditor, JvBaseDlg, JvSelectDirectory,
-  JvExExtCtrls, JvExtComponent, JvPanel, cxSchedulerDialogs, cxColorComboBox,
-  dxGDIPlusClasses, dxDPIAwareUtils, cxBarEditItem, dxPScxEditorLnks,
-  IPPeerClient, Data.Bind.Components, Data.Bind.ObjectScope, REST.Client,
-  System.ImageList, dxDateRanges, REST.Authenticator.Basic;
+  cxSchedulerAgendaView, cxSchedulerDateNavigator, cxSchedulerHolidays,
+  cxSchedulerTimeGridView, cxSchedulerUtils, cxSchedulerWeekView,
+  cxSchedulerYearView, cxSchedulerGanttView, cxSchedulerRecurrence,
+  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser, dxPSGlbl,
+  dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
+  dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport,
+  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
+  dxPScxExtEditorProducers, IPPeerClient, dxGDIPlusClasses, ppCtrls,
+  cxSchedulercxGridConnection, cxSchedulerDBStorage,
+  cxImageList, Data.Bind.Components, Data.Bind.ObjectScope, DAScript, UniScript,
+  Uni, DBAccess, uRwMAPIMsgStoreEvents, uRwMAPIFormManager, JvBaseDlg,
+  JvSelectDirectory, dxPSGraphicLnk, dxPSTCLnk, dxDockControl, dxBar,
+  dxBarDBNav, cxBarEditItem, cxClasses, dxPSCore, dxPScxCommon, Vcl.Dialogs,
+  ppMemo, ppStrtch, ppRegion, MemDS, ppRichTx, raCodMod, ppModule, ppParameter,
+  ppDesignLayer, ppBands, ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
+  ppDB, ppComm, ppRelatv, ppDBPipe, System.Classes, System.Actions,
+  Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, System.ImageList,
+  Vcl.ImgList, Vcl.Controls, Vcl.ExtCtrls, cxSplitter, Vcl.StdCtrls,
+  cxGridBandedTableView, cxGridDBBandedTableView, Vcl.ComCtrls, JvExExtCtrls,
+  JvExtComponent, JvPanel, dxDockPanel, cxGridChartView, cxGridDBChartView,
+  cxDBNavigator, cxGroupBox, cxRadioGroup, cxButtons, VirtualTrees,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridCustomView, cxGrid, cxDropDownEdit, cxDBEdit, cxImage, Vcl.Mask,
+  Vcl.DBCtrls, cxButtonEdit, cxDBLabel, cxLabel, cxDBRichEdit, Vcl.Buttons,
+  cxMaskEdit, cxLookupEdit, cxDBLookupEdit, VCL.Forms, uRwMapiInterfaces,
+  Variants,  uHostPreview, Registry, ComObj, ppFileUtils,
+  ppInistorage, cxSchedulerEventEditor, cxGridExportLink, ITrackMatterDetails,
+  vcl.Themes, vcl.styles, vcl.Styles.Ext, DateUtils, StrUtils, dxNavBarCollns,
+  cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
+  RestClientt, RestUtils, REST.Client, REST.Authenticator.Basic, Vcl.Grids;
 
 
 const
@@ -649,7 +643,6 @@ type
     qryDocVersions: TUniQuery;
     dsDocVersions: TUniDataSource;
     qryCreateDocVersion: TUniQuery;
-    RestClient: TRestClient;
     qrySearchesList: TUniQuery;
     dsSearchesList: TUniDataSource;
     lblWIPCreditLimit: TLabel;
@@ -1540,7 +1533,7 @@ type
     chkDataFormsExpanded: TcxBarEditItem;
     lblConflictCheckCompleted: TLabel;
     dxSelectConflict: TdxBarButton;
-    HTTPBasicAuthenticator1: THTTPBasicAuthenticator;
+    RestClientt: TRestClientt;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -2002,20 +1995,18 @@ type
     { Private declarations }
     FDocTabSetup: Boolean;
     FDataFormTabSetup: Boolean;
-    MatterLabel: TMatterLabel;
     FShowFieldNames: Boolean;
-    FGenDocumentsForm: TfmWorkFlowGenDocuments;
+
     FDebtorNotesModified: Boolean;
     FMatters: integer;
     FAttachFileName: TStringList;  //string;
-    FWorkFlowMergeDocument: TfmWorkFlowMergeDocument;
-    FMergeType: TMergeDocumentClass;
+
     FPRECCATEGORY: integer;
     FWorkflowType: string;
     FRowIndex: integer;
 
-    LMT: TfmWorkflowMatterTasks;
-    LfrmInvoice: TfrmInvoice;
+
+//    LfrmInvoice: TfrmInvoice;
 
     FExpanding: Boolean;
 
@@ -2154,7 +2145,9 @@ uses
   WorkFlowDataModule, client_img_view, doc_folder_sel, CopyMoveFileDialog,
   GenEditor, FeeNotes, ReceiptReqNew, ProjectMatter, MiscFunc, NewTaskNew,
   PrecedentSearchList, EmployeeFindDialog, System.UITypes, ConflictSelect,
-  MatterPositionRpt, LoggingSnippet;
+  MatterPositionRpt, LoggingSnippet, BillNew, MatterLabel,
+  WorkFlowMergeDocument, WorkFlowDocumentMerge, WorkFlowMatterTasks,
+  Ora, WorkFlowGenDocuments, matternotesfrm, ppTypes;
 
 var
    iMinsPerUnit: integer;
@@ -2171,6 +2164,13 @@ var
    aTotalEmpCostPerHour,
    aCalcMinTotal,
    aCalcMaxTotal: double;
+   LfrmInvoice: TfrmInvoice;
+   MatterLabel: TMatterLabel;
+   LMT: TfmWorkflowMatterTasks;
+   FWorkFlowMergeDocument: TfmWorkFlowMergeDocument;
+   FMergeType: TMergeDocumentClass;
+   FGenDocumentsForm: TfmWorkFlowGenDocuments;
+
 
 
 // MGD Data Record For Contacts Virtual Tree (vtContacts)
@@ -3984,17 +3984,20 @@ end;
 
 procedure TfrmMatters.btnInvWordClick(Sender: TObject);
 begin
-   if tvInvoices.Controller.SelectedRowCount > 0 then
+   if (tvInvoices.Controller.SelectedRowCount > 0) then
       InvoiceMerge(qryInvoices.FieldByName('NMEMO').AsInteger,qryMatter.FieldByName('NMATTER').AsInteger);
 end;
 
 procedure TfrmMatters.tmrRefreshTimer(Sender: TObject);
 begin
-   try
-      if RefreshNeededMatter(qryMatter.FieldByName('FILEID').AsString, qryMatter.FieldByName('REFRESH').AsInteger) then
-         dxbtnRefresh.Click;
-   except
-      tmrRefresh.Enabled := False;
+   if dmAxiom.bShutDown = False then
+   begin
+     try
+        if RefreshNeededMatter(qryMatter.FieldByName('FILEID').AsString, qryMatter.FieldByName('REFRESH').AsInteger) then
+           dxbtnRefresh.Click;
+     except
+        tmrRefresh.Enabled := False;
+     end;
    end;
 end;
 
@@ -5394,14 +5397,15 @@ end;
 
 procedure TfrmMatters.DocDelete;
 var
-  sFileToDelete, sRenamedFile: string;
+  sRenamedFile,
+  sFileToDelete: String;
   sSource: string;
   sSQL: string;
   bDeleteFile: boolean;
 begin
    case pageDocuments.ActivePageIndex of
       0: begin
-  			   sFileToDelete := qryDocs.FieldByName('DISPLAY_PATH').AsString;
+  			   sFileToDelete := qryDocs.FieldByName('DISPLAY_PATH').AsWideString;
             sSource := qryDocs.FieldByName('SOURCE').AsString;
             bDeleteFile := False;
             if (sFileToDelete <> '') then
@@ -8574,18 +8578,15 @@ begin
                   else
                      lPassword := dmAxiom.INFOTRACK_PASSWORD;
 
-                  HTTPBasicAuthenticator1.Username := lUser;
-                  HTTPBasicAuthenticator1.Password := lPassword;
+ //                 HTTPBasicAuthenticator1.Username := lUser;
+ //                 HTTPBasicAuthenticator1.Password := lPassword;
 
                   lURL := SystemString('INFOTRACK_URL');
                   vSearch := TMatterDetails.NewFrom(qryMatter.FieldByName('nmatter').AsString,
                                                       qryMatter.FieldByName('nmatter').AsString);
-                  RestClient.BaseURL := lURL;
-//                  RestClient.Accept(RestUtils.MediaType_Json);
-//                  RestClient.ContentType(RestUtils.MediaType_Json);
 
-//                  vResult := vResponse.Post<TMatterDetails>(vSearch);
- //                 lResponse := RestClient.ResponseRecord;
+                  vResult := vResponse.Post<TMatterDetails>(vSearch);
+                 lResponse := RestClientt.ResponseRecord;
                   if (lResponse <> '') then
                   begin
                      List := TStringList.Create;
@@ -11585,6 +11586,7 @@ var
 //   PDFLibrary: TDebenuPDFLibrary1014;
    UnlockResult: Integer;
 begin
+   UnlockResult := 1;
    if SystemString('email_reg') = C_EMAILPASSWORD then
    begin
       ARecipientsList := TStringList.Create;
@@ -11619,14 +11621,14 @@ begin
 
       try
 
-{         PDFLibrary := TDebenuPDFLibrary1014.Create;
+//         PDFLibrary := TDebenuPDFLibrary1014.Create;
          try
-            UnlockResult := PDFLibrary.UnlockKey(DebenuPDFKey);
+//            UnlockResult := PDFLibrary.UnlockKey(DebenuPDFKey);
             if (UnlockResult = 1) then
             begin
                for I := 0 to (AAttachList.Count - 1) do
                begin
-                  PDFLibrary.LoadFromFile(AAttachList.strings[i],'');
+//                  PDFLibrary.LoadFromFile(AAttachList.strings[i],'');
                   TestMsg := copy(AAttachList.strings[i], 1, length(AAttachList.strings[i]) - length(ExtractFileExt(AAttachList.strings[i]))) +'.pdf';
                   ConvAAttachList.Add(TestMsg);
                   if ExtractFileExt(AAttachList.strings[i]) <> '.pdf' then
@@ -11639,17 +11641,17 @@ begin
                            ConvertDOCFiles(AAttachList.strings[i])
                         else if (ExtractFileExt(AAttachList.strings[i]) = '.xls') or
                            (ExtractFileExt(AAttachList.strings[i]) = '.xlsx') then
-                           ConvertXLFiles(AAttachList.strings[i])
-                        else
-                           PDFLibrary.SaveToFile(TestMsg);
+                           ConvertXLFiles(AAttachList.strings[i]);
+//                        else
+//                           PDFLibrary.SaveToFile(TestMsg);
                   end;
                end;
             end
             else
                ShowMessage('Invalid license key');
          finally
-               PDFLibrary.Free;
-         end;  }
+//               PDFLibrary.Free;
+         end;
 
          tmpFileName := sFileName;
          begin
@@ -13974,17 +13976,17 @@ begin
       else
          lPassword := dmAxiom.INFOTRACK_PASSWORD;
 
-//      RestClient.SetCredentials(lUser,lPassword);
+      RestClientt.SetCredentials(lUser,lPassword);
 
       lURL := SystemString('INFOTRACK_URL');
       vSearch := TMatterDetails.NewFrom(qryMatter.FieldByName('fileid').AsString, lUser);
-//      vResponse := RestClient.Resource(lURL)
-//                  .Accept(RestUtils.MediaType_Json)
-//                  .ContentType(RestUtils.MediaType_Json);
+      vResponse := RestClientt.Resource(lURL)
+                  .Accept(RestUtils.MediaType_Json)
+                  .ContentType(RestUtils.MediaType_Json);
 
 
-//      vResult := vResponse.Post<TMatterDetails>(vSearch);
-//      lResponse := RestClient.ResponseRecord;
+      vResult := vResponse.Post<TMatterDetails>(vSearch);
+      lResponse := RestClientt.ResponseRecord;
    finally
       NewDocPath := IncludeTrailingPathDelimiter(SystemString('DRAG_DEFAULT_DIRECTORY'));
       AParsedDocName := ParseMacros(NewDocPath, qryMatter.FieldByName('nmatter').AsInteger);

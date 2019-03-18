@@ -3,27 +3,26 @@ unit NSearch;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, ExtCtrls,
-  CheckLst, ImgList, ToolWin, OracleUniProvider, Uni, DBAccess, MemDS,
-  ActnList, ActnMan, ActnCtrls, AxiomData, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
-  cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxControls, cxGridCustomView, cxClasses, cxGridLevel, cxGrid, dxBar,
-  cxMaskEdit, cxCalendar, cxCheckBox, cxTextEdit, cxMemo, cxCurrencyEdit,
-  cxRichEdit, dxStatusBar, cxButtonEdit, cxImageComboBox, cxContainer,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  dxBarExtItems, cxLookAndFeels, cxLookAndFeelPainters, XPStyleActnCtrls,
-  cxGridExportLink, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap,
-  dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
-  dxPSCore, dxPScxCommon, dxPScxGridLnk, dxPSPDFExportCore, dxPSPDFExport,
-  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxGridLayoutViewLnk, dxPSDBTCLnk,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPScxDBEditorLnks,
-  dxPSTextLnk, dxPScxSchedulerLnk, ppDB, ppCtrls, ppBands, ppClass, ppVar,
-  ppPrnabl, ppCache, ppDesignLayer, ppParameter, ppProd, ppReport, ppComm,
-  ppRelatv, ppDBPipe, dxCore, cxNavigator, System.Actions, cxBarEditItem,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxLabel;
+  Forms, SysUtils, Windows, Graphics, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer,
+  cxEdit, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
+  dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog,
+  Data.DB, cxDBData, cxTextEdit, cxCheckBox, dxPSGlbl, dxPSUtl, dxPSEngn,
+  dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
+  dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
+  dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
+  dxPScxSchedulerLnk, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
+  dxPScxEditorProducers, dxPScxExtEditorProducers, ppParameter, ppDesignLayer,
+  ppBands, ppClass, ppCtrls, ppVar, ppPrnabl, ppCache, ppProd, ppReport, ppDB,
+  ppComm, ppRelatv, ppDBPipe, dxPSCore, dxPScxCommon, Vcl.Dialogs, dxBar,
+  cxBarEditItem, dxBarExtItems, cxClasses, System.Classes, System.Actions,
+  Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ExtCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.Controls, DBAccess, Uni, MemDS,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridCustomView, cxGrid, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.StdCtrls, Vcl.Buttons, Vcl.CheckLst,
+  dxStatusBar, cxGridExportLink, dxCore;
+
 
 const
   imgWORD = 4;
@@ -278,7 +277,7 @@ type
     procedure qPhoneBookAfterScroll(DataSet: TDataSet);
     procedure aShowHideChildrenUpdate(Sender: TObject);
     procedure aShowHideChildrenExecute(Sender: TObject);
-    procedure dbgChildrenCellClick(Column: TColumn);
+//    procedure dbgChildrenCellClick(Column: TColumn);
     procedure qPhoneBookChildrenAfterScroll(DataSet: TDataSet);
     procedure tvPhoneBookCellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
@@ -379,7 +378,7 @@ implementation
 uses
   MiscFunc, Phonebook, PhoneBookNew, WriteMerge,
   SystemFile, Clients, WorkFlowDataModule,
-  WorkFlowDataModuleMerge, BulkMailer;
+  WorkFlowDataModuleMerge, BulkMailer, AxiomData;
 
 {$R *.DFM}
 var
@@ -1702,13 +1701,13 @@ begin
   end;
 end;
 
-procedure TfrmPhoneBookSearch.dbgChildrenCellClick(Column: TColumn);
+{procedure TfrmPhoneBookSearch.dbgChildrenCellClick(Column: TColumn);
 begin
   FLastSelectedNName   := qPhoneBookChildren.FieldByName('nname').AsInteger;
   FLastSelectedSearch  := qPhoneBookChildren.FieldByName('search').AsString;
   FLastSelectedNClient := qPhoneBookChildren.FieldByName('nclient').AsInteger;
   FLastSelectedNCreditor := qPhoneBook.FieldByName('ncreditor').AsInteger;
-end;
+end; }
 
 procedure TfrmPhoneBookSearch.qPhoneBookChildrenAfterScroll(
   DataSet: TDataSet);

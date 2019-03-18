@@ -4,7 +4,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, NumberEdit,
+  Dialogs, StdCtrls, ComCtrls, Db, Buttons, NumberEdit,
   ImgList, ToolWin, ExtCtrls, Menus, OracleUniProvider, Uni, DBAccess, MemDS,
   MatterLabel, DBCtrls, ActnList, ActnMan, StdActns,
   ActnCtrls, ActnMenus, ppStrtch, ppMemo, FMXUtils,
@@ -31,7 +31,8 @@ uses
   dxPSTextLnk, cxDateUtils, dxPScxSchedulerLnk, scExcelExport, dxCore,
   cxNavigator, System.Actions, FeeNotes, DateUtils, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog, VirtualTable,
-  cxEditRepositoryItems, Datasnap.DBClient, myChkBox;
+  cxEditRepositoryItems, Datasnap.DBClient, myChkBox, dxDateRanges,
+  System.ImageList;
 
 const
   imgWORD = 2;
@@ -283,7 +284,7 @@ type
     procedure CheckReturn(Sender: TObject; var Key: Char);
     procedure tabGridShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure dbgrMatters1TitleClick(Column: TColumn);
+//    procedure dbgrMatters1TitleClick(Column: TColumn);
     procedure FormResize(Sender: TObject);
     procedure tmrSearchTimer(Sender: TObject);
     procedure aPrintExecute(Sender: TObject);
@@ -575,12 +576,12 @@ begin
     frmConflictSearch.Free;
 end;
 
-procedure TfrmConflictSearch.dbgrMatters1TitleClick(Column: TColumn);
+{procedure TfrmConflictSearch.dbgrMatters1TitleClick(Column: TColumn);
 begin
   if not FConflictSaved then
     SaveConflict;
   SaveConfig := True;
-end;
+end;   }
 
 procedure TfrmConflictSearch.FormResize(Sender: TObject);
 begin

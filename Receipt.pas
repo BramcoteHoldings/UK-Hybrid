@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, Menus, Buttons,
+  StdCtrls, ComCtrls, Db, Menus, Buttons,
   Uni, DBAccess, MemDS, DateTimeAccount, cxStyles,
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
   cxDBData, cxDropDownEdit, cxButtonEdit, cxTextEdit,

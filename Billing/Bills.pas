@@ -4,7 +4,7 @@ interface
 
 uses
   ComObj, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, ComCtrls, Grids, DBGrids, Menus, Buttons,
+  Db, StdCtrls, ComCtrls, Menus, Buttons,
   ExtCtrls, DBCtrls, ToolWin, DateChangeButton, ImgList,
   NumberLabel, MemDS, OracleUniProvider, Uni, DBAccess, NumberEdit, cxStyles,
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,

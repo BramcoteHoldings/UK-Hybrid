@@ -307,7 +307,7 @@ object frmAccountNew: TfrmAccountNew
   object dtpDate: TEnforceCustomDateEdit
     Left = 120
     Top = 4
-    EditValue = 43496.5899222917d
+    EditValue = 43542.3591176852d
     Properties.MinDate = 1.000000000000000000
     Properties.ShowTime = False
     Properties.OnChange = EnforceCustomDateEdit1PropertiesChange
@@ -839,7 +839,7 @@ object frmAccountNew: TfrmAccountNew
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43496.589922175920000000
+      ReportDocument.CreationDate = 43542.359117453710000000
       ShrinkToPageWidth = True
       PixelsPerInch = 96
       BuiltInReportLink = True

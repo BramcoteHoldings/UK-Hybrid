@@ -88,7 +88,7 @@
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <VerInfo_Build>15</VerInfo_Build>
-        <DCC_UsePackage>vcl;ResizeKitPKD16;rtl;ExcelExportPackXE4;dclExcelExportPackXE4;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>vcl;rtl;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_ExeOutput>.\Bin\Platform\win32</DCC_ExeOutput>
         <DCC_DcuOutput>..\dcu\platform\win32</DCC_DcuOutput>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
@@ -121,7 +121,7 @@
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>42</VerInfo_Build>
+        <VerInfo_Build>46</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
@@ -130,7 +130,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.42;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.46;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -155,14 +155,14 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <VerInfo_Build>38</VerInfo_Build>
+        <VerInfo_Build>39</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_MapFile>3</DCC_MapFile>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.38;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.39;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
@@ -1199,10 +1199,6 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="infotrack\ITrackMatterDetails.pas"/>
-        <DCCReference Include="ArchiveBatch.pas">
-            <Form>frmArchiveBatch</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="prac_num.pas">
             <Form>frmPracNum</Form>
             <FormType>dfm</FormType>
@@ -1328,10 +1324,6 @@
             <Form>frmReceipt</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="ReceiptReqNew.pas">
-            <Form>frmReceiptReqNew</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Projects\ProjectNew.pas">
             <Form>frmProjectNew</Form>
             <FormType>dfm</FormType>
@@ -1367,14 +1359,6 @@
         </DCCReference>
         <DCCReference Include="TemplateSelect.pas">
             <Form>FrmSelectTemplate</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="ReceiptReqs.pas">
-            <Form>frmReceiptReqs</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="ReceiptReqNarrative.pas">
-            <Form>frmReceiptReqNarrative</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="CheqReqs.pas">
@@ -1521,57 +1505,6 @@
                     <VersionInfoKeys Name="Comments">(c) 2010 Bramcote Holdings Pty Ltd as Trustee</VersionInfoKeys>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlackRS25.bpl">ExpressSkins - Black Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlueprintRS25.bpl">ExpressSkins - Blueprint Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinBlueRS25.bpl">ExpressSkins - Blue Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinCaramelRS25.bpl">ExpressSkins - Caramel Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinCoffeeRS25.bpl">ExpressSkins - Coffee Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDarkRoomRS25.bpl">ExpressSkins - Darkroom Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDarkSideRS25.bpl">ExpressSkins - DarkSide Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDevExpressDarkStyleRS25.bpl">ExpressSkins - DevExpressDarkStyle Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinDevExpressStyleRS25.bpl">ExpressSkins - DevExpressStyle Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinFoggyRS25.bpl">ExpressSkins - Foggy Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinGlassOceansRS25.bpl">ExpressSkins - GlassOceans Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinHighContrastRS25.bpl">ExpressSkins - HighContrast Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkiniMaginaryRS25.bpl">ExpressSkins - iMaginary Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLilianRS25.bpl">ExpressSkins - Lilian Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLiquidSkyRS25.bpl">ExpressSkins - LiquidSky Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinLondonLiquidSkyRS25.bpl">ExpressSkins - LondonLiquidSky Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMcSkinRS25.bpl">ExpressSkins - McSkin Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMetropolisDarkRS25.bpl">ExpressSkins - MetropolisDark Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMetropolisRS25.bpl">ExpressSkins - Metropolis Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinMoneyTwinsRS25.bpl">ExpressSkins - MoneyTwins Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007BlackRS25.bpl">ExpressSkins - Office2007Black Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007BlueRS25.bpl">ExpressSkins - Office2007Blue Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007GreenRS25.bpl">ExpressSkins - Office2007Green Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007PinkRS25.bpl">ExpressSkins - Office2007Pink Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2007SilverRS25.bpl">ExpressSkins - Office2007Silver Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010BlackRS25.bpl">ExpressSkins - Office2010Black Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010BlueRS25.bpl">ExpressSkins - Office2010Blue Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2010SilverRS25.bpl">ExpressSkins - Office2010Silver Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013DarkGrayRS25.bpl">ExpressSkins - Office2013DarkGray Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013LightGrayRS25.bpl">ExpressSkins - Office2013LightGray Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2013WhiteRS25.bpl">ExpressSkins - Office2013White Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2016ColorfulRS25.bpl">ExpressSkins - Office2016Colorful Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinOffice2016DarkRS25.bpl">ExpressSkins - Office2016Dark Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinPumpkinRS25.bpl">ExpressSkins - Pumpkin Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSevenClassicRS25.bpl">ExpressSkins - SevenClassic Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSevenRS25.bpl">ExpressSkins - Seven Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSharpPlusRS25.bpl">ExpressSkins - SharpPlus Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSharpRS25.bpl">ExpressSkins - Sharp Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSilverRS25.bpl">ExpressSkins - Silver Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSpringTimeRS25.bpl">ExpressSkins - Springtime Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinStardustRS25.bpl">ExpressSkins - Stardust Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinSummer2008RS25.bpl">ExpressSkins - Summer2008 Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinTheAsphaltWorldRS25.bpl">ExpressSkins - TheAsphaltWorld Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinTheBezierRS25.bpl">ExpressSkins - TheBezier Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinValentineRS25.bpl">ExpressSkins - Valentine Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013BlueRS25.bpl">ExpressSkins - VisualStudio2013Blue Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013DarkRS25.bpl">ExpressSkins - VisualStudio2013Dark Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVisualStudio2013LightRS25.bpl">ExpressSkins - VisualStudio2013Light Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinVS2010RS25.bpl">ExpressSkins - VS2010 Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinWhiteprintRS25.bpl">ExpressSkins - Whiteprint Skin by Developer Express Inc.</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Program Files (x86)\DevExpress VCL\Library\RS25\dxSkinXmas2008BlueRS25.bpl">ExpressSkins - Xmas2008Blue Skin by Developer Express Inc.</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
@@ -1581,28 +1514,38 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="bin\platform\win64\Insight.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="Bin\Platform\win32\Insight.rsm" Configuration="Release" Class="DebugSymbols"/>
-                <DeployFile LocalName="Bin\Platform\win32\Insight.rsm" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
-                        <RemoteName>Insight.rsm</RemoteName>
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="bin\platform\win64\Insight.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="bin\platform\win64\Insight.rsm" Configuration="Debug" Class="DebugSymbols"/>
+                <DeployFile LocalName="Bin\Platform\win32\Insight.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Insight.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Bin\Platform\win32\Insight.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Insight.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

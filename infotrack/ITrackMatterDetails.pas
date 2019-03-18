@@ -12,8 +12,8 @@ type
     ClientReference: String;
     RetailerReference: String;
     URL: string;
-      (* Static constructor *)
-      class function NewFrom( ClientReference, RetailerReference: String): TMatterDetails;
+    (* Static constructor *)
+    class function NewFrom( ClientReference, RetailerReference: String): TMatterDetails;
   end;
 
 implementation
@@ -21,10 +21,10 @@ implementation
 {TTitleSearch}
 class function TMatterDetails.NewFrom( ClientReference, RetailerReference: String): TMatterDetails;
 begin
-  Result := TMatterDetails.Create;
+   Result := TMatterDetails.Create;
 //  Result.Reference := Reference;
-  Result.ClientReference := ClientReference;
-  Result.RetailerReference := RetailerReference;
+   Result.ClientReference := ClientReference;
+   Result.RetailerReference := RetailerReference;
 end;
 
 end.

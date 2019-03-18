@@ -21,7 +21,7 @@ object frmBankRecEdit: TfrmBankRecEdit
   DesignSize = (
     821
     419)
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
     Left = 8
@@ -191,7 +191,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D360800000000000036000000280000002000000010000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       800000808000008080000080800000808000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
@@ -271,7 +271,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -369,7 +369,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -466,7 +466,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D360400000000000036000000280000001000000010000000010020000000
-      0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+      000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00806060FF806060FFFF00FFFFFF00FFFF806060FF806060FFFFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00806060FFA4A0A0FFA4A0A0FF806060FF806060FF806060FFF0FBFFFF8060
@@ -513,7 +513,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D360400000000000036000000280000001000000010000000010020000000
-      0000000000004D1000004D100000000000000000000080008000C0C0C0FFC0C0
+      000000000000C40E0000C40E0000000000000000000080008000C0C0C0FFC0C0
       C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
       C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF8000800080008000000000FF8080
       80FF808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
@@ -904,7 +904,7 @@ object frmBankRecEdit: TfrmBankRecEdit
   object cxStyleRepository1: TcxStyleRepository
     Left = 661
     Top = 112
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]
       Color = clInfoBk
@@ -946,6 +946,7 @@ object frmBankRecEdit: TfrmBankRecEdit
     DataPipeline = plBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -971,15 +972,22 @@ object frmBankRecEdit: TfrmBankRecEdit
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -994,19 +1002,22 @@ object frmBankRecEdit: TfrmBankRecEdit
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 1017
     Top = 328
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plBankRec'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 17727
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1024,6 +1035,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1041,13 +1053,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Bank Statement'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -1060,13 +1074,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1079,13 +1095,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1098,13 +1116,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Ref No'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 30956
@@ -1116,13 +1136,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 45508
@@ -1134,13 +1156,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Statement Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 121444
@@ -1152,13 +1176,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Cashbook Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 147902
@@ -1170,13 +1196,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Presented'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 171186
@@ -1188,6 +1216,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -1201,12 +1230,14 @@ object frmBankRecEdit: TfrmBankRecEdit
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5556
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'BANKED'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1227,6 +1258,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1246,6 +1278,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'REFNO'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1265,6 +1298,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1284,6 +1318,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1305,6 +1340,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1325,6 +1361,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'PresentedDate'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1345,12 +1382,14 @@ object frmBankRecEdit: TfrmBankRecEdit
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1371,13 +1410,15 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Number of unmatched cheques'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 1852
@@ -1389,6 +1430,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBCalc2: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc2'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1409,6 +1451,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppDBCalc3: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc3'
+        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1429,6 +1472,7 @@ object frmBankRecEdit: TfrmBankRecEdit
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 1323

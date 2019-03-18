@@ -33,21 +33,22 @@ and ncheque in (SELECT ncheque
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
-  dxBarBuiltInMenu, cxContainer, cxEdit, cxStyles, cxCustomData, cxFilter,
-  cxData, cxDataStorage, cxNavigator,
+  Windows, Forms, SysUtils, Messages, dxBarBuiltInMenu, cxGraphics,
+  cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
   cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
-  cxCurrencyEdit, cxCalendar, Vcl.DBCtrls, Vcl.Buttons, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
-  cxGrid, Vcl.StdCtrls, cxRadioGroup, Vcl.ExtCtrls, cxSplitter, cxCheckBox,
-  cxGroupBox, DateChangeButton, Vcl.ComCtrls, cxPC, ppParameter, ppCtrls,
-  ppBands, ppVar, ppDesignLayer, ppModule, raCodMod, ppStrtch, ppRegion,
+  cxCurrencyEdit, cxCalendar, cxContainer, Vcl.Dialogs, ppParameter, ppCtrls,
+  ppBands, ppVar, ppDesignLayer, raCodMod, ppModule, ppStrtch, ppRegion,
   ppReport, ppSubRpt, ppPrnabl, ppClass, ppCache, ppProd, dxBar, ppDB, ppComm,
   ppRelatv, ppDBPipe, cxClasses, cxGridCustomPopupMenu, cxGridPopupMenu,
-  Vcl.Menus, Vcl.ImgList, DBAccess, Uni, MemDS, citfunc, DateUtils,
-  ppFileUtils, ppIniStorage, Variants, cxGridExportLink, dxCore, cxDateUtils,
-  cxGridDBDataDefinitions, dxDateRanges, System.ImageList;
+  Vcl.Menus, System.ImageList, Vcl.ImgList, Vcl.Controls, DBAccess, Uni, MemDS,
+  cxCheckBox, cxGroupBox, cxRadioGroup, Vcl.StdCtrls, DateChangeButton,
+  Vcl.ComCtrls, Vcl.DBCtrls, Vcl.Buttons, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
+  cxSplitter, cxPC, System.Classes, citfunc, DateUtils, Variants, ppFileUtils,
+  ppIniStorage, dxCore, cxGridExportLink, cxGridDBDataDefinitions;
+
 
 
 

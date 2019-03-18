@@ -2,10 +2,10 @@ unit About;
 
 interface
 
-uses Windows, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, SysUtils, cxLookAndFeelPainters, cxButtons,
-  Menus, cxGraphics, cxLookAndFeels, cxControls, cxContainer, cxEdit, cxTextEdit, cxMemo,
-  dxGDIPlusClasses, cxImage, cxLabel;
+uses Forms, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, cxControls,
+  cxContainer, cxEdit, cxLabel, Vcl.ExtCtrls, dxGDIPlusClasses, cxImage,
+  cxTextEdit, cxMemo, Vcl.StdCtrls, cxButtons, Vcl.Controls, System.Classes, SysUtils;
+
 
 type
   TfrmAbout = class(TForm)

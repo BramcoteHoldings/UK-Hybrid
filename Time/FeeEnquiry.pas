@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, ComCtrls, Grids, DBGrids, Menus, Buttons,
+  Db, StdCtrls, ComCtrls, Menus, Buttons,
   ExtCtrls, DBCtrls, ToolWin, DateChangeButton,
   TeEngine, Series, TeeProcs, Chart, DBChart, ImgList, NumberEdit,
   MemDS, OracleUniProvider, Uni, DBAccess, Variants, ActnList, ActnMan,
@@ -31,7 +31,7 @@ uses
   cxNavigator, cxRichEdit, System.Actions, cxBarEditItem, dxCore,
   ppRegion, dxSkinsCore, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog,dxSpellCheckerCore,
-  dxSpellChecker, VclTee.TeeGDIPlus, System.ImageList;
+  dxSpellChecker, VclTee.TeeGDIPlus, System.ImageList, dxDateRanges;
 
 type
   TBudgetShowType = (bstYear, bstQuarter, bstMonth, bstAuthor, bstDepartment);

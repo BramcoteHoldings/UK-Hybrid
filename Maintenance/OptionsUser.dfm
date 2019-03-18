@@ -20,9 +20,9 @@ object frmOptionsUser: TfrmOptionsUser
   TextHeight = 15
   object pagOptions: TcxPageControl
     Left = 0
-    Top = 30
+    Top = 28
     Width = 1283
-    Height = 676
+    Height = 678
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -31,17 +31,16 @@ object frmOptionsUser: TfrmOptionsUser
     Font.Style = []
     ParentFont = False
     TabOrder = 4
-    Properties.ActivePage = tabReqFields
+    Properties.ActivePage = tabMatterLabels
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pagOptionsChange
     OnPageChanging = pagOptionsPageChanging
-    ClientRectBottom = 672
+    ClientRectBottom = 674
     ClientRectLeft = 4
     ClientRectRight = 1279
-    ClientRectTop = 29
+    ClientRectTop = 28
     object tabMatterLabels: TcxTabSheet
       Caption = 'Matter Labels'
       ImageIndex = 0
@@ -234,6 +233,10 @@ object frmOptionsUser: TfrmOptionsUser
     object tabArchiveLabels: TcxTabSheet
       Caption = 'Archive Label'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label16: TLabel
         Left = 8
         Top = 13
@@ -296,7 +299,7 @@ object frmOptionsUser: TfrmOptionsUser
       ImageIndex = 1
       DesignSize = (
         1275
-        643)
+        646)
       object Label1: TLabel
         Left = 8
         Top = 8
@@ -331,7 +334,7 @@ object frmOptionsUser: TfrmOptionsUser
       TabVisible = False
       DesignSize = (
         1275
-        643)
+        646)
       object Label8: TLabel
         Left = 556
         Top = 46
@@ -415,8 +418,8 @@ object frmOptionsUser: TfrmOptionsUser
         TabOrder = 4
         DesignSize = (
           1263
-          553)
-        Height = 553
+          556)
+        Height = 556
         Width = 1263
         object Label15: TLabel
           Left = 9
@@ -467,7 +470,7 @@ object frmOptionsUser: TfrmOptionsUser
           StyleFocused.LookAndFeel.Kind = lfFlat
           StyleHot.LookAndFeel.Kind = lfFlat
           TabOrder = 3
-          Height = 502
+          Height = 505
           Width = 1210
         end
       end
@@ -476,6 +479,10 @@ object frmOptionsUser: TfrmOptionsUser
       Caption = 'General Ledger'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cbLedgerShowPrev: TcxCheckBox
         Left = 3
         Top = 17
@@ -493,7 +500,7 @@ object frmOptionsUser: TfrmOptionsUser
       TabVisible = False
       DesignSize = (
         1275
-        643)
+        646)
       object Label9: TLabel
         Left = 8
         Top = 12
@@ -506,13 +513,18 @@ object frmOptionsUser: TfrmOptionsUser
         Left = 7
         Top = 35
         Width = 1265
-        Height = 602
+        Height = 605
         ActivePage = tabPrecWord
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
+        ExplicitHeight = 602
         object tabPrecWordPerfect: TTabSheet
           Caption = 'tabPrecWordPerfect'
           TabVisible = False
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label5: TLabel
             Left = 8
             Top = 85
@@ -582,6 +594,10 @@ object frmOptionsUser: TfrmOptionsUser
           Caption = 'tabPrecWord'
           ImageIndex = 1
           TabVisible = False
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label4: TLabel
             Left = 5
             Top = 2
@@ -606,7 +622,7 @@ object frmOptionsUser: TfrmOptionsUser
       ImageIndex = 5
       DesignSize = (
         1275
-        643)
+        646)
       object Label14: TLabel
         Left = 7
         Top = 12
@@ -619,10 +635,11 @@ object frmOptionsUser: TfrmOptionsUser
         Left = 9
         Top = 35
         Width = 1263
-        Height = 599
+        Height = 602
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
         LookAndFeel.NativeStyle = True
+        ExplicitHeight = 599
         object tvDisplayNames: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsDisplayNames
@@ -701,7 +718,7 @@ object frmOptionsUser: TfrmOptionsUser
       ImageIndex = 6
       DesignSize = (
         1275
-        643)
+        646)
       object Label13: TLabel
         Left = 17
         Top = 12
@@ -714,7 +731,7 @@ object frmOptionsUser: TfrmOptionsUser
         Left = 5
         Top = 39
         Width = 1267
-        Height = 601
+        Height = 604
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -819,6 +836,10 @@ object frmOptionsUser: TfrmOptionsUser
     object tabOther: TcxTabSheet
       Caption = 'Other'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cbFileNote: TcxCheckBox
         Left = 20
         Top = 12
@@ -845,6 +866,10 @@ object frmOptionsUser: TfrmOptionsUser
       Caption = 'Holiday Calendar'
       ImageIndex = 8
       OnShow = tabHolidayCalendarShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxButton3: TcxButton
         Left = 20
         Top = 6
@@ -855,7 +880,7 @@ object frmOptionsUser: TfrmOptionsUser
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+          000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -902,7 +927,7 @@ object frmOptionsUser: TfrmOptionsUser
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+          000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -1286,7 +1311,6 @@ object frmOptionsUser: TfrmOptionsUser
     Top = 183
   end
   object vtName: TVirtualTable
-    Options = [voPersistentData, voStored, voSkipUnSupportedFieldTypes]
     FieldDefs = <
       item
         Name = 'CLASS'
@@ -1301,7 +1325,7 @@ object frmOptionsUser: TfrmOptionsUser
     Left = 294
     Top = 183
     Data = {
-      030002000500434C4153530100140000000000050056414C5545010014000000
+      040002000500434C4153530100140000000000050056414C5545010014000000
       0000000000000000}
   end
   object dsName: TUniDataSource
@@ -1382,7 +1406,7 @@ object frmOptionsUser: TfrmOptionsUser
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -1397,11 +1421,11 @@ object frmOptionsUser: TfrmOptionsUser
     UseSystemFont = True
     Left = 751
     Top = 84
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False

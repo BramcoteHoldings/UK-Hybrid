@@ -4,7 +4,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons,  OracleUniProvider, Uni, MemDS, ExtCtrls,
+  StdCtrls, ComCtrls, Db, Buttons,  OracleUniProvider, Uni, MemDS, ExtCtrls,
   DBAccess, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxCalendar, cxTextEdit, cxCurrencyEdit,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxControls,
@@ -12,7 +12,7 @@ uses
   cxButtons, cxMaskEdit, cxDropDownEdit, cxGroupBox, cxContainer,
   cxRadioGroup, cxPC, Menus, cxLookAndFeels, cxPCdxBarPopupMenu, cxCheckBox,
   cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TLookup = (luUnassigned, luSearch, luCode);

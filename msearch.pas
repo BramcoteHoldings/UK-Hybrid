@@ -3,34 +3,29 @@ unit MSearch;
 interface
 
 uses
-  Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, NumberEdit,
-  ImgList, ToolWin, ExtCtrls, Menus, OracleUniProvider, Uni, DBAccess, MemDS,
-  MatterLabel, DBCtrls, ActnList, ActnMan, StdActns,
-  ActnCtrls, ActnMenus, ppStrtch, ppMemo, FMXUtils,
-  ppCtrls, ppBands, ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
-  ppDB, ppComm, ppRelatv, ppDBPipe, ppDBBDE, ppViewr,
-  cxStyles, cxCustomData, cxGraphics,ComObj, cxFilter, cxData,
-  cxDataStorage, cxEdit, cxDBData, cxMaskEdit, cxDropDownEdit,
-  cxDBLookupComboBox, cxColorComboBox, cxCurrencyEdit, cxCheckBox, cxMemo,
-  cxCalendar, cxTextEdit, cxLookAndFeelPainters, dxBar, dxBarExtItems,
-  cxLabel, cxLookupEdit, cxDBLookupEdit, cxGroupBox, cxRadioGroup,
-  cxButtons, cxContainer, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, cxPC, Variants,
-  cxGridCustomPopupMenu, cxGridPopupMenu, ppRegion, ppModule, raCodMod,
-  ppParameter, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap,
-  dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
-  dxPSCore, dxPScxCommon, dxPScxGridLnk, cxGridExportLink,
-  XPStyleActnCtrls, cxLookAndFeels, ppFileUtils, ppIniStorage,
-  JvDialogs, cxGridChartView, cxGridDBChartView,
-  ppDesignLayer, cxPCdxBarPopupMenu, dxPSPDFExportCore, dxPSPDFExport,
-  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxGridLayoutViewLnk, dxPSDBTCLnk,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPScxDBEditorLnks,
-  dxPSTextLnk, cxDateUtils, dxPScxSchedulerLnk, scExcelExport, dxCore,
-  cxNavigator, System.Actions, FeeNotes, DateUtils, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxPScxEditorLnks;
+  Windows, Forms, SysUtils, Variants, FMXUtils, Graphics, dxBarBuiltInMenu, cxGraphics,
+  cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxMaskEdit, cxCurrencyEdit, cxDBLookupComboBox, cxContainer, Vcl.Menus,
+  dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev,
+  dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
+  dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
+  scExcelExport, ppDB, Vcl.Dialogs, dxPSCore, dxPScxCommon,
+  cxGridCustomPopupMenu, cxGridPopupMenu, dxBar, dxBarExtItems, cxClasses,
+  ppDBPipe, ppDBBDE, ppParameter, ppDesignLayer, raCodMod, ppModule, ppBands,
+  ppMemo, ppCtrls, ppStrtch, ppRegion, ppVar, ppPrnabl, ppClass, ppCache,
+  ppComm, ppRelatv, ppProd, ppReport, Vcl.StdActns, System.Classes,
+  System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, DBAccess,
+  Uni, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList, Vcl.Controls, MemDS,
+  cxLabel, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, Vcl.StdCtrls,
+  NumberEdit, cxGroupBox, cxRadioGroup, Vcl.ComCtrls, cxButtons, cxCheckBox,
+  cxTextEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, cxGridExportLink, ppIniStorage,
+  cxDateUtils, ComObj, ppFileUtils, DateUtils, Types, dxCore, dxPSDBTCLnk;
+
 
 const
   imgWORD = 2;
@@ -395,7 +390,6 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FilterItemChange(Sender: TObject);
     procedure cbBranchChange(Sender: TObject);
-    procedure dbgrMatters1TitleClick(Column: TColumn);
     procedure FormResize(Sender: TObject);
     procedure cbWorkFlowTypeChange(Sender: TObject);
     procedure tmrSearchTimer(Sender: TObject);
@@ -485,7 +479,6 @@ type
     { Private declarations }
     FLookup: TLookup;
     SaveFilter, SaveConfig, RefreshSearch: Boolean;
-    MatterLabel: TMatterLabel;
     sMatterTypeCode : String;
     sMatterSubTypeCode : String;
     sWorkFlowCode : String;
@@ -517,8 +510,8 @@ implementation
 
 uses
   AxiomData, MiscFunc, WriteMerge,
-  OptionsUser, WaitAnimate,
-  TableCache, Word2000, Office2000, DebtorNotes;
+  OptionsUser, WaitAnimate, TableCache, Word2000, Office2000, DebtorNotes,
+  MatterLabel, FeeNotes;
 
 {$R *.DFM}
 
@@ -538,6 +531,7 @@ var
   sTitle : string;
   sAND : string;
   sGroupBy, sChildGroupBy: string;
+  MatterLabel: TMatterLabel;
 
 procedure TfrmMatterSearch.FormShow(Sender: TObject);
 var
@@ -2112,11 +2106,6 @@ begin
       sBranchCode := cbBranch.EditValue //  qryBranch.FieldByName('code').AsString
    else
       sBranchCode := '';
-end;
-
-procedure TfrmMatterSearch.dbgrMatters1TitleClick(Column: TColumn);
-begin
-  SaveConfig := True;
 end;
 
 procedure TfrmMatterSearch.FormResize(Sender: TObject);

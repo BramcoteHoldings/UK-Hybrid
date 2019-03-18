@@ -48,8 +48,6 @@ object frmMatterSearch: TfrmMatterSearch
         Text = 'Filter'
         Width = 50
       end>
-    ExplicitTop = 496
-    ExplicitWidth = 1286
   end
   object pageSearch: TcxPageControl
     Left = 0
@@ -64,11 +62,7 @@ object frmMatterSearch: TfrmMatterSearch
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pageSearchChange
-    ExplicitTop = 48
-    ExplicitWidth = 965
-    ExplicitHeight = 448
     ClientRectBottom = 612
     ClientRectLeft = 4
     ClientRectRight = 1284
@@ -77,15 +71,11 @@ object frmMatterSearch: TfrmMatterSearch
       Caption = '&Matters'
       ImageIndex = 0
       OnShow = tabGridShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrMatters: TcxGrid
         Left = 0
         Top = 0
-        Width = 959
-        Height = 377
+        Width = 1280
+        Height = 542
         Align = alClient
         TabOrder = 0
         LookAndFeel.Kind = lfFlat
@@ -435,8 +425,8 @@ object frmMatterSearch: TfrmMatterSearch
       end
       object Panel1: TPanel
         Left = 0
-        Top = 377
-        Width = 959
+        Top = 542
+        Width = 1280
         Height = 44
         Align = alBottom
         BevelOuter = bvNone
@@ -533,13 +523,13 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 651
           Top = 16
           Width = 105
-          Height = 28
+          Height = 23
           TabOrder = 3
           Visible = False
           OnChange = EnableTimer
         end
         object bnOk: TcxButton
-          Left = 1112
+          Left = 1433
           Top = 15
           Width = 81
           Height = 27
@@ -636,10 +626,9 @@ object frmMatterSearch: TfrmMatterSearch
           OptionsImage.NumGlyphs = 2
           OptionsImage.Spacing = 5
           TabOrder = 4
-          ExplicitLeft = 791
         end
         object bnCancel: TcxButton
-          Left = 1196
+          Left = 1517
           Top = 15
           Width = 80
           Height = 27
@@ -735,7 +724,6 @@ object frmMatterSearch: TfrmMatterSearch
           OptionsImage.NumGlyphs = 2
           OptionsImage.Spacing = 5
           TabOrder = 5
-          ExplicitLeft = 875
         end
         object edtBarcodeSearch: TcxTextEdit
           Left = 491
@@ -754,10 +742,6 @@ object frmMatterSearch: TfrmMatterSearch
       Caption = '&Filter'
       ImageIndex = 1
       OnShow = tabFiltersShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1280
         586)
@@ -2252,7 +2236,7 @@ object frmMatterSearch: TfrmMatterSearch
     Left = 607
     Top = 12
     Bitmap = {
-      494C01010F001100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F0011000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000007070
       7000B2B2B2000000000000000000000000000000000000000000000000000000
@@ -3136,6 +3120,7 @@ object frmMatterSearch: TfrmMatterSearch
     DataPipeline = plMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -3161,15 +3146,22 @@ object frmMatterSearch: TfrmMatterSearch
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3184,19 +3176,23 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 251
     Top = 268
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plMatters'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 35983
       mmPrintPosition = 0
       object ppLine1: TppLine
+        DesignLayer = ppDesignLayer2
         UserName = 'Line1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Position = lpBottom
         Weight = 0.750000000000000000
@@ -3205,126 +3201,154 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 35190
         mmWidth = 200300
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label1'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 794
         mmTop = 30956
         mmWidth = 13229
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label2'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 38894
         mmTop = 30956
         mmWidth = 25400
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label3'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 111919
         mmTop = 30956
         mmWidth = 12435
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label4'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Partner'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 132301
         mmTop = 30956
         mmWidth = 9786
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label5'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Author'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 143941
         mmTop = 30956
         mmWidth = 8728
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label6'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 154523
         mmTop = 30956
         mmWidth = 7408
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label7'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matters Listing'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4784
@@ -3332,11 +3356,14 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 16933
         mmWidth = 200290
         BandType = 0
+        LayerName = Foreground1
       end
       object ppVariable1: TppVariable
+        DesignLayer = ppDesignLayer2
         UserName = 'Variable1'
         OnGetText = ppVariable1GetText
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         Font.Charset = DEFAULT_CHARSET
@@ -3351,10 +3378,13 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 10848
         mmWidth = 200026
         BandType = 0
+        LayerName = Foreground1
       end
       object ppSystemVariable1: TppSystemVariable
+        DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3368,17 +3398,21 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 1852
         mmWidth = 9525
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label9'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Printed:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -3386,10 +3420,13 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 1852
         mmWidth = 11906
         BandType = 0
+        LayerName = Foreground1
       end
       object ppSystemVariable2: TppSystemVariable
+        DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtDateTime
         DisplayFormat = 'dd-mmm-yyyy h:nn:ss AM/PM'
         Font.Charset = DEFAULT_CHARSET
@@ -3404,50 +3441,61 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 1852
         mmWidth = 37042
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel22: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label102'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Archive #'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 184415
         mmTop = 30956
         mmWidth = 14552
         BandType = 0
+        LayerName = Foreground1
       end
       object ppLabel23: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label103'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Destroy Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 163777
         mmTop = 30956
         mmWidth = 19579
         BandType = 0
+        LayerName = Foreground1
       end
     end
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 6679
       mmPrintPosition = 0
       object ppRegion1: TppRegion
+        DesignLayer = ppDesignLayer2
         UserName = 'Region1'
         Brush.Style = bsClear
         ParentWidth = True
@@ -3459,13 +3507,16 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 75
         mmWidth = 200300
         BandType = 4
+        LayerName = Foreground1
         mmBottomOffset = 0
         mmOverFlowOffset = 0
         mmStopPosition = 0
         mmMinHeight = 0
         object ppDBText2: TppDBText
+          DesignLayer = ppDesignLayer2
           UserName = 'DBText2'
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           DataField = 'FILEID'
           DataPipeline = plMatters
           Font.Charset = DEFAULT_CHARSET
@@ -3480,10 +3531,13 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 18263
           BandType = 4
+          LayerName = Foreground1
         end
         object ppDBText3: TppDBText
+          DesignLayer = ppDesignLayer2
           UserName = 'DBText3'
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           DataField = 'PARTNER'
           DataPipeline = plMatters
           Font.Charset = DEFAULT_CHARSET
@@ -3498,10 +3552,13 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 9788
           BandType = 4
+          LayerName = Foreground1
         end
         object ppDBText4: TppDBText
+          DesignLayer = ppDesignLayer2
           UserName = 'DBText4'
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           DataField = 'AUTHOR'
           DataPipeline = plMatters
           Font.Charset = DEFAULT_CHARSET
@@ -3516,10 +3573,13 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 8730
           BandType = 4
+          LayerName = Foreground1
         end
         object ppDBMemo2: TppDBMemo
+          DesignLayer = ppDesignLayer2
           UserName = 'DBMemo2'
           Border.Weight = 1.000000000000000000
+          Border.mmPadding = 0
           CharWrap = True
           DataField = 'TYPE'
           DataPipeline = plMatters
@@ -3537,6 +3597,7 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 7408
           BandType = 4
+          LayerName = Foreground1
           mmBottomOffset = 0
           mmOverFlowOffset = 0
           mmStopPosition = 0
@@ -3544,7 +3605,9 @@ object frmMatterSearch: TfrmMatterSearch
           mmLeading = 0
         end
         object ppDBText7: TppDBText
+          DesignLayer = ppDesignLayer2
           UserName = 'DBText7'
+          Border.mmPadding = 0
           DataField = 'ARCHIVENUM'
           DataPipeline = plMatters
           Font.Charset = DEFAULT_CHARSET
@@ -3560,9 +3623,12 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 14288
           BandType = 4
+          LayerName = Foreground1
         end
         object ppDBMemo1: TppDBMemo
+          DesignLayer = ppDesignLayer2
           UserName = 'DBMemo1'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'LONGDESCR'
           DataPipeline = plMatters
@@ -3580,6 +3646,7 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 70641
           BandType = 4
+          LayerName = Foreground1
           mmBottomOffset = 0
           mmOverFlowOffset = 0
           mmStopPosition = 0
@@ -3587,7 +3654,9 @@ object frmMatterSearch: TfrmMatterSearch
           mmLeading = 0
         end
         object ppDBMemo4: TppDBMemo
+          DesignLayer = ppDesignLayer2
           UserName = 'DBMemo3'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'TITLE'
           DataPipeline = plMatters
@@ -3605,6 +3674,7 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 37306
           BandType = 4
+          LayerName = Foreground1
           mmBottomOffset = 0
           mmOverFlowOffset = 0
           mmStopPosition = 0
@@ -3612,7 +3682,9 @@ object frmMatterSearch: TfrmMatterSearch
           mmLeading = 0
         end
         object ppDBText1: TppDBText
+          DesignLayer = ppDesignLayer2
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'ARCHIVEDEST'
           DataPipeline = plMatters
           DisplayFormat = 'dd/mm/yyyy'
@@ -3629,10 +3701,13 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 604
           mmWidth = 19050
           BandType = 4
+          LayerName = Foreground1
         end
         object ppLine5: TppLine
+          DesignLayer = ppDesignLayer2
           UserName = 'Line5'
           Anchors = [atLeft, atBottom]
+          Border.mmPadding = 0
           Pen.Color = clSilver
           Pen.Style = psDash
           Weight = 1.000000000000000000
@@ -3641,19 +3716,23 @@ object frmMatterSearch: TfrmMatterSearch
           mmTop = 5292
           mmWidth = 196586
           BandType = 4
+          LayerName = Foreground1
         end
       end
     end
     object ppSummaryBand2: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
       mmPrintPosition = 0
       object ppVariable4: TppVariable
+        DesignLayer = ppDesignLayer2
         UserName = 'Variable4'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtInteger
@@ -3670,27 +3749,34 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 529
         mmWidth = 14817
         BandType = 7
+        LayerName = Foreground1
       end
       object ppLabel21: TppLabel
+        DesignLayer = ppDesignLayer2
         UserName = 'Label101'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter(s)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 39158
         mmTop = 529
         mmWidth = 13494
         BandType = 7
+        LayerName = Foreground1
       end
       object ppLine4: TppLine
+        DesignLayer = ppDesignLayer2
         UserName = 'Line4'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -3698,20 +3784,28 @@ object frmMatterSearch: TfrmMatterSearch
         mmTop = 0
         mmWidth = 200300
         BandType = 7
+        LayerName = Foreground1
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D650611
-        44657461696C4265666F72655072696E740B50726F6772616D54797065070B74
-        7450726F63656475726506536F75726365065D70726F63656475726520446574
-        61696C4265666F72655072696E743B0D0A626567696E0D0A7B20202053686170
-        65312E56697369626C65203A3D202844657461696C2E436F756E74206D6F6420
-        3229203D20313B7D0D0A656E643B0D0A0D436F6D706F6E656E744E616D650606
-        44657461696C094576656E744E616D65060B4265666F72655072696E74074576
-        656E7449440218084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DetailBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DetailBeforePrint;'#13#10'begin'#13#10'{   Shape1.Visible := (Deta' +
+          'il.Count mod 2) = 1;}'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Detail'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 24
+      end
     end
     object TppDesignLayers
+      object ppDesignLayer2: TppDesignLayer
+        UserName = 'Foreground1'
+        LayerType = ltBanded
+        Index = 0
+      end
     end
     object ppParameterList1: TppParameterList
     end
@@ -3727,6 +3821,7 @@ object frmMatterSearch: TfrmMatterSearch
     DataPipeline = ppBDEPipeline2
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -3752,15 +3847,22 @@ object frmMatterSearch: TfrmMatterSearch
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
     RTFSettings.DefaultFont.Color = clWindowText
@@ -3774,13 +3876,15 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 626
     Top = 339
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppBDEPipeline2'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 33338
       mmPrintPosition = 0
@@ -3788,6 +3892,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Position = lpBottom
         Weight = 0.750000000000000000
@@ -3802,13 +3907,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Printed:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3704
@@ -3822,6 +3929,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtDateTime
         DisplayFormat = 'dd-mmm-yyyy h:nn:ss AM/PM'
         Font.Charset = DEFAULT_CHARSET
@@ -3842,13 +3950,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Page'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3704
@@ -3862,6 +3972,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable4'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtPageNo
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3882,6 +3993,7 @@ object frmMatterSearch: TfrmMatterSearch
         UserName = 'Variable2'
         OnGetText = ppVariable1GetText
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         Font.Charset = DEFAULT_CHARSET
@@ -3903,13 +4015,15 @@ object frmMatterSearch: TfrmMatterSearch
         UserName = 'Label12'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter Selection'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -3923,13 +4037,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 794
@@ -3942,13 +4058,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 70116
@@ -3961,13 +4079,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label15'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Partner'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 173309
@@ -3980,13 +4100,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label16'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Author'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 185211
@@ -3999,13 +4121,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label17'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Status'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 95796
@@ -4018,13 +4142,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label18'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Jurisdiction'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 143416
@@ -4037,13 +4163,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label19'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Ftype'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 161402
@@ -4056,6 +4184,7 @@ object frmMatterSearch: TfrmMatterSearch
     object ppDetailBand2: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
@@ -4064,6 +4193,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'CLIENTID'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4085,6 +4215,7 @@ object frmMatterSearch: TfrmMatterSearch
         UserName = 'DBMemo2'
         ForceJustifyLastLine = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'TITLE'
         DataPipeline = ppBDEPipeline2
@@ -4113,6 +4244,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBFileId'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4133,6 +4265,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'STATUS'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4154,6 +4287,7 @@ object frmMatterSearch: TfrmMatterSearch
         UserName = 'DBText9'
         CharWrap = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'MATTERSTATUS2'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4175,6 +4309,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'JURISDICTION'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4196,6 +4331,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'PARTNER'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4216,6 +4352,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'AUTHOR'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4236,6 +4373,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = ppBDEPipeline2
         Font.Charset = DEFAULT_CHARSET
@@ -4256,6 +4394,7 @@ object frmMatterSearch: TfrmMatterSearch
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6085
       mmPrintPosition = 0
@@ -4263,6 +4402,7 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Line3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -4277,6 +4417,7 @@ object frmMatterSearch: TfrmMatterSearch
         UserName = 'Variable3'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtInteger
@@ -4299,13 +4440,15 @@ object frmMatterSearch: TfrmMatterSearch
         DesignLayer = ppDesignLayer1
         UserName = 'Label20'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter(s)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 39688

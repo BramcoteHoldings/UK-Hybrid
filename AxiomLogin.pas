@@ -2,13 +2,13 @@ unit AxiomLogin;
 
 interface
 
-uses
-  Vcl.Forms, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
-  cxContainer, cxEdit, Vcl.ExtCtrls, Data.DB, MemDS, DBAccess, Uni,
-  cxProgressBar, dxStatusBar, Vcl.Controls, Vcl.StdCtrls, cxCheckBox,
-  Vcl.Buttons, System.Classes, System.IniFiles,
-  System.Win.Registry, System.SysUtils, Windows, Vcl.Dialogs, Vcl.Graphics, Vcl.ComCtrls,
-  cxLabel, messages, VCL.Themes, System.ConvUtils, dxGDIPlusClasses, cxImage, dxDPIAwareUtils;
+uses cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, Vcl.ExtCtrls, Data.DB, MemDS, DBAccess, Uni, dxGDIPlusClasses,
+  cxImage, cxLabel, Vcl.Controls, Vcl.StdCtrls, cxCheckBox, Vcl.Buttons,
+  cxProgressBar, System.Classes, INIFiles, Forms, Registry, SysUtils, Windows,
+  Messages, Graphics, Vcl.ComCtrls, Dialogs,System.ConvUtils ;
+
+  
 
 
 

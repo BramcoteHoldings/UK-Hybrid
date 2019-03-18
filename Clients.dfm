@@ -362,10 +362,6 @@ object frmClients: TfrmClients
     object tabMatters: TcxTabSheet
       Caption = 'Matters'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1079
         465)
@@ -12696,7 +12692,7 @@ object frmClients: TfrmClients
     PixelsPerInch = 96
     object dxPrintMatterListLink1: TdxGridReportLink
       Component = dbgrMatters
-      PrinterPage.DMPaper = 256
+      PrinterPage.DMPaper = 9
       PrinterPage.Footer = 5080
       PrinterPage.GrayShading = True
       PrinterPage.Header = 2540

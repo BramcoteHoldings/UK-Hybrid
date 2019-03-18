@@ -48,7 +48,7 @@ object frmDesktop: TfrmDesktop
       item
         PanelStyleClassName = 'TdxStatusBarContainerPanelStyle'
         PanelStyle.Container = dxStatusBar1Container1
-        Width = 186
+        Width = 240
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
@@ -77,9 +77,9 @@ object frmDesktop: TfrmDesktop
     ParentFont = True
     OnDblClick = sbarStatusDblClick
     object dxStatusBar1Container1: TdxStatusBarContainerControl
-      Left = 252
+      Left = 238
       Top = 2
-      Width = 188
+      Width = 242
       Height = 25
       object beEntity: TcxButtonEdit
         Left = 0
@@ -97,28 +97,30 @@ object frmDesktop: TfrmDesktop
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        Width = 188
+        ExplicitWidth = 193
+        Width = 242
       end
     end
     object StatusBarContainer5: TdxStatusBarContainerControl
-      Left = 1102
+      Left = 1111
       Top = 2
-      Width = 146
+      Width = 137
       Height = 25
       object pnlTimeTrack: TPanel
         Left = 0
         Top = 0
-        Width = 146
+        Width = 137
         Height = 25
         Align = alClient
         ShowCaption = False
         TabOrder = 0
         Visible = False
+        ExplicitWidth = 146
         object lblTimer: TLabel
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 138
+          Width = 129
           Height = 17
           Align = alClient
           Alignment = taCenter
@@ -286,7 +288,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 124
+            Height = 0
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1355,7 +1357,6 @@ object frmDesktop: TfrmDesktop
           PositionAfterOpen = 26
           MinSize = 26
           Control = lvClassicDesktop
-          ExplicitWidth = 8
         end
         object dxBarDockControl2: TdxBarDockControl
           Left = 0

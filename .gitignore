@@ -21,3 +21,10 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+
+BIN/Platform/win32
+Billing/__history
+Diary/__history
+infotrack/__history
+Time/__history
+__history

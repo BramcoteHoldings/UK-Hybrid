@@ -41,14 +41,13 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tabWorkflow
+    Properties.ActivePage = tsGeneral
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pcMainChange
     OnPageChanging = pcMainPageChanging
     ClientRectBottom = 636
@@ -61,7 +60,7 @@ object frmSystemFile: TfrmSystemFile
       object DBText1: TDBText
         Left = 102
         Top = 3
-        Width = 111
+        Width = 41
         Height = 15
         AutoSize = True
         DataField = 'COMPANY'
@@ -755,6 +754,10 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'User &Statements'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgUserStatements: TcxGrid
         Left = 0
         Top = 0
@@ -825,6 +828,10 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Field &Mapping'
       ImageIndex = 3
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgDataFieldMapping: TcxGrid
         Left = 0
         Top = 0
@@ -886,6 +893,10 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Outlook'
       ImageIndex = 4
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label21: TLabel
         Left = -14
         Top = 21
@@ -3245,7 +3256,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 12
-        Text = ''
+        Text = 'JvDBLookupComboEdit1'
         DataField = 'MEMO_BILL_DEFAULT'
         DataSource = dsSystemFile
       end
@@ -3258,7 +3269,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 13
-        Text = ''
+        Text = 'JvDBLookupComboEdit2'
         DataField = 'DRAFT_BILL_DEFAULT'
         DataSource = dsSystemFile
       end
@@ -3333,7 +3344,6 @@ object frmSystemFile: TfrmSystemFile
         Width = 131
         Height = 23
         AllowNoDate = True
-        ButtonWidth = 22
         DataField = 'DFLT_BILL_DISPATCHED_DATE'
         DataSource = dsSystemFile
         TabOrder = 19
@@ -4358,7 +4368,6 @@ object frmSystemFile: TfrmSystemFile
           Left = 9
           Top = 19
           Caption = 'Fee Alert Receipients'
-          EditValue = '0100'
           Properties.EditValueFormat = cvfStatesString
           Properties.Items = <
             item
@@ -5792,7 +5801,6 @@ object frmSystemFile: TfrmSystemFile
     SQL.Strings = (
       'SELECT S.*, S.ROWID FROM SYSTEMFILE S')
     CachedUpdates = True
-    Active = True
     AfterOpen = qrySystemFileAfterOpen
     Left = 816
     Top = 520
@@ -6175,7 +6183,6 @@ object frmSystemFile: TfrmSystemFile
     Top = 415
   end
   object vtComponentTypes: TVirtualTable
-    Options = [voPersistentData, voStored, voSkipUnSupportedFieldTypes]
     Active = True
     FieldDefs = <
       item
@@ -6191,7 +6198,7 @@ object frmSystemFile: TfrmSystemFile
     Left = 1172
     Top = 172
     Data = {
-      03000200070048656164696E6701001400000000000400747970650100140000
+      04000200070048656164696E6701001400000000000400747970650100140000
       000000000000000000}
   end
   object dsComponentTypes: TUniDataSource
@@ -6302,7 +6309,6 @@ object frmSystemFile: TfrmSystemFile
     Top = 293
   end
   object vtMonth: TVirtualTable
-    Options = [voPersistentData, voStored, voSkipUnSupportedFieldTypes]
     Active = True
     FieldDefs = <
       item
@@ -6317,7 +6323,7 @@ object frmSystemFile: TfrmSystemFile
     Left = 457
     Top = 538
     Data = {
-      0300020005004D6F6E7468030000000000000005004465736372010024000000
+      0400020005004D6F6E7468030000000000000005004465736372010024000000
       000000000C0000000400000001000000030000004A616E040000000200000003
       0000004665620400000003000000030000004D61720400000004000000030000
       004170720400000005000000030000004D61790400000006000000030000004A

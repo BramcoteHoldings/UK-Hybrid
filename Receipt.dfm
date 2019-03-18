@@ -24,7 +24,7 @@ object frmReceipt: TfrmReceipt
   TextHeight = 15
   object Label1: TLabel
     Left = 6
-    Top = 36
+    Top = 37
     Width = 29
     Height = 15
     Caption = 'Bank:'
@@ -65,8 +65,8 @@ object frmReceipt: TfrmReceipt
     Caption = 'Payment Type:'
   end
   object lblBankName: TLabel
-    Left = 144
-    Top = 36
+    Left = 174
+    Top = 37
     Width = 3
     Height = 15
     ShowAccelChar = False
@@ -160,7 +160,7 @@ object frmReceipt: TfrmReceipt
   end
   object edtSaveNeAmount: TEdit
     Left = 203
-    Top = 157
+    Top = 159
     Width = 91
     Height = 23
     Margins.Left = 2
@@ -509,7 +509,7 @@ object frmReceipt: TfrmReceipt
   object tbPayee: TcxButtonEdit
     Tag = 1
     Left = 89
-    Top = 110
+    Top = 109
     Hint = 'Look up Phonebook for Payor'
     Properties.Buttons = <
       item
@@ -577,7 +577,7 @@ object frmReceipt: TfrmReceipt
   object cbBank: TcxComboBox
     Tag = 1
     Left = 89
-    Top = 35
+    Top = 34
     Properties.OnChange = cbBankChange
     Properties.OnCloseUp = cbBankPropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -587,7 +587,7 @@ object frmReceipt: TfrmReceipt
     TabOrder = 0
     OnClick = cbBankClick
     OnExit = tbRcptnoExit
-    Width = 51
+    Width = 81
   end
   object gbCheque: TcxGroupBox
     Left = 699
@@ -720,8 +720,8 @@ object frmReceipt: TfrmReceipt
       Width = 116
     end
     object btnImport: TcxButton
-      Left = 189
-      Top = 45
+      Left = 191
+      Top = 46
       Width = 65
       Height = 22
       Caption = 'Import'
@@ -906,7 +906,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43529.6493501852d
+    EditValue = 43542.744674919d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

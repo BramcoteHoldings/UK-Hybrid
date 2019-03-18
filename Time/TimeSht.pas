@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
+  StdCtrls, ComCtrls, Db, DBCtrls, Menus, Buttons,
   ExtCtrls, NumberEdit, ToolWin, ImgList,QuickCodeSearch, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData,
   cxCalendar, cxButtonEdit, cxTextEdit, cxGridCustomTableView,
@@ -2762,7 +2762,7 @@ end;
 
 procedure TfrmTimeSheet.cbAuthorPropertiesChange(Sender: TObject);
 begin
-   if ClosingForm = False then
+   if dmAxiom.bShutdown = False then
    begin
      try
         tvFeeTmpNew.OnFocusedRecordChanged := nil;

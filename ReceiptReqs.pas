@@ -12,7 +12,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, ComCtrls, Grids, DBGrids, Menus, Buttons, Math, cxGraphics,
+  Db, StdCtrls, ComCtrls, Menus, Buttons, Math, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev,
   dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
@@ -31,7 +31,8 @@ uses
   Variants, dxPSDBTCLnk, dxPScxSchedulerLnk,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
   cxPC, cxRadioGroup, cxBarEditItem, dxCore, cxDateUtils, cxMaskEdit,
-  cxDropDownEdit, cxCalendar, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox;
+  cxDropDownEdit, cxCalendar, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
+  dxDateRanges, dxPScxEditorLnks, System.ImageList;
 
 const
   isREQUISITION = 0;

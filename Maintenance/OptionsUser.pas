@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Spin, Buttons, Printers, ComCtrls, ExtCtrls, NumberEdit,
   DBCGrids, Db, OracleUniProvider, Uni, DBAccess, MemDS, Mask, DBCtrls, VirtualTable,
-  Grids, DBGrids, Menus, dxBar, cxStyles, cxCustomData, cxGraphics,
+  Menus, dxBar, cxStyles, cxCustomData, cxGraphics,
   cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxDropDownEdit,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxDBLookupComboBox,
@@ -15,7 +15,8 @@ uses
   cxCheckBox, cxColorComboBox, cxSpinEdit, cxPC, cxMemo, cxRadioGroup,
   cxGroupBox, cxLookAndFeelPainters, cxButtons, DateUtils, cxPCdxBarPopupMenu,
   cxLookAndFeels, JvTFManager, JvExControls, JvTFGlance, JvTFMonths,
-  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog;
+  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxDateRanges;
 
 const
    Months: array[1..12] of string = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');

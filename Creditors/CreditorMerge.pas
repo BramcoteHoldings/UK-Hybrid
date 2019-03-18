@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, MemDS, DBAccess, OracleUniProvider, Uni, Grids, DBGrids;
+  Dialogs, StdCtrls, Buttons, DB, MemDS, DBAccess, OracleUniProvider, Uni;
 
 type
   TfrmCreditorMerge = class(TForm)

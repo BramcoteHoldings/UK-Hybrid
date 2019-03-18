@@ -44,7 +44,6 @@ object frmFeeListNew: TfrmFeeListNew
       Properties.TabSlants.Kind = skCutCorner
       LookAndFeel.Kind = lfUltraFlat
       LookAndFeel.NativeStyle = True
-      TabSlants.Kind = skCutCorner
       OnChange = pcFeeListChange
       ClientRectBottom = 582
       ClientRectLeft = 4
@@ -53,6 +52,10 @@ object frmFeeListNew: TfrmFeeListNew
       object tsFeeList: TcxTabSheet
         Caption = 'Fees'
         ImageIndex = 0
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object grdFees: TcxGrid
           Left = 0
           Top = 0
@@ -465,6 +468,10 @@ object frmFeeListNew: TfrmFeeListNew
         Caption = 'Statistics'
         ImageIndex = 1
         OnHide = tsStatsHide
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pagStats: TcxPageControl
           Left = 0
           Top = 0
@@ -480,13 +487,14 @@ object frmFeeListNew: TfrmFeeListNew
           Properties.TabSlants.Kind = skCutCorner
           LookAndFeel.Kind = lfOffice11
           LookAndFeel.NativeStyle = True
-          TabSlants.Kind = skCutCorner
           ClientRectBottom = 556
           ClientRectRight = 1081
           ClientRectTop = 0
           object tabStats: TcxTabSheet
             Caption = 'Statistics'
             ImageIndex = 2
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gbStats: TcxGroupBox
               Left = 11
               Top = 6
@@ -1248,6 +1256,8 @@ object frmFeeListNew: TfrmFeeListNew
           object cxTabSheet3: TcxTabSheet
             Caption = 'By Author'
             ImageIndex = 1
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object dbchFeePie: TDBChart
               Left = 316
               Top = 0
@@ -1377,6 +1387,8 @@ object frmFeeListNew: TfrmFeeListNew
           object cxTabSheet1: TcxTabSheet
             Caption = 'Benchmark'
             ImageIndex = 2
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object DBChart1: TDBChart
               Left = 0
               Top = 0
@@ -1496,6 +1508,10 @@ object frmFeeListNew: TfrmFeeListNew
         ImageIndex = 2
         TabVisible = False
         OnShow = tsBudgetShow
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pcBudgetGraphs: TcxPageControl
           Left = 0
           Top = 0
@@ -1512,13 +1528,14 @@ object frmFeeListNew: TfrmFeeListNew
           Properties.TabSlants.Kind = skCutCorner
           LookAndFeel.Kind = lfUltraFlat
           LookAndFeel.NativeStyle = True
-          TabSlants.Kind = skCutCorner
           ClientRectBottom = 556
           ClientRectRight = 1081
           ClientRectTop = 0
           object tsBudgetMonth: TcxTabSheet
             Caption = 'Month'
             ImageIndex = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object pagBudgetMonthYear: TcxPageControl
               Left = 0
               Top = 0
@@ -1532,7 +1549,6 @@ object frmFeeListNew: TfrmFeeListNew
               Properties.TabSlants.Kind = skCutCorner
               LookAndFeel.Kind = lfUltraFlat
               LookAndFeel.NativeStyle = True
-              TabSlants.Kind = skCutCorner
               ClientRectBottom = 556
               ClientRectRight = 1081
               ClientRectTop = 22
@@ -1540,6 +1556,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetMonthShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1616,6 +1635,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeesBudgetMonthShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chFeeBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1680,6 +1702,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Time'
                 ImageIndex = 2
                 OnShow = tsTimeBudgetMonthShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chTimeBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1755,6 +1780,8 @@ object frmFeeListNew: TfrmFeeListNew
             Caption = 'Quarter'
             ImageIndex = 1
             TabVisible = False
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object cxPageControl3: TcxPageControl
               Left = 0
               Top = 0
@@ -1771,6 +1798,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetQtrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chWIPBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -1849,6 +1879,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeeBudgetQtrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chFeesBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -1902,6 +1935,9 @@ object frmFeeListNew: TfrmFeeListNew
                 ImageIndex = 2
                 TabVisible = False
                 OnShow = tsBudgetHoursQtrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chHoursBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -1982,6 +2018,8 @@ object frmFeeListNew: TfrmFeeListNew
           object tsBudgetYear: TcxTabSheet
             Caption = 'Year'
             ImageIndex = 2
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object cxPageControl4: TcxPageControl
               Left = 0
               Top = 0
@@ -1993,7 +2031,6 @@ object frmFeeListNew: TfrmFeeListNew
               Properties.CustomButtons.Buttons = <>
               Properties.Style = 9
               Properties.TabSlants.Kind = skCutCorner
-              TabSlants.Kind = skCutCorner
               ClientRectBottom = 556
               ClientRectRight = 1081
               ClientRectTop = 22
@@ -2001,6 +2038,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetYrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chBudgetYear: TDBChart
                   Left = 0
                   Top = 0
@@ -2075,6 +2115,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeeBudgetYrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chBudgetYearFee: TDBChart
                   Left = 0
                   Top = 0
@@ -2137,6 +2180,9 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Time'
                 ImageIndex = 2
                 OnShow = tsTimeBudgetYrShow
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object chBudgetYearTime: TDBChart
                   Left = 0
                   Top = 0
@@ -2213,6 +2259,10 @@ object frmFeeListNew: TfrmFeeListNew
       object tsFilter: TcxTabSheet
         Caption = 'Filter'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lblAuthor: TLabel
           Left = 22
           Top = 4
@@ -4834,7 +4884,6 @@ object frmFeeListNew: TfrmFeeListNew
         'WHERE FEE.NMATTER = MATTER.NMATTER AND FEE.NMEMO = NMEMO.NMEMO(+' +
         ')'
       'AND MATTER.NCLIENT = PHONEBOOK.NCLIENT')
-    Active = True
     Left = 587
     Top = 110
   end
@@ -4852,7 +4901,7 @@ object frmFeeListNew: TfrmFeeListNew
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -6023,7 +6072,7 @@ object frmFeeListNew: TfrmFeeListNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -6468,7 +6517,6 @@ object frmFeeListNew: TfrmFeeListNew
       'from fee, employee'
       'where fee.author = employee.code(+)'
       'group by fee.author, employee.name')
-    Active = True
     Left = 971
     Top = 124
   end
@@ -6482,7 +6530,7 @@ object frmFeeListNew: TfrmFeeListNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

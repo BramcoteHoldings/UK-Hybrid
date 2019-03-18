@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Db, Grids, DBGrids, ExtCtrls, Mask, DBCtrls, Menus,
+  StdCtrls, Db, ExtCtrls, Mask, DBCtrls, Menus,
   ComCtrls, Buttons, ImgList, MemDS,  OracleUniProvider, Uni, DateTimeAccount,
   DBAccess, VirtualTable, Math, cxControls, cxContainer, cxEdit, cxLabel,
   cxTextEdit, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,

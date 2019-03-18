@@ -3,36 +3,33 @@ unit Clients;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls, ComCtrls, ToolWin, Db,
-  Menus, Buttons, FMXUtils, ImgList,
-  DBNumberLabel, CheckLst, MemDS, OracleUniProvider, Uni, DBAccess,
-  DBDateTimePicker, ActnList, ActnMan, CSearch,
-  cxControls, cxContainer, cxEdit, cxTextEdit, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxDBData,
-  cxMaskEdit, cxCalendar, cxDropDownEdit, cxDBEdit, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView,
-  cxGridLevel, cxGrid, cxMemo, ppViewr, cxCheckBox, variants, cxLabel,
-  cxDBLabel, cxCheckListBox, cxLookAndFeelPainters, cxButtons, cxRadioGroup,
-  cxRichEdit, cxButtonEdit, dxBar, cxPC, dxBarExtItems, cxGroupBox,
-  dxBarDBNav, cxCurrencyEdit, cxListView, cxDBLookupComboBox,
-  cxNavigator, cxDBNavigator, cxBlobEdit, cxSplitter, stringz,
-  cxGridBandedTableView, cxGridDBBandedTableView, cxImageComboBox,
-  VirtualTrees, XPStyleActnCtrls, cxLookAndFeels, ppBands,
-  ppStrtch, ppMemo, ppCtrls, ppVar, ppPrnabl, ppClass, ppCache, ppProd,
-  ppReport, ppDB, ppComm, ppRelatv, ppDBPipe, cxGridExportLink, dxPSGlbl,
-  dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
-  dxPSFillPatterns, dxPSEdgePatterns, dxPSCore, dxPScxCommon, dxPScxGridLnk,
-  ppParameter, ppDesignLayer, cxPCdxBarPopupMenu, dxPSPDFExportCore,
-  dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxGridLayoutViewLnk, dxPSDBTCLnk,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPScxSchedulerLnk, ppSubRpt,
-  dxPScxDBEditorLnks, dxPSTextLnk, daODAC, Ora, ppTypes,
-  uRwMAPIFormManager, uRwMapiInterfaces, Math, ppModule, raCodMod, dxCore,
-  {DebenuPDFLibrary1014, gtPDFDoc,} System.Actions,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxCustomListBox,
-  dxBarBuiltInMenu, cxImage, cxBarEditItem, dxDPIAwareUtils, dxPScxEditorLnks,
-  System.ImageList;
+  Windows, Forms, SysUtils, Graphics, Vcl.Dialogs, System.Classes,
+  Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxBarBuiltInMenu, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxCalendar, cxCurrencyEdit, cxTextEdit, cxRichEdit, cxMaskEdit,
+  cxImageComboBox, cxBlobEdit, cxCheckBox, cxButtonEdit, Vcl.Menus,
+  Vcl.ComCtrls, cxLabel, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap,
+  dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
+  dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv,
+  dxPSPrVwRibbon, dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
+  dxBar, raCodMod, ppModule, uRwMAPIFormManager, ppReport, ppSubRpt, dxPSCore,
+  dxPScxCommon, dxBarExtItems, cxBarEditItem, cxClasses, System.ImageList,
+  Vcl.ImgList, Vcl.Controls, stringz, ppBands, ppParameter,
+  ppDesignLayer, ppStrtch, ppMemo, ppCtrls, ppVar, ppPrnabl, ppClass, ppCache,
+  ppProd, ppDB, ppComm, ppRelatv, ppDBPipe, System.Actions,
+  Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, DBAccess, Uni, MemDS,
+  Vcl.Buttons, cxListView, cxSplitter, cxGridBandedTableView,
+  cxGridDBBandedTableView, VirtualTrees, cxCustomListBox, cxCheckListBox,
+  cxMemo, cxDBEdit, cxButtons, cxRadioGroup, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
+  cxGrid, cxPC, cxImage, cxGroupBox, Vcl.ExtCtrls, cxDBLabel, Vcl.DBCtrls,
+  Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore;
+
+
 
 const
   CLIENTCHECKTABLES: array[0..3] of string = ('MATTER','ARCHIVE','DOCREG','DOCREGITEM');
@@ -1294,7 +1291,6 @@ type
     FSafeCustodyModified: Boolean;
     PacketCount : integer;
     FLookupValue: string;
-    FClientSearch: TfrmClientSearch;
     FCustomAddress: string;
     FCustomDataShowing: boolean;
     FShowDataOnlyGroup: String;
@@ -1347,7 +1343,8 @@ uses
   NSearch,ShellAPI, SystemFile, PhoneBook,
   Archival, WorkFlowDataModule, WorkFlowDataModuleMerge, WriteMerge,
   RelateNew, SafeCustMovementDtls, DocNew, DocSearch,
-  RecordMovement, SafeCustodyNewPacket, client_img_view, LoggingSnippet;
+  RecordMovement, SafeCustodyNewPacket, client_img_view, LoggingSnippet,
+  CSearch, Ora, FMXUtils, Math;
 
 {$R *.DFM}
 
@@ -1363,6 +1360,9 @@ type
     FieldCaption: String;
     FieldValue: String;
   end;
+
+var
+   FClientSearch: TfrmClientSearch;
 
 procedure TfrmClients.DisplayClient(Search: string);
 begin
