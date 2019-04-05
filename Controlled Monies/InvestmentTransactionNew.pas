@@ -12,7 +12,8 @@ uses
   ppVar, ppPrnabl, ppClass, ppCache, ppBands, ppProd, ppReport, ppDB,
   ppComm, ppRelatv, ppDBPipe, daDataModule, daSQL, cxLookAndFeels,
   ppParameter, ComCtrls, dxCore, cxDateUtils, ppDesignLayer,
-  vcl.Themes, Vcl.ExtCtrls;
+  vcl.Themes, Vcl.ExtCtrls, dxLayoutcxEditAdapters, dxLayoutControlAdapters,
+  dxLayoutContainer, cxClasses, dxLayoutControl;
 
   const cniDEPOSIT = 'DEP';
   const cniWITHDRAWAL = 'W/D';
@@ -23,36 +24,25 @@ uses
 
 type
   TfrmInvestmentTransactionNew = class(TForm)
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
     cxCeAmount: TcxCurrencyEdit;
     cxDeCreated: TcxDateEdit;
     cxBtnSave: TcxButton;
     cxBtnCancel: TcxButton;
     qryInvestmentTrans: TUniQuery;
-    Label6: TLabel;
-    Label7: TLabel;
     cxEdReference: TcxCurrencyEdit;
     qryCheckBalance: TUniQuery;
     cxEdPayee: TcxButtonEdit;
     dsMRUList: TUniDataSource;
     qryMRUList: TUniQuery;
-    Label1: TLabel;
     cxLcMatter: TcxLookupComboBox;
-    Label2: TLabel;
     clLcDepositAccount: TcxLookupComboBox;
     qryDepositAccount: TUniQuery;
     dsDepositAccount: TUniDataSource;
     qryInvestmentTransDetails: TUniQuery;
-    StatusBar: TdxStatusBar;
     qryBalances: TUniQuery;
     cmbPaymentMethod: TcxComboBox;
-    Label8: TLabel;
     qryPaymentMethod: TUniQuery;
-    Label9: TLabel;
     memoBankDetails: TcxMemo;
-    lbldeposit: TcxLabel;
     cbKeepOpen: TcxCheckBox;
     plDep: TppDBPipeline;
     qryDep: TUniQuery;
@@ -97,9 +87,35 @@ type
     ppHeaderBand1: TppHeaderBand;
     ppDetailBand2: TppDetailBand;
     ppFooterBand1: TppFooterBand;
-    Panel1: TPanel;
     rbCapital: TcxRadioButton;
     rbInterest: TcxRadioButton;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutGroup4: TdxLayoutGroup;
+    dxLayoutGroup5: TdxLayoutGroup;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutGroup6: TdxLayoutGroup;
+    dxLayoutGroup7: TdxLayoutGroup;
+    dxLayoutGroup8: TdxLayoutGroup;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
+    dxLayoutItem11: TdxLayoutItem;
+    dxLayoutItem12: TdxLayoutItem;
+    dxLayoutGroup9: TdxLayoutGroup;
+    dxLayoutItem13: TdxLayoutItem;
+    dxLayoutItem14: TdxLayoutItem;
+    dxLayoutItem15: TdxLayoutItem;
+    dxLayoutItem16: TdxLayoutItem;
+    StatusBar: TdxStatusBar;
     procedure cxBtnSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cxEdPayeePropertiesButtonClick(Sender: TObject;
@@ -215,7 +231,7 @@ begin
    else
        raise Exception.Create('Unknown investment type');
 
-   lbldeposit.Caption := IntToStr(iDeposit);
+ //  lbldeposit.Caption := IntToStr(iDeposit);
    qryMRUList.close;
    qryMRUList.Open;
    cxLcMatter.EditValue := sFileId;

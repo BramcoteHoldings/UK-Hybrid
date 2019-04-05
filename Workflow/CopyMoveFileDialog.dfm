@@ -96,6 +96,9 @@ object fmCopyMoveFileDialog: TfmCopyMoveFileDialog
       AllowCloseButton = False
       Caption = 'tabOptions'
       ImageIndex = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object rbUpdateThisTemplate: TRadioButton
         Left = 6
         Top = 4
@@ -127,6 +130,9 @@ object fmCopyMoveFileDialog: TfmCopyMoveFileDialog
     object tabFileName: TcxTabSheet
       Caption = 'tabFileName'
       ImageIndex = 1
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         313
         68)

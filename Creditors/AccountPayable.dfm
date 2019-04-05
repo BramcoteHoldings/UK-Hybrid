@@ -26,13 +26,12 @@ object frmAcctPayable: TfrmAcctPayable
     Height = 606
     Align = alClient
     TabOrder = 4
-    Properties.ActivePage = tabAcctPayable
+    Properties.ActivePage = tsFilter
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pagAcctPayableChange
     ClientRectBottom = 602
     ClientRectLeft = 4
@@ -41,10 +40,6 @@ object frmAcctPayable: TfrmAcctPayable
     object tabAcctPayable: TcxTabSheet
       Caption = 'Accounts Payable'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrInvoices: TcxGrid
         Left = 0
         Top = 0
@@ -222,7 +217,7 @@ object frmAcctPayable: TfrmAcctPayable
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 313
-        Width = 8
+        Width = 1079
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -305,10 +300,6 @@ object frmAcctPayable: TfrmAcctPayable
     object tsFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 14
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGroupBox1: TcxGroupBox
         Left = 13
         Top = 42
@@ -348,8 +339,8 @@ object frmAcctPayable: TfrmAcctPayable
           Top = 24
           Width = 100
           Height = 23
-          Date = 38169.466950925900000000
-          Time = 38169.466950925900000000
+          Date = 38169.466950925890000000
+          Time = 38169.466950925890000000
           Checked = False
           TabOrder = 1
         end
@@ -667,17 +658,6 @@ object frmAcctPayable: TfrmAcctPayable
           Width = 130
         end
       end
-      object GLComponentFilter: TGLComponentFilterCxGroup
-        Left = 417
-        Top = 230
-        Caption = 'Chart'
-        Style.LookAndFeel.NativeStyle = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        TabOrder = 4
-        hideEmpty = False
-        Height = 108
-        Width = 258
-      end
       object cxLabel5: TcxLabel
         Left = 12
         Top = 14
@@ -691,8 +671,17 @@ object frmAcctPayable: TfrmAcctPayable
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 6
+        TabOrder = 5
         Width = 129
+      end
+      object GLComponentFilter: TGLComponentFilterGroup
+        Left = 414
+        Top = 233
+        Width = 260
+        Height = 105
+        Caption = 'GLComponentFilter'
+        TabOrder = 6
+        hideEmpty = False
       end
     end
   end

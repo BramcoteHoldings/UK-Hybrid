@@ -8,8 +8,8 @@ inherited frmIndexConfig: TfrmIndexConfig
   Font.Name = 'Tahoma'
   OnShow = FormShow
   ExplicitWidth = 1064
-  ExplicitHeight = 556
-  PixelsPerInch = 120
+  ExplicitHeight = 550
+  PixelsPerInch = 96
   TextHeight = 16
   object Label1: TLabel [0]
     Left = 10
@@ -1159,7 +1159,10 @@ inherited frmIndexConfig: TfrmIndexConfig
     BeforePost = qrySourceBeforePost
   end
   inherited bmMain: TdxBarManager
-    PixelsPerInch = 120
+    PixelsPerInch = 96
+    inherited bmMainBar1: TdxBar
+      Font.Height = -8
+    end
     inherited mnuFilePrint: TdxBarButton
       Visible = ivNever
     end
@@ -1195,32 +1198,6 @@ inherited frmIndexConfig: TfrmIndexConfig
     Left = 588
     Top = 88
     DataPipelineName = 'plSource'
-    inherited ppMaintHeaderBand: TppHeaderBand
-      inherited ppSystemVariable1: TppSystemVariable
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited ppSystemVariable2: TppSystemVariable
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited pplblEntity: TppLabel
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited pplblTitle: TppLabel
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited ppLine1: TppLine
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
-      end
-    end
   end
   inherited plSource: TppDBPipeline
     Left = 513

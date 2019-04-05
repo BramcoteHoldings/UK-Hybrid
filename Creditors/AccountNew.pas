@@ -231,6 +231,7 @@ begin
    qryLedger.FieldByName('TYPE').AsString := 'Matter';
    qryLedger.FieldByName('REFNO').AsString := sFileid;
    qryLedger.FieldByName('LONGDESC').AsString := MatterString(sFileid,'SHORTDESCR');
+//   qryLedger.FieldByName('TAXCODE').AsString := MatterString(sFileId, 'FEE_TAX_BASIS');
 end;
 
 procedure TfrmAccountNew.btnCancelClick(Sender: TObject);
@@ -345,12 +346,12 @@ var
               sTmp := sTmp + 'A Reference number is required for all entries' + #13;
               bRefMsgUsed := True;
             end;
-         if (qryLedger.FieldByName('TYPE').AsString = 'Matter') And (qryLedger.FieldByName('SUNDRYTYPE').AsString = '') then
+ {        if (qryLedger.FieldByName('TYPE').AsString = 'Matter') And (qryLedger.FieldByName('SUNDRYTYPE').AsString = '') then
             if Not bDisbMsgUsed then
             begin
               sTmp := sTmp + 'A disbursement code is required for all matter related entries' + #13;
               bDisbMsgUsed := True;
-            end;
+            end;   }
          qryLedger.Next;
       end;
 
@@ -596,7 +597,11 @@ begin
               , FALSE   // bJournalSplit: Default to False
               , '0'     // sParentChart: Default to '0'
               , qryAllocs.FieldByName('NALLOC').AsInteger                                               // nalloc
-              , nmatter);  // nmatter
+              , nmatter   // nmatter
+              , 0
+              , False
+              , 0
+              , cAccTax);
 
             // Total the legal creditor amount
             cMatterTotal := cMatterTotal + qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency;;
@@ -699,7 +704,15 @@ begin
               , ''
               , qryAccount.FieldByName('NINVOICE').AsInteger
               , sCreditorCode
-              , qryLedger.FieldByName('TAXCODE').AsString);
+              , qryLedger.FieldByName('TAXCODE').AsString
+              , False   // bJournalSplit: Default to False
+              , '0'    // sParentChart: Default to '0'
+              , 0
+              , 0
+              , 0
+              , False
+              , 0
+              , cAccTax);
 
               glInstance.free;
 
@@ -1220,13 +1233,19 @@ begin
          Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
       if frmMatterSearch.ShowModal = mrOk then
       begin
-        qryLedger.Edit;
-        qryLedger.FieldByName('REFNO').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-        qryLedger.FieldByName('LONGDESC').AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-        if qryLedger.FieldByName('REASON').AsString = '' then
-          qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+         qryLedger.Edit;
+         qryLedger.FieldByName('REFNO').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         qryLedger.FieldByName('LONGDESC').AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         if qryLedger.FieldByName('REASON').AsString = '' then
+            qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+{         defaultLedgerTaxCode := MatterString(dmAxiom.qryMSearch.FieldByName('NMATTER').AsInteger, 'FEE_TAX_BASIS');
+         if defaultLedgerTaxCode <> '' then
+            qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode
+         else
+            qryLedger.FieldByName('TAXCODE').AsString := DefaultTax;}
       end;
     end;
+
     if tvLedgerTYPE.DataBinding.Field.Text = 'Ledger' then
     begin
       if not FormExists(frmLedgerSearch) then
@@ -1276,6 +1295,11 @@ begin
                qryLedger.Edit;
             qryLedger.FieldByName('REFNO').AsString := DisplayValue;
             qryLedger.FieldByName('LONGDESC').AsString := MatterString(string(DisplayValue),'TITLE');
+{            defaultLedgerTaxCode := MatterString(string(DisplayValue), 'FEE_TAX_BASIS');
+            if defaultLedgerTaxCode <> '' then
+               qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode
+            else
+               qryLedger.FieldByName('TAXCODE').AsString := DefaultTax;  }
          end;
       end
       else

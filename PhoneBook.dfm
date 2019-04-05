@@ -3,7 +3,7 @@ object frmPhoneBook: TfrmPhoneBook
   Top = 52
   BorderStyle = bsSingle
   Caption = 'Contact'
-  ClientHeight = 732
+  ClientHeight = 753
   ClientWidth = 1164
   Color = clBtnFace
   Constraints.MinWidth = 756
@@ -25,38 +25,34 @@ object frmPhoneBook: TfrmPhoneBook
     Left = 0
     Top = 196
     Width = 1164
-    Height = 536
+    Height = 557
     Align = alClient
     BevelOuter = bvNone
     Caption = 'pBottom'
     TabOrder = 0
     DesignSize = (
       1164
-      536)
+      557)
     object pcBottom: TcxPageControl
       Left = 5
       Top = 5
       Width = 1149
-      Height = 521
+      Height = 542
       Anchors = [akLeft, akTop, akRight, akBottom]
       TabOrder = 0
-      Properties.ActivePage = tsDocuments
+      Properties.ActivePage = tsAddress
       Properties.CustomButtons.Buttons = <>
       OnChange = pcBottomChange
-      ClientRectBottom = 517
+      ClientRectBottom = 538
       ClientRectLeft = 4
       ClientRectRight = 1145
       ClientRectTop = 26
       object tsAddress: TcxTabSheet
         Caption = 'Addresses'
         ImageIndex = 0
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           1141
-          491)
+          512)
         object lStreetPostCode: TLabel
           Left = 44
           Top = 136
@@ -310,7 +306,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 107
           Top = 157
           Width = 214
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'COUNTRY'
           DataSource = dsPhoneBook
@@ -320,7 +316,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 107
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'POSTALSTATE'
           DataSource = dsPhoneBook
@@ -330,7 +326,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 107
           Top = 107
           Width = 214
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'STATE'
           DataSource = dsPhoneBook
@@ -340,7 +336,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 303
           Width = 135
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'CUST_POSTCODE'
           DataSource = dsPhoneBook
@@ -350,7 +346,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 327
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'CUST_COUNTRY'
           DataSource = dsPhoneBook
@@ -360,7 +356,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 157
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'POSTALCOUNTRY'
           DataSource = dsPhoneBook
@@ -386,7 +382,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 107
           Top = 82
           Width = 214
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'SUBURB'
           DataSource = dsPhoneBook
@@ -416,7 +412,6 @@ object frmPhoneBook: TfrmPhoneBook
           Anchors = [akLeft, akTop, akRight]
           BevelOuter = bvNone
           TabOrder = 9
-          ExplicitWidth = 972
           object lDXAddress: TLabel
             Left = 27
             Top = 20
@@ -468,7 +463,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 107
             Top = 16
             Width = 214
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'DX'
             DataSource = dsPhoneBook
@@ -478,7 +473,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 389
             Top = 16
             Width = 214
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'DXLOC'
             DataSource = dsPhoneBook
@@ -505,7 +500,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 255
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'CUST_SUBURB'
           DataSource = dsPhoneBook
@@ -515,7 +510,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 279
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'CUST_STATE'
           DataSource = dsPhoneBook
@@ -525,7 +520,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 132
           Width = 136
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'POSTALPOSTCODE'
           DataSource = dsPhoneBook
@@ -535,7 +530,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 107
           Top = 132
           Width = 136
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'POSTCODE'
           DataSource = dsPhoneBook
@@ -545,7 +540,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 440
           Top = 82
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'POSTALSUBURB'
           DataSource = dsPhoneBook
@@ -555,13 +550,9 @@ object frmPhoneBook: TfrmPhoneBook
       object tsClient: TcxTabSheet
         Caption = 'Client'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           1141
-          491)
+          512)
         object Label10: TLabel
           Left = 24
           Top = 82
@@ -785,7 +776,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 111
           Top = 215
           Width = 846
-          Height = 164
+          Height = 185
           AllowDblClickToggle = False
           AllowGrayed = True
           Anchors = [akLeft, akTop, akRight, akBottom]
@@ -806,13 +797,9 @@ object frmPhoneBook: TfrmPhoneBook
       object tsAdditional: TcxTabSheet
         Caption = 'Additional'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           1141
-          491)
+          512)
         object Bevel13: TBevel
           Left = 11
           Top = 419
@@ -987,7 +974,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 108
           Top = 203
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'ABN'
           DataSource = dsPhoneBook
@@ -997,7 +984,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 108
           Top = 327
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'DEFAULT_REF'
           DataSource = dsPhoneBook
@@ -1007,7 +994,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 372
           Top = 327
           Width = 214
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'CODE'
           DataSource = dsPhoneBook
@@ -1149,7 +1136,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 98
             Top = 21
             Width = 229
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'CLIENTTITLE'
             DataSource = dsPhoneBook
@@ -1160,7 +1147,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 98
             Top = 51
             Width = 229
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'CLIENTNAME'
             DataSource = dsPhoneBook
@@ -1188,7 +1175,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 108
             Top = 5
             Width = 131
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'DOB'
             DataSource = dsPhoneBook
@@ -1215,7 +1202,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 110
             Top = 7
             Width = 213
-            Height = 28
+            Height = 23
             CharCase = ecUpperCase
             Color = clInfoBk
             DataField = 'NRIC'
@@ -1251,7 +1238,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 96
             Top = 1
             Width = 214
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'CONTACT_NAME'
             DataSource = dsPhoneBook
@@ -1261,7 +1248,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 96
             Top = 30
             Width = 214
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'ADDITIONAL_CONTACT_NAME'
             DataSource = dsPhoneBook
@@ -1383,7 +1370,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 108
           Top = 235
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           TabOrder = 11
         end
@@ -1391,7 +1378,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 108
           Top = 260
           Width = 215
-          Height = 28
+          Height = 23
           Color = clInfoBk
           DataField = 'OCCUPATION'
           DataSource = dsPhoneBook
@@ -1414,10 +1401,6 @@ object frmPhoneBook: TfrmPhoneBook
       object tsNotes: TcxTabSheet
         Caption = 'Notes'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object mlNotes: TcxDBMemo
           Left = 0
           Top = 0
@@ -1435,7 +1418,7 @@ object frmPhoneBook: TfrmPhoneBook
           StyleHot.LookAndFeel.Kind = lfOffice11
           StyleHot.LookAndFeel.NativeStyle = False
           TabOrder = 0
-          Height = 491
+          Height = 512
           Width = 1141
         end
       end
@@ -1446,15 +1429,16 @@ object frmPhoneBook: TfrmPhoneBook
         ExplicitLeft = 0
         ExplicitTop = 0
         ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 491
         object dgGroups: TcxGrid
           Left = 0
           Top = 0
-          Width = 1142
-          Height = 498
+          Width = 1141
+          Height = 512
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitHeight = 491
           object tvGroups: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsGroups
@@ -1500,13 +1484,12 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 0
           Top = 0
           Width = 1141
-          Height = 463
+          Height = 484
           Align = alClient
           PopupMenu = popRelationPrint
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1142
-          ExplicitHeight = 474
+          ExplicitHeight = 463
           object tvRelationship: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsRelationships
@@ -1562,7 +1545,7 @@ object frmPhoneBook: TfrmPhoneBook
         end
         object dxBarDockControl1: TdxBarDockControl
           Left = 0
-          Top = 463
+          Top = 484
           Width = 1141
           Height = 28
           Align = dalBottom
@@ -1576,12 +1559,12 @@ object frmPhoneBook: TfrmPhoneBook
         ExplicitLeft = 0
         ExplicitTop = 0
         ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 491
         object vtCustomData: TVirtualStringTree
           Left = 0
           Top = 0
           Width = 1141
-          Height = 491
+          Height = 512
           Align = alClient
           ButtonStyle = bsTriangle
           Color = clInfoBk
@@ -1601,8 +1584,7 @@ object frmPhoneBook: TfrmPhoneBook
           OnGetText = vtCustomDataGetText
           OnPaintText = vtTreePaintText
           OnGetNodeDataSize = vtTreeGetNodeDataSize
-          ExplicitWidth = 1142
-          ExplicitHeight = 498
+          ExplicitHeight = 491
           Columns = <
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible]
@@ -1625,12 +1607,12 @@ object frmPhoneBook: TfrmPhoneBook
         ExplicitLeft = 0
         ExplicitTop = 0
         ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 491
         object vtMatterData: TVirtualStringTree
           Left = 0
           Top = 0
           Width = 1141
-          Height = 491
+          Height = 512
           Margins.Left = 2
           Margins.Top = 2
           Margins.Right = 2
@@ -1653,8 +1635,7 @@ object frmPhoneBook: TfrmPhoneBook
           OnGetText = vtCustomDataGetText
           OnPaintText = vtTreePaintText
           OnGetNodeDataSize = vtTreeGetNodeDataSize
-          ExplicitWidth = 1142
-          ExplicitHeight = 498
+          ExplicitHeight = 491
           Columns = <
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
@@ -1677,15 +1658,16 @@ object frmPhoneBook: TfrmPhoneBook
         ExplicitLeft = 0
         ExplicitTop = 0
         ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 491
         object grdMatterParty: TcxGrid
           Left = 0
           Top = 0
-          Width = 1142
-          Height = 498
+          Width = 1141
+          Height = 512
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitHeight = 491
           object tvMatterParty: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsPartyMatters
@@ -1741,13 +1723,11 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 0
           Top = 26
           Width = 1141
-          Height = 465
+          Height = 486
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
-          ExplicitTop = 24
-          ExplicitWidth = 1142
-          ExplicitHeight = 474
+          ExplicitHeight = 465
           object tvContactNotes: TcxGridDBTableView
             Navigator.Buttons.OnButtonClick = tvContactNotesNavigatorButtonsButtonClick
             Navigator.Buttons.CustomButtons = <>
@@ -1815,16 +1795,17 @@ object frmPhoneBook: TfrmPhoneBook
         ExplicitLeft = 0
         ExplicitTop = 0
         ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 491
         object grdParticipantEvents: TcxGrid
           Left = 0
           Top = 0
-          Width = 1142
-          Height = 498
+          Width = 1141
+          Height = 512
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfFlat
           LookAndFeel.NativeStyle = True
+          ExplicitHeight = 491
           object tvParticipantEvents: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsParticipantEvents
@@ -1944,10 +1925,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Marketing'
         ImageIndex = 11
         OnShow = tsMarketingShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox1: TGroupBox
           Left = 426
           Top = 6
@@ -2037,7 +2014,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 20
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 0
@@ -2060,7 +2037,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 46
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 2
@@ -2069,7 +2046,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 74
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 3
@@ -2078,7 +2055,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 101
             Width = 172
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'SYSTEM1'
             DataSource = dsPhoneBook
@@ -2088,7 +2065,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 128
             Width = 172
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'SYSTEM2'
             DataSource = dsPhoneBook
@@ -2098,7 +2075,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 181
             Width = 172
-            Height = 28
+            Height = 23
             Color = clInfoBk
             DataField = 'TURNOVER'
             DataSource = dsPhoneBook
@@ -2116,7 +2093,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 17
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 0
@@ -2142,7 +2119,7 @@ object frmPhoneBook: TfrmPhoneBook
             Margins.Top = 2
             Margins.Right = 2
             Margins.Bottom = 2
-            ItemHeight = 11
+            ItemHeight = 15
             Style.Color = clInfoBk
             Style.LookAndFeel.Kind = lfStandard
             Style.StyleController = cxEditStyleController1
@@ -2187,7 +2164,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 68
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 0
@@ -2196,7 +2173,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 42
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 1
@@ -2205,7 +2182,7 @@ object frmPhoneBook: TfrmPhoneBook
             Left = 123
             Top = 16
             Width = 276
-            Height = 28
+            Height = 23
             Color = clInfoBk
             ReadOnly = True
             TabOrder = 2
@@ -2223,8 +2200,8 @@ object frmPhoneBook: TfrmPhoneBook
         object grdOtherNames: TcxGrid
           Left = 0
           Top = 0
-          Width = 1142
-          Height = 498
+          Width = 1141
+          Height = 512
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfFlat
@@ -2274,10 +2251,11 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 0
           Top = 0
           Width = 1141
-          Height = 459
+          Height = 480
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitHeight = 459
           object tvDocs: TcxGridDBBandedTableView
             OnDblClick = tvDocsDblClick
             Navigator.Buttons.CustomButtons = <>
@@ -2513,7 +2491,7 @@ object frmPhoneBook: TfrmPhoneBook
         end
         object Panel4: TPanel
           Left = 0
-          Top = 459
+          Top = 480
           Width = 1141
           Height = 32
           Align = alBottom
@@ -2689,13 +2667,10 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 0
           Top = 28
           Width = 1141
-          Height = 463
+          Height = 484
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
-          ExplicitTop = 24
-          ExplicitWidth = 1142
-          ExplicitHeight = 474
           object cxGridDBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsContactNotes
@@ -5510,7 +5485,7 @@ object frmPhoneBook: TfrmPhoneBook
       FloatClientHeight = 238
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -10
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -5609,7 +5584,7 @@ object frmPhoneBook: TfrmPhoneBook
       FloatClientHeight = 141
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -10
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -7154,7 +7129,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8447,7 +8422,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -8672,7 +8647,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -10185,7 +10160,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

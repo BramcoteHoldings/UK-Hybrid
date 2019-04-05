@@ -4,18 +4,17 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
-  citfunc,ExtCtrls, NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DateTimeAccount,
-  mATH, cxLookAndFeelPainters, cxControls, cxContainer, cxEdit, cxGroupBox,
-  cxRadioGroup, cxButtons, cxStyles, cxCustomData, cxGraphics, cxFilter,
-  cxData, cxDataStorage, cxDBData, cxDropDownEdit, cxButtonEdit,
-  cxTextEdit, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxCurrencyEdit,
-  cxCalendar, cxMaskEdit, cxDBLookupComboBox, cxCheckBox, cxDBEdit, cxLabel,
-  cxMemo, cxImageComboBox, DateUtils, EnforceCustomDateEdit, cxLookAndFeels,
-  dxCore, vcl.Themes, cxNavigator, cxDateUtils, System.Win.ComObj,
-  cxDataControllerConditionalFormattingRulesManagerDialog,
-  System.Actions, Vcl.ActnList, dxDateRanges, cxLookupEdit, cxDBLookupEdit;
+  cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, cxControls,
+  cxContainer, cxEdit, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxDropDownEdit, cxButtonEdit, cxTextEdit, cxDBLookupComboBox, cxCurrencyEdit,
+  Vcl.ComCtrls, dxCore, cxDateUtils, System.Actions, Vcl.ActnList, cxClasses,
+  DBAccess, Uni, MemDS, cxLookupEdit, cxDBLookupEdit, cxCalendar,
+  EnforceCustomDateEdit, cxMaskEdit, cxLabel, cxGroupBox, cxCheckBox,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridCustomView, cxGrid, cxRadioGroup, Vcl.StdCtrls, cxButtons, NumberEdit,
+  Vcl.Buttons, vcl.Themes, System.Win.ComObj, Math;
 
 const
   colTYPE = 0;
@@ -328,7 +327,7 @@ uses
   MiscFunc, Process, AxiomData, NSearch, Receipt, Desktop, ChequeUpCredAlloc,
   Variants,glComponentUtil, CheqReqs, AccountPayable, Vcl.Styles,
   Vcl.Styles.FormStyleHooks, TemplateSelect, System.UITypes, GenericSearch,
-  ChequeRev;
+  ChequeRev, citfunc, DateUtils;
 
 {$R *.DFM}
 
@@ -1605,7 +1604,10 @@ begin
                      if cMatterTotal <> 0 then
                      begin
                         cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
-                        cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
+                        if (qryLedger.FieldByName('TAX').AsFloat <> 0) then
+                           cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2)
+                        else
+                           cMatterTotalTax := 0;
                      end;
 
                      if cTradeTotal <> 0 then
@@ -2917,8 +2919,8 @@ begin
             FieldByName('TAXCODE').AsString := DefaultTax;
             Edit;
             qryLedger.FieldByName('UNIQUEID').AsInteger := NCheque;
-            FieldByName('TAX').AsFloat := 0;
-            FieldByName('BAS_TAX').AsFloat := qryDetails.FieldByName('TAX').AsFloat;
+            FieldByName('TAX').AsFloat := 0;  //qryDetails.FieldByName('TAX').AsFloat;
+//            FieldByName('BAS_TAX').AsFloat := qryDetails.FieldByName('TAX').AsFloat;
             Post;
          end;
          neAmount.AsCurrency := neAmount.AsCurrency + qryDetails.FieldByName('OWING').AsFloat;
@@ -3355,6 +3357,9 @@ begin
    if dmAxiom.qryBankList.State = dsInactive then
       dmAxiom.qryBankList.Open;
 
+   if dmAxiom.qryEmplyeeList.State = dsInactive then
+      dmAxiom.qryEmplyeeList.Open;
+
    lblBankName.AutoSize := TRUE;
    lblAuthByName.AutoSize := TRUE;
 
@@ -3538,7 +3543,6 @@ begin
   qryTmp.Close;
   qryInvoiceCRAmount.Close;
 
-//  RemoveFromDesktop(Self);
   Action := caFree;
 end;
 
@@ -4608,6 +4612,15 @@ begin
                qryLedger.FieldByName('AMOUNT').AsCurrency := frmCreditorAccountsSearch.qryAccounts.FieldByName('OWING').AsCurrency;
                qryLedger.Edit;
                qryLedger.FieldByName('UNIQUEID').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
+               qryLedger.Edit;
+               if frmCreditorAccountsSearch.qryAccounts.FieldByName('TAX').AsFloat <> 0 then
+                  qryLedger.FieldByName('TAXCODE').AsString := GetDefaultTax('Invoice', 'FREE')
+               else
+                  qryLedger.FieldByName('TAXCODE').AsString := 'FREE';
+               qryLedger.Edit;
+               qryLedger.FieldByName('tax').AsFloat := frmCreditorAccountsSearch.qryAccounts.FieldByName('tax').AsFloat;
+               qryLedger.Edit;
+               qryLedger.FieldByName('bas_tax').AsFloat := frmCreditorAccountsSearch.qryAccounts.FieldByName('tax').AsFloat;
             end
             else
                MsgErr('There is nothing owing on this Invoice');

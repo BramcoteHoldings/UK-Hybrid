@@ -18,17 +18,19 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
   TextHeight = 15
   object Splitter1: TSplitter
     Left = 161
-    Top = 30
+    Top = 28
     Width = 4
-    Height = 643
+    Height = 645
     Color = clGradientInactiveCaption
     ParentColor = False
+    ExplicitTop = 30
+    ExplicitHeight = 643
   end
   object emailNavBar: TdxNavBar
     Left = 0
-    Top = 30
+    Top = 28
     Width = 161
-    Height = 643
+    Height = 645
     Align = alLeft
     ActiveGroupIndex = 0
     TabOrder = 0
@@ -36,6 +38,8 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     OptionsImage.SmallImages = FoldersImageList
     OptionsView.NavigationPane.MaxVisibleGroups = 0
     OnActiveGroupChanged = emailNavBarActiveGroupChanged
+    ExplicitTop = 30
+    ExplicitHeight = 643
     object grpMail: TdxNavBarGroup
       Caption = 'Mail'
       Hint = 'Mail'
@@ -70,9 +74,9 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     end
     object grpMailControl: TdxNavBarGroupControl
       Left = 1
-      Top = 27
+      Top = 26
       Width = 159
-      Height = 581
+      Height = 588
       Caption = 'grpMailControl'
       TabOrder = 0
       GroupIndex = 0
@@ -81,7 +85,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         Left = 0
         Top = 0
         Width = 159
-        Height = 581
+        Height = 588
         Align = alClient
         AutoExpand = True
         HideSelection = False
@@ -132,12 +136,14 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
   end
   object Panel1: TPanel
     Left = 165
-    Top = 30
+    Top = 28
     Width = 936
-    Height = 643
+    Height = 645
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 5
+    ExplicitTop = 30
+    ExplicitHeight = 643
     object cxCheckBox1: TcxCheckBox
       Left = 563
       Top = 51
@@ -158,7 +164,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Left = 0
       Top = 0
       Width = 936
-      Height = 643
+      Height = 645
       Align = alClient
       TabOrder = 1
       Properties.ActivePage = tabEmails
@@ -166,7 +172,8 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Properties.HideTabs = True
       LookAndFeel.Kind = lfStandard
       LookAndFeel.NativeStyle = False
-      ClientRectBottom = 641
+      ExplicitHeight = 643
+      ClientRectBottom = 643
       ClientRectLeft = 2
       ClientRectRight = 934
       ClientRectTop = 2
@@ -174,6 +181,10 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         Caption = 'tabEmails'
         ImageIndex = 0
         OnShow = tabEmailsShow
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object grdMail: TcxGrid
           Left = 0
           Top = 34
@@ -242,7 +253,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
               HeaderGlyph.SourceDPI = 96
               HeaderGlyph.Data = {
                 424D6E010000000000003600000028000000060000000D000000010020000000
-                0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+                000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
                 FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000FFFFFF
                 FF00FFFFFF00FFFFFF00FFFFFF00000000FF000000FF000000FFFFFFFF00FFFF
                 FF00FFFFFF00FFFFFF00000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -280,7 +291,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
               HeaderGlyph.SourceDPI = 96
               HeaderGlyph.Data = {
                 424D420300000000000036000000280000000D0000000F000000010020000000
-                0000000000004D1000004D1000000000000000000000D8E9EC00D8E9EC00D8E9
+                000000000000C40E0000C40E00000000000000000000D8E9EC00D8E9EC00D8E9
                 EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9
                 EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9
                 EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9
@@ -327,7 +338,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
               HeaderGlyph.SourceDPI = 96
               HeaderGlyph.Data = {
                 424D16020000000000003600000028000000080000000F000000010020000000
-                0000000000004D1000004D1000000000000000000000D8E9EC00D8E9EC00D8E9
+                000000000000C40E0000C40E00000000000000000000D8E9EC00D8E9EC00D8E9
                 EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9
                 EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC00D8E9EC000000
                 00FF000000FF000000FF000000FFD8E9EC00D8E9EC00D8E9EC00000000FF0000
@@ -1360,7 +1371,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -1388,11 +1399,11 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     UseSystemFont = False
     Left = 617
     Top = 74
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowClose = False
@@ -1411,7 +1422,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       FloatClientHeight = 22
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -1454,7 +1465,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         item
           BeginGroup = True
           UserDefine = [udWidth]
-          UserWidth = 40
+          UserWidth = 36
           Visible = True
           ItemName = 'udFlushQueusInterval'
         end
@@ -1486,7 +1497,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 31
+      DockedTop = 28
       DockingStyle = dsTop
       FloatLeft = 276
       FloatTop = 215
@@ -1531,7 +1542,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Color = 16776176
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 31
+      DockedTop = 28
       DockingStyle = dsTop
       FloatLeft = 404
       FloatTop = 344
@@ -1540,14 +1551,14 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       ItemLinks = <
         item
           UserDefine = [udWidth]
-          UserWidth = 150
+          UserWidth = 136
           Visible = True
           ItemName = 'dxBarDateCombo1'
         end
         item
           BeginGroup = True
           UserDefine = [udWidth]
-          UserWidth = 151
+          UserWidth = 137
           Visible = True
           ItemName = 'dxBarDateCombo2'
         end>
@@ -1568,7 +1579,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -1602,7 +1613,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
         00FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       ShowCaption = True
-      Width = 110
     end
     object dxBarDateCombo2: TdxBarDateCombo
       Caption = 'To:'
@@ -1612,7 +1622,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -1646,7 +1656,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
         00FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       ShowCaption = True
-      Width = 110
     end
     object btnDetails: TdxBarButton
       Caption = 'Open'
@@ -1795,7 +1804,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Visible = ivAlways
       OnChange = udFlushQueusIntervalChange
       ShowCaption = True
-      Width = 110
       MaxValue = 60.000000000000000000
       Value = 5.000000000000000000
     end
@@ -3686,17 +3694,17 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     UseOwnFont = False
     Left = 501
     Top = 130
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object cxStyleRepository1: TcxStyleRepository
     Left = 127
     Top = 156
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object styUnread: TcxStyle
       AssignedValues = [svFont]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
     end
@@ -3959,6 +3967,7 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
   end
   object LookAndFeelController: TcxLookAndFeelController
     Kind = lfOffice11
+    ScrollbarMode = sbmHybrid
     Left = 425
     Top = 393
   end

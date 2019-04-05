@@ -6,9 +6,9 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ExtCtrls, DBCtrls, cxGraphics, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, cxLabel, cxControls, cxContainer,
   cxEdit, cxTextEdit, cxMaskEdit, cxButtonEdit, Mask, Dialogs,
-  JvExMask, JvToolEdit, cxLookAndFeels, cxLookAndFeelPainters,
+  cxLookAndFeels, cxLookAndFeelPainters,
   dxLayoutcxEditAdapters, dxLayoutContainer, dxLayoutControlAdapters, cxClasses,
-  dxLayoutControl;
+  dxLayoutControl, JvExMask, JvToolEdit;
 
 type
   TfmWorkFlowAddAdminDocTemplateDialog = class(TForm)

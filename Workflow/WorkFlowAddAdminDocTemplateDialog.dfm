@@ -75,7 +75,7 @@ object fmWorkFlowAddAdminDocTemplateDialog: TfmWorkFlowAddAdminDocTemplateDialog
           Glyph.SourceDPI = 96
           Glyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
-            0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+            000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
             FF00777777FF777777FF777777FF777777FF777777FF777777FF777777FF7777
@@ -157,8 +157,8 @@ object fmWorkFlowAddAdminDocTemplateDialog: TfmWorkFlowAddAdminDocTemplateDialog
         'ake a Temporary File'#13#10'[DATE] = System Date'#13#10'[TIME] = System Time' +
         #13#10'[DATETIME] = System Date and Time'#13#10'[CLIENTID] = Client Code'#13#10'[' +
         'FILEID]=File Number'#13#10'[AUTHOR]=Matter Author'#13#10'[USERINITIALS]=ePMS' +
-        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document' +
-        ' Description'#13#10'[USERPROFILE]=Users Profile'
+        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document ' +
+        'Description'#13#10'[USERPROFILE]=Users Profile'
       BevelInner = bvNone
       BevelKind = bkFlat
       BevelOuter = bvSpace
@@ -182,8 +182,8 @@ object fmWorkFlowAddAdminDocTemplateDialog: TfmWorkFlowAddAdminDocTemplateDialog
         'ake a Temporary File'#13#10'[DATE] = System Date'#13#10'[TIME] = System Time' +
         #13#10'[DATETIME] = System Date and Time'#13#10'[CLIENTID] = Client Code'#13#10'[' +
         'FILEID]=File Number'#13#10'[AUTHOR]=Matter Author'#13#10'[USERINITIALS]=ePMS' +
-        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document' +
-        ' Description'#13#10'[USERPROFILE]=Users Profile'
+        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document ' +
+        'Description'#13#10'[USERPROFILE]=Users Profile'
       BevelInner = bvNone
       BevelKind = bkFlat
       BevelOuter = bvSpace
@@ -207,8 +207,8 @@ object fmWorkFlowAddAdminDocTemplateDialog: TfmWorkFlowAddAdminDocTemplateDialog
         'ake a Temporary File'#13#10'[DATE] = System Date'#13#10'[TIME] = System Time' +
         #13#10'[DATETIME] = System Date and Time'#13#10'[CLIENTID] = Client Code'#13#10'[' +
         'FILEID]=File Number'#13#10'[AUTHOR]=Matter Author'#13#10'[USERINITIALS]=ePMS' +
-        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document' +
-        ' Description'#13#10'[USERPROFILE]=Users Profile'
+        ' User Code '#13#10'[DOCSEQUENCE]=Document Number'#13#10'[DOCDESCR]=Document ' +
+        'Description'#13#10'[USERPROFILE]=Users Profile'
       BevelInner = bvNone
       BevelKind = bkFlat
       BevelOuter = bvSpace
@@ -341,7 +341,7 @@ object fmWorkFlowAddAdminDocTemplateDialog: TfmWorkFlowAddAdminDocTemplateDialog
       Control = beDataForm
       ControlOptions.MinHeight = 22
       ControlOptions.MinWidth = 22
-      ControlOptions.OriginalHeight = 26
+      ControlOptions.OriginalHeight = 25
       ControlOptions.OriginalWidth = 317
       ControlOptions.ShowBorder = False
       Index = 6

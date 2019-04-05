@@ -849,6 +849,12 @@ type
     procCalcFXTotal: TUniStoredProc;
     qryBankList: TUniQuery;
     dsBankList: TUniDataSource;
+    spAxiomEmail: TUniStoredProc;
+    qryDefaultBankList: TUniQuery;
+    dsDefaultBankList: TUniDataSource;
+    procCanAuthoriseBill: TUniStoredProc;
+    dsCurrencyList: TUniDataSource;
+    qryCurrencyList: TUniQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure uniInsightConnectChange(Sender: TObject;
       Connected: Boolean);
@@ -989,6 +995,7 @@ type
     FVIEW_EMP_CHEQREQS_ONLY: string;
     Fauto_process_timesheet: string;
     FUserEmail: string;
+    FAuth_Password: string;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1201,6 +1208,9 @@ type
     property VIEW_EMP_CHEQREQS_ONLY: string read FVIEW_EMP_CHEQREQS_ONLY write FVIEW_EMP_CHEQREQS_ONLY;
     property auto_process_timesheet: string read Fauto_process_timesheet write Fauto_process_timesheet;
     property User_Email: string read FUserEmail write FUserEmail;
+    property Auth_Password: string read FAuth_Password write FAuth_Password;
+
+    function Ping(const AHost : string) : Boolean;
   end;
 
 var
@@ -1223,7 +1233,14 @@ uses
   , uRwSysUtils
   , uRwMapiProps
   , Registry
-  , cxDateUtils, GenericSearch, msearch, citFunc, System.UITypes, LoggingSnippet;
+  , cxDateUtils
+  , GenericSearch
+  , msearch
+  , citFunc
+  , System.UITypes
+  , LoggingSnippet
+  , IdIcmpClient
+  , IdGlobal;
 
 var
    ExeCount: integer;
@@ -1332,6 +1349,7 @@ begin
       FVIEW_EMP_CHEQREQS_ONLY    := qryEmployeesFull.FieldByName('VIEW_EMP_CHEQREQS_ONLY').AsString;
       Fauto_process_timesheet    := qryEmployeesFull.FieldByName('auto_process_timesheet').AsString;
       FUserEmail                 := qryEmployeesFull.FieldByName('EMAIL').AsString;
+      FAuth_Password             := qryEmployeesFull.FieldByName('AUTHORISATION_PASSWD').AsString;
    finally
       qryEmployeesFull.Close;
    end;
@@ -3359,7 +3377,7 @@ begin
             SQL.Text := SQL.Text + 'and matter.entity = '+ QuotedStr(dmAxiom.Entity) ;
 
          if (Trim(LFileID) <> '') then
-            SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(Trim(LFileID)+'%') +') > 0';
+            SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(Trim('%'+LFileID)+'%') +') > 0';
          Prepare;
          Open;
          if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) <> '') then
@@ -3422,6 +3440,31 @@ begin
          if (LFileID <> '') then
             MsgErr('The selected Matter is not valid.  Please check and re-try.');
    end;
+end;
+
+function TdmAxiom.Ping(const AHost : string) : Boolean;
+var
+   MyIdIcmpClient : TIdIcmpClient;
+begin
+   Result := True;
+
+   MyIdIcmpClient := TIdIcmpClient.Create(self);
+   MyIdIcmpClient.ReceiveTimeout := 200;
+   MyIdIcmpClient.Host := AHost;
+   MyIdIcmpClient.PacketSize := 24;
+   MyIdIcmpClient.Protocol := 1;
+   MyIdIcmpClient.IPVersion := Id_IPv4;
+
+   try
+      MyIdIcmpClient.Ping;
+   except
+      Result := False;
+      Exit;
+   end;
+   if (MyIdIcmpClient.ReplyStatus.ReplyStatusType <> rsEcho) Then
+      result := False;
+
+   MyIdIcmpClient.Free;
 end;
 
 end.

@@ -28,7 +28,6 @@ object frmDocNew: TfrmDocNew
     Align = alClient
     TabOrder = 0
     AutoSize = True
-    ExplicitWidth = 533
     DesignSize = (
       537
       579)
@@ -425,7 +424,9 @@ object frmDocNew: TfrmDocNew
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = dsEmployee
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dmAxiom.dsEmplyeeList
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -451,6 +452,7 @@ object frmDocNew: TfrmDocNew
           FieldName = 'NPRECCLASSIFICATION'
         end>
       Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsPRECCLASSIFICATION
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -491,6 +493,7 @@ object frmDocNew: TfrmDocNew
           FieldName = 'DESCR'
         end>
       Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsPRECCATEGORY
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -545,6 +548,7 @@ object frmDocNew: TfrmDocNew
           FieldName = 'LPAD('#39'*'#39',2*(LEVEL-1),'#39'*'#39')||DESCR'
         end>
       Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsFolders
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -1026,17 +1030,7 @@ object frmDocNew: TfrmDocNew
         Value = nil
       end>
   end
-  object tblEmployee: TUniTable
-    TableName = 'EMPLOYEE'
-    Connection = dmAxiom.uniInsight
-    KeyFields = 'CODE'
-    SpecificOptions.Strings = (
-      'Oracle.FetchAll=True')
-    Left = 436
-    Top = 121
-  end
   object dsEmployee: TUniDataSource
-    DataSet = tblEmployee
     Left = 496
     Top = 126
   end

@@ -23,7 +23,7 @@ object frmEmployeeList: TfrmEmployeeList
     Height = 667
     Align = alClient
     TabOrder = 4
-    Properties.ActivePage = tabEmployeeList
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     OnChange = pagEmployeeListingChange
     ClientRectBottom = 663

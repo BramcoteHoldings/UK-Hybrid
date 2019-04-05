@@ -13,12 +13,13 @@ uses
   cxContainer, cxCheckBox, cxTextEdit, cxMaskEdit, cxButtonEdit, cxDBEdit,
   dxBar, cxGridBandedTableView, cxGridDBBandedTableView, cxGroupBox, dxBarDBNav,
   Vcl.ImgList, Vcl.StdCtrls, System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls,
-  Vcl.ActnMan, MaintAncestor, JvActionsEngine, JvDBActions, ppDB, ppDBPipe,
+  Vcl.ActnMan, MaintAncestor, ppDB, ppDBPipe,
   ppParameter, ppDesignLayer, ppBands, ppCtrls, ppPrnabl, ppClass, ppVar,
   ppCache, ppComm, ppRelatv, ppProd, ppReport, Vcl.StdActns, Vcl.DBActns,
   cxLabel, Vcl.Menus, cxButtons, cxDBLookupComboBox, JvBaseDlg,
   JvSelectDirectory, Vcl.Mask, JvExMask, JvToolEdit, cxDBLabel,
-  dxBarBuiltInMenu, cxGridCustomPopupMenu, cxGridPopupMenu;
+  dxBarBuiltInMenu, cxGridCustomPopupMenu, cxGridPopupMenu, dxDateRanges,
+  JvActionsEngine, JvDBActions, System.ImageList;
 
 type
   TfrmIndexConfig = class(TfrmMaint)

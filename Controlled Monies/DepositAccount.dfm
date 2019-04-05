@@ -1,26 +1,26 @@
 inherited frmDepositAccount: TfrmDepositAccount
   Left = 656
   Top = 308
-  AutoSize = True
   Caption = 'Deposit Accounts'
-  ClientHeight = 257
-  ClientWidth = 372
+  ClientHeight = 259
+  ClientWidth = 367
   OldCreateOrder = True
   Position = poMainFormCenter
   OnShow = FormShow
-  ExplicitWidth = 378
-  ExplicitHeight = 286
+  ExplicitWidth = 373
+  ExplicitHeight = 288
   PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
     Top = 28
-    Width = 372
-    Height = 229
+    Width = 367
+    Height = 231
     Align = alClient
     TabOrder = 4
     AutoSize = True
-    ExplicitWidth = 387
+    ExplicitWidth = 314
+    ExplicitHeight = 183
     object cxDBLabel1: TcxDBLabel
       Left = 98
       Top = 12
@@ -920,28 +920,14 @@ inherited frmDepositAccount: TfrmDepositAccount
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
       end
     end
   end

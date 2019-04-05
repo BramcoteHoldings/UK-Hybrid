@@ -4,30 +4,27 @@ interface
 
 uses
   ComObj, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, ComCtrls, Menus, Buttons,
-  ExtCtrls, DBCtrls, ToolWin, DateChangeButton, ImgList,
-  NumberLabel, MemDS, OracleUniProvider, Uni, DBAccess, NumberEdit, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
-  cxDBData, cxCurrencyEdit, cxCalendar, cxDropDownEdit, cxButtonEdit,
-  cxTextEdit, dxBar, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxControls, cxGridCustomView, cxClasses, cxGridLevel, cxGrid, dxBarExtItems,
-  cxCheckBox, ppCtrls, ppVar, ppDB, ppPrnabl, ppClass,
-  ppBands, ppCache, ppDBPipe, ppComm, ppRelatv, ppProd, ppReport, ppViewr,
-  Variants, cxDBExtLookupComboBox, cxDBLookupComboBox, cxMemo,
-  cxGridCustomPopupMenu, cxGridPopupMenu, ppStrtch, ppRegion,
-  ppModule, raCodMod, ppParameter, cxImageComboBox, cxPC,
-  cxLookAndFeelPainters, cxGridExportLink, cxLookAndFeels, ShellAPI, ppFileUtils,
-  ppIniStorage, cxPCdxBarPopupMenu, ppDesignLayer, dxPSGlbl, dxPSUtl, dxPSEngn,
-  dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
-  dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
-  dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPSCore, dxPSContainerLnk,
-  dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxCore, cxNavigator,
-  dxPScxSchedulerLnk, dxPScxDBEditorLnks, dxPSTextLnk, cxContainer, cxGroupBox,
-  cxRadioGroup, cxBarEditItem, ppMemo, dxDPIAwareUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
-  cxMaskEdit, cxLookupEdit, cxDBLookupEdit, dxPScxEditorLnks,
-  uRwMAPIMsgStoreEvents, uRwMAPIInterfaces, dxDateRanges, System.ImageList;
+  Db, StdCtrls, ComCtrls, Menus, Buttons, dxBarBuiltInMenu, cxGraphics,
+  cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, cxDBData,
+  cxCurrencyEdit, cxCalendar, cxCheckBox, cxTextEdit, cxContainer, dxPSGlbl,
+  dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider,
+  dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport,
+  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
+  dxPScxExtEditorProducers, dxPSCore, dxPSContainerLnk, cxGridCustomPopupMenu,
+  cxGridPopupMenu, ppDB, ppDBPipe, ppParameter, ppDesignLayer, ppModule,
+  raCodMod, ppCtrls, ppBands, ppMemo, ppStrtch, ppRegion, ppVar, ppPrnabl,
+  ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBar, cxBarEditItem,
+  dxBarExtItems, cxClasses, Uni, Vcl.ExtCtrls, System.ImageList, Vcl.ImgList,
+  MemDS, DBAccess, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxGroupBox, cxRadioGroup, DateChangeButton, NumberEdit,
+  NumberLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, OracleUniProvider,
+  uRwMAPIMsgStoreEvents, uRwMAPIInterfaces, Variants, dxCore, ppFileUtils,
+  ppIniStorage, cxGridExportLink, ShellAPI;
 
 const
  NMEMOSEARCHDATES: array[0..2] of string = ('GENERATED','DISPATCHED','EXPPAYMENT');
@@ -559,32 +556,32 @@ begin
   end;
   sAND := ' AND ';
   sSQLWhere := '';
-  if tbMatterSearch.text <> '' then
+  if trim(tbMatterSearch.text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.FILEID LIKE ' + QuotedStr(tbMatterSearch.Text + '%');
   if cbAuthor.Text <> '' then
     sSQLWhere := sSQLWhere + sAND + 'MATTER.AUTHOR = ''' + cbAuthor.Text + '''';
   if cbPartner.Text <> '' then
     sSQLWhere := sSQLWhere + sAND + 'MATTER.PARTNER = ''' + cbPartner.Text + '''';
-  if edRefnoFrom.Text <> '' then
+  if trim(edRefnoFrom.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.REFNO >= ''' + edRefnoFrom.Text + '''';
-  if edRefnoTo.Text <> '' then
+  if trim(edRefnoTo.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.REFNO <= ''' + edRefnoTo.Text + '''';
-  if tbClientName.Text <> '' then
+  if trim(tbClientName.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'UPPER(MATTER.TITLE) LIKE ' + QuotedStr('%' + UpperCase(tbClientName.Text) + '%');
-  if tbBilledName.Text <> '' then
+  if trim(tbBilledName.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'UPPER(NMEMO.BILL_TO) LIKE ' + QuotedStr('%' + UpperCase(tbBilledName.Text) + '%');
-  if tbFileID.Text <> '' then
+  if trim(tbFileID.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.FILEID LIKE ' + QuotedStr(tbFileID.Text + '%');
-  if tbAmountFrom.Text <> '' then
+  if trim(tbAmountFrom.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.FEES >= ' + tbAmountFrom.Text;
-  if tbAmountTo.Text <> '' then
+  if trim(tbAmountTo.Text) <> '' then
     sSQLWhere := sSQLWhere + sAND + 'NMEMO.FEES <= ' + tbAmountTo.Text;
-  if tbAmountOwingFrom.Text <> '' then
+  if trim(tbAmountOwingFrom.Text) <> '' then
      sSQLWhere := sSQLWhere + sAND + 'NMEMO.OWING >= ' + tbAmountOwingFrom.Text;
 //    sSQLWhere := sSQLWhere + sAND + '(NMEMO.FEES + NMEMO.DISB + NMEMO.ANTD + NMEMO.SUND + NMEMO.TAX - NMEMO.FEES_PAID - NMEMO.DISB_PAID - NMEMO.ANTD_PAID - NMEMO.SUND_PAID - NMEMO.TAX_PAID) >= ' + tbAmountOwingFrom.Text;
-  if tbAmountOwingTo.Text <> '' then
+  if trim(tbAmountOwingTo.Text) <> '' then
      sSQLWhere := sSQLWhere + sAND + 'NMEMO.OWING <= ' + tbAmountOwingTo.Text;
-  if tbMasterBill.Text <> '' then
+  if trim(tbMasterBill.Text) <> '' then
      sSQLWhere := sSQLWhere + sAND + 'MASTERBILLS.DESCR = '''  + tbMasterBill.Text + '''';
   //    sSQLWhere := sSQLWhere + sAND + '(NMEMO.FEES + NMEMO.DISB + NMEMO.ANTD + NMEMO.SUND + NMEMO.TAX - NMEMO.FEES_PAID - NMEMO.DISB_PAID - NMEMO.ANTD_PAID - NMEMO.SUND_PAID - NMEMO.TAX_PAID) <= ' + tbAmountOwingTo.Text;
   if chkExcludeReversals.Checked then

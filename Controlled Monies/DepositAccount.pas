@@ -11,7 +11,7 @@ uses
   cxLookAndFeelPainters, ppDB, ppDBPipe, ppBands, ppCtrls, ppPrnabl, ppClass,
   ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport, ppParameter, cxClasses,
   ppDesignLayer, MemDS, dxLayoutcxEditAdapters, dxLayoutContainer,
-  dxLayoutControl;
+  dxLayoutControl, System.ImageList;
 
 type
   TfrmDepositAccount = class(TfrmMaint)

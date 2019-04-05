@@ -310,8 +310,8 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       '     AND b.code(+) = e.branch'
       'ORDER BY TYPE'
       '*/')
-    Left = 41
-    Top = 121
+    Left = 49
+    Top = 129
     ParamData = <
       item
         DataType = ftUnknown
@@ -3087,7 +3087,7 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       '--  BJ.COURT_ADDRESS_CODE = CD.CODE (+) AND'
       '--  BJ.SUBJURISDICTION = CD.SUBJURISDICTION (+)')
     Left = 173
-    Top = 418
+    Top = 426
     ParamData = <
       item
         DataType = ftUnknown
@@ -3748,7 +3748,7 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       'ORDER BY dataform, seq'
       '')
     Left = 233
-    Top = 487
+    Top = 503
     ParamData = <
       item
         DataType = ftUnknown

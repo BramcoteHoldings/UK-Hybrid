@@ -21,7 +21,7 @@ uses
   dxCore, dxSkinsCore, dxSkinscxPCPainter, dxSkinsdxBarPainter,
   cxDataControllerConditionalFormattingRulesManagerDialog, cxCustomListBox,
   dxBarBuiltInMenu, cxPC, cxColorComboBox, dxNumericWheelPicker, dxGDIPlusClasses,
-  dxDPIAwareUtils, System.ImageList;
+  dxDPIAwareUtils, System.ImageList, dxDateRanges;
 
   
 type

@@ -4,36 +4,31 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, cxStyles, cxGraphics, cxEdit, cxScheduler,
-  cxSchedulerStorage, cxSchedulerCustomControls, DateUtils,
-  cxSchedulerCustomResourceView, cxSchedulerDayView, Types,
-  cxSchedulerDateNavigator, cxSchedulerWeekView, cxCustomData, cxFilter,
-  cxData, cxDataStorage, DB, cxDBData, cxContainer, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxCalendar, ExtCtrls, OracleUniProvider, Uni, DBAccess, MemDS, ActnList, ActnMan, ImgList,
-  dxBar, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, cxPC, cxLookAndFeelPainters, StdCtrls, cxButtons,
-  cxDateChangeButton, cxSpinEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxButtonEdit, cxGroupBox, NumberEdit, Buttons,
-  cxSchedulerDBStorage, cxSchedulerDialogs, cxCurrencyEdit, cxCheckBox,
-  cxMemo, cxBlobEdit, cxImageComboBox, cxTimeEdit, cxLabel, cxDateNavigator,
-  cxLookAndFeels, XPStyleActnCtrls, cxPCdxBarPopupMenu,
-  cxSchedulerHolidays, cxSchedulerTimeGridView, cxSchedulerUtils,
-  cxSchedulerYearView, cxSchedulerGanttView, ComCtrls, dxCore, ppDB,
-  ppDBPipe, ppComm, ppRelatv, ppProd, ppClass, ppReport, ppCtrls, ppVar,
-  ppPrnabl, ppBands, ppCache, ppDesignLayer, ppParameter, cxDateUtils,
-  cxSchedulerOutlookExchange, cxNavigator, System.Actions,
-  cxSchedulercxGridConnection, cxBarEditItem, dxPSGlbl, dxPSUtl, dxPSEngn,
-  dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
-  dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
-  dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
-  dxPScxSchedulerLnk, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPSCore, dxPScxCommon,
-  dxPSDBTCLnk, cxOutlook2WaySynchronize, dxBarBuiltInMenu,
-  cxSchedulerAgendaView, cxSchedulerRecurrence,
-  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
-  cxDataControllerConditionalFormattingRulesManagerDialog, Outlook2010,
-  dxBarExtItems, Progress;
+  Dialogs, Menus, dxBarBuiltInMenu, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxStyles, cxEdit, cxScheduler, cxSchedulerStorage,
+  cxSchedulerCustomControls, cxSchedulerCustomResourceView, cxSchedulerDayView,
+  cxSchedulerAgendaView, cxSchedulerDateNavigator, cxSchedulerHolidays,
+  cxSchedulerTimeGridView, cxSchedulerUtils, cxSchedulerWeekView,
+  cxSchedulerYearView, cxSchedulerGanttView, cxSchedulerRecurrence,
+  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxTimeEdit, cxCalendar, cxContainer, Vcl.ComCtrls, dxCore, cxDateUtils,
+  cxCheckBox, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev,
+  dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
+  dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
+  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
+  dxPScxGridLayoutViewLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
+  dxPSCore, dxPScxCommon, cxSchedulercxGridConnection, ppDB, ppDBPipe,
+  ppParameter, ppDesignLayer, ppCtrls, ppBands, ppVar, ppPrnabl, ppClass,
+  ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBar, cxSchedulerDBStorage,
+  Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan,
+  System.ImageList, Vcl.ImgList, cxBarEditItem, cxClasses, DBAccess, Uni, MemDS,
+  cxLabel, cxSpinEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxTextEdit, cxButtonEdit, cxGroupBox, Vcl.StdCtrls,
+  cxButtons, cxDateChangeButton, cxMaskEdit, cxDateNavigator, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
+  cxGrid, cxPC, Progress, DateUtils;
 
 const
    DayView = 0;
@@ -341,7 +336,7 @@ implementation
 
 uses
    Matters, AxiomData, FeeNew, miscfunc, citfunc, PhoneMessage, DiaryNew,
-   Desktop,cxGeometry, PhoneBook;
+   Desktop,cxGeometry, PhoneBook, cxOutlook2WaySynchronize, cxSchedulerOutlookExchange;
 
 type
   TcxSchedulerEventCellViewInfoAccess = class(TcxSchedulerEventCellViewInfo);

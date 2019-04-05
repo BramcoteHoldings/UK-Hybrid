@@ -21,7 +21,7 @@ uses
   cxRichEdit, cxNavigator, cxDateUtils, ppDesignLayer, MemDS, DBAccess, Uni,
   cxProgressBar, cxBarEditItem, ppTypes, dxCore, dxSkinsCore,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
-  dxDPIAwareUtils, System.ImageList, dxDateRanges;
+  dxDPIAwareUtils, dxDateRanges, System.ImageList;
 
 const
   colCREATED = 0;
@@ -2475,7 +2475,9 @@ procedure TfrmTimeSheet.tvFeeTmpREFNOPropertiesValidate(Sender: TObject;
 var
    LBillType,
    LMATLOCATE,
-   sDisplayValue: string;
+   sDisplayValue,
+   lFileID,
+   lFoundFileID: string;
 begin
    LMATLOCATE := 'M.TITLE ||'' ''|| SHORTDESCR AS MATLOCATE';
    Error := False;
@@ -2570,6 +2572,10 @@ begin
    if (Trim(sDisplayValue) <> '') then
    begin
       sDisplayValue := PadFileID(sDisplayValue);
+      lFileID := PadFileID(sDisplayValue);
+      dmAxiom.FindMatter(lFoundFileID, lFileID);
+      sDisplayValue := lFoundFileID;
+
       if (MatterExists(UpperCase(sDisplayValue))) then
       begin
          DisplayValue := sDisplayValue;
@@ -3077,7 +3083,7 @@ var
    iUnique: variant;
    ADataSet: TDataset;
 begin
-   if ClosingForm = False then
+   if dmAxiom.bShutdown = False then
    begin
       if qryFeeTmp.State = dsEdit then
          qryFeeTmp.Post;

@@ -85,7 +85,9 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Conficts'
       ImageIndex = 0
       OnShow = tabGridShow
+      ExplicitLeft = 0
       ExplicitTop = 31
+      ExplicitWidth = 0
       ExplicitHeight = 606
       object Panel1: TPanel
         Left = 0
@@ -386,7 +388,9 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Filter'
       ImageIndex = 1
       TabVisible = False
+      ExplicitLeft = 0
       ExplicitTop = 31
+      ExplicitWidth = 0
       ExplicitHeight = 606
       DesignSize = (
         1280
@@ -3049,7 +3053,7 @@ object frmConflictSearch: TfrmConflictSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

@@ -6,14 +6,15 @@ uses
   Winapi.Windows, Winapi.Messages, SysUtils, Classes, Vcl.Graphics, Vcl.Controls,
   Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, DBCtrls, Vcl.StdCtrls, Db, Vcl.Buttons,
   Mask, Spin, Vcl.ComCtrls, ToolWin, ImgList, Printers,
-  DBAccess, MemDS, Grids, DBGrids, Menus, Printer, Variants, cxTextEdit,
+  DBAccess, MemDS, Menus, Printer, Variants, cxTextEdit,
   cxMaskEdit, cxDBEdit, cxControls, cxContainer, cxEdit, cxLabel, dxBarDBNav,
   dxBar, cxPC, cxCheckBox, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxDBData, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridCustomView, cxClasses, cxGridLevel, cxGrid,
   cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu, vcl.Themes,
   OracleUniProvider, Uni, cxNavigator, DBDateTimePicker,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
+  dxDateRanges, System.ImageList;
 
 
 

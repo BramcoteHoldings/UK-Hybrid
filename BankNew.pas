@@ -8,7 +8,8 @@ uses
   MemDS, OracleUniProvider, Uni, DBAccess, cxLabel, cxControls, cxContainer, cxEdit,
   cxTextEdit, cxMaskEdit, cxDBEdit, cxCheckBox, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, dxLayoutControlAdapters, dxLayoutContainer,
-  dxLayoutcxEditAdapters, cxClasses, dxLayoutControl;
+  dxLayoutcxEditAdapters, cxClasses, dxLayoutControl, cxDropDownEdit,
+  cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox;
 
 type
   TfrmBankNew = class(TForm)
@@ -78,6 +79,8 @@ type
     dxLayoutItem18: TdxLayoutItem;
     teSWIFTCode: TcxTextEdit;
     teIBAN: TcxTextEdit;
+    cmbCurrency: TcxLookupComboBox;
+    dxLayoutItem19: TdxLayoutItem;
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -182,6 +185,7 @@ begin
       qryBank.FieldByName('SORT_CODE').AsString := teSortCode.Text;
       qryBank.FieldByName('SWIFT_CODE').AsString := teSWIFTCode.Text;
       qryBank.FieldByName('IBAN').AsString := teIBAN.Text;
+      qryBank.FieldByName('CURRENCY').AsString := cmbCurrency.EditValue;
       if tbBPayCode.Text <> '' then
          qryBank.FieldByName('BPAY_BILLER_CODE').AsInteger := StrToInt(tbBPayCode.text);
       qryBank.Post;
@@ -221,6 +225,8 @@ begin
       lblBPayCode.Visible := False;
       tbBPayCode.Visible := False;
    end;
+   if dmAxiom.qryCurrencyList.Active = False then
+      dmAxiom.qryCurrencyList.Open;
 end;
 
 procedure TfrmBankNew.tbCABDblClick(Sender: TObject);

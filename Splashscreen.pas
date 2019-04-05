@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, dxGDIPlusClasses, ExtCtrls, JvExExtCtrls, JvImage, cxGraphics,
+  Dialogs, dxGDIPlusClasses, ExtCtrls, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   cxImage;
 

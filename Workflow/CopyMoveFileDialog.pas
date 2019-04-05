@@ -3,9 +3,9 @@ unit CopyMoveFileDialog;
 interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, Mask, ShellAPI, JvExMask, JvToolEdit, Vcl.ComCtrls, JvgPage,
+  Buttons, ExtCtrls, Mask, ShellAPI, Vcl.ComCtrls, JvgPage,
   cxPCdxBarPopupMenu, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxPC;
+  cxLookAndFeelPainters, cxPC, dxBarBuiltInMenu, JvExMask, JvToolEdit;
 
 type
   TCMFOperation    = (cmfCopy, cmfMove, cmfRename, cmfDelete);

@@ -573,8 +573,8 @@ object frmBank: TfrmBank
     Top = 442
     Width = 173
     Height = 23
-    Date = 43363.727033564810000000
-    Time = 43363.727033564810000000
+    Date = 43542.727033564810000000
+    Time = 43542.727033564810000000
     ShowCheckbox = True
     Checked = False
     TabOrder = 25
@@ -616,10 +616,6 @@ object frmBank: TfrmBank
     object tabCheque: TcxTabSheet
       Caption = 'Cheques'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgChPrinter: TcxGrid
         Left = 0
         Top = 0
