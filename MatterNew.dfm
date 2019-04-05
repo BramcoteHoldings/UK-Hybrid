@@ -1148,10 +1148,6 @@ object frmMatterNew: TfrmMatterNew
         object tabMatterWorkflowCarriage: TcxTabSheet
           Caption = 'Workflow'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object lblMember1: TLabel
             Left = 8
             Top = 8
@@ -1945,10 +1941,6 @@ object frmMatterNew: TfrmMatterNew
     object tabContacts: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         503
         306)
@@ -2706,10 +2698,6 @@ object frmMatterNew: TfrmMatterNew
         object cxTabSheet2: TcxTabSheet
           Caption = 'Credit Limits'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label38: TLabel
             Left = 8
             Top = 73
@@ -3200,10 +3188,6 @@ object frmMatterNew: TfrmMatterNew
           Caption = 'Recurring Fees'
           ImageIndex = 2
           OnShow = tabRecurringFeesShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label21: TLabel
             Left = 7
             Top = 15
@@ -3365,10 +3349,6 @@ object frmMatterNew: TfrmMatterNew
           Enabled = False
           ImageIndex = 3
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label41: TLabel
             Left = 20
             Top = 119
@@ -3560,10 +3540,6 @@ object frmMatterNew: TfrmMatterNew
         object tabTrustBanks: TcxTabSheet
           Caption = 'Additional Trust Banks'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object gridTrustBanks: TcxGrid
             Left = 0
             Top = 0
@@ -3669,10 +3645,6 @@ object frmMatterNew: TfrmMatterNew
     object tabWorkflow: TcxTabSheet
       Caption = 'Workflow'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         503
         306)
@@ -3976,10 +3948,6 @@ object frmMatterNew: TfrmMatterNew
     object tabDebtor: TcxTabSheet
       Caption = 'Debtor'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label62: TLabel
         Left = 3
         Top = 107
@@ -4105,10 +4073,6 @@ object frmMatterNew: TfrmMatterNew
     object tabMatterBudgets: TcxTabSheet
       Caption = 'Matter Budgets'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGridBatterBudgets: TcxGrid
         Left = 0
         Top = 0
@@ -4263,10 +4227,6 @@ object frmMatterNew: TfrmMatterNew
       Caption = 'Document Security'
       ImageIndex = 6
       OnShow = tabSecureDocsShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
         Top = 0
@@ -4515,10 +4475,6 @@ object frmMatterNew: TfrmMatterNew
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         503
         306)
@@ -4538,10 +4494,6 @@ object frmMatterNew: TfrmMatterNew
     object tabAuthority: TcxTabSheet
       Caption = 'Authority'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lblCostsAgreement: TLabel
         Left = 6
         Top = 96

@@ -4,12 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, FileCtrl, JvDriveCtrls,
-  JvExStdCtrls, JvListBox, JvCombobox, cxGraphics, cxControls,
+  Dialogs, StdCtrls, FileCtrl, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, DB, DBAccess,
   OracleUniProvider, Uni, MemDS, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, cxGroupBox, cxRadioGroup, cxCheckBox,
-  cxLabel, Vcl.Menus, cxButtons;
+  cxLabel, Vcl.Menus, cxButtons, JvDriveCtrls, JvExStdCtrls, JvListBox,
+  JvCombobox;
 
 type
   TfrmSelectDirectory = class(TForm)

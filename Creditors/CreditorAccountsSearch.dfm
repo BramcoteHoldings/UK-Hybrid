@@ -7,7 +7,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -15,7 +15,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 106
-  TextHeight = 15
+  TextHeight = 17
   object pageSearch: TcxPageControl
     Left = 0
     Top = 28
@@ -26,8 +26,14 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
     Margins.Right = 4
     Margins.Bottom = 4
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tabFilters
+    Properties.ActivePage = tabGrid
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     OnChange = pageSearchChange
@@ -42,6 +48,8 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
       Margins.Bottom = 4
       Caption = 'Display Grid'
       ImageIndex = 0
+      ExplicitTop = 28
+      ExplicitHeight = 460
       DesignSize = (
         576
         462)
@@ -57,8 +65,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 550
-        ExplicitHeight = 387
+        ExplicitHeight = 409
         object tvAccounts: TcxGridDBTableView
           OnDblClick = tvAccountsDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -228,8 +235,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
         OptionsImage.NumGlyphs = 2
         OptionsImage.Spacing = 5
         TabOrder = 1
-        ExplicitLeft = 465
-        ExplicitTop = 403
+        ExplicitTop = 425
       end
       object btnOK: TcxButton
         Left = 377
@@ -282,8 +288,7 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         OptionsImage.Spacing = 5
         TabOrder = 2
-        ExplicitLeft = 363
-        ExplicitTop = 403
+        ExplicitTop = 425
       end
     end
     object tabFilters: TcxTabSheet
@@ -598,12 +603,14 @@ object frmCreditorAccountsSearch: TfrmCreditorAccountsSearch
   object qryAccounts: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT REFNO, CREDITOR, DESCR, OWING, DUE_DATE, NCHEQUE, TYPE'
+      
+        'SELECT REFNO, CREDITOR, DESCR, OWING, DUE_DATE, NCHEQUE, TYPE, T' +
+        'AX'
       'FROM INVOICE'
       'WHERE DUE_DATE <= :P_DueDate'
       'ORDER BY DUE_DATE')
-    Left = 409
-    Top = 34
+    Left = 321
+    Top = 18
     ParamData = <
       item
         DataType = ftUnknown

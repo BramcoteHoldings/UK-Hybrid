@@ -1,9 +1,9 @@
 object frmDebtorTaskDue: TfrmDebtorTaskDue
-  Left = 324
-  Top = 213
+  Left = 0
+  Top = 0
   Caption = 'Collections Management Tasks Due'
-  ClientHeight = 572
-  ClientWidth = 956
+  ClientHeight = 744
+  ClientWidth = 1327
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDesigned
   Scaled = False
   OnClose = FormClose
   OnCreate = FormCreate
@@ -22,122 +23,433 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
   object tabMain: TcxPageControl
     Left = 0
     Top = 28
-    Width = 956
-    Height = 544
+    Width = 1327
+    Height = 716
     Align = alClient
     TabOrder = 0
     Properties.ActivePage = tabDue
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = tabMainChange
-    ExplicitWidth = 910
-    ClientRectBottom = 540
+    ClientRectBottom = 712
     ClientRectLeft = 4
-    ClientRectRight = 952
+    ClientRectRight = 1323
     ClientRectTop = 26
     object tabDue: TcxTabSheet
       Caption = 'Due Items'
       ImageIndex = 0
-      ExplicitTop = 24
-      ExplicitWidth = 902
-      ExplicitHeight = 516
-      object lvDue: TListView
+      object grdDueItems: TcxGrid
         Left = 0
         Top = 0
-        Width = 948
-        Height = 514
+        Width = 1319
+        Height = 686
         Align = alClient
+        TabOrder = 0
+        LookAndFeel.Kind = lfUltraFlat
+        LookAndFeel.NativeStyle = True
+        object tvDueItems: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsDueItems
+          DataController.Summary.DefaultGroupSummaryItems = <
+            item
+              Kind = skSum
+              FieldName = 'BALANCE'
+              Column = tvDueItemsBALANCE
+              DisplayText = 'Balance:'
+              Sorted = True
+            end>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Kind = skSum
+              FieldName = 'BALANCE'
+              Column = tvDueItemsBALANCE
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsCustomize.ColumnHidingOnGrouping = False
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsSelection.MultiSelect = True
+          OptionsView.CellEndEllipsis = True
+          OptionsView.CellAutoHeight = True
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.Footer = True
+          OptionsView.GridLines = glNone
+          OptionsView.HeaderEndEllipsis = True
+          OptionsView.Indicator = True
+          object tvDueItemsNDEBTORTASK: TcxGridDBColumn
+            DataBinding.FieldName = 'NDEBTORTASK'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object tvDueItemsNACTION: TcxGridDBColumn
+            DataBinding.FieldName = 'NACTION'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object tvDueItemsDESCR: TcxGridDBColumn
+            Caption = 'Action'
+            DataBinding.FieldName = 'DESCR'
+            Width = 139
+          end
+          object tvDueItemsACTION_DATE: TcxGridDBColumn
+            Caption = 'Due'
+            DataBinding.FieldName = 'ACTION_DATE'
+            PropertiesClassName = 'TcxDateEditProperties'
+            Properties.DisplayFormat = 'dd/mm/yyyy'
+            Width = 47
+          end
+          object tvDueItemsREFNO: TcxGridDBColumn
+            Caption = 'Bill'
+            DataBinding.FieldName = 'REFNO'
+            Width = 37
+          end
+          object tvDueItemsASSIGNED_TO: TcxGridDBColumn
+            Caption = 'Assign'
+            DataBinding.FieldName = 'ASSIGNED_TO'
+            Width = 29
+          end
+          object tvDueItemsALERT_TO: TcxGridDBColumn
+            Caption = 'Alert To'
+            DataBinding.FieldName = 'ALERT_TO'
+            Width = 30
+          end
+          object tvDueItemsALERT_TO_ADD: TcxGridDBColumn
+            Caption = 'Alt Alert To'
+            DataBinding.FieldName = 'ALERT_TO_ADD'
+            Width = 65
+          end
+          object tvDueItemsFILEID: TcxGridDBColumn
+            Caption = 'Matter'
+            DataBinding.FieldName = 'FILEID'
+            Width = 52
+          end
+          object tvDueItemsBILL_TO: TcxGridDBColumn
+            Caption = 'Bill To'
+            DataBinding.FieldName = 'BILL_TO'
+            Width = 115
+          end
+          object tvDueItemsNAME: TcxGridDBColumn
+            Caption = 'Client Name'
+            DataBinding.FieldName = 'NAME'
+            Width = 156
+          end
+          object tvDueItemsSHORTDESCR: TcxGridDBColumn
+            Caption = 'Matter Description'
+            DataBinding.FieldName = 'SHORTDESCR'
+            Width = 106
+          end
+          object tvDueItemsDEBTOR_PHONE: TcxGridDBColumn
+            Caption = 'Debtor Phone'
+            DataBinding.FieldName = 'DEBTOR_PHONE'
+            Width = 85
+          end
+          object tvDueItemsNMEMO: TcxGridDBColumn
+            DataBinding.FieldName = 'NMEMO'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object tvDueItemsAUTHOR: TcxGridDBColumn
+            Caption = 'Author'
+            DataBinding.FieldName = 'AUTHOR'
+            Width = 50
+          end
+          object tvDueItemsNOTES: TcxGridDBColumn
+            Caption = 'Notes'
+            DataBinding.FieldName = 'NOTES'
+            PropertiesClassName = 'TcxMemoProperties'
+            Width = 155
+          end
+          object tvDueItemsTEMPLATE_DESCR: TcxGridDBColumn
+            Caption = 'Template'
+            DataBinding.FieldName = 'TEMPLATE_DESCR'
+            Width = 173
+          end
+          object tvDueItemsBALANCE: TcxGridDBColumn
+            Caption = 'Balance'
+            DataBinding.FieldName = 'BALANCE'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            Width = 66
+          end
+          object tvDueItemsTYPE: TcxGridDBColumn
+            DataBinding.FieldName = 'TYPE'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object tvDueItemsDISPATCHED: TcxGridDBColumn
+            Caption = 'Bill Date'
+            DataBinding.FieldName = 'DISPATCHED'
+          end
+          object tvDueItemsCODE: TcxGridDBColumn
+            Caption = 'Client'
+            DataBinding.FieldName = 'CODE'
+          end
+          object tvDueItemsDAYSOVERDUE: TcxGridDBColumn
+            Caption = 'Days Overdue'
+            DataBinding.FieldName = 'DAYSOVERDUE'
+          end
+          object tvDueItemsNTEMPLATE: TcxGridDBColumn
+            DataBinding.FieldName = 'NTEMPLATE'
+            Visible = False
+          end
+        end
+        object lvDueItems: TcxGridLevel
+          GridView = tvDueItems
+        end
+      end
+    end
+    object tabColumns: TcxTabSheet
+      Caption = 'Columns'
+      ImageIndex = 2
+      TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+      object lvColumns: TListView
+        Left = 0
+        Top = 0
+        Width = 1319
+        Height = 686
+        Align = alClient
+        Checkboxes = True
         Columns = <
           item
-            Caption = 'Action'
-            Width = 100
-          end
-          item
-            Caption = 'Due'
-            Tag = 1
-            Width = 100
-          end
-          item
-            Caption = 'Bill'
-            Tag = 2
-            Width = 70
-          end
-          item
-            Caption = 'Assign To'
-            Tag = 3
-            Width = 60
-          end
-          item
-            Caption = 'Alert To'
-            Tag = 4
-            Width = 60
-          end
-          item
-            Caption = 'Alt Alert To'
-            Tag = 5
-            Width = 60
-          end
-          item
-            Caption = 'Matter'
-            Tag = 6
-            Width = 70
-          end
-          item
-            Caption = 'Bill To'
-            Tag = 7
-            Width = 100
-          end
-          item
-            Caption = 'Client Name'
-            Tag = 8
-            Width = 100
-          end
-          item
-            Caption = 'Matter Description'
-            Tag = 9
-            Width = 90
-          end
-          item
-            Caption = 'Debtor Phone#'
-            Tag = 10
-            Width = 90
-          end
-          item
-            Caption = 'Author'
-            Tag = 11
-          end
-          item
-            Caption = 'Notes'
-            Tag = 12
-          end
-          item
-            Caption = 'Template'
-            Tag = 13
-          end
-          item
-            Caption = 'Balance'
-            Tag = 14
+            Caption = 'Column'
+            Width = 858
           end>
-        ColumnClick = False
-        FullDrag = True
-        MultiSelect = True
-        RowSelect = True
-        SortType = stData
         TabOrder = 0
-        ViewStyle = vsReport
-        OnCompare = lvDueCompare
-        OnExit = lvDueExit
-        OnSelectItem = lvDueSelectItem
-        ExplicitWidth = 902
-        ExplicitHeight = 516
+        ViewStyle = vsList
+        OnChange = lvColumnsChange
+        OnClick = lvColumnsClick
+      end
+    end
+    object tabClientBalance: TcxTabSheet
+      Caption = 'Client Balance'
+      ImageIndex = 2
+      object grdClientBalance: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 1319
+        Height = 686
+        Align = alClient
+        TabOrder = 0
+        LookAndFeel.Kind = lfUltraFlat
+        LookAndFeel.NativeStyle = True
+        object vwBalanceByClient: TcxGridDBTableView
+          PopupMenu = popUpClient
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsDueItemsByClient
+          DataController.DetailKeyFieldNames = 'CLIENT_CODE'
+          DataController.KeyFieldNames = 'CLIENT_CODE'
+          DataController.Summary.DefaultGroupSummaryItems = <
+            item
+              Kind = skSum
+              FieldName = 'CLIENT_BALANCE'
+              DisplayText = 'Balance:'
+            end>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Kind = skSum
+              FieldName = 'BALANCE'
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsCustomize.ColumnHidingOnGrouping = False
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsSelection.MultiSelect = True
+          OptionsView.CellEndEllipsis = True
+          OptionsView.CellAutoHeight = True
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.DataRowHeight = 40
+          OptionsView.Footer = True
+          OptionsView.GridLines = glHorizontal
+          OptionsView.HeaderEndEllipsis = True
+          OptionsView.Indicator = True
+          object vwBalanceByClientCLIENT_BALANCE: TcxGridDBColumn
+            Caption = 'Client Balance'
+            DataBinding.FieldName = 'CLIENT_BALANCE'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            BestFitMaxWidth = 85
+            MinWidth = 85
+            Width = 85
+          end
+          object vwBalanceByClientCLIENT_NAME: TcxGridDBColumn
+            Caption = 'Client Name'
+            DataBinding.FieldName = 'CLIENT_NAME'
+            BestFitMaxWidth = 260
+            MinWidth = 260
+            Width = 270
+          end
+          object vwBalanceByClientCLIENT_CODE: TcxGridDBColumn
+            Caption = 'Client Code'
+            DataBinding.FieldName = 'CLIENT_CODE'
+            MinWidth = 80
+            Width = 82
+          end
+          object vwBalanceByClientASSIGNED_TO: TcxGridDBColumn
+            Caption = 'Assigned To'
+            DataBinding.FieldName = 'MAX(X.ASSIGNED_TO)'
+            BestFitMaxWidth = 80
+            MinWidth = 80
+            Width = 82
+          end
+          object vwBalanceByClientNOTES: TcxGridDBColumn
+            Caption = 'Notes'
+            DataBinding.FieldName = 'NOTES'
+            BestFitMaxWidth = 640
+            MinWidth = 60
+            Width = 657
+          end
+          object vwBalanceByClientDEBTOR_PHONE: TcxGridDBColumn
+            Caption = 'Phone No.'
+            DataBinding.FieldName = 'DEBTOR_PHONE'
+          end
+          object vwBalanceByClientACTiON_DATE: TcxGridDBColumn
+            Caption = 'Next Action Date'
+            DataBinding.FieldName = 'MIN(X.ACTION_DATE)'
+          end
+          object vwBalanceByClientOVERDUE: TcxGridDBColumn
+            Caption = 'Average Days O/D'
+            DataBinding.FieldName = 'AVGDAYSOVERDUE'
+            PropertiesClassName = 'TcxTextEditProperties'
+            Properties.Alignment.Horz = taCenter
+            BestFitMaxWidth = 110
+            Width = 113
+          end
+        end
+        object vwClientDetails: TcxGridDBTableView
+          PopupMenu = PopupMenu
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsDetailClientRecords
+          DataController.DetailKeyFieldNames = 'CLIENT_CODE'
+          DataController.KeyFieldNames = 'CLIENT_CODE'
+          DataController.MasterKeyFieldNames = 'CLIENT_CODE'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsCustomize.ColumnHidingOnGrouping = False
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsSelection.MultiSelect = True
+          OptionsView.CellEndEllipsis = True
+          OptionsView.CellAutoHeight = True
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.Footer = True
+          OptionsView.GridLines = glNone
+          OptionsView.HeaderEndEllipsis = True
+          OptionsView.Indicator = True
+          object vwClientDetailsNDEBTORTASK: TcxGridDBColumn
+            Caption = 'Task #'
+            DataBinding.FieldName = 'NDEBTORTASK'
+          end
+          object vwClientDetailsNACTION: TcxGridDBColumn
+            Caption = 'Action #'
+            DataBinding.FieldName = 'NACTION'
+          end
+          object vwClientDetailsACTION: TcxGridDBColumn
+            Caption = 'Action'
+            DataBinding.FieldName = 'DESCR'
+            SortIndex = 0
+            SortOrder = soDescending
+            Width = 76
+          end
+          object vwClientDetailsACTIONDATE: TcxGridDBColumn
+            Caption = 'Due'
+            DataBinding.FieldName = 'ACTION_DATE'
+            Width = 40
+          end
+          object vwClientDetailsREFNO: TcxGridDBColumn
+            Caption = 'Bill'
+            DataBinding.FieldName = 'REFNO'
+            Width = 41
+          end
+          object vwClientDetailsFILEID: TcxGridDBColumn
+            Caption = 'Matter'
+            DataBinding.FieldName = 'FILEID'
+            Width = 51
+          end
+          object vwClientDetailsAssignedTo: TcxGridDBColumn
+            Caption = 'Assigned To'
+            DataBinding.FieldName = 'ASSIGNED_TO'
+            Width = 54
+          end
+          object vwClientDetailsALERT_TO: TcxGridDBColumn
+            Caption = 'Alert To'
+            DataBinding.FieldName = 'ALERT_TO'
+            Width = 20
+          end
+          object vwClientDetailsALERT_TO_ADD: TcxGridDBColumn
+            Caption = 'Alt Alert To'
+            DataBinding.FieldName = 'ALERT_TO_ADD'
+          end
+          object vwClientDetailsBILL_TO: TcxGridDBColumn
+            Caption = 'Bill To'
+            DataBinding.FieldName = 'BILL_TO'
+            Width = 121
+          end
+          object vwClientDetailsSHORTDESCR: TcxGridDBColumn
+            Caption = 'Matter Description'
+            DataBinding.FieldName = 'SHORTDESCR'
+            Width = 127
+          end
+          object vwClientDetailsAUTHOR: TcxGridDBColumn
+            Caption = 'Author'
+            DataBinding.FieldName = 'AUTHOR'
+            Width = 23
+          end
+          object vwClientDetailsTEMPLATE_DESCR: TcxGridDBColumn
+            Caption = 'Template'
+            DataBinding.FieldName = 'TEMPLATE_DESCR'
+            Width = 36
+          end
+          object vwClientDetailsBALANCE: TcxGridDBColumn
+            Caption = 'Balance'
+            DataBinding.FieldName = 'BALANCE'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            Properties.Alignment.Horz = taRightJustify
+            Width = 20
+          end
+          object vwClientDetailsDISPATCHED: TcxGridDBColumn
+            Caption = 'Bill Date'
+            DataBinding.FieldName = 'DISPATCHED'
+            Width = 29
+          end
+          object vwClientDetailsOVERDUE: TcxGridDBColumn
+            Caption = 'Days Overdue'
+            DataBinding.FieldName = 'DAYSOVERDUE'
+            HeaderAlignmentHorz = taCenter
+            Width = 20
+          end
+        end
+        object grdBalanceByClient: TcxGridLevel
+          GridView = vwBalanceByClient
+          object grdClientDetails: TcxGridLevel
+            GridView = vwClientDetails
+          end
+        end
       end
     end
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
       OnShow = tabFilterShow
+      object lblDebtorCaption: TLabel
+        Left = 24
+        Top = 313
+        Width = 36
+        Height = 15
+        Caption = 'Debtor'
+      end
       object cxRgDate: TcxRadioGroup
         Left = 16
         Top = 3
@@ -174,20 +486,16 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
         ItemIndex = 0
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         Height = 132
         Width = 305
       end
       object cxGroupBox2: TcxGroupBox
-        Left = 16
-        Top = 143
+        Left = 176
+        Top = 136
         Caption = 'Assign To'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 1
         Height = 49
         Width = 145
@@ -212,13 +520,11 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
         end
       end
       object cxGroupBox3: TcxGroupBox
-        Left = 16
-        Top = 199
+        Left = 176
+        Top = 191
         Caption = 'Alert To'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 2
         Height = 49
         Width = 145
@@ -240,61 +546,60 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
           Width = 129
         end
       end
-      object cxGroupBox1: TcxGroupBox
-        Left = 176
-        Top = 143
+      object grpMatter: TcxGroupBox
+        Left = 16
+        Top = 191
         Caption = 'Matter'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 3
         Height = 49
         Width = 145
-        object tbFile: TcxButtonEdit
+        object tbMatter: TcxButtonEdit
           Left = 9
           Top = 16
           Properties.Buttons = <
             item
               Default = True
+              Glyph.SourceDPI = 96
               Glyph.Data = {
-                36040000424D3604000000000000360000002800000010000000100000000100
-                2000000000000004000000000000000000000000000000000000FF00FF00FF00
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000
-                0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF000000000000000000000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF00000000000000
-                00000000000000000000000000000000000000000000FF00FF00000000000000
-                00000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000000000000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000FF00FF000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000FF00FF000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00FF00FF000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                000000000000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00FF000000
-                00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF0000000000FFFFFF0000000000FF00FF00FF00FF00FF00FF000000
-                0000FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00FF000000
-                00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
               Kind = bkGlyph
             end>
-          Properties.OnButtonClick = tbFilePropertiesButtonClick
+          Properties.OnButtonClick = tbMatterPropertiesButtonClick
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -303,62 +608,61 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
           Width = 128
         end
       end
-      object cxGroupBox4: TcxGroupBox
-        Left = 176
-        Top = 199
+      object grpBill: TcxGroupBox
+        Left = 16
+        Top = 136
         Caption = 'Bill'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 4
         Height = 49
         Width = 145
-        object edtBillRef: TcxButtonEdit
+        object tbBill: TcxButtonEdit
           Left = 9
           Top = 16
           BeepOnEnter = False
           Properties.Buttons = <
             item
               Default = True
+              Glyph.SourceDPI = 96
               Glyph.Data = {
-                36040000424D3604000000000000360000002800000010000000100000000100
-                2000000000000004000000000000000000000000000000000000FF00FF00FF00
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000000000
-                0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF000000000000000000000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF00000000000000
-                00000000000000000000000000000000000000000000FF00FF00000000000000
-                00000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000000000000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000FF00FF000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000FFFFFF00000000000000000000000000FF00FF000000000000000000FFFF
-                FF000000000000000000000000000000000000000000FF00FF00FF00FF000000
-                0000000000000000000000000000000000000000000000000000000000000000
-                000000000000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00
-                FF0000000000FFFFFF00000000000000000000000000FF00FF0000000000FFFF
-                FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF000000000000000000000000000000000000000000FF00FF00000000000000
-                0000000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00FF000000
-                00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF0000000000FFFFFF0000000000FF00FF00FF00FF00FF00FF000000
-                0000FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00000000000000000000000000FF00FF00FF00FF00FF00FF000000
-                00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
               Kind = bkGlyph
             end>
-          Properties.OnButtonClick = edtBillRefPropertiesButtonClick
+          Properties.OnButtonClick = tbBillPropertiesButtonClick
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -403,18 +707,16 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       end
       object cxGroupBox5: TcxGroupBox
         Left = 16
-        Top = 255
+        Top = 351
         Caption = 'Owing'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 9
-        Height = 49
+        Height = 90
         Width = 305
         object cxCeFrom: TcxCurrencyEdit
-          Left = 40
-          Top = 16
+          Left = 45
+          Top = 49
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -424,7 +726,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
         end
         object cxCeTo: TcxCurrencyEdit
           Left = 192
-          Top = 16
+          Top = 49
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -433,61 +735,264 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
           Width = 97
         end
         object cxLabel3: TcxLabel
-          Left = 8
-          Top = 16
+          Left = 4
+          Top = 50
           Caption = 'From '
           Transparent = True
         end
         object cxLabel4: TcxLabel
           Left = 168
-          Top = 16
+          Top = 50
           Caption = 'To'
           Transparent = True
         end
+        object radBillLevel: TcxRadioButton
+          Left = 10
+          Top = 23
+          Width = 44
+          Height = 18
+          Caption = 'Bill'
+          Checked = True
+          TabOrder = 4
+          TabStop = True
+        end
+        object radMatterLevel: TcxRadioButton
+          Left = 69
+          Top = 23
+          Width = 57
+          Height = 18
+          Caption = 'Matter'
+          TabOrder = 5
+        end
+        object radClientLevel: TcxRadioButton
+          Left = 145
+          Top = 23
+          Width = 55
+          Height = 18
+          Caption = 'Client'
+          TabOrder = 6
+        end
+        object radDebtorLevel: TcxRadioButton
+          Left = 212
+          Top = 23
+          Width = 60
+          Height = 18
+          Caption = 'Debtor'
+          TabOrder = 7
+        end
       end
-    end
-    object tabColumns: TcxTabSheet
-      Caption = 'Columns'
-      ImageIndex = 2
-      object lvColumns: TListView
-        Left = 0
-        Top = 0
-        Width = 948
-        Height = 514
-        Align = alClient
-        Checkboxes = True
-        Columns = <
+      object grpClient: TcxGroupBox
+        Left = 16
+        Top = 246
+        Caption = 'Client'
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        TabOrder = 10
+        Height = 49
+        Width = 145
+        object tbClient: TcxButtonEdit
+          Left = 9
+          Top = 16
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                424D360400000000000036000000280000001000000010000000010020000000
+                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+                FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+                00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+                00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+                00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+                00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+                00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+                FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+                00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+              Kind = bkGlyph
+            end>
+          Properties.OnButtonClick = tbClientPropertiesButtonClick
+          Style.LookAndFeel.NativeStyle = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          TabOrder = 0
+          Width = 128
+        end
+      end
+      object tbDebtor: TcxButtonEdit
+        Left = 66
+        Top = 310
+        Properties.Buttons = <
           item
-            Caption = 'Column'
-            Width = 858
+            Default = True
+            Glyph.SourceDPI = 96
+            Glyph.Data = {
+              424D360400000000000036000000280000001000000010000000010020000000
+              000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
+              00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+              00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+              00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+              00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+              00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+              FFFF000000FF000000FF000000FF000000FF000000FF000000FFFFFFFFFF0000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+              FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFF
+              FFFF000000FF000000FF000000FFFF00FF00000000FF000000FFFFFFFFFF0000
+              00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00000000FF0000
+              00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+              00FF000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF000000
+              00FFFFFFFFFF000000FF000000FF000000FFFF00FF00000000FFFFFFFFFF0000
+              00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+              00FF000000FF000000FF000000FF000000FFFF00FF00000000FF000000FF0000
+              00FF000000FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+              00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00000000FFFFFFFFFF000000FFFF00FF00FF00FF00FF00FF00000000FFFFFF
+              FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00000000FF000000FF000000FFFF00FF00FF00FF00FF00FF00000000FF0000
+              00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+            Kind = bkGlyph
+          end
+          item
+            Glyph.SourceDPI = 96
+            Glyph.Data = {
+              89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+              610000001D744558745469746C6500436C6F73653B457869743B426172733B52
+              6962626F6E3B4603B9E8000002AD49444154785E85934B4C546714C77FF73232
+              0C041DC2237644C368F109868D98A0290BDA60E2DE9526921856C3C2A08C2E1A
+              A336A64DB48D81A8892D6E241A7CA20B1530261849DA4D47596818082F015118
+              0698B973DFB7773EB1333BEE97FFCD3927DFF97DE77B1CE9E3AF17293FF3B30C
+              48426B7D9939765A1290337AE1DC4B8F2CD73B0E802306C24CEB9BE7ACFA6206
+              86650FECFCE55283079025DBAE2F3D5CB79A94B58E206692C5CF1606933DAF7F
+              006451BA69986099A8C3C38C3C7846D791D3BCB97413351A151AFCADD38D8589
+              DE7F412A3A426A388AC801D92300A689E36A2A1225129923D8D1C9FC9387FCDD
+              D587244BC4037BDC581B91AB97716C93F2AA6D989A004802A0AF28382EF19F3B
+              FD34F4F7515852C4E2AE20FFFED10140CDC9101B0ABD54B4FFCEAB1F7F62D3F9
+              0AB4643203589E9C469F9926B8BF8AF947DD94B5849072246A5A43E040913F9F
+              BC75394C3DEE2658BB9BD4F07BE2E3B35915A83AFAA719766CCDE7C3403F43C8
+              6C6D6EC65FE8C391C0B660E8FA359203BD546EF7A34E4C60A49C2C8066602514
+              B4D94F98F12596150DDB721043DC84CC4A3A168FA14FA75CA085A17D05885B30
+              D280548AE8FB39947D8D048E3661D936DE5C99BC5C8FB0BF3BD684527B88D1D1
+              18B6AAE22E9A5D8186954C105B50680C87503D3EF2BDEE9E6FFD0940F9F11380
+              8FFA700BBD4FEEB2A94842D73D990A74DDC45C49B2A37A336FDB4E5122AB8C5F
+              6FE7CBBDDB7C763571A39D328FCEBB702BDF6F2FC352750C4DCFBC0343750189
+              243E3381131BE369DD018A4BD71328CE136730D7D3CDD3CEBFD8B2A518AF99C0
+              4C030CFEDF82EBE802602C2CE22DC8676F7500633981E2DE0C1694FAFD6C2C29
+              419D8FA12515B06C4C43461080822B6595CF7D927410475A3DF9ACA6B0859FDD
+              50C2566C7BF0ECD258A3E846200FF066B5AAB4462B3B800628FF0122CC6063F4
+              5F96130000000049454E44AE426082}
+            Kind = bkGlyph
           end>
-        TabOrder = 0
-        ViewStyle = vsList
-        OnChange = lvColumnsChange
-        OnClick = lvColumnsClick
+        Properties.ReadOnly = True
+        Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
+        TabOrder = 11
+        Width = 255
       end
     end
   end
   object qryDueItems: TUniQuery
+    SQLRefresh.Strings = (
+      
+        'SELECT NACTION, DESCR, TYPE, AUTO_EMAIL, DOCUMENT_PATH, DOCUMENT' +
+        ', EMAIL_SUBJECT, DEBTOR_NOTE, EMAIL_ALERT, DOCUMENT_NAME, GENERA' +
+        'TED_DOCUMENT_NAME, EMAIL, EMAIL_TO_CLIENT FROM DEBTORWORKFLOWACT' +
+        'ION'
+      'WHERE'
+      '  NACTION = :NACTION')
+    SQLRecCount.Strings = (
+      'SELECT Count(*) FROM ('
+      'SELECT * FROM DEBTORWORKFLOWACTION'
+      ''
+      ')')
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select *'
       
-        'from debtorworkflowtask dt,(select m.*,((nvl(m.FEES,0) + nvl(m.D' +
-        'ISB,0) + nvl(m.ANTD,0) + nvl(m.SUND,0) + nvl(m.TAX,0) + nvl(m.UP' +
-        'CRED,0)) -   '
+        'SELECT memo.owing balance, dtt.descr AS template_descr, dt.notes' +
+        ', ma.author,'
+      '       CASE'
+      '          WHEN dc.whichphone = '#39'W'#39
+      '             THEN NVL (dcn.workphone, dc.workphone)'
+      '          WHEN dc.whichphone = '#39'M'#39
+      '             THEN NVL (dcn.mobile, dc.mobile)'
+      '          WHEN dc.whichphone = '#39'D'#39
+      '             THEN NVL (dcn.directphone, dc.directphone)'
+      '          WHEN dc.whichphone = '#39'H'#39
+      '             THEN NVL (dcn.homephone, dc.homephone)'
+      '       END AS debtor_phone,'
       
-        'NVL(m.FEES_PAID,0) +  nvl(m.DISB_PAID,0) + nvl(m.ANTD_PAID,0) + ' +
-        'nvl(m.SUND_PAID,0) + nvl(m.TAX_PAID,0) + NVL(m.FEES_WOFF,0) +  '
-      'nvl(m.DISB_WOFF,0) + nvl(m.ANTD_WOFF,0) + nvl(m.SUND_WOFF,0) '
+        '       ta.generated_document_name, cl.NAME, memo.bill_to, ta.doc' +
+        'ument,'
       
-        '+ nvl(m.TAX_WOFF,0) + nvl(m.UPCRED_PAID, 0) + nvl(m.UPCRED_WOFF,' +
-        '0) ) AS OWING'
-      'from nmemo m) m'
-      'where dt.nmemo = m.nmemo'
-      'and m.owing >= dt.MIN_BALANCE')
-    Left = 608
-    Top = 72
+        '       ta.document_name, ta.debtor_note, ta.email, ta.email_subj' +
+        'ect,'
+      
+        '       dt.ndebtortask, dt.confirmation_required, ta.TYPE, dt.des' +
+        'cr,'
+      '       ma.nmatter, ma.fileid, memo.nmemo, assigned_to, alert_to,'
+      '       TRUNC (action_date) AS action_date, ta.document_path,'
+      
+        '       dt.confirmed_date, dt.processed_date, memo.refno, ma.shor' +
+        'tdescr,'
+      
+        '       alert_to_add, memo.dispatched, cl.CODE, Trunc(SYSDATE) - ' +
+        'Trunc(MEMO.DISPATCHED) - 28 As DaysOverdue, dt.NTEMPLATE'
+      '  FROM debtorworkflowaction ta,'
+      '       debtorworkflowtask dt,'
+      '       debtorworkflowtemplate dtt,'
+      '       (SELECT m.*'
+      '          FROM nmemo m) memo,'
+      '       matter ma,'
+      '       client cl,'
+      '       phonebook dc,'
+      '       phonebook dcn'
+      ' WHERE dt.nmemo = memo.nmemo'
+      '   AND memo.nmatter = ma.nmatter'
+      '   AND ta.naction = dt.naction'
+      '   AND ma.nclient = cl.nclient'
+      '   AND dt.ntemplate = dtt.ntemplate(+)'
+      '   AND dc.nclient(+) = ma.nbill_to'
+      '   AND dcn.nclient(+) = memo.nbill_to'
+      '   AND memo.rv_type = '#39'N'#39
+      '   AND memo.owing >= dt.min_balance'
+      '   AND dt.confirmed_date IS NULL'
+      '   AND dt.action_date < TRUNC (SYSDATE + 1)')
+    AfterScroll = qryDueItemsAfterScroll
+    Left = 636
+    Top = 250
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -506,8 +1011,9 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
     MenusShowRecentItemsFirst = False
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 640
-    Top = 72
+    Left = 546
+    Top = 28
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
@@ -591,41 +1097,42 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       Category = 0
       Hint = 'Close'
       Visible = ivAlways
+      Glyph.SourceDPI = 96
       Glyph.Data = {
-        36040000424D3604000000000000360000002800000010000000100000000100
-        2000000000000004000000000000000000000000000000000000FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00E6E6E619B2B2B24D9292926D8D8D8D729B9B
-        9B64C7C7C738F9F9F906FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FCFCFC0391919F6E2B2B6BD4050563FA000065FF000060FF0000
-        4FFF16163DE96262629DD4D4D42BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00F4F4F40B6060909F000084FF00008EFF00008EFF00008FFF00008CFF0000
-        88FF000081FF010154FF34343CCBC2C2C23DFFFFFF00FFFFFF00FFFFFF00FDFD
-        FD025A5A9AA5000096FF000097FF00009BFF00009FFF0000A0FF00009DFF0000
-        97FF00008FFF000088FF000062FF36363EC9D6D6D629FFFFFF00FFFFFF008F8F
-        B7700101A3FF08089EFF9999D4FF6868D0FF0000ACFF0000AEFF0000A9FF4848
-        B8FFB7B7E3FF2727A5FF00008CFF010152FF7171718EFFFFFF00DDDDEF222828
-        ABD90000ABFF2828A3FFDEDED2FFFEFEFFFF6464D4FF0000B3FF4646C0FFE7E7
-        ECFFFFFFF7FF5E5EB7FF00009AFF020287FF2E2E45D1FFFFFF009797E5690606
-        B0FD0303B9FF0000C2FF4C4CA7FFE6E6D9FFFCFCFFFF9E9EE6FFE8E9F4FFFFFF
-        F1FF7575B9FF0606B1FF0101ABFF0202A0FF12135DEDFFFFFF005859D0AB0808
-        BBFF0707C8FF0505D1FF0000C8FF5353B6FFF2F2EDFFFFFFFFFFFFFFFCFF7575
-        C9FF0000BEFF0101C3FF0303B8FF0303ACFF0F0F6EF2FFFFFF004B4BD2BC0C0C
-        C9FF0D0DD8FF0B0BDCFF0000D6FF3C3DCEFFEEEFEDFFFFFFFFFFFFFFFDFF5858
-        DBFF0000CAFF0303CBFF0606C5FF0606B8FF111178F1FFFFFF007272E6931414
-        D8FF1717EAFF0B0BF1FF4343DBFFE4E4EAFFFDFDF5FFBABAD4FFEAEAE8FFFEFE
-        FFFF6363E5FF0303D7FF0A0ACFFF0A0AC3FF21217FE2FFFFFF00BBBBF7452525
-        E5F22222FBFF3F3FE9FFDCDCE5FFFDFDEEFF7373C5FF0303D7FF5151B0FFE3E3
-        D6FFFFFFFEFF6161E5FF0808DBFF0F0FCAFF4F4F85B2FFFFFF00F3F3FD0C5E5E
-        F1AF3232FFFF5252EDFFB3B3C2FF7777CAFF0000EAFF0000ECFF0000E8FF5252
-        B4FFADADB0FF4D4DE1FF1818EDFF1818B1F5B6B6B949FFFFFF00FFFFFF00D6D6
-        FC293E3EFBE75353FFFF6868EFFF5757F9FF3838FFFF2525FDFF2929FFFF3838
-        FCFF4242EBFF3232FFFF1F1FE9FF7E7EA784FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00C2C2FC404848FDE66E6EFFFF9191FFFF9393FFFF8484FFFF7676FFFF6767
-        FFFF5151FFFF3030FBFD7C7CB488FEFEFE01FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00DCDCFE246D6DFCB16868FEF68787FFFF9292FFFF7676FFFF5353
-        FFFF5151F2D2A6A6CD5CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAA
-        FD5DE1E1F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+        424D360400000000000036000000280000001000000010000000010020000000
+        000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00E6E6E619B2B2B24D9292926D8D8D8D729B9B9B64C7C7
+        C738F9F9F906FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FCFCFC0391919F6E2B2B6BD4050563FA000065FF000060FF00004FFF1616
+        3DE96262629DD4D4D42BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4F4
+        F40B6060909F000084FF00008EFF00008EFF00008FFF00008CFF000088FF0000
+        81FF010154FF34343CCBC2C2C23DFFFFFF00FFFFFF00FFFFFF00FDFDFD025A5A
+        9AA5000096FF000097FF00009BFF00009FFF0000A0FF00009DFF000097FF0000
+        8FFF000088FF000062FF36363EC9D6D6D629FFFFFF00FFFFFF008F8FB7700101
+        A3FF08089EFF9999D4FF6868D0FF0000ACFF0000AEFF0000A9FF4848B8FFB7B7
+        E3FF2727A5FF00008CFF010152FF7171718EFFFFFF00DDDDEF222828ABD90000
+        ABFF2828A3FFDEDED2FFFEFEFFFF6464D4FF0000B3FF4646C0FFE7E7ECFFFFFF
+        F7FF5E5EB7FF00009AFF020287FF2E2E45D1FFFFFF009797E5690606B0FD0303
+        B9FF0000C2FF4C4CA7FFE6E6D9FFFCFCFFFF9E9EE6FFE8E9F4FFFFFFF1FF7575
+        B9FF0606B1FF0101ABFF0202A0FF12135DEDFFFFFF005859D0AB0808BBFF0707
+        C8FF0505D1FF0000C8FF5353B6FFF2F2EDFFFFFFFFFFFFFFFCFF7575C9FF0000
+        BEFF0101C3FF0303B8FF0303ACFF0F0F6EF2FFFFFF004B4BD2BC0C0CC9FF0D0D
+        D8FF0B0BDCFF0000D6FF3C3DCEFFEEEFEDFFFFFFFFFFFFFFFDFF5858DBFF0000
+        CAFF0303CBFF0606C5FF0606B8FF111178F1FFFFFF007272E6931414D8FF1717
+        EAFF0B0BF1FF4343DBFFE4E4EAFFFDFDF5FFBABAD4FFEAEAE8FFFEFEFFFF6363
+        E5FF0303D7FF0A0ACFFF0A0AC3FF21217FE2FFFFFF00BBBBF7452525E5F22222
+        FBFF3F3FE9FFDCDCE5FFFDFDEEFF7373C5FF0303D7FF5151B0FFE3E3D6FFFFFF
+        FEFF6161E5FF0808DBFF0F0FCAFF4F4F85B2FFFFFF00F3F3FD0C5E5EF1AF3232
+        FFFF5252EDFFB3B3C2FF7777CAFF0000EAFF0000ECFF0000E8FF5252B4FFADAD
+        B0FF4D4DE1FF1818EDFF1818B1F5B6B6B949FFFFFF00FFFFFF00D6D6FC293E3E
+        FBE75353FFFF6868EFFF5757F9FF3838FFFF2525FDFF2929FFFF3838FCFF4242
+        EBFF3232FFFF1F1FE9FF7E7EA784FFFFFF00FFFFFF00FFFFFF00FFFFFF00C2C2
+        FC404848FDE66E6EFFFF9191FFFF9393FFFF8484FFFF7676FFFF6767FFFF5151
+        FFFF3030FBFD7C7CB488FEFEFE01FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00DCDCFE246D6DFCB16868FEF68787FFFF9292FFFF7676FFFF5353FFFF5151
+        F2D2A6A6CD5CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1
+        F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
       PaintStyle = psCaptionGlyph
       ShortCut = 16499
       OnClick = dxBarButton3Click
@@ -804,6 +1311,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
     object dxBtnPrint: TdxBarButton
       Caption = 'New Item'
       Category = 0
+      Enabled = False
       Hint = 'Print'
       Visible = ivAlways
       ImageIndex = 12
@@ -831,12 +1339,12 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       ImageIndex = 13
     end
     object dxBtnNotes: TdxBarButton
-      Caption = 'New Item'
+      Caption = 'Add Note'
       Category = 0
       Enabled = False
       Hint = 'Edit Notes'
       Visible = ivAlways
-      ImageIndex = 13
+      ImageIndex = 18
       OnClick = dxBtnNotesClick
     end
     object dxBarSubItem6: TdxBarSubItem
@@ -868,8 +1376,8 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
   end
   object qryUpdate: TUniQuery
     Connection = dmAxiom.uniInsight
-    Left = 608
-    Top = 104
+    Left = 622
+    Top = 418
   end
   object qryEmployee: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -880,24 +1388,27 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       'select code,name || '#39'('#39' || code || '#39')'#39' as Name '
       'from '
       'employee'
+      'where is_credit_controller = '#39'Y'#39
       'order by 2')
     Left = 640
-    Top = 104
+    Top = 360
   end
   object dsEmployee: TUniDataSource
     DataSet = qryEmployee
-    Left = 640
-    Top = 136
+    Left = 500
+    Top = 234
   end
   object qryDebtorTaskItem: TUniQuery
     KeyFields = 'NDEBTORTASK'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select * '
-      'from debtorworkflowtask'
+      'select t.*, p.DEBTORMEMO, N.NBILL_TO, n.REFNO'
+      'from DEBTORWORKFLOWTASK t'
+      'inner join NMEMO n on t.NMEMO = n.NMEMO'
+      'inner join PHONEBOOK p on p.NNAME = n.NBILL_TO'
       'where ndebtortask = :ndebtortask')
-    Left = 680
-    Top = 72
+    Left = 634
+    Top = 471
     ParamData = <
       item
         DataType = ftUnknown
@@ -907,16 +1418,16 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
   end
   object dsDebtorTaskItem: TUniDataSource
     DataSet = qryDebtorTaskItem
-    Left = 680
-    Top = 104
+    Left = 498
+    Top = 334
   end
   object qryDebtorNotesInsert: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'insert into debtornotes(nmatter,created,createdby,note)'
       'values (:nmatter,sysdate,:createdby,:note)')
-    Left = 680
-    Top = 136
+    Left = 637
+    Top = 305
     ParamData = <
       item
         DataType = ftUnknown
@@ -939,10 +1450,9 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
     Version = 0
     Left = 815
     Top = 259
-    object dxComponentPrinter1Link1: TdxListViewReportLink
-      Active = True
-      Component = lvDue
-      PageNumberFormat = pnfNumeral
+    PixelsPerInch = 96
+    object dxComponentPrinter1Link1: TdxGridReportLink
+      Component = grdDueItems
       PrinterPage.DMPaper = 9
       PrinterPage.Footer = 6350
       PrinterPage.GrayShading = True
@@ -954,165 +1464,145 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       PrinterPage.Orientation = poLandscape
       PrinterPage.PageSize.X = 210000
       PrinterPage.PageSize.Y = 297000
-      PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 42614.469549004630000000
-      ShrinkToPageWidth = True
-      AssignedFormatValues = [fvDate, fvTime, fvPageNumber]
-      EndEllipsis = True
-      EvenFont.Charset = DEFAULT_CHARSET
-      EvenFont.Color = clBlack
-      EvenFont.Height = -11
-      EvenFont.Name = 'Times New Roman'
-      EvenFont.Style = []
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clBlack
-      Font.Height = -11
-      Font.Name = 'Arial Narrow'
-      Font.Style = []
-      HeaderFont.Charset = ANSI_CHARSET
-      HeaderFont.Color = clBlack
-      HeaderFont.Height = -11
-      HeaderFont.Name = 'Arial Narrow'
-      HeaderFont.Style = [fsBold]
-      HeadersOnEveryPage = True
+      PixelsPerInch = 96
       BuiltInReportLink = True
     end
   end
   object ilListImages: TImageList
-    Left = 496
-    Top = 104
+    Left = 388
+    Top = 125
     Bitmap = {
-      494C0101110015001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       00000000000000000000000000000000000000000000BA4C1774B15122E0B153
       23EFB15223EDB15223EDB15223EDB15223EDB15223EDB15223EDB15223EDB152
-      23EDB15323EFB15122E0BA4D1974000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      23EDB15323EFB15122E0BA4D19740000000000000000000000000000000C2B1E
+      19D136251FFF36251FFF35241EFF32221DFF32221DFF35241EFF36251FFF3625
+      1FFF2B1E19D10000000C00000000000000000000000000000000000000000000
+      0000000000000000001F421C11FF30140DEC190A06B30304075F0000001B0000
+      0005000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000BF531D74B55E31FFB75C2EFFB75C
       2EFFB5592AFFB45727FFB75C2EFFB75C2EFFB75C2EFFB75C2EFFB45728FFB458
-      29FFB75C2EFFB75C2EFFB55E30FFBE541D740000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      29FFB75C2EFFB75C2EFFB55E30FFBE541D7400000000000000000000000D3726
+      20FF46342DFF45322BFF423029FF867C78FF867C78FF423029FF45322BFF4634
+      2DFF372620FF0000000D00000000000000000000000000000000000000000000
+      0000000000000000001E663C2BE7B9C7D2FF7889A2FF244182FF051033AF0000
+      0021000000050000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000BA5E2DE0BB6233FFBA6233FFB95F
       2FFFC57850FFCE8E6CFFB75928FFBA6233FFBA6233FFB85B2AFFCA8661FFCA83
-      5FFFB85D2EFFBA6233FFBB6233FFBA5E2DE00000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      5FFFB85D2EFFBA6233FFBB6233FFBA5E2DE000000000000000000000000D3928
+      21FF4A372FFF4A372FFF48362EFF47352DFF47352DFF48362EFF4A372FFF4A37
+      2FFF392821FF0000000D00000000000000000000000000000002000000090000
+      000E0000000F0000002041261BAE879AB2FFC8E3F5FF1F66B6FF2B6BA8FF0512
+      36AD0000001F0000000400000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C16433EFBF6837FFBF6836FFBD63
       30FFCE8B66FFFFFFFFFFC26C3CFFBB5E29FFBB5E2AFFBC602EFFFFFFFFFFDCAD
-      93FFBC602CFFBF6836FFBF6837FFC16433EF0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      93FFBC602CFFBF6836FFBF6837FFC16433EF00000000000000000000000D3B2A
+      23FF926041FFA56B45FFA56B45FFA46B45FFA46B45FFA56B45FFA56B45FF9260
+      41FF3B2A23FF0000000D000000000000000000000000000000088C6657C0C38C
+      7AFFC38C79FFCBA395FFA89894FF488BC3FFDEFEFDFF51B4E3FF1F68B7FF3173
+      AEFF061538AA0000001C00000004000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C86D39EDC86E3DFFC86D3DFFC86D
       3DFFC15B24FFFCF7F5FFEFD9CCFFDDA78BFFDEA88CFFECD0C1FFFFFFFFFFC25E
-      28FFC86D3CFFC86D3DFFC86E3DFFC86D39ED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      28FFC86D3CFFC86D3DFFC86E3DFFC86D39ED00000000000000000000000D3E2B
+      24FFA9714BFFDDAF77FFDDAF77FFDDAF77FFDDAF77FFDDAF77FFDDAF77FFA971
+      4BFF3E2B24FF0000000D0000000000000000000000000000000CC5917EFFFDFB
+      FAFFFCF8F6FFFAF7F5FFECEAE9FF7CA3BFFF479FD2FFDEFEFDFF59BFE9FF216B
+      B9FF367BB3FF07173AA70000001A000000040000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000CF7341EDCC7542FFCC7542FFCC75
       42FFCA6E39FFDDA280FFFFFFFFFFF0D5C5FFEED3C2FFFFFFFFFFE3B49AFFC96C
-      36FFCC7542FFCC7542FFCC7542FFCF7341ED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      36FFCC7542FFCC7542FFCC7542FFCF7341ED00000000000000000000000D402D
+      26FFAD7752FFDFB57FFFDFB57FFFDFB57FFFDFB57FFFDFB57FFFDFB57FFFAD77
+      52FF402D26FF0000000D0000000000000000000000000000000CC79481FFFEFB
+      FAFFF9F0EAFFF8F0EAFFF7F0EBFFE8E4E1FF7EA4BFFF4BA5D5FFDEFEFDFF61CA
+      EFFF246FBCFF3B83B9FF081A3DA3000000180000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000D47B47EDD37B47FFD37B47FFD37B
       47FFD37A46FFCD6C32FFFFFFFFFFDD9D77FFDC9770FFFFFFFFFFCF7039FFD279
-      45FFD37B47FFD37B47FFD37B47FFD47B47ED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      45FFD37B47FFD37B47FFD37B47FFD47B47ED00000000000000000000000D432F
+      28FFB17E59FFE2BB87FFE2BB87FFE2BB87FFE2BB87FFE2BB87FFE2BB87FFB17E
+      59FF432F28FF0000000D0000000000000000000000000000000BC99786FFFEFC
+      FBFFF9F2EDFFF9F2EDFFF9F0EBFFF8F2EDFFEBE7E5FF82A7C2FF4EAAD7FFDEFE
+      FDFF68D4F4FF2875BEFF3F8BBEFF091B3F9E0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000D9814CEDD6804AFFD7804BFFD780
       4BFFD7804BFFD4773FFFEBC2A8FFF9F1EAFFF9EDE5FFEDC9B3FFD3763DFFD780
-      4BFFD7804BFFD7804BFFD6804AFFD9814CED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      4BFFD7804BFFD7804BFFD6804AFFD9814CED00000000000000000000000D4531
+      2AFFB68560FFE5C292FFE7C597FFE7C699FFE7C698FFE6C496FFE5C292FFB685
+      60FF45312AFF0000000D0000000000000000000000000000000ACB9C8BFFFEFD
+      FCFFFAF3EFFFFAF4EEFFFAF3EEFFFAF1ECFFF8F2EEFFEDE9E7FF85ABC7FF51AE
+      DAFFDEFEFDFF6EDDF8FF2C7BC2FF18448BFF0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000DD8651EDDA834EFFDB844FFFDB84
       4FFFDB844FFFDA824CFFD97F47FFFFFFFFFFFFFFFFFFDA8049FFDA814CFFDB84
-      4FFFDB844FFFDB844FFFDA834EFFDD8651ED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      4FFFDB844FFFDB844FFFDA834EFFDD8651ED00000000000000000000000D513D
+      35FFC59D7DFFEDD3ADFFEDD3ADFFEDD3ADFFEDD3ADFFEDD3ADFFEDD3ADFFC59D
+      7DFF513D35FF0000000D00000000000000000000000000000009CFA08DFFFEFE
+      FDFFFBF5F1FFFBF5F0FFFBF4F0FFFAF3EFFFFAF3EFFFF8F4EFFFEFECE9FF89AE
+      CAFF54B1DCFFDEFEFDFF4FA6D4FF102C4E930000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000E08B55EDDD8751FFDD8851FFDD88
       51FFDD8851FFDD8851FFDB8249FFE7AA85FFE7AA83FFDB8149FFDD8851FFDD88
-      51FFDD8851FFDD8851FFDD8751FFE08B55ED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      51FFDD8851FFDD8851FFDD8751FFE08B55ED00000000000000000201010D6E5D
+      57FFCCA98BFFF0D8B3FFF0D8B3FFF0D8B3FFF0D8B3FFF0D8B3FFF0D8B3FFCCA9
+      8BFF6E5D57FF0201010D00000000000000000000000000000009D0A393FFFEFE
+      FDFFFAF5F3FFFBF6F2FFFBF5F1FFFBF5F0FFFBF5F0FFFAF4EFFFFAF6F1FFF3EF
+      EDFF83A0B8FF357FBCFF173A598F0000000C0000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000E48F5AEDE18B55FFE28C56FFE28C
       56FFE28C56FFE28C56FFE28C56FFE0874FFFE0874FFFE28C56FFE28C56FFE28C
-      56FFE28C56FFE28C56FFE18B55FFE48F5AED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      56FFE28C56FFE28C56FFE18B55FFE48F5AED00000000000000000303030D705F
+      59FFCFAD91FFF1DDB9FFF1DDB9FFF1DDB9FFF1DDB9FFF1DDB9FFF1DDB9FFCFAD
+      91FF705F59FF0303030D00000000000000000000000000000008D3A897FFFEFE
+      FEFFFBF6F4FFFBF6F4FFFCF6F3FFFCF6F3FFFCF4F2FFFBF5F1FFFBF5F0FFFAF6
+      F3FFE2CCC4FF0000001600000006000000010000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000E6935EEDE48E58FFE58F59FFE58F
       59FFE58F59FFE58F59FFE58F59FFE58F59FFE58F59FFE58F59FFE58F59FFE58F
-      59FFE58F59FFE58F59FFE48E58FFE6935EED0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      59FFE58F59FFE58F59FFE48E58FFE6935EED00000000000000000303030D7260
+      59FFD2B295FFF3E1BEFFF3E1BFFFF3E1BFFFF3E1BFFFF3E1BFFFF3E1BEFFD2B2
+      95FF726059FF0303030D00000000000000000000000000000007D3AB9AFFFFFE
+      FEFFFCF8F6FFFCF7F5FFFCF7F5FFFBF6F4FFFBF6F4FFFCF6F3FFFCF6F2FFFBF6
+      F1FFD1A494FF0000000C00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000E99762EFE8915BFFE8925CFFE892
       5CFFE8925CFFE8925CFFE8925CFFE8925CFFE8925CFFE8925CFFE8925CFFE892
-      5CFFE8925CFFE8925CFFE8915BFFE99662EF0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      5CFFE8925CFFE8925CFFE8915BFFE99662EF00000000000000000303030D7461
+      5BFFCAAD94FFD5B699FFD5B79AFFD5B89BFFD5B89BFFD5B79AFFD5B699FFCAAD
+      94FF74615BFF0303030D00000000000000000000000000000006D8AE9DFFFFFF
+      FEFFFDF9F7FFFDF9F7FFFCF8F7FFFCF8F6FFFCF7F5FFFBF7F5FFFBF7F4FFFCF7
+      F3FFD3A897FF0000000B00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000EB9B66E0E9945CFFEA955EFFEA95
       5EFFEA955EFFEA955EFFEA955EFFEA955EFFEA955EFFEA955EFFEA955EFFEA95
-      5EFFEA955EFFEA955EFFE9945CFFEB9B67E00000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      5EFFEA955EFFEA955EFFE9945CFFEB9B67E000000000000000000202020C7563
+      5CFFAA9389FFAA9389FF8D7971FF6D5D57FF6D5D57FF8D7971FFAA9389FFAA93
+      89FF75635CFF0202020C00000000000000000000000000000006D8B0A0FFFFFF
+      FFFFFDFAF9FFFDFAF8FFFDFAF8FFFDF9F7FFFCF8F7FFFBF8F6FFFBF7F6FFFCF7
+      F5FFD4AC9BFF0000000A00000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000FAAF7F74EB935AFFEC955EFFEC96
       5EFFEC965EFFEC965EFFEC965EFFEC965EFFEC965EFFEC965EFFEC965EFFEC96
-      5EFFEC965EFFEC965EFFEB935AFFF8AD7C740000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      5EFFEC965EFFEC965EFFEB935AFFF8AD7C740000000000000000020202087664
+      5DFFAE978DFFAD968CFFAD968CFFAD968CFFAD968CFFAD968CFFAD968CFFAE97
+      8DFF76645DFF0202020800000000000000000000000000000005D9B3A3FFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFEFEFFFEFEFEFFFFFEFEFFFEFEFEFFFEFE
+      FEFFD7AE9EFF0000000900000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000FBB18274EEA06DE0EE9E
       6BEFEE9E6BEDEE9E6BEDEE9E6BEDEE9E6BEDEE9E6BEDEE9E6BEDEE9E6BEDEE9E
-      6BEDEE9E6BEFEE9F6DE0F9B08174000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      6BEDEE9E6BEFEE9F6DE0F9B08174000000000000000000000000000000025E4F
+      49C978655DFF78655DFF78655DFF78655DFF78655DFF78655DFF78655DFF7865
+      5DFF5E4F4ACA0101010300000000000000000000000000000003A3867AC0DBB5
+      A5FFDAB5A4FFDAB5A4FFDAB4A4FFD9B3A3FFD9B3A3FFD9B3A2FFD9B2A2FFD8B2
+      A2FFA08377C20000000600000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00008060600080606000FF00FF00FF00FF008060600080606000000000000000
@@ -1650,5 +2140,284 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       0000FF00F1BF40070000FF00C3CF400F0000FF8087E7780F0000FFC09FF37C1F
       0000FFE0FFFF003F0000FFF0FFFF007F00000000000000000000000000000000
       000000000000}
+  end
+  object dsDueItems: TUniDataSource
+    DataSet = qryDueItems
+    Left = 497
+    Top = 287
+  end
+  object PopupMenu: TPopupMenu
+    Images = ilListImages
+    OnPopup = PopupMenuPopup
+    Left = 380
+    Top = 235
+    object ReAssignTask1: TMenuItem
+      Caption = 'Re Assign Task...'
+      OnClick = ReAssignTask1Click
+    end
+    object ChangeDueDate1: TMenuItem
+      Caption = 'Change Due Date...'
+      OnClick = ChangeDueDate1Click
+    end
+    object CreateNote1: TMenuItem
+      Caption = 'Create Task Note'
+      ImageIndex = 18
+      Visible = False
+      OnClick = dxBtnNotesClick
+    end
+    object CreateDebtorNote1: TMenuItem
+      Caption = 'Client Note'
+      OnClick = CreateDebtorNote1Click
+    end
+    object CompleteTask1: TMenuItem
+      Caption = 'Complete Task'
+      ImageIndex = 1
+      OnClick = dxBtnProcessClick
+    end
+  end
+  object cxGridPopupMenu1: TcxGridPopupMenu
+    Grid = grdDueItems
+    PopupMenus = <
+      item
+        GridView = tvDueItems
+        HitTypes = [gvhtCell, gvhtRecord]
+        Index = 0
+        PopupMenu = PopupMenu
+      end>
+    UseBuiltInPopupMenus = False
+    Left = 439
+    Top = 505
+  end
+  object qryPhonebook: TUniQuery
+    KeyFields = 'NNAME'
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'Select * From Phonebook'
+      'Where NNAME = :phonebookkey')
+    Left = 760
+    Top = 368
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'phonebookkey'
+        Value = nil
+      end>
+  end
+  object dsPhonebook: TUniDataSource
+    DataSet = qryPhonebook
+    Left = 768
+    Top = 440
+  end
+  object qryDueItemsByClient: TUniQuery
+    SQLRefresh.Strings = (
+      
+        'SELECT NACTION, DESCR, TYPE, AUTO_EMAIL, DOCUMENT_PATH, DOCUMENT' +
+        ', EMAIL_SUBJECT, DEBTOR_NOTE, EMAIL_ALERT, DOCUMENT_NAME, GENERA' +
+        'TED_DOCUMENT_NAME, EMAIL, EMAIL_TO_CLIENT FROM DEBTORWORKFLOWACT' +
+        'ION'
+      'WHERE'
+      '  NACTION = :NACTION')
+    SQLRecCount.Strings = (
+      'SELECT Count(*) FROM ('
+      'SELECT * FROM DEBTORWORKFLOWACTION'
+      ''
+      ')')
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT SUM(x.balance) as CLIENT_BALANCE'
+      ',x.CLIENT_NAME'
+      ',x.CLIENT_CODE'
+      ',AVG(x.DaysOverdue) as AvgDaysOverDue'
+      ',x.notes'
+      ',max(x.assigned_to)'
+      ',min(x.action_date)'
+      ',x.debtor_phone'
+      'FROM('
+      
+        'SELECT memo.owing balance, dtt.descr AS template_descr, dt.notes' +
+        ', ma.author,'
+      '     nvl(dcn.workphone,dc.workphone) as debtor_phone,'
+      
+        '       ta.generated_document_name, cl.NAME as CLIENT_NAME, memo.' +
+        'bill_to, ta.document,'
+      
+        '       ta.document_name, ta.debtor_note, ta.email, ta.email_subj' +
+        'ect,'
+      
+        '       dt.ndebtortask, dt.confirmation_required, ta.TYPE, dt.des' +
+        'cr,'
+      '       ma.nmatter, ma.fileid, memo.nmemo, assigned_to, alert_to,'
+      '       TRUNC (action_date) AS action_date, ta.document_path,'
+      
+        '       dt.confirmed_date, dt.processed_date, memo.refno, ma.shor' +
+        'tdescr,'
+      
+        '       alert_to_add, memo.dispatched, cl.CODE as CLIENT_CODE, Tr' +
+        'unc(SYSDATE) - Trunc(MEMO.DISPATCHED) - 28 As DaysOverdue, dt.NT' +
+        'EMPLATE'
+      '  FROM debtorworkflowaction ta,'
+      '       debtorworkflowtask dt,'
+      '       debtorworkflowtemplate dtt,'
+      '       (SELECT m.*'
+      '          FROM nmemo m) memo,'
+      '       matter ma,'
+      '       client cl,'
+      '       phonebook dc,'
+      '       phonebook dcn'
+      ' WHERE dt.nmemo = memo.nmemo'
+      '   AND memo.nmatter = ma.nmatter'
+      '   AND ta.naction = dt.naction'
+      '   AND ma.nclient = cl.nclient'
+      '   AND dt.ntemplate = dtt.ntemplate(+)'
+      '   AND dc.nclient(+) = ma.nbill_to'
+      '   AND dcn.nclient(+) = memo.nbill_to'
+      '   AND memo.rv_type = '#39'N'#39
+      '   AND memo.owing >= dt.min_balance'
+      '   AND dt.confirmed_date IS NULL'
+      '   AND dt.action_date < TRUNC (SYSDATE + 1)'
+      '   ) x'
+      
+        'group by x.CLIENT_NAME, x.CLIENT_CODE, x.notes, x.debtor_phone  ' +
+        ' having SUM(x.balance)> 0'
+      'ORDER BY SUM(x.balance) DESC;')
+    AfterScroll = qryDueItemsAfterScroll
+    Left = 372
+    Top = 386
+  end
+  object dsDueItemsByClient: TUniDataSource
+    DataSet = qryDueItemsByClient
+    Left = 369
+    Top = 439
+  end
+  object qryDetailClientRecords: TUniQuery
+    SQLRefresh.Strings = (
+      
+        'SELECT NACTION, DESCR, TYPE, AUTO_EMAIL, DOCUMENT_PATH, DOCUMENT' +
+        ', EMAIL_SUBJECT, DEBTOR_NOTE, EMAIL_ALERT, DOCUMENT_NAME, GENERA' +
+        'TED_DOCUMENT_NAME, EMAIL, EMAIL_TO_CLIENT FROM DEBTORWORKFLOWACT' +
+        'ION'
+      'WHERE'
+      '  NACTION = :NACTION')
+    SQLRecCount.Strings = (
+      'SELECT Count(*) FROM ('
+      'SELECT * FROM DEBTORWORKFLOWACTION'
+      ''
+      ')')
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      
+        'SELECT memo.owing balance, dtt.descr AS template_descr, substr(r' +
+        'trim(dt.notes),1,100) as NOTES, ma.author,'
+      '       CASE'
+      '          WHEN dc.whichphone = '#39'W'#39
+      '             THEN NVL (dcn.workphone, dc.workphone)'
+      '          WHEN dc.whichphone = '#39'M'#39
+      '             THEN NVL (dcn.mobile, dc.mobile)'
+      '          WHEN dc.whichphone = '#39'D'#39
+      '             THEN NVL (dcn.directphone, dc.directphone)'
+      '          WHEN dc.whichphone = '#39'H'#39
+      '             THEN NVL (dcn.homephone, dc.homephone)'
+      '       END AS debtor_phone,'
+      
+        '       ta.generated_document_name, cl.NAME as CLIENT_NAME, memo.' +
+        'bill_to, ta.document,'
+      
+        '       ta.document_name, ta.debtor_note, ta.email, ta.email_subj' +
+        'ect,'
+      
+        '       dt.ndebtortask, dt.confirmation_required, ta.TYPE, dt.des' +
+        'cr,'
+      '       ma.nmatter, ma.fileid, memo.nmemo, assigned_to, alert_to,'
+      '       TRUNC (action_date) AS action_date, ta.document_path,'
+      
+        '       dt.confirmed_date, dt.processed_date, memo.refno, ma.shor' +
+        'tdescr,'
+      
+        '       alert_to_add, memo.dispatched, cl.CODE as CLIENT_CODE, Tr' +
+        'unc(SYSDATE) - Trunc(MEMO.DISPATCHED) - 28 As DaysOverdue, dt.NT' +
+        'EMPLATE, cl.CODE'
+      ',ta.NACTION'
+      '  FROM debtorworkflowaction ta,'
+      '       debtorworkflowtask dt,'
+      '       debtorworkflowtemplate dtt,'
+      '       (SELECT m.*'
+      '          FROM nmemo m) memo,'
+      '       matter ma,'
+      '       client cl,'
+      '       phonebook dc,'
+      '       phonebook dcn'
+      ' WHERE dt.nmemo = memo.nmemo'
+      '   AND memo.nmatter = ma.nmatter'
+      '   AND ta.naction = dt.naction'
+      '   AND ma.nclient = cl.nclient'
+      '   AND dt.ntemplate = dtt.ntemplate(+)'
+      '   AND dc.nclient(+) = ma.nbill_to'
+      '   AND dcn.nclient(+) = memo.nbill_to'
+      '   AND memo.rv_type = '#39'N'#39
+      '   AND memo.owing >= dt.min_balance'
+      '   AND dt.confirmed_date IS NULL'
+      '   AND dt.action_date < TRUNC (SYSDATE + 1)'
+      '  '
+      '')
+    AfterScroll = qryDueItemsAfterScroll
+    Left = 244
+    Top = 522
+  end
+  object dsDetailClientRecords: TUniDataSource
+    DataSet = qryDetailClientRecords
+    Enabled = False
+    Left = 241
+    Top = 575
+  end
+  object PopupMenu1: TPopupMenu
+    Images = ilListImages
+    OnPopup = PopupMenu1Popup
+    Left = 468
+    Top = 163
+    object MenuItem1: TMenuItem
+      Caption = 'Re Assign Task...'
+      OnClick = ReAssignTask1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Change Due Date...'
+      OnClick = ChangeDueDate1Click
+    end
+    object MenuItem3: TMenuItem
+      Caption = 'Create Task Note'
+      ImageIndex = 18
+      Visible = False
+      OnClick = MenuItem3Click
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Client Note'
+      OnClick = CreateDebtorNote1Click
+    end
+    object MenuItem5: TMenuItem
+      Caption = 'Complete Task'
+      ImageIndex = 1
+      OnClick = dxBtnProcessClick
+    end
+  end
+  object popUpClient: TPopupMenu
+    Images = ilListImages
+    Left = 588
+    Top = 163
+    object MenuItem9: TMenuItem
+      Caption = 'Client Note'
+      OnClick = CreateDebtorNote1Click
+    end
+    object ChangeDueDateAllBills1: TMenuItem
+      Caption = 'Change Due Date (All Bills)'
+      OnClick = ChangeDueDateAllBills1Click
+    end
+    object ReAssignClient1: TMenuItem
+      Caption = 'Re-Assign Client'
+      OnClick = ReAssignClient1Click
+    end
+    object CompleteTaskAllBills1: TMenuItem
+      Caption = 'Complete Task (All Bills)'
+      ImageIndex = 1
+      OnClick = CompleteTaskAllBills1Click
+    end
   end
 end

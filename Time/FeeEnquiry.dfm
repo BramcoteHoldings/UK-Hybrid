@@ -52,10 +52,6 @@ object frmFeeListNew: TfrmFeeListNew
       object tsFeeList: TcxTabSheet
         Caption = 'Fees'
         ImageIndex = 0
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object grdFees: TcxGrid
           Left = 0
           Top = 0
@@ -468,10 +464,6 @@ object frmFeeListNew: TfrmFeeListNew
         Caption = 'Statistics'
         ImageIndex = 1
         OnHide = tsStatsHide
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object pagStats: TcxPageControl
           Left = 0
           Top = 0
@@ -493,8 +485,6 @@ object frmFeeListNew: TfrmFeeListNew
           object tabStats: TcxTabSheet
             Caption = 'Statistics'
             ImageIndex = 2
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object gbStats: TcxGroupBox
               Left = 11
               Top = 6
@@ -2259,10 +2249,6 @@ object frmFeeListNew: TfrmFeeListNew
       object tsFilter: TcxTabSheet
         Caption = 'Filter'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object lblAuthor: TLabel
           Left = 22
           Top = 4

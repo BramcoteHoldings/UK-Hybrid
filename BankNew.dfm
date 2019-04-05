@@ -67,7 +67,7 @@ object frmBankNew: TfrmBankNew
       Caption = '&Cancel'
       Kind = bkCancel
       NumGlyphs = 2
-      TabOrder = 23
+      TabOrder = 24
       OnClick = btnCancelClick
     end
     object btnSave: TBitBtn
@@ -96,24 +96,24 @@ object frmBankNew: TfrmBankNew
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
-      TabOrder = 22
+      TabOrder = 23
       OnClick = btnSaveClick
     end
     object tbCode: TEdit
       Left = 130
       Top = 79
-      Width = 35
+      Width = 71
       Height = 21
       BevelInner = bvNone
       BevelKind = bkFlat
       BevelOuter = bvSpace
       BorderStyle = bsNone
       CharCase = ecUpperCase
-      MaxLength = 3
+      MaxLength = 10
       TabOrder = 2
     end
     object cbType: TComboBox
-      Left = 209
+      Left = 245
       Top = 77
       Width = 124
       Height = 25
@@ -255,7 +255,7 @@ object frmBankNew: TfrmBankNew
       StyleDisabled.LookAndFeel.Kind = lfStandard
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
-      TabOrder = 21
+      TabOrder = 22
     end
     object teBSB: TcxMaskEdit
       Left = 128
@@ -323,7 +323,7 @@ object frmBankNew: TfrmBankNew
       StyleDisabled.LookAndFeel.Kind = lfStandard
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
-      TabOrder = 16
+      TabOrder = 17
       OnKeyPress = tbBPayCodeKeyPress
       Width = 523
     end
@@ -344,7 +344,7 @@ object frmBankNew: TfrmBankNew
       StyleDisabled.LookAndFeel.Kind = lfStandard
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
-      TabOrder = 20
+      TabOrder = 21
     end
     object teSortCode: TcxMaskEdit
       Left = 128
@@ -357,7 +357,7 @@ object frmBankNew: TfrmBankNew
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 17
+      TabOrder = 18
       Width = 155
     end
     object teSWIFTCode: TcxTextEdit
@@ -366,7 +366,7 @@ object frmBankNew: TfrmBankNew
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 18
+      TabOrder = 19
       Width = 121
     end
     object teIBAN: TcxTextEdit
@@ -375,8 +375,34 @@ object frmBankNew: TfrmBankNew
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 19
+      TabOrder = 20
       Width = 121
+    end
+    object cmbCurrency: TcxLookupComboBox
+      Left = 326
+      Top = 469
+      Properties.ClearKey = 46
+      Properties.DropDownAutoSize = True
+      Properties.ImmediatePost = True
+      Properties.IncrementalFilteringOptions = [ifoHighlightSearchText]
+      Properties.KeyFieldNames = 'ISO4217_CURRENCY_CODE'
+      Properties.ListColumns = <
+        item
+          FieldName = 'ISO4217_CURRENCY_CODE'
+        end
+        item
+          FieldName = 'MAX(ISO4217_CURRENCY_NAME)'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dmAxiom.dsCurrencyList
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      TabOrder = 16
+      Width = 325
     end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
       AlignHorz = ahLeft
@@ -445,7 +471,7 @@ object frmBankNew: TfrmBankNew
       ControlOptions.MinHeight = 22
       ControlOptions.MinWidth = 22
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 35
+      ControlOptions.OriginalWidth = 71
       Index = 0
     end
     object dxLayoutItem8: TdxLayoutItem
@@ -564,7 +590,7 @@ object frmBankNew: TfrmBankNew
     object dxLayoutItem24: TdxLayoutItem
       Parent = dxLayoutGroup2
       CaptionOptions.AlignHorz = taRightJustify
-      CaptionOptions.Text = 'Cash at Bank'
+      CaptionOptions.Text = 'Cash at Bank G/L'
       Control = tbCAB
       ControlOptions.MinHeight = 22
       ControlOptions.MinWidth = 22
@@ -673,6 +699,7 @@ object frmBankNew: TfrmBankNew
       ButtonOptions.Buttons = <>
       ButtonOptions.DefaultHeight = 18
       ButtonOptions.DefaultWidth = 18
+      ItemIndex = 2
       LayoutDirection = ldHorizontal
       ShowBorder = False
       Index = 14
@@ -710,6 +737,7 @@ object frmBankNew: TfrmBankNew
       ButtonOptions.Buttons = <>
       ButtonOptions.DefaultHeight = 18
       ButtonOptions.DefaultWidth = 18
+      ItemIndex = 2
       LayoutDirection = ldHorizontal
       ShowBorder = False
       Index = 16
@@ -747,6 +775,19 @@ object frmBankNew: TfrmBankNew
       ControlOptions.OriginalWidth = 155
       ControlOptions.ShowBorder = False
       Index = 0
+    end
+    object dxLayoutItem19: TdxLayoutItem
+      Parent = dxLayoutGroup6
+      AlignHorz = ahRight
+      CaptionOptions.Text = 'Currency'
+      SizeOptions.AssignedValues = [sovSizableHorz]
+      SizeOptions.SizableHorz = True
+      SizeOptions.Width = 382
+      Control = cmbCurrency
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 145
+      ControlOptions.ShowBorder = False
+      Index = 2
     end
   end
   object tbRcptFrom: TEdit

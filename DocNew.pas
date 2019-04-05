@@ -4,13 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Db, MemDS, OracleUniProvider, Uni, DBAccess, cxControls, cxContainer,
-  cxEdit, cxGroupBox, cxRadioGroup, cxTextEdit, cxMaskEdit, cxButtonEdit,
-  cxDropDownEdit, cxLookAndFeelPainters, cxButtons, cxGraphics,
-  Menus, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxHyperLinkEdit,
-  cxMemo, cxCheckBox, cxLookAndFeels, SYSTEM.StrUtils, dxLayoutContainer,
-  dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses, dxLayoutControl,
-  uRwMapiInterfaces, uRwMapidefsH, uRwSysUtils, uRwDateTimeUtils,VCL.uRwMAPISession;
+  StdCtrls, Buttons, Db, MemDS, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.Menus, dxLayoutContainer,
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, DBAccess, Uni, cxClasses,
+  cxCheckBox, cxMemo, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxButtons, cxTextEdit, cxMaskEdit, cxButtonEdit,
+  cxGroupBox, cxRadioGroup, dxLayoutControl;
 
 type
   TfrmDocNew = class(TForm)
@@ -31,7 +30,6 @@ type
     qryPopDetails: TUniQuery;
     edKeywords: TcxTextEdit;
     cmbMatterAuthor: TcxLookupComboBox;
-    tblEmployee: TUniTable;
     dsEmployee: TUniDataSource;
     qryPRECCLASSIFICATION: TUniQuery;
     dsPRECCLASSIFICATION: TUniDataSource;
@@ -143,7 +141,8 @@ var
 implementation
 
 uses
-  AxiomData, Matters, MiscFunc, MSearch, citfunc, NSearch, Phonebook, uRwMapiProps;
+  AxiomData, Matters, MiscFunc, MSearch, citfunc, NSearch, Phonebook, uRwMapiProps,
+  uRwMapiInterfaces, SYSTEM.StrUtils, uRwDateTimeUtils;
 
 {$R *.DFM}
 
@@ -873,13 +872,16 @@ begin
       rgStorage.ItemIndex := SystemInteger('DFLT_DOC_SAVE_OPTION');
       rgStorage.Enabled := (SystemString('DISABLE_SAVE_MODE') = 'N');
 
-      with tblEmployee do
+      if dmAxiom.qryEmplyeeList.Active = False then
+         dmAxiom.qryEmplyeeList.Open;
+
+      {with tblEmployee do
       begin
          Close;
          Filter := 'ACTIVE = ''Y'' AND ISAUTHOR = ''Y'' ';
          OrderFields := 'code';
          Open;
-      end;
+      end;}
       qryPRECCLASSIFICATION.Open;
       qryPRECCATEGORY.Open;
    except

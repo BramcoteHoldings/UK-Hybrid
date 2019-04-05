@@ -570,34 +570,13 @@ object frmEmployees: TfrmEmployees
     TabOrder = 23
     Width = 280
   end
-  object cbAxiomClassic: TcxDBCheckBox
-    Left = 325
-    Top = 308
-    Hint = 
-      'Changes to this will only take effect once you log back in to Ax' +
-      'iom.'
-    Caption = 'Axiom Classic'
-    DataBinding.DataField = 'CLASSIC_VERSION'
-    DataBinding.DataSource = dsEmployees
-    Properties.Alignment = taRightJustify
-    Properties.NullStyle = nssUnchecked
-    Properties.ValueChecked = 'Y'
-    Properties.ValueUnchecked = 'N'
-    Properties.OnChange = cbAxiomClassicPropertiesChange
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 24
-    Visible = False
-  end
   object cxGroupBox1: TcxGroupBox
     Left = 439
     Top = 175
     Caption = 'Photo'
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 25
+    TabOrder = 24
     Transparent = True
     DesignSize = (
       150
@@ -780,7 +759,7 @@ object frmEmployees: TfrmEmployees
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 26
+    TabOrder = 25
     Width = 41
   end
   object cbIsTimeRecorder: TcxDBCheckBox
@@ -826,7 +805,7 @@ object frmEmployees: TfrmEmployees
     Caption = 'ILARS'
     DataField = 'ILARS'
     DataSource = dsEmployees
-    TabOrder = 27
+    TabOrder = 26
     ValueChecked = 'Y'
     ValueUnchecked = 'N'
     OnClick = chkILARSNoClick
@@ -838,14 +817,14 @@ object frmEmployees: TfrmEmployees
     Height = 23
     DataField = 'ILARS_NUMBER'
     DataSource = dsEmployees
-    TabOrder = 28
+    TabOrder = 27
   end
   object cxPageControl1: TcxPageControl
     Left = 7
     Top = 373
     Width = 618
     Height = 277
-    TabOrder = 30
+    TabOrder = 29
     Properties.ActivePage = tabDefaults
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
@@ -3119,7 +3098,7 @@ object frmEmployees: TfrmEmployees
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 35
+    TabOrder = 34
     OnClick = dbcbEmpLevelClick
     Width = 185
   end
@@ -4768,6 +4747,33 @@ object frmEmployees: TfrmEmployees
       Caption = 'Employee Security'
       Category = 0
       Hint = 'View/Edit this Employees Security settings'
+      Glyph.SourceDPI = 96
+      Glyph.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        610000001974455874536F6674776172650041646F626520496D616765526561
+        647971C9653C00000011744558745469746C65005065726D697373696F6E3BAC
+        69E97A0000028849444154785E7592CF4B545F18C69F73E79A4416042D84A471
+        D2FA5A999506064509266A8BFA038A56D142088368910E522D0A5AB4FAE2A25C
+        B48A4849B3DA2884440E5A5891639AE14859B471D4993BCEFD71CEB9A7F75C1D
+        31B5030FCFE5E5BE9FE739976B2AA5A00F632C3092D974ADB54E194673D6762B
+        6693734C70EFB3954EFD1FEB7BDE07C025A9DC9E89BF8F79B5E5765BD1CEA268
+        E9EE3022BB8A20A4C4E897AF75C3231FEB00762FD6D7730B804D526B01A10B97
+        AF34141616B694EFDB83896F0974F6BC82F025CA4A4B70F470056CDBB99E9A3F
+        F96EECFD9B5E007C2D204F28A3AD341236C627A7D0D5F3A2DF5A98EBF0956F4C
+        27A62FD59FAEAD8D1487597C6CBC1540FF8680B495292B290EE369F74BA4E693
+        1DF1E1019DC40E56D718938944EDD9C67A28C6F602C8276105C0E86840C6B20A
+        5CD781E3BAA0E5C1DC3D47E9B9B2AA122603A4945B3480560CA5949F6B600CDE
+        6DECCDCFCB020351440F29DC283FF3534A1F424BF890E21378EC036E1EF191FE
+        EF58D7C50743A700B83940283F2F74BCAAF921A0248903BE0B48926F03822417
+        C933344EE1C99D47D5BAF16A00D5C1D252B26B65B9BDF33BB940D3B96D80A767
+        0EE02CC2F364B043C20A40D785CC2C27F1E0E51FBF2C285F02A108E04E004203
+        6C701E00D86A0093820022057836C09DA0414325B514BA992080A5E7A4ECC60D
+        B806B8F304B0747A00793D9282921C3507A60047CF6D28D786E09BD6015850CB
+        4B2E250917F1440693330E14A5C76780F2CD1694E70204F0B8B9FE0A1EF7A19C
+        59026482F4FD3BB278DC6C826D2D0EBE8BFCED072D14C185285807100B19F7ED
+        B3FBDD27B890E00413812BF2246846CE20E4764801A46D3E04C05B0D70CEB7C7
+        1A977F5123D7EA1FAE480E6991843F444C7452F6AD885E0000000049454E44AE
+        426082}
       ImageIndex = 10
     end
     object dxBarButton6: TdxBarButton

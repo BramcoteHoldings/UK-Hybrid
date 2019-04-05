@@ -109,7 +109,6 @@ type
     dfPosition: TcxDBTextEdit;
     dxBarButton1: TdxBarButton;
     btnBudget: TdxBarButton;
-    cbAxiomClassic: TcxDBCheckBox;
     qryEmpCuts: TUniQuery;
     qryUpdate: TUniQuery;
     qryEmpTypeCuts: TUniQuery;
@@ -410,7 +409,6 @@ type
       var DisplayValue: Variant; var ErrorText: TCaption;
       var Error: Boolean);
     procedure btnBudgetClick(Sender: TObject);
-    procedure cbAxiomClassicPropertiesChange(Sender: TObject);
     procedure dbcbTypeClick(Sender: TObject);
     procedure dxPopupImagePopup(Sender: TObject);
     procedure dxattachImageClick(Sender: TObject);
@@ -1243,13 +1241,6 @@ begin
 
    loTfmBudgets.ShowModal;
 end;
-
-procedure TfrmEmployees.cbAxiomClassicPropertiesChange(Sender: TObject);
-begin
-   cbViews.Enabled := ( not cbAxiomClassic.Checked );
-end;
-
-
 
 procedure TfrmEmployees.dbcbEmpLevelClick(Sender: TObject);
 begin

@@ -839,6 +839,7 @@ type
   procedure CalculateFXValue(ABase_Curr, AEntity_Curr, ATran_Curr: string; ATransDate: TDateTime;
                              ATransAmount: double; var ACurrencyValBase, ACurrencyValEntity, ACurrencyValTran, AFXValue: double);
   procedure InvoiceMergeEmail(iInvoice: integer; nMatter: Integer; Template: string = '');
+  function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string): boolean;
 
 type
   TRoundToRange = -37..37;
@@ -7159,43 +7160,49 @@ var
    bStream: TStream;
    ASaveViewName: string;
 begin
-   try
-      dmAxiom.qrySettings.Close;
-      dmAxiom.qrySettings.ParamByName('emp').AsString := sEmp;
-      dmAxiom.qrySettings.ParamByName('owner').AsString := sOwner;
-      dmAxiom.qrySettings.Open;
-      if dmAxiom.qrySettings.RecordCount > 0 then
-         dmAxiom.qrySettings.Edit
-      else
-         dmAxiom.qrySettings.Append;
+   if dmAxiom.bShutDown = False then
+   begin
+      try
+         dmAxiom.qrySettings.Close;
+         dmAxiom.qrySettings.ParamByName('emp').AsString := sEmp;
+         dmAxiom.qrySettings.ParamByName('owner').AsString := sOwner;
+         dmAxiom.qrySettings.Open;
+         if dmAxiom.qrySettings.RecordCount > 0 then
+            dmAxiom.qrySettings.Edit
+         else
+            dmAxiom.qrySettings.Append;
 
-      dmAxiom.qrySettings.FieldByname('emp').AsString := sEmp;
-      dmAxiom.qrySettings.FieldByname('owner').AsString := sOwner;
-      AOptions := [];
-      ASaveViewName := sOwner;
-      bStream := dmAxiom.qrySettings.CreateBlobStream(dmAxiom.qrySettings.FieldByname('options'), bmReadWrite);
-      AView.StoreToStream(bStream, AOptions, ASaveViewName);
-      bStream.free;
-      dmAxiom.qrySettings.Post;
-      dmAxiom.qrySettings.Close;
-   except
-      // Silent exception
+         dmAxiom.qrySettings.FieldByname('emp').AsString := sEmp;
+         dmAxiom.qrySettings.FieldByname('owner').AsString := sOwner;
+         AOptions := [];
+         ASaveViewName := sOwner;
+         bStream := dmAxiom.qrySettings.CreateBlobStream(dmAxiom.qrySettings.FieldByname('options'), bmReadWrite);
+         AView.StoreToStream(bStream, AOptions, ASaveViewName);
+         bStream.free;
+         dmAxiom.qrySettings.Post;
+         dmAxiom.qrySettings.Close;
+      except
+         // Silent exception
+      end;
    end;
 end;
 
 procedure SettingSave(sEmp: string; sOwner: string; sItem: string; sValue: string; iValue: integer); overload;
 begin
-  try
-    dmAxiom.procSettingSave.Close;
-    dmAxiom.procSettingSave.ParamByName('P_Emp').AsString := sEmp;
-    dmAxiom.procSettingSave.ParamByName('P_Owner').AsString := sOwner;
-    dmAxiom.procSettingSave.ParamByName('P_Item').AsString := sItem;
-    dmAxiom.procSettingSave.ParamByName('P_Value').AsString := sValue;
-    dmAxiom.procSettingSave.ParamByName('P_IntValue').Value := iValue;
-    dmAxiom.procSettingSave.Execute;
-    dmAxiom.procSettingSave.Close;
-  except
-    // Silent exception
+  if dmAxiom.bShutDown = False then
+  begin
+     try
+       dmAxiom.procSettingSave.Close;
+       dmAxiom.procSettingSave.ParamByName('P_Emp').AsString := sEmp;
+       dmAxiom.procSettingSave.ParamByName('P_Owner').AsString := sOwner;
+       dmAxiom.procSettingSave.ParamByName('P_Item').AsString := sItem;
+       dmAxiom.procSettingSave.ParamByName('P_Value').AsString := sValue;
+       dmAxiom.procSettingSave.ParamByName('P_IntValue').Value := iValue;
+       dmAxiom.procSettingSave.Execute;
+       dmAxiom.procSettingSave.Close;
+     except
+       // Silent exception
+     end;
   end;
 end;
 
@@ -7206,17 +7213,20 @@ end;
 
 procedure SettingSaveAll(sEmp: string; sOwner: string; sItem: string; sValue: string; iValue: integer); overload;
 begin
-  try
-    dmAxiom.procSettingSave.Close;
-    dmAxiom.procSettingSave.ParamByName('P_Emp').AsString := sEmp;
-    dmAxiom.procSettingSave.ParamByName('P_Owner').AsString := sOwner;
-    dmAxiom.procSettingSave.ParamByName('P_Item').AsString := sItem;
-    dmAxiom.procSettingSave.ParamByName('P_Value').AsString := sValue;
-    dmAxiom.procSettingSave.ParamByName('P_IntValue').AsInteger := iValue;
-    dmAxiom.procSettingSave.Execute;
-    dmAxiom.procSettingSave.Close;
-  except
-    // Silent exception
+  if dmAxiom.bShutDown = False then
+  begin
+     try
+       dmAxiom.procSettingSave.Close;
+       dmAxiom.procSettingSave.ParamByName('P_Emp').AsString := sEmp;
+       dmAxiom.procSettingSave.ParamByName('P_Owner').AsString := sOwner;
+       dmAxiom.procSettingSave.ParamByName('P_Item').AsString := sItem;
+       dmAxiom.procSettingSave.ParamByName('P_Value').AsString := sValue;
+       dmAxiom.procSettingSave.ParamByName('P_IntValue').AsInteger := iValue;
+       dmAxiom.procSettingSave.Execute;
+       dmAxiom.procSettingSave.Close;
+     except
+       // Silent exception
+     end;
   end;
 end;
 
@@ -8352,16 +8362,19 @@ function get_default_gst(sform : String) : String;
 var
    qryTmp : TUniQuery;
 begin
-    qryTmp := TUniQuery.Create(nil);
-    qryTmp.Connection := dmAxiom.uniInsight;
-    qryTmp.SQL.Text := 'SELECT CODE FROM TAXDEFAULT WHERE TYPE=:TYPE';
-    qryTmp.Prepare;
-    qryTmp.ParamByName('TYPE').AsString := sForm;
-    qryTmp.Open;
-    get_default_gst := qryTmp.FieldByName('CODE').AsString;
+    try
+       qryTmp := TUniQuery.Create(nil);
+       qryTmp.Connection := dmAxiom.uniInsight;
+       qryTmp.SQL.Text := 'SELECT CODE FROM TAXDEFAULT WHERE TYPE=:TYPE';
+       qryTmp.Prepare;
+       qryTmp.ParamByName('TYPE').AsString := sForm;
+       qryTmp.Open;
+       get_default_gst := qryTmp.FieldByName('CODE').AsString;
 
-    qryTmp.Close;
-    qryTmp.Free;
+       qryTmp.Close;
+    finally
+       qryTmp.Free;
+    end;
 end;
 
 function CheckReqFields(sTableName: String;dDataSet : TDataSet) : BOOLEAN;
@@ -14941,6 +14954,25 @@ begin
             MsgErr('Error occured email of bill'#13#13 + E.Message);
       end;
    end
+end;
+
+function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string): boolean;
+begin
+   with dmAxiom.procCanAuthoriseBill do
+   begin
+      ParamByName('P_Author').AsString := sEmp;
+      if pnMatter = 0 then
+         ParamByName('P_nmatter').Clear
+      else
+         ParamByName('P_nmatter').AsInteger := pnMatter;
+
+      if (pDept = '') then
+         ParamByName('P_dept').Clear
+      else
+         ParamByName('P_dept').AsString := pDept;
+      Execute;
+      Result := ParambyName('RESULT').AsBoolean;
+   end;
 end;
 
 end.

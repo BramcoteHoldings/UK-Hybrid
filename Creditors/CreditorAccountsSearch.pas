@@ -4,7 +4,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Db, Buttons, ExtCtrls,
+  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, ExtCtrls,
   NumberEdit, OracleUniProvider, Uni, DBAccess, ToolWin, ImgList,
   cxLookAndFeelPainters, cxStyles, cxCustomData, cxGraphics, cxFilter,
   cxData, cxDataStorage, cxEdit, cxDBData, cxCurrencyEdit, dxBar,
@@ -74,10 +74,12 @@ type
   private
     { Private declarations }
     FInvoiceNo: string;
+    FCreditorCode: string;
     procedure MakeSQL;
   public
     { Public declarations }
     property InvoiceNo: string read FInvoiceNo write FInvoiceNo;
+    property CreditorCode: string read FCreditorCode write FCreditorCode;
   end;
 
 var
@@ -154,7 +156,8 @@ var
 begin
   // Build the SQL Filter query
   qryAccounts.Close;
-  sSQL:= 'SELECT REFNO, CREDITOR, DESCR, OWING, DUE_DATE, NINVOICE, TYPE FROM INVOICE ';
+  sSQL:= 'SELECT I.REFNO, I.CREDITOR, I.DESCR, I.OWING, I.DUE_DATE, I.NINVOICE, I.TYPE ' +
+         'FROM INVOICE I INNER JOIN CREDITOR C ON I.NCREDITOR = C.NCREDITOR ';
 
   sWhereClause := '';
   sAND := ' WHERE ';
@@ -206,6 +209,11 @@ begin
     sWhereClause := sWhereClause + sAND + 'OWING < ' + FloatToStr(neOwingLess.Value);
     sAND := ' AND ';
   end;
+  if FCreditorCode <> '' then
+  begin
+    sWhereClause := sWhereClause + sAND + 'C.CODE = ''' + FCreditorCode + ''' ';
+    sAND := ' AND ';
+  end;
   if sOrderBy = '' then sOrderBy:= ' ORDER BY DUE_DATE';
 
   qryAccounts.SQL.Text := sSQL + sWhereClause + sOrderBy;
@@ -216,7 +224,7 @@ begin
   //qryAccounts.SQL.SaveToFile('C:\tmp\tmp\qryAccounts.sql');
 
   qryAccounts.Open;
-  
+
 end;
 
 procedure TfrmCreditorAccountsSearch.FormCreate(Sender: TObject);
@@ -224,6 +232,8 @@ begin
   sSQL := 'SELECT REFNO, CREDITOR, DESCR, OWING, DUE_DATE, NINVOICE FROM INVOICE WHERE TYPE <> ''CN'''; // AND DUE_DATE < :P_DueDate ';
   sOrderBy := ' ORDER BY DUE_DATE ';
   dtpDue.Date := Date;
+  FCreditorCode := '';
+
 end;
 
 

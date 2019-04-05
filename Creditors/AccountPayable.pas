@@ -16,7 +16,8 @@ uses
   cxDBLookupComboBox, StrUtils, cxBlobEdit, cxLookAndFeelPainters, cxButtons,
   XPStyleActnCtrls, cxLookAndFeels, cxPCdxBarPopupMenu, cxNavigator,
   System.Actions, Uni, dxBarBuiltInMenu, dxCore,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxSkinsCore;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxSkinsCore,
+  dxDateRanges, System.ImageList, glComponentFilterGroup;
 
 const
    CM_EXPANDGROUPS = WM_USER + 1002;
@@ -114,7 +115,6 @@ type
     cxLabel3: TcxLabel;
     cxLabel4: TcxLabel;
     dfInvoiceRef: TcxTextEdit;
-    GLComponentFilter: TGLComponentFilterCxGroup;
     qryLedger: TUniQuery;
     dsLedger: TUniDataSource;
     qryBank: TUniQuery;
@@ -156,6 +156,7 @@ type
     actDelete: TAction;
     actPaySelected: TAction;
     dfCreditor: TcxButtonEdit;
+    GLComponentFilter: TGLComponentFilterGroup;
     procedure tbtnAccountNewClick(Sender: TObject);
     procedure qryAccountsBeforeScroll(DataSet: TDataSet);
     procedure qryAccountsAfterScroll(DataSet: TDataSet);

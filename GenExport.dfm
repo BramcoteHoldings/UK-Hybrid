@@ -21,8 +21,6 @@ object frmExport: TfrmExport
     Caption = 'Destination'
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 0
     Transparent = True
     Height = 98

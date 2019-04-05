@@ -22,7 +22,7 @@ uses
   dxPSFillPatterns, dxPSEdgePatterns, dxPSCore, dxPScxCommon,
   dxPScxGridLnk, dxPgsDlg, cxGridChartView,
   cxGridDBChartView, cxGridExportLink, cxLookAndFeelPainters,
-  cxLookAndFeels, XPStyleActnCtrls, JvExComCtrls, JvDateTimePicker,
+  cxLookAndFeels, XPStyleActnCtrls,
   cxPCdxBarPopupMenu, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
   dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
   dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxDBEditorLnks, dxPSTextLnk,
@@ -31,7 +31,8 @@ uses
   cxNavigator, cxRichEdit, System.Actions, cxBarEditItem, dxCore,
   ppRegion, dxSkinsCore, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog,dxSpellCheckerCore,
-  dxSpellChecker, VclTee.TeeGDIPlus, System.ImageList, dxDateRanges;
+  dxSpellChecker, VclTee.TeeGDIPlus, System.ImageList, dxDateRanges,
+  JvExComCtrls, JvDateTimePicker;
 
 type
   TBudgetShowType = (bstYear, bstQuarter, bstMonth, bstAuthor, bstDepartment);

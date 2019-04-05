@@ -4,14 +4,14 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Db, Buttons, OracleUniProvider, Uni, DBAccess, MemDS,
+  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, OracleUniProvider, Uni, DBAccess, MemDS,
   cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
   cxEdit, cxDBData, cxTextEdit, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxControls, cxGridCustomView, cxClasses, cxGridLevel,
   cxGrid, cxCurrencyEdit,cxContainer, cxGroupBox, cxPC, cxLookAndFeels,
   cxLookAndFeelPainters, cxPCdxBarPopupMenu, cxNavigator, Vcl.ExtCtrls,
   dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  cxCalendar, dxDateRanges;
+  cxCalendar;
 
 type
   TfrmDisbSearch = class(TForm)
@@ -71,6 +71,7 @@ type
 
   public
     { Public declarations }
+    TaxFreeOnly: boolean;
   end;
 
 var
@@ -148,9 +149,13 @@ begin
    if tbLedgerSearch.Text <> '' then
       sWhereClause := sWhereClause + ' AND FILEID like ' + QuotedStr('%' + tbLedgerSearch.Text + '%');
 
+   if TaxFreeOnly then
+      sWhereClause := sWhereClause + ' AND TAX = 0';
+
    qryLedgers.SQL.Clear;
    qryLedgers.SQL.Add(sSQL + sWhereClause + sOrderBy);
    qryLedgers.Open;
+
 end;
 
 
@@ -181,15 +186,17 @@ end;
 
 procedure TfrmDisbSearch.FormCreate(Sender: TObject);
 begin
-   sSQL := 'SELECT DESCR, CREATED, ACCT, NMATTER, REFNO, PAYER, TRUST, BILLED, '+
+  sSQL := 'SELECT DESCR, CREATED, ACCT, NMATTER, REFNO, PAYER, TRUST, BILLED, '+
            ' FILEID, CLIENT_NAME, MATTER_DESC, TAXCODE, '+
            ' NALLOC, nvl(amount * -1,0) as amount, nvl(tax * -1,0) as tax '+
            ' FROM ALLOC WHERE BILLED = ''N'' AND NMEMO IS NULL AND '+
            ' NCHEQUE IS NOT NULL AND TRUST = ''G'' AND RV_NALLOC IS NULL AND ninvoice is null AND (nvl(ncheque,0) > 0 '+
            ' or (nvl(njournal,0) > 0 and type = ''J2''))';
-   sOrderBy := ' ORDER BY created ';
+  sOrderBy := ' ORDER BY created ';
+  TaxFreeOnly := False;
 
-   SettingLoadStream(dmAxiom.UserID, 'tvDisbSearch Layout', tvDisbSearch);
+  SettingLoadStream(dmAxiom.UserID, 'tvDisbSearch Layout', tvDisbSearch);
+
 end;
 
 
@@ -223,8 +230,8 @@ end;
 
 procedure TfrmDisbSearch.tbLedgerSearchChange(Sender: TObject);
 begin
-  if tbLedgerSearch.Text <> '' then
-    qryLedgers.Locate('FILEID', tbLedgerSearch.Text, [loPartialKey]);
+//  if tbLedgerSearch.Text <> '' then
+//    qryLedgers.Locate('CODE', tbLedgerSearch.Text, [loPartialKey]);
   makesql;
 
 end;

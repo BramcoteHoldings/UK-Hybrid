@@ -2,12 +2,12 @@ object frmDisbSearch: TfrmDisbSearch
   Left = 468
   Top = 192
   Caption = 'Unbilled Disbursement Selection'
-  ClientHeight = 543
-  ClientWidth = 622
+  ClientHeight = 615
+  ClientWidth = 705
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -15,36 +15,33 @@ object frmDisbSearch: TfrmDisbSearch
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
-  TextHeight = 15
+  PixelsPerInch = 106
+  TextHeight = 17
   object pageSearch: TcxPageControl
     Left = 0
     Top = 0
-    Width = 622
-    Height = 543
+    Width = 705
+    Height = 615
     Align = alClient
     TabOrder = 0
     Properties.ActivePage = tabGrid
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
+    TabSlants.Kind = skCutCorner
     OnChange = cxPageControl1Change
-    ClientRectBottom = 539
+    ClientRectBottom = 611
     ClientRectLeft = 4
-    ClientRectRight = 618
-    ClientRectTop = 26
+    ClientRectRight = 701
+    ClientRectTop = 28
     object tabGrid: TcxTabSheet
       Caption = 'Display Grid'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdDisbSearch: TcxGrid
         Left = 0
         Top = 0
-        Width = 614
-        Height = 475
+        Width = 697
+        Height = 541
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -55,36 +52,45 @@ object frmDisbSearch: TfrmDisbSearch
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
+          FilterRow.SeparatorWidth = 7
+          FixedDataRows.SeparatorWidth = 7
+          NewItemRow.SeparatorWidth = 7
           OptionsBehavior.FocusCellOnTab = True
           OptionsCustomize.ColumnFiltering = False
           OptionsData.Editing = False
           OptionsSelection.CellSelect = False
           OptionsView.CellEndEllipsis = True
-          OptionsView.NavigatorOffset = 51
+          OptionsView.NavigatorOffset = 58
           OptionsView.CellAutoHeight = True
           OptionsView.ColumnAutoWidth = True
           OptionsView.GroupByBox = False
           OptionsView.HeaderEndEllipsis = True
           OptionsView.Indicator = True
+          OptionsView.IndicatorWidth = 14
+          Preview.LeftIndent = 23
+          Preview.RightIndent = 6
           object tvDisbSearchCREATED: TcxGridDBColumn
             Caption = 'Date'
             DataBinding.FieldName = 'CREATED'
             PropertiesClassName = 'TcxDateEditProperties'
             Properties.ShowTime = False
+            MinWidth = 23
             Styles.Header = cxStyle1
-            Width = 95
+            Width = 108
           end
           object tvDisbSearchREPORT_DESC: TcxGridDBColumn
             Caption = 'Description'
             DataBinding.FieldName = 'DESCR'
+            MinWidth = 23
             Styles.Header = cxStyle2
-            Width = 235
+            Width = 266
           end
           object tvDisbSearchFILEID: TcxGridDBColumn
             Caption = 'Matter'
             DataBinding.FieldName = 'FILEID'
+            MinWidth = 23
             Styles.Header = cxStyle3
-            Width = 88
+            Width = 100
           end
           object tvDisbSearchPAYER: TcxGridDBColumn
             Caption = 'Payer'
@@ -92,26 +98,28 @@ object frmDisbSearch: TfrmDisbSearch
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.Alignment.Horz = taRightJustify
             Properties.ReadOnly = False
+            MinWidth = 23
             Styles.Header = cxStyle4
-            Width = 103
+            Width = 117
           end
           object tvDisbSearchAMOUNT: TcxGridDBColumn
             Caption = 'Amount'
             DataBinding.FieldName = 'AMOUNT'
             PropertiesClassName = 'TcxCurrencyEditProperties'
             HeaderAlignmentHorz = taRightJustify
+            MinWidth = 23
             Styles.Header = cxStyle6
-            Width = 79
+            Width = 90
           end
           object tvDisbSearchNALLOC: TcxGridDBColumn
             DataBinding.FieldName = 'NALLOC'
             Visible = False
+            MinWidth = 23
             VisibleForCustomization = False
           end
           object tvDisbSearchTAX: TcxGridDBColumn
             DataBinding.FieldName = 'TAX'
             Visible = False
-            MinWidth = 18
             VisibleForCustomization = False
           end
         end
@@ -121,28 +129,28 @@ object frmDisbSearch: TfrmDisbSearch
       end
       object Panel1: TPanel
         Left = 0
-        Top = 475
-        Width = 614
-        Height = 38
+        Top = 541
+        Width = 697
+        Height = 42
         Align = alBottom
         TabOrder = 1
         DesignSize = (
-          614
-          38)
+          697
+          42)
         object Label7: TLabel
-          Left = 34
-          Top = 11
-          Width = 35
-          Height = 15
+          Left = 39
+          Top = 13
+          Width = 39
+          Height = 17
           Anchors = [akLeft, akBottom]
-          Caption = '&Matter'
+          Caption = '&Search'
           FocusControl = tbLedgerSearch
         end
         object tbLedgerSearch: TEdit
-          Left = 79
-          Top = 7
-          Width = 120
-          Height = 23
+          Left = 89
+          Top = 8
+          Width = 137
+          Height = 25
           Anchors = [akLeft, akBottom]
           CharCase = ecUpperCase
           TabOrder = 0
@@ -150,10 +158,10 @@ object frmDisbSearch: TfrmDisbSearch
           OnKeyDown = tbLedgerSearchKeyDown
         end
         object btnOK: TBitBtn
-          Left = 465
-          Top = 7
-          Width = 70
-          Height = 24
+          Left = 528
+          Top = 8
+          Width = 79
+          Height = 27
           Anchors = [akRight, akBottom]
           Caption = '&OK'
           Default = True
@@ -179,10 +187,10 @@ object frmDisbSearch: TfrmDisbSearch
           TabOrder = 1
         end
         object btnCancel: TBitBtn
-          Left = 541
-          Top = 7
-          Width = 68
-          Height = 24
+          Left = 614
+          Top = 8
+          Width = 77
+          Height = 27
           Anchors = [akRight, akBottom]
           Caption = '&Cancel'
           Kind = bkCancel
@@ -199,76 +207,76 @@ object frmDisbSearch: TfrmDisbSearch
       ExplicitWidth = 0
       ExplicitHeight = 0
       DesignSize = (
-        614
-        513)
+        697
+        583)
       object fraIncludes: TcxGroupBox
-        Left = 11
-        Top = 7
+        Left = 13
+        Top = 8
         Caption = 'Select Containing'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        Height = 46
-        Width = 289
+        Height = 52
+        Width = 327
         object Label5: TLabel
-          Left = 9
-          Top = 21
-          Width = 60
-          Height = 15
+          Left = 10
+          Top = 24
+          Width = 66
+          Height = 17
           Caption = 'Description'
         end
         object tbDesc: TEdit
-          Left = 69
-          Top = 16
-          Width = 198
-          Height = 23
+          Left = 79
+          Top = 18
+          Width = 225
+          Height = 25
           TabOrder = 0
         end
       end
       object gbLess: TcxGroupBox
-        Left = 11
-        Top = 57
+        Left = 13
+        Top = 65
         Caption = 'Select amount'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 1
         Visible = False
-        Height = 70
-        Width = 289
+        Height = 79
+        Width = 327
         object Label3: TLabel
-          Left = 14
-          Top = 19
-          Width = 49
-          Height = 15
+          Left = 16
+          Top = 21
+          Width = 54
+          Height = 17
           Caption = 'Less than'
         end
         object Label2: TLabel
-          Left = 14
-          Top = 41
-          Width = 65
-          Height = 15
+          Left = 16
+          Top = 47
+          Width = 73
+          Height = 17
           Caption = 'Greater than'
         end
         object tbBalanceLess: TEdit
-          Left = 77
-          Top = 19
-          Width = 83
-          Height = 23
+          Left = 93
+          Top = 21
+          Width = 94
+          Height = 25
           TabOrder = 0
         end
         object tbBalanceGreater: TEdit
-          Left = 77
-          Top = 41
-          Width = 83
-          Height = 23
+          Left = 93
+          Top = 47
+          Width = 94
+          Height = 25
           TabOrder = 1
         end
       end
       object btnClear: TBitBtn
-        Left = 537
-        Top = 489
-        Width = 71
-        Height = 23
+        Left = 610
+        Top = 555
+        Width = 80
+        Height = 26
         Anchors = [akRight, akBottom]
         Caption = 'Clear &All'
         Glyph.Data = {

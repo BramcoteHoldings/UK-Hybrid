@@ -1862,7 +1862,7 @@ begin
          lblCustomAddress.Caption := sCustomAddress;
       if Self.Parent <> nil then
       begin
-         ASearch := qPhonebook.FieldByName('SEARCH').AsString;
+         ASearch := qPhonebook.FieldByName('NAME').AsString;
          if (Pos('&',ASearch)) > 0 then
             Insert('&', ASearch, Pos('&',ASearch));
 

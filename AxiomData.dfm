@@ -15,10 +15,10 @@ object dmAxiom: TdmAxiom
     PoolingOptions.MinPoolSize = 1
     PoolingOptions.ConnectionLifetime = 10000000
     PoolingOptions.Validate = True
+    Pooling = True
     Debug = True
     Username = 'axiom'
-    Server = 'ppp-bhl1.local:1521:xe'
-    Connected = True
+    Server = '192.168.0.22:1521:marketing'
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -2047,7 +2047,7 @@ object dmAxiom: TdmAxiom
     Left = 649
     Top = 178
     Bitmap = {
-      494C010102000500080020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3241,7 +3241,7 @@ object dmAxiom: TdmAxiom
     Left = 629
     Top = 15
     Bitmap = {
-      494C01012A002D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012A002D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000B0000000010020000000000000B0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5283,7 +5283,7 @@ object dmAxiom: TdmAxiom
     Left = 889
     Top = 189
     Bitmap = {
-      494C010101000500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000008686860033660000336600003333
       6600333366003333660080000000800000008000000066006600660066006600
@@ -6031,8 +6031,8 @@ object dmAxiom: TdmAxiom
       end>
   end
   object VirtualTable1: TVirtualTable
-    Left = 975
-    Top = 667
+    Left = 935
+    Top = 659
     Data = {04000000000000000000}
   end
   object qryTmp3: TUniQuery
@@ -6338,6 +6338,10 @@ object dmAxiom: TdmAxiom
     Options.Direct = True
     Options.IPVersion = ivIPBoth
     Options.KeepDesignConnected = False
+    Options.LocalFailover = True
+    PoolingOptions.ConnectionLifetime = 10000000
+    PoolingOptions.Validate = True
+    Pooling = True
     Server = 'dev-oracle:1521:marketing'
     LoginPrompt = False
     Left = 252
@@ -6498,7 +6502,7 @@ object dmAxiom: TdmAxiom
         '  :RESULT := BILL_CREATE(:P_ENTITY, :P_NMATTER, :P_ADDFEES, :P_A' +
         'DDDISB, :P_ADDANTD, :P_ADDSUND, :P_ADDUPCRED, :P_ADDFEESUNDRIES,' +
         ' :P_ADDDISBSUNDRIES, :P_BILLTEMPLATE, :P_CREATED, :P_ADDSERVICEF' +
-        'EE);'
+        'EE, :P_CREATEDBY);'
       'end;')
     Connection = uniInsight
     Left = 935
@@ -6579,6 +6583,12 @@ object dmAxiom: TdmAxiom
       item
         DataType = ftFloat
         Name = 'P_ADDSERVICEFEE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_CREATEDBY'
         ParamType = ptInput
         Value = nil
       end>
@@ -6725,7 +6735,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7561,8 +7571,8 @@ object dmAxiom: TdmAxiom
       '          FROM bank_matter_trust'
       '         WHERE nmatter = :nmatter)'
       ' WHERE acct = :acct')
-    Left = 519
-    Top = 776
+    Left = 535
+    Top = 720
     ParamData = <
       item
         DataType = ftUnknown
@@ -7631,6 +7641,7 @@ object dmAxiom: TdmAxiom
       end>
   end
   object cxLookAndFeelController1: TcxLookAndFeelController
+    Kind = lfOffice11
     ScrollbarMode = sbmHybrid
     Left = 1014
     Top = 349
@@ -7809,8 +7820,8 @@ object dmAxiom: TdmAxiom
         'ASE_CURR_ID, :PMATTER_CURR_ID, :PMATTER_CURR);'
       'end;')
     Connection = uniInsight
-    Left = 1016
-    Top = 80
+    Left = 992
+    Top = 112
     ParamData = <
       item
         DataType = ftFloat
@@ -7952,5 +7963,151 @@ object dmAxiom: TdmAxiom
     DataSet = qryBankList
     Left = 1009
     Top = 405
+  end
+  object spAxiomEmail: TUniStoredProc
+    StoredProcName = 'AXIOM.HTML_EMAIL'
+    SQL.Strings = (
+      'begin'
+      
+        '  AXIOM.HTML_EMAIL(:P_TO, :P_FROM, :P_SUBJECT, :P_TEXT, :P_HTML,' +
+        ' :P_SMTP_HOSTNAME, :P_SMTP_PORTNUM);'
+      'end;')
+    Connection = uniInsight
+    Left = 497
+    Top = 786
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'P_TO'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_FROM'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_SUBJECT'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_TEXT'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_HTML'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_SMTP_HOSTNAME'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_SMTP_PORTNUM'
+        ParamType = ptInput
+        Value = nil
+      end>
+    CommandStoredProcName = 'AXIOM.HTML_EMAIL'
+  end
+  object qryDefaultBankList: TUniQuery
+    Connection = uniInsight
+    SQL.Strings = (
+      'SELECT * FROM BANK'
+      'where entity = nvl(:entity, entity)'
+      'and trust = nvl(:trust, trust)'
+      
+        'and (acct In (Select DEFAULT_OFFICE_BANK From ENTITY Where entit' +
+        'y = nvl(:entity, entity)) '
+      
+        'Or acct In (Select DEFAULT_CLIENT_BANK From ENTITY Where entity ' +
+        '= nvl(:entity, entity)))'
+      'Order By ACCT;'
+      '')
+    Left = 1029
+    Top = 20
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'entity'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'trust'
+        Value = nil
+      end>
+  end
+  object dsDefaultBankList: TUniDataSource
+    DataSet = qryDefaultBankList
+    Left = 1033
+    Top = 69
+  end
+  object procCanAuthoriseBill: TUniStoredProc
+    StoredProcName = 'CAN_AUTHORISE_BILLS'
+    SQL.Strings = (
+      'declare'
+      '  v_RESULT boolean;'
+      'begin'
+      
+        '  v_RESULT := CAN_AUTHORISE_BILLS(:P_AUTHOR, :P_NMATTER, :P_DEPT' +
+        ');'
+      '  :RESULT := sys.DIUTIL.BOOL_TO_INT(v_RESULT);'
+      'end;')
+    Connection = uniInsight
+    Left = 588
+    Top = 741
+    ParamData = <
+      item
+        DataType = ftBoolean
+        Name = 'RESULT'
+        ParamType = ptResult
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_AUTHOR'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftFloat
+        Name = 'P_NMATTER'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'P_DEPT'
+        ParamType = ptInput
+        Value = nil
+      end>
+    CommandStoredProcName = 'CAN_AUTHORISE_BILLS'
+  end
+  object dsCurrencyList: TUniDataSource
+    DataSet = qryCurrencyList
+    Left = 1024
+    Top = 568
+  end
+  object qryCurrencyList: TUniQuery
+    Connection = uniInsight
+    SQL.Strings = (
+      'select ISO4217_CURRENCY_CODE, max(ISO4217_CURRENCY_NAME)'
+      'from'
+      'country_list'
+      'Group By ISO4217_CURRENCY_CODE'
+      'Order By ISO4217_CURRENCY_CODE')
+    Left = 1032
+    Top = 512
   end
 end

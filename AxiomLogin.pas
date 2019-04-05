@@ -2,13 +2,13 @@ unit AxiomLogin;
 
 interface
 
-uses cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
-  cxEdit, Vcl.ExtCtrls, Data.DB, MemDS, DBAccess, Uni, dxGDIPlusClasses,
-  cxImage, cxLabel, Vcl.Controls, Vcl.StdCtrls, cxCheckBox, Vcl.Buttons,
-  cxProgressBar, System.Classes, INIFiles, Forms, Registry, SysUtils, Windows,
-  Messages, Graphics, Vcl.ComCtrls, Dialogs,System.ConvUtils ;
-
-  
+uses
+  Vcl.Forms, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, Vcl.ExtCtrls, Data.DB, MemDS, DBAccess, Uni,
+  cxProgressBar, dxStatusBar, Vcl.Controls, Vcl.StdCtrls, cxCheckBox,
+  Vcl.Buttons, System.Classes, System.IniFiles,
+  System.Win.Registry, System.SysUtils, Windows, Vcl.Dialogs, Vcl.Graphics, Vcl.ComCtrls,
+  cxLabel, messages, VCL.Themes, System.ConvUtils, dxGDIPlusClasses, cxImage, dxDPIAwareUtils;
 
 
 
@@ -294,7 +294,8 @@ var
   LdtFile: TDateTime;
   FileDate: integer;
   NetConnMethod,
-  NLSCharSet: string;
+  NLSCharSet,
+  TNSServer: string;
 begin
    ModalResult := mrNone;
    try
@@ -316,8 +317,9 @@ begin
        slRow := TStringList.Create;
        dmAxiom.uniInsight.SpecificOptions.Values['Direct'] := 'False';
        Split(FINIstartup.ReadString('Option' + IntToStr(cbDatabase.ItemIndex + 1), 'ServerName', ''),':' , slRow);
+       TNSServer := FINIstartup.ReadString('Option' + IntToStr(cbDatabase.ItemIndex + 1), 'Name', '');
        try
-         dmAxiom.uniInsight.Server := slRow[2];
+         dmAxiom.uniInsight.Server := TNSServer;  //slRow[2];
 //         MsgInfo(slRow[2]);
 //         MsgInfo(dmAxiom.uniInsight.Server + '2');
        finally
@@ -335,6 +337,7 @@ begin
      try
         dmAxiom.uniInsight.Connect();
      except
+
          tbPassword.Clear;
          lblProcess.Caption := 'Connection Failed.';
          Raise;
@@ -373,7 +376,7 @@ begin
           LregAxiom.WriteString('Net', 'Y');
 }
 
-{        lblProcess.Caption := 'Creating background database connections...';
+        lblProcess.Caption := 'Creating background database connections...';
         pbProcess.Position := 10;
         Application.ProcessMessages;
         if (FINIstartup.ReadString('Option' + IntToStr(cbDatabase.ItemIndex + 1), 'Net', '') = 'N') then
@@ -384,7 +387,7 @@ begin
         dmAxiom.orsAxiom.Password := dmAxiom.uniInsight.Password;
         dmAxiom.orsAxiom.Server := dmAxiom.uniInsight.Server;
         dmAxiom.orsAxiom.Connect;
-}
+
         lblProcess.Caption := 'Gathering Database Instance name...';
         Application.ProcessMessages;
         { added mgd 3/2/2003 to allow bills to connect to correct database when testing }
@@ -491,8 +494,6 @@ begin
             end;
         end;
 
-
-
         if Trunc(dmAxiom.qryTmp.FieldByName('SERVER_DATE').AsDateTime) <> Trunc(Date) then
         begin
           MessageDlg('The date and time on your machine does not match that of the Insight server '+
@@ -517,7 +518,7 @@ var
   sNetworkDir: string;
   regAxiom: TRegistry;
 begin
-   pbProcess.Position := 0;
+//   pbProcess.Position := 0;
 
    // Find out where the network files are
    regAxiom := TRegistry.Create;
@@ -646,13 +647,13 @@ begin
          Self.HelpFile := dmAxiom.HelpPath;   }
 
       pbProcess.Visible := True;
-      if dmAxiom.WANEnabled then
+{      if dmAxiom.WANEnabled then
          pbProcess.Properties.Max := 8
       else
-         pbProcess.Properties.Max := 4;
+         pbProcess.Properties.Max := 7;  }
 
       lblProcess.Caption := 'Setting Entity';
-      pbProcess.Position := pbProcess.Position + 1;
+      pbProcess.Position := pbProcess.Position + 20;
 
       // Make sure we have an Entity defined for this user
       if dmAxiom.Entity = '' then
@@ -681,7 +682,7 @@ begin
 
        dmAxiom.SoundEnabled := True;
        lblProcess.Caption := 'Setting up Desktop';
-       pbProcess.Position := pbProcess.Position + 1;
+       pbProcess.Position := pbProcess.Position + 10;
        PlaySound('Open');
        sTmp := CN_PROGRAM_NAME;
    //    sTmp := SystemString('COMMUNICATIONS');
@@ -770,21 +771,23 @@ begin
        end;
 
        lblProcess.Caption := 'Loading Toolbars';
-       pbProcess.Position := pbProcess.Position + 1;
-       frmDesktop.LoadToolbars;
+       pbProcess.Position := pbProcess.Position + 35;
        Application.ProcessMessages;
+       frmDesktop.LoadToolbars;
+
 
        lblProcess.Caption := 'Setting Shortcuts and Snapshots';
-       pbProcess.Position := pbProcess.Position + 1;
+       pbProcess.Position := pbProcess.Position + 10;
+       Application.ProcessMessages;
        frmDesktop.DisplayIcons;
        frmDesktop.DisplayDesktopIcons;
-       Application.ProcessMessages;
+
 //    end;
 
     lblProcess.Caption := 'Configuring security';
-    pbProcess.Position := pbProcess.Position + 1;
-    dmAxiom.SecurityLoad;
+    pbProcess.Position := pbProcess.Position + 10;
     Application.ProcessMessages;
+    dmAxiom.SecurityLoad;
 
 {   if dmAxiom.WANEnabled then
    begin
@@ -797,14 +800,14 @@ begin
 }
 
    lblProcess.Caption := 'Setting Help file';
-   pbProcess.Position := pbProcess.Position + 1;
+   pbProcess.Position := pbProcess.Position + 10;
+   Application.ProcessMessages;
 //   if trim(dmAxiom.HelpPath) = '' then
-      Application.HelpFile := ExtractFilePath(Application.EXEName) + 'Help\' + SystemString('COMMUNICATIONS') + '.HLP';
+   Application.HelpFile := ExtractFilePath(Application.EXEName) + 'Help\' + SystemString('COMMUNICATIONS') + '.HLP';
 //   else
 //      Application.HelpFile := dmAxiom.HelpPath;
-   Application.ProcessMessages;
 
-    lblProcess.Caption := 'Showing Insight Workspace';
+   lblProcess.Caption := 'Showing Insight Workspace';
 //   lblProcess.Caption := 'Showing NetLawyer Workspace';
    Application.ProcessMessages;
 end;
@@ -877,5 +880,6 @@ begin
 end;
 
 end.
+
 
 

@@ -17,8 +17,9 @@ uses
   cxLookAndFeelPainters, cxPCdxBarPopupMenu, cxSchedulerStorage,
   cxSchedulerCustomControls, cxGridCustomTableView, cxGridTableView,
   uRwMapiFolderDialog, uRwMapiFormManager, uRwMapiTableEvents,
-  dxRibbonSkins, dxRibbon, JvExComCtrls, JvComCtrls, cxNavigator,
-  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog;
+  dxRibbonSkins, dxRibbon, cxNavigator,
+  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxDateRanges, System.ImageList;
 
 const
   WM_NEWMESSAGE = WM_USER + 1;

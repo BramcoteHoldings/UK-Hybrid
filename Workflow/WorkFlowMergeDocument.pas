@@ -20,14 +20,12 @@ unit WorkFlowMergeDocument;
 
 interface
 
-uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, VirtualTrees, WorkflowTask, ActnList, ActnMan,
-  ToolWin, ActnCtrls, ImgList, StdActns, Menus, Variants, cxDateUtils,
-  WorkFlowDocumentMerge, OracleUniProvider, Uni, DBAccess, MemDS, ActiveX,
-  cxControls, cxContainer, cxEdit, cxCheckBox, dxBarExtItems, dxBar,
-  WorkFlowDataModule, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
-  XPStyleActnCtrls, cxClasses, Data.DB, System.Actions, cxBarEditItem,
-  Vcl.PlatformDefaultStyleActnCtrls, System.ImageList;
+uses Windows, SysUtils, Classes, Graphics, Forms, Controls, cxCheckBox, dxBar,
+  cxBarEditItem, dxBarExtItems, cxClasses, Vcl.Menus, System.Actions,
+  Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  System.ImageList, Vcl.ImgList, VirtualTrees, Vcl.ExtCtrls, WorkFlowDocumentMerge,
+  WorkFlowTask, WorkFlowDataModule, Uni, OracleUniProvider, Data.Db, Variants,
+  ActiveX;
 
 const
   C_SETTINGOWNER = 'WKFMERGEDOC';

@@ -754,10 +754,6 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'User &Statements'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgUserStatements: TcxGrid
         Left = 0
         Top = 0

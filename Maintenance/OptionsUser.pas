@@ -4,19 +4,17 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Spin, Buttons, Printers, ComCtrls, ExtCtrls, NumberEdit,
-  DBCGrids, Db, OracleUniProvider, Uni, DBAccess, MemDS, Mask, DBCtrls, VirtualTable,
-  Menus, dxBar, cxStyles, cxCustomData, cxGraphics,
-  cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxDropDownEdit,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, cxDBLookupComboBox,
-  cxNavigator, cxDBNavigator, ShlObj, cxShellCommon, cxTextEdit,
-  cxContainer, cxMaskEdit, cxShellComboBox, cxDBShellComboBox, cxLabel,
-  cxCheckBox, cxColorComboBox, cxSpinEdit, cxPC, cxMemo, cxRadioGroup,
-  cxGroupBox, cxLookAndFeelPainters, cxButtons, DateUtils, cxPCdxBarPopupMenu,
-  cxLookAndFeels, JvTFManager, JvExControls, JvTFGlance, JvTFMonths,
-  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxDateRanges;
+  dxBarBuiltInMenu, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
+  cxContainer, cxEdit, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxDropDownEdit, cxDBLookupComboBox, cxColorComboBox, Vcl.Menus, JvTFManager,
+  dxBar, cxClasses, VirtualTable, DBAccess, Uni, MemDS, JvExControls,
+  JvTFGlance, JvTFMonths, Vcl.StdCtrls, cxButtons, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
+  cxGrid, Vcl.Buttons, cxMemo, cxRadioGroup, cxGroupBox, cxSpinEdit, cxCheckBox,
+  cxLabel, cxTextEdit, cxMaskEdit, cxShellComboBox, cxPC, Printers, DateUtils;
 
 const
    Months: array[1..12] of string = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');

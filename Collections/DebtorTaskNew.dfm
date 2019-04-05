@@ -3,7 +3,7 @@ object frmDebtorTasknew: TfrmDebtorTasknew
   Top = 193
   BorderStyle = bsDialog
   Caption = 'Debtor Task New'
-  ClientHeight = 435
+  ClientHeight = 447
   ClientWidth = 501
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -137,14 +137,14 @@ object frmDebtorTasknew: TfrmDebtorTasknew
     Left = 14
     Top = 312
     Width = 468
-    Height = 107
+    Height = 121
     TabOrder = 7
     Properties.ActivePage = tabData
     Properties.CustomButtons.Buttons = <>
     Properties.HideTabs = True
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
-    ClientRectBottom = 107
+    ClientRectBottom = 121
     ClientRectRight = 468
     ClientRectTop = 0
     object tabData: TcxTabSheet
@@ -152,10 +152,10 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       ImageIndex = 0
       DesignSize = (
         468
-        107)
+        121)
       object cxLabel5: TcxLabel
         Left = 4
-        Top = 7
+        Top = 8
         Caption = 'Description'
       end
       object cxDBTextEdit1: TcxDBTextEdit
@@ -172,12 +172,12 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       end
       object cxLabel6: TcxLabel
         Left = 43
-        Top = 30
+        Top = 33
         Caption = 'Due'
       end
       object cxDBDateEdit2: TcxDBDateEdit
         Left = 74
-        Top = 30
+        Top = 32
         DataBinding.DataField = 'ACTION_DATE'
         DataBinding.DataSource = dsDebtorWorkflowTaskI
         Style.LookAndFeel.NativeStyle = True
@@ -189,7 +189,7 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       end
       object cxDBCheckBox1: TcxDBCheckBox
         Left = 250
-        Top = 81
+        Top = 94
         Caption = 'Confirm'
         DataBinding.DataField = 'CONFIRMATION_REQUIRED'
         DataBinding.DataSource = dsDebtorWorkflowTaskI
@@ -229,7 +229,7 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       end
       object btnActionOk: TBitBtn
         Left = 7
-        Top = 80
+        Top = 94
         Width = 70
         Height = 23
         Anchors = [akLeft, akBottom]
@@ -255,10 +255,11 @@ object frmDebtorTasknew: TfrmDebtorTasknew
         NumGlyphs = 2
         TabOrder = 7
         OnClick = btnActionOkClick
+        ExplicitTop = 80
       end
       object btnActionCancel: TBitBtn
         Left = 82
-        Top = 80
+        Top = 94
         Width = 69
         Height = 23
         Anchors = [akLeft, akBottom]
@@ -284,15 +285,16 @@ object frmDebtorTasknew: TfrmDebtorTasknew
         NumGlyphs = 2
         TabOrder = 8
         OnClick = btnActionCancelClick
+        ExplicitTop = 80
       end
       object cxLabel1: TcxLabel
         Left = 239
-        Top = 31
+        Top = 33
         Caption = 'Min Balance'
       end
       object cxDBCurrencyEdit1: TcxDBCurrencyEdit
         Left = 309
-        Top = 30
+        Top = 32
         DataBinding.DataField = 'MIN_BALANCE'
         DataBinding.DataSource = dsDebtorWorkflowTaskI
         Style.LookAndFeel.NativeStyle = True
@@ -304,17 +306,17 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       end
       object cxLabel2: TcxLabel
         Left = 13
-        Top = 54
+        Top = 58
         Caption = 'Assign To'
       end
       object cxLabel3: TcxLabel
         Left = 263
-        Top = 54
+        Top = 58
         Caption = 'Alert To'
       end
       object cxDBLookupComboBox1: TcxDBLookupComboBox
         Left = 309
-        Top = 53
+        Top = 57
         DataBinding.DataField = 'ALERT_TO'
         DataBinding.DataSource = dsDebtorWorkflowTaskI
         Properties.KeyFieldNames = 'CODE'
@@ -333,7 +335,7 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       end
       object cxDBLookupComboBox2: TcxDBLookupComboBox
         Left = 74
-        Top = 53
+        Top = 57
         DataBinding.DataField = 'ASSIGNED_TO'
         DataBinding.DataSource = dsDebtorWorkflowTaskI
         Properties.KeyFieldNames = 'CODE'
@@ -355,7 +357,7 @@ object frmDebtorTasknew: TfrmDebtorTasknew
       Caption = 'tabBlank'
       ImageIndex = 1
       ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 107
     end
   end
   object qryEmployee: TUniQuery

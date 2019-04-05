@@ -1,6 +1,6 @@
 object frmCreditorSearch: TfrmCreditorSearch
-  Left = 947
-  Top = 199
+  Left = 549
+  Top = 309
   Caption = 'Creditor Selection'
   ClientHeight = 646
   ClientWidth = 728
@@ -11,7 +11,7 @@ object frmCreditorSearch: TfrmCreditorSearch
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
-  Position = poDesktopCenter
+  Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -24,7 +24,7 @@ object frmCreditorSearch: TfrmCreditorSearch
     Height = 646
     Align = alClient
     TabOrder = 0
-    Properties.ActivePage = tabGrid
+    Properties.ActivePage = tabFilters
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfFlat
@@ -40,12 +40,12 @@ object frmCreditorSearch: TfrmCreditorSearch
       OnShow = tabGridShow
       ExplicitLeft = 0
       ExplicitTop = 0
-      ExplicitWidth = 595
-      ExplicitHeight = 569
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
-        Top = 573
-        Width = 719
+        Top = 575
+        Width = 720
         Height = 39
         Align = alBottom
         BevelOuter = bvNone
@@ -118,7 +118,6 @@ object frmCreditorSearch: TfrmCreditorSearch
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
           OptionsImage.Spacing = 5
           TabOrder = 0
-          ExplicitLeft = 522
         end
         object btnCancel: TcxButton
           Left = 625
@@ -217,7 +216,6 @@ object frmCreditorSearch: TfrmCreditorSearch
           OptionsImage.NumGlyphs = 2
           OptionsImage.Spacing = 5
           TabOrder = 1
-          ExplicitLeft = 623
         end
         object tbCreditorSearch: TcxTextEdit
           Left = 124
@@ -253,8 +251,6 @@ object frmCreditorSearch: TfrmCreditorSearch
         Align = alClient
         TabOrder = 1
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 719
-        ExplicitHeight = 573
         object tvCreditors: TcxGridDBTableView
           OnDblClick = dbgrCreditorsDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -321,10 +317,6 @@ object frmCreditorSearch: TfrmCreditorSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 595
-      ExplicitHeight = 569
       object fraActive: TcxRadioGroup
         Left = 17
         Top = 150

@@ -3,29 +3,34 @@ unit Desktop;
 interface
 
 uses
-  vcl.Dialogs, System.Classes, Vcl.ActnList, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, dxBarBuiltInMenu, cxPC, Vcl.Menus,
-  cxStyles, cxScheduler, cxSchedulerStorage, cxSchedulerCustomControls,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, cxPCdxBarPopupMenu, cxPC, Vcl.ComCtrls, cxClasses, dxDockControl,
+  cxEditRepositoryItems, Vcl.Controls, System.Classes, Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dxBar, dxBarExtItems,
+  dxBarExtDBItems, Data.DB, DBAccess, Uni, Vcl.ExtCtrls, MemDS, Vcl.Dialogs,
+  Vcl.Menus, Vcl.ImgList, cxSplitter, cxDropDownEdit, cxLookupEdit,
+  cxDBLookupEdit, cxDBLookupComboBox, Vcl.StdCtrls, cxTreeView, dxNavBarCollns,
+  dxNavBarBase, dxNavBar, dxDockPanel, cxTextEdit, Vcl.Styles.Ext,
+  cxMaskEdit, cxButtonEdit, dxStatusBar, Vcl.MPlayer, Vcl.Forms,
+  System.INIFiles, System.SysUtils, Windows, Registry, Messages, Vcl.graphics,
+  Vcl.Buttons, vcl.themes, AppEvnts, System.Actions, XML.Win.msxmldom,
+  dxRibbonGallery, dxRibbonSkins, dxRibbon, dxBarApplicationMenu, Variants,
+  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
+  cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridLevel, cxGridCustomView, cxGrid, cxSchedulerStorage,
+  cxSchedulerDBStorage, cxSchedulercxGridConnection, cxSchedulerDialogs,
+  cxImageComboBox, cxMemo, cxCalendar, cxCheckBox, cxColorComboBox,
+  cxProgressBar, cxBarEditItem, cxLabel, cxRadioGroup, dxBarBuiltInMenu,
+  cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxRibbonCustomizationForm, dxSkinsCore, WorkflowMergeDocument, System.Win.ComObj,
+  dxDPIAwareUtils, cxPropertiesStore, ConflictSearch,
+  cxScheduler, cxSchedulerCustomControls,
   cxSchedulerCustomResourceView, cxSchedulerDayView, cxSchedulerAgendaView,
   cxSchedulerDateNavigator, cxSchedulerHolidays, cxSchedulerTimeGridView,
   cxSchedulerUtils, cxSchedulerWeekView, cxSchedulerYearView,
-  cxSchedulerGanttView, cxSchedulerRecurrence, VCL.Forms,
-  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser, cxCustomData,
-  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxTextEdit, cxMemo,
-  cxCalendar, cxImageComboBox, cxCheckBox, cxColorComboBox, cxProgressBar,
-  Vcl.ComCtrls, dxRibbonSkins, dxRibbonCustomizationForm, cxSchedulerDBStorage,
-  cxSchedulercxGridConnection, dxBarApplicationMenu, dxRibbon, dxDockControl,
-  cxEditRepositoryItems, dxBar, cxBarEditItem, dxRibbonGallery, dxBarExtItems,
-  dxBarExtDBItems, cxClasses, Data.DB, DBAccess, Uni, Vcl.ExtCtrls, MemDS,
-  System.ImageList, Vcl.ImgList, Vcl.Controls, cxSplitter,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxTreeView,
-  dxNavBarCollns, dxNavBarBase, dxNavBar, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridCustomView, cxGrid, Vcl.StdCtrls, Vcl.Buttons,
-  dxDockPanel, cxMaskEdit, cxButtonEdit, dxStatusBar, Vcl.MPlayer, System.SysUtils,
-  VCL.Graphics, Variants, WorkflowMergeDocument, Registry , ConflictSearch, ComObj,
-   XML.Win.msxmldom, Styles.Ext, cxSchedulerDialogs, Windows, VCL.Themes,
-  cxLabel
+  cxSchedulerGanttView, cxSchedulerRecurrence,
+  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
+  System.ImageList, dxDateRanges
   {, Cromis.DirectoryWatch};
 
 {$DEFINE AXIOM}
@@ -758,10 +763,11 @@ uses
 {$R AXIOMAVI.RES}
 
 var
-  iDiaryNotify :  integer;   // Notification time in seconds
-  LfrmdtSearch:   TfrmdtSearch;
-  LfrmDocSearch:  TfrmDocSearch;
-  iMtrSearchLimit: integer;
+  iDiaryNotify :     integer;   // Notification time in seconds
+  LfrmdtSearch:      TfrmdtSearch;
+  LfrmDocSearch:     TfrmDocSearch;
+  iMtrSearchLimit:   integer;
+  sPing_Server:      string;
 
 
 
@@ -803,6 +809,8 @@ begin
             SplashScreen := TfrmSplashScreen.Create(Application);
             SplashScreen.Show;
             Application.ProcessMessages;
+
+            sPing_Server := SystemString('PING_SERVER');
 
             qryDiary.SQL.Clear;
             if SystemString('USE_PROJECT_BUDGETING') = 'N' then
@@ -1802,7 +1810,7 @@ begin
 
       try
          if finYearStart <> nil then
-            finYearStart.Destroy;
+            finYearStart.Free;
       finally
          if (dmAxiom.orsAxiom.Connected = True) then
             dmAxiom.orsAxiom.Disconnect;
@@ -2647,7 +2655,7 @@ begin
          SQL.Text := SQL.Text + 'and matter.entity = '+ QuotedStr(dmAxiom.Entity) ;
 
       if (Trim(LFileID) <> '') then
-         SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(trim(LFileID)) +') > 0';
+         SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(trim('%'+LFileID+'%')) +') > 0';
       Prepare;
       Open;
       if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) <> '') then
@@ -5057,7 +5065,26 @@ end;
 procedure TfrmDesktop.tmrUserCountTimer(Sender: TObject);
 begin
    if dmAxiom.bShutdown = False then
+   begin
       GetUserCount;
+      if sPing_Server <> '' then
+      BEGIN
+         if dmAxiom.Ping(sPing_Server) = true then
+         begin
+            TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[0].IndicatorType := sitGreen;
+            TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[1].IndicatorType := sitOff;
+            if dmAxiom.uniInsight.Connected = False then
+               dmAxiom.uniInsight.Connect;
+         end
+         else
+         begin
+            TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[0].IndicatorType := sitOff;
+            TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[1].IndicatorType := sitRed;
+            if dmAxiom.uniInsight.Connected = False then
+               dmAxiom.uniInsight.Connect;
+         end;
+      END;
+   end;
 
 //   StatusBar.Panels.Items[3].Text := 'User '+ IntToStr(dmAxiom.UserCount) + ' of '+IntToStr(nTotal);
 end;
@@ -5264,7 +5291,7 @@ begin
       else
          SQL.Text := SQL.Text + 'WHERE nclient is not null ';
 
-      SQL.Text := SQL.Text + ' and contains(dummy,upper('+ QuotedStr(ASearch) +')) > 0';
+      SQL.Text := SQL.Text + ' and contains(dummy,upper('+ QuotedStr('%'+ASearch+'%') +')) > 0';
 
       Open;
       if (RecordCount > 1) then

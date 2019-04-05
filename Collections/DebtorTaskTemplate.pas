@@ -17,7 +17,8 @@ uses
   cxLookAndFeelPainters, cxButtons, cxImageComboBox, cxLookAndFeels,
   cxPCdxBarPopupMenu, ppParameter, ppBands, ppCache, ppClass, ppProd,
   ppReport, ppEndUsr, ppDsgnDB, ppComm, ppRelatv, ppDB, ppDBPipe,
-  ppDesignLayer, cxNavigator;
+  ppDesignLayer, cxNavigator, dxBarBuiltInMenu,
+  cxDataControllerConditionalFormattingRulesManagerDialog, System.ImageList;
 
 type
 

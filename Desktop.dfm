@@ -70,6 +70,17 @@ object frmDesktop: TfrmDesktop
         Fixed = False
         MinWidth = 52
         Width = 52
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarStateIndicatorPanelStyle'
+        PanelStyle.Indicators = <
+          item
+            IndicatorType = sitGreen
+          end
+          item
+          end>
+        MinWidth = 48
+        Width = 48
       end>
     PaintStyle = stpsUseLookAndFeel
     LookAndFeel.Kind = lfOffice11
@@ -77,7 +88,7 @@ object frmDesktop: TfrmDesktop
     ParentFont = True
     OnDblClick = sbarStatusDblClick
     object dxStatusBar1Container1: TdxStatusBarContainerControl
-      Left = 238
+      Left = 229
       Top = 2
       Width = 242
       Height = 25
@@ -97,30 +108,28 @@ object frmDesktop: TfrmDesktop
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        ExplicitWidth = 193
         Width = 242
       end
     end
     object StatusBarContainer5: TdxStatusBarContainerControl
-      Left = 1111
+      Left = 1082
       Top = 2
-      Width = 137
+      Width = 114
       Height = 25
       object pnlTimeTrack: TPanel
         Left = 0
         Top = 0
-        Width = 137
+        Width = 114
         Height = 25
         Align = alClient
         ShowCaption = False
         TabOrder = 0
         Visible = False
-        ExplicitWidth = 146
         object lblTimer: TLabel
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 129
+          Width = 106
           Height = 17
           Align = alClient
           Alignment = taCenter
@@ -288,7 +297,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 0
+            Height = 124
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -925,7 +934,7 @@ object frmDesktop: TfrmDesktop
           Left = -206
           Top = 0
           Width = 206
-          Height = 0
+          Height = 124
           ManagerFont = False
           ParentFont = True
           Visible = False
@@ -1357,6 +1366,7 @@ object frmDesktop: TfrmDesktop
           PositionAfterOpen = 26
           MinSize = 26
           Control = lvClassicDesktop
+          ExplicitWidth = 8
         end
         object dxBarDockControl2: TdxBarDockControl
           Left = 0
@@ -7322,7 +7332,7 @@ object frmDesktop: TfrmDesktop
     Interval = 900000
     OnTimer = tmrUserCountTimer
     Left = 1094
-    Top = 548
+    Top = 380
   end
   object qryTmp: TUniQuery
     Connection = dmAxiom.uniInsight

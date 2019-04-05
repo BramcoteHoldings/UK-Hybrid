@@ -3,7 +3,7 @@ unit DocCopyMoveFileDialog;
 interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, Mask, ShellAPI, JvExMask, JvToolEdit, Vcl.ComCtrls, JvgPage,
+  Buttons, ExtCtrls, Mask, ShellAPI, Vcl.ComCtrls,
   cxPCdxBarPopupMenu, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxPC, vcl.dialogs;
 

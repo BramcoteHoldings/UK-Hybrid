@@ -28,3 +28,6 @@ Diary/__history
 infotrack/__history
 Time/__history
 __history
+BIN/Platform/win32/Insight.ini
+BIN/Platform/win32/Insight.drc
+BIN/Platform/win32/RBuilder.ini

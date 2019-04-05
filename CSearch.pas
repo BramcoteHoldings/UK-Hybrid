@@ -8,7 +8,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons, ExtCtrls,
+  StdCtrls, ComCtrls, Db, Buttons, ExtCtrls,
   CheckLst, ToolWin, ImgList, OracleUniProvider, Uni, MemDS,
   DBAccess, cxControls, cxContainer, cxEdit, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, Variants,
@@ -17,7 +17,7 @@ uses
   cxClasses, cxGridCustomView, cxGridLevel, cxGrid, cxCalendar,
   cxCurrencyEdit, dxBar, cxCheckListBox, cxGroupBox, cxRadioGroup, cxMemo,
   cxLabel, cxPC, dxBarExtItems, cxLookAndFeelPainters,
-  cxLookAndFeels, JvExStdCtrls, JvEdit, dxPSGlbl, dxPSUtl, dxPSEngn,
+  cxLookAndFeels, dxPSGlbl, dxPSUtl, dxPSEngn,
   dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
   dxPSEdgePatterns, dxPSCore, dxPSContainerLnk, dxPScxCommon, dxPScxGridLnk,
   cxGridExportLink, ppCtrls, ppPrnabl, ppClass, ppVar, ppBands, ppCache,
@@ -28,7 +28,7 @@ uses
   dxPScxEditorProducers, dxPScxExtEditorProducers, dxPScxDBEditorLnks,
   dxPSTextLnk, dxPScxSchedulerLnk, dxCore, cxNavigator, cxBarEditItem,
   dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  cxCustomListBox;
+  cxCustomListBox, dxDateRanges, System.ImageList;
 
 const
   imgWORD = 2;
@@ -239,7 +239,6 @@ type
     }
     procedure rgGroupSelectClick(Sender: TObject);
     procedure clbGroupsClick(Sender: TObject);
-    procedure dbgrClientsTitleClick(Column: TColumn);
     procedure FormResize(Sender: TObject);
     procedure tmrSearchTimer(Sender: TObject);
     procedure cmbTypePropertiesChange(Sender: TObject);
@@ -1358,11 +1357,6 @@ procedure TfrmClientSearch.clbGroupsClick(Sender: TObject);
 begin
   SaveFilter := True;
   RefreshSearch := True;
-end;
-
-procedure TfrmClientSearch.dbgrClientsTitleClick(Column: TColumn);
-begin
-  SaveConfig := True;
 end;
 
 procedure TfrmClientSearch.FormResize(Sender: TObject);

@@ -1,59 +1,61 @@
 object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
   Left = 826
   Top = 337
+  BorderStyle = bsDialog
   Caption = 'Merge'
-  ClientHeight = 159
-  ClientWidth = 460
+  ClientHeight = 180
+  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnShow = FormShow
-  PixelsPerInch = 106
-  TextHeight = 15
+  PixelsPerInch = 96
+  TextHeight = 13
   object pcMerge: TcxPageControl
     Left = 0
     Top = 0
-    Width = 460
-    Height = 159
+    Width = 584
+    Height = 180
     Align = alClient
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
-    Properties.ActivePage = tabEmail
+    Properties.ActivePage = tabStatement
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
-    ClientRectBottom = 155
+    ClientRectBottom = 176
     ClientRectLeft = 4
-    ClientRectRight = 456
-    ClientRectTop = 26
+    ClientRectRight = 580
+    ClientRectTop = 24
     object tabWord: TcxTabSheet
       Caption = 'tabWord'
       ImageIndex = 0
       object cxEdOutfile: TcxTextEdit
-        Left = 90
-        Top = 8
+        Left = 78
+        Top = 7
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        Width = 351
+        Width = 304
       end
       object cxLabel1: TcxLabel
-        Left = 8
-        Top = 9
+        Left = 7
+        Top = 8
         Caption = 'Output File'
         Transparent = True
       end
       object cxBcShow: TcxCheckBox
-        Left = 8
-        Top = 35
+        Left = 7
+        Top = 30
+        AutoSize = False
         Caption = 'Show File'
         Properties.Alignment = taRightJustify
         Style.LookAndFeel.NativeStyle = True
@@ -61,11 +63,13 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 2
-        Width = 102
+        Height = 21
+        Width = 88
       end
       object cxCbPrint: TcxCheckBox
-        Left = 8
-        Top = 60
+        Left = 7
+        Top = 52
+        AutoSize = False
         Caption = 'Print File'
         Properties.Alignment = taRightJustify
         Style.LookAndFeel.NativeStyle = True
@@ -73,13 +77,14 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 3
-        Width = 102
+        Height = 21
+        Width = 88
       end
       object btnProcessWord: TBitBtn
-        Left = 8
-        Top = 95
-        Width = 81
-        Height = 26
+        Left = 7
+        Top = 93
+        Width = 70
+        Height = 23
         Caption = 'Process'
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -123,33 +128,35 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     object tabEmail: TcxTabSheet
       Caption = 'tabEmail'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 125
       DesignSize = (
-        452
-        129)
+        576
+        152)
       object cxMemo1: TcxMemo
-        Left = 215
-        Top = 137
+        Left = 186
+        Top = 119
         Lines.Strings = (
           'cxMemo1')
         TabOrder = 0
-        Height = 96
-        Width = 198
+        Height = 83
+        Width = 172
       end
       object cxGroupBox1: TcxGroupBox
-        Left = 8
-        Top = 60
+        Left = 7
+        Top = 106
         Anchors = [akLeft, akTop, akRight, akBottom]
         Caption = 'Text'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 1
-        Height = 24
-        Width = 436
+        Height = 30
+        Width = 562
         object mmEmail: TcxMemo
           Left = 2
-          Top = 20
+          Top = 18
           Align = alClient
           Properties.ScrollBars = ssBoth
           Style.LookAndFeel.NativeStyle = True
@@ -157,13 +164,13 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
-          Height = 2
-          Width = 432
+          Height = 10
+          Width = 558
         end
       end
       object cxLabel2: TcxLabel
-        Left = 8
-        Top = 9
+        Left = 7
+        Top = 31
         Caption = 'To'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -172,8 +179,8 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         Transparent = True
       end
       object cxLabel3: TcxLabel
-        Left = 8
-        Top = 37
+        Left = 7
+        Top = 54
         Caption = 'CC'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -182,28 +189,28 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         Transparent = True
       end
       object edTo: TcxTextEdit
-        Left = 60
-        Top = 8
+        Left = 52
+        Top = 30
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 4
-        Width = 164
+        Width = 428
       end
       object edCC: TcxTextEdit
-        Left = 60
-        Top = 35
+        Left = 52
+        Top = 53
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 5
-        Width = 164
+        Width = 428
       end
       object cxLabel4: TcxLabel
-        Left = 232
-        Top = 37
+        Left = 8
+        Top = 77
         Caption = 'Subject'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -212,20 +219,41 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         Transparent = True
       end
       object edSubject: TcxTextEdit
-        Left = 283
-        Top = 35
+        Left = 52
+        Top = 76
+        Anchors = [akLeft, akTop, akRight]
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 7
-        Width = 164
+        Width = 515
+      end
+      object edFrom: TcxTextEdit
+        Left = 52
+        Top = 7
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 8
+        Width = 211
+      end
+      object cxLabel5: TcxLabel
+        Left = 8
+        Top = 8
+        Caption = 'From'
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Transparent = True
       end
       object btnSendEmail: TBitBtn
-        Left = 8
-        Top = 90
-        Width = 81
-        Height = 27
+        Left = 7
+        Top = 125
+        Width = 70
+        Height = 23
         Anchors = [akLeft, akBottom]
         Caption = 'Send'
         Glyph.Data = {
@@ -240,62 +268,19 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
           0404040403030405060000030404040404040404040404050206000303030303
           0303030303030303020200000000000000000000010202020200000000000000
           0000000000010202000000000000000000000000000001000000}
-        TabOrder = 8
+        TabOrder = 10
         OnClick = btnSendEmailClick
-      end
-      object edFrom: TcxTextEdit
-        Left = 283
-        Top = 8
-        Style.LookAndFeel.NativeStyle = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 9
-        Width = 164
-      end
-      object cxLabel5: TcxLabel
-        Left = 232
-        Top = 9
-        Caption = 'From'
-        Style.LookAndFeel.NativeStyle = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        Transparent = True
+        ExplicitTop = 98
       end
     end
     object tabStatement: TcxTabSheet
       Caption = 'tabStatement'
       ImageIndex = 2
-      object cxCheckBox1: TcxCheckBox
-        Left = 8
-        Top = 40
-        Caption = 'Show File'
-        Properties.Alignment = taRightJustify
-        Style.LookAndFeel.NativeStyle = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 0
-        Width = 102
-      end
-      object cxCheckBox2: TcxCheckBox
-        Left = 8
-        Top = 67
-        Caption = 'Print File'
-        Properties.Alignment = taRightJustify
-        Style.LookAndFeel.NativeStyle = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 1
-        Width = 100
-      end
       object btnProcessStatement: TBitBtn
-        Left = 8
-        Top = 100
-        Width = 81
-        Height = 28
+        Left = 7
+        Top = 99
+        Width = 70
+        Height = 24
         Caption = 'Process'
         Glyph.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -332,24 +317,40 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
           6600FF996600FF996600CC663300FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FF999900FF999900FF999900FF996600CC996600CC996600CC996600CC99
           6600CC663300CC663300CC663300FFFFFF00FFFFFF00FFFFFF00}
-        TabOrder = 2
+        TabOrder = 0
         OnClick = btnProcessStatementClick
       end
       object cxLabel6: TcxLabel
-        Left = 8
-        Top = 8
+        Left = 7
+        Top = 7
         Caption = 'Output File'
         Transparent = True
       end
       object cxEdStmntOutfile: TcxTextEdit
-        Left = 88
-        Top = 8
+        Left = 76
+        Top = 7
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 4
-        Width = 350
+        TabOrder = 2
+        Width = 304
+      end
+      object rgDestination: TcxRadioGroup
+        Left = 7
+        Top = 34
+        Caption = 'Destination'
+        Properties.Columns = 2
+        Properties.Items = <
+          item
+            Caption = 'Open in Word'
+          end
+          item
+            Caption = 'Preview'
+          end>
+        TabOrder = 3
+        Height = 39
+        Width = 273
       end
     end
   end
@@ -535,62 +536,6 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         Value = nil
       end>
   end
-  object spAxiomEmail: TUniStoredProc
-    StoredProcName = 'AXIOM.HTML_EMAIL'
-    SQL.Strings = (
-      'begin'
-      
-        '  AXIOM.HTML_EMAIL(:P_TO, :P_FROM, :P_SUBJECT, :P_TEXT, :P_HTML,' +
-        ' :P_SMTP_HOSTNAME, :P_SMTP_PORTNUM);'
-      'end;')
-    Connection = dmAxiom.uniInsight
-    Left = 233
-    Top = 82
-    ParamData = <
-      item
-        DataType = ftString
-        Name = 'P_TO'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_FROM'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_SUBJECT'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_TEXT'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_HTML'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_SMTP_HOSTNAME'
-        ParamType = ptInput
-        Value = nil
-      end
-      item
-        DataType = ftString
-        Name = 'P_SMTP_PORTNUM'
-        ParamType = ptInput
-        Value = nil
-      end>
-    CommandStoredProcName = 'AXIOM.HTML_EMAIL'
-  end
   object qryDebtorNotesInsert: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
@@ -630,6 +575,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
   object ppStatement: TppReport
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -656,15 +602,22 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -679,12 +632,14 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 333
     Top = 81
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 197300
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -692,12 +647,14 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0

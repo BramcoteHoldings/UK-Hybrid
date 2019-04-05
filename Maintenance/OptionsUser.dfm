@@ -517,7 +517,6 @@ object frmOptionsUser: TfrmOptionsUser
         ActivePage = tabPrecWord
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 0
-        ExplicitHeight = 602
         object tabPrecWordPerfect: TTabSheet
           Caption = 'tabPrecWordPerfect'
           TabVisible = False

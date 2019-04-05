@@ -23,7 +23,7 @@ uses
   dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
   dxPSCore, dxPScxCommon, dxPScxGridLnk, cxGridExportLink,
   XPStyleActnCtrls, cxLookAndFeels, ppFileUtils, ppIniStorage,
-  JvDialogs, cxGridChartView, cxGridDBChartView,
+  cxGridChartView, cxGridDBChartView,
   ppDesignLayer, cxPCdxBarPopupMenu, dxPSPDFExportCore, dxPSPDFExport,
   cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxGridLayoutViewLnk, dxPSDBTCLnk,

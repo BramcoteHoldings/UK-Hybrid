@@ -17,7 +17,7 @@ uses
   cxGroupBox, Vcl.CheckLst, cxCheckListBox, cxMemo, cxRichEdit, cxDBRichEdit,
   Vcl.Graphics, cxDropDownEdit, cxCustomListBox, cxListBox, cxButtons,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, Vcl.Buttons,
-  Vcl.Mask, cxPC, synpdf, uRwMapiInterfaces, SyncObjs, System.Character;
+  Vcl.Mask, cxPC, uRwMapiInterfaces, SyncObjs, System.Character;
 
 //  9 Nov 2017 DW - added Entity Group code
 
@@ -1005,7 +1005,7 @@ var
    yPos: Integer;
    ConvFile: TextFile;
 begin
-   if lbSearchMatches.Items.Count > 0 then
+{   if lbSearchMatches.Items.Count > 0 then
    begin
       try
          setNName;
@@ -1062,7 +1062,7 @@ begin
       finally
 //         gtDocumentConverter.Destroy;
       end;
-   end;
+   end;   }
 end;
 
 procedure TfrmPhoneBookNew.aNextExecute(Sender: TObject);
