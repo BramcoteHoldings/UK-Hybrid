@@ -4,7 +4,7 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Db, Buttons,  OracleUniProvider, Uni, MemDS, ExtCtrls,
+  StdCtrls, Grids, DBGrids, ComCtrls, Db, Buttons,  OracleUniProvider, Uni, MemDS, ExtCtrls,
   DBAccess, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxDBData, cxCalendar, cxTextEdit, cxCurrencyEdit,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxControls,
@@ -78,6 +78,7 @@ type
     { Public declarations }
     sWhereClause: string;
     sOrderBy: string;
+    sMatterCode: string;
     procedure RefreshSearch(Search: string);
   end;
 
@@ -214,9 +215,23 @@ begin
         end;
    end;
 
+   if sMatterCode <> '' then
+   begin
+     sWhereClause := sWhereClause + sAND + 'CODE In (Select C.CODE ' +
+                     'From ALLOC A ' +
+                     'Inner Join INVOICE I On A.NINVOICE = I.NINVOICE ' +
+                     'Inner Join CREDITOR C On I.NCREDITOR = C.NCREDITOR ' +
+                     'Where A.SUNDRYTYPE Is Not Null ' +
+                     'And A.BILLED = ''Y'' ' +
+                     'And I.Owing <> 0 ' +
+                     'And A.FILEID = ''' + sMatterCode + ''')';
+     sAND := ' AND ';
+   end;
+
    qryCreditors.SQL.Clear;
    qryCreditors.SQL.Add(sSQL + sWhereClause + sOrderBy);
    qryCreditors.Open;
+
 end;
 
 procedure TfrmCreditorSearch.dbgrCreditorsColumnMoved(Sender: TObject;
@@ -259,6 +274,7 @@ begin
            'when (gender = ''F'') then ''Female'' when (gender = ''P'') then ''Partnership'' end as GenderDesc FROM CREDITOR ';
    sWhereClause := '';
    sOrderBy := ' ORDER BY SEARCH';
+   sMatterCode:= '';
    FLookup := luUnassigned;
 end;
 
