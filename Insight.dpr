@@ -417,7 +417,7 @@ uses
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas';
 
 {$R *.RES}
-{$R SHORTCUT.RES}
+//{$R SHORTCUT.RES}
 {$R releasenotes.res}
 {$SetPEFlags IMAGE_FILE_NET_RUN_FROM_SWAP
           or IMAGE_FILE_LARGE_ADDRESS_AWARE

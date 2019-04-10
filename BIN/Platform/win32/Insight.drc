@@ -8,6 +8,11 @@
   resources were bound to the produced executable.
 */
 
+#define Jam_Shell_Types_sRenameLabel 56464
+#define Jam_Shell_Types_sPropertiesLabel 56465
+#define Jam_Shell_Types_sCopyPathLabel 56466
+#define Jam_Shell_Types_sPinToHomeLabel 56467
+#define Jam_Shell_Types_sOpenCommandPrompt 56468
 #define System_NetConsts_SNetHttpRequestOpenError 56480
 #define System_NetConsts_SNetHttpRequestAddHeaderError 56481
 #define System_NetConsts_SNetHttpRequestRemoveHeaderError 56482
@@ -15,6 +20,15 @@
 #define System_NetConsts_SNetHttpRequestSetTimeoutError 56484
 #define System_NetConsts_SMimeDuplicateType 56485
 #define System_NetConsts_SMimeTypeEmpty 56486
+#define Shell_Win32_sNewFolder 56487
+#define Shell_Win32_sInFolder 56488
+#define Jam_Shell_Types_sDefaultCommandLabel 56489
+#define Jam_Shell_Types_sOpenLabel 56490
+#define Jam_Shell_Types_sExploreLabel 56491
+#define Jam_Shell_Types_sCopyLabel 56492
+#define Jam_Shell_Types_sCutLabel 56493
+#define Jam_Shell_Types_sPasteLabel 56494
+#define Jam_Shell_Types_sRemoveLabel 56495
 #define System_NetConsts_SNetUriIndexOutOfRange 56496
 #define System_NetConsts_SNetUriInvalid 56497
 #define System_NetConsts_SNetUriParamNotFound 56498
@@ -9057,6 +9071,11 @@
 #define System_SysConst_SInOutError 65535
 STRINGTABLE
 BEGIN
+	Jam_Shell_Types_sRenameLabel,	L"&Rename"
+	Jam_Shell_Types_sPropertiesLabel,	L"P&roperties"
+	Jam_Shell_Types_sCopyPathLabel,	L"Cop&y as Path"
+	Jam_Shell_Types_sPinToHomeLabel,	L"Pin to &Quick Access"
+	Jam_Shell_Types_sOpenCommandPrompt,	L"Open &command prompt"
 	System_NetConsts_SNetHttpRequestOpenError,	L"Error opening request: (%d) %s"
 	System_NetConsts_SNetHttpRequestAddHeaderError,	L"Error adding header: (%d) %s"
 	System_NetConsts_SNetHttpRequestRemoveHeaderError,	L"Error removing header: (%d) %s"
@@ -9064,6 +9083,15 @@ BEGIN
 	System_NetConsts_SNetHttpRequestSetTimeoutError,	L"Error setting timeout for the request: (%d) %s"
 	System_NetConsts_SMimeDuplicateType,	L"Pair of extension and mime type already exists"
 	System_NetConsts_SMimeTypeEmpty,	L"Mime type cannot be empty"
+	Shell_Win32_sNewFolder,	L"New Folder"
+	Shell_Win32_sInFolder,	L"In Folder"
+	Jam_Shell_Types_sDefaultCommandLabel,	L"&Open / Execute"
+	Jam_Shell_Types_sOpenLabel,	L"&Open"
+	Jam_Shell_Types_sExploreLabel,	L"&Open in Windows Explorer"
+	Jam_Shell_Types_sCopyLabel,	L"&Copy"
+	Jam_Shell_Types_sCutLabel,	L"Cu&t"
+	Jam_Shell_Types_sPasteLabel,	L"&Paste"
+	Jam_Shell_Types_sRemoveLabel,	L"&Delete"
 	System_NetConsts_SNetUriIndexOutOfRange,	L"Parameter index (%d) out of range (%d..%d)"
 	System_NetConsts_SNetUriInvalid,	L"Invalid URL: \"%s\""
 	System_NetConsts_SNetUriParamNotFound,	L"Parameter \"%s\" not found"
@@ -18248,7 +18276,7 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressDocking Library\Sources\dxDockStyleVS2005.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarDBNav.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbRAP.res */
-/* C:\jcl\lib\d25\win32\JclUnicode.res */
+/* C:\jcl\lib\d25\win32\debug\JclUnicode.res */
 /* C:\jvcl\Resources\JvConsts.res */
 /* D:\Components-XE10\VirtualTreeView\Source\VirtualTrees.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\CategoryButtons.res */
@@ -18824,6 +18852,5 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeType.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Document Search\ListBoxConcept.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Insight.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\Shortcut.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\releasenotes.RES */
 /* D:\Insight_XE4_Source\UK-Hybrid\Insight.drf */

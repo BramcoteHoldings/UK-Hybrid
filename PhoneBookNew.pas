@@ -542,6 +542,8 @@ type
     eOccupation: TDBEdit;
     qryDebtorStatus: TUniQuery;
     mNotes: TcxDBRichEdit;
+    Label44: TLabel;
+    cxDBButtonEdit3: TcxDBButtonEdit;
     procedure eGivenNamesChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure aPrevExecute(Sender: TObject);

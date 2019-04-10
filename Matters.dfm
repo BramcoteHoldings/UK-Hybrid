@@ -5,7 +5,7 @@ object frmMatters: TfrmMatters
   VertScrollBar.Visible = False
   Caption = 'Matter:'
   ClientHeight = 749
-  ClientWidth = 1370
+  ClientWidth = 1414
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -46,14 +46,14 @@ object frmMatters: TfrmMatters
   object pnlTop: TPanel
     Left = 0
     Top = 28
-    Width = 1370
+    Width = 1414
     Height = 144
     Align = alTop
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
     DesignSize = (
-      1370
+      1414
       144)
     object lblPartnerName: TLabel
       Left = 555
@@ -322,7 +322,7 @@ object frmMatters: TfrmMatters
       Properties.ScrollBars = ssVertical
       TabOrder = 5
       Height = 78
-      Width = 641
+      Width = 685
     end
     object progBarFeeCredit: TcxProgressBar
       Left = 723
@@ -511,7 +511,7 @@ object frmMatters: TfrmMatters
   object pageMatter: TcxPageControl
     Left = 0
     Top = 172
-    Width = 1370
+    Width = 1414
     Height = 577
     Align = alClient
     TabOrder = 5
@@ -523,7 +523,7 @@ object frmMatters: TfrmMatters
     OnPageChanging = tabPartiesPageChanging
     ClientRectBottom = 573
     ClientRectLeft = 4
-    ClientRectRight = 1366
+    ClientRectRight = 1410
     ClientRectTop = 46
     object tabClient: TcxTabSheet
       Caption = 'Client'
@@ -1589,7 +1589,7 @@ object frmMatters: TfrmMatters
       Caption = 'Ledgers'
       ImageIndex = 73
       DesignSize = (
-        1362
+        1406
         527)
       object Label77: TLabel
         Left = 470
@@ -2586,7 +2586,7 @@ object frmMatters: TfrmMatters
         OnClick = cbUnbillBalanceswithGSTClick
       end
       object pbMatterDetails: TBitBtn
-        Left = 1242
+        Left = 1286
         Top = 3
         Width = 118
         Height = 23
@@ -2897,7 +2897,7 @@ object frmMatters: TfrmMatters
       Caption = 'Archived'
       ImageIndex = 44
       DesignSize = (
-        1362
+        1406
         527)
       object Label54: TLabel
         Left = 24
@@ -3045,7 +3045,7 @@ object frmMatters: TfrmMatters
       object grdArchiveLocation: TcxGrid
         Left = 7
         Top = 116
-        Width = 1118
+        Width = 1162
         Height = 242
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 5
@@ -3188,7 +3188,7 @@ object frmMatters: TfrmMatters
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 6
         Height = 138
-        Width = 1117
+        Width = 1161
       end
       object pnlArchiveType: TPanel
         Left = 16
@@ -3660,7 +3660,7 @@ object frmMatters: TfrmMatters
       object Panel2: TPanel
         Left = 0
         Top = 489
-        Width = 1362
+        Width = 1406
         Height = 38
         Align = alBottom
         BevelOuter = bvNone
@@ -3829,7 +3829,7 @@ object frmMatters: TfrmMatters
       object Panel13: TPanel
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 489
         Align = alClient
         Caption = 'Panel13'
@@ -3837,7 +3837,7 @@ object frmMatters: TfrmMatters
         object vtContacts: TVirtualStringTree
           Left = 1
           Top = 1
-          Width = 1360
+          Width = 1404
           Height = 487
           Align = alClient
           ClipboardFormats.Strings = (
@@ -3869,48 +3869,48 @@ object frmMatters: TfrmMatters
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
+              Text = 'Name'
               Width = 200
-              WideText = 'Name'
             end
             item
               MaxWidth = 500
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
+              Text = 'Contact'
               Width = 350
-              WideText = 'Contact'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 2
+              Text = 'Work Phone'
               Width = 100
-              WideText = 'Work Phone'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 3
+              Text = 'Mobile'
               Width = 100
-              WideText = 'Mobile'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 4
+              Text = 'Home Phone'
               Width = 100
-              WideText = 'Home Phone'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 5
+              Text = 'Fax'
               Width = 100
-              WideText = 'Fax'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
-              Width = 406
-              WideText = 'Email'
+              Text = 'Email'
+              Width = 450
             end>
         end
       end
@@ -3921,7 +3921,7 @@ object frmMatters: TfrmMatters
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         TabOrder = 0
@@ -3931,7 +3931,7 @@ object frmMatters: TfrmMatters
         Properties.TabPosition = tpRight
         ClientRectBottom = 523
         ClientRectLeft = 4
-        ClientRectRight = 1336
+        ClientRectRight = 1380
         ClientRectTop = 4
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
@@ -3939,7 +3939,7 @@ object frmMatters: TfrmMatters
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
-            Width = 1332
+            Width = 1376
             Height = 491
             Align = alClient
             ButtonStyle = bsTriangle
@@ -3968,20 +3968,20 @@ object frmMatters: TfrmMatters
             Columns = <
               item
                 Position = 0
+                Text = 'Form / Field'
                 Width = 300
-                WideText = 'Form / Field'
               end
               item
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
-                Width = 1028
-                WideText = 'Value'
+                Text = 'Value'
+                Width = 1072
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
             Left = 0
             Top = 491
-            Width = 1332
+            Width = 1376
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
@@ -4000,13 +4000,13 @@ object frmMatters: TfrmMatters
       object Panel3: TPanel
         Left = 0
         Top = 495
-        Width = 1362
+        Width = 1406
         Height = 32
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          1362
+          1406
           32)
         object btnInvWord: TBitBtn
           Left = 3
@@ -4113,7 +4113,7 @@ object frmMatters: TfrmMatters
           OnClick = btnAutoReceiptClick
         end
         object btnDeleteDraft: TBitBtn
-          Left = 1193
+          Left = 1237
           Top = 3
           Width = 82
           Height = 26
@@ -4137,7 +4137,7 @@ object frmMatters: TfrmMatters
           OnClick = btnDeleteDraftClick
         end
         object btnNewInvoice: TBitBtn
-          Left = 1277
+          Left = 1321
           Top = 3
           Width = 83
           Height = 26
@@ -4294,7 +4294,7 @@ object frmMatters: TfrmMatters
       object dbgrInvoices: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 495
         Align = alClient
         TabOrder = 1
@@ -4722,15 +4722,15 @@ object frmMatters: TfrmMatters
       object Panel10: TPanel
         Left = 0
         Top = 492
-        Width = 1362
+        Width = 1406
         Height = 35
         Align = alBottom
         TabOrder = 0
         DesignSize = (
-          1362
+          1406
           35)
         object btnDeleteMatterNote: TcxButton
-          Left = 805
+          Left = 849
           Top = 5
           Width = 107
           Height = 28
@@ -4811,7 +4811,7 @@ object frmMatters: TfrmMatters
           OnClick = btnDeleteMatterNoteClick
         end
         object btnEditMatterNote: TcxButton
-          Left = 912
+          Left = 956
           Top = 5
           Width = 97
           Height = 28
@@ -4859,7 +4859,7 @@ object frmMatters: TfrmMatters
           OnClick = btnEditMatterNoteClick
         end
         object btnAddMatterNotes: TcxButton
-          Left = 1009
+          Left = 1053
           Top = 5
           Width = 98
           Height = 28
@@ -4906,7 +4906,7 @@ object frmMatters: TfrmMatters
           OnClick = btnAddMatterNotesClick
         end
         object cxButton5: TcxButton
-          Left = 1107
+          Left = 1151
           Top = 5
           Width = 75
           Height = 28
@@ -4953,7 +4953,7 @@ object frmMatters: TfrmMatters
           OnClick = cxButton5Click
         end
         object btnMatterNotesRefresh: TcxButton
-          Left = 1182
+          Left = 1226
           Top = 5
           Width = 75
           Height = 28
@@ -5003,7 +5003,7 @@ object frmMatters: TfrmMatters
       object grdMatterNotes: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 492
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -5082,7 +5082,7 @@ object frmMatters: TfrmMatters
       object cxgrdDebtorNotes: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 456
         Align = alClient
         TabOrder = 0
@@ -5167,15 +5167,15 @@ object frmMatters: TfrmMatters
       object Panel9: TPanel
         Left = 0
         Top = 456
-        Width = 1362
+        Width = 1406
         Height = 71
         Align = alBottom
         TabOrder = 1
         DesignSize = (
-          1362
+          1406
           71)
         object lDebtorStatusCaption: TLabel
-          Left = 979
+          Left = 1023
           Top = 19
           Width = 74
           Height = 15
@@ -5215,7 +5215,7 @@ object frmMatters: TfrmMatters
           Caption = 'Mobile'
         end
         object btnDeleteDebtorNotes: TcxButton
-          Left = 677
+          Left = 721
           Top = 41
           Width = 98
           Height = 26
@@ -5296,7 +5296,7 @@ object frmMatters: TfrmMatters
           OnClick = btnDeleteDebtorNotesClick
         end
         object btnEditDebtorNotes: TcxButton
-          Left = 775
+          Left = 819
           Top = 41
           Width = 97
           Height = 26
@@ -5344,7 +5344,7 @@ object frmMatters: TfrmMatters
           OnClick = btnEditDebtorNotesClick
         end
         object btnAddDebtorNotes: TcxButton
-          Left = 989
+          Left = 1033
           Top = 41
           Width = 116
           Height = 26
@@ -5391,7 +5391,7 @@ object frmMatters: TfrmMatters
           OnClick = btnAddDebtorNotesClick
         end
         object btnRefresh: TcxButton
-          Left = 1107
+          Left = 1151
           Top = 41
           Width = 75
           Height = 26
@@ -5438,7 +5438,7 @@ object frmMatters: TfrmMatters
           OnClick = btnRefreshClick
         end
         object btnDebtorNotesPrint: TcxButton
-          Left = 1187
+          Left = 1231
           Top = 41
           Width = 75
           Height = 26
@@ -5485,7 +5485,7 @@ object frmMatters: TfrmMatters
           OnClick = btnDebtorNotesPrintClick
         end
         object cbDebtorStatus: TcxDBLookupComboBox
-          Left = 1069
+          Left = 1113
           Top = 14
           Anchors = [akRight, akBottom]
           DataBinding.DataField = 'DEBTORSTATUS'
@@ -5521,7 +5521,7 @@ object frmMatters: TfrmMatters
           Visible = False
         end
         object btnAddFeeNotes: TcxButton
-          Left = 872
+          Left = 916
           Top = 41
           Width = 115
           Height = 26
@@ -5568,7 +5568,7 @@ object frmMatters: TfrmMatters
           OnClick = btnAddFeeNotesClick
         end
         object rgDisplayOption: TcxRadioGroup
-          Left = 394
+          Left = 438
           Top = 28
           Anchors = [akRight, akBottom]
           Caption = 'Show'
@@ -5675,7 +5675,7 @@ object frmMatters: TfrmMatters
       object pageReceipts: TcxPageControl
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         TabOrder = 0
@@ -5685,7 +5685,7 @@ object frmMatters: TfrmMatters
         LookAndFeel.ScrollbarMode = sbmDefault
         ClientRectBottom = 523
         ClientRectLeft = 4
-        ClientRectRight = 1358
+        ClientRectRight = 1402
         ClientRectTop = 26
         object tabReceiptList: TcxTabSheet
           Caption = 'Receipts'
@@ -5693,7 +5693,7 @@ object frmMatters: TfrmMatters
           object dbgrReceipts: TcxGrid
             Left = 0
             Top = 0
-            Width = 1354
+            Width = 1398
             Height = 470
             Align = alClient
             TabOrder = 0
@@ -5838,15 +5838,15 @@ object frmMatters: TfrmMatters
           object Panel5: TPanel
             Left = 0
             Top = 470
-            Width = 1354
+            Width = 1398
             Height = 27
             Align = alBottom
             TabOrder = 1
             DesignSize = (
-              1354
+              1398
               27)
             object cxButton2: TcxButton
-              Left = 1199
+              Left = 1243
               Top = 1
               Width = 82
               Height = 25
@@ -5857,7 +5857,7 @@ object frmMatters: TfrmMatters
               OnClick = cxButton2Click
             end
             object btnPrintGrid: TcxButton
-              Left = 1116
+              Left = 1160
               Top = 1
               Width = 83
               Height = 25
@@ -5868,7 +5868,7 @@ object frmMatters: TfrmMatters
               OnClick = btnPrintGridClick
             end
             object btnExportReceiptsToExcel: TcxButton
-              Left = 1019
+              Left = 1063
               Top = 1
               Width = 90
               Height = 25
@@ -5887,13 +5887,13 @@ object frmMatters: TfrmMatters
           object Panel12: TPanel
             Left = 0
             Top = 471
-            Width = 1354
+            Width = 1398
             Height = 26
             Align = alBottom
             ParentColor = True
             TabOrder = 0
             DesignSize = (
-              1354
+              1398
               26)
             object btnReceiptReqCreate: TcxButton
               Left = 1
@@ -5919,7 +5919,7 @@ object frmMatters: TfrmMatters
           object grdReceiptReqs: TcxGrid
             Left = 0
             Top = 0
-            Width = 1354
+            Width = 1398
             Height = 471
             Align = alClient
             TabOrder = 1
@@ -6033,7 +6033,7 @@ object frmMatters: TfrmMatters
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 28
         Align = dalTop
         BarManager = MatterBarManager
@@ -6041,7 +6041,7 @@ object frmMatters: TfrmMatters
       object Panel7: TPanel
         Left = 0
         Top = 28
-        Width = 1362
+        Width = 1406
         Height = 102
         Align = alTop
         TabOrder = 1
@@ -6199,7 +6199,7 @@ object frmMatters: TfrmMatters
       object dbgrTransactions: TcxGrid
         Left = 0
         Top = 130
-        Width = 1362
+        Width = 1406
         Height = 397
         Align = alClient
         TabOrder = 2
@@ -6299,7 +6299,7 @@ object frmMatters: TfrmMatters
       object tabByAuthor: TcxPageControl
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         TabOrder = 0
@@ -6309,13 +6309,13 @@ object frmMatters: TfrmMatters
         Properties.TabPosition = tpRight
         ClientRectBottom = 523
         ClientRectLeft = 4
-        ClientRectRight = 1336
+        ClientRectRight = 1380
         ClientRectTop = 4
         object tabBenchmark: TcxTabSheet
           Caption = 'By Author'
           ImageIndex = 0
           DesignSize = (
-            1332
+            1376
             519)
           object cxGrid2: TcxGrid
             Left = 0
@@ -6388,7 +6388,7 @@ object frmMatters: TfrmMatters
           ImageIndex = 1
           OnShow = cxTabSheet16Show
           DesignSize = (
-            1332
+            1376
             519)
           object cxGrid4: TcxGrid
             Left = 491
@@ -6452,16 +6452,16 @@ object frmMatters: TfrmMatters
       object dxDockSite1: TdxDockSite
         Left = 159
         Top = 0
-        Width = 1203
+        Width = 1247
         Height = 527
         Align = alClient
         DockingType = 5
-        OriginalWidth = 1203
+        OriginalWidth = 1247
         OriginalHeight = 527
         object dxLayoutDockSite5: TdxLayoutDockSite
           Left = 0
           Top = 0
-          Width = 1203
+          Width = 1247
           Height = 527
           ParentShowHint = False
           ShowHint = False
@@ -6472,7 +6472,7 @@ object frmMatters: TfrmMatters
         object DockPanelPecGrid: TdxDockPanel
           Left = 0
           Top = 0
-          Width = 1203
+          Width = 1247
           Height = 527
           AllowFloating = True
           AutoHide = False
@@ -6486,7 +6486,7 @@ object frmMatters: TfrmMatters
           object dbgTemplates: TcxGrid
             Left = 0
             Top = 57
-            Width = 1199
+            Width = 1243
             Height = 466
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
@@ -6568,7 +6568,7 @@ object frmMatters: TfrmMatters
           object JvPanel1: TJvPanel
             Left = 0
             Top = 0
-            Width = 1199
+            Width = 1243
             Height = 57
             HotTrackFont.Charset = DEFAULT_CHARSET
             HotTrackFont.Color = clWindowText
@@ -6580,7 +6580,7 @@ object frmMatters: TfrmMatters
             Color = clMedGray
             TabOrder = 1
             DesignSize = (
-              1199
+              1243
               57)
             object Label79: TLabel
               Left = 7
@@ -6644,7 +6644,7 @@ object frmMatters: TfrmMatters
               AnchorY = 18
             end
             object cbUngroupDocList: TcxCheckBox
-              Left = 705
+              Left = 749
               Top = 5
               Anchors = [akTop, akRight]
               Caption = 'Ungroup Document List'
@@ -6748,21 +6748,21 @@ object frmMatters: TfrmMatters
       ImageIndex = 33
       OnShow = tabDocsShow
       DesignSize = (
-        1362
+        1406
         527)
       object dxDockSite3: TdxDockSite
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         DockingType = 5
-        OriginalWidth = 1362
+        OriginalWidth = 1406
         OriginalHeight = 527
         object dxLayoutDockSite3: TdxLayoutDockSite
           Left = 0
           Top = 0
-          Width = 1333
+          Width = 1377
           Height = 527
           ParentShowHint = False
           ShowHint = False
@@ -6772,7 +6772,7 @@ object frmMatters: TfrmMatters
           object dxLayoutDockSite4: TdxLayoutDockSite
             Left = 0
             Top = 0
-            Width = 1333
+            Width = 1377
             Height = 527
             ParentShowHint = False
             ShowHint = False
@@ -6783,7 +6783,7 @@ object frmMatters: TfrmMatters
           object dxDockPanel2: TdxDockPanel
             Left = 0
             Top = 0
-            Width = 1333
+            Width = 1377
             Height = 527
             AllowDock = [dtLeft]
             AllowFloating = False
@@ -6797,7 +6797,7 @@ object frmMatters: TfrmMatters
             OriginalWidth = 163
             OriginalHeight = 124
             object Splitter1: TSplitter
-              Left = 945
+              Left = 1024
               Top = 0
               Height = 523
               Align = alRight
@@ -6808,7 +6808,7 @@ object frmMatters: TfrmMatters
             object pageDocuments: TcxPageControl
               Left = 0
               Top = 0
-              Width = 945
+              Width = 1024
               Height = 523
               Align = alClient
               TabOrder = 0
@@ -6819,7 +6819,7 @@ object frmMatters: TfrmMatters
               Properties.TabSlants.Kind = skCutCorner
               ClientRectBottom = 519
               ClientRectLeft = 4
-              ClientRectRight = 919
+              ClientRectRight = 998
               ClientRectTop = 4
               object tabGenerated: TcxTabSheet
                 Caption = 'Documents'
@@ -6833,15 +6833,15 @@ object frmMatters: TfrmMatters
                 object pnlDocsGenerated: TPanel
                   Left = 0
                   Top = 0
-                  Width = 915
+                  Width = 994
                   Height = 515
                   Align = alClient
                   TabOrder = 0
                   DesignSize = (
-                    915
+                    994
                     515)
                   object cxButton1: TcxButton
-                    Left = 210
+                    Left = 289
                     Top = 1
                     Width = 94
                     Height = 26
@@ -6891,7 +6891,7 @@ object frmMatters: TfrmMatters
                   object dbgrDocs: TcxGrid
                     Left = 1
                     Top = 1
-                    Width = 913
+                    Width = 992
                     Height = 475
                     Align = alClient
                     TabOrder = 1
@@ -7630,13 +7630,13 @@ object frmMatters: TfrmMatters
                   object pnlDocGeneratedBtns: TPanel
                     Left = 1
                     Top = 476
-                    Width = 913
+                    Width = 992
                     Height = 38
                     Align = alBottom
                     BevelOuter = bvNone
                     TabOrder = 2
                     DesignSize = (
-                      913
+                      992
                       38)
                     object CheckBox1: TCheckBox
                       Left = 536
@@ -7650,7 +7650,7 @@ object frmMatters: TfrmMatters
                       Visible = False
                     end
                     object btnPrecSearch: TBitBtn
-                      Left = 835
+                      Left = 914
                       Top = 5
                       Width = 75
                       Height = 27
@@ -7669,7 +7669,7 @@ object frmMatters: TfrmMatters
                       OnClick = btnPrecSearchClick
                     end
                     object btnDocAdd: TBitBtn
-                      Left = 766
+                      Left = 845
                       Top = 5
                       Width = 68
                       Height = 27
@@ -7728,7 +7728,7 @@ object frmMatters: TfrmMatters
                       Width = 181
                     end
                     object btnDocumentImport: TBitBtn
-                      Left = 574
+                      Left = 653
                       Top = 5
                       Width = 113
                       Height = 27
@@ -7738,7 +7738,7 @@ object frmMatters: TfrmMatters
                       OnClick = btnDocumentImportClick
                     end
                     object btnDocPrint: TBitBtn
-                      Left = 689
+                      Left = 768
                       Top = 5
                       Width = 76
                       Height = 27
@@ -7748,7 +7748,7 @@ object frmMatters: TfrmMatters
                       OnClick = btnDocPrintClick
                     end
                     object btnCreateBrief: TBitBtn
-                      Left = 499
+                      Left = 578
                       Top = 5
                       Width = 69
                       Height = 27
@@ -7760,7 +7760,7 @@ object frmMatters: TfrmMatters
                       OnClick = btnCreateBriefClick
                     end
                     object chkPreviewPane: TCheckBox
-                      Left = 373
+                      Left = 452
                       Top = 11
                       Width = 119
                       Height = 18
@@ -7779,13 +7779,12 @@ object frmMatters: TfrmMatters
                 ImageIndex = 1
               end
             end
-            object pnlPreview: TPanel
-              Left = 948
+            object pnlPreview: TJamFilePreview
+              Left = 1027
               Top = 0
-              Width = 381
+              Width = 346
               Height = 523
               Align = alRight
-              TabOrder = 1
             end
           end
         end
@@ -7836,7 +7835,7 @@ object frmMatters: TfrmMatters
       object dbgrTransit: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 497
         Align = alClient
         TabOrder = 0
@@ -7930,15 +7929,15 @@ object frmMatters: TfrmMatters
       object Panel8: TPanel
         Left = 0
         Top = 497
-        Width = 1362
+        Width = 1406
         Height = 30
         Align = alBottom
         TabOrder = 1
         DesignSize = (
-          1362
+          1406
           30)
         object Button1: TButton
-          Left = 1009
+          Left = 1053
           Top = 1
           Width = 81
           Height = 26
@@ -7948,7 +7947,7 @@ object frmMatters: TfrmMatters
           OnClick = Add1Click
         end
         object Button2: TButton
-          Left = 1097
+          Left = 1141
           Top = 1
           Width = 77
           Height = 26
@@ -7958,7 +7957,7 @@ object frmMatters: TfrmMatters
           OnClick = dbgrTransitDblClick
         end
         object Button3: TButton
-          Left = 1180
+          Left = 1224
           Top = 1
           Width = 82
           Height = 26
@@ -7975,7 +7974,7 @@ object frmMatters: TfrmMatters
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -8042,7 +8041,7 @@ object frmMatters: TfrmMatters
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -8069,7 +8068,7 @@ object frmMatters: TfrmMatters
       object grdSearches: TcxGrid
         Left = 0
         Top = 33
-        Width = 1362
+        Width = 1406
         Height = 494
         Align = alClient
         TabOrder = 1
@@ -8248,7 +8247,7 @@ object frmMatters: TfrmMatters
       object pageProjectTasks: TcxPageControl
         Left = 0
         Top = 132
-        Width = 1362
+        Width = 1406
         Height = 395
         Align = alClient
         TabOrder = 0
@@ -8256,7 +8255,7 @@ object frmMatters: TfrmMatters
         Properties.CustomButtons.Buttons = <>
         ClientRectBottom = 391
         ClientRectLeft = 4
-        ClientRectRight = 1358
+        ClientRectRight = 1402
         ClientRectTop = 26
         object tsGanttChart: TcxTabSheet
           Caption = 'Gantt'
@@ -8264,7 +8263,7 @@ object frmMatters: TfrmMatters
           object ProjectsScheduler: TcxScheduler
             Left = 0
             Top = 0
-            Width = 1354
+            Width = 1398
             Height = 365
             ViewAgenda.EventTextMinWidth = 118
             ViewGantt.Active = True
@@ -8294,8 +8293,8 @@ object frmMatters: TfrmMatters
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
             Splitters = {
-              BA0400007E0000004905000083000000B604000001000000BA0400006C010000}
-            StoredClientBounds = {0100000001000000490500006C010000}
+              E60400007E0000007505000083000000E204000001000000E60400006C010000}
+            StoredClientBounds = {0100000001000000750500006C010000}
             object pnlProjectStats: TPanel
               Left = 0
               Top = 0
@@ -8333,7 +8332,7 @@ object frmMatters: TfrmMatters
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
-            Width = 1354
+            Width = 1398
             Height = 365
             Align = alClient
             TabOrder = 0
@@ -9046,7 +9045,7 @@ object frmMatters: TfrmMatters
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 124
-        Width = 1362
+        Width = 1406
         Height = 8
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
@@ -9056,7 +9055,7 @@ object frmMatters: TfrmMatters
       object pnlProject: TPanel
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 124
         Align = alTop
         Caption = 'pnlProject'
@@ -9064,7 +9063,7 @@ object frmMatters: TfrmMatters
         object gedProjects: TcxGrid
           Left = 1
           Top = 1
-          Width = 1017
+          Width = 1061
           Height = 122
           Align = alClient
           TabOrder = 0
@@ -9108,7 +9107,7 @@ object frmMatters: TfrmMatters
           end
         end
         object cxSplitter2: TcxSplitter
-          Left = 1018
+          Left = 1062
           Top = 1
           Width = 8
           Height = 122
@@ -9119,7 +9118,7 @@ object frmMatters: TfrmMatters
           MinSize = 29
         end
         object pnlQuoteGrid: TPanel
-          Left = 1026
+          Left = 1070
           Top = 1
           Width = 335
           Height = 122
@@ -9196,16 +9195,16 @@ object frmMatters: TfrmMatters
       object Panel4: TPanel
         Left = 0
         Top = 495
-        Width = 1362
+        Width = 1406
         Height = 32
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          1362
+          1406
           32)
         object btnNewDiary: TcxButton
-          Left = 887
+          Left = 931
           Top = 5
           Width = 82
           Height = 28
@@ -9288,7 +9287,7 @@ object frmMatters: TfrmMatters
       object dbgrDiary: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 495
         Align = alClient
         TabOrder = 1
@@ -9359,7 +9358,7 @@ object frmMatters: TfrmMatters
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -9450,16 +9449,16 @@ object frmMatters: TfrmMatters
       object Panel1: TPanel
         Left = 0
         Top = 492
-        Width = 1362
+        Width = 1406
         Height = 35
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          1362
+          1406
           35)
         object BitBtn3: TBitBtn
-          Left = 1097
+          Left = 1141
           Top = 5
           Width = 77
           Height = 27
@@ -9469,7 +9468,7 @@ object frmMatters: TfrmMatters
           OnClick = BitBtn3Click
         end
         object btnTaskEdit: TBitBtn
-          Left = 1182
+          Left = 1226
           Top = 5
           Width = 82
           Height = 27
@@ -9480,7 +9479,7 @@ object frmMatters: TfrmMatters
           OnClick = btnTaskEditClick
         end
         object btnDeleteTask: TBitBtn
-          Left = 1007
+          Left = 1051
           Top = 5
           Width = 77
           Height = 27
@@ -9494,7 +9493,7 @@ object frmMatters: TfrmMatters
       object grdTasks: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 492
         Align = alClient
         TabOrder = 1
@@ -9635,7 +9634,7 @@ object frmMatters: TfrmMatters
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 527
         Align = alClient
         TabOrder = 0
@@ -9713,7 +9712,7 @@ object frmMatters: TfrmMatters
       object dbgrMatterAuthor: TcxGrid
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1406
         Height = 486
         Align = alClient
         TabOrder = 0
@@ -9752,15 +9751,15 @@ object frmMatters: TfrmMatters
       object Panel6: TPanel
         Left = 0
         Top = 486
-        Width = 1362
+        Width = 1406
         Height = 41
         Align = alBottom
         TabOrder = 1
         DesignSize = (
-          1362
+          1406
           41)
         object cxButton3: TcxButton
-          Left = 1197
+          Left = 1241
           Top = 3
           Width = 82
           Height = 25
@@ -34565,7 +34564,7 @@ object frmMatters: TfrmMatters
   end
   object RestClientt: TRestClientt
     ConnectionType = hctWinHttp
-    Left = 616
-    Top = 360
+    Left = 624
+    Top = 376
   end
 end

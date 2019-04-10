@@ -3695,7 +3695,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43549.628910902780000000
+      ReportDocument.CreationDate = 43565.634034814820000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

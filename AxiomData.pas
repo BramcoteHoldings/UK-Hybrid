@@ -855,6 +855,8 @@ type
     procCanAuthoriseBill: TUniStoredProc;
     dsCurrencyList: TUniDataSource;
     qryCurrencyList: TUniQuery;
+    qryEmpAuthor: TUniQuery;
+    dsEmpAuthor: TUniDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure uniInsightConnectChange(Sender: TObject;
       Connected: Boolean);

@@ -3607,7 +3607,7 @@ object frmTimeDiary: TfrmTimeDiary
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Time Diary'
-      ReportDocument.CreationDate = 43524.662853935190000000
+      ReportDocument.CreationDate = 43565.491770451390000000
       ReportDocument.Creator = 'Insight'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3909,7 +3909,7 @@ object frmTimeDiary: TfrmTimeDiary
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4993,7 +4993,7 @@ object frmTimeDiary: TfrmTimeDiary
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

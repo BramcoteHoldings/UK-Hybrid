@@ -39,12 +39,12 @@ uses
   cxGridCustomView, cxGrid, cxDropDownEdit, cxDBEdit, cxImage, Vcl.Mask,
   Vcl.DBCtrls, cxButtonEdit, cxDBLabel, cxLabel, cxDBRichEdit, Vcl.Buttons,
   cxMaskEdit, cxLookupEdit, cxDBLookupEdit, VCL.Forms, uRwMapiInterfaces,
-  Variants,  uHostPreview, Registry, ComObj, ppFileUtils,
+  Variants,  {uHostPreview,} Registry, ComObj, ppFileUtils,
   ppInistorage, cxSchedulerEventEditor, cxGridExportLink, ITrackMatterDetails,
   vcl.Themes, vcl.styles, vcl.Styles.Ext, DateUtils, StrUtils, dxNavBarCollns,
   cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
-  RestClientt, RestUtils, REST.Client, REST.Authenticator.Basic, Vcl.Grids,
-  dxPScxEditorLnks;
+  RestClientt, RestUtils, REST.Client, Vcl.Grids,
+  dxPScxEditorLnks, JamFilePreview;
 
 
 const
@@ -1141,7 +1141,6 @@ type
     pageDocuments: TcxPageControl;
     tabGenerated: TcxTabSheet;
     pGenDocuments1: TcxTabSheet;
-    pnlPreview: TPanel;
     dxDockPanel3: TdxDockPanel;
     lvFolders: TVirtualStringTree;
     tabTransit: TcxTabSheet;
@@ -1535,6 +1534,7 @@ type
     lblConflictCheckCompleted: TLabel;
     dxSelectConflict: TdxBarButton;
     RestClientt: TRestClientt;
+    pnlPreview: TJamFilePreview;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -2024,7 +2024,7 @@ type
 
     AEmailTemplate: ansistring;
 
-    FPreview : THostPreviewHandler;
+//    FPreview : THostPreviewHandler;
 
     FEvent: TcxSchedulerEvent;
     FRecipientsList: TStringList;
@@ -2118,7 +2118,6 @@ type
 var
   arrayData : TCoganArray;
   frmMatters: TfrmMatters;
-  FormClosing: boolean;
 
 implementation
 
@@ -2218,7 +2217,7 @@ type
   end;
 
 
-  THostPreviewHandlerClass=class(THostPreviewHandler);
+ // THostPreviewHandlerClass=class(THostPreviewHandler);
 
 
 procedure TfrmMatters.setDisplayNames;
@@ -4012,7 +4011,6 @@ procedure TfrmMatters.FormClose(Sender: TObject; var Action: TCloseAction);
 var
    ASaveViewName: string;
 begin
-   FormClosing := True;
    if qryMatter.UpdatesPending then
    begin
       if MessageDlg('Save changes ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -4066,8 +4064,8 @@ begin
       SettingSave('Matter_Doc','DocFolderPanelWidth',dxDockPanel3.width);
    end;
 
-   if FPreview <> nil then
-      FPreview.Free;
+ //  if FPreview <> nil then
+ //     FPreview.Free;
 
    qryPhonebookParty1.Close;
    qryPhonebookParty2.Close;
@@ -4863,7 +4861,6 @@ begin
    lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
    TppIniStoragePlugIn.SetStorageName(lsStorageName);
 
-   FormClosing := False;
 //   cxEventEditorClass := nil;
 
 //   cxEventEditorClass := TfrmNewTaskNew; // indicate that the
@@ -5166,7 +5163,7 @@ begin
 
    nFeeTmpID := 0;
 
-   FPreview := nil;
+  // FPreview := nil;
 
    FAttachFileName := TStringList.Create;
    FRecipientsList   := TStringList.Create;
@@ -5577,12 +5574,16 @@ end;
 procedure TfrmMatters.chkPreviewPaneClick(Sender: TObject);
 begin
    if chkPreviewPane.Checked = True then
-      pnlPreview.Width := 380
+   begin
+      pnlPreview.Width := 380;
+      pnlPreview.Enabled := True;
+   end
    else
    begin
+      pnlPreview.Enabled := False;
       pnlPreview.Width := 0;
-      if FPreview <> nil then
-         FPreview := nil;
+//      if FPreview <> nil then
+//         FPreview := nil;
 //      gtDocumentViewer.CloseDocument;
    end;
    SettingSaveBoolean('MATTERS', 'DOCPREVIEWPANE', chkPreviewPane.Checked);
@@ -6098,7 +6099,8 @@ begin
    try
       LfrmDocNew := TfrmDocNew.Create(Self);
       LfrmDocNew.NewCopyDoc := False;
-      LfrmDocNew.FileID :=  qryMatter.FieldByName('FILEID').AsString;
+      LfrmDocNew.FileID := qryMatter.FieldByName('FILEID').AsString;
+      LfrmDocNew.AMatter := qryMatter.FieldByName('NMATTER').AsInteger;
       if LfrmDocNew.ShowModal = mrOk then
       begin
          if cbGroupExpanded.Checked then
@@ -10176,7 +10178,6 @@ begin
       AAttachDocID := TStringList.Create;
 
       AAttachList := GetAttachFile(AAttachDocID);
-      WriteLog('ForwardClick: connecting to MAPI session: ');
       if dmAxiom.MapiSession.Active = False then
       begin
          OldCursor := Screen.Cursor;
@@ -10184,12 +10185,12 @@ begin
          try
             try
               dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-              dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
+{              dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
               dmAxiom.MapiSession.LogonInfo.Password           := '';
               dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
               dmAxiom.MapiSession.LogonInfo.NewSession         := False;
               dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;   }
               dmAxiom.MapiSession.Active                       := True;
             except on e:exception do
               WriteLog('ForwardClick: error connecting to MAPI session: ' + e.Message);
@@ -10205,36 +10206,19 @@ begin
  //     FRecipientsList.text := ARecipientsList.text;
       try
          try
-            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
+            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, True);
          except on e:exception do
               WriteLog('ForwardClick: error connecting to MsgStore: ' + e.Message);
          end;
 
          try
             // 07 Mar 2019 dw attach offline to resolve message send with O365
-            Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
+            Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, True);
          except on e:exception do
               WriteLog('ForwardClick: error connecting to Folder: ' + e.Message);
          end;
-         //try
+
          Msg := Folder.CreateMessage('IPM.Note') As IRwMapiMailMessage;
-        // except on e:exception do
-        //      WriteLog('ForwardClick: error create message IPM Note: ' + e.Message);
-        // end;
-        // try
-        //    Msg := MsgStore.CreateMessage(ftDraft,'IPM.Note', False);
-        // except on e:exception do
-        //     WriteLog('ForwardClick: error create draft message IPM Note: ' + e.Message);
-        // end;
-
-
-         try
-            //FormMgr.ShowMessage(Msg);
-            //FormMgr.NewMessage(Folder);
-         except on e:exception do
-              WriteLog('ForwardClick: error sending from Formmgr: ' + e.Message);
-         end;
-         WriteLog('ForwardClick: Message sent ' + qryMatter.FieldByName('nmatter').AsString);
 
          if SystemString('MATTER_EMAIL_SUBJECT') = '' then
             Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
@@ -10268,48 +10252,34 @@ begin
 
          Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
 
- {        for i := 0 to FAttachFileName.Count - 1 do
-         begin
-            FileName  := FAttachFileName.Strings[i];
-
-            // check for embedded image
- //           ContentID := lowercase(ChangeFileExt(ExtractFileName(FileName),''));
-   //         if Pos('cid:'+ContentID, HtmlSource) > 0 then
-   //            ASender.MapiMessage.AddEmbeddedImage(FileName)
-   //         else
-
-               Msg.AddFileAttachment(FileName);
-          end;  }
- //     if (FAttachFileName.Count > 0) then
-
-
          zipFileName := '';
-         for i := 0 to AAttachList.Count - 1 do
-         begin
-            if tmpFileName <> '' then
-               tmpFileName := tmpFileName + ',';
-            tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
-            if (AAttachList.Count > 1) and (wCompress = high(word)) then
+         wCompress := mrNo;
+         if (AAttachList.Count > 1) {and (wCompress = high(word))} then
                wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
                                    ' files. Would you like to send as a compressed archive (zip) file instead?');
-            if wCompress = mrYes then
-            begin
-               try
-                  zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
-                  zipFile(zipFileName ,AAttachList);
-               finally
-                  Msg.AddFileAttachment(zipFileName);
-                  FileAttachList := zipFileName;
-                  DeleteFile(zipFileName);
-               end;
-               break;
-            end
-            else
-               Msg.AddFileAttachment(AAttachList.Strings[i]);
-         end;
+         case wCompress of
+            mrYes: begin
+                     try
+                        zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
+                        zipFile(zipFileName ,AAttachList);
+                     finally
+                        Msg.AddFileAttachment(zipFileName);
+//                        Msg.AddAttachment.LoadFromFile(zipFileName);
+                        FileAttachList := zipFileName;
+                        DeleteFile(zipFileName);
+                     end;
+                   end;
+            mrNo: begin
+                     for i := 0 to AAttachList.Count - 1 do
+                     begin
+                        if tmpFileName <> '' then
+                           tmpFileName := tmpFileName + ',';
+                        tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
 
-         if zipFileName = '' then
-            FileAttachList := tmpFileName;
+                        Msg.Attachments.AddFileAttachment(AAttachList.Strings[i]);
+                     end;
+                  end;
+         end;
 
          if (FileID = '') then
          begin
@@ -10338,8 +10308,8 @@ begin
          end;
          Msg.SaveChanges(smKeepOpenReadWrite);
 
-         //Msg.ShowForm;
-         FormMgr.ShowMessage(Msg);
+         Msg.ShowForm;
+//         FormMgr.ShowMessage(Msg);
 
       finally
          ARecipientsList.Free;
@@ -10375,7 +10345,7 @@ begin
                begin
                   LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
                   CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
-                  if (FPreview <> nil) then
+ {                 if (FPreview <> nil) then
                      FPreview.Free;
                   FPreview := THostPreviewHandler.Create(Self);
                   FPreview.Top := 0;
@@ -10385,7 +10355,7 @@ begin
                   FPreview.Parent := pnlPreview;
                   FPreview.Align  := alClient;
                   FPreview.FileName:=LsTmpFile;
-                  THostPreviewHandlerClass(FPreview).Paint;
+                  THostPreviewHandlerClass(FPreview).Paint;   }
                end;
             end;
          except on E:Exception do
@@ -11541,8 +11511,6 @@ begin
             end;
          end;
 
-
-
          try
             begin
                try
@@ -11626,7 +11594,7 @@ begin
       AAttachDocID := TStringList.Create;
       ConvAAttachList := TStringList.Create;
       AAttachList := GetAttachFile(AAttachDocID);
-      WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
+ //     WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
       if (dmAxiom.MapiSession.Active = False) then
       begin
          OldCursor := Screen.Cursor;
@@ -11687,60 +11655,60 @@ begin
          end;
 
          tmpFileName := sFileName;
+         //dw 19 sep 19 assigning in isolated method
+         FAttachFileName.text := ConvAAttachList.text;
+         FRecipientsList.text := ARecipientsList.text;
+         try
+             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
+         end;
+
+         try
+             // 07 Mar 2019 DW open the folder offline to resolve O365 issue
+             Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
+         end;
+         Try
+             Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
+         end;
+
+         if SystemString('MATTER_EMAIL_SUBJECT') = '' then
+            Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
+         else
+            Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
+
+         sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+         for i := 1 to length(sSubject) do
          begin
-            //dw 19 sep 19 assigning in isolated method
-            FAttachFileName.text := ConvAAttachList.text;
-            FRecipientsList.text := ARecipientsList.text;
-            try
-                MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
-            end;
-
-            try
-                // 07 Mar 2019 DW open the folder offline to resolve O365 issue
-                Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
-            end;
-            Try
-                Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
-            end;
-
-            if SystemString('MATTER_EMAIL_SUBJECT') = '' then
-               Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
-            else
-               Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
-
-            sSubject := Msg.PropByName(PR_SUBJECT).AsString;
-            for i := 1 to length(sSubject) do
+            if sSubject[i] = '#' then
             begin
-               if sSubject[i] = '#' then
-              begin
-                 for x := i + 1 to length(sSubject) do
-                 begin
-                    if (sSubject[x] <> ' ') and (sSubject[x] <> ']') then
-                        FileID := FileID + sSubject[x];
-                 end;
-              end;
+               for x := i + 1 to length(sSubject) do
+               begin
+                  if (sSubject[x] <> ' ') and (sSubject[x] <> ']') then
+                     FileID := FileID + sSubject[x];
+               end;
             end;
-            try
-                AFileID := Msg.PropByName(MATTER).AsString;
-            except
+         end;
+         try
+            AFileID := Msg.PropByName(MATTER).AsString;
+         except
 
             try
-                Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
+               Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
             except
             //
+            end;
          end;
-          end;
-          if AFileID = '' then
-             AFileID := qryMatter.FieldByName('fileid').AsString;
+
+         if AFileID = '' then
+            AFileID := qryMatter.FieldByName('fileid').AsString;
 
  //         Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID;
-          Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
+         Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
 
        {   for i := 0 to FAttachFileName.Count - 1 do
           begin
@@ -11757,33 +11725,36 @@ begin
 
  //       if (FAttachFileName.Count > 0) then
 
-          zipFileName := '';
-          for i := 0 to FAttachFileName.Count - 1 do
-          begin
-            if tmpFileName <> '' then
-               tmpFileName := tmpFileName + ',';
-            tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
-            if (FAttachFileName.Count > 1) and (wCompress = high(word)) then
-               wCompress := MsgAsk('You have selected '+ IntToStr(FAttachFileName.Count)+
+         zipFileName := '';
+         wCompress := mrNo;
+         if (FAttachFileName.Count > 1) {and (wCompress = high(word))} then
+               wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
                                    ' files. Would you like to send as a compressed archive (zip) file instead?');
-            if wCompress = mrYes then
-            begin
-               try
-                  zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
-                  zipFile(zipFileName ,FAttachFileName);
-               finally
-                  Msg.AddFileAttachment(zipFileName);
-                  FileAttachList := zipFileName;
-                  DeleteFile(zipFileName);
-               end;
-               break;
-            end
-            else
-               Msg.AddFileAttachment(FAttachFileName.Strings[i]);  //  AddAttachment.LoadFromFile(FAttachFileName.Strings[i]);
-          end;
+         case wCompress of
+            mrYes: begin
+                     try
+                        zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
+                        zipFile(zipFileName ,FAttachFileName);
+                     finally
+                        Msg.AddFileAttachment(zipFileName);
+                        FileAttachList := zipFileName;
+                        DeleteFile(zipFileName);
+                     end;
+                   end;
+            mrNo: begin
+                     for i := 0 to FAttachFileName.Count - 1 do
+                     begin
+                        if tmpFileName <> '' then
+                           tmpFileName := tmpFileName + ',';
+                        tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
 
-          if ARecipientsList.Count > 0 then
-          begin
+                        Msg.Attachments.AddFileAttachment(FAttachFileName.Strings[i]);
+                     end;
+                  end;
+         end;
+
+         if ARecipientsList.Count > 0 then
+         begin
             try
                for I := 0 to ARecipientsList.Count - 1 do
                begin
@@ -11792,18 +11763,17 @@ begin
             finally
 
             end;
-          end;
-
-          Msg.SaveChanges(smKeepOpenReadWrite);
-
-          try
-             FormMgr.ShowMessage(Msg);
-          except on e:exception do
-             WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
-          end;
-          WriteLog('MatterForwardAsPDFClick: message sent with converted file to pdf');
-
          end;
+
+         Msg.SaveChanges(smKeepOpenReadWrite);
+
+         try
+//             FormMgr.ShowMessage(Msg);
+             Msg.ShowForm;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
+         end;
+//          WriteLog('MatterForwardAsPDFClick: message sent with converted file to pdf');
       finally
          AAttachList.Free;
          AAttachDocID.Free;
@@ -13182,53 +13152,6 @@ begin
    if chkPreviewPane.Checked then
    begin
       try
-{         if (gtDocumentViewer.IsLoaded) then
-         begin
-            gtDocumentViewer.CloseDocument;
-         end;
-         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
-         begin
-            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
-            if (LsFile <> '') then
-            begin
-                  try
-                     PDFLibrary := TDebenuPDFLibrary1014.Create;
-                     if (ExtractFileExt(LsFile) <> '.pdf') then
-                     begin
-                        if ExtractFileExt(LsFile) = '.msg' then
-                           ConvertMsg(LsFile)
-                        else
-                           if (ExtractFileExt(LsFile) = '.doc') or
-                              (ExtractFileExt(LsFile) = '.docx') then
-                              ConvertDOCFiles(LsFile)
-                           else if (ExtractFileExt(LsFile) = '.xls') or
-                                   (ExtractFileExt(LsFile) = '.xlsx') then
-                              ConvertXLFiles(LsFile)
-                           else
-                           begin
-                              LsPDFFile := copy(LsFile,1,Length(LsFile) - Length(ExtractFileExt(LsFile))) + '.pdf';
-                              PDFLibrary.SaveToFile(LsPDFFile);
-                              LsFile := LsPDFFile;
-                           end;
-                        LsConvFile := copy(LsFile,1,Length(LsFile) - Length(ExtractFileExt(LsFile))) + '.pdf';
-                        if FileExists(LsConvFile) then
-                           gtDocumentViewer.LoadFromFile(LsConvFile);
-                     end
-                     else
-                     begin
-                        try
-                           if FileExists(LsFile) then
-                              gtDocumentViewer.LoadFromFile(LsFile);
-                        except
-                           //
-                        end;
-                     end;
-                  finally
-                     PDFLibrary.Free;
-                  end;
- //              end;
-            end;
-         end; }
          if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
          begin
             LsFile := string(tvDocsDISPLAY_PATH.EditValue);
@@ -13236,8 +13159,8 @@ begin
             begin
 //               LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
 //               CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
-               if (FPreview <> nil) then
-                  FPreview.Free;
+{              if (FPreview <> nil) then
+                  FreeAndNil(FPreview);
                FPreview := THostPreviewHandler.Create(Self);
                FPreview.Top := 0;
                FPreview.Left := 0;
@@ -13246,7 +13169,11 @@ begin
                FPreview.Parent := pnlPreview;
                FPreview.Align  := alClient;
                FPreview.FileName:=LsFile;
-               THostPreviewHandlerClass(FPreview).Paint;
+               THostPreviewHandlerClass(FPreview).Paint;    }
+               pnlPreview.Enabled := False;               
+               pnlPreview.Path := LsFile;
+               pnlPreview.Enabled := True;
+               pnlPreview.Invalidate;
             end;
          end;
       except on E:Exception do

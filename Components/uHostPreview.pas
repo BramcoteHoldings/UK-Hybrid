@@ -73,20 +73,20 @@ const
 var
   lpRect: TRect;
 begin
- if (FPreviewGUIDStr<>'') and (FPreviewHandler<>nil) and not FLoaded then
- begin
-  FLoaded:=True;
-  FPreviewHandler.DoPreview;
-  FPreviewHandler.SetFocus;
- end
- else
- if FPreviewGUIDStr='' then
- begin
-   lpRect:=Rect(0, 0, Self.Width, Self.Height);
-   Canvas.Brush.Style :=bsClear;
-   Canvas.Font.Color  :=clWindowText;
-   DrawText(Canvas.Handle, PChar(Msg) ,Length(Msg), lpRect, DT_VCENTER or DT_CENTER or DT_SINGLELINE);
- end;
+   if (FPreviewGUIDStr<>'') and (FPreviewHandler<>nil) and not FLoaded then
+   begin
+      FLoaded:=True;
+      FPreviewHandler.DoPreview;
+      FPreviewHandler.SetFocus;
+   end
+   else
+   if FPreviewGUIDStr='' then
+   begin
+      lpRect:=Rect(0, 0, Self.Width, Self.Height);
+      Canvas.Brush.Style :=bsClear;
+      Canvas.Font.Color  :=clWindowText;
+      DrawText(Canvas.Handle, PChar(Msg) ,Length(Msg), lpRect, DT_VCENTER or DT_CENTER or DT_SINGLELINE);
+   end;
 end;
 
 destructor THostPreviewHandler.Destroy;

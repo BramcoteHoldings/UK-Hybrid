@@ -11906,7 +11906,7 @@ begin
   if (Pos(C_MACRO_ENTITY, Result) > 0) then
   begin
      lEntity := TableString('NMEMO','NMEMO',IntToStr(ANMemo),'BANK_ACCT');
-     Result := StringReplace(Result,C_MACRO_ENTITY, TableString('ENTITY','ACCT',lEntity,'NAME'),[rfReplaceAll, rfIgnoreCase]);
+     Result := StringReplace(Result,C_MACRO_ENTITY, TableString('ENTITY','CODE',lEntity,'NAME'),[rfReplaceAll, rfIgnoreCase]);
   end;
 end;
 
