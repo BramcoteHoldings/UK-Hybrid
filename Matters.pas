@@ -44,7 +44,8 @@ uses
   vcl.Themes, vcl.styles, vcl.Styles.Ext, DateUtils, StrUtils, dxNavBarCollns,
   cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
   RestClientt, RestUtils, REST.Client, Vcl.Grids,
-  dxPScxEditorLnks, JamFilePreview;
+  dxPScxEditorLnks, JamFilePreview, cxTL, cxTLdxBarBuiltInMenu,
+  cxInplaceContainer, cxTLData, cxDBTL;
 
 
 const
@@ -1535,6 +1536,13 @@ type
     dxSelectConflict: TdxBarButton;
     RestClientt: TRestClientt;
     pnlPreview: TJamFilePreview;
+    cxDBTreeList1: TcxDBTreeList;
+    UniQuery1: TUniQuery;
+    UniDataSource1: TUniDataSource;
+    cxDBTreeList1DESCR: TcxDBTreeListColumn;
+    cxDBTreeList1FOLDER_ID: TcxDBTreeListColumn;
+    cxDBTreeList1PARENT_ID: TcxDBTreeListColumn;
+    cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -1990,6 +1998,8 @@ type
     procedure tabGraphShow(Sender: TObject);
     procedure cxTabSheet16Show(Sender: TObject);
     procedure dxSelectConflictClick(Sender: TObject);
+    procedure cxDBTreeList1Click(Sender: TObject);
+    procedure pmDocFoldersPopup(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2256,61 +2266,61 @@ begin
 end;
 
 procedure TfrmMatters.DeleteFolder1Click(Sender: TObject);
-var
-   Node: PVirtualNode;
-   Data: PFolderData;
-   LFolderId: integer;
-   lParentID: integer;
+//var
+//   Node: PVirtualNode;
+//   Data: PFolderData;
+//   LFolderId: integer;
+//   lParentID: integer;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
-   if Data.Text = 'All Files' then
+//   Data := lvFolders.GetNodeData(Node);
+   if cxDBTreeList1DESCR.Value = 'All Files' then
    begin
       MsgErr('The ''All Files'' directory cannot be deleted');
       Exit;
    end;
 
-   if Data.Text = 'Unallocated Files' then
+   if cxDBTreeList1DESCR.Value = 'Unallocated Files' then
    begin
       MsgErr('The ''Unallocated Files'' directory cannot be deleted');
       Exit;
    end;
 
-   if MsgAsk('Delete directory ' + Data.Text) = mrYes then
+   if MsgAsk('Delete directory ' + cxDBTreeList1DESCR.Value) = mrYes then
    begin
-         qryFldTmp.Close;
-         qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as foldercount from doc where folder_id = '+ IntToStr(Data.FolderID);
-         qryFldTmp.Open;
-         // 25 April 2018 DW changed count from 1 to 0 to prevent orphaning on singular doc in folder
-         if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
-         begin
-            MsgErr('This folder currently has attached documents.  It cannot be deleted.');
-            Exit;
-         end;
-         // 25 April 2018 DW prevent parent folder from being deleted
-         qryFldTmp.Close;
-         qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as foldercount from document_folders where parent_id = '+ IntToStr(Data.FolderID);
-         qryFldTmp.Open;
-         if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
-         begin
-            MsgErr('This folder currently has sub-folders.  It cannot be deleted.');
-            Exit;
-         end;
-         // end of change
-         qryFldTmp.Close;
-         qryFldTmp.Sql.Text := 'delete from document_folders where folder_id = :folder_id and nmatter = :nmatter';
-         qryFldTmp.ParamByName('folder_id').AsInteger := Data.FolderID;
-         qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-         qryFldTmp.ExecSQL;
-         qryFldTmp.Close;
-         // 25 April 2018 DW refresh folder list after deleting
-         SetupDocFolderTab;
-         // end of change
+      qryFldTmp.Close;
+      qryFldTmp.SQL.Clear;
+      qryFldTmp.SQL.Text := 'select count(*) as foldercount from doc where folder_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.Open;
+      // 25 April 2018 DW changed count from 1 to 0 to prevent orphaning on singular doc in folder
+      if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
+      begin
+         MsgErr('This folder currently has attached documents.  It cannot be deleted.');
+         Exit;
+      end;
+      // 25 April 2018 DW prevent parent folder from being deleted
+      qryFldTmp.Close;
+      qryFldTmp.SQL.Clear;
+      qryFldTmp.SQL.Text := 'select count(*) as foldercount from document_folders where parent_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.Open;
+      if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
+      begin
+         MsgErr('This folder currently has sub-folders.  It cannot be deleted.');
+         Exit;
+      end;
+      // end of change
+      qryFldTmp.Close;
+      qryFldTmp.Sql.Text := 'delete from document_folders where folder_id = :folder_id and nmatter = :nmatter';
+      qryFldTmp.ParamByName('folder_id').AsInteger := integer(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      qryFldTmp.ExecSQL;
+      qryFldTmp.Close;
+      // 25 April 2018 DW refresh folder list after deleting
+      SetupDocFolderTab;
+      // end of change
    end;
 end;
 
@@ -5870,6 +5880,9 @@ begin
     end;
     qryFolders.Close;
     lvFolders.EndUpdate;
+    UniQuery1.Close;
+    UniQuery1.ParamByName('nmatter').asinteger := qryMatter.FieldByName('nmatter').AsInteger;
+    UniQuery1.Open;
 end;
 
 procedure TfrmMatters.SetupDocTab;
@@ -6599,6 +6612,14 @@ begin
       miViewCheqreqHistoryforMatter.Caption:= Format('View Cheqreq History for Matter #%s...', [qryMatter.FieldByName('NMATTER').AsString])
   end else
     miViewCheqreqHistoryforMatter.Visible:= False
+end;
+
+procedure TfrmMatters.pmDocFoldersPopup(Sender: TObject);
+begin
+   EditFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   DeleteFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
 end;
 
 procedure TfrmMatters.qryMatterPartyAfterOpen(DataSet: TDataSet);
@@ -10185,12 +10206,12 @@ begin
          try
             try
               dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-{              dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
+              dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
               dmAxiom.MapiSession.LogonInfo.Password           := '';
               dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
               dmAxiom.MapiSession.LogonInfo.NewSession         := False;
               dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;   }
+              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
               dmAxiom.MapiSession.Active                       := True;
             except on e:exception do
               WriteLog('ForwardClick: error connecting to MAPI session: ' + e.Message);
@@ -10206,14 +10227,14 @@ begin
  //     FRecipientsList.text := ARecipientsList.text;
       try
          try
-            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, True);
+            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
          except on e:exception do
               WriteLog('ForwardClick: error connecting to MsgStore: ' + e.Message);
          end;
 
          try
             // 07 Mar 2019 dw attach offline to resolve message send with O365
-            Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, True);
+            Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
          except on e:exception do
               WriteLog('ForwardClick: error connecting to Folder: ' + e.Message);
          end;
@@ -10478,17 +10499,17 @@ end;
 procedure TfrmMatters.EditFolder1Click(Sender: TObject);
 var
    AValue: string;
-   Node: PVirtualNode;
-   Data: PFolderData;
+//   Node: PVirtualNode;
+//   Data: PFolderData;
    LFolderId: integer;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
-   LFolderId := Data.FolderID;
-   AValue := Data.Text;
+//   Data := lvFolders.GetNodeData(Node);
+   LFolderId := cxDBTreeList1FOLDER_ID.Value;
+   AValue := cxDBTreeList1DESCR.Value;
    if ((AValue <> 'All Files') and (AValue <> 'Unallocated Files')) then
    begin
       if InputQueryString('Edit Folder','Edit Folder name','Folder',AValue) = True then
@@ -10597,16 +10618,41 @@ end;
 procedure TfrmMatters.AddFolder1Click(Sender: TObject);
 var
    AValue: string;
-   Node: PVirtualNode;
-   Data: PFolderData;
-   LFolderId: integer;
+//   Node: PVirtualNode;
+//   Data: PFolderData;
+   LFolderId,
+   lFolderParentId: integer;
    lFolderlvl: integer;
+   mbResponse: word;
 begin
-   Node := lvFolders.FocusedNode;
+//   Node := lvFolders.FocusedNode;
+   if (cxDBTreeList1FOLDER_ID.Value = -2) or (cxDBTreeList1FOLDER_ID.Value = -1 )then
+   begin
+      LFolderID := 0;
+      LFolderLvl := 0;
+      lFolderParentId := -1;
+   end
+   else
+   begin
+      mbResponse := MsgAsk('Would you like to add Folder as Child of "'+ cxDBTreeList1DESCR.Value + '" (YES) or at the same level as "'+cxDBTreeList1DESCR.Value + '"(NO)');
+      if mbResponse = mrYes then
+      begin
+         LFolderId := cxDBTreeList1FOLDER_ID.Value;
+         lFolderlvl := cxDBTreeList1FOLDER_LEVEL.Value + 1;
+         lFolderParentId := -2;
+      end
+      else if mbResponse = mrNo then
+      begin
+         LFolderId := cxDBTreeList1FOLDER_ID.Value;
+         lFolderlvl := cxDBTreeList1FOLDER_LEVEL.Value;
+         lFolderParentId := cxDBTreeList1PARENT_ID.Value;
+      end;
+   end;
+
    if InputQueryString('Add Folder','Enter Folder name to create','Folder',AValue) = True then
    begin
       try
-         if not Assigned(Node) then
+ {        if not Assigned(Node) then
          begin
            LFolderID := 0;
            LFolderLvl := 0;
@@ -10616,16 +10662,19 @@ begin
            Data := lvFolders.GetNodeData(Node);
            LFolderId := Data.FolderID;
            lFolderlvl := Data.FolderLvl + 1;
-         end;
+         end;  }
+
          with dmAxiom.qryTmp do
          begin
            Close;
            SQL.Clear;
            SQL.Text := 'insert into document_folders (descr, parent_id, nmatter, folder_level) values (:descr, :parent_id, :nmatter, :folder_level)';
-           if (LFolderID = -1) then
+           if (lFolderParentId = -1) then
               ParamByName('parent_id').AsInteger := 0
+           else if (lFolderParentId = -2) then
+              ParamByName('parent_id').AsInteger := LFolderID
            else
-              ParamByName('parent_id').AsInteger := LFolderID;
+              ParamByName('parent_id').AsInteger := lFolderParentId;
 
            ParamByName('descr').AsString := Trim(AValue);
            ParamByName('nmatter').AsInteger := qryMatter.FieldByName('nmatter').AsInteger;
@@ -11659,7 +11708,7 @@ begin
          FAttachFileName.text := ConvAAttachList.text;
          FRecipientsList.text := ARecipientsList.text;
          try
-             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
+             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);;
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
          end;
@@ -12347,6 +12396,69 @@ begin
                                        '?Subject=#' + qryMatter.FieldByName('FILEID').AsString) ,nil,nil,SW_SHOWNORMAL);
 end;
 
+procedure TfrmMatters.cxDBTreeList1Click(Sender: TObject);
+var
+   LFolderId: integer;
+begin
+   LFolderId := cxDBTreeList1FOLDER_ID.Value;
+   if cxDBTreeList1DESCR.Value = 'All Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocVersions.Close;
+         qryDocs.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;  //-2
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end
+   else
+   if cxDBTreeList1DESCR.Value = 'Unallocated Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocs.Close;
+         qryDocVersions.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;    //-1
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end
+   else
+   if cxDBTreeList1DESCR.Value <> 'All Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocVersions.Close;
+         qryDocs.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end;
+end;
+
 procedure TfrmMatters.cxGrid2DBChartView1Series1GetValueDisplayText(
   Sender: TObject; const AValue: Variant; var ADisplayText: string);
 begin
@@ -12979,9 +13091,9 @@ begin
                   ' WHERE nmatter = :nmatter '+
                   ' AND is_attachment = ''N'' '+
                   '  AND CASE '+
-                  '         WHEN (:folder_id = -1) '+
+                  '         WHEN (:folder_id = -2) '+
                   '            THEN 1  '+                                         // all filess
-                  '         WHEN (:folder_id = 0) AND (folder_id IS NULL) '+
+                  '         WHEN (:folder_id = -1) AND (folder_id IS NULL) '+
                   '            THEN 1 '+                                  // unallocated files
                   '         WHEN (:folder_id > 0) AND (folder_id = :folder_id) '+
                   '            THEN 1 '+
@@ -14645,30 +14757,30 @@ begin
 end;
 
 procedure TfrmMatters.RemoveDocsfromFolder1Click(Sender: TObject);
-var
-   Node: PVirtualNode;
-   Data: PFolderData;
+//var
+//   Node: PVirtualNode;
+//   Data: PFolderData;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
+//   Data := lvFolders.GetNodeData(Node);
 
-   if MsgAsk('Remove documents from folder ' + Data.Text + ' and unassign them?') = mrYes then
+   if MsgAsk('Remove documents from folder ' + cxDBTreeList1DESCR.Value + ' and unassign them?') = mrYes then
    begin
          qryFldTmp.Close;
          qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as doccount from doc where folder_id = '+ IntToStr(Data.FolderID);
+         qryFldTmp.SQL.Text := 'select count(*) as doccount from doc where folder_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
          qryFldTmp.Open;
          if (qryFldTmp.FieldByName('doccount').AsInteger = 0) then
          begin
-            MsgErr('There are no documents to remove from the folder ' + Data.Text);
+            MsgErr('There are no documents to remove from the folder ' + cxDBTreeList1DESCR.Value);
             Exit;
          end;
          qryFldTmp.Close;
          qryFldTmp.Sql.Text := 'update doc set folder_id = null where folder_id = :folder_id and nmatter = :nmatter';
-         qryFldTmp.ParamByName('folder_id').AsInteger := Data.FolderID;
+         qryFldTmp.ParamByName('folder_id').AsInteger := cxDBTreeList1FOLDER_ID.Value;
          qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          qryFldTmp.ExecSQL;
          qryFldTmp.Close;

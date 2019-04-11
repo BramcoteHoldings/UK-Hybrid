@@ -231,7 +231,6 @@ uses
   CriticalAlert in 'CriticalAlert.pas' {frmCritialAlert},
   DocDescrEdit in 'DocDescrEdit.pas' {frmDocDescription},
   browseproperties in 'browseproperties.pas' {frmBrowserProps},
-  BrowserOrgFavourites in 'BrowserOrgFavourites.pas' {frmBrowserOrgFavourites},
   EditText in 'EditText.pas' {frmEditText},
   InvestmentTransactionNew in 'Controlled Monies\InvestmentTransactionNew.pas' {frmInvestmentTransactionNew},
   SafeCustodyNewPacket in 'SafeCustodyNewPacket.pas' {frmSafeCustodyNewPacket},
@@ -410,14 +409,13 @@ uses
   MatterPositionRpt in 'MatterPositionRpt.pas' {frmPositionReport},
   ChequeRev in 'ChequeRev.pas' {dmChequeRev: TDataModule},
   SearchIndexConfig in 'Document Search\SearchIndexConfig.pas' {frmIndexConfig},
-  ListBoxConcept in 'Document Search\ListBoxConcept.pas' {frmdtSearchMaintain},
   cxSchedulerEventEditor in 'Scheduler\cxSchedulerEventEditor.pas' {cxSchedulerEventEditorForm},
   AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax},
   LoggingSnippet in 'LoggingSnippet.pas',
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas';
 
 {$R *.RES}
-//{$R SHORTCUT.RES}
+{$R ADDITIONAL.RES}
 {$R releasenotes.res}
 {$SetPEFlags IMAGE_FILE_NET_RUN_FROM_SWAP
           or IMAGE_FILE_LARGE_ADDRESS_AWARE

@@ -2853,15 +2853,16 @@ procedure TdmAxiom.MapiSessionAfterLogon(Sender: TObject);
 var
    frmEmailMsgListener: TfrmEmailMsgListener;
 begin
-   ExeCount := 0;
-   FMsgStore := MapiSession.OpenDefaultMsgStore(alReadwrite);
-   InboxFolderID := FMsgStore.OpenFolderByType(ftInbox);
-   FSentItemsFolderID := FMsgStore.OpenFolderByType(ftSentItems);
-   FOutboxFolderID := FMsgStore.OpenFolderByType(ftOutbox);
-//   if (not IsExeRunning('AxiomTrayMonitor.exe', ExeCount)) or
-//      (not IsExeRunning('InsightTrayMonitor.exe', ExeCount))then
    if SystemString('Emails_Listener') = 'Y' then
    begin
+      ExeCount := 0;
+      FMsgStore := MapiSession.OpenDefaultMsgStore(alReadwrite);
+      InboxFolderID := FMsgStore.OpenFolderByType(ftInbox);
+      FSentItemsFolderID := FMsgStore.OpenFolderByType(ftSentItems);
+      FOutboxFolderID := FMsgStore.OpenFolderByType(ftOutbox);
+//   if (not IsExeRunning('AxiomTrayMonitor.exe', ExeCount)) or
+//      (not IsExeRunning('InsightTrayMonitor.exe', ExeCount))then
+
       if (not IsExeRunning('AxiomTrayMonitor.exe', ExeCount)) and
          (not IsExeRunning('InsightTrayMonitor.exe', ExeCount)) then
       begin

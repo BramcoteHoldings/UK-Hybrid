@@ -78,6 +78,7 @@ object frmSelectDirectory: TfrmSelectDirectory
     DriveTypes = [dtRemovable, dtFixed, dtRemote, dtCDROM]
     Offset = 4
     TabOrder = 2
+    OnChange = JvDriveCombo1Change
   end
   object lbDirectories: TJvDirectoryListBox
     Left = 9

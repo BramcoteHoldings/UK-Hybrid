@@ -41,6 +41,7 @@ type
     procedure lbDirectoriesDblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure JvDriveCombo1Change(Sender: TObject);
   private
     { Private declarations }
     fDirectory: string;
@@ -76,6 +77,11 @@ end;
 function TfrmSelectDirectory.GetDirectory: string;
 begin
    Result := lbDirectories.Directory;
+end;
+
+procedure TfrmSelectDirectory.JvDriveCombo1Change(Sender: TObject);
+begin
+   txtPath.Caption := JvDriveCombo1.Drive + ':\';
 end;
 
 function TfrmSelectDirectory.GetCategory: string;

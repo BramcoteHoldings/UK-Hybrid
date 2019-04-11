@@ -7,7 +7,7 @@ uses
    VCL.uRwMAPISession, Variants, StrUtils;
 
     function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
-               ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = True): integer;
+               ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False): integer;
     function FileSearch(const PathName, FileName: string): integer;
     procedure SaveDocument(FileName, AFolderName: string);
 //    function MoveMatterDoc(var ANewDocName: string; AOldDocName: string): boolean;
@@ -49,7 +49,7 @@ var
    AFolderName: string;
 
 function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
-                     ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = True): integer;
+                     ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False): integer;
 var
    PathName: string;
    LRetFileCount: integer;
