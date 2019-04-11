@@ -2157,7 +2157,7 @@ uses
   PrecedentSearchList, EmployeeFindDialog, System.UITypes, ConflictSelect,
   MatterPositionRpt, LoggingSnippet, BillNew, MatterLabel,
   WorkFlowMergeDocument, WorkFlowDocumentMerge, WorkFlowMatterTasks,
-  Ora, WorkFlowGenDocuments, matternotesfrm, ppTypes, MSOpenReadOnly;
+  Ora, WorkFlowGenDocuments, matternotesfrm, ppTypes;
 
 var
    iMinsPerUnit: integer;
@@ -2174,7 +2174,6 @@ var
    aTotalEmpCostPerHour,
    aCalcMinTotal,
    aCalcMaxTotal: double;
-   Extensions : array[1..18] of string = ('DOT', 'DOC', 'DOTX', 'DOCX', 'DOTM', 'DOCM', 'PPT', 'PPTX' ,'PPTM', 'POTX', 'POTM', 'PPSX', 'PPSM', 'XLS', 'XLSX' , 'XLT', 'XLTX', 'XLTM');
    LfrmInvoice: TfrmInvoice;
    MatterLabel: TMatterLabel;
    LMT: TfmWorkflowMatterTasks;
@@ -8614,9 +8613,7 @@ begin
 
                   lURL := SystemString('INFOTRACK_URL');
                   vSearch := TMatterDetails.NewFrom(qryMatter.FieldByName('nmatter').AsString,
-                  vResponse := RestClientt.Resource(lURL)
-                           .Accept(RestUtils.MediaType_Json)
-                           .ContentType(RestUtils.MediaType_Json);
+                                                      qryMatter.FieldByName('nmatter').AsString);
 
                   vResult := vResponse.Post<TMatterDetails>(vSearch);
                  lResponse := RestClientt.ResponseRecord;
@@ -9483,7 +9480,7 @@ var
    MsgStore: IRwMapiMsgStore;
    Folder  : IRwMapiFolder;
    RandFile,
-   DocErrMsg, AExt: string;
+   DocErrMsg: string;
    AHandle: THandle;
 begin
    if (chkPreviewPane.Checked = False) then
@@ -9581,22 +9578,13 @@ begin
             end
             else
             begin
-                AExt := UPPERCASE(qryDocs.FieldByName('FILE_EXTENSION').AsString);
-                if ((IsNotMatterTeam(qryMatter.FieldByName('NMATTER').AsInteger) = True) AND (SystemString('RESTRICT_DOC_ALTER_TO_TEAM') = 'Y')
-                    AND (MatchStr(AExt, Extensions))) then
-                begin
-                     ReadDocument(qryDocs.FieldByName('PATH').AsString);
-                end
-                else
-                begin
-                   AHandle := ExecuteFile(qryDocs.FieldByName('PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
-                   if AHandle < 33 then
-                      AHandle := ExecuteFile(qryDocs.FieldByName('Display_PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
-                      if (AHandle < 33) and (DocErrMsg <> '') then
-                         MsgInfo('Unable to open Document. - '+DocErrMsg);
-                   UpdateModBy(InttoStr(SelRec));
-                end;
-                ReopenListUpdate('DOCUMENT', qryDocs.FieldByName('DOCID').AsString);
+               AHandle := ExecuteFile(qryDocs.FieldByName('PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
+               if AHandle < 33 then
+                  AHandle := ExecuteFile(qryDocs.FieldByName('Display_PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
+                  if (AHandle < 33) and (DocErrMsg <> '') then
+                     MsgInfo('Unable to open Document. - '+DocErrMsg);
+               UpdateModBy(InttoStr(SelRec));
+               ReopenListUpdate('DOCUMENT', qryDocs.FieldByName('DOCID').AsString);
             end;
          end;
          Refresh; // Close;

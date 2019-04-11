@@ -25917,7 +25917,7 @@ object frmMatters: TfrmMatters
       ')')
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select body_text, ID'
+      'select body_text '
       'from '
       'email_templates '
       'where id = :id')

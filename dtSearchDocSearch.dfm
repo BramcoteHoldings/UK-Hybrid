@@ -20,9 +20,9 @@ object frmdtSearch: TfrmdtSearch
   TextHeight = 19
   object pagdtSearch: TcxPageControl
     Left = 0
-    Top = 32
+    Top = 28
     Width = 1635
-    Height = 993
+    Height = 997
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -34,9 +34,8 @@ object frmdtSearch: TfrmdtSearch
     Properties.ShowFrame = True
     Properties.Style = 9
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = pagdtSearchChange
-    ClientRectBottom = 992
+    ClientRectBottom = 996
     ClientRectLeft = 1
     ClientRectRight = 1634
     ClientRectTop = 26
@@ -51,7 +50,7 @@ object frmdtSearch: TfrmdtSearch
         Left = 0
         Top = 233
         Width = 1633
-        Height = 733
+        Height = 737
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -456,7 +455,7 @@ object frmdtSearch: TfrmdtSearch
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -472,11 +471,11 @@ object frmdtSearch: TfrmdtSearch
     UseSystemFont = True
     Left = 959
     Top = 76
-    PixelsPerInch = 120
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      32
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False

@@ -198,9 +198,6 @@ type
     tbtnReceiptReqDel: TdxBarButton;
     tbtnConvertReceiptReq: TdxBarButton;
     lblBankName: TcxLabel;
-    edBackdated: TcxCurrencyEdit;
-    Label13: TLabel;
-    qryBackDated: TUniQuery;
     procedure cbBankClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure qryBankRecAfterInsert(DataSet: TDataSet);
@@ -379,8 +376,8 @@ begin
          ParamByName('P_Acct').AsString         := cbBank.Text;
          ParamByName('trust').AsString          := TableString('BANK','ACCT', cbBank.Text, 'TRUST');
          // dw 27 Jan 2019
-         ParamByName('trustasoffice').AsString  := lsTrustasOffice;
-         //ParamByName('trustasoffice').AsString := 'Y';
+         // ParamByName('trustasoffice').AsString  := lsTrustasOffice;
+         ParamByName('trustasoffice').AsString := 'Y';
          Prepare;
          Open;
       end;
@@ -474,32 +471,15 @@ begin
          ParamByName('P_DateTo').AsDate   := Trunc(dtpStatementDate.Date);
          ParamByName('P_Acct').AsString   := cbBank.Text;
          ParamByName('trust').AsString    := TableString('BANK','ACCT', cbBank.Text, 'TRUST');
-
-         ParamByName('trustasoffice').AsString  := lsTrustasOffice;
+         // dw 27 Jan 2019
+         //ParamByName('trustasoffice').AsString  := lsTrustasOffice;
+         ParamByName('trustasoffice').AsString  := 'Y';
          Prepare;
          Open;
          cTmp := FieldByName('adj_total').AsCurrency;
          Close;
       end;
       edAdjustments.Value := cTmp;
-
-      cBal := cBal + (cTmp);
-
-      cTmp := 0;
-      with qryBackDated do
-      begin
-         Close;
-         ParamByName('P_DateTo').AsDate   := Trunc(dtpStatementDate.Date);
-         ParamByName('P_Acct').AsString   := cbBank.Text;
-         ParamByName('trust').AsString    := TableString('BANK','ACCT', cbBank.Text, 'TRUST');
-
-         ParamByName('trustasoffice').AsString  := lsTrustasOffice;
-         Prepare;
-         Open;
-         cTmp := FieldByName('amount').AsCurrency;
-         Close;
-      end;
-      edBackdated.Value := cTmp;
 
       cBal := cBal + (cTmp);
 
@@ -608,7 +588,7 @@ begin
                  '    FROM cheque '+
                  '   WHERE ACCT = :Bank '+
                  '     AND reversed = ''N'' ';
-                 if lsTreatTrustasOffice = 'Z' then
+                 if lsTreatTrustasOffice = 'N' then
                  begin
                     SQL.Text := SQL.Text +
                  '     AND CASE WHEN ((:trust in (''T'', ''I'')) AND ((TRUNC (system_date) <= :p_dateto) AND (presented IS NULL or trunc(presented) > :p_dateto))) THEN 1 '+
@@ -628,9 +608,7 @@ begin
                  '         b.bankrec_saved '+
                  '    FROM bankdep b '+
                  '   WHERE b.acct = :bank  ';
-                 // 10 Mar 2019 to display all transactionsabc
-
-                 if lsTreatTrustasOffice = 'Z' then
+                 if lsTreatTrustasOffice = 'N' then
                  begin
                    SQL.Text := SQL.Text +
                  '     AND CASE WHEN ((:trust in (''T'', ''I'')) AND (TRUNC (b.system_date) <= :p_dateto)) THEN 1 '+

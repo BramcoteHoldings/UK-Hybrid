@@ -425,8 +425,7 @@ const
   IDXDOCFOLDERTMPL        = 190;
   IDXDOCINDEXUSERS        = 191;
   IDXDIARYTYPE            = 192;
-  IDXBULKMAILER           = 193;
-  // Max currently = 193
+  // Max currently = 192
 
   // Used in Reopenlist.
   ConflictTableName     = 'Conflict';
@@ -630,8 +629,6 @@ type
   function SystemVal(Field: string): boolean;
   function TableInteger(Table, LookupField, LookupValue, ReturnField: string): integer; overload;
   function TableInteger(Table, LookupField: string; LookupValue: integer; ReturnField: string): integer; overload;
-  function TableIntegerx(Table, LookupField, LookupValue, ExtraWhere, ReturnField: string): integer; overload;
-  function TableIntegerx(Table, LookupField: string; LookupValue: integer; ExtraWhere: string; ReturnField: string): integer; overload;
   function GetNMemoRef(sField, sRefNo: string) : string;
   function TableCurrency(Table, LookupField, LookupValue, ReturnField: string): currency; overload;
   function TableCurrency(Table, LookupField: string; LookupValue: integer; ReturnField: string): currency; overload;
@@ -646,7 +643,6 @@ type
   function TaxCalc2(var Amount: Currency; RateType, TaxCode: string; TaxDate: TDateTime): Currency;
   function TaxExtract(var Amount: Double; TaxCode: string; TaxDate: TDateTime): Double;
   function TaxRate(RateType, TaxCode: string; Commence: TDateTime): Double;
-  function TaxCode(RateType: String; TaxRate: Double; Commence: TDateTime): String;
   procedure ToggleEditButtons(Sender: TControl; Action: TEditButtonAction = ebaToggle);
   function TypeString(sCode: string; sField: string): string;
   procedure UseBitmap(ilstTarget: TImageList; sName: string);
@@ -658,7 +654,6 @@ type
   function getLabel(sClass,sName : String; sDefault: string = ''): String; overload;
   function set_date_format(sformat : string) : string;
   function get_default_gst(sform : String) : String;
-  function get_tax_method(sEntity : String) : String;
   function CheckReqFields(sTableName: String;dDataSet : TDataSet) : BOOLEAN;
   function ClearTrust(sFileID : String) : Currency;
   function UnClearedTrust(sFileID : String) : Currency;
@@ -781,7 +776,6 @@ type
   procedure PostTempFees;
   function DefaultBillTemplate(): boolean;
   function  IsMatterPrivate(ANMatter: integer; ARestrictMatter: string): boolean;
-  function IsNotMatterTeam(ANMatter: integer): boolean;
 
   procedure PostKeyEx32(key: Word; const shift: TShiftState; specialkey: Boolean) ;
 
@@ -7628,23 +7622,6 @@ begin
   qryLookup.Free;
 end;
 
-function TableIntegerx(Table, LookupField, LookupValue, ExtraWhere, ReturnField: string): integer; overload;
-var
-  qryLookup: TUniQuery;
-begin
-  qryLookup := TUniQuery.Create(nil);
-  qryLookup.Connection := dmAxiom.uniInsight;
-  with qryLookup do
-  begin
-    SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :' + LookupField+ ' AND ' + ExtraWhere;
-    Params[0].AsString := LookupValue;
-    Open;
-    Result := Fields[0].AsInteger;
-    Close;
-  end;
-  qryLookup.Free;
-end;
-
 function GetNMemoRef(sField, sRefNo: string) : string;
 var
   qryLookup: TUniQuery;
@@ -7654,7 +7631,7 @@ begin
   with qryLookup do
   begin
     // disable entity checking
-    SQL.Text := 'SELECT ' + sField + ' FROM NMEMO WHERE RV_TYPE = ''N'' AND BANK_ACCT=:ENTITY AND REFNO=:REFNO';
+    SQL.Text := 'SELECT ' + sField + ' FROM NMEMO WHERE BANK_ACCT=:ENTITY AND REFNO=:REFNO';
     ParambyName('REFNO').AsString := sRefNo;
     ParamByName('ENTITY').AsString := dmAxiom.Entity;
     Open;
@@ -7673,23 +7650,6 @@ begin
   with qryLookup do
   begin
     SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :' + LookupField;
-    Params[0].AsInteger := LookupValue;
-    Open;
-    Result := Fields[0].AsInteger;
-    Close;
-  end;
-  qryLookup.Free;
-end;
-
-function TableIntegerX(Table, LookupField: string; LookupValue: integer; ExtraWhere: string; ReturnField: string): integer; overload;
-var
-  qryLookup: TUniQuery;
-begin
-  qryLookup := TUniQuery.Create(nil);
-  qryLookup.Connection := dmAxiom.uniInsight;
-  with qryLookup do
-  begin
-    SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :' + LookupField + ' AND ' + ExtraWhere;
     Params[0].AsInteger := LookupValue;
     Open;
     Result := Fields[0].AsInteger;
@@ -8225,46 +8185,6 @@ begin
   qryRate.Free;
 end;
 
-function TaxCode(RateType: String; TaxRate: Double; Commence: TDateTime): String;
-var
-  qryRate: TUniQuery;
-begin
-   qryRate := TUniQuery.Create(nil);
-   with qryRate do
-   begin
-      Connection := dmAxiom.uniInsight;
-      SQL.Clear;
-      SQL.Add('SELECT RATE, BILL_RATE, TAXCODE, TAXTYPE ');
-      SQL.Add('FROM TAXTYPE, TAXRATE ');
-      SQL.Add('WHERE TAXRATE.TAXCODE = TAXTYPE.CODE AND TAXTYPE.TAXTYPE = ''TAX'' ');
-      SQL.Add('  AND COMMENCE = (SELECT MAX(COMMENCE) FROM TAXRATE, TAXTYPE ');
-      SQL.Add('  WHERE TAXRATE.TAXCODE = TAXTYPE.CODE ');
-      if (RateType = 'BILL') then
-          SQL.Add('AND TAXRATE.RATE = :TAXRATE AND TAXRATE.BILL_RATE = 0 ');
-      if (RateType = 'CHEQUE') then
-          SQL.Add('AND TAXRATE.BILL_RATE = :TAXRATE and TAXRATE.RATE = 0 ');
-      if (RateType = 'BOTH') then
-          SQL.Add('AND TAXRATE.BILL_RATE = :TAXRATE AND TAXRATE.RATE = :TAXRATE ');
-      SQL.Add('AND TAXTYPE.TAXTYPE = ''TAX'' AND TAXRATE.COMMENCE <= :COMMENCE) ');
-      if (RateType = 'BILL') then
-          SQL.Add('AND TAXRATE.RATE = :TAXRATE AND TAXRATE.BILL_RATE = 0 ');
-      if (RateType = 'CHEQUE') then
-          SQL.Add('AND TAXRATE.BILL_RATE = :TAXRATE and TAXRATE.RATE = 0 ');
-      if (RateType = 'BOTH') then
-          SQL.Add('AND TAXRATE.BILL_RATE = :TAXRATE AND TAXRATE.RATE = :TAXRATE ');
-      ParamByName('TAXRATE').AsFloat := TaxRate;
-      ParamByName('COMMENCE').AsDateTime := Trunc(Commence);
-
-      Open;
-      if IsEmpty then
-         TaxCode := 'N/A'
-      else
-          TaxCode :=  FieldByName('TAXCODE').AsString;
-      Close;
-  end;
-  qryRate.Free;
-end;
-
 
 procedure ToggleEditButtons(Sender: TControl; Action: TEditButtonAction = ebaToggle);
 var
@@ -8442,32 +8362,19 @@ function get_default_gst(sform : String) : String;
 var
    qryTmp : TUniQuery;
 begin
-    qryTmp := TUniQuery.Create(nil);
-    qryTmp.Connection := dmAxiom.uniInsight;
-    qryTmp.SQL.Text := 'SELECT CODE FROM TAXDEFAULT WHERE TYPE=:TYPE';
-    qryTmp.Prepare;
-    qryTmp.ParamByName('TYPE').AsString := sForm;
-    qryTmp.Open;
-    get_default_gst := qryTmp.FieldByName('CODE').AsString;
+    try
+       qryTmp := TUniQuery.Create(nil);
+       qryTmp.Connection := dmAxiom.uniInsight;
+       qryTmp.SQL.Text := 'SELECT CODE FROM TAXDEFAULT WHERE TYPE=:TYPE';
+       qryTmp.Prepare;
+       qryTmp.ParamByName('TYPE').AsString := sForm;
+       qryTmp.Open;
+       get_default_gst := qryTmp.FieldByName('CODE').AsString;
 
-    qryTmp.Close;
-    qryTmp.Free;
-end;
-
-function get_tax_method(sEntity : String) : String;
-var
-   qryTmp : TUniQuery;
-begin
-    qryTmp := TUniQuery.Create(nil);
-    qryTmp.Connection := dmAxiom.uniInsight;
-    qryTmp.SQL.Text := 'SELECT TAX_METHOD FROM ENTITY WHERE CODE=:ENTITY';
-    qryTmp.Prepare;
-    qryTmp.ParamByName('ENTITY').AsString := sEntity;
-    qryTmp.Open;
-    get_tax_method := qryTmp.FieldByName('TAX_METHOD').AsString;
-
-    qryTmp.Close;
-    qryTmp.Free;
+       qryTmp.Close;
+    finally
+       qryTmp.Free;
+    end;
 end;
 
 function CheckReqFields(sTableName: String;dDataSet : TDataSet) : BOOLEAN;
@@ -12406,21 +12313,6 @@ begin
       else
          Result := True;
    end; }
-end;
-
-function IsNotMatterTeam(ANMatter: integer): boolean;
-begin
-   with dmAxiom.procTemp do
-   begin
-      Close;
-      StoredProcName := 'isallowedmatteraccess';
-      PrepareSQL;
-      Params[1].AsInteger  := ANMatter;
-      Params[2].AsString   := dmAxiom.UserID;
-      Params[3].AsString   := 'Y';
-      Execute;
-      Result := (Params[0].AsInteger = 1);
-   end;
 end;
 
 procedure PostKeyEx32(key: Word; const shift: TShiftState; specialkey: Boolean) ;
