@@ -8614,6 +8614,8 @@ begin
 
                   lURL := SystemString('INFOTRACK_URL');
                   vSearch := TMatterDetails.NewFrom(qryMatter.FieldByName('nmatter').AsString,
+                                                      qryMatter.FieldByName('nmatter').AsString);
+
                   vResponse := RestClientt.Resource(lURL)
                            .Accept(RestUtils.MediaType_Json)
                            .ContentType(RestUtils.MediaType_Json);
