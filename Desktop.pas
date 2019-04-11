@@ -1301,7 +1301,7 @@ end;
 procedure TfrmDesktop.LoadToolbars;
   // Load the images for the Shortcuts
 begin
-  ilstShortcuts.Clear;
+ { ilstShortcuts.Clear;
   GetBitmap(ilstShortcuts, 'LOADERROR');
   GetBitmap(ilstShortcuts, 'ARCHIVE');
   GetBitmap(ilstShortcuts, 'AUTOCOSTHAND');
@@ -1352,7 +1352,7 @@ begin
   GetBitmap(ilstShortcuts, 'DATAFORM');
   GetBitmap(ilstShortcuts, 'DATAREPORT');
   GetBitmap(ilstShortcuts, 'SUNDRYLIST');
-  GetBitmap(ilstShortcuts, 'POSTCODESEARCH');      //50
+  GetBitmap(ilstShortcuts, 'POSTCODESEARCH');      //50   
   GetBitmap(ilstShortcuts, 'FEETYPE');
   GetBitmap(ilstShortcuts, 'LEDGER');
   GetBitmap(ilstShortcuts, 'LEDGER');
@@ -1382,7 +1382,7 @@ begin
   GetBitmap(ilstShortcuts, 'LEDGER');
   GetBitmap(ilstShortcuts, 'INVOICEOPEN');
   GetBitmap(ilstShortcuts, 'INVOICEOPEN');
-  GetBitmap(ilstShortcuts, 'KEY');                 //80
+  GetBitmap(ilstShortcuts, 'KEY');                 //80 
   GetBitmap(ilstShortcuts, SystemString('WORDPROC'));
   GetBitmap(ilstShortcuts, 'JOURNAL');
   GetBitmap(ilstShortcuts, SystemString('WORDPROC'));
@@ -1503,7 +1503,7 @@ begin
   // TODO: 197 LEDES Stuff
   GetBitmap(iLstShortcuts, 'RECEIPT'); // 198
   GetBitmap(iLstShortcuts, 'COINS');   // 199 - need to add correct image to repository
-  GetBitmap(iLstShortcuts, 'COINS');   // 200 - Fee Earner / Level Rates
+  GetBitmap(iLstShortcuts, 'COINS');   // 200 - Fee Earner / Level Rates  }
 
 end;
 
@@ -1807,6 +1807,8 @@ begin
 
       qryClientMRU.Close;
       qryEntitys.Close;
+      if dmAxiom.qryEmpAuthor.Active = True then
+         dmAxiom.qryEmpAuthor.Close;
 
       try
          if finYearStart <> nil then

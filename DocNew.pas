@@ -117,6 +117,7 @@ type
     FDocName:        string;
     FURLOnly:        boolean;
     sContactDocsSQL: string;
+    FMatter:         integer;
   public
     { Public declarations }
     procedure DisplayMatter(sMatter: string);
@@ -127,6 +128,7 @@ type
     property ADocId: integer read FDocId write FDocId;
     property Editing: boolean read FEditing write FEditing default False;
     property AFileID: string read FFileID write FFileID;
+    property AMatter: integer read FMatter write FMatter;
     property ANName: integer read FNName write FNName;
     property NewCopyDoc: boolean read FNewCopyDoc write FNewCopyDoc default False;
     property OrigDocPath: string read FOrigDocPath write FOrigDocPath;
@@ -387,7 +389,7 @@ begin
    else
    begin
       if (AFileID <> lblMatter.Caption) and (AFileID <> '') then
-          if (MessageBox(Self.Handle,'The matter number has changed.  This action will move this document to the new matter.  Continue?','Insight', MB_YESNO+MB_ICONQUESTION) = IDYES) then
+          if (MsgAsk('The matter number has changed.  This action will move this document to the new matter.  Continue?') = IDYES) then
              bMoveFiles := True;
 //      FDocId := 0;
       try
@@ -398,32 +400,31 @@ begin
            begin
                if (dmAxiom.MapiSession.Active = False) then
                begin
-               OldCursor := Screen.Cursor;
-               Screen.Cursor := crHourGlass;
-                    try
-                        dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-                        dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
-                        dmAxiom.MapiSession.LogonInfo.Password           := '';
-                        dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
-                        dmAxiom.MapiSession.LogonInfo.NewSession         := False;
-                        dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                        dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
-                        dmAxiom.MapiSession.Active                       := True;
-                    finally
+                  OldCursor := Screen.Cursor;
+                  Screen.Cursor := crHourGlass;
+                  try
+                     dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
+                     dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
+                     dmAxiom.MapiSession.LogonInfo.Password           := '';
+                     dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
+                     dmAxiom.MapiSession.LogonInfo.NewSession         := False;
+                     dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
+                     dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+                     dmAxiom.MapiSession.Active                       := True;
+                  finally
                     Screen.Cursor := OldCursor;
-                    end;
+                  end;
                end;
             end;
+
             for I := 0 to FileList.Count - 1 do
             begin
                with qryPopDetails do
                begin
-//                  MsgInfo('Document to add: '+tbName.Text+' to matter '+lblMatter.Caption);
                   Open;
                   if FEditing then
                   begin
                      Edit;
-//                     FieldByName('DOCID').AsInteger := ADocId;
                   end
                   else
                   begin
@@ -431,8 +432,6 @@ begin
                      ParamByName('docid').AsInteger := ADocId;
                      bMoveFiles := True;
                   end;
-
-//                  MsgInfo('Starting database save');
 
                   if ((tbName.Text = '') or (edtPath.Text = '[** Documents **]')) then
                      FieldByName('DOC_NAME').AsString := ExtractFileName(FileList.Strings[i])
@@ -719,21 +718,19 @@ begin
                    end;
                //end;
 
+                   FieldByName('IMAGEINDEX').AsInteger := FileImg;
 
-
-                  FieldByName('IMAGEINDEX').AsInteger := FileImg;
-
-                  if cmbCategory.ItemIndex >= 0 then
+                   if cmbCategory.ItemIndex >= 0 then
                      FieldByName('NPRECCATEGORY').AsInteger := cmbCategory.EditValue;  //  TableInteger('PRECCATEGORY', 'DESCR', cbCategory.Text, 'NPRECCATEGORY');
-                  if cmbClassification.ItemIndex >= 0 then
+                   if cmbClassification.ItemIndex >= 0 then
                      FieldByName('NPRECCLASSIFICATION').AsInteger := cmbClassification.EditValue;
-                  if cmbFolder.Text <> '' then
+                   if cmbFolder.Text <> '' then
                      FieldByName('FOLDER_ID').AsInteger := cmbFolder.EditValue;
 
                  // if (FileImg = 4) then
                  //    FieldByName('d_create').AsDateTime := EmailCreateDate
                  // else
-                 if (FileImg <> 4) then
+                   if (FileImg <> 4) then
                      FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i] {edtPath.Text}));
 
                   sDocID := qryPopDetails.FieldByName('DOCID').AsString;
@@ -872,8 +869,8 @@ begin
       rgStorage.ItemIndex := SystemInteger('DFLT_DOC_SAVE_OPTION');
       rgStorage.Enabled := (SystemString('DISABLE_SAVE_MODE') = 'N');
 
-      if dmAxiom.qryEmplyeeList.Active = False then
-         dmAxiom.qryEmplyeeList.Open;
+      if dmAxiom.qryEmpAuthor.Active = False then
+         dmAxiom.qryEmpAuthor.Open;
 
       {with tblEmployee do
       begin
@@ -922,7 +919,7 @@ begin
 
    if qryMatter.Active = True then
    begin
-      qryFolders.ParamByName('nMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      qryFolders.ParamByName('nMatter').AsInteger := AMatter;
       qryFolders.Open;
    end;
 

@@ -20,7 +20,8 @@ uses
   ppParameter, cxPCdxBarPopupMenu, ppDesignLayer, cxCalendar, daDataView,
   daQueryDataView, daUniDAC, daDataModule, dxCore, cxNavigator,
   dxGDIPlusClasses, dxDPIAwareUtils, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  System.ImageList;
 
 const
   isCASHBOOK = 0;

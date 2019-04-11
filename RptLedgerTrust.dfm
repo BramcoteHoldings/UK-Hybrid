@@ -10,7 +10,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   Constraints.MinWidth = 669
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -22,26 +22,26 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     666
     303)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label1: TLabel
     Left = 10
     Top = 92
-    Width = 30
-    Height = 17
+    Width = 28
+    Height = 15
     Caption = 'From'
   end
   object Label2: TLabel
     Left = 10
     Top = 120
-    Width = 14
-    Height = 17
+    Width = 13
+    Height = 15
     Caption = 'To'
   end
   object Label3: TLabel
     Left = 10
     Top = 10
-    Width = 39
-    Height = 17
+    Width = 35
+    Height = 15
     Caption = 'Matter'
   end
   object lblFile: TLabel
@@ -86,15 +86,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   object Label4: TLabel
     Left = 10
     Top = 57
-    Width = 27
-    Height = 17
+    Width = 26
+    Height = 15
     Caption = 'Bank'
   end
   object dtpFrom: TDateTimePicker
     Left = 125
     Top = 87
     Width = 106
-    Height = 25
+    Height = 23
     Date = 35612.524133958300000000
     Time = 35612.524133958300000000
     TabOrder = 0
@@ -103,7 +103,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     Left = 125
     Top = 115
     Width = 106
-    Height = 25
+    Height = 23
     Date = 35976.524408888900000000
     Time = 35976.524408888900000000
     TabOrder = 1
@@ -239,7 +239,6 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       88880FFFFFFF080888880FFFFFFF008888880000000008888888}
     TabOrder = 10
     OnClick = btnPrinClick
-    ExplicitTop = 238
   end
   object btnMatter: TBitBtn
     Left = 58
@@ -281,7 +280,6 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     NumGlyphs = 2
     TabOrder = 12
     OnClick = BitBtn1Click
-    ExplicitTop = 238
   end
   object chkWrap: TCheckBox
     Left = 10
@@ -416,7 +414,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       item
         DataType = ftUnknown
         Name = 'P_File'
-        Value = nil
+        Value = Null
       end>
   end
   object qryTrustLedger: TUniQuery
@@ -462,7 +460,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       item
         DataType = ftUnknown
         Name = 'EMPCODE'
-        Value = nil
+        Value = Null
       end>
   end
   object dsMatter: TUniDataSource
@@ -695,6 +693,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -722,15 +721,22 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -745,13 +751,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 481
     Top = 4
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plTrustLedger'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 58738
       mmPrintPosition = 0
@@ -771,6 +779,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -788,6 +797,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -805,13 +815,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object pplblReportTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblReportTitle'
+        Border.mmPadding = 0
         Caption = 'Trust/Controlled Monies Ledger'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4763
@@ -824,13 +836,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -844,13 +858,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Matter:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -862,6 +878,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -883,13 +900,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'Description:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2117
@@ -901,6 +920,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'LONGDESCR'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -922,13 +942,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Client:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 46302
@@ -940,6 +962,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
+        Border.mmPadding = 0
         DataField = 'SEARCH'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -960,13 +983,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Balance'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -979,6 +1004,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Position = lpBottom
         Weight = 0.750000000000000000
@@ -992,13 +1018,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Credit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 161396
@@ -1010,13 +1038,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Debit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 136790
@@ -1028,13 +1058,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 44979
@@ -1046,13 +1078,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Ref'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 24077
@@ -1064,13 +1098,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Trans Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 2117
@@ -1082,13 +1118,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3705
         mmLeft = 2381
@@ -1100,13 +1138,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLabel16: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label16'
+        Border.mmPadding = 0
         Caption = 'Banked Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsItalic]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 2117
@@ -1119,12 +1159,14 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'Label17'
         OnGetText = ppLabel17GetText
+        Border.mmPadding = 0
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3440
         mmLeft = 2117
@@ -1136,6 +1178,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
+        Border.mmPadding = 0
         DataField = 'ADDRESS'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -1156,6 +1199,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText15: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText15'
+        Border.mmPadding = 0
         DataField = 'SUBURB'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -1176,6 +1220,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppLine3: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line3'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1190,6 +1235,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       BeforePrint = ppDetailBand1BeforePrint
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 16404
@@ -1218,13 +1264,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           UserName = 'Label15'
           Anchors = []
           AutoSize = False
+          Border.mmPadding = 0
           Caption = 'Due to clear:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           Visible = False
           mmHeight = 3704
@@ -1239,6 +1287,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           DesignLayer = ppDesignLayer1
           UserName = 'DBText7'
           Anchors = []
+          Border.mmPadding = 0
           DataField = 'DCLEARDATE'
           DataPipeline = plTrustLedger
           DisplayFormat = 'dd/mm/yyyy'
@@ -1279,6 +1328,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText2: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText2'
+          Border.mmPadding = 0
           DataField = 'SYSTEM_DATE'
           DataPipeline = plTrustLedger
           DisplayFormat = 'dd/mm/yyyy'
@@ -1299,6 +1349,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText3: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText3'
+          Border.mmPadding = 0
           DataField = 'REFNO'
           DataPipeline = plTrustLedger
           Font.Charset = DEFAULT_CHARSET
@@ -1318,6 +1369,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText4: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText4'
+          Border.mmPadding = 0
           DataField = 'PAYER'
           DataPipeline = plTrustLedger
           Font.Charset = DEFAULT_CHARSET
@@ -1359,6 +1411,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText13: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText13'
+          Border.mmPadding = 0
           DataField = 'CREATED'
           DataPipeline = plTrustLedger
           DisplayFormat = 'dd/mm/yyyy'
@@ -1380,13 +1433,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           OnPrint = ppLabel12Print
           DesignLayer = ppDesignLayer1
           UserName = 'Label12'
+          Border.mmPadding = 0
           Caption = 'Protected'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           Visible = False
           mmHeight = 3704
@@ -1399,6 +1454,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText9: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText9'
+          Border.mmPadding = 0
           DataField = 'ALLOCTYPE'
           DataPipeline = plTrustLedger
           Font.Charset = DEFAULT_CHARSET
@@ -1418,6 +1474,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppVariable1: TppVariable
           DesignLayer = ppDesignLayer1
           UserName = 'Variable1'
+          Border.mmPadding = 0
           BlankWhenZero = False
           CalcOrder = 0
           DataType = dtCurrency
@@ -1440,6 +1497,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object memoDescr: TppDBMemo
           DesignLayer = ppDesignLayer1
           UserName = 'memoDescr'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'DESCR'
           DataPipeline = plTrustLedger
@@ -1469,6 +1527,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
         Anchors = [atTop, atRight]
+        Border.mmPadding = 0
         DataField = 'DEBIT'
         DataPipeline = plTrustLedger
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1491,6 +1550,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
         Anchors = [atTop, atRight]
+        Border.mmPadding = 0
         DataField = 'CREDIT'
         DataPipeline = plTrustLedger
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1512,6 +1572,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'running total'
         DataPipeline = plTrustLedger
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1546,6 +1607,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         PrintHeight = phDynamic
         mmBottomOffset = 0
         mmHeight = 9525
@@ -1569,6 +1631,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBText1: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'RTYPETEXT'
           DataPipeline = plTrustLedger
           Font.Charset = DEFAULT_CHARSET
@@ -1589,6 +1652,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 12171
@@ -1596,6 +1660,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBCalc2: TppDBCalc
           DesignLayer = ppDesignLayer1
           UserName = 'dbcCredit'
+          Border.mmPadding = 0
           DataField = 'CREDIT'
           DataPipeline = plTrustLedger
           DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1619,13 +1684,15 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppLabel13: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label13'
+          Border.mmPadding = 0
           Caption = 'Balance'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3704
           mmLeft = 112448
@@ -1638,6 +1705,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppVariable2: TppVariable
           DesignLayer = ppDesignLayer1
           UserName = 'Variable2'
+          Border.mmPadding = 0
           BlankWhenZero = False
           CalcOrder = 0
           CalcComponent = ppGroup1
@@ -1664,6 +1732,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppLine2: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line2'
+          Border.mmPadding = 0
           ParentWidth = True
           Weight = 0.750000000000000000
           mmHeight = 794
@@ -1677,6 +1746,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         object ppDBCalc1: TppDBCalc
           DesignLayer = ppDesignLayer1
           UserName = 'dbcDebit'
+          Border.mmPadding = 0
           DataField = 'DEBIT'
           DataPipeline = plTrustLedger
           DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1700,58 +1770,89 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060D54726156617250726F6772616D094368696C645479706502110B50726F
-        6772616D4E616D6506095661726961626C65730B50726F6772616D5479706507
-        0B747450726F63656475726506536F75726365068570726F6365647572652056
-        61726961626C65733B0D0A7661720D0A2020547275737452756E6E696E67546F
-        74616C3A2063757272656E63793B0D0A2020577261704465736372697074696F
-        6E3A20626F6F6C65616E3B0D0A202046696E69736865645265706F72743A2062
-        6F6F6C65616E3B0D0A0D0A626567696E0D0A0D0A656E643B0D0A084361726574
-        506F730102030202000001060A54726150726F6772616D094368696C64547970
-        6502150B50726F6772616D4E616D650610476C6F62616C50726F636564757265
-        310B50726F6772616D54797065070B747450726F63656475726506536F757263
-        65062C70726F63656475726520476C6F62616C50726F636564757265313B0D0A
-        626567696E0D0A0D0A656E643B0D0A084361726574506F730102030203000001
-        060F5472614576656E7448616E646C65720B50726F6772616D4E616D65061152
-        65706F72744265666F72655072696E740B50726F6772616D54797065070B7474
-        50726F63656475726506536F75726365066470726F636564757265205265706F
-        72744265666F72655072696E743B0D0A626567696E0D0A20202046696E697368
-        65645265706F7274203A3D2046616C73653B0D0A202020547275737452756E6E
-        696E67546F74616C203A3D20303B0D0A656E643B0D0A0D436F6D706F6E656E74
-        4E616D6506065265706F7274094576656E744E616D65060B4265666F72655072
-        696E74074576656E7449440201084361726574506F730102030203000001060F
-        5472614576656E7448616E646C65720B50726F6772616D4E616D650610566172
-        6961626C65324F6E5072696E740B50726F6772616D54797065070B747450726F
-        63656475726506536F75726365068570726F636564757265205661726961626C
-        65324F6E5072696E743B0D0A626567696E0D0A20202046696E69736865645265
-        706F7274203A3D20547275653B0D0A2020205661726961626C65322E76616C75
-        65203A3D20206462634372656469742E76616C7565202D206462634465626974
-        2E76616C75653B0D0A2020200D0A656E643B0D0A0D436F6D706F6E656E744E61
-        6D6506095661726961626C6532094576656E744E616D6506074F6E5072696E74
-        074576656E7449440220084361726574506F730102030203000001060F547261
-        4576656E7448616E646C65720B50726F6772616D4E616D65061647726F757031
-        4265666F726547726F7570427265616B0B50726F6772616D54797065070B7474
-        50726F63656475726506536F75726365066970726F6365647572652047726F75
-        70314265666F726547726F7570427265616B3B0D0A626567696E0D0A20202046
-        696E69736865645265706F7274203A3D2046616C73653B0D0A20202054727573
-        7452756E6E696E67546F74616C203A3D20303B0D0A656E643B0D0A0D436F6D70
-        6F6E656E744E616D65060647726F757031094576656E744E616D650610426566
-        6F726547726F7570427265616B074576656E744944021C084361726574506F73
-        0102030203000001060F5472614576656E7448616E646C65720B50726F677261
-        6D4E616D65060E444254657874344F6E5072696E740B50726F6772616D547970
-        65070B747450726F63656475726506536F757263650C0301000070726F636564
-        75726520444254657874344F6E5072696E743B0D0A7661720D0A2020204C696E
-        654E6F3A20696E74656765723B0D0A626567696E0D0A20202044425465787434
-        2E486569676874203A3D20332E3730343B0D0A2020206966204C656E67746828
-        706C54727573744C65646765725B275041594552275D29203E20353320746865
-        6E0D0A202020626567696E0D0A20202020204C696E654E6F203A3D20284C656E
-        67746828706C54727573744C65646765725B275041594552275D292F3533293B
-        0D0A2020202020444254657874342E486569676874203A3D20332E373034202A
-        20284C696E654E6F2B31293B0D0A202020656E643B0D0A656E643B0D0A0D436F
-        6D706F6E656E744E616D65060744425465787434094576656E744E616D650607
-        4F6E5072696E74074576656E7449440220084361726574506F73010203020500
-        0000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraVarProgram'
+        raProgram.ChildType = 17
+        raProgram.ProgramName = 'Variables'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variables;'#13#10'var'#13#10'  TrustRunningTotal: currency;'#13#10'  Wra' +
+          'pDescription: boolean;'#13#10'  FinishedReport: boolean;'#13#10#13#10'begin'#13#10#13#10'e' +
+          'nd;'#13#10
+        raProgram.CaretPos = (
+          3
+          2)
+      end
+      object raProgramInfo2: TraProgramInfo
+        raClassName = 'TraProgram'
+        raProgram.ChildType = 21
+        raProgram.ProgramName = 'GlobalProcedure1'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 'procedure GlobalProcedure1;'#13#10'begin'#13#10#13#10'end;'#13#10
+        raProgram.CaretPos = (
+          3
+          3)
+      end
+      object raProgramInfo3: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'ReportBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure ReportBeforePrint;'#13#10'begin'#13#10'   FinishedReport := False;' +
+          #13#10'   TrustRunningTotal := 0;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Report'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 1
+        raProgram.CaretPos = (
+          3
+          3)
+      end
+      object raProgramInfo4: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable2OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable2OnPrint;'#13#10'begin'#13#10'   FinishedReport := True;'#13#10 +
+          '   Variable2.value :=  dbcCredit.value - dbcDebit.value;'#13#10'   '#13#10'e' +
+          'nd;'#13#10
+        raProgram.ComponentName = 'Variable2'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+        raProgram.CaretPos = (
+          3
+          3)
+      end
+      object raProgramInfo5: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Group1BeforeGroupBreak'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Group1BeforeGroupBreak;'#13#10'begin'#13#10'   FinishedReport := F' +
+          'alse;'#13#10'   TrustRunningTotal := 0;'#13#10'end;'#13#10
+        raProgram.ComponentName = 'Group1'
+        raProgram.EventName = 'BeforeGroupBreak'
+        raProgram.EventID = 28
+        raProgram.CaretPos = (
+          3
+          3)
+      end
+      object raProgramInfo6: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'DBText4OnPrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure DBText4OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   D' +
+          'BText4.Height := 3.704;'#13#10'   if Length(plTrustLedger['#39'PAYER'#39']) > ' +
+          '53 then'#13#10'   begin'#13#10'     LineNo := (Length(plTrustLedger['#39'PAYER'#39']' +
+          ')/53);'#13#10'     DBText4.Height := 3.704 * (LineNo+1);'#13#10'   end;'#13#10'end' +
+          ';'#13#10
+        raProgram.ComponentName = 'DBText4'
+        raProgram.EventName = 'OnPrint'
+        raProgram.EventID = 32
+        raProgram.CaretPos = (
+          3
+          5)
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -1780,14 +1881,16 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       '  FROM matter, bank'
       ' WHERE trust = '#39'T'#39
       '   AND matter.acct = bank.acct'
-      '   AND nmatter = :nmatter'
+      '   AND matter.nmatter = :nmatter'
       '   AND active = '#39'Y'#39
       'UNION'
       'SELECT bank.acct, bank.NAME, bank.trust'
       '  FROM bank'
       ' WHERE trust = '#39'T'#39' AND bank.acct IN (SELECT bank'
       '                                       FROM bank_matter_trust'
-      '                                      WHERE nmatter = :nmatter)'
+      
+        '                                      WHERE bank.nmatter = :nmat' +
+        'ter)'
       '       AND active = '#39'Y'#39)
     Left = 344
     Top = 257

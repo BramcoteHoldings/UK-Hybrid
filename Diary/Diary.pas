@@ -18,17 +18,17 @@ uses
   dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
   dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
   dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
-  dxPScxGridLayoutViewLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
-  dxPSCore, dxPScxCommon, cxSchedulercxGridConnection, ppDB, ppDBPipe,
-  ppParameter, ppDesignLayer, ppCtrls, ppBands, ppVar, ppPrnabl, ppClass,
-  ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBar, cxSchedulerDBStorage,
-  Vcl.ExtCtrls, System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan,
-  System.ImageList, Vcl.ImgList, cxBarEditItem, cxClasses, DBAccess, Uni, MemDS,
-  cxLabel, cxSpinEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, cxTextEdit, cxButtonEdit, cxGroupBox, Vcl.StdCtrls,
-  cxButtons, cxDateChangeButton, cxMaskEdit, cxDateNavigator, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
-  cxGrid, cxPC, Progress, DateUtils;
+  dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
+  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, cxSchedulercxGridConnection,
+  ppDB, ppDBPipe, ppParameter, ppDesignLayer, ppCtrls, ppBands, ppVar, ppPrnabl,
+  ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBar,
+  cxSchedulerDBStorage, Vcl.ExtCtrls, System.Actions, Vcl.ActnList,
+  Vcl.XPStyleActnCtrls, Vcl.ActnMan, System.ImageList, Vcl.ImgList,
+  cxBarEditItem, cxClasses, DBAccess, Uni, MemDS, cxLabel, cxSpinEdit,
+  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit,
+  cxButtonEdit, cxGroupBox, Vcl.StdCtrls, cxButtons, cxDateChangeButton,
+  cxMaskEdit, cxDateNavigator, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, Progress, DateUtils;
 
 const
    DayView = 0;
@@ -1114,10 +1114,10 @@ begin
                3: TwoWaySynch;
             end;
          finally
+            FreeAndNil(afrmProgress);
             DiaryScheduler.EndUpdate;
             Screen.Cursor := crDefault;
             SchedulerDBStorage.EndUpdate;
-            FreeAndNil(afrmProgress);
          end;
       end;
    end;

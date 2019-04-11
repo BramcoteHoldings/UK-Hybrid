@@ -39,12 +39,13 @@ uses
   cxGridCustomView, cxGrid, cxDropDownEdit, cxDBEdit, cxImage, Vcl.Mask,
   Vcl.DBCtrls, cxButtonEdit, cxDBLabel, cxLabel, cxDBRichEdit, Vcl.Buttons,
   cxMaskEdit, cxLookupEdit, cxDBLookupEdit, VCL.Forms, uRwMapiInterfaces,
-  Variants,  uHostPreview, Registry, ComObj, ppFileUtils,
+  Variants,  {uHostPreview,} Registry, ComObj, ppFileUtils,
   ppInistorage, cxSchedulerEventEditor, cxGridExportLink, ITrackMatterDetails,
   vcl.Themes, vcl.styles, vcl.Styles.Ext, DateUtils, StrUtils, dxNavBarCollns,
   cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
-  RestClientt, RestUtils, REST.Client, REST.Authenticator.Basic, Vcl.Grids,
-  dxPScxEditorLnks;
+  RestClientt, RestUtils, REST.Client, Vcl.Grids,
+  dxPScxEditorLnks, JamFilePreview, cxTL, cxTLdxBarBuiltInMenu,
+  cxInplaceContainer, cxTLData, cxDBTL;
 
 
 const
@@ -1141,7 +1142,6 @@ type
     pageDocuments: TcxPageControl;
     tabGenerated: TcxTabSheet;
     pGenDocuments1: TcxTabSheet;
-    pnlPreview: TPanel;
     dxDockPanel3: TdxDockPanel;
     lvFolders: TVirtualStringTree;
     tabTransit: TcxTabSheet;
@@ -1535,6 +1535,14 @@ type
     lblConflictCheckCompleted: TLabel;
     dxSelectConflict: TdxBarButton;
     RestClientt: TRestClientt;
+    pnlPreview: TJamFilePreview;
+    cxDBTreeList1: TcxDBTreeList;
+    UniQuery1: TUniQuery;
+    UniDataSource1: TUniDataSource;
+    cxDBTreeList1DESCR: TcxDBTreeListColumn;
+    cxDBTreeList1FOLDER_ID: TcxDBTreeListColumn;
+    cxDBTreeList1PARENT_ID: TcxDBTreeListColumn;
+    cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -1990,6 +1998,8 @@ type
     procedure tabGraphShow(Sender: TObject);
     procedure cxTabSheet16Show(Sender: TObject);
     procedure dxSelectConflictClick(Sender: TObject);
+    procedure cxDBTreeList1Click(Sender: TObject);
+    procedure pmDocFoldersPopup(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2024,7 +2034,7 @@ type
 
     AEmailTemplate: ansistring;
 
-    FPreview : THostPreviewHandler;
+//    FPreview : THostPreviewHandler;
 
     FEvent: TcxSchedulerEvent;
     FRecipientsList: TStringList;
@@ -2118,7 +2128,6 @@ type
 var
   arrayData : TCoganArray;
   frmMatters: TfrmMatters;
-  FormClosing: boolean;
 
 implementation
 
@@ -2218,7 +2227,7 @@ type
   end;
 
 
-  THostPreviewHandlerClass=class(THostPreviewHandler);
+ // THostPreviewHandlerClass=class(THostPreviewHandler);
 
 
 procedure TfrmMatters.setDisplayNames;
@@ -2257,61 +2266,61 @@ begin
 end;
 
 procedure TfrmMatters.DeleteFolder1Click(Sender: TObject);
-var
-   Node: PVirtualNode;
-   Data: PFolderData;
-   LFolderId: integer;
-   lParentID: integer;
+//var
+//   Node: PVirtualNode;
+//   Data: PFolderData;
+//   LFolderId: integer;
+//   lParentID: integer;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
-   if Data.Text = 'All Files' then
+//   Data := lvFolders.GetNodeData(Node);
+   if cxDBTreeList1DESCR.Value = 'All Files' then
    begin
       MsgErr('The ''All Files'' directory cannot be deleted');
       Exit;
    end;
 
-   if Data.Text = 'Unallocated Files' then
+   if cxDBTreeList1DESCR.Value = 'Unallocated Files' then
    begin
       MsgErr('The ''Unallocated Files'' directory cannot be deleted');
       Exit;
    end;
 
-   if MsgAsk('Delete directory ' + Data.Text) = mrYes then
+   if MsgAsk('Delete directory ' + cxDBTreeList1DESCR.Value) = mrYes then
    begin
-         qryFldTmp.Close;
-         qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as foldercount from doc where folder_id = '+ IntToStr(Data.FolderID);
-         qryFldTmp.Open;
-         // 25 April 2018 DW changed count from 1 to 0 to prevent orphaning on singular doc in folder
-         if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
-         begin
-            MsgErr('This folder currently has attached documents.  It cannot be deleted.');
-            Exit;
-         end;
-         // 25 April 2018 DW prevent parent folder from being deleted
-         qryFldTmp.Close;
-         qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as foldercount from document_folders where parent_id = '+ IntToStr(Data.FolderID);
-         qryFldTmp.Open;
-         if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
-         begin
-            MsgErr('This folder currently has sub-folders.  It cannot be deleted.');
-            Exit;
-         end;
-         // end of change
-         qryFldTmp.Close;
-         qryFldTmp.Sql.Text := 'delete from document_folders where folder_id = :folder_id and nmatter = :nmatter';
-         qryFldTmp.ParamByName('folder_id').AsInteger := Data.FolderID;
-         qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-         qryFldTmp.ExecSQL;
-         qryFldTmp.Close;
-         // 25 April 2018 DW refresh folder list after deleting
-         SetupDocFolderTab;
-         // end of change
+      qryFldTmp.Close;
+      qryFldTmp.SQL.Clear;
+      qryFldTmp.SQL.Text := 'select count(*) as foldercount from doc where folder_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.Open;
+      // 25 April 2018 DW changed count from 1 to 0 to prevent orphaning on singular doc in folder
+      if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
+      begin
+         MsgErr('This folder currently has attached documents.  It cannot be deleted.');
+         Exit;
+      end;
+      // 25 April 2018 DW prevent parent folder from being deleted
+      qryFldTmp.Close;
+      qryFldTmp.SQL.Clear;
+      qryFldTmp.SQL.Text := 'select count(*) as foldercount from document_folders where parent_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.Open;
+      if (qryFldTmp.FieldByName('foldercount').AsInteger > 0) then
+      begin
+         MsgErr('This folder currently has sub-folders.  It cannot be deleted.');
+         Exit;
+      end;
+      // end of change
+      qryFldTmp.Close;
+      qryFldTmp.Sql.Text := 'delete from document_folders where folder_id = :folder_id and nmatter = :nmatter';
+      qryFldTmp.ParamByName('folder_id').AsInteger := integer(cxDBTreeList1FOLDER_ID.Value);
+      qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      qryFldTmp.ExecSQL;
+      qryFldTmp.Close;
+      // 25 April 2018 DW refresh folder list after deleting
+      SetupDocFolderTab;
+      // end of change
    end;
 end;
 
@@ -4012,7 +4021,6 @@ procedure TfrmMatters.FormClose(Sender: TObject; var Action: TCloseAction);
 var
    ASaveViewName: string;
 begin
-   FormClosing := True;
    if qryMatter.UpdatesPending then
    begin
       if MessageDlg('Save changes ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -4066,8 +4074,8 @@ begin
       SettingSave('Matter_Doc','DocFolderPanelWidth',dxDockPanel3.width);
    end;
 
-   if FPreview <> nil then
-      FPreview.Free;
+ //  if FPreview <> nil then
+ //     FPreview.Free;
 
    qryPhonebookParty1.Close;
    qryPhonebookParty2.Close;
@@ -4863,7 +4871,6 @@ begin
    lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
    TppIniStoragePlugIn.SetStorageName(lsStorageName);
 
-   FormClosing := False;
 //   cxEventEditorClass := nil;
 
 //   cxEventEditorClass := TfrmNewTaskNew; // indicate that the
@@ -5166,7 +5173,7 @@ begin
 
    nFeeTmpID := 0;
 
-   FPreview := nil;
+  // FPreview := nil;
 
    FAttachFileName := TStringList.Create;
    FRecipientsList   := TStringList.Create;
@@ -5577,12 +5584,16 @@ end;
 procedure TfrmMatters.chkPreviewPaneClick(Sender: TObject);
 begin
    if chkPreviewPane.Checked = True then
-      pnlPreview.Width := 380
+   begin
+      pnlPreview.Width := 380;
+      pnlPreview.Enabled := True;
+   end
    else
    begin
+      pnlPreview.Enabled := False;
       pnlPreview.Width := 0;
-      if FPreview <> nil then
-         FPreview := nil;
+//      if FPreview <> nil then
+//         FPreview := nil;
 //      gtDocumentViewer.CloseDocument;
    end;
    SettingSaveBoolean('MATTERS', 'DOCPREVIEWPANE', chkPreviewPane.Checked);
@@ -5869,6 +5880,9 @@ begin
     end;
     qryFolders.Close;
     lvFolders.EndUpdate;
+    UniQuery1.Close;
+    UniQuery1.ParamByName('nmatter').asinteger := qryMatter.FieldByName('nmatter').AsInteger;
+    UniQuery1.Open;
 end;
 
 procedure TfrmMatters.SetupDocTab;
@@ -6098,7 +6112,8 @@ begin
    try
       LfrmDocNew := TfrmDocNew.Create(Self);
       LfrmDocNew.NewCopyDoc := False;
-      LfrmDocNew.FileID :=  qryMatter.FieldByName('FILEID').AsString;
+      LfrmDocNew.FileID := qryMatter.FieldByName('FILEID').AsString;
+      LfrmDocNew.AMatter := qryMatter.FieldByName('NMATTER').AsInteger;
       if LfrmDocNew.ShowModal = mrOk then
       begin
          if cbGroupExpanded.Checked then
@@ -6597,6 +6612,14 @@ begin
       miViewCheqreqHistoryforMatter.Caption:= Format('View Cheqreq History for Matter #%s...', [qryMatter.FieldByName('NMATTER').AsString])
   end else
     miViewCheqreqHistoryforMatter.Visible:= False
+end;
+
+procedure TfrmMatters.pmDocFoldersPopup(Sender: TObject);
+begin
+   EditFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   DeleteFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
 end;
 
 procedure TfrmMatters.qryMatterPartyAfterOpen(DataSet: TDataSet);
@@ -10176,7 +10199,6 @@ begin
       AAttachDocID := TStringList.Create;
 
       AAttachList := GetAttachFile(AAttachDocID);
-      WriteLog('ForwardClick: connecting to MAPI session: ');
       if dmAxiom.MapiSession.Active = False then
       begin
          OldCursor := Screen.Cursor;
@@ -10189,7 +10211,7 @@ begin
               dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
               dmAxiom.MapiSession.LogonInfo.NewSession         := False;
               dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
               dmAxiom.MapiSession.Active                       := True;
             except on e:exception do
               WriteLog('ForwardClick: error connecting to MAPI session: ' + e.Message);
@@ -10205,7 +10227,7 @@ begin
  //     FRecipientsList.text := ARecipientsList.text;
       try
          try
-            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
+            MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
          except on e:exception do
               WriteLog('ForwardClick: error connecting to MsgStore: ' + e.Message);
          end;
@@ -10216,25 +10238,8 @@ begin
          except on e:exception do
               WriteLog('ForwardClick: error connecting to Folder: ' + e.Message);
          end;
-         //try
+
          Msg := Folder.CreateMessage('IPM.Note') As IRwMapiMailMessage;
-        // except on e:exception do
-        //      WriteLog('ForwardClick: error create message IPM Note: ' + e.Message);
-        // end;
-        // try
-        //    Msg := MsgStore.CreateMessage(ftDraft,'IPM.Note', False);
-        // except on e:exception do
-        //     WriteLog('ForwardClick: error create draft message IPM Note: ' + e.Message);
-        // end;
-
-
-         try
-            //FormMgr.ShowMessage(Msg);
-            //FormMgr.NewMessage(Folder);
-         except on e:exception do
-              WriteLog('ForwardClick: error sending from Formmgr: ' + e.Message);
-         end;
-         WriteLog('ForwardClick: Message sent ' + qryMatter.FieldByName('nmatter').AsString);
 
          if SystemString('MATTER_EMAIL_SUBJECT') = '' then
             Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
@@ -10268,48 +10273,34 @@ begin
 
          Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
 
- {        for i := 0 to FAttachFileName.Count - 1 do
-         begin
-            FileName  := FAttachFileName.Strings[i];
-
-            // check for embedded image
- //           ContentID := lowercase(ChangeFileExt(ExtractFileName(FileName),''));
-   //         if Pos('cid:'+ContentID, HtmlSource) > 0 then
-   //            ASender.MapiMessage.AddEmbeddedImage(FileName)
-   //         else
-
-               Msg.AddFileAttachment(FileName);
-          end;  }
- //     if (FAttachFileName.Count > 0) then
-
-
          zipFileName := '';
-         for i := 0 to AAttachList.Count - 1 do
-         begin
-            if tmpFileName <> '' then
-               tmpFileName := tmpFileName + ',';
-            tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
-            if (AAttachList.Count > 1) and (wCompress = high(word)) then
+         wCompress := mrNo;
+         if (AAttachList.Count > 1) {and (wCompress = high(word))} then
                wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
                                    ' files. Would you like to send as a compressed archive (zip) file instead?');
-            if wCompress = mrYes then
-            begin
-               try
-                  zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
-                  zipFile(zipFileName ,AAttachList);
-               finally
-                  Msg.AddFileAttachment(zipFileName);
-                  FileAttachList := zipFileName;
-                  DeleteFile(zipFileName);
-               end;
-               break;
-            end
-            else
-               Msg.AddFileAttachment(AAttachList.Strings[i]);
-         end;
+         case wCompress of
+            mrYes: begin
+                     try
+                        zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
+                        zipFile(zipFileName ,AAttachList);
+                     finally
+                        Msg.AddFileAttachment(zipFileName);
+//                        Msg.AddAttachment.LoadFromFile(zipFileName);
+                        FileAttachList := zipFileName;
+                        DeleteFile(zipFileName);
+                     end;
+                   end;
+            mrNo: begin
+                     for i := 0 to AAttachList.Count - 1 do
+                     begin
+                        if tmpFileName <> '' then
+                           tmpFileName := tmpFileName + ',';
+                        tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
 
-         if zipFileName = '' then
-            FileAttachList := tmpFileName;
+                        Msg.Attachments.AddFileAttachment(AAttachList.Strings[i]);
+                     end;
+                  end;
+         end;
 
          if (FileID = '') then
          begin
@@ -10338,8 +10329,8 @@ begin
          end;
          Msg.SaveChanges(smKeepOpenReadWrite);
 
-         //Msg.ShowForm;
-         FormMgr.ShowMessage(Msg);
+         Msg.ShowForm;
+//         FormMgr.ShowMessage(Msg);
 
       finally
          ARecipientsList.Free;
@@ -10375,7 +10366,7 @@ begin
                begin
                   LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
                   CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
-                  if (FPreview <> nil) then
+ {                 if (FPreview <> nil) then
                      FPreview.Free;
                   FPreview := THostPreviewHandler.Create(Self);
                   FPreview.Top := 0;
@@ -10385,7 +10376,7 @@ begin
                   FPreview.Parent := pnlPreview;
                   FPreview.Align  := alClient;
                   FPreview.FileName:=LsTmpFile;
-                  THostPreviewHandlerClass(FPreview).Paint;
+                  THostPreviewHandlerClass(FPreview).Paint;   }
                end;
             end;
          except on E:Exception do
@@ -10508,17 +10499,17 @@ end;
 procedure TfrmMatters.EditFolder1Click(Sender: TObject);
 var
    AValue: string;
-   Node: PVirtualNode;
-   Data: PFolderData;
+//   Node: PVirtualNode;
+//   Data: PFolderData;
    LFolderId: integer;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
-   LFolderId := Data.FolderID;
-   AValue := Data.Text;
+//   Data := lvFolders.GetNodeData(Node);
+   LFolderId := cxDBTreeList1FOLDER_ID.Value;
+   AValue := cxDBTreeList1DESCR.Value;
    if ((AValue <> 'All Files') and (AValue <> 'Unallocated Files')) then
    begin
       if InputQueryString('Edit Folder','Edit Folder name','Folder',AValue) = True then
@@ -10627,16 +10618,41 @@ end;
 procedure TfrmMatters.AddFolder1Click(Sender: TObject);
 var
    AValue: string;
-   Node: PVirtualNode;
-   Data: PFolderData;
-   LFolderId: integer;
+//   Node: PVirtualNode;
+//   Data: PFolderData;
+   LFolderId,
+   lFolderParentId: integer;
    lFolderlvl: integer;
+   mbResponse: word;
 begin
-   Node := lvFolders.FocusedNode;
+//   Node := lvFolders.FocusedNode;
+   if (cxDBTreeList1FOLDER_ID.Value = -2) or (cxDBTreeList1FOLDER_ID.Value = -1 )then
+   begin
+      LFolderID := 0;
+      LFolderLvl := 0;
+      lFolderParentId := -1;
+   end
+   else
+   begin
+      mbResponse := MsgAsk('Would you like to add Folder as Child of "'+ cxDBTreeList1DESCR.Value + '" (YES) or at the same level as "'+cxDBTreeList1DESCR.Value + '"(NO)');
+      if mbResponse = mrYes then
+      begin
+         LFolderId := cxDBTreeList1FOLDER_ID.Value;
+         lFolderlvl := cxDBTreeList1FOLDER_LEVEL.Value + 1;
+         lFolderParentId := -2;
+      end
+      else if mbResponse = mrNo then
+      begin
+         LFolderId := cxDBTreeList1FOLDER_ID.Value;
+         lFolderlvl := cxDBTreeList1FOLDER_LEVEL.Value;
+         lFolderParentId := cxDBTreeList1PARENT_ID.Value;
+      end;
+   end;
+
    if InputQueryString('Add Folder','Enter Folder name to create','Folder',AValue) = True then
    begin
       try
-         if not Assigned(Node) then
+ {        if not Assigned(Node) then
          begin
            LFolderID := 0;
            LFolderLvl := 0;
@@ -10646,16 +10662,19 @@ begin
            Data := lvFolders.GetNodeData(Node);
            LFolderId := Data.FolderID;
            lFolderlvl := Data.FolderLvl + 1;
-         end;
+         end;  }
+
          with dmAxiom.qryTmp do
          begin
            Close;
            SQL.Clear;
            SQL.Text := 'insert into document_folders (descr, parent_id, nmatter, folder_level) values (:descr, :parent_id, :nmatter, :folder_level)';
-           if (LFolderID = -1) then
+           if (lFolderParentId = -1) then
               ParamByName('parent_id').AsInteger := 0
+           else if (lFolderParentId = -2) then
+              ParamByName('parent_id').AsInteger := LFolderID
            else
-              ParamByName('parent_id').AsInteger := LFolderID;
+              ParamByName('parent_id').AsInteger := lFolderParentId;
 
            ParamByName('descr').AsString := Trim(AValue);
            ParamByName('nmatter').AsInteger := qryMatter.FieldByName('nmatter').AsInteger;
@@ -11541,8 +11560,6 @@ begin
             end;
          end;
 
-
-
          try
             begin
                try
@@ -11626,7 +11643,7 @@ begin
       AAttachDocID := TStringList.Create;
       ConvAAttachList := TStringList.Create;
       AAttachList := GetAttachFile(AAttachDocID);
-      WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
+ //     WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
       if (dmAxiom.MapiSession.Active = False) then
       begin
          OldCursor := Screen.Cursor;
@@ -11687,60 +11704,60 @@ begin
          end;
 
          tmpFileName := sFileName;
+         //dw 19 sep 19 assigning in isolated method
+         FAttachFileName.text := ConvAAttachList.text;
+         FRecipientsList.text := ARecipientsList.text;
+         try
+             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
+         end;
+
+         try
+             // 07 Mar 2019 DW open the folder offline to resolve O365 issue
+             Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
+         end;
+         Try
+             Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
+         end;
+
+         if SystemString('MATTER_EMAIL_SUBJECT') = '' then
+            Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
+         else
+            Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
+
+         sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+         for i := 1 to length(sSubject) do
          begin
-            //dw 19 sep 19 assigning in isolated method
-            FAttachFileName.text := ConvAAttachList.text;
-            FRecipientsList.text := ARecipientsList.text;
-            try
-                MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
-            end;
-
-            try
-                // 07 Mar 2019 DW open the folder offline to resolve O365 issue
-                Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
-            end;
-            Try
-                Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
-            except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
-            end;
-
-            if SystemString('MATTER_EMAIL_SUBJECT') = '' then
-               Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
-            else
-               Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
-
-            sSubject := Msg.PropByName(PR_SUBJECT).AsString;
-            for i := 1 to length(sSubject) do
+            if sSubject[i] = '#' then
             begin
-               if sSubject[i] = '#' then
-              begin
-                 for x := i + 1 to length(sSubject) do
-                 begin
-                    if (sSubject[x] <> ' ') and (sSubject[x] <> ']') then
-                        FileID := FileID + sSubject[x];
-                 end;
-              end;
+               for x := i + 1 to length(sSubject) do
+               begin
+                  if (sSubject[x] <> ' ') and (sSubject[x] <> ']') then
+                     FileID := FileID + sSubject[x];
+               end;
             end;
-            try
-                AFileID := Msg.PropByName(MATTER).AsString;
-            except
+         end;
+         try
+            AFileID := Msg.PropByName(MATTER).AsString;
+         except
 
             try
-                Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
+               Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
             except
             //
+            end;
          end;
-          end;
-          if AFileID = '' then
-             AFileID := qryMatter.FieldByName('fileid').AsString;
+
+         if AFileID = '' then
+            AFileID := qryMatter.FieldByName('fileid').AsString;
 
  //         Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID;
-          Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
+         Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
 
        {   for i := 0 to FAttachFileName.Count - 1 do
           begin
@@ -11757,33 +11774,36 @@ begin
 
  //       if (FAttachFileName.Count > 0) then
 
-          zipFileName := '';
-          for i := 0 to FAttachFileName.Count - 1 do
-          begin
-            if tmpFileName <> '' then
-               tmpFileName := tmpFileName + ',';
-            tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
-            if (FAttachFileName.Count > 1) and (wCompress = high(word)) then
-               wCompress := MsgAsk('You have selected '+ IntToStr(FAttachFileName.Count)+
+         zipFileName := '';
+         wCompress := mrNo;
+         if (FAttachFileName.Count > 1) {and (wCompress = high(word))} then
+               wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
                                    ' files. Would you like to send as a compressed archive (zip) file instead?');
-            if wCompress = mrYes then
-            begin
-               try
-                  zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
-                  zipFile(zipFileName ,FAttachFileName);
-               finally
-                  Msg.AddFileAttachment(zipFileName);
-                  FileAttachList := zipFileName;
-                  DeleteFile(zipFileName);
-               end;
-               break;
-            end
-            else
-               Msg.AddFileAttachment(FAttachFileName.Strings[i]);  //  AddAttachment.LoadFromFile(FAttachFileName.Strings[i]);
-          end;
+         case wCompress of
+            mrYes: begin
+                     try
+                        zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
+                        zipFile(zipFileName ,FAttachFileName);
+                     finally
+                        Msg.AddFileAttachment(zipFileName);
+                        FileAttachList := zipFileName;
+                        DeleteFile(zipFileName);
+                     end;
+                   end;
+            mrNo: begin
+                     for i := 0 to FAttachFileName.Count - 1 do
+                     begin
+                        if tmpFileName <> '' then
+                           tmpFileName := tmpFileName + ',';
+                        tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
 
-          if ARecipientsList.Count > 0 then
-          begin
+                        Msg.Attachments.AddFileAttachment(FAttachFileName.Strings[i]);
+                     end;
+                  end;
+         end;
+
+         if ARecipientsList.Count > 0 then
+         begin
             try
                for I := 0 to ARecipientsList.Count - 1 do
                begin
@@ -11792,18 +11812,17 @@ begin
             finally
 
             end;
-          end;
-
-          Msg.SaveChanges(smKeepOpenReadWrite);
-
-          try
-             FormMgr.ShowMessage(Msg);
-          except on e:exception do
-             WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
-          end;
-          WriteLog('MatterForwardAsPDFClick: message sent with converted file to pdf');
-
          end;
+
+         Msg.SaveChanges(smKeepOpenReadWrite);
+
+         try
+//             FormMgr.ShowMessage(Msg);
+             Msg.ShowForm;
+         except on e:exception do
+             WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
+         end;
+//          WriteLog('MatterForwardAsPDFClick: message sent with converted file to pdf');
       finally
          AAttachList.Free;
          AAttachDocID.Free;
@@ -12375,6 +12394,69 @@ begin
    if (TcxDBButtonEdit(Sender).Text <> '') then
       ShellExecute(Handle,'open',PChar('mailto:' + TcxDBButtonEdit(Sender).Text +
                                        '?Subject=#' + qryMatter.FieldByName('FILEID').AsString) ,nil,nil,SW_SHOWNORMAL);
+end;
+
+procedure TfrmMatters.cxDBTreeList1Click(Sender: TObject);
+var
+   LFolderId: integer;
+begin
+   LFolderId := cxDBTreeList1FOLDER_ID.Value;
+   if cxDBTreeList1DESCR.Value = 'All Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocVersions.Close;
+         qryDocs.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;  //-2
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end
+   else
+   if cxDBTreeList1DESCR.Value = 'Unallocated Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocs.Close;
+         qryDocVersions.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;    //-1
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end
+   else
+   if cxDBTreeList1DESCR.Value <> 'All Files' then
+   begin
+      if qryDocs.Active = True then
+      begin
+         qryDocChildren.Close;
+         qryDocVersions.Close;
+         qryDocs.Close;
+         qryDocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocs.ParamByName('folder_id').AsInteger := LFolderId;
+         qryDocs.Open;
+
+         qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocChildren.Open;
+
+         qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryDocVersions.Open;
+      end;
+   end;
 end;
 
 procedure TfrmMatters.cxGrid2DBChartView1Series1GetValueDisplayText(
@@ -13009,9 +13091,9 @@ begin
                   ' WHERE nmatter = :nmatter '+
                   ' AND is_attachment = ''N'' '+
                   '  AND CASE '+
-                  '         WHEN (:folder_id = -1) '+
+                  '         WHEN (:folder_id = -2) '+
                   '            THEN 1  '+                                         // all filess
-                  '         WHEN (:folder_id = 0) AND (folder_id IS NULL) '+
+                  '         WHEN (:folder_id = -1) AND (folder_id IS NULL) '+
                   '            THEN 1 '+                                  // unallocated files
                   '         WHEN (:folder_id > 0) AND (folder_id = :folder_id) '+
                   '            THEN 1 '+
@@ -13182,53 +13264,6 @@ begin
    if chkPreviewPane.Checked then
    begin
       try
-{         if (gtDocumentViewer.IsLoaded) then
-         begin
-            gtDocumentViewer.CloseDocument;
-         end;
-         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
-         begin
-            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
-            if (LsFile <> '') then
-            begin
-                  try
-                     PDFLibrary := TDebenuPDFLibrary1014.Create;
-                     if (ExtractFileExt(LsFile) <> '.pdf') then
-                     begin
-                        if ExtractFileExt(LsFile) = '.msg' then
-                           ConvertMsg(LsFile)
-                        else
-                           if (ExtractFileExt(LsFile) = '.doc') or
-                              (ExtractFileExt(LsFile) = '.docx') then
-                              ConvertDOCFiles(LsFile)
-                           else if (ExtractFileExt(LsFile) = '.xls') or
-                                   (ExtractFileExt(LsFile) = '.xlsx') then
-                              ConvertXLFiles(LsFile)
-                           else
-                           begin
-                              LsPDFFile := copy(LsFile,1,Length(LsFile) - Length(ExtractFileExt(LsFile))) + '.pdf';
-                              PDFLibrary.SaveToFile(LsPDFFile);
-                              LsFile := LsPDFFile;
-                           end;
-                        LsConvFile := copy(LsFile,1,Length(LsFile) - Length(ExtractFileExt(LsFile))) + '.pdf';
-                        if FileExists(LsConvFile) then
-                           gtDocumentViewer.LoadFromFile(LsConvFile);
-                     end
-                     else
-                     begin
-                        try
-                           if FileExists(LsFile) then
-                              gtDocumentViewer.LoadFromFile(LsFile);
-                        except
-                           //
-                        end;
-                     end;
-                  finally
-                     PDFLibrary.Free;
-                  end;
- //              end;
-            end;
-         end; }
          if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
          begin
             LsFile := string(tvDocsDISPLAY_PATH.EditValue);
@@ -13236,8 +13271,8 @@ begin
             begin
 //               LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
 //               CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
-               if (FPreview <> nil) then
-                  FPreview.Free;
+{              if (FPreview <> nil) then
+                  FreeAndNil(FPreview);
                FPreview := THostPreviewHandler.Create(Self);
                FPreview.Top := 0;
                FPreview.Left := 0;
@@ -13246,7 +13281,11 @@ begin
                FPreview.Parent := pnlPreview;
                FPreview.Align  := alClient;
                FPreview.FileName:=LsFile;
-               THostPreviewHandlerClass(FPreview).Paint;
+               THostPreviewHandlerClass(FPreview).Paint;    }
+               pnlPreview.Enabled := False;               
+               pnlPreview.Path := LsFile;
+               pnlPreview.Enabled := True;
+               pnlPreview.Invalidate;
             end;
          end;
       except on E:Exception do
@@ -14718,30 +14757,30 @@ begin
 end;
 
 procedure TfrmMatters.RemoveDocsfromFolder1Click(Sender: TObject);
-var
-   Node: PVirtualNode;
-   Data: PFolderData;
+//var
+//   Node: PVirtualNode;
+//   Data: PFolderData;
 begin
-   Node := lvFolders.FocusedNode;
-   if not Assigned(Node) then
-      Exit;
+//   Node := lvFolders.FocusedNode;
+//   if not Assigned(Node) then
+//      Exit;
 
-   Data := lvFolders.GetNodeData(Node);
+//   Data := lvFolders.GetNodeData(Node);
 
-   if MsgAsk('Remove documents from folder ' + Data.Text + ' and unassign them?') = mrYes then
+   if MsgAsk('Remove documents from folder ' + cxDBTreeList1DESCR.Value + ' and unassign them?') = mrYes then
    begin
          qryFldTmp.Close;
          qryFldTmp.SQL.Clear;
-         qryFldTmp.SQL.Text := 'select count(*) as doccount from doc where folder_id = '+ IntToStr(Data.FolderID);
+         qryFldTmp.SQL.Text := 'select count(*) as doccount from doc where folder_id = '+ IntToStr(cxDBTreeList1FOLDER_ID.Value);
          qryFldTmp.Open;
          if (qryFldTmp.FieldByName('doccount').AsInteger = 0) then
          begin
-            MsgErr('There are no documents to remove from the folder ' + Data.Text);
+            MsgErr('There are no documents to remove from the folder ' + cxDBTreeList1DESCR.Value);
             Exit;
          end;
          qryFldTmp.Close;
          qryFldTmp.Sql.Text := 'update doc set folder_id = null where folder_id = :folder_id and nmatter = :nmatter';
-         qryFldTmp.ParamByName('folder_id').AsInteger := Data.FolderID;
+         qryFldTmp.ParamByName('folder_id').AsInteger := cxDBTreeList1FOLDER_ID.Value;
          qryFldTmp.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          qryFldTmp.ExecSQL;
          qryFldTmp.Close;
