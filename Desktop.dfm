@@ -297,7 +297,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 0
+            Height = 124
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -371,6 +371,7 @@ object frmDesktop: TfrmDesktop
                 TabOrder = 2
                 Visible = False
                 OnBeforeEditing = TaskSchedulerBeforeEditing
+                Selection = 1
                 Splitters = {
                   180000006E0000008E0000007200000014000000010000001800000010000000}
                 StoredClientBounds = {01000000010000008E00000010000000}
@@ -1366,6 +1367,7 @@ object frmDesktop: TfrmDesktop
           PositionAfterOpen = 26
           MinSize = 26
           Control = lvClassicDesktop
+          ExplicitWidth = 8
         end
         object dxBarDockControl2: TdxBarDockControl
           Left = 0

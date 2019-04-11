@@ -11,7 +11,7 @@ uses
   cxDBLookupComboBox, cxLookAndFeels, cxLookAndFeelPainters, cxCalendar,
   cxDBEdit, cxGroupBox, cxRadioGroup, dxLayoutContainer,
   dxLayoutControlAdapters, dxLayoutcxEditAdapters, cxButtonEdit, cxClasses,
-  dxLayoutControl, cxSpinEdit, cxTimeEdit, cxMemo;
+  dxLayoutControl;
 
 type
 
@@ -31,19 +31,24 @@ type
     qryDiaryType: TUniQuery;
     dsDiaryType: TUniDataSource;
     dtpActionStartDate: TDateTimePicker;
+    dtpStartTime: TDateTimePicker;
+    dtpEndTime: TDateTimePicker;
     cbReminderFor: TComboBox;
     icbShowTimeAs: TcxImageComboBox;
     icbLabel: TcxImageComboBox;
     cbEvent: TcxLookupComboBox;
     chkPrivate: TCheckBox;
+    mmoDesc: TMemo;
     chkEventPrintDescr: TCheckBox;
     Label6: TLabel;
+    neNotify: TNumberEdit;
     chkNotify: TCheckBox;
     cbType: TcxLookupComboBox;
     lblClient: TLabel;
     lblStartDayName: TLabel;
     lblMatterDescr: TLabel;
     lblReminderForName: TLabel;
+    edtSubject: TEdit;
     cbLocation: TcxLookupComboBox;
     dxLayoutControl1Group_Root: TdxLayoutGroup;
     dxLayoutControl1: TdxLayoutControl;
@@ -87,17 +92,11 @@ type
     dtpActionEndDate: TDateTimePicker;
     dxLayoutItem28: TdxLayoutItem;
     LblEndDayName: TLabel;
+    dxLayoutItem29: TdxLayoutItem;
     dxLayoutGroup9: TdxLayoutGroup;
     dxLayoutGroup10: TdxLayoutGroup;
     dxLayoutGroup11: TdxLayoutGroup;
     dxLayoutGroup12: TdxLayoutGroup;
-    dxLayoutItem30: TdxLayoutItem;
-    dxLayoutItem31: TdxLayoutItem;
-    dtpStartTime: TcxTimeEdit;
-    dtpEndTime: TcxTimeEdit;
-    mmoDesc: TcxMemo;
-    neNotify: TcxSpinEdit;
-    edtSubject: TcxTextEdit;
     procedure mmoDescKeyPress(Sender: TObject; var Key: Char);
     procedure cbReminderForClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -186,14 +185,14 @@ begin
   dtpActionStartDate.OnClick(Self);
 
   try
-//    dtpStartTime.ShowCheckbox := true;
-//    dtpEndTime.ShowCheckbox := true;
+    dtpStartTime.ShowCheckbox := true;
+    dtpEndTime.ShowCheckbox := true;
     dtpStartTime.Time := dtStart;
     //dtpEndTime.Time := dtEnd;
     dtpEndTime.Time := dtpStartTime.Time + EncodeTime(0, Add30Minutes, 0, 0);
   finally
-//    dtpStartTime.ShowCheckbox := false;
-//    dtpEndTime.ShowCheckbox := false;
+    dtpStartTime.ShowCheckbox := false;
+    dtpEndTime.ShowCheckbox := false;
   end;
 end;
 
@@ -251,10 +250,10 @@ begin
       bLoaded := True;
       dtpActionStartDate.Date := DateFromDateTime(qryDiary.FieldByName('START_DT').AsDateTime);
       dtpActionStartDate.OnClick(Self);
-      dtpStartTime.Time := TimeFromDateTime(qryDiary.FieldByName('START_DT').AsDateTime);
+      dtpStartTime.DateTime := TimeFromDateTime(qryDiary.FieldByName('START_DT').AsDateTime);
       dtpActionEndDate.DateTime := DateFromDateTime(qryDiary.FieldByName('END_DT').AsDateTime);
       dtpActionEndDate.OnClick(Self) ;
-      dtpEndTime.Time := TimeFromDateTime(qryDiary.FieldByName('END_DT').AsDateTime);
+      dtpEndTime.DateTime := TimeFromDateTime(qryDiary.FieldByName('END_DT').AsDateTime);
       tbFile.Text := qryDiary.FieldByName('FILEID').AsString;
       DisplayFile(qryDiary.FieldByName('FILEID').AsString, qryDiary.FieldByName('nname').AsInteger);
       cbReminderFor.ItemIndex := cbReminderFor.Items.IndexOf(qryDiary.FieldByName('REMINDER_FOR').AsString);
@@ -263,13 +262,13 @@ begin
       cbEvent.EditValue := qryDiary.FieldByName('EVENT_TYPE').AsInteger;
       cbType.EditValue := qryDiary.FieldByName('TYPE').AsString;
       cbLocation.EditValue := qryDiary.FieldByName('LOCATION').AsString;
-      mmoDesc.Text := qryDiary.FieldByName('DESCR').AsString;
+      mmoDesc.Text := qryDiary.FieldByName('MESSAGE').AsString;
       chkEventPrintDescr.Checked := qryDiary.FieldByName('EVENTPRINTDESCR').AsString = 'Y';
       icbLabel.EditValue := qryDiary.FieldByName('LABELCOLOUR').AsInteger;
       if (qryDiary.FieldByName('NOTIFY').AsString <> '') then
       begin
         chkNotify.Checked := True;
-        neNotify.Value := qryDiary.FieldByName('NOTIFY_MINS').AsInteger;  // wHour * 60 + wMin;
+        neNotify.AsInteger := qryDiary.FieldByName('NOTIFY_MINS').AsInteger;  // wHour * 60 + wMin;
       end
       else
         chkNotify.Checked := False;
@@ -279,7 +278,7 @@ begin
          chkInternal.Checked := True
       else
          chkExternal.Checked := True;
-      edtSubject.Text := qryDiary.FieldByName('CAPTION').AsString;
+      edtSubject.Text := qryDiary.FieldByName('SUBJECT').AsString;
     end;
   end;
 end;
@@ -346,13 +345,12 @@ begin
   neNotify.Enabled := SystemVal('USE_DIARY_NOTIFY');
 
   chkNotify.Checked := SettingLoadBoolean('OPTIONSDIARY', 'NOTIFY');
-  neNotify.Value := SettingLoadInteger('OPTIONSDIARY', 'NOTIFYMINS');
+  neNotify.AsInteger := SettingLoadInteger('OPTIONSDIARY', 'NOTIFYMINS');
 
   dtpActionStartDate.Date := DateFromDateTime(date);
-  dtpStartTime.Time := TimeFromDateTime(time);
+  dtpStartTime.DateTime := TimeFromDateTime(time);
   dtpActionEndDate.DateTime := DateFromDateTime(date);
-  dtpEndTime.Time := dtpStartTime.Time + EncodeTime(0, Add30Minutes, 0, 0);
-  dtpActionEndDate.OnClick(Self);
+  dtpEndTime.DateTime := dtpStartTime.DateTime + EncodeTime(0, Add30Minutes, 0, 0);
   cbReminderFor.ItemIndex := cbReminderFor.Items.IndexOf(dmAxiom.UserID);
 
   with qryDiary do
@@ -396,7 +394,7 @@ begin
   begin
     neNotify.Enabled := True;
     if cbReminderFor.Text <> '' then
-      neNotify.Value := TableInteger('EMPLOYEE', 'CODE', cbReminderFor.Text, 'DIARYNOTIFY');
+      neNotify.AsInteger := TableInteger('EMPLOYEE', 'CODE', cbReminderFor.Text, 'DIARYNOTIFY');
   end
   else
     neNotify.Enabled := False;
@@ -492,9 +490,9 @@ begin
       qryDiary.FieldByName('NOTIFY').Value := Null;
       if chkNotify.Checked then
       begin
-        qryDiary.FieldByName('NOTIFY_MINS').AsInteger := neNotify.Value;
+        qryDiary.FieldByName('NOTIFY_MINS').AsInteger := neNotify.AsInteger;
         qryDiary.FieldByName('NOTIFY').AsDateTime := qryDiary.FieldByName('START_DT').AsDateTime -
-                                                     EncodeTime(neNotify.Value div 60, neNotify.Value mod 60, 0, 0);
+                                                     EncodeTime(neNotify.AsInteger div 60, neNotify.AsInteger mod 60, 0, 0);
       end;
 
       if chkPrivate.Checked then
