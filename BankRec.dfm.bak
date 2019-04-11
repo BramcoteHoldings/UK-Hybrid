@@ -52,21 +52,21 @@ object frmBankRec: TfrmBankRec
     end
     object Label2: TLabel
       Left = 8
-      Top = 38
+      Top = 37
       Width = 109
       Height = 17
       Caption = 'Statement Balance:'
     end
     object Label3: TLabel
       Left = 6
-      Top = 66
+      Top = 64
       Width = 111
       Height = 17
       Caption = 'Calculated Balance:'
     end
     object Label4: TLabel
       Left = 61
-      Top = 96
+      Top = 91
       Width = 56
       Height = 17
       Caption = 'Variance:'
@@ -78,37 +78,37 @@ object frmBankRec: TfrmBankRec
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 752
+      Left = 674
       Top = 10
       Width = 101
       Height = 17
       Caption = 'Opening Balance:'
     end
     object Label6: TLabel
-      Left = 728
-      Top = 38
+      Left = 650
+      Top = 37
       Width = 125
       Height = 17
       Caption = 'Payments this period:'
     end
     object Label7: TLabel
-      Left = 734
-      Top = 66
+      Left = 656
+      Top = 64
       Width = 119
       Height = 17
       Caption = 'Receipts this period:'
     end
     object Label8: TLabel
-      Left = 509
-      Top = 12
+      Left = 392
+      Top = 41
       Width = 92
       Height = 17
       Alignment = taRightJustify
       Caption = 'Statement Date:'
     end
     object Label9: TLabel
-      Left = 480
-      Top = 38
+      Left = 363
+      Top = 64
       Width = 121
       Height = 17
       Alignment = taRightJustify
@@ -122,39 +122,28 @@ object frmBankRec: TfrmBankRec
       Caption = 'Additions/Errors'
     end
     object Label11: TLabel
-      Left = 745
-      Top = 94
-      Width = 109
-      Height = 34
-      Alignment = taRightJustify
+      Left = 619
+      Top = 91
+      Width = 156
+      Height = 17
       Caption = 'Closing Cashbook Balance:'
-      WordWrap = True
     end
     object lblDRCR: TLabel
-      Left = 987
+      Left = 909
       Top = 91
       Width = 17
       Height = 17
       Caption = 'DR'
     end
     object Label12: TLabel
-      Left = 389
-      Top = 92
+      Left = 272
+      Top = 83
       Width = 212
       Height = 34
       Alignment = taRightJustify
       Caption = 
         'Entries backdated to current period and entered in future period' +
         ':'
-      WordWrap = True
-    end
-    object Label13: TLabel
-      Left = 391
-      Top = 58
-      Width = 210
-      Height = 34
-      Alignment = taRightJustify
-      Caption = 'Unpresented cheques, receipts and Adjustments:'
       WordWrap = True
     end
     object cbBank: TComboBox
@@ -169,8 +158,8 @@ object frmBankRec: TfrmBankRec
       OnClick = cbBankClick
     end
     object dtpStatementDate: TDateTimePicker
-      Left = 607
-      Top = 7
+      Left = 490
+      Top = 36
       Width = 111
       Height = 25
       Date = 36716.509550173600000000
@@ -228,7 +217,7 @@ object frmBankRec: TfrmBankRec
     end
     object edStatementBal: TcxCurrencyEdit
       Left = 121
-      Top = 35
+      Top = 36
       EditValue = 0c
       Properties.Alignment.Horz = taRightJustify
       Properties.OnEditValueChanged = edStatementBalPropertiesEditValueChanged
@@ -238,7 +227,7 @@ object frmBankRec: TfrmBankRec
     end
     object edCalculatedBal: TcxCurrencyEdit
       Left = 121
-      Top = 64
+      Top = 62
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
       Properties.ReadOnly = True
@@ -250,7 +239,7 @@ object frmBankRec: TfrmBankRec
     end
     object edVariance: TcxCurrencyEdit
       Left = 121
-      Top = 93
+      Top = 88
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
@@ -268,8 +257,8 @@ object frmBankRec: TfrmBankRec
       Width = 121
     end
     object edReceipts: TcxCurrencyEdit
-      Left = 860
-      Top = 64
+      Left = 782
+      Top = 61
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
       Properties.ReadOnly = True
@@ -280,8 +269,8 @@ object frmBankRec: TfrmBankRec
       Width = 121
     end
     object edPayments: TcxCurrencyEdit
-      Left = 860
-      Top = 35
+      Left = 782
+      Top = 34
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
       Properties.ReadOnly = True
@@ -292,7 +281,7 @@ object frmBankRec: TfrmBankRec
       Width = 121
     end
     object edOpeningBalance: TcxCurrencyEdit
-      Left = 860
+      Left = 781
       Top = 7
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
@@ -305,7 +294,7 @@ object frmBankRec: TfrmBankRec
     end
     object cmbDRCR: TcxComboBox
       Left = 248
-      Top = 37
+      Top = 36
       Properties.ImmediatePost = True
       Properties.Items.Strings = (
         'DR'
@@ -316,8 +305,8 @@ object frmBankRec: TfrmBankRec
       Width = 51
     end
     object dtpLastReconciled: TDateTimePicker
-      Left = 607
-      Top = 35
+      Left = 490
+      Top = 62
       Width = 111
       Height = 25
       Date = 42662.509550173600000000
@@ -328,8 +317,8 @@ object frmBankRec: TfrmBankRec
       OnChange = dtpStatementDateChange
     end
     object edClosingBalance: TcxCurrencyEdit
-      Left = 860
-      Top = 93
+      Left = 782
+      Top = 88
       Properties.Alignment.Horz = taRightJustify
       Properties.Nullable = False
       Properties.ReadOnly = True
@@ -340,8 +329,8 @@ object frmBankRec: TfrmBankRec
       Width = 121
     end
     object edAdjustments: TcxCurrencyEdit
-      Left = 607
-      Top = 64
+      Left = 490
+      Top = 88
       Properties.Alignment.Horz = taRightJustify
       Properties.ReadOnly = True
       TabOrder = 12
@@ -353,15 +342,7 @@ object frmBankRec: TfrmBankRec
       AutoSize = False
       Transparent = True
       Height = 21
-      Width = 323
-    end
-    object edBackdated: TcxCurrencyEdit
-      Left = 607
-      Top = 93
-      Properties.Alignment.Horz = taRightJustify
-      Properties.ReadOnly = True
-      TabOrder = 14
-      Width = 111
+      Width = 462
     end
   end
   object lblFileName: TcxLabel
@@ -651,7 +632,7 @@ object frmBankRec: TfrmBankRec
       '   '#39'N'#39', :NCHEQUE, '#39'Y'#39', :TRUST, :PRESENTED, '
       '   :DESCR, SysDate, '#39'Y'#39')')
     Left = 555
-    Top = 169
+    Top = 161
     ParamData = <
       item
         DataType = ftUnknown
@@ -733,7 +714,7 @@ object frmBankRec: TfrmBankRec
     BeforeScroll = qryBankRecBeforeScroll
     AfterScroll = qryBankRecAfterScroll
     Left = 524
-    Top = 169
+    Top = 161
     ParamData = <
       item
         DataType = ftUnknown
@@ -782,7 +763,7 @@ object frmBankRec: TfrmBankRec
     Debug = True
     CachedUpdates = True
     Left = 587
-    Top = 169
+    Top = 161
   end
   object qryFindCheque: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -793,7 +774,7 @@ object frmBankRec: TfrmBankRec
       '      AND CHQNO = :CHQNO')
     CachedUpdates = True
     Left = 493
-    Top = 169
+    Top = 161
     ParamData = <
       item
         DataType = ftUnknown
@@ -814,7 +795,7 @@ object frmBankRec: TfrmBankRec
       'WHERE ACCT = :ACCT'
       '      AND RECONDATE IS NULL')
     Left = 459
-    Top = 169
+    Top = 161
     ParamData = <
       item
         DataType = ftUnknown
@@ -835,7 +816,7 @@ object frmBankRec: TfrmBankRec
       '   '#39'J2'#39', :NCLIENT, :NCHEQUE, :PAYER, '#39'G'#39', '#39'N'#39', :FILEID,'
       '   :NALLOC, 0, :CLIENT_NAME, SysDate, :MATTER_DESC, '#39'N'#39', 0, 0)')
     Left = 427
-    Top = 168
+    Top = 160
     ParamData = <
       item
         DataType = ftUnknown
@@ -908,11 +889,11 @@ object frmBankRec: TfrmBankRec
     Interval = 2000
     OnTimer = tmrShowReconciledTimer
     Left = 659
-    Top = 171
+    Top = 139
   end
   object cxStyleRepository1: TcxStyleRepository
     Left = 735
-    Top = 172
+    Top = 156
     PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]
@@ -941,7 +922,8 @@ object frmBankRec: TfrmBankRec
     DataPipeline = plBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -966,15 +948,22 @@ object frmBankRec: TfrmBankRec
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -989,19 +978,22 @@ object frmBankRec: TfrmBankRec
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 945
     Top = 345
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plBankRec'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 17727
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1019,6 +1011,7 @@ object frmBankRec: TfrmBankRec
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1036,13 +1029,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Bank Statement'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -1055,13 +1050,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1074,13 +1071,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1093,13 +1092,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Ref No'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 30956
@@ -1111,13 +1112,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 45508
@@ -1129,13 +1132,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Statement Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 121444
@@ -1147,13 +1152,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Cashbook Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 147902
@@ -1165,13 +1172,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Presented'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
         mmLeft = 171186
@@ -1183,6 +1192,7 @@ object frmBankRec: TfrmBankRec
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -1196,12 +1206,14 @@ object frmBankRec: TfrmBankRec
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5556
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'BANKED'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1222,6 +1234,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1241,6 +1254,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'REFNO'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1260,6 +1274,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1279,6 +1294,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1300,6 +1316,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1320,6 +1337,7 @@ object frmBankRec: TfrmBankRec
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'PresentedDate'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1340,12 +1358,14 @@ object frmBankRec: TfrmBankRec
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1366,13 +1386,15 @@ object frmBankRec: TfrmBankRec
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Number of unmatched cheques'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3810
         mmLeft = 1852
@@ -1384,6 +1406,7 @@ object frmBankRec: TfrmBankRec
       object ppDBCalc2: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc2'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1404,6 +1427,7 @@ object frmBankRec: TfrmBankRec
       object ppDBCalc3: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc3'
+        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1424,6 +1448,7 @@ object frmBankRec: TfrmBankRec
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 1323
@@ -1564,8 +1589,8 @@ object frmBankRec: TfrmBankRec
     ImageOptions.Images = ilstToolbar
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 334
-    Top = 172
+    Left = 534
+    Top = 4
     PixelsPerInch = 96
     DockControlHeights = (
       0
@@ -2928,7 +2953,8 @@ object frmBankRec: TfrmBankRec
   object qryAdjustments: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT NVL (SUM (amount), 0) * -1 AS adj_total FROM ('
+      'SELECT NVL (SUM (amount), 0) * -1 AS adj_total'
+      '  FROM ('
       
         '  ---- UNPRESENTED CHEQUES presented after the period the period' +
         ' (increase balance) '
@@ -2939,14 +2965,14 @@ object frmBankRec: TfrmBankRec
       '  FROM cheque'
       '  WHERE acct = :p_acct'
       
-        '      AND CASE WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Z'#39') A' +
+        '      AND CASE WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39') A' +
         'ND (TRUNC(system_date) <= :p_dateto) '
       
         '                      AND (TRUNC(presented) > :p_dateto OR prese' +
         'nted IS NULL AND bankrec_saved = '#39'N'#39')) THEN 1'
       
-        '               WHEN ((:trust = '#39'T'#39') AND (:trustasoffice <> '#39'Z'#39') ' +
-        'AND (TRUNC (created) <= :p_dateto)'
+        '               WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Y'#39') A' +
+        'ND (TRUNC (created) <= :p_dateto)'
       
         '                      AND (TRUNC(presented) > :p_dateto OR prese' +
         'nted IS NULL AND bankrec_saved = '#39'N'#39')) THEN 1'
@@ -2970,7 +2996,7 @@ object frmBankRec: TfrmBankRec
         '  WHERE bankrec.bank = :p_acct AND TRUNC(bankrec.banked) <= :p_d' +
         'ateto AND bankrec.TYPE = '#39'C'#39' AND bankrec.recondate IS NULL'
       '  UNION ALL'
-      '/*  ---- doesn'#39't make sense '
+      '  ---- doesn'#39't make sense '
       '  SELECT '#39'CHEQUE1'#39' AS grp, cheque.created, cheque.descr,'
       '               cheque.chqno AS refno, cheque.TYPE, cheque.payee,'
       '               (cheque.amount) AS amount, '#39'chq3'#39' AS subx'
@@ -2991,39 +3017,39 @@ object frmBankRec: TfrmBankRec
         '> :p_dateto  AND bankrec_saved = '#39'N'#39') THEN 1'
       '               ELSE 0'
       '          END = 1'
-      '  UNION ALL */'
+      '  UNION ALL'
       
         '  --- banked trust receipts keyed within the period, deposited i' +
-        'n the period, not reconciled or reconciled after period (reduce ' +
-        'balance)'
+        'n the period, not reconciled or renciled after period (reduce ba' +
+        'lance)'
       
-        'SELECT '#39'DEPOSIT'#39' AS grp, bankdep.deposit_date, receipt.descr, ba' +
-        'nkdep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor, rec' +
-        'eipt.amount, '#39'dep1'#39' AS subx'
+        '  SELECT '#39'DEPOSIT'#39' AS grp, bankdep.deposit_date, receipt.descr, ' +
+        'bankdep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor, r' +
+        'eceipt.amount, '#39'dep1'#39' AS subx'
       '  FROM bankdep, receipt'
       
         '  WHERE bankdep.acct = :p_acct --AND bankdep.acct = receipt.acct' +
         ' AND bankdep.nbankdep = receipt.nbankdep'
       
-        '      AND CASE WHEN (:trustasoffice = '#39'N'#39') AND TRUNC(receipt.sys' +
-        'tem_date) <= :p_dateto THEN 1 -- this was missing an equal sign'
+        '      AND CASE WHEN (:trustasoffice = '#39'N'#39') AND TRUNC (receipt.sy' +
+        'stem_date) <= :p_dateto THEN 1 -- this was missing an equal sign'
       
-        '               WHEN (:trustasoffice = '#39'Y'#39') AND TRUNC(receipt.cre' +
-        'ated) <= :p_dateto THEN 1'
-      '          END = 1 -- this was one'
+        '               WHEN (:trustasoffice = '#39'Y'#39') AND TRUNC (receipt.cr' +
+        'eated) <= :p_dateto THEN 1'
+      '          END = 0 -- this was one'
       '      --AND bankdep.last_nreceipt = receipt.nreceipt '
       '      AND (:trust IN ('#39'T'#39', '#39'I'#39'))'
       
-        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND ((bankdep' +
-        '.bankrec_saved = '#39'N'#39' AND bankdep.recondate IS NULL) OR (TRUNC(ba' +
-        'nkdep.recondate) > :p_dateto))'
+        '      AND (TRUNC(bankdep.deposit_date) <= :p_dateto AND (bankdep' +
+        '.bankrec_saved = '#39'N'#39' AND bankdep.recondate IS NULL OR TRUNC(bank' +
+        'dep.recondate) > :p_dateto))'
       '      AND receipt.nbankdep = bankdep.nbankdep(+)'
       '      AND bankdep.acct = receipt.acct  '
       '  UNION ALL'
       
         '  --- banked office receipts created within the period, deposite' +
-        'd in the period, not reconciled or reconciled after period (redu' +
-        'ce balance)'
+        'd in the period, not reconciled or renciled after period (reduce' +
+        ' balance)'
       
         '  SELECT '#39'DEPOSIT'#39' AS grp, bankdep.deposit_date, receipt.descr, ' +
         'bankdep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor,'
@@ -3034,8 +3060,8 @@ object frmBankRec: TfrmBankRec
         '  WHERE bankdep.acct = :p_acct --AND bankdep.acct = receipt.acct' +
         ' AND bankdep.nbankdep = receipt.nbankdep'
       
-        '      AND TRUNC (receipt.created) <= :p_dateto AND bankdep.last_' +
-        'nreceipt = receipt.nreceipt '
+        '      AND TRUNC (receipt.created) <= :p_dateto --AND bankdep.las' +
+        't_nreceipt = receipt.nreceipt '
       '      AND (:trust <> '#39'T'#39')'
       
         '      AND (TRUNC(bankdep.deposit_date) <= :p_dateto AND (bankdep' +
@@ -3086,11 +3112,11 @@ object frmBankRec: TfrmBankRec
         '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
         'ND bankdep.nbankdep = receipt.nbankdep'
       
-        '      AND TRUNC(receipt.system_date) <= :p_dateto AND TRUNC(bank' +
-        'dep.deposit_date) > :p_dateto'
+        '      AND TRUNC(receipt.system_date) < :p_dateto AND TRUNC(bankd' +
+        'ep.deposit_date) >= :p_dateto'
       
-        '      AND TRUNC(bankdep.recondate) <= :p_dateto AND bankdep.bank' +
-        'rec_saved = '#39'N'#39
+        '      AND TRUNC(bankdep.recondate) < :p_dateto AND bankdep.bankr' +
+        'ec_saved = '#39'N'#39
       '  UNION ALL'
       
         '  --- deposited receipts - keyed after the period, deposited in ' +
@@ -3104,13 +3130,11 @@ object frmBankRec: TfrmBankRec
       '  FROM bankdep, receipt'
       
         '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep '
-      
-        '       AND TRUNC(receipt.system_date) > :p_dateto AND (((:trusta' +
-        'soffice = '#39'N'#39') AND (TRUST = '#39'G'#39')) OR (:trustasoffice = '#39'Y'#39'))'
+        'ND bankdep.nbankdep = receipt.nbankdep AND TRUNC(receipt.system_' +
+        'date) >= :p_dateto'
       
         '       AND TRUNC(bankdep.deposit_date) <= :p_dateto AND bankdep.' +
-        'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39' '
+        'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39
       '  UNION ALL'
       
         '  --- deposited receipts - keyed in the period, deposited in the' +
@@ -3132,8 +3156,8 @@ object frmBankRec: TfrmBankRec
         'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39
       '  UNION ALL'
       
-        '/*  --- deposited receipts - deposited in period, reconciled aft' +
-        'er period'
+        '  --- deposited receipts - deposited in period, reconciled after' +
+        ' period'
       
         '  SELECT DISTINCT '#39'DEPOSIT2'#39' AS grp, bankdep.deposit_date,  rece' +
         'ipt.descr, bankdep.nbankdep || '#39' '#39' AS refno,'
@@ -3162,7 +3186,7 @@ object frmBankRec: TfrmBankRec
         '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND TRUNC(ban' +
         'kdep.recondate) >= :p_dateto'
       '      --AND (:trust = '#39'T'#39')'
-      '  UNION ALL */'
+      '  UNION ALL'
       '  --- receipts - not banked - (reduce amount)'
       
         '  SELECT '#39'RECEIPT'#39' AS grp, receipt.created, receipt.descr, recei' +
@@ -3172,13 +3196,13 @@ object frmBankRec: TfrmBankRec
       '  FROM receipt'
       '  WHERE receipt.acct = :p_acct'
       
-        '      AND CASE  WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Z'#39') ' +
+        '      AND CASE  WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39') ' +
         'AND TRUNC(receipt.system_date) <= :p_dateto AND receipt.banked =' +
         ' '#39'N'#39') THEN 1'
       
-        '                WHEN ((:trust = '#39'T'#39') AND (:trustasoffice <> '#39'Z'#39')' +
-        ' AND TRUNC(receipt.created) <= :p_dateto AND receipt.banked = '#39'N' +
-        #39') THEN 1'
+        '                WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Y'#39') ' +
+        'AND TRUNC(receipt.created) <= :p_dateto AND receipt.banked = '#39'N'#39 +
+        ') THEN 1'
       
         '                WHEN ((:trust <> '#39'T'#39') AND TRUNC(receipt.created)' +
         ' <= :p_dateto AND receipt.banked = '#39'N'#39') THEN 1'
@@ -3238,39 +3262,31 @@ object frmBankRec: TfrmBankRec
         'date IS NULL) OR (TRUNC (bankdep.deposit_date) > :p_dateto))'
       '           AND receipt.nbankdep = bankdep.nbankdep(+)'
       '           AND bankdep.acct = receipt.acct'
-      '        UNION ALL */'
+      '        UNION ALL*/'
       
-        '   --- TRUST deposited receipts - keyed receipt after period, no' +
-        't deposited or deposited in period (bit funny)'
+        '   --- deposited receipts - keyed receipt after period, not depo' +
+        'sited or deposited in period (bit funny)'
       
         '   SELECT '#39'RECEIPT1'#39' AS grp, receipt.created, receipt.descr, rec' +
-        'eipt.rcptno AS refno, receipt.TYPE, receipt.payor,(receipt.amoun' +
-        't) AS amount, '#39'rec3'#39' AS subx'
+        'eipt.rcptno AS refno, receipt.TYPE, receipt.payor,(0 - receipt.a' +
+        'mount) AS amount, '#39'rec3'#39' AS subx'
       '   FROM bankdep, receipt'
       
         '   WHERE receipt.acct = :p_acct AND receipt.nbankdep = bankdep.n' +
         'bankdep  AND bankdep.acct = receipt.acct'
       '       AND TRUNC(receipt.system_date) > :p_dateto'
+      '       AND CASE WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39')'
       
-        '       AND (:trust = '#39'T'#39') AND (bankdep.deposit_date IS NULL OR (' +
-        'TRUNC(bankdep.deposit_date) <= :p_dateto)) '
+        '                  AND (bankdep.deposit_date IS NULL OR ((TRUNC(b' +
+        'ankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.system_date' +
+        ') > :p_dateto)) THEN 1'
+      '                WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'Y'#39') '
       
-        '       AND BANKDEP.RECONDATE is null and bankdep.bankrec_saved =' +
-        ' '#39'N'#39' AND :trustasoffice = '#39'N'#39
-      '       --AND CASE WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39')'
-      
-        '       --           AND (bankdep.deposit_date IS NULL OR ((TRUNC' +
-        '(bankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.system_da' +
-        'te) > :p_dateto)) THEN 1'
-      
-        '       --         WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'Y'#39')' +
-        ' '
-      
-        '       --             AND (bankdep.deposit_date IS NULL OR ((TRU' +
-        'NC(bankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.deposit' +
-        '_date) > :p_dateto)) THEN 1'
-      '       --    END = 1'
-      '  UNION ALL '
+        '                    AND (bankdep.deposit_date IS NULL OR ((TRUNC' +
+        '(bankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.deposit_d' +
+        'ate) > :p_dateto)) THEN 1'
+      '           END = 1'
+      '  UNION ALL'
       
         '  ----  any deposits which have been ticked but not reconciled f' +
         'or trust created in the period'
@@ -3322,8 +3338,7 @@ object frmBankRec: TfrmBankRec
       '  FROM receipt_req'
       
         '  WHERE TRUNC(exp_date) <= :p_dateto AND nreceipt IS NULL  AND b' +
-        'ankrec_saved = '#39'Y'#39
-      ' )'
+        'ankrec_saved = '#39'Y'#39')'
       ''
       ''
       ''
@@ -3386,74 +3401,5 @@ object frmBankRec: TfrmBankRec
       'BANKREC_SAVED = '#39'N'#39)
     Left = 360
     Top = 424
-  end
-  object qryBackDated: TUniQuery
-    Connection = dmAxiom.uniInsight
-    SQL.Strings = (
-      'select sum(amount) as amount from('
-      
-        'SELECT '#39'RECEIPT1'#39' AS grp, receipt.created, receipt.descr,receipt' +
-        '.rcptno AS refno, receipt.TYPE, receipt.payor,  (receipt.amount)' +
-        ' AS amount, '#39'rec3'#39' as subx'
-      'FROM bankdep, receipt'
-      
-        'WHERE receipt.acct = :p_acct AND receipt.nbankdep = bankdep.nban' +
-        'kdep AND bankdep.acct = receipt.acct'
-      
-        '     AND TRUNC(receipt.system_date) > :p_dateto and (:trust = '#39'T' +
-        #39')'
-      
-        '     AND (bankdep.deposit_date IS NULL OR ((TRUNC(bankdep.deposi' +
-        't_date) <= :p_dateto) AND TRUNC(bankdep.system_date) > :p_dateto' +
-        '))'
-      '     AND :trustasoffice = '#39'N'#39
-      'UNION ALL'
-      'SELECT '#39'CHEQUE1'#39' AS grp, cheque.created, cheque.descr,'
-      '               cheque.chqno AS refno, cheque.TYPE, cheque.payee,'
-      '               (0 - cheque.amount) AS amount, '#39'chq3'#39' AS subx'
-      'FROM cheque'
-      
-        'WHERE cheque.acct = :p_acct AND TRUNC(cheque.created) <= :p_date' +
-        'to'
-      
-        '      AND :trust IN ('#39'T'#39', '#39'I'#39') AND TRUNC (cheque.system_date) > ' +
-        ':p_dateto'
-      '     AND :trustasoffice = '#39'N'#39
-      'UNION ALL'
-      
-        'SELECT '#39'RECEIPT'#39' AS grp, receipt.created, receipt.descr, receipt' +
-        '.rcptno AS refno, receipt.TYPE, receipt.payor,'
-      '      (receipt.amount), '#39'rec1'#39' AS subx'
-      'FROM receipt'
-      'WHERE receipt.acct = :p_acct'
-      
-        '      AND :trust = '#39'T'#39' AND TRUNC(receipt.system_date) > :p_datet' +
-        'o AND TRUNC(receipt.created) <= :p_dateto AND receipt.banked = '#39 +
-        'N'#39
-      '     AND :trustasoffice = '#39'N'#39
-      ')')
-    Left = 504
-    Top = 432
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'p_acct'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'p_dateto'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'trust'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'trustasoffice'
-        Value = nil
-      end>
   end
 end

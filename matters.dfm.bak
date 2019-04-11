@@ -322,6 +322,7 @@ object frmMatters: TfrmMatters
       Properties.MaxLength = 4000
       Properties.ScrollBars = ssVertical
       TabOrder = 5
+      ExplicitWidth = 685
       Height = 78
       Width = 757
     end
@@ -530,10 +531,7 @@ object frmMatters: TfrmMatters
     object tabClient: TcxTabSheet
       Caption = 'Client'
       ImageIndex = 42
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object cxGroupBox3: TcxGroupBox
         Left = 3
         Top = 348
@@ -1266,10 +1264,6 @@ object frmMatters: TfrmMatters
           object tabStreetAddress: TcxTabSheet
             Caption = 'Street Address'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label35: TLabel
               Left = 1
               Top = 0
@@ -1365,10 +1359,6 @@ object frmMatters: TfrmMatters
           object tabPostalAddress: TcxTabSheet
             Caption = 'Postal Address'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label40: TLabel
               Left = 1
               Top = 0
@@ -1464,10 +1454,6 @@ object frmMatters: TfrmMatters
           object tabCustomAddress: TcxTabSheet
             Caption = 'Custom Address'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label55: TLabel
               Left = 1
               Top = 0
@@ -1563,10 +1549,6 @@ object frmMatters: TfrmMatters
           object tabDX: TcxTabSheet
             Caption = 'DX'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label25: TLabel
               Left = 5
               Top = 14
@@ -1610,10 +1592,7 @@ object frmMatters: TfrmMatters
     object tabOverview: TcxTabSheet
       Caption = 'Ledgers'
       ImageIndex = 73
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       DesignSize = (
         1478
         527)
@@ -2923,10 +2902,7 @@ object frmMatters: TfrmMatters
     object tabArchive: TcxTabSheet
       Caption = 'Archived'
       ImageIndex = 44
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       DesignSize = (
         1478
         527)
@@ -3219,6 +3195,7 @@ object frmMatters: TfrmMatters
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 6
+        ExplicitWidth = 1161
         Height = 138
         Width = 1233
       end
@@ -3306,10 +3283,7 @@ object frmMatters: TfrmMatters
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 30
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Label7: TLabel
         Left = 18
         Top = 156
@@ -3693,10 +3667,7 @@ object frmMatters: TfrmMatters
     object tabParties: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 23
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 489
@@ -3912,48 +3883,48 @@ object frmMatters: TfrmMatters
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
+              Text = 'Name'
               Width = 200
-              WideText = 'Name'
             end
             item
               MaxWidth = 500
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
+              Text = 'Contact'
               Width = 350
-              WideText = 'Contact'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 2
+              Text = 'Work Phone'
               Width = 100
-              WideText = 'Work Phone'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 3
+              Text = 'Mobile'
               Width = 100
-              WideText = 'Mobile'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 4
+              Text = 'Home Phone'
               Width = 100
-              WideText = 'Home Phone'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 5
+              Text = 'Fax'
               Width = 100
-              WideText = 'Fax'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
-              Width = 526
-              WideText = 'Email'
+              Text = 'Email'
+              Width = 522
             end>
         end
       end
@@ -3961,10 +3932,7 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3984,7 +3952,7 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
-          ExplicitHeight = 497
+          ExplicitWidth = 1376
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4018,14 +3986,14 @@ object frmMatters: TfrmMatters
             Columns = <
               item
                 Position = 0
+                Text = 'Form / Field'
                 Width = 300
-                WideText = 'Form / Field'
               end
               item
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
-                Width = 1148
-                WideText = 'Value'
+                Text = 'Value'
+                Width = 1144
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4035,23 +4003,21 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
-            ExplicitTop = 469
+            ExplicitWidth = 1376
           end
         end
         object tabCalculationData: TcxTabSheet
           Caption = 'Calculation Data'
           ImageIndex = 1
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
           ExplicitWidth = 1376
-          ExplicitHeight = 0
         end
       end
     end
     object tabInvoices: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 3
+      ExplicitWidth = 1406
       object Panel3: TPanel
         Left = 0
         Top = 495
@@ -4060,6 +4026,7 @@ object frmMatters: TfrmMatters
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           32)
@@ -4777,6 +4744,7 @@ object frmMatters: TfrmMatters
     object tabMatterNotes: TcxTabSheet
       Caption = 'Matter Notes'
       ImageIndex = 47
+      ExplicitWidth = 1406
       object Panel10: TPanel
         Left = 0
         Top = 492
@@ -4784,6 +4752,7 @@ object frmMatters: TfrmMatters
         Height = 35
         Align = alBottom
         TabOrder = 0
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           35)
@@ -5143,6 +5112,7 @@ object frmMatters: TfrmMatters
       Caption = 'Revenue Notes'
       ImageIndex = 45
       OnShow = tabDebtorNotesShow
+      ExplicitWidth = 1406
       object cxgrdDebtorNotes: TcxGrid
         Left = 0
         Top = 0
@@ -5236,6 +5206,7 @@ object frmMatters: TfrmMatters
         Height = 71
         Align = alBottom
         TabOrder = 1
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           71)
@@ -5658,6 +5629,7 @@ object frmMatters: TfrmMatters
           ItemIndex = 0
           TabOrder = 8
           OnClick = rgDisplayOptionClick
+          ExplicitLeft = 438
           Height = 39
           Width = 263
         end
@@ -5744,10 +5716,7 @@ object frmMatters: TfrmMatters
     object tabReceipts: TcxTabSheet
       Caption = 'Receipts'
       ImageIndex = 20
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object pageReceipts: TcxPageControl
         Left = 0
         Top = 0
@@ -5767,6 +5736,7 @@ object frmMatters: TfrmMatters
         object tabReceiptList: TcxTabSheet
           Caption = 'Receipts'
           ImageIndex = 0
+          ExplicitWidth = 1398
           object dbgrReceipts: TcxGrid
             Left = 0
             Top = 0
@@ -5920,6 +5890,7 @@ object frmMatters: TfrmMatters
             Height = 27
             Align = alBottom
             TabOrder = 1
+            ExplicitWidth = 1398
             DesignSize = (
               1470
               27)
@@ -5965,6 +5936,7 @@ object frmMatters: TfrmMatters
           Caption = 'Receipt Requests'
           ImageIndex = 1
           OnShow = tabReceiptReqsShow
+          ExplicitWidth = 1398
           object Panel12: TPanel
             Left = 0
             Top = 471
@@ -5973,6 +5945,7 @@ object frmMatters: TfrmMatters
             Align = alBottom
             ParentColor = True
             TabOrder = 0
+            ExplicitWidth = 1398
             DesignSize = (
               1470
               26)
@@ -6112,7 +6085,7 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
-      ExplicitHeight = 505
+      ExplicitWidth = 1406
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6120,6 +6093,7 @@ object frmMatters: TfrmMatters
         Height = 28
         Align = dalTop
         BarManager = MatterBarManager
+        ExplicitWidth = 1406
       end
       object Panel7: TPanel
         Left = 0
@@ -6381,10 +6355,7 @@ object frmMatters: TfrmMatters
       ImageIndex = 24
       OnResize = tabGraphResize
       OnShow = tabGraphShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object tabByAuthor: TcxPageControl
         Left = 0
         Top = 0
@@ -6404,6 +6375,7 @@ object frmMatters: TfrmMatters
         object tabBenchmark: TcxTabSheet
           Caption = 'By Author'
           ImageIndex = 0
+          ExplicitWidth = 1376
           DesignSize = (
             1448
             519)
@@ -6477,6 +6449,7 @@ object frmMatters: TfrmMatters
           Caption = 'Benchmark'
           ImageIndex = 1
           OnShow = cxTabSheet16Show
+          ExplicitWidth = 1376
           DesignSize = (
             1448
             519)
@@ -6539,12 +6512,14 @@ object frmMatters: TfrmMatters
     object tabPrecedents: TcxTabSheet
       Caption = 'Precedents'
       ImageIndex = 55
+      ExplicitWidth = 1406
       object dxDockSite1: TdxDockSite
         Left = 159
         Top = 0
         Width = 1319
         Height = 527
         Align = alClient
+        ExplicitWidth = 1247
         DockingType = 5
         OriginalWidth = 1319
         OriginalHeight = 527
@@ -6571,6 +6546,7 @@ object frmMatters: TfrmMatters
           CustomCaptionButtons.Buttons = <>
           ShowCaption = False
           TabsProperties.CustomButtons.Buttons = <>
+          ExplicitWidth = 1247
           DockingType = 0
           OriginalWidth = 163
           OriginalHeight = 124
@@ -6671,6 +6647,7 @@ object frmMatters: TfrmMatters
             BevelInner = bvLowered
             Color = clMedGray
             TabOrder = 1
+            ExplicitWidth = 1243
             DesignSize = (
               1315
               57)
@@ -6789,7 +6766,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -6841,10 +6817,7 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object dxDockSite3: TdxDockSite
         Left = 0
         Top = 0
@@ -6928,6 +6901,7 @@ object frmMatters: TfrmMatters
                 Font.Style = []
                 ImageIndex = 0
                 ParentFont = False
+                ExplicitWidth = 994
                 object pnlDocsGenerated: TPanel
                   Left = 0
                   Top = 0
@@ -6935,6 +6909,7 @@ object frmMatters: TfrmMatters
                   Height = 515
                   Align = alClient
                   TabOrder = 0
+                  ExplicitWidth = 994
                   DesignSize = (
                     902
                     515)
@@ -7735,6 +7710,7 @@ object frmMatters: TfrmMatters
                     Align = alBottom
                     BevelOuter = bvNone
                     TabOrder = 2
+                    ExplicitWidth = 992
                     DesignSize = (
                       900
                       38)
@@ -7883,10 +7859,7 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
-                ExplicitLeft = 0
-                ExplicitTop = 0
                 ExplicitWidth = 994
-                ExplicitHeight = 0
               end
             end
             object pnlPreview: TJamFilePreview
@@ -8013,6 +7986,7 @@ object frmMatters: TfrmMatters
     object tabTransit: TcxTabSheet
       Caption = 'Transit'
       ImageIndex = 14
+      ExplicitWidth = 1406
       object dbgrTransit: TcxGrid
         Left = 0
         Top = 0
@@ -8115,6 +8089,7 @@ object frmMatters: TfrmMatters
         Height = 30
         Align = alBottom
         TabOrder = 1
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           30)
@@ -8156,10 +8131,7 @@ object frmMatters: TfrmMatters
     object tabSubNames: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
@@ -8228,10 +8200,7 @@ object frmMatters: TfrmMatters
     object tabSearches: TcxTabSheet
       Caption = 'Searches'
       ImageIndex = 22
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Panel11: TPanel
         Left = 0
         Top = 0
@@ -8440,10 +8409,7 @@ object frmMatters: TfrmMatters
     object tabProject: TcxTabSheet
       Caption = 'Projects'
       ImageIndex = 17
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object pageProjectTasks: TcxPageControl
         Left = 0
         Top = 132
@@ -8461,6 +8427,7 @@ object frmMatters: TfrmMatters
         object tsGanttChart: TcxTabSheet
           Caption = 'Gantt'
           ImageIndex = 0
+          ExplicitWidth = 1398
           object ProjectsScheduler: TcxScheduler
             Left = 0
             Top = 0
@@ -8493,6 +8460,7 @@ object frmMatters: TfrmMatters
             OnAfterEditing = ProjectsSchedulerAfterEditing
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
+            ExplicitWidth = 1398
             Splitters = {
               2E0500007E000000BD050000830000002A050000010000002E0500006C010000}
             StoredClientBounds = {0100000001000000BD0500006C010000}
@@ -8505,7 +8473,6 @@ object frmMatters: TfrmMatters
               ParentColor = True
               ShowCaption = False
               TabOrder = 0
-              ExplicitHeight = 243
               object lblTotalProjTime: TcxLabel
                 Left = 6
                 Top = 10
@@ -8531,10 +8498,7 @@ object frmMatters: TfrmMatters
         object tsProjectTaskGrid: TcxTabSheet
           Caption = 'Tasks Grid'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
           ExplicitWidth = 1398
-          ExplicitHeight = 0
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
@@ -9404,6 +9368,7 @@ object frmMatters: TfrmMatters
       Caption = 'Diary'
       ImageIndex = 18
       TabVisible = False
+      ExplicitWidth = 1406
       object Panel4: TPanel
         Left = 0
         Top = 495
@@ -9412,6 +9377,7 @@ object frmMatters: TfrmMatters
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           32)
@@ -9569,10 +9535,7 @@ object frmMatters: TfrmMatters
       Caption = 'Emails'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
@@ -9665,6 +9628,7 @@ object frmMatters: TfrmMatters
       Caption = 'Tasks'
       ImageIndex = 18
       TabVisible = False
+      ExplicitWidth = 1406
       object Panel1: TPanel
         Left = 0
         Top = 492
@@ -9673,6 +9637,7 @@ object frmMatters: TfrmMatters
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           35)
@@ -9854,10 +9819,7 @@ object frmMatters: TfrmMatters
       Caption = 'Critical Dates'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 1406
-      ExplicitHeight = 0
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0
@@ -9937,6 +9899,7 @@ object frmMatters: TfrmMatters
     object tabAuthorChange: TcxTabSheet
       Caption = 'Matter Author'
       ImageIndex = 18
+      ExplicitWidth = 1406
       object dbgrMatterAuthor: TcxGrid
         Left = 0
         Top = 0
@@ -9984,6 +9947,7 @@ object frmMatters: TfrmMatters
         Height = 41
         Align = alBottom
         TabOrder = 1
+        ExplicitWidth = 1406
         DesignSize = (
           1478
           41)
@@ -13005,7 +12969,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14226,7 +14190,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15300,7 +15264,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16034,7 +15998,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16931,7 +16895,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -21378,7 +21342,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22165,7 +22129,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22444,7 +22408,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -25953,7 +25917,7 @@ object frmMatters: TfrmMatters
       ')')
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select body_text, ID'
+      'select body_text '
       'from '
       'email_templates '
       'where id = :id')
@@ -26258,7 +26222,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33347,7 +33311,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -34048,7 +34012,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -34816,6 +34780,7 @@ object frmMatters: TfrmMatters
       '     WHERE nmatter = :nmatter'
       'CONNECT BY PRIOR folder_id = parent_id'
       '  ORDER BY 2')
+    Active = True
     Left = 48
     Top = 580
     ParamData = <

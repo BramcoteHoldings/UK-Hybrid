@@ -4,31 +4,36 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, dxBarBuiltInMenu, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, cxStyles, cxEdit, cxScheduler, cxSchedulerStorage,
-  cxSchedulerCustomControls, cxSchedulerCustomResourceView, cxSchedulerDayView,
-  cxSchedulerAgendaView, cxSchedulerDateNavigator, cxSchedulerHolidays,
-  cxSchedulerTimeGridView, cxSchedulerUtils, cxSchedulerWeekView,
-  cxSchedulerYearView, cxSchedulerGanttView, cxSchedulerRecurrence,
-  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser, cxCustomData,
-  cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
-  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
-  cxTimeEdit, cxCalendar, cxContainer, Vcl.ComCtrls, dxCore, cxDateUtils,
-  cxCheckBox, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap, dxPrnDev,
-  dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns, dxPSPDFExportCore,
-  dxPSPDFExport, cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxSchedulerLnk, dxPScxGridLnk,
-  dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
-  dxPScxExtEditorProducers, dxPSCore, dxPScxCommon, cxSchedulercxGridConnection,
-  ppDB, ppDBPipe, ppParameter, ppDesignLayer, ppCtrls, ppBands, ppVar, ppPrnabl,
-  ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBar,
-  cxSchedulerDBStorage, Vcl.ExtCtrls, System.Actions, Vcl.ActnList,
-  Vcl.XPStyleActnCtrls, Vcl.ActnMan, System.ImageList, Vcl.ImgList,
-  cxBarEditItem, cxClasses, DBAccess, Uni, MemDS, cxLabel, cxSpinEdit,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit,
-  cxButtonEdit, cxGroupBox, Vcl.StdCtrls, cxButtons, cxDateChangeButton,
-  cxMaskEdit, cxDateNavigator, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, Progress, DateUtils;
+  Dialogs, Menus, cxStyles, cxGraphics, cxEdit, cxScheduler,
+  cxSchedulerStorage, cxSchedulerCustomControls, DateUtils,
+  cxSchedulerCustomResourceView, cxSchedulerDayView, Types,
+  cxSchedulerDateNavigator, cxSchedulerWeekView, cxCustomData, cxFilter,
+  cxData, cxDataStorage, DB, cxDBData, cxContainer, cxTextEdit, cxMaskEdit,
+  cxDropDownEdit, cxCalendar, ExtCtrls, OracleUniProvider, Uni, DBAccess, MemDS, ActnList, ActnMan, ImgList,
+  dxBar, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxGridLevel, cxClasses, cxControls, cxGridCustomView,
+  cxGrid, cxPC, cxLookAndFeelPainters, StdCtrls, cxButtons,
+  cxDateChangeButton, cxSpinEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxButtonEdit, cxGroupBox, NumberEdit, Buttons,
+  cxSchedulerDBStorage, cxSchedulerDialogs, cxCurrencyEdit, cxCheckBox,
+  cxMemo, cxBlobEdit, cxImageComboBox, cxTimeEdit, cxLabel, cxDateNavigator,
+  cxLookAndFeels, XPStyleActnCtrls, cxPCdxBarPopupMenu,
+  cxSchedulerHolidays, cxSchedulerTimeGridView, cxSchedulerUtils,
+  cxSchedulerYearView, cxSchedulerGanttView, ComCtrls, dxCore, ppDB,
+  ppDBPipe, ppComm, ppRelatv, ppProd, ppClass, ppReport, ppCtrls, ppVar,
+  ppPrnabl, ppBands, ppCache, ppDesignLayer, ppParameter, cxDateUtils,
+  cxSchedulerOutlookExchange, cxNavigator, System.Actions,
+  cxSchedulercxGridConnection, cxBarEditItem, dxPSGlbl, dxPSUtl, dxPSEngn,
+  dxPrnPg, dxBkgnd, dxWrap, dxPrnDev, dxPSCompsProvider, dxPSFillPatterns,
+  dxPSEdgePatterns, dxPSPDFExportCore, dxPSPDFExport, cxDrawTextUtils,
+  dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
+  dxPScxSchedulerLnk, dxPScxGridLnk, dxPScxGridLayoutViewLnk,
+  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPSCore, dxPScxCommon,
+  dxPSDBTCLnk, cxOutlook2WaySynchronize, dxBarBuiltInMenu,
+  cxSchedulerAgendaView, cxSchedulerRecurrence,
+  cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Outlook2010,
+  dxBarExtItems, Progress;
 
 const
    DayView = 0;
@@ -46,15 +51,15 @@ const
 
 DIARYFIELDS     = 'D.START_DT, D.END_DT, D.REMINDER_FOR, D.ENTERED_BY, D.NDIARY,'+
                       'CASE WHEN (d.PRIVATE = ''Y'' AND ((reminder_for <> :Disp_ReminderFor) and (entered_by <> :Disp_ReminderFor))) THEN ''Private Appointment'' '+
-                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN descr ELSE ''Appointment for: '' || D.REMINDER_FOR || '' - '' || d.descr END AS descr, '+
+                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN descr ELSE ''Appointment for: '' || D.REMINDER_FOR || '' - '' || d.DESCR END AS descr1, '+
                       //'D.DESCR, ' +
                       'D.SEARCH_KEY, D.PRIORITY, D.FILEID, D.TASK, D.TYPE,'+
                       'D.LOCATION, D.JURISDICTION, D.EVENT, D.DATAFORMFIELD, '+
                       'D.EVENTPRINTDESCR, NULL AS SHORTDESCR, NULL AS CLIENTNAME, '+
                       'D.NMATTER, D.OPTIONS, D.LABELCOLOUR, D.STATE, D.RESOURCEID,'+
-                      'D.RECURRENCEINDEX, D.OPTIONS, D.REMINDER,'+
+                      'D.RECURRENCEINDEX, D.OPTIONS, D.REMINDER, D.CAPTION, D.DESCR, '+
                       'CASE WHEN (d.PRIVATE = ''Y'' AND ((reminder_for <> :Disp_ReminderFor) and (entered_by <> :Disp_ReminderFor))) THEN ''Private Appointment'' '+
-                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN d.CAPTION else d.CAPTION END AS CAPTION, '+
+                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN d.caption else d.caption END AS CAPTION1, '+
 //                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN D.REMINDER_FOR||'' - ''||D.ENTERED_BY||'' - ''|| descr ELSE D.REMINDER_FOR||'' - ''||D.ENTERED_BY||'' - ''|| d.descr END AS CAPTION, '+
                       'D.EVENT_TYPE, D.ENTRYID, D.ROWID, D.NNAME, D.PRIVATE, D.NOTIFY_MINS, D.MODIFIED ';
 
@@ -259,6 +264,7 @@ type
     dxBarButton9: TdxBarButton;
     actOutlookSync: TAction;
     tvDiaryCAPTION: TcxGridDBColumn;
+    tvDiaryNDIARY: TcxGridDBColumn;
     procedure cxSpinEdit1PropertiesChange(Sender: TObject);
     procedure tmrQueryTimer(Sender: TObject);
     procedure dxBarButton8Click(Sender: TObject);
@@ -313,6 +319,7 @@ type
     { Private declarations }
     CurrentView: integer;
     FFirstActivate: Boolean;
+    FOverrideSync: Boolean;
     function DiaryDelete(NDiary: integer): Boolean;
     procedure MakeSQL;
     procedure RefreshTaskGrid;
@@ -336,7 +343,7 @@ implementation
 
 uses
    Matters, AxiomData, FeeNew, miscfunc, citfunc, PhoneMessage, DiaryNew,
-   Desktop,cxGeometry, PhoneBook, cxOutlook2WaySynchronize, cxSchedulerOutlookExchange;
+   Desktop,cxGeometry, PhoneBook;
 
 type
   TcxSchedulerEventCellViewInfoAccess = class(TcxSchedulerEventCellViewInfo);
@@ -360,104 +367,34 @@ var
    sEntryID,
    sLocation,
    sSubject,
-   sBody,
+   sBody, sMessage,
    sReminder_for,
    sTmpSub: string;
 
 begin
-  {  if dmAxiom.uniInsight.InTransaction = True then
-        dmAxiom.uniInsight.Commit;
-    dmAxiom.uniInsight.StartTransaction;
-    try
-        if (dmAxiom.qryTmp.Active) then
-            dmAxiom.qryTmp.Close;
-        with dmAxiom.qryTmp do
-        begin
-            SQL.Text := 'SELECT REMINDER_FOR FROM DIARY WHERE ENTRYID = ' + QuotedStr(sEntryID);
-            Open;
-            sReminder_For := FieldByName('REMINDER_FOR').AsString
-        end;
+   if AppointmentItem.Sensitivity = olPrivate then
+      AEvent.SetCustomFieldValueByName('private','Y')
+   else
+      AEvent.SetCustomFieldValueByName('private', 'N');
+   sMessage := AEvent.Message;
 
-        if (sReminder_For = '') then
-        begin
-            if (dmAxiom.qryTmp.Active) then
-                dmAxiom.qryTmp.Close;
-            with dmAxiom.qryTmp do
-            begin
-                SQL.Text := 'UPDATE DIARY SET REMINDER_FOR = ' + quotedStr(dmAxiom.UserID) + ' WHERE ENTRYID = ' + QuotedStr(sEntryID);
-                ExecSQL;
-                sReminder_For := dmAxiom.UserID;
-            end;
-        end;
+   sSubject := AppointmentItem.Subject;
+   if sSubject <> '' then
+      AEvent.Caption := sSubject;
 
-        sSubject := AppointmentItem.Subject;
-        if sSubject <> '' then
-          AEvent.Caption := sSubject;
-
-        sBody := trim(AppointmentItem.Body);
-        if (sBody <> '') and (sBody <> AEvent.Message) then
-        begin
-          AEvent.Message := sBody;
-        end;
-
-        sEntryID := AppointmentItem.ENTRYID;
-        if (sEntryID <> '') then
-        begin
-           dmAxiom.qryDiarySub.Close;
-           dmAxiom.qryDiarySub.ParambyName('ENTRYID').AsString := sEntryID;
-           dmAxiom.qryDiarySub.Open;
-           if ((dmAxiom.qryDiarySub.FieldByName('CAPTION').AsString <> sSubject) and (sSubject <> '')) then
-           begin
-            //try
-                if (dmAxiom.qryTmp.Active) then
-                    dmAxiom.qryTmp.Close;
-                with dmAxiom.qryTmp do
-                begin
-                    SQL.Text := 'UPDATE DIARY SET CAPTION = ' + quotedStr(sSubject) + ' WHERE ENTRYID = ' + QuotedStr(sEntryID);
-                    ExecSQL;
-                end;
-            //except on E:Exception do
-            //    ShowMessage('Failed to update caption of Diary entry from Outlook');
-            //end;
-           end;
-           if ((dmAxiom.qryDiarySub.FieldByName('DESCR').AsString <> sBody) and (sBody <> '')) then
-           begin
-            //try
-                sTmpSub := 'Appointment for: ' + sReminder_For + ' - ' + sBody;
-                if (dmAxiom.qryTmp.Active) then
-                    dmAxiom.qryTmp.Close;
-                with dmAxiom.qryTmp do
-                begin
-                    SQL.Text := 'UPDATE DIARY SET DESCR = ' + quotedStr(sTmpSub) + ' WHERE ENTRYID = ' + QuotedStr(sEntryID);
-                    ExecSQL;
-                end;
-            //except on E:Exception do
-            //    ShowMessage('Failed to update Description of Diary entry from Outlook');
-            //end;
-           end;
-       end;
-
-       if AppointmentItem.Sensitivity = olPrivate then
-          AEvent.SetCustomFieldValueByName('private','Y')
-       else
-          AEvent.SetCustomFieldValueByName('private', 'N');
-
-       sLocation := trim(AppointmentItem.Location);
-       if (sLocation <> '') then
-       begin
-          if dmAxiom.qryDiaryLoc.Locate('LOCATION', sLocation, [loCaseInsensitive]) = False then
-          begin
-             with dmAxiom.qryTmp do
-             begin
-                SQL.Text := 'insert into DIARYLOC (LOCATION) values (' + QuotedStr(sLocation) + ')';
-                ExecSQL;
-                dmAxiom.qryDiaryLoc.Refresh;
-             end;
-          end;
-       end;
-    finally
-       dmAxiom.uniInsight.Commit;
-    end;   }
+   sLocation := trim(AppointmentItem.Location);
+   if (sLocation <> '') then
+   begin
+      if dmAxiom.qryDiaryLoc.Locate('LOCATION', sLocation, [loCaseInsensitive]) = False then
+      begin
+         with dmAxiom.qryTmp do
+         begin
+            SQL.Text := 'insert into DIARYLOC (LOCATION) values (' + QuotedStr(sLocation) + ')';
+            ExecSQL;
+            dmAxiom.qryDiaryLoc.Refresh;
+         end;
+      end;
+   end;
 end;
 
 procedure ASyncProc(ACurrent, ACount: Integer; var Abort: Boolean);
@@ -755,6 +692,7 @@ var
    AEvent: TcxSchedulerEvent;
    bPrivate: boolean;
 begin
+   FOverrideSync := True;
    if pagDiary.ActivePage = tabDay then
    begin
       with SchedulerDBStorage do
@@ -780,6 +718,7 @@ begin
                begin
                   qryDiary.Close;
                   qryDiary.Open;
+                  DoOutlookSynchronise;
 //        RefreshMatter(GetEventInfo(Cell[ColumnIndex, RowIndex] as TcwDayViewCell, eiRecourceID));
                end;
             end;
@@ -788,10 +727,18 @@ begin
    end
    else if pagDiary.ActivePage = tabGrid then
    begin
-      if DiaryDelete(qryDiary.FieldByName('NDIARY').AsInteger) then
+      if DiaryDelete(tvDiaryNDIARY.EditValue) then
       begin
-         qryDiary.Close;
-         qryDiary.Open;
+          qryDiary.Close;
+          qryDiary.Open;
+          DoOutlookSynchronise;
+          if (dtpDateTo.Date <> NullDate) and
+             (dtpDateFrom.Date <> NullDate) then
+          begin
+             //MakeSQL;  //populateGrid;
+             populateGrid;
+             btnPrint.Enabled := True;
+          end;
       end;
    end;
 end;
@@ -1026,6 +973,7 @@ begin
    if(FFirstActivate) then
    begin
       FFirstActivate := False;
+      FOverrideSync := False;
       // Load the combo boxes
       qryPartner.Open;
       qryAuthor.Open;
@@ -1072,7 +1020,7 @@ begin
       RefreshTaskGrid();
       cmbReminderFor.OnClick := cmbReminderForClick;
       cmbReminderFor.Properties.OnChange := cmbReminderForClick;
-      DoOutlookSynchronise;
+      //DoOutlookSynchronise;
    end;
 end;
 
@@ -1103,7 +1051,8 @@ begin
                //from outlook
                1: begin
                      afrmProgress.Show;
-                     cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                     if FOverrideSync = False then
+                        cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
                   end;
                // to outlook
                2: begin
@@ -1111,16 +1060,35 @@ begin
                      cxSchedulerSynchronizeOutlookWithStorage(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), True, nil, GetResource, ASyncProc);
                   end;
                // bi directional
-               3: TwoWaySynch;
+               3: begin
+                    dmAxiom.qryTmp.Close;
+                    dmAxiom.qryTmp.SQL.Text := 'SELECT COUNT(*) AS EM_COUNT FROM DIARY WHERE ENTRYID IS NOT NULL AND REMINDER_FOR = ' + QuotedStr(dmAxiom.UserID);
+                    dmAxiom.qryTmp.Open;
+                    if dmAxiom.qryTmp.FieldByName('EM_COUNT').AsInteger > 0 then
+                    begin
+                         if FOverrideSync = False then
+                              cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                         cxSchedulerSynchronizeOutlookWithStorage(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), True, nil, GetResource, ASyncProc);
+                         //TwoWaySynch;
+                         //TwoWaySynch;
+                    end
+                    else
+                    begin
+                        ShowMessage('You have not run the Synchronisation with Outlook previously, replicating Outlook calendar entries into BHL Insight');
+                        afrmProgress.Show;
+                        cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                    end;
+                  end;
             end;
          finally
-            FreeAndNil(afrmProgress);
             DiaryScheduler.EndUpdate;
             Screen.Cursor := crDefault;
             SchedulerDBStorage.EndUpdate;
+            FreeAndNil(afrmProgress);
          end;
       end;
    end;
+   FOverrideSync := False;
 end;
 
 procedure TfrmDiary99.MakeSQL;
@@ -1535,7 +1503,8 @@ begin
       SQL.Add(', DECODE(D.INT_EXT, ''I'', ''Internal'', ''E'', ''External'') as int_ext ');
       SQL.Add('FROM DIARY D, MATTER M, PHONEBOOK P');
       SQL.Add('WHERE ');
-      SQL.Add('D.START_DT >= :DateFrom AND D.START_DT < :DateTo ');
+      //SQL.Add('D.START_DT >= :DateFrom AND D.START_DT < :DateTo ');
+      SQL.Add('((D.START_DT <= :DateFrom AND D.END_DT >= :DateFrom) OR (D.START_DT >= :DateFrom AND D.START_DT < :DateTo)) ');
       SQL.Add(' AND ');
       SQL.Add(' M.NCLIENT = P.NCLIENT(+)');
       SQL.Add('  AND D.FILEID = M.FILEID(+) ');
@@ -1553,6 +1522,8 @@ begin
    end;
 
    DiaryBindParams(qryDiaryList);
+      if dmAxiom.runningide = true then
+          qryDiaryList.SQL.SaveToFile('c:\tmp\diarylist.sql');
    if (dtpDateTo.Date <> NullDate) and
       (dtpDateFrom.Date <> NullDate) then
       qryDiaryList.Open;
@@ -1563,6 +1534,7 @@ begin
    try
       //MakeSQL;  //PopulateGrid;
       PopulateGrid;
+      Self.Caption := MakeTitle;
    finally
       btnPrint.Enabled := True;
    end;
@@ -1573,6 +1545,7 @@ begin
    try
       //MakeSQL;   //PopulateGrid;
       PopulateGrid;
+      Self.Caption := MakeTitle;
    finally
       btnPrint.Enabled := True;
    end;

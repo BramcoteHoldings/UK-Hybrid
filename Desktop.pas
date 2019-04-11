@@ -756,7 +756,7 @@ uses
   EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
   Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
-  WinAPI.ShellAPI, SearchIndexConfig;
+  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer;
 
 
 {$R *.DFM}
@@ -4057,6 +4057,7 @@ begin
 //    IDXNARRATIVE: FindOrCreate(TfrmReceiptReqNarrative, iProgramID).Show;
     IDXDOCFOLDERTMPL: FindOrCreate(TfrmDoc_Fldr_Tmpl, iProgramID).Show;
     IDXDOCINDEXUSERS: FindOrCreate(TfrmIndexConfig, iProgramID).Show;
+    IDXBULKMAILER: FindorCreate(TfrmBulkMailer, iProgramID).Show;
   end;
   Screen.Cursor := csrPrev;  // Restore cursor
 end;
