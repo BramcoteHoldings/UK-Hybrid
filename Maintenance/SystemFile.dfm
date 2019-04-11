@@ -83,7 +83,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label1: TLabel
         Left = 7
-        Top = 112
+        Top = 114
         Width = 62
         Height = 15
         Caption = 'Next Matter'
@@ -100,7 +100,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label3: TLabel
         Left = 7
-        Top = 140
+        Top = 138
         Width = 88
         Height = 15
         Caption = 'Minutes per Unit'
@@ -131,7 +131,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label75: TLabel
         Left = 7
-        Top = 89
+        Top = 90
         Width = 29
         Height = 15
         Caption = 'Email'
@@ -148,7 +148,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit5: TDBEdit
         Left = 102
-        Top = 42
+        Top = 41
         Width = 222
         Height = 23
         DataField = 'ADD2'
@@ -157,7 +157,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit6: TDBEdit
         Left = 102
-        Top = 64
+        Top = 63
         Width = 125
         Height = 23
         DataField = 'SUBURB'
@@ -166,7 +166,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit7: TDBEdit
         Left = 233
-        Top = 64
+        Top = 63
         Width = 35
         Height = 23
         CharCase = ecUpperCase
@@ -176,7 +176,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit8: TDBEdit
         Left = 274
-        Top = 64
+        Top = 63
         Width = 50
         Height = 23
         DataField = 'POSTCODE'
@@ -204,7 +204,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit3: TDBEdit
         Left = 102
-        Top = 137
+        Top = 135
         Width = 21
         Height = 23
         DataField = 'TIME_UNITS'
@@ -824,10 +824,6 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Field &Mapping'
       ImageIndex = 3
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgDataFieldMapping: TcxGrid
         Left = 0
         Top = 0
@@ -889,10 +885,6 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Outlook'
       ImageIndex = 4
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label21: TLabel
         Left = -14
         Top = 21

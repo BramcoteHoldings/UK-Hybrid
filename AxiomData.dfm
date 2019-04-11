@@ -19,6 +19,7 @@ object dmAxiom: TdmAxiom
     Debug = True
     Username = 'axiom'
     Server = '192.168.0.22:1521:marketing'
+    Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -3049,7 +3050,7 @@ object dmAxiom: TdmAxiom
       'from employee where active = '#39'Y'#39
       'order by name')
     Left = 664
-    Top = 460
+    Top = 444
   end
   object dsEmplyeeList: TUniDataSource
     DataSet = qryEmplyeeList
@@ -8109,5 +8110,19 @@ object dmAxiom: TdmAxiom
       'Order By ISO4217_CURRENCY_CODE')
     Left = 1032
     Top = 512
+  end
+  object qryEmpAuthor: TUniQuery
+    Connection = uniInsight
+    SQL.Strings = (
+      'select code, name'
+      'from employee where active = '#39'Y'#39' and isauthor = '#39'Y'#39
+      'order by name')
+    Left = 992
+    Top = 652
+  end
+  object dsEmpAuthor: TUniDataSource
+    DataSet = qryEmpAuthor
+    Left = 1022
+    Top = 706
   end
 end

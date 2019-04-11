@@ -11,55 +11,63 @@ uses
   cxControls, cxContainer, cxEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxGraphics,
   cxLookAndFeels, cxLookAndFeelPainters, ppParameter, cxClasses,
-  ppDesignLayer, cxImage, cxDBEdit;
+  ppDesignLayer, cxImage, cxDBEdit, dxLayoutContainer, dxLayoutcxEditAdapters,
+  cxButtonEdit, dxLayoutControl, System.ImageList;
 
 type
   TfrmBranches = class(TfrmMaint)
-    Label1: TLabel;
-    Label2: TLabel;
-    dbedCode: TDBEdit;
     dbedDescr: TDBEdit;
-    btnCodeSearch: TBitBtn;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    lblState: TLabel;
-    Label7: TLabel;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
-    Label8: TLabel;
-    Label9: TLabel;
     DBEdit7: TDBEdit;
     DBEdit8: TDBEdit;
-    Label10: TLabel;
-    Label11: TLabel;
     DBEdit9: TDBEdit;
     DBEdit10: TDBEdit;
-    Label12: TLabel;
-    Label13: TLabel;
     edLedgerComponent: TDBEdit;
     cxDBLookupComboBox1: TcxDBLookupComboBox;
     qryBanks: TUniQuery;
     dsBanks: TUniDataSource;
-    Label14: TLabel;
-    Label15: TLabel;
     DBEdit11: TDBEdit;
     DBEdit12: TDBEdit;
-    lblMailingState: TLabel;
     DBEdit13: TDBEdit;
-    Label17: TLabel;
     DBEdit14: TDBEdit;
     cxDBImage1: TcxDBImage;
-    cxLabel1: TcxLabel;
     dxBarPopupMenu1: TdxBarPopupMenu;
     dxBarButton1: TdxBarButton;
     dxBarButton2: TdxBarButton;
     dxBarButton3: TdxBarButton;
     dlFile: TOpenDialog;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutGroup4: TdxLayoutGroup;
+    dxLayoutItem10: TdxLayoutItem;
+    dxLayoutItem11: TdxLayoutItem;
+    dxLayoutItem12: TdxLayoutItem;
+    dxLayoutGroup5: TdxLayoutGroup;
+    dxLayoutItem13: TdxLayoutItem;
+    dxLayoutItem14: TdxLayoutItem;
+    dxLayoutItem15: TdxLayoutItem;
+    dxLayoutGroup6: TdxLayoutGroup;
+    dxLayoutItem16: TdxLayoutItem;
+    dxLayoutItem17: TdxLayoutItem;
+    dxLayoutItem18: TdxLayoutItem;
+    dxLayoutItem19: TdxLayoutItem;
+    dxLayoutItem20: TdxLayoutItem;
+    dbedCode: TcxDBButtonEdit;
+    dxLayoutItem21: TdxLayoutItem;
     procedure qrySourceAfterInsert(DataSet: TDataSet);
     procedure btnCodeSearchClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -70,6 +78,8 @@ type
     procedure dxBarButton1Click(Sender: TObject);
     procedure dxBarButton2Click(Sender: TObject);
     procedure dxBarButton3Click(Sender: TObject);
+    procedure cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
     sSetEntity : String;
@@ -134,6 +144,21 @@ begin
    qrySource.ParamByName('Entity').AsString := sSetEntity;
    qrySource.Close;
    qrySource.Open;
+end;
+
+procedure TfrmBranches.cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+var
+   frmGenericSearch : TfrmGenericSearch;
+begin
+   frmGenericSearch := TfrmGenericSearch.Create(Self);
+   with frmGenericSearch do
+   begin
+      SQL := 'SELECT CODE, DESCR, ''N'' AS DEFAULTITEM FROM BRANCH WHERE ENTITY = ''' + sSetEntity + ''' ORDER BY CODE';
+      if ShowModal = mrOK then
+         Self.qrySource.Locate('CODE', qrySource.FieldByName('CODE').AsString, []);
+      Release;
+   end;
 end;
 
 procedure TfrmBranches.dxBarButton1Click(Sender: TObject);
@@ -203,11 +228,6 @@ begin
    else
       edLedgerComponent.MaxLength := iGlComponentLength;
 
-   if SystemString('LOCALE_NAME') <> '' then
-   begin
-      lblMailingState.Caption := 'Mailing County';
-      lblState.Caption := 'County';
-   end;
 end;
 
 function TfrmBranches.validateData(var sError : String): boolean;

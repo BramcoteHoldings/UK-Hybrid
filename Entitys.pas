@@ -13,7 +13,7 @@ uses
   ppDesignLayer, ppModule, raCodMod, ppVar, ppBands, ppCtrls, ppStrtch,
   ppRegion, Vcl.Imaging.jpeg, ppPrnabl, ppClass, ppCache, ppParameter, ppComm,
   ppRelatv, ppProd, ppReport, ppDB, ppDBPipe, ppSubRpt, ppMemo, dxBarBuiltInMenu,
-  cxColorComboBox, cxDBColorComboBox, cxCalendar;
+  cxColorComboBox, cxDBColorComboBox, cxCalendar, System.ImageList;
 
 type
   TfrmEntity = class(TForm)

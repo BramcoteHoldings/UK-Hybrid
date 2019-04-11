@@ -26,7 +26,9 @@ object frmDocNew: TfrmDocNew
     Width = 537
     Height = 579
     Align = alClient
+    ParentBackground = True
     TabOrder = 0
+    Transparent = True
     AutoSize = True
     DesignSize = (
       537
@@ -426,7 +428,7 @@ object frmDocNew: TfrmDocNew
         end>
       Properties.ListOptions.ShowHeader = False
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = dmAxiom.dsEmplyeeList
+      Properties.ListSource = dmAxiom.dsEmpAuthor
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -1031,6 +1033,7 @@ object frmDocNew: TfrmDocNew
       end>
   end
   object dsEmployee: TUniDataSource
+    DataSet = dmAxiom.qryEmplyeeList
     Left = 496
     Top = 126
   end

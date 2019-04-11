@@ -69,7 +69,7 @@ object frmEntity: TfrmEntity
   end
   object Label8: TLabel
     Left = 18
-    Top = 266
+    Top = 264
     Width = 69
     Height = 15
     Alignment = taRightJustify
@@ -100,7 +100,7 @@ object frmEntity: TfrmEntity
   end
   object Label36: TLabel
     Left = 15
-    Top = 238
+    Top = 237
     Width = 72
     Height = 15
     Alignment = taRightJustify
@@ -209,10 +209,6 @@ object frmEntity: TfrmEntity
       object tabCreation: TcxTabSheet
         Caption = 'Creation'
         ImageIndex = 0
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label51: TLabel
           Left = 8
           Top = 30
@@ -417,10 +413,6 @@ object frmEntity: TfrmEntity
       object tabInvoice: TcxTabSheet
         Caption = 'Billing'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label66: TLabel
           Left = 139
           Top = 8
@@ -850,10 +842,6 @@ object frmEntity: TfrmEntity
       object tabReceipt: TcxTabSheet
         Caption = 'Receipting'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label70: TLabel
           Left = 16
           Top = 34
@@ -1039,10 +1027,6 @@ object frmEntity: TfrmEntity
         Caption = 'Write Off'
         ImageIndex = 3
         OnShow = tabWriteOffShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label78: TLabel
           Left = 8
           Top = 29
@@ -1316,10 +1300,6 @@ object frmEntity: TfrmEntity
       object tabEOY: TcxTabSheet
         Caption = 'End Of Year'
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label86: TLabel
           Left = 8
           Top = 21
@@ -1482,7 +1462,7 @@ object frmEntity: TfrmEntity
   end
   object cxDBButtonEdit1: TcxDBButtonEdit
     Left = 94
-    Top = 263
+    Top = 261
     DataBinding.DataField = 'WPDIR'
     DataBinding.DataSource = dsEntity
     Properties.Buttons = <
@@ -2242,7 +2222,7 @@ object frmEntity: TfrmEntity
       FloatClientHeight = 286
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -10
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -3781,8 +3761,9 @@ object frmEntity: TfrmEntity
     NoDataBehaviors = [ndMessageOnPage, ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3846,15 +3827,22 @@ object frmEntity: TfrmEntity
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3869,13 +3857,15 @@ object frmEntity: TfrmEntity
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 564
     Top = 452
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'peEntityPrint'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 121179
@@ -3883,13 +3873,15 @@ object frmEntity: TfrmEntity
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Entity Information'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 18
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 7673
         mmLeft = 6350
@@ -3905,6 +3897,7 @@ object frmEntity: TfrmEntity
         AlignVertical = avCenter
         AutoSize = True
         MaintainAspectRatio = False
+        Border.mmPadding = 0
         Picture.Data = {
           0A544A504547496D61676578260000FFD8FFE000104A46494600010101007800
           780000FFDB004300020101020101020202020202020203050303030303060404
@@ -4225,6 +4218,7 @@ object frmEntity: TfrmEntity
       object ppLine5: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line5'
+        Border.mmPadding = 0
         Pen.Color = clSilver
         Pen.Width = 2
         ParentWidth = True
@@ -4257,13 +4251,15 @@ object frmEntity: TfrmEntity
         object ppLabel3: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label3'
+          Border.mmPadding = 0
           Caption = 'General Information'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 12
           Font.Style = [fsItalic, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 5027
           mmLeft = 6350
@@ -4275,13 +4271,15 @@ object frmEntity: TfrmEntity
         object ppLabel10: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label10'
+          Border.mmPadding = 0
           Caption = 'Code:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -4294,6 +4292,7 @@ object frmEntity: TfrmEntity
         object ppDBText12: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText12'
+          Border.mmPadding = 0
           DataField = 'CODE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4315,6 +4314,7 @@ object frmEntity: TfrmEntity
           DesignLayer = ppDesignLayer1
           UserName = 'DBText13'
           AutoSize = True
+          Border.mmPadding = 0
           DataField = 'NAME'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4336,6 +4336,7 @@ object frmEntity: TfrmEntity
           DesignLayer = ppDesignLayer1
           UserName = 'DBText15'
           AutoSize = True
+          Border.mmPadding = 0
           DataField = 'BANK_NAME'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4356,6 +4357,7 @@ object frmEntity: TfrmEntity
         object ppDBText14: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText14'
+          Border.mmPadding = 0
           DataField = 'DEFAULT_BANK'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4376,13 +4378,15 @@ object frmEntity: TfrmEntity
         object ppLabel11: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label11'
+          Border.mmPadding = 0
           Caption = 'Bank:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -4395,13 +4399,15 @@ object frmEntity: TfrmEntity
         object ppLabel12: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label12'
+          Border.mmPadding = 0
           Caption = 'Business No:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -4414,6 +4420,7 @@ object frmEntity: TfrmEntity
         object ppDBText16: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText16'
+          Border.mmPadding = 0
           DataField = 'ABN'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4434,6 +4441,7 @@ object frmEntity: TfrmEntity
         object ppDBText6: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText4'
+          Border.mmPadding = 0
           DataField = 'CLIENTLENGTH'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4455,6 +4463,7 @@ object frmEntity: TfrmEntity
         object ppDBText7: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText6'
+          Border.mmPadding = 0
           DataField = 'CLIENTPAD'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4476,13 +4485,15 @@ object frmEntity: TfrmEntity
         object ppLabel5: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label5'
+          Border.mmPadding = 0
           Caption = 'Coding Information'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 12
           Font.Style = [fsItalic, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 5027
           mmLeft = 6350
@@ -4494,13 +4505,15 @@ object frmEntity: TfrmEntity
         object ppLabel6: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label6'
+          Border.mmPadding = 0
           Caption = 'Client'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = [fsItalic]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 7408
@@ -4512,13 +4525,15 @@ object frmEntity: TfrmEntity
         object ppLabel8: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label8'
+          Border.mmPadding = 0
           Caption = 'Code:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 18256
@@ -4530,6 +4545,7 @@ object frmEntity: TfrmEntity
         object ppDBText9: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText8'
+          Border.mmPadding = 0
           DataField = 'CLIENTCODE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4550,13 +4566,15 @@ object frmEntity: TfrmEntity
         object ppLabel9: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label9'
+          Border.mmPadding = 0
           Caption = 'Padding'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 58208
@@ -4568,13 +4586,15 @@ object frmEntity: TfrmEntity
         object ppLabel19: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label19'
+          Border.mmPadding = 0
           Caption = 'Separator'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 71438
@@ -4586,13 +4606,15 @@ object frmEntity: TfrmEntity
         object ppLabel20: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label20'
+          Border.mmPadding = 0
           Caption = 'No of chars'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 88098
@@ -4604,13 +4626,15 @@ object frmEntity: TfrmEntity
         object ppLabel21: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label21'
+          Border.mmPadding = 0
           Caption = 'Create acronym?'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 106619
@@ -4622,13 +4646,15 @@ object frmEntity: TfrmEntity
         object ppLabel22: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label22'
+          Border.mmPadding = 0
           Caption = 'Use name value?'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 135723
@@ -4640,13 +4666,15 @@ object frmEntity: TfrmEntity
         object ppLabel23: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label23'
+          Border.mmPadding = 0
           Caption = 'Use Entity code as prefix?'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 165092
@@ -4658,13 +4686,15 @@ object frmEntity: TfrmEntity
         object ppLabel24: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label24'
+          Border.mmPadding = 0
           Caption = 'Entity separator'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 207955
@@ -4676,6 +4706,7 @@ object frmEntity: TfrmEntity
         object ppLine1: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line1'
+          Border.mmPadding = 0
           Weight = 0.750000000000000000
           mmHeight = 2381
           mmLeft = 88098
@@ -4688,13 +4719,15 @@ object frmEntity: TfrmEntity
           DesignLayer = ppDesignLayer1
           UserName = 'Label25'
           AutoSize = False
+          Border.mmPadding = 0
           Caption = 'Name'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -4707,13 +4740,15 @@ object frmEntity: TfrmEntity
         object ppLabel26: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label26'
+          Border.mmPadding = 0
           Caption = 'No of chars'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 233892
@@ -4725,6 +4760,7 @@ object frmEntity: TfrmEntity
         object ppLine3: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line3'
+          Border.mmPadding = 0
           Weight = 0.750000000000000000
           mmHeight = 1588
           mmLeft = 165092
@@ -4737,13 +4773,15 @@ object frmEntity: TfrmEntity
           DesignLayer = ppDesignLayer1
           UserName = 'Label27'
           AutoSize = False
+          Border.mmPadding = 0
           Caption = 'Entity'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -4756,13 +4794,15 @@ object frmEntity: TfrmEntity
         object ppLabel28: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label28'
+          Border.mmPadding = 0
           Caption = 'Matter:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = [fsItalic]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -4775,13 +4815,15 @@ object frmEntity: TfrmEntity
         object ppLabel29: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label29'
+          Border.mmPadding = 0
           Caption = 'Creditor:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = [fsItalic]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -4794,6 +4836,7 @@ object frmEntity: TfrmEntity
         object ppDBText10: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText9'
+          Border.mmPadding = 0
           DataField = 'MATTERCODE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4814,6 +4857,7 @@ object frmEntity: TfrmEntity
         object ppDBText11: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText10'
+          Border.mmPadding = 0
           DataField = 'CREDITORCODE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4834,6 +4878,7 @@ object frmEntity: TfrmEntity
         object ppDBText8: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText7'
+          Border.mmPadding = 0
           DataField = 'CLIENTSEPARATOR'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4855,6 +4900,7 @@ object frmEntity: TfrmEntity
         object ppDBText18: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText11'
+          Border.mmPadding = 0
           DataField = 'CLIENTACRONYM'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4876,6 +4922,7 @@ object frmEntity: TfrmEntity
         object ppDBText19: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText18'
+          Border.mmPadding = 0
           DataField = 'USE_PHONEBOOK_NAME'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4897,6 +4944,7 @@ object frmEntity: TfrmEntity
         object ppDBText20: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText19'
+          Border.mmPadding = 0
           DataField = 'USE_ENTITY_CODE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4918,6 +4966,7 @@ object frmEntity: TfrmEntity
         object ppDBText21: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText20'
+          Border.mmPadding = 0
           DataField = 'USE_ENTITY_SEPERATOR'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4939,6 +4988,7 @@ object frmEntity: TfrmEntity
         object ppDBText22: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText21'
+          Border.mmPadding = 0
           DataField = 'USE_ENTITY_LENGTH'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4960,6 +5010,7 @@ object frmEntity: TfrmEntity
         object ppDBText23: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText22'
+          Border.mmPadding = 0
           DataField = 'MATTERPAD'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -4981,6 +5032,7 @@ object frmEntity: TfrmEntity
         object ppDBText24: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText23'
+          Border.mmPadding = 0
           DataField = 'CREDITORPAD'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5002,6 +5054,7 @@ object frmEntity: TfrmEntity
         object ppDBText25: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText24'
+          Border.mmPadding = 0
           DataField = 'CLIENTSEPARATOR'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5023,6 +5076,7 @@ object frmEntity: TfrmEntity
         object ppDBText26: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText25'
+          Border.mmPadding = 0
           DataField = 'MATTERSEPERATOR'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5044,6 +5098,7 @@ object frmEntity: TfrmEntity
         object ppDBText27: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText26'
+          Border.mmPadding = 0
           DataField = 'MATTERLENGTH'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5065,6 +5120,7 @@ object frmEntity: TfrmEntity
         object ppDBText28: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText27'
+          Border.mmPadding = 0
           DataField = 'CREDITORLENGTH'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5086,6 +5142,7 @@ object frmEntity: TfrmEntity
         object ppDBText29: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText28'
+          Border.mmPadding = 0
           DataField = 'MATTERACRONYM'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5107,6 +5164,7 @@ object frmEntity: TfrmEntity
         object ppDBText30: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText29'
+          Border.mmPadding = 0
           DataField = 'CREDITORACRONYM'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5128,13 +5186,15 @@ object frmEntity: TfrmEntity
         object ppLabel30: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label30'
+          Border.mmPadding = 0
           Caption = 'Fee tax basis:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -5147,13 +5207,15 @@ object frmEntity: TfrmEntity
         object ppLabel31: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label31'
+          Border.mmPadding = 0
           Caption = 'Control Account'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4234
@@ -5166,6 +5228,7 @@ object frmEntity: TfrmEntity
         object ppDBText31: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText30'
+          Border.mmPadding = 0
           DataField = 'CREDITORS'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5187,6 +5250,7 @@ object frmEntity: TfrmEntity
         object ppLine4: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line4'
+          Border.mmPadding = 0
           Weight = 0.750000000000000000
           mmHeight = 794
           mmLeft = 18256
@@ -5198,6 +5262,7 @@ object frmEntity: TfrmEntity
         object ppDBText32: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText31'
+          Border.mmPadding = 0
           DataField = 'FEE_TAX_BASIS'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5218,13 +5283,15 @@ object frmEntity: TfrmEntity
         object ppLabel32: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label32'
+          Border.mmPadding = 0
           Caption = 'Last Rollover:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -5237,13 +5304,15 @@ object frmEntity: TfrmEntity
         object ppLabel33: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label33'
+          Border.mmPadding = 0
           Caption = 'Financial year ending:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -5256,13 +5325,15 @@ object frmEntity: TfrmEntity
         object ppLabel34: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label34'
+          Border.mmPadding = 0
           Caption = 'Lock date:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4233
@@ -5275,6 +5346,7 @@ object frmEntity: TfrmEntity
         object ppDBText33: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText32'
+          Border.mmPadding = 0
           DataField = 'LAST_ROLLOVER'
           DataPipeline = peEntityPrintBase
           DisplayFormat = 'dd/mm/yyyy'
@@ -5296,6 +5368,7 @@ object frmEntity: TfrmEntity
         object ppDBText34: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText33'
+          Border.mmPadding = 0
           DataField = 'FINYEAREND'
           DataPipeline = peEntityPrintBase
           DisplayFormat = 'dd/mm/yyyy'
@@ -5317,6 +5390,7 @@ object frmEntity: TfrmEntity
         object ppDBText35: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText34'
+          Border.mmPadding = 0
           DataField = 'LOCKDATE'
           DataPipeline = peEntityPrintBase
           DisplayFormat = 'dd/mm/yyyy'
@@ -5338,13 +5412,15 @@ object frmEntity: TfrmEntity
         object ppLabel35: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label35'
+          Border.mmPadding = 0
           Caption = 'Next matter:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -5357,13 +5433,15 @@ object frmEntity: TfrmEntity
         object ppLabel36: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label36'
+          Border.mmPadding = 0
           Caption = 'Next archive:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -5376,13 +5454,15 @@ object frmEntity: TfrmEntity
         object ppLabel37: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label37'
+          Border.mmPadding = 0
           Caption = 'LEI / Company No:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -5395,6 +5475,7 @@ object frmEntity: TfrmEntity
         object ppDBText36: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText35'
+          Border.mmPadding = 0
           DataField = 'ACN'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5415,6 +5496,7 @@ object frmEntity: TfrmEntity
         object ppDBText37: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText36'
+          Border.mmPadding = 0
           DataField = 'NEXTMATTER'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5435,6 +5517,7 @@ object frmEntity: TfrmEntity
         object ppDBText38: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText37'
+          Border.mmPadding = 0
           DataField = 'NEXTARCHIVE'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5455,13 +5538,15 @@ object frmEntity: TfrmEntity
         object ppLabel38: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label38'
+          Border.mmPadding = 0
           Caption = 'Journal No:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 4498
@@ -5474,6 +5559,7 @@ object frmEntity: TfrmEntity
         object ppDBText39: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText38'
+          Border.mmPadding = 0
           DataField = 'NJOURNAL'
           DataPipeline = peEntityPrintBase
           Font.Charset = DEFAULT_CHARSET
@@ -5512,13 +5598,15 @@ object frmEntity: TfrmEntity
         object ppLabel4: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label4'
+          Border.mmPadding = 0
           Caption = 'Posting Information'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 12
           Font.Style = [fsItalic, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 5027
           mmLeft = 7408
@@ -5530,13 +5618,15 @@ object frmEntity: TfrmEntity
         object ppLabel18: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label18'
+          Border.mmPadding = 0
           Caption = 'Posting Type'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 7408
@@ -5548,13 +5638,15 @@ object frmEntity: TfrmEntity
         object ppLabel14: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label14'
+          Border.mmPadding = 0
           Caption = 'GL Code'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 71438
@@ -5566,13 +5658,15 @@ object frmEntity: TfrmEntity
         object ppLabel15: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label15'
+          Border.mmPadding = 0
           Caption = 'Tax Code'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 88106
@@ -5584,13 +5678,15 @@ object frmEntity: TfrmEntity
         object ppLabel16: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label16'
+          Border.mmPadding = 0
           Caption = 'Chart Type'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 106627
@@ -5602,13 +5698,15 @@ object frmEntity: TfrmEntity
         object ppLabel17: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label17'
+          Border.mmPadding = 0
           Caption = 'Chart Type Description'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 135732
@@ -5620,13 +5718,15 @@ object frmEntity: TfrmEntity
         object ppLabel13: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label13'
+          Border.mmPadding = 0
           Caption = 'GL Description'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = []
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4498
           mmLeft = 174361
@@ -5638,6 +5738,7 @@ object frmEntity: TfrmEntity
         object ppLine2: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line2'
+          Border.mmPadding = 0
           Weight = 0.750000000000000000
           mmHeight = 2646
           mmLeft = 7408
@@ -5671,8 +5772,9 @@ object frmEntity: TfrmEntity
           DataPipeline = peEntityGroup
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5683,24 +5785,27 @@ object frmEntity: TfrmEntity
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'peEntityGroup'
           object ppTitleBand2: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 16933
             mmPrintPosition = 0
             object ppLabel52: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label52'
+              Border.mmPadding = 0
               Caption = 'Company Groups'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 12
               Font.Style = [fsItalic]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 5027
               mmLeft = 6085
@@ -5712,6 +5817,7 @@ object frmEntity: TfrmEntity
             object ppLine7: TppLine
               DesignLayer = ppDesignLayer3
               UserName = 'Line7'
+              Border.mmPadding = 0
               Weight = 0.750000000000000000
               mmHeight = 529
               mmLeft = 6085
@@ -5723,13 +5829,15 @@ object frmEntity: TfrmEntity
             object ppLabel53: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label53'
+              Border.mmPadding = 0
               Caption = 'Code'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4498
               mmLeft = 6085
@@ -5741,13 +5849,15 @@ object frmEntity: TfrmEntity
             object ppLabel54: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label54'
+              Border.mmPadding = 0
               Caption = 'Description'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 4498
@@ -5761,12 +5871,14 @@ object frmEntity: TfrmEntity
           object ppDetailBand3: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5556
             mmPrintPosition = 0
             object ppDBText51: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText51'
+              Border.mmPadding = 0
               DataField = 'CODE'
               DataPipeline = peEntityGroup
               Font.Charset = DEFAULT_CHARSET
@@ -5786,6 +5898,7 @@ object frmEntity: TfrmEntity
             object ppDBText52: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText52'
+              Border.mmPadding = 0
               DataField = 'DESCRIPTION'
               DataPipeline = peEntityGroup
               Font.Charset = DEFAULT_CHARSET
@@ -5816,6 +5929,7 @@ object frmEntity: TfrmEntity
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 12965
@@ -5824,6 +5938,7 @@ object frmEntity: TfrmEntity
         DesignLayer = ppDesignLayer1
         UserName = 'DBText17'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'C_TYPE'
         DataPipeline = peEntityPrint
         Font.Charset = DEFAULT_CHARSET
@@ -5843,6 +5958,7 @@ object frmEntity: TfrmEntity
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'GL_CODE'
         DataPipeline = peEntityPrint
         Font.Charset = DEFAULT_CHARSET
@@ -5862,6 +5978,7 @@ object frmEntity: TfrmEntity
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'GL_TAXCODE'
         DataPipeline = peEntityPrint
         Font.Charset = DEFAULT_CHARSET
@@ -5881,6 +5998,7 @@ object frmEntity: TfrmEntity
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'GL_CHARTTYPE'
         DataPipeline = peEntityPrint
         Font.Charset = DEFAULT_CHARSET
@@ -5900,6 +6018,7 @@ object frmEntity: TfrmEntity
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText101'
+        Border.mmPadding = 0
         DataField = 'GL_CHRTTYPE_DESC'
         DataPipeline = peEntityPrint
         Font.Charset = DEFAULT_CHARSET
@@ -5919,6 +6038,7 @@ object frmEntity: TfrmEntity
       object ppDBMemo1: TppDBMemo
         DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'CHART_DESC'
         DataPipeline = peEntityPrint
@@ -5946,19 +6066,22 @@ object frmEntity: TfrmEntity
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 7673
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4498
@@ -5971,6 +6094,7 @@ object frmEntity: TfrmEntity
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -5988,6 +6112,7 @@ object frmEntity: TfrmEntity
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -6005,6 +6130,7 @@ object frmEntity: TfrmEntity
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -6033,8 +6159,9 @@ object frmEntity: TfrmEntity
           DataPipeline = peTax
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -6045,24 +6172,27 @@ object frmEntity: TfrmEntity
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'peTax'
           object ppTitleBand1: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 34660
             mmPrintPosition = 0
             object ppLabel39: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label39'
+              Border.mmPadding = 0
               Caption = 'Code'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6075,6 +6205,7 @@ object frmEntity: TfrmEntity
             object ppLine6: TppLine
               DesignLayer = ppDesignLayer2
               UserName = 'Line6'
+              Border.mmPadding = 0
               Weight = 0.750000000000000000
               mmHeight = 2117
               mmLeft = 6350
@@ -6086,13 +6217,15 @@ object frmEntity: TfrmEntity
             object ppLabel40: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label40'
+              Border.mmPadding = 0
               Caption = 'Description'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6105,13 +6238,15 @@ object frmEntity: TfrmEntity
             object ppLabel41: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label41'
+              Border.mmPadding = 0
               Caption = 'Default Tax'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6124,13 +6259,15 @@ object frmEntity: TfrmEntity
             object ppLabel42: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label42'
+              Border.mmPadding = 0
               Caption = 'Withholding'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6143,13 +6280,15 @@ object frmEntity: TfrmEntity
             object ppLabel43: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label43'
+              Border.mmPadding = 0
               Caption = 'Tax Type'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6162,13 +6301,15 @@ object frmEntity: TfrmEntity
             object ppLabel44: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label44'
+              Border.mmPadding = 0
               Caption = 'Input GL Ledger'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6181,13 +6322,15 @@ object frmEntity: TfrmEntity
             object ppLabel45: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label45'
+              Border.mmPadding = 0
               Caption = 'Output GL Ledger'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6200,13 +6343,15 @@ object frmEntity: TfrmEntity
             object ppLabel46: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label46'
+              Border.mmPadding = 0
               Caption = 'Adjust GL Ledger'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6219,13 +6364,15 @@ object frmEntity: TfrmEntity
             object ppLabel47: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label47'
+              Border.mmPadding = 0
               Caption = 'Tax Rate (%)'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6238,13 +6385,15 @@ object frmEntity: TfrmEntity
             object ppLabel48: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label48'
+              Border.mmPadding = 0
               Caption = 'Commenced'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6257,13 +6406,15 @@ object frmEntity: TfrmEntity
             object ppLabel49: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label49'
+              Border.mmPadding = 0
               Caption = 'Ended'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taCentered
               Transparent = True
               mmHeight = 4498
@@ -6280,6 +6431,7 @@ object frmEntity: TfrmEntity
               AlignVertical = avCenter
               AutoSize = True
               MaintainAspectRatio = False
+              Border.mmPadding = 0
               Picture.Data = {
                 0A544A504547496D61676578260000FFD8FFE000104A46494600010101007800
                 780000FFDB004300020101020101020202020202020203050303030303060404
@@ -6600,13 +6752,15 @@ object frmEntity: TfrmEntity
             object ppLabel50: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label50'
+              Border.mmPadding = 0
               Caption = 'Entity Information'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 18
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 7673
               mmLeft = 6350
@@ -6618,13 +6772,15 @@ object frmEntity: TfrmEntity
             object ppLabel51: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label51'
+              Border.mmPadding = 0
               Caption = 'Tax Information'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 12
               Font.Style = [fsItalic, fsUnderline]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 5027
               mmLeft = 6350
@@ -6637,12 +6793,14 @@ object frmEntity: TfrmEntity
           object ppDetailBand2: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 8467
             mmPrintPosition = 0
             object ppDBText40: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText40'
+              Border.mmPadding = 0
               DataField = 'CODE'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6662,6 +6820,7 @@ object frmEntity: TfrmEntity
             object ppDBText41: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText41'
+              Border.mmPadding = 0
               DataField = 'DESCR'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6681,6 +6840,7 @@ object frmEntity: TfrmEntity
             object ppDBText42: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText42'
+              Border.mmPadding = 0
               DataField = 'DEFAULTTAX'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6701,6 +6861,7 @@ object frmEntity: TfrmEntity
             object ppDBText43: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText43'
+              Border.mmPadding = 0
               DataField = 'WITHHOLDING'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6721,6 +6882,7 @@ object frmEntity: TfrmEntity
             object ppDBText44: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText44'
+              Border.mmPadding = 0
               DataField = 'TAXTYPE'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6741,6 +6903,7 @@ object frmEntity: TfrmEntity
             object ppDBText45: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText45'
+              Border.mmPadding = 0
               DataField = 'LEDGER'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6761,6 +6924,7 @@ object frmEntity: TfrmEntity
             object ppDBText46: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText46'
+              Border.mmPadding = 0
               DataField = 'OUTPUTLEDGER'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6781,6 +6945,7 @@ object frmEntity: TfrmEntity
             object ppDBText47: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText47'
+              Border.mmPadding = 0
               DataField = 'ADJUSTLEDGER'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6801,6 +6966,7 @@ object frmEntity: TfrmEntity
             object ppDBText48: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText48'
+              Border.mmPadding = 0
               DataField = 'RATE'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6821,6 +6987,7 @@ object frmEntity: TfrmEntity
             object ppDBText49: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText49'
+              Border.mmPadding = 0
               DataField = 'COMMENCE'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6841,6 +7008,7 @@ object frmEntity: TfrmEntity
             object ppDBText50: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText50'
+              Border.mmPadding = 0
               DataField = 'END_PERIOD'
               DataPipeline = peTax
               Font.Charset = DEFAULT_CHARSET
@@ -6861,19 +7029,22 @@ object frmEntity: TfrmEntity
           end
           object ppFooterBand2: TppFooterBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 8731
             mmPrintPosition = 0
             object ppLabel7: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label7'
+              Border.mmPadding = 0
               Caption = 'Printed'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = []
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               TextAlignment = taRightJustified
               Transparent = True
               mmHeight = 4498
@@ -6886,6 +7057,7 @@ object frmEntity: TfrmEntity
             object ppSystemVariable3: TppSystemVariable
               DesignLayer = ppDesignLayer2
               UserName = 'SystemVariable3'
+              Border.mmPadding = 0
               VarType = vtPrintDateTime
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -6903,6 +7075,7 @@ object frmEntity: TfrmEntity
             object ppSystemVariable4: TppSystemVariable
               DesignLayer = ppDesignLayer2
               UserName = 'SystemVariable4'
+              Border.mmPadding = 0
               VarType = vtPageNoDesc
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -6929,20 +7102,23 @@ object frmEntity: TfrmEntity
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D650611
-        4865616465724265666F72655072696E740B50726F6772616D54797065070B74
-        7450726F63656475726506536F757263650C0101000070726F63656475726520
-        4865616465724265666F72655072696E743B0D0A626567696E0D0A2020696620
-        5265706F72742E4162736F6C757465506167654E6F203E2031207468656E0D0A
-        2020626567696E0D0A202020202020526567696F6E312E76697369626C65203A
-        3D2046616C73653B0D0A2020202020205375625265706F7274322E7669736962
-        6C65203A3D2046616C73653B0D0A2020656E640D0A2020656C73650D0A202062
-        6567696E0D0A202020202020526567696F6E312E76697369626C65203A3D2054
-        7275653B0D0A2020202020205375625265706F7274322E76697369626C65203A
-        3D20547275653B0D0A2020656E643B0D0A656E643B0D0A0D436F6D706F6E656E
-        744E616D650606486561646572094576656E744E616D65060B4265666F726550
-        72696E74074576656E7449440218084361726574506F73010221020B000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'HeaderBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure HeaderBeforePrint;'#13#10'begin'#13#10'  if Report.AbsolutePageNo ' +
+          '> 1 then'#13#10'  begin'#13#10'      Region1.visible := False;'#13#10'      SubRep' +
+          'ort2.visible := False;'#13#10'  end'#13#10'  else'#13#10'  begin'#13#10'      Region1.vi' +
+          'sible := True;'#13#10'      SubReport2.visible := True;'#13#10'  end;'#13#10'end;'#13 +
+          #10
+        raProgram.ComponentName = 'Header'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 24
+        raProgram.CaretPos = (
+          33
+          11)
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer

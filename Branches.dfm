@@ -1,344 +1,536 @@
 inherited frmBranches: TfrmBranches
   Left = 784
   Top = 321
+  AutoSize = True
   Caption = 'Branches'
-  ClientHeight = 611
-  ClientWidth = 507
+  ClientHeight = 633
+  ClientWidth = 518
   OldCreateOrder = True
   Scaled = True
   OnShow = FormShow
-  ExplicitWidth = 513
-  ExplicitHeight = 642
+  ExplicitWidth = 524
+  ExplicitHeight = 662
   PixelsPerInch = 96
   TextHeight = 15
-  object Label1: TLabel [0]
-    Left = 8
-    Top = 41
-    Width = 28
-    Height = 15
-    Caption = 'Code'
-  end
-  object Label2: TLabel [1]
-    Left = 8
-    Top = 66
-    Width = 60
-    Height = 15
-    Caption = 'Description'
-  end
-  object Label3: TLabel [2]
-    Left = 8
-    Top = 93
-    Width = 51
-    Height = 15
-    Caption = 'Address 1'
-  end
-  object Label4: TLabel [3]
-    Left = 8
-    Top = 121
-    Width = 51
-    Height = 15
-    Caption = 'Address 2'
-  end
-  object Label5: TLabel [4]
-    Left = 8
-    Top = 149
-    Width = 72
-    Height = 15
-    Caption = 'Town/Suburb'
-  end
-  object lblState: TLabel [5]
-    Left = 8
-    Top = 178
-    Width = 26
-    Height = 15
-    Caption = 'State'
-  end
-  object Label7: TLabel [6]
-    Left = 8
-    Top = 204
-    Width = 49
-    Height = 15
-    Caption = 'Postcode'
-  end
-  object Label8: TLabel [7]
-    Left = 239
-    Top = 149
-    Width = 60
-    Height = 15
-    Caption = 'DX Address'
-  end
-  object Label9: TLabel [8]
-    Left = 239
-    Top = 178
-    Width = 34
-    Height = 15
-    Caption = 'Phone'
-  end
-  object Label10: TLabel [9]
-    Left = 239
-    Top = 204
-    Width = 17
-    Height = 15
-    Caption = 'Fax'
-  end
-  object Label11: TLabel [10]
-    Left = 8
-    Top = 259
-    Width = 85
-    Height = 15
-    Caption = 'Mailing Address'
-  end
-  object Label12: TLabel [11]
-    Left = 8
-    Top = 315
-    Width = 115
-    Height = 15
-    Caption = 'Mailing Town/Suburb'
-  end
-  object Label13: TLabel [12]
-    Left = 8
-    Top = 231
-    Width = 103
-    Height = 15
-    Caption = 'Ledger Component'
-  end
-  object Label14: TLabel [13]
-    Left = 8
-    Top = 370
-    Width = 96
-    Height = 15
-    Caption = 'Default Trust Bank'
-  end
-  object Label15: TLabel [14]
-    Left = 8
-    Top = 398
-    Width = 62
-    Height = 15
-    Caption = 'Next Matter'
-  end
-  object lblMailingState: TLabel [15]
-    Left = 8
-    Top = 342
-    Width = 69
-    Height = 15
-    Caption = 'Mailing State'
-  end
-  object Label17: TLabel [16]
-    Left = 245
-    Top = 342
-    Width = 92
-    Height = 15
-    Caption = 'Mailing Postcode'
-  end
-  object dbedCode: TDBEdit [17]
-    Left = 84
-    Top = 36
-    Width = 47
-    Height = 23
-    CharCase = ecUpperCase
-    DataField = 'CODE'
-    DataSource = dsSource
-    TabOrder = 0
-  end
-  object dbedDescr: TDBEdit [18]
-    Left = 84
-    Top = 63
-    Width = 361
-    Height = 23
-    DataField = 'DESCR'
-    DataSource = dsSource
-    TabOrder = 2
-  end
-  object btnCodeSearch: TBitBtn [19]
-    Left = 132
-    Top = 35
-    Width = 28
-    Height = 24
-    Glyph.Data = {
-      F6000000424DF600000000000000760000002800000010000000100000000100
-      0400000000008000000000000000000000001000000010000000000000000000
-      8000008000000080800080000000800080008080000080808000C0C0C0000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
-      8888888888888888888800000888880000080F000888880F00080F000888880F
-      0008000000080000000800F000000F00000800F000800F00000800F000800F00
-      00088000000000000088880F00080F0008888800000800000888888000888000
-      88888880F08880F0888888800088800088888888888888888888}
-    TabOrder = 1
-    OnClick = btnCodeSearchClick
-  end
-  object DBEdit1: TDBEdit [20]
-    Left = 84
-    Top = 90
-    Width = 195
-    Height = 23
-    DataField = 'ADD1'
-    DataSource = dsSource
-    TabOrder = 3
-  end
-  object DBEdit2: TDBEdit [21]
-    Left = 84
-    Top = 118
-    Width = 195
-    Height = 23
-    DataField = 'ADD2'
-    DataSource = dsSource
+  object dxLayoutControl1: TdxLayoutControl [0]
+    Left = 0
+    Top = 28
+    Width = 518
+    Height = 605
+    Align = alClient
+    ParentBackground = True
     TabOrder = 4
-  end
-  object DBEdit3: TDBEdit [22]
-    Left = 84
-    Top = 146
-    Width = 139
-    Height = 23
-    DataField = 'SUBURB'
-    DataSource = dsSource
-    TabOrder = 5
-  end
-  object DBEdit4: TDBEdit [23]
-    Left = 84
-    Top = 173
-    Width = 139
-    Height = 23
-    DataField = 'STATE'
-    DataSource = dsSource
-    TabOrder = 6
-  end
-  object DBEdit5: TDBEdit [24]
-    Left = 84
-    Top = 201
-    Width = 139
-    Height = 23
-    DataField = 'POSTCODE'
-    DataSource = dsSource
-    TabOrder = 7
-  end
-  object DBEdit6: TDBEdit [25]
-    Left = 313
-    Top = 146
-    Width = 141
-    Height = 23
-    DataField = 'DXADDRESS'
-    DataSource = dsSource
-    TabOrder = 8
-  end
-  object DBEdit7: TDBEdit [26]
-    Left = 313
-    Top = 173
-    Width = 141
-    Height = 23
-    DataField = 'PHONE'
-    DataSource = dsSource
-    TabOrder = 9
-  end
-  object DBEdit8: TDBEdit [27]
-    Left = 313
-    Top = 201
-    Width = 141
-    Height = 23
-    DataField = 'FAX'
-    DataSource = dsSource
-    TabOrder = 10
-  end
-  object DBEdit9: TDBEdit [28]
-    Left = 127
-    Top = 256
-    Width = 327
-    Height = 23
-    DataField = 'MAILADDRESS'
-    DataSource = dsSource
-    TabOrder = 12
-  end
-  object DBEdit10: TDBEdit [29]
-    Left = 127
-    Top = 312
-    Width = 138
-    Height = 23
-    DataField = 'MAILCITY'
-    DataSource = dsSource
-    TabOrder = 13
-  end
-  object edLedgerComponent: TDBEdit [30]
-    Left = 127
-    Top = 228
-    Width = 139
-    Height = 23
-    DataField = 'LEDGER_COMPONENT'
-    DataSource = dsSource
-    TabOrder = 17
-  end
-  object cxDBLookupComboBox1: TcxDBLookupComboBox [31]
-    Left = 127
-    Top = 367
-    DataBinding.DataField = 'DEFAULT_BANK'
-    DataBinding.DataSource = dsSource
-    Properties.DropDownAutoSize = True
-    Properties.KeyFieldNames = 'ACCT'
-    Properties.ListColumns = <
-      item
-        FieldName = 'NAME'
-      end
-      item
-        FieldName = 'ACCT'
-      end>
-    Properties.ListOptions.ShowHeader = False
-    Properties.ListSource = dsBanks
-    Style.LookAndFeel.Kind = lfStandard
-    StyleDisabled.LookAndFeel.Kind = lfStandard
-    StyleFocused.LookAndFeel.Kind = lfStandard
-    StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 18
-    Width = 327
-  end
-  object DBEdit11: TDBEdit [32]
-    Left = 127
-    Top = 395
-    Width = 139
-    Height = 23
-    DataField = 'NEXT_MATTER'
-    DataSource = dsSource
-    TabOrder = 19
-  end
-  object DBEdit12: TDBEdit [33]
-    Left = 127
-    Top = 284
-    Width = 327
-    Height = 23
-    DataField = 'MAILADDRESS2'
-    DataSource = dsSource
-    TabOrder = 20
-  end
-  object DBEdit13: TDBEdit [34]
-    Left = 127
-    Top = 339
-    Width = 104
-    Height = 23
-    DataField = 'MAILSTATE'
-    DataSource = dsSource
-    TabOrder = 21
-  end
-  object DBEdit14: TDBEdit [35]
-    Left = 350
-    Top = 339
-    Width = 104
-    Height = 23
-    DataField = 'MAILPOSTCODE'
-    DataSource = dsSource
-    TabOrder = 22
-  end
-  object cxDBImage1: TcxDBImage [36]
-    Left = 127
-    Top = 425
-    DataBinding.DataField = 'LOGO_IMAGE'
-    DataBinding.DataSource = dsSource
-    PopupMenu = dxBarPopupMenu1
-    TabOrder = 23
-    Height = 155
-    Width = 327
-  end
-  object cxLabel1: TcxLabel [37]
-    Left = 8
-    Top = 425
-    Caption = 'Logo'
     Transparent = True
+    AutoSize = True
+    ExplicitLeft = 576
+    ExplicitTop = 40
+    ExplicitWidth = 737
+    ExplicitHeight = 641
+    object dbedDescr: TDBEdit
+      Left = 136
+      Top = 45
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'DESCR'
+      DataSource = dsSource
+      TabOrder = 1
+    end
+    object DBEdit1: TDBEdit
+      Left = 136
+      Top = 75
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'ADD1'
+      DataSource = dsSource
+      TabOrder = 2
+    end
+    object DBEdit2: TDBEdit
+      Left = 136
+      Top = 105
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'ADD2'
+      DataSource = dsSource
+      TabOrder = 3
+    end
+    object DBEdit3: TDBEdit
+      Left = 136
+      Top = 135
+      Width = 139
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'SUBURB'
+      DataSource = dsSource
+      TabOrder = 4
+    end
+    object DBEdit4: TDBEdit
+      Left = 136
+      Top = 165
+      Width = 139
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'STATE'
+      DataSource = dsSource
+      TabOrder = 6
+    end
+    object DBEdit5: TDBEdit
+      Left = 136
+      Top = 195
+      Width = 139
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'POSTCODE'
+      DataSource = dsSource
+      TabOrder = 8
+    end
+    object DBEdit6: TDBEdit
+      Left = 352
+      Top = 135
+      Width = 141
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'DXADDRESS'
+      DataSource = dsSource
+      TabOrder = 5
+    end
+    object DBEdit7: TDBEdit
+      Left = 352
+      Top = 165
+      Width = 141
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'PHONE'
+      DataSource = dsSource
+      TabOrder = 7
+    end
+    object DBEdit8: TDBEdit
+      Left = 352
+      Top = 195
+      Width = 141
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'FAX'
+      DataSource = dsSource
+      TabOrder = 9
+    end
+    object DBEdit9: TDBEdit
+      Left = 136
+      Top = 255
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'MAILADDRESS'
+      DataSource = dsSource
+      TabOrder = 11
+    end
+    object DBEdit10: TDBEdit
+      Left = 136
+      Top = 315
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'MAILCITY'
+      DataSource = dsSource
+      TabOrder = 13
+    end
+    object edLedgerComponent: TDBEdit
+      Left = 136
+      Top = 225
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'LEDGER_COMPONENT'
+      DataSource = dsSource
+      TabOrder = 10
+    end
+    object cxDBLookupComboBox1: TcxDBLookupComboBox
+      Left = 134
+      Top = 373
+      DataBinding.DataField = 'DEFAULT_BANK'
+      DataBinding.DataSource = dsSource
+      Properties.DropDownAutoSize = True
+      Properties.KeyFieldNames = 'ACCT'
+      Properties.ListColumns = <
+        item
+          FieldName = 'NAME'
+        end
+        item
+          FieldName = 'ACCT'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = dsBanks
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.Kind = lfStandard
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.Kind = lfStandard
+      StyleFocused.LookAndFeel.Kind = lfStandard
+      StyleHot.LookAndFeel.Kind = lfStandard
+      TabOrder = 16
+      Width = 365
+    end
+    object DBEdit11: TDBEdit
+      Left = 136
+      Top = 405
+      Width = 361
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'NEXT_MATTER'
+      DataSource = dsSource
+      TabOrder = 17
+    end
+    object DBEdit12: TDBEdit
+      Left = 136
+      Top = 285
+      Width = 361
+      Height = 19
+      AutoSize = False
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'MAILADDRESS2'
+      DataSource = dsSource
+      TabOrder = 12
+    end
+    object DBEdit13: TDBEdit
+      Left = 136
+      Top = 345
+      Width = 104
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'MAILSTATE'
+      DataSource = dsSource
+      TabOrder = 14
+    end
+    object DBEdit14: TDBEdit
+      Left = 349
+      Top = 345
+      Width = 104
+      Height = 19
+      BevelInner = bvNone
+      BevelOuter = bvSpace
+      BevelKind = bkFlat
+      BorderStyle = bsNone
+      DataField = 'MAILPOSTCODE'
+      DataSource = dsSource
+      TabOrder = 15
+    end
+    object cxDBImage1: TcxDBImage
+      Left = 134
+      Top = 433
+      DataBinding.DataField = 'LOGO_IMAGE'
+      DataBinding.DataSource = dsSource
+      PopupMenu = dxBarPopupMenu1
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 18
+      Height = 155
+      Width = 365
+    end
+    object dbedCode: TcxDBButtonEdit
+      Left = 134
+      Top = 12
+      DataBinding.DataField = 'CODE'
+      DataBinding.DataSource = dsSource
+      Properties.Buttons = <
+        item
+          Default = True
+          Glyph.SourceDPI = 96
+          Glyph.Data = {
+            89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+            6100000026744558745469746C650046696E643B426172733B526962626F6E3B
+            5374616E646172643B536561726368BB659C08000002D149444154785EAD936D
+            48936B18C7FF7B369FB5E3CB3C6AEACC66E66C94980AF6C1B74A462FE743E087
+            2526299812C519A20B03C98A3AC9D2E8E518519F52222A2789ACF99264C58AD0
+            322A848E9BBA6992D95496BACD3DDBF43EF7C62AE9ABFDE1C77D735DF7F5E7BA
+            EEFB79788410FC2EF128020A4B09A230AB733FF8454CEDE54EFF7AF8EFC6CD6A
+            4DFBA39A069DBDF282565F507A2AD96758A369939EB9D6ABAB6BEA75D55EE9D2
+            A9EAEE487D466A4D07FC525FF46F84AAF3DA572F07C7C8F0E814B9DD6A20AA73
+            5A0E40485D538F6BE0C3383159BE929B779F90AAFA760300BEEA6CDBCF2E9465
+            F5F9FF5CEF21D3338BC43060240DD75BC9D1DA7B04C0969397F464F2CB376234
+            5B49F3FD3EA23A7D8F9454DFC8FA3E0E43091286FD59BE4D168B2597070E9717
+            939356184DA3D8B1F784D16432C3C97941C0032B12C2EB716085B01500F87E83
+            2D698AE820365429A70636BB0B8B4E17161C2E78380F122591F0B8396ABA0CEF
+            0A8150148C20FE0ABCCB284ECB514600E031F2F4FDF58A6CB9302E468CD4E418
+            A46FDD88785FA1D78D71CB3838B71B3C1E81242A1407F2535176682FC0D9D689
+            C2132E0010308C4054989F2547F7D31114553DC4DB8F56ECCE4D839B165A67A6
+            C0D1B1A2C422E8FB465158A9C390D981A2821CDAA1BBC46FC0B9BCFCF03021BA
+            0CA38854E4A17BC08CED294960593EC6FFD3FF151B17075FBEF38505EBF765A3
+            67F013D25393E97D39F900186689B34F8E4DCC4091BB09F3AFFBB13B538A11F3
+            17D817E626000C3916178C96092BF6E44961EB7F83FCCC784C4DCF8273DA2D00
+            0833373D72B5B9F53912625834AA7642124CD0F2E031E667276E02B0DBAC9F2F
+            B5689F214922C0BFD53990867970ABB9034EFBAC06808702B12C43A94EC93B36
+            BC2DEF389165161B6365BB6A0044049E6A5D4A56E991949C8A77F2AC32929871
+            F0BD44AE2807205AFD2DFC4189A66CA0C450820371040EB18198981242610371
+            ACF96F64B046FD0FE22625E3DA6A63E80000000049454E44AE426082}
+          Kind = bkGlyph
+        end>
+      Properties.OnButtonClick = cxDBButtonEdit1PropertiesButtonClick
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      TabOrder = 0
+      Width = 365
+    end
+    object dxLayoutControl1Group_Root: TdxLayoutGroup
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ItemIndex = 13
+      ShowBorder = False
+      Index = -1
+    end
+    object dxLayoutItem3: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Description'
+      Control = dbedDescr
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 361
+      Index = 1
+    end
+    object dxLayoutItem4: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Address 1'
+      Control = DBEdit1
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 195
+      Index = 2
+    end
+    object dxLayoutItem5: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Address 2'
+      Control = DBEdit2
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 195
+      Index = 3
+    end
+    object dxLayoutGroup2: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 4
+    end
+    object dxLayoutItem6: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'Town/Suburb'
+      Control = DBEdit3
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 139
+      Index = 0
+    end
+    object dxLayoutItem7: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'DX Address'
+      Control = DBEdit6
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 141
+      Index = 1
+    end
+    object dxLayoutGroup3: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 5
+    end
+    object dxLayoutItem8: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'State'
+      Control = DBEdit4
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 139
+      Index = 0
+    end
+    object dxLayoutItem9: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'Phone'
+      Control = DBEdit7
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 141
+      Index = 1
+    end
+    object dxLayoutGroup4: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 6
+    end
+    object dxLayoutItem10: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'Postcode'
+      Control = DBEdit5
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 139
+      Index = 0
+    end
+    object dxLayoutItem11: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'Fax'
+      Control = DBEdit8
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 141
+      Index = 1
+    end
+    object dxLayoutItem12: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Ledger Component'
+      Control = edLedgerComponent
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 139
+      Index = 7
+    end
+    object dxLayoutGroup5: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ShowBorder = False
+      Index = 8
+    end
+    object dxLayoutItem13: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      CaptionOptions.Text = 'Mailing Address'
+      Control = DBEdit9
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 327
+      Index = 0
+    end
+    object dxLayoutItem14: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      CaptionOptions.Text = '              '
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = False
+      SizeOptions.SizableVert = True
+      Control = DBEdit12
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 327
+      Index = 1
+    end
+    object dxLayoutItem15: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Mailing Town/Suburb'
+      Control = DBEdit10
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 138
+      Index = 9
+    end
+    object dxLayoutGroup6: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 10
+    end
+    object dxLayoutItem16: TdxLayoutItem
+      Parent = dxLayoutGroup6
+      CaptionOptions.Text = 'Mailing State'
+      Control = DBEdit13
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 104
+      Index = 0
+    end
+    object dxLayoutItem17: TdxLayoutItem
+      Parent = dxLayoutGroup6
+      CaptionOptions.Text = 'Mailing Postcode'
+      Control = DBEdit14
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 104
+      Index = 1
+    end
+    object dxLayoutItem18: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Default Trust Bank'
+      Control = cxDBLookupComboBox1
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 327
+      ControlOptions.ShowBorder = False
+      Index = 11
+    end
+    object dxLayoutItem19: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Next Matter'
+      Control = DBEdit11
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 139
+      Index = 12
+    end
+    object dxLayoutItem20: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Logo'
+      Control = cxDBImage1
+      ControlOptions.OriginalHeight = 155
+      ControlOptions.OriginalWidth = 327
+      ControlOptions.ShowBorder = False
+      Index = 13
+    end
+    object dxLayoutItem21: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Code'
+      Control = dbedCode
+      ControlOptions.OriginalHeight = 24
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
   end
   inherited dsSource: TUniDataSource
     Left = 246
@@ -919,6 +1111,7 @@ inherited frmBranches: TfrmBranches
     inherited bmMainBar2: TdxBar
       AllowClose = False
       AllowReset = False
+      Font.Height = -12
       OldName = 'Toolbar1'
     end
     object dxBarButton1: TdxBarButton [2]
@@ -954,32 +1147,6 @@ inherited frmBranches: TfrmBranches
     Left = 437
     Top = 73
     DataPipelineName = 'plSource'
-    inherited ppMaintHeaderBand: TppHeaderBand
-      inherited ppSystemVariable1: TppSystemVariable
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited ppSystemVariable2: TppSystemVariable
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited pplblEntity: TppLabel
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited pplblTitle: TppLabel
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-      inherited ppLine1: TppLine
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
-      end
-    end
   end
   object qryBanks: TUniQuery
     Connection = dmAxiom.uniInsight
