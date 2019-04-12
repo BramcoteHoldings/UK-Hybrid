@@ -52,7 +52,6 @@ object frmMatters: TfrmMatters
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 1414
     DesignSize = (
       1486
       144)
@@ -522,7 +521,6 @@ object frmMatters: TfrmMatters
     Properties.MultiLine = True
     OnChange = pageMatterChange
     OnPageChanging = tabPartiesPageChanging
-    ExplicitWidth = 1414
     ClientRectBottom = 573
     ClientRectLeft = 4
     ClientRectRight = 1482
@@ -530,10 +528,6 @@ object frmMatters: TfrmMatters
     object tabClient: TcxTabSheet
       Caption = 'Client'
       ImageIndex = 42
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object cxGroupBox3: TcxGroupBox
         Left = 3
         Top = 348
@@ -1266,10 +1260,6 @@ object frmMatters: TfrmMatters
           object tabStreetAddress: TcxTabSheet
             Caption = 'Street Address'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label35: TLabel
               Left = 1
               Top = 0
@@ -1365,10 +1355,6 @@ object frmMatters: TfrmMatters
           object tabPostalAddress: TcxTabSheet
             Caption = 'Postal Address'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label40: TLabel
               Left = 1
               Top = 0
@@ -1464,10 +1450,6 @@ object frmMatters: TfrmMatters
           object tabCustomAddress: TcxTabSheet
             Caption = 'Custom Address'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label55: TLabel
               Left = 1
               Top = 0
@@ -1563,10 +1545,6 @@ object frmMatters: TfrmMatters
           object tabDX: TcxTabSheet
             Caption = 'DX'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label25: TLabel
               Left = 5
               Top = 14
@@ -1610,10 +1588,6 @@ object frmMatters: TfrmMatters
     object tabOverview: TcxTabSheet
       Caption = 'Ledgers'
       ImageIndex = 73
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       DesignSize = (
         1478
         527)
@@ -2655,7 +2629,6 @@ object frmMatters: TfrmMatters
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
         TabOrder = 13
         OnClick = dxbtnMAtterEditClick
-        ExplicitLeft = 1286
       end
       object cbShowMatterDetails: TCheckBox
         Left = 324
@@ -2923,10 +2896,6 @@ object frmMatters: TfrmMatters
     object tabArchive: TcxTabSheet
       Caption = 'Archived'
       ImageIndex = 44
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       DesignSize = (
         1478
         527)
@@ -3081,7 +3050,6 @@ object frmMatters: TfrmMatters
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 5
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1162
         object tvArchiveLocation: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.PriorPage.Visible = True
@@ -3306,10 +3274,6 @@ object frmMatters: TfrmMatters
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 30
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Label7: TLabel
         Left = 18
         Top = 156
@@ -3693,10 +3657,6 @@ object frmMatters: TfrmMatters
     object tabParties: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 23
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 489
@@ -3705,7 +3665,6 @@ object frmMatters: TfrmMatters
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1406
         object btnPartyDelete: TBitBtn
           Left = 344
           Top = 6
@@ -3875,7 +3834,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         Caption = 'Panel13'
         TabOrder = 1
-        ExplicitWidth = 1406
         object vtContacts: TVirtualStringTree
           Left = 1
           Top = 1
@@ -3907,53 +3865,52 @@ object frmMatters: TfrmMatters
           OnGetText = vtContactsGetText
           OnPaintText = vtContactsPaintText
           OnGetNodeDataSize = vtContactsGetNodeDataSize
-          ExplicitWidth = 1404
           Columns = <
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
+              Text = 'Name'
               Width = 200
-              WideText = 'Name'
             end
             item
               MaxWidth = 500
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
+              Text = 'Contact'
               Width = 350
-              WideText = 'Contact'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 2
+              Text = 'Work Phone'
               Width = 100
-              WideText = 'Work Phone'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 3
+              Text = 'Mobile'
               Width = 100
-              WideText = 'Mobile'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 4
+              Text = 'Home Phone'
               Width = 100
-              WideText = 'Home Phone'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 5
+              Text = 'Fax'
               Width = 100
-              WideText = 'Fax'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
-              Width = 526
-              WideText = 'Email'
+              Text = 'Email'
+              Width = 522
             end>
         end
       end
@@ -3961,10 +3918,6 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3976,7 +3929,6 @@ object frmMatters: TfrmMatters
         Properties.CustomButtons.Buttons = <>
         Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoTopToBottomText]
         Properties.TabPosition = tpRight
-        ExplicitWidth = 1406
         ClientRectBottom = 523
         ClientRectLeft = 4
         ClientRectRight = 1452
@@ -3984,7 +3936,6 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
-          ExplicitHeight = 497
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4014,18 +3965,17 @@ object frmMatters: TfrmMatters
             OnPaintText = vtMatterDataPaintText
             OnGetNodeDataSize = vtMatterDataGetNodeDataSize
             OnNewText = vtMatterDataNewText
-            ExplicitWidth = 1376
             Columns = <
               item
                 Position = 0
+                Text = 'Form / Field'
                 Width = 300
-                WideText = 'Form / Field'
               end
               item
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
-                Width = 1148
-                WideText = 'Value'
+                Text = 'Value'
+                Width = 1144
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4035,17 +3985,12 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
-            ExplicitTop = 469
           end
         end
         object tabCalculationData: TcxTabSheet
           Caption = 'Calculation Data'
           ImageIndex = 1
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 1376
-          ExplicitHeight = 0
         end
       end
     end
@@ -4190,7 +4135,6 @@ object frmMatters: TfrmMatters
           NumGlyphs = 2
           TabOrder = 3
           OnClick = btnDeleteDraftClick
-          ExplicitLeft = 1237
         end
         object btnNewInvoice: TBitBtn
           Left = 1393
@@ -4215,7 +4159,6 @@ object frmMatters: TfrmMatters
           NumGlyphs = 2
           TabOrder = 4
           OnClick = btnNewInvoiceClick
-          ExplicitLeft = 1321
         end
         object btnEmailBill: TBitBtn
           Left = 249
@@ -4357,7 +4300,6 @@ object frmMatters: TfrmMatters
         TabOrder = 1
         LookAndFeel.Kind = lfFlat
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvInvoices: TcxGridDBTableView
           PopupMenu = dxBarPopupMenuBills
           OnDblClick = dbgrInvoicesDblClick
@@ -4867,7 +4809,6 @@ object frmMatters: TfrmMatters
           OptionsImage.NumGlyphs = 2
           TabOrder = 0
           OnClick = btnDeleteMatterNoteClick
-          ExplicitLeft = 849
         end
         object btnEditMatterNote: TcxButton
           Left = 1028
@@ -4916,7 +4857,6 @@ object frmMatters: TfrmMatters
             00FFFFFFFF00FFFFFF00808080FF808080FFFFFFFF00}
           TabOrder = 1
           OnClick = btnEditMatterNoteClick
-          ExplicitLeft = 956
         end
         object btnAddMatterNotes: TcxButton
           Left = 1125
@@ -4964,7 +4904,6 @@ object frmMatters: TfrmMatters
             00FFFFFFFF00FFFFFF00808080FF808080FFFFFFFF00}
           TabOrder = 2
           OnClick = btnAddMatterNotesClick
-          ExplicitLeft = 1053
         end
         object cxButton5: TcxButton
           Left = 1223
@@ -5012,7 +4951,6 @@ object frmMatters: TfrmMatters
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 3
           OnClick = cxButton5Click
-          ExplicitLeft = 1151
         end
         object btnMatterNotesRefresh: TcxButton
           Left = 1298
@@ -5060,7 +4998,6 @@ object frmMatters: TfrmMatters
             8F703D743DC2FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 4
           OnClick = btnMatterNotesRefreshClick
-          ExplicitLeft = 1226
         end
       end
       object grdMatterNotes: TcxGrid
@@ -5077,7 +5014,6 @@ object frmMatters: TfrmMatters
         ParentFont = False
         TabOrder = 1
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvMatterNotes: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellClick = tvMatterNotesCellClick
@@ -5151,7 +5087,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvDebtorNotes: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellClick = tvDebtorNotesCellClick
@@ -5359,7 +5294,6 @@ object frmMatters: TfrmMatters
           OptionsImage.NumGlyphs = 2
           TabOrder = 0
           OnClick = btnDeleteDebtorNotesClick
-          ExplicitLeft = 721
         end
         object btnEditDebtorNotes: TcxButton
           Left = 891
@@ -5408,7 +5342,6 @@ object frmMatters: TfrmMatters
             00FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 1
           OnClick = btnEditDebtorNotesClick
-          ExplicitLeft = 819
         end
         object btnAddDebtorNotes: TcxButton
           Left = 1105
@@ -5456,7 +5389,6 @@ object frmMatters: TfrmMatters
             00FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 2
           OnClick = btnAddDebtorNotesClick
-          ExplicitLeft = 1033
         end
         object btnRefresh: TcxButton
           Left = 1223
@@ -5504,7 +5436,6 @@ object frmMatters: TfrmMatters
             8F703D743DC2FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 3
           OnClick = btnRefreshClick
-          ExplicitLeft = 1151
         end
         object btnDebtorNotesPrint: TcxButton
           Left = 1303
@@ -5552,7 +5483,6 @@ object frmMatters: TfrmMatters
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 4
           OnClick = btnDebtorNotesPrintClick
-          ExplicitLeft = 1231
         end
         object cbDebtorStatus: TcxDBLookupComboBox
           Left = 1185
@@ -5574,7 +5504,6 @@ object frmMatters: TfrmMatters
           StyleFocused.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.Kind = lfStandard
           TabOrder = 5
-          ExplicitLeft = 1113
           Width = 193
         end
         object dbtxtExpectedPaymentDate: TDBMemo
@@ -5637,7 +5566,6 @@ object frmMatters: TfrmMatters
             00FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           TabOrder = 7
           OnClick = btnAddFeeNotesClick
-          ExplicitLeft = 916
         end
         object rgDisplayOption: TcxRadioGroup
           Left = 510
@@ -5744,10 +5672,6 @@ object frmMatters: TfrmMatters
     object tabReceipts: TcxTabSheet
       Caption = 'Receipts'
       ImageIndex = 20
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object pageReceipts: TcxPageControl
         Left = 0
         Top = 0
@@ -5759,7 +5683,6 @@ object frmMatters: TfrmMatters
         Properties.CustomButtons.Buttons = <>
         LookAndFeel.NativeStyle = True
         LookAndFeel.ScrollbarMode = sbmDefault
-        ExplicitWidth = 1406
         ClientRectBottom = 523
         ClientRectLeft = 4
         ClientRectRight = 1474
@@ -5776,7 +5699,6 @@ object frmMatters: TfrmMatters
             TabOrder = 0
             LookAndFeel.NativeStyle = True
             LookAndFeel.ScrollbarMode = sbmDefault
-            ExplicitWidth = 1398
             object tvReceipts: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dsReceipts
@@ -5933,7 +5855,6 @@ object frmMatters: TfrmMatters
               LookAndFeel.NativeStyle = True
               TabOrder = 0
               OnClick = cxButton2Click
-              ExplicitLeft = 1243
             end
             object btnPrintGrid: TcxButton
               Left = 1232
@@ -5945,7 +5866,6 @@ object frmMatters: TfrmMatters
               LookAndFeel.NativeStyle = True
               TabOrder = 1
               OnClick = btnPrintGridClick
-              ExplicitLeft = 1160
             end
             object btnExportReceiptsToExcel: TcxButton
               Left = 1135
@@ -5957,7 +5877,6 @@ object frmMatters: TfrmMatters
               LookAndFeel.NativeStyle = True
               TabOrder = 2
               OnClick = btnExportReceiptsToExcelClick
-              ExplicitLeft = 1063
             end
           end
         end
@@ -6004,7 +5923,6 @@ object frmMatters: TfrmMatters
             Height = 471
             Align = alClient
             TabOrder = 1
-            ExplicitWidth = 1398
             object tvReceiptReqs: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dsReceiptReqs
@@ -6112,7 +6030,6 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
-      ExplicitHeight = 505
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6128,7 +6045,6 @@ object frmMatters: TfrmMatters
         Height = 102
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 1406
         object GroupBox1: TGroupBox
           Left = 8
           Top = 3
@@ -6288,7 +6204,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         TabOrder = 2
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvTransactions: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsInvestmentTransactions
@@ -6381,10 +6296,6 @@ object frmMatters: TfrmMatters
       ImageIndex = 24
       OnResize = tabGraphResize
       OnShow = tabGraphShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object tabByAuthor: TcxPageControl
         Left = 0
         Top = 0
@@ -6396,7 +6307,6 @@ object frmMatters: TfrmMatters
         Properties.CustomButtons.Buttons = <>
         Properties.Options = [pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoTopToBottomText]
         Properties.TabPosition = tpRight
-        ExplicitWidth = 1406
         ClientRectBottom = 523
         ClientRectLeft = 4
         ClientRectRight = 1452
@@ -6555,7 +6465,6 @@ object frmMatters: TfrmMatters
           Height = 527
           ParentShowHint = False
           ShowHint = False
-          ExplicitWidth = 1247
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -6589,7 +6498,6 @@ object frmMatters: TfrmMatters
             TabOrder = 0
             LookAndFeel.Kind = lfOffice11
             LookAndFeel.NativeStyle = True
-            ExplicitWidth = 1243
             object tvTemplates: TcxGridDBTableView
               OnDblClick = btnModifyCreateNewClick
               Navigator.Buttons.CustomButtons = <>
@@ -6758,7 +6666,6 @@ object frmMatters: TfrmMatters
               TabOrder = 3
               Transparent = True
               OnClick = cbUngroupDocListClick
-              ExplicitLeft = 749
             end
             object edSearchFileName: TcxTextEdit
               Left = 102
@@ -6789,7 +6696,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -6841,17 +6747,12 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object dxDockSite3: TdxDockSite
         Left = 0
         Top = 0
         Width = 1478
         Height = 527
         Align = alClient
-        ExplicitWidth = 1406
         DockingType = 5
         OriginalWidth = 1478
         OriginalHeight = 527
@@ -6862,7 +6763,6 @@ object frmMatters: TfrmMatters
           Height = 527
           ParentShowHint = False
           ShowHint = False
-          ExplicitWidth = 1213
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -6914,7 +6814,6 @@ object frmMatters: TfrmMatters
               Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoTopToBottomText]
               Properties.TabPosition = tpRight
               Properties.TabSlants.Kind = skCutCorner
-              ExplicitWidth = 1024
               ClientRectBottom = 519
               ClientRectLeft = 4
               ClientRectRight = 906
@@ -6985,7 +6884,6 @@ object frmMatters: TfrmMatters
                     TabOrder = 0
                     Visible = False
                     OnClick = btnCategoriesClick
-                    ExplicitLeft = 289
                   end
                   object dbgrDocs: TcxGrid
                     Left = 1
@@ -6996,7 +6894,6 @@ object frmMatters: TfrmMatters
                     TabOrder = 1
                     LookAndFeel.Kind = lfFlat
                     LookAndFeel.NativeStyle = True
-                    ExplicitWidth = 992
                     object tvEmailAttachments: TcxGridDBTableView
                       OnDblClick = tvEmailAttachmentsDblClick
                       Navigator.Buttons.CustomButtons = <>
@@ -7767,7 +7664,6 @@ object frmMatters: TfrmMatters
                         88888880F08880F0888888800088800088888888888888888888}
                       TabOrder = 6
                       OnClick = btnPrecSearchClick
-                      ExplicitLeft = 914
                     end
                     object btnDocAdd: TBitBtn
                       Left = 753
@@ -7787,7 +7683,6 @@ object frmMatters: TfrmMatters
                         8888880FFFFFF008888888000000008888888888888888888888}
                       TabOrder = 5
                       OnClick = btnDocAddClick
-                      ExplicitLeft = 845
                     end
                     object cxLabel3: TcxLabel
                       Left = 0
@@ -7838,7 +7733,6 @@ object frmMatters: TfrmMatters
                       Caption = 'Import Documents'
                       TabOrder = 2
                       OnClick = btnDocumentImportClick
-                      ExplicitLeft = 653
                     end
                     object btnDocPrint: TBitBtn
                       Left = 676
@@ -7849,7 +7743,6 @@ object frmMatters: TfrmMatters
                       Caption = 'Print Doc List'
                       TabOrder = 4
                       OnClick = btnDocPrintClick
-                      ExplicitLeft = 768
                     end
                     object btnCreateBrief: TBitBtn
                       Left = 486
@@ -7862,7 +7755,6 @@ object frmMatters: TfrmMatters
                       TabOrder = 8
                       Visible = False
                       OnClick = btnCreateBriefClick
-                      ExplicitLeft = 578
                     end
                     object chkPreviewPane: TCheckBox
                       Left = 360
@@ -7875,7 +7767,6 @@ object frmMatters: TfrmMatters
                       State = cbChecked
                       TabOrder = 9
                       OnClick = chkPreviewPaneClick
-                      ExplicitLeft = 452
                     end
                   end
                 end
@@ -7883,10 +7774,6 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 994
-                ExplicitHeight = 0
               end
             end
             object pnlPreview: TJamFilePreview
@@ -7895,7 +7782,6 @@ object frmMatters: TfrmMatters
               Width = 346
               Height = 523
               Align = alRight
-              ExplicitLeft = 1027
             end
           end
         end
@@ -7915,57 +7801,39 @@ object frmMatters: TfrmMatters
           DockingType = 1
           OriginalWidth = 193
           OriginalHeight = 124
-          object lvFolders: TVirtualStringTree
+          object lvFolders: TcxDBTreeList
             Left = 0
             Top = 0
             Width = 189
-            Height = 184
+            Height = 498
             Align = alClient
-            Colors.UnfocusedColor = clMedGray
-            DefaultNodeHeight = 19
-            Header.AutoSizeIndex = 0
-            Header.Height = 20
-            Header.MainColumn = -1
-            Images = ilstDocuments
-            Margin = 1
-            PopupMenu = pmDocFolders
-            StateImages = ilstToolbar
-            TabOrder = 0
-            OnClick = lvFoldersClick
-            OnGetText = lvFoldersGetText
-            ExplicitWidth = 136
-            ExplicitHeight = 185
-            Columns = <>
-          end
-          object cxDBTreeList1: TcxDBTreeList
-            Left = 0
-            Top = 184
-            Width = 189
-            Height = 314
-            Align = alBottom
             Bands = <
               item
               end>
-            DataController.DataSource = UniDataSource1
+            DataController.DataSource = dsFolders
             DataController.ParentField = 'PARENT_ID'
             DataController.KeyField = 'FOLDER_ID'
+            DataController.StateIndexField = 'FOLDER_LEVEL'
+            DragMode = dmAutomatic
             Navigator.Buttons.CustomButtons = <>
+            OptionsCustomizing.DynamicSizing = True
             OptionsData.Editing = False
             OptionsData.Deleting = False
-            OptionsSelection.CellSelect = False
             OptionsSelection.HideSelection = True
-            OptionsSelection.InvertSelect = False
             OptionsView.CellEndEllipsis = True
             OptionsView.ColumnAutoWidth = True
+            OptionsView.DropNodeIndicator = True
             OptionsView.Headers = False
             PopupMenu = pmDocFolders
             RootValue = 0
-            TabOrder = 1
+            TabOrder = 0
             OnClick = cxDBTreeList1Click
-            ExplicitWidth = 136
+            OnDragDrop = lvFoldersDragDrop
+            OnDragOver = lvFoldersDragOver
             object cxDBTreeList1DESCR: TcxDBTreeListColumn
               Caption.AlignVert = vaTop
               DataBinding.FieldName = 'DESCR'
+              Options.Focusing = False
               Width = 100
               Position.ColIndex = 0
               Position.RowIndex = 0
@@ -8021,7 +7889,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvTransit: TcxGridDBTableView
           PopupMenu = popTransit
           OnDblClick = dbgrTransitDblClick
@@ -8127,7 +7994,6 @@ object frmMatters: TfrmMatters
           Caption = 'Add'
           TabOrder = 0
           OnClick = Add1Click
-          ExplicitLeft = 1053
         end
         object Button2: TButton
           Left = 1213
@@ -8138,7 +8004,6 @@ object frmMatters: TfrmMatters
           Caption = 'Edit'
           TabOrder = 1
           OnClick = dbgrTransitDblClick
-          ExplicitLeft = 1141
         end
         object Button3: TButton
           Left = 1296
@@ -8149,17 +8014,12 @@ object frmMatters: TfrmMatters
           Caption = 'Remove'
           TabOrder = 2
           OnClick = mnuRemoveTransitClick
-          ExplicitLeft = 1224
         end
       end
     end
     object tabSubNames: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
@@ -8174,7 +8034,6 @@ object frmMatters: TfrmMatters
         ParentFont = False
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvSubNames: TcxGridDBTableView
           OnDblClick = tvSubNamesDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -8228,10 +8087,6 @@ object frmMatters: TfrmMatters
     object tabSearches: TcxTabSheet
       Caption = 'Searches'
       ImageIndex = 22
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object Panel11: TPanel
         Left = 0
         Top = 0
@@ -8240,7 +8095,6 @@ object frmMatters: TfrmMatters
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitWidth = 1406
         object btnTitleSearch: TBitBtn
           Left = 6
           Top = 3
@@ -8267,7 +8121,6 @@ object frmMatters: TfrmMatters
         Height = 494
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 1406
         object tvSearches: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellClick = tvSearchesCellClick
@@ -8440,10 +8293,6 @@ object frmMatters: TfrmMatters
     object tabProject: TcxTabSheet
       Caption = 'Projects'
       ImageIndex = 17
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object pageProjectTasks: TcxPageControl
         Left = 0
         Top = 132
@@ -8453,7 +8302,6 @@ object frmMatters: TfrmMatters
         TabOrder = 0
         Properties.ActivePage = tsGanttChart
         Properties.CustomButtons.Buttons = <>
-        ExplicitWidth = 1406
         ClientRectBottom = 391
         ClientRectLeft = 4
         ClientRectRight = 1474
@@ -8505,7 +8353,6 @@ object frmMatters: TfrmMatters
               ParentColor = True
               ShowCaption = False
               TabOrder = 0
-              ExplicitHeight = 243
               object lblTotalProjTime: TcxLabel
                 Left = 6
                 Top = 10
@@ -8531,10 +8378,6 @@ object frmMatters: TfrmMatters
         object tsProjectTaskGrid: TcxTabSheet
           Caption = 'Tasks Grid'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 1398
-          ExplicitHeight = 0
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
@@ -8542,7 +8385,6 @@ object frmMatters: TfrmMatters
             Height = 365
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 1398
             object tvProjectTaskItems1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dsProjectTasks
@@ -9258,7 +9100,6 @@ object frmMatters: TfrmMatters
         AlignSplitter = salTop
         PositionAfterOpen = 29
         MinSize = 29
-        ExplicitWidth = 1406
       end
       object pnlProject: TPanel
         Left = 0
@@ -9268,7 +9109,6 @@ object frmMatters: TfrmMatters
         Align = alTop
         Caption = 'pnlProject'
         TabOrder = 2
-        ExplicitWidth = 1406
         object gedProjects: TcxGrid
           Left = 1
           Top = 1
@@ -9276,7 +9116,6 @@ object frmMatters: TfrmMatters
           Height = 122
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 1061
           object tvProjects: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             OnCellClick = tvProjectsCellClick
@@ -9326,7 +9165,6 @@ object frmMatters: TfrmMatters
           PositionAfterOpen = 29
           InvertDirection = True
           MinSize = 29
-          ExplicitLeft = 1062
         end
         object pnlQuoteGrid: TPanel
           Left = 1142
@@ -9336,7 +9174,6 @@ object frmMatters: TfrmMatters
           Align = alRight
           Caption = 'pnlQuoteGrid'
           TabOrder = 2
-          ExplicitLeft = 1070
           object gridTaskQuoting: TcxGrid
             Left = 1
             Top = 1
@@ -9494,7 +9331,6 @@ object frmMatters: TfrmMatters
           OptionsImage.NumGlyphs = 2
           TabOrder = 0
           OnClick = btnNewDiaryClick
-          ExplicitLeft = 931
         end
       end
       object dbgrDiary: TcxGrid
@@ -9505,7 +9341,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         TabOrder = 1
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvDiary: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsDiary
@@ -9569,10 +9404,6 @@ object frmMatters: TfrmMatters
       Caption = 'Emails'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
@@ -9587,7 +9418,6 @@ object frmMatters: TfrmMatters
         ParentFont = False
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvEmails: TcxGridDBTableView
           OnDblClick = tvEmailsDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -9685,7 +9515,6 @@ object frmMatters: TfrmMatters
           Caption = 'New Task'
           TabOrder = 0
           OnClick = BitBtn3Click
-          ExplicitLeft = 1141
         end
         object btnTaskEdit: TBitBtn
           Left = 1298
@@ -9697,7 +9526,6 @@ object frmMatters: TfrmMatters
           Enabled = False
           TabOrder = 1
           OnClick = btnTaskEditClick
-          ExplicitLeft = 1226
         end
         object btnDeleteTask: TBitBtn
           Left = 1123
@@ -9709,7 +9537,6 @@ object frmMatters: TfrmMatters
           Enabled = False
           TabOrder = 2
           OnClick = btnDeleteTaskClick
-          ExplicitLeft = 1051
         end
       end
       object grdTasks: TcxGrid
@@ -9719,7 +9546,6 @@ object frmMatters: TfrmMatters
         Height = 492
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 1406
         object tvTasks: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellClick = tvTasksCellClick
@@ -9854,10 +9680,6 @@ object frmMatters: TfrmMatters
       Caption = 'Critical Dates'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 1406
-      ExplicitHeight = 0
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0
@@ -9866,7 +9688,6 @@ object frmMatters: TfrmMatters
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1406
         object tvCriticalDates: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.First.Visible = False
@@ -9944,7 +9765,6 @@ object frmMatters: TfrmMatters
         Height = 486
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 1406
         object dbgrMatterAuthorDBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsMatterAuthor
@@ -9996,7 +9816,6 @@ object frmMatters: TfrmMatters
           Caption = 'Print Report'
           TabOrder = 0
           OnClick = cxButton3Click
-          ExplicitLeft = 1241
         end
       end
     end
@@ -13005,7 +12824,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14226,7 +14045,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15300,7 +15119,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16034,7 +15853,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16931,7 +16750,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -21378,7 +21197,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22165,7 +21984,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22444,7 +22263,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -26258,7 +26077,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33347,7 +33166,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -34048,7 +33867,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -34763,11 +34582,6 @@ object frmMatters: TfrmMatters
       Position = 3
     end
   end
-  object qryFolders: TUniQuery
-    Connection = dmAxiom.uniInsight
-    Left = 79
-    Top = 291
-  end
   object qryFldTmp: TUniQuery
     Connection = dmAxiom.uniInsight
     Left = 114
@@ -34798,36 +34612,76 @@ object frmMatters: TfrmMatters
     Left = 624
     Top = 376
   end
-  object UniQuery1: TUniQuery
+  object qryFolders: TUniQuery
+    UpdatingTable = 'Document_folders'
+    KeyFields = 'folder_id'
+    SQLInsert.Strings = (
+      'INSERT INTO DOCUMENT_FOLDERS'
+      '  (FOLDER_ID, DESCR, PARENT_ID, FOLDER_LEVEL)'
+      'VALUES'
+      '  (:FOLDER_ID, :DESCR, :PARENT_ID, :FOLDER_LEVEL)')
+    SQLDelete.Strings = (
+      'DELETE FROM DOCUMENT_FOLDERS'
+      'WHERE'
+      '  FOLDER_ID = :Old_FOLDER_ID')
+    SQLUpdate.Strings = (
+      'UPDATE DOCUMENT_FOLDERS'
+      'SET'
+      
+        '  FOLDER_ID = :FOLDER_ID, DESCR = :DESCR, PARENT_ID = :PARENT_ID' +
+        ', FOLDER_LEVEL = :FOLDER_LEVEL'
+      'WHERE'
+      '  FOLDER_ID = :Old_FOLDER_ID')
+    SQLLock.Strings = (
+      
+        'SELECT FOLDER_ID, DESCR, PARENT_ID, FOLDER_LEVEL FROM DOCUMENT_F' +
+        'OLDERS'
+      'WHERE'
+      '  FOLDER_ID = :Old_FOLDER_ID'
+      'FOR UPDATE NOWAIT')
+    SQLRefresh.Strings = (
+      
+        'SELECT FOLDER_ID, DESCR, PARENT_ID, FOLDER_LEVEL FROM DOCUMENT_F' +
+        'OLDERS'
+      'WHERE'
+      '  FOLDER_ID = :FOLDER_ID')
+    SQLRecCount.Strings = (
+      'SELECT Count(*) FROM ('
+      'SELECT * FROM DOCUMENT_FOLDERS'
+      ''
+      ')')
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT   '#39'All Files'#39' AS descr, -2 AS folder_id, -2 AS parent_id,'
-      '         0 AS folder_level'
+      
+        '(SELECT   '#39'All Files'#39' AS descr, -2 AS folder_id, -2 AS parent_id' +
+        ','
+      '         0 AS folder_level, rowid'
       '    FROM DUAL'
       'UNION'
       
         'SELECT   '#39'Unallocated Files'#39' AS descr, -1 AS folder_id, -1 AS pa' +
         'rent_id,'
-      '         0 AS folder_level'
-      '    FROM DUAL'
+      '         0 AS folder_level, rowid'
+      '    FROM DUAL)'
       'UNION'
-      'SELECT     descr, folder_id, parent_id, folder_level'
+      'SELECT '
+      '    descr, folder_id, parent_id, folder_level, rowid'
       '      FROM document_folders'
       '     WHERE nmatter = :nmatter'
       'CONNECT BY PRIOR folder_id = parent_id'
       '  ORDER BY 2')
-    Left = 48
-    Top = 580
+    Left = 40
+    Top = 468
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = Null
+        Value = nil
       end>
   end
-  object UniDataSource1: TUniDataSource
-    DataSet = UniQuery1
-    Left = 80
-    Top = 512
+  object dsFolders: TUniDataSource
+    DataSet = qryFolders
+    Left = 40
+    Top = 520
   end
 end

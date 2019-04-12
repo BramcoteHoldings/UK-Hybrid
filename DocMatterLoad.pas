@@ -7,7 +7,8 @@ uses
    VCL.uRwMAPISession, Variants, StrUtils;
 
     function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
-               ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False): integer;
+               ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False;
+               AFolderName: string = ''): integer;
     function FileSearch(const PathName, FileName: string): integer;
     procedure SaveDocument(FileName, AFolderName: string);
 //    function MoveMatterDoc(var ANewDocName: string; AOldDocName: string): boolean;
@@ -46,10 +47,11 @@ var
    lTempFolder3,
    FAFolderName: string;
    bFolderCreate: boolean;
-   AFolderName: string;
+   lFolderName: string;
 
 function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
-                     ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False): integer;
+                     ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False;
+                     AFolderName: string = ''): integer;
 var
    PathName: string;
    LRetFileCount: integer;
@@ -113,7 +115,7 @@ begin
          if FindFirst(Path + FileName, faAnyFile - faDirectory, Rec) = 0 then
          try
             repeat
-               SaveDocument(Path + Rec.Name, AFolderName);
+               SaveDocument(Path + Rec.Name, lFolderName);
             until FindNext(Rec) <> 0;
          finally
             FindClose(Rec);
@@ -124,11 +126,11 @@ begin
             repeat
                if ((Rec.Attr and faDirectory) <> 0)  and (Rec.Name<>'.') and (Rec.Name <> '..') then
                begin
-                  AFolderName := '';
+                  lFolderName := '';
                   if (bFolderCreate) then
                   begin
                       AddFolder(Path + Rec.Name, lOrigPath);
-                      AFolderName := Rec.Name;
+                      lFolderName := Rec.Name;
                   end;
                   FileSearch(Path + Rec.Name, FileName);
                end;

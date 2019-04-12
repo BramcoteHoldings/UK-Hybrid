@@ -81,6 +81,8 @@ const
   C_DOCTYPECLIENT = 'O';
   C_DOCTYPEADMIN  = 'A';
 
+  UM_MYMESSAGE = WM_USER + 1001;
+
 
 type
    PFolderData = ^TFolderData;
@@ -1143,7 +1145,6 @@ type
     tabGenerated: TcxTabSheet;
     pGenDocuments1: TcxTabSheet;
     dxDockPanel3: TdxDockPanel;
-    lvFolders: TVirtualStringTree;
     tabTransit: TcxTabSheet;
     dbgrTransit: TcxGrid;
     tvTransit: TcxGridDBTableView;
@@ -1499,7 +1500,6 @@ type
     plMatterAuthorppField4: TppField;
     Label57: TLabel;
     lblOpenedBy: TLabel;
-    qryFolders: TUniQuery;
     RemoveDocsfromFolder1: TMenuItem;
     qryFldTmp: TUniQuery;
     cxLabel4: TcxLabel;
@@ -1536,9 +1536,9 @@ type
     dxSelectConflict: TdxBarButton;
     RestClientt: TRestClientt;
     pnlPreview: TJamFilePreview;
-    cxDBTreeList1: TcxDBTreeList;
-    UniQuery1: TUniQuery;
-    UniDataSource1: TUniDataSource;
+    lvFolders: TcxDBTreeList;
+    qryFolders: TUniQuery;
+    dsFolders: TUniDataSource;
     cxDBTreeList1DESCR: TcxDBTreeListColumn;
     cxDBTreeList1FOLDER_ID: TcxDBTreeListColumn;
     cxDBTreeList1PARENT_ID: TcxDBTreeListColumn;
@@ -1925,8 +1925,6 @@ type
     procedure imgClientIDClick(Sender: TObject);
     procedure tvEmailAttachmentsDblClick(Sender: TObject);
     procedure btnWIPItemsClick(Sender: TObject);
-    procedure lvFoldersGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
-      Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
     procedure lvFoldersGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -2000,6 +1998,9 @@ type
     procedure dxSelectConflictClick(Sender: TObject);
     procedure cxDBTreeList1Click(Sender: TObject);
     procedure pmDocFoldersPopup(Sender: TObject);
+    procedure lvFoldersDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure lvFoldersDragDrop(Sender, Source: TObject; X, Y: Integer);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2120,6 +2121,7 @@ type
     function GetViewStatus: TRwMAPIViewStatus;
     function GetSelectedFolder(AMsgStore: IRwMAPIMsgStore): IRwMAPIFolder;
 
+    procedure umMyMessage(var Message: TMessage); message UM_MYMESSAGE;
   end;
 
 type
@@ -4125,7 +4127,7 @@ begin
       FreeAndNil(FRecipientsList);
 
    if FAttachFileName <> nil then
-      FAttachFileName := nil;
+      FreeAndNil(FAttachFileName);
 
    if frmDesktop.pagMainControl.ActivePageIndex = 1 then
       Action := caFree
@@ -5814,9 +5816,9 @@ var
    Data: PFolderData;
 begin
    lTmpFolderID := 0;
-   lvFolders.Clear;
+//   lvFolders.Clear;
    lvFolders.BeginUpdate;
-   lvFolders.NodeDataSize := SizeOf(TFolderData);
+{   lvFolders.NodeDataSize := SizeOf(TFolderData);
    qryFolders.Close;
    qryFolders.SQL.Clear;
    qryFolders.SQL.Text := 'SELECT NVL(MAX(FOLDER_LEVEL),0) AS MAX_LEVEL FROM DOCUMENT_FOLDERS WHERE NMATTER = :MATTER';
@@ -5878,12 +5880,12 @@ begin
          end;
          // end of sub-folders add
          qryFolders.Next;
-    end;
+    end;   }
+//    qryFolders.Close;
     qryFolders.Close;
+    qryFolders.ParamByName('nmatter').asinteger := qryMatter.FieldByName('nmatter').AsInteger;
+    qryFolders.Open;
     lvFolders.EndUpdate;
-    UniQuery1.Close;
-    UniQuery1.ParamByName('nmatter').asinteger := qryMatter.FieldByName('nmatter').AsInteger;
-    UniQuery1.Open;
 end;
 
 procedure TfrmMatters.SetupDocTab;
@@ -7556,7 +7558,7 @@ var
    Data: PFolderData;
    LFolderId: integer;
 begin
-   Node := lvFolders.FocusedNode;
+{   Node := lvFolders.FocusedNode;
    if not Assigned(Node) then
       Exit;
 
@@ -7618,7 +7620,7 @@ begin
          qryDocVersions.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          qryDocVersions.Open;
       end;
-   end;
+   end;      }
 end;
 
 procedure TfrmMatters.lvFoldersGetImageIndex(Sender: TBaseVirtualTree;
@@ -7629,16 +7631,6 @@ var
 begin
    Data := Sender.GetNodeData(Node);
    ImageIndex := Data^.ImageIndex;
-end;
-
-procedure TfrmMatters.lvFoldersGetText(Sender: TBaseVirtualTree;
-  Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
-  var CellText: string);
-var
-   Data: PFolderData;
-begin
-   Data := lvFolders.GetNodeData(Node);
-   CellText := Data^.Text;
 end;
 
 procedure TfrmMatters.tcDiaryChange(Sender: TObject);
@@ -11832,17 +11824,16 @@ begin
 
          try
 //             FormMgr.ShowMessage(Msg);
-             Msg.ShowForm;
+            Msg.ShowForm;
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
          end;
 //          WriteLog('MatterForwardAsPDFClick: message sent with converted file to pdf');
       finally
-         AAttachList.Free;
-         AAttachDocID.Free;
-         ARecipientsList.Free;
-         ConvAAttachList.Free;
-         FAttachFileName.Free;
+         FreeAndNil(AAttachList);
+         FreeAndNil(AAttachDocID);
+         FreeAndNil(ARecipientsList);
+         FreeAndNil(ConvAAttachList);
       end;
    end
    else
@@ -12471,6 +12462,40 @@ begin
          qryDocVersions.Open;
       end;
    end;
+end;
+
+procedure TfrmMatters.lvFoldersDragDrop(Sender, Source: TObject; X,
+  Y: Integer);
+begin
+   PostMessage(Handle, UM_MYMESSAGE, 0, 0);
+end;
+
+procedure TfrmMatters.lvFoldersDragOver(Sender, Source: TObject; X,
+  Y: Integer; State: TDragState; var Accept: Boolean);
+var
+  node: TcxTreeListNode;
+begin
+   Accept:= false;
+   if not (Source = Sender) then
+   begin
+      lvFolders.OptionsView.DropNodeIndicator:= Accept;
+      Exit;
+   end;
+   node := TcxTreeList(Sender).GetNodeAt(X,Y);
+   if node <> nil then
+      Accept := (node.level = 0) and (node.Index > 1);
+
+   lvFolders.OptionsView.DropNodeIndicator:= Accept;
+end;
+
+procedure TfrmMatters.umMyMessage(var Message: TMessage);
+begin
+  if (lvFolders.FocusedNode.Parent <> lvFolders.Root) and
+     ((lvFolders.FocusedNode.Parent.Values[0] <> 'Unallocated Files') or
+     (lvFolders.FocusedNode.Parent.Values[0] <> 'All Files'))  then
+    Caption := lvFolders.FocusedNode.Parent.Values[0]
+  else
+    Caption := 'nil';
 end;
 
 procedure TfrmMatters.cxGrid2DBChartView1Series1GetValueDisplayText(
@@ -13130,8 +13155,8 @@ begin
          qryDocVersions.Open;
 
          Open;
-         Node := lvFolders.GetFirst;
-         lvFolders.Selected[Node] := True;
+//         Node := lvFolders.GetFirst;
+//         lvFolders.Selected[Node] := True;
       except
       //
       end;
@@ -14014,7 +14039,10 @@ var
    LRetFileCount,
    lFolder: integer;
    bCancelled: boolean;
+   CurrDir,
+   lFolderName: string;
 begin
+   CurrDir := GetCurrentDir;
    lfrmSelectDirectory := TfrmSelectDirectory.Create(Self);
    LRetFileCount := -1;
    try
@@ -14036,20 +14064,28 @@ begin
                lClass := lfrmSelectDirectory.cmbClassification.EditValue;
 
             if (VarIsNull(lfrmSelectDirectory.cmbFolderList.EditValue))  then
-               lFolder := -1
+            begin
+               lFolder := -1;
+               lFolderName := '';
+            end
             else
+            begin
+               lFolderName := lfrmSelectDirectory.cmbFolderList.Text;
                lFolder := lfrmSelectDirectory.cmbFolderList.EditValue;
+            end;
 
             Application.ProcessMessages;
 
             LRetFileCount := DoFileScan(Directory, qryMatter.FieldByName('NMATTER').AsInteger,
                                         lCat, lClass, lFolder, rgCopyDocuments.ItemIndex,
-                                        lfrmSelectDirectory.cbEmailSplit.Checked, cbCreateFolders.Checked);
+                                        lfrmSelectDirectory.cbEmailSplit.Checked, cbCreateFolders.Checked,
+                                        lFolderName);
          end
          else
             bCancelled := True;
       end;
    finally
+      SetCurrentDir(CurrDir);
       Application.ProcessMessages;
       lfrmSelectDirectory.Free;
       if qryDocs.state <> dsInactive then
