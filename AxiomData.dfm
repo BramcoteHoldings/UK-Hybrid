@@ -5173,8 +5173,8 @@ object dmAxiom: TdmAxiom
   end
   object procTemp: TUniStoredProc
     Connection = uniInsight
-    Left = 763
-    Top = 471
+    Left = 771
+    Top = 463
   end
   object StyleRepository: TcxStyleRepository
     Left = 898
@@ -6431,7 +6431,7 @@ object dmAxiom: TdmAxiom
     Delimiter = '/'
     Connection = uniInsight
     Left = 715
-    Top = 495
+    Top = 487
   end
   object qrySaveEmailAttachments: TUniQuery
     Connection = uniInsight
@@ -7602,8 +7602,8 @@ object dmAxiom: TdmAxiom
       end>
     UseThreadedLoad = True
     OnSpellingComplete = TSSpellCheckerSpellingComplete
-    Left = 902
-    Top = 770
+    Left = 870
+    Top = 754
   end
   object qryDocFolderExists: TUniQuery
     Connection = uniInsight
