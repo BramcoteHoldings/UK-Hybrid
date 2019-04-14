@@ -1,11 +1,12 @@
 object frmLedgerNew: TfrmLedgerNew
   Left = 743
   Top = 158
+  AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = 'Account Ledger Code Creation'
-  ClientHeight = 550
-  ClientWidth = 361
+  ClientHeight = 570
+  ClientWidth = 355
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -110,8 +111,8 @@ object frmLedgerNew: TfrmLedgerNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 361
-    Height = 550
+    Width = 355
+    Height = 570
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -123,13 +124,15 @@ object frmLedgerNew: TfrmLedgerNew
     TabOrder = 2
     Transparent = True
     AutoSize = True
+    ExplicitWidth = 361
+    ExplicitHeight = 550
     DesignSize = (
-      361
-      550)
+      355
+      570)
     object lblEntityName: TLabel
       Left = 116
       Top = 12
-      Width = 228
+      Width = 224
       Height = 16
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
@@ -140,7 +143,7 @@ object frmLedgerNew: TfrmLedgerNew
       ShowAccelChar = False
     end
     object lblGlHeader: TLabel
-      Left = 118
+      Left = 114
       Top = 88
       Width = 226
       Height = 15
@@ -152,23 +155,9 @@ object frmLedgerNew: TfrmLedgerNew
       Width = 3
       Height = 16
     end
-    object tbRptDesc: TEdit
-      Left = 118
-      Top = 185
-      Width = 224
-      Height = 16
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 5
-      OnEnter = tbRptDescEnter
-      OnExit = tbRptDescExit
-      OnKeyPress = tbRptDescKeyPress
-    end
     object btnSave: TBitBtn
-      Left = 104
-      Top = 513
+      Left = 102
+      Top = 530
       Width = 69
       Height = 25
       Anchors = [akLeft, akBottom]
@@ -196,8 +185,8 @@ object frmLedgerNew: TfrmLedgerNew
       OnClick = btnSaveClick
     end
     object btnCancel: TBitBtn
-      Left = 180
-      Top = 513
+      Left = 178
+      Top = 530
       Width = 71
       Height = 25
       Anchors = [akLeft, akBottom]
@@ -224,22 +213,9 @@ object frmLedgerNew: TfrmLedgerNew
       TabOrder = 21
       OnClick = btnCancelClick
     end
-    object mmoDescr: TMemo
-      Left = 118
-      Top = 139
-      Width = 224
-      Height = 35
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 4
-      OnExit = mmoDescrExit
-      OnKeyPress = mmoDescrKeyPress
-    end
     object neColumn: TNumberEdit
       Left = 118
-      Top = 212
+      Top = 226
       Width = 31
       Height = 17
       Alignment = taLeftJustify
@@ -268,8 +244,8 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object cbBASGroup: TComboBox
       Left = 116
-      Top = 268
-      Width = 228
+      Top = 282
+      Width = 224
       Height = 23
       Style = csDropDownList
       Sorted = True
@@ -281,8 +257,8 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object cbDefaultTaxCode: TComboBox
       Left = 116
-      Top = 298
-      Width = 228
+      Top = 312
+      Width = 224
       Height = 23
       Style = csDropDownList
       Sorted = True
@@ -290,7 +266,7 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object chkActive: TCheckBox
       Left = 12
-      Top = 445
+      Top = 462
       Width = 53
       Height = 16
       Caption = 'Active'
@@ -298,7 +274,7 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object chkJournalSplit: TCheckBox
       Left = 72
-      Top = 445
+      Top = 462
       Width = 120
       Height = 16
       Caption = 'Journal Split Enabled'
@@ -306,7 +282,7 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object chkAllowDirectPosting: TCheckBox
       Left = 199
-      Top = 445
+      Top = 462
       Width = 123
       Height = 16
       Caption = 'Allow Direct Posting'
@@ -314,8 +290,8 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object cbDefaultOIFCode: TComboBox
       Left = 116
-      Top = 328
-      Width = 228
+      Top = 342
+      Width = 224
       Height = 23
       Style = csDropDownList
       TabOrder = 11
@@ -327,8 +303,8 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object cbChartType: TComboBox
       Left = 116
-      Top = 385
-      Width = 228
+      Top = 402
+      Width = 224
       Height = 23
       Style = csDropDownList
       TabOrder = 13
@@ -338,30 +314,18 @@ object frmLedgerNew: TfrmLedgerNew
         'Investing'
         'Financing')
     end
-    object tbAccountCode: TEdit
-      Left = 118
-      Top = 112
-      Width = 224
-      Height = 16
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 3
-      OnExit = tbAccountCodeExit
-    end
     object cbAllEntity: TCheckBox
       Left = 12
-      Top = 468
-      Width = 332
+      Top = 485
+      Width = 328
       Height = 15
       Caption = 'Apply to all entities '
       TabOrder = 18
     end
     object cbMulti: TCheckBox
       Left = 12
-      Top = 490
-      Width = 332
+      Top = 507
+      Width = 328
       Height = 16
       Caption = 'Multi Post'
       TabOrder = 19
@@ -374,20 +338,6 @@ object frmLedgerNew: TfrmLedgerNew
       Height = 16
       Caption = 'Master'
       TabOrder = 1
-    end
-    object tbFMRCCode: TEdit
-      Left = 118
-      Top = 360
-      Width = 224
-      Height = 16
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 12
-      OnEnter = tbRptDescEnter
-      OnExit = tbRptDescExit
-      OnKeyPress = tbRptDescKeyPress
     end
     object cbPrivate: TCheckBox
       Left = 75
@@ -417,7 +367,7 @@ object frmLedgerNew: TfrmLedgerNew
     end
     object cmbGLReportGroup: TcxLookupComboBox
       Left = 116
-      Top = 415
+      Top = 432
       Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownRows = 20
@@ -438,11 +388,11 @@ object frmLedgerNew: TfrmLedgerNew
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
       TabOrder = 14
-      Width = 228
+      Width = 224
     end
     object cbAddTo: TcxLookupComboBox
       Left = 116
-      Top = 238
+      Top = 252
       Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownRows = 20
@@ -464,11 +414,11 @@ object frmLedgerNew: TfrmLedgerNew
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
       TabOrder = 8
-      Width = 228
+      Width = 224
     end
     object neReportLevel: TNumberEdit
       Left = 231
-      Top = 212
+      Top = 226
       Width = 29
       Height = 17
       Alignment = taLeftJustify
@@ -494,6 +444,52 @@ object frmLedgerNew: TfrmLedgerNew
       NoZero = False
       TabOrder = 7
       Text = '0'
+    end
+    object tbFMRCCode: TcxTextEdit
+      Left = 116
+      Top = 372
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 12
+      OnEnter = tbRptDescEnter
+      OnExit = tbRptDescExit
+      OnKeyPress = tbRptDescKeyPress
+      Width = 224
+    end
+    object tbRptDesc: TcxTextEdit
+      Left = 116
+      Top = 194
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 5
+      OnEnter = tbRptDescExit
+      OnExit = tbRptDescExit
+      OnKeyPress = tbRptDescKeyPress
+      Width = 224
+    end
+    object tbAccountCode: TcxTextEdit
+      Left = 116
+      Top = 110
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 3
+      OnExit = tbAccountCodeExit
+      Width = 224
+    end
+    object mmoDescr: TcxMemo
+      Left = 116
+      Top = 140
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 4
+      OnExit = mmoDescrExit
+      OnKeyPress = mmoDescrKeyPress
+      Height = 47
+      Width = 224
     end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
       AlignHorz = ahLeft
@@ -593,37 +589,6 @@ object frmLedgerNew: TfrmLedgerNew
       ControlOptions.ShowBorder = False
       Index = 1
     end
-    object dxLayoutItem6: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      CaptionOptions.Text = 'Account Code'
-      Control = tbAccountCode
-      ControlOptions.MinHeight = 19
-      ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 16
-      ControlOptions.OriginalWidth = 224
-      Index = 4
-    end
-    object dxLayoutItem7: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      CaptionOptions.AlignVert = tavTop
-      CaptionOptions.Text = 'Description'
-      Control = mmoDescr
-      ControlOptions.MinHeight = 19
-      ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 35
-      ControlOptions.OriginalWidth = 224
-      Index = 5
-    end
-    object dxLayoutItem8: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      CaptionOptions.Text = 'Report Description'
-      Control = tbRptDesc
-      ControlOptions.MinHeight = 19
-      ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 16
-      ControlOptions.OriginalWidth = 224
-      Index = 6
-    end
     object dxLayoutGroup4: TdxLayoutGroup
       Parent = dxLayoutControl1Group_Root
       CaptionOptions.Text = 'New Group'
@@ -696,16 +661,6 @@ object frmLedgerNew: TfrmLedgerNew
       ControlOptions.OriginalWidth = 224
       ControlOptions.ShowBorder = False
       Index = 11
-    end
-    object dxLayoutItem15: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      CaptionOptions.Text = 'FMRC Code'
-      Control = tbFMRCCode
-      ControlOptions.MinHeight = 19
-      ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 16
-      ControlOptions.OriginalWidth = 224
-      Index = 12
     end
     object dxLayoutItem16: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
@@ -854,6 +809,43 @@ object frmLedgerNew: TfrmLedgerNew
       ControlOptions.OriginalWidth = 71
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+    object dxLayoutItem26: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'FMRC Code'
+      Control = tbFMRCCode
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 12
+    end
+    object dxLayoutItem15: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Report Description'
+      Control = tbRptDesc
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 6
+    end
+    object dxLayoutItem8: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Account Code'
+      Control = tbAccountCode
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 4
+    end
+    object dxLayoutItem6: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Description'
+      Control = mmoDescr
+      ControlOptions.OriginalHeight = 47
+      ControlOptions.OriginalWidth = 185
+      ControlOptions.ShowBorder = False
+      Index = 5
     end
   end
   object qryLedger: TUniQuery

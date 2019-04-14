@@ -1772,7 +1772,7 @@ object frmSystemFile: TfrmSystemFile
       ImageIndex = 9
       object Label50: TLabel
         Left = 405
-        Top = 101
+        Top = 100
         Width = 112
         Height = 15
         Caption = 'Default Closed Status'
@@ -1847,6 +1847,7 @@ object frmSystemFile: TfrmSystemFile
       object cxDBCheckBox27: TcxDBCheckBox
         Left = 16
         Top = 78
+        AutoSize = False
         Caption = 'Retain original Closed Date when re-opening matter'
         DataBinding.DataField = 'RETAIN_MATTER_CLOSED_DATE'
         DataBinding.DataSource = dsSystemFile
@@ -1861,7 +1862,8 @@ object frmSystemFile: TfrmSystemFile
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 4
-        Width = 198
+        Height = 23
+        Width = 298
       end
       object cxDBLookupComboBox9: TcxDBLookupComboBox
         Left = 523
@@ -2344,20 +2346,20 @@ object frmSystemFile: TfrmSystemFile
         Properties.ValueUnchecked = 'N'
         Style.BorderStyle = ebs3D
         Style.LookAndFeel.Kind = lfStandard
-        Style.LookAndFeel.NativeStyle = False
+        Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.Kind = lfStandard
-        StyleDisabled.LookAndFeel.NativeStyle = False
+        StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.Kind = lfStandard
-        StyleFocused.LookAndFeel.NativeStyle = False
+        StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.Kind = lfStandard
-        StyleHot.LookAndFeel.NativeStyle = False
+        StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 12
         Transparent = True
         Height = 21
         Width = 192
       end
       object cxLabel33: TcxLabel
-        Left = 420
+        Left = 384
         Top = 63
         AutoSize = False
         Caption = 'Barcode Word Macro Name'
@@ -2365,7 +2367,7 @@ object frmSystemFile: TfrmSystemFile
         Properties.WordWrap = True
         Transparent = True
         Height = 34
-        Width = 94
+        Width = 130
         AnchorX = 514
       end
       object cxDBTextEdit16: TcxDBTextEdit
@@ -2897,14 +2899,14 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label53: TLabel
         Left = 20
-        Top = 336
+        Top = 338
         Width = 141
         Height = 15
         Caption = 'Default Draft Bill Template:'
       end
       object Label54: TLabel
         Left = 20
-        Top = 360
+        Top = 362
         Width = 150
         Height = 15
         Caption = 'Default Memo Bill Template:'
@@ -2918,7 +2920,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label59: TLabel
         Left = 20
-        Top = 313
+        Top = 314
         Width = 92
         Height = 15
         Caption = 'Bill Discount Rate'
@@ -3089,7 +3091,7 @@ object frmSystemFile: TfrmSystemFile
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 9
-        Height = 64
+        Height = 67
         Width = 410
         object Label48: TLabel
           Left = 7
@@ -3101,7 +3103,7 @@ object frmSystemFile: TfrmSystemFile
         end
         object Label49: TLabel
           Left = 7
-          Top = 42
+          Top = 43
           Width = 65
           Height = 15
           Caption = 'Interest Rate'
@@ -3134,7 +3136,7 @@ object frmSystemFile: TfrmSystemFile
         end
         object cxDBSpinEdit4: TcxDBSpinEdit
           Left = 106
-          Top = 39
+          Top = 40
           DataBinding.DataField = 'SERVICE_FEE_PERCENT'
           DataBinding.DataSource = dsSystemFile
           Properties.Increment = 0.100000000000000000
@@ -3237,7 +3239,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBLookupComboEdit1: TJvDBLookupComboEdit
         Left = 169
-        Top = 357
+        Top = 359
         Width = 217
         Height = 23
         LookupDisplay = 'ITEM_NAME'
@@ -3250,7 +3252,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBLookupComboEdit2: TJvDBLookupComboEdit
         Left = 169
-        Top = 334
+        Top = 335
         Width = 217
         Height = 23
         LookupDisplay = 'ITEM_NAME'
@@ -3289,7 +3291,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBSpinEdit1: TJvDBSpinEdit
         Left = 169
-        Top = 310
+        Top = 311
         Width = 112
         Height = 23
         ValueType = vtFloat
@@ -3386,7 +3388,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 0
         Transparent = True
         Height = 30
-        Width = 252
+        Width = 265
       end
       object cxDBCheckBox14: TcxDBCheckBox
         Left = 4
@@ -3408,7 +3410,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 1
         Transparent = True
         Height = 25
-        Width = 252
+        Width = 265
       end
       object cxDBCheckBox1: TcxDBCheckBox
         Left = 4
@@ -3429,7 +3431,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 2
         Transparent = True
         Height = 16
-        Width = 252
+        Width = 265
       end
       object cxDBCheckBox29: TcxDBCheckBox
         Left = 4
@@ -3450,7 +3452,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 3
         Transparent = True
         Height = 16
-        Width = 252
+        Width = 265
       end
       object cxDBComboBox2: TcxDBComboBox
         Left = 134
@@ -3487,7 +3489,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 5
         Transparent = True
         Height = 17
-        Width = 252
+        Width = 265
       end
       object cxGroupBox1: TcxGroupBox
         Left = 7
@@ -3651,7 +3653,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 7
         Transparent = True
         Height = 16
-        Width = 252
+        Width = 265
       end
       object cxDBCheckBox63: TcxDBCheckBox
         Left = 4
@@ -3673,7 +3675,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 8
         Transparent = True
         Height = 17
-        Width = 252
+        Width = 265
       end
       object cxDBCheckBox68: TcxDBCheckBox
         Left = 4
@@ -3695,7 +3697,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 9
         Transparent = True
         Height = 17
-        Width = 252
+        Width = 265
       end
     end
     object tsGlStructure: TcxTabSheet

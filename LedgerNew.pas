@@ -10,7 +10,7 @@ uses
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   cxLookAndFeels, cxLookAndFeelPainters, dxLayoutContainer,
   dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses, dxLayoutControl,
-  dxGDIPlusClasses, dxDPIAwareUtils;
+  dxGDIPlusClasses, dxDPIAwareUtils, cxMemo;
 
 const
 //  TChartTypeCodes: array[0..8] of string = ('GEN', 'DISB', 'DEBT', 'GSTINP', 'GSTOUT', 'CRED', 'BANK', 'FEE', 'SUND');
@@ -27,12 +27,10 @@ type
     lblTypeDesc: TLabel;
     qryLedger: TUniQuery;
     lblEntityName: TLabel;
-    tbRptDesc: TEdit;
     lblAddTo: TLabel;
     qryAddTos: TUniQuery;
     btnSave: TBitBtn;
     btnCancel: TBitBtn;
-    mmoDescr: TMemo;
     neColumn: TNumberEdit;
     cbBASGroup: TComboBox;
     Label9: TLabel;
@@ -48,7 +46,6 @@ type
     chkAllowDirectPosting: TCheckBox;
     cbDefaultOIFCode: TComboBox;
     cbChartType: TComboBox;
-    tbAccountCode: TEdit;
     lblGlHeader: TLabel;
     lblLedgerKey: TLabel;
     cbAllEntity: TCheckBox;
@@ -56,7 +53,6 @@ type
     qryCheckGlCode: TUniQuery;
     cbMulti: TCheckBox;
     cbMaster: TCheckBox;
-    tbFMRCCode: TEdit;
     cbPrivate: TCheckBox;
     cbType: TcxComboBox;
     cmbGLReportGroup: TcxLookupComboBox;
@@ -75,9 +71,6 @@ type
     dxLayoutGroup3: TdxLayoutGroup;
     dxLayoutItem4: TdxLayoutItem;
     dxLayoutItem5: TdxLayoutItem;
-    dxLayoutItem6: TdxLayoutItem;
-    dxLayoutItem7: TdxLayoutItem;
-    dxLayoutItem8: TdxLayoutItem;
     dxLayoutGroup4: TdxLayoutGroup;
     dxLayoutItem9: TdxLayoutItem;
     dxLayoutItem10: TdxLayoutItem;
@@ -85,7 +78,6 @@ type
     dxLayoutItem12: TdxLayoutItem;
     dxLayoutItem13: TdxLayoutItem;
     dxLayoutItem14: TdxLayoutItem;
-    dxLayoutItem15: TdxLayoutItem;
     dxLayoutItem16: TdxLayoutItem;
     dxLayoutItem17: TdxLayoutItem;
     dxLayoutGroup5: TdxLayoutGroup;
@@ -98,6 +90,14 @@ type
     dxLayoutGroup6: TdxLayoutGroup;
     dxLayoutItem24: TdxLayoutItem;
     dxLayoutItem25: TdxLayoutItem;
+    tbFMRCCode: TcxTextEdit;
+    dxLayoutItem26: TdxLayoutItem;
+    tbRptDesc: TcxTextEdit;
+    dxLayoutItem15: TdxLayoutItem;
+    tbAccountCode: TcxTextEdit;
+    dxLayoutItem8: TdxLayoutItem;
+    mmoDescr: TcxMemo;
+    dxLayoutItem6: TdxLayoutItem;
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure mmoDescrKeyPress(Sender: TObject; var Key: Char);

@@ -329,7 +329,6 @@ object frmCheque: TfrmCheque
         Width = 110
       end>
     SizeGrip = False
-    ExplicitWidth = 882
   end
   object cmbPrinter: TComboBox
     Left = 94
@@ -347,7 +346,6 @@ object frmCheque: TfrmCheque
     Height = 23
     Anchors = [akTop, akRight]
     TabOrder = 8
-    ExplicitLeft = 730
   end
   object btnImport: TcxButton
     Left = 873
@@ -428,7 +426,6 @@ object frmCheque: TfrmCheque
     OptionsImage.NumGlyphs = 2
     TabOrder = 9
     OnClick = btnImportClick
-    ExplicitLeft = 806
   end
   object rgType: TcxRadioGroup
     Left = 818
@@ -447,7 +444,6 @@ object frmCheque: TfrmCheque
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 6
     OnClick = rgTypeClick
-    ExplicitLeft = 751
     Height = 63
     Width = 121
   end
@@ -461,7 +457,6 @@ object frmCheque: TfrmCheque
     OnEnter = cxGrid1Enter
     OnExit = cxGrid1Exit
     LookAndFeel.NativeStyle = True
-    ExplicitWidth = 867
     object tvLedger: TcxGridDBTableView
       PopupMenu = popGrid
       Navigator.Buttons.CustomButtons = <>
@@ -629,7 +624,6 @@ object frmCheque: TfrmCheque
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 12
     OnClick = chkPrintClick
-    ExplicitLeft = 641
   end
   object btnOK: TcxButton
     Left = 776
@@ -678,7 +672,6 @@ object frmCheque: TfrmCheque
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     TabOrder = 13
     OnClick = btnOKClick
-    ExplicitLeft = 709
   end
   object btnCancel: TcxButton
     Left = 858
@@ -727,7 +720,6 @@ object frmCheque: TfrmCheque
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     TabOrder = 14
     OnClick = btnCancelClick
-    ExplicitLeft = 791
   end
   object grpDirectDebit: TcxGroupBox
     Left = 4
@@ -848,7 +840,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43549.5055343519d
+    EditValue = 43569.8886173495d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -876,7 +868,6 @@ object frmCheque: TfrmCheque
     Anchors = [akRight, akBottom]
     Caption = 'Template'
     TabOrder = 7
-    ExplicitLeft = 424
     Height = 50
     Width = 210
     object btnChooseTemplate: TcxButton
@@ -1034,7 +1025,6 @@ object frmCheque: TfrmCheque
     Properties.ListOptions.SyncMode = True
     Properties.ListSource = dmAxiom.dsBankList
     TabOrder = 21
-    ExplicitLeft = 730
     Width = 72
   end
   object qryCheque: TUniQuery

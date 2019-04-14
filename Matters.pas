@@ -1144,7 +1144,7 @@ type
     pageDocuments: TcxPageControl;
     tabGenerated: TcxTabSheet;
     pGenDocuments1: TcxTabSheet;
-    dxDockPanel3: TdxDockPanel;
+    DockPanelFolderList: TdxDockPanel;
     tabTransit: TcxTabSheet;
     dbgrTransit: TcxGrid;
     tvTransit: TcxGridDBTableView;
@@ -4072,9 +4072,9 @@ begin
       ASaveViewName := 'tvDocs Layout';
       SettingSaveStream(dmAxiom.UserID, ASaveViewName, tvDocs);
       // 19 April 2018 DW save matter folder setting
-      SettingSaveBoolean('Matter_Doc','DocFolderPanelAutoHide',dxDockPanel3.Showing);
-      SettingSave('Matter_Doc','DocFolderPanelHeight',dxDockPanel3.height);
-      SettingSave('Matter_Doc','DocFolderPanelWidth',dxDockPanel3.width);
+      SettingSaveBoolean('Matter_Doc','DocFolderPanelAutoHide',DockPanelFolderList.Showing);
+      SettingSave('Matter_Doc','DocFolderPanelHeight',DockPanelFolderList.height);
+      SettingSave('Matter_Doc','DocFolderPanelWidth',DockPanelFolderList.width);
    end;
 
  //  if FPreview <> nil then
@@ -5069,25 +5069,25 @@ begin
       pnlWidth := SettingLoadInteger(dmAxiom.UserID, 'Matter_Doc',  'DocFolderPanelWidth');
       pnlHeight := SettingLoadInteger(dmAxiom.UserID, 'Matter_Doc',  'DocFolderPanelHeight');
 
-      if SettingLoadBoolean('Matter_Doc', 'DocFolderPanelAutoHide') = True then
+      if SettingLoadBooleanTrueWhenEmpty(dmAxiom.UserID, 'Matter_Doc', 'DocFolderPanelAutoHide') = True then
       begin
-         dxDockPanel3.AutoHide := False;
-         dxDockPanel3.show;
+         DockPanelFolderList.AutoHide := False;
+         DockPanelFolderList.show;
       end
       else
       begin
-         dxDockPanel3.AutoHide := True;
-         dxDockPanel3.Hide;
+         DockPanelFolderList.AutoHide := True;
+//         DockPanelFolderList.Hide;
       end;
       if pnlWidth > 0 then
       begin
          if pnlWidth > 1000 then
             pnlWidth := 150;
-         dxDockPanel3.width := pnlWidth;
+         DockPanelFolderList.width := pnlWidth;
       end;
 
      if pnlHeight > 0 then
-         dxDockPanel3.Height := pnlHeight;
+         DockPanelFolderList.Height := pnlHeight;
      /// end of 19 April change
      ///
    end else
@@ -5415,114 +5415,100 @@ end;
 procedure TfrmMatters.DocDelete;
 var
   sRenamedFile,
-  sFileToDelete: String;
-  sSource: string;
+  sFileToDelete,
+  sSource,
   sSQL: string;
   bDeleteFile: boolean;
+  I,
+  RecIdx: integer;
 begin
    case pageDocuments.ActivePageIndex of
       0: begin
-  			   sFileToDelete := qryDocs.FieldByName('DISPLAY_PATH').AsWideString;
-            sSource := qryDocs.FieldByName('SOURCE').AsString;
-            bDeleteFile := False;
-            if (sFileToDelete <> '') then
+//  			   sFileToDelete := qryDocs.FieldByName('DISPLAY_PATH').AsWideString;
+//            sSource := qryDocs.FieldByName('SOURCE').AsString;
+            if (tvDocs.Controller.SelectedRowCount > 0) then
             begin
-  			      if MessageDlg('Are you sure you want to delete: ' + ExtractFileName(sFileToDelete) + ' ?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  			      if MsgAsk('Delete selected document(s)? ') = mrYes then
   			      begin
-                  if (MessageDlg('Do you wish to remove the associated file '+qryDocs.FieldByName('DISPLAY_PATH').AsString+' from the file system?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
-    			      begin
-                     if dmAxiom.Security.Document.DeleteFile then
-                     begin
-                        if not(DeleteFile(sFileToDelete)) then
-        		     	         MsgErr('Could not delete '+sFileToDelete +'. Please check that the file is not open in another application!');
-                        // 09/08/2018 AES now delete attachments if they exist
-                        if (UpperCase(qryDocs.FieldByName('FILE_EXTENSION').AsString) = 'MSG') then
-                        begin
-                           with dmAxiom.qryTmp do
-                           begin
-                              Close;
-                              SQL.Text := 'select path from doc where parentdocid = :parentdocid';
-                              ParamByName('parentdocid').AsInteger := qryDocs.FieldByName('docid').AsInteger;
-                              Open;
-                              while not eof do
-                              begin
-                                 sFileToDelete := FieldByName('path').AsString;
-                                 DeleteFile(sFileToDelete);
-                                 next;
-                              end;
-                           end;
-                        end;
-                     end
-                     else
-                     begin
-                        sRenamedFile := sFileToDelete + '.del-'+ FormatDateTime('d_mm_yyyyhhmm', Now);
-                        RenameFile(sFileToDelete, sRenamedFile);
-                     end;
-                  end;
-
                   try
                      dmAxiom.uniInsight.StartTransaction;
-                     if sSource = 'FROMDOC' then
-                        sSQL := 'DELETE FROM DOC WHERE DOCID = :DOCID';
-//                   else if sSource = 'FROMWGT' then
-                     with dmAxiom.qryTmp do
-                     begin
-                        SQL.Clear;
-                        SQL.Text := sSQL;
-                        ParamByName('docid').AsInteger :=qryDocs.FieldByName('docid').AsInteger;
-                        Execute;
-                     end;
+                     bDeleteFile := (MsgAsk('Do you wish to remove the associated document(s) from the file system?') = mrYes);
+                     tvdocs.BeginUpdate();
+                     for I := 0 to tvDocs.Controller.SelectedRowCount - 1 do
+    			         begin
+                        RecIdx := tvDocs.Controller.SelectedRecords[I].RecordIndex;
+                        tvDocs.Controller.FocusedRowIndex := RecIdx;
+                        sFileToDelete := tvDocsPATH.EditValue;
+                        if dmAxiom.Security.Document.DeleteFile and bDeleteFile then
+                        begin
+                           if FileExists(sFileToDelete) = True then
+                              DeleteFile(sFileToDelete);
+    //    		     	            MsgErr('Could not delete '+sFileToDelete +'. Please check that the file is not open in another application!');
+                           // 09/08/2018 AES now delete attachments if they exist
+                           if (UpperCase(tvDocsFILE_EXTENSION.EditValue) = 'MSG') then
+                           begin
+                              with dmAxiom.qryTmp do
+                              begin
+                                 Close;
+                                 SQL.Text := 'select path from doc where parentdocid = :parentdocid';
+                                 ParamByName('parentdocid').AsInteger := tvDocsDOCID.EditValue;
+                                 Open;
+                                 while not eof do
+                                 begin
+                                    sFileToDelete := FieldByName('path').AsString;
+                                    DeleteFile(sFileToDelete);
+                                    next;
+                                 end;
+                              end;
+                           end;
+                        end
+                        else
+                        begin
+                           sRenamedFile := sFileToDelete + '.del-'+ FormatDateTime('d_mm_yyyyhhmm', Now);
+                           RenameFile(sFileToDelete, sRenamedFile);
+                        end;
 
-                     if (UpperCase(qryDocs.FieldByName('FILE_EXTENSION').AsString) = 'MSG') then
-                     begin
-                        sSQL := 'DELETE FROM DOC WHERE PARENTDOCID = :DOCID';
+//                     if sSource = 'FROMDOC' then
+                        sSQL := 'DELETE FROM DOC WHERE DOCID = :DOCID';
+//                      else if sSource = 'FROMWGT' then
                         with dmAxiom.qryTmp do
                         begin
                            SQL.Clear;
                            SQL.Text := sSQL;
-                           ParamByName('docid').AsInteger :=qryDocs.FieldByName('docid').AsInteger;
+                           ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
+                           Execute;
+                        end;
+
+                        if (UpperCase(tvDocsFILE_EXTENSION.EditValue) = 'MSG') then
+                        begin
+                           sSQL := 'DELETE FROM DOC WHERE PARENTDOCID = :DOCID';
+                           with dmAxiom.qryTmp do
+                           begin
+                              SQL.Clear;
+                              SQL.Text := sSQL;
+                              ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
+                              Execute;
+                           end;
+                        end;
+
+                        sSQL := 'DELETE FROM WORKFLOWGENDOCUMENTS WHERE WORKFLOWGENDOCUMENT = :DOCID';
+                        with dmAxiom.qryTmp do
+                        begin
+                           SQL.Clear;
+                           SQL.Text := sSQL;
+                           ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
                            Execute;
                         end;
                      end;
-
-                     sSQL := 'DELETE FROM WORKFLOWGENDOCUMENTS WHERE WORKFLOWGENDOCUMENT = :DOCID';
-                     with dmAxiom.qryTmp do
-                     begin
-                        SQL.Clear;
-                        SQL.Text := sSQL;
-                        ParamByName('docid').AsInteger :=qryDocs.FieldByName('docid').AsInteger;
-                        Execute;
-                     end;
-//                      qryDocs.Delete;
                   finally
-                     dmAxiom.uniInsight.Commit;
-                     qryDocs.Close;
-                     qryDocs.Open;
-//        		         PlaySound('Delete');
+                        dmAxiom.uniInsight.Commit;
+                        tvdocs.EndUpdate;
+                        qryDocs.Close;
+                        qryDocs.Open;
                   end;
-               end;
-            end
-            else
-            begin
-               try
-                  dmAxiom.uniInsight.StartTransaction;
-                  tvDocs.DataController.BeginUpdate;
-                  sSQL := 'DELETE FROM DOC WHERE DOCID = :DOCID';
-                  with dmAxiom.qryTmp do
-                  begin
-                     SQL.Clear;
-                     SQL.Text := sSQL;
-                     ParamByName('docid').AsInteger :=qryDocs.FieldByName('docid').AsInteger;
-                     Execute;
-                  end;
-
-               finally
-                  dmAxiom.uniInsight.Commit;
-                  qryDocs.Close;
-                  qryDocs.Open;
-                  tvDocs.DataController.EndUpdate;
                end;
             end;
+
             if cbGroupExpanded.Checked then
               dbgrDocs.FocusedView.DataController.Groups.FullExpand;
   		   end;
@@ -6111,8 +6097,10 @@ end;
 procedure TfrmMatters.btnDocAddClick(Sender: TObject);
 var
    LfrmDocNew: TfrmDocNew;
+   CurrDir: string;
 begin
    try
+      CurrDir := GetCurrentDir;
       LfrmDocNew := TfrmDocNew.Create(Self);
       LfrmDocNew.NewCopyDoc := False;
       LfrmDocNew.FileID := qryMatter.FieldByName('FILEID').AsString;
@@ -6125,6 +6113,7 @@ begin
       end;
    finally
       LfrmDocNew.Free;
+      SetCurrentDir(CurrDir);
    end;
 end;
 
@@ -11204,7 +11193,7 @@ begin
                                      (tvDocs.Controller.SelectedRowCount = 1) ;
 
    btnOpenDocument.Enabled := tvDocs.Controller.SelectedRowCount = 1;
-   bbtnDeleteDocument.Enabled := (tvDocs.Controller.SelectedRowCount = 1) and
+   bbtnDeleteDocument.Enabled := (tvDocs.Controller.SelectedRowCount > 0) and
                                  (dmAxiom.Security.Document.DeleteDocument = True);
    btnForward.Enabled := tvDocs.Controller.SelectedRowCount > 0;
    bbtnForwadAsLink.Enabled := tvDocs.Controller.SelectedRowCount > 0;

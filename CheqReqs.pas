@@ -63,7 +63,7 @@ uses
   System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ImgList,
   dxBar, cxClasses, Uni, MemDS, DBAccess, cxProgressBar, dxStatusBar, ppFileUtils,
   ppIniStorage, Variants, cxGridDBDataDefinitions, dxDateRanges,
-  dxPScxEditorLnks, System.ImageList;
+  dxPScxEditorLnks, System.ImageList, dxPSDBTCLnk;
 
 const
   isREQUISITION = 0;
