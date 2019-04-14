@@ -48,6 +48,8 @@ var
    FAFolderName: string;
    bFolderCreate: boolean;
    lFolderName: string;
+   bTopLevelFolder: boolean;
+   lParentParent_ID: integer;
 
 function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
                      ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False;
@@ -62,11 +64,11 @@ begin
 //      FileCount2 := 0;
       lFileFolder_ID := 0;
       lFolder_Level := -1;
+
+      bTopLevelFolder := True;
       bFolderCreate := ACreateFolder;
       if (dmAxiom.MapiSession.Active = False) then
       begin
-         //OldCursor := Screen.Cursor;
-         //Screen.Cursor := crHourGlass;
          try
             dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
             dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
@@ -77,11 +79,12 @@ begin
             dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
             dmAxiom.MapiSession.Active                       := True;
          finally
-            //Screen.Cursor := OldCursor;
+//
          end;
       end;
 
       ////
+      lParentParent_ID := AFolder;
       fmFileCopyDisp := TfrmFileCopyDisp.Create(nil);
       fmFileCopyDisp.Show;
       LCopyMove := ACopyMove;
@@ -129,8 +132,11 @@ begin
                   lFolderName := '';
                   if (bFolderCreate) then
                   begin
+                      if bTopLevelFolder = False then
+                         lParentParent_ID := 0;
                       AddFolder(Path + Rec.Name, lOrigPath);
                       lFolderName := Rec.Name;
+                      bTopLevelFolder := False;
                   end;
                   FileSearch(Path + Rec.Name, FileName);
                end;
@@ -526,7 +532,10 @@ begin
                   AFolderID := dmAxiom.GetSeqNumber('seq_doc_folders');
                   FieldByName('FOLDER_ID').AsInteger := strToInt(AFolderID) +1;
                   FieldByName('DESCR').AsString := RightStr(CheckPath, (lCheckPathLen - lOrigDirLen));
-                  FieldByName('PARENT_ID').AsInteger := 0;
+                  if lParentParent_ID <> 0 then
+                     FieldByName('PARENT_ID').AsInteger := lParentParent_ID
+                  else
+                     FieldByName('PARENT_ID').AsInteger := 0;
                   FieldByName('NMATTER').AsInteger := LNMatter;
                   FieldByName('FOLDER_LEVEL').AsInteger := 0;
                   FieldByName('TMPL_ID').AsInteger := 0;

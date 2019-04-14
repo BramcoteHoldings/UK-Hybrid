@@ -3869,48 +3869,48 @@ object frmMatters: TfrmMatters
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
-              Text = 'Name'
               Width = 200
+              WideText = 'Name'
             end
             item
               MaxWidth = 500
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
-              Text = 'Contact'
               Width = 350
+              WideText = 'Contact'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 2
-              Text = 'Work Phone'
               Width = 100
+              WideText = 'Work Phone'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 3
-              Text = 'Mobile'
               Width = 100
+              WideText = 'Mobile'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 4
-              Text = 'Home Phone'
               Width = 100
+              WideText = 'Home Phone'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 5
-              Text = 'Fax'
               Width = 100
+              WideText = 'Fax'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
-              Text = 'Email'
               Width = 522
+              WideText = 'Email'
             end>
         end
       end
@@ -3968,14 +3968,14 @@ object frmMatters: TfrmMatters
             Columns = <
               item
                 Position = 0
-                Text = 'Form / Field'
                 Width = 300
+                WideText = 'Form / Field'
               end
               item
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
-                Text = 'Value'
                 Width = 1144
+                WideText = 'Value'
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -6747,6 +6747,9 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
+      DesignSize = (
+        1478
+        527)
       object dxDockSite3: TdxDockSite
         Left = 0
         Top = 0
@@ -6757,9 +6760,9 @@ object frmMatters: TfrmMatters
         OriginalWidth = 1478
         OriginalHeight = 527
         object dxLayoutDockSite3: TdxLayoutDockSite
-          Left = 193
+          Left = 0
           Top = 0
-          Width = 1285
+          Width = 1449
           Height = 527
           ParentShowHint = False
           ShowHint = False
@@ -6769,10 +6772,11 @@ object frmMatters: TfrmMatters
           object dxLayoutDockSite4: TdxLayoutDockSite
             Left = 0
             Top = 0
-            Width = 1285
+            Width = 1449
             Height = 527
             ParentShowHint = False
             ShowHint = False
+            ExplicitWidth = 1285
             DockingType = 0
             OriginalWidth = 265
             OriginalHeight = 176
@@ -6780,7 +6784,7 @@ object frmMatters: TfrmMatters
           object dxDockPanel2: TdxDockPanel
             Left = 0
             Top = 0
-            Width = 1285
+            Width = 1449
             Height = 527
             AllowDock = [dtLeft]
             AllowFloating = False
@@ -6790,11 +6794,12 @@ object frmMatters: TfrmMatters
             CustomCaptionButtons.Buttons = <>
             ShowCaption = False
             TabsProperties.CustomButtons.Buttons = <>
+            ExplicitWidth = 1285
             DockingType = 0
             OriginalWidth = 163
             OriginalHeight = 124
             object Splitter1: TSplitter
-              Left = 932
+              Left = 1096
               Top = 0
               Height = 523
               Align = alRight
@@ -6805,7 +6810,7 @@ object frmMatters: TfrmMatters
             object pageDocuments: TcxPageControl
               Left = 0
               Top = 0
-              Width = 932
+              Width = 1096
               Height = 523
               Align = alClient
               TabOrder = 0
@@ -6814,9 +6819,10 @@ object frmMatters: TfrmMatters
               Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoTopToBottomText]
               Properties.TabPosition = tpRight
               Properties.TabSlants.Kind = skCutCorner
+              ExplicitWidth = 932
               ClientRectBottom = 519
               ClientRectLeft = 4
-              ClientRectRight = 906
+              ClientRectRight = 1070
               ClientRectTop = 4
               object tabGenerated: TcxTabSheet
                 Caption = 'Documents'
@@ -6827,18 +6833,20 @@ object frmMatters: TfrmMatters
                 Font.Style = []
                 ImageIndex = 0
                 ParentFont = False
+                ExplicitWidth = 902
                 object pnlDocsGenerated: TPanel
                   Left = 0
                   Top = 0
-                  Width = 902
+                  Width = 1066
                   Height = 515
                   Align = alClient
                   TabOrder = 0
+                  ExplicitWidth = 902
                   DesignSize = (
-                    902
+                    1066
                     515)
                   object cxButton1: TcxButton
-                    Left = 197
+                    Left = 361
                     Top = 1
                     Width = 94
                     Height = 26
@@ -6884,16 +6892,18 @@ object frmMatters: TfrmMatters
                     TabOrder = 0
                     Visible = False
                     OnClick = btnCategoriesClick
+                    ExplicitLeft = 197
                   end
                   object dbgrDocs: TcxGrid
                     Left = 1
                     Top = 1
-                    Width = 900
+                    Width = 1064
                     Height = 475
                     Align = alClient
                     TabOrder = 1
                     LookAndFeel.Kind = lfFlat
                     LookAndFeel.NativeStyle = True
+                    ExplicitWidth = 900
                     object tvEmailAttachments: TcxGridDBTableView
                       OnDblClick = tvEmailAttachmentsDblClick
                       Navigator.Buttons.CustomButtons = <>
@@ -7627,13 +7637,14 @@ object frmMatters: TfrmMatters
                   object pnlDocGeneratedBtns: TPanel
                     Left = 1
                     Top = 476
-                    Width = 900
+                    Width = 1064
                     Height = 38
                     Align = alBottom
                     BevelOuter = bvNone
                     TabOrder = 2
+                    ExplicitWidth = 900
                     DesignSize = (
-                      900
+                      1064
                       38)
                     object CheckBox1: TCheckBox
                       Left = 536
@@ -7647,7 +7658,7 @@ object frmMatters: TfrmMatters
                       Visible = False
                     end
                     object btnPrecSearch: TBitBtn
-                      Left = 822
+                      Left = 986
                       Top = 5
                       Width = 75
                       Height = 27
@@ -7664,9 +7675,10 @@ object frmMatters: TfrmMatters
                         88888880F08880F0888888800088800088888888888888888888}
                       TabOrder = 6
                       OnClick = btnPrecSearchClick
+                      ExplicitLeft = 822
                     end
                     object btnDocAdd: TBitBtn
-                      Left = 753
+                      Left = 917
                       Top = 5
                       Width = 68
                       Height = 27
@@ -7683,6 +7695,7 @@ object frmMatters: TfrmMatters
                         8888880FFFFFF008888888000000008888888888888888888888}
                       TabOrder = 5
                       OnClick = btnDocAddClick
+                      ExplicitLeft = 753
                     end
                     object cxLabel3: TcxLabel
                       Left = 0
@@ -7725,7 +7738,7 @@ object frmMatters: TfrmMatters
                       Width = 181
                     end
                     object btnDocumentImport: TBitBtn
-                      Left = 561
+                      Left = 725
                       Top = 5
                       Width = 113
                       Height = 27
@@ -7733,9 +7746,10 @@ object frmMatters: TfrmMatters
                       Caption = 'Import Documents'
                       TabOrder = 2
                       OnClick = btnDocumentImportClick
+                      ExplicitLeft = 561
                     end
                     object btnDocPrint: TBitBtn
-                      Left = 676
+                      Left = 840
                       Top = 5
                       Width = 76
                       Height = 27
@@ -7743,9 +7757,10 @@ object frmMatters: TfrmMatters
                       Caption = 'Print Doc List'
                       TabOrder = 4
                       OnClick = btnDocPrintClick
+                      ExplicitLeft = 676
                     end
                     object btnCreateBrief: TBitBtn
-                      Left = 486
+                      Left = 650
                       Top = 5
                       Width = 69
                       Height = 27
@@ -7755,9 +7770,10 @@ object frmMatters: TfrmMatters
                       TabOrder = 8
                       Visible = False
                       OnClick = btnCreateBriefClick
+                      ExplicitLeft = 486
                     end
                     object chkPreviewPane: TCheckBox
-                      Left = 360
+                      Left = 524
                       Top = 11
                       Width = 119
                       Height = 18
@@ -7767,6 +7783,7 @@ object frmMatters: TfrmMatters
                       State = cbChecked
                       TabOrder = 9
                       OnClick = chkPreviewPaneClick
+                      ExplicitLeft = 360
                     end
                   end
                 end
@@ -7774,30 +7791,35 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
+                ExplicitWidth = 902
               end
             end
             object pnlPreview: TJamFilePreview
-              Left = 935
+              Left = 1099
               Top = 0
               Width = 346
               Height = 523
               Align = alRight
+              ExplicitLeft = 935
             end
           end
         end
-        object dxDockPanel3: TdxDockPanel
-          Left = 0
+        object DockPanelFolderList: TdxDockPanel
+          Left = -193
           Top = 0
           Width = 193
           Height = 527
+          Visible = False
           AllowFloating = False
-          AutoHide = False
+          AutoHide = True
           Caption = 'Folder List'
           CaptionButtons = [cbHide]
           CustomCaptionButtons.Buttons = <>
+          CustomCaptionButtons.Images = frmDesktop.ilstMatter
           TabsProperties.CustomButtons.Buttons = <>
           TabsProperties.HotTrack = True
           TabsProperties.NavigatorPosition = npLeftTop
+          AutoHidePosition = 0
           DockingType = 1
           OriginalWidth = 193
           OriginalHeight = 124
@@ -7805,7 +7827,7 @@ object frmMatters: TfrmMatters
             Left = 0
             Top = 0
             Width = 189
-            Height = 498
+            Height = 497
             Align = alClient
             Bands = <
               item
@@ -7830,6 +7852,7 @@ object frmMatters: TfrmMatters
             OnClick = cxDBTreeList1Click
             OnDragDrop = lvFoldersDragDrop
             OnDragOver = lvFoldersDragOver
+            ExplicitHeight = 498
             object cxDBTreeList1DESCR: TcxDBTreeListColumn
               Caption.AlignVert = vaTop
               DataBinding.FieldName = 'DESCR'
@@ -8341,6 +8364,7 @@ object frmMatters: TfrmMatters
             OnAfterEditing = ProjectsSchedulerAfterEditing
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
+            Selection = 1
             Splitters = {
               2E0500007E000000BD050000830000002A050000010000002E0500006C010000}
             StoredClientBounds = {0100000001000000BD0500006C010000}
@@ -12824,7 +12848,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14045,7 +14069,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15119,7 +15143,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15853,7 +15877,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16750,7 +16774,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -20963,9 +20987,9 @@ object frmMatters: TfrmMatters
       OnClick = btnForwardClick
     end
     object bbtnDeleteDocument: TdxBarButton
-      Caption = 'Delete document'
+      Caption = 'Delete document(s)'
       Category = 9
-      Hint = 'Delete document'
+      Hint = 'Delete document(s)'
       Visible = ivAlways
       ImageIndex = 63
       OnClick = bbtnDeleteDocumentClick
@@ -21197,7 +21221,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -21984,7 +22008,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22263,7 +22287,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -26077,7 +26101,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33166,7 +33190,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33867,7 +33891,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
