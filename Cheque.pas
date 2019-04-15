@@ -1050,7 +1050,6 @@ begin
                      end
                 else
                 begin
-
                    {post components}
                    sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryBank.FieldByName('CASH_AT_BANK').AsString,'',true,'');
 
@@ -1391,6 +1390,7 @@ begin
                         // Now make the General Ledger entry
 
                         // post components
+                        // AES 14/4
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
 
 
@@ -1446,8 +1446,9 @@ begin
                         MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'UNBILL_DISB', 0 - (cAmount));
 
                         {post components}
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',true,'');
+                        //AES 14/4
 
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',true,'');
 
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                             , cAmount
@@ -1645,7 +1646,8 @@ begin
 
                   // Post for legal
                   {post components}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
+                  //AES 14/4
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLegalCode,'',true,'');
 
                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                       , 0 - cMatterTotal

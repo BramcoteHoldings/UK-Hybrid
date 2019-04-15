@@ -7,7 +7,7 @@ object frmCheqReqs: TfrmCheqReqs
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -19,7 +19,7 @@ object frmCheqReqs: TfrmCheqReqs
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 17
+  TextHeight = 15
   object sbarInfo: TdxStatusBar
     Left = 0
     Top = 646
@@ -88,14 +88,12 @@ object frmCheqReqs: TfrmCheqReqs
     ClientRectBottom = 614
     ClientRectLeft = 4
     ClientRectRight = 1050
-    ClientRectTop = 28
+    ClientRectTop = 26
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 28
+      ExplicitHeight = 586
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -361,19 +359,21 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 0
         Top = 256
         Width = 1046
-        Height = 330
+        Height = 332
         Align = alClient
         Caption = 'Panel2'
         TabOrder = 1
+        ExplicitHeight = 330
         object cxGrid1: TcxGrid
           Left = 1
           Top = 1
           Width = 1044
-          Height = 328
+          Height = 330
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfOffice11
           LookAndFeel.NativeStyle = True
+          ExplicitHeight = 328
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsData
@@ -430,104 +430,102 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 28
+      ExplicitHeight = 586
       DesignSize = (
         1046
-        586)
+        588)
       object Label1: TLabel
         Left = 8
         Top = 57
-        Width = 45
-        Height = 17
+        Width = 40
+        Height = 15
         Caption = 'Date To'
         Transparent = True
       end
       object Label2: TLabel
         Left = 8
         Top = 159
-        Width = 39
-        Height = 17
+        Width = 35
+        Height = 15
         Caption = 'Matter'
         Transparent = True
       end
       object Label3: TLabel
         Left = 8
         Top = 185
-        Width = 85
-        Height = 17
+        Width = 78
+        Height = 15
         Caption = 'Payee includes'
         Transparent = True
       end
       object Label4: TLabel
         Left = 8
         Top = 211
-        Width = 117
-        Height = 17
+        Width = 107
+        Height = 15
         Caption = 'Description includes'
         Transparent = True
       end
       object Label5: TLabel
         Left = 8
         Top = 263
-        Width = 104
-        Height = 17
+        Width = 96
+        Height = 15
         Caption = 'Amount less than '
         Transparent = True
       end
       object Label8: TLabel
         Left = 8
         Top = 107
-        Width = 79
-        Height = 17
+        Width = 71
+        Height = 15
         Caption = 'Requested By'
         Transparent = True
       end
       object lblAmountFrom: TLabel
         Left = 8
         Top = 237
-        Width = 113
-        Height = 17
+        Width = 105
+        Height = 15
         Caption = 'Amount more than '
         Transparent = True
       end
       object lblBank: TLabel
         Left = 8
         Top = 9
-        Width = 27
-        Height = 17
+        Width = 26
+        Height = 15
         Caption = 'Bank'
         Transparent = True
       end
       object lblDateFrom: TLabel
         Left = 8
         Top = 33
-        Width = 61
-        Height = 17
+        Width = 55
+        Height = 15
         Caption = 'Date From'
         Transparent = True
       end
       object lblShowOnly: TLabel
         Left = 8
         Top = 85
-        Width = 59
-        Height = 17
+        Width = 55
+        Height = 15
         Caption = 'Show only'
         Transparent = True
       end
       object Memo: TLabel
         Left = 8
         Top = 133
-        Width = 38
-        Height = 17
+        Width = 35
+        Height = 15
         Caption = 'Memo'
         Transparent = True
       end
       object btnClearAll: TcxButton
         Left = 943
-        Top = 555
+        Top = 557
         Width = 100
         Height = 28
         Anchors = [akRight, akBottom]
@@ -605,6 +603,7 @@ object frmCheqReqs: TfrmCheqReqs
         OptionsImage.NumGlyphs = 2
         TabOrder = 0
         OnClick = btnClearAllClick
+        ExplicitTop = 555
       end
       object btnTrust: TButton
         Left = 310
@@ -619,7 +618,7 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 144
         Top = 104
         Width = 57
-        Height = 25
+        Height = 23
         TabOrder = 2
         OnChange = cbAuthorClick
         OnClick = cbAuthorClick
@@ -628,7 +627,7 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 144
         Top = 3
         Width = 57
-        Height = 25
+        Height = 23
         TabOrder = 3
         OnChange = cbBankClick
         OnClick = cbBankClick
@@ -975,7 +974,7 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 161
         Top = 29
         Width = 95
-        Height = 25
+        Height = 23
         Date = 38169.466950925890000000
         Time = 38169.466950925890000000
         Checked = False
@@ -986,7 +985,7 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 161
         Top = 55
         Width = 95
-        Height = 25
+        Height = 23
         Date = 38199.847006782400000000
         Time = 38199.847006782400000000
         Checked = False
@@ -1014,28 +1013,28 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 144
         Top = 234
         Width = 158
-        Height = 25
+        Height = 23
         TabOrder = 33
       end
       object tbAmountTo: TEdit
         Left = 144
         Top = 260
         Width = 158
-        Height = 25
+        Height = 23
         TabOrder = 34
       end
       object tbDesc: TEdit
         Left = 144
         Top = 208
         Width = 158
-        Height = 25
+        Height = 23
         TabOrder = 35
       end
       object tbFileID: TEdit
         Left = 144
         Top = 156
         Width = 81
-        Height = 25
+        Height = 23
         CharCase = ecUpperCase
         TabOrder = 36
       end
@@ -1043,14 +1042,14 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 144
         Top = 130
         Width = 81
-        Height = 25
+        Height = 23
         TabOrder = 37
       end
       object tbPayee: TEdit
         Left = 144
         Top = 182
         Width = 158
-        Height = 25
+        Height = 23
         TabOrder = 38
       end
     end
