@@ -7,13 +7,13 @@ object frmChequeImport: TfrmChequeImport
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object grdChequeImport: TcxGrid
     Left = 0
     Top = 0
@@ -22,7 +22,6 @@ object frmChequeImport: TfrmChequeImport
     Align = alClient
     TabOrder = 0
     LookAndFeel.NativeStyle = True
-    ExplicitHeight = 290
     object tvChequeImport: TcxGridDBBandedTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataModeController.SmartRefresh = True
@@ -143,9 +142,6 @@ object frmChequeImport: TfrmChequeImport
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 162
-    ExplicitTop = 260
-    ExplicitWidth = 185
     DesignSize = (
       818
       41)
@@ -161,7 +157,7 @@ object frmChequeImport: TfrmChequeImport
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -210,7 +206,7 @@ object frmChequeImport: TfrmChequeImport
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
-        0000000000004D1000004D100000000000000000000000808000008080000080
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080

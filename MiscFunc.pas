@@ -425,7 +425,7 @@ const
   IDXDOCFOLDERTMPL        = 190;
   IDXDOCINDEXUSERS        = 191;
   IDXDIARYTYPE            = 192;
-  IDXBULKMAILER           = 193;
+  IDXBULKMAILER           = 202;
   // Max currently = 193
 
   // Used in Reopenlist.

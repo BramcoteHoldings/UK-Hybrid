@@ -10,7 +10,8 @@ uses
   OracleUniProvider, Uni, DBAccess, MemDS, cxGridLevel, cxClasses, cxControls,
   cxGridCustomView, cxGrid, cxCheckBox, cxGridBandedTableView,
   cxGridDBBandedTableView, cxCurrencyEdit, Menus, cxLookAndFeels, cxNavigator,
-  cxDataControllerConditionalFormattingRulesManagerDialog, Vcl.ExtCtrls;
+  cxDataControllerConditionalFormattingRulesManagerDialog, Vcl.ExtCtrls,
+  dxDateRanges;
 
 type
   TfrmChequeImport = class(TForm)

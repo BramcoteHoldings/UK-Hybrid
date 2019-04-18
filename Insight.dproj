@@ -3,7 +3,7 @@
         <ProjectGuid>{1CE7716A-2E7B-47E8-8A23-92126A230F08}</ProjectGuid>
         <MainSource>Insight.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -121,7 +121,7 @@
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>68</VerInfo_Build>
+        <VerInfo_Build>75</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
@@ -130,7 +130,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.68;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.75;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -155,14 +155,14 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <VerInfo_Build>49</VerInfo_Build>
+        <VerInfo_Build>54</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_MapFile>3</DCC_MapFile>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.49;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.54;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
@@ -195,9 +195,6 @@
         </DCCReference>
         <DCCReference Include="BankRecEdit.pas">
             <Form>frmBankRecEdit</Form>
-        </DCCReference>
-        <DCCReference Include="IGraph.pas">
-            <Form>frmInvoiceGraph</Form>
         </DCCReference>
         <DCCReference Include="CashPay.pas">
             <Form>frmCashpay</Form>
@@ -379,9 +376,6 @@
         </DCCReference>
         <DCCReference Include="ClientGroups.pas">
             <Form>frmClientGroups</Form>
-        </DCCReference>
-        <DCCReference Include="MaisterAnalysis.pas">
-            <Form>frmMaisterAnalysis</Form>
         </DCCReference>
         <DCCReference Include="MonitorImport.pas">
             <Form>frmMonitorImport</Form>
@@ -621,9 +615,6 @@
             <Form>fmWorkFlowTCPCommunication</Form>
         </DCCReference>
         <DCCReference Include="WorkFlow\WorkFlowXML.pas"/>
-        <DCCReference Include="CheqreqHistoryForm.pas">
-            <Form>frmCheqreqHistory</Form>
-        </DCCReference>
         <DCCReference Include="Workflow\WorkFlowAdminDocs.pas">
             <Form>fmWorkFlowAdminDocs</Form>
         </DCCReference>
@@ -935,9 +926,6 @@
         <DCCReference Include="GenEditor.pas">
             <Form>frmGenEditor</Form>
         </DCCReference>
-        <DCCReference Include="BulkMailer.pas">
-            <Form>frmBulkMailer</Form>
-        </DCCReference>
         <DCCReference Include="Workflow\MatterReportBuilder.pas">
             <Form>frmMatterReportBuilder</Form>
         </DCCReference>
@@ -979,10 +967,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="Workflow\MSWordMerge.pas"/>
-        <DCCReference Include="home.pas">
-            <Form>frmHome</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="BHLSupport.pas">
             <Form>frmBHLSupport</Form>
             <FormType>dfm</FormType>
@@ -1508,19 +1492,13 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Release" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="bin\platform\win64\Insight.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="Bin\Platform\win32\Insight.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>Insight.rsm</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -1545,7 +1523,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="ModelSupport_Insight\default.txvpck" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

@@ -868,6 +868,7 @@ begin
                             {post components}
                             sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,
                                            sWipSubCr,qrySetup.fieldByName('AUTHOR').AsString,true,'');
+
                             sLedgerKeyDr := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,
                                            sWipSubDr,qrySetup.fieldByName('AUTHOR').AsString,true,'');
 
@@ -1480,7 +1481,7 @@ begin
                   end;
 
                   {post normal componsnts}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_CR'),'',true,'Error with Disbursement Chart');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_CR'),'',false,'Error with Disbursement Chart');
 
                   PostLedger(dtpDispatched.Date
                     , - qrySetup.FieldByName('SUMAMOUNT').AsCurrency  //Self.qryBill.FieldByName('DISB').AsCurrency
@@ -1502,7 +1503,7 @@ begin
                     Self.qryBill.FieldByName('DISB').AsCurrency - qrySetup.FieldByName('TAXAMOUNT').AsFloat);
 
                   {post componsnts}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'Error with Disbursement Chart');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',false,'Error with Disbursement Chart');
 
                   PostLedger(dtpDispatched.Date
                     , qrySetup.FieldByName('SUMAMOUNT').AsCurrency  //- Self.qryBill.FieldByName('DISB').AsCurrency
@@ -1533,7 +1534,7 @@ begin
                       }
 
                         {post componsnts}
-                    sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillDisbTaxSubDR,'',true,'Error with Disbursement Tax Chart');
+                    sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillDisbTaxSubDR,'',false,'Error with Disbursement Tax Chart');
 
                      PostLedger(dtpDispatched.Date
                         , qrySetup.FieldByName('TAXAMOUNT').AsCurrency   //- Self.qryBill.FieldByName('DISBTAX').AsCurrency
@@ -1555,7 +1556,7 @@ begin
               {post disb adjustments if any }
               if (cAllocDisbAmountDiff <> 0) then
               begin
-                 sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',true,'Error with Disbursement Adjustment Chart');
+                 sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
 
                  PostLedger(dtpDispatched.Date
                    , - cAllocDisbAmountDiff
@@ -1577,7 +1578,7 @@ begin
                      Self.qryBill.FieldByName('DISB').AsCurrency - qrySetup.FieldByName('TAXAMOUNT').AsFloat);
 
                  {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',true,'Error with Disbursement Adjustment Chart');
+                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',false,'Error with Disbursement Adjustment Chart');
 
                  PostLedger(dtpDispatched.Date
                    , cAllocDisbAmountDiff
@@ -1602,7 +1603,7 @@ begin
                        lsBillDisbTaxAdjSubDR := lsBillDisbTaxAdjDR + lsChartSuffix;
 
                        {post componsnts}
-                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',true,'Error with Disbursement Adjustment Tax Chart');
+                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',false,'Error with Disbursement Adjustment Tax Chart');
 
                        PostLedger(dtpDispatched.Date
                            , cAllocDisbTaxDiff
@@ -1637,7 +1638,7 @@ begin
                  qrySetup.Open;
 
                  {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR'),'',true,'Error with Unpaid Creditors Chart');
+                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR'),'',false,'Error with Unpaid Creditors Chart');
 
                  PostLedger(dtpDispatched.Date
                     , - (Self.qryBill.FieldByName('UPCRED').AsCurrency {+ qryBill.FieldByName('UPCREDTAXFREE').AsCurrency})
@@ -1662,7 +1663,7 @@ begin
 
 
                  {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_DR'),'',true,'Error with Unpaid Creditors Chart');
+                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_DR'),'',false,'Error with Unpaid Creditors Chart');
 
 
                  PostLedger(dtpDispatched.Date
@@ -1693,7 +1694,7 @@ begin
                       }
 
                       {post componsnts}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillUpCredTaxSubDR,'',true,'Error with Unpaid Creditors Tax Chart');
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillUpCredTaxSubDR,'',false,'Error with Unpaid Creditors Tax Chart');
 
 
                       PostLedger(dtpDispatched.Date

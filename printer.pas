@@ -10,7 +10,8 @@ uses
   ExtDlgs, dxBarDBNav, dxBar, cxClasses, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxLayoutContainer, dxLayoutControlAdapters,
   dxLayoutControl, dxLayoutcxEditAdapters, cxContainer, cxEdit, cxTextEdit,
-  cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox;
+  cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
+  System.ImageList;
 
 type
   TfrmPrinter = class(TfrmMaintNoRep)

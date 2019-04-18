@@ -3,26 +3,26 @@ inherited frmPrinter: TfrmPrinter
   Top = 216
   BorderStyle = bsDialog
   Caption = 'Printers'
-  ClientHeight = 448
-  ClientWidth = 598
+  ClientHeight = 708
+  ClientWidth = 886
   OldCreateOrder = True
   Position = poOwnerFormCenter
   OnDblClick = FormDblClick
   OnHide = FormHide
   OnShow = FormShow
-  ExplicitWidth = 604
-  ExplicitHeight = 479
-  PixelsPerInch = 106
+  ExplicitWidth = 892
+  ExplicitHeight = 737
+  PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
-    Top = 30
-    Width = 598
-    Height = 399
+    Top = 28
+    Width = 886
+    Height = 661
     Align = alClient
     TabOrder = 4
     AutoSize = True
-    ExplicitHeight = 545
+    ExplicitTop = 22
     object dbeCode: TDBEdit
       Left = 84
       Top = 14
@@ -482,8 +482,8 @@ inherited frmPrinter: TfrmPrinter
   end
   object StatusBar1: TStatusBar [1]
     Left = 0
-    Top = 429
-    Width = 598
+    Top = 689
+    Width = 886
     Height = 19
     AutoHint = True
     Panels = <
@@ -493,7 +493,8 @@ inherited frmPrinter: TfrmPrinter
     ParentShowHint = False
     ShowHint = True
     SimplePanel = True
-    ExplicitTop = 575
+    ExplicitTop = 429
+    ExplicitWidth = 598
   end
   inherited dsSource: TUniDataSource
     Left = 281
@@ -1063,27 +1064,14 @@ inherited frmPrinter: TfrmPrinter
   inherited dxBarManager1: TdxBarManager
     Left = 313
     Top = 217
-    PixelsPerInch = 106
-    DockControlHeights = (
-      0
-      0
-      30
-      0)
+    PixelsPerInch = 96
     inherited dxBarManager1Bar1: TdxBar
-      AllowReset = False
-      DockedTop = 0
-      IsMainMenu = True
-      MultiLine = True
+      Font.Height = -12
       OldName = 'Toolbar1'
-      Row = 0
-      WholeRow = True
     end
     inherited dxBarManager1Bar2: TdxBar
-      IsMainMenu = False
-      MultiLine = False
+      Font.Height = -9
       OldName = 'Main Menu1'
-      Visible = False
-      WholeRow = False
     end
     inherited dxBarDBNavCancel1: TdxBarDBNavButton
       ImageIndex = 11
@@ -1119,7 +1107,6 @@ inherited frmPrinter: TfrmPrinter
     Top = 290
   end
   object vtType: TVirtualTable
-    Options = [voPersistentData, voStored, voSkipUnSupportedFieldTypes]
     FieldDefs = <
       item
         Name = 'TYPE'
@@ -1134,7 +1121,7 @@ inherited frmPrinter: TfrmPrinter
     Left = 489
     Top = 159
     Data = {
-      0300020004005459504501001400000000000500444553435201001400000000
+      0400020004005459504501001400000000000500444553435201001400000000
       00000000000000}
   end
   object dsType: TUniDataSource

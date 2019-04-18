@@ -33,7 +33,6 @@ object frmJournals: TfrmJournals
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     OnChange = pagJournalChange
     ClientRectBottom = 551
     ClientRectLeft = 4
@@ -42,6 +41,10 @@ object frmJournals: TfrmJournals
     object tabCashbook: TcxTabSheet
       Caption = 'Journals'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlAllocations: TPanel
         Left = 0
         Top = 161
@@ -155,7 +158,7 @@ object frmJournals: TfrmJournals
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 153
-        Width = 1124
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -1574,17 +1577,17 @@ object frmJournals: TfrmJournals
       item
         DataType = ftUnknown
         Name = 'P_DateFrom'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateTo'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'ACCT'
-        Value = nil
+        Value = Null
       end>
   end
   object plJournalsPrint: TppDBPipeline
@@ -1600,7 +1603,7 @@ object frmJournals: TfrmJournals
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1626,15 +1629,22 @@ object frmJournals: TfrmJournals
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1649,26 +1659,30 @@ object frmJournals: TfrmJournals
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 295
     Top = 361
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plJournalsPrint'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 34925
       mmPrintPosition = 0
       object lblCompany: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblCompany'
+        Border.mmPadding = 0
         Caption = 'lblCompany'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 14
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5715
         mmLeft = 0
@@ -1693,13 +1707,15 @@ object frmJournals: TfrmJournals
       object lblEntity: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblEntity'
+        Border.mmPadding = 0
         Caption = 'lblEntity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 0
@@ -1711,13 +1727,15 @@ object frmJournals: TfrmJournals
       object pplblTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Journal Report'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 0
@@ -1729,13 +1747,15 @@ object frmJournals: TfrmJournals
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'TX Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 1323
@@ -1747,13 +1767,15 @@ object frmJournals: TfrmJournals
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Jrnl #'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 28310
@@ -1765,13 +1787,15 @@ object frmJournals: TfrmJournals
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4106
         mmLeft = 49213
@@ -1783,13 +1807,15 @@ object frmJournals: TfrmJournals
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Code'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4106
         mmLeft = 30956
@@ -1801,13 +1827,15 @@ object frmJournals: TfrmJournals
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4106
         mmLeft = 53711
@@ -1819,13 +1847,15 @@ object frmJournals: TfrmJournals
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Debit'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4106
         mmLeft = 153723
@@ -1837,13 +1867,15 @@ object frmJournals: TfrmJournals
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Credit'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4106
         mmLeft = 176477
@@ -1855,6 +1887,7 @@ object frmJournals: TfrmJournals
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1867,13 +1900,15 @@ object frmJournals: TfrmJournals
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -1886,13 +1921,15 @@ object frmJournals: TfrmJournals
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3725
@@ -1905,13 +1942,15 @@ object frmJournals: TfrmJournals
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4234
         mmLeft = 1323
@@ -1924,6 +1963,7 @@ object frmJournals: TfrmJournals
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 14817
@@ -1932,6 +1972,7 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
         HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'TX_DATE'
         DataPipeline = plJournalsPrint
         DisplayFormat = 'dd/mm/yyyy'
@@ -1975,7 +2016,7 @@ object frmJournals: TfrmJournals
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpVertical
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -1986,12 +2027,13 @@ object frmJournals: TfrmJournals
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plAllocsPrint'
           object ppDetailBand2: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 5821
@@ -1999,6 +2041,7 @@ object frmJournals: TfrmJournals
             object ppDBText5: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText5'
+              Border.mmPadding = 0
               DataField = 'CODE'
               DataPipeline = plAllocsPrint
               Font.Charset = ANSI_CHARSET
@@ -2018,6 +2061,7 @@ object frmJournals: TfrmJournals
             object ppDBMemo2: TppDBMemo
               DesignLayer = ppDesignLayer2
               UserName = 'DBMemo2'
+              Border.mmPadding = 0
               CharWrap = False
               DataField = 'DESCR'
               DataPipeline = plAllocsPrint
@@ -2046,6 +2090,7 @@ object frmJournals: TfrmJournals
               DesignLayer = ppDesignLayer2
               UserName = 'DBText6'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'DEBIT'
               DataPipeline = plAllocsPrint
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2068,6 +2113,7 @@ object frmJournals: TfrmJournals
               DesignLayer = ppDesignLayer2
               UserName = 'DBText7'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'CREDIT'
               DataPipeline = plAllocsPrint
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2088,7 +2134,6 @@ object frmJournals: TfrmJournals
             end
           end
           object raCodeModule1: TraCodeModule
-            ProgramStream = {00}
           end
           object ppDesignLayers2: TppDesignLayers
             object ppDesignLayer2: TppDesignLayer
@@ -2102,6 +2147,7 @@ object frmJournals: TfrmJournals
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'NJOURNAL'
         DataPipeline = plJournalsPrint
         Font.Charset = ANSI_CHARSET
@@ -2122,6 +2168,7 @@ object frmJournals: TfrmJournals
       object ppDBMemo1: TppDBMemo
         DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'REASON'
         DataPipeline = plJournalsPrint
@@ -2149,6 +2196,7 @@ object frmJournals: TfrmJournals
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plJournalsPrint
         Font.Charset = ANSI_CHARSET
@@ -2170,6 +2218,7 @@ object frmJournals: TfrmJournals
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plJournalsPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2193,6 +2242,7 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer1
         UserName = 'DBText16'
         HyperlinkEnabled = False
+        Border.mmPadding = 0
         DataField = 'CREATED'
         DataPipeline = plJournalsPrint
         DisplayFormat = 'dd/mm/yyyy'
@@ -2213,12 +2263,14 @@ object frmJournals: TfrmJournals
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -2236,6 +2288,7 @@ object frmJournals: TfrmJournals
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -2248,13 +2301,15 @@ object frmJournals: TfrmJournals
       object lblFileName: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblFileName'
+        Border.mmPadding = 0
         Caption = 'lblFileName'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 0
@@ -2266,6 +2321,7 @@ object frmJournals: TfrmJournals
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 7938
       mmPrintPosition = 0
@@ -2285,6 +2341,7 @@ object frmJournals: TfrmJournals
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plJournalsPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2305,7 +2362,6 @@ object frmJournals: TfrmJournals
       end
     end
     object raCodeModule2: TraCodeModule
-      ProgramStream = {00}
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -2443,17 +2499,17 @@ object frmJournals: TfrmJournals
       item
         DataType = ftUnknown
         Name = 'NJOURNAL'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'ACCT'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'TRUST'
-        Value = nil
+        Value = Null
       end>
   end
   object qryAllocPrint: TUniQuery
@@ -2481,17 +2537,17 @@ object frmJournals: TfrmJournals
       item
         DataType = ftUnknown
         Name = 'P_Acct'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_Trust'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_NJournal'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftLargeint
@@ -2705,7 +2761,7 @@ object frmJournals: TfrmJournals
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2732,15 +2788,22 @@ object frmJournals: TfrmJournals
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -2755,13 +2818,15 @@ object frmJournals: TfrmJournals
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 644
     Top = 358
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plAllocPrint'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 40746
@@ -2769,13 +2834,15 @@ object frmJournals: TfrmJournals
       object lblCompanyJournals: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'lblCompany'
+        Border.mmPadding = 0
         Caption = 'lblCompany'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -2788,13 +2855,15 @@ object frmJournals: TfrmJournals
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Journal Report'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -2807,13 +2876,15 @@ object frmJournals: TfrmJournals
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Date:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 265
@@ -2825,13 +2896,15 @@ object frmJournals: TfrmJournals
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Jrnl #'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 265
@@ -2843,13 +2916,15 @@ object frmJournals: TfrmJournals
       object ppLabel15: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Description:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 265
@@ -2862,13 +2937,15 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'Label7'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Code'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 21167
@@ -2881,13 +2958,15 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'Label8'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 48154
@@ -2900,13 +2979,15 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'Label9'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Debit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 155311
@@ -2919,13 +3000,15 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'Label10'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Credit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4022
@@ -2939,6 +3022,7 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'Line2'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -2951,13 +3035,15 @@ object frmJournals: TfrmJournals
       object ppLabel20: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -2970,13 +3056,15 @@ object frmJournals: TfrmJournals
       object ppLabel21: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -2989,6 +3077,7 @@ object frmJournals: TfrmJournals
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer4
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3006,6 +3095,7 @@ object frmJournals: TfrmJournals
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CREATED'
         DataPipeline = plJournalPrint
         DisplayFormat = 'dd/mm/yyyy'
@@ -3027,6 +3117,7 @@ object frmJournals: TfrmJournals
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'NJOURNAL'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -3047,6 +3138,7 @@ object frmJournals: TfrmJournals
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -3068,6 +3160,7 @@ object frmJournals: TfrmJournals
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plJournalPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3090,6 +3183,7 @@ object frmJournals: TfrmJournals
       object ppDBText15: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText15'
+        Border.mmPadding = 0
         DataField = 'REASON'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -3111,13 +3205,15 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'lblEntity1'
         HyperlinkEnabled = False
+        Border.mmPadding = 0
         Caption = 'lblEntity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 0
@@ -3130,6 +3226,7 @@ object frmJournals: TfrmJournals
     object ppDetailBand3: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
@@ -3137,6 +3234,7 @@ object frmJournals: TfrmJournals
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plAllocPrint
         Font.Charset = DEFAULT_CHARSET
@@ -3156,6 +3254,7 @@ object frmJournals: TfrmJournals
       object ppDBMemo3: TppDBMemo
         DesignLayer = ppDesignLayer4
         UserName = 'DBMemo3'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'DESCR'
         DataPipeline = plAllocPrint
@@ -3184,6 +3283,7 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'DBText10'
         BlankWhenZero = True
+        Border.mmPadding = 0
         DataField = 'DEBIT'
         DataPipeline = plAllocPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3206,6 +3306,7 @@ object frmJournals: TfrmJournals
         DesignLayer = ppDesignLayer4
         UserName = 'DBText11'
         BlankWhenZero = True
+        Border.mmPadding = 0
         DataField = 'CREDIT'
         DataPipeline = plAllocPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3227,12 +3328,14 @@ object frmJournals: TfrmJournals
     end
     object ppFooterBand2: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppLine4: TppLine
         DesignLayer = ppDesignLayer4
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -3245,13 +3348,15 @@ object frmJournals: TfrmJournals
       object ppLabel22: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'lblFileName'
+        Border.mmPadding = 0
         Caption = 'lblFileName'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 0

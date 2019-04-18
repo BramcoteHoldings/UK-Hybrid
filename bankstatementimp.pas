@@ -13,7 +13,7 @@ uses
   cxGridCustomPopupMenu, cxGridPopupMenu, MemDS, DBAccess, OracleUniProvider,
   Uni, cxSpinEdit, cxLookAndFeels, cxNavigator,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, dxDateRanges;
 
 const
    Delim: array[0..2] of char = (#44,#9,#59);

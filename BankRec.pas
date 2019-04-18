@@ -116,7 +116,6 @@ type
     Panel1: TPanel;
     cbBank: TComboBox;
     dtpStatementDate: TDateTimePicker;
-    btnPrint: TcxButton;
     Panel2: TPanel;
     dbgrLedger: TcxGrid;
     tvLedger: TcxGridDBTableView;
@@ -201,6 +200,7 @@ type
     edBackdated: TcxCurrencyEdit;
     Label13: TLabel;
     qryBackDated: TUniQuery;
+    btnPrint: TdxBarButton;
     procedure cbBankClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure qryBankRecAfterInsert(DataSet: TDataSet);

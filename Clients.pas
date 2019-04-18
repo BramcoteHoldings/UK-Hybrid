@@ -27,7 +27,7 @@ uses
   cxMemo, cxDBEdit, cxButtons, cxRadioGroup, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
   cxGrid, cxPC, cxImage, cxGroupBox, Vcl.ExtCtrls, cxDBLabel, Vcl.DBCtrls,
-  Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore;
+  Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore, dxPSDBTCLnk;
 
 
 
@@ -1388,7 +1388,7 @@ begin
                         '     WHEN (C.CLIENT_PACK = ''SCCO'') THEN ''No - Safe Custody Client Only'' '+
                         '     WHEN (C.CLIENT_PACK = ''NOCL'') THEN ''No - Development NOCL Only'' '+
                         '     ELSE '''' '+
-                        'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, SC.DESCR '+
+                        'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, SC.DESCR, P.ACN '+
                         'FROM SUPERCLIENT SC, PHONEBOOK P, CLIENT C WHERE C.CODE = ' + quotedstr(Search) +
                         ' AND C.NCLIENT = P.NCLIENT AND P.SUPERCLIENT(+) = SC.CODE';
   qryClient.Open();
@@ -1437,7 +1437,7 @@ begin
                      '     WHEN (C.CLIENT_PACK = ''SCCO'') THEN ''No - Safe Custody Client Only'' '+
                      '     WHEN (C.CLIENT_PACK = ''NOCL'') THEN ''No - Development NOCL Only'' '+
                      '     ELSE '''' '+
-                     'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, P.SUPERCLIENT '+  // 20 Sep 2018 dw added superclient back in
+                     'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, P.SUPERCLIENT, P.ACN '+  // 20 Sep 2018 dw added superclient back in
                      'FROM PHONEBOOK P, CLIENT C WHERE C.NCLIENT = ' + IntToStr(PNClient) +
                      ' AND C.NCLIENT = P.NCLIENT';
 
@@ -2419,7 +2419,7 @@ begin
       if not qryClient.IsEmpty then
       begin
         if (qryClient.FieldByName('GENDER').AsString = 'C') or (qryClient.FieldByName('GENDER').AsString = 'G') then
-          lblTaxNumberMsg.Caption := 'A.B.N.'
+          lblTaxNumberMsg.Caption := qryGender.FieldByName('ACNCAPTION').AsString
         else
           lblTaxNumberMsg.Caption := 'T.F.N.';
         if qryMatterCount.Active then

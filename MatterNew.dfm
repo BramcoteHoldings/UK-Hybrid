@@ -2549,7 +2549,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object lblTrustBank: TLabel
         Left = 164
-        Top = 32
+        Top = 31
         Width = 63
         Height = 15
         Caption = 'Trust Bank *'
@@ -2621,7 +2621,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object cmbBank: TcxDBLookupComboBox
         Left = 224
-        Top = 27
+        Top = 28
         AutoSize = False
         DataBinding.DataField = 'ACCT'
         DataBinding.DataSource = dsMatter
@@ -2991,9 +2991,10 @@ object frmMatterNew: TfrmMatterNew
             end
             object lblxpectedCompletion: TLabel
               Left = 4
-              Top = 98
-              Width = 63
-              Height = 30
+              Top = 99
+              Width = 114
+              Height = 19
+              AutoSize = False
               Caption = 'Expected Completion'
               Transparent = True
               WordWrap = True
@@ -3019,9 +3020,10 @@ object frmMatterNew: TfrmMatterNew
             end
             object Label33: TLabel
               Left = 244
-              Top = 98
-              Width = 83
+              Top = 99
+              Width = 93
               Height = 15
+              AutoSize = False
               Caption = 'Estimated Value'
             end
             object lblTotalFeesRecorded: TLabel
@@ -3130,7 +3132,7 @@ object frmMatterNew: TfrmMatterNew
               StyleFocused.LookAndFeel.NativeStyle = True
               StyleHot.LookAndFeel.NativeStyle = True
               TabOrder = 7
-              Height = 24
+              Height = 25
               Width = 104
             end
             object dtpExpCompletion: TcxDBDateEdit
@@ -3609,7 +3611,7 @@ object frmMatterNew: TfrmMatterNew
         end
         object lblBillingPlan: TLabel
           Left = 14
-          Top = 32
+          Top = 33
           Width = 59
           Height = 15
           Caption = 'Billing Plan'
@@ -3630,7 +3632,7 @@ object frmMatterNew: TfrmMatterNew
         end
         object dbtbBillingPlan: TcxDBTextEdit
           Left = 78
-          Top = 29
+          Top = 28
           DataBinding.DataField = 'BILLING_PLAN'
           DataBinding.DataSource = dsMatter
           Style.LookAndFeel.NativeStyle = True

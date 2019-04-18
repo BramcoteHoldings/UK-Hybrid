@@ -8,7 +8,7 @@ uses
   cxContainer, cxListView, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxEdit, cxLabel, DB,
   OracleUniProvider, Uni, DBAccess, MemDS, ComCtrls, ImgList, cxListBox, Menus,
-  cxGraphics, cxLookAndFeels, Vcl.Buttons;
+  cxGraphics, cxLookAndFeels, Vcl.Buttons, System.ImageList;
 
 type
   TfrmBatchChequePrint = class(TForm)

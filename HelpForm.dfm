@@ -7,7 +7,7 @@ object fmHelpForm: TfmHelpForm
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsStayOnTop
@@ -16,7 +16,7 @@ object fmHelpForm: TfmHelpForm
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 15
   object mReleaseNotes: TcxRichEdit
     Left = 0
     Top = 0
@@ -48,7 +48,7 @@ object fmHelpForm: TfmHelpForm
     Width = 546
     Height = 26
     Align = alBottom
-    TabOrder = 5
+    TabOrder = 1
     object BitBtn1: TBitBtn
       Left = 453
       Top = 0
@@ -97,11 +97,7 @@ object fmHelpForm: TfmHelpForm
     UseSystemFont = True
     Left = 432
     Top = 15
-    DockControlHeights = (
-      0
-      0
-      0
-      0)
+    PixelsPerInch = 96
     object dxBarManager1Bar1: TdxBar
       AllowClose = False
       AllowCustomizing = False

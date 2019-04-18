@@ -8,7 +8,7 @@ object frmBankStmntImport: TfrmBankStmntImport
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -18,12 +18,12 @@ object frmBankStmntImport: TfrmBankStmntImport
     1127
     655)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label3: TLabel
     Left = 10
     Top = 15
-    Width = 94
-    Height = 17
+    Width = 86
+    Height = 15
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -43,7 +43,7 @@ object frmBankStmntImport: TfrmBankStmntImport
         Glyph.SourceDPI = 96
         Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+          000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
           FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -188,7 +188,7 @@ object frmBankStmntImport: TfrmBankStmntImport
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -290,7 +290,7 @@ object frmBankStmntImport: TfrmBankStmntImport
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -547,7 +547,7 @@ object frmBankStmntImport: TfrmBankStmntImport
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -566,7 +566,7 @@ object frmBankStmntImport: TfrmBankStmntImport
     UseSystemFont = True
     Left = 491
     Top = 161
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False
       AllowQuickCustomizing = False
@@ -702,7 +702,7 @@ object frmBankStmntImport: TfrmBankStmntImport
     UseOwnFont = False
     Left = 154
     Top = 225
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object qryBankRec: TUniQuery
     Connection = dmAxiom.uniInsight

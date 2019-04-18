@@ -10,7 +10,7 @@ uses
   ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport, ppParameter,
   cxClasses, ppDesignLayer, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxLayoutContainer, dxLayoutControlAdapters,
-  dxLayoutControl;
+  dxLayoutControl, System.ImageList;
 
 type
   TfrmGenders = class(TfrmMaint)
