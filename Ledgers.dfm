@@ -44,15 +44,11 @@ object frmLedgers: TfrmLedgers
     object tabLedger: TcxTabSheet
       Caption = 'Ledger'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
         Top = 246
-        Width = 1001
-        Height = 271
+        Width = 995
+        Height = 266
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
@@ -72,8 +68,8 @@ object frmLedgers: TfrmLedgers
         object grdTransactions: TcxGrid
           Left = 1
           Top = 1
-          Width = 999
-          Height = 269
+          Width = 993
+          Height = 264
           Align = alClient
           PopupMenu = pmCreateCheque
           TabOrder = 0
@@ -143,7 +139,7 @@ object frmLedgers: TfrmLedgers
       object Panel2: TPanel
         Left = 0
         Top = 28
-        Width = 1001
+        Width = 995
         Height = 210
         Align = alTop
         Caption = 'Panel2'
@@ -151,7 +147,7 @@ object frmLedgers: TfrmLedgers
         object grdLedgers: TcxGrid
           Left = 1
           Top = 1
-          Width = 999
+          Width = 993
           Height = 208
           Align = alClient
           TabOrder = 0
@@ -254,7 +250,7 @@ object frmLedgers: TfrmLedgers
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1001
+        Width = 995
         Height = 28
         Align = alTop
         TabOrder = 2
@@ -275,7 +271,7 @@ object frmLedgers: TfrmLedgers
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 665
+          Left = 659
           Top = 7
           Width = 35
           Height = 15
@@ -285,7 +281,7 @@ object frmLedgers: TfrmLedgers
           ExplicitLeft = 671
         end
         object Label6: TLabel
-          Left = 814
+          Left = 808
           Top = 7
           Width = 35
           Height = 15
@@ -295,7 +291,7 @@ object frmLedgers: TfrmLedgers
           ExplicitLeft = 820
         end
         object tbLedgerSearch: TEdit
-          Left = 702
+          Left = 696
           Top = 2
           Width = 95
           Height = 23
@@ -304,17 +300,15 @@ object frmLedgers: TfrmLedgers
           TabOrder = 0
           OnChange = tbLedgerSearchChange
           OnKeyDown = tbLedgerSearchKeyDown
-          ExplicitLeft = 708
         end
         object tbReportSearch: TEdit
-          Left = 852
+          Left = 846
           Top = 3
           Width = 136
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 1
           OnChange = tbReportSearchChange
-          ExplicitLeft = 858
         end
         object chkGroupBy: TcxCheckBox
           Left = 77
@@ -337,15 +331,11 @@ object frmLedgers: TfrmLedgers
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
         Control = Panel2
-        ExplicitWidth = 8
       end
     end
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
-      ExplicitLeft = 1
-      ExplicitWidth = 1001
-      ExplicitHeight = 515
       DesignSize = (
         995
         512)
@@ -614,8 +604,6 @@ object frmLedgers: TfrmLedgers
         OptionsImage.NumGlyphs = 2
         TabOrder = 2
         OnClick = btnClearAllClick
-        ExplicitLeft = 902
-        ExplicitTop = 482
       end
       object grpTrans: TcxGroupBox
         Left = 10
@@ -643,7 +631,7 @@ object frmLedgers: TfrmLedgers
           Transparent = True
         end
         object lblAmountFrom: TLabel
-          Left = 8
+          Left = 2
           Top = 84
           Width = 105
           Height = 15
@@ -651,7 +639,7 @@ object frmLedgers: TfrmLedgers
           Transparent = True
         end
         object Label5: TLabel
-          Left = 8
+          Left = 2
           Top = 108
           Width = 96
           Height = 15
@@ -659,7 +647,7 @@ object frmLedgers: TfrmLedgers
           Transparent = True
         end
         object Label4: TLabel
-          Left = 8
+          Left = 2
           Top = 132
           Width = 107
           Height = 15
@@ -818,9 +806,9 @@ object frmLedgers: TfrmLedgers
           TabOrder = 13
         end
         object chMovementOnly: TCheckBox
-          Left = 264
+          Left = 248
           Top = 110
-          Width = 177
+          Width = 193
           Height = 17
           Alignment = taLeftJustify
           Caption = 'Only accounts with movement?'

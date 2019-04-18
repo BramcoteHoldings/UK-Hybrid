@@ -38,8 +38,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     OptionsImage.SmallImages = FoldersImageList
     OptionsView.NavigationPane.MaxVisibleGroups = 0
     OnActiveGroupChanged = emailNavBarActiveGroupChanged
-    ExplicitTop = 30
-    ExplicitHeight = 643
     object grpMail: TdxNavBarGroup
       Caption = 'Mail'
       Hint = 'Mail'
@@ -94,7 +92,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         RowSelect = True
         TabOrder = 0
         OnChange = tvFoldersChange
-        ExplicitHeight = 579
       end
     end
     object grpCalendarControl: TdxNavBarGroupControl
@@ -142,8 +139,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 5
-    ExplicitTop = 30
-    ExplicitHeight = 643
     object cxCheckBox1: TcxCheckBox
       Left = 563
       Top = 51
@@ -172,7 +167,6 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
       Properties.HideTabs = True
       LookAndFeel.Kind = lfStandard
       LookAndFeel.NativeStyle = False
-      ExplicitHeight = 643
       ClientRectBottom = 643
       ClientRectLeft = 2
       ClientRectRight = 934
@@ -181,15 +175,11 @@ object frmOutLookDiaryNew: TfrmOutLookDiaryNew
         Caption = 'tabEmails'
         ImageIndex = 0
         OnShow = tabEmailsShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object grdMail: TcxGrid
           Left = 0
           Top = 34
           Width = 932
-          Height = 605
+          Height = 607
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfOffice11

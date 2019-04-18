@@ -148,6 +148,9 @@ uses
 
 {$R *.DFM}
 
+var
+   FMsgStore: IRwMapiMsgStore;
+
 
 procedure TfrmDocNew.DisplayMatter(sMatter: string);
 var
@@ -334,6 +337,7 @@ end;
 
 procedure TfrmDocNew.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+   FMsgStore := nil;
    qryMatter.Close;
    FileList.Free;
    qryPRECCLASSIFICATION.Close;
@@ -416,6 +420,9 @@ begin
                   end;
                end;
             end;
+
+            if FMsgStore = Nil then
+               FMsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadwrite, False);
 
             for I := 0 to FileList.Count - 1 do
             begin
@@ -609,7 +616,7 @@ begin
                    begin
                       try
     //                     FSavedMsg := dmAxiom.MapiSession.GetDefaultMsgStore(alReadwrite).OpenSavedMessage(AParsedDocName);
-                         FSavedMsg := dmAxiom.MsgStore.OpenSavedMessage(AParsedDocName);
+                         FSavedMsg := FMsgStore.OpenSavedMessage(AParsedDocName);
                       except
                                //
                       end;

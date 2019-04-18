@@ -112,7 +112,7 @@ object frmClients: TfrmClients
   object dblblTaxNo: TcxDBLabel
     Left = 144
     Top = 137
-    DataBinding.DataField = 'TAXNO'
+    DataBinding.DataField = 'ACN'
     DataBinding.DataSource = dsClients
     ParentColor = False
     ParentFont = False
@@ -2450,14 +2450,14 @@ object frmClients: TfrmClients
           item
             Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible]
             Position = 0
+            Text = 'Group/Field'
             Width = 280
-            WideText = 'Group/Field'
           end
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
             Position = 1
+            Text = 'Value'
             Width = 799
-            WideText = 'Value'
           end>
       end
     end
@@ -4309,10 +4309,6 @@ object frmClients: TfrmClients
       Caption = 'Bills'
       ImageIndex = 13
       OnShow = tabBillsShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 433
@@ -7718,7 +7714,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8565,7 +8561,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -12037,7 +12033,8 @@ object frmClients: TfrmClients
       '  P.DOB,'
       '  P.CLIENT_IMAGE,'
       '  P.DATE_OF_DEATH,'
-      '  SC.DESCR AS SUPERCLIENT'
+      '  SC.DESCR AS SUPERCLIENT,'
+      '  P.ACN'
       'FROM'
       '  SUPERCLIENT SC,'
       '  CLIENT C,'
@@ -12739,7 +12736,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14031,7 +14028,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -14255,7 +14252,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -15705,7 +15702,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16233,7 +16230,7 @@ object frmClients: TfrmClients
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

@@ -442,7 +442,7 @@ implementation
 
 uses
   MiscFunc, CheqReqNew, CheqReqPrint, Cheque, Process, AxiomData,
-  CheqreqHistoryForm, CheqReqReverse, CheqReqInvoiceDebit,
+  {CheqreqHistoryForm,} CheqReqReverse, CheqReqInvoiceDebit,
   BulkCheques,glComponentUtil, ChequePrint, System.UITypes;
 
 {$R *.DFM}
@@ -2592,10 +2592,10 @@ begin
 end;
 
 procedure TfrmCheqReqs.miViewCheqreqHistoryforMatterClick(Sender: TObject);
-var
-  frmCheqreqHistory: TfrmCheqreqHistory;
+//var
+//  frmCheqreqHistory: TfrmCheqreqHistory;
 begin
-  if qryCheqReq.IsEmpty then
+{  if qryCheqReq.IsEmpty then
     MessageDlg('Nothing to look at!', mtInformation, [mbOK], 0)
   else
   begin
@@ -2608,7 +2608,7 @@ begin
         frmCheqreqHistory.qryMatterDetails.Open;
         frmCheqreqHistory.Show;
       end;    //  end if
-  end;    //  end if-else
+  end;    //  end if-else   }
 end;
 
 procedure TfrmCheqReqs.qryCheqReqBeforeClose(DataSet: TDataSet);

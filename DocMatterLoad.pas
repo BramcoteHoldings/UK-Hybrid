@@ -50,6 +50,7 @@ var
    lFolderName: string;
    bTopLevelFolder: boolean;
    lParentParent_ID: integer;
+   FMsgStore: IRwMapiMsgStore;
 
 function DoFileScan(const APathName: string; ANMatter: integer; APrecCat, APrecClass, AFolder: integer;
                      ACopyMove: integer = 0; ASplitEmail: boolean = True; ACreateFolder: boolean = False;
@@ -63,7 +64,7 @@ begin
       FileCount := 0;
 //      FileCount2 := 0;
       lFileFolder_ID := 0;
-      lFolder_Level := -1;
+      lFolder_Level := 0;
 
       bTopLevelFolder := True;
       bFolderCreate := ACreateFolder;
@@ -83,6 +84,8 @@ begin
          end;
       end;
 
+      if FMsgStore = Nil then
+         FMsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadwrite, False);
       ////
       lParentParent_ID := AFolder;
       fmFileCopyDisp := TfrmFileCopyDisp.Create(nil);
@@ -97,12 +100,14 @@ begin
       LPrecClass := APrecClass;
       lFolder := AFolder;
       lOrigPath := IncludeTrailingPathDelimiter(APathName);
+      lFolderName := '';
       LRetFileCount := FileSearch(APathName,'*.*');
    finally
       fmFileCopyDisp.Close;
       dmAxiom.uniInsight.Commit;
       dmAxiom.qryDocDetails.Close;
       DoFileScan := FileCount;
+      FMsgStore := nil;
    end;
 end;
 
@@ -245,7 +250,7 @@ begin
                begin
                   try
 //                     FSavedMsg := dmAxiom.MapiSession.GetDefaultMsgStore(alReadwrite).OpenSavedMessage(AParsedDocName);
-                     FSavedMsg := dmAxiom.MsgStore.OpenSavedMessage(AParsedDocName);
+                     FSavedMsg := FMsgStore.OpenSavedMessage(AParsedDocName);
                   except
                            //
                   end;
@@ -532,7 +537,7 @@ begin
                   AFolderID := dmAxiom.GetSeqNumber('seq_doc_folders');
                   FieldByName('FOLDER_ID').AsInteger := strToInt(AFolderID) +1;
                   FieldByName('DESCR').AsString := RightStr(CheckPath, (lCheckPathLen - lOrigDirLen));
-                  if lParentParent_ID <> 0 then
+                  if lParentParent_ID > 0 then
                      FieldByName('PARENT_ID').AsInteger := lParentParent_ID
                   else
                      FieldByName('PARENT_ID').AsInteger := 0;

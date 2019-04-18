@@ -18276,7 +18276,7 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressDocking Library\Sources\dxDockStyleVS2005.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarDBNav.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbRAP.res */
-/* C:\jcl\lib\d25\win32\debug\JclUnicode.res */
+/* C:\jcl\lib\d25\win32\JclUnicode.res */
 /* C:\jvcl\Resources\JvConsts.res */
 /* D:\Components-XE10\VirtualTreeView\Source\VirtualTrees.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\CategoryButtons.res */
@@ -18534,7 +18534,6 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillCreditTypes.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\ChequePrint.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\ChequeUpCredAlloc.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqreqHistoryForm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqReverse.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqInvoiceDebit.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\BulkCheques.dfm */
@@ -18827,7 +18826,6 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\MatterNotesFrm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\DocDescription.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Matters.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\IGraph.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryType.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\MatterTaskNew.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\YearEnd2.dfm */

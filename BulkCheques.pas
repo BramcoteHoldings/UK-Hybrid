@@ -11,7 +11,8 @@ uses
   cxLookAndFeelPainters, StdCtrls, cxButtons, cxTextEdit, cxCurrencyEdit,
   cxCheckBox, cxDropDownEdit, cxButtonEdit, cxLabel, cxContainer,
   cxMaskEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, dxBar,
-  Menus, cxLookAndFeels, cxNavigator;
+  Menus, cxLookAndFeels, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog;
 
 type                                     
   TfrmBulkCheques = class(TForm)
@@ -26,7 +27,6 @@ type
     pbCancel: TcxButton;
     tvBulkChequesNCHEQREQ_LIST: TcxGridDBColumn;
     cmbPrinter: TcxComboBox;
-    lblPrinter: TcxLabel;
     cxLabel2: TcxLabel;
     cbAuthBy: TcxLookupComboBox;
     qryEmployee: TUniQuery;
@@ -44,6 +44,7 @@ type
     dsEFTBank: TUniDataSource;
     teRefNo: TcxTextEdit;
     lblReference: TcxLabel;
+    lblPrinter: TcxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure tvBulkChequesDblClick(Sender: TObject);

@@ -8,7 +8,7 @@ uses
   cxProgressBar, dxStatusBar, Vcl.Controls, Vcl.StdCtrls, cxCheckBox,
   Vcl.Buttons, System.Classes, System.IniFiles,
   System.Win.Registry, System.SysUtils, Windows, Vcl.Dialogs, Vcl.Graphics, Vcl.ComCtrls,
-  cxLabel, messages, VCL.Themes, System.ConvUtils, dxGDIPlusClasses, cxImage, dxDPIAwareUtils;
+  cxLabel, messages, VCL.Themes, System.ConvUtils, dxGDIPlusClasses, cxImage;
 
 
 

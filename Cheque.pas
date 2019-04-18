@@ -1391,7 +1391,7 @@ begin
 
                         // post components
                         // AES 14/4
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',false,'');
 
 
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
@@ -1448,7 +1448,7 @@ begin
                         {post components}
                         //AES 14/4
 
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',true,'');
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',false,'');
 
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                             , cAmount
@@ -1622,7 +1622,7 @@ begin
                   // Post for trade
 
                   {post components}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLedgerCode,'',false,'');
                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                       //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
                       , 0 - cTradeTotal
@@ -1647,7 +1647,7 @@ begin
                   // Post for legal
                   {post components}
                   //AES 14/4
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLegalCode,'',true,'');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLegalCode,'',false,'');
 
                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                       , 0 - cMatterTotal
@@ -1754,7 +1754,8 @@ begin
                     if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
                     begin
                       {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,
+                                                                     TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
                       PostLedger(dtpDate.Date
                            , qryLedger.FieldByName('TAX').AsFloat
@@ -1776,7 +1777,8 @@ begin
                     else
                       begin
                       {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,
+                                                                     TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
                       PostLedger(dtpDate.Date
                            , 0 - qryLedger.FieldByName('TAX').AsFloat
@@ -1801,7 +1803,8 @@ begin
                     if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
                     begin
                      {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,
+                                                                     TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
                       PostLedger(dtpDate.Date
                            , qryLedger.FieldByName('TAX').AsFloat
@@ -1823,7 +1826,8 @@ begin
                     else
                     begin
                       {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,
+                                                                     TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
                       PostLedger(dtpDate.Date
                            , 0 - qryLedger.FieldByName('TAX').AsFloat
@@ -1920,7 +1924,7 @@ begin
                   qryAllocs.Post;  // Put it into the cached buffer
 
                   sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_UPCRED_DR');
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLedgerCode,'',false,'');
                   // do creditor control account
 
                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
@@ -1941,7 +1945,7 @@ begin
                       , qryAllocs.FieldByName('NMATTER').AsInteger );
 
                   sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR');
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryAllocs.FieldByName('NMATTER').AsString,sLedgerCode,'',false,'');
                   // do debtor control account
 
                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime

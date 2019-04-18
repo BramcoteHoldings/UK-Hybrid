@@ -5,8 +5,8 @@ object frmLedgerNew: TfrmLedgerNew
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = 'Account Ledger Code Creation'
-  ClientHeight = 570
-  ClientWidth = 355
+  ClientHeight = 573
+  ClientWidth = 360
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -111,8 +111,8 @@ object frmLedgerNew: TfrmLedgerNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 355
-    Height = 570
+    Width = 360
+    Height = 573
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -124,11 +124,11 @@ object frmLedgerNew: TfrmLedgerNew
     TabOrder = 2
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 361
-    ExplicitHeight = 550
+    ExplicitWidth = 336
+    ExplicitHeight = 508
     DesignSize = (
-      355
-      570)
+      360
+      573)
     object lblEntityName: TLabel
       Left = 116
       Top = 12

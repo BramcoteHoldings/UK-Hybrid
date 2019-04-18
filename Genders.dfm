@@ -2,23 +2,23 @@ inherited frmGenders: TfrmGenders
   Left = 531
   Top = 319
   Caption = 'Name Label Maintenance'
-  ClientHeight = 488
-  ClientWidth = 921
+  ClientHeight = 383
+  ClientWidth = 477
   OldCreateOrder = True
-  ExplicitWidth = 927
-  ExplicitHeight = 519
-  PixelsPerInch = 106
+  ExplicitWidth = 483
+  ExplicitHeight = 412
+  PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
-    Top = 30
-    Width = 921
-    Height = 458
+    Top = 28
+    Width = 477
+    Height = 355
     Align = alClient
     TabOrder = 4
     AutoSize = True
-    ExplicitWidth = 1210
-    ExplicitHeight = 495
+    ExplicitWidth = 921
+    ExplicitHeight = 460
     object DBEdit1: TDBEdit
       Left = 96
       Top = 14
@@ -418,8 +418,9 @@ inherited frmGenders: TfrmGenders
     Top = 196
   end
   inherited bmMain: TdxBarManager
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
+      Font.Height = -9
       NotDocking = []
       OldName = 'Main Menu1'
     end
@@ -437,23 +438,14 @@ inherited frmGenders: TfrmGenders
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
       end
     end
     inherited ppMaintDetailBand: TppDetailBand
@@ -462,13 +454,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'CODE'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -480,6 +474,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -500,13 +495,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'DESCR'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 28840
@@ -518,6 +515,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -538,13 +536,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'SEARCHCAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -556,6 +556,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'SEARCHCAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -576,13 +577,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'NAMECAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -594,6 +597,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'NAMECAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -614,13 +618,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'LONGNAMECAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -632,6 +638,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'LONGNAMECAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -652,13 +659,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'SHORTNAMECAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -670,6 +679,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'SHORTNAMECAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -690,13 +700,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'TITLECAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -708,6 +720,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'TITLECAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -728,13 +741,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'ACNCAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -746,6 +761,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'ACNCAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -766,13 +782,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'OCCUPATIONCAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -784,6 +802,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'OCCUPATIONCAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -804,13 +823,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'CLIENTNAMECAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -822,6 +843,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
+        Border.mmPadding = 0
         DataField = 'CLIENTNAMECAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -842,13 +864,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'CLIENTCONTACTCAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -860,6 +884,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'CLIENTCONTACTCAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -880,13 +905,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label12'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'SALUTATIONCAPTION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -898,6 +925,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
+        Border.mmPadding = 0
         DataField = 'SALUTATIONCAPTION'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -918,13 +946,15 @@ inherited frmGenders: TfrmGenders
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
         AutoSize = False
+        Border.mmPadding = 0
         Caption = 'IS_COMPANY'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 2646
@@ -936,6 +966,7 @@ inherited frmGenders: TfrmGenders
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
+        Border.mmPadding = 0
         DataField = 'IS_COMPANY'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -950,11 +981,6 @@ inherited frmGenders: TfrmGenders
         mmTop = 39688
         mmWidth = 3175
         BandType = 4
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
         LayerName = Foreground
       end
     end
