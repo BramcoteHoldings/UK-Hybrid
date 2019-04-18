@@ -3,17 +3,17 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
   Top = 252
   Caption = 'Analysis/Comparison of fees'
   ClientHeight = 327
-  ClientWidth = 536
+  ClientWidth = 553
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
   OnClose = FormClose
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 15
   object nlPercentVariance: TNumberLabel
     Left = 200
     Top = 248
@@ -71,8 +71,8 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
   object Label21: TLabel
     Left = 16
     Top = 248
-    Width = 77
-    Height = 20
+    Width = 70
+    Height = 21
     Caption = 'Variance:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -122,50 +122,50 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
   object Label1: TLabel
     Left = 8
     Top = 8
-    Width = 30
-    Height = 14
+    Width = 35
+    Height = 15
     Caption = 'Matter'
   end
   object fraTheFirm: TGroupBox
     Left = 282
     Top = 64
-    Width = 249
+    Width = 263
     Height = 225
     Caption = 'The Firm'
     TabOrder = 0
     object Label20: TLabel
-      Left = 16
+      Left = 10
       Top = 32
-      Width = 43
-      Height = 14
+      Width = 45
+      Height = 15
       Caption = 'Revenue'
     end
     object Label23: TLabel
-      Left = 16
+      Left = 10
       Top = 128
-      Width = 120
-      Height = 14
+      Width = 138
+      Height = 15
       Caption = 'Contribution/Partner Cost'
     end
     object Label24: TLabel
-      Left = 16
+      Left = 10
       Top = 104
-      Width = 60
-      Height = 14
+      Width = 65
+      Height = 15
       Caption = 'Partner Cost'
     end
     object Label25: TLabel
-      Left = 16
+      Left = 10
       Top = 80
-      Width = 90
-      Height = 14
+      Width = 100
+      Height = 15
       Caption = 'Gross Contribution'
     end
     object Label26: TLabel
-      Left = 17
+      Left = 11
       Top = 56
-      Width = 83
-      Height = 14
+      Width = 93
+      Height = 15
       Caption = 'Non-Partner Cost'
     end
     object dblblFirmRecvdFees: TDBText
@@ -220,10 +220,10 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
       Height = 2
     end
     object lblComparison: TLabel
-      Left = 16
+      Left = 10
       Top = 152
-      Width = 229
-      Height = 14
+      Width = 247
+      Height = 15
       Caption = 'These figures include only Matters which have:'
     end
     object nlFirmGrossCont: TNumberLabel
@@ -281,7 +281,7 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
       NoZero = False
     end
     object chkPartner: TCheckBox
-      Left = 16
+      Left = 10
       Top = 168
       Width = 217
       Height = 17
@@ -290,7 +290,7 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
       OnClick = chkPartnerClick
     end
     object chkType: TCheckBox
-      Left = 16
+      Left = 10
       Top = 200
       Width = 217
       Height = 17
@@ -299,7 +299,7 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
       OnClick = chkTypeClick
     end
     object chkAuthor: TCheckBox
-      Left = 16
+      Left = 10
       Top = 184
       Width = 217
       Height = 17
@@ -318,8 +318,8 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
     object Label15: TLabel
       Left = 16
       Top = 32
-      Width = 43
-      Height = 14
+      Width = 45
+      Height = 15
       Caption = 'Revenue'
     end
     object dblblJuniorCost: TDBText
@@ -355,29 +355,29 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
     object Label19: TLabel
       Left = 16
       Top = 128
-      Width = 120
-      Height = 14
+      Width = 138
+      Height = 15
       Caption = 'Contribution/Partner Cost'
     end
     object Label18: TLabel
       Left = 16
       Top = 104
-      Width = 60
-      Height = 14
+      Width = 65
+      Height = 15
       Caption = 'Partner Cost'
     end
     object Label17: TLabel
       Left = 16
       Top = 80
-      Width = 90
-      Height = 14
+      Width = 100
+      Height = 15
       Caption = 'Gross Contribution'
     end
     object Label16: TLabel
       Left = 17
       Top = 56
-      Width = 83
-      Height = 14
+      Width = 93
+      Height = 15
       Caption = 'Non-Partner Cost'
     end
     object dblblRecvdFees: TDBText
@@ -451,7 +451,7 @@ object frmMaisterAnalysis: TfrmMaisterAnalysis
     end
   end
   object btnAnalyse: TBitBtn
-    Left = 456
+    Left = 470
     Top = 296
     Width = 75
     Height = 25

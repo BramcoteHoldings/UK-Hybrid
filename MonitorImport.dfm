@@ -3,11 +3,11 @@ object frmMonitorImport: TfrmMonitorImport
   Top = 356
   Caption = 'Monitor Import'
   ClientHeight = 92
-  ClientWidth = 482
+  ClientWidth = 497
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -15,28 +15,29 @@ object frmMonitorImport: TfrmMonitorImport
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    482
+    497
     92)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label3: TLabel
-    Left = 8
-    Top = 8
-    Width = 71
-    Height = 13
+    Left = 4
+    Top = 11
+    Width = 86
+    Height = 15
     Caption = 'Import from File'
   end
   object tbFile: TEdit
-    Left = 88
+    Left = 104
     Top = 8
-    Width = 366
-    Height = 21
+    Width = 359
+    Height = 23
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     Text = 'NETLOG01.ACC'
+    ExplicitWidth = 369
   end
   object btnSave: TBitBtn
-    Left = 454
+    Left = 462
     Top = 6
     Width = 25
     Height = 24
@@ -59,7 +60,7 @@ object frmMonitorImport: TfrmMonitorImport
     OnClick = btnSaveClick
   end
   object btnOK: TBitBtn
-    Left = 404
+    Left = 412
     Top = 63
     Width = 75
     Height = 25
@@ -71,15 +72,15 @@ object frmMonitorImport: TfrmMonitorImport
     OnClick = btnOKClick
   end
   object chkFileDelete: TCheckBox
-    Left = 88
-    Top = 32
-    Width = 281
+    Left = 104
+    Top = 36
+    Width = 235
     Height = 17
     Caption = 'Delete file after processing?'
     TabOrder = 3
   end
   object btnCancel: TBitBtn
-    Left = 323
+    Left = 331
     Top = 63
     Width = 75
     Height = 25

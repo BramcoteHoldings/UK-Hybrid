@@ -1,31 +1,28 @@
 inherited frmBranches: TfrmBranches
   Left = 784
   Top = 321
-  AutoSize = True
   Caption = 'Branches'
-  ClientHeight = 633
-  ClientWidth = 518
+  ClientHeight = 634
+  ClientWidth = 517
   OldCreateOrder = True
   Scaled = True
   OnShow = FormShow
-  ExplicitWidth = 524
-  ExplicitHeight = 662
+  ExplicitWidth = 523
+  ExplicitHeight = 663
   PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
     Top = 28
-    Width = 518
-    Height = 605
+    Width = 517
+    Height = 606
     Align = alClient
     ParentBackground = True
     TabOrder = 4
     Transparent = True
     AutoSize = True
-    ExplicitLeft = 576
-    ExplicitTop = 40
-    ExplicitWidth = 737
-    ExplicitHeight = 641
+    ExplicitWidth = 314
+    ExplicitHeight = 183
     object dbedDescr: TDBEdit
       Left = 136
       Top = 45

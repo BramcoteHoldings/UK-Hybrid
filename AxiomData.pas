@@ -1054,6 +1054,7 @@ type
     QueryTolerance: Double;  // A query must run more than this many seconds in order to be traced
     RegistryRoot: string;
     bShutDown: boolean;
+    bCostCA: boolean;
     property AxiomAdminMode: Boolean read FAdminMode write FAdminMode;
     property Code: string read FCode;
     property AccessLevel: integer read FUserAccessLevel;
@@ -2860,8 +2861,6 @@ begin
       InboxFolderID := FMsgStore.OpenFolderByType(ftInbox);
       FSentItemsFolderID := FMsgStore.OpenFolderByType(ftSentItems);
       FOutboxFolderID := FMsgStore.OpenFolderByType(ftOutbox);
-//   if (not IsExeRunning('AxiomTrayMonitor.exe', ExeCount)) or
-//      (not IsExeRunning('InsightTrayMonitor.exe', ExeCount))then
 
       if (not IsExeRunning('AxiomTrayMonitor.exe', ExeCount)) and
          (not IsExeRunning('InsightTrayMonitor.exe', ExeCount)) then

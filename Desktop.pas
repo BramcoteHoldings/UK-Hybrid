@@ -22,9 +22,8 @@ uses
   cxImageComboBox, cxMemo, cxCalendar, cxCheckBox, cxColorComboBox,
   cxProgressBar, cxBarEditItem, cxLabel, cxRadioGroup, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxRibbonCustomizationForm, dxSkinsCore, WorkflowMergeDocument, System.Win.ComObj,
-  dxDPIAwareUtils, cxPropertiesStore, ConflictSearch,
-  cxScheduler, cxSchedulerCustomControls,
+  dxRibbonCustomizationForm, WorkflowMergeDocument, System.Win.ComObj,
+  cxPropertiesStore, ConflictSearch, cxScheduler, cxSchedulerCustomControls,
   cxSchedulerCustomResourceView, cxSchedulerDayView, cxSchedulerAgendaView,
   cxSchedulerDateNavigator, cxSchedulerHolidays, cxSchedulerTimeGridView,
   cxSchedulerUtils, cxSchedulerWeekView, cxSchedulerYearView,
@@ -756,7 +755,7 @@ uses
   EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
   Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
-  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer;
+  WinAPI.ShellAPI, SearchIndexConfig;
 
 
 {$R *.DFM}
@@ -811,6 +810,8 @@ begin
             Application.ProcessMessages;
 
             sPing_Server := SystemString('PING_SERVER');
+
+            dmAxiom.bCostCA := (SystemString('COSTCENTRE_ACCOUNTING_YN') = 'Y');
 
             qryDiary.SQL.Clear;
             if SystemString('USE_PROJECT_BUDGETING') = 'N' then
@@ -4057,7 +4058,7 @@ begin
 //    IDXNARRATIVE: FindOrCreate(TfrmReceiptReqNarrative, iProgramID).Show;
     IDXDOCFOLDERTMPL: FindOrCreate(TfrmDoc_Fldr_Tmpl, iProgramID).Show;
     IDXDOCINDEXUSERS: FindOrCreate(TfrmIndexConfig, iProgramID).Show;
-    IDXBULKMAILER: FindorCreate(TfrmBulkMailer, iProgramID).Show;
+//    IDXBULKMAILER: FindorCreate(TfrmBulkMailer, iProgramID).Show;
   end;
   Screen.Cursor := csrPrev;  // Restore cursor
 end;
@@ -5071,24 +5072,21 @@ begin
    begin
       GetUserCount;
       if sPing_Server <> '' then
-      BEGIN
+      begin
          if dmAxiom.Ping(sPing_Server) = true then
          begin
             TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[0].IndicatorType := sitGreen;
             TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[1].IndicatorType := sitOff;
-            if dmAxiom.uniInsight.Connected = False then
-               dmAxiom.uniInsight.Connect;
          end
          else
          begin
             TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[0].IndicatorType := sitOff;
             TdxStatusBarStateIndicatorPanelStyle(StatusBar.Panels[6].PanelStyle).Indicators.Items[1].IndicatorType := sitRed;
-            if dmAxiom.uniInsight.Connected = False then
-               dmAxiom.uniInsight.Connect;
          end;
-      END;
+      end;
+      if dmAxiom.uniInsight.Connected = False then
+            dmAxiom.uniInsight.Connect;
    end;
-
 //   StatusBar.Panels.Items[3].Text := 'User '+ IntToStr(dmAxiom.UserCount) + ' of '+IntToStr(nTotal);
 end;
 

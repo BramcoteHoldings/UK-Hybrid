@@ -2001,6 +2001,9 @@ type
     procedure lvFoldersDragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
     procedure lvFoldersDragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure lvFoldersMoveTo(Sender: TcxCustomTreeList;
+      AttachNode: TcxTreeListNode; AttachMode: TcxTreeListNodeAttachMode;
+      Nodes: TList; var IsCopy, Done: Boolean);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2143,7 +2146,7 @@ uses
   RptLedgerFees, RptLedgerDisb, RptLedgerDebt, RptLedgerSundry, RptLedgerTrust,
   RptLedgerCombo, RptLedgerCheqReq, RptLedgerUnconCheqReq,
   MiscClasses, JournalDisbDebt, GenericSearch, PrecNew,
-  RptLedgerTransit, TransitNew, citfunc, PhoneBookNew, CheqreqHistoryForm,
+  RptLedgerTransit, TransitNew, citfunc, PhoneBookNew,{ CheqreqHistoryForm,}
   OptionsUser, ShellAPI, RptLedgerCreditors, AccountNew, DebtorNotes,
   WorkFlowTask, Clients, matternotes, uRwDateTimeUtils,
   uRwMapiUtils, uRwBoxes, uRwMapiMessage, DocSearch,
@@ -5417,10 +5420,12 @@ var
   sRenamedFile,
   sFileToDelete,
   sSource,
-  sSQL: string;
+  sSQL,
+  sExtToDelete: string;
   bDeleteFile: boolean;
   I,
-  RecIdx: integer;
+  RecIdx,
+  iDocIDToDelete: integer;
 begin
    case pageDocuments.ActivePageIndex of
       0: begin
@@ -5437,8 +5442,9 @@ begin
                      for I := 0 to tvDocs.Controller.SelectedRowCount - 1 do
     			         begin
                         RecIdx := tvDocs.Controller.SelectedRecords[I].RecordIndex;
-                        tvDocs.Controller.FocusedRowIndex := RecIdx;
-                        sFileToDelete := tvDocsPATH.EditValue;
+                        sFileToDelete := tvDocs.DataController.GetValue(RecIdx, tvDocsPATH.Index);
+                        iDocIDToDelete := tvDocs.DataController.GetValue(RecIdx, tvDocsDOCID.Index);
+                        sExtToDelete :=  UpperCase(tvDocs.DataController.GetValue(RecIdx, tvDocsFILE_EXTENSION.Index));
                         if dmAxiom.Security.Document.DeleteFile and bDeleteFile then
                         begin
                            if FileExists(sFileToDelete) = True then
@@ -5451,7 +5457,7 @@ begin
                               begin
                                  Close;
                                  SQL.Text := 'select path from doc where parentdocid = :parentdocid';
-                                 ParamByName('parentdocid').AsInteger := tvDocsDOCID.EditValue;
+                                 ParamByName('parentdocid').AsInteger := iDocIDToDelete;
                                  Open;
                                  while not eof do
                                  begin
@@ -5475,18 +5481,18 @@ begin
                         begin
                            SQL.Clear;
                            SQL.Text := sSQL;
-                           ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
+                           ParamByName('docid').AsInteger := iDocIDToDelete;
                            Execute;
                         end;
 
-                        if (UpperCase(tvDocsFILE_EXTENSION.EditValue) = 'MSG') then
+                        if (sExtToDelete = 'MSG') then
                         begin
                            sSQL := 'DELETE FROM DOC WHERE PARENTDOCID = :DOCID';
                            with dmAxiom.qryTmp do
                            begin
                               SQL.Clear;
                               SQL.Text := sSQL;
-                              ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
+                              ParamByName('docid').AsInteger := iDocIDToDelete;
                               Execute;
                            end;
                         end;
@@ -5496,15 +5502,19 @@ begin
                         begin
                            SQL.Clear;
                            SQL.Text := sSQL;
-                           ParamByName('docid').AsInteger := tvDocsDOCID.EditValue;
+                           ParamByName('docid').AsInteger := iDocIDToDelete;
                            Execute;
                         end;
                      end;
                   finally
-                        dmAxiom.uniInsight.Commit;
-                        tvdocs.EndUpdate;
-                        qryDocs.Close;
-                        qryDocs.Open;
+                     dmAxiom.uniInsight.Commit;
+                     if (chkPreviewPane.Checked = True) then
+                     begin
+                        pnlPreview.Path.Empty;
+                     end;
+                     tvdocs.EndUpdate;
+                     qryDocs.Close;
+                     qryDocs.Open;
                   end;
                end;
             end;
@@ -6575,10 +6585,10 @@ end;
 }
 
 procedure TfrmMatters.miViewCheqreqHistoryforMatterClick(Sender: TObject);
-var
-  frmCheqreqHistory: TfrmCheqreqHistory;
+//var
+//  frmCheqreqHistory: TfrmCheqreqHistory;
 begin
-  if qryMatter.IsEmpty then
+{  if qryMatter.IsEmpty then
     MessageDlg('Nothing to look at!', mtInformation, [mbOK], 0)
   else
   begin
@@ -6591,7 +6601,7 @@ begin
         frmCheqreqHistory.qryMatterDetails.Open;
         frmCheqreqHistory.Show
       end;    //  end if
-  end;
+  end;    }
 end;
 
 procedure TfrmMatters.pmCheqreqsPopup(Sender: TObject);
@@ -7620,6 +7630,16 @@ var
 begin
    Data := Sender.GetNodeData(Node);
    ImageIndex := Data^.ImageIndex;
+end;
+
+procedure TfrmMatters.lvFoldersMoveTo(Sender: TcxCustomTreeList;
+  AttachNode: TcxTreeListNode; AttachMode: TcxTreeListNodeAttachMode;
+  Nodes: TList; var IsCopy, Done: Boolean);
+var
+   ANode: TcxTreeListNode;
+begin
+   if ((AttachNode.Texts[0] = 'Unallocated Files') or (AttachNode.Texts[0] = 'All Files')) then
+      Done := True;
 end;
 
 procedure TfrmMatters.tcDiaryChange(Sender: TObject);
@@ -9469,8 +9489,8 @@ var
    DocErrMsg, AExt: string;
    AHandle: THandle;
 begin
-   if (chkPreviewPane.Checked = False) then
-   begin
+//   if (chkPreviewPane.Checked = False) then
+//   begin
       SaveSelectedItems;
 
       with qryDocs do
@@ -9587,7 +9607,7 @@ begin
             dbgrDocs.FocusedView.DataController.Groups.FullExpand;
          RestoreSelectedItems;
       end;
-   end;
+//   end;
 end;
 
 procedure TfrmMatters.Label33Click(Sender: TObject);
@@ -10300,16 +10320,16 @@ begin
          if (FileID = '') then
          begin
             if (sSubject = '') then
-               lSubject := tmpFileName +
+               lSubject := //tmpFileName +
                             ' [Matter#' + qryMatter.FieldByName('fileid').AsString+']'
             else
                lSubject := sSubject +
-                            tmpFileName +
+               //             tmpFileName +
                             ' [Matter#' + qryMatter.FieldByName('fileid').AsString+']';
             Msg.PropByName(PR_SUBJECT).AsString := lSubject;
          end
          else
-            Msg.PropByName(PR_SUBJECT).AsString := Msg.PropByName(PR_SUBJECT).AsString + tmpFileName;
+            Msg.PropByName(PR_SUBJECT).AsString := Msg.PropByName(PR_SUBJECT).AsString {+ tmpFileName};
 
          if ARecipientsList.Count > 0 then
          begin
@@ -10351,36 +10371,25 @@ var
 begin
    if chkPreviewPane.Checked then
    begin
-      if Button = mbRight then
-      begin
-         try
-            if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
+      try
+         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
+         begin
+            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
+            if ((LsFile <> '') and (FileExists(LsFile) = True)) then
             begin
-               LsFile := string(tvDocsDISPLAY_PATH.EditValue);
-               if ((LsFile <> '') and (FileExists(LsFile) = True)) then
-               begin
-                  LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
-                  CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
- {                 if (FPreview <> nil) then
-                     FPreview.Free;
-                  FPreview := THostPreviewHandler.Create(Self);
-                  FPreview.Top := 0;
-                  FPreview.Left := 0;
-                  FPreview.Width  := pnlPreview.ClientWidth;
-                  FPreview.Height := pnlPreview.ClientHeight;
-                  FPreview.Parent := pnlPreview;
-                  FPreview.Align  := alClient;
-                  FPreview.FileName:=LsTmpFile;
-                  THostPreviewHandlerClass(FPreview).Paint;   }
-               end;
+               pnlPreview.Enabled := False;
+               pnlPreview.Path := LsFile;
+               pnlPreview.Enabled := True;
+               pnlPreview.Invalidate;
             end;
-         except on E:Exception do
-            ShowMessage(E.Message);
          end;
+      except on E:Exception do
+         ShowMessage(E.Message);
       end;
    end;
-
 end;
+
+
 
 // the merge form close event, free and set pointer to nil
 procedure TfrmMatters.MergeFormClose(Sender: TObject;
@@ -12455,14 +12464,19 @@ end;
 
 procedure TfrmMatters.lvFoldersDragDrop(Sender, Source: TObject; X,
   Y: Integer);
+var
+   ANode: TcxTreeListNode;
 begin
-   PostMessage(Handle, UM_MYMESSAGE, 0, 0);
+{   ANode := TcxTreeList(Sender).GetNodeAt(X,Y);
+   if ((ANode.Texts[0] <> 'Unallocated Files') and (ANode.Texts[0] <> 'All Files')) then
+      PostMessage(Handle, UM_MYMESSAGE, 0, 1);}
 end;
 
 procedure TfrmMatters.lvFoldersDragOver(Sender, Source: TObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 var
-  node: TcxTreeListNode;
+  Src,
+  Dst: TcxTreeListNode;
 begin
    Accept:= false;
    if not (Source = Sender) then
@@ -12470,21 +12484,20 @@ begin
       lvFolders.OptionsView.DropNodeIndicator:= Accept;
       Exit;
    end;
-   node := TcxTreeList(Sender).GetNodeAt(X,Y);
-   if node <> nil then
-      Accept := (node.level = 0) and (node.Index > 1);
+   Dst := TcxTreeList(Sender).GetNodeAt(X,Y);
+
+   if Dst <> nil then
+      Accept := ((Dst.level >= 0));
 
    lvFolders.OptionsView.DropNodeIndicator:= Accept;
 end;
 
 procedure TfrmMatters.umMyMessage(var Message: TMessage);
 begin
-  if (lvFolders.FocusedNode.Parent <> lvFolders.Root) and
-     ((lvFolders.FocusedNode.Parent.Values[0] <> 'Unallocated Files') or
-     (lvFolders.FocusedNode.Parent.Values[0] <> 'All Files'))  then
-    Caption := lvFolders.FocusedNode.Parent.Values[0]
-  else
-    Caption := 'nil';
+   if (lvFolders.FocusedNode.Parent <> lvFolders.Root) and (Message.LParam = 1) then
+      Caption := lvFolders.FocusedNode.Parent.Values[0]
+   else
+      Caption := 'nil';
 end;
 
 procedure TfrmMatters.cxGrid2DBChartView1Series1GetValueDisplayText(
@@ -12500,7 +12513,7 @@ begin
 end;
 
 procedure TfrmMatters.cxSchedulerEventModified(Sender: TObject;
-  AEvent: TcxSchedulerEvent; var AHandled: Boolean);
+      AEvent: TcxSchedulerEvent; var AHandled: Boolean);
 begin
    FEvent := AEvent;
    with dmAxiom.qryTmp do

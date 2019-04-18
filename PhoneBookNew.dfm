@@ -1455,12 +1455,12 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         ParentFont = False
       end
       object Label44: TLabel
-        Left = 40
+        Left = 46
         Top = 282
-        Width = 61
+        Width = 55
         Height = 15
         Alignment = taRightJustify
-        Caption = 'A/P E0Mail:'
+        Caption = 'A/P EMail:'
       end
       object ckEmail1Default: TCheckBox
         Tag = 2
@@ -2665,8 +2665,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43563.419444675930000000
-        Time = 43563.419444675930000000
+        Date = 43572.419444675930000000
+        Time = 43572.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -3144,14 +3144,14 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           item
             Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
             Position = 0
+            Text = 'Group/Field'
             Width = 180
-            WideText = 'Group/Field'
           end
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAllowFocus]
             Position = 1
+            Text = 'Value'
             Width = 366
-            WideText = 'Value'
           end>
       end
     end
@@ -3189,14 +3189,14 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
             Position = 0
+            Text = 'Group/Matter/Field'
             Width = 150
-            WideText = 'Group/Matter/Field'
           end
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
             Position = 1
+            Text = 'Value'
             Width = 396
-            WideText = 'Value'
           end>
       end
     end

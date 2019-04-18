@@ -169,7 +169,7 @@ type
     FStartDateTag, FEndDateTag, FAllDayTag: Integer;
     FRecurStartDateTag, FRecurEndDateTag, FIsRecurringTag: Integer;
     FEmailShown, FAppShown, FFolderListBuilt: Boolean;
-    FMsgStore: IRwMapiMsgStore;
+//    FMsgStore: IRwMapiMsgStore;
     FInboxFolderID: TRwMapiEntryID;
     FAddressbook: IRwMapiAddressbook;
     FLastCreateMessage: OleVariant;    
@@ -210,7 +210,8 @@ uses
    , uRwMapiProps
    , uRwMapiBase;
 
-
+var
+   FMsgStore: IRwMapiMsgStore;
 
 const
 {  DateValueIndexToday = 0;
@@ -531,7 +532,7 @@ begin
    EntryID := StrToEntryID(tvMailEntry_ID.EditValue);
 
   // now use that data to open the message
-  Result := dmAxiom.MsgStore.OpenMessage(EntryID) as IRwMapiMailMessage;//  dmAxiom.MsgStore.OpenMessage(EntryID, alReadwrite, False);
+  Result := FMsgStore.OpenMessage(EntryID) as IRwMapiMailMessage;
 end;
 
 procedure TfrmOutLookDiaryNew.actNewFormManagerExecute(Sender: TObject);
@@ -805,7 +806,7 @@ begin
    FFolderListBuilt := False;
    try
      // get the default messagestore
-     FMsgStore := dmAxiom.MsgStore;
+//     FMsgStore := dmAxiom.MsgStore;
 //     FMsgStore.UseUnicode := True;
 
      // open the specified folder
@@ -1141,6 +1142,9 @@ begin
        end;
        btnAppRefresh.Enabled := True;
        btnNew.Enabled := True;
+
+       if FMsgStore = Nil then
+         FMsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadwrite, False);
 
        // get property tags for some named properties
        FMsgStore      := dmAxiom.MapiSession.OpenDefaultMsgStore;
@@ -1686,7 +1690,7 @@ var
    FormRect: TRect;
 begin
    Msg := GetSelectedMessage;
-   DefMsgStore := dmAxiom.MsgStore;;
+   DefMsgStore := FMsgStore;
    OutBox := DefMsgStore.OpenFolderByType(ftOutbox, alReadWrite);
 //   ForwardMsg := OutBox.
 

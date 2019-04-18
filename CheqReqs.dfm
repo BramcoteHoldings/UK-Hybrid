@@ -92,7 +92,9 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
+      ExplicitLeft = 0
       ExplicitTop = 28
+      ExplicitWidth = 0
       ExplicitHeight = 586
       object Splitter1: TSplitter
         Left = 0
@@ -430,7 +432,9 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
+      ExplicitLeft = 0
       ExplicitTop = 28
+      ExplicitWidth = 0
       ExplicitHeight = 586
       DesignSize = (
         1046
@@ -2679,7 +2683,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4891,7 +4895,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

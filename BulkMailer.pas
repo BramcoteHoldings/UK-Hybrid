@@ -12,12 +12,13 @@ uses
   cxGridDBTableView, cxGrid, ExtCtrls, dxDockControl, dxDockPanel,
   dxStatusBar, ComCtrls, DBAccess, OracleUniProvider, Uni, MemDS, cxCheckBox, cxGroupBox,
   cxRadioGroup, ActnList, Menus, Clipbrd, cxLabel,
-  cxPCdxBarPopupMenu, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
+  cxPCdxBarPopupMenu,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdMessageClient, IdSMTP, IdMessage, IdExplicitTLSClientServerBase, IdSMTPBase,
   cxNavigator, Vcl.StdCtrls, IdIOHandler, IdText,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, SHDocVw_EWB,
   RichEditBrowser, SHDocVw, mshtml, EwbCore, EmbeddedWB, IdAttachmentFile,
-  dxBarExtDBItems, System.Math, dxBarBuiltInMenu,
+  dxBarExtDBItems, System.Math, dd_HTMLEditor, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
   System.ImageList;
 

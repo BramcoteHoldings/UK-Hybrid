@@ -9,7 +9,8 @@ uses
   cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, DBAccess, Uni, MemDS,
   cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Vcl.Menus, Vcl.StdCtrls, cxButtons,
-  cxCurrencyEdit;
+  cxCurrencyEdit, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog;
 
 type
   TfrmExpenseTemplateSelection = class(TForm)
