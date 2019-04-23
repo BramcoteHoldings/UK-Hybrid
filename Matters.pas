@@ -82,6 +82,8 @@ const
   C_DOCTYPEADMIN  = 'A';
 
   UM_MYMESSAGE = WM_USER + 1001;
+  UM_PREVIEWPANEL = WM_USER + 1002;
+  UM_OPENDOCUMENT = WM_USER + 1003;
 
 
 type
@@ -1893,9 +1895,6 @@ type
     procedure btnOpenDocumentClick(Sender: TObject);
     procedure bbtnChangeCreatedDateClick(Sender: TObject);
     procedure bbtnDeleteDocumentClick(Sender: TObject);
-    procedure tvDocsCellClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
     procedure chkPreviewPaneClick(Sender: TObject);
     procedure btnNewControlledMoneyClick(Sender: TObject);
     procedure dxbReceiptClick(Sender: TObject);
@@ -1950,11 +1949,6 @@ type
     procedure rgDisplayOptionClick(Sender: TObject);
     procedure cxDBButtonEdit3PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
-    procedure tvDocsCellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
-    procedure tvDocsMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure bbtnReceiptRequestClick(Sender: TObject);
     procedure tabReceiptReqsShow(Sender: TObject);
     procedure btnReceiptReqEditClick(Sender: TObject);
@@ -2004,6 +1998,8 @@ type
     procedure lvFoldersMoveTo(Sender: TcxCustomTreeList;
       AttachNode: TcxTreeListNode; AttachMode: TcxTreeListNodeAttachMode;
       Nodes: TList; var IsCopy, Done: Boolean);
+    procedure tvDocsMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2125,6 +2121,8 @@ type
     function GetSelectedFolder(AMsgStore: IRwMAPIMsgStore): IRwMAPIFolder;
 
     procedure umMyMessage(var Message: TMessage); message UM_MYMESSAGE;
+    procedure umPreviewPanel(var Message: TMessage); message UM_PREVIEWPANEL;
+    procedure umOpenDocument(var Message: TMessage); message UM_OPENDOCUMENT;
   end;
 
 type
@@ -9489,6 +9487,8 @@ var
    DocErrMsg, AExt: string;
    AHandle: THandle;
 begin
+//   PostMessage(Handle, UM_OPENDOCUMENT, 0, 0);
+
 //   if (chkPreviewPane.Checked = False) then
 //   begin
       SaveSelectedItems;
@@ -9569,7 +9569,7 @@ begin
 //                        FormMgr.SetBeforeSubmitMessage(BeforeSubmitMessage);
 
                   //      FormMgr.ShowMessage(Msg, FormRect, SiteStatus);
-                        FormMgr.ShowMessage(Msg{,FormRect});
+                        FormMgr.ShowMessage(Msg);
                      end;
                      DeleteFile(tmpFileName);
                   except
@@ -10363,33 +10363,11 @@ begin
       DocDelete;
 end;
 
-procedure TfrmMatters.tvDocsMouseDown(Sender: TObject; Button: TMouseButton;
+procedure TfrmMatters.tvDocsMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
-var
-   LsFile,
-   LsTMPFile: string;
 begin
-   if chkPreviewPane.Checked then
-   begin
-      try
-         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
-         begin
-            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
-            if ((LsFile <> '') and (FileExists(LsFile) = True)) then
-            begin
-               pnlPreview.Enabled := False;
-               pnlPreview.Path := LsFile;
-               pnlPreview.Enabled := True;
-               pnlPreview.Invalidate;
-            end;
-         end;
-      except on E:Exception do
-         ShowMessage(E.Message);
-      end;
-   end;
+   PostMessage(Handle, UM_PREVIEWPANEL, 0, 0);
 end;
-
-
 
 // the merge form close event, free and set pointer to nil
 procedure TfrmMatters.MergeFormClose(Sender: TObject;
@@ -10397,6 +10375,11 @@ procedure TfrmMatters.MergeFormClose(Sender: TObject;
 begin
   Action := caFree;
   FWorkFlowMergeDocument := Nil;
+end;
+
+procedure TfrmMatters.umOpenDocument(var Message: TMessage);
+begin
+   btnOpenDocument.Click;
 end;
 
 procedure TfrmMatters.OnUpdateWindowEvent(Sender: TObject);
@@ -12500,6 +12483,31 @@ begin
       Caption := 'nil';
 end;
 
+procedure TfrmMatters.umPreviewPanel(var Message: TMessage);
+var
+   LsFile,
+   LsTMPFile: string;
+begin
+   if chkPreviewPane.Checked then
+   begin
+      try
+         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
+         begin
+            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
+            if ((LsFile <> '') and (FileExists(LsFile) = True)) then
+            begin
+               pnlPreview.Enabled := False;
+               pnlPreview.Path := LsFile;
+               pnlPreview.Enabled := True;
+               pnlPreview.Invalidate;
+            end;
+         end;
+      except on E:Exception do
+         ShowMessage(E.Message);
+      end;
+   end;
+end;
+
 procedure TfrmMatters.cxGrid2DBChartView1Series1GetValueDisplayText(
   Sender: TObject; const AValue: Variant; var ADisplayText: string);
 begin
@@ -13291,173 +13299,6 @@ begin
       end;
       Refresh; // Close;
 //      RestoreSelectedItems;
-   end;
-end;
-
-procedure TfrmMatters.tvDocsCellClick(Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
-var
-//   PDFLibrary: TDebenuPDFLibrary1014;
-   LsFile,
-   LsTMPFile: string;
-begin
-   if chkPreviewPane.Checked then
-   begin
-      try
-         if (VarIsNull(tvDocsDISPLAY_PATH.EditValue) = False) then
-         begin
-            LsFile := string(tvDocsDISPLAY_PATH.EditValue);
-            if ((LsFile <> '') and (FileExists(LsFile) = True)) then
-            begin
-//               LsTMPFile := IncludeTrailingPathDelimiter(dmAxiom.GetEnvVar('TMP'))+ ExtractFileName(LsFile);
-//               CopyFile(PChar(LsFile), PChar(LsTmpFile), false);
-{              if (FPreview <> nil) then
-                  FreeAndNil(FPreview);
-               FPreview := THostPreviewHandler.Create(Self);
-               FPreview.Top := 0;
-               FPreview.Left := 0;
-               FPreview.Width  := pnlPreview.ClientWidth;
-               FPreview.Height := pnlPreview.ClientHeight;
-               FPreview.Parent := pnlPreview;
-               FPreview.Align  := alClient;
-               FPreview.FileName:=LsFile;
-               THostPreviewHandlerClass(FPreview).Paint;    }
-               pnlPreview.Enabled := False;               
-               pnlPreview.Path := LsFile;
-               pnlPreview.Enabled := True;
-               pnlPreview.Invalidate;
-            end;
-         end;
-      except on E:Exception do
-         ShowMessage(E.Message);
-      end;
-   end;
-end;
-
-procedure TfrmMatters.tvDocsCellDblClick(Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
-var
-   bStream: TStream;
-   tmpFileName: string;
-   Msg : IRwMapiMessage;
-   OldCursor: TCursor;
-   SelRec: integer;
-   MsgStore: IRwMapiMsgStore;
-   Folder  : IRwMapiFolder;
-   RandFile,
-   DocErrMsg: string;
-   AHandle: THandle;
-begin
-   SaveSelectedItems;
-
-   SelRec := 0;
-
-   with qryDocs do
-   begin
-      if (not IsEmpty) then
-      begin
-         if (not FieldByName('URL').IsNull) then
-         begin
-            AHandle := ExecuteFile(FieldByName('URL').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
-            if AHandle <= 32 then
-               MsgInfo('Unable to open Link. The Link may no longer exist.');
-            UpdateModBy(InttoStr(SelRec));
-         end
-         else
-         if FieldByName('PATH').IsNull then
-         begin
-            SelRec := FieldByName('DOCID').AsInteger;
-            qrySingleDoc.Close;
-            qrySingleDoc.ParamByName('docid').AsInteger := SelRec;
-            qrySingleDoc.Open;
-            Randomize;
-            RandFile := IntToStr(RandomRange(100, 100000));
-            bStream := qrySingleDoc.CreateBlobStream(qrySingleDoc.FieldByName('DOCUMENT'),bmRead);
-            try
-               if ExtractFileExt(qrySingleDoc.FieldByName('DOC_NAME').AsString) = '' then
-                  tmpFileName := dmAxiom.GetEnvVar('TMP')+'\'+ RandFile + qrySingleDoc.FieldByName('DOC_NAME').AsString + '.'+ qrySingleDoc.FieldByName('file_extension').AsString
-               else
-                  tmpFileName := dmAxiom.GetEnvVar('TMP')+'\'+ RandFile + qrySingleDoc.FieldByName('DOC_NAME').AsString;
-
-               if qrySingleDoc.FieldByName('FILE_EXTENSION').AsString = 'msg' then
-                  tmpFileName := dmAxiom.GetEnvVar('TMP')+'\'+ 'axeml' + RandFile + '.msg';
-               // in case file still sitting in tmp directory
-               DeleteFile(tmpFileName);
-
-               bStream.Seek(0, soFromBeginning);
-
-               with TFileStream.Create(tmpFileName, fmCreate) do
-               try
-                  CopyFrom(bStream, bStream.Size)
-               finally
-                  Free
-               end;
-            finally
-               bStream.Free
-            end;
-            if qrySingleDoc.FieldByName('FILE_EXTENSION').AsString = 'msg' then
-            begin
-               if not dmAxiom.MapiSession.Active then
-               begin
-                  OldCursor := Screen.Cursor;
-                  Screen.Cursor := crHourGlass;
-                  try
-                     dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-                     dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;  //'Outlook';
-                     dmAxiom.MapiSession.LogonInfo.Password           := '';
-                     dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
-                     dmAxiom.MapiSession.LogonInfo.NewSession         := False;
-                     dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                     dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
-                     dmAxiom.MapiSession.Active                       := True;
-                  finally
-                     Screen.Cursor := OldCursor;
-                  end;
-               end;
-               try
-                  Msg := dmAxiom.MapiSession.OpenDefaultMsgStore.OpenSavedMessage(tmpFileName);
-//                  Msg.DisplayProperties;
-                  begin
-                     MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
-                     Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite);
-                     // Display the message in a Form Manager form.
-                     // A Form Manager Form is more flexible than the default mapi form
-
-                     // get a form manager
-//                     FormMgr := dmAxiom.MapiSession.GetFormMgr;
-//                     FormMgr.SetBeforeSubmitMessage(BeforeSubmitMessage);
-
-               //      FormMgr.ShowMessage(Msg, FormRect, SiteStatus);
-                     FormMgr.ShowMessage(Msg{,FormRect});
-                  end;
-                  DeleteFile(tmpFileName);
-               except
-                  // error
-               end;
-           end
-           else
-           begin
-              ExecuteFile(tmpFileName, '', '.', SW_SHOWNORMAL, DocErrMsg);
-              UpdateModBy(InttoStr(SelRec));
-           end;
-         end
-         else
-         begin
-            AHandle := ExecuteFile(qryDocs.FieldByName('PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
-            if AHandle < 33 then
-               AHandle := ExecuteFile(qryDocs.FieldByName('Display_PATH').AsString, '', '.', SW_SHOWNORMAL, DocErrMsg);
-               if (AHandle < 33) and (DocErrMsg <> '') then
-                  MsgInfo('Unable to open Document. - '+DocErrMsg);
-            UpdateModBy(InttoStr(SelRec));
-            ReopenListUpdate('DOCUMENT', qryDocs.FieldByName('DOCID').AsString);
-         end;
-      end;
-      Refresh; // Close;
-      if cbGroupExpanded.Checked then
-         dbgrDocs.FocusedView.DataController.Groups.FullExpand;
-      RestoreSelectedItems;
    end;
 end;
 
