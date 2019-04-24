@@ -298,12 +298,12 @@ begin
 
          if iTransId <= 0 then
          begin
-           if TableInteger('BANK','ACCT', ABank,'bank_receipt_seq') > 0 then
+{           if TableInteger('BANK','ACCT', ABank,'bank_receipt_seq') > 0 then
            begin
               iTransId := TableInteger('BANK','ACCT', ABank,'bank_receipt_seq');
               bBankReceipt := True;
            end
-           else
+           else   }
                iTransId := strToInt(dmAxiom.GetSeqNumber('SQNC_NINVTRAN'));
          end;
 

@@ -14076,7 +14076,7 @@ begin
                lFolder := lfrmSelectDirectory.cmbFolderList.EditValue;
             end;
 
-            Application.ProcessMessages;
+//            Application.ProcessMessages;
 
             LRetFileCount := DoFileScan(Directory, qryMatter.FieldByName('NMATTER').AsInteger,
                                         lCat, lClass, lFolder, rgCopyDocuments.ItemIndex,
