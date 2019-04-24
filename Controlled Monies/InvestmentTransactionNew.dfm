@@ -29,9 +29,6 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitLeft = 8
-    ExplicitWidth = 361
-    ExplicitHeight = 457
     DesignSize = (
       362
       455)
@@ -798,9 +795,6 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitLeft = 128
-    ExplicitTop = 568
-    ExplicitWidth = 0
   end
   object qryInvestmentTrans: TUniQuery
     KeyFields = 'NINVTRAN'

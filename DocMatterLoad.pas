@@ -73,11 +73,11 @@ begin
          try
             dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
             dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
-            dmAxiom.MapiSession.LogonInfo.Password           := '';
+ //           dmAxiom.MapiSession.LogonInfo.Password           := '';
             dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
             dmAxiom.MapiSession.LogonInfo.NewSession         := False;
             dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-            dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+            dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
             dmAxiom.MapiSession.Active                       := True;
          finally
 //
