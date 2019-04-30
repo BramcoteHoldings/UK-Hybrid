@@ -255,7 +255,7 @@ object frmBankRec: TfrmBankRec
     end
     object cmbDRCR: TcxComboBox
       Left = 248
-      Top = 37
+      Top = 35
       Properties.ImmediatePost = True
       Properties.Items.Strings = (
         'DR'
@@ -298,8 +298,8 @@ object frmBankRec: TfrmBankRec
       Width = 111
     end
     object lblBankName: TcxLabel
-      Left = 156
-      Top = 36
+      Left = 177
+      Top = 8
       AutoSize = False
       Transparent = True
       Height = 21
