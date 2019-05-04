@@ -2,8 +2,8 @@ object frmJournalBill: TfrmJournalBill
   Left = 519
   Top = 215
   Caption = 'Bill Payment Journal'
-  ClientHeight = 356
-  ClientWidth = 696
+  ClientHeight = 372
+  ClientWidth = 716
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object frmJournalBill: TfrmJournalBill
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    696
-    356)
+    716
+    372)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -43,8 +43,8 @@ object frmJournalBill: TfrmJournalBill
     FocusControl = edLedger
   end
   object lblAmountMsg: TLabel
-    Left = 552
-    Top = 297
+    Left = 572
+    Top = 313
     Width = 27
     Height = 15
     Anchors = [akRight, akBottom]
@@ -55,11 +55,12 @@ object frmJournalBill: TfrmJournalBill
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 552
     ExplicitTop = 293
   end
   object lblTotal: TLabel
-    Left = 672
-    Top = 297
+    Left = 692
+    Top = 313
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -70,18 +71,19 @@ object frmJournalBill: TfrmJournalBill
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 672
     ExplicitTop = 293
   end
   object Label11: TLabel
     Left = 35
-    Top = 55
+    Top = 56
     Width = 41
     Height = 13
     Caption = '&Amount'
   end
   object lblUnallocatedMsg: TLabel
-    Left = 366
-    Top = 297
+    Left = 386
+    Top = 313
     Width = 66
     Height = 15
     Anchors = [akRight, akBottom]
@@ -93,11 +95,12 @@ object frmJournalBill: TfrmJournalBill
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
+    ExplicitLeft = 366
     ExplicitTop = 293
   end
   object lblUnallocated: TLabel
-    Left = 527
-    Top = 297
+    Left = 547
+    Top = 313
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -109,6 +112,7 @@ object frmJournalBill: TfrmJournalBill
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
+    ExplicitLeft = 527
     ExplicitTop = 293
   end
   object edLedger: TEdit
@@ -131,8 +135,8 @@ object frmJournalBill: TfrmJournalBill
     OnKeyPress = tbPayeeKeyPress
   end
   object btnOK: TBitBtn
-    Left = 548
-    Top = 314
+    Left = 568
+    Top = 330
     Width = 68
     Height = 23
     Anchors = [akRight, akBottom]
@@ -159,10 +163,12 @@ object frmJournalBill: TfrmJournalBill
     NumGlyphs = 2
     TabOrder = 7
     OnClick = btnOKClick
+    ExplicitLeft = 548
+    ExplicitTop = 314
   end
   object btnCancel: TBitBtn
-    Left = 622
-    Top = 314
+    Left = 642
+    Top = 330
     Width = 68
     Height = 23
     Anchors = [akRight, akBottom]
@@ -171,12 +177,14 @@ object frmJournalBill: TfrmJournalBill
     NumGlyphs = 2
     TabOrder = 5
     OnClick = btnCancelClick
+    ExplicitLeft = 622
+    ExplicitTop = 314
   end
   object dbgrLedger: TDBGrid
     Left = 7
     Top = 78
-    Width = 683
-    Height = 213
+    Width = 703
+    Height = 229
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clInfoBk
     DataSource = dsLedger
@@ -234,7 +242,7 @@ object frmJournalBill: TfrmJournalBill
   end
   object neAmount: TNumberEdit
     Left = 82
-    Top = 52
+    Top = 53
     Width = 75
     Height = 21
     Alignment = taLeftJustify
@@ -261,17 +269,18 @@ object frmJournalBill: TfrmJournalBill
   end
   object chkNoExit: TCheckBox
     Left = 9
-    Top = 317
+    Top = 333
     Width = 185
     Height = 14
     Anchors = [akLeft, akBottom]
     Caption = '&Keep form open after posting?'
     TabOrder = 6
+    ExplicitTop = 317
   end
   object sbarBalances: TStatusBar
     Left = 0
-    Top = 337
-    Width = 696
+    Top = 353
+    Width = 716
     Height = 19
     Panels = <
       item
@@ -292,6 +301,8 @@ object frmJournalBill: TfrmJournalBill
       item
         Width = 110
       end>
+    ExplicitTop = 337
+    ExplicitWidth = 696
   end
   object btnLedger: TBitBtn
     Left = 357
@@ -316,7 +327,7 @@ object frmJournalBill: TfrmJournalBill
   object dtpDate: TEnforceCustomDateEdit
     Left = 82
     Top = 7
-    EditValue = 42716.5261111343d
+    EditValue = 43581.5224631713d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard

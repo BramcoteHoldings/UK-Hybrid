@@ -5,13 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
-  NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DateTimeAccount, cxStyles,
-  cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
-  cxDBData, cxButtonEdit, cxCurrencyEdit, cxCheckBox,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, Math, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxCalendar, EnforceCustomDateEdit, dxCore, cxDateUtils;
+  NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DateTimeAccount,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, dxCore, cxDateUtils, cxTextEdit, cxMaskEdit, cxDropDownEdit,
+  cxCalendar, EnforceCustomDateEdit, Math;
 
 const
   colREFNO = 0;
