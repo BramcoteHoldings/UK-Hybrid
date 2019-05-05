@@ -10,34 +10,47 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, DBAccess, Uni, MemDS, dxBar, cxBlobEdit, System.Actions, Vcl.ActnList,
   Vcl.DBActns, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, cxContainer,
+  Vcl.ImgList, dxBarDBNav, cxDBEdit, Vcl.StdCtrls, cxTextEdit, cxMaskEdit,
+  cxDropDownEdit, Vcl.Menus, cxButtons, cxMemo, cxRichEdit, cxDBRichEdit,
+  dd_HTMLEditor, Vcl.ComCtrls;
 
 type
   TfrmEmailTemplates = class(TForm)
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1: TcxGrid;
     dxBarManager1: TdxBarManager;
     dxBarManager1Bar1: TdxBar;
     dxBarButton1: TdxBarButton;
     dxBarButton2: TdxBarButton;
-    barbtnEditTemplate: TdxBarButton;
     qryEmailTemplate: TUniQuery;
     dsEmailTemplate: TUniDataSource;
-    cxGrid1DBTableView1ID: TcxGridDBColumn;
-    cxGrid1DBTableView1DESCR: TcxGridDBColumn;
-    cxGrid1DBTableView1BODY_TEXT: TcxGridDBColumn;
-    cxGrid1DBTableView1SYSTEM_DATE: TcxGridDBColumn;
-    cxGrid1DBTableView1WHO: TcxGridDBColumn;
     dxBarButton4: TdxBarButton;
     dlFile: TOpenDialog;
     ActionManager1: TActionManager;
     DatasetDelete1: TDataSetDelete;
+    dxBarButton5: TdxBarButton;
+    dxBarButton6: TdxBarButton;
+    dxBarButton3: TdxBarButton;
+    edTempDescr: TcxDBTextEdit;
+    Label2: TLabel;
+    dxBarDBNavigator1: TdxBarDBNavigator;
+    dxBarDBNavEdit1: TdxBarDBNavButton;
+    dxBarDBNavPost1: TdxBarDBNavButton;
+    dxBarDBNavCancel1: TdxBarDBNavButton;
+    dxBarDBNavRefresh1: TdxBarDBNavButton;
+    dxBarDBNavDelete1: TdxBarDBNavButton;
+    dxBarDBNavInsert1: TdxBarDBNavButton;
+    dxBarManager1Bar2: TdxBar;
+    ilstToolbar: TImageList;
+    dxBarDBNavFirst1: TdxBarDBNavButton;
+    dxBarDBNavPrev1: TdxBarDBNavButton;
+    dxBarDBNavNext1: TdxBarDBNavButton;
+    dxBarDBNavLast1: TdxBarDBNavButton;
+    HTMLEdit: TddDBHTMLEditor;
     procedure dxBarButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure dxBarButton1Click(Sender: TObject);
     procedure barbtnEditTemplateClick(Sender: TObject);
+    procedure dxBarButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,7 +65,7 @@ implementation
 {$R *.dfm}
 
 uses
-   AxiomData, EmailTemplateAddEdit;
+   AxiomData, EmailTemplateAddEdit, EmailTemplateRichEdit, GenEditor;
 
 procedure TfrmEmailTemplates.barbtnEditTemplateClick(Sender: TObject);
 var
@@ -71,17 +84,26 @@ end;
 
 procedure TfrmEmailTemplates.dxBarButton1Click(Sender: TObject);
 var
-   frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit;
+   sFileName: string;
+   bStream, fStream: TStream;
 begin
-   try
-      frmEmailTemplateAddEdit := TfrmEmailTemplateAddEdit.Create(Self);
-      frmEmailTemplateAddEdit.qryEmailTemplate.Open;
-      frmEmailTemplateAddEdit.qryEmailTemplate.Insert;
-      frmEmailTemplateAddEdit.ShowModal;
-   finally
-      frmEmailTemplateAddEdit.Free;
-      qryEmailTemplate.Refresh;
-   end;
+
+      dlFile.Filter := 'HTM|*.htm|HTML|*.html';
+
+      if not dlFile.Execute then
+         exit;
+
+      sFileName := dlFile.FileName;
+
+      if qryEmailTemplate.State in [dsBrowse] then
+         qryEmailTemplate.edit;
+
+      bStream := qryEmailTemplate.CreateBlobStream(qryEmailTemplate.fieldByname('body_text'), bmReadWrite);
+
+      fStream := TFileStream.Create(sFileName, fmOpenRead);
+      bStream.CopyFrom(fStream, fStream.Size);
+      bStream.free;
+      fStream.free;
 end;
 
 procedure TfrmEmailTemplates.dxBarButton2Click(Sender: TObject);
@@ -92,12 +114,18 @@ end;
 procedure TfrmEmailTemplates.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-   qryEmailTemplate.Close;
+    if dmAxiom.uniInsight.InTransaction and qryEmailTemplate.Modified then
+    begin
+        qryEmailTemplate.Post;
+        dmAxiom.uniInsight.Commit;
+        qryEmailTemplate.Close;
+    end;
 end;
 
 procedure TfrmEmailTemplates.FormCreate(Sender: TObject);
 begin
    qryEmailTemplate.Open;
 end;
+
 
 end.

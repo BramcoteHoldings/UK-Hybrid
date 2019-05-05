@@ -3,50 +3,50 @@ object frmGenEditor: TfrmGenEditor
   Top = 255
   BorderStyle = bsDialog
   Caption = 'Editor'
-  ClientHeight = 605
-  ClientWidth = 884
+  ClientHeight = 524
+  ClientWidth = 766
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnShow = FormShow
-  PixelsPerInch = 106
-  TextHeight = 15
+  PixelsPerInch = 96
+  TextHeight = 13
   object dxStatusBar: TdxStatusBar
     Left = 0
-    Top = 583
-    Width = 884
-    Height = 22
+    Top = 505
+    Width = 766
+    Height = 19
     Images = ilStatusBarImages
     Panels = <
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        Width = 150
+        Width = 130
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         Fixed = False
-        Width = 502
+        Width = 435
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        Width = 150
+        Width = 130
       end>
     PaintStyle = stpsXP
     LookAndFeel.NativeStyle = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -10
+    Font.Height = -9
     Font.Name = 'Segoe UI'
     Font.Style = []
   end
   object Editor: TcxDBRichEdit
     Left = 0
-    Top = 84
+    Top = 77
     Align = alClient
     DataBinding.DataField = 'NOTES'
     DataBinding.DataSource = dsMatterNotes
@@ -57,18 +57,18 @@ object frmGenEditor: TfrmGenEditor
     Properties.OnChange = EditorPropertiesChange
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clWindowText
-    Style.Font.Height = -15
+    Style.Font.Height = -13
     Style.Font.Name = 'Arial'
     Style.Font.Style = []
     Style.IsFontAssigned = True
     TabOrder = 5
-    Height = 499
-    Width = 884
+    Height = 428
+    Width = 766
   end
   object BarManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -100,11 +100,11 @@ object frmGenEditor: TfrmGenEditor
     UseSystemFont = True
     Left = 14
     Top = 147
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      84
+      77
       0)
     object BarManagerBar1: TdxBar
       AllowClose = False
@@ -145,7 +145,7 @@ object frmGenEditor: TfrmGenEditor
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 28
+      DockedTop = 25
       DockingStyle = dsTop
       FloatLeft = 122
       FloatTop = 175
@@ -200,8 +200,8 @@ object frmGenEditor: TfrmGenEditor
       Caption = 'Format'
       CaptionButtons = <>
       DockedDockingStyle = dsTop
-      DockedLeft = 266
-      DockedTop = 28
+      DockedLeft = 241
+      DockedTop = 25
       DockingStyle = dsTop
       FloatLeft = 225
       FloatTop = 262
@@ -247,7 +247,7 @@ object frmGenEditor: TfrmGenEditor
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 56
+      DockedTop = 51
       DockingStyle = dsTop
       FloatLeft = 585
       FloatTop = 329
@@ -438,7 +438,7 @@ object frmGenEditor: TfrmGenEditor
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -471,7 +471,7 @@ object frmGenEditor: TfrmGenEditor
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000}
-      Width = 55
+      Width = 50
       OnClick = dxBarComboFontSizeClick
       Text = '10'
       DropDownCount = 12
@@ -606,7 +606,7 @@ object frmGenEditor: TfrmGenEditor
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF000000
+        000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF000000
         00FF000080FF000080FF8080C0FF000000FF008000FF008000FF80C080FF0000
         00FF800000FF800000FFC08080FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
         00FF000080FF000080FF8080C0FF000000FF008000FF008000FF80C080FF0000
@@ -639,7 +639,6 @@ object frmGenEditor: TfrmGenEditor
         C0FF000000FFC04040FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00404040FFC0C0C0FFFFFFFF00FFFFFF00404040FFC0C0C0FFFFFFFF00FFFF
         FF00404040FFC0C0C0FFFFFFFF00FFFFFF00FFFFFF00}
-      Width = 110
       ShowEditor = True
       Color = clBlack
       ShowCustomColorButton = True
@@ -653,7 +652,7 @@ object frmGenEditor: TfrmGenEditor
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -686,7 +685,7 @@ object frmGenEditor: TfrmGenEditor
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000}
-      Width = 177
+      Width = 160
       Text = 'Arial'
       DropDownCount = 12
     end
@@ -907,7 +906,7 @@ object frmGenEditor: TfrmGenEditor
     UseOwnFont = False
     Left = 20
     Top = 220
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object OpenDialog: TOpenDialog
     DefaultExt = 'RTF'
@@ -5699,6 +5698,24 @@ object frmGenEditor: TfrmGenEditor
       item
         DataType = ftUnknown
         Name = 'nmemo'
+        Value = nil
+      end>
+  end
+  object qryEmailNote: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select EMAIL_TEMPLATES.RICHTEXT as notes, EMAIL_TEMPLATES.rowid '
+      'from '
+      ' EMAIL_TEMPLATES'
+      'where'
+      ' ID = :ID')
+    CachedUpdates = True
+    Left = 376
+    Top = 264
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID'
         Value = nil
       end>
   end

@@ -77,6 +77,7 @@ type
     Editor: TcxDBRichEdit;
     dsMatterNotes: TUniDataSource;
     qryBillNotes: TUniQuery;
+    qryEmailNote: TUniQuery;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -112,6 +113,7 @@ type
     property EditorValue: TMemoryStream read FEditorValue write FEditorValue;
     procedure DisplayMatterNotes(pNMatter: integer);
     procedure DisplayBillNotes(pNMemo: integer);
+    procedure DisplayEmailNotes(pID: integer);
   end;
 
 var
@@ -199,7 +201,7 @@ begin
       qryMatterNotes.ApplyUpdates;
     end;
    end
-   else
+   else if qryBillNotes.Active then
    begin
       if qryBillNotes.State = dsBrowse then
          qryBillNotes.Edit;
@@ -210,6 +212,17 @@ begin
 
          qryBillNotes.Post;
          qryBillNotes.ApplyUpdates;
+      end;
+   end
+   else
+   begin
+      if qryEmailNote.State = dsBrowse then
+         qryEmailNote.Edit;
+
+      if qryEmailNote.State = dsEdit then
+      begin
+         qryEmailNote.Post;
+         qryEmailNote.ApplyUpdates;
       end;
    end;
    ModalResult := mrOK;
@@ -433,6 +446,28 @@ begin
          dsMatterNotes.DataSet := qryBillNotes;
          Close;
          ParamByName('NMEMO').AsInteger := pNMemo;
+         Open;
+         Edit;
+
+//         Editor.Properties.PlainText := False;
+//         Editor.Text := FieldByName('NOTES').AsString;
+      finally
+         Editor.EditModified := False;
+         SetModified(False);
+      end;
+//    Editor.  Text := FieldByName('NOTES').AsString;
+   end;
+end;
+
+procedure TfrmGenEditor.DisplayEmailNotes(pID: integer);
+begin
+   Self.Caption := 'Email Template';
+   with qryEmailNote do
+   begin
+      try
+         dsMatterNotes.DataSet := qryEmailNote;
+         Close;
+         ParamByName('ID').AsInteger := pID;
          Open;
          Edit;
 

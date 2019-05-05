@@ -11,7 +11,7 @@ uses
   cxLookAndFeelPainters, StdCtrls, cxButtons, cxTextEdit, cxCurrencyEdit,
   cxCheckBox, cxDropDownEdit, cxButtonEdit, cxLabel, cxContainer,
   cxMaskEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, dxBar,
-  Menus, cxLookAndFeels, cxNavigator, dxDateRanges,
+  Menus, cxLookAndFeels, cxNavigator,
   cxDataControllerConditionalFormattingRulesManagerDialog;
 
 type                                     
@@ -27,6 +27,7 @@ type
     pbCancel: TcxButton;
     tvBulkChequesNCHEQREQ_LIST: TcxGridDBColumn;
     cmbPrinter: TcxComboBox;
+    lblPrinter: TcxLabel;
     cxLabel2: TcxLabel;
     cbAuthBy: TcxLookupComboBox;
     qryEmployee: TUniQuery;
@@ -44,7 +45,6 @@ type
     dsEFTBank: TUniDataSource;
     teRefNo: TcxTextEdit;
     lblReference: TcxLabel;
-    lblPrinter: TcxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure tvBulkChequesDblClick(Sender: TObject);
@@ -153,7 +153,7 @@ begin
 
    if (bOkToPost = True) then
    begin
-      if (((EFTBank <> 'NAB') and (EFTBank <> 'MBL') and (EFTBank <> 'WBC')) and (not CreateCheque)) then
+      if (((EFTBank <> 'NAB') and (EFTBank <> 'MBL') and (EFTBank <> 'WBC') and (EFTBank <> 'ANZ')) and (not CreateCheque)) then
       begin
          MsgInfo('This functionality is currently not supported for the Bank that you use.' + #13 +
                  'If you require this functionality, please call BHL Insight.');
