@@ -3,7 +3,7 @@ object frmDiaryNew: TfrmDiaryNew
   Top = 179
   BorderStyle = bsDialog
   Caption = 'Diary Entry'
-  ClientHeight = 669
+  ClientHeight = 759
   ClientWidth = 583
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,22 +21,19 @@ object frmDiaryNew: TfrmDiaryNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 583
-    Height = 669
+    Width = 618
+    Height = 702
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    Align = alClient
     ParentBackground = True
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 618
-    ExplicitHeight = 665
     DesignSize = (
-      583
-      669)
+      618
+      702)
     object lblStartDayName: TLabel
       Left = 247
       Top = 71

@@ -326,6 +326,20 @@ object frmBulkCheques: TfrmBulkCheques
     Height = 22
     Width = 187
   end
+  object lblPrinter: TcxLabel
+    Left = 5
+    Top = 5
+    AutoSize = False
+    Caption = 'Default Printer:'
+    Style.LookAndFeel.NativeStyle = True
+    StyleDisabled.LookAndFeel.NativeStyle = True
+    StyleFocused.LookAndFeel.NativeStyle = True
+    StyleHot.LookAndFeel.NativeStyle = True
+    Properties.WordWrap = True
+    Transparent = True
+    Height = 34
+    Width = 45
+  end
   object cxLabel2: TcxLabel
     Left = 420
     Top = 13
@@ -357,7 +371,7 @@ object frmBulkCheques: TfrmBulkCheques
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 5
+    TabOrder = 6
     Height = 22
     Width = 183
   end
@@ -371,7 +385,7 @@ object frmBulkCheques: TfrmBulkCheques
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 6
+    TabOrder = 7
     Visible = False
   end
   object pbSelect: TcxButton
@@ -417,7 +431,7 @@ object frmBulkCheques: TfrmBulkCheques
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    TabOrder = 8
+    TabOrder = 9
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -428,7 +442,7 @@ object frmBulkCheques: TfrmBulkCheques
   end
   object lblEFTBank: TcxLabel
     Left = 12
-    Top = 13
+    Top = 10
     Caption = 'Bank'
     Transparent = True
   end
@@ -457,7 +471,7 @@ object frmBulkCheques: TfrmBulkCheques
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 9
+    TabOrder = 10
     Width = 223
   end
   object teRefNo: TcxTextEdit
@@ -467,7 +481,7 @@ object frmBulkCheques: TfrmBulkCheques
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 10
+    TabOrder = 11
     Width = 67
   end
   object lblReference: TcxLabel
@@ -475,16 +489,6 @@ object frmBulkCheques: TfrmBulkCheques
     Top = 13
     Caption = 'Reference:'
     Transparent = True
-  end
-  object lblPrinter: TcxLabel
-    Left = 1
-    Top = 2
-    AutoSize = False
-    Caption = 'Default Printer'
-    Properties.WordWrap = True
-    Transparent = True
-    Height = 34
-    Width = 46
   end
   object qryEmployee: TUniQuery
     Connection = dmAxiom.uniInsight

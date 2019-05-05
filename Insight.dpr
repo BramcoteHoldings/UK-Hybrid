@@ -410,11 +410,13 @@ uses
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas';
 
 {$R *.RES}
-{$R ADDITIONAL.RES}
+//{$R ADDITIONAL.RES}
 {$R releasenotes.res}
-{$SetPEFlags IMAGE_FILE_NET_RUN_FROM_SWAP
-          or IMAGE_FILE_LARGE_ADDRESS_AWARE
-          or IMAGE_FILE_RELOCS_STRIPPED}
+{$SetPEFlags IMAGE_FILE_NET_RUN_FROM_SWAP}
+{$SetPEFlags IMAGE_FILE_LARGE_ADDRESS_AWARE}
+{$SetPEFlags IMAGE_FILE_RELOCS_STRIPPED}
+{$SetPEFlags IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP}
+
 
 
 begin

@@ -262,7 +262,7 @@ begin
       cbEvent.EditValue := qryDiary.FieldByName('EVENT_TYPE').AsInteger;
       cbType.EditValue := qryDiary.FieldByName('TYPE').AsString;
       cbLocation.EditValue := qryDiary.FieldByName('LOCATION').AsString;
-      mmoDesc.Text := qryDiary.FieldByName('MESSAGE').AsString;
+      mmoDesc.Text := qryDiary.FieldByName('DESCR').AsString;
       chkEventPrintDescr.Checked := qryDiary.FieldByName('EVENTPRINTDESCR').AsString = 'Y';
       icbLabel.EditValue := qryDiary.FieldByName('LABELCOLOUR').AsInteger;
       if (qryDiary.FieldByName('NOTIFY').AsString <> '') then
@@ -278,7 +278,7 @@ begin
          chkInternal.Checked := True
       else
          chkExternal.Checked := True;
-      edtSubject.Text := qryDiary.FieldByName('SUBJECT').AsString;
+      edtSubject.Text := qryDiary.FieldByName('CAPTION').AsString;
     end;
   end;
 end;
@@ -352,6 +352,11 @@ begin
   dtpActionEndDate.DateTime := DateFromDateTime(date);
   dtpEndTime.DateTime := dtpStartTime.DateTime + EncodeTime(0, Add30Minutes, 0, 0);
   cbReminderFor.ItemIndex := cbReminderFor.Items.IndexOf(dmAxiom.UserID);
+  chkOutlook.Checked := False;
+  if SystemString('outlook_synchronise') = 'N' then
+     chkOutlook.Visible := True
+  else
+     chkOutlook.Visible := False;
 
   with qryDiary do
   begin
@@ -551,12 +556,15 @@ begin
           varOutlook := CreateOLEObject('Outlook.Application');
           try
             varDiary := varOutlook.CreateItem(1);
-            varDiary.Subject := mmoDesc.Text;
+            varDiary.Subject := edtSubject.Text;
+            varDiary.body := mmoDesc.Text;
             //varDiary.Start := dtpStarttime.DateTime;
             varDiary.Start := Trunc(dtpActionStartDate.Date) + TimeFromDateTime(dtpStartTime.Time);
             //varDiary.End := dtpActionEndDate.Date + TimeFromDateTime(dtpEndTime.Time);
             varDiary.End := Trunc(dtpActionEndDate.Date) + TimeFromDateTime(dtpEndTime.Time);
             varDiary.Location := cbLocation.Text;
+            if chkPrivate.Checked then
+                varDiary.Sensitivity := 2;
             varDiary.Save;
           except
             on E: Exception do

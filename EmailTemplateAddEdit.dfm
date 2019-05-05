@@ -3,8 +3,8 @@ object frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Add\Edit Email Template'
-  ClientHeight = 363
-  ClientWidth = 531
+  ClientHeight = 389
+  ClientWidth = 569
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,17 +17,17 @@ object frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 21
+    Left = 9
+    Top = 23
     Width = 63
     Height = 15
     Caption = 'Description:'
   end
   object BitBtn1: TBitBtn
-    Left = 362
-    Top = 329
-    Width = 75
-    Height = 25
+    Left = 388
+    Top = 353
+    Width = 80
+    Height = 26
     Caption = 'Save'
     Kind = bkOK
     NumGlyphs = 2
@@ -35,10 +35,10 @@ object frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit
     OnClick = BitBtn1Click
   end
   object BitBtn2: TBitBtn
-    Left = 443
-    Top = 329
-    Width = 75
-    Height = 25
+    Left = 475
+    Top = 353
+    Width = 80
+    Height = 26
     Caption = 'Close'
     Kind = bkCancel
     NumGlyphs = 2
@@ -46,18 +46,27 @@ object frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit
     OnClick = BitBtn2Click
   end
   object cxDBTextEdit1: TcxDBTextEdit
-    Left = 151
-    Top = 18
+    Left = 162
+    Top = 19
     DataBinding.DataField = 'DESCR'
     DataBinding.DataSource = dsEmailTemplate
     TabOrder = 2
-    Width = 367
+    Width = 393
+  end
+  object ddDBHTMLEditor1: TddDBHTMLEditor
+    Left = 162
+    Top = 48
+    Width = 393
+    Height = 288
+    DataSource = dsEmailTemplate
+    DataField = 'BODY_TEXT'
+    ReadOnly = False
   end
   object btnHTML: TcxButton
     Left = 1
-    Top = 45
-    Width = 143
-    Height = 25
+    Top = 48
+    Width = 153
+    Height = 27
     Caption = 'Add Template - HTML'
     LookAndFeel.NativeStyle = True
     OptionsImage.Glyph.SourceDPI = 96
@@ -96,17 +105,8 @@ object frmEmailTemplateAddEdit: TfrmEmailTemplateAddEdit
       00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    TabOrder = 3
-    OnClick = btnHTMLClick
-  end
-  object HTMLTemplate: TdxRichEditControl
-    Left = 150
-    Top = 47
-    Width = 368
-    Height = 276
-    Options.HorizontalRuler.Visibility = Hidden
-    Options.VerticalRuler.Visibility = Hidden
     TabOrder = 4
+    OnClick = btnHTMLClick
   end
   object qryEmailTemplate: TUniQuery
     KeyFields = 'id'
