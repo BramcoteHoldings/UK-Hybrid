@@ -1863,7 +1863,7 @@ begin
                  qryMatter.FieldByName('COMPLETED').AsDateTime := Now;
                  qryMatter.Post;
               end;
-        end;
+            end;
 
             // Work out the tax
             cDisbTax := Self.qryBill.FieldByName('DISBTAX').AsCurrency;

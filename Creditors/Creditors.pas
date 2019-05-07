@@ -935,8 +935,8 @@ begin
  //    dbgrInvoices.DataSource.DataSet.GotoBookmark(Pointer(dbgrInvoices.SelectedRows.Items[iCtr]));
       ARowIndex := tvInvoices.DataController.GetSelectedRowIndex(iCtr);
       tvInvoices.ViewData.Records[ARowIndex].Focused  := True;
-      if (qryAccounts.FieldByName('OWING').AsFloat <> 0) and
-         (qryAccounts.FieldByName('HOLD').AsString <> 'Y') then
+      if ((qryAccounts.FieldByName('OWING').AsFloat <> 0) and
+         (qryAccounts.FieldByName('HOLD').AsString <> 'Y')) then
          frmCheque.ChequeFromInvoice(qryAccounts.FieldByName('NINVOICE').AsInteger);
    end;
 

@@ -12616,11 +12616,9 @@ begin
    outputFileName := copy(AFile, 1, length(AFile) - length(ExtractFileExt(AFile))) + '.pdf';
    if FileExists(outputFileName) = False then
    begin
-      try
-         OutlookApp := GetActiveOleObject('Outlook.Application');
-      except
+      if IsObjectActive('Outlook.Application') = False then
          OutlookApp := CreateOleObject('Outlook.Application');
-      end;
+
 
       try
          OutPutFileName := copy(AFile, 1, length(AFile) - length(ExtractFileExt(AFile))) +'.html';
@@ -12658,21 +12656,18 @@ var
    WordStarted: boolean;
 begin
    WordStarted := False;
-   try
-      varWord := GetActiveOleObject('Word.Application');
-   except
-      on EOleSysError do
-      begin
-         try
-            varWord := CreateOleObject('Word.Application');
-            Sleep(200);
-            WordStarted := True;
-         except
-            on e: Exception do
-            begin
-               MessageDlg('Error Starting MS Word: ' + E.Message, mtError, [mbOK], 0);
-               varWord := null;
-            end;
+
+   if IsObjectActive('Word.Application') = False then
+   begin
+      try
+         varWord := CreateOleObject('Word.Application');
+         Sleep(200);
+         WordStarted := True;
+      except
+         on e: Exception do
+         begin
+            MessageDlg('Error Starting MS Word: ' + E.Message, mtError, [mbOK], 0);
+            varWord := null;
          end;
       end;
    end;
@@ -12706,20 +12701,16 @@ var
    varDocs: variant;
    outputFileName: string;
 begin
-   try
-      varExcel := GetActiveOleObject('Excel.Application');
-   except
-      on EOleSysError do
-      begin
-         try
-            varExcel := CreateOleObject('Excel.Application');
-            Sleep(200);
-         except
-            on e: Exception do
-            begin
-               MessageDlg('Error Starting Excel: ' + E.Message, mtError, [mbOK], 0);
-               varExcel := null;
-            end;
+   if IsObjectActive('Excel.Application') then
+   begin
+      try
+         varExcel := CreateOleObject('Excel.Application');
+         Sleep(200);
+      except
+         on e: Exception do
+         begin
+            MessageDlg('Error Starting Excel: ' + E.Message, mtError, [mbOK], 0);
+            varExcel := null;
          end;
       end;
    end;
@@ -15082,5 +15073,6 @@ begin
       Result := ParambyName('RESULT').AsBoolean;
    end;
 end;
+
 
 end.

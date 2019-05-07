@@ -521,7 +521,7 @@ object frmMatterNew: TfrmMatterNew
   end
   object cbDepartment: TcxDBLookupComboBox
     Left = 77
-    Top = 107
+    Top = 106
     AutoSize = False
     DataBinding.DataField = 'DEPT'
     DataBinding.DataSource = dsMatter
@@ -5212,6 +5212,7 @@ object frmMatterNew: TfrmMatterNew
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from mattertype'
+      'WHERE ACTIVE = '#39'Y'#39
       'order by descr')
     Left = 570
     Top = 9
@@ -5388,6 +5389,7 @@ object frmMatterNew: TfrmMatterNew
     SQL.Strings = (
       'SELECT code, descr'
       'FROM empdept'
+      'WHERE ACTIVE = '#39'Y'#39
       'ORDER BY code')
     Left = 742
     Top = 542

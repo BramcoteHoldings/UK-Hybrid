@@ -1186,7 +1186,7 @@ object frmPhoneBook: TfrmPhoneBook
           Left = 0
           Top = 421
           Width = 1017
-          Height = 37
+          Height = 31
           BevelOuter = bvNone
           ShowCaption = False
           TabOrder = 7
@@ -1219,17 +1219,17 @@ object frmPhoneBook: TfrmPhoneBook
           BevelOuter = bvNone
           TabOrder = 8
           object Label43: TLabel
-            Left = 15
+            Left = 13
             Top = 3
             Width = 80
             Height = 15
             Caption = 'Contact Name:'
           end
           object Label44: TLabel
-            Left = 35
+            Left = 6
             Top = 25
-            Width = 55
-            Height = 45
+            Width = 86
+            Height = 32
             Alignment = taRightJustify
             Caption = 'Additional Contact Name:'
             WordWrap = True
@@ -1396,6 +1396,36 @@ object frmPhoneBook: TfrmPhoneBook
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 13
           Width = 214
+        end
+        object pnlPassportNo: TPanel
+          Left = 0
+          Top = 451
+          Width = 1017
+          Height = 30
+          BevelOuter = bvNone
+          ShowCaption = False
+          TabOrder = 14
+          object Label3: TLabel
+            Left = 35
+            Top = 10
+            Width = 70
+            Height = 20
+            AutoSize = False
+            Caption = 'Passport No:'
+            WordWrap = True
+          end
+          object DBEdit9: TDBEdit
+            Left = 110
+            Top = 7
+            Width = 213
+            Height = 23
+            CharCase = ecUpperCase
+            Color = clInfoBk
+            DataField = 'PASSPORT_NO'
+            DataSource = dsPhoneBook
+            ReadOnly = True
+            TabOrder = 0
+          end
         end
       end
       object tsNotes: TcxTabSheet
@@ -1578,14 +1608,14 @@ object frmPhoneBook: TfrmPhoneBook
             item
               Options = [coAllowClick, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible]
               Position = 0
+              Text = 'Group/Field'
               Width = 280
-              WideText = 'Group/Field'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
+              Text = 'Value'
               Width = 857
-              WideText = 'Value'
             end>
         end
       end
@@ -1624,14 +1654,14 @@ object frmPhoneBook: TfrmPhoneBook
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
+              Text = 'Group/Matter/Field'
               Width = 300
-              WideText = 'Group/Matter/Field'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
+              Text = 'Value'
               Width = 837
-              WideText = 'Value'
             end>
         end
       end
@@ -2612,8 +2642,8 @@ object frmPhoneBook: TfrmPhoneBook
             TabOrder = 6
           end
           object cxLabel3: TcxLabel
-            Left = 1
-            Top = 9
+            Left = 0
+            Top = 6
             Caption = 'Search Name or description:'
             Transparent = True
           end
@@ -4457,7 +4487,8 @@ object frmPhoneBook: TfrmPhoneBook
       
         '  NVL(P.additional_contact_name, M.additional_contact_name) as A' +
         'DDITIONAL_CONTACT_NAME,'
-      '  P.NRIC'
+      '  P.NRIC,'
+      '  P.PASSPORT_NO'
       'FROM'
       '  phonebook p, gender g,'
       '  phonebook m'
@@ -7093,7 +7124,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8386,7 +8417,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -8611,7 +8642,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -10124,7 +10155,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

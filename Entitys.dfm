@@ -198,7 +198,7 @@ object frmEntity: TfrmEntity
       Width = 376
       Height = 272
       TabOrder = 1
-      Properties.ActivePage = tabCreation
+      Properties.ActivePage = tabWriteOff
       Properties.CustomButtons.Buttons = <>
       LookAndFeel.Kind = lfFlat
       LookAndFeel.NativeStyle = True
@@ -1112,8 +1112,8 @@ object frmEntity: TfrmEntity
           Transparent = True
         end
         object dbtbWoffFeeCR: TcxDBTextEdit
-          Left = 231
-          Top = 26
+          Left = 233
+          Top = 27
           DataBinding.DataField = 'WOFF_FEE_CR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True

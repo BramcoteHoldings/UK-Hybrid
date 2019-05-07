@@ -33,7 +33,7 @@ uses
   cxSchedulerAgendaView, cxSchedulerRecurrence,
   cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
   cxDataControllerConditionalFormattingRulesManagerDialog, Outlook2010,
-  dxBarExtItems, Progress;
+  dxBarExtItems, Progress, dxDateRanges, System.ImageList;
 
 const
    DayView = 0;
@@ -61,7 +61,7 @@ DIARYFIELDS     = 'D.START_DT, D.END_DT, D.REMINDER_FOR, D.ENTERED_BY, D.NDIARY,
                       'CASE WHEN (d.PRIVATE = ''Y'' AND ((reminder_for <> :Disp_ReminderFor) and (entered_by <> :Disp_ReminderFor))) THEN ''Private Appointment'' '+
                       '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN d.caption else d.caption END AS CAPTION1, '+
 //                      '     WHEN (d.PRIVATE = ''Y'' AND reminder_for = :Disp_ReminderFor) THEN D.REMINDER_FOR||'' - ''||D.ENTERED_BY||'' - ''|| descr ELSE D.REMINDER_FOR||'' - ''||D.ENTERED_BY||'' - ''|| d.descr END AS CAPTION, '+
-                      'D.EVENT_TYPE, D.ENTRYID, D.ROWID, D.NNAME, D.PRIVATE, D.NOTIFY_MINS, D.MODIFIED ';
+                      'D.EVENTTYPE, D.EVENT_TYPE, D.ENTRYID, D.ROWID, D.NNAME, D.PRIVATE, D.NOTIFY_MINS, D.MODIFIED ';
 
 type
   TfrmDiary99 = class(TForm)
@@ -82,7 +82,7 @@ type
     tvPhoneMessageCreatedDate: TcxGridDBColumn;
     tvPhoneMessageCreatedTime: TcxGridDBColumn;
     tabGrid: TcxTabSheet;
-    cxTabSheet4: TcxTabSheet;
+    tabFilter: TcxTabSheet;
     dxBarManager1: TdxBarManager;
     dxBarButton2: TdxBarButton;
     dxBarButton3: TdxBarButton;
@@ -198,7 +198,7 @@ type
     dsPartner: TUniDataSource;
     dsAuthor: TUniDataSource;
     dsController: TUniDataSource;
-    cxTabSheet1: TcxTabSheet;
+    tabCalendar: TcxTabSheet;
     cxDateNavigator1: TcxDateNavigator;
     dxBarPopupMenu1: TdxBarPopupMenu;
     btnRefresh: TdxBarButton;
@@ -265,6 +265,14 @@ type
     actOutlookSync: TAction;
     tvDiaryCAPTION: TcxGridDBColumn;
     tvDiaryNDIARY: TcxGridDBColumn;
+    SecureSchedulerDBStorage: TcxSchedulerDBStorage;
+    dsDiaryLoc: TUniDataSource;
+    qryDiaryJur: TUniQuery;
+    dsDiaryJur: TUniDataSource;
+    qryDiaryEvent: TUniQuery;
+    dsDiaryEvent: TUniDataSource;
+    qryEmpDept: TUniQuery;
+    dsEmpDept: TUniDataSource;
     procedure cxSpinEdit1PropertiesChange(Sender: TObject);
     procedure tmrQueryTimer(Sender: TObject);
     procedure dxBarButton8Click(Sender: TObject);
@@ -313,6 +321,14 @@ type
     procedure qryDiaryNewRecord(DataSet: TDataSet);
     procedure actOutlookSyncExecute(Sender: TObject);
     procedure actOutlookSyncUpdate(Sender: TObject);
+    procedure DiarySchedulerEndDrag(Sender, Target: TObject; X, Y: Integer);
+    procedure DiarySchedulerKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DiarySchedulerDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure chkViewAllEntriesChange(Sender: TObject);
+    procedure tbMatterPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   protected
     AnchorDate: TDateTime;
   private
@@ -343,7 +359,7 @@ implementation
 
 uses
    Matters, AxiomData, FeeNew, miscfunc, citfunc, PhoneMessage, DiaryNew,
-   Desktop,cxGeometry, PhoneBook;
+   Desktop,cxGeometry, PhoneBook, MSearch;
 
 type
   TcxSchedulerEventCellViewInfoAccess = class(TcxSchedulerEventCellViewInfo);
@@ -356,9 +372,14 @@ var
   userFeeEarner : boolean;
   FEventID: integer;
   afrmProgress: TfrmProgress;
+  bDelete: boolean;
 
 procedure GetResource(AEvent: TcxSchedulerEvent; const AppointmentItem: OleVariant );
 begin
+    if AEvent.GetCustomFieldValueByName('private') = 'Y' then
+        AppointmentItem.Sensitivity := olPrivate
+    else
+        AppointmentItem.Sensitivity := olNormal;
 
 end;
 
@@ -416,6 +437,17 @@ begin
    tmrQuery.Interval := (neListRefresh.Value * 1000);
 end;
 
+procedure TfrmDiary99.tbMatterPropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+   if not FormExists(frmMatterSearch) then
+      Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+   if frmMatterSearch.ShowModal = mrOk then
+   begin
+      tbMatter.Text := dmAxiom.qryMSearch.FieldByName('FILEID').AsString; //  dmAxiom.qryMSearch.FieldByName('TITLE').AsString;
+   end;
+end;
+
 procedure TfrmDiary99.tmrQueryTimer(Sender: TObject);
 begin
    tmrQuery.Enabled := False;
@@ -432,15 +464,21 @@ begin
       AEvent := GetEventByID(FEventID);
       if AEvent <> nil then
       begin
-         LMatters := TfrmMatters.Create(Self);
-         LMatters.DisplayMatter(TableString('DIARY','NDIARY',FEventID,'FILEID'));
-         frmDesktop.AddFormToTab(LMatters, 1);
+         if TableString('DIARY','NDIARY',FEventID,'FILEID') <> '' then
+         begin
+           LMatters := TfrmMatters.Create(Self);
+           LMatters.DisplayMatter(TableString('DIARY','NDIARY',FEventID,'FILEID'));
+           frmDesktop.AddFormToTab(LMatters, 1);
+         end
+         else
+            ShowMessage('No associated matter');
       end;
    end;
 end;
 
 procedure TfrmDiary99.DoOutlookSynchronise;
 begin
+   dxBarButton9.Enabled := False;
    PostMessage(Handle, CM_OUTLOOK_SYNC, 0, 0);
 end;
 
@@ -616,21 +654,25 @@ begin
       //
    end; }
 
-   SettingLoadStream(dmAxiom.UserID, 'tvDiary Layout', tvDiary );
+    SettingLoadStream(dmAxiom.UserID, 'tvDiary Layout', tvDiary );
 
-   qryPhoneMessage.ParamByName('EMPCODE').AsString := dmAxiom.UserID;
-   qryPhoneMessage.Open;
+    qryPhoneMessage.ParamByName('EMPCODE').AsString := dmAxiom.UserID;
+    qryPhoneMessage.Open;
 
-   if qryFeeEarner.Active = True then
+    if qryFeeEarner.Active = True then
       qryFeeEarner.Close;
-   qryFeeEarner.ParamByName('p_code').AsString := dmAxiom.UserID;
-   qryFeeEarner.Open;
-   if qryFeeEarner.EOF = True then
+    qryFeeEarner.ParamByName('p_code').AsString := dmAxiom.UserID;
+    qryFeeEarner.Open;
+    if qryFeeEarner.EOF = True then
       userFeeEarner := False
-   else
+    else
       userFeeEarner := True;
-   qryFeeEarner.Close;
-   dmAxiom.qryDiaryLoc.Open;
+    qryFeeEarner.Close;
+    dmAxiom.qryDiaryLoc.Open;
+    qryDiaryJur.Open;
+    qryDiaryEvent.Open;
+    qryEmpDept.Open;
+    bDelete := False;
 end;
 
 procedure TfrmDiary99.dxBarButton11Click(Sender: TObject);
@@ -718,6 +760,7 @@ begin
                begin
                   qryDiary.Close;
                   qryDiary.Open;
+                  bDelete := True;
                   DoOutlookSynchronise;
 //        RefreshMatter(GetEventInfo(Cell[ColumnIndex, RowIndex] as TcwDayViewCell, eiRecourceID));
                end;
@@ -729,9 +772,13 @@ begin
    begin
       if DiaryDelete(tvDiaryNDIARY.EditValue) then
       begin
-          qryDiary.Close;
-          qryDiary.Open;
-          DoOutlookSynchronise;
+          if tvDiaryNDIARY.EditValue > 0 then
+          begin
+            qryDiary.Close;
+            qryDiary.Open;
+            bDelete := True;
+            DoOutlookSynchronise;
+          end;
           if (dtpDateTo.Date <> NullDate) and
              (dtpDateFrom.Date <> NullDate) then
           begin
@@ -746,9 +793,15 @@ end;
 procedure TfrmDiary99.popDayViewPopup(Sender: TObject);
 begin
    ViewContactdetails1.Enabled := FEventID > 0;
-   E1.Enabled := FEventID > 0;
+   if (cmbReminderFor.EditValue <> dmAxiom.UserID) then
+      E1.Enabled := False
+   else
+      E1.Enabled := FEventID > 0;
    ConverttoFee1.Enabled := FEventID > 0;
-   DeleteEntry1.Enabled := FEventID > 0;
+   if (cmbReminderFor.EditValue <> dmAxiom.UserID) then
+      DeleteEntry1.Enabled := False
+   else
+      DeleteEntry1.Enabled := FEventID > 0;
 end;
 
 procedure TfrmDiary99.DiarySchedulerDateNavigatorPeriodChanged(
@@ -814,7 +867,12 @@ begin
                         LDiary := TfrmDiaryNew.Create(Self);
                         LDiary.LoadDiary(FEventID);
                         FormResult := LDiary.ShowModal() ;
-                        if FormResult = mrOk then RefreshTaskGrid();
+                        if FormResult = mrOk then
+                        begin
+                          RefreshTaskGrid();
+                          FOverrideSync := True;
+                          DoOutlookSynchronise;
+                        end;
                      except
                        //
                      end;
@@ -843,6 +901,8 @@ begin
                      begin
                         SelectedList.Free;
                         RefreshTaskGrid();
+                        FOverrideSync := True;
+                        DoOutlookSynchronise;
                      end;
                   end;
                finally
@@ -881,6 +941,23 @@ begin
    end;
 end;
 
+procedure TfrmDiary99.DiarySchedulerDragOver(Sender, Source: TObject; X,
+  Y: Integer; State: TDragState; var Accept: Boolean);
+begin
+    if ((chkViewAllEntries.EditValue = true) or (cmbReminderFor.EditValue <> dmAxiom.UserID)) then
+       Accept := False
+    else
+       Accept := True;
+end;
+
+procedure TfrmDiary99.DiarySchedulerEndDrag(Sender, Target: TObject; X,
+  Y: Integer);
+begin
+        dxBarButton9.Enabled := False;
+        FOverrideSync := True;
+        DoOutlookSynchronise;
+end;
+
 procedure TfrmDiary99.DiarySchedulerEventSelectionChanged(
   Sender: TcxCustomScheduler; AEvent: TcxSchedulerControlEvent);
 begin
@@ -890,10 +967,22 @@ begin
       FEventID := -1;
 end;
 
+procedure TfrmDiary99.DiarySchedulerKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = VK_DELETE) and (chkViewAllEntries.EditValue = False) and (cmbReminderFor.EditValue = dmAxiom.UserID) then
+  begin
+        dxBarButton9.Enabled := False;
+        FOverrideSync := True;
+        DoOutlookSynchronise;
+  end;
+end;
+
 procedure TfrmDiary99.ViewContactdetails1Click(Sender: TObject);
 var
   LfrmPhonebook: TfrmPhonebook;
   AEvent: TcxSchedulerEvent;
+  iContact: integer;
 begin
       with SchedulerDBStorage do
       begin
@@ -902,14 +991,22 @@ begin
          begin
             if (not VarIsNull(AEvent.GetCustomFieldValueByIndex(0))) then
             begin
-               LfrmPhonebook := TfrmPhonebook.Create(Self);
-//               if frmDesktop.pagMainControl.ActivePageIndex = 0 then
-//                  frmDesktop.fdTab.AddForm(LfrmPhonebook,True);
-               LfrmPhonebook.btnCreate.Enabled := False;
+               iContact := AEvent.GetCustomFieldValueByIndex(0);
+               if iContact > 0 then
+               begin
+                   LfrmPhonebook := TfrmPhonebook.Create(Self);
+    //               if frmDesktop.pagMainControl.ActivePageIndex = 0 then
+    //                  frmDesktop.fdTab.AddForm(LfrmPhonebook,True);
+                   LfrmPhonebook.btnCreate.Enabled := False;
 
-               LfrmPhonebook.Search := AEvent.GetCustomFieldValueByIndex(0);
-               LfrmPhonebook.Show();
-            end;
+                   LfrmPhonebook.Search := AEvent.GetCustomFieldValueByIndex(0);
+                   LfrmPhonebook.Show();
+               end
+               else
+                   ShowMessage('No associated contact');
+            end
+            else
+                ShowMessage('No associated contact');
          end;
       end;
 end;
@@ -985,7 +1082,6 @@ begin
 
 //      cmbReminderForClick(Self);
 
-
       // Load the saved settings
       //cbReminderFor.ItemIndex := cbReminderFor.Items.IndexOf(SettingLoadString('Diary', 'Author'));
       tbMatter.Text := SettingLoadString('Diary', 'Matter');
@@ -1020,6 +1116,9 @@ begin
       RefreshTaskGrid();
       cmbReminderFor.OnClick := cmbReminderForClick;
       cmbReminderFor.Properties.OnChange := cmbReminderForClick;
+      if pagDiary.ActivePage = tabgrid then
+         dxBarButton9.Enabled := False;
+      pagDiary.ActivePage := tabday;
       //DoOutlookSynchronise;
    end;
 end;
@@ -1035,9 +1134,9 @@ end;
 
 procedure TfrmDiary99.CmOutlookSync(var Msg: TMessage);
 var
-   iOutlookSync: integer;
+   iOutlookSync, buttonselected: integer;
 begin
-   if SystemString('outlook_synchronise') = 'Y' then
+   if (SystemString('outlook_synchronise') = 'Y') and (pagDiary.ActivePage = tabday) then
    begin
       if IsObjectActive('Outlook.Application') = True then
       begin
@@ -1050,14 +1149,21 @@ begin
             case iOutlookSync of
                //from outlook
                1: begin
+                    dmAxiom.qryTmp.Close;
+                    dmAxiom.qryTmp.SQL.Text := 'SELECT COUNT(*) AS EM_COUNT FROM DIARY WHERE ENTRYID IS NOT NULL AND REMINDER_FOR = ' + QuotedStr(dmAxiom.UserID);
+                    dmAxiom.qryTmp.Open;
+                    if dmAxiom.qryTmp.FieldByName('EM_COUNT').AsInteger > 0 then
+                        bDelete := True
+                    else
+                        bDelete := False;
                      afrmProgress.Show;
                      if FOverrideSync = False then
-                        cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                        cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), bDelete, nil, SetResource, ASyncProc);
                   end;
                // to outlook
                2: begin
                      afrmProgress.Show;
-                     cxSchedulerSynchronizeOutlookWithStorage(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), True, nil, GetResource, ASyncProc);
+                     cxSchedulerSynchronizeOutlookWithStorage(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), bDelete, nil, GetResource, ASyncProc);
                   end;
                // bi directional
                3: begin
@@ -1074,9 +1180,12 @@ begin
                     end
                     else
                     begin
-                        ShowMessage('You have not run the Synchronisation with Outlook previously, replicating Outlook calendar entries into BHL Insight');
-                        afrmProgress.Show;
-                        cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                        buttonselected := messagedlg('You have not run the Synchronisation with Outlook previously, replicating Outlook calendar entries into BHL Insight', mtConfirmation, mbOKCancel, 0);
+                        if (buttonSelected = mrOK) then
+                        begin
+                          afrmProgress.Show;
+                          cxSchedulerSynchronizeStorageWithOutlook(SchedulerDBStorage, SchedulerDBStorage.CustomFields.ItemByFieldName('EntryID'), False, nil, SetResource, ASyncProc);
+                        end;
                     end;
                   end;
             end;
@@ -1089,6 +1198,9 @@ begin
       end;
    end;
    FOverrideSync := False;
+   bDelete := False;
+   dxBarButton9.Enabled := True;
+   RefreshTaskGrid;
 end;
 
 procedure TfrmDiary99.MakeSQL;
@@ -1100,7 +1212,11 @@ begin
 
       qryDiary.SQL.Add('SELECT /*+ FIRST_ROWS */');
       qryDiary.SQL.Add(DIARYFIELDS);
-      qryDiary.SQL.Add('FROM DIARY D');
+      qryDiary.SQL.Add('FROM DIARY D LEFT OUTER JOIN EMPLOYEE E ON D.REMINDER_FOR = E.CODE ');
+      if ((cmbPartner.Text <> '') or (cmbController.Text <> '') or (cmbAuthor.Text <> '')) then
+      begin
+         qryDiary.SQL.Add('INNER JOIN MATTER M ON D.NMATTER = M.NMATTER ');
+      end;
       qryDiary.SQL.Add(WhereClause('M'));
       qryDiary.SQL.Add('ORDER BY 1');
 
@@ -1120,15 +1236,60 @@ begin
    end;
 end;
 
+
+procedure TfrmDiary99.chkViewAllEntriesChange(Sender: TObject);
+begin
+    If (chkViewAllEntries.EditValue = True) then
+    begin
+        DiaryScheduler.EventOperations.Deleting := False;
+        dxBarButton9.Enabled := False;
+    end
+    else
+    begin
+        DiaryScheduler.EventOperations.Deleting := True;
+        dxBarButton9.Enabled := True;
+    end;
+    PopulateGrid;
+    RefreshTaskGrid;
+end;
+
 procedure TfrmDiary99.chkViewAllEntriesPropertiesChange(Sender: TObject);
 begin
    btnRefresh.Click;
+   If (chkViewAllEntries.EditValue = True) then
+   begin
+      dxBarButton9.Enabled := False;
+      pbDelete.Enabled := False;
+   end;
+   if (pagDiary.ActivePage = tabDay) and (cmbReminderFor.EditValue = dmAxiom.UserID) then
+   begin
+       If (chkViewAllEntries.EditValue = True) then
+       begin
+          dxBarButton9.Enabled := False;
+          pbDelete.Enabled := False;
+       end
+       else
+       begin
+          dxBarButton9.Enabled := True;
+          pbDelete.Enabled := True;
+       end;
+   end;
 end;
 
 procedure TfrmDiary99.cmbReminderForClick(Sender: TObject);
 begin
 //  lblReminderForName.Caption := TableString('EMPLOYEE', 'CODE', string(cmbReminderFor.EditValue), 'NAME');
    btnRefresh.Click;
+   if (cmbReminderFor.EditValue = dmAxiom.UserID) and (chkViewAllEntries.EditValue = False) then
+   begin
+        DiaryScheduler.EventOperations.Deleting := True;
+        dxBarButton9.Enabled := True;
+   end
+   else
+   begin
+        DiaryScheduler.EventOperations.Deleting := False;
+        dxBarButton9.Enabled := False;
+   end;
 end;
 
 procedure TfrmDiary99.ConverttoFee1Click(Sender: TObject);
@@ -1230,6 +1391,8 @@ begin
 
   if (cmbReminderFor.Text <> '') AND BOOLEAN(chkViewAllEntries.Editvalue) = false then
       sSQLWhere := sSQLWhere + AWhere + 'D.REMINDER_FOR = NVL(:ReminderFor, D.REMINDER_FOR)';
+  if (cmbReminderFor.Text = '') AND (BOOLEAN(chkViewAllEntries.Editvalue) = false) AND (cbDept.EditValue <> '') then
+      sSQLWhere := sSQLWhere + AWhere + 'E.DEPT = ' + cbDept.EditValue;
   if tbMatter.Text <> '' then
     sSQLWhere := sSQLWhere + sAND + 'D.FILEID = :FileID';
   if cbLocation.Text <> '' then
@@ -1323,7 +1486,9 @@ begin
 
    if(pagDiary.ActivePage = tabGrid) then
    begin
-      if Trunc(dtpDateFrom.Date) = Trunc(dtpDateTo.Date) then
+      if Trunc(dtpDateFrom.Date) = NullDate then
+         sTitle := sTitle + ' for ' + FormatDateTime('ddddd', DiaryScheduler.DateNavigator.Date)
+      else if Trunc(dtpDateFrom.Date) = Trunc(dtpDateTo.Date) then
          sTitle := sTitle + ' for ' + FormatDateTime('ddddd', dtpDateFrom.Date)
       else
          sTitle := sTitle + ' for the period ' + FormatDateTime('ddddd', dtpDateFrom.Date) +
@@ -1404,6 +1569,7 @@ begin
       qryTime.ParamByName('REMINDER_FOR').AsString := cmbReminderFor.EditValue;
    qryTime.ParamByName('START_DT').AsDateTime := AStart;
    qryTime.Open;
+   Self.Caption := MakeTitle;
 end;
 
 procedure TfrmDiary99.cxDateNavigator1DblClick(Sender: TObject);
@@ -1413,23 +1579,27 @@ end;
 
 procedure TfrmDiary99.btnRefreshClick(Sender: TObject);
 begin
-   RefreshTaskGrid;
+    PopulateGrid;
+    RefreshTaskGrid;
 end;
 
 procedure TfrmDiary99.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   cmbReminderFor.OnClick := nil;
-   qryDiary.Close;
-   qryDiaryList.Close;
-   dmAxiom.qryDiaryLoc.Close;
-   qryPhoneMessage.Close;
-   qryEvents.Close;
-   qryTime.Close;
-   qryEmployee.Close;
-   qryFeeEarner.Close;
-   qryPartner.Close;
-   qryPartner.Close;
-   qryController.Close;
+    cmbReminderFor.OnClick := nil;
+    qryDiary.Close;
+    qryDiaryList.Close;
+    qryPhoneMessage.Close;
+    qryEvents.Close;
+    qryTime.Close;
+    qryEmployee.Close;
+    qryFeeEarner.Close;
+    dmAxiom.qryDiaryLoc.Open;
+    qryDiaryJur.Open;
+    qryDiaryEvent.Open;
+    qryEmpDept.Open;
+    qryPartner.Close;
+    qryPartner.Close;
+    qryController.Close;
 
    SettingSaveStream(dmAxiom.UserID, 'tvDiary Layout', tvDiary );
    RemoveFromDesktop(Self);
@@ -1438,14 +1608,26 @@ end;
 procedure TfrmDiary99.pagDiaryChange(Sender: TObject);
 begin
    btnPrint.Enabled := False;
+   if pagDiary.ActivePage = tabFilter then
+   begin
+      dxBarButton9.Enabled := False;
+      pbDelete.Enabled := False;
+      pbAppointment.Enabled := False;
+   end;
    if pagDiary.ActivePage = tabgrid then
    begin
+      pbAppointment.Enabled := True;
+      pbDelete.Enabled := False;
       if (dtpDateTo.Date <> NullDate) and
          (dtpDateFrom.Date <> NullDate) then
       begin
          //MakeSQL;  //populateGrid;
-         populateGrid;
-         btnPrint.Enabled := True;
+          populateGrid;
+          btnPrint.Enabled := True;
+          if (chkViewAllEntries.EditValue = True) or (cmbReminderFor.EditValue <> dmAxiom.UserID) then
+              pbDelete.Enabled := False
+          else
+              pbDelete.Enabled := True;
       end;
 {      qryDiary.SQL.Clear;
       qryDiary.SQL.Text :=
@@ -1476,6 +1658,27 @@ begin
               ' AND D.REMINDER_FOR = :Author '+
               ' AND M.NCLIENT = P.NCLIENT '+
               ' ORDER BY 1 ';     }
+      dxBarButton9.Enabled := False;
+   end;
+   if pagDiary.ActivePage = tabCalendar then
+   begin
+      pbAppointment.Enabled := True;
+      dxBarButton9.Enabled := False;
+      pbDelete.Enabled := False;
+   end;
+   if pagDiary.ActivePage = tabDay then
+   begin
+      pbAppointment.Enabled := True;
+      if (chkViewAllEntries.EditValue = True) or (cmbReminderFor.EditValue <> dmAxiom.UserID) then
+      begin
+        dxBarButton9.Enabled := False;
+        pbDelete.Enabled := False;
+      end
+      else
+      begin
+        dxBarButton9.Enabled := True;
+        pbDelete.Enabled := True;
+      end;
    end;
 end;
 

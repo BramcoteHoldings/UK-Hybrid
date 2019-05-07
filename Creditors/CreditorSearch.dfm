@@ -7,7 +7,7 @@ object frmCreditorSearch: TfrmCreditorSearch
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -16,7 +16,7 @@ object frmCreditorSearch: TfrmCreditorSearch
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object pageSearch: TcxPageControl
     Left = 0
     Top = 0
@@ -33,18 +33,14 @@ object frmCreditorSearch: TfrmCreditorSearch
     ClientRectBottom = 642
     ClientRectLeft = 4
     ClientRectRight = 724
-    ClientRectTop = 28
+    ClientRectTop = 26
     object tabGrid: TcxTabSheet
       Caption = 'Creditors'
       ImageIndex = 0
       OnShow = tabGridShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
-        Top = 575
+        Top = 577
         Width = 720
         Height = 39
         Align = alBottom
@@ -56,16 +52,16 @@ object frmCreditorSearch: TfrmCreditorSearch
         object Label8: TLabel
           Left = 3
           Top = 12
-          Width = 112
-          Height = 17
+          Width = 99
+          Height = 15
           Anchors = [akLeft, akBottom]
           Caption = 'Search for Creditor'
         end
         object Label5: TLabel
           Left = 236
           Top = 12
-          Width = 31
-          Height = 17
+          Width = 28
+          Height = 15
           Anchors = [akLeft, akBottom]
           Caption = 'Co&de'
           Visible = False
@@ -247,7 +243,7 @@ object frmCreditorSearch: TfrmCreditorSearch
         Left = 0
         Top = 0
         Width = 720
-        Height = 575
+        Height = 577
         Align = alClient
         TabOrder = 1
         LookAndFeel.NativeStyle = True
@@ -317,6 +313,8 @@ object frmCreditorSearch: TfrmCreditorSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
+      ExplicitTop = 28
+      ExplicitHeight = 614
       object fraActive: TcxRadioGroup
         Left = 17
         Top = 150
@@ -351,16 +349,16 @@ object frmCreditorSearch: TfrmCreditorSearch
         object Label6: TLabel
           Left = 10
           Top = 66
-          Width = 27
-          Height = 17
+          Width = 25
+          Height = 15
           Caption = 'Type'
           Transparent = True
         end
         object Label7: TLabel
           Left = 10
           Top = 29
-          Width = 83
-          Height = 17
+          Width = 74
+          Height = 15
           Caption = 'Creditor Code'
           Transparent = True
         end
@@ -402,8 +400,8 @@ object frmCreditorSearch: TfrmCreditorSearch
         object Label2: TLabel
           Left = 9
           Top = 28
-          Width = 87
-          Height = 17
+          Width = 78
+          Height = 15
           Caption = 'Creditor Name'
           Transparent = True
         end
@@ -430,8 +428,8 @@ object frmCreditorSearch: TfrmCreditorSearch
         object Label3: TLabel
           Left = 9
           Top = 31
-          Width = 52
-          Height = 17
+          Width = 48
+          Height = 15
           Caption = 'Invoice #'
           Transparent = True
         end

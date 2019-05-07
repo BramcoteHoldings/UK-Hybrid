@@ -85,15 +85,11 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Conficts'
       ImageIndex = 0
       OnShow = tabGridShow
-      ExplicitLeft = 0
-      ExplicitTop = 31
-      ExplicitWidth = 0
-      ExplicitHeight = 606
       object Panel1: TPanel
         Left = 0
-        Top = 556
+        Top = 567
         Width = 1280
-        Height = 55
+        Height = 44
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -101,13 +97,12 @@ object frmConflictSearch: TfrmConflictSearch
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitTop = 551
         DesignSize = (
           1280
-          55)
+          44)
         object Label9: TLabel
           Left = 0
-          Top = 19
+          Top = 13
           Width = 103
           Height = 15
           Margins.Left = 4
@@ -119,10 +114,11 @@ object frmConflictSearch: TfrmConflictSearch
           ParentShowHint = False
           ShowHint = True
           Transparent = True
+          ExplicitTop = 24
         end
         object edtConflictSearch: TcxTextEdit
           Left = 155
-          Top = 16
+          Top = 10
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -136,13 +132,14 @@ object frmConflictSearch: TfrmConflictSearch
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
+          ExplicitTop = 21
           Width = 173
         end
         object bnCancel: TcxButton
           Left = 1168
-          Top = 15
+          Top = 9
           Width = 106
-          Height = 36
+          Height = 29
           Hint = 'Exit'
           Margins.Left = 4
           Margins.Top = 4
@@ -240,12 +237,13 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsImage.Spacing = 7
           TabOrder = 1
           OnClick = aFileExitExecute
+          ExplicitTop = 20
         end
         object btnCreateClient: TcxButton
           Left = 424
-          Top = 12
+          Top = 8
           Width = 108
-          Height = 36
+          Height = 29
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -257,12 +255,13 @@ object frmConflictSearch: TfrmConflictSearch
           TabOrder = 2
           Visible = False
           OnClick = btnCreateClientClick
+          ExplicitTop = 19
         end
         object btnCreateMatter: TcxButton
           Left = 540
-          Top = 12
+          Top = 8
           Width = 109
-          Height = 36
+          Height = 29
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -273,20 +272,21 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsImage.Spacing = 7
           TabOrder = 3
           Visible = False
+          ExplicitTop = 19
         end
       end
       object dbGrConflicts: TcxGrid
         Left = 0
         Top = 0
         Width = 1280
-        Height = 556
+        Height = 567
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 551
+        ExplicitHeight = 568
         object vConflicts: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellDblClick = vConflictsCellDblClick
@@ -309,6 +309,7 @@ object frmConflictSearch: TfrmConflictSearch
           NewItemRow.SeparatorWidth = 8
           OptionsData.Deleting = False
           OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
           OptionsSelection.HideFocusRectOnExit = False
           OptionsView.NavigatorOffset = 63
           OptionsView.ColumnAutoWidth = True
@@ -320,40 +321,42 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'cat'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Width = 85
           end
           object vConflictsFileID: TcxGridDBColumn
             Caption = 'File ID'
             DataBinding.FieldName = 'FileID'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Width = 74
           end
           object vConflictsClientName: TcxGridDBColumn
             Caption = 'Client Name'
             DataBinding.FieldName = 'ClientName'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
-            Width = 208
+            Width = 239
           end
           object vConflictsMatterDesc: TcxGridDBColumn
             Caption = 'Matter Description'
             DataBinding.FieldName = 'matterdesc'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
-            Width = 315
+            Width = 363
           end
           object vConflictsDataFieldName: TcxGridDBColumn
             Caption = 'Field Name'
             DataBinding.FieldName = 'DataFieldName'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
-            Width = 159
+            Width = 183
           end
           object vConflictsData: TcxGridDBColumn
             Caption = 'Field TextValue'
             DataBinding.FieldName = 'Data'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
-            Width = 199
+            Width = 229
           end
           object vConflictsExclude: TcxGridDBColumn
             Caption = 'No Conflict'
@@ -363,7 +366,7 @@ object frmConflictSearch: TfrmConflictSearch
             Properties.ValueUnchecked = 'N'
             Options.Sorting = False
             VisibleForEditForm = bFalse
-            Width = 91
+            Width = 105
           end
           object vConflictsClientID: TcxGridDBColumn
             DataBinding.FieldName = 'nclient'
@@ -388,10 +391,6 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Filter'
       ImageIndex = 1
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 31
-      ExplicitWidth = 0
-      ExplicitHeight = 606
       DesignSize = (
         1280
         611)
@@ -456,7 +455,6 @@ object frmConflictSearch: TfrmConflictSearch
         Margins.Bottom = 4
         Anchors = [akLeft, akBottom]
         TabOrder = 1
-        ExplicitTop = 568
       end
       object edtFileSearch: TEdit
         Left = 287
@@ -470,7 +468,6 @@ object frmConflictSearch: TfrmConflictSearch
         Anchors = [akLeft, akBottom]
         CharCase = ecUpperCase
         TabOrder = 2
-        ExplicitTop = 568
       end
       object gbOpened: TcxGroupBox
         Left = 681
@@ -1404,7 +1401,6 @@ object frmConflictSearch: TfrmConflictSearch
         OptionsImage.NumGlyphs = 2
         OptionsImage.Spacing = 7
         TabOrder = 9
-        ExplicitTop = 560
       end
       object fraEqual: TcxGroupBox
         Left = 11
@@ -2943,11 +2939,6 @@ object frmConflictSearch: TfrmConflictSearch
       Visible = ivAlways
     end
   end
-  object cxGridPopupMenu: TcxGridPopupMenu
-    PopupMenus = <>
-    Left = 720
-    Top = 182
-  end
   object qryConflicts: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
@@ -3023,6 +3014,17 @@ object frmConflictSearch: TfrmConflictSearch
         '    FieldName DataFieldName, upper(textvalue) data, upper(ftl.te' +
         'xtvalue) searchtext, '#39'N'#39' Exclude'
       '    from fieldtypelink ftl'
+      ''
+      '    union'
+      
+        '    select '#39'Contact Passport'#39' cat, TO_char(nclient) clientID, nc' +
+        'lient nclient, null matterNo,  null FileID, name ClientName, ph.' +
+        'passport_no,'
+      '    null matterdesc,'
+      '    null DataFieldName,'
+      '    null Data,'
+      '    upper(ph.passport_no) searchtext, '#39'N'#39' Exclude'
+      '    from phonebook ph'
       ''
       ') joinups'
       'where upper(searchtext) like '#39'%'#39' || upper(:searchtext) || '#39'%'#39)
@@ -3802,11 +3804,6 @@ object frmConflictSearch: TfrmConflictSearch
           end
           item
             Caption = '-'
-          end
-          item
-            Action = aHelp
-            Caption = '&Help'
-            ImageIndex = 5
           end>
       end
       item
@@ -3880,12 +3877,6 @@ object frmConflictSearch: TfrmConflictSearch
             UsageCount = 1
           end
           item
-            Items = <
-              item
-                Action = aHelp
-                Caption = '&Help'
-                ImageIndex = 5
-              end>
             Caption = '&Help'
           end>
       end>
@@ -3917,11 +3908,6 @@ object frmConflictSearch: TfrmConflictSearch
       Hint = 'Print'
       ImageIndex = 4
       OnExecute = aPrintExecute
-    end
-    object aHelp: TAction
-      Category = 'Help'
-      Caption = 'Help'
-      ImageIndex = 5
     end
     object aFileExit: TWindowClose
       Category = 'File'
@@ -3970,10 +3956,6 @@ object frmConflictSearch: TfrmConflictSearch
       Category = 'Print'
       Caption = 'Export to Excel'
       Enabled = False
-    end
-    object aWIPNotes: TAction
-      Caption = 'Add WIP Notes'
-      ImageIndex = 3
     end
   end
   object vtConflicts: TVirtualTable
