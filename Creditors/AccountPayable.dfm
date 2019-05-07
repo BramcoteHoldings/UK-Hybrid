@@ -40,6 +40,10 @@ object frmAcctPayable: TfrmAcctPayable
     object tabAcctPayable: TcxTabSheet
       Caption = 'Accounts Payable'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrInvoices: TcxGrid
         Left = 0
         Top = 0
@@ -217,7 +221,7 @@ object frmAcctPayable: TfrmAcctPayable
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 313
-        Width = 1079
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
