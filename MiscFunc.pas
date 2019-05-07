@@ -12617,8 +12617,11 @@ begin
    if FileExists(outputFileName) = False then
    begin
       if IsObjectActive('Outlook.Application') = False then
-         OutlookApp := CreateOleObject('Outlook.Application');
-
+         OutlookApp := CreateOleObject('Outlook.Application')
+      else
+      begin
+         OutlookApp := GetActiveOleObject('Outlook.Application');
+      end;
 
       try
          OutPutFileName := copy(AFile, 1, length(AFile) - length(ExtractFileExt(AFile))) +'.html';
@@ -12642,7 +12645,6 @@ begin
       OutlookApp := unassigned;
    end;
 end;
-
 
 procedure ConvertDOCFiles(AFile: string);
 var

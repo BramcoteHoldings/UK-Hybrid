@@ -9944,7 +9944,7 @@ begin
         qryDocs.SQL.Add('FROM DOC ');
         qryDocs.SQL.Add('where nmatter = :nmatter ');
         qryDocs.SQL.Add('and nvl(folder_id,0) = nvl(:folder_id, 0) ');
-        qryDocs.SQL.Add('and nvl(parentdocid,0) = 0');
+        qryDocs.SQL.Add('and nvl(parentdocid,0) = docid');
 
 {        if SystemString('hide_matter_workflow') = 'Y' then
         begin
@@ -9982,7 +9982,7 @@ begin
         qryDocs.SQL.Add('FROM DOC ');
         qryDocs.SQL.Add('where nmatter = :nmatter ');
         qryDocs.SQL.Add('and nvl(folder_id,0) = nvl(:folder_id, 0) ');
-        qryDocs.SQL.Add('and nvl(parentdocid,0) = 0 ');
+        qryDocs.SQL.Add('and nvl(parentdocid,0) = docid ');
         qryDocs.SQL.Add('  AND D.NPRECCATEGORY = '+ IntToStr(ALink.Item.Tag));
 {        if SystemString('hide_matter_workflow') = 'Y' then
         begin
@@ -13169,7 +13169,7 @@ begin
 //      Sql.Text := Sql.Text + ' GROUP BY docid, parentdocid ';
       Sql.Text := Sql.Text + ' order by 6 desc, 4 ';
       ParamByName('NMATTER').AsString := qryMatter.FieldByName('NMATTER').AsString;
-      ParamByName('FOLDER_ID').AsInteger := -1;
+      ParamByName('FOLDER_ID').AsInteger := -2;
       try
          qryDocChildren.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          qryDocChildren.Open;
