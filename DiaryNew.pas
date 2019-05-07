@@ -125,7 +125,6 @@ type
     DefaultWith: TDiaryWith;
     FWithSQL: TStringList;
     FEvent: TcxSchedulerControlEvent;
-    iNname: integer;
     function GetWithSQL: TStringList;
     function OKtoPost: Boolean;
     function DateFromDateTime(ADateTime: TDateTime): TDate;
@@ -263,7 +262,6 @@ begin
       cbEvent.EditValue := qryDiary.FieldByName('EVENTTYPE').AsInteger;
       cbType.EditValue := qryDiary.FieldByName('TYPE').AsString;
       cbLocation.EditValue := qryDiary.FieldByName('LOCATION').AsString;
-      iNname := qryDiary.FieldByName('NNAME').AsInteger;
       mmoDesc.Text := qryDiary.FieldByName('DESCR').AsString;
       chkEventPrintDescr.Checked := qryDiary.FieldByName('EVENTPRINTDESCR').AsString = 'Y';
       icbLabel.EditValue := qryDiary.FieldByName('LABELCOLOUR').AsInteger;
@@ -356,9 +354,9 @@ begin
   cbReminderFor.ItemIndex := cbReminderFor.Items.IndexOf(dmAxiom.UserID);
   chkOutlook.Checked := False;
   if SystemString('outlook_synchronise') = 'N' then
-     chkOutlook.enabled := True
+     chkOutlook.Visible := True
   else
-     chkOutlook.enabled := False;
+     chkOutlook.Visible := False;
 
   with qryDiary do
   begin
@@ -476,7 +474,6 @@ begin
       if tbFile.Text <> '' then
          qryDiary.FieldByName('PARTNER').AsString := MatterString(tbFile.Text, 'PARTNER');
       qryDiary.FieldByName('SEARCH_KEY').AsString := tbSearch.Text;
-      qryDiary.FieldByName('NNAME').AsInteger := iNname;
       if cbType.Text <> '' then
          qryDiary.FieldByName('TYPE').AsString := cbType.EditValue;
       qryDiary.FieldByName('DESCR').AsString := mmoDesc.Text;
@@ -487,10 +484,8 @@ begin
       qryDiary.FieldByName('LOCATION').AsString := cbLocation.Text;
 //      qryDiary.FieldByName('JURISDICTION').AsString := cbJurisdiction.Text;
       if cbEvent.Text <> '' then
-      begin
          qryDiary.FieldByName('EVENTTYPE').AsString := cbEvent.EditValue;
-         qryDiary.FieldByName('EVENT').AsString := cbEvent.Text;
-      end;
+
       qryDiary.FieldByName('State').AsInteger := icbShowTimeAs.EditValue;
       if icbLabel.EditValue = 0 then
          qryDiary.FieldByName('LABELCOLOUR').AsInteger := 536870912
@@ -604,12 +599,7 @@ begin
   if not FormExists(frmPhoneBookSearch) then
     Application.CreateForm(TfrmPhoneBookSearch, frmPhoneBookSearch);
   if frmPhoneBookSearch.ShowModal = mrOk then
-  begin
     tbSearch.Text := frmPhoneBookSearch.qryPhoneBook.FieldByName('SEARCH').AsString;
-    iNname := frmPhoneBookSearch.qryPhoneBook.FieldByName('NNAME').AsInteger;
-  end
-  else
-    iNname := null;
   mmoDesc.SetFocus;
 end;
 

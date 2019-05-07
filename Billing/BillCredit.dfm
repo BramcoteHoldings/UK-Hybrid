@@ -368,7 +368,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43542.7441197106d
+    EditValue = 43587.4909176042d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -803,7 +803,7 @@ object frmBillCredit: TfrmBillCredit
       'where nmemo = :nmemo'
       'and alloc_amt > 0')
     Left = 806
-    Top = 44
+    Top = 76
     ParamData = <
       item
         DataType = ftUnknown

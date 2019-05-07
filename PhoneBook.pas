@@ -773,6 +773,9 @@ type
     cbShowMatterTasks: TcxBarEditItem;
     tsContacts: TcxTabSheet;
     tvDocsIs_Conflict: TcxGridDBBandedColumn;
+    pnlPassportNo: TPanel;
+    Label3: TLabel;
+    DBEdit9: TDBEdit;
     procedure aNewExecute(Sender: TObject);
     procedure qPhoneBookAfterScroll(DataSet: TDataSet);
     procedure vtTreeCollapsing(Sender: TBaseVirtualTree;
@@ -1386,6 +1389,7 @@ begin
   pnlDOB.Visible := (SystemString('HideDOBPanel') = 'N');
   getLabel(lGender,'PHONEBOOK', 'GENDER', imaxLength, 'Type/Gender:');
   pnlNRIC.Visible := (SystemString('HideNRICPanel') = 'N');
+  pnlPassportNo.Visible := (SystemString('HideNRICPanel') = 'N');
 
 //  Self.Caption := 'Phonebook: ' + qPhonebook.FieldByName('SEARCH').AsString;
   btnArchive.Enabled := dmAxiom.Security.Phonebook.Archive;

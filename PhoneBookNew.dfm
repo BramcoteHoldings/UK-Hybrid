@@ -1843,7 +1843,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       end
       object Label3: TLabel
         Left = 3
-        Top = 461
+        Top = 480
         Width = 83
         Height = 15
         Alignment = taRightJustify
@@ -1858,8 +1858,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Caption = 'Contact Title:'
       end
       object cxButton1: TcxButton
-        Left = 419
-        Top = 461
+        Left = 412
+        Top = 480
         Width = 78
         Height = 24
         Action = ActAddConflictDoc
@@ -1876,7 +1876,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       end
       object grpCLLData: TGroupBox
         Left = 3
-        Top = 363
+        Top = 383
         Width = 350
         Height = 89
         Caption = 'CLL Data'
@@ -1917,9 +1917,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       end
       object lbConflicts: TcxListBox
         Left = 101
-        Top = 461
+        Top = 480
         Width = 302
-        Height = 65
+        Height = 54
         ItemHeight = 15
         TabOrder = 3
       end
@@ -2045,9 +2045,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           Caption = 'Contact Name:'
         end
         object Label40: TLabel
-          Left = 31
+          Left = 6
           Top = 25
-          Width = 55
+          Width = 80
           Height = 45
           Alignment = taRightJustify
           Caption = 'Additional Contact Name:'
@@ -2105,7 +2105,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Left = -1
         Top = 305
         Width = 550
-        Height = 36
+        Height = 32
         BevelOuter = bvNone
         ShowCaption = False
         TabOrder = 8
@@ -2244,6 +2244,36 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           DataField = 'OCCUPATION'
           DataSource = dsPhoneBook
           TabOrder = 0
+        end
+      end
+      object pnlPassportNo: TPanel
+        Left = -1
+        Top = 337
+        Width = 550
+        Height = 32
+        BevelOuter = bvNone
+        ShowCaption = False
+        TabOrder = 10
+        object Label47: TLabel
+          Left = 19
+          Top = 10
+          Width = 67
+          Height = 15
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Passport No:'
+          WordWrap = True
+        end
+        object DBEdit8: TDBEdit
+          Left = 96
+          Top = 5
+          Width = 214
+          Height = 23
+          CharCase = ecUpperCase
+          DataField = 'PASSPORT_NO'
+          DataSource = dsPhoneBook
+          TabOrder = 0
+          OnChange = dbedNRICChange
         end
       end
     end
@@ -2665,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43572.419444675930000000
-        Time = 43572.419444675930000000
+        Date = 43588.419444675930000000
+        Time = 43588.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -4438,7 +4468,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       '  P.NRIC,'
       '  P.PROSPECTIVE,'
       '  P.PHONEBOOK_STATUS_ID,'
-      '  P.AP_EMAIL'
+      '  P.AP_EMAIL,'
+      '  P.PASSPORT_NO'
       'FROM'
       '  phonebook p, gender g,'
       '  phonebook m'

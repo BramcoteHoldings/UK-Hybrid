@@ -212,7 +212,6 @@ begin
       else
         sError := 'There is no money outstanding on this Bill';
     end
-
     else
       sError := 'This Bill has not been dispatched';
 
@@ -388,6 +387,7 @@ begin
                 , -1
                 , ''
                 , qryLedger.FieldByName('TAXCODE').AsString);
+
               // Tax
               if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
                 begin

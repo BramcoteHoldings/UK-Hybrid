@@ -4,35 +4,19 @@ interface
 
 uses
   Matters, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Db, Buttons, NumberEdit,
-  ImgList, ToolWin, ExtCtrls, Menus, OracleUniProvider, Uni, DBAccess, MemDS,
-  MatterLabel, DBCtrls, ActnList, ActnMan, StdActns,
-  ActnCtrls, ActnMenus, ppStrtch, ppMemo, FMXUtils,
-  ppCtrls, ppBands, ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
-  ppDB, ppComm, ppRelatv, ppDBPipe, ppDBBDE, ppViewr,
-  cxStyles, cxCustomData, cxGraphics,ComObj, cxFilter, cxData,
-  cxDataStorage, cxEdit, cxDBData, cxMaskEdit, cxDropDownEdit,
-  cxDBLookupComboBox, cxColorComboBox, cxCurrencyEdit, cxCheckBox, cxMemo,
-  cxCalendar, cxTextEdit, cxLookAndFeelPainters, dxBar, dxBarExtItems,
-  cxLabel, cxLookupEdit, cxDBLookupEdit, cxGroupBox, cxRadioGroup,
-  cxButtons, cxContainer, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, cxPC, Variants,
-  cxGridCustomPopupMenu, cxGridPopupMenu, ppRegion, ppModule, raCodMod,
-  ppParameter, dxPSGlbl, dxPSUtl, dxPSEngn, dxPrnPg, dxBkgnd, dxWrap,
-  dxPrnDev, dxPSCompsProvider, dxPSFillPatterns, dxPSEdgePatterns,
-  dxPSCore, dxPScxCommon, dxPScxGridLnk, cxGridExportLink,
-  XPStyleActnCtrls, cxLookAndFeels, ppFileUtils, ppIniStorage,
-  cxGridChartView, cxGridDBChartView,
-  ppDesignLayer, cxPCdxBarPopupMenu, dxPSPDFExportCore, dxPSPDFExport,
-  cxDrawTextUtils, dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon,
-  dxPScxPageControlProducer, dxPScxGridLayoutViewLnk, dxPSDBTCLnk,
-  dxPScxEditorProducers, dxPScxExtEditorProducers, dxPScxDBEditorLnks,
-  dxPSTextLnk, cxDateUtils, dxPScxSchedulerLnk, scExcelExport, dxCore,
-  cxNavigator, System.Actions, FeeNotes, DateUtils, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, VirtualTable,
-  cxEditRepositoryItems, Datasnap.DBClient, myChkBox, dxDateRanges,
-  System.ImageList;
+  Dialogs, StdCtrls, ComCtrls, Db, dxBarBuiltInMenu, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.Menus,
+  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
+  dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog,
+  cxDBData, cxTextEdit, cxCheckBox, cxEditRepositoryItems, VirtualTable,
+  Vcl.StdActns, System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan,
+  ppParameter, ppDesignLayer, raCodMod, ppModule, ppBands, ppClass, ppCtrls,
+  ppMemo, ppStrtch, ppRegion, ppVar, ppPrnabl, ppCache, ppProd, ppReport,
+  ppComm, ppRelatv, ppDB, ppDBPipe, DBAccess, Uni, dxBar, cxClasses, MemDS,
+  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList, cxLabel, cxMaskEdit,
+  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, NumberEdit,
+  cxGroupBox, cxRadioGroup, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxButtons, cxPC, dxCore;
 
 const
   imgWORD = 2;
@@ -159,7 +143,6 @@ type
     cxStyle1: TcxStyle;
     lblParaLegal: TLabel;
     cmbParaLegal: TcxLookupComboBox;
-    cxGridPopupMenu: TcxGridPopupMenu;
     styDebtorStatus: TcxStyle;
     cmbDebtorStatus: TcxLookupComboBox;
     cxLabel2: TcxLabel;
@@ -217,7 +200,6 @@ type
     aClearAll: TAction;
     aMerge: TAction;
     aPrint: TAction;
-    aHelp: TAction;
     aFileExit: TWindowClose;
     aPrintLabelsAll: TAction;
     qPrintLabelsSelected: TAction;
@@ -227,7 +209,6 @@ type
     aRecentHolder: TAction;
     aPrintGrid: TAction;
     aPrinttoXL: TAction;
-    aWIPNotes: TAction;
     btnCreateClient: TcxButton;
     btnCreateMatter: TcxButton;
     vConflictsExclude: TcxGridDBColumn;

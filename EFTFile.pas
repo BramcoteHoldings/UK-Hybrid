@@ -9,7 +9,7 @@ uses
   cxButtons, cxDropDownEdit, cxCalendar, StrUtils, DB, OracleUniProvider, Uni, MemDS,
   DBAccess, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, ImgList,
   ActnList, ActnMan, Menus, cxGraphics, XPStyleActnCtrls, cxLookAndFeels,
-  ComCtrls, dxCore, cxDateUtils;
+  ComCtrls, dxCore, cxDateUtils, System.ImageList, System.Actions;
 
 type
   TfrmEFTFileGeneration = class(TForm)
@@ -110,7 +110,6 @@ begin
    line := line + PadStr(tmpLine,40);
    Writeln(F, line);
    Result := line;
-
 end;
 
 function TfrmEFTFileGeneration.EFT_Detail: string;
