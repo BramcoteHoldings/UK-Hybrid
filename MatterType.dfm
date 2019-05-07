@@ -12,42 +12,42 @@ inherited frmMatterType: TfrmMatterType
   TextHeight = 15
   object Label1: TLabel [0]
     Left = 8
-    Top = 62
+    Top = 39
     Width = 28
     Height = 15
     Caption = 'Code'
   end
   object Label2: TLabel [1]
     Left = 8
-    Top = 83
+    Top = 60
     Width = 60
     Height = 15
     Caption = 'Description'
   end
   object Label13: TLabel [2]
     Left = 8
-    Top = 108
+    Top = 85
     Width = 103
     Height = 15
     Caption = 'Ledger Component'
   end
   object Label15: TLabel [3]
     Left = 8
-    Top = 133
+    Top = 110
     Width = 80
     Height = 15
     Caption = 'Sundry Percent'
   end
   object Label16: TLabel [4]
-    Left = 209
-    Top = 133
+    Left = 214
+    Top = 110
     Width = 65
     Height = 15
     Caption = 'Sundry Type'
   end
   object dbtbCode: TDBEdit [5]
     Left = 115
-    Top = 57
+    Top = 34
     Width = 53
     Height = 23
     CharCase = ecUpperCase
@@ -57,7 +57,7 @@ inherited frmMatterType: TfrmMatterType
   end
   object dbtbDescr: TDBEdit [6]
     Left = 115
-    Top = 81
+    Top = 58
     Width = 185
     Height = 23
     DataField = 'DESCR'
@@ -66,7 +66,7 @@ inherited frmMatterType: TfrmMatterType
   end
   object btnCodeSearch: TBitBtn [7]
     Left = 169
-    Top = 57
+    Top = 34
     Width = 24
     Height = 22
     Glyph.Data = {
@@ -83,7 +83,7 @@ inherited frmMatterType: TfrmMatterType
   end
   object edLedgerComponent: TDBEdit [8]
     Left = 115
-    Top = 105
+    Top = 82
     Width = 90
     Height = 23
     DataField = 'LEDGER_COMPONENT'
@@ -101,7 +101,6 @@ inherited frmMatterType: TfrmMatterType
     Properties.MultiLine = True
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = pagDetailsChange
     ClientRectBottom = 234
     ClientRectLeft = 4
@@ -309,7 +308,7 @@ inherited frmMatterType: TfrmMatterType
       object dblblBilltemplate: TDBText
         Left = 128
         Top = 64
-        Width = 88
+        Width = 3
         Height = 13
         AutoSize = True
         DataField = 'BILLTEMPLATE'
@@ -507,7 +506,7 @@ inherited frmMatterType: TfrmMatterType
   end
   object spSundryPercent: TcxDBSpinEdit [10]
     Left = 115
-    Top = 129
+    Top = 106
     DataBinding.DataField = 'SUNDRY_PERCENT'
     DataBinding.DataSource = dsSource
     Properties.DisplayFormat = '0'
@@ -520,8 +519,8 @@ inherited frmMatterType: TfrmMatterType
     Width = 90
   end
   object cmbSundryType: TcxDBLookupComboBox [11]
-    Left = 279
-    Top = 129
+    Left = 284
+    Top = 106
     DataBinding.DataField = 'SUNDRY_TYPE'
     DataBinding.DataSource = dsSource
     Properties.DropDownAutoSize = True
@@ -540,6 +539,17 @@ inherited frmMatterType: TfrmMatterType
     TabOrder = 5
     Width = 146
   end
+  object cxDBCheckBox1: TcxDBCheckBox [12]
+    Left = 8
+    Top = 134
+    Caption = 'Active'
+    DataBinding.DataField = 'ACTIVE'
+    DataBinding.DataSource = dsSource
+    Properties.NullStyle = nssUnchecked
+    Properties.ValueChecked = 'Y'
+    Properties.ValueUnchecked = 'N'
+    TabOrder = 11
+  end
   inherited dsSource: TUniDataSource
     Left = 170
     Top = 13
@@ -552,6 +562,7 @@ inherited frmMatterType: TfrmMatterType
       'SELECT M.*, M.ROWID'
       'FROM MATTERTYPE M'
       'ORDER BY M.CODE')
+    Active = True
     AfterScroll = qrySourceAfterScroll
     Left = 71
     Top = 22
@@ -564,10 +575,23 @@ inherited frmMatterType: TfrmMatterType
       OldName = 'Main Menu1'
     end
     inherited bmMainBar2: TdxBar
+      Font.Height = -12
       IsMainMenu = False
       MultiLine = False
       OldName = 'Toolbar1'
       WholeRow = False
+    end
+    inherited dxBarDBNavNext3: TdxBarDBNavButton
+      Enabled = True
+    end
+    inherited dxBarDBNavLast3: TdxBarDBNavButton
+      Enabled = True
+    end
+    inherited dxBarDBNavInsert4: TdxBarDBNavButton
+      Enabled = True
+    end
+    inherited dxBarDBNavDelete3: TdxBarDBNavButton
+      Enabled = True
     end
   end
   inherited dxBarDBNavigator1: TdxBarDBNavigator
@@ -580,29 +604,21 @@ inherited frmMatterType: TfrmMatterType
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
       end
     end
     inherited ppMaintDetailBand: TppDetailBand
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -622,6 +638,7 @@ inherited frmMatterType: TfrmMatterType
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -636,11 +653,6 @@ inherited frmMatterType: TfrmMatterType
         mmTop = 1058
         mmWidth = 159809
         BandType = 4
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
         LayerName = Foreground
       end
     end

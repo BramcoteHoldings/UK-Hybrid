@@ -544,6 +544,9 @@ type
     mNotes: TcxDBRichEdit;
     Label44: TLabel;
     cxDBButtonEdit3: TcxDBButtonEdit;
+    pnlPassportNo: TPanel;
+    Label47: TLabel;
+    DBEdit8: TDBEdit;
     procedure eGivenNamesChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure aPrevExecute(Sender: TObject);
@@ -946,6 +949,7 @@ begin
    getLabel(lGender,'PHONEBOOK', 'GENDER', imaxLength, 'Type/Gender:');
    lblServicePartner.Caption := GetLabelValue('MATTER', 'PARTNER', iMaxLength, 'Partner');
    pnlNRIC.Visible := (SystemString('HideNRICPanel') = 'N');
+   pnlPassportNo.Visible := (SystemString('HideNRICPanel') = 'N');
 
    if SystemString('HIDE_CLIENT_DECEASEDDATE') = 'Y' then
    begin

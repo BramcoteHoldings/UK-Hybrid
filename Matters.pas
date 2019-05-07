@@ -10214,6 +10214,11 @@ begin
       AAttachDocID := TStringList.Create;
 
       AAttachList := GetAttachFile(AAttachDocID);
+
+      // if outlook not running, start it
+      if IsObjectActive('Outlook.Application') = False then
+         CreateOleObject('Outlook.Application');
+
       if dmAxiom.MapiSession.Active = False then
       begin
          OldCursor := Screen.Cursor;
@@ -11529,6 +11534,11 @@ begin
          FAttachDoc := False;
          AAttachDocID := TStringList.Create;
          AAttachFile := GetAttachFile(AAttachDocID);
+
+               // if outlook not running, start it
+         if IsObjectActive('Outlook.Application') = False then
+            CreateOleObject('Outlook.Application');
+
          if (not dmAxiom.MapiSession.Active) then
          begin
             OldCursor := Screen.Cursor;
@@ -11631,6 +11641,9 @@ begin
       ConvAAttachList := TStringList.Create;
       AAttachList := GetAttachFile(AAttachDocID);
  //     WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
+      // if outlook not running, start it
+      if IsObjectActive('Outlook.Application') = False then
+         CreateOleObject('Outlook.Application');
       if (dmAxiom.MapiSession.Active = False) then
       begin
          OldCursor := Screen.Cursor;
@@ -13559,9 +13572,14 @@ begin
       ARecipientsList := TStringList.Create;
       GetEmailAddresses(ARecipientsList, qryMatter.FieldByName('nclient').AsInteger);
 
+            // if outlook not running, start it
+      if IsObjectActive('Outlook.Application') = False then
+         CreateOleObject('Outlook.Application');
+
       if (dmAxiom.MapiSession.Active = False) then
       begin
-         WriteLog('EmailBillClick: Establishing MAPI session ');OldCursor := Screen.Cursor;
+         WriteLog('EmailBillClick: Establishing MAPI session ');
+         OldCursor := Screen.Cursor;
          Screen.Cursor := crHourGlass;
          try
             try
@@ -13571,7 +13589,7 @@ begin
                 dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
                 dmAxiom.MapiSession.LogonInfo.NewSession         := False;
                 dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+                dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
                 dmAxiom.MapiSession.Active                       := True;
             except on e:exception do
 	              WriteLog('Failed to establish MAPI session: ' + e.message);
@@ -13592,7 +13610,7 @@ begin
             FAttachFileName.text := AAttachList.text;
             FRecipientsList.text := ARecipientsList.text;
             try
-               MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore;
+               MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
             except on e:exception do
                WriteLog('Formgr failed to send message: ' + e.message);
             end;
@@ -13647,7 +13665,8 @@ begin
 //            dmAxiom.qryEmailTemplates.Close;
             Msg.SaveChanges(smKeepOpenReadWrite);
 
-            FormMgr.ShowMessage(Msg);
+            Msg.ShowForm;
+//            FormMgr.ShowMessage(Msg);
          end;
       finally
          if (AAttachList <> nil) then

@@ -462,7 +462,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       item
         DataType = ftUnknown
         Name = 'P_File'
-        Value = nil
+        Value = Null
       end>
   end
   object qryFeesLedger: TUniQuery
@@ -494,17 +494,17 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       item
         DataType = ftUnknown
         Name = 'P_Matter'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateFrom'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateTo'
-        Value = nil
+        Value = Null
       end>
   end
   object qryFeeByAuthor: TUniQuery
@@ -570,7 +570,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     NoDataBehaviors = [ndMessageOnPage, ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -632,15 +633,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -655,13 +663,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 23
     Top = 99
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plMatter'
     object ppTitleBand4: TppTitleBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 38629
       mmPrintPosition = 0
@@ -682,6 +692,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -699,13 +710,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 5821
@@ -717,13 +730,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Fee Ledger'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5028
@@ -736,6 +751,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -753,13 +769,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 10054
@@ -771,6 +789,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -791,13 +810,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 51065
@@ -810,6 +831,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'SEARCH'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -830,6 +852,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppDBText16: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText16'
+        Border.mmPadding = 0
         DataField = 'LONGDESCR'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -851,13 +874,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 10054
@@ -870,13 +895,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
         OnGetText = ppLabel7GetText
+        Border.mmPadding = 0
         Caption = 'Label7'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -889,6 +916,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLine5: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line5'
+        Border.mmPadding = 0
         Pen.Color = clSilver
         Pen.Width = 2
         ParentWidth = True
@@ -905,6 +933,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 19315
@@ -932,7 +961,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plFeesLedger
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -943,13 +973,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plFeesLedger'
           object ppDetailBand2: TppDetailBand
             Save = True
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 15800
@@ -978,6 +1009,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText12: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText12'
+                Border.mmPadding = 0
                 DataField = 'PARTNER'
                 DataPipeline = plFeesLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -998,6 +1030,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText13: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText13'
+                Border.mmPadding = 0
                 DataField = 'INVOICEDATE'
                 DataPipeline = plFeesLedger
                 DisplayFormat = 'dd/mm/yyyy'
@@ -1019,6 +1052,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText14: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText14'
+                Border.mmPadding = 0
                 DataField = 'MINS'
                 DataPipeline = plFeesLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -1040,6 +1074,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText15: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText15'
+                Border.mmPadding = 0
                 DataField = 'TAX'
                 DataPipeline = plFeesLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1062,6 +1097,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBMemo2: TppDBMemo
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBMemo2'
+                Border.mmPadding = 0
                 CharWrap = False
                 DataField = 'DESCR'
                 DataPipeline = plFeesLedger
@@ -1108,6 +1144,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText3: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText3'
+                Border.mmPadding = 0
                 DataField = 'CREATED'
                 DataPipeline = plFeesLedger
                 DisplayFormat = 'dd/mm/yyyy'
@@ -1129,6 +1166,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText5: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText5'
+                Border.mmPadding = 0
                 DataField = 'AUTHOR'
                 DataPipeline = plFeesLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -1149,6 +1187,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText6: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText6'
+                Border.mmPadding = 0
                 DataField = 'REFNO'
                 DataPipeline = plFeesLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -1169,6 +1208,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText7: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText7'
+                Border.mmPadding = 0
                 DataField = 'UNITS'
                 DataPipeline = plFeesLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -1190,6 +1230,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText9: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText9'
+                Border.mmPadding = 0
                 DataField = 'running total'
                 DataPipeline = plFeesLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1211,6 +1252,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText8: TppDBText
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBText8'
+                Border.mmPadding = 0
                 DataField = 'AMOUNT'
                 DataPipeline = plFeesLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1233,6 +1275,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBMemo1: TppDBMemo
                 DesignLayer = ppDesignLayer2
                 UserName = 'DBMemo1'
+                Border.mmPadding = 0
                 CharWrap = False
                 DataField = 'TASK_DESCR'
                 DataPipeline = plFeesLedger
@@ -1286,6 +1329,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
                 Font.Size = 9
                 Font.Style = []
                 SaveOrder = 0
+                Border.mmPadding = 0
                 ExportRTFAsBitmap = False
                 DataField = 'NOTES'
                 DataPipeline = plFeesLedger
@@ -1308,12 +1352,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppFooterBand1: TppFooterBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 2381
             mmPrintPosition = 0
             object ppLine8: TppLine
               DesignLayer = ppDesignLayer2
               UserName = 'Line8'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -1329,12 +1375,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           object ppSummaryBand2: TppSummaryBand
             Save = True
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 10583
             mmPrintPosition = 0
             object ppDBCalc1: TppDBCalc
               DesignLayer = ppDesignLayer2
               UserName = 'DBCalc1'
+              Border.mmPadding = 0
               DataField = 'UNITS'
               DataPipeline = plFeesLedger
               Font.Charset = DEFAULT_CHARSET
@@ -1355,6 +1403,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc2: TppDBCalc
               DesignLayer = ppDesignLayer2
               UserName = 'DBCalc2'
+              Border.mmPadding = 0
               DataField = 'MINS'
               DataPipeline = plFeesLedger
               Font.Charset = DEFAULT_CHARSET
@@ -1375,6 +1424,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc3: TppDBCalc
               DesignLayer = ppDesignLayer2
               UserName = 'DBCalc3'
+              Border.mmPadding = 0
               DataField = 'AMOUNT'
               DataPipeline = plFeesLedger
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1396,6 +1446,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine2: TppLine
               DesignLayer = ppDesignLayer2
               UserName = 'Line2'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -1410,6 +1461,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc12: TppDBCalc
               DesignLayer = ppDesignLayer2
               UserName = 'DBCalc12'
+              Border.mmPadding = 0
               DataField = 'TAX'
               DataPipeline = plFeesLedger
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1443,19 +1495,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand1: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 17727
               mmPrintPosition = 0
               object ppLabel6: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label6'
+                Border.mmPadding = 0
                 Caption = 'Date'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3705
                 mmLeft = 2646
@@ -1468,13 +1523,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel8: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label8'
+                Border.mmPadding = 0
                 Caption = 'Narration'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3705
                 mmLeft = 23283
@@ -1487,13 +1544,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel11: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label11'
+                Border.mmPadding = 0
                 Caption = 'Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 106892
@@ -1506,13 +1565,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel13: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label13'
+                Border.mmPadding = 0
                 Caption = 'Bill'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 118534
@@ -1525,13 +1586,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel15: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label15'
+                Border.mmPadding = 0
                 Caption = 'Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -1545,13 +1608,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel17: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label17'
+                Border.mmPadding = 0
                 Caption = 'Amount'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -1565,13 +1630,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel26: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label26'
+                Border.mmPadding = 0
                 Caption = 'Partner'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 106892
@@ -1584,13 +1651,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel27: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label27'
+                Border.mmPadding = 0
                 Caption = 'Billed'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 118534
@@ -1603,13 +1672,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel28: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label28'
+                Border.mmPadding = 0
                 Caption = 'Minutes'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 137054
@@ -1622,13 +1693,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel29: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label29'
+                Border.mmPadding = 0
                 Caption = 'Tax'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -1642,6 +1715,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine7: TppLine
                 DesignLayer = ppDesignLayer2
                 UserName = 'Line7'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -1658,13 +1732,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel38: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label38'
+                Border.mmPadding = 0
                 Caption = 'Running Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -1678,13 +1754,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel39: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label39'
+                Border.mmPadding = 0
                 Caption = 'Task'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3705
                 mmLeft = 23283
@@ -1697,13 +1775,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel41: TppLabel
                 DesignLayer = ppDesignLayer2
                 UserName = 'Label41'
+                Border.mmPadding = 0
                 Caption = 'Notes'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 23283
@@ -1716,6 +1796,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand1: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -1723,7 +1804,6 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
           end
           object raCodeModule2: TraCodeModule
-            ProgramStream = {00}
           end
           object ppDesignLayers2: TppDesignLayers
             object ppDesignLayer2: TppDesignLayer
@@ -1758,7 +1838,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plFeesByAuthor
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -1769,18 +1850,20 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plFeesByAuthor'
           object ppDetailBand3: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText17: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText17'
+              Border.mmPadding = 0
               DataField = 'AUTHOR'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1801,6 +1884,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBText18: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText18'
+              Border.mmPadding = 0
               DataField = 'NAME'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1822,6 +1906,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer3
               UserName = 'DBText21'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeesByAuthor
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1844,6 +1929,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer3
               UserName = 'DBText22'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeesByAuthor
               DisplayFormat = '#,0;-#,0'
@@ -1866,6 +1952,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer3
               UserName = 'DBText27'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1888,6 +1975,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer3
               UserName = 'DBText28'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1909,12 +1997,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppSummaryBand3: TppSummaryBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5556
             mmPrintPosition = 0
             object ppDBCalc8: TppDBCalc
               DesignLayer = ppDesignLayer3
               UserName = 'DBCalc8'
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1936,6 +2026,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc9: TppDBCalc
               DesignLayer = ppDesignLayer3
               UserName = 'DBCalc9'
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeesByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -1957,6 +2048,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc10: TppDBCalc
               DesignLayer = ppDesignLayer3
               UserName = 'DBCalc10'
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeesByAuthor
               DisplayFormat = '#,0;-#,0'
@@ -1979,6 +2071,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc11: TppDBCalc
               DesignLayer = ppDesignLayer3
               UserName = 'DBCalc11'
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeesByAuthor
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2001,6 +2094,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine3: TppLine
               DesignLayer = ppDesignLayer3
               UserName = 'Line3'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -2027,19 +2121,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand2: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 12965
               mmPrintPosition = 0
               object ppLabel43: TppLabel
                 DesignLayer = ppDesignLayer3
                 UserName = 'Label43'
+                Border.mmPadding = 0
                 Caption = 'Billable Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 WordWrap = True
                 mmHeight = 7673
@@ -2053,13 +2150,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel44: TppLabel
                 DesignLayer = ppDesignLayer3
                 UserName = 'Label202'
+                Border.mmPadding = 0
                 Caption = 'W.I.P. Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3705
@@ -2073,13 +2172,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel45: TppLabel
                 DesignLayer = ppDesignLayer3
                 UserName = 'Label45'
+                Border.mmPadding = 0
                 Caption = 'W.I.P.'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3705
@@ -2093,13 +2194,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel46: TppLabel
                 DesignLayer = ppDesignLayer3
                 UserName = 'Label46'
+                Border.mmPadding = 0
                 Caption = 'Total Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3705
@@ -2113,13 +2216,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel47: TppLabel
                 DesignLayer = ppDesignLayer3
                 UserName = 'Label47'
+                Border.mmPadding = 0
                 Caption = 'Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3705
@@ -2133,6 +2238,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine10: TppLine
                 DesignLayer = ppDesignLayer3
                 UserName = 'Line10'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -2149,6 +2255,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand2: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -2188,7 +2295,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plFeeByAuthorNonBillable
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -2199,18 +2307,20 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plFeeByAuthorNonBillable'
           object ppDetailBand4: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText19: TppDBText
               DesignLayer = ppDesignLayer4
               UserName = 'DBText19'
+              Border.mmPadding = 0
               DataField = 'AUTHOR'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2231,6 +2341,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBText20: TppDBText
               DesignLayer = ppDesignLayer4
               UserName = 'DBText20'
+              Border.mmPadding = 0
               DataField = 'NAME'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2252,6 +2363,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer4
               UserName = 'DBText23'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '#,0;-#,0'
@@ -2274,6 +2386,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer4
               UserName = 'DBText24'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2296,6 +2409,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer4
               UserName = 'DBText25'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2317,6 +2431,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer4
               UserName = 'DBText26'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2337,12 +2452,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppSummaryBand1: TppSummaryBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5556
             mmPrintPosition = 0
             object ppDBCalc17: TppDBCalc
               DesignLayer = ppDesignLayer4
               UserName = 'DBCalc17'
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2364,6 +2481,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc18: TppDBCalc
               DesignLayer = ppDesignLayer4
               UserName = 'DBCalc18'
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2385,6 +2503,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc19: TppDBCalc
               DesignLayer = ppDesignLayer4
               UserName = 'DBCalc101'
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -2406,6 +2525,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc20: TppDBCalc
               DesignLayer = ppDesignLayer4
               UserName = 'DBCalc20'
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -2428,6 +2548,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine6: TppLine
               DesignLayer = ppDesignLayer4
               UserName = 'Line6'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -2454,19 +2575,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand3: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 17198
               mmPrintPosition = 0
               object ppLabel30: TppLabel
                 DesignLayer = ppDesignLayer4
                 UserName = 'Label30'
+                Border.mmPadding = 0
                 Caption = 'Non Billable Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 WordWrap = True
                 mmHeight = 11642
@@ -2480,13 +2604,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel31: TppLabel
                 DesignLayer = ppDesignLayer4
                 UserName = 'Label201'
+                Border.mmPadding = 0
                 Caption = 'W.I.P. Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -2500,13 +2626,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel32: TppLabel
                 DesignLayer = ppDesignLayer4
                 UserName = 'Label32'
+                Border.mmPadding = 0
                 Caption = 'W.I.P.'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -2520,13 +2648,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel33: TppLabel
                 DesignLayer = ppDesignLayer4
                 UserName = 'Label33'
+                Border.mmPadding = 0
                 Caption = 'Total Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -2540,13 +2670,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel34: TppLabel
                 DesignLayer = ppDesignLayer4
                 UserName = 'Label34'
+                Border.mmPadding = 0
                 Caption = 'Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Segoe UI'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -2560,6 +2692,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine1: TppLine
                 DesignLayer = ppDesignLayer4
                 UserName = 'Line1'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -2576,6 +2709,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand3: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -2593,7 +2727,6 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {00}
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -2957,7 +3090,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     NoDataBehaviors = [ndMessageOnPage, ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3018,15 +3152,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3041,13 +3182,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 22
     Top = 149
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plMatter'
     object ppTitleBand1: TppTitleBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 38629
       mmPrintPosition = 0
@@ -3068,6 +3211,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppSystemVariable3: TppSystemVariable
         DesignLayer = ppDesignLayer8
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3085,13 +3229,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer8
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Printed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 5821
@@ -3103,13 +3249,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer8
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Fee Ledger'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4233
@@ -3122,6 +3270,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppSystemVariable4: TppSystemVariable
         DesignLayer = ppDesignLayer8
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3139,13 +3288,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer8
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 10054
@@ -3157,6 +3308,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer8
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -3177,13 +3329,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer8
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 51065
@@ -3196,6 +3350,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
         DesignLayer = ppDesignLayer8
         UserName = 'DBText2'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'SEARCH'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -3216,6 +3371,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppDBText30: TppDBText
         DesignLayer = ppDesignLayer8
         UserName = 'DBText16'
+        Border.mmPadding = 0
         DataField = 'LONGDESCR'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -3237,13 +3393,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLabel16: TppLabel
         DesignLayer = ppDesignLayer8
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 10054
@@ -3256,13 +3414,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
         DesignLayer = ppDesignLayer8
         UserName = 'Label7'
         OnGetText = ppLabel7GetText
+        Border.mmPadding = 0
         Caption = 'Label7'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4233
@@ -3275,6 +3435,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       object ppLine4: TppLine
         DesignLayer = ppDesignLayer8
         UserName = 'Line5'
+        Border.mmPadding = 0
         Pen.Color = clSilver
         Pen.Width = 2
         ParentWidth = True
@@ -3291,6 +3452,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
     object ppDetailBand5: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 19315
@@ -3318,7 +3480,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plFeeItemsLedger
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3329,13 +3492,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plFeeItemsLedger'
           object ppDetailBand6: TppDetailBand
             Save = True
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 15800
@@ -3364,6 +3528,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText31: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText12'
+                Border.mmPadding = 0
                 DataField = 'PARTNER'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3384,6 +3549,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText32: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText13'
+                Border.mmPadding = 0
                 DataField = 'INVOICEDATE'
                 DataPipeline = plFeeItemsLedger
                 DisplayFormat = 'dd/mm/yyyy'
@@ -3405,6 +3571,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText33: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText14'
+                Border.mmPadding = 0
                 DataField = 'MINS'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3426,6 +3593,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText34: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText15'
+                Border.mmPadding = 0
                 DataField = 'TAX'
                 DataPipeline = plFeeItemsLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3448,6 +3616,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText35: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText4'
+                Border.mmPadding = 0
                 DataField = 'DESCR'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3488,6 +3657,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText36: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText3'
+                Border.mmPadding = 0
                 DataField = 'CREATED'
                 DataPipeline = plFeeItemsLedger
                 DisplayFormat = 'dd/mm/yyyy'
@@ -3509,6 +3679,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText37: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText5'
+                Border.mmPadding = 0
                 DataField = 'AUTHOR'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3529,6 +3700,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText38: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText6'
+                Border.mmPadding = 0
                 DataField = 'REFNO'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3549,6 +3721,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText39: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText7'
+                Border.mmPadding = 0
                 DataField = 'UNITS'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3570,6 +3743,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText40: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText9'
+                Border.mmPadding = 0
                 DataField = 'running total'
                 DataPipeline = plFeeItemsLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3591,6 +3765,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText41: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText8'
+                Border.mmPadding = 0
                 DataField = 'AMOUNT'
                 DataPipeline = plFeeItemsLedger
                 DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3613,6 +3788,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppDBText42: TppDBText
                 DesignLayer = ppDesignLayer5
                 UserName = 'DBText11'
+                Border.mmPadding = 0
                 DataField = 'TASK_DESCR'
                 DataPipeline = plFeeItemsLedger
                 Font.Charset = DEFAULT_CHARSET
@@ -3660,6 +3836,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
                 Font.Size = 9
                 Font.Style = []
                 SaveOrder = 0
+                Border.mmPadding = 0
                 ExportRTFAsBitmap = False
                 DataField = 'NOTES'
                 DataPipeline = plFeeItemsLedger
@@ -3682,12 +3859,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppFooterBand2: TppFooterBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 2381
             mmPrintPosition = 0
             object ppLine9: TppLine
               DesignLayer = ppDesignLayer5
               UserName = 'Line8'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -3703,12 +3882,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           object ppSummaryBand4: TppSummaryBand
             Save = True
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 10583
             mmPrintPosition = 0
             object ppDBCalc4: TppDBCalc
               DesignLayer = ppDesignLayer5
               UserName = 'DBCalc1'
+              Border.mmPadding = 0
               DataField = 'UNITS'
               DataPipeline = plFeeItemsLedger
               Font.Charset = DEFAULT_CHARSET
@@ -3729,6 +3910,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc5: TppDBCalc
               DesignLayer = ppDesignLayer5
               UserName = 'DBCalc2'
+              Border.mmPadding = 0
               DataField = 'MINS'
               DataPipeline = plFeeItemsLedger
               Font.Charset = DEFAULT_CHARSET
@@ -3749,6 +3931,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc6: TppDBCalc
               DesignLayer = ppDesignLayer5
               UserName = 'DBCalc3'
+              Border.mmPadding = 0
               DataField = 'AMOUNT'
               DataPipeline = plFeeItemsLedger
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3770,6 +3953,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine11: TppLine
               DesignLayer = ppDesignLayer5
               UserName = 'Line2'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -3784,6 +3968,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc7: TppDBCalc
               DesignLayer = ppDesignLayer5
               UserName = 'DBCalc12'
+              Border.mmPadding = 0
               DataField = 'TAX'
               DataPipeline = plFeeItemsLedger
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -3817,19 +4002,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand4: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 17727
               mmPrintPosition = 0
               object ppLabel19: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label6'
+                Border.mmPadding = 0
                 Caption = 'Date'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 2646
@@ -3842,13 +4030,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel20: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label8'
+                Border.mmPadding = 0
                 Caption = 'Narration'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 4233
                 mmLeft = 23283
@@ -3861,13 +4051,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel21: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label11'
+                Border.mmPadding = 0
                 Caption = 'Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 106892
@@ -3880,13 +4072,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel22: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label13'
+                Border.mmPadding = 0
                 Caption = 'Bill'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 118534
@@ -3899,13 +4093,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel23: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label15'
+                Border.mmPadding = 0
                 Caption = 'Items'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -3919,13 +4115,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel24: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label17'
+                Border.mmPadding = 0
                 Caption = 'Amount'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -3939,13 +4137,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel25: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label26'
+                Border.mmPadding = 0
                 Caption = 'Partner'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 106892
@@ -3958,13 +4158,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel35: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label27'
+                Border.mmPadding = 0
                 Caption = 'Billed'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 118534
@@ -3977,13 +4179,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel36: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label28'
+                Border.mmPadding = 0
                 Caption = 'Minutes'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 3704
                 mmLeft = 137054
@@ -3996,13 +4200,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel37: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label29'
+                Border.mmPadding = 0
                 Caption = 'Tax'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -4016,6 +4222,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine12: TppLine
                 DesignLayer = ppDesignLayer5
                 UserName = 'Line7'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -4032,13 +4239,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel40: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label38'
+                Border.mmPadding = 0
                 Caption = 'Running Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 3704
@@ -4052,13 +4261,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel42: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label39'
+                Border.mmPadding = 0
                 Caption = 'Task'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 4233
                 mmLeft = 23283
@@ -4071,13 +4282,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel48: TppLabel
                 DesignLayer = ppDesignLayer5
                 UserName = 'Label41'
+                Border.mmPadding = 0
                 Caption = 'Notes'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = []
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 mmHeight = 4233
                 mmLeft = 23283
@@ -4090,6 +4303,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand4: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -4097,33 +4311,33 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
           end
           object raCodeModule3: TraCodeModule
-            ProgramStream = {
-              01060F5472614576656E7448616E646C65720B50726F6772616D4E616D65060E
-              444254657874344F6E5072696E740B50726F6772616D54797065070B74745072
-              6F63656475726506536F7572636506FD70726F63656475726520444254657874
-              344F6E5072696E743B0D0A7661720D0A2020204C696E654E6F3A20696E746567
-              65723B0D0A626567696E0D0A202020444254657874342E486569676874203A3D
-              20342E323B0D0A2020206966204C656E67746828706C466565734C6564676572
-              5B274445534352275D29203E203533207468656E0D0A202020626567696E0D0A
-              20202020204C696E654E6F203A3D20284C656E67746828706C466565734C6564
-              6765725B274445534352275D292F3533293B0D0A202020202044425465787434
-              2E486569676874203A3D20342E32202A20284C696E654E6F2B31293B0D0A2020
-              20656E643B0D0A656E643B0D0A0D436F6D706F6E656E744E616D650607444254
-              65787434094576656E744E616D6506074F6E5072696E74074576656E74494402
-              20084361726574506F730102000200000001060F5472614576656E7448616E64
-              6C65720B50726F6772616D4E616D65060F44425465787431314F6E5072696E74
-              0B50726F6772616D54797065070B747450726F63656475726506536F75726365
-              0C0A01000070726F6365647572652044425465787431314F6E5072696E743B0D
-              0A7661720D0A2020204C696E654E6F3A20696E74656765723B0D0A626567696E
-              0D0A20202044425465787431312E486569676874203A3D20342E323B0D0A2020
-              206966204C656E67746828706C466565734C65646765725B275441534B5F4445
-              534352275D29203E203533207468656E0D0A202020626567696E0D0A20202020
-              204C696E654E6F203A3D20284C656E67746828706C466565734C65646765725B
-              275441534B5F4445534352275D292F3533293B0D0A2020202020444254657874
-              31312E486569676874203A3D20342E32202A20284C696E654E6F2B31293B0D0A
-              202020656E643B0D0A656E643B0D0A0D436F6D706F6E656E744E616D65060844
-              42546578743131094576656E744E616D6506074F6E5072696E74074576656E74
-              49440220084361726574506F730102000200000000}
+            object raProgramInfo1: TraProgramInfo
+              raClassName = 'TraEventHandler'
+              raProgram.ProgramName = 'DBText4OnPrint'
+              raProgram.ProgramType = ttProcedure
+              raProgram.Source = 
+                'procedure DBText4OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   D' +
+                'BText4.Height := 4.2;'#13#10'   if Length(plFeesLedger['#39'DESCR'#39']) > 53 ' +
+                'then'#13#10'   begin'#13#10'     LineNo := (Length(plFeesLedger['#39'DESCR'#39'])/53' +
+                ');'#13#10'     DBText4.Height := 4.2 * (LineNo+1);'#13#10'   end;'#13#10'end;'#13#10
+              raProgram.ComponentName = 'DBText4'
+              raProgram.EventName = 'OnPrint'
+              raProgram.EventID = 32
+            end
+            object raProgramInfo2: TraProgramInfo
+              raClassName = 'TraEventHandler'
+              raProgram.ProgramName = 'DBText11OnPrint'
+              raProgram.ProgramType = ttProcedure
+              raProgram.Source = 
+                'procedure DBText11OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   ' +
+                'DBText11.Height := 4.2;'#13#10'   if Length(plFeesLedger['#39'TASK_DESCR'#39']' +
+                ') > 53 then'#13#10'   begin'#13#10'     LineNo := (Length(plFeesLedger['#39'TASK' +
+                '_DESCR'#39'])/53);'#13#10'     DBText11.Height := 4.2 * (LineNo+1);'#13#10'   en' +
+                'd;'#13#10'end;'#13#10
+              raProgram.ComponentName = 'DBText11'
+              raProgram.EventName = 'OnPrint'
+              raProgram.EventID = 32
+            end
           end
           object ppDesignLayers5: TppDesignLayers
             object ppDesignLayer5: TppDesignLayer
@@ -4158,7 +4372,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plItemsByAuthor
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4169,18 +4384,20 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plItemsByAuthor'
           object ppDetailBand7: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText43: TppDBText
               DesignLayer = ppDesignLayer6
               UserName = 'DBText17'
+              Border.mmPadding = 0
               DataField = 'AUTHOR'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4201,6 +4418,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBText44: TppDBText
               DesignLayer = ppDesignLayer6
               UserName = 'DBText18'
+              Border.mmPadding = 0
               DataField = 'NAME'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4222,6 +4440,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer6
               UserName = 'DBText21'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plItemsByAuthor
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4244,6 +4463,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer6
               UserName = 'DBText22'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plItemsByAuthor
               DisplayFormat = '#,0;-#,0'
@@ -4266,6 +4486,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer6
               UserName = 'DBText27'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4288,6 +4509,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer6
               UserName = 'DBText28'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4309,12 +4531,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppSummaryBand5: TppSummaryBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5556
             mmPrintPosition = 0
             object ppDBCalc13: TppDBCalc
               DesignLayer = ppDesignLayer6
               UserName = 'DBCalc8'
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4336,6 +4560,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc14: TppDBCalc
               DesignLayer = ppDesignLayer6
               UserName = 'DBCalc9'
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plItemsByAuthor
               Font.Charset = DEFAULT_CHARSET
@@ -4357,6 +4582,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc15: TppDBCalc
               DesignLayer = ppDesignLayer6
               UserName = 'DBCalc10'
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plItemsByAuthor
               DisplayFormat = '#,0;-#,0'
@@ -4379,6 +4605,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc16: TppDBCalc
               DesignLayer = ppDesignLayer6
               UserName = 'DBCalc11'
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plItemsByAuthor
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4401,6 +4628,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine13: TppLine
               DesignLayer = ppDesignLayer6
               UserName = 'Line3'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -4427,19 +4655,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand5: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 12965
               mmPrintPosition = 0
               object ppLabel49: TppLabel
                 DesignLayer = ppDesignLayer6
                 UserName = 'Label43'
+                Border.mmPadding = 0
                 Caption = 'Billable Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 WordWrap = True
                 mmHeight = 8467
@@ -4453,13 +4684,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel50: TppLabel
                 DesignLayer = ppDesignLayer6
                 UserName = 'Label202'
+                Border.mmPadding = 0
                 Caption = 'Item Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4234
@@ -4473,13 +4706,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel51: TppLabel
                 DesignLayer = ppDesignLayer6
                 UserName = 'Label45'
+                Border.mmPadding = 0
                 Caption = 'Item Amount'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4234
@@ -4493,13 +4728,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel52: TppLabel
                 DesignLayer = ppDesignLayer6
                 UserName = 'Label46'
+                Border.mmPadding = 0
                 Caption = 'Total Items'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4234
@@ -4513,13 +4750,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel53: TppLabel
                 DesignLayer = ppDesignLayer6
                 UserName = 'Label47'
+                Border.mmPadding = 0
                 Caption = 'Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -4533,6 +4772,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine14: TppLine
                 DesignLayer = ppDesignLayer6
                 UserName = 'Line10'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -4549,6 +4789,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand5: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -4588,7 +4829,8 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           DataPipeline = plFeeByAuthorNonBillable
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4599,18 +4841,20 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'plFeeByAuthorNonBillable'
           object ppDetailBand8: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText49: TppDBText
               DesignLayer = ppDesignLayer7
               UserName = 'DBText19'
+              Border.mmPadding = 0
               DataField = 'AUTHOR'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4631,6 +4875,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBText50: TppDBText
               DesignLayer = ppDesignLayer7
               UserName = 'DBText20'
+              Border.mmPadding = 0
               DataField = 'NAME'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4652,6 +4897,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer7
               UserName = 'DBText23'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '#,0;-#,0'
@@ -4674,6 +4920,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer7
               UserName = 'DBText24'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4696,6 +4943,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer7
               UserName = 'DBText25'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4717,6 +4965,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               DesignLayer = ppDesignLayer7
               UserName = 'DBText26'
               BlankWhenZero = True
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4737,12 +4986,14 @@ object frmRptLedgerFees: TfrmRptLedgerFees
           end
           object ppSummaryBand6: TppSummaryBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5556
             mmPrintPosition = 0
             object ppDBCalc21: TppDBCalc
               DesignLayer = ppDesignLayer7
               UserName = 'DBCalc17'
+              Border.mmPadding = 0
               DataField = 'WIPUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4764,6 +5015,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc22: TppDBCalc
               DesignLayer = ppDesignLayer7
               UserName = 'DBCalc18'
+              Border.mmPadding = 0
               DataField = 'WIP'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4785,6 +5037,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc23: TppDBCalc
               DesignLayer = ppDesignLayer7
               UserName = 'DBCalc101'
+              Border.mmPadding = 0
               DataField = 'TOTALUNITS'
               DataPipeline = plFeeByAuthorNonBillable
               Font.Charset = DEFAULT_CHARSET
@@ -4806,6 +5059,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppDBCalc24: TppDBCalc
               DesignLayer = ppDesignLayer7
               UserName = 'DBCalc20'
+              Border.mmPadding = 0
               DataField = 'TOTAL'
               DataPipeline = plFeeByAuthorNonBillable
               DisplayFormat = '$#,0.00;($#,0.00)'
@@ -4828,6 +5082,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             object ppLine15: TppLine
               DesignLayer = ppDesignLayer7
               UserName = 'Line6'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -4854,19 +5109,22 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             NewFile = False
             object ppGroupHeaderBand6: TppGroupHeaderBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               mmBottomOffset = 0
               mmHeight = 17198
               mmPrintPosition = 0
               object ppLabel54: TppLabel
                 DesignLayer = ppDesignLayer7
                 UserName = 'Label30'
+                Border.mmPadding = 0
                 Caption = 'Non Billable Author'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 Transparent = True
                 WordWrap = True
                 mmHeight = 12700
@@ -4880,13 +5138,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel55: TppLabel
                 DesignLayer = ppDesignLayer7
                 UserName = 'Label201'
+                Border.mmPadding = 0
                 Caption = 'W.I.P. Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -4900,13 +5160,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel56: TppLabel
                 DesignLayer = ppDesignLayer7
                 UserName = 'Label32'
+                Border.mmPadding = 0
                 Caption = 'W.I.P.'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -4920,13 +5182,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel57: TppLabel
                 DesignLayer = ppDesignLayer7
                 UserName = 'Label33'
+                Border.mmPadding = 0
                 Caption = 'Total Units'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -4940,13 +5204,15 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLabel58: TppLabel
                 DesignLayer = ppDesignLayer7
                 UserName = 'Label34'
+                Border.mmPadding = 0
                 Caption = 'Total'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Name = 'Arial Narrow'
                 Font.Size = 9
                 Font.Style = [fsBold]
-                FormField = False
+                FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+                FormFieldSettings.FormFieldType = fftNone
                 TextAlignment = taRightJustified
                 Transparent = True
                 mmHeight = 4233
@@ -4960,6 +5226,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
               object ppLine16: TppLine
                 DesignLayer = ppDesignLayer7
                 UserName = 'Line1'
+                Border.mmPadding = 0
                 Pen.Color = clSilver
                 Pen.Width = 2
                 ParentWidth = True
@@ -4976,6 +5243,7 @@ object frmRptLedgerFees: TfrmRptLedgerFees
             end
             object ppGroupFooterBand6: TppGroupFooterBand
               Background.Brush.Style = bsClear
+              Border.mmPadding = 0
               HideWhenOneDetail = False
               mmBottomOffset = 0
               mmHeight = 0
@@ -4993,7 +5261,6 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       end
     end
     object raCodeModule4: TraCodeModule
-      ProgramStream = {00}
     end
     object ppDesignLayers8: TppDesignLayers
       object ppDesignLayer8: TppDesignLayer
@@ -5034,17 +5301,17 @@ object frmRptLedgerFees: TfrmRptLedgerFees
       item
         DataType = ftUnknown
         Name = 'P_Matter'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateFrom'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateTo'
-        Value = nil
+        Value = Null
       end>
   end
   object dsFeeItemsLedger: TUniDataSource

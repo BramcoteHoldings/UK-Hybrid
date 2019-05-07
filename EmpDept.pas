@@ -8,7 +8,9 @@ uses
   ToolWin, ExtCtrls, Menus, OracleUniProvider, Uni, MemDS,
   DBAccess, dxBarDBNav, dxBar, ppCtrls, ppDB, ppDBPipe, ppBands, ppPrnabl,
   ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport, ppParameter,
-  cxClasses, ppDesignLayer;
+  cxClasses, ppDesignLayer, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxCheckBox, cxDBEdit,
+  System.ImageList;
 
 type
   TfrmEmpDept = class(TfrmMaint)
@@ -21,6 +23,7 @@ type
     ppDBText1: TppDBText;
     ppDBText2: TppDBText;
     ppDBText3: TppDBText;
+    cxDBCheckBox1: TcxDBCheckBox;
     procedure FormCreate(Sender: TObject);
     function validateData(var sError : String): boolean;override;
   private

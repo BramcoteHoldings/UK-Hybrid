@@ -3154,7 +3154,10 @@ object frmEmployees: TfrmEmployees
   object qryDepts: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT CODE, DESCR FROM EMPDEPT ORDER BY CODE')
+      'SELECT CODE, DESCR '
+      'FROM EMPDEPT '
+      'WHERE ACTIVE = '#39'Y'#39
+      'ORDER BY CODE')
     Left = 978
     Top = 91
   end

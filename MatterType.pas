@@ -15,7 +15,8 @@ uses
   cxLookAndFeels, cxLookAndFeelPainters, ppCtrls, ppDB, ppDBPipe, ppBands,
   ppPrnabl, ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport,
   cxPCdxBarPopupMenu, ppParameter, ppDesignLayer, cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxButtonEdit;
+  cxDataControllerConditionalFormattingRulesManagerDialog, cxButtonEdit,
+  dxDateRanges, cxCheckBox, System.ImageList;
 
 type
   TfrmMatterType = class(TfrmMaint)
@@ -76,6 +77,7 @@ type
     btnDataForm: TcxDBButtonEdit;
     btnWorkflowType: TcxDBButtonEdit;
     btnTask: TcxDBButtonEdit;
+    cxDBCheckBox1: TcxDBCheckBox;
     procedure qrySourceAfterScroll(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure cbFeeCodeClick(Sender: TObject);
