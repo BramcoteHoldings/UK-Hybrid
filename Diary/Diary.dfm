@@ -23,12 +23,13 @@ object frmDiary99: TfrmDiary99
     Height = 737
     Align = alClient
     TabOrder = 0
-    Properties.ActivePage = tabDay
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.Style = 1
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
+    TabSlants.Kind = skCutCorner
     OnChange = pagDiaryChange
     ClientRectBottom = 733
     ClientRectLeft = 4
@@ -88,11 +89,7 @@ object frmDiary99: TfrmDiary99
         Storage = SecureSchedulerDBStorage
         TabOrder = 0
         OnDblClick = DiarySchedulerDblClick
-        OnDragOver = DiarySchedulerDragOver
-        OnEndDrag = DiarySchedulerEndDrag
         OnEventSelectionChanged = DiarySchedulerEventSelectionChanged
-        OnKeyDown = DiarySchedulerKeyDown
-        Selection = 1
         Splitters = {
           610400008E000000F0040000920000005D0400000100000061040000C2020000}
         StoredClientBounds = {0100000001000000F0040000C2020000}
@@ -181,7 +178,6 @@ object frmDiary99: TfrmDiary99
         OnCustomDrawDayNumber = DiarySchedulerDateNavigatorCustomDrawDayNumber
         OnPeriodChanged = DiarySchedulerDateNavigatorPeriodChanged
         OnDblClick = cxDateNavigator1DblClick
-        Selection = 1
       end
     end
     object tabGrid: TcxTabSheet
@@ -193,6 +189,7 @@ object frmDiary99: TfrmDiary99
         Width = 1265
         Height = 649
         Align = alClient
+        PopupMenu = popDayView
         TabOrder = 0
         LookAndFeel.NativeStyle = True
         object tvDiary: TcxGridDBTableView
@@ -297,7 +294,6 @@ object frmDiary99: TfrmDiary99
           object tvDiaryTYPE: TcxGridDBColumn
             Caption = 'Type'
             DataBinding.FieldName = 'TYPE'
-            Visible = False
             MinWidth = 18
             Width = 37
           end
@@ -333,7 +329,6 @@ object frmDiary99: TfrmDiary99
           end
           object tvDiaryNDIARY: TcxGridDBColumn
             DataBinding.FieldName = 'NDIARY'
-            Visible = False
             VisibleForEditForm = bFalse
           end
         end
@@ -637,7 +632,6 @@ object frmDiary99: TfrmDiary99
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
               Kind = bkGlyph
             end>
-          Properties.OnButtonClick = tbMatterPropertiesButtonClick
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -668,12 +662,7 @@ object frmDiary99: TfrmDiary99
         object cbLocation: TcxLookupComboBox
           Left = 98
           Top = 80
-          Properties.KeyFieldNames = 'LOCATION'
-          Properties.ListColumns = <
-            item
-              FieldName = 'LOCATION'
-            end>
-          Properties.ListSource = dsDiaryLoc
+          Properties.ListColumns = <>
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -684,12 +673,7 @@ object frmDiary99: TfrmDiary99
         object cbJurisdiction: TcxLookupComboBox
           Left = 98
           Top = 108
-          Properties.KeyFieldNames = 'JURISDICTION'
-          Properties.ListColumns = <
-            item
-              FieldName = 'JURISDICTION'
-            end>
-          Properties.ListSource = dsDiaryJur
+          Properties.ListColumns = <>
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -700,12 +684,7 @@ object frmDiary99: TfrmDiary99
         object cbEvent: TcxLookupComboBox
           Left = 98
           Top = 136
-          Properties.KeyFieldNames = 'EVENT'
-          Properties.ListColumns = <
-            item
-              FieldName = 'EVENT'
-            end>
-          Properties.ListSource = dsDiaryEvent
+          Properties.ListColumns = <>
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -838,12 +817,7 @@ object frmDiary99: TfrmDiary99
         object cbDept: TcxLookupComboBox
           Left = 98
           Top = 191
-          Properties.KeyFieldNames = 'CODE'
-          Properties.ListColumns = <
-            item
-              FieldName = 'DESCR'
-            end>
-          Properties.ListSource = dsEmpDept
+          Properties.ListColumns = <>
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -882,8 +856,8 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT PM.*, PM.ROWID FROM PHONEMESSAGE PM'
       'WHERE PM.EMPCODEFOR = :EMPCODE')
-    Left = 729
-    Top = 185
+    Left = 521
+    Top = 313
     ParamData = <
       item
         DataType = ftUnknown
@@ -912,8 +886,8 @@ object frmDiary99: TfrmDiary99
   end
   object dsPhoneMessage: TUniDataSource
     DataSet = qryPhoneMessage
-    Left = 816
-    Top = 188
+    Left = 592
+    Top = 316
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1397,7 +1371,6 @@ object frmDiary99: TfrmDiary99
       Category = 5
       Hint = 'View all entries '
       Visible = ivAlways
-      OnChange = chkViewAllEntriesChange
       ShowCaption = True
       Width = 0
       PropertiesClassName = 'TcxCheckBoxProperties'
@@ -2328,8 +2301,8 @@ object frmDiary99: TfrmDiary99
       item
       end>
     Images = imgGlyph
-    Left = 490
-    Top = 588
+    Left = 898
+    Top = 532
     StyleName = 'XP Style'
     object Action7: TAction
       Category = 'Phone Message'
@@ -2387,8 +2360,8 @@ object frmDiary99: TfrmDiary99
   object dsDiary: TUniDataSource
     AutoEdit = False
     DataSet = qryDiary
-    Left = 616
-    Top = 342
+    Left = 352
+    Top = 310
   end
   object qryEvents: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2403,8 +2376,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.START_DT < :P_DateTo'
       '  AND D.FILEID = M.FILEID(+)'
       'ORDER BY 1, 2, 3')
-    Left = 528
-    Top = 290
+    Left = 584
+    Top = 386
     ParamData = <
       item
         DataType = ftUnknown
@@ -2538,8 +2511,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.NFEE IS NULL'
       'ORDER BY 1, 2'
       ' ')
-    Left = 535
-    Top = 378
+    Left = 255
+    Top = 346
     ParamData = <
       item
         DataType = ftUnknown
@@ -2584,8 +2557,8 @@ object frmDiary99: TfrmDiary99
         '     :DEPT, :EMP_TYPE, :DESCR, :FILEID, :NMATTER, :NCLIENT, 0, :' +
         'NFEE)'
       '')
-    Left = 611
-    Top = 536
+    Left = 483
+    Top = 584
     ParamData = <
       item
         DataType = ftUnknown
@@ -2860,8 +2833,8 @@ object frmDiary99: TfrmDiary99
     SpecificOptions.Strings = (
       'Oracle.FetchAll=True')
     OnNewRecord = qryDiaryNewRecord
-    Left = 529
-    Top = 335
+    Left = 353
+    Top = 247
     ParamData = <
       item
         DataType = ftUnknown
@@ -2874,19 +2847,19 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT * FROM EMPLOYEE'
       'WHERE ACTIVE = '#39'Y'#39)
-    Left = 539
-    Top = 473
+    Left = 123
+    Top = 201
   end
   object dsEmployee: TUniDataSource
     DataSet = qryEmployee
-    Left = 615
-    Top = 469
+    Left = 199
+    Top = 197
   end
   object popDayView: TPopupMenu
     Images = imgGlyph
     OnPopup = popDayViewPopup
-    Left = 331
-    Top = 189
+    Left = 259
+    Top = 213
     object N5Minutes1: TMenuItem
       Action = actNewDiaryEntry
       Caption = 'New Diary Entry'
@@ -2924,8 +2897,8 @@ object frmDiary99: TfrmDiary99
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT * FROM DIARYLOC')
-    Left = 620
-    Top = 292
+    Left = 516
+    Top = 428
   end
   object qryFeeEarner: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2934,8 +2907,8 @@ object frmDiary99: TfrmDiary99
       'WHERE ACTIVE = '#39'Y'#39
       'AND ISFEEEARNER = '#39'Y'#39
       'AND CODE = :p_code')
-    Left = 728
-    Top = 240
+    Left = 512
+    Top = 376
     ParamData = <
       item
         DataType = ftUnknown
@@ -2952,8 +2925,8 @@ object frmDiary99: TfrmDiary99
       'where active = '#39'Y'#39
       'and ispartner = '#39'Y'#39
       'order by name')
-    Left = 727
-    Top = 292
+    Left = 735
+    Top = 172
   end
   object qryAuthor: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2964,30 +2937,30 @@ object frmDiary99: TfrmDiary99
       'where active = '#39'Y'#39
       'and isauthor = '#39'Y'#39
       'order by name')
-    Left = 729
-    Top = 336
+    Left = 705
+    Top = 184
   end
   object qryController: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT CODE, NAME FROM EMPLOYEE WHERE ACTIVE = '#39'Y'#39' ORDER BY NAME')
-    Left = 727
-    Top = 377
+    Left = 703
+    Top = 241
   end
   object dsPartner: TUniDataSource
     DataSet = qryPartner
-    Left = 797
-    Top = 291
+    Left = 877
+    Top = 171
   end
   object dsAuthor: TUniDataSource
     DataSet = qryAuthor
-    Left = 802
-    Top = 339
+    Left = 810
+    Top = 163
   end
   object dsController: TUniDataSource
     DataSet = qryController
-    Left = 799
-    Top = 380
+    Left = 791
+    Top = 244
   end
   object dxBarPopupMenu1: TdxBarPopupMenu
     BarManager = dxBarManager1
@@ -2997,15 +2970,15 @@ object frmDiary99: TfrmDiary99
         ItemName = 'dxBarButton7'
       end>
     UseOwnFont = False
-    Left = 429
-    Top = 312
+    Left = 869
+    Top = 400
     PixelsPerInch = 96
   end
   object dsDiaryList: TUniDataSource
     AutoEdit = False
     DataSet = qryDiaryList
-    Left = 805
-    Top = 569
+    Left = 685
+    Top = 481
   end
   object ppDiaryList: TppReport
     AutoStop = False
@@ -3013,9 +2986,8 @@ object frmDiary99: TfrmDiary99
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3039,22 +3011,15 @@ object frmDiary99: TfrmDiary99
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
-    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
-    PDFSettings.EncryptSettings.AllowExtract = True
-    PDFSettings.EncryptSettings.AllowAssemble = True
-    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
-    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
-    PDFSettings.PDFAFormat = pafNone
-    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3069,30 +3034,26 @@ object frmDiary99: TfrmDiary99
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
-    XLSSettings.WorksheetName = 'Report'
     Left = 610
     Top = 184
-    Version = '19.02'
+    Version = '16.03'
     mmColumnWidth = 0
     DataPipelineName = 'plDiaryListRpt'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
-      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 23283
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
-        Border.mmPadding = 0
         Caption = 'Diary'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -3105,7 +3066,6 @@ object frmDiary99: TfrmDiary99
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
-        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3124,7 +3084,6 @@ object frmDiary99: TfrmDiary99
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
-        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3142,7 +3101,6 @@ object frmDiary99: TfrmDiary99
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
-        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -3156,15 +3114,13 @@ object frmDiary99: TfrmDiary99
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
-        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3598
@@ -3177,15 +3133,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
-        Border.mmPadding = 0
         Caption = 'Author'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3810
@@ -3198,15 +3152,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
-        Border.mmPadding = 0
         Caption = 'Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3810
@@ -3219,15 +3171,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
-        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3810
@@ -3240,15 +3190,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
-        Border.mmPadding = 0
         Caption = 'Contact'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3810
@@ -3261,15 +3209,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
-        Border.mmPadding = 0
         Caption = 'Location'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3810
@@ -3282,15 +3228,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
-        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3810
         mmLeft = 120650
@@ -3302,15 +3246,13 @@ object frmDiary99: TfrmDiary99
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
-        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3810
         mmLeft = 193411
@@ -3323,14 +3265,12 @@ object frmDiary99: TfrmDiary99
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
-      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 25400
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
-        Border.mmPadding = 0
         DataField = 'REMINDER_FOR'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3350,7 +3290,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
-        Border.mmPadding = 0
         DataField = 'SHORTDESCR'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3370,7 +3309,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
-        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3390,7 +3328,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
-        Border.mmPadding = 0
         DataField = 'JURISDICTION'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3410,7 +3347,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
-        Border.mmPadding = 0
         DataField = 'START_DT'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3430,7 +3366,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
-        Border.mmPadding = 0
         DataField = 'LOCATION'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3450,7 +3385,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
-        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3470,7 +3404,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
-        Border.mmPadding = 0
         DataField = 'CLIENTNAME'
         DataPipeline = plDiaryListRpt
         Font.Charset = ANSI_CHARSET
@@ -3490,7 +3423,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText9'
-        Border.mmPadding = 0
         DataField = 'START_DT'
         DataPipeline = plDiaryListRpt
         DisplayFormat = 'm/d/yy h:nn AM/PM'
@@ -3511,7 +3443,6 @@ object frmDiary99: TfrmDiary99
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText10'
-        Border.mmPadding = 0
         DataField = 'END_DT'
         DataPipeline = plDiaryListRpt
         DisplayFormat = 'm/d/yy h:nn AM/PM'
@@ -3548,8 +3479,8 @@ object frmDiary99: TfrmDiary99
   end
   object dsDiaryListRpt: TUniDataSource
     DataSet = qryDiaryListRpt
-    Left = 622
-    Top = 423
+    Left = 438
+    Top = 175
   end
   object qryDiaryList: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -3595,8 +3526,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.REMINDER_FOR = :Author'
       '  AND M.NCLIENT = P.NCLIENT'
       'ORDER BY 1')
-    Left = 730
-    Top = 570
+    Left = 706
+    Top = 386
     ParamData = <
       item
         DataType = ftUnknown
@@ -3645,8 +3576,8 @@ object frmDiary99: TfrmDiary99
     Options.SetFieldsReadOnly = False
     SpecificOptions.Strings = (
       'Oracle.ExtendedFieldsInfo=False')
-    Left = 539
-    Top = 424
+    Left = 323
+    Top = 184
     ParamData = <
       item
         DataType = ftUnknown
@@ -3689,8 +3620,8 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT D.*, D.ROWID FROM DIARY D WHERE D.NDIARY = :NDIARY')
     Options.RequiredFields = False
-    Left = 535
-    Top = 524
+    Left = 95
+    Top = 388
     ParamData = <
       item
         DataType = ftUnknown
@@ -3699,14 +3630,14 @@ object frmDiary99: TfrmDiary99
       end>
   end
   object cxSchedulerGridConnection1: TcxSchedulerGridConnection
-    Left = 437
-    Top = 452
+    Left = 893
+    Top = 84
   end
   object dxComponentPrinter: TdxComponentPrinter
     CurrentLink = dxComponentPrinterLink1
     Version = 0
-    Left = 602
-    Top = 609
+    Left = 594
+    Top = 521
     PixelsPerInch = 96
     object dxComponentPrinterLink1: TdxGridReportLink
       Active = True
@@ -3736,7 +3667,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43591.471342662040000000
+      ReportDocument.CreationDate = 43581.659997453700000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3793,46 +3724,5 @@ object frmDiary99: TfrmDiary99
     FieldNames.State = 'STATE'
     Left = 184
     Top = 384
-  end
-  object dsDiaryLoc: TUniDataSource
-    DataSet = dmAxiom.qryDiaryLoc
-    Left = 800
-    Top = 424
-  end
-  object qryDiaryJur: TUniQuery
-    Connection = dmAxiom.uniInsight
-    SQL.Strings = (
-      'select * from diaryjur')
-    Left = 728
-    Top = 472
-  end
-  object dsDiaryJur: TUniDataSource
-    DataSet = qryDiaryJur
-    Left = 800
-    Top = 472
-  end
-  object qryDiaryEvent: TUniQuery
-    Connection = dmAxiom.uniInsight
-    SQL.Strings = (
-      'select * from diaryevt')
-    Left = 728
-    Top = 520
-  end
-  object dsDiaryEvent: TUniDataSource
-    DataSet = qryDiaryEvent
-    Left = 800
-    Top = 520
-  end
-  object qryEmpDept: TUniQuery
-    Connection = dmAxiom.uniInsight
-    SQL.Strings = (
-      'select * from empdept')
-    Left = 736
-    Top = 616
-  end
-  object dsEmpDept: TUniDataSource
-    DataSet = qryEmpDept
-    Left = 808
-    Top = 616
   end
 end

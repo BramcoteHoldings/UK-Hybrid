@@ -8,7 +8,7 @@ object frmBankRec: TfrmBankRec
   Constraints.MinWidth = 728
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -22,7 +22,7 @@ object frmBankRec: TfrmBankRec
     1068
     654)
   PixelsPerInch = 96
-  TextHeight = 15
+  TextHeight = 17
   object Splitter1: TSplitter
     Left = 0
     Top = 299
@@ -40,25 +40,28 @@ object frmBankRec: TfrmBankRec
     Height = 141
     Align = alTop
     TabOrder = 1
+    DesignSize = (
+      1068
+      141)
     object Label1: TLabel
       Left = 87
       Top = 10
-      Width = 29
-      Height = 15
+      Width = 30
+      Height = 17
       Caption = 'Bank:'
     end
     object Label2: TLabel
       Left = 8
       Top = 38
-      Width = 101
-      Height = 15
+      Width = 109
+      Height = 17
       Caption = 'Statement Balance:'
     end
     object Label3: TLabel
       Left = 6
       Top = 66
-      Width = 103
-      Height = 15
+      Width = 111
+      Height = 17
       Caption = 'Calculated Balance:'
     end
     object Label4: TLabel
@@ -77,68 +80,68 @@ object frmBankRec: TfrmBankRec
     object Label5: TLabel
       Left = 752
       Top = 10
-      Width = 93
-      Height = 15
+      Width = 101
+      Height = 17
       Caption = 'Opening Balance:'
     end
     object Label6: TLabel
       Left = 728
       Top = 38
-      Width = 114
-      Height = 15
+      Width = 125
+      Height = 17
       Caption = 'Payments this period:'
     end
     object Label7: TLabel
       Left = 734
       Top = 66
-      Width = 106
-      Height = 15
+      Width = 119
+      Height = 17
       Caption = 'Receipts this period:'
     end
     object Label8: TLabel
-      Left = 517
+      Left = 509
       Top = 12
-      Width = 84
-      Height = 15
+      Width = 92
+      Height = 17
       Alignment = taRightJustify
       Caption = 'Statement Date:'
     end
     object Label9: TLabel
-      Left = 492
+      Left = 480
       Top = 38
-      Width = 109
-      Height = 15
+      Width = 121
+      Height = 17
       Alignment = taRightJustify
       Caption = 'Last reconciled Date:'
     end
     object Label10: TLabel
       Left = 8
       Top = 122
-      Width = 86
-      Height = 15
+      Width = 96
+      Height = 17
       Caption = 'Additions/Errors'
     end
     object Label11: TLabel
-      Left = 755
+      Left = 745
       Top = 94
-      Width = 99
-      Height = 30
+      Width = 109
+      Height = 34
       Alignment = taRightJustify
       Caption = 'Closing Cashbook Balance:'
       WordWrap = True
     end
     object lblDRCR: TLabel
       Left = 987
-      Top = 96
-      Width = 15
-      Height = 15
+      Top = 91
+      Width = 17
+      Height = 17
       Caption = 'DR'
     end
     object Label12: TLabel
-      Left = 390
+      Left = 389
       Top = 92
-      Width = 211
-      Height = 30
+      Width = 212
+      Height = 34
       Alignment = taRightJustify
       Caption = 
         'Entries backdated to current period and entered in future period' +
@@ -146,10 +149,10 @@ object frmBankRec: TfrmBankRec
       WordWrap = True
     end
     object Label13: TLabel
-      Left = 414
+      Left = 391
       Top = 58
-      Width = 187
-      Height = 30
+      Width = 210
+      Height = 34
       Alignment = taRightJustify
       Caption = 'Unpresented cheques, receipts and Adjustments:'
       WordWrap = True
@@ -158,7 +161,7 @@ object frmBankRec: TfrmBankRec
       Left = 121
       Top = 7
       Width = 49
-      Height = 23
+      Height = 25
       Style = csDropDownList
       Sorted = True
       TabOrder = 0
@@ -169,12 +172,59 @@ object frmBankRec: TfrmBankRec
       Left = 607
       Top = 7
       Width = 111
-      Height = 23
+      Height = 25
       Date = 36716.509550173600000000
       Time = 36716.509550173600000000
       Checked = False
       TabOrder = 1
       OnChange = dtpStatementDateChange
+    end
+    object btnPrint: TcxButton
+      Left = 983
+      Top = 110
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = '&Print'
+      LookAndFeel.NativeStyle = True
+      OptionsImage.Glyph.SourceDPI = 96
+      OptionsImage.Glyph.Data = {
+        424D360400000000000036000000280000001000000010000000010020000000
+        000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00806060FF806060FFFF00FFFFFF00FFFF806060FF806060FFFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00806060FFA4A0A0FFA4A0A0FF806060FF806060FF806060FFF0FBFFFF8060
+        60FF806060FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF008060
+        60FFC0DCC0FFA4A0A0FFA4A0A0FFA4A0A0FF404040FF404040FF806060FFC0C0
+        C0FFF0FBFFFFC0C0C0FF806060FF806060FF806060FFFFFFFF00806060FFC0DC
+        C0FFC0C0C0FFA4A0A0FFA4A0A0FFA4A0A0FF404040FF000000FF000000FF0000
+        00FF000000FF808080FFC0C0C0FF806060FFFF00FFFF806060FFC0C0C0FFC0C0
+        C0FFA4A0A0FFC0DCC0FFC0C0C0FFC0C0C0FFC0C0C0FFA4A0A0FFA4A0A0FF4060
+        60FF000000FF000000FF000000FF806060FF808080FF806060FFC0C0C0FFA4A0
+        A0FFF0FBFFFFF0FBFFFFF0FBFFFFF0FBFFFFC0DCC0FFC0DCC0FFC0C0C0FFC0C0
+        C0FFC0C0C0FFA4A0A0FF406060FF808080FF808080FF806060FFA4A0A0FFF0FB
+        FFFFF0FBFFFFF0FBFFFFC0DCC0FFA4A0A0FFA4A0A0FFC0C0C0FFC0C0C0FFC0DC
+        C0FFC0DCC0FFC0C0C0FFC0C0C0FFA4A0A0FF806060FFFFFFFF00806060FF8060
+        60FFF0FBFFFFC0C0C0FF808080FFA4A0A0FFA4A0A0FFA4A0A0FFA4A0A0FFA4A0
+        A0FFA4A0A0FFC0C0C0FFC0C0C0FFC0C0C0FF806060FFFFFFFF00FFFFFF00FFFF
+        FF00806060FFC0A060FF806060FF806060FF808080FF806060FF808080FFA4A0
+        A0FFA4A0A0FFC0C0C0FFC0C0C0FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFC0A060FFC0A0
+        60FF808080FF806060FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A0
+        60FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C0A0
+        60FFF0FBFFFFF0FBFFFFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C0A0
+        60FFC0A060FFC0A060FFF0FBFFFFF0CAA6FFF0CAA6FFC0A060FFFFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00C0A060FFC0A060FFC0A060FFFFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+      TabOrder = 4
+      OnClick = btnPrintClick
     end
     object edStatementBal: TcxCurrencyEdit
       Left = 121
@@ -195,7 +245,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 4
+      TabOrder = 5
       Width = 121
     end
     object edVariance: TcxCurrencyEdit
@@ -214,7 +264,7 @@ object frmBankRec: TfrmBankRec
       Style.Font.Name = 'Arial Black'
       Style.Font.Style = [fsBold]
       Style.IsFontAssigned = True
-      TabOrder = 5
+      TabOrder = 6
       Width = 121
     end
     object edReceipts: TcxCurrencyEdit
@@ -226,7 +276,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 6
+      TabOrder = 7
       Width = 121
     end
     object edPayments: TcxCurrencyEdit
@@ -238,7 +288,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 7
+      TabOrder = 8
       Width = 121
     end
     object edOpeningBalance: TcxCurrencyEdit
@@ -250,7 +300,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 8
+      TabOrder = 9
       Width = 121
     end
     object cmbDRCR: TcxComboBox
@@ -269,12 +319,12 @@ object frmBankRec: TfrmBankRec
       Left = 607
       Top = 35
       Width = 111
-      Height = 23
+      Height = 25
       Date = 42662.509550173600000000
       Time = 42662.509550173600000000
       Checked = False
       Enabled = False
-      TabOrder = 9
+      TabOrder = 10
       OnChange = dtpStatementDateChange
     end
     object edClosingBalance: TcxCurrencyEdit
@@ -286,7 +336,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 10
+      TabOrder = 11
       Width = 121
     end
     object edAdjustments: TcxCurrencyEdit
@@ -294,7 +344,7 @@ object frmBankRec: TfrmBankRec
       Top = 64
       Properties.Alignment.Horz = taRightJustify
       Properties.ReadOnly = True
-      TabOrder = 11
+      TabOrder = 12
       Width = 111
     end
     object lblBankName: TcxLabel
@@ -310,7 +360,7 @@ object frmBankRec: TfrmBankRec
       Top = 93
       Properties.Alignment.Horz = taRightJustify
       Properties.ReadOnly = True
-      TabOrder = 13
+      TabOrder = 14
       Width = 111
     end
   end
@@ -333,12 +383,6 @@ object frmBankRec: TfrmBankRec
       Width = 1066
       Height = 128
       Align = alClient
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
       TabOrder = 0
       OnEnter = dbgrLedgerEnter
       LookAndFeel.NativeStyle = True
@@ -897,8 +941,7 @@ object frmBankRec: TfrmBankRec
     DataPipeline = plBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -923,22 +966,15 @@ object frmBankRec: TfrmBankRec
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
-    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
-    PDFSettings.EncryptSettings.AllowExtract = True
-    PDFSettings.EncryptSettings.AllowAssemble = True
-    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
-    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
-    PDFSettings.PDFAFormat = pafNone
-    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -953,22 +989,19 @@ object frmBankRec: TfrmBankRec
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
-    XLSSettings.WorksheetName = 'Report'
     Left = 945
     Top = 345
-    Version = '19.02'
+    Version = '16.03'
     mmColumnWidth = 0
     DataPipelineName = 'plBankRec'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
-      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 17727
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
-        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -986,7 +1019,6 @@ object frmBankRec: TfrmBankRec
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
-        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1004,15 +1036,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
-        Border.mmPadding = 0
         Caption = 'Bank Statement'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -1025,15 +1055,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
-        Border.mmPadding = 0
         Caption = 'Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1046,15 +1074,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
-        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3704
@@ -1067,15 +1093,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
-        Border.mmPadding = 0
         Caption = 'Ref No'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3704
         mmLeft = 30956
@@ -1087,15 +1111,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
-        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3704
         mmLeft = 45508
@@ -1107,15 +1129,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
-        Border.mmPadding = 0
         Caption = 'Statement Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3598
         mmLeft = 121444
@@ -1127,15 +1147,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
-        Border.mmPadding = 0
         Caption = 'Cashbook Amt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3598
         mmLeft = 147902
@@ -1147,15 +1165,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
-        Border.mmPadding = 0
         Caption = 'Presented'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3598
         mmLeft = 171186
@@ -1167,7 +1183,6 @@ object frmBankRec: TfrmBankRec
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
-        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -1181,14 +1196,12 @@ object frmBankRec: TfrmBankRec
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
-      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5556
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
-        Border.mmPadding = 0
         DataField = 'BANKED'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1209,7 +1222,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
-        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1229,7 +1241,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
-        Border.mmPadding = 0
         DataField = 'REFNO'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1249,7 +1260,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
-        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1269,7 +1279,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
-        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1291,7 +1300,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
-        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1312,7 +1320,6 @@ object frmBankRec: TfrmBankRec
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
-        Border.mmPadding = 0
         DataField = 'PresentedDate'
         DataPipeline = plBankRec
         DisplayFormat = 'dd/mm/yyyy'
@@ -1333,14 +1340,12 @@ object frmBankRec: TfrmBankRec
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
-      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
-        Border.mmPadding = 0
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1361,15 +1366,13 @@ object frmBankRec: TfrmBankRec
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
-        Border.mmPadding = 0
         Caption = 'Number of unmatched cheques'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
+        FormField = False
         Transparent = True
         mmHeight = 3810
         mmLeft = 1852
@@ -1381,7 +1384,6 @@ object frmBankRec: TfrmBankRec
       object ppDBCalc2: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc2'
-        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1402,7 +1404,6 @@ object frmBankRec: TfrmBankRec
       object ppDBCalc3: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc3'
-        Border.mmPadding = 0
         DataField = 'MatchedAmount'
         DataPipeline = plBankRec
         Font.Charset = DEFAULT_CHARSET
@@ -1423,7 +1424,6 @@ object frmBankRec: TfrmBankRec
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
-        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 1323
@@ -1610,11 +1610,6 @@ object frmBankRec: TfrmBankRec
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'btnPrint'
-        end
-        item
-          BeginGroup = True
-          Visible = True
           ItemName = 'dxBarButton1'
         end>
       OneOnRow = True
@@ -1770,15 +1765,6 @@ object frmBankRec: TfrmBankRec
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       PaintStyle = psCaptionGlyph
       OnClick = btnSaveRecClick
-    end
-    object btnPrint: TdxBarButton
-      Caption = 'Print'
-      Category = 1
-      Hint = 'Print'
-      Visible = ivAlways
-      ImageIndex = 18
-      PaintStyle = psCaptionGlyph
-      OnClick = dxBarButton3Click
     end
   end
   object dsCashbook: TUniDataSource
@@ -2077,135 +2063,135 @@ object frmBankRec: TfrmBankRec
     Left = 339
     Top = 212
     Bitmap = {
-      494C010113001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010112001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000084848400848484008484
       8400848484008484840084848400848484008484840084848400000000000000
       0000000000000000000000000000000000000000000000000000F3F3F30CE7E7
       E718F2F2F20D0000000000000000000000000000000000000000000000000000
       000000000000F5F5F50AE9E9E916000000000000000000000000000000000000
-      00030000000C0000001200000014000000140000001500000015000000140000
-      000D000000030000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000840000008400C6C6C600C6C6
       C600C6C6C600C6C6C60000008400000084000000840000008400000000000000
       00000000000000000000000000000000000000000000F3F3F30CB0B0B04F6E6E
       6E919B9B9B64EFEFEF100000000000000000000000000000000000000000FEFE
       FE01E4E4E41BA7A7A7589090906FE9E9E9160000000000000000000000000000
-      0009896256C2BD8A78FFBE8A78FFBD8A78FFBD8978FFBD8978FFBE8978FF8763
-      56C30000000B0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000840000008400C6C6C600C6C6
       C600C6C6C600C6C6C6000000840000008400000084000000840000000000FFFF
       FF00FFFFFF00FFFFFF00FFFFFF000000000000000000907CEB832900DFFF3E28
       A5D76565659AC9C9C936FCFCFC03000000000000000000000000FCFCFC03D5D5
-      D52A6150B2AF2D07D8F8A7A7A758F5F5F50A000000030000000E000000150000
-      0021C08D7CFFF6EEE9FFF5EDE9FFF5EDE9FFF5ECE8FFF4ECE8FFF5ECE7FFBF8D
-      7BFF00000026000000180000000F000000040000000000000000000000000000
+      D52A6150B2AF2D07D8F8A7A7A758F5F5F50A0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C6C6C60000008400840000008400
       0000840000008400000084000000840000008400000084000000000000008484
       84008484840084848400FFFFFF000000000000000000BBAFF4502900DFFF300A
       DBF5524E69B17F7F7F80DDDDDD220000000000000000FCFCFC03C7C5D23A4529
-      C2D62900DFFF7C6BCD94F0F0F00F000000000000000C7B5042C5A76E5BFF9F67
-      55FFC2917FFFF7F0ECFFE2B47DFFE2B37AFFE1B077FFE0AE72FFF6EEEAFFC290
-      7FFF845545FF895847FF613E32C70000000E0000000000000000000000000000
+      C2D62900DFFF7C6BCD94F0F0F00F000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C6C6C60000008400840000008400
       000084000000840000008400000084000000840000000000840000000000FFFF
       FF008400000084000000FFFFFF000000000000000000000000008670ED8F2900
       DFFF3C1CD1E35F5F5FA09494946BE1E1E11EFCFCFC03C7C5D23A3918CDE72D07
-      D8F8A39CC563F6F6F609000000000000000000000011BB7E6BFFECD9CCFFE3CE
-      BEFFC59483FFF9F2F0FFE4B984FFE3B781FFE3B47CFFE0B176FFF7F0EDFFC594
-      83FFE0CBBCFFEBD8CBFFB67763FF000000140000000000000000000000000000
+      D8F8A39CC563F6F6F60900000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000840000008400840000008400
       0000840000008400000084000000840000000000840000008400000000008484
       8400840000008400000084000000000000000000000000000000000000007960
       EB9F2900DFFF5138C2C76464649B9292926DB6B4C14B3918CDE72D07D8F8A39C
-      C563F6F6F60900000000000000000000000000000010BE8571FFF1E5DAFFECDB
-      D0FF7A4835FF7A4835FF7A4835FF7A4835FF7A4835FF7A4835FF7A4835FF7A48
-      35FFEBDBCFFFF1E2D8FFB97C69FF000000130000000000000000000000000000
+      C563F6F6F6090000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000840000008400840000008400
       000084000000840000008400000000008400000084000000840000000000FFFF
       FF00FFFFFF008400000084000000000000000000000000000000000000000000
       00007960EB9F2900DFFF5037C2C852505DAF3312C7ED2C06D6F9A39CC563F6F6
-      F609000000000000000000000000000000000000000EC28B78FFF5EEE7FFF2E7
-      DDFFF2E7DEFFF3E7DEFFF2E5DEFFF3E5DEFFF2E7DDFFF2E7DDFFF2E7DEFFF2E7
-      DDFFF2E5DEFFF5EDE6FFBC826EFF000000120000000000000000000000000000
+      F609000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C6C6C60000008400840000008400
       000084000000840000008400000084000000C6C6C60000008400000000008484
       8400848484008400000084000000000000000000000000000000000000000000
       000000000000785FE9A02900DFFF2C06D6F92B05D5FA6A628B9DDADADA25FEFE
-      FE01000000000000000000000000000000000000000CC7937FFFFAF4F1FFCDBE
-      B8FF6F5448FF614337FF614035FF5F3F34FF5E3F33FF5D3D32FF5D3D34FF6A4C
-      44FFCABCB6FFF9F5F1FFC18875FF000000100000000000000000000000000000
+      FE01000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000C6C6C60000008400840000008400
       000084000000000084008400000084000000840000000000840000000000FFFF
       FF00FFFFFF008400000084000000000000000000000000000000000000000000
       0000FCFCFC03C7C5D23A2E08D9F72900DFFF472BC3D47474748B9191916ED5D5
-      D52AF9F9F9060000000000000000000000000000000ACC9986FFFDFAFAFF7D60
-      54FF745043FF744F43FF744E43FF734E43FF734E42FF724D42FF724C41FF724C
-      40FF73584DFFFDFAFAFFC58F7CFF0000000E0000000000000000000000000000
+      D52AF9F9F9060000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000840000008400840000008400
       0000000084000000840000008400840000008400000084000000840000008400
       000084000000840000008400000000000000000000000000000000000000FCFC
       FC03C7C5D23A3918CDE72D07D8F8705CCBA3350FDFF0593DD5C27C7A88858585
-      857AC3C3C33CF3F3F30C000000000000000000000008CF9F8DFFFFFFFFFF7A5A
-      4CFF8E695AFFF9F4F1FFF0E6E0FFF0E5DFFFEFE5DEFFEFE5DEFFF6EFEBFF8662
-      53FF704F43FFFFFFFFFFCA9683FF0000000B0000000000000000000000000000
+      857AC3C3C33CF3F3F30C00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000840000000000
       0000000000000000000000000000000000000000000084000000840000008400
       00008400000084000000FFFFFF00000000000000000000000000F9F9F906C7C5
       D23A3918CDE72900DFFF8A80B87FF0F0F00FD6CFF830431FE2E04928DDD77972
-      9C8D7C7C7C83B3B3B34CF5F5F50A0000000000000005BE9584E9F5ECE8FF8666
-      56FF977262FFFAF6F4FFF2E8E3FFF1E8E1FFF1E7E2FFF1E7E1FFF8F2EEFF8E6A
-      5BFF7A5B4CFFF5EAE6FFBA8E7DEA000000080000000000000000000000000000
+      9C8D7C7C7C83B3B3B34CF5F5F50A000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000084840000848400008484000084
       8400008484000084840000848400008484000084840000000000840000008400
       00008400000000000000000000000000000000000000FBFBFB04BBB9C7463817
       CCE82900DFFF7263B69CEAEAEA150000000000000000F1EFFC105E40E7BF340E
-      DEF17B6EB39189898976DBDBDB24FCFCFC030000000234292545A78375CC9472
-      62FFA07B6AFFFCF9F8FFF3EBE6FFF4EAE5FFF2EAE5FFF3EAE3FFF9F5F3FF9772
-      63FF876658FFA68072CE34282348000000030000000000000000000000000000
+      DEF17B6EB39189898976DBDBDB24FCFCFC030000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000848400008484000084
       84000084840000848400008484000000000000000000FFFFFF00FFFFFF00FFFF
       FF0000000000FFFFFF00FFFFFF000000000000000000C5BEE7413817CCE82900
       DFFF5A46B5B9E3E3E31C0000000000000000000000000000000000000000937F
-      EE802900DFFFCFCAE635FCFCFC03000000000000000000000001000000030000
-      000AC89B89FFFDFBFAFFF5EDE8FFF4EDE8FFF5EDE7FFF5ECE7FFFBF7F6FFC596
-      85FF000000110000000400000002000000000000000000000000000000000000
+      EE802900DFFFCFCAE635FCFCFC03000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000084
       840000848400000000000000000084848400848484008484840084848400FFFF
       FF0000000000FFFFFF00000000000000000000000000411DDFE22900DFFF4529
       C2D6D5D5D52AFEFEFE0100000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0005CA9E8DFFFEFCFCFFF7F0ECFFF6EFEBFFF7EFEBFFF5EFEAFFFCFAF8FFC89A
-      89FF000000090000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF0000000000000000000000000000000000000000003610E1EF4D2CE1D3DFDD
       EB22FEFEFE010000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0003CDA291FFFEFEFDFFFEFDFDFFFEFDFCFFFEFCFCFFFEFCFBFFFDFBFAFFCB9F
-      8DFF000000070000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      00019A796DBFCFA493FFCEA493FFCEA493FFCEA492FFCDA391FFCDA391FF9878
-      6BC1000000040000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2977,8 +2963,8 @@ object frmBankRec: TfrmBankRec
       '  ---- Withdrawal adjustment within the period (reduce balance)'
       
         '  SELECT '#39'CHEQUN'#39' AS grp, bankrec.banked, NULL, bankrec.refno AS' +
-        ' refno, NULL, bankrec.descr AS payee, (0-bankrec.amount) AS amou' +
-        'nt, '#39'chq2'#39' AS subx'
+        ' refno, NULL, bankrec.descr AS payee, (0 - bankrec.amount) AS am' +
+        'ount, '#39'chq2'#39' AS subx'
       '  FROM bankrec'
       
         '  WHERE bankrec.bank = :p_acct AND TRUNC(bankrec.banked) <= :p_d' +
