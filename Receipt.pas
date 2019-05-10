@@ -381,9 +381,8 @@ implementation
 uses
   System.UITypes, AxiomData, CashRcp, InvoiceSearch, Matters, MSearch, MiscFunc, LSearch, NSearch,
   ReceiptPrint, ReceiptDistribute, Desktop, citfunc,glComponentUtil, cxGridDBDataDefinitions,
-  cxLookupDBGrid, CheqImport, Vcl.Styles.FormStyleHooks, DisbSearch, uRwSysUtils
-  , VCL.uRwBoxes
-  , uRwMAPIProps, ScreenSave, StencilSelect;
+  cxLookupDBGrid, CheqImport, Vcl.Styles.FormStyleHooks, uRwSysUtils, VCL.uRwBoxes, uRwMAPIProps,
+  ScreenSave, StencilSelect;
 
 {$R *.DFM}
 
@@ -2380,7 +2379,7 @@ begin
       end;
    end;
 
-   if (tvLedgerTYPE.DataBinding.Field.Text = 'Disburse') then
+{   if (tvLedgerTYPE.DataBinding.Field.Text = 'Disburse') then
    begin
       try
          frmDisbSearch := TfrmDisbSearch.Create(Self);
@@ -2403,7 +2402,7 @@ begin
 
          frmDisbSearch.Free();
       end;
-   end;
+   end;       }
 
    if ((chkCheckMultipleMatters.Checked) and not MultipleCheck) then
        CheckForMultipleMatters(ADispValue);

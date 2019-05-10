@@ -8,7 +8,9 @@ uses
   cxControls, cxContainer, cxEdit, cxTextEdit, cxMemo, cxRichEdit, DBCtrls,
   cxMaskEdit, cxButtonEdit, cxDBRichEdit, DB, OracleUniProvider, Uni, DBAccess, MemDS,
   cxDBEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox, Menus, cxGraphics, cxCalendar, cxLookAndFeels;
+  cxDBLookupComboBox, Menus, cxGraphics, cxCalendar, cxLookAndFeels,
+  ppParameter, ppDesignLayer, ppBands, ppStrtch, ppRegion, ppMemo, ppCtrls,
+  ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport, ppRichTx;
 
 type
   TfrmMatterNotesAdd = class(TForm)
@@ -28,8 +30,31 @@ type
     cmbNoteType: TcxDBLookupComboBox;
     cmbDate: TcxDBDateEdit;
     Label4: TLabel;
+    btnNotePrint: TcxButton;
+    ppMatterNoteRpt: TppReport;
+    ppParameterList1: TppParameterList;
+    ppHeaderBand1: TppHeaderBand;
+    pplblTransTitle: TppLabel;
+    ppLabel2: TppLabel;
+    ppLine2: TppLine;
+    ppDetailBand1: TppDetailBand;
+    ppLabel1: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    pplblMatter: TppLabel;
+    pplblMatterDesc: TppLabel;
+    pplblClient: TppLabel;
+    ppLabel8: TppLabel;
+    ppMemoNotes: TppRichText;
+    ppSummaryBand1: TppSummaryBand;
+    pplblFooter: TppLabel;
+    ppLine1: TppLine;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
     procedure qryMatterNotesAfterInsert(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
+    procedure btnNotePrintClick(Sender: TObject);
+    procedure ppMatterNoteRptBeforePrint(Sender: TObject);
   private
     { Private declarations }
     lNoteType: string;
@@ -59,6 +84,17 @@ uses AxiomData, CitFunc, InvoiceSearch, MiscFunc;
 function TfrmMatterNotesAdd.GetNote: String;
 begin
    Result := mlNote.Lines.Text;
+end;
+
+procedure TfrmMatterNotesAdd.ppMatterNoteRptBeforePrint(Sender: TObject);
+begin
+   pplblMatter.Caption := MatterString(lNMatter, 'FILEID');
+   pplblMatterDesc.Caption := MatterString(lNMatter, 'SHORTDESCR');
+   pplblClient.Caption := MatterString(lNMatter, 'TITLE');
+   pplblFooter.Caption := 'Matter note entry dated ' + FormatDateTime('dd/mm/yyyy hh:nn:ss', cmbDate.Date) +
+                         ' entered by ' + dmAxiom.UserID;
+   pplblTransTitle.Caption := dmAxiom.EntityName;
+   ppMemoNotes.RichText := mlNote.Text;
 end;
 
 procedure TfrmMatterNotesAdd.SetBy(const Value: String);
@@ -92,6 +128,11 @@ begin
    ASequence := qryMaxSequence.FieldByName('newsequence').AsInteger;
    if ASequence = 0 then ASequence := 1;
    qryMatterNotes.FieldByName('sequence').AsInteger  := ASequence;
+end;
+
+procedure TfrmMatterNotesAdd.btnNotePrintClick(Sender: TObject);
+begin
+   ppMatterNoteRpt.Print;
 end;
 
 procedure TfrmMatterNotesAdd.FormShow(Sender: TObject);

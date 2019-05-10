@@ -7,7 +7,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -17,7 +17,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object vtDocs: TVirtualStringTree
     Left = 0
     Top = 56
@@ -43,6 +43,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
     LineMode = lmBands
     LineStyle = lsSolid
     PopupMenu = pmDocuments
+    StateImages = SystemImages
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoExpand, toAutoScroll, toAutoScrollOnExpand, toAutoTristateTracking, toAutoDeleteMovedNodes]
     TreeOptions.PaintOptions = [toShowButtons, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
@@ -53,7 +54,6 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
     OnExpanded = vtDocsExpanded
     OnGetText = vtDocsGetText
     OnPaintText = vtDocsPaintText
-    OnGetImageIndex = vtDocsGetImageIndex
     OnInitChildren = vtDocsInitChildren
     OnInitNode = vtDocsInitNode
     OnLoadNode = vtDocsLoadNode
@@ -65,50 +65,50 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
     Columns = <
       item
         Position = 0
+        Text = 'Document'
         Width = 250
-        WideText = 'Document'
       end
       item
         Position = 1
+        Text = 'Referred To'
         Width = 150
-        WideText = 'Referred To'
       end
       item
         Position = 2
+        Text = 'Template Filename'
         Width = 250
-        WideText = 'Template Filename'
       end
       item
         Position = 3
+        Text = 'Data Filename'
         Width = 250
-        WideText = 'Data Filename'
       end
       item
         Position = 4
+        Text = 'Document Filename'
         Width = 250
-        WideText = 'Document Filename'
       end
       item
         Position = 5
-        WideText = 'Data Form'
+        Text = 'Data Form'
       end
       item
         Position = 6
-        WideText = 'Active'
+        Text = 'Active'
       end
       item
         Position = 7
-        WideText = 'Workflow Only'
+        Text = 'Workflow Only'
       end
       item
         Position = 8
-        WideText = 'Category'
+        Text = 'Category'
       end
       item
         Position = 9
-        WideText = 'Classification'
+        Text = 'Classification'
       end>
-    WideDefaultText = ''
+    DefaultText = ''
   end
   object pBottom: TPanel
     Left = 0
@@ -204,7 +204,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
     Left = 288
     Top = 136
     Bitmap = {
-      494C01011C002100080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011C002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1975,7 +1975,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2325,7 +2325,7 @@ object fmWorkFlowDocTemplates: TfmWorkFlowDocTemplates
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350

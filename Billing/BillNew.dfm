@@ -2,7 +2,7 @@ object frmInvoice: TfrmInvoice
   Left = 563
   Top = 66
   Caption = 'Bill Creation'
-  ClientHeight = 658
+  ClientHeight = 687
   ClientWidth = 869
   Color = clBtnFace
   Constraints.MinHeight = 572
@@ -22,7 +22,7 @@ object frmInvoice: TfrmInvoice
   OnShow = FormShow
   DesignSize = (
     869
-    658)
+    687)
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
@@ -1013,7 +1013,7 @@ object frmInvoice: TfrmInvoice
   end
   object rgFilter: TcxRadioGroup
     Left = 6
-    Top = 604
+    Top = 633
     Anchors = [akLeft, akBottom]
     Caption = 'Filter'
     ParentShowHint = False
@@ -1044,6 +1044,7 @@ object frmInvoice: TfrmInvoice
     TabOrder = 26
     Transparent = True
     OnClick = rgFilterClick
+    ExplicitTop = 604
     Height = 47
     Width = 625
   end
@@ -1083,13 +1084,14 @@ object frmInvoice: TfrmInvoice
     Left = 6
     Top = 392
     Width = 855
-    Height = 206
+    Height = 235
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvNone
     BevelOuter = bvNone
     TabOrder = 30
     LookAndFeel.NativeStyle = True
     RootLevelOptions.DetailTabsPosition = dtpTop
+    ExplicitHeight = 206
     object tvBillItems: TcxGridDBTableView
       PopupMenu = pmGrid
       OnDblClick = tbtnEditClick
@@ -2001,7 +2003,7 @@ object frmInvoice: TfrmInvoice
   end
   object pbSpellCheck: TBitBtn
     Left = 648
-    Top = 621
+    Top = 650
     Width = 187
     Height = 30
     Anchors = [akRight, akBottom]
@@ -2035,6 +2037,7 @@ object frmInvoice: TfrmInvoice
       89899E9E9E9C9C9CEEEEEEFDFDFDBCBCBC8E8E8EA4A4A48B8B8B}
     TabOrder = 37
     OnClick = pbSpellCheckClick
+    ExplicitTop = 621
   end
   object edtDiscountGST: TEdit
     Left = 333
@@ -2140,12 +2143,14 @@ object frmInvoice: TfrmInvoice
   end
   object chkUnbilledTransactions: TcxCheckBox
     Left = 648
-    Top = 655
+    Top = 628
+    Anchors = [akRight, akBottom]
     Caption = 'Show Unbilled Transactions'
     TabOrder = 47
     Transparent = True
     Visible = False
     OnClick = chkUnbilledTransactionsClick
+    ExplicitTop = 613
   end
   object lblRecoveryPct: TcxLabel
     Left = 173
@@ -2449,29 +2454,7 @@ object frmInvoice: TfrmInvoice
   object qryFees: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT 0 AS TYPE, TRUNC (fee.created) created,'
-      
-        '       DECODE (fee.PRIVATE, '#39'Y'#39', '#39'(P) '#39', '#39#39') || fee.descr AS des' +
-        'cr,       '
-      '       FEE.AMOUNT, '
-      '       fee.author, fee.nfee AS uniqueid, fee.taxcode,       '
-      
-        '       DECODE(NVL(fee.tax,0), 0, DECODE(fee.billed,'#39'Y'#39',fee.tax, ' +
-        'ROUND(fee.amount * ABS(r.rate)) / 100), fee.tax) AS tax, '
-      
-        '       fee.PRIVATE, fee.fileid AS payee, NULL AS approval, units' +
-        ', task,'
-      '       nfee AS uniqueid, 0 AS unbilled'
-      '  FROM fee, taxrate r, scalecost'
-      'WHERE nmemo = :p_invoice'
-      '   AND fee.taxcode = r.taxcode(+)'
-      '   AND TRUNC (fee.created) >= r.commence'
-      '   AND TRUNC (fee.created) <= NVL (r.end_period, SYSDATE + 1000)'
-      '   AND fee.billtype = '#39'Billable'#39
-      '   AND fee.task = scalecost.code(+)'
-      ''
-      ''
-      '{SELECT 0 as type, '
+      'SELECT 0 as type, '
       '        trunc(FEE.CREATED) CREATED, '
       
         '        DECODE(FEE.PRIVATE,'#39'Y'#39','#39'(P) '#39','#39#39') || FEE.DESCR as DESCR,' +
@@ -2508,7 +2491,31 @@ object frmInvoice: TfrmInvoice
       
         'AND TRUNC (created) >= r.commence and TRUNC(created) <= nvl(r.en' +
         'd_period,sysdate + 1000)'
-      'AND BILLTYPE = '#39'Billable'#39'}')
+      'AND BILLTYPE = '#39'Billable'#39
+      ''
+      ''
+      ''
+      ''
+      '/*SELECT 0 AS TYPE, TRUNC (fee.created) created,'
+      
+        '       DECODE (fee.PRIVATE, '#39'Y'#39', '#39'(P) '#39', '#39#39') || fee.descr AS des' +
+        'cr,       '
+      '       FEE.AMOUNT, '
+      '       fee.author, fee.nfee AS uniqueid, fee.taxcode,       '
+      
+        '       DECODE(NVL(fee.tax,0), 0, DECODE(fee.billed,'#39'Y'#39',fee.tax, ' +
+        'ROUND(fee.amount * ABS(r.rate)) / 100), fee.tax) AS tax, '
+      
+        '       fee.PRIVATE, fee.fileid AS payee, NULL AS approval, units' +
+        ', task,'
+      '       nfee AS uniqueid, 0 AS unbilled'
+      '  FROM fee, taxrate r, scalecost'
+      'WHERE nmemo = :p_invoice'
+      '   AND fee.taxcode = r.taxcode(+)'
+      '   AND TRUNC (fee.created) >= r.commence'
+      '   AND TRUNC (fee.created) <= NVL (r.end_period, SYSDATE + 1000)'
+      '   AND fee.billtype = '#39'Billable'#39
+      '   AND fee.task = scalecost.code(+)*/')
     Options.StrictUpdate = False
     Left = 1017
     Top = 258
