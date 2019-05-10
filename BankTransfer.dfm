@@ -57,6 +57,7 @@ object frmTransferMoney: TfrmTransferMoney
     Left = 99
     Top = 221
     TabOrder = 2
+    OnKeyPress = tbDescKeyPress
     Width = 326
   end
   object GroupBox1: TGroupBox

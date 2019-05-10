@@ -7,7 +7,7 @@ object frmDisbSearch: TfrmDisbSearch
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -16,7 +16,7 @@ object frmDisbSearch: TfrmDisbSearch
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object pageSearch: TcxPageControl
     Left = 0
     Top = 0
@@ -28,23 +28,25 @@ object frmDisbSearch: TfrmDisbSearch
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = cxPageControl1Change
     ClientRectBottom = 611
     ClientRectLeft = 4
     ClientRectRight = 701
-    ClientRectTop = 28
+    ClientRectTop = 26
     object tabGrid: TcxTabSheet
       Caption = 'Display Grid'
       ImageIndex = 0
+      ExplicitTop = 28
+      ExplicitHeight = 583
       object grdDisbSearch: TcxGrid
         Left = 0
         Top = 0
         Width = 697
-        Height = 541
+        Height = 543
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
+        ExplicitHeight = 541
         object tvDisbSearch: TcxGridDBTableView
           OnDblClick = dbgrLedgersDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -129,19 +131,20 @@ object frmDisbSearch: TfrmDisbSearch
       end
       object Panel1: TPanel
         Left = 0
-        Top = 541
+        Top = 543
         Width = 697
         Height = 42
         Align = alBottom
         TabOrder = 1
+        ExplicitTop = 541
         DesignSize = (
           697
           42)
         object Label7: TLabel
           Left = 39
           Top = 13
-          Width = 39
-          Height = 17
+          Width = 35
+          Height = 15
           Anchors = [akLeft, akBottom]
           Caption = '&Search'
           FocusControl = tbLedgerSearch
@@ -150,7 +153,7 @@ object frmDisbSearch: TfrmDisbSearch
           Left = 89
           Top = 8
           Width = 137
-          Height = 25
+          Height = 23
           Anchors = [akLeft, akBottom]
           CharCase = ecUpperCase
           TabOrder = 0
@@ -202,13 +205,9 @@ object frmDisbSearch: TfrmDisbSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         697
-        583)
+        585)
       object fraIncludes: TcxGroupBox
         Left = 13
         Top = 8
@@ -221,15 +220,15 @@ object frmDisbSearch: TfrmDisbSearch
         object Label5: TLabel
           Left = 10
           Top = 24
-          Width = 66
-          Height = 17
+          Width = 60
+          Height = 15
           Caption = 'Description'
         end
         object tbDesc: TEdit
           Left = 79
           Top = 18
           Width = 225
-          Height = 25
+          Height = 23
           TabOrder = 0
         end
       end
@@ -246,35 +245,35 @@ object frmDisbSearch: TfrmDisbSearch
         object Label3: TLabel
           Left = 16
           Top = 21
-          Width = 54
-          Height = 17
+          Width = 49
+          Height = 15
           Caption = 'Less than'
         end
         object Label2: TLabel
           Left = 16
           Top = 47
-          Width = 73
-          Height = 17
+          Width = 65
+          Height = 15
           Caption = 'Greater than'
         end
         object tbBalanceLess: TEdit
           Left = 93
           Top = 21
           Width = 94
-          Height = 25
+          Height = 23
           TabOrder = 0
         end
         object tbBalanceGreater: TEdit
           Left = 93
           Top = 47
           Width = 94
-          Height = 25
+          Height = 23
           TabOrder = 1
         end
       end
       object btnClear: TBitBtn
         Left = 610
-        Top = 555
+        Top = 557
         Width = 80
         Height = 26
         Anchors = [akRight, akBottom]

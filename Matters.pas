@@ -2000,6 +2000,7 @@ type
       Nodes: TList; var IsCopy, Done: Boolean);
     procedure tvDocsMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure tvMatterNotesDblClick(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -2457,8 +2458,10 @@ begin
 //AES               pageMatter.ActivePageIndex := 1;
             end;
 
+            tabDocs.OnShow := nil;
             tabDocs.TabVisible := ((MatterDocAccess(qryMatter.FieldByName('NMATTER').AsString, dmAxiom.UserID)) and (dmAxiom.Security.Matter.Tabs.Documents) and
                                   (SystemString('docs_reg') = C_DOCUMENTPASSWORD));
+            tabDocs.OnShow := tabDocsShow;
 
             qryAllocs.Close;
             qryAllocs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
@@ -9830,7 +9833,7 @@ begin
         qryPrecedents.SQL.Add(' union ');
         qryPrecedents.SQL.Add(' SELECT   wdt.docid, wdt.documentname AS filename, ');
         qryPrecedents.SQL.Add(' workflowdocparties (wdt.docid), 2 AS prec, wdt.docid AS docid, nvl(NAME, ''None'') as name,');
-        qryPrecedents.SQL.Add(' wt.descr, wt.code, wdt.doctype, wdt.npreccategory,');
+        qryPrecedents.SQL.Add(' wdt.description, wt.code, wdt.doctype, wdt.npreccategory,');
         qryPrecedents.SQL.Add(' wdt.nprecclassification ');
         qryPrecedents.SQL.Add('FROM workflowdocgroups wdg RIGHT OUTER JOIN workflowdoctemplates wdt ');
         qryPrecedents.SQL.Add(' ON (wdg.groupid = wdt.groupid) ');
@@ -9892,8 +9895,7 @@ begin
         qryPrecedents.SQL.Add('AND P.NPRECCATEGORY = '+
                         IntToStr(ALink.Item.Tag));
         qryPrecedents.SQL.Add('union ');
-        qryPrecedents.SQL.Add('select  wdt.docid, wdt.documentname AS FILENAME, WorkflowDocParties(wdt.docid) , 2 as Prec, WDT.DOCID AS DOCID, NAME, WT.DESCR ');
-
+        qryPrecedents.SQL.Add('select  wdt.docid, wdt.documentname AS FILENAME, WorkflowDocParties(wdt.docid) , 2 as Prec, WDT.DOCID AS DOCID, NAME, WDT.DESCRiption ');
         qryPrecedents.SQL.Add('from WORKFLOWTYPE WT, WORKFLOWDOCTEMPLATES WDT, WORKFLOWDOCGROUPS WDG ');
         qryPrecedents.SQL.Add('where  WDG.groupid = WDT.groupid ');
         qryPrecedents.SQL.Add('and workflowtypecode = nvl(:workflowtypecode, workflowtypecode) ');
@@ -10733,7 +10735,7 @@ begin
         qryPrecedents.SQL.Add(' union ');
         qryPrecedents.SQL.Add(' SELECT   wdt.docid, wdt.documentname AS filename, ');
         qryPrecedents.SQL.Add(' workflowdocparties (wdt.docid), 2 AS prec, wdt.docid AS docid, NAME,');
-        qryPrecedents.SQL.Add(' wt.descr, wt.code, wdt.doctype, wdt.npreccategory,');
+        qryPrecedents.SQL.Add(' wdt.description, wt.code, wdt.doctype, wdt.npreccategory,');
         qryPrecedents.SQL.Add(' wdt.nprecclassification ');
         qryPrecedents.SQL.Add('FROM workflowdocgroups wdg RIGHT OUTER JOIN workflowdoctemplates wdt ');
         qryPrecedents.SQL.Add(' ON (wdg.groupid = wdt.groupid) ');
@@ -10778,7 +10780,7 @@ begin
         qryPrecedents.SQL.Add(' union ');
         qryPrecedents.SQL.Add(' SELECT   wdt.docid, wdt.documentname AS filename, ');
         qryPrecedents.SQL.Add(' workflowdocparties (wdt.docid), 2 AS prec, wdt.docid AS docid, NAME,');
-        qryPrecedents.SQL.Add(' wt.descr, wt.code, wdt.doctype, wdt.npreccategory,');
+        qryPrecedents.SQL.Add(' wdt.description, wt.code, wdt.doctype, wdt.npreccategory,');
         qryPrecedents.SQL.Add(' wdt.nprecclassification ');
         qryPrecedents.SQL.Add('FROM workflowdocgroups wdg RIGHT OUTER JOIN workflowdoctemplates wdt ');
         qryPrecedents.SQL.Add(' ON (wdg.groupid = wdt.groupid) ');
@@ -10859,8 +10861,8 @@ begin
    qryPrecedents.SQL.Add(' union ');
    qryPrecedents.SQL.Add(' SELECT   wdt.docid, wdt.documentname AS filename, ');
    qryPrecedents.SQL.Add(' workflowdocparties (wdt.docid), 2 AS prec, wdt.docid AS docid, NAME,');
-   qryPrecedents.SQL.Add(' wt.descr, wt.code, wdt.doctype, wdt.npreccategory,');
-   qryPrecedents.SQL.Add(' wdt.nprecclassification ');
+   qryPrecedents.SQL.Add(' wdt.description, wt.code, wdt.doctype, wdt.npreccategory,');
+   qryPrecedents.SQL.Add(' wdt.nprecclassificationwt ');
    qryPrecedents.SQL.Add('FROM workflowdocgroups wdg RIGHT OUTER JOIN workflowdoctemplates wdt ');
    qryPrecedents.SQL.Add(' ON (wdg.groupid = wdt.groupid) ');
    qryPrecedents.SQL.Add(' JOIN workflowtype wt ON (wdt.workflowtypecode = wt.code) ');
@@ -12171,6 +12173,12 @@ procedure TfrmMatters.tvMatterNotesCellClick(
 begin
    btnEditMatterNote.Enabled := True;
    btnDeleteMatterNote.Enabled := True;
+end;
+
+procedure TfrmMatters.tvMatterNotesDblClick(Sender: TObject);
+begin
+   if btnEditMatterNote.Enabled = True then
+      btnEditMatterNote.Click;
 end;
 
 procedure TfrmMatters.tvProjectsCellClick(Sender: TcxCustomGridTableView;

@@ -18134,187 +18134,187 @@ BEGIN
 	System_SysConst_SInOutError,	L"I/O error %d"
 END
 
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\controls.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLibrary\Sources\dxOffice11.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLibrary\Sources\dxSkinInfo.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLibrary\Sources\cxLookAndFeelPainters.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLibrary\Sources\cxControls.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxEdit.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxScrollCursors.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLibrary\Sources\dxShadowWindow.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\Buttons.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLayout Control\Sources\dxLayoutEditForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressLayout Control\Sources\dxLayoutCustomizeForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarNameEd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarPopupMenuEd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarItemEd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarAddGroupItemsEd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarCustomCustomizationForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarCustForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBar.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\extdlgs.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\dxCameraControlRes.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\dxCameraDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxImage.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\firtercontrolicons.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxFilterDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxFilterControlDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetCore.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingIconSet.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumTreeList\Sources\cxTL.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\dxColorDialogForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFormatXLSXReader.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetInplaceEdit.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFormatODSReader.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetContainerCustomizationDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetUnhideSheetDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxFontNameComboBox.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetEditHyperlinkDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPasteSpecialDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPasswordDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetProtectSheetDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPopupMenu.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetCellsModificationDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFindAndReplaceDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetProtectWorkbookDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressOfficeCore Library\Sources\dxCustomPreview.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPageSetupHeaderFooterDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPageSetupDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheet.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetCellStyleEditDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingDataBarRuleStyleEditDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingRuleEditDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingRulesManagerDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet Core\Sources\cxDataControllerConditionalFormattingRulesManagerDialog.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\Vcl.DBLogDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\Vcl.DBPWDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\dbctrls.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxScheduler.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceSelectionDialog.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\controls.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxOffice11.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxSkinInfo.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\cxLookAndFeelPainters.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\cxControls.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxEdit.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxScrollCursors.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxShadowWindow.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Buttons.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutEditForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutCustomizeForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarNameEd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarPopupMenuEd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarItemEd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarAddGroupItemsEd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarCustomCustomizationForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarCustForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBar.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\extdlgs.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\dxCameraControlRes.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\dxCameraDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxImage.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\firtercontrolicons.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxFilterDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxFilterControlDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetCore.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingIconSet.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumTreeList\Sources\cxTL.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\dxColorDialogForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFormatXLSXReader.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetInplaceEdit.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFormatODSReader.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetContainerCustomizationDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetUnhideSheetDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxFontNameComboBox.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetEditHyperlinkDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPasteSpecialDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPasswordDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetProtectSheetDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPopupMenu.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetCellsModificationDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetFindAndReplaceDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetProtectWorkbookDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressOfficeCore Library\Sources\dxCustomPreview.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPageSetupHeaderFooterDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetPageSetupDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheet.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetCellStyleEditDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingDataBarRuleStyleEditDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingRuleEditDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetConditionalFormattingRulesManagerDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\cxDataControllerConditionalFormattingRulesManagerDialog.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Vcl.DBLogDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Vcl.DBPWDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\dbctrls.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxScheduler.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceSelectionDialog.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Scheduler\cxSchedulerEventEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerEventModernInfoContainer.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerReminderWindow.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\filectrl.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressEditors Library\Sources\cxShellBrowser.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerHolidaysEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerHolidaysLocationHolidayEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerHolidaysLocationEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerTaskDependencyEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceHolidayEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerResourcesLayoutEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerGoToDateDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxRibbonSkins2007.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxRibbonSkins2010.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxRibbonSkins2013.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxRibbonFormCaptionHelper.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxStatusBar.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressScheduler\Sources\cxSchedulerRibbonStyleEventEditor.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSImgs.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPrVwOpt.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmClr.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmDfnStl.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmAutoHFTextFmt.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPgsDlg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmDTFmt.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmPNFmt.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSExtDlgs.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmZoom.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxFEFDlg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPrnDlg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxpsfmEditDesc.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmLnkAdd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSCPDsg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmTtl.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmFootnotes.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxfmChFn.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmReportProperties.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmCompositionAdd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSfmCompositionDsg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPDFExportDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPrVwStd.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarExtItems.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPrVwAdv.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSReportLinkDesignWindow.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSContainerLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxCommon.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxSchedulerLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxSchedulerLnk.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGrid.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGridViewLayoutCustomizationForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGridLayoutViewCustomizationForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGridTableViewInplaceEditFormCustomizationForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGridChartView.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpreadSheet\Sources\dxSpreadSheetReportDesigner.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSdxSpreadSheetLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxGridLnk.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\TeeFonts.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\TeeResou.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSLbxLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSTextLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxCheckListBoxLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSTVLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPSLVLnk.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressPrinting System\Sources\dxPScxMCListBoxLnk.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppASDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPrvBmp.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPrvDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppCDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppTmDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppNoDataDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbsRGB.RES */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbQRCode.RES */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppEmailLoginDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppEmailDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbPrint.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppTmEDlg.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressQuantumGrid\Sources\cxGridMenuOperations.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerEventModernInfoContainer.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerReminderWindow.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\filectrl.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxShellBrowser.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerHolidaysEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerHolidaysLocationHolidayEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerHolidaysLocationEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerTaskDependencyEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceHolidayEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerResourcesLayoutEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerGoToDateDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonSkins2007.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonSkins2010.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonSkins2013.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonFormCaptionHelper.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxStatusBar.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRibbonStyleEventEditor.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSImgs.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwOpt.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmClr.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDfnStl.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmAutoHFTextFmt.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPgsDlg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDTFmt.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmPNFmt.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSExtDlgs.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmZoom.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxFEFDlg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPrnDlg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxpsfmEditDesc.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmLnkAdd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSCPDsg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmTtl.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmFootnotes.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmChFn.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmReportProperties.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionAdd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionDsg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPDFExportDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwStd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarExtItems.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwAdv.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSReportLinkDesignWindow.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSContainerLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxCommon.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxSchedulerLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxSchedulerLnk.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGrid.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridViewLayoutCustomizationForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridLayoutViewCustomizationForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridTableViewInplaceEditFormCustomizationForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridChartView.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetReportDesigner.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSdxSpreadSheetLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxGridLnk.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\TeeFonts.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\TeeResou.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLbxLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSTextLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxCheckListBoxLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSTVLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLVLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxMCListBoxLnk.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppASDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPrvBmp.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPrvDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNoDataDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbsRGB.RES */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbQRCode.RES */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppEmailLoginDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppEmailDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbPrint.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmEDlg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridMenuOperations.res */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\DBAccess.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressDocking Library\Sources\dxDockStyleVS2005.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarDBNav.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbRAP.res */
-/* C:\jcl\jcl\lib\d25\win32\debug\JclUnicode.res */
-/* C:\jcl\jvcl\Resources\JvConsts.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressDocking Library\Sources\dxDockStyleVS2005.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarDBNav.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbRAP.res */
+/* C:\jcl\lib\d25\win32\JclUnicode.res */
+/* C:\jvcl\Resources\JvConsts.res */
 /* D:\Components-XE10\VirtualTreeView\Source\VirtualTrees.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\CategoryButtons.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressNavBar\Sources\dxNavBarCustomization.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressNavBar\Sources\dxNavBarOffice12Views.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressNavBar\Sources\dxNavBarVistaViews.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressNavBar\Sources\dxNavBar.res */
-/* C:\Program Files (x86)\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFields.dfm */
-/* C:\Program Files (x86)\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiProperties.dfm */
-/* C:\Program Files (x86)\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFolderDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxCustomDictionaryDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerOutlookDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerWordDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerSpellingOptionsDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerAutoCorrectOptionsDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerExceptionsFrame.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSpellChecker\Sources\dxSpellCheckerAutoCorrectExceptionDialog.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\CategoryButtons.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarCustomization.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarOffice12Views.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarVistaViews.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBar.res */
+/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFields.dfm */
+/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiProperties.dfm */
+/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFolderDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxCustomDictionaryDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerOutlookDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerWordDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerSpellingOptionsDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerAutoCorrectOptionsDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerExceptionsFrame.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerAutoCorrectExceptionDialog.dfm */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\Ora.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\TableCache.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppSynUEdit.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daJoinTableDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\dbgrids.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daPreviewDataDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppSynUEdit.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daJoinTableDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\dbgrids.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daPreviewDataDlg.dfm */
 /* C:\Program Files (x86)\Devart\UniDAC for RAD Studio 10.2\Lib\Win32\UniConnectForm.dfm */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\ConnectForm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\LEDES1998B.dfm */
-/* C:\jcl\jvcl\Resources\JvToolEdit.res */
+/* C:\jvcl\Resources\JvToolEdit.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\WriteMerge.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxBarExtDBItems.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\mplayer.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressBars\Sources\dxRibbonCustomizationForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarExtDBItems.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\mplayer.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonCustomizationForm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleMerge.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleRun.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleDocs.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleTasks.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowDataModule.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\PrecedentSearchList.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\MyChkBox.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\MyChkBox.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowAdminDocs.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\GenericSearch.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowAddDocTemplateDialog.dfm */
@@ -18332,8 +18332,8 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\MatterDataForm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowNewTaskDialog.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\PostcodeSearch.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\spin.res */
-/* C:\jcl\jvcl\Resources\JvSpin.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\spin.res */
+/* C:\jvcl\Resources\JvSpin.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\SQLDesigner.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\UserStatementEditor.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorSearch.dfm */
@@ -18381,47 +18381,47 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\DebtorNotes.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Conflicts\SelectConflictDocName.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Conflicts\ConflictSearch.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinBlack.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinBlue.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinBlueprint.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinCaramel.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinCoffee.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinDarkRoom.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinDarkSide.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinDevExpressDarkStyle.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinDevExpressStyle.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinFoggy.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinGlassOceans.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinHighContrast.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkiniMaginary.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinLilian.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinLiquidSky.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinLondonLiquidSky.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinMcSkin.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinMoneyTwins.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2007Black.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2007Blue.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2007Green.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2007Pink.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2007Silver.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2010Black.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2010Blue.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2010Silver.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinPumpkin.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSeven.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSevenClassic.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSharp.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSharpPlus.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSilver.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSpringTime.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinStardust.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinSummer2008.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinTheAsphaltWorld.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinsDefaultPainters.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinValentine.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinVS2010.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinWhiteprint.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinXmas2008Blue.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlack.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlue.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlueprint.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinCaramel.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinCoffee.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinDarkRoom.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinDarkSide.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinDevExpressDarkStyle.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinDevExpressStyle.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinFoggy.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinGlassOceans.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinHighContrast.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkiniMaginary.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinLilian.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinLiquidSky.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinLondonLiquidSky.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinMcSkin.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinMoneyTwins.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2007Black.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2007Blue.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2007Green.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2007Pink.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2007Silver.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2010Black.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2010Blue.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinOffice2010Silver.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinPumpkin.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSeven.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSevenClassic.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSharp.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSharpPlus.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSilver.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSpringTime.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinStardust.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinSummer2008.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinTheAsphaltWorld.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinsDefaultPainters.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinValentine.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinVS2010.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinWhiteprint.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinXmas2008Blue.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\MaintAncestor.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\MaintAncestorNoRep.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\printer.dfm */
@@ -18432,73 +18432,60 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\Bank.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Collections\DebtorTaskNew.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\InvPost.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinMetropolis.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinMetropolisDark.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2013DarkGray.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2013LightGray.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2013White.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2016Colorful.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinOffice2016Dark.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinTheBezier.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinVisualStudio2013Blue.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinVisualStudio2013Dark.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressSkins Library\Sources\dxSkinVisualStudio2013Light.res */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqPrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorAccountsSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DisbSearch.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqNew.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\SubBill.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\bill_narration.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeListDataModule.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeEditQuick.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\Release\tabs.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppRWzDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppRichEd.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPgSDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppTxtDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppGrpDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppFmtDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppGrdDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppAbout.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppMemDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppClcDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppRstDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppShfDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppDemo.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPosDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppDatDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppBPsDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppBarDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppDrlDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppVarDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppNewDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppLWzDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppCOrDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppPgNDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppCheckTreeView.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppOutlineSettingsDialog.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppTextSearchSettingsDialog.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppIDEBmp.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbIDE.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppDsgner.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppParametersEd.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppGMapMarkerDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daDataViewToolWin.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daVisualLinkHint.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daMetaDataDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daDataSettingDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daQueryDesigner.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daQueryWizardCriteriaDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daQueryWizardCalcDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daQueryWizard.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daLinkDataViewDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\rbDADE.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\daIDEBmp.res */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppCTDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppCWzDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\raClcDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppExpDlg.dfm */
-/* C:\Program Files (x86)\Embarcadero\Studio\19.0\RBuilder\Lib\Win32\ppExpFrm.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\tabs.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRWzDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRichEd.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgSDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTxtDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrpDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppFmtDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrdDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppAbout.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppMemDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppClcDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRstDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppShfDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDemo.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPosDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDatDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBPsDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBarDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDrlDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppVarDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNewDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppLWzDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCOrDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgNDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCheckTreeView.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppOutlineSettingsDialog.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTextSearchSettingsDialog.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppIDEBmp.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbIDE.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDsgner.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppParametersEd.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGMapMarkerDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataViewToolWin.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daVisualLinkHint.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daMetaDataDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataSettingDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryDesigner.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCriteriaDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCalcDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizard.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daLinkDataViewDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbDADE.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daIDEBmp.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCTDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCWzDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\raClcDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpFrm.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Password.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillTemplates.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillTemplatePrint.dfm */
@@ -18532,6 +18519,7 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\About.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillCreditTypes.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\ChequePrint.dfm */
+/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorAccountsSearch.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\ChequeUpCredAlloc.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqReverse.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\CheqReqInvoiceDebit.dfm */
@@ -18623,10 +18611,10 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\SoftlogImport.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\SundryList.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\SundryType.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressFlowChart\Sources\dxFlowChartTemplates.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressFlowChart\Sources\dxFlowChartImages.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressFlowChart\Sources\dxFlowChartCursors.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressOrgChart\Sources\dxorgcedadv.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartTemplates.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartImages.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartCursors.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressOrgChart\Sources\dxorgcedadv.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Projects\project_chart.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Projects\ProjectNew.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\Projects\Projects.dfm */
@@ -18729,47 +18717,47 @@ END
 /* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\CountryList.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\BankTransfer.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\documentcenter.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.OfficeImage.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.Cursors.res */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.DocumentModel.Images.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Control.Images.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomDialog.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SearchText.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Control.Ruler.RES */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomNumberingListForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomNumberingList.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.BulletedList.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SimpleNumberingList.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.MultiLevelNumberingList.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Numbering.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Paragraph.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Symbol.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Fonts.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.BorderShading.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomTableOptions.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableCellOptions.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableProperties.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableOptions.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Tabs.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertTable.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SplitTableCells.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Hyperlink.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomInsertDeleteTableCells.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.DeleteTableCells.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertTableCells.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.ColumnsSetup.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.EditStyle.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.FloatingObjectLayoutForm.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.LineNumbering.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.PageSetup.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InputBox.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.RangeEditingPermissions.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.QueryPassword.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertMergeField.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Bookmark.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.MergeOptions.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableOfContents.dfm */
-/* C:\Program Files (x86)\DevExpress VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableStyle.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.OfficeImage.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.Cursors.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.DocumentModel.Images.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Control.Images.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomDialog.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SearchText.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Control.Ruler.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomNumberingListForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomNumberingList.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.BulletedList.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SimpleNumberingList.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.MultiLevelNumberingList.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Numbering.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Paragraph.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Symbol.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Fonts.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.BorderShading.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomTableOptions.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableCellOptions.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableProperties.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableOptions.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Tabs.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertTable.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.SplitTableCells.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Hyperlink.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomInsertDeleteTableCells.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.DeleteTableCells.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertTableCells.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.ColumnsSetup.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.EditStyle.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.FloatingObjectLayoutForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.LineNumbering.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.PageSetup.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InputBox.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.RangeEditingPermissions.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.QueryPassword.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.InsertMergeField.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.Bookmark.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.MergeOptions.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableOfContents.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableStyle.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplateAddEdit.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplateRichEdit.dfm */
 /* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplates.dfm */
