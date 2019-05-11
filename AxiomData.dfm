@@ -19,6 +19,7 @@ object dmAxiom: TdmAxiom
     Debug = True
     Username = 'axiom'
     Server = '192.168.0.22:1521:marketing'
+    Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -6735,7 +6736,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7943,7 +7944,6 @@ object dmAxiom: TdmAxiom
       'where entity = nvl(:entity, entity)'
       'and trust = nvl(:trust, trust)'
       'and active = '#39'Y'#39
-      'and trust = nvl(:trust,trust)'
       'Order By ACCT')
     Left = 925
     Top = 412
@@ -8049,7 +8049,7 @@ object dmAxiom: TdmAxiom
       end>
   end
   object dsDefaultBankList: TUniDataSource
-    DataSet = qryDefaultBankList
+    DataSet = qryBankList
     Left = 1033
     Top = 69
   end
