@@ -27,7 +27,7 @@ object frmBills: TfrmBills
     Height = 644
     Align = alClient
     TabOrder = 4
-    Properties.ActivePage = tabBills
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagBillsChange
@@ -575,6 +575,10 @@ object frmBills: TfrmBills
     object tabTotals: TcxTabSheet
       Caption = 'Totals'
       ImageIndex = 19
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object nlFees: TNumberLabel
         Left = 228
         Top = 17
@@ -3744,7 +3748,7 @@ object frmBills: TfrmBills
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 4350

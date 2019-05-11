@@ -7,7 +7,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -17,40 +17,40 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     559
     442)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
     Left = 9
     Top = 9
     Width = 24
-    Height = 13
+    Height = 15
     Caption = 'Date'
   end
   object Label2: TLabel
     Left = 9
     Top = 33
-    Width = 55
-    Height = 13
+    Width = 56
+    Height = 15
     Caption = 'Entered By'
   end
   object Label3: TLabel
     Left = 9
     Top = 78
-    Width = 25
-    Height = 13
+    Width = 26
+    Height = 15
     Caption = 'Note'
   end
   object Label4: TLabel
     Left = 9
     Top = 57
-    Width = 22
-    Height = 13
+    Width = 25
+    Height = 15
     Caption = 'Type'
   end
   object cxButton1: TcxButton
     Left = 399
     Top = 411
     Width = 70
-    Height = 23
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'OK'
     Default = True
@@ -93,14 +93,12 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     TabOrder = 3
-    ExplicitLeft = 177
-    ExplicitTop = 218
   end
   object cxButton2: TcxButton
     Left = 481
     Top = 411
     Width = 70
-    Height = 23
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     LookAndFeel.NativeStyle = True
@@ -142,11 +140,9 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       FF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     TabOrder = 4
-    ExplicitLeft = 259
-    ExplicitTop = 218
   end
   object lBy: TcxDBLabel
-    Left = 67
+    Left = 75
     Top = 31
     AutoSize = True
     DataBinding.DataField = 'CREATEDBY'
@@ -155,7 +151,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     Style.StyleController = dmAxiom.LabelStyle
   end
   object mlNote: TcxDBRichEdit
-    Left = 67
+    Left = 75
     Top = 79
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataBinding.DataField = 'NOTE'
@@ -167,13 +163,11 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 2
-    ExplicitWidth = 261
-    ExplicitHeight = 132
     Height = 325
-    Width = 483
+    Width = 476
   end
   object cmbNoteType: TcxDBLookupComboBox
-    Left = 67
+    Left = 75
     Top = 53
     DataBinding.DataField = 'NMATTERNOTEID'
     DataBinding.DataSource = dsMatterNotes
@@ -194,7 +188,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     Width = 135
   end
   object cmbDate: TcxDBDateEdit
-    Left = 67
+    Left = 75
     Top = 5
     DataBinding.DataField = 'CREATED'
     DataBinding.DataSource = dsMatterNotes
@@ -205,6 +199,41 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 0
     Width = 135
+  end
+  object btnNotePrint: TcxButton
+    Left = 290
+    Top = 411
+    Width = 97
+    Height = 25
+    Anchors = [akRight, akBottom]
+    Caption = 'Print Note'
+    LookAndFeel.NativeStyle = True
+    OptionsImage.Glyph.SourceDPI = 96
+    OptionsImage.Glyph.Data = {
+      89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+      610000000C744558745469746C65005072696E743BC83632EA00000267494441
+      54785E7D93CB6B135114C6BF99C434A60F05698B1B5716752582E84AAD2822B6
+      88B8101F50B45441210BEBC285150591A250A326462AA218F20FB810178A482C
+      AD165AD0958216051F68D1966426F3B82FCFDCCC0C71512F7C73EE3DDCEF77EE
+      DC87A19442D40C6AB74A332F4CD3EC05745E7FA33982F1CAF0E0D65D34E69127
+      897F9B49EA3D7374A376AA901041F2E5D9ED0012A4A5019C0B28092C5A5E58D9
+      808244476B0B38135111C4005AB55E7D587D191712928C147579052308908272
+      5C03D2E4610064A0C0648E8E5776DF2EBF7D33385CB0BF7C7E0F2915494288C0
+      28C0833E69EEE33B1C3E35FA67ECE1CCF4C5DCD33D0012C9E0B33CD3513EB477
+      6DD744E54930D4D5852008240CD55807A3B1EB3AB0EC1A8EF4ADDF547A2C4B00
+      D66880E0AAAB7B550675CB42329186904A5754A119000125015C38561DAB3B33
+      604C75462B303D5F5042229D4AE0E78FEF3878EC4274046150210C686F4BE8B9
+      9EC7D00460700832347000378B252C2C542145E0931AA1A4D23BBC72453B4E0F
+      1D87C3380138026F03E032D409D2B3A107C5FC95C6A1C8F0084D8A8D0C744602
+      B6CB41459B003E47CDE1A8D7194E666FE07FED5EFE2C7C9102F385E60600C3F7
+      04AA1643D576B0BFBF0FD981CD284CCDEBCD6402641038BFA31BC5F22C7E2FDA
+      A03F81CF1A0013009BFFF5753277E719EE8E3F070FCFDD63244E002E29070DE3
+      D4B976BD8C91CB0FF0E9C3E46B10C708EF762BA985D43632F6722E7B628BDE79
+      4087F846161E4DE3EAB99DEB0054490EC94E2AA54490085FA3655BD6ABDCFDA9
+      6DF1B6A9F8ADC2756B1300BE91C75EEA31F9B94BFDFB00A44866EC44FCB23D92
+      DB6CF80BF54A6944F3A08E160000000049454E44AE426082}
+    TabOrder = 6
+    OnClick = btnNotePrintClick
   end
   object qryMatterNotes: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -251,5 +280,366 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       'select * from MATTER_NOTES_TYPE')
     Left = 11
     Top = 208
+  end
+  object ppMatterNoteRpt: TppReport
+    NoDataBehaviors = [ndBlankReport]
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 60350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    Units = utMillimeters
+    AllowPrintToFile = True
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    BeforePrint = ppMatterNoteRptBeforePrint
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.Enabled = True
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = False
+    OutlineSettings.CreatePageNodes = False
+    OutlineSettings.Enabled = False
+    OutlineSettings.Visible = False
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zs100Percent
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Segoe UI'
+    RTFSettings.DefaultFont.Style = []
+    ShowCancelDialog = False
+    ShowPrintDialog = False
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 45
+    Top = 309
+    Version = '19.02'
+    mmColumnWidth = 0
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 16404
+      mmPrintPosition = 0
+      object pplblTransTitle: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblTransTitle'
+        Border.mmPadding = 0
+        Caption = 'lblTransTitle'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4022
+        mmLeft = 89451
+        mmTop = 2910
+        mmWidth = 18923
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label2'
+        Border.mmPadding = 0
+        Caption = 'Matter Filenote'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4498
+        mmLeft = 86519
+        mmTop = 8202
+        mmWidth = 25135
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line2'
+        Border.mmPadding = 0
+        Pen.Width = 2
+        ParentWidth = True
+        Weight = 1.500000000000000000
+        mmHeight = 794
+        mmLeft = 0
+        mmTop = 15619
+        mmWidth = 197300
+        BandType = 0
+        LayerName = Foreground
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      PrintHeight = phDynamic
+      mmBottomOffset = 0
+      mmHeight = 30163
+      mmPrintPosition = 0
+      object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label1'
+        Border.mmPadding = 0
+        Caption = 'Matter #'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3968
+        mmLeft = 18521
+        mmTop = 3440
+        mmWidth = 12435
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label3'
+        Border.mmPadding = 0
+        Caption = 'Matter'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 21167
+        mmTop = 9525
+        mmWidth = 9789
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        Border.mmPadding = 0
+        Caption = 'Client'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 22490
+        mmTop = 15610
+        mmWidth = 8466
+        BandType = 4
+        LayerName = Foreground
+      end
+      object pplblMatter: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblMatter'
+        Border.mmPadding = 0
+        Caption = 'lblMatter'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3968
+        mmLeft = 34660
+        mmTop = 3440
+        mmWidth = 12171
+        BandType = 4
+        LayerName = Foreground
+      end
+      object pplblMatterDesc: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblMatterDesc'
+        Border.mmPadding = 0
+        Caption = 'lblMatterDesc'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 34660
+        mmTop = 9525
+        mmWidth = 19844
+        BandType = 4
+        LayerName = Foreground
+      end
+      object pplblClient: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblClient'
+        Border.mmPadding = 0
+        Caption = 'lblClient'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 34660
+        mmTop = 15610
+        mmWidth = 11907
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label8'
+        Border.mmPadding = 0
+        Caption = 'Note'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 24077
+        mmTop = 21696
+        mmWidth = 6879
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppMemoNotes: TppRichText
+        DesignLayer = ppDesignLayer1
+        UserName = 'MemoNotes'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        Border.mmPadding = 0
+        ExportRTFAsBitmap = False
+        RemoveEmptyLines = False
+        Stretch = True
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 34660
+        mmTop = 21696
+        mmWidth = 142611
+        BandType = 4
+        LayerName = Foreground
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+      end
+    end
+    object ppSummaryBand1: TppSummaryBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 7673
+      mmPrintPosition = 0
+      object pplblFooter: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lblFooter'
+        Border.mmPadding = 0
+        Caption = 'lblFooter'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 89959
+        mmTop = 1852
+        mmWidth = 12700
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Border.mmPadding = 0
+        Pen.Width = 2
+        ParentWidth = True
+        Weight = 1.500000000000000000
+        mmHeight = 524
+        mmLeft = 0
+        mmTop = 528
+        mmWidth = 197300
+        BandType = 7
+        LayerName = Foreground
+      end
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
   end
 end

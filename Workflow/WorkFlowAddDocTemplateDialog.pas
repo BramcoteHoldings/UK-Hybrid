@@ -259,7 +259,7 @@ begin
    if(beDataform.Enabled) then
       dmWorkFlowDataModuleDocs.tbDocTemplatesEdit.FieldByName('DATAFORM').AsString := beDataform.Text;
    if memoTemplateDescr.enabled then
-      memoTemplateDescr.Text := dmWorkFlowDataModuleDocs.tbDocTemplatesEdit.FieldByName('DESCRIPTION').AsString;
+      dmWorkFlowDataModuleDocs.tbDocTemplatesEdit.FieldByName('DESCRIPTION').AsString := memoTemplateDescr.Text;
 
 
 
@@ -296,6 +296,7 @@ begin
       dmWorkFlowDataModuleDocs.tbDocTemplatesEdit.FieldByName('TEMPLATETYPE').AsString := cmbTemplateType.EditValue
    else
       dmWorkFlowDataModuleDocs.tbDocTemplatesEdit.FieldByName('TEMPLATETYPE').Clear;
+
 
 
    {     else

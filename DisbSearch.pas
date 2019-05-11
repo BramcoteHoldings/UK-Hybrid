@@ -11,7 +11,7 @@ uses
   cxGrid, cxCurrencyEdit,cxContainer, cxGroupBox, cxPC, cxLookAndFeels,
   cxLookAndFeelPainters, cxPCdxBarPopupMenu, cxNavigator, Vcl.ExtCtrls,
   dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  cxCalendar;
+  cxCalendar, dxDateRanges;
 
 type
   TfrmDisbSearch = class(TForm)

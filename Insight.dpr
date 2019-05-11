@@ -376,7 +376,6 @@ uses
   Projects in 'Projects\Projects.pas' {frmProjects},
   cxOutlook2WaySynchronize in 'Maintenance\cxOutlook2WaySynchronize.pas',
   ProjectMatter in 'Projects\ProjectMatter.pas' {frmProjectMatter},
-  DisbSearch in 'DisbSearch.pas' {frmDisbSearch},
   NewTask in 'Tasks\NewTask.pas' {frmNewTask},
   project_chart in 'Projects\project_chart.pas' {frmProjectChart},
   NewTaskNew in 'Tasks\NewTaskNew.pas' {frmNewTaskNew},

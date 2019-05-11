@@ -57,6 +57,7 @@ type
     procedure cmbBankToPropertiesCloseUp(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
+    procedure tbDescKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     DefaultTax     : String;
@@ -369,6 +370,12 @@ begin
    qryToBank.ParamByName('entity').AsString := dmAxiom.Entity;
    qryToBank.Open;
    dtpDate.Date := Now;
+end;
+
+procedure TfrmTransferMoney.tbDescKeyPress(Sender: TObject; var Key: Char);
+begin
+   if (Key = ' ') then
+    Quickcode(tbDesc);
 end;
 
 procedure TfrmTransferMoney.teLedgerREFNOPropertiesValidate(Sender: TObject;
