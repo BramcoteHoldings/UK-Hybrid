@@ -21,7 +21,7 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridCustomView, cxGrid, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, Vcl.StdCtrls, Vcl.Buttons, Vcl.CheckLst,
-  dxStatusBar, cxGridExportLink, dxCore;
+  dxStatusBar, cxGridExportLink, dxCore, dxPSDBTCLnk;
 
 
 const
@@ -1203,39 +1203,39 @@ var
   LSql: TStringList;
   ssql: string;
 begin
-  if(not Assigned(dmWorkFlowDataModuleMerge)) then
-    dmWorkFlowDataModuleMerge := TdmWorkFlowDataModuleMerge.Create(Application);
-  LSql := TStringList.Create();
-  try
-    LSql.Assign(dmWorkFlowDataModuleMerge.qPartyDetails.SQL);
+   if(not Assigned(dmWorkFlowDataModuleMerge)) then
+      dmWorkFlowDataModuleMerge := TdmWorkFlowDataModuleMerge.Create(Application);
+   LSql := TStringList.Create();
+   try
+      LSql.Assign(dmWorkFlowDataModuleMerge.qPartyDetails.SQL);
 
-    // get rid of blank lines..
-    while(LSql[LSql.Count - 1] = '') do
+      // get rid of blank lines..
+      while(LSql[LSql.Count - 1] = '') do
+         LSql.Delete(LSql.Count - 1);
+      // delete the where clause.
+
       LSql.Delete(LSql.Count - 1);
-    // delete the where clause.
+      LSql.Delete(LSql.Count - 1);
 
-    LSql.Delete(LSql.Count - 1);
-    LSql.Delete(LSql.Count - 1);
+      // delete party type
+      LSql.Delete(1);
 
-    // delete party type
-    LSql.Delete(1);
+      ssql := MakeSQL(''); //MakeSQL('p.');
+      if ssql <> '' then
+         LSql.Add(' AND ' + ssql);
 
-    ssql := MakeSQL(''); //MakeSQL('p.');
-    if ssql <> '' then
-      LSql.Add(' AND ' + ssql);
+      if dmAxiom.runningide then
+         LSQL.SaveToFile('c:\tmp\nsearch.sql');
 
-    if dmAxiom.runningide then
-      LSQL.SaveToFile('c:\tmp\nsearch.sql');
+      LfrmWriteMerge := TfrmWriteMerge.Create(Self);
+      LfrmWriteMerge.FromPhoneBook := True;
+      LfrmWriteMerge.SQL := LSQL.Text;
 
-    LfrmWriteMerge := TfrmWriteMerge.Create(Self);
-    LfrmWriteMerge.FromPhoneBook := True;
-    LfrmWriteMerge.SQL := LSQL.Text;
-
-    LfrmWriteMerge.AddSortField('SEARCH');
-  finally
-    LSql.Free();
-  end;
-  LfrmWriteMerge.Show;
+      LfrmWriteMerge.AddSortField('SEARCH');
+   finally
+      LSql.Free();
+   end;
+   LfrmWriteMerge.Show;
 end;
 
 procedure TfrmPhoneBookSearch.aHelpExecute(Sender: TObject);

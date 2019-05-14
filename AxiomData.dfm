@@ -8124,4 +8124,17 @@ object dmAxiom: TdmAxiom
     Left = 1022
     Top = 706
   end
+  object qryTaxList: TUniQuery
+    Connection = uniInsight
+    SQL.Strings = (
+      'SELECT CODE, DESCR FROM TAXTYPE'
+      'Order By Code')
+    Left = 813
+    Top = 284
+  end
+  object dsTaxList: TUniDataSource
+    DataSet = qryTaxList
+    Left = 865
+    Top = 293
+  end
 end
