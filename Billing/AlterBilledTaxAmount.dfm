@@ -3,7 +3,7 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
   Top = 0
   Caption = 'Adjust Billed Tax'
   ClientHeight = 139
-  ClientWidth = 321
+  ClientWidth = 383
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,22 +15,26 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    321
+    383
     139)
   PixelsPerInch = 96
   TextHeight = 13
   object lblBilledTaxOld: TcxLabel
     Left = 35
     Top = 32
-    Caption = 'Old billed tax:'
+    Caption = 'Old tax code:'
+    ParentColor = False
+    Style.Color = clBtnFace
+    Transparent = True
   end
   object lblBilledTax: TcxLabel
     Left = 29
     Top = 60
-    Caption = 'New billed tax:'
+    Caption = 'New tax code:'
+    Transparent = True
   end
   object btnOK: TcxButton
-    Left = 130
+    Left = 192
     Top = 96
     Width = 79
     Height = 27
@@ -75,10 +79,10 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     TabOrder = 2
-    ExplicitTop = 101
+    ExplicitLeft = 134
   end
   object btnCancel: TcxButton
-    Left = 223
+    Left = 285
     Top = 96
     Width = 81
     Height = 27
@@ -124,42 +128,79 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     TabOrder = 3
     OnClick = btnCancelClick
-    ExplicitTop = 101
+    ExplicitLeft = 227
   end
   object edBilledTax: TcxCurrencyEdit
-    Left = 112
+    Left = 423
     Top = 59
     TabOrder = 4
     Width = 121
   end
   object edOldBilledTax: TcxCurrencyEdit
-    Left = 112
+    Left = 423
     Top = 31
     Enabled = False
     TabOrder = 5
     Width = 121
   end
+  object cbOldTaxCode: TcxLookupComboBox
+    Left = 110
+    Top = 32
+    Properties.KeyFieldNames = 'CODE'
+    Properties.ListColumns = <
+      item
+        FieldName = 'CODE'
+      end
+      item
+        FieldName = 'DESCR'
+      end>
+    TabOrder = 6
+    Width = 256
+  end
+  object cbNewTaxCode: TcxLookupComboBox
+    Left = 110
+    Top = 59
+    Properties.KeyFieldNames = 'CODE'
+    Properties.ListColumns = <
+      item
+        FieldName = 'CODE'
+      end
+      item
+        FieldName = 'DESCR'
+      end>
+    TabOrder = 7
+    Width = 256
+  end
+  object chkApplyToAll: TcxCheckBox
+    Left = 16
+    Top = 99
+    Caption = 'Apply to all disbursements'
+    TabOrder = 8
+  end
   object qryBilledTax: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT BILLED_TAX_AMOUNT FROM ALLOC WHERE NALLOC = :UNIQUEID')
+      
+        'SELECT BILLED_TAX_AMOUNT, TAXCODE FROM ALLOC WHERE NALLOC = :UNI' +
+        'QUEID')
     Active = True
-    Left = 24
-    Top = 96
+    Left = 272
+    Top = 16
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'UNIQUEID'
-        Value = nil
+        Value = Null
       end>
   end
   object qryBilledTaxOld: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT BILLED_TAX_AMOUNT FROM ALLOC WHERE NALLOC = :UNIQUEID')
-    Active = True
-    Left = 88
-    Top = 96
+      
+        'SELECT BILLED_TAX_AMOUNT, TAX_CODE FROM ALLOC WHERE NALLOC = :UN' +
+        'IQUEID')
+    Left = 272
+    Top = 56
     ParamData = <
       item
         DataType = ftUnknown

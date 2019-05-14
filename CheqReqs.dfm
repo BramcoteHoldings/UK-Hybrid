@@ -81,7 +81,7 @@ object frmCheqReqs: TfrmCheqReqs
     Height = 618
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabCashbook
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
@@ -92,10 +92,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 28
-      ExplicitWidth = 0
-      ExplicitHeight = 586
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -365,7 +361,6 @@ object frmCheqReqs: TfrmCheqReqs
         Align = alClient
         Caption = 'Panel2'
         TabOrder = 1
-        ExplicitHeight = 330
         object cxGrid1: TcxGrid
           Left = 1
           Top = 1
@@ -375,7 +370,6 @@ object frmCheqReqs: TfrmCheqReqs
           TabOrder = 0
           LookAndFeel.Kind = lfOffice11
           LookAndFeel.NativeStyle = True
-          ExplicitHeight = 328
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsData
@@ -432,10 +426,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
-      ExplicitLeft = 0
-      ExplicitTop = 28
-      ExplicitWidth = 0
-      ExplicitHeight = 586
       DesignSize = (
         1046
         588)
@@ -607,7 +597,6 @@ object frmCheqReqs: TfrmCheqReqs
         OptionsImage.NumGlyphs = 2
         TabOrder = 0
         OnClick = btnClearAllClick
-        ExplicitTop = 555
       end
       object btnTrust: TButton
         Left = 310

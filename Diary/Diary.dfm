@@ -38,6 +38,10 @@ object frmDiary99: TfrmDiary99
     object tabDay: TcxTabSheet
       Caption = 'Diary'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DiaryScheduler: TcxScheduler
         Left = 0
         Top = 0
@@ -89,7 +93,10 @@ object frmDiary99: TfrmDiary99
         Storage = SecureSchedulerDBStorage
         TabOrder = 0
         OnDblClick = DiarySchedulerDblClick
+        OnDragOver = DiarySchedulerDragOver
+        OnEndDrag = DiarySchedulerEndDrag
         OnEventSelectionChanged = DiarySchedulerEventSelectionChanged
+        OnKeyDown = DiarySchedulerKeyDown
         Splitters = {
           610400008E000000F0040000920000005D0400000100000061040000C2020000}
         StoredClientBounds = {0100000001000000F0040000C2020000}
@@ -155,6 +162,10 @@ object frmDiary99: TfrmDiary99
     object tabCalendar: TcxTabSheet
       Caption = 'Calendar'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1265
         707)
@@ -183,13 +194,16 @@ object frmDiary99: TfrmDiary99
     object tabGrid: TcxTabSheet
       Caption = 'List'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdDiary: TcxGrid
         Left = 0
         Top = 58
         Width = 1265
         Height = 649
         Align = alClient
-        PopupMenu = popDayView
         TabOrder = 0
         LookAndFeel.NativeStyle = True
         object tvDiary: TcxGridDBTableView
@@ -294,6 +308,7 @@ object frmDiary99: TfrmDiary99
           object tvDiaryTYPE: TcxGridDBColumn
             Caption = 'Type'
             DataBinding.FieldName = 'TYPE'
+            Visible = False
             MinWidth = 18
             Width = 37
           end
@@ -329,6 +344,7 @@ object frmDiary99: TfrmDiary99
           end
           object tvDiaryNDIARY: TcxGridDBColumn
             DataBinding.FieldName = 'NDIARY'
+            Visible = False
             VisibleForEditForm = bFalse
           end
         end
@@ -632,6 +648,7 @@ object frmDiary99: TfrmDiary99
                 FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
               Kind = bkGlyph
             end>
+          Properties.OnButtonClick = tbMatterPropertiesButtonClick
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -662,7 +679,12 @@ object frmDiary99: TfrmDiary99
         object cbLocation: TcxLookupComboBox
           Left = 98
           Top = 80
-          Properties.ListColumns = <>
+          Properties.KeyFieldNames = 'LOCATION'
+          Properties.ListColumns = <
+            item
+              FieldName = 'LOCATION'
+            end>
+          Properties.ListSource = dsDiaryLoc
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -673,7 +695,12 @@ object frmDiary99: TfrmDiary99
         object cbJurisdiction: TcxLookupComboBox
           Left = 98
           Top = 108
-          Properties.ListColumns = <>
+          Properties.KeyFieldNames = 'JURISDICTION'
+          Properties.ListColumns = <
+            item
+              FieldName = 'JURISDICTION'
+            end>
+          Properties.ListSource = dsDiaryJur
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -684,7 +711,12 @@ object frmDiary99: TfrmDiary99
         object cbEvent: TcxLookupComboBox
           Left = 98
           Top = 136
-          Properties.ListColumns = <>
+          Properties.KeyFieldNames = 'EVENT'
+          Properties.ListColumns = <
+            item
+              FieldName = 'EVENT'
+            end>
+          Properties.ListSource = dsDiaryEvent
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -817,7 +849,12 @@ object frmDiary99: TfrmDiary99
         object cbDept: TcxLookupComboBox
           Left = 98
           Top = 191
-          Properties.ListColumns = <>
+          Properties.KeyFieldNames = 'CODE'
+          Properties.ListColumns = <
+            item
+              FieldName = 'DESCR'
+            end>
+          Properties.ListSource = dsEmpDept
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
@@ -856,8 +893,8 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT PM.*, PM.ROWID FROM PHONEMESSAGE PM'
       'WHERE PM.EMPCODEFOR = :EMPCODE')
-    Left = 521
-    Top = 313
+    Left = 729
+    Top = 185
     ParamData = <
       item
         DataType = ftUnknown
@@ -886,8 +923,8 @@ object frmDiary99: TfrmDiary99
   end
   object dsPhoneMessage: TUniDataSource
     DataSet = qryPhoneMessage
-    Left = 592
-    Top = 316
+    Left = 816
+    Top = 188
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1371,6 +1408,7 @@ object frmDiary99: TfrmDiary99
       Category = 5
       Hint = 'View all entries '
       Visible = ivAlways
+      OnChange = chkViewAllEntriesChange
       ShowCaption = True
       Width = 0
       PropertiesClassName = 'TcxCheckBoxProperties'
@@ -2301,8 +2339,8 @@ object frmDiary99: TfrmDiary99
       item
       end>
     Images = imgGlyph
-    Left = 898
-    Top = 532
+    Left = 490
+    Top = 588
     StyleName = 'XP Style'
     object Action7: TAction
       Category = 'Phone Message'
@@ -2360,8 +2398,8 @@ object frmDiary99: TfrmDiary99
   object dsDiary: TUniDataSource
     AutoEdit = False
     DataSet = qryDiary
-    Left = 352
-    Top = 310
+    Left = 616
+    Top = 342
   end
   object qryEvents: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2376,8 +2414,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.START_DT < :P_DateTo'
       '  AND D.FILEID = M.FILEID(+)'
       'ORDER BY 1, 2, 3')
-    Left = 584
-    Top = 386
+    Left = 528
+    Top = 290
     ParamData = <
       item
         DataType = ftUnknown
@@ -2511,8 +2549,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.NFEE IS NULL'
       'ORDER BY 1, 2'
       ' ')
-    Left = 255
-    Top = 346
+    Left = 535
+    Top = 378
     ParamData = <
       item
         DataType = ftUnknown
@@ -2557,8 +2595,8 @@ object frmDiary99: TfrmDiary99
         '     :DEPT, :EMP_TYPE, :DESCR, :FILEID, :NMATTER, :NCLIENT, 0, :' +
         'NFEE)'
       '')
-    Left = 483
-    Top = 584
+    Left = 611
+    Top = 536
     ParamData = <
       item
         DataType = ftUnknown
@@ -2833,8 +2871,8 @@ object frmDiary99: TfrmDiary99
     SpecificOptions.Strings = (
       'Oracle.FetchAll=True')
     OnNewRecord = qryDiaryNewRecord
-    Left = 353
-    Top = 247
+    Left = 529
+    Top = 335
     ParamData = <
       item
         DataType = ftUnknown
@@ -2847,19 +2885,19 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT * FROM EMPLOYEE'
       'WHERE ACTIVE = '#39'Y'#39)
-    Left = 123
-    Top = 201
+    Left = 539
+    Top = 473
   end
   object dsEmployee: TUniDataSource
     DataSet = qryEmployee
-    Left = 199
-    Top = 197
+    Left = 615
+    Top = 469
   end
   object popDayView: TPopupMenu
     Images = imgGlyph
     OnPopup = popDayViewPopup
-    Left = 259
-    Top = 213
+    Left = 331
+    Top = 189
     object N5Minutes1: TMenuItem
       Action = actNewDiaryEntry
       Caption = 'New Diary Entry'
@@ -2897,8 +2935,8 @@ object frmDiary99: TfrmDiary99
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT * FROM DIARYLOC')
-    Left = 516
-    Top = 428
+    Left = 620
+    Top = 292
   end
   object qryFeeEarner: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2907,8 +2945,8 @@ object frmDiary99: TfrmDiary99
       'WHERE ACTIVE = '#39'Y'#39
       'AND ISFEEEARNER = '#39'Y'#39
       'AND CODE = :p_code')
-    Left = 512
-    Top = 376
+    Left = 728
+    Top = 240
     ParamData = <
       item
         DataType = ftUnknown
@@ -2925,8 +2963,8 @@ object frmDiary99: TfrmDiary99
       'where active = '#39'Y'#39
       'and ispartner = '#39'Y'#39
       'order by name')
-    Left = 735
-    Top = 172
+    Left = 727
+    Top = 292
   end
   object qryAuthor: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2937,30 +2975,30 @@ object frmDiary99: TfrmDiary99
       'where active = '#39'Y'#39
       'and isauthor = '#39'Y'#39
       'order by name')
-    Left = 705
-    Top = 184
+    Left = 729
+    Top = 336
   end
   object qryController: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT CODE, NAME FROM EMPLOYEE WHERE ACTIVE = '#39'Y'#39' ORDER BY NAME')
-    Left = 703
-    Top = 241
+    Left = 727
+    Top = 377
   end
   object dsPartner: TUniDataSource
     DataSet = qryPartner
-    Left = 877
-    Top = 171
+    Left = 797
+    Top = 291
   end
   object dsAuthor: TUniDataSource
     DataSet = qryAuthor
-    Left = 810
-    Top = 163
+    Left = 802
+    Top = 339
   end
   object dsController: TUniDataSource
     DataSet = qryController
-    Left = 791
-    Top = 244
+    Left = 799
+    Top = 380
   end
   object dxBarPopupMenu1: TdxBarPopupMenu
     BarManager = dxBarManager1
@@ -2970,15 +3008,15 @@ object frmDiary99: TfrmDiary99
         ItemName = 'dxBarButton7'
       end>
     UseOwnFont = False
-    Left = 869
-    Top = 400
+    Left = 429
+    Top = 312
     PixelsPerInch = 96
   end
   object dsDiaryList: TUniDataSource
     AutoEdit = False
     DataSet = qryDiaryList
-    Left = 685
-    Top = 481
+    Left = 805
+    Top = 569
   end
   object ppDiaryList: TppReport
     AutoStop = False
@@ -3479,8 +3517,8 @@ object frmDiary99: TfrmDiary99
   end
   object dsDiaryListRpt: TUniDataSource
     DataSet = qryDiaryListRpt
-    Left = 438
-    Top = 175
+    Left = 622
+    Top = 423
   end
   object qryDiaryList: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -3526,8 +3564,8 @@ object frmDiary99: TfrmDiary99
       '  AND D.REMINDER_FOR = :Author'
       '  AND M.NCLIENT = P.NCLIENT'
       'ORDER BY 1')
-    Left = 706
-    Top = 386
+    Left = 730
+    Top = 570
     ParamData = <
       item
         DataType = ftUnknown
@@ -3576,8 +3614,8 @@ object frmDiary99: TfrmDiary99
     Options.SetFieldsReadOnly = False
     SpecificOptions.Strings = (
       'Oracle.ExtendedFieldsInfo=False')
-    Left = 323
-    Top = 184
+    Left = 539
+    Top = 424
     ParamData = <
       item
         DataType = ftUnknown
@@ -3620,8 +3658,8 @@ object frmDiary99: TfrmDiary99
     SQL.Strings = (
       'SELECT D.*, D.ROWID FROM DIARY D WHERE D.NDIARY = :NDIARY')
     Options.RequiredFields = False
-    Left = 95
-    Top = 388
+    Left = 535
+    Top = 524
     ParamData = <
       item
         DataType = ftUnknown
@@ -3630,14 +3668,14 @@ object frmDiary99: TfrmDiary99
       end>
   end
   object cxSchedulerGridConnection1: TcxSchedulerGridConnection
-    Left = 893
-    Top = 84
+    Left = 437
+    Top = 452
   end
   object dxComponentPrinter: TdxComponentPrinter
     CurrentLink = dxComponentPrinterLink1
     Version = 0
-    Left = 594
-    Top = 521
+    Left = 602
+    Top = 609
     PixelsPerInch = 96
     object dxComponentPrinterLink1: TdxGridReportLink
       Active = True
@@ -3667,7 +3705,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43581.659997453700000000
+      ReportDocument.CreationDate = 43596.718236192130000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3724,5 +3762,46 @@ object frmDiary99: TfrmDiary99
     FieldNames.State = 'STATE'
     Left = 184
     Top = 384
+  end
+  object dsDiaryLoc: TUniDataSource
+    DataSet = dmAxiom.qryDiaryLoc
+    Left = 800
+    Top = 424
+  end
+  object qryDiaryJur: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select * from diaryjur')
+    Left = 728
+    Top = 472
+  end
+  object dsDiaryJur: TUniDataSource
+    DataSet = qryDiaryJur
+    Left = 800
+    Top = 472
+  end
+  object qryDiaryEvent: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select * from diaryevt')
+    Left = 728
+    Top = 520
+  end
+  object dsDiaryEvent: TUniDataSource
+    DataSet = qryDiaryEvent
+    Left = 800
+    Top = 520
+  end
+  object qryEmpDept: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select * from empdept')
+    Left = 736
+    Top = 616
+  end
+  object dsEmpDept: TUniDataSource
+    DataSet = qryEmpDept
+    Left = 808
+    Top = 616
   end
 end

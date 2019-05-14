@@ -1226,6 +1226,10 @@ object frmEmployees: TfrmEmployees
     object tabGL: TcxTabSheet
       Caption = 'G/L'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gbGLPosting: TcxGroupBox
         Left = 6
         Top = 7
@@ -1504,6 +1508,10 @@ object frmEmployees: TfrmEmployees
     object tabSignatory: TcxTabSheet
       Caption = 'Signatory'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label27: TLabel
         Left = 2
         Top = 15
@@ -2163,6 +2171,10 @@ object frmEmployees: TfrmEmployees
     object tabWorkingWeek: TcxTabSheet
       Caption = 'Working Week'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label32: TLabel
         Left = 4
         Top = 193
@@ -2654,6 +2666,10 @@ object frmEmployees: TfrmEmployees
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxDBMemo1: TcxDBMemo
         Left = 0
         Top = 0
@@ -2672,6 +2688,10 @@ object frmEmployees: TfrmEmployees
     object tabMatterOptions: TcxTabSheet
       Caption = 'Matter Options'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 8
         Top = 5

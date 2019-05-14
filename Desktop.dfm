@@ -13577,9 +13577,9 @@ object frmDesktop: TfrmDesktop
       ItemLinks = <>
     end
     object dxBarFindConflicts: TdxBarButton
-      Caption = 'Find Conflicts'
+      Caption = 'Saved Conflict searches'
       Category = 17
-      Hint = 'Find Conflicts'
+      Hint = 'Saved Conflict searches'
       Visible = ivAlways
       DropDownEnabled = False
       Glyph.SourceDPI = 96

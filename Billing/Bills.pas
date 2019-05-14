@@ -2026,7 +2026,7 @@ procedure TfrmBills.btnSubBillClick(Sender: TObject);
 begin
    with TfrmSubBill.Create(self) do
    begin
-      displaySubBill(qryBills.fieldByName('NMEMO').AsInteger);
+      displaySubBill(qryBills.fieldByName('NMEMO').AsInteger, qryBills.fieldByName('TOTAL').AsFloat);
       totals := true;
       ShowModal;
       free;
