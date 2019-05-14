@@ -2,8 +2,8 @@ object frmInvoice: TfrmInvoice
   Left = 563
   Top = 66
   Caption = 'Bill Creation'
-  ClientHeight = 687
-  ClientWidth = 869
+  ClientHeight = 693
+  ClientWidth = 887
   Color = clBtnFace
   Constraints.MinHeight = 572
   Constraints.MinWidth = 663
@@ -21,13 +21,13 @@ object frmInvoice: TfrmInvoice
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   DesignSize = (
-    869
-    687)
+    887
+    693)
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
     Left = 6
-    Top = 103
+    Top = 106
     Width = 63
     Height = 15
     Caption = 'Fees - Items'
@@ -41,9 +41,9 @@ object frmInvoice: TfrmInvoice
     Visible = False
   end
   object lblFeesAvail: TLabel
-    Left = 110
-    Top = 89
-    Width = 73
+    Left = 102
+    Top = 87
+    Width = 79
     Height = 14
     Alignment = taRightJustify
     AutoSize = False
@@ -58,14 +58,14 @@ object frmInvoice: TfrmInvoice
     Caption = 'Bill'
   end
   object Label5: TLabel
-    Left = 6
-    Top = 121
+    Left = 4
+    Top = 124
     Width = 78
     Height = 15
     Caption = 'Disbursements'
   end
   object lblDisbAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 124
     Width = 73
     Height = 14
@@ -76,12 +76,12 @@ object frmInvoice: TfrmInvoice
   object Label7: TLabel
     Left = 6
     Top = 146
-    Width = 64
+    Width = 90
     Height = 15
-    Caption = 'Cheque Req'
+    Caption = 'Anticipated Disb.'
   end
   object lblAntdAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 150
     Width = 73
     Height = 14
@@ -97,7 +97,7 @@ object frmInvoice: TfrmInvoice
     Caption = 'Sundries'
   end
   object lblSundAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 201
     Width = 73
     Height = 14
@@ -107,7 +107,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblBillToCaption: TLabel
     Left = 6
-    Top = 336
+    Top = 362
     Width = 30
     Height = 15
     Caption = '&Bill to'
@@ -115,7 +115,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblBillTo: TLabel
     Left = 94
-    Top = 336
+    Top = 362
     Width = 340
     Height = 14
     AutoSize = False
@@ -129,21 +129,21 @@ object frmInvoice: TfrmInvoice
   end
   object Label10: TLabel
     Left = 6
-    Top = 35
+    Top = 36
     Width = 36
     Height = 15
     Caption = 'Bill Ref'
   end
   object lblDispatchMsg: TLabel
-    Left = 302
-    Top = 35
-    Width = 59
+    Left = 309
+    Top = 36
+    Width = 55
     Height = 15
-    Caption = 'Dispatched'
+    Caption = 'Posted On'
   end
   object Label11: TLabel
     Left = 6
-    Top = 363
+    Top = 389
     Width = 49
     Height = 15
     Caption = '&Template'
@@ -151,9 +151,9 @@ object frmInvoice: TfrmInvoice
   object lblLessTrust: TLabel
     Left = 6
     Top = 227
-    Width = 51
+    Width = 91
     Height = 15
-    Caption = 'Less Trust'
+    Caption = 'Less Client Funds'
   end
   object Label13: TLabel
     Left = 590
@@ -179,7 +179,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblBillTemplate: TLabel
     Left = 94
-    Top = 363
+    Top = 389
     Width = 129
     Height = 14
     AutoSize = False
@@ -206,7 +206,7 @@ object frmInvoice: TfrmInvoice
     Caption = 'Creditors'
   end
   object lblUnPaidAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 176
     Width = 73
     Height = 14
@@ -215,7 +215,7 @@ object frmInvoice: TfrmInvoice
     Visible = False
   end
   object nlTrustAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 227
     Width = 73
     Height = 14
@@ -230,8 +230,8 @@ object frmInvoice: TfrmInvoice
     Caption = 'Tax'
   end
   object DBText1: TDBText
-    Left = 407
-    Top = 263
+    Left = 375
+    Top = 278
     Width = 27
     Height = 13
     DataField = 'ACCT'
@@ -261,8 +261,8 @@ object frmInvoice: TfrmInvoice
     Caption = 'Expected Payment'
   end
   object Label14: TLabel
-    Left = 497
-    Top = 35
+    Left = 515
+    Top = 36
     Width = 35
     Height = 15
     Caption = 'Matter'
@@ -291,7 +291,7 @@ object frmInvoice: TfrmInvoice
     WordWrap = True
   end
   object lblUnitFeesAvail: TLabel
-    Left = 110
+    Left = 108
     Top = 106
     Width = 73
     Height = 14
@@ -300,10 +300,47 @@ object frmInvoice: TfrmInvoice
   end
   object Label20: TLabel
     Left = 6
-    Top = 89
+    Top = 87
     Width = 61
     Height = 15
     Caption = 'Fees - Time'
+  end
+  object Label6: TLabel
+    Left = 6
+    Top = 334
+    Width = 42
+    Height = 15
+    Caption = 'Bill date'
+    FocusControl = dtpInterim
+  end
+  object lblAuthorisedBy: TLabel
+    Left = 675
+    Top = 56
+    Width = 77
+    Height = 15
+    Caption = 'Authorised By:'
+    ParentShowHint = False
+    ShowHint = True
+    Visible = False
+  end
+  object lblCreatedBy: TLabel
+    Left = 675
+    Top = 35
+    Width = 60
+    Height = 15
+    Caption = 'Created By:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object lblPostedBy: TLabel
+    Left = 675
+    Top = 79
+    Width = 55
+    Height = 15
+    Caption = 'Posted By:'
+    ParentShowHint = False
+    ShowHint = True
+    Visible = False
   end
   object btnFeesRebuild: TBitBtn
     Left = 468
@@ -484,7 +521,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -513,7 +550,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -538,12 +575,12 @@ object frmInvoice: TfrmInvoice
   end
   object neAntd: TNumberEdit
     Left = 184
-    Top = 144
+    Top = 146
     Width = 86
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -572,7 +609,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -596,7 +633,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnBillTo: TBitBtn
     Left = 63
-    Top = 333
+    Top = 359
     Width = 27
     Height = 23
     Hint = 'Search PhoneBook for Address'
@@ -621,7 +658,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -659,7 +696,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnBillTemplate: TBitBtn
     Left = 63
-    Top = 359
+    Top = 385
     Width = 27
     Height = 22
     Glyph.Data = {
@@ -681,7 +718,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -732,7 +769,7 @@ object frmInvoice: TfrmInvoice
     Top = 222
     Width = 113
     Height = 22
-    Caption = 'Apply Trust'
+    Caption = 'Apply Client funds'
     NumGlyphs = 2
     TabOrder = 14
     TabStop = False
@@ -745,7 +782,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -774,7 +811,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -803,7 +840,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -832,7 +869,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -855,8 +892,8 @@ object frmInvoice: TfrmInvoice
     OnChange = neUpCredTaxChange
   end
   object BitBtn1: TBitBtn
-    Left = 788
-    Top = 271
+    Left = 786
+    Top = 359
     Width = 80
     Height = 24
     Caption = 'Apply BI Trust'
@@ -873,7 +910,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -902,7 +939,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -925,13 +962,13 @@ object frmInvoice: TfrmInvoice
     OnChange = neUpCredTaxChange
   end
   object neAntdTaxFree: TNumberEdit
-    Left = 375
+    Left = 376
     Top = 146
     Width = 86
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -960,7 +997,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -989,7 +1026,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
-    DisplayFormat = dfCurrency
+    DisplayFormat = dfFloat
     EditText = '0.00'
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
@@ -1012,10 +1049,12 @@ object frmInvoice: TfrmInvoice
     OnChange = neFeesTaxChange
   end
   object rgFilter: TcxRadioGroup
-    Left = 6
-    Top = 633
+    Left = 8
+    Top = 639
     Anchors = [akLeft, akBottom]
+    BiDiMode = bdLeftToRight
     Caption = 'Filter'
+    ParentBiDiMode = False
     ParentShowHint = False
     Properties.Columns = 6
     Properties.Items = <
@@ -1029,7 +1068,7 @@ object frmInvoice: TfrmInvoice
         Caption = 'Disbursements'
       end
       item
-        Caption = 'Cheque Req'
+        Caption = 'Anticipated Disbs.'
       end
       item
         Caption = 'Creditors'
@@ -1037,20 +1076,20 @@ object frmInvoice: TfrmInvoice
       item
         Caption = 'Sundries'
       end>
+    Properties.WordWrap = True
     ItemIndex = 0
     ShowHint = True
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 26
+    TabOrder = 27
     Transparent = True
     OnClick = rgFilterClick
-    ExplicitTop = 604
     Height = 47
-    Width = 625
+    Width = 636
   end
   object lblDispatched: TcxLabel
-    Left = 373
-    Top = 34
+    Left = 380
+    Top = 36
     AutoSize = False
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
@@ -1081,17 +1120,16 @@ object frmInvoice: TfrmInvoice
     AnchorX = 115
   end
   object grdBillItems: TcxGrid
-    Left = 6
-    Top = 392
-    Width = 855
-    Height = 235
+    Left = 8
+    Top = 413
+    Width = 873
+    Height = 220
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvNone
     BevelOuter = bvNone
-    TabOrder = 30
+    TabOrder = 31
     LookAndFeel.NativeStyle = True
     RootLevelOptions.DetailTabsPosition = dtpTop
-    ExplicitHeight = 206
     object tvBillItems: TcxGridDBTableView
       PopupMenu = pmGrid
       OnDblClick = tbtnEditClick
@@ -1138,8 +1176,9 @@ object frmInvoice: TfrmInvoice
           Column = tvBillItemsTAX
         end
         item
-          Format = '#0'
+          Format = '#0.0'
           Kind = skSum
+          Tag = 2
           FieldName = 'UNITS'
           Column = tvBillItemsUNITS
         end>
@@ -1790,19 +1829,19 @@ object frmInvoice: TfrmInvoice
     end
   end
   object cxGroupBox1: TcxGroupBox
-    Left = 438
+    Left = 416
     Top = 222
     Style.BorderStyle = ebsOffice11
     Style.LookAndFeel.NativeStyle = False
     Style.Shadow = True
     Style.TransparentBorder = True
     StyleDisabled.LookAndFeel.NativeStyle = False
-    TabOrder = 31
+    TabOrder = 32
     Transparent = True
     Height = 132
-    Width = 205
+    Width = 227
     object lblTotalGST: TcxLabel
-      Left = 84
+      Left = 104
       Top = 38
       AutoSize = False
       ParentFont = False
@@ -1815,11 +1854,11 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Height = 18
-      Width = 108
-      AnchorX = 192
+      Width = 112
+      AnchorX = 216
     end
     object lblTotalExGST: TcxLabel
-      Left = 84
+      Left = 104
       Top = 16
       AutoSize = False
       ParentFont = False
@@ -1832,11 +1871,11 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Height = 18
-      Width = 108
-      AnchorX = 192
+      Width = 112
+      AnchorX = 216
     end
     object cxLabel3: TcxLabel
-      Left = 35
+      Left = 59
       Top = 38
       AutoSize = False
       Caption = 'Tax'
@@ -1844,18 +1883,18 @@ object frmInvoice: TfrmInvoice
       Transparent = True
       Height = 18
       Width = 42
-      AnchorX = 77
+      AnchorX = 101
     end
     object cxLabel4: TcxLabel
-      Left = 15
+      Left = 39
       Top = 17
       Caption = 'Gross Total'
       Properties.Alignment.Horz = taRightJustify
       Transparent = True
-      AnchorX = 77
+      AnchorX = 101
     end
     object lblTotalBill: TcxLabel
-      Left = 84
+      Left = 104
       Top = 103
       AutoSize = False
       ParentFont = False
@@ -1868,11 +1907,11 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Height = 18
-      Width = 108
-      AnchorX = 192
+      Width = 112
+      AnchorX = 216
     end
     object cxLabel1: TcxLabel
-      Left = 26
+      Left = 50
       Top = 103
       Caption = 'Total Bill'
       ParentFont = False
@@ -1884,10 +1923,10 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Transparent = True
-      AnchorX = 77
+      AnchorX = 101
     end
     object lblTrust: TcxLabel
-      Left = 84
+      Left = 104
       Top = 81
       AutoSize = False
       ParentFont = False
@@ -1900,23 +1939,23 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Height = 19
-      Width = 108
-      AnchorX = 192
+      Width = 112
+      AnchorX = 216
     end
     object cxLabel5: TcxLabel
-      Left = 20
+      Left = 6
       Top = 81
-      Caption = 'Less Trust'
+      Caption = 'Less Client Funds'
       Transparent = True
     end
     object cxLabel2: TcxLabel
-      Left = 28
+      Left = 50
       Top = 58
       Caption = 'Discount'
       Transparent = True
     end
     object lblDiscount: TcxLabel
-      Left = 84
+      Left = 104
       Top = 59
       AutoSize = False
       ParentFont = False
@@ -1929,8 +1968,8 @@ object frmInvoice: TfrmInvoice
       Style.IsFontAssigned = True
       Properties.Alignment.Horz = taRightJustify
       Height = 18
-      Width = 108
-      AnchorX = 192
+      Width = 112
+      AnchorX = 216
     end
   end
   object btnInterimDate: TBitBtn
@@ -1939,7 +1978,7 @@ object frmInvoice: TfrmInvoice
     Width = 87
     Height = 23
     Caption = 'Apply Interim'
-    TabOrder = 32
+    TabOrder = 33
     OnClick = btnInterimDateClick
   end
   object dtpExpectedPayment: TDateTimePicker
@@ -1949,32 +1988,32 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Date = 35855.939284826410000000
     Time = 35855.939284826410000000
-    TabOrder = 33
+    TabOrder = 34
   end
   object lblMatter: TcxLabel
-    Left = 539
-    Top = 34
+    Left = 560
+    Top = 36
     AutoSize = False
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
     Properties.Alignment.Horz = taRightJustify
     Properties.ShowAccelChar = False
     Height = 19
-    Width = 104
+    Width = 83
     AnchorX = 643
   end
   object grpUnprocessed: TGroupBox
-    Left = 663
-    Top = 36
+    Left = 668
+    Top = 106
     Width = 198
-    Height = 229
-    TabOrder = 35
+    Height = 247
+    TabOrder = 36
     Visible = False
     object lblUnProcessedTime: TLabel
-      Left = 12
-      Top = 3
-      Width = 172
-      Height = 217
+      Left = 9
+      Top = 6
+      Width = 182
+      Height = 198
       AutoSize = False
       Caption = 'x'
       Font.Charset = DEFAULT_CHARSET
@@ -1986,24 +2025,9 @@ object frmInvoice: TfrmInvoice
       WordWrap = True
     end
   end
-  object edtDiscount: TEdit
-    Left = 185
-    Top = 301
-    Width = 114
-    Height = 23
-    Hint = 
-      'Discount (% or $ amount. eg 5% or 200).  If discount is whole do' +
-      'llar amount, assumption is that the amount is GST inclusive.'
-    AutoSize = False
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 36
-    OnExit = edtDiscountExit
-    OnKeyPress = edtDiscountKeyPress
-  end
   object pbSpellCheck: TBitBtn
-    Left = 648
-    Top = 650
+    Left = 666
+    Top = 656
     Width = 187
     Height = 30
     Anchors = [akRight, akBottom]
@@ -2037,7 +2061,6 @@ object frmInvoice: TfrmInvoice
       89899E9E9E9C9C9CEEEEEEFDFDFDBCBCBC8E8E8EA4A4A48B8B8B}
     TabOrder = 37
     OnClick = pbSpellCheckClick
-    ExplicitTop = 621
   end
   object edtDiscountGST: TEdit
     Left = 333
@@ -2056,7 +2079,7 @@ object frmInvoice: TfrmInvoice
     Width = 87
     Height = 24
     Caption = 'Notes'
-    TabOrder = 44
+    TabOrder = 43
     OnClick = btnNotesClick
   end
   object neSundTax: TcxCurrencyEdit
@@ -2066,6 +2089,7 @@ object frmInvoice: TfrmInvoice
     EditValue = 0.000000000000000000
     ParentFont = False
     Properties.Alignment.Horz = taRightJustify
+    Properties.DisplayFormat = ',0.00;-,0.00'
     Properties.Nullable = False
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clWindowText
@@ -2142,18 +2166,20 @@ object frmInvoice: TfrmInvoice
     AnchorX = 638
   end
   object chkUnbilledTransactions: TcxCheckBox
-    Left = 648
-    Top = 628
+    Left = 661
+    Top = 634
     Anchors = [akRight, akBottom]
+    AutoSize = False
     Caption = 'Show Unbilled Transactions'
-    TabOrder = 47
+    TabOrder = 46
     Transparent = True
     Visible = False
     OnClick = chkUnbilledTransactionsClick
-    ExplicitTop = 613
+    Height = 23
+    Width = 169
   end
   object lblRecoveryPct: TcxLabel
-    Left = 173
+    Left = 174
     Top = 55
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
@@ -2163,6 +2189,26 @@ object frmInvoice: TfrmInvoice
     Style.Font.Style = [fsBold]
     Style.IsFontAssigned = True
     Transparent = True
+  end
+  object edtDiscount: TcxTextEdit
+    Left = 185
+    Top = 302
+    Hint = 
+      'Discount (% or $ amount. eg 5% or 200).  If discount is whole do' +
+      'llar amount, assumption is that the amount is GST inclusive.'
+    TabOrder = 26
+    OnExit = edtDiscountExit
+    OnKeyPress = edtDiscountKeyPress
+    Width = 114
+  end
+  object dtpBillDate: TcxDateEdit
+    Left = 185
+    Top = 328
+    Properties.SaveTime = False
+    Properties.ShowTime = False
+    Properties.UseNullString = True
+    TabOrder = 48
+    Width = 114
   end
   object ilstItems: TImageList
     Left = 832
@@ -2448,13 +2494,58 @@ object frmInvoice: TfrmInvoice
       'FROM NMEMO M '
       'WHERE M.NMEMO = -1')
     AfterScroll = qryInvoiceAfterScroll
-    Left = 745
-    Top = 11
+    Left = 707
+    Top = 41
   end
   object qryFees: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT 0 as type, '
+      'SELECT 0 AS TYPE, TRUNC (fee.created) created,'
+      
+        '       DECODE (fee.PRIVATE, '#39'Y'#39', '#39'(P) '#39', '#39#39') || fee.descr AS des' +
+        'cr,       '
+      '       -- FEE.AMOUNT, -- PRIOR TO HYBRID BILL'
+      
+        '       CASE WHEN ((NVL(fee.task_amount, 0) > 0) OR (NVL(scalecos' +
+        't.defaulttime, 0) > 0))'
+      '          THEN fee.task_amount'
+      '          ELSE fee.amount'
+      
+        '       END AS amount,                                    -- HYBR' +
+        'ID BILL AMOUNT'
+      '       fee.author, fee.nfee AS uniqueid, fee.taxcode,       '
+      
+        '       -- DECODE(NVL(fee.tax,0), 0, DECODE(fee.billed,'#39'Y'#39',fee.ta' +
+        'x, ROUND(fee.amount * ABS(r.rate)) / 100), fee.tax) AS tax,  -- ' +
+        'PRIOR TO HYBRID BILL'
+      '       DECODE(NVL(fee.tax, 0),0, DECODE(fee.billed,'#39'Y'#39', fee.tax,'
+      
+        '                 ROUND(CASE WHEN ((NVL (fee.task_amount, 0) > 0)' +
+        ' OR (NVL (scalecost.defaulttime, 0) > 0))'
+      '                         THEN fee.task_amount'
+      
+        '                         ELSE fee.amount END * ABS (r.rate)) / 1' +
+        '00),'
+      
+        '           CASE WHEN ((NVL(fee.task_amount, 0) > 0) OR (NVL (sca' +
+        'lecost.defaulttime, 0) > 0))'
+      '              THEN fee.task_tax'
+      '              ELSE fee.tax'
+      '              END) AS tax,'
+      
+        '       fee.PRIVATE, fee.fileid AS payee, NULL AS approval, units' +
+        ', task,'
+      '       nfee AS uniqueid, 0 AS unbilled'
+      '  FROM fee, taxrate r, scalecost'
+      'WHERE nmemo = :p_invoice'
+      '   AND fee.taxcode = r.taxcode(+)'
+      '   AND TRUNC (fee.created) >= r.commence'
+      '   AND TRUNC (fee.created) <= NVL (r.end_period, SYSDATE + 1000)'
+      '   AND fee.billtype = '#39'Billable'#39
+      '   AND fee.task = scalecost.code(+)'
+      ''
+      ''
+      '{SELECT 0 as type, '
       '        trunc(FEE.CREATED) CREATED, '
       
         '        DECODE(FEE.PRIVATE,'#39'Y'#39','#39'(P) '#39','#39#39') || FEE.DESCR as DESCR,' +
@@ -2491,31 +2582,7 @@ object frmInvoice: TfrmInvoice
       
         'AND TRUNC (created) >= r.commence and TRUNC(created) <= nvl(r.en' +
         'd_period,sysdate + 1000)'
-      'AND BILLTYPE = '#39'Billable'#39
-      ''
-      ''
-      ''
-      ''
-      '/*SELECT 0 AS TYPE, TRUNC (fee.created) created,'
-      
-        '       DECODE (fee.PRIVATE, '#39'Y'#39', '#39'(P) '#39', '#39#39') || fee.descr AS des' +
-        'cr,       '
-      '       FEE.AMOUNT, '
-      '       fee.author, fee.nfee AS uniqueid, fee.taxcode,       '
-      
-        '       DECODE(NVL(fee.tax,0), 0, DECODE(fee.billed,'#39'Y'#39',fee.tax, ' +
-        'ROUND(fee.amount * ABS(r.rate)) / 100), fee.tax) AS tax, '
-      
-        '       fee.PRIVATE, fee.fileid AS payee, NULL AS approval, units' +
-        ', task,'
-      '       nfee AS uniqueid, 0 AS unbilled'
-      '  FROM fee, taxrate r, scalecost'
-      'WHERE nmemo = :p_invoice'
-      '   AND fee.taxcode = r.taxcode(+)'
-      '   AND TRUNC (fee.created) >= r.commence'
-      '   AND TRUNC (fee.created) <= NVL (r.end_period, SYSDATE + 1000)'
-      '   AND fee.billtype = '#39'Billable'#39
-      '   AND fee.task = scalecost.code(+)*/')
+      'AND BILLTYPE = '#39'Billable'#39'}')
     Options.StrictUpdate = False
     Left = 1017
     Top = 258
@@ -3371,32 +3438,27 @@ object frmInvoice: TfrmInvoice
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT'
-      '  2 as type, '
-      '  C.REQDATE,'
-      '  C.DESCR,'
-      '  C.AMOUNT,'
-      '  C.AUTHOR,'
-      '  C.NCHEQREQ AS UniqueID,'
-      '  C.TAXCODE,'
-      
-        '  round(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (N' +
-        'VL (0 - c.tax, 0)) '
-      
-        '  else (ABS(NVL(c.amount, 0) * (NVL(r.rate, 0)) / 100)) end,2) A' +
-        'S tax, '
+      '  2 as type,  '
+      '  REQDATE,'
+      '  DESCR,'
+      '  AMOUNT,'
+      '  AUTHOR,'
+      '  NCHEQREQ AS UniqueID,'
+      '  TAXCODE,'
+      '  TAX,'
       '  null as private,'
-      '  C.PAYEE,'
+      '  PAYEE,'
       '  null,'
       '  0 as units,'
       '  null as Task,'
-      '  C.ncheqreq as uniqueid, 0 as unbilled'
+      '  ncheqreq as uniqueid, 0 as unbilled'
       'FROM '
-      ' CHEQREQ C, TAXRATE R '
+      ' CHEQREQ '
       'WHERE '
-      '   R.TAXCODE = C.TAXCODE'
       '-- NMATTER = :P_Matter '
-      '   AND '
-      '   C.NMEMO = :P_INVOICE')
+      '--AND '
+      ' NMEMO = :P_Invoice'
+      'And Trust <> '#39'T'#39)
     Options.StrictUpdate = False
     Left = 1017
     Top = 308
@@ -3411,8 +3473,8 @@ object frmInvoice: TfrmInvoice
     Enabled = False
     Interval = 2000
     OnTimer = tmrInterimTimer
-    Left = 33
-    Top = 394
+    Left = 111
+    Top = 372
   end
   object procBillAddFees: TUniStoredProc
     StoredProcName = 'BILL_ADD_FEES'
@@ -3421,8 +3483,8 @@ object frmInvoice: TfrmInvoice
       '  BILL_ADD_FEES(:P_NMEMO, :P_CREATED, :P_MASTER);'
       'end;')
     Connection = dmAxiom.uniInsight
-    Left = 815
-    Top = 448
+    Left = 359
+    Top = 552
     ParamData = <
       item
         DataType = ftInteger
@@ -3447,8 +3509,8 @@ object frmInvoice: TfrmInvoice
   object procBillAddDisb: TUniStoredProc
     StoredProcName = 'BILL_ADD_DISB'
     Connection = dmAxiom.uniInsight
-    Left = 793
-    Top = 663
+    Left = 41
+    Top = 551
     ParamData = <
       item
         DataType = ftFloat
@@ -3511,8 +3573,8 @@ object frmInvoice: TfrmInvoice
   object procBillReverse: TUniStoredProc
     StoredProcName = 'BILL_REVERSE'
     Connection = dmAxiom.uniInsight
-    Left = 621
-    Top = 40
+    Left = 517
+    Top = 560
     ParamData = <
       item
         DataType = ftFloat
@@ -3629,8 +3691,8 @@ object frmInvoice: TfrmInvoice
       'VALUES(SYSDATE,:DESCR,0,:AUTHOR,'
       ':PARTNER,:NMATTER,'#39'N'#39',:NMEMO,:DEPT,:EMP_TYPE,'
       '1,:NCLIENT,'#39'ia'#39',:TAXCODE,1,:AMOUNT,:TAX,'#39'N'#39')')
-    Left = 153
-    Top = 301
+    Left = 721
+    Top = 333
     ParamData = <
       item
         DataType = ftUnknown
@@ -3712,8 +3774,8 @@ object frmInvoice: TfrmInvoice
     NotDocking = [dsNone]
     PopupMenuLinks = <>
     UseSystemFont = False
-    Left = 435
-    Top = 316
+    Left = 499
+    Top = 382
     PixelsPerInch = 96
     DockControlHeights = (
       0
@@ -3771,7 +3833,6 @@ object frmInvoice: TfrmInvoice
           ItemName = 'dxBarButton3'
         end
         item
-          BeginGroup = True
           Visible = True
           ItemName = 'barbtnRemoveDiscount'
         end
@@ -3802,19 +3863,12 @@ object frmInvoice: TfrmInvoice
           BeginGroup = True
           ViewLayout = ivlGlyphControlCaption
           Visible = True
-          ItemName = 'cbAssessed'
-        end
-        item
-          BeginGroup = True
-          ViewLayout = ivlGlyphControlCaption
-          Visible = True
-          ItemName = 'cbProforma'
-        end
-        item
-          BeginGroup = True
-          ViewLayout = ivlGlyphControlCaption
-          Visible = True
           ItemName = 'cbMasterBill'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarBtnCashierNotes'
         end>
       NotDocking = [dsNone]
       OldName = 'toolbar'
@@ -3935,9 +3989,9 @@ object frmInvoice: TfrmInvoice
       OnClick = tbtnRemoveDisbsClick
     end
     object tbtnRemoveCheqReq: TdxBarButton
-      Caption = 'Remove Cheque Requisitions'
+      Caption = 'Remove Anticipated Disbursements'
       Category = 0
-      Hint = 'Remove Cheque Requisitions'
+      Hint = 'Remove Anticipated Disbursements'
       Visible = ivAlways
       ImageIndex = 8
       OnClick = tbtnRemoveCheqReqClick
@@ -4247,9 +4301,9 @@ object frmInvoice: TfrmInvoice
       OnClick = barbtnRemoveDiscountClick
     end
     object cbAuthorise: TcxBarEditItem
-      Caption = 'Authorised '
+      Caption = 'Authorise'
       Category = 2
-      Hint = 'Authorised '
+      Hint = 'Authorise'
       Visible = ivAlways
       ShowCaption = True
       Width = 0
@@ -4320,11 +4374,26 @@ object frmInvoice: TfrmInvoice
       InternalEditValue = False
     end
     object bbtnBillNotes: TdxBarButton
-      Caption = 'Bill Notes'
+      Caption = 'Debtor Notes'
       Category = 2
-      Hint = 'Bill Notes'
+      Hint = 'Debtor Notes'
       Visible = ivAlways
       OnClick = bbtnBillNotesClick
+    end
+    object dxBarBtnCashierNotes: TdxBarButton
+      Caption = 'Cashier Notes'
+      Category = 2
+      Hint = 'Cashier Notes'
+      Visible = ivNever
+      OnClick = dxBarBtnCashierNotesClick
+    end
+    object btnAddChequeRequest: TdxBarButton
+      Caption = 'Add Anticipated Disbursement...'
+      Category = 2
+      Hint = 'Add anticipated disbursement to Bill'
+      Visible = ivAlways
+      ImageIndex = 8
+      OnClick = btnAddChequeRequestClick
     end
   end
   object dxBarPopupMenu1: TdxBarPopupMenu
@@ -4339,8 +4408,8 @@ object frmInvoice: TfrmInvoice
         ItemName = 'dxBarButton1'
       end>
     UseOwnFont = False
-    Left = 651
-    Top = 9
+    Left = 643
+    Top = 72
     PixelsPerInch = 96
   end
   object rptSummaryBill: TppReport
@@ -5503,8 +5572,8 @@ object frmInvoice: TfrmInvoice
         'SELECT title, name, address, suburb||'#39' '#39'||state||'#39' '#39'||postcode a' +
         's SSP FROM PHONEBOOK'
       ' WHERE nname = :Search')
-    Left = 748
-    Top = 27
+    Left = 729
+    Top = 85
     ParamData = <
       item
         DataType = ftUnknown
@@ -7088,6 +7157,10 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
+        ItemName = 'btnAddChequeRequest'
+      end
+      item
+        Visible = True
         ItemName = 'dxBbtnAddExpTemplate'
       end
       item
@@ -7154,8 +7227,8 @@ object frmInvoice: TfrmInvoice
       end>
     UseOwnFont = False
     OnPopup = pmGridPopup
-    Left = 158
-    Top = 481
+    Left = 166
+    Top = 505
     PixelsPerInch = 96
   end
   object cxGridPopupMenu1: TcxGridPopupMenu
@@ -7168,8 +7241,8 @@ object frmInvoice: TfrmInvoice
         PopupMenu = pmGrid
       end>
     UseBuiltInPopupMenus = False
-    Left = 121
-    Top = 407
+    Left = 259
+    Top = 477
   end
   object rptDraftBill: TppReport
     AutoStop = False
@@ -8124,8 +8197,8 @@ object frmInvoice: TfrmInvoice
       '  BILL_ADD_FEE(:P_NMEMO, :P_NFEE);'
       'end;')
     Connection = dmAxiom.uniInsight
-    Left = 818
-    Top = 545
+    Left = 98
+    Top = 553
     ParamData = <
       item
         DataType = ftFloat
@@ -8148,8 +8221,8 @@ object frmInvoice: TfrmInvoice
       '  BILL_ADD_FEES_ONLY(:P_NMEMO);'
       'end;')
     Connection = dmAxiom.uniInsight
-    Left = 773
-    Top = 571
+    Left = 173
+    Top = 555
     ParamData = <
       item
         DataType = ftFloat
@@ -8237,8 +8310,8 @@ object frmInvoice: TfrmInvoice
       '  BILL_ADD_SUNDRY(:P_NMEMO, :P_NSUNDRY, :P_CREATED);'
       'end;')
     Connection = dmAxiom.uniInsight
-    Left = 565
-    Top = 652
+    Left = 573
+    Top = 556
     ParamData = <
       item
         DataType = ftFloat
@@ -9252,8 +9325,8 @@ object frmInvoice: TfrmInvoice
   object procBillDiscReverse: TUniStoredProc
     StoredProcName = 'bill_discount_reverse'
     Connection = dmAxiom.uniInsight
-    Left = 639
-    Top = 301
+    Left = 455
+    Top = 557
     ParamData = <
       item
         DataType = ftFloat
@@ -9331,8 +9404,8 @@ object frmInvoice: TfrmInvoice
       '  BILL_ADD_ITEMFEES(:P_NMEMO, :P_CREATED, :P_MASTER);'
       'end;')
     Connection = dmAxiom.uniInsight
-    Left = 820
-    Top = 494
+    Left = 268
+    Top = 550
     ParamData = <
       item
         DataType = ftFloat
@@ -9688,57 +9761,14 @@ object frmInvoice: TfrmInvoice
   end
   object dsInvoice: TUniDataSource
     DataSet = qryInvoice
-    Left = 461
+    Left = 533
     Top = 384
   end
-  object qryFeesHybrid: TUniQuery
+  object qryCheqReqReverse: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT 0 AS TYPE, TRUNC (fee.created) created,'
-      
-        '       DECODE (fee.PRIVATE, '#39'Y'#39', '#39'(P) '#39', '#39#39') || fee.descr AS des' +
-        'cr,       '
-      
-        '       CASE WHEN ((NVL(fee.task_amount, 0) > 0) OR (NVL(scalecos' +
-        't.defaulttime, 0) > 0))'
-      '          THEN fee.task_amount'
-      '          ELSE fee.amount'
-      
-        '       END AS amount,                                    -- HYBR' +
-        'ID BILL AMOUNT'
-      '       fee.author, fee.nfee AS uniqueid, fee.taxcode,       '
-      '       DECODE(NVL(fee.tax, 0),0, DECODE(fee.billed,'#39'Y'#39', fee.tax,'
-      
-        '                 ROUND(CASE WHEN ((NVL (fee.task_amount, 0) > 0)' +
-        ' OR (NVL (scalecost.defaulttime, 0) > 0))'
-      '                         THEN fee.task_amount'
-      
-        '                         ELSE fee.amount END * ABS (r.rate)) / 1' +
-        '00),'
-      
-        '           CASE WHEN ((NVL(fee.task_amount, 0) > 0) OR (NVL (sca' +
-        'lecost.defaulttime, 0) > 0))'
-      '              THEN fee.task_tax'
-      '              ELSE fee.tax'
-      '              END) AS tax,'
-      
-        '       fee.PRIVATE, fee.fileid AS payee, NULL AS approval, units' +
-        ', task,'
-      '       nfee AS uniqueid, 0 AS unbilled'
-      '  FROM fee, taxrate r, scalecost'
-      'WHERE nmemo = :p_invoice'
-      '   AND fee.taxcode = r.taxcode(+)'
-      '   AND TRUNC (fee.created) >= r.commence'
-      '   AND TRUNC (fee.created) <= NVL (r.end_period, SYSDATE + 1000)'
-      '   AND fee.billtype = '#39'Billable'#39
-      '   AND fee.task = scalecost.code(+)')
-    Left = 320
-    Top = 360
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'p_invoice'
-        Value = nil
-      end>
+      '')
+    Left = 623
+    Top = 136
   end
 end

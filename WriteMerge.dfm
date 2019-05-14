@@ -10,7 +10,7 @@ object frmWriteMerge: TfrmWriteMerge
   Constraints.MinWidth = 420
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -19,7 +19,7 @@ object frmWriteMerge: TfrmWriteMerge
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object pnlBottom: TPanel
     Left = 0
     Top = 345
@@ -29,15 +29,14 @@ object frmWriteMerge: TfrmWriteMerge
     BevelOuter = bvNone
     ParentColor = True
     TabOrder = 0
-    ExplicitWidth = 459
     DesignSize = (
       463
       33)
     object btnMerge: TBitBtn
-      Left = 297
-      Top = 4
-      Width = 70
-      Height = 23
+      Left = 304
+      Top = 1
+      Width = 72
+      Height = 27
       Anchors = [akRight, akBottom]
       Caption = '&Merge'
       Default = True
@@ -56,9 +55,9 @@ object frmWriteMerge: TfrmWriteMerge
     end
     object bnCancel: TBitBtn
       Left = 380
-      Top = 4
-      Width = 70
-      Height = 23
+      Top = 1
+      Width = 72
+      Height = 27
       Anchors = [akRight, akBottom]
       Caption = '&Close'
       Glyph.Data = {
@@ -109,55 +108,51 @@ object frmWriteMerge: TfrmWriteMerge
     TabOrder = 1
     Properties.ActivePage = tabOutput
     Properties.CustomButtons.Buttons = <>
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 499
-    ExplicitHeight = 343
     ClientRectBottom = 341
     ClientRectLeft = 4
     ClientRectRight = 459
-    ClientRectTop = 24
+    ClientRectTop = 26
     object tabOutput: TcxTabSheet
       Caption = 'Output'
       ImageIndex = 0
-      ExplicitWidth = 491
-      ExplicitHeight = 315
+      ExplicitTop = 24
+      ExplicitHeight = 317
       object Label3: TLabel
         Left = 27
         Top = 146
         Width = 54
-        Height = 13
+        Height = 15
         Alignment = taRightJustify
         Caption = 'Export File'
       end
       object Label8: TLabel
-        Left = 4
+        Left = 0
         Top = 194
-        Width = 77
-        Height = 13
+        Width = 81
+        Height = 15
         Alignment = taRightJustify
         Caption = 'Word Template'
       end
       object gbDelimiters: TGroupBox
         Left = 30
-        Top = 15
+        Top = 3
         Width = 157
-        Height = 90
+        Height = 102
         Caption = 'Delimiters'
         TabOrder = 0
         object Label1: TLabel
           Left = 31
-          Top = 26
+          Top = 25
           Width = 25
-          Height = 13
+          Height = 15
           Alignment = taRightJustify
           Caption = 'Field'
         end
         object Label2: TLabel
-          Left = 20
-          Top = 48
-          Width = 36
-          Height = 13
+          Left = 19
+          Top = 51
+          Width = 37
+          Height = 15
           Alignment = taRightJustify
           Caption = 'Record'
         end
@@ -165,7 +160,7 @@ object frmWriteMerge: TfrmWriteMerge
           Left = 64
           Top = 22
           Width = 61
-          Height = 21
+          Height = 23
           TabOrder = 0
           Items.Strings = (
             ','
@@ -174,9 +169,9 @@ object frmWriteMerge: TfrmWriteMerge
         end
         object cbRecord: TComboBox
           Left = 64
-          Top = 45
+          Top = 48
           Width = 61
-          Height = 21
+          Height = 23
           TabOrder = 1
           Items.Strings = (
             '[CR]'
@@ -185,7 +180,7 @@ object frmWriteMerge: TfrmWriteMerge
         end
         object chkQuote: TCheckBox
           Left = 7
-          Top = 67
+          Top = 77
           Width = 128
           Height = 16
           Caption = 'Enclose text in quotes?'
@@ -205,10 +200,10 @@ object frmWriteMerge: TfrmWriteMerge
         TabOrder = 1
       end
       object feExportFile: TJvFilenameEdit
-        Left = 87
+        Left = 91
         Top = 143
         Width = 216
-        Height = 21
+        Height = 23
         DialogTitle = 'Browse Export File'
         ButtonWidth = 20
         TabOrder = 2
@@ -218,7 +213,7 @@ object frmWriteMerge: TfrmWriteMerge
       object ckLaunchWord: TCheckBox
         Left = 11
         Top = 169
-        Width = 90
+        Width = 93
         Height = 16
         Alignment = taLeftJustify
         Caption = 'Launch Word'
@@ -226,10 +221,10 @@ object frmWriteMerge: TfrmWriteMerge
         OnClick = ckLaunchWordClick
       end
       object feWordTemplate: TJvFilenameEdit
-        Left = 87
+        Left = 91
         Top = 191
         Width = 216
-        Height = 21
+        Height = 23
         Filter = 
           'All files (*.*)|*.*|Word Templates (*.dot)|*.dot|Word Document (' +
           '*.doc)|*.doc'
@@ -245,8 +240,6 @@ object frmWriteMerge: TfrmWriteMerge
       Caption = 'Fields'
       ImageIndex = 1
       OnShow = tabFieldsShow
-      ExplicitWidth = 491
-      ExplicitHeight = 315
       object gbFieldOrder: TGroupBox
         Left = 5
         Top = 10
@@ -257,15 +250,15 @@ object frmWriteMerge: TfrmWriteMerge
         object Label6: TLabel
           Left = 7
           Top = 15
-          Width = 46
-          Height = 13
+          Width = 48
+          Height = 15
           Caption = 'Available'
         end
         object Label7: TLabel
           Left = 257
           Top = 15
           Width = 38
-          Height = 13
+          Height = 15
           Caption = 'Output'
         end
         object lbFieldsAvailable: TListBox
@@ -273,7 +266,7 @@ object frmWriteMerge: TfrmWriteMerge
           Top = 30
           Width = 180
           Height = 239
-          ItemHeight = 13
+          ItemHeight = 15
           MultiSelect = True
           Sorted = True
           TabOrder = 0
@@ -284,7 +277,7 @@ object frmWriteMerge: TfrmWriteMerge
           Top = 30
           Width = 180
           Height = 239
-          ItemHeight = 13
+          ItemHeight = 15
           MultiSelect = True
           TabOrder = 1
           OnDblClick = btnUnselectClick
@@ -349,20 +342,18 @@ object frmWriteMerge: TfrmWriteMerge
     object tabSortBy: TcxTabSheet
       Caption = 'Sort By'
       ImageIndex = 2
-      ExplicitWidth = 491
-      ExplicitHeight = 315
       object Label4: TLabel
         Left = 2
         Top = 7
-        Width = 79
-        Height = 13
+        Width = 81
+        Height = 15
         Caption = 'Available Fields'
       end
       object Label5: TLabel
         Left = 265
         Top = 7
         Width = 52
-        Height = 13
+        Height = 15
         Caption = 'Sort order'
       end
       object lbAllFields: TListBox
@@ -370,7 +361,7 @@ object frmWriteMerge: TfrmWriteMerge
         Top = 22
         Width = 180
         Height = 287
-        ItemHeight = 13
+        ItemHeight = 15
         MultiSelect = True
         Sorted = True
         TabOrder = 0
@@ -381,7 +372,7 @@ object frmWriteMerge: TfrmWriteMerge
         Top = 22
         Width = 180
         Height = 287
-        ItemHeight = 13
+        ItemHeight = 15
         MultiSelect = True
         TabOrder = 1
         OnDblClick = btnFieldsUnselectClick
@@ -464,8 +455,6 @@ object frmWriteMerge: TfrmWriteMerge
     object tsNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 3
-      ExplicitWidth = 491
-      ExplicitHeight = 315
       object ckAddContactNote: TCheckBox
         Left = 9
         Top = 10

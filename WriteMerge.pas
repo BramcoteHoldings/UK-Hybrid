@@ -87,6 +87,8 @@ type
     FARCHIVEDETTO: TDateTime;
 
 
+
+
     procedure SetSQL(AValue : string);
     procedure EnableMerge;
     procedure DoWordMerge;
@@ -390,10 +392,10 @@ end;
 
 procedure TfrmWriteMerge.FormCreate(Sender: TObject);
 begin
-  FSQL := '';
-  pagMerge.ActivePageIndex := 0;
-  btnMerge.Glyph.LoadFromResourceName(HInstance, SystemString('WORDPROC'));
-  tsNotes.TabVisible := False;
+   FSQL := '';
+   pagMerge.ActivePageIndex := 0;
+//   btnMerge.Glyph.LoadFromResourceName(HInstance, SystemString('WORDPROC'));
+   tsNotes.TabVisible := False;
 end;
 
 procedure TfrmWriteMerge.btnFieldsAllClick(Sender: TObject);

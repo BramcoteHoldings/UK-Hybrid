@@ -43,7 +43,7 @@ object frmClientSearch: TfrmClientSearch
     Height = 679
     Align = alClient
     TabOrder = 1
-    Properties.ActivePage = tabGrid
+    Properties.ActivePage = tabFilters
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
@@ -266,10 +266,6 @@ object frmClientSearch: TfrmClientSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1117
         649)

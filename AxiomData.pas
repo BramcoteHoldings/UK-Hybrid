@@ -857,6 +857,8 @@ type
     qryCurrencyList: TUniQuery;
     qryEmpAuthor: TUniQuery;
     dsEmpAuthor: TUniDataSource;
+    qryTaxList: TUniQuery;
+    dsTaxList: TUniDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure uniInsightConnectChange(Sender: TObject;
       Connected: Boolean);
@@ -998,6 +1000,8 @@ type
     Fauto_process_timesheet: string;
     FUserEmail: string;
     FAuth_Password: string;
+    FIs_Cashier: string;
+    FIs_CreditController: string;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1212,6 +1216,8 @@ type
     property auto_process_timesheet: string read Fauto_process_timesheet write Fauto_process_timesheet;
     property User_Email: string read FUserEmail write FUserEmail;
     property Auth_Password: string read FAuth_Password write FAuth_Password;
+    property Is_Cashier: string read FIs_Cashier write FIs_Cashier;
+    property Is_Credit_Controller: string read FIs_CreditController write FIs_CreditController;
 
     function Ping(const AHost : string) : Boolean;
   end;
@@ -1353,6 +1359,8 @@ begin
       Fauto_process_timesheet    := qryEmployeesFull.FieldByName('auto_process_timesheet').AsString;
       FUserEmail                 := qryEmployeesFull.FieldByName('EMAIL').AsString;
       FAuth_Password             := qryEmployeesFull.FieldByName('AUTHORISATION_PASSWD').AsString;
+      FIs_Cashier                := qryEmployeesFull.FieldByName('is_cashier').AsString;
+      FIs_CreditController       := qryEmployeesFull.FieldByName('IS_CREDIT_CONTROLLER').AsString;
    finally
       qryEmployeesFull.Close;
    end;

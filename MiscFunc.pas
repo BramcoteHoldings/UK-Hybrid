@@ -845,7 +845,7 @@ type
   procedure CalculateFXValue(ABase_Curr, AEntity_Curr, ATran_Curr: string; ATransDate: TDateTime;
                              ATransAmount: double; var ACurrencyValBase, ACurrencyValEntity, ACurrencyValTran, AFXValue: double);
   procedure InvoiceMergeEmail(iInvoice: integer; nMatter: Integer; Template: string = '');
-  function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string): boolean;
+  function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string = ''): boolean;
 
 type
   TRoundToRange = -37..37;

@@ -121,7 +121,7 @@
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>83</VerInfo_Build>
+        <VerInfo_Build>85</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
@@ -130,7 +130,7 @@
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.83;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.85;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -155,14 +155,14 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <VerInfo_Build>58</VerInfo_Build>
+        <VerInfo_Build>59</VerInfo_Build>
         <VerInfo_Release>26</VerInfo_Release>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>1</VerInfo_MinorVer>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_MapFile>3</DCC_MapFile>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.58;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.26.59;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.1.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
@@ -838,9 +838,6 @@
         <DCCReference Include="SafeCustodyNewPacket.pas">
             <Form>frmSafeCustodyNewPacket</Form>
         </DCCReference>
-        <DCCReference Include="SubBill.pas">
-            <Form>frmSubBill</Form>
-        </DCCReference>
         <DCCReference Include="Phonebook_Status.pas">
             <Form>frmPhonebook_Status</Form>
         </DCCReference>
@@ -1423,12 +1420,16 @@
         <DCCReference Include="Scheduler\cxSchedulerEventEditor.pas">
             <Form>cxSchedulerEventEditorForm</Form>
         </DCCReference>
+        <DCCReference Include="LoggingSnippet.pas"/>
+        <DCCReference Include="Workflow\GenericDocNoMerge.pas"/>
+        <DCCReference Include="Billing\SubBill.pas">
+            <Form>frmSubBill</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <DCCReference Include="Billing\AlterBilledTaxAmount.pas">
             <Form>frmAdjustBilledTax</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="LoggingSnippet.pas"/>
-        <DCCReference Include="Workflow\GenericDocNoMerge.pas"/>
         <None Include="ModelSupport_Insight\default.txvpck"/>
         <None Include="ModelSupport_Insight\default.txaPackage"/>
         <BuildConfiguration Include="Debug">

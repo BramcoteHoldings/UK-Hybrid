@@ -132,7 +132,6 @@ object frmConflictSearch: TfrmConflictSearch
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
-          ExplicitTop = 21
           Width = 173
         end
         object bnCancel: TcxButton
@@ -237,7 +236,6 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsImage.Spacing = 7
           TabOrder = 1
           OnClick = aFileExitExecute
-          ExplicitTop = 20
         end
         object btnCreateClient: TcxButton
           Left = 424
@@ -255,7 +253,6 @@ object frmConflictSearch: TfrmConflictSearch
           TabOrder = 2
           Visible = False
           OnClick = btnCreateClientClick
-          ExplicitTop = 19
         end
         object btnCreateMatter: TcxButton
           Left = 540
@@ -272,7 +269,6 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsImage.Spacing = 7
           TabOrder = 3
           Visible = False
-          ExplicitTop = 19
         end
       end
       object dbGrConflicts: TcxGrid
@@ -286,7 +282,6 @@ object frmConflictSearch: TfrmConflictSearch
         Margins.Bottom = 4
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 568
         object vConflicts: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCellDblClick = vConflictsCellDblClick
@@ -2952,7 +2947,8 @@ object frmConflictSearch: TfrmConflictSearch
       '    null DataFieldName,'
       '    null Data,'
       '    upper(cl.name) searchtext, '#39'N'#39' Exclude'
-      '    from client cl'
+      '    from phonebook cl'
+      '    where nclient is not null'
       ''
       '    union'
       

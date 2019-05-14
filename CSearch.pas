@@ -449,7 +449,7 @@ begin
 //     sWhereClause := sWhereClause + sAND + 'client.nclient = docreg.nclient and docreg.packetid like ' + QuotedStr('%' + edPacketID.Text + '%');
      if (edPacket.Text <> '') then
      begin
-         sWhereClause := sWhereClause + sAND + 'PHONEBOOK.nclient = docregitem.nclient and docregitem.packetid = ' + QuotedStr(edPacket.Text);
+         sWhereClause := sWhereClause + sAND + 'PHONEBOOK.nclient = docregitem.nclient and upper(docregitem.packetid) like ' + QuotedStr(uppercase(edPacket.Text));
      end
      else
      begin

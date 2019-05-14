@@ -2048,7 +2048,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
           Left = 6
           Top = 25
           Width = 80
-          Height = 45
+          Height = 30
           Alignment = taRightJustify
           Caption = 'Additional Contact Name:'
           WordWrap = True
@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43588.419444675930000000
-        Time = 43588.419444675930000000
+        Date = 43599.419444675930000000
+        Time = 43599.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -4060,7 +4060,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       
         '  DIRECTPHONE, CONTACT, CONTACT_NAME, ADDITIONAL_CONTACT_NAME, D' +
         'ATE_OF_DEATH, DEBTORSTATUS,WHICHPHONE,'
-      '  SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STATUS_ID, AP_EMAIL)'
+      
+        '  SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STATUS_ID, AP_EMAIL,' +
+        ' PASSPORT_NO)'
       'VALUES'
       
         '  (:NNAME, :NCLIENT, :SEARCH, :TITLE, :GENDER, :SALUTATION, :ADD' +
@@ -4091,7 +4093,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'ACT, :CONTACT_NAME, :ADDITIONAL_CONTACT_NAME,'
       
         '  :DATE_OF_DEATH, :DEBTORSTATUS,:WHICHPHONE, :SUPERCLIENT, :NRIC' +
-        ', :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL)'
+        ', :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO)'
       'RETURNING'
       
         '  NNAME, NCLIENT, SEARCH, TITLE, GENDER, SALUTATION, ADDRESS, SU' +
@@ -4120,7 +4122,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       
         '  ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, DEBTORSTATUS, WHICHPHO' +
         'NE, SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STATUS_ID, AP_EMAI' +
-        'L'
+        'L, PASSPORT_NO'
       'INTO'
       
         '  :NNAME, :NCLIENT, :SEARCH, :TITLE, :GENDER, :SALUTATION, :ADDR' +
@@ -4151,7 +4153,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'ACT, :CONTACT_NAME, :ADDITIONAL_CONTACT_NAME,'
       
         '  :DATE_OF_DEATH, :DEBTORSTATUS, :WHICHPHONE, :SUPERCLIENT, :NRI' +
-        'C, :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL')
+        'C, :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO')
     SQLDelete.Strings = (
       'DELETE FROM PHONEBOOK'
       'WHERE'
@@ -4210,7 +4212,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       
         '  SUPERCLIENT = :SUPERCLIENT, NRIC = :NRIC, PROSPECTIVE = :PROSP' +
         'ECTIVE, PHONEBOOK_STATUS_ID = :PHONEBOOK_STATUS_ID, AP_EMAIL = :' +
-        'AP_EMAIL'
+        'AP_EMAIL, PASSPORT_NO = :PASSPORT_NO'
       'WHERE'
       '  NNAME = :Old_NNAME'
       'RETURNING'
@@ -4237,7 +4239,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       
         '  CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, DEBTORST' +
         'ATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STAT' +
-        'US_ID, AP_EMAIL'
+        'US_ID, AP_EMAIL, PASSPORT_NO'
       'INTO'
       
         '  :NNAME, :NCLIENT, :SEARCH, :TITLE, :GENDER, :SALUTATION, :ADDR' +
@@ -4265,7 +4267,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'L_CONTACT_NAME, :DATE_OF_DEATH,'
       
         '  :DEBTORSTATUS, :WHICHPHONE, :SUPERCLIENT, :NRIC, :PROSPECTIVE,' +
-        ' :PHONEBOOK_STATUS_ID, :AP_EMAIL')
+        ' :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO')
     SQLLock.Strings = (
       
         'SELECT NNAME, NCLIENT, SEARCH, TITLE, GENDER, SALUTATION, ADDRES' +
@@ -4292,7 +4294,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'CLIENT_IMAGE, CONTACT, CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DA' +
         'TE_OF_DEATH, DEBTORSTATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPE' +
         'CTIVE,'
-      'PHONEBOOK_STATUS_ID, AP_EMAIL'
+      'PHONEBOOK_STATUS_ID, AP_EMAIL, PASSPORT_NO'
       'FROM PHONEBOOK'
       'WHERE'
       '  NNAME = :Old_NNAME'
@@ -4321,7 +4323,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'NTACT, CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, '
       
         'DEBTORSTATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPECTIVE, PHONEB' +
-        'OOK_STATUS_ID, AP_EMAIL'
+        'OOK_STATUS_ID, AP_EMAIL, PASSPORT_NO'
       'FROM PHONEBOOK'
       'WHERE'
       '  NNAME = :Old_NNAME')

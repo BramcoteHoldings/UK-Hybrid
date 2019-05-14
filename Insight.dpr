@@ -231,7 +231,6 @@ uses
   EditText in 'EditText.pas' {frmEditText},
   InvestmentTransactionNew in 'Controlled Monies\InvestmentTransactionNew.pas' {frmInvestmentTransactionNew},
   SafeCustodyNewPacket in 'SafeCustodyNewPacket.pas' {frmSafeCustodyNewPacket},
-  SubBill in 'SubBill.pas' {frmSubBill},
   Phonebook_Status in 'Phonebook_Status.pas' {frmPhonebook_Status},
   RecordMovement in 'RecordMovement.pas' {frmRecordMovement},
   chequerenumber in 'chequerenumber.pas' {frmChequeRenumber},
@@ -404,9 +403,10 @@ uses
   ChequeRev in 'ChequeRev.pas' {dmChequeRev: TDataModule},
   SearchIndexConfig in 'Document Search\SearchIndexConfig.pas' {frmIndexConfig},
   cxSchedulerEventEditor in 'Scheduler\cxSchedulerEventEditor.pas' {cxSchedulerEventEditorForm},
-  AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax},
   LoggingSnippet in 'LoggingSnippet.pas',
-  GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas';
+  GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas',
+  SubBill in 'Billing\SubBill.pas' {frmSubBill},
+  AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}
@@ -426,6 +426,7 @@ begin
   Application.CreateForm(TdmAxiom, dmAxiom);
   Application.CreateForm(TdmTableCache, dmTableCache);
   Application.CreateForm(TfrmDesktop, frmDesktop);
+  Application.CreateForm(TfrmSubBill, frmSubBill);
   Application.ProcessMessages;
   Application.Run;
 end.
