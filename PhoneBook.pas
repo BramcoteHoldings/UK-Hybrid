@@ -1277,7 +1277,7 @@ var
 begin
    if(Find()) then
    begin
-      ASearch := Search;
+      ASearch := qPhonebook.FieldByName('NAME').AsString;  //Search;
       if (Pos('&',ASearch)) > 0 then
          Insert('&', ASearch, Pos('&',ASearch));
 

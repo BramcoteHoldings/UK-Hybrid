@@ -755,9 +755,9 @@ begin
    if (systemstring('locale_name') <> '') then
       begin
       if (dmAxiom.Security.Employee.ChangeEntity = true) then
-         qryClientCount.ParamByName('DefEntity').AsString := dmAxiom.Entity
+         qryClientCount.ParamByName('DEFENTITY').AsString := dmAxiom.Entity
       else
-         qryClientCount.ParamByName('DefEntity').AsString := dmAxiom.EmpEntity;
+         qryClientCount.ParamByName('DEFENTITY').AsString := dmAxiom.EmpEntity;
    end;
 
    qryClientCount.Open;
@@ -1245,8 +1245,9 @@ begin
                  'PHONEBOOK.PARTNER, PHONEBOOK.TITLE, PHONEBOOK.SALUTATION, '+
                  'PHONEBOOK.ADDRESS, PHONEBOOK.SUBURB, PHONEBOOK.STATE, PHONEBOOK.POSTCODE, '+
                  'PHONEBOOK.COUNTRY, PHONEBOOK.NAME, PHONEBOOK.WORKPHONE, PHONEBOOK.FAX, '+
-                 'PHONEBOOK.HOMEPHONE, PHONEBOOK.DX, PHONEBOOK.DXLOC, PHONEBOOK.WWW, PHONEBOOK.EMAIL '+
-                 ' FROM DEBTORSTATUS, PHONEBOOK ';
+                 'PHONEBOOK.HOMEPHONE, PHONEBOOK.DX, PHONEBOOK.DXLOC, PHONEBOOK.WWW, PHONEBOOK.EMAIL, '+
+                 'PHONEBOOK.GIVENNAMES, PHONEBOOK.LASTNAME, PHONEBOOK.ARCHIVED_WHEN, MARKETINDUSTRY.DESCR AS INDUSTRY'+
+                 ' FROM MARKETINDUSTRY, DEBTORSTATUS, PHONEBOOK ';
       if (systemstring('locale_name') <> '') then
          sTmpSQL := sTmpSQL + ', PHONEBOOK_ENTITY';
 
@@ -1255,7 +1256,7 @@ begin
 //    if sWhereClause = '' then
 //      sTmpSQL := sTmpSQL + ' WHERE PHONEBOOK.SEARCH = CLIENT.SEARCH'
 //    else
-      sTmpSQL := sTmpSQL + ' WHERE ' + Copy(sWhereClause, 7, 999);
+      sTmpSQL := sTmpSQL + ' WHERE ' + Copy(sWhereClause, 7, 999) + ' AND PHONEBOOK.INDUSTRYCODE = MARKETINDUSTRY.CODE(+) ';
       SQL := sTmpSQL;
       AddSortField('SEARCH');
       Show;

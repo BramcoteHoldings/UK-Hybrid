@@ -859,7 +859,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43592.449176875d
+    EditValue = 43602.6171965162d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1086,7 +1086,7 @@ object frmCheque: TfrmCheque
       
         'NCREDITOR, ACCOUNT_NAME, ACCOUNT, BSB, DEP_ACCOUNT_TYPE, NDEPOSI' +
         'TACCOUNT, ANTICIPATED, ORIGINAL_TX, CHART, BAS_TAX,'
-      'FILEID'
+      'FILEID, NINVOICE'
       'FROM LGRALLOC'
       'WHERE 1=2')
     CachedUpdates = True
@@ -1185,6 +1185,9 @@ object frmCheque: TfrmCheque
     end
     object qryLedgerFILEID: TStringField
       FieldName = 'FILEID'
+    end
+    object qryLedgerNINVOICE: TLargeintField
+      FieldName = 'NINVOICE'
     end
   end
   object dsLedger: TUniDataSource
@@ -1484,40 +1487,6 @@ object frmCheque: TfrmCheque
     Left = 357
     Top = 346
   end
-  object qryInvoiceUpdate: TUniQuery
-    Connection = dmAxiom.uniInsight
-    SQL.Strings = (
-      'UPDATE INVOICE SET'
-      '  OWING = OWING - :Amount,'
-      '  LAST_PAYMENT = :Last_Payment,'
-      '  NCHEQUE = :NCHEQUE'
-      'WHERE NINVOICE = :NINVOICE'
-      ' ')
-    CachedUpdates = True
-    Left = 296
-    Top = 234
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'Amount'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'Last_Payment'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'NCHEQUE'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'NINVOICE'
-        Value = nil
-      end>
-  end
   object qryNMEMOUpdate: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
@@ -1754,5 +1723,55 @@ object frmCheque: TfrmCheque
     OnStateChange = dsLedgerTemplateStateChange
     Left = 40
     Top = 368
+  end
+  object qryInvoiceUpdate: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'UPDATE INVOICE SET'
+      '  OWING = OWING - :Amount,'
+      '  LAST_PAYMENT = :Last_Payment,'
+      '  NCHEQUE = :NCHEQUE,'
+      
+        '  LEGAL_CR_AMOUNT_OWING = decode(LEGAL_CR_AMOUNT_OWING, 0, 0, LE' +
+        'GAL_CR_AMOUNT_OWING - :LegalAmount),'
+      
+        '  TRADE_CR_AMOUNT_OWING = decode(TRADE_CR_AMOUNT_OWING, 0, 0, TR' +
+        'ADE_CR_AMOUNT_OWING - :TradeAmount)'
+      'WHERE NINVOICE = :NINVOICE'
+      '')
+    CachedUpdates = True
+    Left = 296
+    Top = 234
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'Amount'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'Last_Payment'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NCHEQUE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'LegalAmount'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TradeAmount'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NINVOICE'
+        Value = nil
+      end>
   end
 end

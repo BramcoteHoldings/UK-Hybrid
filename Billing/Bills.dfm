@@ -1147,10 +1147,6 @@ object frmBills: TfrmBills
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 20
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1388
         614)
@@ -1294,7 +1290,7 @@ object frmBills: TfrmBills
         Top = 103
         Width = 96
         Height = 23
-        TabOrder = 0
+        TabOrder = 15
         OnKeyUp = edRefnoFromKeyUp
       end
       object dtpDateTo: TDateTimePicker
@@ -1304,7 +1300,7 @@ object frmBills: TfrmBills
         Height = 23
         Date = 23204.847006782400000000
         Time = 23204.847006782400000000
-        TabOrder = 1
+        TabOrder = 4
       end
       object dtpDateFrom: TDateTimePicker
         Left = 165
@@ -1313,7 +1309,7 @@ object frmBills: TfrmBills
         Height = 23
         Date = 23204.847006782400000000
         Time = 23204.847006782400000000
-        TabOrder = 2
+        TabOrder = 5
       end
       object rgAuthorised: TRadioGroup
         Left = 4
@@ -1327,7 +1323,7 @@ object frmBills: TfrmBills
           'All'
           'Authorised Only'
           'Not Authorised')
-        TabOrder = 3
+        TabOrder = 32
       end
       object neSearchRefresh: TNumberEdit
         Left = 160
@@ -1353,7 +1349,7 @@ object frmBills: TfrmBills
         FontBetween.Name = 'Segoe UI'
         FontBetween.Style = []
         NoZero = False
-        TabOrder = 4
+        TabOrder = 29
         OnExit = neSearchRefreshExit
       end
       object edRefnoTo: TEdit
@@ -1361,7 +1357,7 @@ object frmBills: TfrmBills
         Top = 103
         Width = 97
         Height = 23
-        TabOrder = 5
+        TabOrder = 16
         OnEnter = edRefnoToEnter
       end
       object dcThisWeek: TDateChangeButton
@@ -1370,7 +1366,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'This Week'
-        TabOrder = 6
+        TabOrder = 7
         TabStop = False
         ChangeType = ctThisWeek
         DateFrom = dtpDateFrom
@@ -1384,7 +1380,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'This Month'
-        TabOrder = 7
+        TabOrder = 8
         TabStop = False
         ChangeType = ctThisMonth
         DateFrom = dtpDateFrom
@@ -1398,7 +1394,7 @@ object frmBills: TfrmBills
         Width = 85
         Height = 23
         Caption = 'Last Year'
-        TabOrder = 8
+        TabOrder = 9
         TabStop = False
         ChangeType = ctLastYear
         DateFrom = dtpDateFrom
@@ -1412,7 +1408,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'Yesterday'
-        TabOrder = 9
+        TabOrder = 10
         TabStop = False
         ChangeType = ctYesterday
         DateFrom = dtpDateFrom
@@ -1426,7 +1422,7 @@ object frmBills: TfrmBills
         Width = 85
         Height = 23
         Caption = 'Year To Date'
-        TabOrder = 10
+        TabOrder = 11
         TabStop = False
         ChangeType = ctYearToDate
         DateFrom = dtpDateFrom
@@ -1440,7 +1436,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'Today'
-        TabOrder = 11
+        TabOrder = 12
         TabStop = False
         ChangeType = ctToday
         DateFrom = dtpDateFrom
@@ -1465,7 +1461,7 @@ object frmBills: TfrmBills
           'Assessed'
           'Credit Notes')
         ParentBiDiMode = False
-        TabOrder = 12
+        TabOrder = 1
         OnClick = rgDispatchedClick
       end
       object tbMasterBill: TEdit
@@ -1473,7 +1469,7 @@ object frmBills: TfrmBills
         Top = 257
         Width = 96
         Height = 23
-        TabOrder = 13
+        TabOrder = 27
       end
       object tbFileID: TEdit
         Left = 160
@@ -1481,14 +1477,14 @@ object frmBills: TfrmBills
         Width = 96
         Height = 23
         CharCase = ecUpperCase
-        TabOrder = 14
+        TabOrder = 17
       end
       object tbClientName: TEdit
         Left = 421
         Top = 231
         Width = 97
         Height = 23
-        TabOrder = 15
+        TabOrder = 26
       end
       object cxGroupBox1: TcxGroupBox
         Left = 3
@@ -1498,7 +1494,7 @@ object frmBills: TfrmBills
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.Kind = lfFlat
         StyleDisabled.LookAndFeel.NativeStyle = True
-        TabOrder = 16
+        TabOrder = 30
         Transparent = True
         Height = 53
         Width = 491
@@ -1518,7 +1514,7 @@ object frmBills: TfrmBills
         Top = 258
         Width = 97
         Height = 23
-        TabOrder = 17
+        TabOrder = 28
         OnClick = cbPartnerClick
       end
       object tbMatterSearch: TcxTextEdit
@@ -1530,7 +1526,7 @@ object frmBills: TfrmBills
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 18
+        TabOrder = 31
         Visible = False
         OnKeyDown = tbMatterSearchKeyDown
         OnKeyPress = tbMatterSearchKeyPress
@@ -1541,14 +1537,14 @@ object frmBills: TfrmBills
         Top = 180
         Width = 96
         Height = 23
-        TabOrder = 19
+        TabOrder = 20
       end
       object tbAmountFrom: TEdit
         Left = 160
         Top = 154
         Width = 96
         Height = 23
-        TabOrder = 20
+        TabOrder = 18
       end
       object rgSearchBy: TcxRadioGroup
         Left = 274
@@ -1568,7 +1564,7 @@ object frmBills: TfrmBills
         ItemIndex = 0
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
-        TabOrder = 21
+        TabOrder = 6
         Transparent = True
         Height = 56
         Width = 189
@@ -1578,21 +1574,21 @@ object frmBills: TfrmBills
         Top = 231
         Width = 96
         Height = 23
-        TabOrder = 22
+        TabOrder = 25
       end
       object tbAmountTo: TEdit
         Left = 421
         Top = 154
         Width = 97
         Height = 23
-        TabOrder = 23
+        TabOrder = 19
       end
       object tbAmountOwingTo: TEdit
         Left = 421
         Top = 180
         Width = 97
         Height = 23
-        TabOrder = 24
+        TabOrder = 21
       end
       object dcLastWeek: TDateChangeButton
         Left = 554
@@ -1600,7 +1596,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'Last Week'
-        TabOrder = 25
+        TabOrder = 13
         TabStop = False
         ChangeType = ctLastWeek
         DateFrom = dtpDateFrom
@@ -1613,14 +1609,14 @@ object frmBills: TfrmBills
         Top = 53
         Width = 16
         Height = 18
-        TabOrder = 26
+        TabOrder = 2
       end
       object cbPartner: TComboBox
         Left = 421
         Top = 206
         Width = 97
         Height = 23
-        TabOrder = 27
+        TabOrder = 23
         OnClick = cbPartnerClick
       end
       object cbAuthor: TComboBox
@@ -1628,7 +1624,7 @@ object frmBills: TfrmBills
         Top = 206
         Width = 96
         Height = 23
-        TabOrder = 28
+        TabOrder = 22
         OnClick = cbAuthorClick
       end
       object dcLastMonth: TDateChangeButton
@@ -1637,7 +1633,7 @@ object frmBills: TfrmBills
         Width = 86
         Height = 23
         Caption = 'Last Month'
-        TabOrder = 29
+        TabOrder = 14
         TabStop = False
         ChangeType = ctLastMonth
         DateFrom = dtpDateFrom
@@ -1655,7 +1651,7 @@ object frmBills: TfrmBills
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 30
+        TabOrder = 0
         Transparent = True
       end
       object chkDateTo: TCheckBox
@@ -1663,7 +1659,7 @@ object frmBills: TfrmBills
         Top = 78
         Width = 16
         Height = 18
-        TabOrder = 31
+        TabOrder = 3
       end
       object btnClearAll: TBitBtn
         Left = 1289
@@ -1687,7 +1683,7 @@ object frmBills: TfrmBills
           3333333777333777333333333999993333333333377777333333}
         ModalResult = 3
         NumGlyphs = 2
-        TabOrder = 32
+        TabOrder = 33
         Visible = False
         OnClick = btnClearAllClick
       end
@@ -1704,7 +1700,7 @@ object frmBills: TfrmBills
         Properties.ListOptions.ShowHeader = False
         Properties.ListOptions.SyncMode = True
         Properties.ListSource = dsControllers
-        TabOrder = 33
+        TabOrder = 24
         Width = 141
       end
     end

@@ -970,7 +970,6 @@ begin
                      {post components}
                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR'),'',true,'');
 
-
                      PostLedger(Date
                        , cOriginalAmount
                        , cOriginalTax
@@ -990,7 +989,6 @@ begin
 
                      {post components}
                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', cbTaxType.Text, 'LEDGER'),'',true,'');
-
 
                      // Debit the GST Input Tax Credits ledger the tax amount
                      PostLedger(Date
@@ -1013,7 +1011,6 @@ begin
 
                      {post components}
                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_CR'),'',true,'');
-
 
                      PostLedger(Date
                        , 0 - cOriginalAmount - cOriginalTax
@@ -1049,8 +1046,8 @@ begin
 
              qryCheqReq.FieldByName('BILLED').AsString := 'N';
              //pb- if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and (qryCheqReq.FieldByName('NMEMO').AsInteger = 0))
-             if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and (qryCheqReq.FieldByName('NMEMO').AsString = ''))
-               or (qryCheqReq.State = dsInsert) then
+             if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and (qryCheqReq.FieldByName('NMEMO').AsString = '')) or
+                (qryCheqReq.State = dsInsert) then
              begin
                if chkBill.Checked then
                begin
@@ -1067,7 +1064,6 @@ begin
              begin
                qryCheqReq.FieldByName('HELD').AsString := 'W';
              end;
-
 
              qryCheqReq.Post;
 

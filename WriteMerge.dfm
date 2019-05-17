@@ -115,8 +115,6 @@ object frmWriteMerge: TfrmWriteMerge
     object tabOutput: TcxTabSheet
       Caption = 'Output'
       ImageIndex = 0
-      ExplicitTop = 24
-      ExplicitHeight = 317
       object Label3: TLabel
         Left = 27
         Top = 146
@@ -381,7 +379,7 @@ object frmWriteMerge: TfrmWriteMerge
         Left = 184
         Top = 45
         Width = 80
-        Height = 23
+        Height = 24
         Caption = 'All'
         Glyph.Data = {
           F6000000424DF600000000000000760000002800000010000000100000000100
@@ -419,7 +417,7 @@ object frmWriteMerge: TfrmWriteMerge
         Left = 184
         Top = 171
         Width = 80
-        Height = 23
+        Height = 24
         Caption = 'Unselect'
         Glyph.Data = {
           F6000000424DF600000000000000760000002800000010000000100000000100
@@ -437,7 +435,7 @@ object frmWriteMerge: TfrmWriteMerge
         Left = 184
         Top = 201
         Width = 80
-        Height = 23
+        Height = 24
         Caption = 'None'
         Glyph.Data = {
           F6000000424DF600000000000000760000002800000010000000100000000100

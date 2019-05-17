@@ -3,8 +3,8 @@ object frmDiaryNew: TfrmDiaryNew
   Top = 179
   BorderStyle = bsDialog
   Caption = 'Diary Entry'
-  ClientHeight = 759
-  ClientWidth = 583
+  ClientHeight = 646
+  ClientWidth = 578
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object frmDiaryNew: TfrmDiaryNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 618
-    Height = 702
+    Width = 577
+    Height = 643
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -32,11 +32,11 @@ object frmDiaryNew: TfrmDiaryNew
     Transparent = True
     AutoSize = True
     DesignSize = (
-      618
-      702)
+      577
+      643)
     object lblStartDayName: TLabel
       Left = 247
-      Top = 71
+      Top = 64
       Width = 75
       Height = 15
       Margins.Left = 2
@@ -48,7 +48,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object Label6: TLabel
       Left = 172
-      Top = 559
+      Top = 542
       Width = 152
       Height = 15
       Margins.Left = 4
@@ -59,7 +59,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object lblClient: TLabel
       Left = 286
-      Top = 215
+      Top = 199
       Width = 276
       Height = 16
       Cursor = crHandPoint
@@ -75,7 +75,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object lblMatterDescr: TLabel
       Left = 12
-      Top = 245
+      Top = 226
       Width = 550
       Height = 20
       Margins.Left = 4
@@ -86,7 +86,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object lblReminderForName: TLabel
       Left = 162
-      Top = 179
+      Top = 167
       Width = 364
       Height = 20
       Margins.Left = 4
@@ -98,9 +98,9 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object btnCancel: TBitBtn
       Left = 462
-      Top = 619
+      Top = 600
       Width = 100
-      Height = 34
+      Height = 30
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -114,9 +114,9 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object btnSave: TBitBtn
       Left = 355
-      Top = 619
+      Top = 600
       Width = 100
-      Height = 34
+      Height = 30
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -148,7 +148,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object chkOutlook: TCheckBox
       Left = 12
-      Top = 624
+      Top = 603
       Width = 150
       Height = 24
       Margins.Left = 4
@@ -161,7 +161,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object dtpActionStartDate: TDateTimePicker
       Left = 87
-      Top = 71
+      Top = 64
       Width = 130
       Height = 23
       Margins.Left = 4
@@ -176,7 +176,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object dtpStartTime: TDateTimePicker
       Left = 385
-      Top = 71
+      Top = 64
       Width = 130
       Height = 23
       Margins.Left = 4
@@ -190,9 +190,9 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object dtpEndTime: TDateTimePicker
       Left = 385
-      Top = 101
+      Top = 94
       Width = 130
-      Height = 28
+      Height = 23
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -204,7 +204,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object cbReminderFor: TComboBox
       Left = 89
-      Top = 178
+      Top = 166
       Width = 66
       Height = 23
       Margins.Left = 4
@@ -218,7 +218,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object icbShowTimeAs: TcxImageComboBox
       Left = 89
-      Top = 272
+      Top = 253
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -242,7 +242,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object icbLabel: TcxImageComboBox
       Left = 354
-      Top = 272
+      Top = 253
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -266,7 +266,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object cbEvent: TcxLookupComboBox
       Left = 89
-      Top = 302
+      Top = 283
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -296,7 +296,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object chkPrivate: TCheckBox
       Left = 464
-      Top = 362
+      Top = 343
       Width = 98
       Height = 22
       Margins.Left = 4
@@ -308,26 +308,9 @@ object frmDiaryNew: TfrmDiaryNew
       TabOrder = 13
       OnClick = chkNotifyClick
     end
-    object mmoDesc: TMemo
-      Left = 91
-      Top = 430
-      Width = 469
-      Height = 82
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 15
-      OnExit = mmoDescExit
-      OnKeyPress = mmoDescKeyPress
-    end
     object chkEventPrintDescr: TCheckBox
       Left = 88
-      Top = 521
+      Top = 505
       Width = 474
       Height = 24
       Margins.Left = 4
@@ -341,15 +324,16 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object neNotify: TNumberEdit
       Left = 119
-      Top = 554
+      Top = 538
       Width = 44
-      Height = 26
+      Height = 23
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Alignment = taLeftJustify
       BorderStyle = bsNone
+      Ctl3D = False
       DecimalPlaces = 0
       DisplayFormat = dfInteger
       FontAbove.Charset = DEFAULT_CHARSET
@@ -372,7 +356,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object chkNotify: TCheckBox
       Left = 12
-      Top = 555
+      Top = 537
       Width = 98
       Height = 24
       Margins.Left = 4
@@ -386,7 +370,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object cbType: TcxLookupComboBox
       Left = 89
-      Top = 589
+      Top = 570
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -407,24 +391,9 @@ object frmDiaryNew: TfrmDiaryNew
       TabOrder = 19
       Width = 473
     end
-    object edtSubject: TEdit
-      Left = 91
-      Top = 14
-      Width = 438
-      Height = 26
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      BevelInner = bvNone
-      BevelKind = bkFlat
-      BevelOuter = bvSpace
-      BorderStyle = bsNone
-      TabOrder = 0
-    end
     object cbLocation: TcxLookupComboBox
       Left = 89
-      Top = 332
+      Top = 313
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -454,7 +423,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object tbFile: TcxButtonEdit
       Left = 89
-      Top = 208
+      Top = 196
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -508,12 +477,12 @@ object frmDiaryNew: TfrmDiaryNew
       Style.ButtonStyle = bts3D
       TabOrder = 6
       OnExit = tbFileExit
-      Height = 30
+      Height = 23
       Width = 190
     end
     object tbSearch: TcxButtonEdit
       Left = 89
-      Top = 391
+      Top = 372
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -571,7 +540,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object chkInternal: TcxRadioButton
       Left = 92
-      Top = 362
+      Top = 343
       Width = 98
       Height = 22
       Margins.Left = 4
@@ -586,7 +555,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object chkExternal: TcxRadioButton
       Left = 197
-      Top = 362
+      Top = 343
       Width = 98
       Height = 22
       Margins.Left = 4
@@ -599,7 +568,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object dtpActionEndDate: TDateTimePicker
       Left = 87
-      Top = 101
+      Top = 94
       Width = 130
       Height = 23
       Margins.Left = 7
@@ -614,7 +583,7 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object LblEndDayName: TLabel
       Left = 280
-      Top = 114
+      Top = 102
       Width = 40
       Height = 15
       Margins.Left = 2
@@ -624,26 +593,34 @@ object frmDiaryNew: TfrmDiaryNew
       Caption = '   '
       Constraints.MinWidth = 40
     end
+    object mmoDesc: TcxMemo
+      Left = 89
+      Top = 409
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 15
+      OnExit = cxMemo1Exit
+      OnKeyPress = cxMemo1KeyPress
+      Height = 89
+      Width = 473
+    end
+    object edtSubject: TcxTextEdit
+      Left = 89
+      Top = 12
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 0
+      Width = 473
+    end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
       AlignHorz = ahLeft
       AlignVert = avParentManaged
       ButtonOptions.Buttons = <>
       Hidden = True
-      ItemIndex = 1
       ShowBorder = False
       Index = -1
-    end
-    object dxLayoutItem1: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      AlignHorz = ahLeft
-      AlignVert = avTop
-      CaptionOptions.Text = 'Subject'
-      Control = edtSubject
-      ControlOptions.MinHeight = 26
-      ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 26
-      ControlOptions.OriginalWidth = 438
-      Index = 0
     end
     object dxLayoutItem2: TdxLayoutItem
       Parent = dxLayoutGroup9
@@ -678,12 +655,14 @@ object frmDiaryNew: TfrmDiaryNew
     end
     object dxLayoutItem4: TdxLayoutItem
       Parent = dxLayoutGroup12
-      AlignVert = avClient
       CaptionOptions.Text = 'End'
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = False
+      SizeOptions.SizableVert = True
       Control = dtpEndTime
       ControlOptions.MinHeight = 26
       ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 28
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 130
       ControlOptions.ShowBorder = False
       Index = 1
@@ -739,7 +718,7 @@ object frmDiaryNew: TfrmDiaryNew
       Control = tbFile
       ControlOptions.MinHeight = 26
       ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 30
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 190
       ControlOptions.ShowBorder = False
       Index = 0
@@ -883,17 +862,6 @@ object frmDiaryNew: TfrmDiaryNew
       ControlOptions.ShowBorder = False
       Index = 11
     end
-    object dxLayoutItem17: TdxLayoutItem
-      Parent = dxLayoutControl1Group_Root
-      CaptionOptions.AlignVert = tavTop
-      CaptionOptions.Text = 'Description'
-      Control = mmoDesc
-      ControlOptions.MinHeight = 26
-      ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 82
-      ControlOptions.OriginalWidth = 438
-      Index = 12
-    end
     object dxLayoutItem18: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
       AlignHorz = ahRight
@@ -939,7 +907,7 @@ object frmDiaryNew: TfrmDiaryNew
       Control = neNotify
       ControlOptions.MinHeight = 26
       ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 26
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 44
       Index = 1
     end
@@ -1001,7 +969,7 @@ object frmDiaryNew: TfrmDiaryNew
       Control = btnSave
       ControlOptions.MinHeight = 26
       ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 34
+      ControlOptions.OriginalHeight = 30
       ControlOptions.OriginalWidth = 100
       ControlOptions.ShowBorder = False
       Index = 1
@@ -1014,7 +982,7 @@ object frmDiaryNew: TfrmDiaryNew
       Control = btnCancel
       ControlOptions.MinHeight = 26
       ControlOptions.MinWidth = 26
-      ControlOptions.OriginalHeight = 34
+      ControlOptions.OriginalHeight = 30
       ControlOptions.OriginalWidth = 100
       ControlOptions.ShowBorder = False
       Index = 2
@@ -1123,11 +1091,34 @@ object frmDiaryNew: TfrmDiaryNew
     object dxLayoutGroup12: TdxLayoutGroup
       Parent = dxLayoutGroup10
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
       Padding.Bottom = -5
       Padding.Top = -10
       Padding.AssignedValues = [lpavBottom, lpavTop]
       Index = 2
+    end
+    object dxLayoutItem30: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Description'
+      Control = mmoDesc
+      ControlOptions.OriginalHeight = 89
+      ControlOptions.OriginalWidth = 185
+      ControlOptions.ShowBorder = False
+      Index = 12
+    end
+    object dxLayoutItem17: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Subject'
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = True
+      SizeOptions.SizableVert = False
+      SizeOptions.Width = 498
+      AllowRemove = False
+      Control = edtSubject
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 0
     end
   end
   object qryDiary: TUniQuery

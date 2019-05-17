@@ -3,12 +3,12 @@ object frmInvPost: TfrmInvPost
   Top = 149
   BorderStyle = bsDialog
   Caption = 'Invoice Post'
-  ClientHeight = 515
-  ClientWidth = 575
+  ClientHeight = 550
+  ClientWidth = 614
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -18,90 +18,90 @@ object frmInvPost: TfrmInvPost
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    575
-    515)
+    614
+    550)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
-    Left = 91
+    Left = 93
     Top = 74
     Width = 23
-    Height = 13
+    Height = 15
     Caption = 'Fees'
   end
   object Label5: TLabel
     Left = 38
-    Top = 116
-    Width = 76
-    Height = 13
+    Top = 115
+    Width = 78
+    Height = 15
     Caption = 'Disbursements'
   end
   object Label7: TLabel
-    Left = 7
-    Top = 136
-    Width = 107
-    Height = 13
+    Left = 8
+    Top = 135
+    Width = 108
+    Height = 15
     Caption = 'Cheque Requisitions'
   end
   object Label9: TLabel
-    Left = 69
-    Top = 177
+    Left = 71
+    Top = 176
     Width = 45
-    Height = 13
+    Height = 15
     Caption = 'Sundries'
   end
   object Label10: TLabel
     Left = 223
     Top = 9
     Width = 50
-    Height = 13
+    Height = 15
     Caption = 'Bill Refno'
     OnDblClick = tbRefnoDblClick
   end
   object Label3: TLabel
     Left = 140
     Top = 56
-    Width = 80
-    Height = 13
+    Width = 85
+    Height = 15
     Caption = 'Invoice Amount'
   end
   object Label2: TLabel
     Left = 7
     Top = 249
     Width = 83
-    Height = 13
+    Height = 15
     Caption = 'Fee Distribution'
   end
   object Label8: TLabel
     Left = 237
     Top = 56
-    Width = 48
-    Height = 13
+    Width = 50
+    Height = 15
     Caption = 'Allocated'
   end
   object Label4: TLabel
-    Left = 293
+    Left = 295
     Top = 56
-    Width = 60
-    Height = 13
+    Width = 63
+    Height = 15
     Caption = '% Allocated'
   end
   object Label11: TLabel
-    Left = 42
+    Left = 43
     Top = 9
-    Width = 72
-    Height = 13
+    Width = 73
+    Height = 15
     Caption = 'Dispatch as at'
   end
   object Label12: TLabel
-    Left = 22
-    Top = 33
-    Width = 92
-    Height = 13
+    Left = 19
+    Top = 35
+    Width = 97
+    Height = 15
     Caption = 'Expected Payment'
   end
   object Label13: TLabel
-    Left = 89
+    Left = 91
     Top = 222
     Width = 25
     Height = 13
@@ -115,44 +115,44 @@ object frmInvPost: TfrmInvPost
   end
   object Label6: TLabel
     Left = 99
-    Top = 198
-    Width = 15
-    Height = 13
+    Top = 197
+    Width = 17
+    Height = 15
     Caption = 'Tax'
   end
   object Label14: TLabel
-    Left = 26
-    Top = 156
-    Width = 88
-    Height = 13
+    Left = 27
+    Top = 155
+    Width = 89
+    Height = 15
     Caption = 'Unpaid Creditors'
   end
   object Label15: TLabel
     Left = 73
     Top = 95
-    Width = 41
-    Height = 13
+    Width = 43
+    Height = 15
     Caption = 'Fees Tax'
   end
   object Label16: TLabel
-    Left = 357
+    Left = 363
     Top = 56
-    Width = 62
-    Height = 13
-    Caption = '$ Difference'
+    Width = 54
+    Height = 15
+    Caption = 'Difference'
   end
   object dtpExpectedPayment: TDateTimePicker
     Left = 119
-    Top = 28
+    Top = 31
     Width = 90
-    Height = 21
+    Height = 23
     Date = 35855.939284826410000000
     Time = 35855.939284826410000000
     TabOrder = 1
   end
   object chkCompleted: TCheckBox
     Left = 220
-    Top = 31
+    Top = 33
     Width = 69
     Height = 15
     Alignment = taLeftJustify
@@ -161,10 +161,12 @@ object frmInvPost: TfrmInvPost
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 496
-    Width = 575
+    Top = 531
+    Width = 614
     Height = 19
     Panels = <>
+    ExplicitTop = 496
+    ExplicitWidth = 575
   end
   object lblFees: TcxLabel
     Left = 119
@@ -175,7 +177,7 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
@@ -188,7 +190,7 @@ object frmInvPost: TfrmInvPost
     Style.BorderStyle = ebsFlat
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clBlue
-    Style.Font.Height = -11
+    Style.Font.Height = -12
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = []
     Style.StyleController = dmAxiom.LabelStyle
@@ -209,72 +211,72 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
   object lblDisb: TcxLabel
     Left = 119
-    Top = 114
+    Top = 113
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
   object lblAntd: TcxLabel
     Left = 119
-    Top = 134
+    Top = 133
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
   object lblUpCred: TcxLabel
     Left = 119
-    Top = 155
+    Top = 154
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
   object lblSund: TcxLabel
     Left = 119
-    Top = 175
+    Top = 174
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
   object lblTax: TcxLabel
     Left = 119
-    Top = 196
+    Top = 195
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 101
     AnchorX = 220
   end
@@ -287,7 +289,7 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
     AnchorX = 285
   end
@@ -300,12 +302,12 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
     AnchorX = 285
   end
   object lblPercentAlloc: TcxLabel
-    Left = 295
+    Left = 297
     Top = 72
     AutoSize = False
     Caption = 'LABEL'
@@ -313,12 +315,12 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
-    AnchorX = 348
+    AnchorX = 350
   end
   object lblPercentAllocTax: TcxLabel
-    Left = 295
+    Left = 297
     Top = 93
     AutoSize = False
     Caption = 'LABEL'
@@ -326,12 +328,12 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
-    AnchorX = 348
+    AnchorX = 350
   end
   object lblFeesDiff: TcxLabel
-    Left = 359
+    Left = 363
     Top = 72
     AutoSize = False
     Caption = 'LABEL'
@@ -339,12 +341,12 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
-    AnchorX = 412
+    AnchorX = 416
   end
   object lblFeesTaxDiff: TcxLabel
-    Left = 359
+    Left = 363
     Top = 93
     AutoSize = False
     Caption = 'LABEL'
@@ -352,9 +354,9 @@ object frmInvPost: TfrmInvPost
     StyleHot.BorderStyle = ebsFlat
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
-    Height = 17
+    Height = 18
     Width = 53
-    AnchorX = 412
+    AnchorX = 416
   end
   object tbRefno: TcxTextEdit
     Left = 276
@@ -365,18 +367,20 @@ object frmInvPost: TfrmInvPost
     StyleHot.LookAndFeel.Kind = lfStandard
     TabOrder = 18
     OnDblClick = tbRefnoDblClick
-    Width = 74
+    Width = 80
   end
   object dbgrFeeDist: TcxGrid
     Left = 7
     Top = 268
-    Width = 557
-    Height = 199
+    Width = 596
+    Height = 231
     Anchors = [akLeft, akTop, akRight, akBottom]
     PopupMenu = popDistFees
     TabOrder = 19
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = True
+    ExplicitWidth = 557
+    ExplicitHeight = 196
     object tvFeeDist: TcxGridDBTableView
       Navigator.Buttons.OnButtonClick = tvFeeDistNavigatorButtonsButtonClick
       Navigator.Buttons.CustomButtons = <>
@@ -447,14 +451,19 @@ object frmInvPost: TfrmInvPost
         Properties.Alignment.Horz = taRightJustify
         HeaderAlignmentHorz = taRightJustify
         MinWidth = 17
+        Options.Editing = False
         Width = 56
       end
       object tvFeeDistFEE_PC: TcxGridDBColumn
         Caption = 'Fee %'
         DataBinding.FieldName = 'FEE_PC'
-        PropertiesClassName = 'TcxTextEditProperties'
+        PropertiesClassName = 'TcxSpinEditProperties'
+        Properties.DisplayFormat = '#0.00'
+        Properties.EditFormat = '#0.00'
+        Properties.SpinButtons.Visible = False
         HeaderAlignmentHorz = taRightJustify
         MinWidth = 17
+        Options.Editing = False
         Width = 56
       end
       object tvFeeDistALLOC_AMT: TcxGridDBColumn
@@ -469,10 +478,14 @@ object frmInvPost: TfrmInvPost
       object tvFeeDistALLOC_PC: TcxGridDBColumn
         Caption = 'Allocation %'
         DataBinding.FieldName = 'ALLOC_PC'
-        PropertiesClassName = 'TcxTextEditProperties'
-        Properties.Alignment.Horz = taRightJustify
+        PropertiesClassName = 'TcxSpinEditProperties'
+        Properties.DisplayFormat = '#.00'
+        Properties.EditFormat = '#0.00'
+        Properties.ImmediatePost = True
+        Properties.SpinButtons.Visible = False
         HeaderAlignmentHorz = taRightJustify
         MinWidth = 17
+        Options.Editing = False
         Width = 56
       end
       object tvFeeDistALLOC_TAX: TcxGridDBColumn
@@ -481,6 +494,7 @@ object frmInvPost: TfrmInvPost
         PropertiesClassName = 'TcxTextEditProperties'
         Properties.Alignment.Horz = taRightJustify
         MinWidth = 17
+        Options.Editing = False
         Width = 61
       end
       object tvFeeDistFEEDIST_ID: TcxGridDBColumn
@@ -495,8 +509,8 @@ object frmInvPost: TfrmInvPost
     end
   end
   object btnPost: TcxButton
-    Left = 482
-    Top = 468
+    Left = 521
+    Top = 502
     Width = 82
     Height = 26
     Anchors = [akRight, akBottom]
@@ -593,11 +607,13 @@ object frmInvPost: TfrmInvPost
     OptionsImage.Spacing = 3
     TabOrder = 20
     OnClick = btnPostClick
+    ExplicitLeft = 482
+    ExplicitTop = 467
   end
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43587.4203528472d
+    EditValue = 43602.6484143056d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
@@ -615,7 +631,7 @@ object frmInvPost: TfrmInvPost
   end
   object chkprintbill: TcxCheckBox
     Left = 246
-    Top = 472
+    Top = 506
     Anchors = [akLeft, akBottom]
     Caption = 'Save Bill as PDF'
     Enabled = False
@@ -626,10 +642,11 @@ object frmInvPost: TfrmInvPost
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 21
     Transparent = True
+    ExplicitTop = 471
   end
   object btnCancel: TcxButton
-    Left = 395
-    Top = 468
+    Left = 434
+    Top = 502
     Width = 82
     Height = 26
     Anchors = [akRight, akBottom]
@@ -725,6 +742,8 @@ object frmInvPost: TfrmInvPost
     OptionsImage.Spacing = 3
     TabOrder = 22
     OnClick = btnCancelClick
+    ExplicitLeft = 395
+    ExplicitTop = 467
   end
   object qryMatter: TUniQuery
     Connection = dmAxiom.uniInsight

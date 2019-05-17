@@ -2940,8 +2940,8 @@ object frmConflictSearch: TfrmConflictSearch
       'select * from'
       '('
       
-        '    select '#39'Client Name'#39' cat, to_char(cl.search) clientID, nclie' +
-        'nt nclient, null matterNo,  null FileID, name ClientName, '
+        '    select '#39'Client Name'#39' cat, to_char(cl.name) clientID, nclient' +
+        ' nclient, null matterNo,  null FileID, name ClientName, '
       '    null nric,'
       '    null matterdesc,'
       '    null DataFieldName,'
@@ -2949,7 +2949,17 @@ object frmConflictSearch: TfrmConflictSearch
       '    upper(cl.name) searchtext, '#39'N'#39' Exclude'
       '    from phonebook cl'
       '    where nclient is not null'
-      ''
+      '    union'
+      
+        '    select '#39'Contact Name'#39' cat, to_char(cl.name) clientID, nclien' +
+        't nclient, null matterNo,  null FileID, name ClientName, '
+      '    null nric,'
+      '    null matterdesc,'
+      '    null DataFieldName,'
+      '    null Data,'
+      '    upper(cl.name) searchtext, '#39'N'#39' Exclude'
+      '    from phonebook cl'
+      '    where nclient is null'
       '    union'
       
         '    select '#39'Matter ID'#39' cat, null clientID, null nclient, nmatter' +
@@ -2959,7 +2969,6 @@ object frmConflictSearch: TfrmConflictSearch
       '    null Data,'
       '    upper(m.FileID) searchtext, '#39'N'#39' Exclude'
       '    from matter m'
-      ''
       '    union'
       
         '    select '#39'Matter Description'#39' cat, null clientID, nclient ncli' +
@@ -2971,7 +2980,6 @@ object frmConflictSearch: TfrmConflictSearch
       '    null Data,'
       '    upper(longdescr) searchtext, '#39'N'#39' Exclude'
       '    from matter m'
-      ''
       '    union'
       
         '    select '#39'Contact NRIC'#39' cat, TO_char(nclient) clientID, nclien' +
@@ -2982,7 +2990,6 @@ object frmConflictSearch: TfrmConflictSearch
       '    null Data,'
       '    upper(ph.nric) searchtext, '#39'N'#39' Exclude'
       '    from phonebook ph'
-      ''
       '    union'
       
         '    select '#39'Field Name'#39' cat, null clientID, null nclient, nuniqu' +
@@ -2994,23 +3001,40 @@ object frmConflictSearch: TfrmConflictSearch
       '    null matterdesc, FieldName DataFieldName, textvalue data,'
       '    upper(ftl.FieldName) searchtext, '#39'N'#39' Exclude'
       '    from fieldtypelink ftl'
-      ''
       '    union'
+      '    SELECT '#39'Field Text Value'#39' cat,'
+      '       CASE'
+      '          WHEN nname IS NOT NULL'
+      '             THEN (SELECT NAME'
+      '                     FROM phonebook'
+      '                    WHERE nname = ftl.nname)'
+      '          ELSE NULL'
+      '       END AS clientid,'
+      '       NULL nclient, nunique matterno,'
+      '       CASE'
+      '          WHEN ftl.nmatter IS NOT NULL'
+      '             THEN (SELECT MAX (fileid)'
+      '                     FROM matter m'
+      '                    WHERE m.nmatter = ftl.nmatter)'
+      '          ELSE NULL'
+      '       END AS fileid,'
+      '       CASE'
+      '          WHEN nname IS NOT NULL'
+      '             THEN (SELECT NAME'
+      '                     FROM phonebook'
+      '                    WHERE nname = ftl.nname)'
+      '          ELSE NULL'
+      '       END AS clientname, NULL nric, (SELECT MAX (longdescr)'
+      '                                      FROM matter m'
       
-        '    select '#39'Field Text Value'#39' cat, null clientID, null nclient, ' +
-        'nunique matterNo,'
+        '                                     WHERE m.nmatter = ftl.nuniq' +
+        'ue)'
       
-        '    (select max(fileid) from matter m where m.nmatter = ftl.nuni' +
-        'que) FileID,'
-      '    null ClientName, null nric,'
-      
-        '    (select max(longdescr) from matter m where m.nmatter = ftl.n' +
-        'unique) matterdesc,'
-      
-        '    FieldName DataFieldName, upper(textvalue) data, upper(ftl.te' +
-        'xtvalue) searchtext, '#39'N'#39' Exclude'
-      '    from fieldtypelink ftl'
-      ''
+        '                                                                ' +
+        '   matterdesc,'
+      '       fieldname datafieldname, UPPER (textvalue) DATA,'
+      '       UPPER (ftl.textvalue) searchtext, '#39'N'#39' exclude'
+      '  FROM fieldtypelink ftl'
       '    union'
       
         '    select '#39'Contact Passport'#39' cat, TO_char(nclient) clientID, nc' +
@@ -3021,7 +3045,6 @@ object frmConflictSearch: TfrmConflictSearch
       '    null Data,'
       '    upper(ph.passport_no) searchtext, '#39'N'#39' Exclude'
       '    from phonebook ph'
-      ''
       ') joinups'
       'where upper(searchtext) like '#39'%'#39' || upper(:searchtext) || '#39'%'#39)
     Options.SetFieldsReadOnly = False
