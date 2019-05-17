@@ -14,7 +14,7 @@ uses
   cxCalendar, cxCurrencyEdit,DateUtils, cxCheckBox, cxMemo, cxMaskEdit,
   cxDropDownEdit, EnforceCustomDateEdit, cxLookAndFeels, dxCore, cxNavigator,
   cxDateUtils, cxDBLookupComboBox, cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxBarBuiltInMenu, dxDPIAwareUtils, dxDateRanges, System.ImageList;
+  dxBarBuiltInMenu, dxDPIAwareUtils, dxDateRanges, System.ImageList, cxSpinEdit;
 
 const
   COL_AUTHOR = 0;
@@ -224,16 +224,6 @@ begin
       qryTmp.Open;
       ATotal_Units := qryTmp.FieldByName('TOTAL_UNITS').AsInteger;
       qryTmp.Close;
-     {
-       This piece of crap does not work and will not work ever...
-
-       Brendan J.    25/03/2003
-
-     if SettingLoadBoolean('sys', 'BILL', 'BILLREF') then
-       tbRefNo.Text := Self.qryInvoice.FieldbyName('NMEMO').AsString
-     else
-       tbRefno.Text := NextRefno(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'LASTBILL'));
-     }
 
      // 28/09/2004 TH - Pre-Assign Bill Number updates
      if PreassignBill() then
@@ -338,7 +328,6 @@ begin
            dtpExpectedPayment.DateTime := Self.qryBill.FieldByName('EXPPAYMENT').AsDateTime;
 //         dtpExpectedPayment.MinDate := dtpDispatched.MinDate;
      end;
-
 
      dtpExpectedPayment.MinDate := dtpDispatched.Properties.MinDate; //  dtpDispatched.MinDate;
 
@@ -2274,7 +2263,8 @@ end;
 
 procedure TfrmInvPost.qryDistFeesALLOC_AMTChange(Sender: TField);
 var
-  dTaxRatio: Single;
+  dTaxRatio,
+  dAllocAmt: double;
 begin{
   Code modified 6.01.2003 GG
 
@@ -2293,12 +2283,21 @@ begin{
       begin
          {Use the ratio of the fee-earner's fees tax over the fee-earner's fees to
          calculate this fee-earner's allocated fees tax}
-         if qryDistFees.FieldByName('FEE_AMT').AsCurrency = 0 then
-            qryDistFees.FieldByName('ALLOC_TAX').AsCurrency:= 0
+         if qryDistFees.FieldByName('ALLOC_AMT').AsFloat = 0 then
+            qryDistFees.FieldByName('ALLOC_TAX').AsFloat:= 0
          else
          begin
-            dTaxRatio:= qryDistFees.FieldByName('FEE_TAX').AsCurrency / qryDistFees.FieldByName('FEE_AMT').AsCurrency;
-            qryDistFees.FieldByName('ALLOC_TAX').AsCurrency:= FloatToCurr(qryDistFees.FieldByName('ALLOC_AMT').AsCurrency * dTaxRatio);
+            if (qryDistFees.FieldByName('FEE_AMT').AsFloat > 0) then
+            begin
+               dTaxRatio:= qryDistFees.FieldByName('FEE_TAX').AsFloat / qryDistFees.FieldByName('FEE_AMT').AsFloat;
+               qryDistFees.FieldByName('ALLOC_TAX').AsFloat:= (qryDistFees.FieldByName('ALLOC_AMT').AsFloat * dTaxRatio);
+            end
+            else
+            if (qryDistFees.FieldByName('ALLOC_AMT').AsFloat > 0) then
+            begin
+               dAllocAmt := qryDistFees.FieldByName('ALLOC_AMT').AsFloat;
+               qryDistFees.FieldByName('ALLOC_TAX').AsFloat := TaxCalc(dAllocAmt, '', 'GST', Now);
+            end;
          end;
       end;
       qryDistFees.Post;

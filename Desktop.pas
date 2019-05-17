@@ -1744,31 +1744,35 @@ procedure TfrmDesktop.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   regAxiom : TRegistry;
 begin
-
-   // Get rid of the user from the registry so that they can't run reports
-   // without being in Insight
-   if (dmAxiom.USE_ACTIVE_DIRECTORY = 'N') then
-   begin
-      regAxiom := TRegistry.Create;
-      try
-         regAxiom.RootKey := HKEY_CURRENT_USER;
-         if regAxiom.OpenKey(dmAxiom.RegistryRoot + '\Database', False) then
-            regAxiom.DeleteValue('Password');
-      finally
-         regAxiom.Free;
-      end;
-   end;
-
    try
-      if tmrUserCount.Enabled = True then
-         tmrUserCount.Enabled := False;
-      if tmrDiaryNotify.Enabled = True then
-         tmrDiaryNotify.Enabled := False;
-   finally
-      dmAxiom.qryBanks.Close;
-      tmrUserCount.Free;
-      tmrDiaryNotify.Free;
-      TabImage.Free;
+      // Get rid of the user from the registry so that they can't run reports
+      // without being in Insight
+      if (dmAxiom.USE_ACTIVE_DIRECTORY = 'N') then
+      begin
+         regAxiom := TRegistry.Create;
+         try
+            regAxiom.RootKey := HKEY_CURRENT_USER;
+            if regAxiom.OpenKey(dmAxiom.RegistryRoot + '\Database', False) then
+               regAxiom.DeleteValue('Password');
+         finally
+            regAxiom.Free;
+         end;
+      end;
+
+      try
+         if tmrUserCount.Enabled = True then
+            tmrUserCount.Enabled := False;
+         if tmrDiaryNotify.Enabled = True then
+            tmrDiaryNotify.Enabled := False;
+      finally
+         dmAxiom.qryBanks.Close;
+         tmrUserCount.Free;
+         tmrDiaryNotify.Free;
+         TabImage.Free;
+      end;
+   except
+      // if some sort of error force close
+      Application.Terminate;
    end;
 end;
 

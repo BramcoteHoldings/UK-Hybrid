@@ -1463,7 +1463,7 @@ type
     actRelate: TAction;
     tabAuthorChange: TcxTabSheet;
     dbgrMatterAuthor: TcxGrid;
-    dbgrMatterAuthorDBTableView1: TcxGridDBTableView;
+    tvMatterAuthor: TcxGridDBTableView;
     tvMatterAuthor_AuthorNew: TcxGridDBColumn;
     tvMatterAuthor_AuthorOld: TcxGridDBColumn;
     tvMatterAuthor_Modified: TcxGridDBColumn;
@@ -7092,12 +7092,12 @@ begin
               if(LData.New) then
               begin
                 qTmp.SQL.Add('INSERT INTO fieldtypelink');
-                qTmp.SQL.Add(' (nunique, linktable, fieldname, textvalue, datevalue, modified, numbervalue)');
-                qTmp.SQL.Add(' VALUES (:nunique, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue)');
+                qTmp.SQL.Add(' (nunique, linktable, fieldname, textvalue, datevalue, modified, numbervalue, type, nmatter)');
+                qTmp.SQL.Add(' VALUES (:nunique, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue, ''M'', :nmatter)');
               end else
               begin
                 qTmp.SQL.Add('UPDATE fieldtypelink SET');
-                qTmp.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue');
+                qTmp.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue, type = ''M'', nmatter = :nmatter ');
                 qTmp.SQL.Add('WHERE nunique = :nunique AND linktable = :linktable AND fieldname = :fieldname');
               end;
 
@@ -7134,6 +7134,7 @@ begin
               qTmp.ParamByName('nunique').AsInteger := qMatterDataFields.ParamByName('nunique').AsInteger;
               qTmp.ParamByName('linktable').AsString := LData.DataForm;
               qTmp.ParamByName('fieldname').AsString := LData.FieldName;
+              qTmp.ParamByName('nmatter').AsInteger := qMatterDataFields.ParamByName('nunique').AsInteger;
 
               qTmp.ExecSQL();
             end;

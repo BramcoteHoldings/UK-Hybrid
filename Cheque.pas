@@ -151,7 +151,6 @@ type
     dfBSB: TcxTextEdit;
     dfAccount: TcxTextEdit;
     dfAccountName: TcxTextEdit;
-    qryInvoiceUpdate: TUniQuery;
     qryNMEMOUpdate: TUniQuery;
     qryJournalInsert: TUniQuery;
     qryBill: TUniQuery;
@@ -180,6 +179,8 @@ type
     chkNoExit: TcxCheckBox;
     ActionList1: TActionList;
     chkReplacementCheque: TcxCheckBox;
+    qryInvoiceUpdate: TUniQuery;
+    qryLedgerNINVOICE: TLargeintField;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure cbAuthByClick(Sender: TObject);
@@ -1483,8 +1484,10 @@ begin
                       Close;
                       ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
                       Open;
-                      cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat;
-                      cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat;
+                      cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                      cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                      cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat - cTradeTotalTax;
+                      cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat - cMatterTotalTax;
                       if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
                           //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                           //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
@@ -1526,13 +1529,18 @@ begin
                   begin
                      if cMatterTotal <> 0 then
                      begin
-                        if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
+						      cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
+                        cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
+                        if (qryLedger.FieldByName('TAX').AsFloat = 0) then
+                           cMatterTotalTax := 0;
+
+{                        if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
                             cMatterTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cTradeTotal;
                         //cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
                         if (qryLedger.FieldByName('TAX').AsFloat <> 0) then
                            cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2)
                         else
-                           cMatterTotalTax := 0;
+                           cMatterTotalTax := 0;}
                      end;
 
                      if cTradeTotal <> 0 then
@@ -1621,12 +1629,14 @@ begin
 
                   with qryInvoiceUpdate do
                   begin
-                    ParamByName('AMOUNT').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat);
-                    ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
-                    ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
-                    ParamByName('NINVOICE').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
-                    ExecSQL;
-                    Close;
+                     ParamByName('AMOUNT').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat);
+                     ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
+                     ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
+                     ParamByName('NINVOICE').AsInteger := qryLedger.FieldByName('NINVOICE').AsInteger;
+                     ParamByName('LegalAmount').AsFloat := (cMatterTotal + cMatterTotalTax);
+                     ParamByName('TradeAmount').AsFloat := (cTradeTotal + cTradeTotalTax);
+                     ExecSQL;
+                     Close;
                   end;
 
                   MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);

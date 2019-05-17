@@ -3435,7 +3435,7 @@ begin
                              else
                              begin
 
-                              SplitPercent := (qryLedger.FieldByName('UPCREDCR').AsCurrency/(qryBill.FieldByName('UPCRED').AsCurrency + qryBill.FieldByName('UPCREDTAX').AsCurrency));
+                               SplitPercent := (qryLedger.FieldByName('UPCREDCR').AsCurrency/(qryBill.FieldByName('UPCRED').AsCurrency + qryBill.FieldByName('UPCREDTAX').AsCurrency));
                                TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsCurrency * SplitPercent),-2);
                                ParamByName('UPCREDTAX_PAID').AsCurrency := TaxCalc;
                                ParamByName('UPCRED_PAID').AsCurrency := (qryLedger.FieldByName('UPCREDCR').AsCurrency - TaxCalc);

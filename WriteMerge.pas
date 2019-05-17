@@ -179,42 +179,53 @@ var
   LProceed : boolean;
 begin
   // Try to open the query
-  try
-    LFullSQL := FSQL;
-    LTmp := ' ORDER BY ';
-    for i := 0 to lbSortBy.Items.Count - 1 do
-    begin
-      if(FFromPhoneBook) then
-        LFullSQL := LFullSQL + LTmp + {'p.' +} lbSortBy.Items[i]
-      else
-        LFullSQL := LFullSQL + LTmp + lbSortBy.Items[i];
-      LTmp := ', ';
-    end;
-    qryMerge.Close;
-    qryMerge.SQL.Text := LFullSQL;
-    // from matter search
-    if Pos(':OPENEDSINCE', LFullSQL) > 0 then
-      qryMerge.ParamByName('OPENEDSINCE').AsDate := Trunc(FOpenedSince);
-    if Pos(':OPENEDBEFORE', LFullSQL) > 0 then
-      qryMerge.ParamByName('OPENEDBEFORE').AsDate := Trunc(FOpenedBefore) + 1;
-    if Pos(':COMPLETEDSINCE', LFullSQL) > 0 then
-      qryMerge.ParamByName('COMPLETEDSINCE').AsDate := Trunc(FCompletedSince);
-    if Pos(':COMPLETEDBEFORE', LFullSQL) > 0 then
-      qryMerge.ParamByName('COMPLETEDBEFORE').AsDate := Trunc(FCompletedBefore) + 1;
+   try
+      LFullSQL := FSQL;
+      LTmp := ' ORDER BY ';
+      for i := 0 to lbSortBy.Items.Count - 1 do
+      begin
+         if(FFromPhoneBook) then
+            LFullSQL := LFullSQL + LTmp + {'p.' +} lbSortBy.Items[i]
+         else
+            LFullSQL := LFullSQL + LTmp + lbSortBy.Items[i];
+         LTmp := ', ';
+      end;
+      qryMerge.Close;
+      qryMerge.SQL.Text := LFullSQL;
+      // from matter search
+      if Pos(':OPENEDSINCE', LFullSQL) > 0 then
+         qryMerge.ParamByName('OPENEDSINCE').AsDate := Trunc(FOpenedSince);
+      if Pos(':OPENEDBEFORE', LFullSQL) > 0 then
+         qryMerge.ParamByName('OPENEDBEFORE').AsDate := Trunc(FOpenedBefore) + 1;
+      if Pos(':COMPLETEDSINCE', LFullSQL) > 0 then
+         qryMerge.ParamByName('COMPLETEDSINCE').AsDate := Trunc(FCompletedSince);
+      if Pos(':COMPLETEDBEFORE', LFullSQL) > 0 then
+         qryMerge.ParamByName('COMPLETEDBEFORE').AsDate := Trunc(FCompletedBefore) + 1;
 
-    if Pos(':SLESINCE', LFullSQL) > 0 then
-      qryMerge.ParamByName('SLESINCE').AsDate := Trunc(FSLESince);
-    if Pos(':SLEBEFORE', LFullSQL) > 0 then
-      qryMerge.ParamByName('SLEBEFORE').AsDate := Trunc(FSLEBefore) + 1;
+      if Pos(':SLESINCE', LFullSQL) > 0 then
+         qryMerge.ParamByName('SLESINCE').AsDate := Trunc(FSLESince);
+      if Pos(':SLEBEFORE', LFullSQL) > 0 then
+         qryMerge.ParamByName('SLEBEFORE').AsDate := Trunc(FSLEBefore) + 1;
 
-    if Pos(':ARCHIVEDSINCE', LFullSQL) > 0 then
-      qryMerge.ParamByName('ARCHIVEDSINCE').AsDate := Trunc(FARCHIVEDAFTER);
-    if Pos(':ARCHIVEDBEFORE', LFullSQL) > 0 then
-      qryMerge.ParamByName('ARCHIVEDBEFORE').AsDate := Trunc(FARCHIVEDBEFORE);
-    if Pos(':ARCHIVED', LFullSQL) > 0 then
-      qryMerge.ParamByName('ARCHIVED').AsDate := Trunc(FARCHIVEDETFROM);
-    if Pos(':ARCHIVEDTO', LFullSQL) > 0 then
-      qryMerge.ParamByName('ARCHIVEDTO').AsDate := Trunc(FARCHIVEDETTO);
+      if Pos(':ARCHIVEDSINCE', LFullSQL) > 0 then
+         qryMerge.ParamByName('ARCHIVEDSINCE').AsDate := Trunc(FARCHIVEDAFTER);
+      if Pos(':ARCHIVEDBEFORE', LFullSQL) > 0 then
+         qryMerge.ParamByName('ARCHIVEDBEFORE').AsDate := Trunc(FARCHIVEDBEFORE);
+      if Pos(':ARCHIVED', LFullSQL) > 0 then
+         qryMerge.ParamByName('ARCHIVED').AsDate := Trunc(FARCHIVEDETFROM);
+      if Pos(':ARCHIVEDTO', LFullSQL) > 0 then
+         qryMerge.ParamByName('ARCHIVEDTO').AsDate := Trunc(FARCHIVEDETTO);
+
+      if ((Pos(':DEFENTITY', LFullSQL) > 0) or (Pos(':DefEntity', LFullSQL) > 0)) then
+      begin
+         if (systemstring('locale_name') <> '') then
+         begin
+            if (dmAxiom.Security.Employee.ChangeEntity = true) then
+               qryMerge.ParamByName('DEFENTITY').AsString := dmAxiom.Entity
+            else
+               qryMerge.ParamByName('DEFENTITY').AsString := dmAxiom.EmpEntity;
+         end;
+      end;
 
     // end matter search
 

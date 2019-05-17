@@ -43,7 +43,7 @@ object frmClientSearch: TfrmClientSearch
     Height = 679
     Align = alClient
     TabOrder = 1
-    Properties.ActivePage = tabFilters
+    Properties.ActivePage = tabGrid
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner

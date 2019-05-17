@@ -2652,18 +2652,19 @@ begin
         if(LData.New) then
         begin
           qTmp2.SQL.Add('INSERT INTO fieldtypelink');
-          qTmp2.SQL.Add(' (nunique, linktable, fieldname, textvalue, datevalue, modified, numbervalue)');
-          qTmp2.SQL.Add(' VALUES (:nunique, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue)');
+          qTmp2.SQL.Add(' (nunique, linktable, fieldname, textvalue, datevalue, modified, numbervalue, type, nname)');
+          qTmp2.SQL.Add(' VALUES (:nunique, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue, ''P'', :nname)');
         end else
         begin
           qTmp2.SQL.Add('UPDATE fieldtypelink SET');
-          qTmp2.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue');
+          qTmp2.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue, type = ''P'', nname = :nname ');
           qTmp2.SQL.Add('WHERE nunique = :nunique AND linktable = :linktable AND fieldname = :fieldname');
         end;
 
         qTmp2.ParamByName('nunique').AsInteger := NName;
         qTmp2.ParamByName('linktable').AsString := LData.DataForm;
         qTmp2.ParamByName('fieldname').AsString := LData.FieldName;
+        qTmp2.ParamByName('nname').AsInteger := NName;
 
 
         if(LData.FieldType = efDate) then
@@ -3100,11 +3101,11 @@ begin
           begin
             qTmp2.SQL.Add('INSERT INTO fieldtypelink');
             qTmp2.SQL.Add(' (nunique, nunique2, linktable, fieldname, textvalue, datevalue, modified, numbervalue)');
-            qTmp2.SQL.Add(' VALUES (:nunique, :nunique2, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue)');
+            qTmp2.SQL.Add(' VALUES (:nunique, :nunique2, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue, nname, nmatter)');
           end else
           begin
             qTmp2.SQL.Add('UPDATE fieldtypelink SET');
-            qTmp2.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue');
+            qTmp2.SQL.Add('textvalue = :textvalue, datevalue = :datevalue, modified = SYSDATE, numbervalue = :numbervalue, nname = :nname, nmatter = :nmatter ');
             qTmp2.SQL.Add('WHERE nunique = :nunique AND nunique2 = :nunique2 AND linktable = :linktable AND fieldname = :fieldname');
           end;
 
@@ -3112,6 +3113,8 @@ begin
           qTmp2.ParamByName('nunique2').AsInteger := LData.NMatter;
           qTmp2.ParamByName('linktable').AsString := LData.DataForm;
           qTmp2.ParamByName('fieldname').AsString := LData.FieldName;
+          qTmp2.ParamByName('nname').AsInteger := NName;
+          qTmp2.ParamByName('nmatter').AsInteger := LData.NMatter;
 
           if(LData.FieldType = efDate) then
             qTmp2.ParamByName('datevalue').AsDate := VarToDateTime(LData.FieldValue)

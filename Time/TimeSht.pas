@@ -5503,7 +5503,7 @@ begin
          Bitmap:= TBitmap.Create;
          if tvFeeTmpNewPROCESS.Tag = 0 then
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+            Bitmap.LoadFromFile('.\images\checkboxuntick.bmp');    //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
             tvFeeTmpNewPROCESS.HeaderGlyph.Assign(Bitmap);
             tvFeeTmpNewPROCESS.Tag := 1;
             GV.ViewData.Records[0].Focused := True;
@@ -5518,7 +5518,7 @@ begin
          end
          else
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+            Bitmap.LoadFromFile('.\images\checkboxtick.bmp');  // LoadFromResourceName(HInstance,'CHECKBOXTICK');
             tvFeeTmpNewPROCESS.HeaderGlyph.Assign(Bitmap);
             tvFeeTmpNewPROCESS.Tag := 0;
             GV.ViewData.Records[0].Focused := True;
