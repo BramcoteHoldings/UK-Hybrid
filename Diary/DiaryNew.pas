@@ -11,7 +11,7 @@ uses
   cxDBLookupComboBox, cxLookAndFeels, cxLookAndFeelPainters, cxCalendar,
   cxDBEdit, cxGroupBox, cxRadioGroup, dxLayoutContainer,
   dxLayoutControlAdapters, dxLayoutcxEditAdapters, cxButtonEdit, cxClasses,
-  dxLayoutControl;
+  dxLayoutControl, cxMemo;
 
 type
 
@@ -38,7 +38,6 @@ type
     icbLabel: TcxImageComboBox;
     cbEvent: TcxLookupComboBox;
     chkPrivate: TCheckBox;
-    mmoDesc: TMemo;
     chkEventPrintDescr: TCheckBox;
     Label6: TLabel;
     neNotify: TNumberEdit;
@@ -48,11 +47,9 @@ type
     lblStartDayName: TLabel;
     lblMatterDescr: TLabel;
     lblReminderForName: TLabel;
-    edtSubject: TEdit;
     cbLocation: TcxLookupComboBox;
     dxLayoutControl1Group_Root: TdxLayoutGroup;
     dxLayoutControl1: TdxLayoutControl;
-    dxLayoutItem1: TdxLayoutItem;
     dxLayoutGroup1: TdxLayoutGroup;
     dxLayoutItem3: TdxLayoutItem;
     dxLayoutGroup2: TdxLayoutGroup;
@@ -73,7 +70,6 @@ type
     dxLayoutItem16: TdxLayoutItem;
     tbFile: TcxButtonEdit;
     tbSearch: TcxButtonEdit;
-    dxLayoutItem17: TdxLayoutItem;
     dxLayoutItem18: TdxLayoutItem;
     dxLayoutGroup6: TdxLayoutGroup;
     dxLayoutItem19: TdxLayoutItem;
@@ -97,7 +93,10 @@ type
     dxLayoutGroup10: TdxLayoutGroup;
     dxLayoutGroup11: TdxLayoutGroup;
     dxLayoutGroup12: TdxLayoutGroup;
-    procedure mmoDescKeyPress(Sender: TObject; var Key: Char);
+    mmoDesc: TcxMemo;
+    dxLayoutItem30: TdxLayoutItem;
+    edtSubject: TcxTextEdit;
+    dxLayoutItem17: TdxLayoutItem;
     procedure cbReminderForClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure dtpActionStartDateChange(Sender: TObject);
@@ -117,6 +116,8 @@ type
     procedure tbSearchPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure dtpActionEndDateChange(Sender: TObject);
+    procedure cxMemo1KeyPress(Sender: TObject; var Key: Char);
+    procedure cxMemo1Exit(Sender: TObject);
 
   private
     { Private declarations }
@@ -309,12 +310,6 @@ begin
 end;
 
 
-procedure TfrmDiaryNew.mmoDescKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ' ' then
-    Quickcode(Sender);
-end;
-
 procedure TfrmDiaryNew.cbReminderForClick(Sender: TObject);
 begin
   lblReminderForName.Caption := TableString('EMPLOYEE', 'CODE', cbReminderFor.Text, 'NAME');
@@ -416,6 +411,17 @@ begin
     tbSearch.Text := dmAxiom.qryMSearch.FieldByName('TITLE').AsString;
     mmoDesc.SetFocus;
   end;
+end;
+
+procedure TfrmDiaryNew.cxMemo1Exit(Sender: TObject);
+begin
+   QuickCode(mmoDesc);
+end;
+
+procedure TfrmDiaryNew.cxMemo1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = ' ' then
+    Quickcode(Sender);
 end;
 
 procedure TfrmDiaryNew.btnSaveClick(Sender: TObject);

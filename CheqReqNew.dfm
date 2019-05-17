@@ -229,7 +229,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Visible = False
   end
   object tbLedger: TcxButtonEdit
-    Left = 113
+    Left = 114
     Top = 136
     Properties.Buttons = <
       item
@@ -421,8 +421,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 108
   end
   object cmbBank: TcxLookupComboBox
-    Left = 119
-    Top = 31
+    Left = 114
+    Top = 32
     Anchors = [akLeft, akTop, akRight]
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 10
@@ -967,7 +967,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43594.4707015972d
+    EditValue = 43600.509370787d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1002,7 +1002,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 75
   end
   object cmbBills: TcxLookupComboBox
-    Left = 113
+    Left = 114
     Top = 110
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 12
@@ -1087,7 +1087,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 226
   end
   object cmbInvoice: TcxLookupComboBox
-    Left = 123
+    Left = 114
     Top = 136
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 12

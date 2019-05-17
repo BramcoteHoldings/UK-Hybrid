@@ -33,7 +33,7 @@ uses
   cxSchedulerAgendaView, cxSchedulerRecurrence,
   cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
   cxDataControllerConditionalFormattingRulesManagerDialog, Outlook2010,
-  dxBarExtItems, Progress;
+  dxBarExtItems, Progress, dxDateRanges, System.ImageList;
 
 const
    DayView = 0;
