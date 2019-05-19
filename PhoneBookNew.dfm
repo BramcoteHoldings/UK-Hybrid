@@ -88,7 +88,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Width = 558
     Height = 593
     TabOrder = 5
-    Properties.ActivePage = tsCustomData
+    Properties.ActivePage = tsName
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pcPagesChange
@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43601.419444675930000000
-        Time = 43601.419444675930000000
+        Date = 43603.419444675930000000
+        Time = 43603.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
