@@ -5,7 +5,7 @@ object frmFeeNew: TfrmFeeNew
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Fee Creation'
-  ClientHeight = 591
+  ClientHeight = 594
   ClientWidth = 385
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,12 +22,12 @@ object frmFeeNew: TfrmFeeNew
   OnShow = FormShow
   DesignSize = (
     385
-    591)
+    594)
   PixelsPerInch = 96
   TextHeight = 15
   object Label13: TLabel
     Left = 5
-    Top = 428
+    Top = 461
     Width = 63
     Height = 15
     Caption = 'Department'
@@ -39,20 +39,6 @@ object frmFeeNew: TfrmFeeNew
     Height = 15
     Caption = 'Fee Basis'
     Visible = False
-  end
-  object Label16: TLabel
-    Left = 5
-    Top = 481
-    Width = 17
-    Height = 15
-    Caption = 'Tax'
-  end
-  object Label9: TLabel
-    Left = 166
-    Top = 481
-    Width = 43
-    Height = 15
-    Caption = 'Minutes'
   end
   object Label1: TLabel
     Left = 5
@@ -100,21 +86,21 @@ object frmFeeNew: TfrmFeeNew
   end
   object Label15: TLabel
     Left = 5
-    Top = 402
+    Top = 435
     Width = 43
     Height = 15
     Caption = 'Tax Rate'
   end
   object Label5: TLabel
     Left = 5
-    Top = 454
+    Top = 487
     Width = 25
     Height = 15
     Caption = 'Type'
   end
   object Label6: TLabel
     Left = 5
-    Top = 137
+    Top = 138
     Width = 23
     Height = 15
     Caption = 'Task'
@@ -170,7 +156,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object Label24: TLabel
     Left = 239
-    Top = 507
+    Top = 517
     Width = 53
     Height = 15
     Caption = 'Prac Num'
@@ -178,7 +164,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object btnCancel: TcxButton
     Left = 285
-    Top = 559
+    Top = 562
     Width = 80
     Height = 27
     Anchors = [akLeft, akBottom]
@@ -271,12 +257,12 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 22
+    TabOrder = 20
     OnClick = btnCancelClick
   end
   object btnOk: TcxButton
     Left = 196
-    Top = 559
+    Top = 562
     Width = 80
     Height = 27
     Anchors = [akLeft, akBottom]
@@ -369,12 +355,12 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 21
+    TabOrder = 19
     OnClick = btnOkClick
   end
   object cbDept: TcxLookupComboBox
     Left = 79
-    Top = 425
+    Top = 458
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 10
     Properties.ImmediatePost = True
@@ -424,17 +410,6 @@ object frmFeeNew: TfrmFeeNew
     OnClick = cbFeeBasisClick
     Width = 178
   end
-  object neTax: TcxCurrencyEdit
-    Left = 79
-    Top = 478
-    Enabled = False
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 16
-    Width = 75
-  end
   object cbAuthor: TcxLookupComboBox
     Left = 79
     Top = 109
@@ -462,34 +437,21 @@ object frmFeeNew: TfrmFeeNew
     TabOrder = 4
     Width = 285
   end
-  object neMinutes: TcxTextEdit
-    Left = 215
-    Top = 478
-    Enabled = False
-    Properties.Alignment.Horz = taRightJustify
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 17
-    Text = '0'
-    Width = 42
-  end
   object chkPrivate: TcxCheckBox
     Left = 299
-    Top = 473
+    Top = 484
     Caption = 'Private?'
     Properties.Alignment = taRightJustify
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 18
+    TabOrder = 16
     Visible = False
   end
   object cbPrint: TcxCheckBox
     Left = 4
-    Top = 562
+    Top = 565
     Anchors = [akLeft, akBottom]
     Caption = 'Print Notes'
     Properties.Alignment = taRightJustify
@@ -497,7 +459,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 19
+    TabOrder = 17
   end
   object lblInvoice: TcxLabel
     Left = 257
@@ -509,7 +471,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object cbTaxType: TcxLookupComboBox
     Left = 79
-    Top = 399
+    Top = 432
     Properties.DropDownAutoSize = True
     Properties.ImmediatePost = True
     Properties.KeyFieldNames = 'CODE'
@@ -556,7 +518,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object sbPrint: TcxButton
     Left = 158
-    Top = 559
+    Top = 562
     Width = 27
     Height = 27
     Anchors = [akLeft, akBottom]
@@ -630,12 +592,12 @@ object frmFeeNew: TfrmFeeNew
       80007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 20
+    TabOrder = 18
     OnClick = sbPrintClick
   end
   object cmbTemplate: TcxLookupComboBox
     Left = 79
-    Top = 134
+    Top = 135
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 15
     Properties.ImmediatePost = True
@@ -720,7 +682,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object icmbType: TcxImageComboBox
     Left = 79
-    Top = 451
+    Top = 484
     Properties.Images = ImageList1
     Properties.ImmediatePost = True
     Properties.Items = <
@@ -768,7 +730,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object chkExcludeFromBill: TCheckBox
     Left = 5
-    Top = 505
+    Top = 515
     Width = 222
     Height = 18
     Hint = 'This excludes this entry from the merged bill'
@@ -776,7 +738,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Exclude Fee Description from Bill'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 26
+    TabOrder = 24
   end
   object dtpStartTime: TDateTimePicker
     Left = 79
@@ -802,7 +764,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object chkKeepOpen: TCheckBox
     Left = 5
-    Top = 525
+    Top = 535
     Width = 222
     Height = 18
     Hint = 'Keep Fee Creation form open after posting.'
@@ -810,7 +772,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Keep form open after posting'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 27
+    TabOrder = 25
   end
   object neItem: TcxCurrencyEdit
     Left = 282
@@ -838,24 +800,25 @@ object frmFeeNew: TfrmFeeNew
   end
   object neItemTax: TcxCurrencyEdit
     Left = 300
-    Top = 446
+    Top = 457
     Enabled = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 28
+    TabOrder = 26
     Visible = False
     Width = 64
   end
   object Panel1: TPanel
     Left = 1
     Top = 339
-    Width = 385
-    Height = 58
+    Width = 384
+    Height = 87
     BevelInner = bvSpace
     BevelKind = bkSoft
     BevelOuter = bvNone
+    ParentColor = True
     TabOrder = 11
     object Label7: TLabel
       Left = 140
@@ -887,14 +850,28 @@ object frmFeeNew: TfrmFeeNew
     end
     object Label21: TLabel
       Left = 1
-      Top = 5
+      Top = 7
       Width = 27
       Height = 15
       Caption = 'Units'
     end
+    object Label9: TLabel
+      Left = 2
+      Top = 31
+      Width = 43
+      Height = 15
+      Caption = 'Minutes'
+    end
+    object Label16: TLabel
+      Left = 256
+      Top = 55
+      Width = 17
+      Height = 15
+      Caption = 'Tax'
+    end
     object neRate: TcxCurrencyEdit
       Left = 166
-      Top = 2
+      Top = 4
       Properties.Alignment.Horz = taRightJustify
       Properties.OnChange = neRateChange
       Style.LookAndFeel.NativeStyle = True
@@ -920,7 +897,7 @@ object frmFeeNew: TfrmFeeNew
     end
     object neValue: TcxCurrencyEdit
       Left = 280
-      Top = 1
+      Top = 4
       Properties.Alignment.Horz = taRightJustify
       Properties.OnChange = neAmountChange
       Style.LookAndFeel.NativeStyle = True
@@ -941,7 +918,7 @@ object frmFeeNew: TfrmFeeNew
       Properties.OnChange = neDiscountPropertiesChange
       TabOrder = 3
       Text = '0'
-      Height = 22
+      Height = 23
       Width = 60
     end
     object neUnits: TcxSpinEdit
@@ -954,10 +931,35 @@ object frmFeeNew: TfrmFeeNew
       Value = 1.000000000000000000
       Width = 48
     end
+    object neTax: TcxCurrencyEdit
+      Left = 280
+      Top = 52
+      Enabled = False
+      Properties.Alignment.Horz = taRightJustify
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 5
+      Width = 82
+    end
+    object neMinutes: TcxTextEdit
+      Left = 76
+      Top = 28
+      Enabled = False
+      Properties.Alignment.Horz = taRightJustify
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 6
+      Text = '0'
+      Width = 48
+    end
   end
   object cmbPracNums: TcxLookupComboBox
     Left = 296
-    Top = 503
+    Top = 513
     Enabled = False
     Properties.KeyFieldNames = 'PRAC_NUM'
     Properties.ListColumns = <
@@ -966,7 +968,7 @@ object frmFeeNew: TfrmFeeNew
       end>
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsPracNum
-    TabOrder = 29
+    TabOrder = 27
     Visible = False
     Width = 68
   end
