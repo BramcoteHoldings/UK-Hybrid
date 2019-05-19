@@ -872,7 +872,7 @@ begin
                               , qryMatter.FieldByName('AUTHOR').AsString
                               // 17 Dec 17 DW changed to use Matter Tax Code or default tax code if not set
                               //, dmAxiom.DefaultTax);
-                              ,sTaxCode);
+                              , sTaxCode);
                           end;
 
                           // Now credit the billed fees

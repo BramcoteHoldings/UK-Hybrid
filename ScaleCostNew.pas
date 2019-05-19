@@ -14,7 +14,7 @@ uses
   dxLayoutContainer, cxClasses, dxLayoutControl, dxLayoutControlAdapters,
   cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
   cxDataControllerConditionalFormattingRulesManagerDialog, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridCustomView, cxGrid;
+  cxGridCustomTableView, cxGridTableView, cxGridCustomView, cxGrid, dxDateRanges;
 
 type
   TfrmScaleCostNew = class(TForm)

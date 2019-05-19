@@ -165,8 +165,6 @@ object frmInvPost: TfrmInvPost
     Width = 614
     Height = 19
     Panels = <>
-    ExplicitTop = 496
-    ExplicitWidth = 575
   end
   object lblFees: TcxLabel
     Left = 119
@@ -379,8 +377,6 @@ object frmInvPost: TfrmInvPost
     TabOrder = 19
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = True
-    ExplicitWidth = 557
-    ExplicitHeight = 196
     object tvFeeDist: TcxGridDBTableView
       Navigator.Buttons.OnButtonClick = tvFeeDistNavigatorButtonsButtonClick
       Navigator.Buttons.CustomButtons = <>
@@ -447,8 +443,7 @@ object frmInvPost: TfrmInvPost
       object tvFeeDistFEE_AMT: TcxGridDBColumn
         Caption = 'Fees $'
         DataBinding.FieldName = 'FEE_AMT'
-        PropertiesClassName = 'TcxTextEditProperties'
-        Properties.Alignment.Horz = taRightJustify
+        PropertiesClassName = 'TcxCurrencyEditProperties'
         HeaderAlignmentHorz = taRightJustify
         MinWidth = 17
         Options.Editing = False
@@ -607,13 +602,11 @@ object frmInvPost: TfrmInvPost
     OptionsImage.Spacing = 3
     TabOrder = 20
     OnClick = btnPostClick
-    ExplicitLeft = 482
-    ExplicitTop = 467
   end
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43602.6484143056d
+    EditValue = 43602.9008203241d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
@@ -642,7 +635,6 @@ object frmInvPost: TfrmInvPost
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 21
     Transparent = True
-    ExplicitTop = 471
   end
   object btnCancel: TcxButton
     Left = 434
@@ -742,8 +734,6 @@ object frmInvPost: TfrmInvPost
     OptionsImage.Spacing = 3
     TabOrder = 22
     OnClick = btnCancelClick
-    ExplicitLeft = 395
-    ExplicitTop = 467
   end
   object qryMatter: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1326,8 +1316,8 @@ object frmInvPost: TfrmInvPost
       'Oracle.FetchAll=True')
     BeforeInsert = qryDistFeesBeforeInsert
     AfterInsert = qryDistFeesAfterInsert
-    Left = 10
-    Top = 140
+    Left = 42
+    Top = 188
     ParamData = <
       item
         DataType = ftInteger
@@ -1410,6 +1400,46 @@ object frmInvPost: TfrmInvPost
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
+        'SELECT author, name, sum(amount) as sumamount, sum(tax) as sumta' +
+        'x, sum(units) as sumunits'
+      '    FROM (SELECT fee.author AS author, employee.NAME AS NAME,'
+      '                 CASE'
+      '                    WHEN (   (NVL (fee.task_amount, 0) > 0)'
+      
+        '                          OR (NVL (scalecost.defaulttime, 0) > 0' +
+        ')'
+      '                         )'
+      '                       THEN fee.task_amount'
+      '                    ELSE fee.amount'
+      '                 END AS amount,'
+      '                 CASE'
+      '                    WHEN (   (NVL (fee.task_tax, 0) > 0)'
+      
+        '                          OR (NVL (scalecost.defaulttime, 0) > 0' +
+        ')'
+      '                         )'
+      '                       THEN fee.task_tax'
+      '                    ELSE fee.tax'
+      '                 END AS tax,'
+      '                 CASE'
+      '                    WHEN (   (NVL (fee.items, 0) > 0)'
+      
+        '                          OR (NVL (scalecost.defaulttime, 0) > 0' +
+        ')'
+      '                         )'
+      '                       THEN fee.items'
+      '                    ELSE fee.units'
+      '                 END AS units'
+      '            FROM scalecost, employee, fee'
+      '           WHERE fee.nmatter = :p_matter'
+      '             AND fee.nmemo = :p_invoice'
+      '             AND fee.task = scalecost.code(+)'
+      '             AND UPPER (fee.author) = UPPER (employee.code(+)))'
+      'GROUP BY author, NAME'
+      '  HAVING sum(amount) <> 0'
+      ''
+      '/*'
+      
         'SELECT FEE.AUTHOR AS AUTHOR, EMPLOYEE.NAME AS NAME, SUM(FEE.AMOU' +
         'NT)'
       'AS SUMAMOUNT,SUM(FEE.TAX) SUMTAX, SUM(UNITS) AS SUMUNITS'
@@ -1418,7 +1448,8 @@ object frmInvPost: TfrmInvPost
       'AND FEE.NMEMO = :P_Invoice'
       'AND UPPER(FEE.AUTHOR) = UPPER(EMPLOYEE.CODE(+)) '
       'GROUP BY FEE.AUTHOR, '
-      'EMPLOYEE.NAME HAVING SUM(FEE.AMOUNT) <> 0')
+      'EMPLOYEE.NAME HAVING SUM(FEE.AMOUNT) <> 0'
+      '*/')
     Left = 103
     Top = 291
     ParamData = <
@@ -1436,20 +1467,36 @@ object frmInvPost: TfrmInvPost
   object qryTotalFees: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      'SELECT SUM (amount) AS sumamount'
+      '  FROM (SELECT CASE'
+      '                  WHEN (   (NVL (fee.task_amount, 0) > 0)'
+      '                        OR (NVL (scalecost.defaulttime, 0) > 0)'
+      '                       )'
+      '                     THEN fee.task_amount'
+      '                  ELSE fee.amount'
+      '               END AS amount'
+      '          FROM fee, scalecost'
+      '         WHERE nmemo = :p_invoice AND fee.nmatter = :p_matter'
+      '               AND fee.task = scalecost.code(+))'
+      ''
+      ''
+      ''
+      '/*'
       
         'SELECT SUM(FEE.AMOUNT) AS SUMAMOUNT FROM FEE WHERE FEE.NMATTER =' +
-        ' :P_Matter AND FEE.NMEMO = :P_Invoice')
+        ' :P_Matter AND FEE.NMEMO = :P_Invoice'
+      '*/')
     Left = 77
     Top = 369
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'P_Matter'
+        Name = 'P_Invoice'
         Value = nil
       end
       item
         DataType = ftUnknown
-        Name = 'P_Invoice'
+        Name = 'P_Matter'
         Value = nil
       end>
   end

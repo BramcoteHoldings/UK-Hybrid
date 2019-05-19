@@ -715,7 +715,7 @@ begin
   bOKtoPost:= True;
   sTmp := '';
   if ((neAmount.AsCurrency <> 0) or dmAxiom.Security.Cheque.ForceTally ) and
-      (neAmount.AsCurrency <> TotalAmt) and (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
+      (neAmount.AsCurrency <> TotalAmt) {and (qryLedger.FieldByName('TYPE').AsString <> 'Invoice')} then
     sTmp := sTmp + '       Cheque is not fully allocated' + #13;
   if cbBank.Text = '' then
     sTmp := sTmp + '       Bank Account Code' + #13;
@@ -2957,6 +2957,7 @@ begin
               FieldByName('NCREDITOR').AsInteger := qryDetails.FieldByName('NCREDITOR').AsInteger;
               if qryDetails.FindField('FILEID') <> nil then
                  FieldByName('FILEID').AsString := qryDetails.FieldByName('FILEID').AsString;
+              FieldByName('NINVOICE').AsInteger := qryDetails.FieldByName('NINVOICE').AsInteger;
               Edit;
   {
     Added 17.12.2002 GG

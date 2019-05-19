@@ -3042,7 +3042,7 @@ object frmConflictSearch: TfrmConflictSearch
         'passport_no,'
       '    null matterdesc,'
       '    null DataFieldName,'
-      '    null Data,'
+      '    ph.passport_no Data,'
       '    upper(ph.passport_no) searchtext, '#39'N'#39' Exclude'
       '    from phonebook ph'
       ') joinups'
@@ -3074,7 +3074,7 @@ object frmConflictSearch: TfrmConflictSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

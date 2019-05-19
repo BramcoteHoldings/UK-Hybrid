@@ -4,8 +4,8 @@ object frmScaleCostNew: TfrmScaleCostNew
   AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Fee Template Codes'
-  ClientHeight = 717
-  ClientWidth = 428
+  ClientHeight = 534
+  ClientWidth = 411
   Color = clBtnFace
   Constraints.MinHeight = 488
   Constraints.MinWidth = 417
@@ -58,14 +58,14 @@ object frmScaleCostNew: TfrmScaleCostNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 428
-    Height = 717
+    Width = 411
+    Height = 534
     Align = alClient
     TabOrder = 0
     AutoSize = True
     DesignSize = (
-      428
-      717)
+      411
+      534)
     object dbtbCode: TcxDBTextEdit
       Left = 115
       Top = 13
@@ -175,7 +175,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
-        0000000000004D1000004D100000000000000000000000808000008080000080
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
@@ -278,7 +278,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
-        0000000000004D1000004D100000000000000000000000808000008080000080
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
@@ -400,16 +400,15 @@ object frmScaleCostNew: TfrmScaleCostNew
       Margins.Right = 5
       Margins.Bottom = 5
       TabOrder = 11
-      Properties.ActivePage = tsTimeCost
+      Properties.ActivePage = tsItemCost
       Properties.CustomButtons.Buttons = <>
       Properties.ShowFrame = True
       Properties.TabSlants.Kind = skCutCorner
       LookAndFeel.NativeStyle = True
-      TabSlants.Kind = skCutCorner
       ClientRectBottom = 191
       ClientRectLeft = 4
       ClientRectRight = 390
-      ClientRectTop = 29
+      ClientRectTop = 28
       object tsTimeCost: TcxTabSheet
         Margins.Left = 5
         Margins.Top = 5
@@ -727,10 +726,6 @@ object frmScaleCostNew: TfrmScaleCostNew
       object tsDocument: TcxTabSheet
         Caption = 'Document'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgDocs: TcxGrid
           Left = 0
           Top = 0

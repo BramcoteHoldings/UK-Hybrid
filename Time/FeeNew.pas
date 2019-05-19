@@ -28,11 +28,8 @@ type
     btnOk: TcxButton;
     cbDept: TcxLookupComboBox;
     cbFeeBasis: TcxLookupComboBox;
-    neTax: TcxCurrencyEdit;
     Label13: TLabel;
     Label14: TLabel;
-    Label16: TLabel;
-    Label9: TLabel;
     qryEmpDept: TUniQuery;
     dsEmpDept: TUniDataSource;
     qryFeeBasisList: TUniQuery;
@@ -47,7 +44,6 @@ type
     qryTaxType: TUniQuery;
     dsTaxType: TUniDataSource;
     qFeeEarnersDEPT: TStringField;
-    neMinutes: TcxTextEdit;
     chkPrivate: TcxCheckBox;
     cbPrint: TcxCheckBox;
     lblInvoice: TcxLabel;
@@ -126,6 +122,10 @@ type
     mmoDesc: TcxRichEdit;
     mmoNotes: TcxRichEdit;
     neUnits: TcxSpinEdit;
+    neTax: TcxCurrencyEdit;
+    neMinutes: TcxTextEdit;
+    Label9: TLabel;
+    Label16: TLabel;
     procedure btnOkClick(Sender: TObject);
     procedure neRateChange(Sender: TObject);
     procedure neUnitsChange(Sender: TObject);
@@ -749,7 +749,10 @@ begin
                neValue.Value := 0.00;
             end;
          end;
-         CalcTax;
+         if neItem.Value <> 0 then
+            CalcTax(neItem.Value)
+         else
+            CalcTax;
 //         dtpEndTime.DateTime := IncMinute(dtpStartTime.DateTime, StrToInt(neMinutes.Text));
          dtpStartTime.DateTime := IncMinute(dtpEndTime.DateTime, StrToInt(neMinutes.Text)*-1);
       end
@@ -1169,8 +1172,11 @@ begin
    else
    begin
       neTax.EditValue := TaxCalc(dAmount, '', cbTaxType.EditValue, dtpCreated.Date);
-      neAmount.EditValue := dAmount;
-      neAmount.Value := dAmount;
+      if neItem.Value = 0 then
+      begin
+         neAmount.EditValue := dAmount;
+         neAmount.Value := dAmount;
+      end;
    end;
 
    // task items stuff
@@ -1190,7 +1196,6 @@ begin
       neItem.EditValue := dAmount;
       neItem.Value := dAmount;
    end;
-
 end;
 
 procedure TfrmFeeNew.neAmountExit(Sender: TObject);
@@ -1260,7 +1265,7 @@ begin
    qryScaleCost.Open();
    try
       bRateItem := ((qryScaleCost.FieldByName('RATE').AsCurrency <> 0) and
-                    (qryScaleCost.FieldByName('DFLT_TIME_UNITS').AsInteger <> 0));
+                    (qryScaleCost.FieldByName('DEFAULTTIME').AsInteger <> 0));
       LabelDesc := trim(qryScaleCost.FieldByName('UNIT').AsString);
 //      neItem.Visible := False;
 //      cmbTemplate.EditValue := AScaleCode;
@@ -1313,7 +1318,10 @@ begin
       begin
          UpdateAmount;
          ScaleAmount := neAmount.Value;
-         CalcTax;
+         if neItem.Value <> 0 then
+            CalcTax(neItem.Value)
+         else
+            CalcTax;
       end
       else
       begin
