@@ -164,7 +164,6 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
-              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -8422,17 +8421,20 @@ object frmBulkMailer: TfrmBulkMailer
     CommandStoredProcName = 'AXIOM.HTML_EMAIL'
   end
   object SMTP: TIdSMTP
+    IOHandler = IdSSLIOHandlerSocketOpenSSL1
     SASLMechanisms = <>
+    UseTLS = utUseExplicitTLS
     ValidateAuthLoginCapability = False
     Left = 953
     Top = 153
   end
   object IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL
-    Destination = 'smtp.gmail.com:465'
-    Host = 'smtp.gmail.com'
+    Destination = ':25'
     MaxLineAction = maException
-    Port = 465
+    Port = 25
     DefaultPort = 0
+    SSLOptions.Method = sslvSSLv23
+    SSLOptions.SSLVersions = [sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2]
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
@@ -8521,7 +8523,7 @@ object frmBulkMailer: TfrmBulkMailer
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8619,7 +8621,7 @@ object frmBulkMailer: TfrmBulkMailer
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350

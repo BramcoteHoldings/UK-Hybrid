@@ -10,7 +10,7 @@ inherited frmEmpType: TfrmEmpType
   Position = poMainFormCenter
   Scaled = True
   ExplicitWidth = 640
-  ExplicitHeight = 726
+  ExplicitHeight = 724
   PixelsPerInch = 106
   TextHeight = 15
   object Label1: TLabel [0]
@@ -77,7 +77,6 @@ inherited frmEmpType: TfrmEmpType
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     ClientRectBottom = 542
     ClientRectLeft = 4
     ClientRectRight = 630
@@ -87,9 +86,9 @@ inherited frmEmpType: TfrmEmpType
       ImageIndex = 0
       object tvSecurity: TTreeView
         Left = 0
-        Top = 30
+        Top = 28
         Width = 626
-        Height = 486
+        Height = 488
         Align = alClient
         Images = ilstTreeView
         Indent = 19
@@ -102,7 +101,7 @@ inherited frmEmpType: TfrmEmpType
         Left = 0
         Top = 0
         Width = 626
-        Height = 30
+        Height = 28
         Align = dalTop
         BarManager = bmMain
         SunkenBorder = False
@@ -157,7 +156,7 @@ inherited frmEmpType: TfrmEmpType
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C00000FF00FFC0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C00000FF00FFC0C0C000C0C0
@@ -204,7 +203,7 @@ inherited frmEmpType: TfrmEmpType
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C00000FF00FFC0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -251,7 +250,7 @@ inherited frmEmpType: TfrmEmpType
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -297,7 +296,7 @@ inherited frmEmpType: TfrmEmpType
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C0000000FFFFC0C0C000C0C0C000C0C0C000C0C0
@@ -353,7 +352,7 @@ inherited frmEmpType: TfrmEmpType
         Left = 0
         Top = 0
         Width = 626
-        Height = 30
+        Height = 28
         Align = dalTop
         BarManager = bmMain
       end
@@ -944,11 +943,13 @@ inherited frmEmpType: TfrmEmpType
       True)
     Left = 428
     Top = 6
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
+      Font.Height = -9
       OldName = 'Main Menu1'
     end
     inherited bmMainBar2: TdxBar
+      Font.Height = -12
       IsMainMenu = False
       MultiLine = False
       OldName = 'Toolbar1'
@@ -1098,34 +1099,27 @@ inherited frmEmpType: TfrmEmpType
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Code'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 4498
@@ -1137,13 +1131,15 @@ inherited frmEmpType: TfrmEmpType
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 17463
@@ -1157,6 +1153,7 @@ inherited frmEmpType: TfrmEmpType
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1176,6 +1173,7 @@ inherited frmEmpType: TfrmEmpType
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1194,12 +1192,10 @@ inherited frmEmpType: TfrmEmpType
       end
     end
     inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
-      end
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1258,7 +1254,7 @@ inherited frmEmpType: TfrmEmpType
         'ptype')
     MasterSource = dsSource
     Left = 249
-    Top = 11
+    Top = 27
   end
   object qryEmpTypeSecurityUpdate: TUniQuery
     Connection = dmAxiom.uniInsight

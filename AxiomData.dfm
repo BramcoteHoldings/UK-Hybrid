@@ -7,7 +7,6 @@ object dmAxiom: TdmAxiom
   object uniInsight: TUniConnection
     ProviderName = 'Oracle'
     SpecificOptions.Strings = (
-      'Oracle.Direct=True'
       'Oracle.IPVersion=ivIPBoth')
     Options.KeepDesignConnected = False
     Options.LocalFailover = True
@@ -17,8 +16,8 @@ object dmAxiom: TdmAxiom
     PoolingOptions.Validate = True
     Pooling = True
     Debug = True
-    Username = 'axiom'
-    Server = '192.168.0.22:1521:marketing'
+    Username = 'dbs'
+    Server = 'BBSLAW'
     Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
@@ -26,7 +25,7 @@ object dmAxiom: TdmAxiom
     OnConnectionLost = uniInsightConnectionLost
     Left = 26
     Top = 14
-    EncryptedPassword = '9EFF87FF96FF90FF92FF'
+    EncryptedPassword = '9BFF9DFF8CFF'
   end
   object qryTmp: TUniQuery
     Connection = uniInsight
@@ -6736,7 +6735,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
