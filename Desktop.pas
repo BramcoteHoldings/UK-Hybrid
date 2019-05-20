@@ -755,7 +755,7 @@ uses
   EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
   Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
-  WinAPI.ShellAPI, SearchIndexConfig;
+  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer;
 
 
 {$R *.DFM}
@@ -3448,7 +3448,8 @@ var
   LfrmReceipt: TfrmReceipt;
   LfrmCreditor: TfrmCreditors;
   OldDir,
-  DocErrMsg: string;
+  DocErrMsg,
+  DREmailSQL: string;
   AHandle: THandle;
 begin
    csrPrev := Screen.Cursor;
@@ -4062,7 +4063,18 @@ begin
 //    IDXNARRATIVE: FindOrCreate(TfrmReceiptReqNarrative, iProgramID).Show;
     IDXDOCFOLDERTMPL: FindOrCreate(TfrmDoc_Fldr_Tmpl, iProgramID).Show;
     IDXDOCINDEXUSERS: FindOrCreate(TfrmIndexConfig, iProgramID).Show;
-//    IDXBULKMAILER: FindorCreate(TfrmBulkMailer, iProgramID).Show;
+    IDXBULKMAILER: begin
+                       with TfrmBulkMailer.Create(frmDesktop) do
+                       begin
+                          Tag := iProgramID;
+                          DebtorStatements := 1;
+
+                          DREmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
+                                        ' AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+                          EmailSQL := DREmailSQL;
+                          ShowModal;
+                        end;
+                    end;
   end;
   Screen.Cursor := csrPrev;  // Restore cursor
 end;

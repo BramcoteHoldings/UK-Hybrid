@@ -20,7 +20,9 @@ uses
   RichEditBrowser, SHDocVw, mshtml, EwbCore, EmbeddedWB, IdAttachmentFile,
   dxBarExtDBItems, System.Math, dd_HTMLEditor, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
-  System.ImageList;
+  System.ImageList, ppParameter, ppRichTx, ppBands, ppClass, ppDesignLayer,
+  ppModule, raCodMod, ppCtrls, ppReport, ppPrnabl, ppStrtch, ppSubRpt, ppCache,
+  ppComm, ppRelatv, ppProd, ppDB, ppDBPipe;
 
 type
   TfrmBulkMailer = class(TForm)
@@ -176,6 +178,59 @@ type
     cxLabel1: TcxLabel;
     edFrom: TcxTextEdit;
     edSubject: TcxTextEdit;
+    Report: TppReport;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppSubReport1: TppSubReport;
+    ppChildReport1: TppChildReport;
+    ppTitleBand1: TppTitleBand;
+    ppLabel1: TppLabel;
+    ppDetailBand2: TppDetailBand;
+    ppDBText6: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    ppSummaryBand2: TppSummaryBand;
+    ppDBCalc1: TppDBCalc;
+    raCodeModule1: TraCodeModule;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppDBText1: TppDBText;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppRichText3: TppRichText;
+    ppRichText2: TppRichText;
+    raCodeModule2: TraCodeModule;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    dsRB_Item: TUniDataSource;
+    plReports: TppDBPipeline;
+    plReportsppField1: TppField;
+    plReportsppField2: TppField;
+    plReportsppField3: TppField;
+    plReportsppField4: TppField;
+    plReportsppField5: TppField;
+    plReportsppField6: TppField;
+    plReportsppField7: TppField;
+    plReportsppField8: TppField;
+    plReportsppField9: TppField;
+    qryRB_Items: TUniQuery;
+    qryRB_ItemsROWID: TStringField;
+    qryRB_ItemsITEM_ID: TIntegerField;
+    qryRB_ItemsFOLDER_ID: TIntegerField;
+    qryRB_ItemsITEM_NAME: TStringField;
+    qryRB_ItemsITEM_SIZE: TIntegerField;
+    qryRB_ItemsITEM_TYPE: TIntegerField;
+    qryRB_ItemsMODIFIED: TFloatField;
+    qryRB_ItemsDELETED: TFloatField;
+    qryRB_ItemsTEMPLATE: TMemoField;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -232,6 +287,7 @@ type
     fDocumentHistory: TStringList;
     fSpellcheckerSmartTagHandlerID: integer;
     fTemplateDir: string;
+    FDebtorStatements: integer;
 
     procedure UpdateLinkControls();
     procedure UpdateFontControls();
@@ -267,6 +323,7 @@ type
     property EditorValue: TMemoryStream read FEditorValue write FEditorValue;
     property EmailSQL: string read FSql write SetSQL;
     property EventID: integer read FEventID write FEventID default 0;
+    property DebtorStatements: integer read FDebtorStatements write FDebtorStatements default 0;
 
     procedure Loaded(); override;
   end;
@@ -280,7 +337,8 @@ implementation
 
 uses
     ShellApi, InsertTableForm, IdExceptionCore,
-    AxiomData, StrUtils, MiscFunc, GenExport, IdMessageBuilder;
+    AxiomData, StrUtils, MiscFunc, GenExport, IdMessageBuilder,
+    ppTypes,  IdMessageParts, IdAttachment;
 
 const NEW_DOCUMENT_FILENAME = 'New Document.html';
 
@@ -289,14 +347,25 @@ var
 
 procedure TfrmBulkMailer.SetSQL(AValue : string);
 begin
-   FSQL := AValue;
-   qryEmails.SQL.Text := AValue;
-   if dmAxiom.RunningIde then
-      qryEmails.SQL.SaveToFile('c:\tmp\bulkmail.sql');
-   qryEmails.Close();
-   if EventID > 0 then
-      qryEmails.ParamByName('event_id').AsInteger := EventID;
-   qryEmails.Open();
+   try
+      if DebtorStatements = 0 then
+      begin
+         FSQL := AValue;
+         qryEmails.SQL.Text := AValue;
+         if dmAxiom.RunningIde then
+            qryEmails.SQL.SaveToFile('c:\tmp\bulkmail.sql');
+         qryEmails.Close();
+         if EventID > 0 then
+            qryEmails.ParamByName('event_id').AsInteger := EventID;
+      end
+      else
+      begin
+         FSQL := AValue;
+         qryEmails.SQL.Text := AValue;
+      end;
+   finally
+      qryEmails.Open();
+   end;
 end;
 
 procedure TfrmBulkMailer.dxBarButtonBoldClick(Sender: TObject);
@@ -1033,12 +1102,17 @@ var
    iLoop,
    nRowCount: integer;
    Field: TField;
-   RTFSource: string;
+   RTFSource,
+   aFileDate: string;
 //   MyMemoryStream: TMemoryStream;
 //   idAttach : TIdAttachmentFile;
-   lsSubject: string;
+   lsSubject,
+   ANewDocName,
+   AParsedDocName,
+   AParsedDir: string;
    lEmailTemp: TStrings;
    bSelected: boolean;
+   Attachment: TIdAttachment;
 begin
    Screen.Cursor := crSQLWait;
    if (edFrom.Text = '') then
@@ -1078,7 +1152,7 @@ begin
                if VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
                   bSelected := False
                else
-                  bSelected := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index];
+                  bSelected := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index];
 
                if (not VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index])) and bSelected then
                begin
@@ -1088,8 +1162,6 @@ begin
                      MailMessage.From.Address := edFrom.Text;
                      MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
 
-                     MailMessage.ContentType := 'text/html';
-
                      lsSubject := edSubject.Text;
 
                      try
@@ -1098,11 +1170,60 @@ begin
                         lEmailTemp := TStringList.Create;
                         lEmailTemp.LoadFromFile(fTemplateDir);
 
-                        MailMessage.Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] {qryEmails.FieldByName('NNAME').AsInteger},
-                                                               lEmailTemp.Text);
+                        with TIdText.Create(MailMessage.MessageParts, nil) do
+                        begin
+                           Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
+                                                         lEmailTemp.Text);
+                           ContentType := 'text/html';
+                        end;
                      finally
                         lEmailTemp.Free;
                      end;
+
+                     try
+                        with Report do
+                        begin
+                           try
+                              qryRB_Items.Close;
+                              Report.Template.DatabaseSettings.DataPipeline := plReports;
+                              Report.Template.DatabaseSettings.NameField := 'ITEM_Name';
+                              Report.Template.DatabaseSettings.TemplateField := 'Template';
+                              Report.Template.DatabaseSettings.Name := SystemString('DR_TEMPLATE');
+                              Report.Template.LoadFromDatabase;
+                           except
+                              ;
+                           end;
+
+                           if (Report.Parameters.Count > 0) then
+                           begin
+                              Report.Parameters['NCLIENT'].Value := tvEmailsNNAME.EditValue;
+
+                              //Report.Parameters['NDATE'].Value := trunc(Now);
+                              Report.Parameters['ENTITY'].Value := dmAxiom.Entity;
+                              Report.Parameters['EMAILPRINT'].Value := 0;
+                           end;
+                        end;
+                     finally
+                        DateTimeToString(aFileDate,'ddmmyyyy',Now);
+                        ANewDocName := SystemString('DFLT_DOC_LIST')+ '\' +
+                                    tvEmailsNNAME.EditValue +
+                                    '\Debtor Statement_'+ aFileDate + '.pdf';
+                        AParsedDocName := ParseMacros(ANewDocName, integer(tvEmailsNNAME.EditValue));
+                        AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
+                        // check directory exists, if not create it
+                        if not DirectoryExists(AParsedDir) then
+                           ForceDirectories(AParsedDir);
+                        Report.AllowPrintToFile := True;
+                        Report.ShowPrintDialog := False;
+                        Report.DeviceType := dtPDF;
+                        Report.PDFSettings.OpenPDFFile := False;
+                        Report.TextFileName := AParsedDocName;
+                        Report.Print;
+                     end;
+
+                     Attachment := TIdAttachmentFile.Create(MailMessage.MessageParts, AParsedDocName);
+                     MailMessage.ContentType := 'multipart/related; type="text/html"';
+                     MailMessage.Charset := 'utf-8';
 
                      try
                         if (SMTP.Connected = False) then
@@ -1116,13 +1237,13 @@ begin
                         on E:Exception do
                            Panel1.Caption := 'ERROR: ' + E.Message;
                      end;
-
+                     Attachment.Free;
                      SaveEmail(ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] {qryEmails.FieldByName('nname').AsInteger}, edSubject.Text);
                      spHTMLEmail.Close;
                   end;
                end;
-               EndUpdate;
             end;
+            EndUpdate;
          end;
 
 {         with qryEmails do
@@ -1177,8 +1298,10 @@ begin
       finally
          begin
             if SMTP.Connected then SMTP.Disconnect;
-//            MailMessage.Free;
+            MailMessage.Free;
 //            MyMemoryStream.Free;
+//            Attachment.Free;
+            SMTP.Free;
             Screen.Cursor := crDefault;
             self.Close;
          end;
@@ -1367,7 +1490,7 @@ begin
    Bitmap:= TBitmap.Create;
    if tvEmailsSELECT.Tag = 0 then
    begin
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+      Bitmap.LoadFromFile('.\images\CHECKBOXUNTICK.bmp');
       tvEmailsSELECT.HeaderGlyph.Assign(Bitmap);
       tvEmailsSELECT.Tag := 1;
       GV.ViewData.Records[0].Focused := True;
@@ -1379,7 +1502,7 @@ begin
    end
    else
    begin
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+      Bitmap.LoadFromFile('.\images\CHECKBOXTICK.bmp');
       tvEmailsSELECT.HeaderGlyph.Assign(Bitmap);
       tvEmailsSELECT.Tag := 0;
       GV.ViewData.Records[0].Focused := True;

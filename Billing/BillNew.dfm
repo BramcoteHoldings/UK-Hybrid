@@ -2196,8 +2196,8 @@ object frmInvoice: TfrmInvoice
     Hint = 
       'Discount (% or $ amount. eg 5% or 200).  If discount is whole do' +
       'llar amount, assumption is that the amount is GST inclusive.'
+    Properties.OnChange = edtDiscountPropertiesChange
     TabOrder = 26
-    OnExit = edtDiscountExit
     OnKeyPress = edtDiscountKeyPress
     Width = 114
   end

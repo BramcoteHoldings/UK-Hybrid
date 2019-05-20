@@ -12672,7 +12672,9 @@ begin
             varWord := null;
          end;
       end;
-   end;
+   end
+   else
+      varWord := GetActiveOleObject('Word.Application');
 
    varDoc := varWord.Documents.Add(AFile);
    varDoc.Select;
@@ -12715,7 +12717,9 @@ begin
             varExcel := null;
          end;
       end;
-   end;
+   end
+   else
+      varExcel := GetActiveOleObject('Excel.Application');
 
    varWBook := varExcel.Workbooks.Open(AFile);
 //   varWBook.Select;

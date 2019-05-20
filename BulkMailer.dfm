@@ -106,10 +106,6 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Editor: TRichEdit
               Left = 0
               Top = 0
@@ -142,10 +138,6 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'tabHTML'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object ed_LinkHRef: TcxTextEdit
               Left = 435
               Top = 4
@@ -212,10 +204,6 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
@@ -8452,12 +8440,12 @@ object frmBulkMailer: TfrmBulkMailer
     Top = 289
   end
   object MailMessage: TIdMessage
-    AttachmentEncoding = 'UUE'
+    AttachmentEncoding = 'MIME'
     BccList = <>
     CharSet = 'us-ascii'
     CCList = <>
     ContentType = 'text/html'
-    Encoding = meDefault
+    Encoding = meMIME
     FromList = <
       item
       end>
@@ -8473,7 +8461,7 @@ object frmBulkMailer: TfrmBulkMailer
       'select *'
       'from'
       'email_templates')
-    Left = 670
+    Left = 638
     Top = 118
   end
   object dsEmailTemplates: TUniDataSource
@@ -8527,5 +8515,642 @@ object frmBulkMailer: TfrmBulkMailer
         ParamType = ptInput
         Value = nil
       end>
+  end
+  object Report: TppReport
+    NoDataBehaviors = [ndBlankReport]
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 296900
+    PrinterSetup.mmPaperWidth = 209900
+    PrinterSetup.PaperSize = 9
+    Units = utMillimeters
+    AllowPrintToFile = True
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.Enabled = True
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zs100Percent
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 755
+    Top = 443
+    Version = '19.02'
+    mmColumnWidth = 0
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 69056
+      mmPrintPosition = 0
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      PrintHeight = phDynamic
+      mmBottomOffset = 0
+      mmHeight = 7938
+      mmPrintPosition = 0
+      object ppSubReport1: TppSubReport
+        DesignLayer = ppDesignLayer1
+        UserName = 'SubReport1'
+        ExpandAll = False
+        NewPrintJob = False
+        OutlineSettings.CreateNode = True
+        TraverseAllData = False
+        mmHeight = 5027
+        mmLeft = 0
+        mmTop = 1058
+        mmWidth = 197200
+        BandType = 4
+        LayerName = Foreground
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+        object ppChildReport1: TppChildReport
+          AutoStop = False
+          PrinterSetup.BinName = 'Default'
+          PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PrinterName = 'Default'
+          PrinterSetup.SaveDeviceSettings = False
+          PrinterSetup.mmMarginBottom = 6350
+          PrinterSetup.mmMarginLeft = 6350
+          PrinterSetup.mmMarginRight = 6350
+          PrinterSetup.mmMarginTop = 6350
+          PrinterSetup.mmPaperHeight = 296900
+          PrinterSetup.mmPaperWidth = 209900
+          PrinterSetup.PaperSize = 9
+          Version = '19.02'
+          mmColumnWidth = 0
+          object ppTitleBand1: TppTitleBand
+            Background.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 8731
+            mmPrintPosition = 0
+            object ppLabel1: TppLabel
+              DesignLayer = ppDesignLayer2
+              UserName = 'Label1'
+              Border.mmPadding = 0
+              Caption = 'Matter'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = [fsBold]
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
+              TextAlignment = taRightJustified
+              Transparent = True
+              mmHeight = 3969
+              mmLeft = 6350
+              mmTop = 3969
+              mmWidth = 11642
+              BandType = 1
+              LayerName = Foreground1
+            end
+          end
+          object ppDetailBand2: TppDetailBand
+            Background1.Brush.Style = bsClear
+            Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 5821
+            mmPrintPosition = 0
+            object ppDBText6: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText6'
+              Border.mmPadding = 0
+              DataField = 'FILEID'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = []
+              ParentDataPipeline = False
+              Transparent = True
+              mmHeight = 3852
+              mmLeft = 6350
+              mmTop = 794
+              mmWidth = 15081
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText7: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText7'
+              Border.mmPadding = 0
+              DataField = 'SHORTDESCR'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = []
+              ParentDataPipeline = False
+              Transparent = True
+              mmHeight = 3852
+              mmLeft = 23019
+              mmTop = 794
+              mmWidth = 83608
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText8: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText8'
+              Border.mmPadding = 0
+              DataField = 'REFNO'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = []
+              ParentDataPipeline = False
+              Transparent = True
+              mmHeight = 3969
+              mmLeft = 137319
+              mmTop = 794
+              mmWidth = 18785
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText9: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText9'
+              Border.mmPadding = 0
+              DataField = 'OWING'
+              DisplayFormat = '$#,0.00;($#,0.00)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = []
+              ParentDataPipeline = False
+              TextAlignment = taRightJustified
+              Transparent = True
+              mmHeight = 3969
+              mmLeft = 161132
+              mmTop = 794
+              mmWidth = 23548
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText10: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText10'
+              Border.mmPadding = 0
+              DataField = 'DISPATCHED'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = []
+              ParentDataPipeline = False
+              TextAlignment = taRightJustified
+              Transparent = True
+              mmHeight = 3969
+              mmLeft = 108215
+              mmTop = 794
+              mmWidth = 23283
+              BandType = 4
+              LayerName = Foreground1
+            end
+          end
+          object ppSummaryBand2: TppSummaryBand
+            Background.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 6615
+            mmPrintPosition = 0
+            object ppDBCalc1: TppDBCalc
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBCalc1'
+              Border.mmPadding = 0
+              DataField = 'TOTAL'
+              DisplayFormat = '$#,0.00;($#,0.00)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Verdana'
+              Font.Size = 9
+              Font.Style = [fsBold]
+              TextAlignment = taRightJustified
+              Transparent = True
+              mmHeight = 3852
+              mmLeft = 161132
+              mmTop = 265
+              mmWidth = 23548
+              BandType = 7
+              LayerName = Foreground1
+            end
+          end
+          object raCodeModule1: TraCodeModule
+          end
+          object ppDesignLayers2: TppDesignLayers
+            object ppDesignLayer2: TppDesignLayer
+              UserName = 'Foreground1'
+              LayerType = ltBanded
+              Index = 0
+            end
+          end
+        end
+      end
+    end
+    object ppGroup1: TppGroup
+      BreakName = 'NBILL_TO'
+      GroupFileSettings.NewFile = False
+      GroupFileSettings.EmailFile = False
+      OutlineSettings.CreateNode = True
+      NewPage = True
+      ResetPageNo = True
+      StartOnOddPage = False
+      UserName = 'Group1'
+      mmNewColumnThreshold = 0
+      mmNewPageThreshold = 0
+      DataPipelineName = ''
+      NewFile = False
+      object ppGroupHeaderBand1: TppGroupHeaderBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        mmBottomOffset = 0
+        mmHeight = 19844
+        mmPrintPosition = 0
+        object ppDBText1: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText1'
+          Border.mmPadding = 0
+          DataField = 'NAME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          mmHeight = 3852
+          mmLeft = 7408
+          mmTop = 3704
+          mmWidth = 67998
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText2: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText2'
+          Border.mmPadding = 0
+          DataField = 'CUST_ADDRESS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          mmHeight = 3852
+          mmLeft = 7673
+          mmTop = 8731
+          mmWidth = 67733
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText3: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText3'
+          Border.mmPadding = 0
+          DataField = 'CUST_STATE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          mmHeight = 3852
+          mmLeft = 42863
+          mmTop = 13229
+          mmWidth = 10848
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText4: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText4'
+          Border.mmPadding = 0
+          DataField = 'CUST_SUBURB'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          mmHeight = 3852
+          mmLeft = 7938
+          mmTop = 13229
+          mmWidth = 34660
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+        object ppDBText5: TppDBText
+          DesignLayer = ppDesignLayer1
+          UserName = 'DBText5'
+          Border.mmPadding = 0
+          DataField = 'CUST_POSTCODE'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          ParentDataPipeline = False
+          Transparent = True
+          mmHeight = 3852
+          mmLeft = 53975
+          mmTop = 13494
+          mmWidth = 21431
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground
+        end
+      end
+      object ppGroupFooterBand1: TppGroupFooterBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        HideWhenOneDetail = False
+        mmBottomOffset = 0
+        mmHeight = 84931
+        mmPrintPosition = 0
+        object ppRichText3: TppRichText
+          DesignLayer = ppDesignLayer1
+          UserName = 'RichText3'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          Border.mmPadding = 0
+          Caption = 'RichText3'
+          ExportRTFAsBitmap = False
+          RichText = 
+            '{\rtf1\ansi\ansicpg1252\deff0\deflang3081{\fonttbl{\f0\fnil\fcha' +
+            'rset0 Verdana;}{\f1\fnil Verdana;}}'#13#10'{\colortbl ;\red0\green0\bl' +
+            'ue0;}'#13#10'\viewkind4\uc1\pard\hyphpar0\sl240\slmult1\qj\cf1\f0\fs18' +
+            ' Yours faithfully\par'#13#10'\par'#13#10'\par'#13#10'Per:\par'#13#10'\par'#13#10'\pard\f1\par'#13 +
+            #10'}'#13#10#0
+          RemoveEmptyLines = False
+          Transparent = True
+          mmHeight = 44715
+          mmLeft = 7408
+          mmTop = 35983
+          mmWidth = 84138
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+          mmBottomOffset = 0
+          mmOverFlowOffset = 0
+          mmStopPosition = 0
+          mmMinHeight = 0
+        end
+        object ppRichText2: TppRichText
+          DesignLayer = ppDesignLayer1
+          UserName = 'RichText2'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Name = 'Verdana'
+          Font.Size = 9
+          Font.Style = []
+          Border.mmPadding = 0
+          Caption = 'RichText2'
+          ExportRTFAsBitmap = False
+          RichText = 
+            '{\rtf1\ansi\ansicpg1252\deff0\deflang3081{\fonttbl{\f0\fnil\fcha' +
+            'rset0 Verdana;}{\f1\fnil Verdana;}}'#13#10'{\colortbl ;\red0\green0\bl' +
+            'ue0;}'#13#10'\viewkind4\uc1\pard\hyphpar0\sl240\slmult1\cf1\f0\fs20 We' +
+            ' write to advise that the above \{\v 1\v0 @AccountAccounts\} out' +
+            'standing as at today'#39's date.\par'#13#10'\par'#13#10'Would you please attend ' +
+            'to payment of the outstanding amount within the next seven (7) d' +
+            'ays.\par'#13#10'\par'#13#10'\pard Should there be any reason as to why payme' +
+            'nt cannot be made at this time, please contact the undersigned t' +
+            'o discuss alternative arrangements.\f1\fs18\par'#13#10'}'#13#10#0
+          RemoveEmptyLines = False
+          Transparent = True
+          mmHeight = 31750
+          mmLeft = 7408
+          mmTop = 3175
+          mmWidth = 181769
+          BandType = 5
+          GroupNo = 0
+          LayerName = Foreground
+          mmBottomOffset = 0
+          mmOverFlowOffset = 0
+          mmStopPosition = 0
+          mmMinHeight = 0
+        end
+      end
+    end
+    object raCodeModule2: TraCodeModule
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
+  object dsRB_Item: TUniDataSource
+    DataSet = qryRB_Items
+    Left = 522
+    Top = 475
+  end
+  object plReports: TppDBPipeline
+    DataSource = dsRB_Item
+    CloseDataSource = True
+    UserName = 'plReports'
+    Left = 606
+    Top = 477
+    object plReportsppField1: TppField
+      FieldAlias = 'ROWID'
+      FieldName = 'ROWID'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 0
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField2: TppField
+      FieldAlias = 'ITEM_ID'
+      FieldName = 'ITEM_ID'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 1
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField3: TppField
+      FieldAlias = 'FOLDER_ID'
+      FieldName = 'FOLDER_ID'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 2
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField4: TppField
+      FieldAlias = 'ITEM_NAME'
+      FieldName = 'ITEM_NAME'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 3
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField5: TppField
+      FieldAlias = 'ITEM_SIZE'
+      FieldName = 'ITEM_SIZE'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 4
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField6: TppField
+      FieldAlias = 'ITEM_TYPE'
+      FieldName = 'ITEM_TYPE'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 5
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField7: TppField
+      FieldAlias = 'MODIFIED'
+      FieldName = 'MODIFIED'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 6
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField8: TppField
+      FieldAlias = 'DELETED'
+      FieldName = 'DELETED'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 7
+      Searchable = False
+      Sortable = False
+    end
+    object plReportsppField9: TppField
+      FieldAlias = 'TEMPLATE'
+      FieldName = 'TEMPLATE'
+      FieldLength = 0
+      DataType = dtNotKnown
+      DisplayWidth = 0
+      Position = 8
+      Searchable = False
+      Sortable = False
+    end
+  end
+  object qryRB_Items: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT T.RowId, T.*'
+      'FROM RB_ITEM T')
+    Left = 448
+    Top = 472
+    object qryRB_ItemsROWID: TStringField
+      FieldName = 'ROWID'
+      ReadOnly = True
+      Size = 18
+    end
+    object qryRB_ItemsITEM_ID: TIntegerField
+      FieldName = 'ITEM_ID'
+    end
+    object qryRB_ItemsFOLDER_ID: TIntegerField
+      FieldName = 'FOLDER_ID'
+    end
+    object qryRB_ItemsITEM_NAME: TStringField
+      FieldName = 'ITEM_NAME'
+      FixedChar = True
+      Size = 60
+    end
+    object qryRB_ItemsITEM_SIZE: TIntegerField
+      FieldName = 'ITEM_SIZE'
+    end
+    object qryRB_ItemsITEM_TYPE: TIntegerField
+      FieldName = 'ITEM_TYPE'
+    end
+    object qryRB_ItemsMODIFIED: TFloatField
+      FieldName = 'MODIFIED'
+    end
+    object qryRB_ItemsDELETED: TFloatField
+      FieldName = 'DELETED'
+    end
+    object qryRB_ItemsTEMPLATE: TMemoField
+      FieldName = 'TEMPLATE'
+      BlobType = ftMemo
+    end
   end
 end
