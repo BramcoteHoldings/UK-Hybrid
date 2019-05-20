@@ -841,7 +841,6 @@ inherited frmSundryType: TfrmSundryType
       'SELECT S.*, S.ROWID'
       'FROM SUNDRYTYPE S'
       'ORDER BY S.CODE')
-    Active = True
     Left = 112
   end
   inherited bmMain: TdxBarManager
@@ -913,18 +912,6 @@ inherited frmSundryType: TfrmSundryType
       ImageIndex = 10
       OnClick = dxBarButton1Click
     end
-    inherited dxBarDBNavNext3: TdxBarDBNavButton
-      Enabled = True
-    end
-    inherited dxBarDBNavLast3: TdxBarDBNavButton
-      Enabled = True
-    end
-    inherited dxBarDBNavInsert4: TdxBarDBNavButton
-      Enabled = True
-    end
-    inherited dxBarDBNavDelete3: TdxBarDBNavButton
-      Enabled = True
-    end
     inherited dxBarDBNavCancel3: TdxBarDBNavButton
       ImageIndex = 12
     end
@@ -935,101 +922,242 @@ inherited frmSundryType: TfrmSundryType
   end
   inherited rpMaintReport: TppReport
     NoDataBehaviors = [ndBlankReport]
+    PrinterSetup.Orientation = poLandscape
+    PrinterSetup.mmPaperHeight = 210000
+    PrinterSetup.mmPaperWidth = 297000
     BeforePrint = nil
     Left = 617
     Top = 55
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
+      mmHeight = 21431
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
+        mmTop = 20637
+        mmWidth = 284300
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
+        mmLeft = 273051
+        mmTop = 1058
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
+        TextAlignment = taCentered
+        mmHeight = 5556
+        mmLeft = 125677
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
+        mmWidth = 284428
       end
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Code'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
-        Font.Style = []
-        FormField = False
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 4022
+        mmHeight = 4498
         mmLeft = 0
-        mmTop = 11906
-        mmWidth = 8382
+        mmTop = 15346
+        mmWidth = 8202
         BandType = 0
         LayerName = Foreground
       end
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
-        Font.Style = []
-        FormField = False
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 4022
+        mmHeight = 4498
         mmLeft = 18256
-        mmTop = 11906
-        mmWidth = 17568
+        mmTop = 15346
+        mmWidth = 18786
         BandType = 0
         LayerName = Foreground
       end
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Ledger'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
-        Font.Style = []
-        FormField = False
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 4022
-        mmLeft = 181769
-        mmTop = 11906
-        mmWidth = 10922
+        mmHeight = 4498
+        mmLeft = 175948
+        mmTop = 15346
+        mmWidth = 11113
         BandType = 0
         LayerName = Foreground
       end
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Rate'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 10
-        Font.Style = []
-        FormField = False
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 4022
-        mmLeft = 148432
-        mmTop = 11906
-        mmWidth = 7408
+        mmHeight = 4498
+        mmLeft = 148696
+        mmTop = 15346
+        mmWidth = 7144
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label5'
+        Border.mmPadding = 0
+        Caption = 'Entity'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4498
+        mmLeft = 226219
+        mmTop = 14817
+        mmWidth = 9525
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label6'
+        Border.mmPadding = 0
+        Caption = 'Active'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4498
+        mmLeft = 237596
+        mmTop = 14817
+        mmWidth = 10054
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label7'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Zero Billed'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taCentered
+        Transparent = True
+        WordWrap = True
+        mmHeight = 9533
+        mmLeft = 250627
+        mmTop = 9840
+        mmWidth = 11105
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label8'
+        Border.mmPadding = 0
+        Caption = 'Summarise'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4234
+        mmLeft = 264319
+        mmTop = 15081
+        mmWidth = 19050
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label9'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Tax Rate'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taCentered
+        Transparent = True
+        WordWrap = True
+        mmHeight = 9004
+        mmLeft = 191294
+        mmTop = 10369
+        mmWidth = 10054
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Group Header'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = [fsBold]
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        WordWrap = True
+        mmHeight = 8467
+        mmLeft = 207963
+        mmTop = 10906
+        mmWidth = 11906
         BandType = 0
         LayerName = Foreground
       end
@@ -1038,6 +1166,7 @@ inherited frmSundryType: TfrmSundryType
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1057,6 +1186,7 @@ inherited frmSundryType: TfrmSundryType
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1076,6 +1206,7 @@ inherited frmSundryType: TfrmSundryType
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'LEDGER'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1087,7 +1218,7 @@ inherited frmSundryType: TfrmSundryType
         Transparent = True
         DataPipelineName = 'plSource'
         mmHeight = 4233
-        mmLeft = 166952
+        mmLeft = 161387
         mmTop = 1058
         mmWidth = 25665
         BandType = 4
@@ -1096,6 +1227,7 @@ inherited frmSundryType: TfrmSundryType
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'RATE'
         DataPipeline = plSource
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1114,10 +1246,132 @@ inherited frmSundryType: TfrmSundryType
         BandType = 4
         LayerName = Foreground
       end
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText1'
+        Border.mmPadding = 0
+        DataField = 'ENTITY'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 228377
+        mmTop = 1058
+        mmWidth = 6350
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText2'
+        Border.mmPadding = 0
+        DataField = 'ACTIVE'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 241331
+        mmTop = 1058
+        mmWidth = 3704
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        Border.mmPadding = 0
+        DataField = 'ZERO_BILLED'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 255118
+        mmTop = 1058
+        mmWidth = 3704
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText4'
+        Border.mmPadding = 0
+        DataField = 'SUMMARISE'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 270734
+        mmTop = 1058
+        mmWidth = 3704
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText9: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText9'
+        Border.mmPadding = 0
+        DataField = 'TAXCODE'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 190765
+        mmTop = 1058
+        mmWidth = 12171
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText10'
+        Border.mmPadding = 0
+        DataField = 'TYPEGROUP'
+        DataPipeline = plSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plSource'
+        mmHeight = 4233
+        mmLeft = 208492
+        mmTop = 1058
+        mmWidth = 14288
+        BandType = 4
+        LayerName = Foreground
+      end
     end
     inherited ppMaintSummaryBand: TppSummaryBand
       inherited ppLine2: TppLine
-        LayerName = Foreground
+        mmWidth = 284300
       end
     end
   end
@@ -1125,6 +1379,113 @@ inherited frmSundryType: TfrmSundryType
     DataSource = dsRpt
     Left = 558
     Top = 54
+    object plSourceppField1: TppField
+      FieldAlias = 'CODE'
+      FieldName = 'CODE'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 0
+    end
+    object plSourceppField2: TppField
+      FieldAlias = 'DESCR'
+      FieldName = 'DESCR'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 1
+    end
+    object plSourceppField3: TppField
+      FieldAlias = 'LEDGER'
+      FieldName = 'LEDGER'
+      FieldLength = 12
+      DisplayWidth = 12
+      Position = 2
+    end
+    object plSourceppField4: TppField
+      FieldAlias = 'TAXCODE'
+      FieldName = 'TAXCODE'
+      FieldLength = 8
+      DisplayWidth = 8
+      Position = 3
+    end
+    object plSourceppField5: TppField
+      FieldAlias = 'TYPEGROUP'
+      FieldName = 'TYPEGROUP'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 4
+    end
+    object plSourceppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'RATE'
+      FieldName = 'RATE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 5
+    end
+    object plSourceppField7: TppField
+      FieldAlias = 'ENTITY'
+      FieldName = 'ENTITY'
+      FieldLength = 2
+      DisplayWidth = 2
+      Position = 6
+    end
+    object plSourceppField8: TppField
+      FieldAlias = 'SOFTLOG_CODE'
+      FieldName = 'SOFTLOG_CODE'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 7
+    end
+    object plSourceppField9: TppField
+      FieldAlias = 'ACTIVE'
+      FieldName = 'ACTIVE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 8
+    end
+    object plSourceppField10: TppField
+      FieldAlias = 'SUMMARISE'
+      FieldName = 'SUMMARISE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 9
+    end
+    object plSourceppField11: TppField
+      FieldAlias = 'SUMMARISE_YN'
+      FieldName = 'SUMMARISE_YN'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 10
+    end
+    object plSourceppField12: TppField
+      FieldAlias = 'FEE_RELATED'
+      FieldName = 'FEE_RELATED'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 11
+    end
+    object plSourceppField13: TppField
+      FieldAlias = 'ZERO_BILLED'
+      FieldName = 'ZERO_BILLED'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 12
+    end
+    object plSourceppField14: TppField
+      FieldAlias = 'CURRENCY'
+      FieldName = 'CURRENCY'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 13
+    end
+    object plSourceppField15: TppField
+      FieldAlias = 'ROWID'
+      FieldName = 'ROWID'
+      FieldLength = 18
+      DisplayWidth = 18
+      Position = 14
+    end
   end
   object qrySundryGroup: TUniQuery
     Connection = dmAxiom.uniInsight

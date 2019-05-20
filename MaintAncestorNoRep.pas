@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, DbCtrls, ComCtrls, ImgList, ToolWin, ExtCtrls,
   Menus, OracleUniProvider, Uni, DBAccess, MemDS, AxiomData, dxBar, dxBarDBNav,
-  cxClasses;
+  cxClasses, System.ImageList;
 
 type
   TfrmMaintNoRep = class(TForm)

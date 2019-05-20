@@ -14,7 +14,7 @@ uses
   cxLookAndFeels, XPStyleActnCtrls, ppCtrls, ppDB, ppDBPipe, ppBands,
   ppPrnabl, ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport,
   cxPCdxBarPopupMenu, ppParameter, ppDesignLayer, System.Actions,
-  dxBarBuiltInMenu, cxCustomListBox;
+  dxBarBuiltInMenu, cxCustomListBox, System.ImageList;
 
 const
   imgNO = 0;

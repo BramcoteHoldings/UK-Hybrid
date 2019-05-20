@@ -17,7 +17,7 @@ object frmMaint: TfrmMaint
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 15
   object dsSource: TUniDataSource
     DataSet = qrySource
@@ -578,7 +578,7 @@ object frmMaint: TfrmMaint
   object bmMain: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -609,11 +609,11 @@ object frmMaint: TfrmMaint
     UseSystemFont = False
     Left = 395
     Top = 54
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object bmMainBar1: TdxBar
       AllowClose = False
@@ -632,7 +632,7 @@ object frmMaint: TfrmMaint
       FloatClientHeight = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -10
       Font.Name = 'Segoe UI'
       Font.Style = []
       Hidden = True
@@ -672,7 +672,7 @@ object frmMaint: TfrmMaint
       FloatClientHeight = 247
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       IsMainMenu = True
@@ -847,7 +847,7 @@ object frmMaint: TfrmMaint
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -891,7 +891,7 @@ object frmMaint: TfrmMaint
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -935,7 +935,7 @@ object frmMaint: TfrmMaint
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -979,7 +979,7 @@ object frmMaint: TfrmMaint
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+        000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
         C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -1072,7 +1072,8 @@ object frmMaint: TfrmMaint
     DataPipeline = plSource
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1098,15 +1099,22 @@ object frmMaint: TfrmMaint
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1121,19 +1129,22 @@ object frmMaint: TfrmMaint
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 572
     Top = 90
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plSource'
     object ppMaintHeaderBand: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 17198
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1151,6 +1162,7 @@ object frmMaint: TfrmMaint
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1168,13 +1180,15 @@ object frmMaint: TfrmMaint
       object pplblEntity: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblEntity'
+        Border.mmPadding = 0
         Caption = 'Insight Software'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5027
         mmLeft = 82550
@@ -1186,13 +1200,15 @@ object frmMaint: TfrmMaint
       object pplblTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblTitle'
+        Border.mmPadding = 0
         Caption = 'Maintenance Report'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -1206,6 +1222,7 @@ object frmMaint: TfrmMaint
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1219,18 +1236,21 @@ object frmMaint: TfrmMaint
     object ppMaintDetailBand: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5821
       mmPrintPosition = 0
     end
     object ppMaintSummaryBand: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 8202
       mmPrintPosition = 0
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
