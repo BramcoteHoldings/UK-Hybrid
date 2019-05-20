@@ -11645,29 +11645,6 @@ begin
       AAttachList := GetAttachFile(AAttachDocID);
  //     WriteLog('MatterForwardAsPDFClick: sending email with converted file to PDF');
       // if outlook not running, start it
-      if IsObjectActive('Outlook.Application') = False then
-         CreateOleObject('Outlook.Application');
-      if (dmAxiom.MapiSession.Active = False) then
-      begin
-         OldCursor := Screen.Cursor;
-         Screen.Cursor := crHourGlass;
-         try
-             try
-                dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-                dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
-                dmAxiom.MapiSession.LogonInfo.Password           := '';
-                dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
-                dmAxiom.MapiSession.LogonInfo.NewSession         := False;
-                dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
-                dmAxiom.MapiSession.Active                       := True;
-             except on e:exception do
-                WriteLog('MatterForwardAsPDFClick: error connecting to Folder: ' + e.Message);
-             end;
-         finally
-            Screen.Cursor := OldCursor;
-         end;
-      end;
 
       try
          begin
@@ -11703,6 +11680,30 @@ begin
                         end;
                      end; }
                end;
+            end;
+         end;
+
+         if IsObjectActive('Outlook.Application') = False then
+            CreateOleObject('Outlook.Application');
+         if (dmAxiom.MapiSession.Active = False) then
+         begin
+            OldCursor := Screen.Cursor;
+            Screen.Cursor := crHourGlass;
+            try
+                try
+                   dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
+                   dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
+                   dmAxiom.MapiSession.LogonInfo.Password           := '';
+                   dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
+                   dmAxiom.MapiSession.LogonInfo.NewSession         := False;
+                   dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
+                   dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+                   dmAxiom.MapiSession.Active                       := True;
+                except on e:exception do
+                   WriteLog('MatterForwardAsPDFClick: error connecting to Folder: ' + e.Message);
+                end;
+            finally
+               Screen.Cursor := OldCursor;
             end;
          end;
 

@@ -41,7 +41,7 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tsGeneral
+    Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
@@ -3238,7 +3238,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 11
       end
       object JvDBLookupComboEdit1: TJvDBLookupComboEdit
-        Left = 169
+        Left = 174
         Top = 359
         Width = 217
         Height = 23
@@ -3251,7 +3251,7 @@ object frmSystemFile: TfrmSystemFile
         DataSource = dsSystemFile
       end
       object JvDBLookupComboEdit2: TJvDBLookupComboEdit
-        Left = 169
+        Left = 174
         Top = 335
         Width = 217
         Height = 23
@@ -3281,7 +3281,7 @@ object frmSystemFile: TfrmSystemFile
         ValueUnchecked = 'N'
       end
       object DBEdit17: TDBEdit
-        Left = 169
+        Left = 174
         Top = 287
         Width = 112
         Height = 23
@@ -3290,7 +3290,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 15
       end
       object JvDBSpinEdit1: TJvDBSpinEdit
-        Left = 169
+        Left = 174
         Top = 311
         Width = 112
         Height = 23

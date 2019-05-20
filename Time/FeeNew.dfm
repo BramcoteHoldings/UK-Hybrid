@@ -27,7 +27,7 @@ object frmFeeNew: TfrmFeeNew
   TextHeight = 15
   object Label13: TLabel
     Left = 5
-    Top = 461
+    Top = 460
     Width = 63
     Height = 15
     Caption = 'Department'
@@ -360,7 +360,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object cbDept: TcxLookupComboBox
     Left = 79
-    Top = 458
+    Top = 457
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 10
     Properties.ImmediatePost = True
@@ -438,8 +438,8 @@ object frmFeeNew: TfrmFeeNew
     Width = 285
   end
   object chkPrivate: TcxCheckBox
-    Left = 299
-    Top = 484
+    Left = 298
+    Top = 535
     Caption = 'Private?'
     Properties.Alignment = taRightJustify
     Style.LookAndFeel.NativeStyle = True
@@ -764,7 +764,7 @@ object frmFeeNew: TfrmFeeNew
   end
   object chkKeepOpen: TCheckBox
     Left = 5
-    Top = 535
+    Top = 538
     Width = 222
     Height = 18
     Hint = 'Keep Fee Creation form open after posting.'
@@ -1330,7 +1330,7 @@ object frmFeeNew: TfrmFeeNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

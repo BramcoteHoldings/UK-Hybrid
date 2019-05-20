@@ -13,7 +13,7 @@ uses
   cxDataControllerConditionalFormattingRulesManagerDialog, cxContainer,
   Vcl.ImgList, dxBarDBNav, cxDBEdit, Vcl.StdCtrls, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, Vcl.Menus, cxButtons, cxMemo, cxRichEdit, cxDBRichEdit,
-  dd_HTMLEditor, Vcl.ComCtrls;
+  dd_HTMLEditor, Vcl.ComCtrls, System.ImageList;
 
 type
   TfrmEmailTemplates = class(TForm)
@@ -84,26 +84,28 @@ end;
 
 procedure TfrmEmailTemplates.dxBarButton1Click(Sender: TObject);
 var
-   sFileName: string;
+   sFileName,
+   CurrDir: string;
    bStream, fStream: TStream;
 begin
+   CurrDir := GetCurrentDir;
+   dlFile.Filter := 'HTM|*.htm|HTML|*.html';
 
-      dlFile.Filter := 'HTM|*.htm|HTML|*.html';
+   if not dlFile.Execute then
+      exit;
 
-      if not dlFile.Execute then
-         exit;
+   sFileName := dlFile.FileName;
 
-      sFileName := dlFile.FileName;
+   if qryEmailTemplate.State in [dsBrowse] then
+      qryEmailTemplate.edit;
 
-      if qryEmailTemplate.State in [dsBrowse] then
-         qryEmailTemplate.edit;
+   bStream := qryEmailTemplate.CreateBlobStream(qryEmailTemplate.fieldByname('body_text'), bmReadWrite);
 
-      bStream := qryEmailTemplate.CreateBlobStream(qryEmailTemplate.fieldByname('body_text'), bmReadWrite);
-
-      fStream := TFileStream.Create(sFileName, fmOpenRead);
-      bStream.CopyFrom(fStream, fStream.Size);
-      bStream.free;
-      fStream.free;
+   fStream := TFileStream.Create(sFileName, fmOpenRead);
+   bStream.CopyFrom(fStream, fStream.Size);
+   bStream.free;
+   fStream.free;
+   SetCurrentDir(CurrDir);
 end;
 
 procedure TfrmEmailTemplates.dxBarButton2Click(Sender: TObject);

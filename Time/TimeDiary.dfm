@@ -3607,7 +3607,7 @@ object frmTimeDiary: TfrmTimeDiary
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Time Diary'
-      ReportDocument.CreationDate = 43565.491770451390000000
+      ReportDocument.CreationDate = 43605.559129675920000000
       ReportDocument.Creator = 'Insight'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
