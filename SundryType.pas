@@ -11,7 +11,7 @@ uses
   cxContainer, cxEdit, cxTextEdit, cxMaskEdit, cxButtonEdit, cxCheckBox,
   cxGraphics, ppBands, ppCache, ppClass, ppDB, ppDBPipe, ppComm, ppRelatv,
   ppProd, ppReport, ppVar, ppCtrls, ppPrnabl, cxLookAndFeels,
-  cxLookAndFeelPainters, ppParameter, cxClasses, ppDesignLayer;
+  cxLookAndFeelPainters, ppParameter, cxClasses, ppDesignLayer, System.ImageList;
 
 type
   TfrmSundryType = class(TfrmMaint)
@@ -56,6 +56,18 @@ type
     dsRpt: TUniDataSource;
     cxDBCheckBox4: TcxDBCheckBox;
     qryTmp: TUniQuery;
+    ppDBText1: TppDBText;
+    ppLabel5: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel6: TppLabel;
+    ppDBText3: TppDBText;
+    ppLabel7: TppLabel;
+    ppDBText4: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBText9: TppDBText;
+    ppLabel9: TppLabel;
+    ppDBText10: TppDBText;
+    ppLabel10: TppLabel;
     procedure btnCodeSearchClick(Sender: TObject);
     procedure tbtnGroupsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
