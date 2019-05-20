@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabAuthorChange
+    Properties.ActivePage = tabDocs
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -6748,9 +6748,6 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
-      DesignSize = (
-        1478
-        527)
       object dxDockSite3: TdxDockSite
         Left = 0
         Top = 0
@@ -6761,9 +6758,9 @@ object frmMatters: TfrmMatters
         OriginalWidth = 1478
         OriginalHeight = 527
         object dxLayoutDockSite3: TdxLayoutDockSite
-          Left = 0
+          Left = 193
           Top = 0
-          Width = 1449
+          Width = 1285
           Height = 527
           ParentShowHint = False
           ShowHint = False
@@ -6773,10 +6770,11 @@ object frmMatters: TfrmMatters
           object dxLayoutDockSite4: TdxLayoutDockSite
             Left = 0
             Top = 0
-            Width = 1449
+            Width = 1285
             Height = 527
             ParentShowHint = False
             ShowHint = False
+            ExplicitWidth = 1449
             DockingType = 0
             OriginalWidth = 265
             OriginalHeight = 176
@@ -6784,7 +6782,7 @@ object frmMatters: TfrmMatters
           object dxDockPanel2: TdxDockPanel
             Left = 0
             Top = 0
-            Width = 1449
+            Width = 1285
             Height = 527
             AllowDock = [dtLeft]
             AllowFloating = False
@@ -6794,11 +6792,12 @@ object frmMatters: TfrmMatters
             CustomCaptionButtons.Buttons = <>
             ShowCaption = False
             TabsProperties.CustomButtons.Buttons = <>
+            ExplicitWidth = 1449
             DockingType = 0
             OriginalWidth = 163
             OriginalHeight = 124
             object Splitter1: TSplitter
-              Left = 1096
+              Left = 932
               Top = 0
               Height = 523
               Align = alRight
@@ -6809,7 +6808,7 @@ object frmMatters: TfrmMatters
             object pageDocuments: TcxPageControl
               Left = 0
               Top = 0
-              Width = 1096
+              Width = 932
               Height = 523
               Align = alClient
               TabOrder = 0
@@ -6818,9 +6817,10 @@ object frmMatters: TfrmMatters
               Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradient, pcoGradientClientArea, pcoRedrawOnResize, pcoTopToBottomText]
               Properties.TabPosition = tpRight
               Properties.TabSlants.Kind = skCutCorner
+              ExplicitWidth = 1096
               ClientRectBottom = 519
               ClientRectLeft = 4
-              ClientRectRight = 1070
+              ClientRectRight = 906
               ClientRectTop = 4
               object tabGenerated: TcxTabSheet
                 Caption = 'Documents'
@@ -6831,18 +6831,20 @@ object frmMatters: TfrmMatters
                 Font.Style = []
                 ImageIndex = 0
                 ParentFont = False
+                ExplicitWidth = 1066
                 object pnlDocsGenerated: TPanel
                   Left = 0
                   Top = 0
-                  Width = 1066
+                  Width = 902
                   Height = 515
                   Align = alClient
                   TabOrder = 0
+                  ExplicitWidth = 1066
                   DesignSize = (
-                    1066
+                    902
                     515)
                   object cxButton1: TcxButton
-                    Left = 361
+                    Left = 197
                     Top = 1
                     Width = 94
                     Height = 26
@@ -6888,16 +6890,18 @@ object frmMatters: TfrmMatters
                     TabOrder = 0
                     Visible = False
                     OnClick = btnCategoriesClick
+                    ExplicitLeft = 361
                   end
                   object dbgrDocs: TcxGrid
                     Left = 1
                     Top = 1
-                    Width = 1064
+                    Width = 900
                     Height = 475
                     Align = alClient
                     TabOrder = 1
                     LookAndFeel.Kind = lfFlat
                     LookAndFeel.NativeStyle = True
+                    ExplicitWidth = 1064
                     object tvEmailAttachments: TcxGridDBTableView
                       OnDblClick = tvEmailAttachmentsDblClick
                       Navigator.Buttons.CustomButtons = <>
@@ -7631,13 +7635,14 @@ object frmMatters: TfrmMatters
                   object pnlDocGeneratedBtns: TPanel
                     Left = 1
                     Top = 476
-                    Width = 1064
+                    Width = 900
                     Height = 38
                     Align = alBottom
                     BevelOuter = bvNone
                     TabOrder = 2
+                    ExplicitWidth = 1064
                     DesignSize = (
-                      1064
+                      900
                       38)
                     object CheckBox1: TCheckBox
                       Left = 536
@@ -7651,7 +7656,7 @@ object frmMatters: TfrmMatters
                       Visible = False
                     end
                     object btnPrecSearch: TBitBtn
-                      Left = 986
+                      Left = 822
                       Top = 5
                       Width = 75
                       Height = 27
@@ -7668,9 +7673,10 @@ object frmMatters: TfrmMatters
                         88888880F08880F0888888800088800088888888888888888888}
                       TabOrder = 6
                       OnClick = btnPrecSearchClick
+                      ExplicitLeft = 986
                     end
                     object btnDocAdd: TBitBtn
-                      Left = 917
+                      Left = 753
                       Top = 5
                       Width = 68
                       Height = 27
@@ -7687,6 +7693,7 @@ object frmMatters: TfrmMatters
                         8888880FFFFFF008888888000000008888888888888888888888}
                       TabOrder = 5
                       OnClick = btnDocAddClick
+                      ExplicitLeft = 917
                     end
                     object cxLabel3: TcxLabel
                       Left = 0
@@ -7729,7 +7736,7 @@ object frmMatters: TfrmMatters
                       Width = 181
                     end
                     object btnDocumentImport: TBitBtn
-                      Left = 725
+                      Left = 561
                       Top = 5
                       Width = 113
                       Height = 27
@@ -7737,9 +7744,10 @@ object frmMatters: TfrmMatters
                       Caption = 'Import Documents'
                       TabOrder = 2
                       OnClick = btnDocumentImportClick
+                      ExplicitLeft = 725
                     end
                     object btnDocPrint: TBitBtn
-                      Left = 840
+                      Left = 676
                       Top = 5
                       Width = 76
                       Height = 27
@@ -7747,9 +7755,10 @@ object frmMatters: TfrmMatters
                       Caption = 'Print Doc List'
                       TabOrder = 4
                       OnClick = btnDocPrintClick
+                      ExplicitLeft = 840
                     end
                     object btnCreateBrief: TBitBtn
-                      Left = 650
+                      Left = 486
                       Top = 5
                       Width = 69
                       Height = 27
@@ -7759,9 +7768,10 @@ object frmMatters: TfrmMatters
                       TabOrder = 8
                       Visible = False
                       OnClick = btnCreateBriefClick
+                      ExplicitLeft = 650
                     end
                     object chkPreviewPane: TCheckBox
-                      Left = 524
+                      Left = 360
                       Top = 11
                       Width = 119
                       Height = 18
@@ -7771,6 +7781,7 @@ object frmMatters: TfrmMatters
                       State = cbChecked
                       TabOrder = 9
                       OnClick = chkPreviewPaneClick
+                      ExplicitLeft = 524
                     end
                   end
                 end
@@ -7778,25 +7789,26 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
+                ExplicitWidth = 1066
               end
             end
             object pnlPreview: TJamFilePreview
-              Left = 1099
+              Left = 935
               Top = 0
               Width = 346
               Height = 523
               Align = alRight
+              ExplicitLeft = 1099
             end
           end
         end
         object DockPanelFolderList: TdxDockPanel
-          Left = -193
+          Left = 0
           Top = 0
           Width = 193
-          Height = 0
-          Visible = False
+          Height = 527
           AllowFloating = False
-          AutoHide = True
+          AutoHide = False
           Caption = 'Folder List'
           CaptionButtons = [cbHide]
           CustomCaptionButtons.Buttons = <>
@@ -7804,7 +7816,6 @@ object frmMatters: TfrmMatters
           TabsProperties.CustomButtons.Buttons = <>
           TabsProperties.HotTrack = True
           TabsProperties.NavigatorPosition = npLeftTop
-          AutoHidePosition = 0
           DockingType = 1
           OriginalWidth = 193
           OriginalHeight = 124
@@ -7812,7 +7823,7 @@ object frmMatters: TfrmMatters
             Left = 0
             Top = 0
             Width = 189
-            Height = 0
+            Height = 497
             Align = alClient
             Bands = <
               item
@@ -7831,7 +7842,7 @@ object frmMatters: TfrmMatters
             OptionsView.ColumnAutoWidth = True
             OptionsView.DropNodeIndicator = True
             OptionsView.Headers = False
-            PopupMenu = pmDocFolders
+            PopupMenu = pmResetArchiveNum
             RootValue = 0
             TabOrder = 0
             OnClick = cxDBTreeList1Click

@@ -23,7 +23,7 @@ uses
   cxClasses, System.ImageList, Vcl.ImgList, MemDS, DBAccess, Uni,
   System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan,
   cxSchedulerDBStorage, cxImage, cxLabel, Vcl.StdCtrls, cxTextEdit, cxMemo,
-  Vcl.ExtCtrls, cxSchedulerDialogs, ppTypes;
+  Vcl.ExtCtrls, cxSchedulerDialogs, ppTypes, dxPScxDBEditorLnks, dxPSTextLnk;
 
 
 const

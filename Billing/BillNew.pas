@@ -558,7 +558,6 @@ type
     procedure edtDiscountKeyPress(
       Sender  : TObject;
       var Key : Char);
-    procedure edtDiscountExit(Sender : TObject);
     procedure barbtnRemoveDiscountClick(Sender : TObject);
     procedure dtpInterimClick(Sender : TObject);
     procedure tvBillItems1DESCRPropertiesValidate(
@@ -601,6 +600,7 @@ type
     procedure dxChequeRequestClick(Sender : TObject);
     procedure btnAddChequeRequestClick(Sender : TObject);
     procedure ReverseAnticipatedDisbursement(nOldCheqnum: integer);
+    procedure edtDiscountPropertiesChange(Sender: TObject);
     // procedure tbtnRemoveClick(Sender: TObject);
     private
       { Private declarations }
@@ -658,12 +658,12 @@ type
       procedure CalcDiscount;
       procedure DisplayTaxValues;
       procedure ControlEditFields(AState : Boolean);
+      procedure CalcDiscountEntry;
     public
       { Public declarations }
       property OwnerForm : TComponent read FForm write FForm;
       procedure DisplayInvoice(iMemo: Integer; AForm: TComponent = nil; AFromBillGrid: Boolean = False);
       procedure DisplayItems;
-
   end;
 
   TItemType = (itFees, itDisb, itAntd, itUpCred, itSund);
@@ -5839,80 +5839,74 @@ procedure TfrmInvoice.dxChequeRequestClick(Sender : TObject);
     LfrmCheqReqNew.Show;
   end;
 
-procedure TfrmInvoice.edtDiscountExit(Sender : TObject);
-  begin
-    if edtDiscount.Text = '0'
-    then
+procedure TfrmInvoice.CalcDiscountEntry;
+begin
+   if edtDiscount.Text = '0' then
       lblDiscount.Caption := '0.00';
 
-    if edtDiscount.Text = ''
-    then
+   if edtDiscount.Text = '' then
       edtDiscount.Text := '0';
 
-    if (neFees.AsDouble > 0)
-    then
-    begin
-      if qryInvoice.state = dsBrowse
-      then
-        qryInvoice.Edit;
+   if (neFees.AsDouble > 0) then
+   begin
+      if qryInvoice.state = dsBrowse then
+         qryInvoice.Edit;
 
-      if pos('%', edtDiscount.Text) > 0
-      then
+      if pos('%', edtDiscount.Text) > 0 then
       begin
-        qryInvoice.FieldByName('DISCOUNT').AsCurrency :=
-          ((neFees.AsCurrency + neFeesTax.AsCurrency) * (strtofloat(copy(edtDiscount.Text, 1, length(edtDiscount.Text) - 1)) / 100)) * - 1;
-        edtDiscount.Text := FloatToStr(((neFees.AsCurrency + neFeesTax.AsCurrency) * (strtofloat(copy(edtDiscount.Text, 1, length(edtDiscount.Text) - 1)) /
-          100)) * - 1);
-        edtDiscountGST.Text := FloatToStr(qryInvoice.FieldByName('DISCOUNT').AsCurrency * 1 / 11);
+         qryInvoice.FieldByName('DISCOUNT').AsCurrency :=
+                        ((neFees.AsCurrency + neFeesTax.AsCurrency) * (strtofloat(copy(edtDiscount.Text, 1, length(edtDiscount.Text) - 1)) / 100)) * - 1;
+         edtDiscount.Text := FloatToStr(((neFees.AsCurrency + neFeesTax.AsCurrency) * (strtofloat(copy(edtDiscount.Text, 1, length(edtDiscount.Text) - 1)) /
+                        100)) * - 1);
+         edtDiscountGST.Text := FloatToStrF(qryInvoice.FieldByName('DISCOUNT').AsCurrency * 1 / 11, ffGeneral, 8,2);
       end
       else
       begin
-        try
-          if strtofloat(edtDiscount.Text) > 0
-          then
-          begin
-            qryInvoice.FieldByName('DISCOUNT').AsCurrency := strtofloat(edtDiscount.Text) * - 1;
-            qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := (strtofloat(edtDiscount.Text) * 1 / 11) * - 1;
-          end
-          else
-          begin
-            qryInvoice.FieldByName('DISCOUNT').AsCurrency := strtofloat(edtDiscount.Text);
-            qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := strtofloat(edtDiscount.Text) * 1 / 11;
-          end;
-          lblDiscount.Caption := edtDiscount.Text;
-          edtDiscountGST.Text := FloatToStr(qryInvoice.FieldByName('DISCOUNT').AsCurrency * 1 / 11);
-        finally
-          qryInvoice.Refresh;
-        end;
+         try
+            if strtofloat(edtDiscount.Text) > 0 then
+            begin
+               qryInvoice.FieldByName('DISCOUNT').AsCurrency := strtofloat(edtDiscount.Text) * - 1;
+               qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := (strtofloat(edtDiscount.Text) * 1 / 11) * - 1;
+            end
+            else
+            begin
+               qryInvoice.FieldByName('DISCOUNT').AsCurrency := strtofloat(edtDiscount.Text);
+               qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := strtofloat(edtDiscount.Text) * 1 / 11;
+            end;
+            lblDiscount.Caption := edtDiscount.Text;
+            edtDiscountGST.Text := FloatToStrF(qryInvoice.FieldByName('DISCOUNT').AsCurrency * 1 / 11, ffGeneral, 8,2);
+         finally
+            qryInvoice.Refresh;
+         end;
       end;
     end
-    else if (neFees.AsDouble = 0)
-    then
-    begin
-      if qryInvoice.state = dsBrowse
-      then
-        qryInvoice.Edit;
+   else if (neFees.AsDouble = 0) then
+   begin
+      if qryInvoice.state = dsBrowse then
+         qryInvoice.Edit;
       try
-        qryInvoice.FieldByName('DISCOUNT').AsCurrency := 0;
-        qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := 0;
-        edtDiscount.Text := '0';
-        edtDiscountGST.Text := '0';
-        lblDiscount.Caption := '0.00';
+         qryInvoice.FieldByName('DISCOUNT').AsCurrency := 0;
+         qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := 0;
+         edtDiscount.Text := '0';
+         edtDiscountGST.Text := '0';
+         lblDiscount.Caption := '0.00';
       finally
-        qryInvoice.Refresh;
+         qryInvoice.Refresh;
       end;
-    end;
-    CalcTotal;
-  end;
+   end;
+   CalcTotal;
+end;
 
-procedure TfrmInvoice.edtDiscountKeyPress(
-  Sender  : TObject;
-  var Key : Char);
-  begin
-    if (not (Key in ['0' .. '9']) and not (Key = '%') and not (Key = '.'))
-    then
+procedure TfrmInvoice.edtDiscountKeyPress(Sender: TObject; var Key: Char);
+begin
+   if (not (Key in ['0' .. '9']) and not (Key = '%') and not (Key = '.')) then
       Key := #0;
-  end;
+end;
+
+procedure TfrmInvoice.edtDiscountPropertiesChange(Sender: TObject);
+begin
+   CalcDiscountEntry;
+end;
 
 procedure TfrmInvoice.memoNotesKeyUp(
   Sender  : TObject;
