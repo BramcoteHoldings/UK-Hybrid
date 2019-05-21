@@ -1545,6 +1545,7 @@ type
     cxDBTreeList1FOLDER_ID: TcxDBTreeListColumn;
     cxDBTreeList1PARENT_ID: TcxDBTreeListColumn;
     cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
+    tvDocsFOLDER_ID: TcxGridDBBandedColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -9943,7 +9944,7 @@ begin
         qryDocs.SQL.Add('NPRECCATEGORY,');
         qryDocs.SQL.Add('IMAGEINDEX, FILE_EXTENSION, EMAIL_SENT_TO,''DATAFILEPATH'',null as DATAFORM, null as TEMPLATELINEID, AUTH2, URL, ');
         qryDocs.SQL.Add('tablevalue(''preccategory'',''npreccategory'', nvl(npreccategory,0),''descr'') as preccategory ,');
-        qryDocs.SQL.Add('tablevalue(''precclassification'',''nprecclassification'',nvl(nprecclassification,0),''descr'') as precclassification ');
+        qryDocs.SQL.Add('tablevalue(''precclassification'',''nprecclassification'',nvl(nprecclassification,0),''descr'') as precclassification, folder_id ');
         qryDocs.SQL.Add('FROM DOC ');
         qryDocs.SQL.Add('where nmatter = :nmatter ');
         qryDocs.SQL.Add('and nvl(folder_id,0) = nvl(:folder_id, 0) ');
@@ -9981,7 +9982,7 @@ begin
         qryDocs.SQL.Add('NPRECCATEGORY,');
         qryDocs.SQL.Add('IMAGEINDEX, FILE_EXTENSION, EMAIL_SENT_TO,''DATAFILEPATH'',null as DATAFORM, null as TEMPLATELINEID, AUTH2, URL, ');
         qryDocs.SQL.Add('tablevalue(''preccategory'',''npreccategory'',nvl(npreccategory,0),''descr'') as preccategory ,');
-        qryDocs.SQL.Add('tablevalue(''precclassification'',''nprecclassification'',nvl(nprecclassification,0),''descr'') as precclassification ');
+        qryDocs.SQL.Add('tablevalue(''precclassification'',''nprecclassification'',nvl(nprecclassification,0),''descr'') as precclassification, folder_id ');
         qryDocs.SQL.Add('FROM DOC ');
         qryDocs.SQL.Add('where nmatter = :nmatter ');
         qryDocs.SQL.Add('and nvl(folder_id,0) = nvl(:folder_id, 0) ');
@@ -11101,7 +11102,7 @@ begin
                   SQL.Text := 'SELECT doc.doc_name, doc.search, doc.doc_code, doc.d_create, doc.auth1, ' +
                               'doc.d_modif, doc.auth2, doc.PATH, doc.descr, doc.fileid, doc.docid, ' +
                               'doc.npreccategory, doc.nmatter, doc.imageindex, doc.file_extension, ' +
-                              'doc.display_path, doc.precedent_details, doc.document, doc.rowid ' +
+                              'doc.display_path, doc.precedent_details, doc.document, doc.rowid, doc.folder_id ' +
                               'FROM doc ' +
                               'WHERE doc.docid = :docid ';
                   ParamByName('docid').AsInteger := SelRec;
@@ -13143,7 +13144,7 @@ begin
                   'display_path display_path, url url,' +
                   ' preccategory, precclassification, '+
                   'external_access external_access, doc_notes doc_notes,' +
-                  'email_from email_from, ot_version ot_version, parentdocid ' +
+                  'email_from email_from, ot_version ot_version, parentdocid, folder_id ' +
 
                   ' from '+
                   '(SELECT docidver AS docidver, docid, nmatter nmatter, ' +
@@ -13158,7 +13159,7 @@ begin
                   'tablevalue (''precclassification'',''nprecclassification'',NVL (nprecclassification, 0),''descr'') AS precclassification, '+
                   'external_access external_access, doc_notes doc_notes,' +
                   'email_from email_from, ot_version , parentdocid, ' +
-                  ' max(ot_version) over (partition by parentdocid) max_ot_version ' +
+                  ' max(ot_version) over (partition by parentdocid) max_ot_version, folder_id ' +
                   'FROM DOC '+
                   ' WHERE nmatter = :nmatter '+
                   ' AND is_attachment = ''N'' '+
