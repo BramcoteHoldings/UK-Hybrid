@@ -129,8 +129,8 @@ begin
 
       // Create a new record
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-      iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');   //GetSeqnum('NCHEQUE');
-      liInvoiceNum := GetSeqNum('NINVOICE');
+      iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
+      liInvoiceNum := GetSequenceNumber('sqnc_ncheqreq');
 
       qryInvoiceReverse.ParamByName('ACCT').AsString := qryInvoice.FieldByName('ACCT').AsString;
       qryInvoiceReverse.ParamByName('CREDITOR').AsString := qryInvoice.FieldByName('CREDITOR').AsString;

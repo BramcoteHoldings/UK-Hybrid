@@ -123,7 +123,7 @@ begin
       // Create the Cheque entry - as we are using Cached Updates
       // this won't save until we explicitly ApplyUpdates
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-      iNcheque := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
+      iNcheque := GetSequenceNumber('SQNC_NCHEQUE');
       qryCheque.ParamByName('P_Ncheque').AsInteger := iNcheque;
       qryCheque.Open;
 
@@ -152,7 +152,7 @@ begin
       qryCheque.Post; // Puts cheque into cached buffer
 
       // Create Cash At Bank Entry
-      nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  //GetSeqnum('NACCOUNT');
+      nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
        // need to save chart used on posting
       qryBanks.close;
       qryBanks.ParamByName('P_Acct').AsString := cmbBankFrom.EditValue;
@@ -232,7 +232,7 @@ begin
           // Create the RECEIPT entry - as we are using Cached Updates
           // this won't save until we explicitly ApplyUdates
           qryReceipt.Close;
-          iReceipt := GetSequenceNumber('SQNC_NRECEIPT');    //GetSeqnum('NRECEIPT');
+          iReceipt := GetSequenceNumber('SQNC_NRECEIPT');
           //iReceipt := GetSeqnum('NRECEIPT');
           qryReceipt.ParamByName('p_nreceipt').AsInteger := iReceipt;
           qryReceipt.Open;
@@ -310,7 +310,7 @@ begin
           qryReceipt.FieldByName('PRINTED').AsString := 'N';
           qryReceipt.Post; // Puts Receipt into cached buffer
 
-          nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  //GetSeqnum('NACCOUNT');
+          nAccount := GetSequenceNumber('sqnc_naccount');
 
           if qryReceipt.FieldByName('TRUST').AsString <> 'T' then
 	   	 begin

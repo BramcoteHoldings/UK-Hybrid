@@ -7,7 +7,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -18,7 +18,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object pagMain: TcxPageControl
     Left = 0
     Top = 47
@@ -144,7 +144,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           ParentFont = False
         end
         object Label18: TLabel
-          Left = 11
+          Left = 6
           Top = 267
           Width = 45
           Height = 15
@@ -152,7 +152,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Transparent = True
         end
         object Label19: TLabel
-          Left = 12
+          Left = 7
           Top = 285
           Width = 22
           Height = 15
@@ -202,8 +202,8 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           AnchorX = 146
         end
         object lblWipTotal: TcxLabel
-          Left = 77
-          Top = 126
+          Left = 75
+          Top = 127
           AutoSize = False
           Caption = 'lblWipTotal'
           Style.BorderStyle = ebsSingle
@@ -213,7 +213,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Transparent = True
           Height = 16
           Width = 71
-          AnchorX = 148
+          AnchorX = 146
         end
         object lblwip120: TcxDBLabel
           Left = 72
@@ -265,7 +265,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           DataBinding.DataField = 'MONTH_TOTAL'
           DataBinding.DataSource = dmDashboardInd.dsWIPGenerated
           Transparent = True
-          Height = 15
+          Height = 20
           Width = 59
         end
         object cxDBLabel6: TcxDBLabel
@@ -274,7 +274,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           DataBinding.DataField = 'MONTH_BUDGET'
           DataBinding.DataSource = dmDashboardInd.dsWipGeneratedBudget
           Transparent = True
-          Height = 15
+          Height = 20
           Width = 59
         end
         object cxDBLabel7: TcxDBLabel
@@ -283,7 +283,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           DataBinding.DataField = 'YEAR_BUDGET'
           DataBinding.DataSource = dmDashboardInd.dsWipGeneratedBudget
           Transparent = True
-          Height = 15
+          Height = 20
           Width = 59
         end
         object cxDBLabel8: TcxDBLabel
@@ -292,7 +292,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           DataBinding.DataField = 'YEAR_TOTAL'
           DataBinding.DataSource = dmDashboardInd.dsWIPGenerated
           Transparent = True
-          Height = 15
+          Height = 20
           Width = 59
         end
         object chartWIP: TDBChart
@@ -895,7 +895,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         end
         object cxDBLabel3: TcxDBLabel
           Left = 31
-          Top = 277
+          Top = 279
           DataBinding.DataField = 'NVL(SUM(AMOUNT),0)'
           DataBinding.DataSource = dmDashboardInd.dsFeesBilledYTD
           ParentFont = False
@@ -912,11 +912,11 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Height = 17
           Width = 74
           AnchorX = 105
-          AnchorY = 294
+          AnchorY = 296
         end
         object cxDBLabel4: TcxDBLabel
           Left = 107
-          Top = 277
+          Top = 279
           DataBinding.DataField = 'YEAR_BUDGET'
           DataBinding.DataSource = dmDashboardInd.dsFeesBilledBudget
           ParentFont = False
@@ -932,7 +932,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Height = 17
           Width = 76
           AnchorX = 183
-          AnchorY = 294
+          AnchorY = 296
         end
         object grdFeesBilled: TcxGrid
           Left = 221
@@ -2042,7 +2042,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           OptionsView.ShowEventsWithoutResource = True
           Storage = cxSchedulerStorage1
           TabOrder = 1
-          Selection = 238
+          Selection = 259
           Splitters = {
             020300007E00000091030000830000003C0400000100000041040000C9010000}
           StoredClientBounds = {01000000010000004D0400001E020000}
@@ -2139,10 +2139,10 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       FloatLeft = 824
       FloatTop = 499
       FloatClientWidth = 23
-      FloatClientHeight = 22
+      FloatClientHeight = 23
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -2461,7 +2461,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729439039350000000
+      ReportDocument.CreationDate = 43607.647451701390000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2491,7 +2491,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729439282410000000
+      ReportDocument.CreationDate = 43607.647452013890000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2521,7 +2521,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729439849540000000
+      ReportDocument.CreationDate = 43607.647452361110000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

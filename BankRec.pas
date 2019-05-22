@@ -16,7 +16,8 @@ uses
   ppCache, ppComm, ppRelatv, ppProd, ppReport, VCL.Themes, cxNavigator,
   cxDateUtils, ppDesignLayer, dxBar, cxCheckBox, cxGridCustomPopupMenu,
   cxGridPopupMenu, Vcl.ImgList, system.DateUtils, Registry, FMXUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  System.ImageList;
 
 const
   // Transaction types
@@ -828,7 +829,7 @@ begin
       dmAxiom.uniInsight.StartTransaction;
       // Create the Cheque entry
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-      qryCheque.ParamByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
+      qryCheque.ParamByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');
 //      qryCheque.ParamByName('CREATED').AsDateTime := dtpDate.Date;
       qryCheque.ParamByName('CHQNO').AsString := 'BP' + IntToStr(qryCheque.ParamByName('NCHEQUE').AsInteger);
       qryCheque.ParamByName('PRESENTED').AsDateTime := qryBankRec.FieldByName('BANKED').AsDateTime;

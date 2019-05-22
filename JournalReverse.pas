@@ -272,7 +272,7 @@ begin
                  qryTransItemInsert.ParamByName('AMOUNT').AsFloat := 0 - qryTransItems.FieldByName('AMOUNT').AsCurrency;
                  qryTransItemInsert.ParamByName('TAX').AsFloat := 0 - qryTransItems.FieldByName('TAX').AsCurrency;
                  qryTransItemInsert.ParamByName('CHART').AsString  := qryTransItems.FieldByName('CHART').AsString;
-                 qryTransItemInsert.ParamByName('NACCOUNT').AsInteger := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  //GetSeqnum('NACCOUNT');
+                 qryTransItemInsert.ParamByName('NACCOUNT').AsInteger := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
                  qryTransItemInsert.ParamByName('TAXCODE').AsString  := qryTransItems.FieldByName('TAXCODE').AsString;
                  qryTransItemInsert.ParamByName('PARENT_CHART').AsString  := qryTransItems.FieldByName('PARENT_CHART').AsString;
                  {

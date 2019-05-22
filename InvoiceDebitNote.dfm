@@ -271,7 +271,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   object dtpDate: TEnforceCustomDateEdit
     Left = 119
     Top = 37
-    EditValue = 43070.4946045486d
+    EditValue = 43607.576831331d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -440,6 +440,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     UseSystemFont = True
     Left = 641
     Top = 67
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0

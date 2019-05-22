@@ -1732,7 +1732,7 @@ begin
                   MessageDlg('There is no Trust account associated with this matter',mtWarning,[mbOK],0);
                 qryCheqReq.Open;
                 qryCheqReq.Insert;
-                qryCheqReq.FieldByName('NCHEQREQ').AsInteger  := GetSeqnum('NCHEQREQ');
+                qryCheqReq.FieldByName('NCHEQREQ').AsInteger  := GetSequenceNumber('sqnc_ncheqreq');
                 qryCheqReq.FieldByName('CONVERTED').AsString  := 'N';
                 qryCheqReq.FieldByName('REQDATE').AsDateTime  := ReqDate;
                 qryCheqReq.FieldByName('BANK').AsString       := sBank;

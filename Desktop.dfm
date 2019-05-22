@@ -934,7 +934,7 @@ object frmDesktop: TfrmDesktop
           Left = -206
           Top = 0
           Width = 206
-          Height = 0
+          Height = 124
           ManagerFont = False
           ParentFont = True
           Visible = False

@@ -1327,7 +1327,7 @@ begin
 
        qryReceiptInsert.Prepare;
 
-       qryReceiptInsert.ParamByName('NRECEIPT').AsInteger := GetSeqnum('NRECEIPT');
+       qryReceiptInsert.ParamByName('NRECEIPT').AsInteger := GetSequenceNumber('SQNC_NRECEIPT');
        qryReceiptInsert.ParamByName('AMOUNT').AsCurrency := qryNaccounts.FieldByName('AMOUNT').AsCurrency;
        //qryReceiptInsert.ParamByName('ACCT').AsString :=  qryNaccounts.FieldByName('ACCT').AsString;
        qryReceiptInsert.ParamByName('PRINTED').AsString := 'N';
@@ -1383,7 +1383,7 @@ begin
 
        qryChequeInsert.Prepare;
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-       qryChequeInsert.ParamByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
+       qryChequeInsert.ParamByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');
        qryChequeInsert.ParamByName('AMOUNT').AsCurrency := qryNaccounts.FieldByName('AMOUNT').AsCurrency * -1;
        //qryReceiptInsert.ParamByName('ACCT').AsString :=  qryNaccounts.FieldByName('ACCT').AsString;
        qryChequeInsert.ParamByName('PRINTED').AsString := 'N';

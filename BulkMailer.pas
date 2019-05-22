@@ -277,6 +277,7 @@ type
       State: TDragState; var Accept: Boolean);
     procedure AddFieldtoSubject1Click(Sender: TObject);
     procedure dxBarButton3Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     FEditorValue: TMemoryStream;
@@ -1536,6 +1537,11 @@ end;
 
 procedure TfrmBulkMailer.FormClose(Sender: TObject;
   var Action: TCloseAction);
+begin
+   Action := caFree;
+end;
+
+procedure TfrmBulkMailer.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
    fDocumentHistory.Free;
    qryEmailTemplates.Close;
