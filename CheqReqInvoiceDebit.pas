@@ -338,7 +338,7 @@ begin
          bPostingFailed := False;
          dmAxiom.uniInsight.StartTransaction;
 
-         iCheqReq := GetSeqnum('NCHEQREQ');
+         iCheqReq := GetSequenceNumber('sqnc_ncheqreq');
          qryCheqReq.ParamByName('NCHEQREQ').AsInteger := iCheqReq;
          qryCheqReq.Open;
          qryCheqReq.Insert;

@@ -20,7 +20,7 @@ object frmDashboard_Team: TfrmDashboard_Team
   TextHeight = 15
   object pagMain: TcxPageControl
     Left = 0
-    Top = 47
+    Top = 49
     Width = 1053
     Height = 599
     Align = alTop
@@ -31,7 +31,7 @@ object frmDashboard_Team: TfrmDashboard_Team
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    ExplicitTop = 50
+    ExplicitTop = 47
     ClientRectBottom = 595
     ClientRectLeft = 4
     ClientRectRight = 1049
@@ -40,8 +40,6 @@ object frmDashboard_Team: TfrmDashboard_Team
       Caption = 'WIP'
       ImageIndex = 0
       OnShow = tabWIPShow
-      ExplicitTop = 27
-      ExplicitHeight = 568
       object pnlWIP: TPanel
         Left = 0
         Top = 0
@@ -50,7 +48,6 @@ object frmDashboard_Team: TfrmDashboard_Team
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 568
         DesignSize = (
           1045
           569)
@@ -715,8 +712,6 @@ object frmDashboard_Team: TfrmDashboard_Team
       Caption = 'Fees'
       ImageIndex = 1
       OnShow = tabFeesShow
-      ExplicitTop = 27
-      ExplicitHeight = 568
       object pnlFees: TPanel
         Left = 0
         Top = 0
@@ -725,7 +720,6 @@ object frmDashboard_Team: TfrmDashboard_Team
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 568
         DesignSize = (
           1045
           569)
@@ -1245,10 +1239,6 @@ object frmDashboard_Team: TfrmDashboard_Team
       Caption = 'Clients'
       ImageIndex = 2
       OnShow = tabTopClientShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlClients: TPanel
         Left = 0
         Top = 0
@@ -1257,7 +1247,6 @@ object frmDashboard_Team: TfrmDashboard_Team
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 568
         DesignSize = (
           1045
           569)
@@ -1406,8 +1395,6 @@ object frmDashboard_Team: TfrmDashboard_Team
           object cxTabSheet1: TcxTabSheet
             Caption = 'Top 10 Clients'
             ImageIndex = 0
-            ExplicitTop = 27
-            ExplicitHeight = 259
             object grdClients: TcxGrid
               Left = 0
               Top = 22
@@ -1416,7 +1403,6 @@ object frmDashboard_Team: TfrmDashboard_Team
               Align = alClient
               TabOrder = 0
               LookAndFeel.NativeStyle = True
-              ExplicitHeight = 237
               object tvClients: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
                 DataController.DataSource = dmDasboardTeam.dsTopClients
@@ -1484,8 +1470,6 @@ object frmDashboard_Team: TfrmDashboard_Team
           object cxTabSheet2: TcxTabSheet
             Caption = 'Top 10 Referrers'
             ImageIndex = 1
-            ExplicitTop = 27
-            ExplicitHeight = 259
             object grdReferrers: TcxGrid
               Left = 0
               Top = 23
@@ -1494,10 +1478,6 @@ object frmDashboard_Team: TfrmDashboard_Team
               Align = alClient
               TabOrder = 0
               LookAndFeel.NativeStyle = True
-              ExplicitLeft = -4
-              ExplicitTop = 94
-              ExplicitWidth = 264
-              ExplicitHeight = 248
               object tvReferrers: TcxGridDBTableView
                 Navigator.Buttons.CustomButtons = <>
                 DataController.DataSource = dmDasboardTeam.dsTopReferrers
@@ -1753,7 +1733,7 @@ object frmDashboard_Team: TfrmDashboard_Team
   end
   object pnlTop: TPanel
     Left = 0
-    Top = 26
+    Top = 28
     Width = 1053
     Height = 21
     Align = alTop
@@ -1765,7 +1745,7 @@ object frmDashboard_Team: TfrmDashboard_Team
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = 29
+    ExplicitTop = 26
   end
   object cbThreeD: TcxCheckBox
     Left = 206
@@ -1792,9 +1772,9 @@ object frmDashboard_Team: TfrmDashboard_Team
     Categories.Visibles = (
       True)
     ImageOptions.Images = dmAxiom.ilstToolbar
-    LookAndFeel.NativeStyle = False
+    LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = True
     PopupMenuLinks = <>
-    Style = bmsOffice11
     UseSystemFont = True
     Left = 587
     Top = 48
@@ -1802,7 +1782,7 @@ object frmDashboard_Team: TfrmDashboard_Team
     DockControlHeights = (
       0
       0
-      26
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False
@@ -2119,7 +2099,7 @@ object frmDashboard_Team: TfrmDashboard_Team
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.724517685180000000
+      ReportDocument.CreationDate = 43607.465252847220000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2149,7 +2129,7 @@ object frmDashboard_Team: TfrmDashboard_Team
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.724518136570000000
+      ReportDocument.CreationDate = 43607.465253344900000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2179,7 +2159,7 @@ object frmDashboard_Team: TfrmDashboard_Team
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.724518541670000000
+      ReportDocument.CreationDate = 43607.465253807870000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

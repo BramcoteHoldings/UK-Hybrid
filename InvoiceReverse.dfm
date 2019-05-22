@@ -446,7 +446,7 @@ object frmInvoiceReverse: TfrmInvoiceReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 77
     Top = 133
-    EditValue = 43312.3934758912d
+    EditValue = 43607.5742965046d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     StyleDisabled.LookAndFeel.Kind = lfStandard

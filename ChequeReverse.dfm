@@ -71,7 +71,7 @@ object frmChequeReverse: TfrmChequeReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 94
     Top = 163
-    EditValue = 43315.5909476852d
+    EditValue = 43607.5757979282d
     Properties.ButtonGlyph.SourceDPI = 96
     Properties.ButtonGlyph.Data = {
       424DF6030000000000003600000028000000100000000F000000010020000000

@@ -692,7 +692,7 @@ begin
                      , 0
                      , qryMatter.FieldByName('NMATTER').AsInteger);
 
-                     fiNCheqReq := GetSeqnum('NCHEQREQ');
+                     fiNCheqReq := GetSequenceNumber('sqnc_ncheqreq');
 
                      with qryCheqReqInsert do
                      begin

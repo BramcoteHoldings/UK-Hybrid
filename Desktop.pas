@@ -4064,8 +4064,9 @@ begin
     IDXDOCFOLDERTMPL: FindOrCreate(TfrmDoc_Fldr_Tmpl, iProgramID).Show;
     IDXDOCINDEXUSERS: FindOrCreate(TfrmIndexConfig, iProgramID).Show;
     IDXBULKMAILER: begin
-                       with TfrmBulkMailer.Create(frmDesktop) do
-                       begin
+                      try
+                        with TfrmBulkMailer.Create(frmDesktop) do
+                        begin
                           Tag := iProgramID;
                           DebtorStatements := 1;
 
@@ -4074,6 +4075,9 @@ begin
                           EmailSQL := DREmailSQL;
                           ShowModal;
                         end;
+                      finally
+                        //
+                      end;
                     end;
   end;
   Screen.Cursor := csrPrev;  // Restore cursor

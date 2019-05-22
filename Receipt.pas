@@ -2776,7 +2776,7 @@ begin
                     qryReceipt.Insert;
                     qryReceipt.FieldByName('PRINTER').AsString := cmbPrinter.Text;
                     // 22/05/2018 - AES changed to use sequence rather than seqnum table.  needs reset sequence to be run
-                    qryReceipt.FieldByName('NRECEIPT').AsInteger := GetSequenceNumber('SQNC_NRECEIPT'); //   GetSeqnum('NRECEIPT');
+                    qryReceipt.FieldByName('NRECEIPT').AsInteger := GetSequenceNumber('SQNC_NRECEIPT');
                     qryReceipt.FieldByName('CREATED').AsDateTime := dtpDate.Date;
                     qryReceipt.FieldByName('ACCT').AsString := cbBank.Text;
                     qryReceipt.FieldByName('TYPE').AsString := cbType.EditValue;
@@ -2859,7 +2859,7 @@ begin
                     qryReceipt.FieldByName('PRINTED').AsString := 'N';
                     qryReceipt.Post; // Puts Receipt into cached buffer
 
-                    nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));   //GetSeqnum('NACCOUNT');
+                    nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
                     if qryReceipt.FieldByName('TRUST').AsString <> 'T' then
 		      	        begin
                       {post components}

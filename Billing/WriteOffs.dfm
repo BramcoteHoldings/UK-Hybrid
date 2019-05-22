@@ -918,7 +918,7 @@ object frmWriteOff: TfrmWriteOff
       Left = 107
       Top = 287
       AutoSize = False
-      EditValue = 43531.7414512037d
+      EditValue = 43607.5764615278d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D

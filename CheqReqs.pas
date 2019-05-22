@@ -1043,7 +1043,7 @@ begin
           qryUpdate.SQL.Add('SELECT FILEID, LEDGER, PAYEE, ''Deleted - '' || DESCR, 0-AMOUNT, AUTHOR, SysDate, BANK, ''N'', GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, ''Y'', TRUST, ''N'', TAXCODE, 0-TAX, SUNDRYTYPE, NMATTER');
           qryUpdate.SQL.Add('FROM CHEQREQ');
           qryUpdate.SQL.Add('WHERE NCHEQREQ = ' + qryCheqreq.FieldByName('NCHEQREQ').AsString);
-          qryUpdate.ParamByName('NCHEQREQ').AsInteger := GetSeqnum('NCHEQREQ');
+          qryUpdate.ParamByName('NCHEQREQ').AsInteger := GetSequenceNumber('sqnc_ncheqreq');  // GetSeqnum('NCHEQREQ');
           qryUpdate.ExecSQL;
           qryUpdate.Close;
           if qryCheqReq.FieldByName('NMEMO').AsInteger <> 0 then

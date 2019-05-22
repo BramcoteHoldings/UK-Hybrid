@@ -7,14 +7,14 @@ object frmDashboard: TfrmDashboard
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object pagMain: TcxPageControl
     Left = 0
     Top = 50
@@ -28,40 +28,45 @@ object frmDashboard: TfrmDashboard
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    ExplicitTop = 52
     ClientRectBottom = 522
     ClientRectLeft = 4
     ClientRectRight = 1114
-    ClientRectTop = 28
+    ClientRectTop = 26
     object tsWIP: TcxTabSheet
       Caption = 'WIP'
       ImageIndex = 0
       OnShow = tsWIPShow
-      ExplicitTop = 29
-      ExplicitHeight = 493
+      ExplicitTop = 28
+      ExplicitHeight = 494
       object pnlWIP: TPanel
         Left = 0
         Top = 0
         Width = 1110
-        Height = 494
+        Height = 496
         Align = alClient
         BevelOuter = bvNone
         Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 493
+        ExplicitHeight = 494
         object Label18: TLabel
           Left = 3
           Top = 397
-          Width = 48
-          Height = 17
+          Width = 45
+          Height = 15
           Caption = 'MONTH'
           Transparent = True
         end
         object Label19: TLabel
           Left = 5
           Top = 427
-          Width = 23
-          Height = 17
+          Width = 22
+          Height = 15
           Caption = 'YTD'
           Transparent = True
         end
@@ -94,46 +99,46 @@ object frmDashboard: TfrmDashboard
         object Label11: TLabel
           Left = 13
           Top = 197
-          Width = 43
-          Height = 17
+          Width = 40
+          Height = 15
           Caption = 'Current'
           Transparent = True
         end
         object Label12: TLabel
           Left = 13
           Top = 215
-          Width = 14
-          Height = 17
+          Width = 12
+          Height = 15
           Caption = '30'
           Transparent = True
         end
         object Label13: TLabel
           Left = 13
-          Top = 232
-          Width = 14
-          Height = 17
+          Top = 233
+          Width = 12
+          Height = 15
           Caption = '60'
           Transparent = True
         end
         object Label14: TLabel
           Left = 13
-          Top = 248
-          Width = 14
-          Height = 17
+          Top = 251
+          Width = 12
+          Height = 15
           Caption = '90'
           Transparent = True
         end
         object Label15: TLabel
           Left = 13
-          Top = 265
-          Width = 30
-          Height = 17
+          Top = 269
+          Width = 26
+          Height = 15
           Caption = '120+'
           Transparent = True
         end
         object Label16: TLabel
           Left = 13
-          Top = 284
+          Top = 293
           Width = 23
           Height = 12
           Caption = 'Total'
@@ -148,40 +153,40 @@ object frmDashboard: TfrmDashboard
         object Label1: TLabel
           Left = 13
           Top = 42
-          Width = 43
-          Height = 17
+          Width = 40
+          Height = 15
           Caption = 'Current'
           Transparent = True
         end
         object Label2: TLabel
           Left = 13
           Top = 58
-          Width = 14
-          Height = 17
+          Width = 12
+          Height = 15
           Caption = '30'
           Transparent = True
         end
         object Label3: TLabel
           Left = 13
           Top = 74
-          Width = 14
-          Height = 17
+          Width = 12
+          Height = 15
           Caption = '60'
           Transparent = True
         end
         object Label4: TLabel
           Left = 13
           Top = 90
-          Width = 14
-          Height = 17
+          Width = 12
+          Height = 15
           Caption = '90'
           Transparent = True
         end
         object Label5: TLabel
           Left = 13
           Top = 106
-          Width = 30
-          Height = 17
+          Width = 26
+          Height = 15
           Caption = '120+'
           Transparent = True
         end
@@ -250,57 +255,57 @@ object frmDashboard: TfrmDashboard
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
           Transparent = True
-          Height = 18
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel2: TcxDBLabel
           Left = 97
-          Top = 212
+          Top = 213
           DataBinding.DataField = 'ADJ1'
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
           Transparent = True
-          Height = 19
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel3: TcxDBLabel
           Left = 97
-          Top = 230
+          Top = 231
           DataBinding.DataField = 'ADJ2'
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
           Transparent = True
-          Height = 18
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel4: TcxDBLabel
           Left = 97
-          Top = 247
+          Top = 249
           DataBinding.DataField = 'ADJ3'
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
           Transparent = True
-          Height = 17
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel5: TcxDBLabel
           Left = 97
-          Top = 263
+          Top = 267
           DataBinding.DataField = 'ADJ10'
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
           Transparent = True
-          Height = 19
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object lblWiptotal: TcxDBLabel
           Left = 97
-          Top = 282
+          Top = 288
           DataBinding.DataField = 'TOTALWIP'
           DataBinding.DataSource = dmDashboardFirm.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
@@ -314,11 +319,11 @@ object frmDashboard: TfrmDashboard
           Height = 20
           Width = 106
           AnchorX = 203
-          AnchorY = 292
+          AnchorY = 298
         end
         object cxDBLabel35: TcxDBLabel
           Left = 97
-          Top = 120
+          Top = 129
           DataBinding.DataField = 'TOTALAGED'
           DataBinding.DataSource = dmDashboardFirm.dsAgedDebtors
           ParentColor = False
@@ -330,56 +335,56 @@ object frmDashboard: TfrmDashboard
           Style.Edges = [bTop]
           Style.TextStyle = [fsBold]
           Transparent = True
-          Height = 18
+          Height = 20
           Width = 106
           AnchorX = 203
-          AnchorY = 129
+          AnchorY = 139
         end
         object cxDBLabel34: TcxDBLabel
           Left = 97
-          Top = 102
+          Top = 109
           DataBinding.DataField = 'ADJ10'
           DataBinding.DataSource = dmDashboardFirm.dsAgedDebtors
           Properties.Alignment.Horz = taRightJustify
           Style.Edges = []
           Transparent = True
-          Height = 18
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel33: TcxDBLabel
           Left = 97
-          Top = 85
+          Top = 91
           DataBinding.DataField = 'ADJ3'
           DataBinding.DataSource = dmDashboardFirm.dsAgedDebtors
           Properties.Alignment.Horz = taRightJustify
           Style.Edges = []
           Transparent = True
-          Height = 19
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel32: TcxDBLabel
           Left = 97
-          Top = 69
+          Top = 73
           DataBinding.DataField = 'ADJ2'
           DataBinding.DataSource = dmDashboardFirm.dsAgedDebtors
           Properties.Alignment.Horz = taRightJustify
           Style.Edges = []
           Transparent = True
-          Height = 19
+          Height = 20
           Width = 106
           AnchorX = 203
         end
         object cxDBLabel31: TcxDBLabel
           Left = 97
-          Top = 54
+          Top = 56
           DataBinding.DataField = 'ADJ1'
           DataBinding.DataSource = dmDashboardFirm.dsAgedDebtors
           Properties.Alignment.Horz = taRightJustify
           Style.Edges = []
           Transparent = True
-          Height = 19
+          Height = 20
           Width = 106
           AnchorX = 203
         end
@@ -396,7 +401,7 @@ object frmDashboard: TfrmDashboard
           StyleFocused.LookAndFeel.NativeStyle = False
           StyleHot.LookAndFeel.NativeStyle = False
           Transparent = True
-          Height = 17
+          Height = 20
           Width = 106
           AnchorX = 203
         end
@@ -577,32 +582,32 @@ object frmDashboard: TfrmDashboard
       Caption = 'Fees'
       ImageIndex = 1
       OnShow = tsFeesShow
-      ExplicitTop = 29
-      ExplicitHeight = 493
+      ExplicitTop = 28
+      ExplicitHeight = 494
       object pnlFees: TPanel
         Left = 0
         Top = 0
         Width = 1110
-        Height = 494
+        Height = 496
         Align = alClient
         BevelOuter = bvLowered
         Caption = 'pnlFees'
         Color = clWhite
         TabOrder = 0
-        ExplicitHeight = 493
+        ExplicitHeight = 494
         object Label7: TLabel
           Left = 8
           Top = 68
-          Width = 48
-          Height = 17
+          Width = 45
+          Height = 15
           Caption = 'MONTH'
           Transparent = True
         end
         object Label10: TLabel
           Left = 9
           Top = 93
-          Width = 23
-          Height = 17
+          Width = 22
+          Height = 15
           Caption = 'YTD'
           Transparent = True
         end
@@ -635,8 +640,8 @@ object frmDashboard: TfrmDashboard
         object Label27: TLabel
           Left = 8
           Top = 242
-          Width = 48
-          Height = 17
+          Width = 45
+          Height = 15
           Caption = 'MONTH'
           Transparent = True
         end
@@ -671,8 +676,8 @@ object frmDashboard: TfrmDashboard
         object Label28: TLabel
           Left = 8
           Top = 269
-          Width = 23
-          Height = 17
+          Width = 22
+          Height = 15
           Caption = 'YTD'
           Transparent = True
         end
@@ -1027,10 +1032,8 @@ object frmDashboard: TfrmDashboard
       Caption = 'Clients'
       ImageIndex = 2
       OnShow = tabTopClientShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitTop = 28
+      ExplicitHeight = 494
       object Panel3: TPanel
         Left = 14
         Top = 7
@@ -1042,32 +1045,32 @@ object frmDashboard: TfrmDashboard
         object Label29: TLabel
           Left = 3
           Top = 33
-          Width = 28
-          Height = 17
+          Width = 26
+          Height = 15
           Caption = 'MTD'
           Transparent = True
         end
         object Label30: TLabel
           Left = 3
           Top = 61
-          Width = 23
-          Height = 17
+          Width = 22
+          Height = 15
           Caption = 'YTD'
           Transparent = True
         end
         object Label35: TLabel
           Left = 7
           Top = 125
-          Width = 28
-          Height = 17
+          Width = 26
+          Height = 15
           Caption = 'MTD'
           Transparent = True
         end
         object Label36: TLabel
           Left = 7
           Top = 150
-          Width = 23
-          Height = 17
+          Width = 22
+          Height = 15
           Caption = 'YTD'
           Transparent = True
         end
@@ -1259,21 +1262,21 @@ object frmDashboard: TfrmDashboard
         ClientRectBottom = 299
         ClientRectLeft = 4
         ClientRectRight = 259
-        ClientRectTop = 28
+        ClientRectTop = 26
         object cxTabSheet1: TcxTabSheet
           Caption = 'Top 10 Clients'
           ImageIndex = 0
-          ExplicitTop = 29
-          ExplicitHeight = 270
+          ExplicitTop = 28
+          ExplicitHeight = 271
           object cxGrid1: TcxGrid
             Left = 0
             Top = 22
             Width = 255
-            Height = 249
+            Height = 251
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
-            ExplicitTop = 21
+            ExplicitHeight = 249
             object cxGrid1DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dmDashboardFirm.dsTopClients
@@ -1345,17 +1348,17 @@ object frmDashboard: TfrmDashboard
         object cxTabSheet2: TcxTabSheet
           Caption = 'Top 10 Referrers'
           ImageIndex = 1
-          ExplicitTop = 29
-          ExplicitHeight = 270
+          ExplicitTop = 28
+          ExplicitHeight = 271
           object cxGrid2: TcxGrid
             Left = 0
             Top = 22
             Width = 255
-            Height = 249
+            Height = 251
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
-            ExplicitTop = 21
+            ExplicitHeight = 249
             object cxGridDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dmDashboardFirm.dsTopReferrers
@@ -1503,8 +1506,8 @@ object frmDashboard: TfrmDashboard
         object Label31: TLabel
           Left = 8
           Top = 45
-          Width = 74
-          Height = 17
+          Width = 68
+          Height = 15
           Caption = 'Cash at Bank'
           Transparent = True
         end
@@ -1610,8 +1613,8 @@ object frmDashboard: TfrmDashboard
         object Label8: TLabel
           Left = 8
           Top = 35
-          Width = 28
-          Height = 17
+          Width = 26
+          Height = 15
           Caption = 'Total'
           Transparent = True
         end
@@ -1658,7 +1661,6 @@ object frmDashboard: TfrmDashboard
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = 30
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -1701,7 +1703,7 @@ object frmDashboard: TfrmDashboard
       FloatClientHeight = 22
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -1932,7 +1934,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729154907400000000
+      ReportDocument.CreationDate = 43607.605597893520000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1962,7 +1964,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729155254630000000
+      ReportDocument.CreationDate = 43607.605598321760000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1991,7 +1993,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43529.729155277770000000
+      ReportDocument.CreationDate = 43607.605598344900000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -12
