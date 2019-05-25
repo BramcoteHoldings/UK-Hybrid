@@ -44,6 +44,10 @@ object frmLedgers: TfrmLedgers
     object tabLedger: TcxTabSheet
       Caption = 'Ledger'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
         Top = 246
@@ -331,11 +335,16 @@ object frmLedgers: TfrmLedgers
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
         Control = Panel2
+        ExplicitWidth = 8
       end
     end
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         995
         512)

@@ -101,6 +101,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       ImageIndex = 0
       OnExit = tsNameExit
       OnShow = tsNameShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -638,6 +642,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Address'
       ImageIndex = 1
       OnShow = tsAddressShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object tsAddresses: TcxPageControl
         Left = 0
         Top = 0
@@ -654,6 +662,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tsMainAddress: TcxTabSheet
           Caption = 'Main Address'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           DesignSize = (
             536
             507)
@@ -1145,6 +1157,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             'nance->Options->Display Names tab.'
           Caption = 'Custom Address'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label16: TLabel
             Left = 53
             Top = 24
@@ -1300,6 +1316,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsPhone: TcxTabSheet
       Caption = 'Phonebook/Internet'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -1793,6 +1813,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Additional'
       ImageIndex = 3
       OnShow = tsAdditionalShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -2280,6 +2304,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object mNotes: TcxDBRichEdit
         Left = 0
         Top = 0
@@ -2294,6 +2322,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsGroups: TcxTabSheet
       Caption = 'Groups'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbGroups: TcxCheckListBox
         Left = 0
         Top = 0
@@ -2314,6 +2346,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Client'
       ImageIndex = 6
       OnShow = tsClientShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 55
         Top = 24
@@ -2695,8 +2731,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43603.419444675930000000
-        Time = 43603.419444675930000000
+        Date = 43607.419444675930000000
+        Time = 43607.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -2718,6 +2754,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tabClientTemplates: TcxTabSheet
           Caption = 'Templates'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           DesignSize = (
             525
             135)
@@ -2901,6 +2941,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tabDebtor: TcxTabSheet
           Caption = 'Debtor'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label21: TLabel
             Left = 43
             Top = 8
@@ -3066,6 +3110,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Creditor'
       ImageIndex = 7
       OnShow = tsCreditorShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label13: TLabel
         Left = 36
         Top = 84
@@ -3141,6 +3189,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsCustomData: TcxTabSheet
       Caption = 'Custom Data'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3181,13 +3233,17 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAllowFocus]
             Position = 1
             Text = 'Value'
-            Width = 366
+            Width = 370
           end>
       end
     end
     object tsMatterData: TcxTabSheet
       Caption = 'Matter Data'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtMatterData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3226,7 +3282,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
             Position = 1
             Text = 'Value'
-            Width = 396
+            Width = 400
           end>
       end
     end
@@ -3288,6 +3344,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsEventList: TcxTabSheet
       Caption = 'Events'
       ImageIndex = 11
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdEventList: TcxGrid
         Left = 0
         Top = 0
@@ -3591,6 +3651,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsMarketing: TcxTabSheet
       Caption = 'Marketing'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grpInterest: TGroupBox
         Left = 9
         Top = 198
@@ -3816,6 +3880,10 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsCRM: TcxTabSheet
       Caption = 'CRM'
       ImageIndex = 13
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label31: TLabel
         Left = 26
         Top = 20
@@ -4031,6 +4099,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
   end
   object qPhoneBook: TUniQuery
     UpdatingTable = 'PHONEBOOK'
+    KeyFields = 'NNAME'
     SQLInsert.Strings = (
       'INSERT INTO PHONEBOOK'
       
@@ -4093,67 +4162,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'ACT, :CONTACT_NAME, :ADDITIONAL_CONTACT_NAME,'
       
         '  :DATE_OF_DEATH, :DEBTORSTATUS,:WHICHPHONE, :SUPERCLIENT, :NRIC' +
-        ', :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO)'
-      'RETURNING'
-      
-        '  NNAME, NCLIENT, SEARCH, TITLE, GENDER, SALUTATION, ADDRESS, SU' +
-        'BURB, STATE, POSTCODE, '
-      
-        '  WORKPHONE, HOMEPHONE, DX, DXLOC, FAX, CODE, SPARTY, SOLICITOR,' +
-        ' REAL_ESTATE, REFERRALS, '
-      
-        '  NOTE, NAME, SHORTNAME, LONGNAME, TYPE, COUNTRY, ACN, OCCUPATIO' +
-        'N, DOB, EMAIL, WWW, MOBILE, '
-      
-        '  NNAMEMASTER, POSTALADDRESS, POSTALSUBURB, POSTALSTATE, POSTALP' +
-        'OSTCODE, POSTALCOUNTRY, '
-      
-        '  WHICHADDRESS, GIVENNAMES, INDUSTRYCODE, REFERRALCODE, REFERRED' +
-        'BY, REFERRALMAINTAINER, '
-      
-        '  CUST_ADDRESS, CUST_SUBURB, CUST_STATE, CUST_POSTCODE, CUST_COU' +
-        'NTRY, ABN, REFERREDBY_NNAME, '
-      
-        '  REFERREDBY_NCLIENT, REFERREDBY_EMP, REFERRALTYPE, EMAIL1, EMAI' +
-        'L2, RELATIONSHIP_TYPE, '
-      
-        '  RELATIONSHIP_STATUS, RELATIONSHIP_ACTION, FIRM_SIZE, SYSTEM1, ' +
-        'SYSTEM2, LASTNAME, DIRECTPHONE, CONTACT, CONTACT_NAME,'
-      
-        '  ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, DEBTORSTATUS, WHICHPHO' +
-        'NE, SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STATUS_ID, AP_EMAI' +
-        'L, PASSPORT_NO'
-      'INTO'
-      
-        '  :NNAME, :NCLIENT, :SEARCH, :TITLE, :GENDER, :SALUTATION, :ADDR' +
-        'ESS, :SUBURB, :STATE, '
-      
-        '  :POSTCODE, :WORKPHONE, :HOMEPHONE, :DX, :DXLOC, :FAX, :CODE, :' +
-        'SPARTY, :SOLICITOR, '
-      
-        '  :REAL_ESTATE, :REFERRALS, :NOTE, :NAME, :SHORTNAME, :LONGNAME,' +
-        ' :TYPE, :COUNTRY, :ACN, '
-      
-        '  :OCCUPATION, :DOB, :EMAIL, :WWW, :MOBILE, :NNAMEMASTER, :POSTA' +
-        'LADDRESS, :POSTALSUBURB, '
-      
-        '  :POSTALSTATE, :POSTALPOSTCODE, :POSTALCOUNTRY, :WHICHADDRESS, ' +
-        ':GIVENNAMES, :INDUSTRYCODE, '
-      
-        '  :REFERRALCODE, :REFERREDBY, :REFERRALMAINTAINER, :CUST_ADDRESS' +
-        ', :CUST_SUBURB, :CUST_STATE, '
-      
-        '  :CUST_POSTCODE, :CUST_COUNTRY, :ABN, :REFERREDBY_NNAME, :REFER' +
-        'REDBY_NCLIENT, :REFERREDBY_EMP, '
-      
-        '  :REFERRALTYPE, :EMAIL1, :EMAIL2, :RELATIONSHIP_TYPE, :RELATION' +
-        'SHIP_STATUS, :RELATIONSHIP_ACTION, '
-      
-        '  :FIRM_SIZE, :SYSTEM1, :SYSTEM2, :LASTNAME, :DIRECTPHONE, :CONT' +
-        'ACT, :CONTACT_NAME, :ADDITIONAL_CONTACT_NAME,'
-      
-        '  :DATE_OF_DEATH, :DEBTORSTATUS, :WHICHPHONE, :SUPERCLIENT, :NRI' +
-        'C, :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO')
+        ', :PROSPECTIVE, :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO)')
     SQLDelete.Strings = (
       'DELETE FROM PHONEBOOK'
       'WHERE'
@@ -4202,9 +4211,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         ', MODIFIED = :MODIFIED, LASTNAME = :LASTNAME, IS_CLIENT = :IS_CL' +
         'IENT, IS_CREDITOR = :IS_CREDITOR,'
       
-        '  NCREDITOR = :NCREDITOR, DIRECTPHONE = :DIRECTPHONE, CLIENT_IMA' +
-        'GE = :CLIENT_IMAGE, CLIENTID = :CLIENTID, CREDITORID = :CREDITOR' +
-        'ID, CONTACT = :CONTACT, '
+        '  NCREDITOR = :NCREDITOR, DIRECTPHONE = :DIRECTPHONE, CLIENTID =' +
+        ' :CLIENTID, CREDITORID = :CREDITORID, CONTACT = :CONTACT, '
       
         '  CONTACT_NAME = :CONTACT_NAME, ADDITIONAL_CONTACT_NAME = :ADDIT' +
         'IONAL_CONTACT_NAME, DATE_OF_DEATH = :DATE_OF_DEATH, DEBTORSTATUS' +
@@ -4214,60 +4222,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'ECTIVE, PHONEBOOK_STATUS_ID = :PHONEBOOK_STATUS_ID, AP_EMAIL = :' +
         'AP_EMAIL, PASSPORT_NO = :PASSPORT_NO'
       'WHERE'
-      '  NNAME = :Old_NNAME'
-      'RETURNING'
-      
-        '  NNAME, NCLIENT, SEARCH, TITLE, GENDER, SALUTATION, ADDRESS, SU' +
-        'BURB, STATE, POSTCODE, WORKPHONE, HOMEPHONE, DX, DXLOC, FAX, COD' +
-        'E, SPARTY, SOLICITOR, REAL_ESTATE, '
-      
-        '  REFERRALS, NOTE, NAME, SHORTNAME, LONGNAME, TYPE, COUNTRY, ACN' +
-        ', OCCUPATION, DOB, EMAIL, WWW, MOBILE, NNAMEMASTER, POSTALADDRES' +
-        'S, POSTALSUBURB, POSTALSTATE, '
-      
-        '  POSTALPOSTCODE, POSTALCOUNTRY, WHICHADDRESS, GIVENNAMES, INDUS' +
-        'TRYCODE, REFERRALCODE, REFERREDBY, REFERRALMAINTAINER, CUST_ADDR' +
-        'ESS, CUST_SUBURB, CUST_STATE, '
-      
-        '  CUST_POSTCODE, CUST_COUNTRY, ABN, REFERREDBY_NNAME, REFERREDBY' +
-        '_NCLIENT, REFERREDBY_EMP, REFERRALTYPE, EMAIL1, EMAIL2, RELATION' +
-        'SHIP_TYPE, RELATIONSHIP_STATUS, '
-      
-        '  RELATIONSHIP_ACTION, FIRM_SIZE, SYSTEM1, SYSTEM2, MODIFIED, LA' +
-        'STNAME, IS_CLIENT, IS_CREDITOR, NCREDITOR, DIRECTPHONE, CLIENT_I' +
-        'MAGE, CLIENTID, CREDITORID, CONTACT,'
-      
-        '  CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, DEBTORST' +
-        'ATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPECTIVE, PHONEBOOK_STAT' +
-        'US_ID, AP_EMAIL, PASSPORT_NO'
-      'INTO'
-      
-        '  :NNAME, :NCLIENT, :SEARCH, :TITLE, :GENDER, :SALUTATION, :ADDR' +
-        'ESS, :SUBURB, :STATE, :POSTCODE, :WORKPHONE, :HOMEPHONE, :DX, :D' +
-        'XLOC, :FAX, :CODE, :SPARTY, '
-      
-        '  :SOLICITOR, :REAL_ESTATE, :REFERRALS, :NOTE, :NAME, :SHORTNAME' +
-        ', :LONGNAME, :TYPE, :COUNTRY, :ACN, :OCCUPATION, :DOB, :EMAIL, :' +
-        'WWW, :MOBILE, :NNAMEMASTER, '
-      
-        '  :POSTALADDRESS, :POSTALSUBURB, :POSTALSTATE, :POSTALPOSTCODE, ' +
-        ':POSTALCOUNTRY, :WHICHADDRESS, :GIVENNAMES, :INDUSTRYCODE, :REFE' +
-        'RRALCODE, :REFERREDBY, '
-      
-        '  :REFERRALMAINTAINER, :CUST_ADDRESS, :CUST_SUBURB, :CUST_STATE,' +
-        ' :CUST_POSTCODE, :CUST_COUNTRY, :ABN, :REFERREDBY_NNAME, :REFERR' +
-        'EDBY_NCLIENT, :REFERREDBY_EMP, '
-      
-        '  :REFERRALTYPE, :EMAIL1, :EMAIL2, :RELATIONSHIP_TYPE, :RELATION' +
-        'SHIP_STATUS, :RELATIONSHIP_ACTION, :FIRM_SIZE, :SYSTEM1, :SYSTEM' +
-        '2, :MODIFIED, :LASTNAME,'
-      
-        '  :IS_CLIENT, :IS_CREDITOR, :NCREDITOR, :DIRECTPHONE, :CLIENT_IM' +
-        'AGE, :CLIENTID, :CREDITORID, :CONTACT, :CONTACT_NAME, :ADDITIONA' +
-        'L_CONTACT_NAME, :DATE_OF_DEATH,'
-      
-        '  :DEBTORSTATUS, :WHICHPHONE, :SUPERCLIENT, :NRIC, :PROSPECTIVE,' +
-        ' :PHONEBOOK_STATUS_ID, :AP_EMAIL, :PASSPORT_NO')
+      '  NNAME = :Old_NNAME')
     SQLLock.Strings = (
       
         'SELECT NNAME, NCLIENT, SEARCH, TITLE, GENDER, SALUTATION, ADDRES' +
@@ -4291,9 +4246,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         'RELATIONSHIP_TYPE, RELATIONSHIP_STATUS, RELATIONSHIP_ACTION, FIR' +
         'M_SIZE, SYSTEM1, SYSTEM2, IMPORTED, DIRECTPHONE,'
       
-        'CLIENT_IMAGE, CONTACT, CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DA' +
-        'TE_OF_DEATH, DEBTORSTATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPE' +
-        'CTIVE,'
+        'CONTACT, CONTACT_NAME, ADDITIONAL_CONTACT_NAME, DATE_OF_DEATH, D' +
+        'EBTORSTATUS, WHICHPHONE, SUPERCLIENT, NRIC, PROSPECTIVE,'
       'PHONEBOOK_STATUS_ID, AP_EMAIL, PASSPORT_NO'
       'FROM PHONEBOOK'
       'WHERE'
@@ -4495,7 +4449,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Top = 564
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'nname'
         Value = nil
       end>

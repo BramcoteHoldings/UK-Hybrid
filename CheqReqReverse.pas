@@ -86,7 +86,7 @@ begin
       dmAxiom.uniInsight.StartTransaction;
 
      // Create a new record
-      nCheqReq := GetSeqnum('NCHEQREQ');
+      nCheqReq := GetSequenceNumber('sqnc_ncheqreq');
 
       sReason:= '';
       sReason := 'Deleted - ' + mlReason.Text;

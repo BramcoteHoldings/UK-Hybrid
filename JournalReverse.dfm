@@ -113,7 +113,7 @@ object frmJournalReverse: TfrmJournalReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 82
     Top = 143
-    EditValue = 43265.4210745139d
+    EditValue = 43607.5761953125d
     Properties.ShowTime = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True

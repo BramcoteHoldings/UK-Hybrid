@@ -375,7 +375,7 @@ object frmReceiptReverse: TfrmReceiptReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 85
     Top = 154
-    EditValue = 43315.5893211921d
+    EditValue = 43607.576041331d
     Properties.ButtonGlyph.SourceDPI = 96
     Properties.ButtonGlyph.Data = {
       424DF6030000000000003600000028000000100000000F000000010020000000

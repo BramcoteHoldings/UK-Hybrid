@@ -14,7 +14,7 @@ uses
   cxLookAndFeels, cxMaskEdit, cxDropDownEdit, cxCalendar,
   EnforceCustomDateEdit, dxCore, cxNavigator, cxDateUtils, dxSkinsCore,
   cxDataControllerConditionalFormattingRulesManagerDialog, System.Actions,
-  Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dxDateRanges;
 
 type
   TfrmReceiptReverse = class(TForm)
@@ -751,7 +751,6 @@ begin
       // Create a new record
       with qryChequeRV do
       begin
-//       iRvNcheque := GetSeqnum('NCHEQUE');
 //    14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
          iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
          ParamByName('NCHEQUE').AsInteger := iRvNcheque;

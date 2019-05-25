@@ -1284,7 +1284,7 @@ function TfrmPhoneBookNew.SavePhonebook(bFromClose: boolean): boolean;
   begin
     if(qCreditor.FieldByName('NCreditor').AsInteger = 0) then
     begin
-      NCreditor := GetSeqnum('NCREDITOR');
+      NCreditor := GetSequenceNumber('SQNC_NCREDITOR');
       qCreditor.FieldByName('NCREDITOR').AsInteger := NCreditor;
     end;
     qCreditor.FieldByName('SEARCH').AsString := Search;

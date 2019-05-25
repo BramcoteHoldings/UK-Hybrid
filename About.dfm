@@ -8,7 +8,7 @@ object frmAbout: TfrmAbout
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clBlack
-  Font.Height = -15
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -16,7 +16,7 @@ object frmAbout: TfrmAbout
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 120
-  TextHeight = 20
+  TextHeight = 15
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -35,8 +35,8 @@ object frmAbout: TfrmAbout
     object Label3: TLabel
       Left = 471
       Top = 41
-      Width = 208
-      Height = 20
+      Width = 165
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -60,24 +60,18 @@ object frmAbout: TfrmAbout
     object CopyRight: TLabel
       Left = 471
       Top = 134
-      Width = 351
-      Height = 17
+      Width = 315
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = #169' Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -13
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ParentFont = False
       IsControl = True
     end
     object lblLicense: TLabel
       Left = 559
-      Top = 108
+      Top = 104
       Width = 68
       Height = 20
       Margins.Left = 4
@@ -97,8 +91,8 @@ object frmAbout: TfrmAbout
     object Label1: TLabel
       Left = 471
       Top = 108
-      Width = 78
-      Height = 20
+      Width = 63
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -108,8 +102,8 @@ object frmAbout: TfrmAbout
     object Label2: TLabel
       Left = 471
       Top = 187
-      Width = 27
-      Height = 20
+      Width = 21
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -119,8 +113,8 @@ object frmAbout: TfrmAbout
     object Label4: TLabel
       Left = 471
       Top = 211
-      Width = 27
-      Height = 20
+      Width = 21
+      Height = 15
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -129,9 +123,9 @@ object frmAbout: TfrmAbout
     end
     object btnOk: TcxButton
       Left = 829
-      Top = 214
+      Top = 224
       Width = 73
-      Height = 34
+      Height = 24
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -159,16 +153,9 @@ object frmAbout: TfrmAbout
         'Using JCL and JVCL components from '
         'http://www.delphi-'
         'jedi.org/')
-      ParentFont = False
       Properties.ReadOnly = True
       Properties.ScrollBars = ssVertical
-      Style.Font.Charset = DEFAULT_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -13
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
       Style.LookAndFeel.NativeStyle = True
-      Style.IsFontAssigned = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
@@ -1443,8 +1430,8 @@ object frmAbout: TfrmAbout
     object LinkLabel1: TLinkLabel
       Left = 471
       Top = 159
-      Width = 179
-      Height = 24
+      Width = 149
+      Height = 19
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -1455,7 +1442,7 @@ object frmAbout: TfrmAbout
       TabOrder = 3
     end
     object ProductName: TcxLabel
-      Left = 471
+      Left = 470
       Top = 2
       Margins.Left = 4
       Margins.Top = 4
@@ -1474,6 +1461,7 @@ object frmAbout: TfrmAbout
       StyleDisabled.LookAndFeel.Kind = lfOffice11
       StyleFocused.LookAndFeel.Kind = lfOffice11
       StyleHot.LookAndFeel.Kind = lfOffice11
+      Transparent = True
     end
   end
 end

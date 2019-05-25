@@ -875,7 +875,7 @@ begin
               // Create the Cheque entry - as we are using Cached Updates
               // this won't save until we explicitly ApplyUpdates
               // 22/05/2018 - AES changed to use sequence rather than seqnum table.  needs reset sequence to be run
-              iNcheque := GetSequenceNumber('SQNC_NCHEQUE');  // GetSeqnum('NCHEQUE');
+              iNcheque := GetSequenceNumber('SQNC_NCHEQUE');
               qryCheque.ParamByName('P_Ncheque').AsInteger := iNcheque;
               qryCheque.Open;
 
@@ -941,7 +941,7 @@ begin
               qryCheque.Post; // Puts cheque into cached buffer
 
               // Create Cash At Bank Entry
-              nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  //GetSeqnum('NACCOUNT');
+              nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
               if qryCheque.FieldByName('TRUST').AsString <> 'T' then
               begin
                 // If it's a Ledger cheque, need to save chart used on posting

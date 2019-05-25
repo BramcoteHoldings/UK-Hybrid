@@ -111,7 +111,7 @@ begin
   qryAccount.Open;
   qryAccount.Insert;
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-  qryAccount.FieldByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
+  qryAccount.FieldByName('NCHEQUE').AsInteger := GetSequenceNumber('SQNC_NCHEQUE');
   qryAccount.FieldByName('INVOICE_DATE').AsDateTime := dtpDate.Date;
   qryAccount.FieldByName('ACCT').AsString := dmAxiom.Entity;
 end;
