@@ -117,12 +117,9 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmDebtorDocumentMerge.wordMerge(
-  iNmemo : integer;
-  sTemplate, sDebtorNote, sGeneratedDocumentName, sTaskDesc : string;
-  iTaskKey             : integer;
-  bAuto, bShow, bPrint : boolean);
-  begin
+procedure TfrmDebtorDocumentMerge.wordMerge(iNmemo: integer; sTemplate, sDebtorNote, sGeneratedDocumentName, sTaskDesc : string;
+                                            iTaskKey: integer; bAuto, bShow, bPrint : boolean);
+begin
     // self.Width := 412;
     // self.Height := 194;
     pcMerge.activepage := tabWord;
@@ -139,19 +136,18 @@ procedure TfrmDebtorDocumentMerge.wordMerge(
     cxCbPrint.Checked := bPrint;
     cxBcShow.Checked := bShow;
 
-    if bAuto
-    then
+    if bAuto then
       btnProcessWordClick(self);
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.emailMerge(
   iNmemo : integer;
   sEmail, sSubject, sAssign, sAlert, sAlert2, sDebtorNote, sTaskDesc : string;
   iTaskKey : integer;
   bAuto    : boolean);
-  var
+var
     AAlert, AAlert2 : string;
-  begin
+begin
     self.Width := 645;
     self.Height := 470;
     pcMerge.activepage := tabEmail;
@@ -181,12 +177,12 @@ procedure TfrmDebtorDocumentMerge.emailMerge(
     if bAuto
     then
       btnSendEmailClick(self);
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.createWordDoc(sTemplate, sDataFile : string);
-  var
+var
     varWord, varDoc : Variant;
-  begin
+begin
     try
       checkDirectory(cxEdOutfile.Text);
 
@@ -219,8 +215,7 @@ procedure TfrmDebtorDocumentMerge.createWordDoc(sTemplate, sDataFile : string);
         varDoc.Activewindow.WindowState := wdWindowStateMaximize;
         varDoc.saveAs(cxEdOutfile.Text);
 
-        if cxCbPrint.Checked
-        then
+        if cxCbPrint.Checked then
           varDoc.print;
 
         { if AutoProcess then
@@ -229,8 +224,7 @@ procedure TfrmDebtorDocumentMerge.createWordDoc(sTemplate, sDataFile : string);
           varDoc := Unassigned;
           end; }
 
-        if ((not cxBcShow.Checked) and (not AutoProcess))
-        then
+        if ((not cxBcShow.Checked) and (not AutoProcess)) then
         begin
           varDoc.Close();
           varDoc := Unassigned;
@@ -264,37 +258,34 @@ procedure TfrmDebtorDocumentMerge.createWordDoc(sTemplate, sDataFile : string);
         bOk := false;
       end;
     end;
-    //
-  end;
+end;
 
 function TfrmDebtorDocumentMerge.mergeEmail(sIn : string) : string;
-  var
+var
     sResult, sFieldName, sValue : string;
     iLoop : integer;
     Field : TField;
-  begin
-    sResult := sIn;
-    qryDataSource.Close;
-    qryDataSource.ParamByName('NMEMO').AsInteger := iNmemo;
-    qryDataSource.ParamByName('TASK_DESCRIPTION').AsString := sTaskDesc;
+begin
+   sResult := sIn;
+   qryDataSource.Close;
+   qryDataSource.ParamByName('NMEMO').AsInteger := iNmemo;
+   qryDataSource.ParamByName('TASK_DESCRIPTION').AsString := sTaskDesc;
 
-    qryDataSource.Open;
-    qryDataSource.First;
-    if qryDataSource.eof
-    then
-    begin
+   qryDataSource.Open;
+   qryDataSource.First;
+   if qryDataSource.eof then
+   begin
       mergeEmail := '';
       qryDataSource.Close;
       exit;
-    end;
+   end;
 
-    for iLoop := 0 to qryDataSource.Fields.Count - 1 do
-    begin
+   for iLoop := 0 to qryDataSource.Fields.Count - 1 do
+   begin
       Field := qryDataSource.Fields[iLoop];
       sFieldName := '<<' + Field.FieldName + '>>';
 
-      if Field.DataType in [ftDateTime, ftDate, ftTime]
-      then
+      if Field.DataType in [ftDateTime, ftDate, ftTime] then
       begin
         sValue := formatDateTime('DD/MM/YYYY', Field.asDateTime);
       end
@@ -303,57 +294,54 @@ function TfrmDebtorDocumentMerge.mergeEmail(sIn : string) : string;
         sValue := Field.AsString;
       end;
       sResult := AnsiReplaceText(sResult, sFieldName, sValue);
-    end;
+   end;
 
     mergeEmail := sResult;
     qryDataSource.Close;
     //
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.exportDataSource(
   iNmemo    : integer;
   sDataFile : string);
-  var
+var
     sLine, sFileText : string;
     iLoop : integer;
     Field : TField;
     fileStream : TStream;
     stringStream : TStringStream;
     sFieldString : string;
-  begin
-    sFileText := '';
-    qryDataSource.Close;
-    qryDataSource.ParamByName('NMEMO').AsInteger := iNmemo;
-    qryDataSource.ParamByName('TASK_DESCRIPTION').AsString := sTaskDesc;
-    qryDataSource.Open;
+begin
+   sFileText := '';
+   qryDataSource.Close;
+   qryDataSource.ParamByName('NMEMO').AsInteger := iNmemo;
+   qryDataSource.ParamByName('TASK_DESCRIPTION').AsString := sTaskDesc;
+   qryDataSource.Open;
 
-    qryDataSource.First;
-    sLine := '';
-    for iLoop := 0 to qryDataSource.Fields.Count - 1 do
-    begin
+   qryDataSource.First;
+   sLine := '';
+   for iLoop := 0 to qryDataSource.Fields.Count - 1 do
+   begin
       Field := qryDataSource.Fields[iLoop];
-      if iLoop > 0
-      then
+      if iLoop > 0 then
         sLine := sLine + ',';
       sLine := sLine + '"' + Field.FieldName + '"';
       // fileStream.Write
-    end;
+   end;
 
-    sFileText := sFileText + sLine;
+   sFileText := sFileText + sLine;
 
-    while (not qryDataSource.eof) do
-    begin
+   while (not qryDataSource.eof) do
+   begin
       sLine := '';
       sLine := sLine + #13#10;
       for iLoop := 0 to qryDataSource.Fields.Count - 1 do
       begin
-        if iLoop > 0
-        then
+        if iLoop > 0 then
           sLine := sLine + ',';
         Field := qryDataSource.Fields[iLoop];
 
-        if Field.DataType in [ftDateTime, ftDate, ftTime]
-        then
+        if Field.DataType in [ftDateTime, ftDate, ftTime] then
         begin
           sFieldString := formatDateTime('DD/MM/YYYY', Field.asDateTime);
         end
@@ -366,55 +354,52 @@ procedure TfrmDebtorDocumentMerge.exportDataSource(
       end;
       sFileText := sFileText + sLine;
       qryDataSource.Next;
-    end;
+   end;
 
-    try
+   try
       stringStream := TStringStream.Create(sFileText);
 
-      if fileExists(sDataFile)
-      then
+      if fileExists(sDataFile) then
         DeleteFile(sDataFile);
 
       fileStream := TFileStream.Create(sDataFile, fmCreate);
 
       fileStream.CopyFrom(stringStream, stringStream.Size);
-    finally
+   finally
       fileStream.Free;
       stringStream.Free;
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmDebtorDocumentMerge.btnProcessWordClick(Sender : TObject);
-  var
+var
     sDataFile : string;
-  begin
-    bOk := True;
-    sDataFile := dmAxiom.GetEnvVar('TMP') + '\' + intToStr(self.iNmemo) + '.dat';
-    exportDataSource(iNmemo, sDataFile);
-    createWordDoc(sTemplate, sDataFile);
+begin
+   bOk := True;
+   sDataFile := dmAxiom.GetEnvVar('TMP') + '\' + intToStr(self.iNmemo) + '.dat';
+   exportDataSource(iNmemo, sDataFile);
+   createWordDoc(sTemplate, sDataFile);
 
-    addDebtorNotes;
+   addDebtorNotes;
 
-    SaveToDB;
+   SaveToDB;
 
-    self.Close;
-  end;
+   self.Close;
+end;
 
 procedure TfrmDebtorDocumentMerge.SaveToDB;
-  var
+var
     tmpFileName, ADocName : string;
     APrec_Category, APrec_Classification : integer;
-  begin
+begin
     try
-      if dmAxiom.uniInsight.InTransaction
-      then
+      if dmAxiom.uniInsight.InTransaction then
         dmAxiom.uniInsight.Commit;
       dmAxiom.uniInsight.StartTransaction;
 
       dmAxiom.qryMatterAttachments.CachedUpdates := True;
 
-      if dmAxiom.qryMatterAttachments.state = dsInactive
-      then
+      if dmAxiom.qryMatterAttachments.state = dsInactive then
         dmAxiom.qryMatterAttachments.Open;
 
       dmAxiom.qryMatterAttachments.Insert;
@@ -447,17 +432,17 @@ procedure TfrmDebtorDocumentMerge.SaveToDB;
     except
       dmAxiom.uniInsight.Rollback;
     end;
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.FormShow(Sender : TObject);
-  begin
-    pcMerge.HideTabs := True;
-  end;
+begin
+   pcMerge.HideTabs := True;
+end;
 
 procedure TfrmDebtorDocumentMerge.btnSendEmailClick(Sender : TObject);
-  var
+var
     sOracleError : string;
-  begin
+begin
     // nmSMTP.Host := SystemString('SMTP_SERVER');
     // nmSMTP.PostMessage.FromAddress := edFrom.text;
     // nmSMTP.PostMessage.ToAddress.Add(edTo.Text);
@@ -512,15 +497,14 @@ procedure TfrmDebtorDocumentMerge.btnSendEmailClick(Sender : TObject);
 
     dmAxiom.spAxiomEmail.Close;
     self.Close;
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.addDebtorNotes;
-  var
+var
     snote : string;
-  begin
-    if iTaskKey <> 0
-    then
-    begin
+begin
+   if iTaskKey <> 0 then
+   begin
       snote := mergeEmail(sDebtorNote);
       qryDebtorNotesInsert.Close;
       qryDebtorNotesInsert.ParamByName('NMATTER').AsInteger := TableInteger('NMEMO', 'NMEMO', iNmemo, 'NMATTER');
@@ -531,14 +515,14 @@ procedure TfrmDebtorDocumentMerge.addDebtorNotes;
       qryDebtorNotesInsert.ParamByName('ndebtortask').AsInteger := iTaskKey;
       qryDebtorNotesInsert.ExecSQL;
       qryDebtorNotesInsert.Close;
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmDebtorDocumentMerge.checkDirectory(sDir : string);
-  var
+var
     sNewDir, sSub, sCreateDir, sTotalPath : string;
     iPos, iNext : integer;
-  begin
+begin
     // break down the path and create check each directory
 
     sNewDir := ExtractFilePath(sDir);
@@ -557,21 +541,16 @@ procedure TfrmDebtorDocumentMerge.checkDirectory(sDir : string);
 
       sTotalPath := sTotalPath + '\' + sCreateDir;
 
-      if not DirectoryExists(sTotalPath)
-      then
-        if not createDir(sTotalPath)
-        then
+      if not DirectoryExists(sTotalPath) then
+        if not createDir(sTotalPath) then
           raise Exception.Create('Error could not create directory ' + sTotalPath);
 
     end;
-  end;
+end;
 
-procedure TfrmDebtorDocumentMerge.StatementMerge(
-  iNmemo : integer;
-  sTemplate, sDebtorNote, sGeneratedDocumentName, sTaskDesc : string;
-  iTaskKey             : integer;
-  bAuto, bShow, bPrint : boolean);
-  begin
+procedure TfrmDebtorDocumentMerge.StatementMerge(iNmemo: integer; sTemplate, sDebtorNote, sGeneratedDocumentName, sTaskDesc : string;
+               iTaskKey: integer; bAuto, bShow, bPrint: boolean);
+begin
     pcMerge.activepage := tabStatement;
     self.iNmemo := iNmemo;
     self.iTaskKey := iTaskKey;
@@ -588,16 +567,15 @@ procedure TfrmDebtorDocumentMerge.StatementMerge(
     Else
       rgDestination.ItemIndex := 1;
 
-    if bAuto
-    then
+    if bAuto then
       btnProcessStatementClick(self);
 
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.btnProcessStatementClick(Sender : TObject);
-  var
+var
     sDataFile : string;
-  begin
+begin
     bOk := True;
     // sDataFile := dmAxiom.GetEnvVar('TMP')+'\'+ intToStr(self.iNmemo) + '.dat';
     // exportDataSource(iNmemo, sDataFile);
@@ -608,12 +586,12 @@ procedure TfrmDebtorDocumentMerge.btnProcessStatementClick(Sender : TObject);
     SaveToDB;
 
     self.Close;
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.createStatement(
   sTemplate : string;
   iNmemo    : integer);
-  begin
+begin
     try
       try
         checkDirectory(cxEdStmntOutfile.Text);
@@ -626,8 +604,7 @@ procedure TfrmDebtorDocumentMerge.createStatement(
         end;
 
         try
-          if (ppStatement.Parameters.Count > 0)
-          then
+          if (ppStatement.Parameters.Count > 0) then
           begin
             with ppStatement.Parameters do
             begin
@@ -678,20 +655,19 @@ procedure TfrmDebtorDocumentMerge.createStatement(
         bOk := false;
       end;
     end;
-  end;
+end;
 
 procedure TfrmDebtorDocumentMerge.BillPrintBeforePrint(Sender : TObject);
-  begin
-    if (ppStatement.Parameters.Count > 0)
-    then
-    begin
+begin
+   if (ppStatement.Parameters.Count > 0) then
+   begin
       with ppStatement.Parameters do
       begin
         // Items['NMATTER'].Value := StrToInt(nmatter);
         // Items['NMEMO'].Value := StrToInt(nmemo);
         // Items['NCLIENT'].Value := StrToInt(nclient);
       end;
-    end
-  end;
+   end
+end;
 
 end.

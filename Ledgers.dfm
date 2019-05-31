@@ -2,8 +2,8 @@ object frmLedgers: TfrmLedgers
   Left = 528
   Top = 238
   Caption = 'General Ledger'
-  ClientHeight = 593
-  ClientWidth = 1003
+  ClientHeight = 677
+  ClientWidth = 1258
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object frmLedgers: TfrmLedgers
   object pagCashbook: TcxPageControl
     Left = 0
     Top = 28
-    Width = 1003
-    Height = 542
+    Width = 1258
+    Height = 626
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -31,31 +31,33 @@ object frmLedgers: TfrmLedgers
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    Properties.ActivePage = tabFilter
+    Properties.ActivePage = tabLedger
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
     OnChange = pagCashbook1Change
-    ClientRectBottom = 538
+    ExplicitWidth = 1115
+    ExplicitHeight = 592
+    ClientRectBottom = 622
     ClientRectLeft = 4
-    ClientRectRight = 999
+    ClientRectRight = 1254
     ClientRectTop = 26
     object tabLedger: TcxTabSheet
       Caption = 'Ledger'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 1107
+      ExplicitHeight = 562
       object Panel1: TPanel
         Left = 0
         Top = 246
-        Width = 995
-        Height = 266
+        Width = 1250
+        Height = 350
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
+        ExplicitWidth = 1107
+        ExplicitHeight = 316
         object Label17: TLabel
           Left = 13
           Top = 7
@@ -72,12 +74,14 @@ object frmLedgers: TfrmLedgers
         object grdTransactions: TcxGrid
           Left = 1
           Top = 1
-          Width = 993
-          Height = 264
+          Width = 1248
+          Height = 348
           Align = alClient
           PopupMenu = pmCreateCheque
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 1105
+          ExplicitHeight = 314
           object tvTransactions: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsNaccounts
@@ -143,19 +147,21 @@ object frmLedgers: TfrmLedgers
       object Panel2: TPanel
         Left = 0
         Top = 28
-        Width = 995
+        Width = 1250
         Height = 210
         Align = alTop
         Caption = 'Panel2'
         TabOrder = 1
+        ExplicitWidth = 1107
         object grdLedgers: TcxGrid
           Left = 1
           Top = 1
-          Width = 993
+          Width = 1248
           Height = 208
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 1105
           object tvLedgers: TcxGridDBTableView
             OnDblClick = mnuFileEditClick
             Navigator.Buttons.CustomButtons = <>
@@ -254,12 +260,13 @@ object frmLedgers: TfrmLedgers
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 995
+        Width = 1250
         Height = 28
         Align = alTop
         TabOrder = 2
+        ExplicitWidth = 1107
         DesignSize = (
-          995
+          1250
           28)
         object Label16: TLabel
           Left = 8
@@ -275,7 +282,7 @@ object frmLedgers: TfrmLedgers
           ParentFont = False
         end
         object Label13: TLabel
-          Left = 659
+          Left = 914
           Top = 7
           Width = 35
           Height = 15
@@ -285,7 +292,7 @@ object frmLedgers: TfrmLedgers
           ExplicitLeft = 671
         end
         object Label6: TLabel
-          Left = 808
+          Left = 1063
           Top = 7
           Width = 35
           Height = 15
@@ -295,7 +302,7 @@ object frmLedgers: TfrmLedgers
           ExplicitLeft = 820
         end
         object tbLedgerSearch: TEdit
-          Left = 696
+          Left = 951
           Top = 2
           Width = 95
           Height = 23
@@ -304,15 +311,17 @@ object frmLedgers: TfrmLedgers
           TabOrder = 0
           OnChange = tbLedgerSearchChange
           OnKeyDown = tbLedgerSearchKeyDown
+          ExplicitLeft = 808
         end
         object tbReportSearch: TEdit
-          Left = 846
+          Left = 1101
           Top = 3
           Width = 136
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 1
           OnChange = tbReportSearchChange
+          ExplicitLeft = 958
         end
         object chkGroupBy: TcxCheckBox
           Left = 77
@@ -329,25 +338,23 @@ object frmLedgers: TfrmLedgers
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 238
-        Width = 995
+        Width = 1250
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
         Control = Panel2
-        ExplicitWidth = 8
+        ExplicitWidth = 1107
       end
     end
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 1107
+      ExplicitHeight = 562
       DesignSize = (
-        995
-        512)
+        1250
+        596)
       object cxGroupBox1: TcxGroupBox
         Left = 10
         Top = 143
@@ -535,8 +542,8 @@ object frmLedgers: TfrmLedgers
         end
       end
       object btnClearAll: TcxButton
-        Left = 896
-        Top = 479
+        Left = 1151
+        Top = 563
         Width = 75
         Height = 25
         Anchors = [akRight, akBottom]
@@ -613,6 +620,8 @@ object frmLedgers: TfrmLedgers
         OptionsImage.NumGlyphs = 2
         TabOrder = 2
         OnClick = btnClearAllClick
+        ExplicitLeft = 1008
+        ExplicitTop = 529
       end
       object grpTrans: TcxGroupBox
         Left = 10
@@ -842,8 +851,8 @@ object frmLedgers: TfrmLedgers
   end
   object sbarInfo: TStatusBar
     Left = 0
-    Top = 570
-    Width = 1003
+    Top = 654
+    Width = 1258
     Height = 23
     BiDiMode = bdLeftToRight
     Panels = <
@@ -859,6 +868,8 @@ object frmLedgers: TfrmLedgers
         Width = 50
       end>
     ParentBiDiMode = False
+    ExplicitTop = 620
+    ExplicitWidth = 1115
   end
   object dsCharts: TUniDataSource
     AutoEdit = False

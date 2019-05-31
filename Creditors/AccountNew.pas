@@ -696,7 +696,7 @@ begin
             PostLedger(qryAccount.FieldByName('INVOICE_DATE').AsDateTime
               , cAccTotal
               , cAccTax
-              , glInstance.ledgerKey
+              , qryAccount.FieldByName('REFNO').AsString  //glInstance.ledgerKey
               , 'INVOICE'
               , qryAccount.FieldByName('NINVOICE').AsInteger
               , qryLedger.FieldByName('REASON').AsString

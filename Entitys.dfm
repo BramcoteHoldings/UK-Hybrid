@@ -198,7 +198,7 @@ object frmEntity: TfrmEntity
       Width = 376
       Height = 272
       TabOrder = 1
-      Properties.ActivePage = tabWriteOff
+      Properties.ActivePage = tabCreation
       Properties.CustomButtons.Buttons = <>
       LookAndFeel.Kind = lfFlat
       LookAndFeel.NativeStyle = True

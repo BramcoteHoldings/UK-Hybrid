@@ -662,7 +662,6 @@ object frmTimeSheet: TfrmTimeSheet
           Properties.OnCloseUp = tvFeeTmpFILEIDPropertiesCloseUp
           Properties.OnEditValueChanged = tvFeeTmpFILEIDPropertiesEditValueChanged
           Properties.OnInitPopup = tvFeeTmpFILEIDPropertiesInitPopup
-          Properties.OnValidate = tvFeeTmpREFNOPropertiesValidate
           VisibleForCustomization = False
           Width = 54
         end

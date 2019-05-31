@@ -14,7 +14,7 @@ uses
   cxDropDownEdit, Variants, cxLookAndFeels, cxCalendar,
   EnforceCustomDateEdit, dxCore, cxNavigator, cxDateUtils,
   dxGDIPlusClasses, dxDPIAwareUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   colREFNO = 0;

@@ -1,23 +1,25 @@
 object FrmConflictDocName: TFrmConflictDocName
   Left = 0
   Top = 0
+  BorderStyle = bsDialog
   Caption = 'Conflict Document Details'
-  ClientHeight = 165
-  ClientWidth = 598
+  ClientHeight = 141
+  ClientWidth = 608
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   OnKeyDown = edtConflictDocNameKeyDown
   OnShow = FormShow
   PixelsPerInch = 120
-  TextHeight = 16
+  TextHeight = 14
   object btnOk: TcxButton
     Left = 362
-    Top = 113
+    Top = 97
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -117,7 +119,7 @@ object FrmConflictDocName: TFrmConflictDocName
   end
   object btnCancel: TcxButton
     Left = 483
-    Top = 113
+    Top = 97
     Width = 94
     Height = 31
     Margins.Left = 4
@@ -217,7 +219,7 @@ object FrmConflictDocName: TFrmConflictDocName
   end
   object edtConflictDocName: TcxTextEdit
     Left = 112
-    Top = 26
+    Top = 18
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -228,7 +230,7 @@ object FrmConflictDocName: TFrmConflictDocName
   end
   object cxLabel1: TcxLabel
     Left = 44
-    Top = 27
+    Top = 19
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -238,7 +240,7 @@ object FrmConflictDocName: TFrmConflictDocName
   end
   object edConflictDocDescription: TcxTextEdit
     Left = 112
-    Top = 68
+    Top = 60
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -249,7 +251,7 @@ object FrmConflictDocName: TFrmConflictDocName
   end
   object cxLabel2: TcxLabel
     Left = 14
-    Top = 69
+    Top = 61
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4

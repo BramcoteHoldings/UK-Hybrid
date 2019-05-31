@@ -30,7 +30,8 @@ const
    InfoTrackKey = '06b83197-b930-48e9-87fd-4a2e5ca33951';
    CRLF = #13#10;
 //   PATCH_VERSION = '9_0_1_37';
-   PATCH_VERSION = '9_1_26';
+//   PATCH_VERSION = '9_1_26';
+   PATCH_VERSION = '9_2_0';
    LOGFILESIZE =     30000;
 
 type

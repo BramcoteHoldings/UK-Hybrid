@@ -3,26 +3,27 @@ inherited frmPrinter: TfrmPrinter
   Top = 216
   BorderStyle = bsDialog
   Caption = 'Printers'
-  ClientHeight = 708
-  ClientWidth = 886
+  ClientHeight = 694
+  ClientWidth = 851
   OldCreateOrder = True
   Position = poOwnerFormCenter
   OnDblClick = FormDblClick
   OnHide = FormHide
   OnShow = FormShow
-  ExplicitWidth = 892
-  ExplicitHeight = 737
+  ExplicitWidth = 857
+  ExplicitHeight = 723
   PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
     Top = 28
-    Width = 886
-    Height = 661
+    Width = 851
+    Height = 646
     Align = alClient
     TabOrder = 4
     AutoSize = True
-    ExplicitTop = 22
+    ExplicitWidth = 886
+    ExplicitHeight = 661
     object dbeCode: TDBEdit
       Left = 84
       Top = 14
@@ -49,8 +50,10 @@ inherited frmPrinter: TfrmPrinter
       BevelOuter = bvSpace
       BevelKind = bkFlat
       BorderStyle = bsNone
+      Ctl3D = True
       DataField = 'TRAY'
       DataSource = dsSource
+      ParentCtl3D = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 5
@@ -177,17 +180,6 @@ inherited frmPrinter: TfrmPrinter
       ShowHint = True
       TabOrder = 4
     end
-    object dbimage: TDBImage
-      Left = 14
-      Top = 398
-      Width = 105
-      Height = 101
-      BorderStyle = bsNone
-      DataField = 'SIGNATURE'
-      DataSource = dsPrinterSignatures
-      Enabled = False
-      TabOrder = 14
-    end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 82
       Top = 312
@@ -248,8 +240,8 @@ inherited frmPrinter: TfrmPrinter
       Width = 344
     end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
-      AlignHorz = ahClient
-      AlignVert = avClient
+      AlignHorz = ahParentManaged
+      AlignVert = avParentManaged
       ButtonOptions.Buttons = <>
       Hidden = True
       ShowBorder = False
@@ -257,7 +249,6 @@ inherited frmPrinter: TfrmPrinter
     end
     object dxLayoutGroup1: TdxLayoutGroup
       Parent = dxLayoutControl1Group_Root
-      AlignHorz = ahLeft
       CaptionOptions.Text = 'Hidden Group'
       ButtonOptions.Buttons = <>
       ButtonOptions.DefaultHeight = 18
@@ -275,7 +266,7 @@ inherited frmPrinter: TfrmPrinter
       ButtonOptions.DefaultHeight = 18
       ButtonOptions.DefaultWidth = 18
       Hidden = True
-      ItemIndex = 3
+      ItemIndex = 2
       ShowBorder = False
       Index = 0
     end
@@ -465,36 +456,26 @@ inherited frmPrinter: TfrmPrinter
       ControlOptions.ShowBorder = False
       Index = 2
     end
-    object dxLayoutItem15: TdxLayoutItem
-      Parent = dxLayoutGroup2
-      AlignHorz = ahLeft
-      CaptionOptions.Text = 'dbimage'
-      CaptionOptions.Visible = False
-      Visible = False
-      Control = dbimage
-      ControlOptions.MinHeight = 22
-      ControlOptions.MinWidth = 22
-      ControlOptions.OriginalHeight = 101
-      ControlOptions.OriginalWidth = 105
-      Enabled = False
-      Index = 3
-    end
   end
-  object StatusBar1: TStatusBar [1]
+  object StatusBar1: TdxStatusBar [1]
     Left = 0
-    Top = 689
-    Width = 886
-    Height = 19
-    AutoHint = True
+    Top = 674
+    Width = 851
+    Height = 20
     Panels = <
       item
-        Width = 50
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.AutoHint = True
+        PanelStyle.EllipsisType = dxetTruncate
       end>
-    ParentShowHint = False
-    ShowHint = True
-    SimplePanel = True
-    ExplicitTop = 429
-    ExplicitWidth = 598
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ExplicitLeft = 424
+    ExplicitTop = 672
+    ExplicitWidth = 0
   end
   inherited dsSource: TUniDataSource
     Left = 281
@@ -1066,7 +1047,6 @@ inherited frmPrinter: TfrmPrinter
     Top = 217
     PixelsPerInch = 96
     inherited dxBarManager1Bar1: TdxBar
-      Font.Height = -12
       OldName = 'Toolbar1'
     end
     inherited dxBarManager1Bar2: TdxBar

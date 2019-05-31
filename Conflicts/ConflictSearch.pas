@@ -479,9 +479,15 @@ begin
       QrySaveConflictItems.ParamByName('NConflict').AsInteger := qrySaveConflict.ParamByName('NConflict').AsInteger;
 
       Category := vtConflicts.FieldByName('Cat').AsString;
+
       if StrMatches('Client*', Category) then
       begin
         QrySaveConflictItems.ParamByName('KeyKind').AsString := 'Client';
+        QrySaveConflictItems.ParamByName('NKey').AsInteger := vtConflicts.FieldByName('NClient').AsInteger
+      end
+      else if StrMatches('Contact*', Category) then
+      begin
+        QrySaveConflictItems.ParamByName('KeyKind').AsString := 'Contact';
         QrySaveConflictItems.ParamByName('NKey').AsInteger := vtConflicts.FieldByName('NClient').AsInteger
       end
       // Fields link only to matters.
@@ -490,6 +496,7 @@ begin
         QrySaveConflictItems.ParamByName('KeyKind').AsString := 'Matter';
         QrySaveConflictItems.ParamByName('NKey').AsInteger := vtConflicts.FieldByName('MatterNo').AsInteger;
       end;
+
       QrySaveConflictItems.ParamByName('Exclude').AsString := vtConflicts.FieldByName('Exclude').AsString;
       QrySaveConflictItems.ParamByName('NConflictItem').AsInteger := ConflictItem;
       QrySaveConflictItems.ExecSQL;

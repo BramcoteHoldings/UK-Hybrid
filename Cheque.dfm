@@ -559,6 +559,7 @@ object frmCheque: TfrmCheque
         DataBinding.FieldName = 'TAXCODE'
         PropertiesClassName = 'TcxLookupComboBoxProperties'
         Properties.ClearKey = 46
+        Properties.ImmediatePost = True
         Properties.KeyFieldNames = 'CODE'
         Properties.ListColumns = <
           item
@@ -859,7 +860,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43607.575468206d
+    EditValue = 43608.5139716204d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday

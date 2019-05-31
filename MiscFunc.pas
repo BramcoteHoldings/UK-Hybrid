@@ -5625,21 +5625,25 @@ var
   bRefresh: boolean;
   qryThisMatter: TUniQuery;
 begin
-  qryThisMatter := TUniQuery.Create(nil);
-  with qryThisMatter do
-  begin
-    bRefresh := False;
-    Connection := dmAxiom.uniInsight;
-    SQL.Text := 'SELECT REFRESH FROM MATTER WHERE FILEID = :FILEID';
-    Params[0].AsString := sFile;
-    Open;
-    if not IsEmpty then
-      if FieldByName('REFRESH').AsInteger <> iOldRefresh then
-        bRefresh := True;
-    Close;
-  end;
-  RefreshNeededMatter := bRefresh;
-  qryThisMatter.Free;
+   try
+      qryThisMatter := TUniQuery.Create(nil);
+      with qryThisMatter do
+      begin
+         bRefresh := False;
+         Connection := dmAxiom.uniInsight;
+         SQL.Text := 'SELECT REFRESH FROM MATTER WHERE FILEID = :FILEID';
+         Params[0].AsString := sFile;
+         Open;
+         if not IsEmpty then
+            if FieldByName('REFRESH').AsInteger <> iOldRefresh then
+               bRefresh := True;
+         Close;
+      end;
+      RefreshNeededMatter := bRefresh;
+      qryThisMatter.Free;
+   except
+      raise;
+   end;
 end;
 
 procedure RvNaccount(qryOldNaccount: TUniQuery; ReversalDate: TDateTime; Refno: string;

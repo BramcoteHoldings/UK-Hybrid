@@ -88,7 +88,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Width = 558
     Height = 593
     TabOrder = 5
-    Properties.ActivePage = tsName
+    Properties.ActivePage = tsClient
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pcPagesChange
@@ -101,10 +101,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       ImageIndex = 0
       OnExit = tsNameExit
       OnShow = tsNameShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         550
         543)
@@ -1475,12 +1471,12 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         ParentFont = False
       end
       object Label44: TLabel
-        Left = 46
+        Left = 25
         Top = 282
-        Width = 55
+        Width = 76
         Height = 15
         Alignment = taRightJustify
-        Caption = 'A/P EMail:'
+        Caption = 'Debtor E-Mail:'
       end
       object ckEmail1Default: TCheckBox
         Tag = 2
@@ -2346,10 +2342,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Client'
       ImageIndex = 6
       OnShow = tsClientShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 55
         Top = 24
@@ -2731,8 +2723,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43607.419444675930000000
-        Time = 43607.419444675930000000
+        Date = 43614.419444675930000000
+        Time = 43614.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -2941,10 +2933,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tabDebtor: TcxTabSheet
           Caption = 'Debtor'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label21: TLabel
             Left = 43
             Top = 8
@@ -6935,8 +6923,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
   end
   object popCopyStreetAddress: TPopupMenu
     OnPopup = popCopyStreetAddressPopup
-    Left = 269
-    Top = 65528
+    Left = 77
+    Top = 56
     object CopyToPostalAddress: TMenuItem
       Caption = 'Copy Address To Postal Address'
       OnClick = aCopyAddressDownExecute
