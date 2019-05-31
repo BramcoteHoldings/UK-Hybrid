@@ -18,9 +18,9 @@ uses
   cxImageComboBox, cxImage, cxMemo, cxLookAndFeels, WinINET, HttpAPP,
   cxCheckGroup, cxDBCheckGroup, cxPCdxBarPopupMenu, JvDBLookupComboEdit,
   JvExMask, JvToolEdit, JvDBLookup, MemDS, cxNavigator, JvSpin, JvDBSpinEdit,
-  DBDateTimePicker, JvMaskEdit, JvCheckedMaskEdit, JvDatePickerEdit,
-  JvDBDatePickerEdit, dxBarBuiltInMenu, dxDPIAwareUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges{, Cromis.DirectoryWatch};
+  DBDateTimePicker,dxBarBuiltInMenu, dxDPIAwareUtils,
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  cxCalendar{, Cromis.DirectoryWatch};
 
 const
   C_EMP = 'sys';
@@ -487,7 +487,6 @@ type
     chkSaveCheqReaasPDF: TcxDBCheckBox;
     cxDBCheckBox59: TcxDBCheckBox;
     Label71: TLabel;
-    JvDBDatePickerEdit1: TJvDBDatePickerEdit;
     Label72: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     qryFeeRate: TUniQuery;
@@ -544,6 +543,10 @@ type
     DBCheckBox7: TDBCheckBox;
     cxDBCheckBox73: TcxDBCheckBox;
     cxDBCheckBox74: TcxDBCheckBox;
+    cxDBDateEdit1: TcxDBDateEdit;
+    Label78: TLabel;
+    DBEdit29: TDBEdit;
+    cxDBComboBox3: TcxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);

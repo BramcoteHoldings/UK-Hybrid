@@ -27,7 +27,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
     Height = 716
     Align = alClient
     TabOrder = 0
-    Properties.ActivePage = tabDue
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
@@ -50,6 +50,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
         LookAndFeel.NativeStyle = True
         object tvDueItems: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          OnCellClick = tvDueItemsCellClick
           DataController.DataSource = dsDueItems
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -205,10 +206,6 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       Caption = 'Columns'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lvColumns: TListView
         Left = 0
         Top = 0
@@ -442,7 +439,6 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
-      OnShow = tabFilterShow
       object lblDebtorCaption: TLabel
         Left = 24
         Top = 313
@@ -990,8 +986,7 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       '   AND memo.owing >= dt.min_balance'
       '   AND dt.confirmed_date IS NULL'
       '   AND dt.action_date < TRUNC (SYSDATE + 1)')
-    AfterScroll = qryDueItemsAfterScroll
-    Left = 636
+    Left = 612
     Top = 250
   end
   object dxBarManager1: TdxBarManager
@@ -2280,7 +2275,6 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
         'group by x.CLIENT_NAME, x.CLIENT_CODE, x.notes, x.debtor_phone  ' +
         ' having SUM(x.balance)> 0'
       'ORDER BY SUM(x.balance) DESC;')
-    AfterScroll = qryDueItemsAfterScroll
     Left = 372
     Top = 386
   end
@@ -2359,7 +2353,6 @@ object frmDebtorTaskDue: TfrmDebtorTaskDue
       '   AND dt.action_date < TRUNC (SYSDATE + 1)'
       '  '
       '')
-    AfterScroll = qryDueItemsAfterScroll
     Left = 244
     Top = 522
   end

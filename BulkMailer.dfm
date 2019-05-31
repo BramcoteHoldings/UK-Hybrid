@@ -107,10 +107,6 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Editor: TRichEdit
               Left = 0
               Top = 0
@@ -188,7 +184,7 @@ object frmBulkMailer: TfrmBulkMailer
             end
             object Memo1: TMemo
               Left = 765
-              Top = 291
+              Top = 339
               Width = 89
               Height = 35
               Margins.Left = 4
@@ -209,10 +205,6 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
@@ -277,6 +269,8 @@ object frmBulkMailer: TfrmBulkMailer
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
+          ExplicitLeft = 4
+          ExplicitTop = 539
         end
         object Panel2: TPanel
           Left = 0
@@ -8432,7 +8426,11 @@ object frmBulkMailer: TfrmBulkMailer
   end
   object SMTP: TIdSMTP
     IOHandler = IdSSLIOHandlerSocketOpenSSL1
-    SASLMechanisms = <>
+    AuthType = satSASL
+    SASLMechanisms = <
+      item
+        SASL = IdSASLLogin1
+      end>
     UseTLS = utUseExplicitTLS
     ValidateAuthLoginCapability = False
     Left = 953
@@ -8448,7 +8446,7 @@ object frmBulkMailer: TfrmBulkMailer
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
-    Left = 944
+    Left = 960
     Top = 289
   end
   object MailMessage: TIdMessage
@@ -9164,5 +9162,14 @@ object frmBulkMailer: TfrmBulkMailer
       FieldName = 'TEMPLATE'
       BlobType = ftMemo
     end
+  end
+  object IdSASLLogin1: TIdSASLLogin
+    UserPassProvider = IdUserPassProvider
+    Left = 963
+    Top = 341
+  end
+  object IdUserPassProvider: TIdUserPassProvider
+    Left = 955
+    Top = 397
   end
 end

@@ -476,7 +476,7 @@ begin
 //    SQL.Add('     ,decode(instr(bal.amount,''-''),''0'',''0'',bal.amount*-1) as debit ');
     SQL.Add('     ,DECODE(TRIM(C.OIFDEFAULTCODE),''O'',''Operating'',''I'',''Investing'',''F'',''Financing'',NULL) AS OIFDEFAULTCODE ');
     SQL.Add('     ,DECODE(TRIM(C.CHARTTYPE),''DISB'', ''Disbursement Control'', ''DEBT'', ''Debtor Control'', ''GSTINP'' , ''GST Input Control'',''GSTOUT'',''GST Output Control'', ''CRED'', ''Creditor Control'', ''BANK'',');
-    SQL.Add('     ''Bank Control'', ''FEE'' , ''Fee Account'', ''GEN'' , ''General'',''SUND'',''Sundry Account'', NULL) AS CHARTTYPE ');
+    SQL.Add('     ''Bank Control'', ''FEE'' , ''Fee Account'', ''GEN'' , ''General'',''SUND'',''Sundry Account'', ''GSTADJ'', ''GST Adjustment Control'', NULL) AS CHARTTYPE ');
 //    SQL.Add('     ,NVL(budget,0) AS ACCOUNTVALUE');
     SQL.Add('     ,nvl(b.ACCOUNTVALUE,0) AS ACCOUNTVALUE');
   {
@@ -502,7 +502,7 @@ begin
 	         ',DECODE(TRIM(C.OIFDEFAULTCODE),''O'',''Operating'',''I'',''Investing'',''F'',''Financing'',NULL) '+
 	         //',DECODE(TRIM(C.CHARTTYPE),''DISB'', ''Disbursement Control'', ''DEBT'', ''Debtor Control'', ''GST'' , ''Bank Control'', ''CRED'', ''GST Control'', ''BANK'', ''Fee Control'', ''FEE'', ''Creditor Control'', ''GEN'', ''General'', NULL) '+
                  ',DECODE(TRIM(C.CHARTTYPE),''DISB'', ''Disbursement Control'', ''DEBT'', ''Debtor Control'', ''GSTINP'' , ''GST Input Control'',''GSTOUT'',''GST Output Control'', ''CRED'', ''Creditor Control'', ''BANK'',' +
-                 '''Bank Control'', ''FEE'' , ''Fee Account'', ''GEN'' , ''General'',''SUND'',''Sundry Account'', NULL) ' +
+                 '''Bank Control'', ''FEE'' , ''Fee Account'', ''GEN'' , ''General'',''SUND'',''Sundry Account'', ''GSTADJ'', ''GST Adjustment Control'', NULL) ' +
             ', C.DEFAULT_TAXCODE, b.accountvalue ' );
 //	         ', C.DEFAULT_TAXCODE, nvl(b.ACCOUNTVALUE,0), C.CODE ' );
     if sOrderBy = '' then
@@ -1817,9 +1817,9 @@ begin
 
 }
 //  if (qryCharts.FieldByName('TYPE').AsString = 'E') or (qryCharts.FieldByName('TYPE').AsString = 'I')  then
-  if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
-    qryNaccounts.SQL.Add('WHERE CREATED < :P_DateFrom AND CREATED >=:P_DateStart ')
-  else
+//  if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
+//    qryNaccounts.SQL.Add('WHERE CREATED < :P_DateFrom AND CREATED >=:P_DateStart ')
+//  else
     qryNaccounts.SQL.Add('WHERE CREATED < :P_DateFrom');
 
   qryNaccounts.SQL.Add('  AND ACCT = ''' + qryCharts.FieldByName('BANK').AsString + ''' AND CHART = ''' + qryCharts.FieldByName('LKEY').AsString + '''');
@@ -1839,14 +1839,11 @@ begin
   qryNaccounts.SQL.Add('WHERE CREATED >= :P_DateFrom AND CREATED < :P_DateTo ' + sSQLWhere + '');
   qryNaccounts.SQL.Add('ORDER BY 9, 1');
 
-  if (dmAxiom.runningide) then
-     qryNaccounts.SQL.SaveToFile('C:\tmp\qryNaccounts.sql');
-
   qryNaccounts.Prepare;
 
 //  if (qryCharts.FieldByName('TYPE').AsString = 'E') or (qryCharts.FieldByName('TYPE').AsString = 'I')  then
-  if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
-    qryNaccounts.ParamByName('P_DateStart').AsDateTime := Trunc(dtFinYearStart);
+//  if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
+//    qryNaccounts.ParamByName('P_DateStart').AsDateTime := Trunc(dtFinYearStart);
     
   qryNaccounts.ParamByName('P_DateFrom').AsDateTime := Trunc(dtpDateFrom.Date);
   qryNaccounts.ParamByName('P_DateTo').AsDateTime := Trunc(dtpDateTo.Date) + 1;

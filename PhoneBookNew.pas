@@ -3305,11 +3305,13 @@ begin
     begin
       // Use the system number
       //AES 09/08/2017 changed to use nclient from client table rather than value from seqnums table
-      qClientCheck.Close;
-      qClientCheck.SQL.Text := 'SELECT max(NCLIENT) + 1 as NCLIENT FROM CLIENT';  //   'SELECT NCLIENT FROM SEQNUMS';
+      //AES 29/05/2019 changed to use sequence
+{      qClientCheck.Close;
+      qClientCheck.SQL.Text :=  'SELECT max(NCLIENT) + 1 as NCLIENT FROM CLIENT';  //   'SELECT NCLIENT FROM SEQNUMS';
       qClientCheck.Open;
       LClientCode := IntToStr(qClientCheck.FieldByName('NCLIENT').AsInteger);
-      qClientCheck.Close;
+      qClientCheck.Close; }
+      LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'));
 
       qGetCodes.Close;
       qGetCodes.SQL.Clear;

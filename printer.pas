@@ -11,7 +11,7 @@ uses
   cxLookAndFeelPainters, dxLayoutContainer, dxLayoutControlAdapters,
   dxLayoutControl, dxLayoutcxEditAdapters, cxContainer, cxEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  System.ImageList;
+  System.ImageList, dxStatusBar;
 
 type
   TfrmPrinter = class(TfrmMaintNoRep)
@@ -33,7 +33,6 @@ type
     ckVal: TCheckBox;
     qryCheckReceipt: TUniQuery;
     dbcPrinter: TDBComboBox;
-    dbimage: TDBImage;
     dsPrinterSignatures: TUniDataSource;
     qrySignature: TUniQuery;
     dsSignature: TUniDataSource;
@@ -60,11 +59,10 @@ type
     dxLayoutItem12: TdxLayoutItem;
     dxLayoutItem13: TdxLayoutItem;
     dxLayoutItem14: TdxLayoutItem;
-    dxLayoutItem15: TdxLayoutItem;
-    StatusBar1: TStatusBar;
     dbcBank: TcxDBLookupComboBox;
     qryBanks: TUniQuery;
     dsBanks: TUniDataSource;
+    StatusBar1: TdxStatusBar;
     procedure FormShow(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure btnSelectTmpClick(Sender: TObject);
