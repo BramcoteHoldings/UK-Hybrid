@@ -782,28 +782,26 @@ object frmMatterSearch: TfrmMatterSearch
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         OnClick = FilterItemChange
-        Width = 115
+        Width = 114
       end
       object edtClientSearch: TEdit
         Left = 30
         Top = 557
         Width = 130
-        Height = 28
+        Height = 23
         Anchors = [akLeft, akBottom]
         TabOrder = 1
         OnChange = FilterItemChange
-        ExplicitTop = 392
       end
       object edtFileSearch: TEdit
         Left = 215
         Top = 557
         Width = 103
-        Height = 28
+        Height = 23
         Anchors = [akLeft, akBottom]
         CharCase = ecUpperCase
         TabOrder = 2
         OnChange = FilterItemChange
-        ExplicitTop = 392
       end
       object gbOpened: TcxGroupBox
         Left = 511
@@ -1116,7 +1114,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 17
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1144,7 +1142,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 41
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1172,7 +1170,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 65
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1200,7 +1198,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 89
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1228,7 +1226,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 111
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1256,7 +1254,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 135
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1284,7 +1282,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 159
           Width = 70
-          Height = 28
+          Height = 21
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1386,7 +1384,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 17
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 0
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1395,7 +1393,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 41
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 1
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1404,7 +1402,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 65
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 2
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1413,7 +1411,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 89
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 3
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1422,7 +1420,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 111
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 4
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1431,7 +1429,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 135
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 5
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1440,7 +1438,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 155
           Top = 159
           Width = 136
-          Height = 28
+          Height = 23
           TabOrder = 6
           OnChange = FilterItemChange
           OnKeyPress = CheckReturn
@@ -1537,8 +1535,6 @@ object frmMatterSearch: TfrmMatterSearch
         OptionsImage.NumGlyphs = 2
         OptionsImage.Spacing = 5
         TabOrder = 9
-        ExplicitLeft = 872
-        ExplicitTop = 386
       end
       object fraEqual: TcxGroupBox
         Left = 8

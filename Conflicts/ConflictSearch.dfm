@@ -136,9 +136,9 @@ object frmConflictSearch: TfrmConflictSearch
         end
         object bnCancel: TcxButton
           Left = 1168
-          Top = 9
+          Top = 8
           Width = 106
-          Height = 29
+          Height = 27
           Hint = 'Exit'
           Margins.Left = 4
           Margins.Top = 4
@@ -241,7 +241,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 424
           Top = 8
           Width = 108
-          Height = 29
+          Height = 27
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -258,7 +258,7 @@ object frmConflictSearch: TfrmConflictSearch
           Left = 540
           Top = 8
           Width = 109
-          Height = 29
+          Height = 27
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -304,7 +304,6 @@ object frmConflictSearch: TfrmConflictSearch
           NewItemRow.SeparatorWidth = 8
           OptionsData.Deleting = False
           OptionsData.Inserting = False
-          OptionsSelection.CellSelect = False
           OptionsSelection.HideFocusRectOnExit = False
           OptionsView.NavigatorOffset = 63
           OptionsView.ColumnAutoWidth = True
@@ -316,6 +315,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'cat'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 85
           end
           object vConflictsFileID: TcxGridDBColumn
@@ -323,6 +324,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'FileID'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 74
           end
           object vConflictsClientName: TcxGridDBColumn
@@ -330,6 +333,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'ClientName'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 239
           end
           object vConflictsMatterDesc: TcxGridDBColumn
@@ -337,6 +342,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'matterdesc'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 363
           end
           object vConflictsDataFieldName: TcxGridDBColumn
@@ -344,6 +351,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'DataFieldName'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 183
           end
           object vConflictsData: TcxGridDBColumn
@@ -351,6 +360,8 @@ object frmConflictSearch: TfrmConflictSearch
             DataBinding.FieldName = 'Data'
             PropertiesClassName = 'TcxTextEditProperties'
             Properties.ReadOnly = True
+            Options.Editing = False
+            Options.Focusing = False
             Width = 229
           end
           object vConflictsExclude: TcxGridDBColumn
@@ -2951,8 +2962,8 @@ object frmConflictSearch: TfrmConflictSearch
       '    where nclient is not null'
       '    union'
       
-        '    select '#39'Contact Name'#39' cat, to_char(cl.name) clientID, nclien' +
-        't nclient, null matterNo,  null FileID, name ClientName, '
+        '    select '#39'Contact Name'#39' cat, to_char(cl.name) clientID, nname ' +
+        'nclient, null matterNo,  null FileID, name ClientName, '
       '    null nric,'
       '    null matterdesc,'
       '    null DataFieldName,'
@@ -3074,7 +3085,7 @@ object frmConflictSearch: TfrmConflictSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

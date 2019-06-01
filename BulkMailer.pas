@@ -22,7 +22,8 @@ uses
   cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
   System.ImageList, ppParameter, ppRichTx, ppBands, ppClass, ppDesignLayer,
   ppModule, raCodMod, ppCtrls, ppReport, ppPrnabl, ppStrtch, ppSubRpt, ppCache,
-  ppComm, ppRelatv, ppProd, ppDB, ppDBPipe;
+  ppComm, ppRelatv, ppProd, ppDB, ppDBPipe, IdSASL, IdSASLUserPass, IdSASLLogin,
+  IdUserPassProvider;
 
 type
   TfrmBulkMailer = class(TForm)
@@ -231,6 +232,8 @@ type
     qryRB_ItemsMODIFIED: TFloatField;
     qryRB_ItemsDELETED: TFloatField;
     qryRB_ItemsTEMPLATE: TMemoField;
+    IdSASLLogin1: TIdSASLLogin;
+    IdUserPassProvider: TIdUserPassProvider;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -1130,19 +1133,23 @@ begin
             Host := FHostname;
             Port := StrToInt(FPortNum);
             if (SystemString('mailsvrneedauthentication') = 'Y') then
-               AuthType := satDefault
+               AuthType := satSASL //satDefault
             else
                AuthType := satNone;
             IOHandler := IdSSLIOHandlerSocketOpenSSL1;
 
             if (SystemString('mailsvrsecureMode') = 'Y') then
-               UseTLS := utUseImplicitTLS
+               UseTLS := utUseExplicitTLS
             else
                UseTLS := utNoTLSSupport;
 
-            Username := SystemString('mailsvrusername');
-            Password := SystemString('mailsvrpassword');
+//            Username := SystemString('mailsvrusername');
+//            Password := SystemString('mailsvrpassword');
          end;
+
+         IdUserPassProvider.Username := SystemString('mailsvrusername');
+         IdUserPassProvider.Password := SystemString('mailsvrpassword');
+
 
          with tvEmails do
          begin

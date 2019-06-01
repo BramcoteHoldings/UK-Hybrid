@@ -25,7 +25,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
-    Properties.ActivePage = tabStatement
+    Properties.ActivePage = tabWord
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
@@ -63,6 +63,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 2
+        Transparent = True
         Height = 21
         Width = 88
       end
@@ -77,6 +78,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 3
+        Transparent = True
         Height = 21
         Width = 88
       end
@@ -128,10 +130,6 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     object tabEmail: TcxTabSheet
       Caption = 'tabEmail'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 125
       DesignSize = (
         576
         152)
@@ -270,7 +268,6 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
           0000000000010202000000000000000000000000000001000000}
         TabOrder = 10
         OnClick = btnSendEmailClick
-        ExplicitTop = 98
       end
     end
     object tabStatement: TcxTabSheet
@@ -349,6 +346,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
             Caption = 'Preview'
           end>
         TabOrder = 3
+        Transparent = True
         Height = 39
         Width = 273
       end

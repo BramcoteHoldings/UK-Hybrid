@@ -414,6 +414,178 @@ type
     qryCheqReqReverse: TUniQuery;
     lblCreatedBy: TLabel;
     lblPostedBy: TLabel;
+    qryInvoiceNMEMO: TLargeintField;
+    qryInvoiceNTRANS: TLargeintField;
+    qryInvoiceGENERATED: TDateTimeField;
+    qryInvoiceDISPATCHED: TDateTimeField;
+    qryInvoiceINTERIM: TDateTimeField;
+    qryInvoiceNMATTER: TLargeintField;
+    qryInvoiceFEES_FLAG: TStringField;
+    qryInvoiceDISB_FLAG: TStringField;
+    qryInvoiceANTD_FLAG: TStringField;
+    qryInvoiceSUND_FLAG: TStringField;
+    qryInvoiceLEGAL_AID_FLAG: TStringField;
+    qryInvoiceITEM_DATE_FLAG: TStringField;
+    qryInvoiceBANK_ACCT: TStringField;
+    qryInvoiceBILL_TO: TStringField;
+    qryInvoiceFORMAT_FILE: TStringField;
+    qryInvoiceRV_TYPE: TStringField;
+    qryInvoiceRV_NMEMO: TLargeintField;
+    qryInvoiceAUTHOR: TStringField;
+    qryInvoicePARTNER: TStringField;
+    qryInvoiceDATE_LAST_RECPT: TDateTimeField;
+    qryInvoiceFULLY_PAID: TStringField;
+    qryInvoiceINV_NOTE: TStringField;
+    qryInvoiceNOWNER: TLargeintField;
+    qryInvoiceEXPPAYMENT: TDateTimeField;
+    qryInvoiceNCLIENT: TLargeintField;
+    qryInvoiceFILEID: TStringField;
+    qryInvoiceREFNO: TStringField;
+    qryInvoiceBILLTEMPLATE: TStringField;
+    qryInvoiceCREDITTYPE: TStringField;
+    qryInvoiceNORECOVERY: TStringField;
+    qryInvoiceESCALATION: TIntegerField;
+    qryInvoiceUPCRED_FLAG: TStringField;
+    qryInvoiceFEES: TFloatField;
+    qryInvoiceDISB: TFloatField;
+    qryInvoiceANTD: TFloatField;
+    qryInvoiceSUND: TFloatField;
+    qryInvoiceTRUST: TFloatField;
+    qryInvoiceDEBTORS: TFloatField;
+    qryInvoiceFEES_PAID: TFloatField;
+    qryInvoiceDISB_PAID: TFloatField;
+    qryInvoiceSUND_PAID: TFloatField;
+    qryInvoiceDISB_CRDIT: TFloatField;
+    qryInvoiceANTD_CRDIT: TFloatField;
+    qryInvoiceTAX: TFloatField;
+    qryInvoiceFEES_CRDIT: TFloatField;
+    qryInvoiceTAX_PAID: TFloatField;
+    qryInvoiceTAX_CRDIT: TFloatField;
+    qryInvoiceFEESTAX: TFloatField;
+    qryInvoiceDISBTAX: TFloatField;
+    qryInvoiceSUNDTAX: TFloatField;
+    qryInvoiceFEESTAX_PAID: TFloatField;
+    qryInvoiceDISBTAX_PAID: TFloatField;
+    qryInvoiceSUNDTAX_PAID: TFloatField;
+    qryInvoiceANTD_PAID: TFloatField;
+    qryInvoiceANTDTAX: TFloatField;
+    qryInvoiceANTDTAX_PAID: TFloatField;
+    qryInvoiceUPCRED: TFloatField;
+    qryInvoiceUPCRED_PAID: TFloatField;
+    qryInvoiceUPCREDTAX: TFloatField;
+    qryInvoiceUPCREDTAX_PAID: TFloatField;
+    qryInvoiceDISB_WOFF: TFloatField;
+    qryInvoiceANTD_WOFF: TFloatField;
+    qryInvoiceFEES_WOFF: TFloatField;
+    qryInvoiceUPCRED_WOFF: TFloatField;
+    qryInvoiceSUND_WOFF: TFloatField;
+    qryInvoiceDISBTAX_WOFF: TFloatField;
+    qryInvoiceANTDTAX_WOFF: TFloatField;
+    qryInvoiceFESSTAX_WOFF: TFloatField;
+    qryInvoiceUPCREDTAX_WOFF: TFloatField;
+    qryInvoiceSUNDTAX_WOFF: TFloatField;
+    qryInvoiceTAX_WOFF: TFloatField;
+    qryInvoiceFEESTAX_WOFF: TFloatField;
+    qryInvoiceFEESTAXFREE: TFloatField;
+    qryInvoiceDISBTAXFREE: TFloatField;
+    qryInvoiceSUNDTAXFREE: TFloatField;
+    qryInvoiceANTDTAXFREE: TFloatField;
+    qryInvoiceUPCREDTAXFREE: TFloatField;
+    qryInvoiceMODBY: TStringField;
+    qryInvoiceMOD_DATE: TDateTimeField;
+    qryInvoiceMOD_DESCR: TStringField;
+    qryInvoiceDRAFT_BILL_NO: TLargeintField;
+    qryInvoiceNBILL_TO: TLargeintField;
+    qryInvoiceAUTHORISED: TStringField;
+    qryInvoiceOWING: TFloatField;
+    qryInvoiceTOTAL: TFloatField;
+    qryInvoicePRIVATE: TStringField;
+    qryInvoiceSPLIT_BILL: TStringField;
+    qryInvoiceNMASTER: TLargeintField;
+    qryInvoiceBPAY_REFERENCE: TStringField;
+    qryInvoiceREQUESTED_BY: TStringField;
+    qryInvoiceSYSTEMDATE: TDateTimeField;
+    qryInvoiceASSESSED_BILL: TStringField;
+    qryInvoiceTAKE_ON: TStringField;
+    qryInvoicePROFORMA: TStringField;
+    qryInvoiceMOD_BY: TStringField;
+    qryInvoiceINVOICE_COPY: TBlobField;
+    qryInvoiceINVOICE_COPY_EXT: TStringField;
+    qryInvoiceDATE_EMAILED: TDateTimeField;
+    qryInvoicePATH: TStringField;
+    qryInvoiceCREATEDBY: TStringField;
+    qryInvoiceORIGINAL_TOTAL: TFloatField;
+    qryInvoiceTOTAL_EXGST: TFloatField;
+    qryInvoiceDISCOUNT: TFloatField;
+    qryInvoiceREVERSIBLE: TStringField;
+    qryInvoiceMASTER_BILL: TStringField;
+    qryInvoiceDISCOUNT_GST: TFloatField;
+    qryInvoiceSPELL_CHK_DONE: TStringField;
+    qryInvoicePRAC_NUM: TStringField;
+    qryInvoiceORIGINAL_FEES: TFloatField;
+    qryInvoiceORIGINAL_ITEM_FEES: TFloatField;
+    qryInvoiceIS_DRAFT: TStringField;
+    qryInvoiceBILL_DATE: TDateTimeField;
+    qryInvoiceCASHIER_NOTES: TStringField;
+    qryInvoiceCURRENCY: TStringField;
+    qryInvoiceFX_RATE: TFloatField;
+    qryInvoiceBASE_CCY_FEES: TFloatField;
+    qryInvoiceBASE_CCY_DISB: TFloatField;
+    qryInvoiceBASE_CCY_ANTD: TFloatField;
+    qryInvoiceBASE_CCY_TRUST: TFloatField;
+    qryInvoiceBASE_CCY_FEES_PAID: TFloatField;
+    qryInvoiceBASE_CCY_DISB_PAID: TFloatField;
+    qryInvoiceBASE_CCY_ANTD_PAID: TFloatField;
+    qryInvoiceBASE_CCY_SUND: TFloatField;
+    qryInvoiceBASE_CCY_SUND_PAID: TFloatField;
+    qryInvoiceBASE_CCY_FEES_CRDIT: TFloatField;
+    qryInvoiceBASE_CCY_DISB_CRDIT: TFloatField;
+    qryInvoiceBASE_CCY_ANTD_CRDIT: TFloatField;
+    qryInvoiceBASE_CCY_TAX_CRDIT: TFloatField;
+    qryInvoiceBASE_CCY_TAX: TFloatField;
+    qryInvoiceBASE_CCY_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_FEES_TAX: TFloatField;
+    qryInvoiceBASE_CCY_FEES_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_DISB_TAX: TFloatField;
+    qryInvoiceBASE_CCY_DISB_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_ANTD_TAX: TFloatField;
+    qryInvoiceBASE_CCY_ANTD_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_SUND_TAX: TFloatField;
+    qryInvoiceBASE_CCY_SUND_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_UPCRED_PAID: TFloatField;
+    qryInvoiceBASE_CCY_UPCRED_TAX: TFloatField;
+    qryInvoiceBASE_CCY_UPCRED_TAX_PAID: TFloatField;
+    qryInvoiceBASE_CCY_FEES_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_DISB_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_ANTD_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_SUND_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_UPCRED_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_FEESTAX_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_DISBTAX_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_ANTDTAX_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_SUNDTAX_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_TAX_WOFF: TFloatField;
+    qryInvoiceBASE_CCY_FEESTAXFREE: TFloatField;
+    qryInvoiceBASE_CCY_DISBTAXFREE: TFloatField;
+    qryInvoiceBASE_CCY_ANTDTAXFREE: TFloatField;
+    qryInvoiceBASE_CCY_UPCREDTAXFREE: TFloatField;
+    qryInvoiceBASE_CCY_OWING: TFloatField;
+    qryInvoiceBASE_CCY_TOTAL: TFloatField;
+    qryInvoiceBASE_CCY_ORIGINAL_TOTAL: TFloatField;
+    qryInvoiceBASE_CCY_TOTALEXGST: TFloatField;
+    qryInvoiceBASE_CCY_DISCOUNT: TFloatField;
+    qryInvoiceBASE_CCY_DISCOUNT_GST: TFloatField;
+    qryInvoiceCOPY_TO_CREATED_BY: TStringField;
+    qryInvoiceCOPY_TO_AUTHORISED_BY: TStringField;
+    qryInvoiceSUND_CRDIT: TFloatField;
+    qryInvoiceUPCRED_CRDIT: TFloatField;
+    qryInvoiceFEESTAX_CRDIT: TFloatField;
+    qryInvoiceSUNDTAX_CRDIT: TFloatField;
+    qryInvoiceUPCREDTAX_CRDIT: TFloatField;
+    qryInvoiceDISBTAX_CRDIT: TFloatField;
+    qryInvoiceDISPATCHED_BY: TStringField;
+    qryInvoiceAUTHORISED_BY: TStringField;
+    qryInvoiceROWID: TStringField;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -560,25 +732,14 @@ type
       var Key : Char);
     procedure barbtnRemoveDiscountClick(Sender : TObject);
     procedure dtpInterimClick(Sender : TObject);
-    procedure tvBillItems1DESCRPropertiesValidate(
-      Sender           : TObject;
-      var DisplayValue : Variant;
-      var ErrorText    : TCaption;
-      var Error        : Boolean);
-    procedure tvBillItems2InitEdit(
-      Sender : TcxCustomGridTableView;
-      AItem  : TcxCustomGridTableItem;
-      AEdit  : TcxCustomEdit);
+    procedure tvBillItems1DESCRPropertiesValidate(Sender: TObject; var DisplayValue: Variant;
+                                                  var ErrorText: TCaption; var Error: Boolean);
+    procedure tvBillItems2InitEdit(Sender : TcxCustomGridTableView; AItem: TcxCustomGridTableItem; AEdit: TcxCustomEdit);
     procedure tvBillItemsDESCRPropertiesInitPopup(Sender : TObject);
-    procedure tvBillItemsDESCRPropertiesButtonClick(
-      Sender       : TObject;
-      AButtonIndex : Integer);
+    procedure tvBillItemsDESCRPropertiesButtonClick(Sender: TObject; AButtonIndex: Integer);
     procedure pbSpellCheckClick(Sender : TObject);
     procedure dxBarButton4Click(Sender : TObject);
-    procedure cxRichEdit1KeyUp(
-      Sender  : TObject;
-      var Key : Word;
-      Shift   : TShiftState);
+    procedure cxRichEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnNotesClick(Sender : TObject);
     procedure cbSplitBillPropertiesEditValueChanged(Sender : TObject);
     procedure cxBarEditItem1PropertiesEditValueChanged(Sender : TObject);
@@ -589,11 +750,8 @@ type
     procedure bbtnShowSingleLineClick(Sender : TObject);
     procedure bbtnAdjDisbTotalClick(Sender : TObject);
     procedure chkUnbilledTransactionsClick(Sender : TObject);
-    procedure tvBillItemsStylesGetContentStyle(
-      Sender     : TcxCustomGridTableView;
-      ARecord    : TcxCustomGridRecord;
-      AItem      : TcxCustomGridTableItem;
-      var AStyle : TcxStyle);
+    procedure tvBillItemsStylesGetContentStyle(Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
+                                               AItem: TcxCustomGridTableItem; var AStyle: TcxStyle);
     procedure bbtnBillNotesClick(Sender : TObject);
     procedure tbtnEditTaxClick(Sender : TObject);
     procedure dxBarBtnCashierNotesClick(Sender : TObject);
@@ -659,6 +817,7 @@ type
       procedure DisplayTaxValues;
       procedure ControlEditFields(AState : Boolean);
       procedure CalcDiscountEntry;
+      procedure DoAuthorise;
     public
       { Public declarations }
       property OwnerForm : TComponent read FForm write FForm;
@@ -752,8 +911,8 @@ begin
 
     // enable split bills button
     if ((SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('AUTHOR').AsString = dmAxiom.UserID))  or
-       ((SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('CREATEDBY').AsString = dmAxiom.UserID)) or
-       (dmAxiom.Is_Cashier = 'Y') or (dmAxiom.Is_Credit_Controller = 'Y') then
+       ((SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('CREATEDBY').AsString = dmAxiom.UserID)) {or
+       (dmAxiom.Is_Cashier = 'Y') or (dmAxiom.Is_Credit_Controller = 'Y')} then
     begin
       cbSplitBill.Enabled := true;
     end
@@ -1091,13 +1250,9 @@ begin
       neUpCredTaxFree.Enabled := False;
       neUpCredTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeUnpaidCreditorsTax;
 
-      //neTrust.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeTrust and dmAxiom.Security.Bill.Post and dmAxiom.Security.Bill.TrustTransfer;
-      // RDW - 21/03/2019 - Removed Bill.Post
+      neTrust.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeTrust and dmAxiom.Security.Bill.Post and dmAxiom.Security.Bill.TrustTransfer;
       neTrust.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeTrust and dmAxiom.Security.Bill.TrustTransfer;
 
-      // tbtnPost.Enabled := dmAxiom.Security.Bill.Post;
-
-      // tbtnPost.Enabled := (boolean(cbAuthorise.EditValue) = False) and (dmAxiom.Security.Bill.Post);
       tbtnReverse.Enabled := False;
       { popGridRemove.Enabled := True;
         popGridRemoveAll.Enabled := True;
@@ -1123,8 +1278,11 @@ begin
       cbPrivate.Enabled := ((dmAxiom.UserID = qryInvoice.FieldByName('AUTHOR').AsString) Or (dmAxiom.UserID = qryInvoice.FieldByName('CREATEDBY').AsString)) and
         (qryInvoice.FieldByName('AUTHORISED').AsString = 'N') and (qryInvoice.FieldByName('dispatched').IsNull);
 
-      tbtnPost.Enabled := ((qryInvoice.FieldByName('PRIVATE').AsString = 'N') and (qryInvoice.FieldByName('AUTHORISED').AsString = 'Y') and
-        (dmAxiom.Security.Bill.Post) and (dmAxiom.Is_Cashier = 'Y'));
+      tbtnPost.Enabled := dmAxiom.Security.Bill.Post;
+
+{      tbtnPost.Enabled := ((qryInvoice.FieldByName('PRIVATE').AsString = 'N') and (qryInvoice.FieldByName('AUTHORISED').AsString = 'Y') and
+                          (dmAxiom.Security.Bill.Post) and (dmAxiom.Is_Cashier = 'Y'))
+}
     end;
 
     if (IsBillItem = '') and (qryInvoice.FieldByName('billtemplate').IsNull)
@@ -1456,9 +1614,7 @@ procedure TfrmInvoice.qryInvoiceAfterScroll(DataSet : TDataSet);
 
 procedure TfrmInvoice.DisplayItems;
 
-    procedure SetRecordValue(
-      ARecordIndex, AItemIndex : Integer;
-      AValue                   : Variant);
+    procedure SetRecordValue(ARecordIndex, AItemIndex: Integer; AValue: Variant);
       begin
         try
           tvBillItems.DataController.SetValue(ARecordIndex, AItemIndex, AValue);
@@ -1467,7 +1623,7 @@ procedure TfrmInvoice.DisplayItems;
         end;
       end;
 
-  var
+var
     {
       Modified 25.10.2002 GG
       Removed compiler hint
@@ -1475,7 +1631,7 @@ procedure TfrmInvoice.DisplayItems;
     newListItem { ,selitem } : TListItem;
     ptrData : TptrItemData;
     iSelected, icount, I, NumRecords : Integer;
-  begin
+begin
     // Defer drawing ListView until EndUpdate
     // lvItems.Items.BeginUpdate;
     iSelected := 0;
@@ -1787,7 +1943,7 @@ procedure TfrmInvoice.DisplayItems;
       tvBillItems1.EndUpdate;
       end;
     }
-  end;
+end;
 
 procedure TfrmInvoice.btnBillToClick(Sender : TObject);
   var
@@ -2007,12 +2163,10 @@ function TfrmInvoice.SaveInvoice : Boolean;
     bFeeTaxCorrect : Boolean;
   begin
     bFeeTaxCorrect := true;
-    if not bNoSave
-    then
+    if not bNoSave then
     begin
       try
-        if not qryInvoice.Modified
-        then
+        if not qryInvoice.Modified then
           qryInvoice.Edit;
 
         qryFeeAmount.Close;
@@ -2035,24 +2189,19 @@ function TfrmInvoice.SaveInvoice : Boolean;
         if nFee <> 0
         then
         begin
-          if MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS') <> ''
-          then
+          if MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS') <> '' then
             CalculatedFeesTax := TaxCalc(nFee, 'BILL', MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS'), TaxDate)
           else
             CalculatedFeesTax := TaxCalc(nFee, 'BILL', 'GST', Now);
 
-          if ((CalculatedFeesTax + 0.01) < neFeesTax.AsCurrency) and (qryInvoice.FieldByName('DISPATCHED').AsString = '') and (neFees.AsCurrency <> 0.00)
-          then
+          if ((CalculatedFeesTax + 0.01) < neFeesTax.AsCurrency) and (qryInvoice.FieldByName('DISPATCHED').AsString = '') and (neFees.AsCurrency <> 0.00) then
           begin
-            if MsgAsk('GST amount does not match the actual taxable amount.' + chr(13) + 'Would you like to continue?') = mrNO
-            then
+            if MsgAsk('GST amount does not match the actual taxable amount.' + chr(13) + 'Would you like to continue?') = mrNO then
               bFeeTaxCorrect := False;
           end;
         end;
-        if bFeeTaxCorrect
-        then
-          if qryInvoice.FieldByName('DISPATCHED').IsNull
-          then
+        if bFeeTaxCorrect then
+          if qryInvoice.FieldByName('DISPATCHED').IsNull then
           begin
             //
             // Bill not yet finalised.
@@ -2083,8 +2232,7 @@ function TfrmInvoice.SaveInvoice : Boolean;
             qryInvoice.FieldByName('TRUST').AsCurrency := neTrust.AsCurrency;
             qryInvoice.FieldByName('DEBTORS').AsCurrency := TableCurrency('MATTER', 'FILEID', qryInvoice.FieldByName('FILEID').AsString, 'DEBTORS');
 
-            if not dtpInterim.Checked
-            then
+            if not dtpInterim.Checked then
               qryInvoice.FieldByName('INTERIM').Value := Null
             else
               qryInvoice.FieldByName('INTERIM').AsDateTime := trunc(dtpInterim.DateTime);
@@ -2100,41 +2248,33 @@ function TfrmInvoice.SaveInvoice : Boolean;
         qryInvoice.FieldByName('EXPPAYMENT').AsDateTime := trunc(dtpExpectedPayment.DateTime);
 
         qryInvoice.FieldByName('AUTHORISED').AsString := 'N';
-        if qryInvoice.FieldByName('DISPATCHED').IsNull
-        then
+        if qryInvoice.FieldByName('DISPATCHED').IsNull then
           qryInvoice.FieldByName('IS_DRAFT').AsString := 'Y';
-        if Boolean(cbAuthorise.EditValue)
-        then
+        if Boolean(cbAuthorise.EditValue) then
         begin
           qryInvoice.FieldByName('AUTHORISED').AsString := 'Y';
-          if qryInvoice.FieldByName('DISPATCHED').IsNull
-          then
-            qryInvoice.FieldByName('REFNO').AsString := 'AUTH';
+          if qryInvoice.FieldByName('DISPATCHED').IsNull then
+            qryInvoice.FieldByName('REFNO').AsString := SystemString('AUTH_BILL_REF');
         end;
 
         qryInvoice.FieldByName('PRIVATE').AsString := 'N';
-        if Boolean(cbPrivate.EditValue)
-        then
+        if Boolean(cbPrivate.EditValue) then
           qryInvoice.FieldByName('PRIVATE').AsString := 'Y';
 
         qryInvoice.FieldByName('SPLIT_BILL').AsString := 'N';
-        if Boolean(cbSplitBill.EditValue)
-        then
+        if Boolean(cbSplitBill.EditValue) then
           qryInvoice.FieldByName('SPLIT_BILL').AsString := 'Y';
 
         qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'N';
-        if Boolean(cbAssessed.EditValue)
-        then
+        if Boolean(cbAssessed.EditValue) then
           qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'Y';
 
         qryInvoice.FieldByName('PROFORMA').AsString := 'N';
-        if Boolean(cbProforma.EditValue)
-        then
+        if Boolean(cbProforma.EditValue) then
           qryInvoice.FieldByName('PROFORMA').AsString := 'Y';
 
         qryInvoice.FieldByName('MASTER_BILL').AsString := 'N';
-        if Boolean(cbMasterBill.EditValue)
-        then
+        if Boolean(cbMasterBill.EditValue) then
           qryInvoice.FieldByName('MASTER_BILL').AsString := 'Y';
 
         qryInvoice.FieldByName('BILL_DATE').AsDateTime := dtpBillDate.Date;
@@ -2165,8 +2305,7 @@ function TfrmInvoice.SaveInvoice : Boolean;
         qryInvoice.Post;
 
         // post the sub bills
-        if (SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('SPLIT_BILL').AsString = 'Y')
-        then
+        if (SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('SPLIT_BILL').AsString = 'Y') then
           dmAxiom.upDateSubBills(qryInvoice.FieldByName('NMEMO').AsInteger);
 
         // qryInvoice.ApplyUpdates;
@@ -2177,28 +2316,23 @@ function TfrmInvoice.SaveInvoice : Boolean;
     Result := bFeeTaxCorrect;
   end;
 
-procedure TfrmInvoice.FormClose(
-  Sender     : TObject;
-  var Action : TCloseAction);
-  var
-    bClose : Boolean;
-  begin
-    bClose := true;
-    if qryInvoice.Active
-    then
-    begin
-      if not SaveInvoice
-      then
+procedure TfrmInvoice.FormClose(Sender: TObject; var Action : TCloseAction);
+var
+   bClose : Boolean;
+begin
+   bClose := true;
+   if qryInvoice.Active then
+   begin
+      if not SaveInvoice then
       begin
         Action := caNone;
         bPosting := False;
         bClose := False;
       end;
-    end;
+   end;
 
-    if bClose
-    then
-    begin
+   if bClose then
+   begin
       qryFees.Close;
       qryInvoice.Close;
       qryDisb.Close;
@@ -2207,8 +2341,7 @@ procedure TfrmInvoice.FormClose(
       qrySund.Close;
       qryUpCred.Close;
       qryMatter.Close;
-      if FReturnSelection <> nil
-      then
+      if FReturnSelection <> nil then
         qryBillItems.FreeBookmark(FReturnSelection);
       // if dmAxiom.DictionaryInstalled then
       // dmAxiom.AddictLiveSpell.RemoveControl(memoNotes);
@@ -2220,31 +2353,27 @@ procedure TfrmInvoice.FormClose(
         Refresh the frmMatter details on exiting this form if the owner is an instance
         of TfrmMatter.
       }
-      if bPosting
-      then
+      if bPosting then
         // don't refresh yet
         bPosting := False
-      else if (FForm is TfrmMatters)
-      then
+      else if (FForm is TfrmMatters) then
         (FForm as TfrmMatters).DisplayMatter((FForm as TfrmMatters).qryMatter.FieldByName('FILEID').AsString);
 
       // if Owner is TfrmMatters then
       // (Owner as TfrmMatters).DisplayMatter((Owner as TfrmMatters).qryMatter.FieldByName('FILEID').AsString);
-      if (Owner is TfrmBills)
-      then
+      if (Owner is TfrmBills) then
         (Owner as TfrmBills).MakeSQL();
       FreeAndNil(Self);
     end;
   end;
 
 procedure TfrmInvoice.tbtnPrintClick(Sender : TObject);
-  begin
-    SaveInvoice;
+begin
+   SaveInvoice;
     // with TfrmInvoicePrint.Create(Self) do
     // PrintInvoice(Self.qryInvoice.FieldByName('NMEMO').AsInteger, True);
-    if SystemString('draft_bill_default') = ''
-    then
-    begin
+   if SystemString('draft_bill_default') = '' then
+   begin
       qryPhonebook.Close;
       qryPhonebook.ParamByName('SEARCH').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
       qryPhonebook.Open;
@@ -2255,8 +2384,7 @@ procedure TfrmInvoice.tbtnPrintClick(Sender : TObject);
         Open;
       end;
 
-      if (qryInvoiceDraftBill.IsEmpty = False)
-      then
+      if (qryInvoiceDraftBill.IsEmpty = False) then
       begin
         with qryItems do
         begin
@@ -2274,8 +2402,7 @@ procedure TfrmInvoice.tbtnPrintClick(Sender : TObject);
           Open;
         end;
 
-        if not qryMatterDraftBill.IsEmpty
-        then
+        if not qryMatterDraftBill.IsEmpty then
           with qryPhonebook do
           begin
             Close;
@@ -2287,8 +2414,7 @@ procedure TfrmInvoice.tbtnPrintClick(Sender : TObject);
     end
     else
     begin
-      if (not Assigned(dmBillTemplate))
-      then
+      if (not Assigned(dmBillTemplate)) then
         dmBillTemplate := TdmBillTemplate.create(Application);
 
       dmBillTemplate.InvoiceCreate.Clear;
@@ -2312,7 +2438,7 @@ procedure TfrmInvoice.tbtnPrintClick(Sender : TObject);
 
       dmBillTemplate.BillPrint.Print;
     end;
-  end;
+end;
 
 procedure TfrmInvoice.tbtnWordClick(Sender : TObject);
   begin
@@ -2660,7 +2786,7 @@ procedure TfrmInvoice.FormCreate(Sender : TObject);
     // ****** 18/09/2003 AES
     // *** user can only do Trust Transfer if they have authority.
     btnAddTrust.Enabled := dmAxiom.Security.Bill.TrustTransfer;
-    dxBarButton4.Enabled := (dmAxiom.Is_Cashier = 'Y');
+  //  dxBarButton4.Enabled := (dmAxiom.Is_Cashier = 'Y');
 
     {
       Modified 21.11.2002 GG
@@ -3942,41 +4068,39 @@ function TfrmInvoice.FeeTotals(sSQL : string) : currency;
   end;
 
 procedure TfrmInvoice.cbAssessedPropertiesEditValueChanged(Sender : TObject);
-  begin
-    tbtnPost.Enabled := ((Boolean(cbAssessed.EditValue) = False) and (dmAxiom.Security.Bill.Post));
-  end;
+begin
+   tbtnPost.Enabled := ((Boolean(cbAssessed.EditValue) = False) and (dmAxiom.Security.Bill.Post));
+end;
 
 procedure TfrmInvoice.cbMasterBillPropertiesEditValueChanged(Sender : TObject);
-  begin
-    try
+begin
+   try
       RebuildData(Sender);
-    finally
+   finally
       RestoreSelectedItems();
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.cbPrivatePropertiesEditValueChanged(Sender : TObject);
-  begin
-    if (qryInvoice.state <> dsEdit)
-    then
+begin
+   if (qryInvoice.state <> dsEdit) then
       qryInvoice.Edit;
-    if Boolean(cbPrivate.EditValue)
-    then
+    if Boolean(cbPrivate.EditValue) then
       qryInvoice.FieldByName('PRIVATE').AsString := 'Y'
     else
       qryInvoice.FieldByName('PRIVATE').AsString := 'N';
-  end;
+end;
 
 procedure TfrmInvoice.tbtnEditClick(Sender : TObject);
-  var
-    LFeeNew : TfrmFeeNew;
-    LCheqReqNew : TfrmCheqReqNew;
-    LSundryNew : TfrmSundryNew;
-    LUnique, LReturn : Integer;
-    dGstFree : double;
-  begin
-    SaveSelectedItems();
-    try
+var
+   LFeeNew : TfrmFeeNew;
+   LCheqReqNew : TfrmCheqReqNew;
+   LSundryNew : TfrmSundryNew;
+   LUnique, LReturn : Integer;
+   dGstFree : double;
+begin
+   SaveSelectedItems();
+   try
       LUnique := tvBillItemsUNIQUEID.EditValue;
       case tvBillItemsTYPE.EditValue of
         IMG_FEES :
@@ -4104,21 +4228,20 @@ procedure TfrmInvoice.tbtnEditClick(Sender : TObject);
       CalcDiscount;
 
       RestoreSelectedItems();
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tbtnAddGSTClick(Sender : TObject);
-  var
-    dtTax : TDateTime;
-    iCtr : Integer;
-    cTax : currency;
-    AView : TcxGridTableView;
-    sTaxCode : string;
-  begin
-    AView := tvBillItems;
-    if AView.DataController.GetSelectedCount > 0
-    then
-    begin
+var
+   dtTax : TDateTime;
+   iCtr : Integer;
+   cTax : currency;
+   AView : TcxGridTableView;
+   sTaxCode : string;
+begin
+   AView := tvBillItems;
+   if AView.DataController.GetSelectedCount > 0 then
+   begin
       try
         // 25-08-2018 DW added to accomodate Singapore tax codes
         sTaxCode := TableString('TAXDEFAULT', 'TYPE', 'Bill', 'CODE');
@@ -4238,65 +4361,59 @@ procedure TfrmInvoice.tbtnAddGSTClick(Sender : TObject);
       end;
     end;
 
-  end;
+end;
 
 procedure TfrmInvoice.tbtnPrivateClick(Sender : TObject);
-  var
-    iCtr : Integer;
-    ptrData : TptrItemData;
+var
+   iCtr : Integer;
+   ptrData : TptrItemData;
 
-    sPrivate : string;
-    AView : TcxGridTableView;
-  begin
-    AView := tvBillItems;
-    if AView.DataController.GetSelectedCount > 0
-    then
-    begin
+   sPrivate : string;
+   AView : TcxGridTableView;
+begin
+   AView := tvBillItems;
+   if AView.DataController.GetSelectedCount > 0 then
+   begin
       SaveSelectedItems();
       try
-        qryNew.Close;
+         qryNew.Close;
 
-        for iCtr := AView.DataController.RecordCount - 1 downto 0 do
-        begin
-          if AView.DataController.IsRowSelected(iCtr)
-          then
-          begin
-            if tvBillItemsTYPE.EditValue = IMG_FEES
-            then
+         for iCtr := AView.DataController.RecordCount - 1 downto 0 do
+         begin
+            if AView.DataController.IsRowSelected(iCtr) then
             begin
-              // if its not private, make it private, else make it not private
-              qryNew.SQL.Text := 'SELECT PRIVATE FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
-              qryNew.Open;
-              if qryNew.RecordCount > 0
-              then
-              begin
-                sPrivate := qryNew.FieldByName('PRIVATE').AsString;
-              end;
-              qryNew.Close;
-              if (sPrivate = 'N') or (sPrivate = '')
-              then
-                qryNew.SQL.Text := 'UPDATE FEE SET PRIVATE = ''Y'' WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue)
-              else
-                qryNew.SQL.Text := 'UPDATE FEE SET PRIVATE = ''N'' WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
-              qryNew.ExecSQL;
-              qryNew.Close;
+               if tvBillItemsTYPE.EditValue = IMG_FEES then
+               begin
+                  // if its not private, make it private, else make it not private
+                  qryNew.SQL.Text := 'SELECT PRIVATE FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                  qryNew.Open;
+                  if qryNew.RecordCount > 0 then
+                  begin
+                     sPrivate := qryNew.FieldByName('PRIVATE').AsString;
+                  end;
+                  qryNew.Close;
+                  if (sPrivate = 'N') or (sPrivate = '') then
+                     qryNew.SQL.Text := 'UPDATE FEE SET PRIVATE = ''Y'' WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue)
+                  else
+                     qryNew.SQL.Text := 'UPDATE FEE SET PRIVATE = ''N'' WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                  qryNew.ExecSQL;
+                  qryNew.Close;
+               end;
             end;
-          end;
-        end; // for
-        // refresh the grid
-        DisplayItems;
+         end; // for
+         // refresh the grid
+         DisplayItems;
       finally
-        RestoreSelectedItems();
+         RestoreSelectedItems();
       end;
-
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tbtnRecalculateClick(Sender : TObject);
-  var
-    dGstFree : double;
-  begin
-    try
+var
+   dGstFree : double;
+begin
+   try
       CalcTotal;
       qryNew.SQL.Clear;
       qryNew.Close;
@@ -4324,10 +4441,10 @@ procedure TfrmInvoice.tbtnRecalculateClick(Sender : TObject);
       // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
       lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
       SaveInvoice;
-    finally
+   finally
       RestoreSelectedItems();
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tbtnNewFeeClick(Sender : TObject);
   var
@@ -4971,25 +5088,22 @@ procedure TfrmInvoice.tbtnShowSummaryClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.pmGridPopup(Sender : TObject);
-  var
+var
     iLoop, ImageIndex : Integer;
     miNew : TMenuItem;
     iCtr : Integer;
     TotalItems : Integer;
     menuReopen : TdxBarButton;
     NewItemLink : TdxBarItemLink;
-  begin
-    if ((Boolean(cbAuthorise.EditValue) = true) and (dmAxiom.Is_Cashier = 'Y'))
-    then
-    begin
+begin
+//   if ((Boolean(cbAuthorise.EditValue) = true) and (dmAxiom.Is_Cashier = 'Y')) then
+//   begin
       tbtnShowSummary.Caption := 'View Description in Preview';
       tbtnGroupSort.Caption := 'Group when Sorting';
-      if tvBillItems.Preview.Active
-      then
-        tbtnShowSummary.Caption := 'Hide Preview';
-      if tvBillItems.OptionsCustomize.GroupBySorting
-      then
-        tbtnGroupSort.Caption := 'Remove Grouping when sorting';
+      if tvBillItems.Preview.Active then
+         tbtnShowSummary.Caption := 'Hide Preview';
+      if tvBillItems.OptionsCustomize.GroupBySorting then
+         tbtnGroupSort.Caption := 'Remove Grouping when sorting';
 
       tbtnUnassignDebtor.Visible := ivNever;
       tbtnAssignToDebtor.Visible := ivNever;
@@ -4997,173 +5111,164 @@ procedure TfrmInvoice.pmGridPopup(Sender : TObject);
 
       bbtnShowSingleLine.Down := (not SettingLoadBoolean('tvBillItems', 'SingleLine'));
 
-      if qryInvoice.FieldByName('DISPATCHED').AsString <> ''
-      then
+      if qryInvoice.FieldByName('DISPATCHED').AsString <> '' then
       begin
-        tbtnAddGST.Enabled := False;
-        tbtnRemove.Enabled := False;
-        tbtnRemoveAll.Enabled := False;
-        tbtnRebuildAll.Enabled := False;
-        tbtnEdit.Enabled := False;
-        { popItemWriteOff.Enabled := False;
-          popGridFilter.Enabled := False; }
-        tbtnRecalculate.Enabled := False;
-        tbtnPrivate.Enabled := False;
-        tbtnNewFee.Enabled := False;
-        btnAddSundry.Enabled := False;
-        btnAddChequeRequest.Enabled := False;
-        tbtnQuickEdit.Enabled := False;
-        btnUplift10.Enabled := False;
-        btnUplift25.Enabled := False;
-        tbtnFilter.Enabled := False;
-        bbtnAdjDisbTotal.Enabled := False;
+         tbtnAddGST.Enabled := False;
+         tbtnRemove.Enabled := False;
+         tbtnRemoveAll.Enabled := False;
+         tbtnRebuildAll.Enabled := False;
+         tbtnEdit.Enabled := False;
+     { popItemWriteOff.Enabled := False;
+       popGridFilter.Enabled := False; }
+         tbtnRecalculate.Enabled := False;
+         tbtnPrivate.Enabled := False;
+         tbtnNewFee.Enabled := False;
+         btnAddSundry.Enabled := False;
+         btnAddChequeRequest.Enabled := False;
+         tbtnQuickEdit.Enabled := False;
+         btnUplift10.Enabled := False;
+         btnUplift25.Enabled := False;
+         tbtnFilter.Enabled := False;
+         bbtnAdjDisbTotal.Enabled := False;
       end
       else
       begin
-        tbtnAddGST.Enabled := true;
-        tbtnRemove.Enabled := true;
-        tbtnRemoveAll.Enabled := true;
-        tbtnRebuildAll.Enabled := true;
-        // popGridFilter.Enabled := True;
-        tbtnRecalculate.Enabled := true;
-        tbtnPrivate.Enabled := true;
-        tbtnNewFee.Enabled := true;
-        btnAddSundry.Enabled := true;
-        btnAddChequeRequest.Enabled := True;
-        btnUplift10.Enabled := true;
-        btnUplift25.Enabled := true;
-        tbtnFilter.Enabled := true;
+         tbtnAddGST.Enabled := true;
+         tbtnRemove.Enabled := true;
+         tbtnRemoveAll.Enabled := true;
+         tbtnRebuildAll.Enabled := true;
+     // popGridFilter.Enabled := True;
+         tbtnRecalculate.Enabled := true;
+         tbtnPrivate.Enabled := true;
+         tbtnNewFee.Enabled := true;
+         btnAddSundry.Enabled := true;
+         btnAddChequeRequest.Enabled := True;
+         btnUplift10.Enabled := true;
+         btnUplift25.Enabled := true;
+         tbtnFilter.Enabled := true;
 
-        tbtnQuickEdit.Enabled := (dmAxiom.Security.Fee.QuickEdit) and (tvBillItemsTYPE.EditValue = IMG_FEES);
+         tbtnQuickEdit.Enabled := (dmAxiom.Security.Fee.QuickEdit) and (tvBillItemsTYPE.EditValue = IMG_FEES);
 
-        if (tvBillItems.DataController.GetSelectedCount > 1) or (tvBillItems.DataController.GetSelectedCount < 1)
-        then
-        begin
-          tbtnEdit.Enabled := False;
-          // popItemWriteOff.Enabled := False;
-        end
-        else
-        begin
-          ImageIndex := tvBillItemsTYPE.EditValue;
-          if ((ImageIndex <> IMG_DISB) AND (ImageIndex <> IMG_UPCRED))
-          then
-            tbtnEdit.Enabled := true
-          else
+         if (tvBillItems.DataController.GetSelectedCount > 1) or (tvBillItems.DataController.GetSelectedCount < 1) then
+         begin
             tbtnEdit.Enabled := False;
-          // popItemWriteOff.Enabled := True;
-        end;
-        if (ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED)
-        then
-          tbtnEditDescription.Visible := ivAlways;
+       // popItemWriteOff.Enabled := False;
+         end
+         else
+         begin
+            ImageIndex := tvBillItemsTYPE.EditValue;
+            if ((ImageIndex <> IMG_DISB) AND (ImageIndex <> IMG_UPCRED)) then
+               tbtnEdit.Enabled := true
+            else
+               tbtnEdit.Enabled := False;
+       // popItemWriteOff.Enabled := True;
+         end;
+         if (ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) then
+            tbtnEditDescription.Visible := ivAlways;
 
-        bbtnAdjDisbTotal.Enabled := (ImageIndex = IMG_DISB) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
+         bbtnAdjDisbTotal.Enabled := (ImageIndex = IMG_DISB) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
       end;
 
-      // can we assign to debtors ?
-      // are any of the selected items a disb?
-      // uncommented on 09/09/2009 by AES
+   // can we assign to debtors ?
+   // are any of the selected items a disb?
+   // uncommented on 09/09/2009 by AES
       ImageIndex := tvBillItemsTYPE.EditValue;
-      if ImageIndex = IMG_DISB
-      then
+      if ImageIndex = IMG_DISB then
       begin
-        qrySubBills.Close;
-        qrySubBills.ParamByName('NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-        qrySubBills.Open;
+         qrySubBills.Close;
+         qrySubBills.ParamByName('NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+         qrySubBills.Open;
 
-        if not qrySubBills.Eof
-        then
-        begin
-          tbtnUnassignDebtor.Visible := ivAlways;
-          tbtnAssignToDebtor.Visible := ivAlways;
-        end;
+         if not qrySubBills.Eof then
+         begin
+            tbtnUnassignDebtor.Visible := ivAlways;
+            tbtnAssignToDebtor.Visible := ivAlways;
+         end;
 
-        if tvBillItems.Controller.GridView.GroupedColumnCount > 0
-        then
-          btnExpand.Visible := ivAlways
-        else
-          btnExpand.Visible := ivNever;
+         if tvBillItems.Controller.GridView.GroupedColumnCount > 0 then
+            btnExpand.Visible := ivAlways
+         else
+            btnExpand.Visible := ivNever;
       end;
-      if ((bAlterGSTAmount) and (rgFilter.ItemIndex in [2, 4, 5]) and (qryBillItems.RecordCount > 0) and (qryInvoice.FieldByName('DISPATCHED').IsNull))
-      then
+      if ((bAlterGSTAmount) and (rgFilter.ItemIndex in [2, 4, 5]) and (qryBillItems.RecordCount > 0) and (qryInvoice.FieldByName('DISPATCHED').IsNull)) then
       begin
-        tbtnEditTax.Enabled := true;
-        tbtnEditTax.Visible := ivAlways;
+         tbtnEditTax.Enabled := true;
+         tbtnEditTax.Visible := ivAlways;
       end
       else
       begin
-        tbtnEditTax.Enabled := False;
-        tbtnEditTax.Visible := ivNever;
+         tbtnEditTax.Enabled := False;
+         tbtnEditTax.Visible := ivNever;
       end;
 
-      { if tbtnAssignToDebtor.Visible = ivAlways then
-        begin
-        qrySubBills.Close;
-        qrySubBills.ParamByName('NMEMO').AsInteger := qryInvoice.fieldByName('NMEMO').AsInteger;
-        qrySubBills.open;
+   { if tbtnAssignToDebtor.Visible = ivAlways then
+     begin
+     qrySubBills.Close;
+     qrySubBills.ParamByName('NMEMO').AsInteger := qryInvoice.fieldByName('NMEMO').AsInteger;
+     qrySubBills.open;
 
-        if qrySubBills.eof then
-        begin
-        tbtnUnassignDebtor.Visible := ivNever;
-        tbtnAssignToDebtor.Visible := ivNever;
-        end;
+     if qrySubBills.eof then
+     begin
+     tbtnUnassignDebtor.Visible := ivNever;
+     tbtnAssignToDebtor.Visible := ivNever;
+     end;
 
-        TotalItems := tbtnAssignToDebtor.ItemLinks.Count;
-        for iCtr := TotalItems - 1 downto 1 do
-        tbtnAssignToDebtor.ItemLinks.Delete(iCtr);
+     TotalItems := tbtnAssignToDebtor.ItemLinks.Count;
+     for iCtr := TotalItems - 1 downto 1 do
+     tbtnAssignToDebtor.ItemLinks.Delete(iCtr);
 
-        NewItemLink := tbtnAssignToDebtor.ItemLinks.Add;
-        while not qrySubBills.eof do
-        begin
-        menuReopen := TdxBarButton.Create(nil);
-        menuReopen.Caption := qrySubBills.fieldByName('debtor_name').AsString;
-        menuReopen.ImageIndex := qrySubBills.fieldByName('nsubbill').AsInteger;
-        menuReopen.OnClick := assignToDebtor;
-        tbtnAssignToDebtor.ItemLinks.Add.Item := menuReopen;
-        next;
-        end;
-        qrySubBills.Close;
-        end; }
-    end;
-  end;
+     NewItemLink := tbtnAssignToDebtor.ItemLinks.Add;
+     while not qrySubBills.eof do
+     begin
+     menuReopen := TdxBarButton.Create(nil);
+     menuReopen.Caption := qrySubBills.fieldByName('debtor_name').AsString;
+     menuReopen.ImageIndex := qrySubBills.fieldByName('nsubbill').AsInteger;
+     menuReopen.OnClick := assignToDebtor;
+     tbtnAssignToDebtor.ItemLinks.Add.Item := menuReopen;
+     next;
+     end;
+     qrySubBills.Close;
+     end; }
+//   end;
+end;
 
 procedure TfrmInvoice.tbtnGroupSortClick(Sender : TObject);
-  begin
-    if tvBillItems.OptionsCustomize.GroupBySorting
-    then
+begin
+   if tvBillItems.OptionsCustomize.GroupBySorting then
       tvBillItems.OptionsCustomize.GroupBySorting := False
-    else
+   else
       tvBillItems.OptionsCustomize.GroupBySorting := true;
-  end;
+end;
 
 procedure TfrmInvoice.FormDestroy(Sender : TObject);
-  begin
+begin
     // SaveColumnData;
     // SettingSaveStream(dmAxiom.UserID,'BillItem Layout',tvBillItems);
-  end;
+end;
 
 procedure TfrmInvoice.SaveColumnData;
-  var
+var
     LNumFields : Integer;
     GroupIndex : Integer;
-  begin
-    for LNumFields := 0 to tvBillItems.ColumnCount - 3 do
-    begin
+begin
+   for LNumFields := 0 to tvBillItems.ColumnCount - 3 do
+   begin
       SettingSave(C_BILLITEMSGRID, C_COLUMNNAME + IntToStr(LNumFields), tvBillItems.Columns[LNumFields].Name);
       SettingSaveBoolean(C_BILLITEMSGRID, C_COLUMNVISIBLE + IntToStr(LNumFields), tvBillItems.Columns[LNumFields].Visible);
       SettingSave(C_BILLITEMSGRID, C_COLUMNSORTORDER + IntToStr(LNumFields), tvBillItems.Columns[LNumFields].SortOrder);
       SettingSave(C_BILLITEMSGRID, C_COLUMNGROUPORDER + IntToStr(LNumFields), tvBillItems.Columns[LNumFields].GroupIndex);
       SettingSave(C_BILLITEMSGRID, C_COLUMNWIDTH + IntToStr(LNumFields), Integer(tvBillItems.Columns[LNumFields].Width));
       SettingSave(C_BILLITEMSGRID, C_COLUMNPOSITION + IntToStr(LNumFields), Integer(tvBillItems.Columns[LNumFields].Index));
-    end;
-    SettingSave(C_BILLITEMSGRID, 'ColumnCount', LNumFields);
-  end;
+   end;
+   SettingSave(C_BILLITEMSGRID, 'ColumnCount', LNumFields);
+end;
 
 procedure TfrmInvoice.LoadColumnData;
-  var
+var
     LNumFields : Integer;
     I : Integer;
     LVisibleIndex : Integer;
-  begin
+begin
     for LNumFields := 0 to tvBillItems.ColumnCount - 3 do
     begin
       tvBillItems.Columns[LNumFields].Visible := SettingLoadGridBoolean(C_BILLITEMSGRID, C_COLUMNVISIBLE + IntToStr(LNumFields));
@@ -5172,8 +5277,7 @@ procedure TfrmInvoice.LoadColumnData;
       then
         tvBillItems.Columns[LNumFields].Width := SettingLoadInteger(C_BILLITEMSGRID, C_COLUMNWIDTH + IntToStr(LNumFields));
 
-      if tvBillItems.Columns[LNumFields].Visible
-      then
+      if tvBillItems.Columns[LNumFields].Visible then
         for I := 0 to tvBillItems.ColumnCount - 3 do
         begin
           if SettingLoadString(C_BILLITEMSGRID, C_COLUMNNAME + IntToStr(I)) = tvBillItems.Columns[LNumFields].Name
@@ -5192,7 +5296,7 @@ procedure TfrmInvoice.LoadColumnData;
             end;
         end;
     end;
-  end;
+end;
 
 procedure TfrmInvoice.RemoveByInterimDate;
   var
@@ -5641,66 +5745,68 @@ procedure TfrmInvoice.cxBarEditItem1PropertiesEditValueChanged(Sender : TObject)
 var
     LEntered : string;
 begin
-    if (qryInvoice.state <> dsEdit)
-    then
+   if (qryInvoice.state <> dsEdit) then
       qryInvoice.Edit;
-    if (InputQueryPassword(CN_PROGRAM_NAME, 'Please enter you authorisation password', LEntered))
-    then
-    begin
-      if (LEntered = dmAxiom.Auth_Password)
-      then
+
+   if SystemString('NO_AUTHORISE_PASSWORD') = 'N' then
+   begin
+      if (InputQueryPassword(CN_PROGRAM_NAME, 'Please enter you authorisation password', LEntered)) then
       begin
-         if boolean(cbAuthorise.EditValue) then
-         BEGIN
-            qryInvoice.FieldByName('AUTHORISED').AsString := 'Y';
-            // RDW - Update Authorised by and Authorised Date
-            qryInvoice.FieldByname('AUTHORISED_BY').AsString := dmAxiom.UserID;
-            qryInvoice.FieldByName('AUTHORISED_DATE').AsDateTime := now;
-
-            // Show the Authorise Email
-            lblAuthorisedBy.Caption := 'Authorised By: ' + dmAxiom.UserID;
-            lblAuthorisedBy.Visible := True;
-//            chkEmailCreator.Visible := True;
-
-            tbtnPost.Enabled := (dmAxiom.Is_Cashier = 'Y'); // RDW 21/03/2019 - Removed and (dmAxiom.Security.Bill.Post = True);
-            //If (dmAxiom.Is_Cashier = 'Y') and (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
-            If (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
-              ControlEditFields(true)
-            Else
-              ControlEditFields(false);
-         END
+         if (LEntered = dmAxiom.Auth_Password) then
+            DoAuthorise
          else
          begin
-            qryInvoice.FieldByName('AUTHORISED').AsString := 'N';
-            qryInvoice.FieldByname('AUTHORISED_BY').Clear;
-            qryInvoice.FieldByName('AUTHORISED_DATE').Clear;
-            tbtnPost.Enabled := false;
+            cbAuthorise.EditValue := (not Boolean(cbAuthorise.EditValue));
+            MsgErr('Invalid Password');
          end;
       end
       else
-      begin
-        cbAuthorise.EditValue := (not Boolean(cbAuthorise.EditValue));
-        MsgErr('Invalid Password');
-      end;
-    end
-    else
-      cbAuthorise.EditValue := (not Boolean(cbAuthorise.EditValue));
+         cbAuthorise.EditValue := (not Boolean(cbAuthorise.EditValue));
+   end
+   else
+      DoAuthorise;
+end;
+
+procedure TfrmInvoice.DoAuthorise;
+begin
+   if boolean(cbAuthorise.EditValue) then
+   BEGIN
+      qryInvoice.FieldByName('AUTHORISED').AsString := 'Y';
+      // RDW - Update Authorised by and Authorised Date
+      qryInvoice.FieldByname('AUTHORISED_BY').AsString := dmAxiom.UserID;
+      qryInvoice.FieldByName('AUTHORISED_DATE').AsDateTime := now;
+
+      // Show the Authorise Email
+      lblAuthorisedBy.Caption := 'Authorised By: ' + dmAxiom.UserID;
+      lblAuthorisedBy.Visible := True;
+//      chkEmailCreator.Visible := True;
+
+      tbtnPost.Enabled := (dmAxiom.Security.Bill.Post = True);  // (dmAxiom.Is_Cashier = 'Y'); // RDW 21/03/2019 - Removed and (dmAxiom.Security.Bill.Post = True);
+      //If (dmAxiom.Is_Cashier = 'Y') and (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
+      If (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
+        ControlEditFields(true)
+      Else
+        ControlEditFields(false);
+   END
+   else
+   begin
+      qryInvoice.FieldByName('AUTHORISED').AsString := 'N';
+      qryInvoice.FieldByname('AUTHORISED_BY').Clear;
+      qryInvoice.FieldByName('AUTHORISED_DATE').Clear;
+      tbtnPost.Enabled := false;
+   end;
 end;
 
 procedure TfrmInvoice.cxPopupEdit1PropertiesCloseUp(Sender : TObject);
-  begin
+begin
     // popNotes.EditValue := Trim(memoNotes.Text);
-  end;
+end;
 
-procedure TfrmInvoice.cxRichEdit1KeyUp(
-  Sender  : TObject;
-  var Key : Word;
-  Shift   : TShiftState);
-  begin
-    If Key = VK_SPACE
-    then
+procedure TfrmInvoice.cxRichEdit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+    If Key = VK_SPACE then
       QuickCode(Sender);
-  end;
+end;
 
 procedure TfrmInvoice.dxBarButton3Click(Sender : TObject);
   var
@@ -5882,16 +5988,19 @@ begin
     end
    else if (neFees.AsDouble = 0) then
    begin
-      if qryInvoice.state = dsBrowse then
-         qryInvoice.Edit;
-      try
-         qryInvoice.FieldByName('DISCOUNT').AsCurrency := 0;
-         qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := 0;
-         edtDiscount.Text := '0';
-         edtDiscountGST.Text := '0';
-         lblDiscount.Caption := '0.00';
-      finally
-         qryInvoice.Refresh;
+      if qryInvoice.Active then
+      begin
+         if qryInvoice.state = dsBrowse then
+            qryInvoice.Edit;
+         try
+            qryInvoice.FieldByName('DISCOUNT').AsCurrency := 0;
+            qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := 0;
+            edtDiscount.Text := '0';
+            edtDiscountGST.Text := '0';
+            lblDiscount.Caption := '0.00';
+         finally
+            qryInvoice.Refresh;
+         end;
       end;
    end;
    CalcTotal;
@@ -6078,11 +6187,11 @@ procedure TfrmInvoice.tvBillItemsFocusedRecordChanged(
   Sender                             : TcxCustomGridTableView;
   APrevFocusedRecord, AFocusedRecord : TcxCustomGridRecord;
   ANewItemRecordFocusingChanged      : Boolean);
-  var
+var
     GroupItemCount : Integer;
     Data : TcxCustomDataController; // TcxGridDataController;
     I : Integer;
-  begin
+begin
     if (AFocusedRecord = nil) or (APrevFocusedRecord = nil)
     then
       Exit;
@@ -6134,10 +6243,10 @@ procedure TfrmInvoice.tvBillItemsFocusedRecordChanged(
       end
     end;
 
-  end;
+end;
 
 procedure TfrmInvoice.lvBillItemsDESCRPropertiesCloseUp(Sender : TObject);
-  begin
+begin
     { if (tvBillItemsTYPE.EditValue = IMG_FEES) and (AddictRichEdit1.Modified = True) then
       begin
       try
@@ -6158,13 +6267,13 @@ procedure TfrmInvoice.lvBillItemsDESCRPropertiesCloseUp(Sender : TObject);
       tvBillItems.EndUpdate;
       end;
       end; }
-  end;
+end;
 
 procedure TfrmInvoice.lvBillItemsDESCRPropertiesPopup(Sender : TObject);
-  begin
+begin
     // FPopupForm := GetParentForm(TControl(Sender));
 
-  end;
+end;
 
 procedure TfrmInvoice.tvBillItemsEditKeyDown(
   Sender  : TcxCustomGridTableView;
@@ -6234,18 +6343,14 @@ procedure TfrmInvoice.tvBillItemsMouseDown(
     end;
   end;
 
-procedure TfrmInvoice.tvBillItemsStylesGetContentStyle(
-  Sender     : TcxCustomGridTableView;
-  ARecord    : TcxCustomGridRecord;
-  AItem      : TcxCustomGridTableItem;
-  var AStyle : TcxStyle);
-  begin
-    if (ARecord.Values[14] = 99999)
-    then
+procedure TfrmInvoice.tvBillItemsStylesGetContentStyle(Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
+                  AItem: TcxCustomGridTableItem; var AStyle: TcxStyle);
+begin
+{   if (ARecord.Values[14] = 99999) then
       AStyle := dmAxiom.cxStyle10
-    else
-      AStyle := dmAxiom.cxStyle1;
-  end;
+   else
+      AStyle := dmAxiom.cxStyle1; }
+end;
 
 procedure TfrmInvoice.barbtnRemoveDiscountClick(Sender : TObject);
   var

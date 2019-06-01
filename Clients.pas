@@ -27,7 +27,8 @@ uses
   cxMemo, cxDBEdit, cxButtons, cxRadioGroup, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
   cxGrid, cxPC, cxImage, cxGroupBox, Vcl.ExtCtrls, cxDBLabel, Vcl.DBCtrls,
-  Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore, dxPSDBTCLnk;
+  Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore, dxPSDBTCLnk,
+  cxDBRichEdit, cxDateUtils;
 
 
 
@@ -95,7 +96,6 @@ type
     dsPacket: TUniDataSource;
     qryDocReg: TUniQuery;
     qryDocReg2: TUniQuery;
-    dsDocReg2: TDataSource;
     dsDocReg: TUniDataSource;
     qryMarketing: TUniQuery;
     qryClientBalances: TUniQuery;
@@ -838,7 +838,6 @@ type
     cxDBTextEdit9: TcxDBTextEdit;
     cxDBButtonEdit1: TcxDBButtonEdit;
     cxDBButtonEdit2: TcxDBButtonEdit;
-    cxDBMemo2: TcxDBMemo;
     dbtbSearchkey: TcxDBTextEdit;
     ePhoneHome: TcxDBTextEdit;
     ePhoneMobile: TcxDBTextEdit;
@@ -1112,6 +1111,8 @@ type
     barEditProspective: TcxBarEditItem;
     Label4: TLabel;
     cxDBLabel2: TcxDBLabel;
+    cxDBRichEdit1: TcxDBRichEdit;
+    dsDocReg2: TUniDataSource;
     procedure tbtnSnapshotClick(Sender: TObject);
     procedure dbgrMattersDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -3923,6 +3924,7 @@ begin
       //   qryDocReg2.FieldByName('ndocument').AsInteger);
          LSafeCustodyNew.qryDocReg2.Edit;
          LSafeCustodyNew.qryDocReg2.FieldByName('DATE_RETURNED').AsDateTime := now;
+         LSafeCustodyNew.qryDocReg2.FieldByName('REQUESTED_DATE').Clear;
          LSafeCustodyNew.qryDocReg2.ApplyUpdates;
          qryDocReg2.Refresh;
       end
@@ -3942,6 +3944,7 @@ begin
                   with qryUpdateItem do
                   begin
                      ParamByName('REQUESTED_BY').AsString := '';
+                     ParamByName('REQUESTED_DATE').AsDateTime := NullDate;
                      ParamByName('DATE_RETURNED').AsDateTime := now;
                      ParamByName('MOVEMENT_REASON').AsString := frmMovementDetails.edMovementReason.Text;
                      ParamByName('RELEASED_TO').AsString := frmMovementDetails.edReleasedTo.Text;

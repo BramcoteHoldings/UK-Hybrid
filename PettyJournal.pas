@@ -13,7 +13,9 @@ uses
   cxGrid, cxMaskEdit, cxCurrencyEdit, cxContainer, cxGroupBox, cxRadioGroup,
   cxLabel, cxLookAndFeelPainters, cxButtons, dxBar, ImgList,
   cxGridCustomPopupMenu, cxGridPopupMenu, cxLookAndFeels, cxCalendar,
-  EnforceCustomDateEdit, dxCore, cxNavigator, cxDateUtils;
+  EnforceCustomDateEdit, dxCore, cxNavigator, cxDateUtils, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
+  System.ImageList;
 
 const
   colTYPE = 0;
@@ -348,6 +350,7 @@ begin
                 ParamByName('AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('AMOUNT').AsFloat);
                 ParamByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
                 ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                ParamByName('BILLED_TAX_AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);
                 if rgType.ItemIndex = 0 then
                   ParamByName('TYPE').AsString := 'J2'
                 else

@@ -382,6 +382,10 @@ inherited frmMatterType: TfrmMatterType
     object tabParties: TcxTabSheet
       Caption = 'Other Party Captions'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label7: TLabel
         Left = 8
         Top = 19
@@ -434,6 +438,10 @@ inherited frmMatterType: TfrmMatterType
     object tabSubType: TcxTabSheet
       Caption = 'Sub Type'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 0
@@ -483,6 +491,10 @@ inherited frmMatterType: TfrmMatterType
       Caption = 'Debtor Task'
       ImageIndex = 4
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label14: TLabel
         Left = 8
         Top = 16
@@ -549,6 +561,7 @@ inherited frmMatterType: TfrmMatterType
     Properties.ValueChecked = 'Y'
     Properties.ValueUnchecked = 'N'
     TabOrder = 11
+    Transparent = True
   end
   inherited dsSource: TUniDataSource
     Left = 170
@@ -575,7 +588,6 @@ inherited frmMatterType: TfrmMatterType
       OldName = 'Main Menu1'
     end
     inherited bmMainBar2: TdxBar
-      Font.Height = -12
       IsMainMenu = False
       MultiLine = False
       OldName = 'Toolbar1'

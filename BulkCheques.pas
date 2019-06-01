@@ -12,7 +12,7 @@ uses
   cxCheckBox, cxDropDownEdit, cxButtonEdit, cxLabel, cxContainer,
   cxMaskEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, dxBar,
   Menus, cxLookAndFeels, cxNavigator,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type                                     
   TfrmBulkCheques = class(TForm)
@@ -213,7 +213,8 @@ begin
    begin
       pbSelect.Caption := 'DeSelect All';
       bbSelectAll.Caption := 'DeSelect All';
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+
+      Bitmap.LoadFromFile('.\images\checkboxuntick.bmp');   //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
       pbselect.Glyph.Assign(Bitmap);
       bbSelectAll.Glyph.Assign(Bitmap);
       with DC.DataSet do
@@ -236,7 +237,7 @@ begin
    begin
       pbSelect.Caption := 'Select All';
       bbSelectAll.Caption := 'Select All';
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+      Bitmap.LoadFromFile('.\images\checkboxtick.bmp');        //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
       pbselect.Glyph.Assign(Bitmap);
       bbSelectAll.Glyph.Assign(Bitmap);
       with DC.DataSet do

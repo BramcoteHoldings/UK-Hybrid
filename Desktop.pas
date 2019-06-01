@@ -1765,7 +1765,6 @@ begin
          if tmrDiaryNotify.Enabled = True then
             tmrDiaryNotify.Enabled := False;
       finally
-         dmAxiom.qryBanks.Close;
          tmrUserCount.Free;
          tmrDiaryNotify.Free;
          TabImage.Free;
@@ -1812,6 +1811,7 @@ begin
 
       qryClientMRU.Close;
       qryEntitys.Close;
+      dmAxiom.qryBanks.Close;
       if dmAxiom.qryEmpAuthor.Active = True then
          dmAxiom.qryEmpAuthor.Close;
 
@@ -1821,7 +1821,8 @@ begin
       finally
          if (dmAxiom.orsAxiom.Connected = True) then
             dmAxiom.orsAxiom.Disconnect;
-         dmAxiom.uniInsight.Disconnect;
+         if (dmAxiom.uniInsight.Connected = True) then
+            dmAxiom.uniInsight.Disconnect;
       end;
    end;
 end;
@@ -4070,8 +4071,9 @@ begin
                           Tag := iProgramID;
                           DebtorStatements := 1;
 
-                          DREmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
-                                        ' AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+                          DREmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL '+
+                                        'FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
+                                        'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
                           EmailSQL := DREmailSQL;
                           ShowModal;
                         end;

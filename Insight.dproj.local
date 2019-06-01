@@ -108,9 +108,9 @@
     <Transaction>2018/05/16 15:02:27.000.888,D:\Insight_XE4_Source\Insight\AccountNew.pas=</Transaction>
     <Transaction>2018/05/16 15:02:27.000.920,D:\Insight_XE4_Source\Insight\AccountPayable.pas=</Transaction>
     <Transaction>2018/05/16 15:02:27.000.835,D:\Insight_XE4_Source\Insight\AccountCreate.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.562,D:\Insight_XE4_Source\Insight\CreditorSearch.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.534,D:\Insight_XE4_Source\Insight\Creditors.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.562,D:\Insight_XE4_Source\Insight\CreditorSearch.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.475,D:\Insight_XE4_Source\Insight\CreditorMerge.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.506,D:\Insight_XE4_Source\Insight\CreditorMergeProgress.pas=</Transaction>
     <Transaction>2018/05/16 15:05:24.000.811,=D:\Insight_XE4_Source\Insight\Creditors\AccountCreate.pas</Transaction>

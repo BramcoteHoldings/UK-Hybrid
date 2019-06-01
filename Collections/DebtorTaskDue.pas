@@ -270,10 +270,8 @@ type
       Sender  : TObject;
       var Key : Word;
       Shift   : TShiftState);
-    procedure tabFilterShow(Sender : TObject);
     procedure FormCreate(Sender : TObject);
     procedure dxBtnDebtorStatementClick(Sender : TObject);
-    procedure qryDueItemsAfterScroll(DataSet : TDataSet);
     procedure ReAssignTask1Click(Sender : TObject);
     procedure PopupCustomButtonClick(Sender : TObject);
     procedure ChangeDueDate1Click(Sender : TObject);
@@ -298,6 +296,9 @@ type
     procedure ChangeDueDateAllBills1Click(Sender: TObject);
     procedure ReAssignClient1Click(Sender: TObject);
     procedure CompleteTaskAllBills1Click(Sender: TObject);
+    procedure tvDueItemsCellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
     private
       { Private declarations }
       aReportControls : array of TControl;
@@ -478,7 +479,7 @@ procedure TfrmDebtorTaskDue.refreshList;
     iCurrentSelection : integer;
   begin
     try
-      qryDueItems.AfterScroll := nil;
+//      qryDueItems.AfterScroll := nil;
       iCurrentSelection := - 1;
 
       //qryDetailClientRecords.DataSource.Enabled := True;
@@ -495,7 +496,7 @@ procedure TfrmDebtorTaskDue.refreshList;
       qryDetailClientRecords.open;
       qryDetailClientRecords.first;
     finally
-      qryDueItems.AfterScroll := qryDueItemsAfterScroll;
+ //     qryDueItems.AfterScroll := qryDueItemsAfterScroll;
     end;
 
   end;
@@ -1339,11 +1340,6 @@ procedure TfrmDebtorTaskDue.PopupMenuPopup(Sender : TObject);
 
   end;
 
-procedure TfrmDebtorTaskDue.qryDueItemsAfterScroll(DataSet : TDataSet);
-  begin
-    enableButtons;
-  end;
-
 procedure TfrmDebtorTaskDue.ReAssignClient1Click(Sender: TObject);
     // RDW Re-assign all bills for the selected client
     var
@@ -2167,15 +2163,13 @@ begin
       end;
     end;
     refreshList;
-
-
 end;
 
 procedure TfrmDebtorTaskDue.CreateDebtorNote1Click(Sender : TObject);
-  var
+var
     frmTextEdit : TfrmTextEdit;
     iCode : integer;
-  begin
+begin
     try
       qryDebtorTaskItem.close;
       // RDW - Check if Client detail tab
@@ -2216,23 +2210,21 @@ procedure TfrmDebtorTaskDue.CreateDebtorNote1Click(Sender : TObject);
       // Nothing to do now we are modal.
     end;
 
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.cxButtonEdit1PropertiesButtonClick(
   Sender       : TObject;
   AButtonIndex : integer);
-  var
+var
     result : Boolean;
-  begin
+begin
     case AButtonIndex of
       0 :
         begin
-          if (not FormExists(frmPhoneBookSearch))
-          then
+          if (not FormExists(frmPhoneBookSearch)) then
             Application.CreateForm(TfrmPhoneBookSearch, frmPhoneBookSearch);
           result := (frmPhoneBookSearch.ShowModal() = mrOK);
-          if (result)
-          then
+          if (result) then
           begin
             tbDebtor.Text := frmPhoneBookSearch.qryPhonebook.fieldByName('SEARCH').AsString;
             NDebtor := frmPhoneBookSearch.qryPhonebook.fieldByName('NNAME').AsInteger;
@@ -2244,88 +2236,79 @@ procedure TfrmDebtorTaskDue.cxButtonEdit1PropertiesButtonClick(
           NDebtor := 0;
         end;
     end;
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.cxRgDatePropertiesChange(Sender : TObject);
-  begin
+begin
     cxdeFrom.Enabled := false;
     cxdeTo.Enabled := false;
 
     if (cxRgDate.Properties.Items[cxRgDate.ItemIndex].Tag = 2) or (cxRgDate.Properties.Items[cxRgDate.ItemIndex].Tag = 4) or
-      (cxRgDate.Properties.Items[cxRgDate.ItemIndex].Tag = 5)
-    then
+      (cxRgDate.Properties.Items[cxRgDate.ItemIndex].Tag = 5) then
     begin
       cxdeFrom.Enabled := true;
       cxdeTo.Enabled := true;
     end;
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.FormKeyDown(
   Sender  : TObject;
   var Key : Word;
   Shift   : TShiftState);
-  begin
+begin
     if (ssCtrl in Shift) and (Key = VK_F4)
     then
       Self.close;
-  end;
-
-procedure TfrmDebtorTaskDue.tabFilterShow(Sender : TObject);
-  begin
-    // loadGrid;
-
-    // refreshList;
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.FormCreate(Sender : TObject);
-  begin
+begin
     qryEmployee.open;
     tabMain.ActivePage := tabFilter;
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.tbBillPropertiesButtonClick(
   Sender       : TObject;
   AButtonIndex : integer);
-  begin
-    if not FormExists(frmInvoiceSearch)
-    then
+begin
+    if not FormExists(frmInvoiceSearch) then
       Application.CreateForm(TfrmInvoiceSearch, frmInvoiceSearch);
 
-    if frmInvoiceSearch.ShowModal = mrOK
-    then
+    if frmInvoiceSearch.ShowModal = mrOK then
     begin
       tbBill.Text := frmInvoiceSearch.qryInvoices.fieldByName('REFNO').AsString;
     end;
-  end;
+end;
 
 procedure TfrmDebtorTaskDue.tbClientPropertiesButtonClick(
   Sender       : TObject;
   AButtonIndex : integer);
-  begin
-    if not FormExists(frmClientSearch)
-    then
+begin
+    if not FormExists(frmClientSearch) then
       Application.CreateForm(TfrmClientSearch, frmClientSearch);
 
-    if frmClientSearch.ShowModal = mrOK
-    then
+    if frmClientSearch.ShowModal = mrOK then
     begin
       tbClient.Text := frmClientSearch.qryClientList.fieldByName('CLIENTID').AsString;
     end;
-  end;
+end;
 
-procedure TfrmDebtorTaskDue.tbMatterPropertiesButtonClick(
-  Sender       : TObject;
-  AButtonIndex : integer);
-  begin
-    if not FormExists(frmMatterSearch)
-    then
+procedure TfrmDebtorTaskDue.tbMatterPropertiesButtonClick(Sender: TObject; AButtonIndex: integer);
+begin
+   if not FormExists(frmMatterSearch) then
       Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
 
-    if frmMatterSearch.ShowModal = mrOK
-    then
-    begin
+   if frmMatterSearch.ShowModal = mrOK then
+   begin
       tbMatter.Text := dmAxiom.qryMSearch.fieldByName('FILEID').AsString;
-    end;
-  end;
+   end;
+end;
+
+procedure TfrmDebtorTaskDue.tvDueItemsCellClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+   enableButtons;
+end;
 
 end.
