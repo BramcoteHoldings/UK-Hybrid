@@ -23,7 +23,7 @@ uses
   System.ImageList, ppParameter, ppRichTx, ppBands, ppClass, ppDesignLayer,
   ppModule, raCodMod, ppCtrls, ppReport, ppPrnabl, ppStrtch, ppSubRpt, ppCache,
   ppComm, ppRelatv, ppProd, ppDB, ppDBPipe, IdSASL, IdSASLUserPass, IdSASLLogin,
-  IdUserPassProvider;
+  IdUserPassProvider, IdIntercept, IdLogBase, IdLogFile;
 
 type
   TfrmBulkMailer = class(TForm)
@@ -161,14 +161,11 @@ type
     qryInsertNNameDoc: TUniQuery;
     spHTMLEmail: TUniStoredProc;
     dxBarButton15: TdxBarButton;
-    SMTP: TIdSMTP;
-    IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     HTMLEditor: TEmbeddedWB;
     Editor: TRichEdit;
     Memo1: TMemo;
     AddFieldtoSubject1: TMenuItem;
     N1: TMenuItem;
-    MailMessage: TIdMessage;
     cmbEmailTemplates: TdxBarLookupCombo;
     qryEmailTemplates: TUniQuery;
     dsEmailTemplates: TUniDataSource;
@@ -232,8 +229,6 @@ type
     qryRB_ItemsMODIFIED: TFloatField;
     qryRB_ItemsDELETED: TFloatField;
     qryRB_ItemsTEMPLATE: TMemoField;
-    IdSASLLogin1: TIdSASLLogin;
-    IdUserPassProvider: TIdUserPassProvider;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -281,6 +276,8 @@ type
     procedure AddFieldtoSubject1Click(Sender: TObject);
     procedure dxBarButton3Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure IdSMTP1Status(ASender: TObject; const AStatus: TIdStatus;
+      const AStatusText: string);
   private
     { Private declarations }
     FEditorValue: TMemoryStream;
@@ -342,7 +339,7 @@ implementation
 uses
     ShellApi, InsertTableForm, IdExceptionCore,
     AxiomData, StrUtils, MiscFunc, GenExport, IdMessageBuilder,
-    ppTypes,  IdMessageParts, IdAttachment;
+    ppTypes,  IdMessageParts, IdAttachment, LoggingSnippet;
 
 const NEW_DOCUMENT_FILENAME = 'New Document.html';
 
@@ -809,6 +806,12 @@ begin
       (HTMLEditor.Document AS IHTMLDocument2).designMode := 'on';
 end;
 
+procedure TfrmBulkMailer.IdSMTP1Status(ASender: TObject;
+  const AStatus: TIdStatus; const AStatusText: string);
+begin
+   WriteLog(AStatusText);
+end;
+
 procedure TfrmBulkMailer.dxBarButton10Click(Sender: TObject);
 begin
 //  HTMLEdit.DeleteCurrentTable();
@@ -1113,10 +1116,17 @@ var
    lsSubject,
    ANewDocName,
    AParsedDocName,
-   AParsedDir: string;
+   AParsedDir,
+   AEmailServerType: string;
    lEmailTemp: TStrings;
    bSelected: boolean;
    Attachment: TIdAttachment;
+   SMTP: TIdSMTP;
+   MailMessage: TIdMessage;
+   SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
+   SASLLogin: TIdSASLLogin;
+   UserPassProvider: TIdUserPassProvider;
+   IdLogFile: TIdLogFile;
 begin
    Screen.Cursor := crSQLWait;
    if (edFrom.Text = '') then
@@ -1127,28 +1137,94 @@ begin
          Panel1.Caption := '';
          FHostname := SystemString('smtp_server');
          FPortNum := SystemString('smtp_port');
+         SMTP := TIdSMTP.Create(nil);
+         IdLogFile := TIdLogFile.Create(nil);
+         IdLogFile.Filename := 'SMTPMessage.log';
+         IdLogFile.Active := True;
 
-         with SMTP do
+         SMTP.OnStatus := IdSMTP1Status;
+         SMTP.Intercept := IdLogFile;
+
+         MailMessage := TIdMessage.Create(nil);
+         MailMessage.ContentType := 'multipart/related; type="text/html"';
+         MailMessage.Charset := 'utf-8';
+
+         AEmailServerType := SystemString('MAIL_SERVER_TYPE');
+         if AEmailServerType = '' then
          begin
-            Host := FHostname;
-            Port := StrToInt(FPortNum);
-            if (SystemString('mailsvrneedauthentication') = 'Y') then
-               AuthType := satSASL //satDefault
-            else
-               AuthType := satNone;
-            IOHandler := IdSSLIOHandlerSocketOpenSSL1;
+            MsgErr('No Email Server type set up. Please set one up by going to Maintenance\System');
+            Exit;
+         end
+         else if AEmailServerType = 'Office365' then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
 
-            if (SystemString('mailsvrsecureMode') = 'Y') then
-               UseTLS := utUseExplicitTLS
-            else
+               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+               UserPassProvider := TIdUserPassProvider.Create(nil);
+
+               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
+
+               if (SystemString('mailsvrneedauthentication') = 'Y') then
+                  AuthType := satSASL //satDefault
+               else
+                  AuthType := satNone;
+               IOHandler := SSLHandler;
+
+               if (SystemString('mailsvrsecureMode') = 'Y') then
+                  UseTLS := utUseExplicitTLS
+               else
+                  UseTLS := utNoTLSSupport;
+
+//               SASLMechanisms.Add;
+            end;
+
+            UserPassProvider.Username := SystemString('mailsvrusername');
+            UserPassProvider.Password := SystemString('mailsvrpassword');
+         end
+         else if (AEmailServerType = 'Relay Server') then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
+               AuthType := satDefault;
+
                UseTLS := utNoTLSSupport;
+               ValidateAuthLoginCapability := False;
+//               Username := SystemString('mailsvrusername');
+//               Password := SystemString('mailsvrpassword');
+            end;
+         end
+         else if (AEmailServerType = 'Gmail') then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
 
-//            Username := SystemString('mailsvrusername');
-//            Password := SystemString('mailsvrpassword');
+               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+               UserPassProvider := TIdUserPassProvider.Create(nil);
+
+               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
+
+               if (SystemString('mailsvrneedauthentication') = 'Y') then
+                  AuthType := satDefault
+               else
+                  AuthType := satNone;
+               IOHandler := SSLHandler;
+
+               if (SystemString('mailsvrsecureMode') = 'Y') then
+                  UseTLS := utUseImplicitTLS
+               else
+                  UseTLS := utNoTLSSupport;
+
+               Username := SystemString('mailsvrusername');
+               Password := SystemString('mailsvrpassword');
+            end;
          end;
-
-         IdUserPassProvider.Username := SystemString('mailsvrusername');
-         IdUserPassProvider.Password := SystemString('mailsvrpassword');
 
 
          with tvEmails do
@@ -1157,7 +1233,7 @@ begin
             for nRowCount := 0 to DataController.RowCount - 1 do
             begin
                ViewData.Records[nRowCount].Focused := True;
-               if VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
+               if VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index]) then
                   bSelected := False
                else
                   bSelected := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index];
@@ -1174,14 +1250,16 @@ begin
 
                      try
                         MailMessage.Subject := lsSubject;
-
+                        MailMessage.AttachmentEncoding := 'MIME';
+                        MailMessage.CharSet := 'us-ascii';
+                        MailMessage.Encoding := meMIME;
                         lEmailTemp := TStringList.Create;
                         lEmailTemp.LoadFromFile(fTemplateDir);
 
                         with TIdText.Create(MailMessage.MessageParts, nil) do
                         begin
-                           Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
-                                                         lEmailTemp.Text);
+ //                          Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
+ //                                                        lEmailTemp.Text);
                            ContentType := 'text/html';
                         end;
                      finally
@@ -1230,12 +1308,10 @@ begin
                      end;
 
                      Attachment := TIdAttachmentFile.Create(MailMessage.MessageParts, AParsedDocName);
-                     MailMessage.ContentType := 'multipart/related; type="text/html"';
-                     MailMessage.Charset := 'utf-8';
 
                      try
-                        if (SMTP.Connected = False) then
-                           SMTP.Connect;
+                        SMTP.UseEhlo := True;
+                        SMTP.Connect;
                         SMTP.Send(MailMessage);
                      except
                         on E: EIdHostRequired do
@@ -1254,62 +1330,17 @@ begin
             EndUpdate;
          end;
 
-{         with qryEmails do
-         begin
-            qryEmails.First;
-
-            while (qryEmails.EOF = False) do
-            begin
-               if (not qryEmails.FieldByName('partyemail').IsNull) then
-               begin
-                  //setup mail message
-                  MailMessage.From.Address := edFrom.Text;
-                  MailMessage.Recipients.EMailAddresses := qryEmails.FieldByName('partyemail').AsString;
-
-                  MailMessage.ContentType := 'text/html';
-
-//                  memo1.text := Editor.Text;
-                  lsSubject := edSubject.Text;
-
-
-                  try
-                     MailMessage.Subject := lsSubject;
-
-                     lEmailTemp := TStringList.Create;
-                     lEmailTemp.LoadFromFile(fTemplateDir);
-
-                     MailMessage.Body.Text := ParseEmailMacros(-1, qryEmails.FieldByName('NNAME').AsInteger,
-                                                               lEmailTemp.Text);
-                  finally
-                      lEmailTemp.Free;
-                  end;
-
-                  try
-                     if (SMTP.Connected = False) then
-                        SMTP.Connect;
-                     SMTP.Send(MailMessage);
-                  except
-                     on E: EIdHostRequired do
-                     begin
-                        Panel1.Caption := 'ERROR: Please specify a valid Host';
-                     end;
-                     on E:Exception do
-                        Panel1.Caption := 'ERROR: ' + E.Message;
-                  end;
-
-                  SaveEmail(qryEmails.FieldByName('nname').AsInteger, edSubject.Text);
-                  spHTMLEmail.Close;
-               end;
-               qryEmails.Next;
-           end;
-         end; }
       finally
          begin
             if SMTP.Connected then SMTP.Disconnect;
             MailMessage.Free;
-//            MyMemoryStream.Free;
-//            Attachment.Free;
             SMTP.Free;
+            IdLogFile.Free;
+            if Assigned(SSLHandler) then
+               SSLHandler.Free;
+
+            if Assigned(UserPassProvider) then
+               UserPassProvider.Free;
             Screen.Cursor := crDefault;
             self.Close;
          end;

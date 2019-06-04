@@ -14,7 +14,8 @@ uses
   cxLabel, cxContainer, cxLookAndFeelPainters, cxCheckBox, cxButtons,
   cxMaskEdit, cxGroupBox, cxLookAndFeels, cxCalendar, EnforceCustomDateEdit,
   dxCore, cxNavigator, cxDateUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
+  dxDateRanges;
 
 const
   colREFNO    = 0;

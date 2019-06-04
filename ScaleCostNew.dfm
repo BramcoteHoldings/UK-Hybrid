@@ -4,14 +4,14 @@ object frmScaleCostNew: TfrmScaleCostNew
   AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Fee Template Codes'
-  ClientHeight = 534
-  ClientWidth = 411
+  ClientHeight = 696
+  ClientWidth = 425
   Color = clBtnFace
   Constraints.MinHeight = 488
   Constraints.MinWidth = 417
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -20,12 +20,12 @@ object frmScaleCostNew: TfrmScaleCostNew
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label8: TLabel
     Left = 12
     Top = 411
-    Width = 66
-    Height = 17
+    Width = 60
+    Height = 15
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
@@ -35,8 +35,8 @@ object frmScaleCostNew: TfrmScaleCostNew
   object Label2: TLabel
     Left = 12
     Top = 517
-    Width = 72
-    Height = 17
+    Width = 64
+    Height = 15
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
@@ -46,8 +46,8 @@ object frmScaleCostNew: TfrmScaleCostNew
   object Label6: TLabel
     Left = 226
     Top = 10
-    Width = 77
-    Height = 17
+    Width = 70
+    Height = 15
     Margins.Left = 5
     Margins.Top = 5
     Margins.Right = 5
@@ -58,17 +58,19 @@ object frmScaleCostNew: TfrmScaleCostNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 411
-    Height = 534
+    Width = 425
+    Height = 696
     Align = alClient
     TabOrder = 0
     AutoSize = True
+    ExplicitWidth = 411
+    ExplicitHeight = 534
     DesignSize = (
-      411
-      534)
+      425
+      696)
     object dbtbCode: TcxDBTextEdit
-      Left = 115
-      Top = 13
+      Left = 105
+      Top = 12
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -86,8 +88,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Width = 90
     end
     object cbType: TcxDBLookupComboBox
-      Left = 115
-      Top = 46
+      Left = 105
+      Top = 42
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -115,11 +117,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 2
-      Width = 292
+      Width = 301
     end
     object dbmmoFeeDesc: TcxDBMemo
-      Left = 115
-      Top = 447
+      Left = 105
+      Top = 424
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -136,11 +138,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 12
       Height = 101
-      Width = 292
+      Width = 301
     end
     object dbmmoNotes: TcxDBMemo
-      Left = 115
-      Top = 556
+      Left = 105
+      Top = 532
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -157,11 +159,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 13
       Height = 100
-      Width = 292
+      Width = 301
     end
     object btnOK: TcxButton
-      Left = 115
-      Top = 664
+      Left = 114
+      Top = 639
       Width = 91
       Height = 29
       Margins.Left = 5
@@ -263,8 +265,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       OnClick = btnOKClick
     end
     object btnCancel: TcxButton
-      Left = 214
-      Top = 664
+      Left = 212
+      Top = 639
       Width = 91
       Height = 29
       Margins.Left = 5
@@ -366,8 +368,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       OnClick = btnCancelClick
     end
     object cmbBillType: TcxDBComboBox
-      Left = 115
-      Top = 79
+      Left = 105
+      Top = 72
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -388,11 +390,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 3
-      Width = 292
+      Width = 301
     end
     object pageSelections: TcxPageControl
-      Left = 13
-      Top = 244
+      Left = 12
+      Top = 222
       Width = 394
       Height = 195
       Margins.Left = 5
@@ -400,7 +402,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Margins.Right = 5
       Margins.Bottom = 5
       TabOrder = 11
-      Properties.ActivePage = tsItemCost
+      Properties.ActivePage = tsTimeCost
       Properties.CustomButtons.Buttons = <>
       Properties.ShowFrame = True
       Properties.TabSlants.Kind = skCutCorner
@@ -408,7 +410,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       ClientRectBottom = 191
       ClientRectLeft = 4
       ClientRectRight = 390
-      ClientRectTop = 28
+      ClientRectTop = 26
       object tsTimeCost: TcxTabSheet
         Margins.Left = 5
         Margins.Top = 5
@@ -419,8 +421,8 @@ object frmScaleCostNew: TfrmScaleCostNew
         object Label39: TLabel
           Left = 1
           Top = 12
-          Width = 107
-          Height = 17
+          Width = 97
+          Height = 15
           Hint = 
             'The Time Rate per unit will override the employee rate set in th' +
             'e Employee or in the Fee Rate Codes for the Matter.'
@@ -434,8 +436,8 @@ object frmScaleCostNew: TfrmScaleCostNew
         object Label10: TLabel
           Left = 1
           Top = 45
-          Width = 139
-          Height = 17
+          Width = 127
+          Height = 15
           Margins.Left = 5
           Margins.Top = 5
           Margins.Right = 5
@@ -504,11 +506,13 @@ object frmScaleCostNew: TfrmScaleCostNew
         Margins.Bottom = 5
         Caption = 'Item Cost'
         ImageIndex = 1
+        ExplicitTop = 28
+        ExplicitHeight = 163
         object Label4: TLabel
           Left = 1
           Top = 12
-          Width = 108
-          Height = 17
+          Width = 97
+          Height = 15
           Margins.Left = 5
           Margins.Top = 5
           Margins.Right = 5
@@ -519,8 +523,8 @@ object frmScaleCostNew: TfrmScaleCostNew
         object Label9: TLabel
           Left = 1
           Top = 69
-          Width = 141
-          Height = 17
+          Width = 129
+          Height = 15
           Margins.Left = 5
           Margins.Top = 5
           Margins.Right = 5
@@ -531,8 +535,8 @@ object frmScaleCostNew: TfrmScaleCostNew
         object Label5: TLabel
           Left = 1
           Top = 40
-          Width = 94
-          Height = 17
+          Width = 86
+          Height = 15
           Margins.Left = 5
           Margins.Top = 5
           Margins.Right = 5
@@ -543,8 +547,8 @@ object frmScaleCostNew: TfrmScaleCostNew
         object Label7: TLabel
           Left = 272
           Top = 40
-          Width = 96
-          Height = 17
+          Width = 88
+          Height = 15
           Margins.Left = 5
           Margins.Top = 5
           Margins.Right = 5
@@ -622,6 +626,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       object tsEstimate: TcxTabSheet
         Caption = 'Budgets/Estimates'
         ImageIndex = 2
+        ExplicitTop = 28
+        ExplicitHeight = 163
         object cxLabel5: TcxLabel
           Left = 2
           Top = 6
@@ -726,6 +732,10 @@ object frmScaleCostNew: TfrmScaleCostNew
       object tsDocument: TcxTabSheet
         Caption = 'Document'
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgDocs: TcxGrid
           Left = 0
           Top = 0
@@ -794,8 +804,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       end
     end
     object cbZeroFee: TcxDBCheckBox
-      Left = 13
-      Top = 211
+      Left = 12
+      Top = 192
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -819,8 +829,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Transparent = True
     end
     object cbActive: TcxDBCheckBox
-      Left = 96
-      Top = 211
+      Left = 88
+      Top = 192
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -844,8 +854,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Transparent = True
     end
     object cbAutoTimer: TcxDBCheckBox
-      Left = 162
-      Top = 211
+      Left = 152
+      Top = 192
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -863,8 +873,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Transparent = True
     end
     object dbtbUTBMSCode: TcxDBTextEdit
-      Left = 296
-      Top = 13
+      Left = 278
+      Top = 12
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
@@ -882,8 +892,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Width = 90
     end
     object cmbEmployee: TcxDBLookupComboBox
-      Left = 115
-      Top = 112
+      Left = 105
+      Top = 102
       DataBinding.DataField = 'EMPLOYEE_TYPE'
       DataBinding.DataSource = dsScaleCosts
       Properties.KeyFieldNames = 'CODE'
@@ -899,11 +909,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 4
-      Width = 292
+      Width = 301
     end
     object cmbParent: TcxDBLookupComboBox
-      Left = 115
-      Top = 145
+      Left = 105
+      Top = 132
       DataBinding.DataField = 'PARENT_ID'
       DataBinding.DataSource = dsScaleCosts
       Properties.DropDownAutoSize = True
@@ -926,11 +936,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 5
-      Width = 292
+      Width = 301
     end
     object spinDays: TcxDBSpinEdit
-      Left = 115
-      Top = 178
+      Left = 105
+      Top = 162
       DataBinding.DataField = 'DAYS'
       DataBinding.DataSource = dsScaleCosts
       Style.BorderColor = clWindowFrame
@@ -938,11 +948,11 @@ object frmScaleCostNew: TfrmScaleCostNew
       Style.HotTrack = False
       Style.ButtonStyle = bts3D
       TabOrder = 6
-      Width = 292
+      Width = 301
     end
     object cbProjectTask: TcxDBCheckBox
-      Left = 258
-      Top = 211
+      Left = 243
+      Top = 192
       Caption = 'Project Task'
       DataBinding.DataField = 'PROJECT_TASK'
       DataBinding.DataSource = dsScaleCosts
@@ -970,7 +980,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = dbtbCode
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 90
       ControlOptions.ShowBorder = False
       Index = 0
@@ -981,7 +991,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = dbtbUTBMSCode
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 90
       ControlOptions.ShowBorder = False
       Index = 1
@@ -992,7 +1002,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cbType
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 292
       ControlOptions.ShowBorder = False
       Index = 1
@@ -1003,7 +1013,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cmbBillType
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 212
       ControlOptions.ShowBorder = False
       Index = 2
@@ -1014,7 +1024,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cmbEmployee
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 212
       ControlOptions.ShowBorder = False
       Index = 3
@@ -1025,7 +1035,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cmbParent
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 212
       ControlOptions.ShowBorder = False
       Index = 4
@@ -1036,7 +1046,7 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = spinDays
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 134
       ControlOptions.ShowBorder = False
       Index = 5
@@ -1073,8 +1083,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cbAutoTimer
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 88
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 84
       ControlOptions.ShowBorder = False
       Index = 2
     end
@@ -1085,8 +1095,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cbActive
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 58
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 57
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -1097,8 +1107,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cbZeroFee
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 75
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 69
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -1193,8 +1203,8 @@ object frmScaleCostNew: TfrmScaleCostNew
       Control = cbProjectTask
       ControlOptions.MinHeight = 23
       ControlOptions.MinWidth = 23
-      ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 93
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 87
       ControlOptions.ShowBorder = False
       Index = 3
     end

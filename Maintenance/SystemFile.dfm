@@ -50,7 +50,6 @@ object frmSystemFile: TfrmSystemFile
     LookAndFeel.NativeStyle = True
     OnChange = pcMainChange
     OnPageChanging = pcMainPageChanging
-    ExplicitHeight = 640
     ClientRectBottom = 664
     ClientRectLeft = 4
     ClientRectRight = 1080
@@ -58,7 +57,6 @@ object frmSystemFile: TfrmSystemFile
     object tsGeneral: TcxTabSheet
       Caption = '&General'
       ImageIndex = 0
-      ExplicitHeight = 590
       object DBText1: TDBText
         Left = 102
         Top = 3
@@ -4059,8 +4057,6 @@ object frmSystemFile: TfrmSystemFile
     object tabEmails: TcxTabSheet
       Caption = 'Mail Setting Defaults'
       ImageIndex = 7
-      ExplicitLeft = 3
-      ExplicitTop = 47
       object Label34: TLabel
         Left = 13
         Top = 16
@@ -4356,7 +4352,9 @@ object frmSystemFile: TfrmSystemFile
         end
         object cxDBComboBox3: TcxDBComboBox
           Left = 248
-          Top = 43
+          Top = 42
+          DataBinding.DataField = 'MAIL_SERVER_TYPE'
+          DataBinding.DataSource = dsSystemFile
           Properties.Items.Strings = (
             'Exchange'
             'Office 365'
