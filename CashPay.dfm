@@ -2,8 +2,8 @@ object frmCashpay: TfrmCashpay
   Left = 489
   Top = 206
   Caption = 'Payments Cashbook'
-  ClientHeight = 599
-  ClientWidth = 973
+  ClientHeight = 655
+  ClientWidth = 1118
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,8 +31,8 @@ object frmCashpay: TfrmCashpay
   end
   object sbarInfo: TStatusBar
     Left = 0
-    Top = 573
-    Width = 973
+    Top = 629
+    Width = 1118
     Height = 26
     Panels = <
       item
@@ -45,12 +45,14 @@ object frmCashpay: TfrmCashpay
       item
         Width = 50
       end>
+    ExplicitTop = 573
+    ExplicitWidth = 973
   end
   object pagCashbook: TcxPageControl
     Left = 0
     Top = 28
-    Width = 973
-    Height = 545
+    Width = 1118
+    Height = 601
     Align = alClient
     TabOrder = 5
     Properties.ActivePage = tabFilter
@@ -58,24 +60,29 @@ object frmCashpay: TfrmCashpay
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
     OnPageChanging = pagCashbookPageChanging
-    ClientRectBottom = 541
+    ExplicitWidth = 973
+    ExplicitHeight = 545
+    ClientRectBottom = 597
     ClientRectLeft = 4
-    ClientRectRight = 969
+    ClientRectRight = 1114
     ClientRectTop = 26
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 965
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         HotZone.SizePercent = 58
         AlignSplitter = salBottom
         Control = Panel3
-        ExplicitWidth = 8
       end
       object Panel1: TPanel
         Left = 0
@@ -205,7 +212,7 @@ object frmCashpay: TfrmCashpay
           BevelOuter = bvNone
           TabOrder = 0
           DesignSize = (
-            965
+            1110
             32)
           object Label10: TLabel
             Left = 9
@@ -222,16 +229,17 @@ object frmCashpay: TfrmCashpay
             Transparent = True
           end
           object Label17: TLabel
-            Left = 848
+            Left = 993
             Top = 8
             Width = 35
             Height = 15
             Anchors = [akTop, akRight]
             Caption = '&Search'
             Transparent = True
+            ExplicitLeft = 848
           end
           object tbSearch: TEdit
-            Left = 896
+            Left = 1041
             Top = 5
             Width = 60
             Height = 23
@@ -239,17 +247,19 @@ object frmCashpay: TfrmCashpay
             TabOrder = 0
             OnChange = tbSearchChange
             OnKeyDown = tbSearchKeyDown
+            ExplicitLeft = 896
           end
         end
         object dbgrCheques: TcxGrid
           Left = 0
           Top = 32
-          Width = 965
+          Width = 1110
           Height = 219
           Align = alClient
           TabOrder = 1
           LookAndFeel.Kind = lfFlat
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 965
           object tvCheques: TcxGridDBTableView
             PopupMenu = popCheque
             OnDblClick = dbgrChequesDblClick
@@ -602,6 +612,8 @@ object frmCashpay: TfrmCashpay
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 12
+      ExplicitWidth = 965
+      ExplicitHeight = 515
       object lblBank: TLabel
         Left = 9
         Top = 19
@@ -900,6 +912,7 @@ object frmCashpay: TfrmCashpay
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 13
+        Transparent = True
         Height = 43
         Width = 241
       end
@@ -980,6 +993,7 @@ object frmCashpay: TfrmCashpay
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 23
+        Transparent = True
       end
       object chkUnprinted: TcxCheckBox
         Left = 178
@@ -991,6 +1005,7 @@ object frmCashpay: TfrmCashpay
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 24
+        Transparent = True
       end
       object chkEFTOnly: TcxCheckBox
         Left = 178
@@ -1006,6 +1021,7 @@ object frmCashpay: TfrmCashpay
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 25
+        Transparent = True
       end
       object chkPresentedChequesOnly: TcxCheckBox
         Left = 385
@@ -1017,6 +1033,7 @@ object frmCashpay: TfrmCashpay
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 26
+        Transparent = True
       end
       object chkNoReversals: TcxCheckBox
         Left = 385
@@ -1028,6 +1045,7 @@ object frmCashpay: TfrmCashpay
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 27
+        Transparent = True
       end
     end
   end
@@ -2607,7 +2625,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3158,7 +3176,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350

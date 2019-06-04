@@ -113,7 +113,7 @@ object frmJournalReverse: TfrmJournalReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 82
     Top = 143
-    EditValue = 43607.5761953125d
+    EditValue = 43620.5970055671d
     Properties.ShowTime = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -860,7 +860,7 @@ object frmJournalReverse: TfrmJournalReverse
       '   PRIVATE, TAXCODE, TAX, SUNDRYTYPE,CLEARED)'
       'VALUES'
       '  (:AMOUNT, :DESCR, :CREATED, :ACCT, :NMATTER, :REFNO,'
-      '   :TYPE, :NCLIENT, :NJOURNAL, :PAYER, '#39'G'#39', '#39'N'#39', :FILEID,'
+      '   :TYPE, :NCLIENT, :NJOURNAL, :PAYER, '#39'G'#39', '#39'Y'#39', :FILEID,'
       '   :NALLOC, null, :CLIENT_NAME, SysDate, :MATTER_DESC,'
       '   '#39'N'#39', :TAXCODE, :TAX, :SUNDRYTYPE,'#39'Y'#39')')
     Left = 57

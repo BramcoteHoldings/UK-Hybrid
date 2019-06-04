@@ -655,7 +655,8 @@ begin
       tvFeeTmpNew.OnFocusedRecordChanged := nil;
       ProcessTimeSheet();
    finally
-      tvFeeTmpNew.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
+      if ClosingForm = False then
+         tvFeeTmpNew.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
    end;
 end;
 

@@ -165,7 +165,6 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
-              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -269,8 +268,6 @@ object frmBulkMailer: TfrmBulkMailer
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
-          ExplicitLeft = 4
-          ExplicitTop = 539
         end
         object Panel2: TPanel
           Left = 0
@@ -416,6 +413,7 @@ object frmBulkMailer: TfrmBulkMailer
             object tvEmailsSELECT: TcxGridDBColumn
               DataBinding.ValueType = 'Boolean'
               PropertiesClassName = 'TcxCheckBoxProperties'
+              Properties.ImmediatePost = True
               Properties.NullStyle = nssUnchecked
               HeaderGlyph.SourceDPI = 96
               HeaderGlyph.Data = {
@@ -461,6 +459,7 @@ object frmBulkMailer: TfrmBulkMailer
               Options.HorzSizing = False
               Options.Moving = False
               Options.Sorting = False
+              VisibleForCustomization = False
               Width = 21
               OnHeaderClick = tvEmailsSELECTHeaderClick
             end
@@ -8424,47 +8423,6 @@ object frmBulkMailer: TfrmBulkMailer
       end>
     CommandStoredProcName = 'AXIOM.HTML_EMAIL'
   end
-  object SMTP: TIdSMTP
-    IOHandler = IdSSLIOHandlerSocketOpenSSL1
-    AuthType = satSASL
-    SASLMechanisms = <
-      item
-        SASL = IdSASLLogin1
-      end>
-    UseTLS = utUseExplicitTLS
-    ValidateAuthLoginCapability = False
-    Left = 953
-    Top = 153
-  end
-  object IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL
-    Destination = ':25'
-    MaxLineAction = maException
-    Port = 25
-    DefaultPort = 0
-    SSLOptions.Method = sslvSSLv23
-    SSLOptions.SSLVersions = [sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2]
-    SSLOptions.Mode = sslmUnassigned
-    SSLOptions.VerifyMode = []
-    SSLOptions.VerifyDepth = 0
-    Left = 960
-    Top = 289
-  end
-  object MailMessage: TIdMessage
-    AttachmentEncoding = 'MIME'
-    BccList = <>
-    CharSet = 'us-ascii'
-    CCList = <>
-    ContentType = 'text/html'
-    Encoding = meMIME
-    FromList = <
-      item
-      end>
-    Recipients = <>
-    ReplyTo = <>
-    ConvertPreamble = True
-    Left = 944
-    Top = 215
-  end
   object qryEmailTemplates: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
@@ -9162,14 +9120,5 @@ object frmBulkMailer: TfrmBulkMailer
       FieldName = 'TEMPLATE'
       BlobType = ftMemo
     end
-  end
-  object IdSASLLogin1: TIdSASLLogin
-    UserPassProvider = IdUserPassProvider
-    Left = 963
-    Top = 341
-  end
-  object IdUserPassProvider: TIdUserPassProvider
-    Left = 955
-    Top = 397
   end
 end

@@ -2,12 +2,12 @@ object frmCashRcp: TfrmCashRcp
   Left = 135
   Top = 191
   Caption = 'Receipts Cashbook'
-  ClientHeight = 678
-  ClientWidth = 990
+  ClientHeight = 727
+  ClientWidth = 1204
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -19,11 +19,11 @@ object frmCashRcp: TfrmCashRcp
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 17
+  TextHeight = 15
   object sbarInfo: TStatusBar
     Left = 0
-    Top = 656
-    Width = 990
+    Top = 705
+    Width = 1204
     Height = 22
     Panels = <
       item
@@ -33,47 +33,56 @@ object frmCashRcp: TfrmCashRcp
       item
         Width = 50
       end>
+    ExplicitTop = 656
+    ExplicitWidth = 990
   end
   object pagCashbook: TcxPageControl
     Left = 0
-    Top = 53
-    Width = 990
-    Height = 603
+    Top = 28
+    Width = 1204
+    Height = 677
     Align = alClient
     TabOrder = 5
     Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
-    ClientRectBottom = 599
+    ExplicitTop = 53
+    ExplicitWidth = 990
+    ExplicitHeight = 603
+    ClientRectBottom = 673
     ClientRectLeft = 4
-    ClientRectRight = 986
-    ClientRectTop = 28
+    ClientRectRight = 1200
+    ClientRectTop = 26
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitTop = 28
+      ExplicitWidth = 982
+      ExplicitHeight = 571
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 250
-        Width = 982
+        Width = 1196
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         HotZone.SizePercent = 53
         AlignSplitter = salTop
-        ExplicitWidth = 8
+        ExplicitWidth = 982
       end
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 982
+        Width = 1196
         Height = 250
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 982
         object Panel1: TPanel
           Left = 1
           Top = 1
-          Width = 980
+          Width = 1194
           Height = 27
           Align = alTop
           Alignment = taLeftJustify
@@ -86,11 +95,12 @@ object frmCashRcp: TfrmCashRcp
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ExplicitWidth = 980
           DesignSize = (
-            980
+            1194
             27)
           object Label17: TLabel
-            Left = 772
+            Left = 986
             Top = 3
             Width = 39
             Height = 17
@@ -106,7 +116,7 @@ object frmCashRcp: TfrmCashRcp
             ExplicitLeft = 1153
           end
           object tbSearch: TEdit
-            Left = 816
+            Left = 1030
             Top = 0
             Width = 81
             Height = 25
@@ -114,16 +124,18 @@ object frmCashRcp: TfrmCashRcp
             TabOrder = 0
             OnChange = tbSearchChange
             OnKeyDown = tbSearchKeyDown
+            ExplicitLeft = 816
           end
         end
         object dbgrReceipts: TcxGrid
           Left = 1
           Top = 28
-          Width = 980
+          Width = 1194
           Height = 221
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 980
           object tvReceipts: TcxGridDBTableView
             PopupMenu = pmReceipts
             OnDblClick = tvReceiptsDblClick
@@ -237,14 +249,16 @@ object frmCashRcp: TfrmCashRcp
       object Panel4: TPanel
         Left = 0
         Top = 258
-        Width = 982
-        Height = 313
+        Width = 1196
+        Height = 389
         Align = alClient
         TabOrder = 2
+        ExplicitWidth = 982
+        ExplicitHeight = 313
         object Panel2: TPanel
           Left = 1
           Top = 1
-          Width = 980
+          Width = 1194
           Height = 27
           Align = alTop
           Alignment = taLeftJustify
@@ -257,6 +271,7 @@ object frmCashRcp: TfrmCashRcp
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ExplicitWidth = 980
           object rbMatters: TcxRadioButton
             Left = 113
             Top = 5
@@ -295,11 +310,13 @@ object frmCashRcp: TfrmCashRcp
         object dbgrAllocations: TcxGrid
           Left = 1
           Top = 28
-          Width = 980
-          Height = 284
+          Width = 1194
+          Height = 360
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 980
+          ExplicitHeight = 284
           object tvAllocations: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsNallocs
@@ -351,93 +368,96 @@ object frmCashRcp: TfrmCashRcp
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 11
+      ExplicitTop = 28
+      ExplicitWidth = 982
+      ExplicitHeight = 571
       DesignSize = (
-        982
-        571)
+        1196
+        647)
       object Label7: TLabel
         Left = 8
         Top = 138
-        Width = 113
-        Height = 17
+        Width = 102
+        Height = 15
         Caption = 'Receipt Number To'
         Transparent = True
       end
       object Label6: TLabel
         Left = 8
         Top = 110
-        Width = 129
-        Height = 17
+        Width = 117
+        Height = 15
         Caption = 'Receipt Number From'
         Transparent = True
       end
       object lblAmountFrom: TLabel
         Left = 8
         Top = 254
-        Width = 113
-        Height = 17
+        Width = 105
+        Height = 15
         Caption = 'Amount more than '
         Transparent = True
       end
       object Label8: TLabel
         Left = 8
         Top = 167
-        Width = 147
-        Height = 17
+        Width = 134
+        Height = 15
         Caption = 'Receipt Number contains'
         Transparent = True
       end
       object Label5: TLabel
         Left = 8
         Top = 283
-        Width = 104
-        Height = 17
+        Width = 96
+        Height = 15
         Caption = 'Amount less than '
         Transparent = True
       end
       object Label2: TLabel
         Left = 8
         Top = 82
-        Width = 45
-        Height = 17
+        Width = 40
+        Height = 15
         Caption = 'Date To'
         Transparent = True
       end
       object Label1: TLabel
         Left = 8
         Top = 58
-        Width = 61
-        Height = 17
+        Width = 55
+        Height = 15
         Caption = 'Date From'
         Transparent = True
       end
       object Label4: TLabel
         Left = 8
         Top = 225
-        Width = 117
-        Height = 17
+        Width = 107
+        Height = 15
         Caption = 'Description includes'
         Transparent = True
       end
       object Label3: TLabel
         Left = 8
         Top = 196
-        Width = 84
-        Height = 17
+        Width = 77
+        Height = 15
         Caption = 'Payor includes'
         Transparent = True
       end
       object lblBankName: TLabel
         Left = 222
         Top = 26
-        Width = 4
-        Height = 17
+        Width = 3
+        Height = 15
         Transparent = True
       end
       object lblBank: TLabel
         Left = 8
         Top = 26
-        Width = 27
-        Height = 17
+        Width = 26
+        Height = 15
         Caption = 'Bank'
         Transparent = True
       end
@@ -473,7 +493,7 @@ object frmCashRcp: TfrmCashRcp
         Left = 180
         Top = 51
         Width = 90
-        Height = 25
+        Height = 23
         Date = 0.847006782409152900
         Time = 0.847006782409152900
         TabOrder = 2
@@ -566,14 +586,14 @@ object frmCashRcp: TfrmCashRcp
         Left = 163
         Top = 222
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 9
       end
       object tbChqnoTo: TEdit
         Left = 163
         Top = 135
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 10
         OnEnter = tbChqnoToEnter
       end
@@ -581,7 +601,7 @@ object frmCashRcp: TfrmCashRcp
         Left = 163
         Top = 164
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 11
         OnEnter = tbChqnoToEnter
       end
@@ -589,14 +609,14 @@ object frmCashRcp: TfrmCashRcp
         Left = 163
         Top = 193
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 12
       end
       object tbChqnoFrom: TEdit
         Left = 163
         Top = 107
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 13
       end
       object rgOrderby: TcxRadioGroup
@@ -615,6 +635,7 @@ object frmCashRcp: TfrmCashRcp
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 14
+        Transparent = True
         Height = 40
         Width = 225
       end
@@ -622,7 +643,7 @@ object frmCashRcp: TfrmCashRcp
         Left = 180
         Top = 79
         Width = 90
-        Height = 25
+        Height = 23
         Date = 0.847006782409152900
         Time = 0.847006782409152900
         TabOrder = 15
@@ -631,14 +652,14 @@ object frmCashRcp: TfrmCashRcp
         Left = 163
         Top = 280
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 16
       end
       object tbAmountFrom: TEdit
         Left = 163
         Top = 251
         Width = 121
-        Height = 25
+        Height = 23
         TabOrder = 17
       end
       object chkNoReversals: TcxCheckBox
@@ -653,6 +674,7 @@ object frmCashRcp: TfrmCashRcp
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 18
+        Transparent = True
         Height = 25
         Width = 180
       end
@@ -677,6 +699,7 @@ object frmCashRcp: TfrmCashRcp
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 20
+        Transparent = True
         Height = 25
         Width = 180
       end
@@ -692,6 +715,7 @@ object frmCashRcp: TfrmCashRcp
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 21
+        Transparent = True
         Height = 25
         Width = 180
       end
@@ -708,14 +732,14 @@ object frmCashRcp: TfrmCashRcp
         Left = 163
         Top = 23
         Width = 57
-        Height = 25
+        Height = 23
         TabOrder = 23
         OnChange = cbBankChange
         OnClick = cbBankClick
       end
       object btnClearAll: TBitBtn
-        Left = 898
-        Top = 543
+        Left = 1112
+        Top = 619
         Width = 81
         Height = 25
         Anchors = [akRight, akBottom]
@@ -737,6 +761,8 @@ object frmCashRcp: TfrmCashRcp
         NumGlyphs = 2
         TabOrder = 24
         OnClick = btnClearAllClick
+        ExplicitLeft = 898
+        ExplicitTop = 543
       end
     end
   end
@@ -1508,7 +1534,7 @@ object frmCashRcp: TfrmCashRcp
     DockControlHeights = (
       0
       0
-      53
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False
@@ -1539,7 +1565,7 @@ object frmCashRcp: TfrmCashRcp
       OneOnRow = True
       Row = 0
       UseOwnFont = True
-      Visible = True
+      Visible = False
       WholeRow = True
     end
     object dxBarManager1Bar2: TdxBar
@@ -1549,7 +1575,7 @@ object frmCashRcp: TfrmCashRcp
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 25
+      DockedTop = 0
       DockingStyle = dsTop
       FloatLeft = 276
       FloatTop = 216
