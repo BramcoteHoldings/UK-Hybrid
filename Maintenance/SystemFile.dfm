@@ -4309,7 +4309,7 @@ object frmSystemFile: TfrmSystemFile
         object DBCheckBox4: TDBCheckBox
           Left = 13
           Top = 68
-          Width = 179
+          Width = 169
           Height = 16
           Caption = 'Server Needs Authentication'
           DataField = 'MAILSVRNEEDAUTHENTICATION'
@@ -4363,6 +4363,29 @@ object frmSystemFile: TfrmSystemFile
             'Other')
           TabOrder = 8
           Width = 121
+        end
+        object cxDBComboBox4: TcxDBComboBox
+          Left = 287
+          Top = 72
+          DataBinding.DataField = 'MAIL_SSL_IPVER'
+          DataBinding.DataSource = dsSystemFile
+          Properties.Items.Strings = (
+            'Id_IPv4'
+            'Id_IPv6')
+          TabOrder = 9
+          Width = 82
+        end
+        object cxLabel42: TcxLabel
+          Left = 180
+          Top = 44
+          Caption = 'Server Type'
+          Transparent = True
+        end
+        object cxLabel43: TcxLabel
+          Left = 220
+          Top = 73
+          Caption = 'IP Version'
+          Transparent = True
         end
       end
       object DBCheckBox1: TDBCheckBox
