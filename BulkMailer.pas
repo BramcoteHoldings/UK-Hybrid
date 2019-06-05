@@ -339,7 +339,8 @@ implementation
 uses
     ShellApi, InsertTableForm, IdExceptionCore,
     AxiomData, StrUtils, MiscFunc, GenExport, IdMessageBuilder,
-    ppTypes,  IdMessageParts, IdAttachment, LoggingSnippet;
+    ppTypes,  IdMessageParts, IdAttachment, LoggingSnippet, IdSASLCollection,
+    IdGlobal;
 
 const NEW_DOCUMENT_FILENAME = 'New Document.html';
 
@@ -1127,6 +1128,7 @@ var
    SASLLogin: TIdSASLLogin;
    UserPassProvider: TIdUserPassProvider;
    IdLogFile: TIdLogFile;
+   SASListentry: TIdSASLListEntry;
 begin
    Screen.Cursor := crSQLWait;
    if (edFrom.Text = '') then
@@ -1134,99 +1136,10 @@ begin
    else
    begin
       try
-         Panel1.Caption := '';
-         FHostname := SystemString('smtp_server');
-         FPortNum := SystemString('smtp_port');
-         SMTP := TIdSMTP.Create(nil);
-         IdLogFile := TIdLogFile.Create(nil);
-         IdLogFile.Filename := 'SMTPMessage.log';
-         IdLogFile.Active := True;
-
-         SMTP.OnStatus := IdSMTP1Status;
-         SMTP.Intercept := IdLogFile;
-
          MailMessage := TIdMessage.Create(nil);
          MailMessage.ContentType := 'multipart/related; type="text/html"';
          MailMessage.Charset := 'utf-8';
-
-         AEmailServerType := SystemString('MAIL_SERVER_TYPE');
-         if AEmailServerType = '' then
-         begin
-            MsgErr('No Email Server type set up. Please set one up by going to Maintenance\System');
-            Exit;
-         end
-         else if AEmailServerType = 'Office365' then
-         begin
-            with SMTP do
-            begin
-               Host := FHostname;
-               Port := StrToInt(FPortNum);
-
-               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-               UserPassProvider := TIdUserPassProvider.Create(nil);
-
-               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
-
-               if (SystemString('mailsvrneedauthentication') = 'Y') then
-                  AuthType := satSASL //satDefault
-               else
-                  AuthType := satNone;
-               IOHandler := SSLHandler;
-
-               if (SystemString('mailsvrsecureMode') = 'Y') then
-                  UseTLS := utUseExplicitTLS
-               else
-                  UseTLS := utNoTLSSupport;
-
-//               SASLMechanisms.Add;
-            end;
-
-            UserPassProvider.Username := SystemString('mailsvrusername');
-            UserPassProvider.Password := SystemString('mailsvrpassword');
-         end
-         else if (AEmailServerType = 'Relay Server') then
-         begin
-            with SMTP do
-            begin
-               Host := FHostname;
-               Port := StrToInt(FPortNum);
-               AuthType := satDefault;
-
-               UseTLS := utNoTLSSupport;
-               ValidateAuthLoginCapability := False;
-//               Username := SystemString('mailsvrusername');
-//               Password := SystemString('mailsvrpassword');
-            end;
-         end
-         else if (AEmailServerType = 'Gmail') then
-         begin
-            with SMTP do
-            begin
-               Host := FHostname;
-               Port := StrToInt(FPortNum);
-
-               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
-               UserPassProvider := TIdUserPassProvider.Create(nil);
-
-               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
-
-               if (SystemString('mailsvrneedauthentication') = 'Y') then
-                  AuthType := satDefault
-               else
-                  AuthType := satNone;
-               IOHandler := SSLHandler;
-
-               if (SystemString('mailsvrsecureMode') = 'Y') then
-                  UseTLS := utUseImplicitTLS
-               else
-                  UseTLS := utNoTLSSupport;
-
-               Username := SystemString('mailsvrusername');
-               Password := SystemString('mailsvrpassword');
-            end;
-         end;
-
-
+         // create message for Debtor Statements
          with tvEmails do
          begin
             BeginUpdate;
@@ -1258,8 +1171,8 @@ begin
 
                         with TIdText.Create(MailMessage.MessageParts, nil) do
                         begin
- //                          Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
- //                                                        lEmailTemp.Text);
+                           Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
+                                                         lEmailTemp.Text);
                            ContentType := 'text/html';
                         end;
                      finally
@@ -1307,31 +1220,134 @@ begin
                         Report.Print;
                      end;
 
-                     Attachment := TIdAttachmentFile.Create(MailMessage.MessageParts, AParsedDocName);
-
-                     try
-                        SMTP.UseEhlo := True;
-                        SMTP.Connect;
-                        SMTP.Send(MailMessage);
-                     except
-                        on E: EIdHostRequired do
-                        begin
-                           Panel1.Caption := 'ERROR: Please specify a valid Host';
-                        end;
-                        on E:Exception do
-                           Panel1.Caption := 'ERROR: ' + E.Message;
-                     end;
-                     Attachment.Free;
-                     SaveEmail(ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] {qryEmails.FieldByName('nname').AsInteger}, edSubject.Text);
-                     spHTMLEmail.Close;
+                    TIdAttachmentFile.Create(MailMessage.MessageParts, AParsedDocName);
                   end;
                end;
             end;
             EndUpdate;
          end;
 
-      finally
+         Panel1.Caption := '';
+         FHostname := SystemString('smtp_server');
+         FPortNum := SystemString('smtp_port');
+         SMTP := TIdSMTP.Create(nil);
+         IdLogFile := TIdLogFile.Create(nil);
+         IdLogFile.Filename := 'SMTPMessage.log';
+         IdLogFile.Active := True;
+
+         SMTP.OnStatus := IdSMTP1Status;
+         SMTP.Intercept := IdLogFile;
+
+         AEmailServerType := SystemString('MAIL_SERVER_TYPE');
+         if AEmailServerType = '' then
          begin
+            MsgErr('No Email Server type set up. Please set one up by going to Maintenance\System');
+            Exit;
+         end
+         else if AEmailServerType = 'Office 365' then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
+
+               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+               UserPassProvider := TIdUserPassProvider.Create(nil);
+               SASLLogin := TIdSASLLogin.Create(nil);
+
+               if SystemString('MAIL_SSL_IPVER') = 'Id_IPv6' then
+                  SSLHandler.IPVersion := Id_IPv6
+               else
+                  SSLHandler.IPVersion := Id_IPv4;
+
+               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
+
+               if (SystemString('mailsvrneedauthentication') = 'Y') then
+                  AuthType := satSASL //satDefault
+               else
+                  AuthType := satNone;
+               IOHandler := SSLHandler;
+
+               if (SystemString('mailsvrsecureMode') = 'Y') then
+                  UseTLS := utUseExplicitTLS
+               else
+                  UseTLS := utNoTLSSupport;
+
+               SASLLogin.UserPassProvider := UserPassProvider;
+               SASLMechanisms.Add.SASL := SASLLogin;
+            end;
+
+            UserPassProvider.Username := SystemString('mailsvrusername');
+            UserPassProvider.Password := SystemString('mailsvrpassword');
+         end
+         else if (AEmailServerType = 'Relay Server') then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
+               AuthType := satDefault;
+
+               UseTLS := utNoTLSSupport;
+               ValidateAuthLoginCapability := False;
+//               Username := SystemString('mailsvrusername');
+//               Password := SystemString('mailsvrpassword');
+            end;
+         end
+         else if (AEmailServerType = 'Gmail') then
+         begin
+            with SMTP do
+            begin
+               Host := FHostname;
+               Port := StrToInt(FPortNum);
+
+               SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+               UserPassProvider := TIdUserPassProvider.Create(nil);
+
+               SSLHandler.SSLOptions.Method := sslvTLSv1_2;
+
+               if (SystemString('mailsvrneedauthentication') = 'Y') then
+                  AuthType := satDefault
+               else
+                  AuthType := satNone;
+               IOHandler := SSLHandler;
+
+               if (SystemString('mailsvrsecureMode') = 'Y') then
+                  UseTLS := utUseImplicitTLS
+               else
+                  UseTLS := utNoTLSSupport;
+
+               Username := SystemString('mailsvrusername');
+               Password := SystemString('mailsvrpassword');
+            end;
+         end;
+
+      finally
+         try
+            SMTP.UseEhlo := True;
+            try
+               SMTP.Connect;
+               if SMTP.Connected then
+                  SMTP.Send(MailMessage);
+            except
+               on E:Exception do
+                  Panel1.Caption := 'ERROR: ' + E.Message;
+            end;
+         except
+            on E: EIdHostRequired do
+            begin
+               Panel1.Caption := 'ERROR: Please specify a valid Host';
+            end;
+            on E:Exception do
+               Panel1.Caption := 'ERROR: ' + E.Message;
+         end;
+         if Assigned(Attachment) then
+            Attachment.Free;
+         SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] {qryEmails.FieldByName('nname').AsInteger}, edSubject.Text);
+         spHTMLEmail.Close;
+
+         begin
+            IdLogFile.Active := False;
             if SMTP.Connected then SMTP.Disconnect;
             MailMessage.Free;
             SMTP.Free;
@@ -1341,6 +1357,9 @@ begin
 
             if Assigned(UserPassProvider) then
                UserPassProvider.Free;
+
+            if Assigned(SASLLogin) then
+               SASLLogin.Free;
             Screen.Cursor := crDefault;
             self.Close;
          end;

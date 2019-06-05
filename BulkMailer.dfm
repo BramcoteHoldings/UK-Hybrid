@@ -165,6 +165,7 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
+              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -172,8 +173,7 @@ object frmBulkMailer: TfrmBulkMailer
               PrintOptions.HTMLHeader.Strings = (
                 '<HTML></HTML>')
               PrintOptions.Orientation = poPortrait
-              ExplicitWidth = 1112
-              ExplicitHeight = 477
+              ExplicitTop = 3
               ControlData = {
                 4C000000136B0000EE2800000000000000000000000000000000000000000000
                 000000004C000000000000000000000001000000E0D057007335CF11AE690800

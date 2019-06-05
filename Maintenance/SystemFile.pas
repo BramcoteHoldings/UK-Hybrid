@@ -547,6 +547,9 @@ type
     Label78: TLabel;
     DBEdit29: TDBEdit;
     cxDBComboBox3: TcxDBComboBox;
+    cxDBComboBox4: TcxDBComboBox;
+    cxLabel42: TcxLabel;
+    cxLabel43: TcxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
