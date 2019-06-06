@@ -1121,7 +1121,6 @@ var
    AEmailServerType: string;
    lEmailTemp: TStrings;
    bSelected: boolean;
-   Attachment: TIdAttachment;
    SMTP: TIdSMTP;
    MailMessage: TIdMessage;
    SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
@@ -1129,6 +1128,11 @@ var
    UserPassProvider: TIdUserPassProvider;
    IdLogFile: TIdLogFile;
    SASListentry: TIdSASLListEntry;
+   MessageBuilder : TIdMessageBuilderHtml;
+   Attachment: TIdMessageBuilderAttachment;
+   OldDir,
+   TempFilePath: string;
+   ANClient: integer;
 begin
    Screen.Cursor := crSQLWait;
    if (edFrom.Text = '') then
@@ -1136,97 +1140,6 @@ begin
    else
    begin
       try
-         MailMessage := TIdMessage.Create(nil);
-         MailMessage.ContentType := 'multipart/related; type="text/html"';
-         MailMessage.Charset := 'utf-8';
-         // create message for Debtor Statements
-         with tvEmails do
-         begin
-            BeginUpdate;
-            for nRowCount := 0 to DataController.RowCount - 1 do
-            begin
-               ViewData.Records[nRowCount].Focused := True;
-               if VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index]) then
-                  bSelected := False
-               else
-                  bSelected := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index];
-
-               if (not VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index])) and bSelected then
-               begin
-                  if IsValidEmail(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
-                  begin
-                     //setup mail message
-                     MailMessage.From.Address := edFrom.Text;
-                     MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
-
-                     lsSubject := edSubject.Text;
-
-                     try
-                        MailMessage.Subject := lsSubject;
-                        MailMessage.AttachmentEncoding := 'MIME';
-                        MailMessage.CharSet := 'us-ascii';
-                        MailMessage.Encoding := meMIME;
-                        lEmailTemp := TStringList.Create;
-                        lEmailTemp.LoadFromFile(fTemplateDir);
-
-                        with TIdText.Create(MailMessage.MessageParts, nil) do
-                        begin
-                           Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] ,
-                                                         lEmailTemp.Text);
-                           ContentType := 'text/html';
-                        end;
-                     finally
-                        lEmailTemp.Free;
-                     end;
-
-                     try
-                        with Report do
-                        begin
-                           try
-                              qryRB_Items.Close;
-                              Report.Template.DatabaseSettings.DataPipeline := plReports;
-                              Report.Template.DatabaseSettings.NameField := 'ITEM_Name';
-                              Report.Template.DatabaseSettings.TemplateField := 'Template';
-                              Report.Template.DatabaseSettings.Name := SystemString('DR_TEMPLATE');
-                              Report.Template.LoadFromDatabase;
-                           except
-                              ;
-                           end;
-
-                           if (Report.Parameters.Count > 0) then
-                           begin
-                              Report.Parameters['NCLIENT'].Value := tvEmailsNNAME.EditValue;
-
-                              //Report.Parameters['NDATE'].Value := trunc(Now);
-                              Report.Parameters['ENTITY'].Value := dmAxiom.Entity;
-                              Report.Parameters['EMAILPRINT'].Value := 0;
-                           end;
-                        end;
-                     finally
-                        DateTimeToString(aFileDate,'ddmmyyyy',Now);
-                        ANewDocName := SystemString('DFLT_DOC_LIST')+ '\' +
-                                    tvEmailsNNAME.EditValue +
-                                    '\Debtor Statement_'+ aFileDate + '.pdf';
-                        AParsedDocName := ParseMacros(ANewDocName, integer(tvEmailsNNAME.EditValue));
-                        AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
-                        // check directory exists, if not create it
-                        if not DirectoryExists(AParsedDir) then
-                           ForceDirectories(AParsedDir);
-                        Report.AllowPrintToFile := True;
-                        Report.ShowPrintDialog := False;
-                        Report.DeviceType := dtPDF;
-                        Report.PDFSettings.OpenPDFFile := False;
-                        Report.TextFileName := AParsedDocName;
-                        Report.Print;
-                     end;
-
-                    TIdAttachmentFile.Create(MailMessage.MessageParts, AParsedDocName);
-                  end;
-               end;
-            end;
-            EndUpdate;
-         end;
-
          Panel1.Caption := '';
          FHostname := SystemString('smtp_server');
          FPortNum := SystemString('smtp_port');
@@ -1322,47 +1235,151 @@ begin
             end;
          end;
 
-      finally
-         try
-            SMTP.UseEhlo := True;
-            try
-               SMTP.Connect;
-               if SMTP.Connected then
-                  SMTP.Send(MailMessage);
-            except
-               on E:Exception do
-                  Panel1.Caption := 'ERROR: ' + E.Message;
-            end;
-         except
-            on E: EIdHostRequired do
-            begin
-               Panel1.Caption := 'ERROR: Please specify a valid Host';
-            end;
-            on E:Exception do
-               Panel1.Caption := 'ERROR: ' + E.Message;
-         end;
-         if Assigned(Attachment) then
-            Attachment.Free;
-         SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsNNAME.Index] {qryEmails.FieldByName('nname').AsInteger}, edSubject.Text);
-         spHTMLEmail.Close;
+         MailMessage := TIdMessage.Create(nil);
+         MailMessage.ContentType := 'multipart/related; type="text/html"';
+         MailMessage.Charset := 'utf-8';
+         MessageBuilder := TIdMessageBuilderHtml.Create;
+         // create message for Debtor Statements
+         MessageBuilder.HtmlCharSet := 'utf-8';
+         MessageBuilder.HtmlContentTransfer := 'quoted-printable';
 
+         with tvEmails do
          begin
-            IdLogFile.Active := False;
-            if SMTP.Connected then SMTP.Disconnect;
-            MailMessage.Free;
-            SMTP.Free;
-            IdLogFile.Free;
-            if Assigned(SSLHandler) then
-               SSLHandler.Free;
+            BeginUpdate;
+            for nRowCount := 0 to DataController.RowCount - 1 do
+            begin
+               ViewData.Records[nRowCount].Focused := True;
+               if VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index]) then
+                  bSelected := False
+               else
+                  bSelected := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsSELECT.Index];
 
-            if Assigned(UserPassProvider) then
-               UserPassProvider.Free;
+               if (not VarIsNull(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index])) and bSelected then
+               begin
+                  if IsValidEmail(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
+                  begin
+                     ANClient := TableInteger('PHONEBOOK','NNAME', INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index]), 'NCLIENT');
+                     //setup mail message
+                     MailMessage.From.Address := edFrom.Text;
+                     MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
 
-            if Assigned(SASLLogin) then
-               SASLLogin.Free;
-            Screen.Cursor := crDefault;
-            self.Close;
+                     lsSubject := edSubject.Text;
+
+                     try
+                        MailMessage.Subject := lsSubject;
+                        MailMessage.AttachmentEncoding := 'MIME';
+                        MailMessage.CharSet := 'us-ascii';
+                        MailMessage.Encoding := meMIME;
+                        lEmailTemp := TStringList.Create;
+                        lEmailTemp.LoadFromFile(fTemplateDir);
+
+                        MessageBuilder.Html.LoadFromFile(fTemplateDir);
+                        with TIdText.Create(MailMessage.MessageParts, nil) do
+                        begin
+                           Body.Text := ParseEmailMacros(-1, ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index],
+                                                         lEmailTemp.Text);
+                           ContentType := 'text/html';
+                        end;
+                     finally
+                        lEmailTemp.Free;
+                     end;
+
+                     try
+                        with Report do
+                        begin
+                           try
+                              qryRB_Items.Close;
+                              Report.Template.DatabaseSettings.DataPipeline := plReports;
+                              Report.Template.DatabaseSettings.NameField := 'ITEM_Name';
+                              Report.Template.DatabaseSettings.TemplateField := 'Template';
+                              Report.Template.DatabaseSettings.Name := SystemString('DR_TEMPLATE');
+                              Report.Template.LoadFromDatabase;
+                           except
+                              ;
+                           end;
+
+                           if (Parameters.Count > 0) then
+                           begin
+                              with Parameters do
+                              begin
+                                 Items['NCLIENT'].Value := null;
+                                 Items['ENTITY'].Value := null;
+
+                                 Items['NCLIENT'].Value := ANClient;
+                                 Items['ENTITY'].Value := dmAxiom.Entity;
+
+                                 Items['EMAILPRINT'].Value := 0;
+                              end;
+                           end;
+                        end;
+                     finally
+                        DateTimeToString(aFileDate,'ddmmyyyy',Now);
+                        ANewDocName := IncludeTrailingBackslash(SystemString('DFLT_DOC_LIST'))+
+                                       tvEmailsNNAME.EditValue +
+                                       '\Debtor_Statement_'+ aFileDate + '.pdf';
+                        AParsedDocName := ParseMacros(ANewDocName, integer(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index] {tvEmailsNNAME.EditValue}));
+                        AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
+                        // check directory exists, if not create it
+                        if not DirectoryExists(AParsedDir) then
+                           ForceDirectories(AParsedDir);
+                        Report.AllowPrintToFile := True;
+                        Report.ShowPrintDialog := False;
+                        Report.DeviceType := dtPDF;
+                        Report.PDFSettings.OpenPDFFile := False;
+                        Report.TextFileName := AParsedDocName;
+                        Report.Print;
+//                        OldDir := GetCurrentDir;
+//                        TempFilePath := ExtractFilePath(Application.EXEName) + ExtractFileName(AParsedDocName);
+//                        CopyFile(PWideChar(AParsedDocName), PWideChar(TempFilePath),True);
+                     end;
+
+                     MessageBuilder.Attachments.Add(AParsedDocName);
+
+                     MessageBuilder.FillMessage(MailMessage);
+                     try
+                        SMTP.UseEhlo := True;
+                        try
+                           SMTP.Connect;
+                           if SMTP.Connected then
+                              SMTP.Send(MailMessage);
+                           SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index], edSubject.Text);
+                           spHTMLEmail.Close;
+//                           DeleteFile(TempFilePath);
+//                           SetCurrentDir(OldDir);
+                        except
+                           on E:Exception do
+                              Panel1.Caption := 'ERROR: ' + E.Message;
+                        end;
+                     except
+                        on E: EIdHostRequired do
+                        begin
+                           Panel1.Caption := 'ERROR: Please specify a valid Host';
+                        end;
+                        on E:Exception do
+                           Panel1.Caption := 'ERROR: ' + E.Message;
+                     end;
+                  end;
+               end;
+            end;
+            EndUpdate;
          end;
+      finally
+         IdLogFile.Active := False;
+         if SMTP.Connected then SMTP.Disconnect;
+         MailMessage.Free;
+         SMTP.Free;
+         Attachment.Free;
+         IdLogFile.Free;
+         if Assigned(SSLHandler) then
+            SSLHandler.Free;
+
+         if Assigned(UserPassProvider) then
+            UserPassProvider.Free;
+
+         if Assigned(SASLLogin) then
+            SASLLogin.Free;
+         Screen.Cursor := crDefault;
+         self.Close;
       end;
    end;
 end;

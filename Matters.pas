@@ -10864,7 +10864,7 @@ begin
    qryPrecedents.SQL.Add(' SELECT   wdt.docid, wdt.documentname AS filename, ');
    qryPrecedents.SQL.Add(' workflowdocparties (wdt.docid), 2 AS prec, wdt.docid AS docid, NAME,');
    qryPrecedents.SQL.Add(' wdt.description, wt.code, wdt.doctype, wdt.npreccategory,');
-   qryPrecedents.SQL.Add(' wdt.nprecclassificationwt ');
+   qryPrecedents.SQL.Add(' wdt.nprecclassification ');
    qryPrecedents.SQL.Add('FROM workflowdocgroups wdg RIGHT OUTER JOIN workflowdoctemplates wdt ');
    qryPrecedents.SQL.Add(' ON (wdg.groupid = wdt.groupid) ');
    qryPrecedents.SQL.Add(' JOIN workflowtype wt ON (wdt.workflowtypecode = wt.code) ');

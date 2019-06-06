@@ -165,7 +165,6 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
-              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -472,7 +471,6 @@ object frmBulkMailer: TfrmBulkMailer
             end
             object tvEmailsNNAME: TcxGridDBColumn
               DataBinding.FieldName = 'NNAME'
-              Visible = False
               MinWidth = 21
               VisibleForCustomization = False
             end
