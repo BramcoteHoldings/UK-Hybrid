@@ -24,9 +24,6 @@ object frmReports: TfrmReports
     Height = 654
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitWidth = 295
-    ExplicitHeight = 638
     object dbgrReports: TcxGrid
       Left = 1
       Top = 1
@@ -37,10 +34,6 @@ object frmReports: TfrmReports
       LookAndFeel.NativeStyle = True
       RootLevelOptions.DetailTabsPosition = dtpTop
       OnActiveTabChanged = dbgrReportsActiveTabChanged
-      ExplicitLeft = -254
-      ExplicitTop = -16
-      ExplicitWidth = 549
-      ExplicitHeight = 654
       object tvReports: TcxGridDBTableView
         OnDblClick = dbgrReportsDblClick
         Navigator.Buttons.CustomButtons = <>
@@ -203,7 +196,6 @@ object frmReports: TfrmReports
     Height = 654
     Align = alRight
     TabOrder = 1
-    ExplicitLeft = 380
     DesignSize = (
       324
       654)
@@ -366,6 +358,7 @@ object frmReports: TfrmReports
       Font.Name = 'Segoe UI'
       Font.Style = []
       TabOrder = 6
+      Zoom = 100
     end
     object tbJumpTo: TEdit
       Left = 9

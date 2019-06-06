@@ -3954,6 +3954,10 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3972,6 +3976,7 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
+          ExplicitHeight = 497
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4021,6 +4026,7 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
+            ExplicitTop = 469
           end
         end
         object tabCalculationData: TcxTabSheet
@@ -6095,6 +6101,7 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
+      ExplicitHeight = 505
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6825,6 +6832,10 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1478
         527)
@@ -6844,6 +6855,7 @@ object frmMatters: TfrmMatters
           Height = 527
           ParentShowHint = False
           ShowHint = False
+          ExplicitWidth = 1450
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -6871,6 +6883,7 @@ object frmMatters: TfrmMatters
             CustomCaptionButtons.Buttons = <>
             ShowCaption = False
             TabsProperties.CustomButtons.Buttons = <>
+            ExplicitWidth = 1450
             DockingType = 0
             OriginalWidth = 163
             OriginalHeight = 124

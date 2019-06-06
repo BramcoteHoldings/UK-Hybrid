@@ -10,7 +10,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxControls, cxGridCustomView,
   cxClasses, cxGridLevel, cxGrid, ShellAPI, ppComm, ppRelatv, ppProd,
   ppClass, ppReport, cxLookAndFeels, cxLookAndFeelPainters, MemDS,
-  cxNavigator, cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxNavigator, cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxDateRanges;
 
 const
 
