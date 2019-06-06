@@ -814,7 +814,7 @@ begin
                end;
          4:    begin
                   LHasSelection := True;
-                  sWhereClause := sWhereClause + sAND + 'MATTER.PROSPECTIVE = ''Y'' ';
+                  sWhereClause := sWhereClause + sAND + 'MATTER.PROSPECTIVE = ''Y'' AND MATTER.CLOSED = 0 ';
                   sAND := ' AND ';
                end;
       end;

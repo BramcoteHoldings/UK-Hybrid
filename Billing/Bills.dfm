@@ -27,7 +27,7 @@ object frmBills: TfrmBills
     Height = 644
     Align = alClient
     TabOrder = 4
-    Properties.ActivePage = tabFilter
+    Properties.ActivePage = tabBills
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagBillsChange
@@ -38,10 +38,6 @@ object frmBills: TfrmBills
     object tabBills: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrBills: TcxGrid
         Left = 0
         Top = 0
@@ -126,6 +122,11 @@ object frmBills: TfrmBills
               Kind = skSum
               FieldName = 'UPCRED'
               Column = tvBillsUPCRED
+            end
+            item
+              Format = '$,0.00;-$,0.00'
+              FieldName = 'FEES_PAID'
+              Column = tvBillsFEES_PAID
             end>
           DataController.Summary.SummaryGroups = <>
           DataController.Summary.OnAfterSummary = tvBillsDataControllerSummaryAfterSummary

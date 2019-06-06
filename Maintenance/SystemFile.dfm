@@ -50,7 +50,6 @@ object frmSystemFile: TfrmSystemFile
     LookAndFeel.NativeStyle = True
     OnChange = pcMainChange
     OnPageChanging = pcMainPageChanging
-    ExplicitHeight = 640
     ClientRectBottom = 664
     ClientRectLeft = 4
     ClientRectRight = 1080
@@ -58,7 +57,6 @@ object frmSystemFile: TfrmSystemFile
     object tsGeneral: TcxTabSheet
       Caption = '&General'
       ImageIndex = 0
-      ExplicitHeight = 590
       object DBText1: TDBText
         Left = 102
         Top = 3
@@ -4059,8 +4057,6 @@ object frmSystemFile: TfrmSystemFile
     object tabEmails: TcxTabSheet
       Caption = 'Mail Setting Defaults'
       ImageIndex = 7
-      ExplicitLeft = 3
-      ExplicitTop = 47
       object Label34: TLabel
         Left = 13
         Top = 16
@@ -4313,7 +4309,7 @@ object frmSystemFile: TfrmSystemFile
         object DBCheckBox4: TDBCheckBox
           Left = 13
           Top = 68
-          Width = 179
+          Width = 169
           Height = 16
           Caption = 'Server Needs Authentication'
           DataField = 'MAILSVRNEEDAUTHENTICATION'
@@ -4356,7 +4352,9 @@ object frmSystemFile: TfrmSystemFile
         end
         object cxDBComboBox3: TcxDBComboBox
           Left = 248
-          Top = 43
+          Top = 42
+          DataBinding.DataField = 'MAIL_SERVER_TYPE'
+          DataBinding.DataSource = dsSystemFile
           Properties.Items.Strings = (
             'Exchange'
             'Office 365'
@@ -4365,6 +4363,29 @@ object frmSystemFile: TfrmSystemFile
             'Other')
           TabOrder = 8
           Width = 121
+        end
+        object cxDBComboBox4: TcxDBComboBox
+          Left = 287
+          Top = 72
+          DataBinding.DataField = 'MAIL_SSL_IPVER'
+          DataBinding.DataSource = dsSystemFile
+          Properties.Items.Strings = (
+            'Id_IPv4'
+            'Id_IPv6')
+          TabOrder = 9
+          Width = 82
+        end
+        object cxLabel42: TcxLabel
+          Left = 180
+          Top = 44
+          Caption = 'Server Type'
+          Transparent = True
+        end
+        object cxLabel43: TcxLabel
+          Left = 220
+          Top = 73
+          Caption = 'IP Version'
+          Transparent = True
         end
       end
       object DBCheckBox1: TDBCheckBox
