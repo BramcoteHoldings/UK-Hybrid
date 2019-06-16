@@ -331,9 +331,13 @@ type
     qExportClientsPARTYEMAIL: TStringField;
     qExportClientsPARTYEMAIL1: TStringField;
     qExportClientsPARTYEMAIL2: TStringField;
-    qEmployeeTypeRatesEMPTYPE: TStringField;
     qEmployeeTypeRatesFEERATE: TFloatField;
     qTaskDocumentsTEMPLATETYPE: TStringField;
+    qEmployeeTypeRatesEMP_LEVEL: TStringField;
+    qMatterDetailsAUTHOR_INITIAL: TStringField;
+    qMatterDetailsAUTHOR_PHONE: TStringField;
+    qMatterDetailsAUTHOR_EMAIL: TStringField;
+    qExportEmployeesINITIALS: TStringField;
   private
     { Private declarations }
   public

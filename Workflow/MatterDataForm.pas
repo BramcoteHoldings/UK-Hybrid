@@ -8,7 +8,7 @@ uses
   ImgList, cxButtons, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
   Vcl.Menus, dxGDIPlusClasses, dxDPIAwareUtils, cxControls, cxContainer, cxEdit,
   cxLabel, dxCore, cxDateUtils, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  cxCalendar, cxCheckBox, cxCustomListBox, cxListBox;
+  cxCalendar, cxCheckBox, cxCustomListBox, cxListBox, System.ImageList;
 
 const
 
@@ -725,10 +725,13 @@ begin
         Parent := Self;
         Transparent := True;
         Caption := qryFieldType.FieldByName('CAPTION').AsString;
+        Hint := qryFieldType.FieldByName('CAPTION').AsString;
         Left := iLeftMsg;
-        width := 265;
-        Autosize := True;
+        width := 245;
+        Autosize := False;
+        Transparent := True;
         Properties.Wordwrap := True;
+        ShowHint := True;
         Top := iTop+3;
         if qryFieldType.FieldByName('MANDATORY').AsString = 'Y' then
            Font.Style := [fsBold];

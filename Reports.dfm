@@ -451,7 +451,6 @@ object frmReports: TfrmReports
       '    frequency = '#39'Quarterly'#39
       'ORDER BY NAME')
     Options.StrictUpdate = False
-    Active = True
     AfterScroll = qryReportsQuarterlyAfterScroll
     Left = 151
     Top = 181
@@ -476,7 +475,6 @@ object frmReports: TfrmReports
       '    frequency = '#39'Weekly'#39
       'ORDER BY NAME')
     Options.StrictUpdate = False
-    Active = True
     AfterScroll = qryReportsQuarterlyAfterScroll
     Left = 150
     Top = 273

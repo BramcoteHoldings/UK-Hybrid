@@ -2,7 +2,7 @@ object frmCreditors: TfrmCreditors
   Left = 252
   Top = 174
   Caption = 'Creditors'
-  ClientHeight = 851
+  ClientHeight = 749
   ClientWidth = 1270
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -105,6 +105,10 @@ object frmCreditors: TfrmCreditors
     object tabAccounts: TcxTabSheet
       Caption = 'Accounts Payable'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrTransactions: TcxGrid
         Left = 0
         Top = 309
@@ -508,6 +512,7 @@ object frmCreditors: TfrmCreditors
         PositionAfterOpen = 34
         MinSize = 34
         Control = dbgrInvoices
+        ExplicitWidth = 8
       end
     end
     object tabBalances: TcxTabSheet
@@ -2306,7 +2311,7 @@ object frmCreditors: TfrmCreditors
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Creditor Transactions Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

@@ -202,6 +202,8 @@ object frmWriteMerge: TfrmWriteMerge
         Top = 143
         Width = 216
         Height = 23
+        OnBeforeDialog = feExportFileBeforeDialog
+        OnAfterDialog = feExportFileAfterDialog
         DialogTitle = 'Browse Export File'
         ButtonWidth = 20
         TabOrder = 2
@@ -210,7 +212,7 @@ object frmWriteMerge: TfrmWriteMerge
       end
       object ckLaunchWord: TCheckBox
         Left = 11
-        Top = 169
+        Top = 170
         Width = 93
         Height = 16
         Alignment = taLeftJustify
@@ -223,6 +225,8 @@ object frmWriteMerge: TfrmWriteMerge
         Top = 191
         Width = 216
         Height = 23
+        OnBeforeDialog = feWordTemplateBeforeDialog
+        OnAfterDialog = feWordTemplateAfterDialog
         Filter = 
           'All files (*.*)|*.*|Word Templates (*.dot)|*.dot|Word Document (' +
           '*.doc)|*.doc'

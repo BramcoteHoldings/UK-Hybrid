@@ -8,7 +8,7 @@ uses
   NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DateTimeAccount,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
   cxEdit, dxCore, cxDateUtils, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  cxCalendar, EnforceCustomDateEdit, Math;
+  cxCalendar, EnforceCustomDateEdit, Math, AxiomData;
 
 const
   colREFNO = 0;
@@ -164,6 +164,8 @@ type
       var Error: Boolean);
     procedure qryLedgerAfterOpen(DataSet: TDataSet);
     procedure loadSubbills;
+  protected
+   procedure CloseFrm(var Message: TMessage); message CM_CLOSEFORM;
   private
     { Private declarations }
     TotalAmt: Currency;
@@ -183,7 +185,7 @@ type
 implementation
 
 uses
-  AxiomData, Journals, InvoiceSearch, Matters, MiscFunc, LSearch,
+  Journals, InvoiceSearch, Matters, MiscFunc, LSearch,
   ReceiptDistribute, citfunc,glComponentUtil;
 
 {$R *.DFM}
@@ -211,7 +213,7 @@ end;
 
 procedure TfrmJournalBill.btnCancelClick(Sender: TObject);
 begin
-  Self.Close;
+   PostMessage(Self.Handle, CM_CLOSEFORM, 0, 0);
 //   RemoveFromDesktop(Self);
 end;
 
@@ -1458,10 +1460,12 @@ begin
     //ParamByName('NMEMO').AsInteger := billQuery.FieldByName('NMEMO').AsInteger;
     //ExecSQL;
    end;
-
 end;
 
-
+procedure TfrmJournalBill.CloseFrm(var Message: TMessage);
+begin
+   RemoveFromDesktop(Self);
+end;
 
 end.
 

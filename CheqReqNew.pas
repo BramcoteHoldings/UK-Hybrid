@@ -1541,7 +1541,7 @@ begin
    if cmbExpenseType.Text <> '' then
    begin
       lTaxCode := TableString('SUNDRYTYPE','CODE', string(cmbExpenseType.EditValue), 'TAXCODE');
-      if (lTaxCode <> '') then
+      if (lTaxCode <> '') and (dmAxiom.qryEntityBank.FieldByName('TRUST').AsString <> 'T') then
       begin
          cbTaxType.EditValue := lTaxCode;
          CalcTax;

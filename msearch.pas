@@ -2854,7 +2854,9 @@ var
   DocErrMsg: string;
   nCat: integer;
 begin
-   try
+   if IsObjectActive('Word.Application') = False then
+      varWord := CreateOleObject('Word.Application');
+{   try
        varWord := GetActiveOleObject('Word.Application');
    except
       on EOleSysError do
@@ -2870,7 +2872,7 @@ begin
             end;
          end;
       end;
-   end;
+   end; }
 
    if(not VarIsNull(varWord)) then
    begin

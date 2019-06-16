@@ -116,7 +116,6 @@ type
     Panel1: TPanel;
     cbBank: TComboBox;
     dtpStatementDate: TDateTimePicker;
-    btnPrint: TcxButton;
     Panel2: TPanel;
     dbgrLedger: TcxGrid;
     tvLedger: TcxGridDBTableView;
@@ -201,6 +200,7 @@ type
     edBackdated: TcxCurrencyEdit;
     Label13: TLabel;
     qryBackDated: TUniQuery;
+    dxBarButton3: TdxBarButton;
     procedure cbBankClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure qryBankRecAfterInsert(DataSet: TDataSet);
@@ -212,7 +212,6 @@ type
     procedure qryBankRecAfterScroll(DataSet: TDataSet);
     procedure btnProcessClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btnPrintClick(Sender: TObject);
     procedure dtpStatementDateChange(Sender: TObject);
     procedure tmrShowReconciledTimer(Sender: TObject);
     procedure qryBankRecREFNOChange(Sender: TField);
@@ -253,6 +252,7 @@ type
     procedure cbBankChange(Sender: TObject);
     procedure tbtnReceiptReqDelClick(Sender: TObject);
     procedure tbtnConvertReceiptReqClick(Sender: TObject);
+    procedure dxBarButton3Click(Sender: TObject);
   private
     { Private declarations }
     sAllocType: string;
@@ -1183,7 +1183,37 @@ begin
    end;
 end;
 
-procedure TfrmBankRec.btnPrintClick(Sender: TObject);
+procedure TfrmBankRec.tmrShowReconciledTimer(Sender: TObject);
+begin
+//  tmrShowReconciled.Enabled := False;
+  ShowReconciled;
+end;
+
+procedure TfrmBankRec.ShowReconciled;
+begin
+   qryCashbook.Close;
+   qryCashbook.ParamByName('bank').AsString := cbBank.Text;
+   qryCashbook.Open;
+end;
+
+procedure TfrmBankRec.dtpStatementDateChange(Sender: TObject);
+begin
+//  tmrShowReconciled.Enabled := True;
+   PopulateGrids;
+end;
+
+
+procedure TfrmBankRec.dxBarButton1Click(Sender: TObject);
+begin
+   Self.Close;
+end;
+
+procedure TfrmBankRec.dxBarButton2Click(Sender: TObject);
+begin
+   PopulateGrids;
+end;
+
+procedure TfrmBankRec.dxBarButton3Click(Sender: TObject);
 var
   regAxiom: TRegistry;
   sNetworkDir,
@@ -1214,36 +1244,6 @@ begin
       regAxiom.Free;
       SetCurrentDir(OldDir);
    end;
-end;
-
-procedure TfrmBankRec.tmrShowReconciledTimer(Sender: TObject);
-begin
-//  tmrShowReconciled.Enabled := False;
-  ShowReconciled;
-end;
-
-procedure TfrmBankRec.ShowReconciled;
-begin
-   qryCashbook.Close;
-   qryCashbook.ParamByName('bank').AsString := cbBank.Text;
-   qryCashbook.Open;
-end;
-
-procedure TfrmBankRec.dtpStatementDateChange(Sender: TObject);
-begin
-//  tmrShowReconciled.Enabled := True;
-   PopulateGrids;
-end;
-
-
-procedure TfrmBankRec.dxBarButton1Click(Sender: TObject);
-begin
-   Self.Close;
-end;
-
-procedure TfrmBankRec.dxBarButton2Click(Sender: TObject);
-begin
-   PopulateGrids;
 end;
 
 procedure TfrmBankRec.tbtnConvertReceiptReqClick(Sender: TObject);

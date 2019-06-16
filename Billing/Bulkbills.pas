@@ -20,8 +20,8 @@ uses
   dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
   dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxSchedulerLnk,
   dxPScxEditorProducers, dxPScxExtEditorProducers, Vcl.Buttons, dxCore,
-  cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxNavigator, dxBarBuiltInMenu, AxiomData,
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TfrmBulkBills = class(TForm)
@@ -157,6 +157,9 @@ type
       ARecord: TcxCustomGridRecord; AItem: TcxCustomGridTableItem;
       var AStyle: TcxStyle);
     procedure FormDestroy(Sender: TObject);
+ protected
+   procedure CloseFrm(var Message: TMessage); message CM_CLOSEFORM;
+
   private
     { Private declarations }
     sOrderBy: string;
@@ -180,7 +183,7 @@ implementation
 {$R *.dfm}
 
 uses
-   AxiomData, miscfunc, CSearch, citfunc, cxDateUtils, Process, BillNew;
+   miscfunc, CSearch, citfunc, cxDateUtils, Process, BillNew;
 
 procedure TfrmBulkBills.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -191,7 +194,7 @@ begin
    qController.Close;
    qOperator.Close;
    qryDepartment.Close;
-   RemoveFromDesktop(Self);
+//   RemoveFromDesktop(Self);
 end;
 
 procedure TfrmBulkBills.vMatters1DblClick(Sender: TObject);
@@ -410,7 +413,8 @@ end;
 
 procedure TfrmBulkBills.bnCancelClick(Sender: TObject);
 begin
-   Self.Close;
+   PostMessage(Self.Handle, CM_CLOSEFORM, 0, 0);
+//   Self.Close;
 end;
 
 procedure TfrmBulkBills.pagControlChange(Sender: TObject);
@@ -900,10 +904,13 @@ begin
   dxComponentPrinter1.Preview();
 end;
 
-
 procedure TfrmBulkBills.FormShow(Sender: TObject);
-begin    
+begin
    dtpInterim.Checked := False;
 end;
 
+procedure TfrmBulkBills.CloseFrm(var Message: TMessage);
+begin
+   RemoveFromDesktop(Self);
+end;
 end.

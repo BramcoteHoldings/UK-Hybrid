@@ -3808,7 +3808,7 @@ var
   LSql: TStringList;
 begin
    try
-       Screen.Cursor := crSQLWait;
+      Screen.Cursor := crSQLWait;
       LSql := TStringList.Create();
       LSql.Assign(qPartyDetails.SQL);
 
@@ -3826,7 +3826,7 @@ begin
       Screen.Cursor := crDefault;
 
       LfrmWriteMerge := TfrmWriteMerge.Create(Self);
-      LfrmWriteMerge.FromPhoneBook := True;
+      LfrmWriteMerge.FromPhoneBook := False;
       LfrmWriteMerge.SQL := LSQL.Text;
    finally
       LSql.Free();

@@ -414,178 +414,6 @@ type
     qryCheqReqReverse: TUniQuery;
     lblCreatedBy: TLabel;
     lblPostedBy: TLabel;
-    qryInvoiceNMEMO: TLargeintField;
-    qryInvoiceNTRANS: TLargeintField;
-    qryInvoiceGENERATED: TDateTimeField;
-    qryInvoiceDISPATCHED: TDateTimeField;
-    qryInvoiceINTERIM: TDateTimeField;
-    qryInvoiceNMATTER: TLargeintField;
-    qryInvoiceFEES_FLAG: TStringField;
-    qryInvoiceDISB_FLAG: TStringField;
-    qryInvoiceANTD_FLAG: TStringField;
-    qryInvoiceSUND_FLAG: TStringField;
-    qryInvoiceLEGAL_AID_FLAG: TStringField;
-    qryInvoiceITEM_DATE_FLAG: TStringField;
-    qryInvoiceBANK_ACCT: TStringField;
-    qryInvoiceBILL_TO: TStringField;
-    qryInvoiceFORMAT_FILE: TStringField;
-    qryInvoiceRV_TYPE: TStringField;
-    qryInvoiceRV_NMEMO: TLargeintField;
-    qryInvoiceAUTHOR: TStringField;
-    qryInvoicePARTNER: TStringField;
-    qryInvoiceDATE_LAST_RECPT: TDateTimeField;
-    qryInvoiceFULLY_PAID: TStringField;
-    qryInvoiceINV_NOTE: TStringField;
-    qryInvoiceNOWNER: TLargeintField;
-    qryInvoiceEXPPAYMENT: TDateTimeField;
-    qryInvoiceNCLIENT: TLargeintField;
-    qryInvoiceFILEID: TStringField;
-    qryInvoiceREFNO: TStringField;
-    qryInvoiceBILLTEMPLATE: TStringField;
-    qryInvoiceCREDITTYPE: TStringField;
-    qryInvoiceNORECOVERY: TStringField;
-    qryInvoiceESCALATION: TIntegerField;
-    qryInvoiceUPCRED_FLAG: TStringField;
-    qryInvoiceFEES: TFloatField;
-    qryInvoiceDISB: TFloatField;
-    qryInvoiceANTD: TFloatField;
-    qryInvoiceSUND: TFloatField;
-    qryInvoiceTRUST: TFloatField;
-    qryInvoiceDEBTORS: TFloatField;
-    qryInvoiceFEES_PAID: TFloatField;
-    qryInvoiceDISB_PAID: TFloatField;
-    qryInvoiceSUND_PAID: TFloatField;
-    qryInvoiceDISB_CRDIT: TFloatField;
-    qryInvoiceANTD_CRDIT: TFloatField;
-    qryInvoiceTAX: TFloatField;
-    qryInvoiceFEES_CRDIT: TFloatField;
-    qryInvoiceTAX_PAID: TFloatField;
-    qryInvoiceTAX_CRDIT: TFloatField;
-    qryInvoiceFEESTAX: TFloatField;
-    qryInvoiceDISBTAX: TFloatField;
-    qryInvoiceSUNDTAX: TFloatField;
-    qryInvoiceFEESTAX_PAID: TFloatField;
-    qryInvoiceDISBTAX_PAID: TFloatField;
-    qryInvoiceSUNDTAX_PAID: TFloatField;
-    qryInvoiceANTD_PAID: TFloatField;
-    qryInvoiceANTDTAX: TFloatField;
-    qryInvoiceANTDTAX_PAID: TFloatField;
-    qryInvoiceUPCRED: TFloatField;
-    qryInvoiceUPCRED_PAID: TFloatField;
-    qryInvoiceUPCREDTAX: TFloatField;
-    qryInvoiceUPCREDTAX_PAID: TFloatField;
-    qryInvoiceDISB_WOFF: TFloatField;
-    qryInvoiceANTD_WOFF: TFloatField;
-    qryInvoiceFEES_WOFF: TFloatField;
-    qryInvoiceUPCRED_WOFF: TFloatField;
-    qryInvoiceSUND_WOFF: TFloatField;
-    qryInvoiceDISBTAX_WOFF: TFloatField;
-    qryInvoiceANTDTAX_WOFF: TFloatField;
-    qryInvoiceFESSTAX_WOFF: TFloatField;
-    qryInvoiceUPCREDTAX_WOFF: TFloatField;
-    qryInvoiceSUNDTAX_WOFF: TFloatField;
-    qryInvoiceTAX_WOFF: TFloatField;
-    qryInvoiceFEESTAX_WOFF: TFloatField;
-    qryInvoiceFEESTAXFREE: TFloatField;
-    qryInvoiceDISBTAXFREE: TFloatField;
-    qryInvoiceSUNDTAXFREE: TFloatField;
-    qryInvoiceANTDTAXFREE: TFloatField;
-    qryInvoiceUPCREDTAXFREE: TFloatField;
-    qryInvoiceMODBY: TStringField;
-    qryInvoiceMOD_DATE: TDateTimeField;
-    qryInvoiceMOD_DESCR: TStringField;
-    qryInvoiceDRAFT_BILL_NO: TLargeintField;
-    qryInvoiceNBILL_TO: TLargeintField;
-    qryInvoiceAUTHORISED: TStringField;
-    qryInvoiceOWING: TFloatField;
-    qryInvoiceTOTAL: TFloatField;
-    qryInvoicePRIVATE: TStringField;
-    qryInvoiceSPLIT_BILL: TStringField;
-    qryInvoiceNMASTER: TLargeintField;
-    qryInvoiceBPAY_REFERENCE: TStringField;
-    qryInvoiceREQUESTED_BY: TStringField;
-    qryInvoiceSYSTEMDATE: TDateTimeField;
-    qryInvoiceASSESSED_BILL: TStringField;
-    qryInvoiceTAKE_ON: TStringField;
-    qryInvoicePROFORMA: TStringField;
-    qryInvoiceMOD_BY: TStringField;
-    qryInvoiceINVOICE_COPY: TBlobField;
-    qryInvoiceINVOICE_COPY_EXT: TStringField;
-    qryInvoiceDATE_EMAILED: TDateTimeField;
-    qryInvoicePATH: TStringField;
-    qryInvoiceCREATEDBY: TStringField;
-    qryInvoiceORIGINAL_TOTAL: TFloatField;
-    qryInvoiceTOTAL_EXGST: TFloatField;
-    qryInvoiceDISCOUNT: TFloatField;
-    qryInvoiceREVERSIBLE: TStringField;
-    qryInvoiceMASTER_BILL: TStringField;
-    qryInvoiceDISCOUNT_GST: TFloatField;
-    qryInvoiceSPELL_CHK_DONE: TStringField;
-    qryInvoicePRAC_NUM: TStringField;
-    qryInvoiceORIGINAL_FEES: TFloatField;
-    qryInvoiceORIGINAL_ITEM_FEES: TFloatField;
-    qryInvoiceIS_DRAFT: TStringField;
-    qryInvoiceBILL_DATE: TDateTimeField;
-    qryInvoiceCASHIER_NOTES: TStringField;
-    qryInvoiceCURRENCY: TStringField;
-    qryInvoiceFX_RATE: TFloatField;
-    qryInvoiceBASE_CCY_FEES: TFloatField;
-    qryInvoiceBASE_CCY_DISB: TFloatField;
-    qryInvoiceBASE_CCY_ANTD: TFloatField;
-    qryInvoiceBASE_CCY_TRUST: TFloatField;
-    qryInvoiceBASE_CCY_FEES_PAID: TFloatField;
-    qryInvoiceBASE_CCY_DISB_PAID: TFloatField;
-    qryInvoiceBASE_CCY_ANTD_PAID: TFloatField;
-    qryInvoiceBASE_CCY_SUND: TFloatField;
-    qryInvoiceBASE_CCY_SUND_PAID: TFloatField;
-    qryInvoiceBASE_CCY_FEES_CRDIT: TFloatField;
-    qryInvoiceBASE_CCY_DISB_CRDIT: TFloatField;
-    qryInvoiceBASE_CCY_ANTD_CRDIT: TFloatField;
-    qryInvoiceBASE_CCY_TAX_CRDIT: TFloatField;
-    qryInvoiceBASE_CCY_TAX: TFloatField;
-    qryInvoiceBASE_CCY_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_FEES_TAX: TFloatField;
-    qryInvoiceBASE_CCY_FEES_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_DISB_TAX: TFloatField;
-    qryInvoiceBASE_CCY_DISB_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_ANTD_TAX: TFloatField;
-    qryInvoiceBASE_CCY_ANTD_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_SUND_TAX: TFloatField;
-    qryInvoiceBASE_CCY_SUND_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_UPCRED_PAID: TFloatField;
-    qryInvoiceBASE_CCY_UPCRED_TAX: TFloatField;
-    qryInvoiceBASE_CCY_UPCRED_TAX_PAID: TFloatField;
-    qryInvoiceBASE_CCY_FEES_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_DISB_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_ANTD_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_SUND_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_UPCRED_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_FEESTAX_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_DISBTAX_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_ANTDTAX_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_SUNDTAX_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_TAX_WOFF: TFloatField;
-    qryInvoiceBASE_CCY_FEESTAXFREE: TFloatField;
-    qryInvoiceBASE_CCY_DISBTAXFREE: TFloatField;
-    qryInvoiceBASE_CCY_ANTDTAXFREE: TFloatField;
-    qryInvoiceBASE_CCY_UPCREDTAXFREE: TFloatField;
-    qryInvoiceBASE_CCY_OWING: TFloatField;
-    qryInvoiceBASE_CCY_TOTAL: TFloatField;
-    qryInvoiceBASE_CCY_ORIGINAL_TOTAL: TFloatField;
-    qryInvoiceBASE_CCY_TOTALEXGST: TFloatField;
-    qryInvoiceBASE_CCY_DISCOUNT: TFloatField;
-    qryInvoiceBASE_CCY_DISCOUNT_GST: TFloatField;
-    qryInvoiceCOPY_TO_CREATED_BY: TStringField;
-    qryInvoiceCOPY_TO_AUTHORISED_BY: TStringField;
-    qryInvoiceSUND_CRDIT: TFloatField;
-    qryInvoiceUPCRED_CRDIT: TFloatField;
-    qryInvoiceFEESTAX_CRDIT: TFloatField;
-    qryInvoiceSUNDTAX_CRDIT: TFloatField;
-    qryInvoiceUPCREDTAX_CRDIT: TFloatField;
-    qryInvoiceDISBTAX_CRDIT: TFloatField;
-    qryInvoiceDISPATCHED_BY: TStringField;
-    qryInvoiceAUTHORISED_BY: TStringField;
-    qryInvoiceROWID: TStringField;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -1121,7 +949,7 @@ begin
 
     if neTrust.AsCurrency > 0
     then
-      btnAddTrust.Caption := 'Remove Client funds';
+      btnAddTrust.Caption := 'Remove Trust';
 
     {
       The withholding tax has two tax amounts, that is, -48.5% and 10%.
@@ -2818,8 +2646,8 @@ procedure TfrmInvoice.FormCreate(Sender : TObject);
     if SystemString('LOCALE_NAME') <> ''
     then
     begin
-      btnAddTrust.Caption := 'Apply Client Funds';
-      lblLessTrust.Caption := 'Less Client Funds';
+      btnAddTrust.Caption := 'Apply Trust';
+      lblLessTrust.Caption := 'Less Trust';
       lblDiscountCaption.Caption := 'Discount (% or ' + GetCurrencySymbol + ' amount. eg 5% or 200)';
       lblDiscountCaption.Hint := 'Discount (% or ' + GetCurrencySymbol + ' amount. eg 5% or 200)';
       chkUnbilledTransactions.Visible := true;
@@ -3388,117 +3216,105 @@ procedure TfrmInvoice.neUpCredExitChanged(Sender : TObject);
   end;
 
 procedure TfrmInvoice.btnAddTrustClick(Sender : TObject);
-  var
-    TrustDiff : currency;
-    Billtotal : currency;
-    ApplyTrust : Boolean;
-    vDiscount : Variant;
-  begin
-    if btnAddTrust.Caption = 'Apply Client funds'
-    then
-    begin
+var
+   TrustDiff: Currency;
+   Billtotal: Currency;
+   ApplyTrust: Boolean;
+   vDiscount: variant;
+begin
+   if btnAddTrust.caption = 'Apply Trust' then
+   begin
       ApplyTrust := False;
-      if edtDiscount.Text <> ''
-      then
-        vDiscount := edtDiscount.Text;
-      if vDiscount > 0
-      then
-        vDiscount := vDiscount * - 1;
-
-      Billtotal := neFees.AsCurrency + neDisb.AsCurrency + neAntd.AsCurrency + neUpCred.AsCurrency + neSund.AsCurrency + TaxFees + TaxDisb + TaxAntD + TaxUpCred
-        + TaxSund + vDiscount;
+      if edtDiscount.Text <> '' then
+         vDiscount := edtDiscount.Text;
+      Billtotal := neFees.AsCurrency + neDisb.AsCurrency + neAntd.AsCurrency +
+                   neUpCred.AsCurrency + neSund.AsCurrency + TaxFees + TaxDisb +
+                   TaxAntD + TaxUpCred + TaxSund + vDiscount;
       TrustDiff := 0;
-      if SystemString('show_net_trust') = 'Y'
-      then
+      if SystemString('show_net_trust') = 'Y' then
       begin
-        // TrustDiff := (cTrustBal - cProtectedBal - cUnconCheqReq) - Billtotal;
-        TrustDiff := (cTrustBal - cUnconCheqReq) - Billtotal;
-        if (TrustDiff >= 0)
-        then
-        begin
-          neTrust.AsCurrency := Billtotal;
-          ApplyTrust := true;
-        end
-        else if (cTrustBal - cUnconCheqReq) < 0
-        then { (cTrustBal - cProtectedBal - cUnconCheqReq) }
-          neTrust.AsCurrency := 0
-        else if Billtotal >= (cTrustBal - cUnconCheqReq)
-        then { (cTrustBal - cProtectedBal - cUnconCheqReq) }
-        begin
-          ApplyTrust := true;
-          neTrust.AsCurrency := (cTrustBal - cUnconCheqReq); { (cTrustBal - cProtectedBal - cUnconCheqReq) }
-        end
-        else if Billtotal <= cTrustBal
-        then
-        begin
-          neTrust.AsCurrency := Billtotal;
-          ApplyTrust := true;
-        end;
+//         TrustDiff := (cTrustBal - cProtectedBal - cUnconCheqReq) - Billtotal;
+         TrustDiff := (cTrustBal - cUnconCheqReq) - Billtotal;
+         if (TrustDiff >= 0) then
+         begin
+            neTrust.AsCurrency := Billtotal;
+            ApplyTrust := True;
+         end
+         else
+         if (cTrustBal - cUnconCheqReq) < 0 then  {(cTrustBal - cProtectedBal - cUnconCheqReq)}
+            neTrust.AsCurrency := 0
+         else
+         if Billtotal >=  (cTrustBal - cUnconCheqReq) then    {(cTrustBal - cProtectedBal - cUnconCheqReq)}
+         begin
+            ApplyTrust := True;
+            neTrust.AsCurrency := (cTrustBal - cUnconCheqReq);  {(cTrustBal - cProtectedBal - cUnconCheqReq)}
+         end
+         else if Billtotal <= cTrustBal then
+         begin
+            neTrust.AsCurrency := Billtotal ;
+            ApplyTrust := True;
+         end;
       end
       else
       begin
-        TrustDiff := (cTrustBal) - Billtotal; { (cTrustBal - cProtectedBal) }
-        if (TrustDiff >= 0)
-        then
-        begin
-          neTrust.AsCurrency := Billtotal;
-          ApplyTrust := true;
-        end
-        else if (cTrustBal) < 0
-        then { (cTrustBal - cProtectedBal) }
-          neTrust.AsCurrency := 0
-        else if Billtotal >= (cTrustBal)
-        then { (cTrustBal - cProtectedBal) }
-        begin
-          ApplyTrust := true;
-          neTrust.AsCurrency := (cTrustBal); { (cTrustBal - cProtectedBal) }
-        end
-        else if Billtotal <= cTrustBal
-        then
-        begin
-          neTrust.AsCurrency := Billtotal;
-          ApplyTrust := true;
-        end;
+         TrustDiff := (cTrustBal) - Billtotal;  {(cTrustBal - cProtectedBal)}
+         if (TrustDiff >= 0) then
+         begin
+            neTrust.AsCurrency := Billtotal;
+            ApplyTrust := True;
+         end
+         else
+         if (cTrustBal) < 0 then  {(cTrustBal - cProtectedBal)}
+            neTrust.AsCurrency := 0
+         else
+         if Billtotal >=  (cTrustBal) then   {(cTrustBal - cProtectedBal)}
+         begin
+            ApplyTrust := True;
+            neTrust.AsCurrency := (cTrustBal);   {(cTrustBal - cProtectedBal)}
+         end
+         else if Billtotal <= cTrustBal then
+         begin
+            neTrust.AsCurrency := Billtotal ;
+            ApplyTrust := True;
+         end;
       end;
-      // else
-      // neTrust.AsCurrency := cTrustBal - cProtectedBal - cUnconCheqReq;
+//      else
+//         neTrust.AsCurrency := cTrustBal - cProtectedBal - cUnconCheqReq;
 
-      if ApplyTrust
-      then
-        btnAddTrust.Caption := 'Remove Client funds';
-    end
-    else
-    begin
-      // btnAddTrust.caption := 'Remove Trust';
-      btnAddTrust.Caption := 'Apply Client funds';
+       if ApplyTrust then btnAddTrust.caption := 'Remove Trust';
+   end
+   else
+   begin
+//      btnAddTrust.caption := 'Remove Trust';
+      btnAddTrust.caption := 'Apply Trust';
       neTrust.AsCurrency := 0
-    end;
-    neTrustExitChanged(Sender);
-  end;
+   end;
+   neTrustExitChanged(sender);
+end;
 
 procedure TfrmInvoice.neFeesTaxChange(Sender : TObject);
-  begin
-    TaxFees := neFeesTax.AsCurrency;
-    // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
-    lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
-    CalcTotal;
-  end;
+begin
+   TaxFees := neFeesTax.AsCurrency;
+   // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
+   lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
+   CalcTotal;
+end;
 
 procedure TfrmInvoice.neDisbTaxChange(Sender : TObject);
-  begin
-    TaxDisb := neDisbTax.AsCurrency;
-    // sgrTotals.Cells[0, 1] := Format('%10.2f', [neDisbTax.AsCurrency]);
-    lblDisbTotal.Caption := Format('%10.2f', [neDisbTax.AsCurrency]);
-    CalcTotal;
-  end;
+begin
+   TaxDisb := neDisbTax.AsCurrency;
+   // sgrTotals.Cells[0, 1] := Format('%10.2f', [neDisbTax.AsCurrency]);
+   lblDisbTotal.Caption := Format('%10.2f', [neDisbTax.AsCurrency]);
+   CalcTotal;
+end;
 
 procedure TfrmInvoice.neAntdTaxChange(Sender : TObject);
-  begin
-    TaxAntD := neAntdTax.AsCurrency;
-    // sgrTotals.Cells[0, 2] := Format('%10.2f', [neAntdTax.AsCurrency]);
-    lblAntdTotal.Caption := Format('%10.2f', [neAntdTax.AsCurrency]);
-    CalcTotal;
-  end;
+begin
+   TaxAntD := neAntdTax.AsCurrency;
+   // sgrTotals.Cells[0, 2] := Format('%10.2f', [neAntdTax.AsCurrency]);
+   lblAntdTotal.Caption := Format('%10.2f', [neAntdTax.AsCurrency]);
+   CalcTotal;
+end;
 
 procedure TfrmInvoice.neUpCredTaxChange(Sender : TObject);
   begin
@@ -4360,7 +4176,6 @@ begin
         RestoreSelectedItems();
       end;
     end;
-
 end;
 
 procedure TfrmInvoice.tbtnPrivateClick(Sender : TObject);

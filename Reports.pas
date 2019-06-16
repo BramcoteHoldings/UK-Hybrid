@@ -11,7 +11,7 @@ uses
   cxClasses, cxGridLevel, cxGrid, ShellAPI, ppComm, ppRelatv, ppProd,
   ppClass, ppReport, cxLookAndFeels, cxLookAndFeelPainters, MemDS,
   cxNavigator, cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxDateRanges;
+  dxDateRanges, Axiomdata;
 
 const
 
@@ -83,6 +83,8 @@ type
       ALevel: TcxGridLevel);
     procedure qryReportsMonthAfterScroll(DataSet: TDataSet);
     procedure qryReportsQuarterlyAfterScroll(DataSet: TDataSet);
+  protected
+   procedure CloseFrm(var Message: TMessage); message CM_CLOSEFORM;
   private
     { Private declarations }
     sSQL,
@@ -99,7 +101,7 @@ type
 implementation
 
 uses
-  AxiomData, Desktop, FMXUtils, MiscFunc,ComObj, Variants, reportAdd, citfunc,
+  Desktop, FMXUtils, MiscFunc,ComObj, Variants, reportAdd, citfunc,
   rptViewer;
 
 {$R *.DFM}
@@ -496,7 +498,7 @@ end;
 
 procedure TfrmReports.btnExitClick(Sender: TObject);
 begin
-   Self.Close; 
+   PostMessage(Self.Handle, CM_CLOSEFORM, 0, 0);
 end;
 
 procedure TfrmReports.btnEditReportClick(Sender: TObject);
@@ -523,6 +525,11 @@ begin
       qryReportsAll.Refresh;
 //      qryReports.Open;
    end;
+end;
+
+procedure TfrmReports.CloseFrm(var Message: TMessage);
+begin
+   RemoveFromDesktop(Self);
 end;
 
 end.

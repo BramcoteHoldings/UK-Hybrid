@@ -2,7 +2,7 @@ object frmJournalBill: TfrmJournalBill
   Left = 519
   Top = 215
   Caption = 'Bill Payment Journal'
-  ClientHeight = 372
+  ClientHeight = 379
   ClientWidth = 716
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,7 +16,7 @@ object frmJournalBill: TfrmJournalBill
   OnShow = FormShow
   DesignSize = (
     716
-    372)
+    379)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -44,9 +44,9 @@ object frmJournalBill: TfrmJournalBill
   end
   object lblAmountMsg: TLabel
     Left = 572
-    Top = 313
+    Top = 316
     Width = 27
-    Height = 15
+    Height = 16
     Anchors = [akRight, akBottom]
     Caption = 'Total'
     Font.Charset = DEFAULT_CHARSET
@@ -55,14 +55,12 @@ object frmJournalBill: TfrmJournalBill
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    ExplicitLeft = 552
-    ExplicitTop = 293
   end
   object lblTotal: TLabel
     Left = 692
-    Top = 313
+    Top = 316
     Width = 3
-    Height = 15
+    Height = 16
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
@@ -71,8 +69,6 @@ object frmJournalBill: TfrmJournalBill
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    ExplicitLeft = 672
-    ExplicitTop = 293
   end
   object Label11: TLabel
     Left = 35
@@ -83,9 +79,9 @@ object frmJournalBill: TfrmJournalBill
   end
   object lblUnallocatedMsg: TLabel
     Left = 386
-    Top = 313
+    Top = 316
     Width = 66
-    Height = 15
+    Height = 16
     Anchors = [akRight, akBottom]
     Caption = 'Unallocated'
     Font.Charset = DEFAULT_CHARSET
@@ -95,14 +91,12 @@ object frmJournalBill: TfrmJournalBill
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
-    ExplicitLeft = 366
-    ExplicitTop = 293
   end
   object lblUnallocated: TLabel
     Left = 547
-    Top = 313
+    Top = 316
     Width = 3
-    Height = 15
+    Height = 16
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
@@ -112,8 +106,6 @@ object frmJournalBill: TfrmJournalBill
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
-    ExplicitLeft = 527
-    ExplicitTop = 293
   end
   object edLedger: TEdit
     Left = 282
@@ -136,9 +128,9 @@ object frmJournalBill: TfrmJournalBill
   end
   object btnOK: TBitBtn
     Left = 568
-    Top = 330
+    Top = 333
     Width = 68
-    Height = 23
+    Height = 24
     Anchors = [akRight, akBottom]
     Caption = '&OK'
     Default = True
@@ -163,28 +155,24 @@ object frmJournalBill: TfrmJournalBill
     NumGlyphs = 2
     TabOrder = 7
     OnClick = btnOKClick
-    ExplicitLeft = 548
-    ExplicitTop = 314
   end
   object btnCancel: TBitBtn
     Left = 642
-    Top = 330
+    Top = 333
     Width = 68
-    Height = 23
+    Height = 24
     Anchors = [akRight, akBottom]
     Caption = '&Cancel'
     Kind = bkCancel
     NumGlyphs = 2
     TabOrder = 5
     OnClick = btnCancelClick
-    ExplicitLeft = 622
-    ExplicitTop = 314
   end
   object dbgrLedger: TDBGrid
     Left = 7
     Top = 78
     Width = 703
-    Height = 229
+    Height = 232
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clInfoBk
     DataSource = dsLedger
@@ -269,17 +257,17 @@ object frmJournalBill: TfrmJournalBill
   end
   object chkNoExit: TCheckBox
     Left = 9
-    Top = 333
+    Top = 340
     Width = 185
     Height = 14
     Anchors = [akLeft, akBottom]
     Caption = '&Keep form open after posting?'
     TabOrder = 6
-    ExplicitTop = 317
+    ExplicitTop = 333
   end
   object sbarBalances: TStatusBar
     Left = 0
-    Top = 353
+    Top = 360
     Width = 716
     Height = 19
     Panels = <
@@ -301,8 +289,7 @@ object frmJournalBill: TfrmJournalBill
       item
         Width = 110
       end>
-    ExplicitTop = 337
-    ExplicitWidth = 696
+    ExplicitTop = 353
   end
   object btnLedger: TBitBtn
     Left = 357
@@ -327,7 +314,7 @@ object frmJournalBill: TfrmJournalBill
   object dtpDate: TEnforceCustomDateEdit
     Left = 82
     Top = 7
-    EditValue = 43581.5224631713d
+    EditValue = 43630.9588359838d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard

@@ -11,7 +11,7 @@ uses
   ppCache, ppComm, ppRelatv, ppProd, ppReport, dxBarDBNav, dxBar, cxClasses,
   Data.DB, MemDS, DBAccess, Vcl.ImgList, cxButtonEdit, cxDBEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  Vcl.DBCtrls, Vcl.Mask, cxCheckBox;
+  Vcl.DBCtrls, Vcl.Mask, cxCheckBox, System.ImageList;
 
 type
   TfrmDataForm = class(TForm)

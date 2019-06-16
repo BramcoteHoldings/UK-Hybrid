@@ -3161,20 +3161,25 @@ begin
       end
       else if pageMatter.ActivePage = tabInvoices then
       begin
-          qryInvoices.ParamByName('P_Matter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-          qryInvoices.Open;
+          try
+             qryInvoices.AfterScroll := nil;
+             qryInvoices.ParamByName('P_Matter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+             qryInvoices.Open;
 
-          qrySubBill.ParamByName('P_Matter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-          qrySubBill.Open;
+             qrySubBill.ParamByName('P_Matter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+             qrySubBill.Open;
 
-          if (not IsClosedMatter) then
-          begin
-             btnInvOpen.Enabled := not qryInvoices.EOF;
-             btnInvWord.Enabled := not qryInvoices.EOF;
-          end;    //  end if
-          SetupMatterBalances;
-          if chkExcludeBillReversals.Checked then
-            qryInvoices.Filtered := True
+             if (not IsClosedMatter) then
+             begin
+                btnInvOpen.Enabled := not qryInvoices.EOF;
+                btnInvWord.Enabled := not qryInvoices.EOF;
+             end;    //  end if
+             SetupMatterBalances;
+             if chkExcludeBillReversals.Checked then
+                  qryInvoices.Filtered := True;
+          finally
+             qryInvoices.AfterScroll := qryInvoicesAfterScroll;
+          end;
       end
       else if pageMatter.ActivePage = tabReceipts then
       begin
@@ -4035,7 +4040,8 @@ begin
          qryMatter.ApplyUpdates;
    end;
 //  FreeAndNil(FOutlookIntegrator);
-   MatterLabel.Free;
+   if Assigned(MatterLabel) then
+      MatterLabel.Free;
    if frmDesktop.pagMainControl.ActivePageIndex = 1 then
    begin
       if Self.WindowState = wsMaximized then
@@ -8713,11 +8719,7 @@ begin
    begin
       try
          MsgInfo('REMINDER!' + chr(13) + 'Have you printed a Trust Statement?');
-         if not Assigned(MatterLabel) then
-            MatterLabel := TMatterLabel.Create(dmAxiom.uniInsight);
-         MatterLabel.ArchiveMode := True;
-         if not MatterLabel.Cancelled then
-            MatterLabel.Print(qryMatter.FieldByName('NMATTER').AsInteger,'ARCHIVELABEL');
+
       finally
          DisplayMatter(qryMatter.FieldByName('FILEID').AsString);
       end;
@@ -10211,6 +10213,7 @@ var
 begin
    if SystemString('email_reg') = C_EMAILPASSWORD then
    begin
+      AFileID := qryMatter.FieldByName('fileid').AsString;
       ARecipientsList := TStringList.Create;
       GetEmailAddresses(ARecipientsList, qryMatter.FieldByName('nmatter').AsInteger, qryMatter.FieldByName('nclient').AsInteger);
 
@@ -10265,12 +10268,12 @@ begin
 
          Msg := Folder.CreateMessage('IPM.Note') As IRwMapiMailMessage;
 
-         if SystemString('MATTER_EMAIL_SUBJECT') = '' then
-            Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
+         if (SystemString('MATTER_EMAIL_SUBJECT') = '') then
+            Msg.Subject := 'Our Ref #'+AFileID
          else
-            Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
+            Msg.Subject := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
 
-         sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+         sSubject := Msg.Subject;
          for i := 1 to length(sSubject) do
          begin
             if sSubject[i] = '#' then
@@ -10353,8 +10356,8 @@ begin
          end;
          Msg.SaveChanges(smKeepOpenReadWrite);
 
-         Msg.ShowForm;
-//         FormMgr.ShowMessage(Msg);
+//         Msg.ShowForm;
+         FormMgr.ShowMessage(Msg);
 
       finally
          ARecipientsList.Free;
@@ -11528,13 +11531,15 @@ var
    i: Integer;
    Folder  : IRwMapiFolder;
    MsgStore: IRwMapiMsgStore;
-   sSubject: string;
+   sSubject,
+   AFileID: string;
    AAttachFile, AAttachDocID: TStringList;
    MsgBody, ADisp_Path: string;
 begin
    if SystemString('email_reg') = C_EMAILPASSWORD then
    begin
       try
+         AFileID := qryMatter.FieldByName('fileid').AsString;
          FAttachDoc := False;
          AAttachDocID := TStringList.Create;
          AAttachFile := GetAttachFile(AAttachDocID);
@@ -11570,7 +11575,7 @@ begin
                   Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
                   Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
 
-                  sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+                  sSubject := Msg.Subject;
 
                   MsgBody := '<html><head></head><h1>Documents for action</h1><body>';
                   for i := 0 to FAttachFileName.Count - 1 do
@@ -11637,6 +11642,7 @@ var
 begin
    if SystemString('email_reg') = C_EMAILPASSWORD then
    begin
+      AFileID := qryMatter.FieldByName('fileid').AsString;
       ARecipientsList := TStringList.Create;
       GetEmailAddresses(ARecipientsList, qryMatter.FieldByName('nmatter').AsInteger, qryMatter.FieldByName('nclient').AsInteger);
 
@@ -11713,7 +11719,7 @@ begin
          FAttachFileName.text := ConvAAttachList.text;
          FRecipientsList.text := ARecipientsList.text;
          try
-             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);;
+             MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error opening the Message Store: ' + e.Message);
          end;
@@ -11724,18 +11730,19 @@ begin
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
          end;
+
          Try
              Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error opening the message folder: ' + e.Message);
          end;
 
-         if SystemString('MATTER_EMAIL_SUBJECT') = '' then
-            Msg.PropByName(PR_SUBJECT).AsString := 'Our Ref #'+AFileID
+         if (SystemString('MATTER_EMAIL_SUBJECT') = '') then
+            Msg.Subject := 'Our Ref #'+AFileID
          else
-            Msg.PropByName(PR_SUBJECT).AsString := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
+            Msg.Subject := ParseMacros(SystemString('matter_email_subject'),qryMatter.FieldByName('nmatter').AsInteger);
 
-         sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+         sSubject := Msg.Subject;
          for i := 1 to length(sSubject) do
          begin
             if sSubject[i] = '#' then
@@ -11750,7 +11757,6 @@ begin
          try
             AFileID := Msg.PropByName(MATTER).AsString;
          except
-
             try
                Msg.PropByName(MATTER).AsString := qryMatter.FieldByName('fileid').AsString;
             except
@@ -11782,29 +11788,42 @@ begin
          zipFileName := '';
          wCompress := mrNo;
          if (FAttachFileName.Count > 1) {and (wCompress = high(word))} then
-               wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
+         begin
+            wCompress := MsgAsk('You have selected '+ IntToStr(AAttachList.Count)+
                                    ' files. Would you like to send as a compressed archive (zip) file instead?');
-         case wCompress of
-            mrYes: begin
-                     try
-                        zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
-                        zipFile(zipFileName ,FAttachFileName);
-                     finally
-                        Msg.AddFileAttachment(zipFileName);
-                        FileAttachList := zipFileName;
-                        DeleteFile(zipFileName);
-                     end;
-                   end;
-            mrNo: begin
-                     for i := 0 to FAttachFileName.Count - 1 do
-                     begin
-                        if tmpFileName <> '' then
-                           tmpFileName := tmpFileName + ',';
-                        tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
+            case wCompress of
+               mrYes: begin
+                        try
+                           zipFileName := GetTempDirectory + qryMatter.FieldByName('fileid').AsString+'.zip';
+                           zipFile(zipFileName ,FAttachFileName);
+                        finally
+                           Msg.AddFileAttachment(zipFileName);
+                           FileAttachList := zipFileName;
+                           DeleteFile(zipFileName);
+                        end;
+                      end;
+               mrNo: begin
+                        for i := 0 to FAttachFileName.Count - 1 do
+                        begin
+                           if tmpFileName <> '' then
+                              tmpFileName := tmpFileName + ',';
+                           tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
 
-                        Msg.Attachments.AddFileAttachment(FAttachFileName.Strings[i]);
+                           Msg.Attachments.AddFileAttachment(FAttachFileName.Strings[i]);
+                        end;
                      end;
-                  end;
+            end;
+         end
+         else
+         begin
+            for i := 0 to FAttachFileName.Count - 1 do
+            begin
+               if tmpFileName <> '' then
+                  tmpFileName := tmpFileName + ',';
+               tmpFileName := tmpFileName + ExtractFileName(FAttachFileName.Strings[i]);
+
+               Msg.Attachments.AddFileAttachment(FAttachFileName.Strings[i]);
+            end;
          end;
 
          if ARecipientsList.Count > 0 then
@@ -11822,8 +11841,8 @@ begin
          Msg.SaveChanges(smKeepOpenReadWrite);
 
          try
-//             FormMgr.ShowMessage(Msg);
-            Msg.ShowForm;
+            FormMgr.ShowMessage(Msg);
+//            Msg.ShowForm;
          except on e:exception do
              WriteLog('MatterForwardAsPDFClick: error creating the new message in Formmgr: ' + e.Message);
          end;
