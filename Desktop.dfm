@@ -233,6 +233,8 @@ object frmDesktop: TfrmDesktop
               CustomCaptionButtons.Buttons = <>
               ShowCaption = False
               TabsProperties.CustomButtons.Buttons = <>
+              ExplicitLeft = -64
+              ExplicitTop = -3
               DockingType = 0
               OriginalWidth = 163
               OriginalHeight = 124
@@ -297,7 +299,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 124
+            Height = 0
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1366,7 +1368,6 @@ object frmDesktop: TfrmDesktop
           PositionAfterOpen = 26
           MinSize = 26
           Control = lvClassicDesktop
-          ExplicitWidth = 8
         end
         object dxBarDockControl2: TdxBarDockControl
           Left = 0

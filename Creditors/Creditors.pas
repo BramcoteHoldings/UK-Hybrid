@@ -376,7 +376,7 @@ uses
   AccountNew, CheqReqPrint, Cheque, PhoneBookNew, CreditorSearch,
   Desktop, InvoiceDebitNote, InvoiceReverse, MiscFunc, PostcodeSearch, Reports,
   CreditorAccountsSearch, citfunc, CreditorMerge,
-  CreditorMergeProgress, InvoiceChangeDueDate, ShellAPI, InvoiceScan, InvoiceAmountChange,
+  CreditorMergeProgress, InvoiceChangeDueDate, ShellAPI, InvoiceScan{, InvoiceAmountChange},
   NSearch;
 
 {$R *.DFM}
@@ -1751,21 +1751,20 @@ end;
 
 procedure TfrmCreditors.popAmendInvAmtClick(Sender: TObject);
 var
-   frmInvoiceAmountChange: TfrmInvoiceAmountChange;
+//   frmInvoiceAmountChange: TfrmInvoiceAmountChange;
    ARowInfo: TcxRowInfo;
 begin
    ARowInfo := tvInvoices.DataController.GetRowInfo(tvInvoices.DataController.FocusedRowIndex);
-   frmInvoiceAmountChange := TfrmInvoiceAmountChange.Create(nil);
+//   frmInvoiceAmountChange := TfrmInvoiceAmountChange.Create(nil);
    try
-      if frmInvoiceAmountChange.ShowModal() = mrOk then
+//      if frmInvoiceAmountChange.ShowModal() = mrOk then
       begin
 //         qryCheques.Close;
 //         qryCheques.Open;
       end;
    finally
-      frmInvoiceAmountChange.Free;
+ //     frmInvoiceAmountChange.Free;
    end;
-
 end;
 
 procedure TfrmCreditors.tvInvoicesTcxGridDBDataControllerTcxDataSummaryFooterSummaryItems0GetText(

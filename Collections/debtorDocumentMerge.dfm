@@ -130,6 +130,10 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     object tabEmail: TcxTabSheet
       Caption = 'tabEmail'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         576
         152)
@@ -574,7 +578,7 @@ object frmDebtorDocumentMerge: TfrmDebtorDocumentMerge
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

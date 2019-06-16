@@ -7,10 +7,11 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -18,9 +19,9 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
     383
     139)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 14
   object lblBilledTaxOld: TcxLabel
-    Left = 35
+    Left = 17
     Top = 32
     Caption = 'Old tax code:'
     ParentColor = False
@@ -28,7 +29,7 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
     Transparent = True
   end
   object lblBilledTax: TcxLabel
-    Left = 29
+    Left = 11
     Top = 60
     Caption = 'New tax code:'
     Transparent = True
@@ -79,7 +80,6 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     TabOrder = 2
-    ExplicitLeft = 134
   end
   object btnCancel: TcxButton
     Left = 285
@@ -128,7 +128,6 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     TabOrder = 3
     OnClick = btnCancelClick
-    ExplicitLeft = 227
   end
   object edBilledTax: TcxCurrencyEdit
     Left = 423
@@ -154,6 +153,7 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       item
         FieldName = 'DESCR'
       end>
+    Properties.ListSource = dmAxiom.dsTaxList
     TabOrder = 6
     Width = 256
   end
@@ -168,6 +168,7 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
       item
         FieldName = 'DESCR'
       end>
+    Properties.ListSource = dmAxiom.dsTaxList
     TabOrder = 7
     Width = 256
   end
@@ -176,6 +177,7 @@ object frmAdjustBilledTax: TfrmAdjustBilledTax
     Top = 99
     Caption = 'Apply to all disbursements'
     TabOrder = 8
+    Transparent = True
   end
   object qryBilledTax: TUniQuery
     Connection = dmAxiom.uniInsight

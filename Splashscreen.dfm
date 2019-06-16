@@ -4,7 +4,7 @@ object frmSplashScreen: TfrmSplashScreen
   BorderStyle = bsNone
   Caption = 'Insight Splash Screen'
   ClientHeight = 179
-  ClientWidth = 423
+  ClientWidth = 356
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,17 +20,20 @@ object frmSplashScreen: TfrmSplashScreen
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 423
+    Width = 356
     Height = 179
     Align = alClient
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 423
     object Panel1: TPanel
       Left = 1
       Top = 119
-      Width = 421
+      Width = 354
       Height = 59
       Align = alBottom
+      BevelEdges = []
+      BevelOuter = bvNone
       Caption = 'Initialising system. Please Wait...'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -40,6 +43,7 @@ object frmSplashScreen: TfrmSplashScreen
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 421
     end
     object cxImage1: TcxImage
       Left = 12
@@ -2797,11 +2801,11 @@ object frmSplashScreen: TfrmSplashScreen
         FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
         FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
         FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE00}
-      Properties.FitMode = ifmProportionalStretch
+      Properties.FitMode = ifmNormal
       Properties.PopupMenuLayout.MenuItems = []
       Properties.ReadOnly = True
       Style.BorderStyle = ebsNone
-      Style.Edges = [bBottom]
+      Style.Edges = []
       Style.HotTrack = True
       Style.LookAndFeel.Kind = lfOffice11
       Style.LookAndFeel.NativeStyle = True
@@ -2815,8 +2819,8 @@ object frmSplashScreen: TfrmSplashScreen
       StyleHot.LookAndFeel.Kind = lfOffice11
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 1
-      Height = 112
-      Width = 401
+      Height = 104
+      Width = 327
     end
   end
 end

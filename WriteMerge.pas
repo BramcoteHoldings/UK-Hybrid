@@ -70,6 +70,14 @@ type
     procedure ckAddContactNoteClick(Sender: TObject);
     procedure bnCancelClick(Sender: TObject);
     procedure tabFieldsShow(Sender: TObject);
+    procedure feExportFileBeforeDialog(Sender: TObject; var AName: string;
+      var AAction: Boolean);
+    procedure feExportFileAfterDialog(Sender: TObject; var AName: string;
+      var AAction: Boolean);
+    procedure feWordTemplateBeforeDialog(Sender: TObject; var AName: string;
+      var AAction: Boolean);
+    procedure feWordTemplateAfterDialog(Sender: TObject; var AName: string;
+      var AAction: Boolean);
   private
     { Private declarations }
     FSQL : string;
@@ -85,9 +93,7 @@ type
     FARCHIVEDAFTER: TDateTime;
     FARCHIVEDETFROM: TDateTime;
     FARCHIVEDETTO: TDateTime;
-
-
-
+    ACurrDir: string;
 
     procedure SetSQL(AValue : string);
     procedure EnableMerge;
@@ -111,7 +117,6 @@ type
     property ARCHIVEDSINCE: TDateTime read FARCHIVEDAFTER write FARCHIVEDAFTER;
     property ARCHIVEDETFROM: TDateTime read FARCHIVEDETFROM write FARCHIVEDETFROM;
     property ARCHIVEDETTO: TDateTime read FARCHIVEDETTO write FARCHIVEDETTO;
-
   end;
 
 var
@@ -141,12 +146,10 @@ begin
   lbSortBy.Items.Add(sField);
 end;
 
-
 procedure TfrmWriteMerge.EnableMerge;
 begin
   btnMerge.Enabled := (FSQL <> '') and (feExportFile.FileName <> '') and (cbField.Text <> '') and (cbRecord.Text <> '');
 end;
-
 
 procedure TfrmWriteMerge.tabFieldsShow(Sender: TObject);
 var
@@ -169,15 +172,17 @@ begin
   EnableMerge();
 end;
 
-
 procedure TfrmWriteMerge.btnMergeClick(Sender: TObject);
 var
   LFullSQL, LTmp : string;
   LMergefile : TextFile;
-  LFieldDelimiter, LRecordDelimiter : string;
+  LFieldDelimiter,
+  LRecordDelimiter,
+  dir : string;
   i: integer;
   LProceed : boolean;
 begin
+  dir := GetCurrentDir;
   // Try to open the query
    try
       LFullSQL := FSQL;
@@ -255,6 +260,12 @@ begin
   if FileExists(feExportFile.FileName) then
     LProceed := MsgAsk('The file ''' + feExportFile.FileName + ''' exists. Do you want to overwrite it?') = mrYes;
 
+  if lbFieldsOutput.Items.Count = 0 then
+  begin
+     MsgInfo('There are no output columns selected.');
+     LProceed := False;
+  end;
+
   if LProceed then
   begin
     try
@@ -271,9 +282,13 @@ begin
           begin
             Write(LMergefile, qryMerge.Fields[i].FieldName);
             if i < qryMerge.FieldCount - 1 then
-              Write(LMergefile, LFieldDelimiter)
+            begin
+              Write(LMergefile, LFieldDelimiter);
+            end
             else
+            begin
               Write(LMergeFile, LRecordDelimiter);
+            end;
           end;
         end else
         begin
@@ -282,68 +297,94 @@ begin
           begin
             Write(LMergefile, lbFieldsOutput.Items[i]);
             if i < lbFieldsOutput.Items.Count - 1 then
-              Write(LMergefile, LFieldDelimiter)
+            begin
+              Write(LMergefile, LFieldDelimiter);
+            end
             else
+            begin
               Write(LMergeFile, LRecordDelimiter);
+            end;
           end;
         end;
       end;
       // Now output the actual fields
 
-      qryMerge.First;
-      while (not qryMerge.EOF) do
-      begin
-        if lbFieldsOutput.Items.Count = 0 then
-        begin
-          for i := 0 to qryMerge.FieldCount - 1 do
-          begin
-            if chkQuote.Checked then
-            begin
-              if (qryMerge.Fields[i].DataType = ftString) or (qryMerge.Fields[i].DataType = ftMemo) then
-                Write(LMergefile, '"', qryMerge.Fields[i].Value, '"')
-              else
-                Write(LMergefile, qryMerge.Fields[i].Value);
-            end else
-              Write(LMergefile, qryMerge.Fields[i].Value);
-            if i < qryMerge.FieldCount - 1 then
-              Write(LMergefile, LFieldDelimiter)
-            else
-              Write(LMergeFile, LRecordDelimiter);
-          end;
-        end else
-        begin
-          for i := 0 to lbFieldsOutput.Items.Count - 1 do
-          begin
-            if chkQuote.Checked then
-            begin
-              if (qryMerge.FieldByName(lbFieldsOutput.Items[i]).DataType = ftString) or (qryMerge.FieldByName(lbFieldsOutput.Items[i]).DataType = ftMemo) then
-              begin
-                try
-                   Write(LMergefile, '"', qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text , '"');
-                except
-                   Write(LMergefile, '"',NullAsStringValue, '"');
-                end;
-              end
-              else
-                Write(LMergefile, qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text);
-            end else
-            begin
-              if (NOT VarIsNull(qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text)) then
-                 Write(LMergefile, qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text);
-            end;
-            if i < lbFieldsOutput.Items.Count - 1 then
-              Write(LMergefile, LFieldDelimiter)
-            else
-              Write(LMergeFile, LRecordDelimiter);
-          end;
-        end;
+      try
+         qryMerge.First;
+         while (not qryMerge.EOF) do
+         begin
+           if lbFieldsOutput.Items.Count = 0 then
+           begin
+             for i := 0 to qryMerge.FieldCount - 1 do
+             begin
+               if chkQuote.Checked then
+               begin
+                 if (qryMerge.Fields[i].DataType = ftString) or (qryMerge.Fields[i].DataType = ftMemo) then
+                 begin
+                   Write(LMergefile, '"', qryMerge.Fields[i].Value, '"');
+                 end
+                 else
+                 begin
+                     Write(LMergefile, qryMerge.Fields[i].Value);
+                 end;
+               end else
+               begin
+                 Write(LMergefile, qryMerge.Fields[i].Value);
+               end;
+               if i < qryMerge.FieldCount - 1 then
+               begin
+                 Write(LMergefile, LFieldDelimiter);
+               end
+               else
+               begin
+                 Write(LMergeFile, LRecordDelimiter);
+               end;
+             end;
+           end else
+           begin
+             for i := 0 to lbFieldsOutput.Items.Count - 1 do
+             begin
+               if chkQuote.Checked then
+               begin
+                 if (qryMerge.FieldByName(lbFieldsOutput.Items[i]).DataType = ftString) or
+                    (qryMerge.FieldByName(lbFieldsOutput.Items[i]).DataType = ftMemo) then
+                 begin
+                   try
+                      Write(LMergefile, '"', qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text , '"');
+                   except
+                      Write(LMergefile, '"',NullAsStringValue, '"');
+                   end;
+                 end
+                 else
+                 begin
+                   Write(LMergefile, qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text);
+                 end;
+               end else
+               begin
+                 if (NOT VarIsNull(qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text)) then
+                 begin
+                    Write(LMergefile, qryMerge.FieldByName(lbFieldsOutput.Items[i]).Text);
+                 end;
+               end;
+               if i < lbFieldsOutput.Items.Count - 1 then
+               begin
+                 Write(LMergefile, LFieldDelimiter);
+               end
+               else
+               begin
+                  Write(LMergeFile, LRecordDelimiter);
+               end;
+             end;
+           end;
 
-        if(FFromPhoneBook) then
-          AddNote(qryMerge.FieldByName('nname').AsInteger);
+           if(FFromPhoneBook) then
+             AddNote(qryMerge.FieldByName('nname').AsInteger);
 
-        qryMerge.Next;
+           qryMerge.Next;
+         end;
+      finally
+         CloseFile(LMergefile);
       end;
-      CloseFile(LMergefile);
 
       // launch word and merge..
 
@@ -353,9 +394,13 @@ begin
         MsgInfo('Merge completed');
     except
       on E: Exception do
-        MsgErr('Can''t write merge data:'#13#13 + E.Message);
+      begin
+         CloseFile(LMergefile);
+         MsgErr('Can not write merge data:'#13#13 + E.Message);
+      end;
     end;
   end;
+  SetcurrentDir(dir);
 end;
 
 
@@ -467,9 +512,33 @@ begin
   end;
 end;
 
+procedure TfrmWriteMerge.feExportFileAfterDialog(Sender: TObject;
+  var AName: string; var AAction: Boolean);
+begin
+   SetCurrentDir(ACurrDir);
+end;
+
+procedure TfrmWriteMerge.feExportFileBeforeDialog(Sender: TObject;
+  var AName: string; var AAction: Boolean);
+begin
+   ACurrDir := GetCurrentDir;
+end;
+
 procedure TfrmWriteMerge.feExportFileChange(Sender: TObject);
 begin
   EnableMerge;
+end;
+
+procedure TfrmWriteMerge.feWordTemplateAfterDialog(Sender: TObject;
+  var AName: string; var AAction: Boolean);
+begin
+   SetCurrentDir(ACurrDir);
+end;
+
+procedure TfrmWriteMerge.feWordTemplateBeforeDialog(Sender: TObject;
+  var AName: string; var AAction: Boolean);
+begin
+   ACurrDir := GetCurrentDir;
 end;
 
 procedure TfrmWriteMerge.ckLaunchWordClick(Sender: TObject);
@@ -481,23 +550,10 @@ procedure TfrmWriteMerge.DoWordMerge();
 var
   varWord, varDoc : Variant;
 begin
-  try
-    varWord := GetActiveOleObject('Word.Application');
-  except
-    on EOleSysError do
-    begin
-      try
-        varWord := CreateOleObject('Word.Application');
-      except
-        on e: Exception do
-        begin
-          MessageDlg('Error Starting MS Word: ' + E.Message, mtError, [mbOK], 0);
-          varWord := null;
-        end;
-      end;
-    end;
-  end;
-  if(not VarIsNull(varWord)) then
+  if IsObjectActive('Word.Application') = False then
+     varWord := CreateOleObject('Word.Application');
+
+  if (not VarIsNull(varWord)) then
   begin
     try
       varWord.Visible := True;

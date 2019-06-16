@@ -333,10 +333,11 @@ var
    OLEvar, PropName: OleVariant;
    ADocumentPath: OleVariant;
    LPrecID, LCatID: string;
+   WordOpen: boolean;
 begin
    Result := mrCancel;
    varDoc := null;
-try
+//   try
 //     We want to name document prior to anything happening
       if SystemString('doc_prompt_descr') = 'Y' then
       begin
@@ -382,7 +383,17 @@ try
       else
          ADocumentPath := DocumentPath;
 
-   varWord := GetActiveOleObject('Word.Application');
+   WordOpen := False;
+   if IsObjectActive('Word.Application') = False then
+   begin
+      varWord := CreateOleObject('Word.Application');
+      Sleep(200);
+   end
+   else
+      WordOpen := True;
+
+{   try
+      varWord := GetActiveOleObject('Word.Application');
    except
       on EOleSysError do
       begin
@@ -397,13 +408,14 @@ try
             end;
          end;
       end;
-   end;
+   end; }
 
-   if(not VarIsNull(varWord)) then
+   if (VarIsNull(varWord)= False) then
    begin
       try
-         varWord.Visible := True;
-         varDoc := varWord.Documents.Add(TemplatePath);
+         if WordOpen = False then
+            varWord.Visible := True;
+         varDoc := varWord.Documents.Open(TemplatePath);
          varDocs := varWord.Documents;
          Sleep(200);
          wrdSelection := varWord.Selection;
@@ -665,7 +677,7 @@ try
             if SystemString('AUTO_SAVE_WORD_MERGE') = 'Y' then
             begin
                // 12/04/2010 AES - changed the following from Createdir to ForceDirectories
-               if(not DirectoryExists(ExtractFilePath(ADocumentPath))) then
+               if(DirectoryExists(ExtractFilePath(ADocumentPath))= False) then
                   ForceDirectories(ExtractFilePath(ADocumentPath));
 
                varDoc.SaveAs(ADocumentPath);

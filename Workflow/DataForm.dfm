@@ -7,7 +7,7 @@ object frmDataForm: TfrmDataForm
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -19,40 +19,40 @@ object frmDataForm: TfrmDataForm
     595
     758)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
     Left = 8
     Top = 39
-    Width = 29
-    Height = 13
+    Width = 32
+    Height = 15
     Caption = 'Name'
   end
   object Label2: TLabel
     Left = 8
     Top = 65
-    Width = 41
-    Height = 13
+    Width = 42
+    Height = 15
     Caption = 'Caption'
   end
   object Label3: TLabel
     Left = 8
     Top = 90
-    Width = 59
-    Height = 13
+    Width = 60
+    Height = 15
     Caption = 'Description'
   end
   object Label4: TLabel
     Left = 8
     Top = 112
-    Width = 50
-    Height = 13
+    Width = 55
+    Height = 15
     Caption = 'Party Type'
   end
   object dbedCaption: TDBEdit
     Left = 91
-    Top = 63
+    Top = 62
     Width = 249
-    Height = 21
+    Height = 23
     DataField = 'CAPTION'
     DataSource = dsSource
     TabOrder = 1
@@ -61,16 +61,16 @@ object frmDataForm: TfrmDataForm
     Left = 91
     Top = 87
     Width = 345
-    Height = 21
+    Height = 23
     DataField = 'DESCR'
     DataSource = dsSource
     TabOrder = 2
   end
   object dblPartyType: TDBLookupComboBox
     Left = 91
-    Top = 110
+    Top = 112
     Width = 145
-    Height = 21
+    Height = 23
     DataField = 'PARTY'
     DataSource = dsSource
     KeyField = 'CATEGORY'
@@ -83,7 +83,7 @@ object frmDataForm: TfrmDataForm
     Left = 421
     Top = 39
     Width = 145
-    Height = 21
+    Height = 23
     DataField = 'WORKFLOWTYPECODE'
     DataSource = dsSource
     KeyField = 'CODE'
@@ -150,40 +150,40 @@ object frmDataForm: TfrmDataForm
   end
   object cxPageControl1: TcxPageControl
     Left = 8
-    Top = 138
+    Top = 141
     Width = 558
-    Height = 606
+    Height = 602
     Anchors = [akLeft, akTop, akBottom]
     TabOrder = 6
     Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
-    ExplicitHeight = 616
-    ClientRectBottom = 602
+    ClientRectBottom = 598
     ClientRectLeft = 4
     ClientRectRight = 554
-    ClientRectTop = 24
+    ClientRectTop = 26
     object cxTabSheet1: TcxTabSheet
       Caption = 'DataForm Fields'
       ImageIndex = 0
-      ExplicitHeight = 588
+      ExplicitTop = 24
+      ExplicitHeight = 578
       DesignSize = (
         550
-        578)
+        572)
       object GroupBox2: TGroupBox
         Left = 3
         Top = 3
         Width = 537
-        Height = 574
+        Height = 568
         Anchors = [akLeft, akTop, akBottom]
         Caption = 'DataForm Fields'
         TabOrder = 0
-        ExplicitHeight = 584
+        ExplicitHeight = 574
         DesignSize = (
           537
-          574)
+          568)
         object btnUp: TBitBtn
           Left = 249
-          Top = 459
+          Top = 453
           Width = 25
           Height = 25
           Hint = 'Move field up'
@@ -205,11 +205,11 @@ object frmDataForm: TfrmDataForm
           NumGlyphs = 2
           TabOrder = 2
           OnClick = btnUpClick
-          ExplicitTop = 469
+          ExplicitTop = 459
         end
         object btnDown: TBitBtn
           Left = 274
-          Top = 459
+          Top = 453
           Width = 25
           Height = 25
           Hint = 'Move field down'
@@ -231,7 +231,7 @@ object frmDataForm: TfrmDataForm
           NumGlyphs = 2
           TabOrder = 3
           OnClick = btnDownClick
-          ExplicitTop = 469
+          ExplicitTop = 459
         end
         object btnLaunchAll: TBitBtn
           Left = 231
@@ -299,7 +299,7 @@ object frmDataForm: TfrmDataForm
         end
         object btnRemove: TBitBtn
           Left = 231
-          Top = 498
+          Top = 492
           Width = 69
           Height = 26
           Anchors = [akLeft, akBottom]
@@ -315,11 +315,11 @@ object frmDataForm: TfrmDataForm
             9988888888888888898888888888888888888888888888888888}
           TabOrder = 4
           OnClick = btnRemoveClick
-          ExplicitTop = 508
+          ExplicitTop = 498
         end
         object btnLaunchNone: TBitBtn
           Left = 231
-          Top = 524
+          Top = 518
           Width = 69
           Height = 26
           Anchors = [akLeft, akBottom]
@@ -335,13 +335,13 @@ object frmDataForm: TfrmDataForm
             9988888888988888898888888888888888888888888888888888}
           TabOrder = 5
           OnClick = btnLaunchNoneClick
-          ExplicitTop = 534
+          ExplicitTop = 524
         end
         object lbDataFields: TcxListBox
           Left = 8
           Top = 16
           Width = 214
-          Height = 549
+          Height = 543
           Anchors = [akLeft, akTop, akBottom]
           ItemHeight = 15
           MultiSelect = True
@@ -354,13 +354,13 @@ object frmDataForm: TfrmDataForm
           Style.IsFontAssigned = True
           TabOrder = 6
           OnDblClick = btnLaunchSelectClick
-          ExplicitHeight = 559
+          ExplicitHeight = 549
         end
         object lbDataFormFields: TcxListBox
           Left = 309
           Top = 16
           Width = 214
-          Height = 549
+          Height = 543
           Anchors = [akLeft, akTop, akBottom]
           ItemHeight = 15
           MultiSelect = True
@@ -372,32 +372,34 @@ object frmDataForm: TfrmDataForm
           Style.Font.Style = []
           Style.IsFontAssigned = True
           TabOrder = 7
-          ExplicitHeight = 559
+          ExplicitHeight = 549
         end
       end
     end
     object cxTabSheet2: TcxTabSheet
       Caption = 'Workflow Type'
       ImageIndex = 1
+      ExplicitHeight = 576
       DesignSize = (
         550
-        578)
+        572)
       object gbFields: TGroupBox
         Left = 3
         Top = 3
         Width = 530
-        Height = 566
+        Height = 560
         Anchors = [akLeft, akTop, akBottom]
         Caption = 'Workflows'
         TabOrder = 0
+        ExplicitHeight = 564
         DesignSize = (
           530
-          566)
+          560)
         object lbDataformWorkflows: TListBox
           Left = 309
           Top = 16
           Width = 214
-          Height = 546
+          Height = 540
           Anchors = [akLeft, akTop, akBottom]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -409,12 +411,13 @@ object frmDataForm: TfrmDataForm
           ParentFont = False
           TabOrder = 0
           OnDblClick = BitBtn5Click
+          ExplicitHeight = 544
         end
         object lbWorkflowAvailable: TListBox
           Left = 7
           Top = 16
           Width = 214
-          Height = 546
+          Height = 540
           Anchors = [akLeft, akTop, akBottom]
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -426,6 +429,7 @@ object frmDataForm: TfrmDataForm
           ParentFont = False
           TabOrder = 1
           OnDblClick = BitBtn4Click
+          ExplicitHeight = 544
         end
         object BitBtn3: TBitBtn
           Left = 231
@@ -493,7 +497,7 @@ object frmDataForm: TfrmDataForm
         end
         object BitBtn1: TBitBtn
           Left = 250
-          Top = 453
+          Top = 447
           Width = 25
           Height = 25
           Hint = 'Move field up'
@@ -514,10 +518,11 @@ object frmDataForm: TfrmDataForm
           Layout = blGlyphRight
           NumGlyphs = 2
           TabOrder = 4
+          ExplicitTop = 451
         end
         object BitBtn2: TBitBtn
           Left = 275
-          Top = 453
+          Top = 447
           Width = 25
           Height = 25
           Hint = 'Move field down'
@@ -538,10 +543,11 @@ object frmDataForm: TfrmDataForm
           Layout = blGlyphRight
           NumGlyphs = 2
           TabOrder = 5
+          ExplicitTop = 451
         end
         object BitBtn5: TBitBtn
           Left = 231
-          Top = 494
+          Top = 488
           Width = 69
           Height = 25
           Anchors = [akLeft, akBottom]
@@ -557,10 +563,11 @@ object frmDataForm: TfrmDataForm
             9988888888888888898888888888888888888888888888888888}
           TabOrder = 6
           OnClick = BitBtn5Click
+          ExplicitTop = 492
         end
         object BitBtn6: TBitBtn
           Left = 231
-          Top = 520
+          Top = 514
           Width = 69
           Height = 25
           Anchors = [akLeft, akBottom]
@@ -576,6 +583,7 @@ object frmDataForm: TfrmDataForm
             9988888888988888898888888888888888888888888888888888}
           TabOrder = 7
           OnClick = BitBtn6Click
+          ExplicitTop = 518
         end
       end
     end
@@ -1665,7 +1673,8 @@ object frmDataForm: TfrmDataForm
     DataPipeline = ppDBPipeline1
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1690,15 +1699,22 @@ object frmDataForm: TfrmDataForm
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1713,19 +1729,22 @@ object frmDataForm: TfrmDataForm
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 572
     Top = 90
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppDBPipeline1'
     object ppMaintHeaderBand: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 17198
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1743,6 +1762,7 @@ object frmDataForm: TfrmDataForm
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1760,13 +1780,15 @@ object frmDataForm: TfrmDataForm
       object pplblEntity: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblEntity'
+        Border.mmPadding = 0
         Caption = 'Insight Software'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5027
         mmLeft = 82550
@@ -1779,6 +1801,7 @@ object frmDataForm: TfrmDataForm
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1791,13 +1814,15 @@ object frmDataForm: TfrmDataForm
       object pplblTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblTitle'
+        Border.mmPadding = 0
         Caption = 'Data Forms List'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -1811,12 +1836,14 @@ object frmDataForm: TfrmDataForm
     object ppMaintDetailBand: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5821
       mmPrintPosition = 0
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'FIELDNAME'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -1837,6 +1864,7 @@ object frmDataForm: TfrmDataForm
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'SEQ'
         DataPipeline = ppDBPipeline1
         Font.Charset = DEFAULT_CHARSET
@@ -1858,12 +1886,14 @@ object frmDataForm: TfrmDataForm
     end
     object ppMaintSummaryBand: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 8202
       mmPrintPosition = 0
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1889,12 +1919,14 @@ object frmDataForm: TfrmDataForm
       NewFile = False
       object ppGroupHeaderBand2: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 6879
         mmPrintPosition = 0
         object ppDBText5: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText5'
+          Border.mmPadding = 0
           DataField = 'CAPTION'
           DataPipeline = ppDBPipeline1
           Font.Charset = DEFAULT_CHARSET
@@ -1916,13 +1948,15 @@ object frmDataForm: TfrmDataForm
         object ppLabel4: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label4'
+          Border.mmPadding = 0
           Caption = 'DataForm:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 5556
@@ -1935,6 +1969,7 @@ object frmDataForm: TfrmDataForm
         object ppDBText6: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText6'
+          Border.mmPadding = 0
           DataField = 'CODE'
           DataPipeline = ppDBPipeline1
           Font.Charset = DEFAULT_CHARSET
@@ -1956,13 +1991,15 @@ object frmDataForm: TfrmDataForm
         object ppLabel5: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label5'
+          Border.mmPadding = 0
           Caption = 'Code:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 101865
@@ -1975,6 +2012,7 @@ object frmDataForm: TfrmDataForm
       end
       object ppGroupFooterBand2: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0

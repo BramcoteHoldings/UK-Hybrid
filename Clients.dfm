@@ -653,6 +653,10 @@ object frmClients: TfrmClients
     object tabArchive: TcxTabSheet
       Caption = 'Archive'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrArchived: TcxGrid
         Left = 0
         Top = 0
@@ -2215,6 +2219,10 @@ object frmClients: TfrmClients
         object tabCurrentGroups: TcxTabSheet
           Caption = 'Client Groups'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object grdClientGroups: TcxGrid
             Left = 0
             Top = 0
@@ -2378,6 +2386,10 @@ object frmClients: TfrmClients
       Caption = 'Custom Data'
       ImageIndex = 6
       OnShow = tsCustomDataShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -2412,7 +2424,7 @@ object frmClients: TfrmClients
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
             Position = 1
             Text = 'Value'
-            Width = 795
+            Width = 799
           end>
       end
     end
@@ -3998,6 +4010,10 @@ object frmClients: TfrmClients
     object tsOtherClients: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgOtherClients: TcxGrid
         Left = 0
         Top = 0
@@ -4139,6 +4155,10 @@ object frmClients: TfrmClients
     object tabEvent: TcxTabSheet
       Caption = 'Event'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdParticipantEvents: TcxGrid
         Left = 0
         Top = 0
@@ -7643,7 +7663,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8490,7 +8510,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -12798,7 +12818,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14090,7 +14110,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+          PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -14314,7 +14334,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+          PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -15764,7 +15784,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16292,7 +16312,7 @@ object frmClients: TfrmClients
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

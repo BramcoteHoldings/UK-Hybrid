@@ -40,9 +40,6 @@ object frmBankRec: TfrmBankRec
     Height = 141
     Align = alTop
     TabOrder = 1
-    DesignSize = (
-      1068
-      141)
     object Label1: TLabel
       Left = 87
       Top = 10
@@ -132,15 +129,15 @@ object frmBankRec: TfrmBankRec
     end
     object lblDRCR: TLabel
       Left = 987
-      Top = 91
+      Top = 96
       Width = 17
       Height = 17
       Caption = 'DR'
     end
     object Label12: TLabel
-      Left = 389
+      Left = 368
       Top = 92
-      Width = 212
+      Width = 233
       Height = 34
       Alignment = taRightJustify
       Caption = 
@@ -149,9 +146,9 @@ object frmBankRec: TfrmBankRec
       WordWrap = True
     end
     object Label13: TLabel
-      Left = 391
+      Left = 368
       Top = 58
-      Width = 210
+      Width = 233
       Height = 34
       Alignment = taRightJustify
       Caption = 'Unpresented cheques, receipts and Adjustments:'
@@ -179,53 +176,6 @@ object frmBankRec: TfrmBankRec
       TabOrder = 1
       OnChange = dtpStatementDateChange
     end
-    object btnPrint: TcxButton
-      Left = 983
-      Top = 110
-      Width = 75
-      Height = 25
-      Anchors = [akTop, akRight]
-      Caption = '&Print'
-      LookAndFeel.NativeStyle = True
-      OptionsImage.Glyph.SourceDPI = 96
-      OptionsImage.Glyph.Data = {
-        424D360400000000000036000000280000001000000010000000010020000000
-        000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00806060FF806060FFFF00FFFFFF00FFFF806060FF806060FFFFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00806060FFA4A0A0FFA4A0A0FF806060FF806060FF806060FFF0FBFFFF8060
-        60FF806060FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF008060
-        60FFC0DCC0FFA4A0A0FFA4A0A0FFA4A0A0FF404040FF404040FF806060FFC0C0
-        C0FFF0FBFFFFC0C0C0FF806060FF806060FF806060FFFFFFFF00806060FFC0DC
-        C0FFC0C0C0FFA4A0A0FFA4A0A0FFA4A0A0FF404040FF000000FF000000FF0000
-        00FF000000FF808080FFC0C0C0FF806060FFFF00FFFF806060FFC0C0C0FFC0C0
-        C0FFA4A0A0FFC0DCC0FFC0C0C0FFC0C0C0FFC0C0C0FFA4A0A0FFA4A0A0FF4060
-        60FF000000FF000000FF000000FF806060FF808080FF806060FFC0C0C0FFA4A0
-        A0FFF0FBFFFFF0FBFFFFF0FBFFFFF0FBFFFFC0DCC0FFC0DCC0FFC0C0C0FFC0C0
-        C0FFC0C0C0FFA4A0A0FF406060FF808080FF808080FF806060FFA4A0A0FFF0FB
-        FFFFF0FBFFFFF0FBFFFFC0DCC0FFA4A0A0FFA4A0A0FFC0C0C0FFC0C0C0FFC0DC
-        C0FFC0DCC0FFC0C0C0FFC0C0C0FFA4A0A0FF806060FFFFFFFF00806060FF8060
-        60FFF0FBFFFFC0C0C0FF808080FFA4A0A0FFA4A0A0FFA4A0A0FFA4A0A0FFA4A0
-        A0FFA4A0A0FFC0C0C0FFC0C0C0FFC0C0C0FF806060FFFFFFFF00FFFFFF00FFFF
-        FF00806060FFC0A060FF806060FF806060FF808080FF806060FF808080FFA4A0
-        A0FFA4A0A0FFC0C0C0FFC0C0C0FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFC0A060FFC0A0
-        60FF808080FF806060FF806060FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A0
-        60FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00C0A060FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C0A0
-        60FFF0FBFFFFF0FBFFFFF0CAA6FFF0CAA6FFF0CAA6FFF0CAA6FFC0A060FFFFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00C0A0
-        60FFC0A060FFC0A060FFF0FBFFFFF0CAA6FFF0CAA6FFC0A060FFFFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00C0A060FFC0A060FFC0A060FFFFFFFF00FFFFFF00FFFF
-        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-      TabOrder = 4
-      OnClick = btnPrintClick
-    end
     object edStatementBal: TcxCurrencyEdit
       Left = 121
       Top = 35
@@ -245,7 +195,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 5
+      TabOrder = 4
       Width = 121
     end
     object edVariance: TcxCurrencyEdit
@@ -264,7 +214,7 @@ object frmBankRec: TfrmBankRec
       Style.Font.Name = 'Arial Black'
       Style.Font.Style = [fsBold]
       Style.IsFontAssigned = True
-      TabOrder = 6
+      TabOrder = 5
       Width = 121
     end
     object edReceipts: TcxCurrencyEdit
@@ -276,7 +226,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 7
+      TabOrder = 6
       Width = 121
     end
     object edPayments: TcxCurrencyEdit
@@ -288,7 +238,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 8
+      TabOrder = 7
       Width = 121
     end
     object edOpeningBalance: TcxCurrencyEdit
@@ -300,7 +250,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 9
+      TabOrder = 8
       Width = 121
     end
     object cmbDRCR: TcxComboBox
@@ -324,7 +274,7 @@ object frmBankRec: TfrmBankRec
       Time = 42662.509550173600000000
       Checked = False
       Enabled = False
-      TabOrder = 10
+      TabOrder = 9
       OnChange = dtpStatementDateChange
     end
     object edClosingBalance: TcxCurrencyEdit
@@ -336,7 +286,7 @@ object frmBankRec: TfrmBankRec
       Properties.UseDisplayFormatWhenEditing = True
       Properties.UseLeftAlignmentOnEditing = False
       Properties.ValidateOnEnter = False
-      TabOrder = 11
+      TabOrder = 10
       Width = 121
     end
     object edAdjustments: TcxCurrencyEdit
@@ -344,7 +294,7 @@ object frmBankRec: TfrmBankRec
       Top = 64
       Properties.Alignment.Horz = taRightJustify
       Properties.ReadOnly = True
-      TabOrder = 12
+      TabOrder = 11
       Width = 111
     end
     object lblBankName: TcxLabel
@@ -360,7 +310,7 @@ object frmBankRec: TfrmBankRec
       Top = 93
       Properties.Alignment.Horz = taRightJustify
       Properties.ReadOnly = True
-      TabOrder = 14
+      TabOrder = 13
       Width = 111
     end
   end
@@ -942,7 +892,7 @@ object frmBankRec: TfrmBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1654,6 +1604,11 @@ object frmBankRec: TfrmBankRec
         item
           BeginGroup = True
           Visible = True
+          ItemName = 'dxBarButton3'
+        end
+        item
+          BeginGroup = True
+          Visible = True
           ItemName = 'dxBarButton1'
         end>
       OneOnRow = True
@@ -1809,6 +1764,15 @@ object frmBankRec: TfrmBankRec
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       PaintStyle = psCaptionGlyph
       OnClick = btnSaveRecClick
+    end
+    object dxBarButton3: TdxBarButton
+      Caption = 'Print Bank Rec'
+      Category = 1
+      Hint = 'Print Bank Rec'
+      Visible = ivAlways
+      ImageIndex = 9
+      PaintStyle = psCaptionGlyph
+      OnClick = dxBarButton3Click
     end
   end
   object dsCashbook: TUniDataSource

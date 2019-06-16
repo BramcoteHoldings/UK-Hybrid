@@ -24,6 +24,7 @@ const
    CM_REFRESHTREE = WM_USER + 2;
    AXM_POPULATE = WM_APP + 400;
    SEARCH_REFRESH = WM_APP + 401;
+   CM_CLOSEFORM = WM_APP + 402;
 //   ISYSAppDir = 'C:\Program Files\ISYS 8';
 //   ISYSKey = 'XNETE 45VBG R5PW6 YBHTY 6CQFP 5GCYN';
    DebenuPDFKey = 'j99qf8ga5c86x57569sj7oj9y';

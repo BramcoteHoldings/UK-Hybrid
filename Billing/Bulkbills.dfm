@@ -32,7 +32,6 @@ object frmBulkBills: TfrmBulkBills
     Properties.ShowFrame = True
     Properties.Style = 9
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = pagControlChange
     ClientRectBottom = 600
     ClientRectLeft = 1
@@ -448,10 +447,6 @@ object frmBulkBills: TfrmBulkBills
     object tabGrid: TcxTabSheet
       Caption = 'Data Found'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrMatters: TcxGrid
         Left = 0
         Top = 0
@@ -1154,7 +1149,7 @@ object frmBulkBills: TfrmBulkBills
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43353.746400289350000000
+      ReportDocument.CreationDate = 43630.957679560180000000
       TimeFormat = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

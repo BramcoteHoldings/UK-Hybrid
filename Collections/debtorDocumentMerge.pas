@@ -185,8 +185,10 @@ var
 begin
     try
       checkDirectory(cxEdOutfile.Text);
+      if IsObjectActive('Word.Application') = False then
+         varWord := CreateOleObject('Word.Application');
 
-      try
+{      try
         varWord := GetActiveOleObject('Word.Application');
       except
         on EOleSysError do
@@ -201,7 +203,7 @@ begin
             end;
           end;
         end;
-      end;
+      end; }
 
       varWord.Visible := cxBcShow.Checked;
       varDoc := varWord.Documents.Add(sTemplate);
