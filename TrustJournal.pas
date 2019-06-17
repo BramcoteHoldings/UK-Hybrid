@@ -15,7 +15,7 @@ uses
   ppDB, ppParameter, ppDesignLayer, ppBands, ppStrtch, ppMemo, ppCtrls,
   ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv,
   ppDBPipe, MemDS, cxNavigator, cxDateUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   colTYPE = 0;

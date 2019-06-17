@@ -115,6 +115,10 @@ object frmWriteMerge: TfrmWriteMerge
     object tabOutput: TcxTabSheet
       Caption = 'Output'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label3: TLabel
         Left = 27
         Top = 146
@@ -242,6 +246,10 @@ object frmWriteMerge: TfrmWriteMerge
       Caption = 'Fields'
       ImageIndex = 1
       OnShow = tabFieldsShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gbFieldOrder: TGroupBox
         Left = 5
         Top = 10
@@ -344,6 +352,10 @@ object frmWriteMerge: TfrmWriteMerge
     object tabSortBy: TcxTabSheet
       Caption = 'Sort By'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label4: TLabel
         Left = 2
         Top = 7
@@ -457,6 +469,10 @@ object frmWriteMerge: TfrmWriteMerge
     object tsNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object ckAddContactNote: TCheckBox
         Left = 9
         Top = 10

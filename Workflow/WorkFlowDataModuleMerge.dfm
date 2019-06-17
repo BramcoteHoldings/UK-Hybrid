@@ -1,7 +1,7 @@
 object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
   OldCreateOrder = False
-  Height = 586
-  Width = 443
+  Height = 620
+  Width = 447
   object qExportBranchMatter: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
@@ -110,140 +110,212 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
   object qExportEmployees: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT'
-      '  m.employee AS ID,'
-      '  m.type,'
-      '  e.name,'
-      '  e.phone,'
-      '  e.fax AS facsimile,'
-      '  e.email,'
-      '  e.sex,'
-      '  d.descr AS department,'
-      '  b.descr AS office,'
-      '  e.signatory,'
-      '  e.position,'
-      '  e.rate,'
-      '  e.givennames,'
-      '  e.surname,'
-      '  e.ilars'
-      'FROM'
-      '  employee e,'
-      '  ('
-      '    SELECT'
-      '      partner AS employee,'
-      '      '#39'Partner'#39' AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION ALL'
-      '    SELECT'
-      '      author AS employee,'
-      '      '#39'Author'#39' AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION ALL'
-      '    SELECT'
-      '      author AS employee,'
-      '      '#39'Solicitor'#39' AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION ALL'
-      '    SELECT'
-      '      controller AS employee,'
-      '      '#39'Controller'#39' AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter    '
-      '    UNION ALL'
-      '    SELECT'
-      '      operator AS employee,'
-      '      '#39'Assistant'#39' AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION ALL'
-      '    SELECT'
-      '      :employee AS employee,'
-      '      '#39'User'#39
-      '    FROM'
-      '      dual'
-      '    UNION'
-      '    SELECT'
-      '      author AS employee,'
+      'select * from ('
       
-        '      NVL((SELECT value FROM display_name WHERE name = '#39'AUTHOR'#39' ' +
-        'AND class = '#39'MATTER'#39' AND acct = entity),'#39'Author'#39') AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION'
-      '    SELECT'
-      '      partner AS employee,'
+        'SELECT   m.employee AS ID, m.TYPE, e.NAME, e.phone, e.fax AS fac' +
+        'simile,'
       
-        '      NVL((SELECT value FROM display_name WHERE name = '#39'PARTNER'#39 +
-        ' AND class = '#39'MATTER'#39' AND acct = entity),'#39'Partner'#39') AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION'
-      '    SELECT'
-      '      controller AS employee,'
+        '         e.email, e.sex, d.descr AS department, b.descr AS offic' +
+        'e,'
       
-        '      NVL((SELECT value FROM display_name WHERE name = '#39'CONTROLL' +
-        'ER'#39' AND class = '#39'MATTER'#39' AND acct = entity),'#39'Controller'#39') AS typ' +
-        'e'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION'
-      '    SELECT'
-      '      operator AS employee,'
+        '         e.signatory, e.POSITION, e.rate, e.givennames, e.surnam' +
+        'e, e.ilars,'
+      '         e.initials'
+      '    FROM employee e,         '
+      '         (SELECT partner AS employee, '#39'Partner'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT author AS employee, '#39'Author'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT author AS employee, '#39'Solicitor'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT controller AS employee, '#39'Controller'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT OPERATOR AS employee, '#39'Assistant'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT author AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'AUTHOR'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Author'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT partner AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'PARTNER'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Partner'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT controller AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'CONTROLLER'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Controller'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT OPERATOR AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'OPERATOR'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Operator'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT paralegal AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'LAWCLERK'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'LawClerk'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter) m,'
+      '         empdept d,'
+      '         branch b'
       
-        '      NVL((SELECT value FROM display_name WHERE name = '#39'OPERATOR' +
-        #39' AND class = '#39'MATTER'#39' AND acct = entity),'#39'Operator'#39') AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '    UNION'
-      '    SELECT'
-      '      paralegal AS employee,'
+        '   WHERE e.code = m.employee AND d.code(+) = e.dept AND b.code(+' +
+        ') = e.branch'
+      'ORDER BY TYPE)'
+      'union'
+      '(SELECT code AS ID, '#39'User Id'#39', NAME, phone, fax AS facsimile,'
       
-        '      NVL((SELECT value FROM display_name WHERE name = '#39'LAWCLERK' +
-        #39' AND class = '#39'MATTER'#39' AND acct = entity),'#39'LawClerk'#39') AS type'
-      '    FROM'
-      '      matter'
-      '    WHERE'
-      '      nmatter = :nmatter'
-      '  ) m,'
-      '  empdept d,'
-      '  branch b'
-      'WHERE'
-      '  e.code = m.employee AND'
-      '  d.code(+) = e.dept AND'
-      '  b.code(+) = e.branch'
-      'ORDER BY type')
+        '         email, sex, '#39#39'/*d.descr */ AS department, '#39#39'/*b.descr *' +
+        '/ AS office,'
+      '         signatory, POSITION, rate, givennames, surname, ilars,'
+      '         initials AS employee'
+      '            FROM employee'
+      '           WHERE employee.user_name = USER)'
+      ''
+      ''
+      '/*'
+      
+        'SELECT   m.employee AS ID, m.TYPE, e.NAME, e.phone, e.fax AS fac' +
+        'simile,'
+      
+        '         e.email, e.sex, d.descr AS department, b.descr AS offic' +
+        'e,'
+      
+        '         e.signatory, e.POSITION, e.rate, e.givennames, e.surnam' +
+        'e, e.ilars,'
+      '         e.initials, (SELECT initials AS employee'
+      '                        FROM employee'
+      
+        '                       WHERE employee.login_id = USER) AS user_i' +
+        'd'
+      '    FROM employee e,'
+      '         (SELECT partner AS employee, '#39'Partner'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT author AS employee, '#39'Author'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT author AS employee, '#39'Solicitor'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT controller AS employee, '#39'Controller'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION ALL'
+      '          SELECT OPERATOR AS employee, '#39'Assistant'#39' AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT author AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'AUTHOR'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Author'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT partner AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'PARTNER'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Partner'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT controller AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'CONTROLLER'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Controller'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT OPERATOR AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'OPERATOR'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'Operator'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter'
+      '          UNION'
+      '          SELECT paralegal AS employee,'
+      '                 NVL ((SELECT VALUE'
+      '                         FROM display_name'
+      '                        WHERE NAME = '#39'LAWCLERK'#39
+      '                          AND CLASS = '#39'MATTER'#39
+      '                          AND acct = entity),'
+      '                      '#39'LawClerk'#39
+      '                     ) AS TYPE'
+      '            FROM matter'
+      '           WHERE nmatter = :nmatter) m,'
+      '         empdept d,'
+      '         branch b'
+      '   WHERE e.code = m.employee '
+      '     AND d.code(+) = e.dept'
+      '     AND b.code(+) = e.branch'
+      'ORDER BY TYPE'
+      '*/')
     Left = 41
     Top = 121
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'employee'
         Value = nil
       end>
     object qExportEmployeesID: TStringField
@@ -309,6 +381,10 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
     object qExportEmployeesILARS: TStringField
       FieldName = 'ILARS'
       Size = 1
+    end
+    object qExportEmployeesINITIALS: TStringField
+      FieldName = 'INITIALS'
+      ReadOnly = True
     end
   end
   object qExportEntity: TUniQuery
@@ -425,12 +501,15 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
         '  M.ESTIMATEDDISBPRINC + M.ESTIMATEDDISBAGENT + M.ESTIMATEDCREDI' +
         'TORS + M.ESTIMATEDFEE AS ESTIMATE_TOTAL,'
       '  m.author||'#39':'#39'||m.operator||'#39':'#39'||m.fileid as AuthOper,'
-      '  m.author as author_initials,'
-      '  m.partner as partner_initials,'
-      '  m.controller as controller_initials,'
-      '  m.operator as operator_initials,'
+      '  ea.INITIALS as author_initials,'
+      '  ep.INITIALS as partner_initials,'
+      '  ec.INITIALS as controller_initials,'
+      '  eo.INITIALS as operator_initials,'
       '  M.BARCODE,'
-      '  M.BPAY_REFERENCE'
+      '  M.BPAY_REFERENCE,'
+      '  EA.EMAIL AS AUTHOR_EMAIL,'
+      '  EA.PHONE AS AUTHOR_PHONE,'
+      '  EA.NAME AS AUTHOR_NAME'
       'from'
       '  matter m,'
       '  mattertype mt,'
@@ -843,12 +922,15 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
   object qMatterDetails: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      
-        'SELECT m.fileid, m.nmatter, m.shortdescr, c.search clientname, w' +
-        '.descr as workflowtype, m.workflow as workflowtypecode'
-      'FROM matter m, client c, workflowtype w'
-      'WHERE c.nclient = m.nclient AND w.code = m.workflow'
-      'AND m.nmatter = :nmatter ')
+      'SELECT m.fileid, m.nmatter, m.shortdescr, c.search clientname,'
+      '       w.descr AS workflowtype, m.workflow AS workflowtypecode,'
+      '       e.initials AS author_initial, e.phone AS author_phone,'
+      '       e.email AS author_email'
+      '  FROM employee e, client c, workflowtype w, matter m'
+      ' WHERE c.nclient = m.nclient'
+      '   AND w.code = m.workflow'
+      '   AND m.nmatter = :nmatter'
+      '   AND m.author = e.code ')
     Left = 42
     Top = 187
     ParamData = <
@@ -884,6 +966,17 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
     object qMatterDetailsWORKFLOWTYPECODE: TStringField
       FieldName = 'WORKFLOWTYPECODE'
       Size = 11
+    end
+    object qMatterDetailsAUTHOR_INITIAL: TStringField
+      FieldName = 'AUTHOR_INITIAL'
+    end
+    object qMatterDetailsAUTHOR_PHONE: TStringField
+      FieldName = 'AUTHOR_PHONE'
+      Size = 30
+    end
+    object qMatterDetailsAUTHOR_EMAIL: TStringField
+      FieldName = 'AUTHOR_EMAIL'
+      Size = 100
     end
   end
   object qMatterFormData: TUniQuery
@@ -1590,7 +1683,11 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       
         '    NVL(P.additional_contact_name, M.additional_contact_name) as' +
         ' PARTY_ADDITIONAL_CONTACT_NAME,'
-      '    NVL(P.NRIC, M.NRIC) NRIC'
+      '    NVL(P.NRIC, M.NRIC) NRIC,'
+      '    NVL(P.full_address, M.full_address) Full_Address,'
+      
+        '    NVL(P.full_name_address, M.full_name_address) full_name_addr' +
+        'ess'
       'FROM'
       '  PHONEBOOK P,'
       '  PHONEBOOK M'
@@ -2206,7 +2303,11 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       '  NVL(trim(P.EMAIL), trim(B.EMAIL))           AS partyemail,'
       '  NVL(trim(P.EMAIL1), trim(B.EMAIL1))           AS partyemail1,'
       '  NVL(trim(P.EMAIL2), trim(B.EMAIL2))           AS partyemail2,'
-      '  NVL(P.NRIC, B.NRIC) NRIC'
+      '  NVL(P.NRIC, B.NRIC) NRIC,'
+      '  NVL(P.full_address, B.full_address) Full_Address,'
+      
+        '  NVL(P.full_name_address, B.full_name_address) full_name_addres' +
+        's'
       'FROM'
       '  MATTER M,'
       '  CLIENT C,'
@@ -3431,7 +3532,11 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       '  NVL(t.CONTACT_NAME, pp.CONTACT_NAME) as PARTY_CONTACT_NAME,'
       
         '  NVL(t.additional_contact_name, pp.additional_contact_name) as ' +
-        'PARTY_ADDITIONAL_CONTACT_NAME'
+        'PARTY_ADDITIONAL_CONTACT_NAME,'
+      '  NVL(t.full_address, pp.full_address) Full_Address,'
+      
+        '  NVL(t.full_name_address, pp.full_name_address) full_name_addre' +
+        'ss'
       'FROM '
       '  mattercontactactingfor at, '
       '  phonebook t,'
@@ -3465,7 +3570,7 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
         '  :RESULT := DOCINSERTGENDOCUMENT(:ANMATTER, :ADOCUMENTID, :AFIL' +
         'EPATH, :ATEMPLATEPATH, :ADATAFILEPATH, :AWHO, :ADATAFORM, :ADESC' +
         'R, :ADOC_NAME, :AFILEID, :AFILE_EXTENSION, :APRECCATEGORY, :APRE' +
-        'CCLASSIFICATION, :ADISPLAYFILEPATH);'
+        'CCLASSIFICATION, :ADISPLAYFILEPATH, :AIMAGEINDEX);'
       'end;')
     Connection = dmAxiom.uniInsight
     Left = 47
@@ -3558,6 +3663,12 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
       item
         DataType = ftString
         Name = 'ADISPLAYFILEPATH'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftFloat
+        Name = 'AIMAGEINDEX'
         ParamType = ptInput
         Value = nil
       end>
@@ -3823,37 +3934,36 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT   '
-      '         NVL (a.emptype, b.emptype) AS emptype, '
+      '         NVL (a.emp_level, b.emp_level) AS emp_level, '
       '         NVL (a.rate, b.stdrate) as feerate'
       
         '--         NVL (a.feecodedesc, b.feecodedesc) as feecodedesc , N' +
         'VL(a.emptypedescr, b.emptypedescr) as emptypedescr'
       
-        '    FROM (SELECT effective_from, emptype, nvl(rate,0) rate, feec' +
-        'ode.descr AS feecodedesc,'
-      '                 emptype.descr AS emptypedescr'
-      '            FROM feecodetype, feecode, emptype'
+        '    FROM (SELECT effective_from, emp_level, nvl(feecodetype.rate' +
+        ',0) rate, feecode.descr AS feecodedesc,'
+      '                 feetype.descr AS feetypedescr'
+      '            FROM feecodetype, feecode, feetype'
       '           WHERE feecodetype.feecode = feecode.code'
       '             AND feecode.code = :code'
       '             AND effective_from IS NOT NULL'
       '             AND effective_to IS NULL'
-      '             AND feecodetype.emptype = emptype.code) a,'
+      '             AND feecodetype.emp_level = feetype.code) a,'
       
-        '         (SELECT   MAX (effective_from), emptype, MAX (rate) AS ' +
-        'stdrate,'
+        '         (SELECT   MAX (effective_from), emp_level, MAX (feecode' +
+        'type.rate) AS stdrate,'
       '                   feecode.descr AS feecodedesc,'
-      '                   emptype.descr AS emptypedescr'
-      '              FROM feecodetype, feecode, emptype'
+      '                   feetype.descr AS feetypedescr'
+      '              FROM feecodetype, feecode, feetype'
       '             WHERE feecodetype.feecode = feecode.code'
       '               AND feecode.code = :stdcode'
       '               AND effective_from IS NOT NULL'
       '               AND effective_to IS NULL'
-      '               AND feecodetype.emptype = emptype.code'
+      '               AND feecodetype.emp_level = feetype.code'
       
-        '          GROUP BY feecodetype.emptype, feecode.descr, emptype.d' +
-        'escr) b'
-      '   WHERE a.emptype(+) = b.emptype'
-      '--ORDER BY 2 desc')
+        '          GROUP BY feecodetype.emp_level, feecode.descr, feetype' +
+        '.descr) b'
+      '   WHERE a.emp_level(+) = b.emp_level')
     SpecificOptions.Strings = (
       'Oracle.ExtendedFieldsInfo=True')
     Left = 122
@@ -3871,13 +3981,12 @@ object dmWorkFlowDataModuleMerge: TdmWorkFlowDataModuleMerge
         ParamType = ptInput
         Value = nil
       end>
-    object qEmployeeTypeRatesEMPTYPE: TStringField
-      FieldName = 'EMPTYPE'
-      ReadOnly = True
-      Size = 3
-    end
     object qEmployeeTypeRatesFEERATE: TFloatField
       FieldName = 'FEERATE'
+      ReadOnly = True
+    end
+    object qEmployeeTypeRatesEMP_LEVEL: TStringField
+      FieldName = 'EMP_LEVEL'
       ReadOnly = True
     end
   end

@@ -8719,7 +8719,11 @@ begin
    begin
       try
          MsgInfo('REMINDER!' + chr(13) + 'Have you printed a Trust Statement?');
-
+         if not Assigned(MatterLabel) then
+            MatterLabel := TMatterLabel.Create(dmAxiom.uniInsight);
+         MatterLabel.ArchiveMode := True;
+         if not MatterLabel.Cancelled then
+            MatterLabel.Print(qryMatter.FieldByName('NMATTER').AsInteger,'ARCHIVELABEL');
       finally
          DisplayMatter(qryMatter.FieldByName('FILEID').AsString);
       end;
