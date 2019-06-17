@@ -43,7 +43,7 @@ object frmClientSearch: TfrmClientSearch
     Height = 679
     Align = alClient
     TabOrder = 1
-    Properties.ActivePage = tabGrid
+    Properties.ActivePage = tabFilters
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
@@ -636,6 +636,7 @@ object frmClientSearch: TfrmClientSearch
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 2
+          Transparent = True
           OnClick = chkPacketDeedClick
         end
         object edPacketID: TcxTextEdit

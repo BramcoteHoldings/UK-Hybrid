@@ -2855,7 +2855,9 @@ var
   nCat: integer;
 begin
    if IsObjectActive('Word.Application') = False then
-      varWord := CreateOleObject('Word.Application');
+      varWord := CreateOleObject('Word.Application')
+   else
+      varWord := GetActiveOleObject('Word.Application');
 {   try
        varWord := GetActiveOleObject('Word.Application');
    except

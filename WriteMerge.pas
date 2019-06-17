@@ -551,7 +551,9 @@ var
   varWord, varDoc : Variant;
 begin
   if IsObjectActive('Word.Application') = False then
-     varWord := CreateOleObject('Word.Application');
+     varWord := CreateOleObject('Word.Application')
+  else
+     varWord := GetActiveOleObject('Word.Application');
 
   if (not VarIsNull(varWord)) then
   begin

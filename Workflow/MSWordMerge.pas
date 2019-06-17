@@ -390,7 +390,10 @@ begin
       Sleep(200);
    end
    else
+   begin
+      varWord := GetActiveOleObject('Word.Application');
       WordOpen := True;
+   end;
 
 {   try
       varWord := GetActiveOleObject('Word.Application');
@@ -413,8 +416,7 @@ begin
    if (VarIsNull(varWord)= False) then
    begin
       try
-         if WordOpen = False then
-            varWord.Visible := True;
+         varWord.Visible := True;
          varDoc := varWord.Documents.Open(TemplatePath);
          varDocs := varWord.Documents;
          Sleep(200);

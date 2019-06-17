@@ -7,7 +7,7 @@ object frmTrustJournal: TfrmTrustJournal
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = True
@@ -18,19 +18,19 @@ object frmTrustJournal: TfrmTrustJournal
     1005
     539)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label2: TLabel
     Left = 8
     Top = 8
-    Width = 27
-    Height = 17
+    Width = 24
+    Height = 15
     Caption = '&Date'
   end
   object Label8: TLabel
     Left = 8
     Top = 37
-    Width = 88
-    Height = 17
+    Width = 79
+    Height = 15
     Caption = 'Default Reason'
     FocusControl = tbDesc
   end
@@ -79,16 +79,16 @@ object frmTrustJournal: TfrmTrustJournal
   object Label1: TLabel
     Left = 261
     Top = 8
-    Width = 63
-    Height = 17
+    Width = 58
+    Height = 15
     Caption = 'Trust &Bank '
     FocusControl = cbBank
   end
   object lblBankName: TLabel
     Left = 388
     Top = 8
-    Width = 4
-    Height = 17
+    Width = 3
+    Height = 15
     ShowAccelChar = False
   end
   object lblWarning: TLabel
@@ -109,7 +109,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 110
     Top = 34
     Width = 270
-    Height = 25
+    Height = 23
     TabOrder = 2
     OnExit = tbDescExit
     OnKeyPress = tbDescKeyPress
@@ -118,7 +118,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 329
     Top = 5
     Width = 51
-    Height = 25
+    Height = 23
     Style = csDropDownList
     Sorted = True
     TabOrder = 1
@@ -136,7 +136,7 @@ object frmTrustJournal: TfrmTrustJournal
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -235,7 +235,7 @@ object frmTrustJournal: TfrmTrustJournal
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D560A00000000000036000000280000002400000012000000010020000000
-      0000000000004D1000004D100000000000000000000000808000008080000080
+      000000000000C40E0000C40E0000000000000000000000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000008080000080
@@ -395,6 +395,8 @@ object frmTrustJournal: TfrmTrustJournal
         Properties.Alignment.Horz = taLeftJustify
         Properties.ReadOnly = True
         MinWidth = 23
+        Options.Editing = False
+        Options.Focusing = False
         Width = 142
       end
       object tvLedgerREASON: TcxGridDBColumn
@@ -403,8 +405,6 @@ object frmTrustJournal: TfrmTrustJournal
         PropertiesClassName = 'TcxTextEditProperties'
         Properties.OnValidate = tvLedgerREASON1PropertiesValidate
         MinWidth = 23
-        Options.Editing = False
-        Options.Focusing = False
         Width = 238
       end
       object tvLedgerDEBIT: TcxGridDBColumn
@@ -437,7 +437,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 110
     Top = 5
     AutoSize = False
-    EditValue = 43161.6118679167d
+    EditValue = 43633.4802449653d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -770,7 +770,7 @@ object frmTrustJournal: TfrmTrustJournal
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -796,15 +796,22 @@ object frmTrustJournal: TfrmTrustJournal
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -819,13 +826,15 @@ object frmTrustJournal: TfrmTrustJournal
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 444
     Top = 335
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plAllocPrint'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 42598
@@ -833,13 +842,15 @@ object frmTrustJournal: TfrmTrustJournal
       object lblCompanyJournals: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'lblCompany'
+        Border.mmPadding = 0
         Caption = 'lblCompany'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -852,13 +863,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Journal Report'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -871,13 +884,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Date:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 265
@@ -889,13 +904,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Jrnl #'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 265
@@ -907,13 +924,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel15: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Description:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 265
@@ -926,13 +945,15 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'Label7'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Matter/Code'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 21167
@@ -945,13 +966,15 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'Label8'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 48154
@@ -964,13 +987,15 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'Label9'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Debit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 155311
@@ -983,13 +1008,15 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'Label10'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Credit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4022
@@ -1003,6 +1030,7 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'Line2'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
@@ -1015,13 +1043,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel20: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -1034,13 +1064,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel21: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3810
@@ -1053,6 +1085,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer4
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1070,6 +1103,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CREATED'
         DataPipeline = plJournalPrint
         DisplayFormat = 'dd/mm/yyyy'
@@ -1091,6 +1125,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'NJOURNAL'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -1111,6 +1146,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -1132,6 +1168,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plJournalPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1154,6 +1191,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText15: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText15'
+        Border.mmPadding = 0
         DataField = 'REASON'
         DataPipeline = plJournalPrint
         Font.Charset = DEFAULT_CHARSET
@@ -1174,13 +1212,15 @@ object frmTrustJournal: TfrmTrustJournal
       object lblEntity: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'lblEntity'
+        Border.mmPadding = 0
         Caption = 'lblEntity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 0
@@ -1193,6 +1233,7 @@ object frmTrustJournal: TfrmTrustJournal
     object ppDetailBand3: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 5292
@@ -1200,6 +1241,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer4
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plAllocPrint
         Font.Charset = DEFAULT_CHARSET
@@ -1219,6 +1261,7 @@ object frmTrustJournal: TfrmTrustJournal
       object ppDBMemo3: TppDBMemo
         DesignLayer = ppDesignLayer4
         UserName = 'DBMemo3'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'DESCR'
         DataPipeline = plAllocPrint
@@ -1247,6 +1290,7 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'DBText10'
         BlankWhenZero = True
+        Border.mmPadding = 0
         DataField = 'DEBIT'
         DataPipeline = plAllocPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1269,6 +1313,7 @@ object frmTrustJournal: TfrmTrustJournal
         DesignLayer = ppDesignLayer4
         UserName = 'DBText11'
         BlankWhenZero = True
+        Border.mmPadding = 0
         DataField = 'CREDIT'
         DataPipeline = plAllocPrint
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1290,12 +1335,14 @@ object frmTrustJournal: TfrmTrustJournal
     end
     object ppFooterBand2: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppLine4: TppLine
         DesignLayer = ppDesignLayer4
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -1308,13 +1355,15 @@ object frmTrustJournal: TfrmTrustJournal
       object ppLabel22: TppLabel
         DesignLayer = ppDesignLayer4
         UserName = 'lblFileName'
+        Border.mmPadding = 0
         Caption = 'lblFileName'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 0
