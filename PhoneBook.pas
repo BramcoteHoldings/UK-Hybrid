@@ -20,7 +20,8 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
   cxGrid, cxMemo, cxDBEdit, cxMaskEdit, cxButtonEdit, cxCustomListBox,
   cxCheckListBox, cxCurrencyEdit, Vcl.ComCtrls, Vcl.Mask, cxPC, ppFileUtils,
-  Outlook2000, uRwMapiInterfaces, Variants, ppIniStorage, Math;
+  Outlook2000, uRwMapiInterfaces, Variants, ppIniStorage, Math, cxRichEdit,
+  cxDBRichEdit;
 
 
 
@@ -647,7 +648,6 @@ type
     lCode: TLabel;
     lACN: TLabel;
     tsNotes: TcxTabSheet;
-    mlNotes: TcxDBMemo;
     tsGroups: TcxTabSheet;
     dgGroups: TcxGrid;
     tvGroups: TcxGridDBTableView;
@@ -776,6 +776,8 @@ type
     pnlPassportNo: TPanel;
     Label3: TLabel;
     DBEdit9: TDBEdit;
+    cxDBRichEdit1: TcxDBRichEdit;
+    mlNotes: TcxDBRichEdit;
     procedure aNewExecute(Sender: TObject);
     procedure qPhoneBookAfterScroll(DataSet: TDataSet);
     procedure vtTreeCollapsing(Sender: TBaseVirtualTree;
