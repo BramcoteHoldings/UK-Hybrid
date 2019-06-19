@@ -550,10 +550,6 @@ object frmPhoneBook: TfrmPhoneBook
       object tsClient: TcxTabSheet
         Caption = 'Client'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           1141
           512)
@@ -801,10 +797,6 @@ object frmPhoneBook: TfrmPhoneBook
       object tsAdditional: TcxTabSheet
         Caption = 'Additional'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         DesignSize = (
           1141
           512)
@@ -1439,27 +1431,26 @@ object frmPhoneBook: TfrmPhoneBook
       object tsNotes: TcxTabSheet
         Caption = 'Notes'
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
-        object mlNotes: TcxDBMemo
+        object cxDBRichEdit1: TcxDBRichEdit
+          Left = 1032
+          Top = 288
+          TabOrder = 0
+          Height = 89
+          Width = 185
+        end
+        object mlNotes: TcxDBRichEdit
           Left = 0
           Top = 0
           Align = alClient
           DataBinding.DataField = 'NOTE'
           DataBinding.DataSource = dsPhoneBook
-          Style.BorderStyle = ebs3D
+          Properties.ReadOnly = True
           Style.Color = clInfoBk
-          Style.LookAndFeel.Kind = lfOffice11
-          Style.LookAndFeel.NativeStyle = False
-          StyleDisabled.LookAndFeel.Kind = lfOffice11
-          StyleDisabled.LookAndFeel.NativeStyle = False
-          StyleFocused.LookAndFeel.Kind = lfOffice11
-          StyleFocused.LookAndFeel.NativeStyle = False
-          StyleHot.LookAndFeel.Kind = lfOffice11
-          StyleHot.LookAndFeel.NativeStyle = False
-          TabOrder = 0
+          TabOrder = 1
+          ExplicitLeft = 192
+          ExplicitTop = 48
+          ExplicitWidth = 185
+          ExplicitHeight = 89
           Height = 512
           Width = 1141
         end
@@ -1468,10 +1459,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Groups'
         ImageIndex = 4
         OnShow = tsGroupsShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dgGroups: TcxGrid
           Left = 0
           Top = 0
@@ -1596,10 +1583,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Custom Data'
         ImageIndex = 6
         OnShow = tsCustomDataShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object vtCustomData: TVirtualStringTree
           Left = 0
           Top = 0
@@ -1635,7 +1618,7 @@ object frmPhoneBook: TfrmPhoneBook
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
               Text = 'Value'
-              Width = 861
+              Width = 857
             end>
         end
       end
@@ -1643,10 +1626,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Matter Data'
         ImageIndex = 7
         OnShow = tsMatterDataShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object vtMatterData: TVirtualStringTree
           Left = 0
           Top = 0
@@ -1685,7 +1664,7 @@ object frmPhoneBook: TfrmPhoneBook
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
               Text = 'Value'
-              Width = 841
+              Width = 837
             end>
         end
       end
@@ -1693,10 +1672,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Matter Party'
         ImageIndex = 8
         OnShow = tsPartyMatterShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object grdMatterParty: TcxGrid
           Left = 0
           Top = 0
@@ -1828,10 +1803,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Event'
         ImageIndex = 10
         OnShow = tsEventListShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object grdParticipantEvents: TcxGrid
           Left = 0
           Top = 0
@@ -1960,10 +1931,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Marketing'
         ImageIndex = 11
         OnShow = tsMarketingShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox1: TGroupBox
           Left = 426
           Top = 6
@@ -2232,10 +2199,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Child Records'
         ImageIndex = 12
         OnShow = tsOtherNamesShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object grdOtherNames: TcxGrid
           Left = 0
           Top = 0
@@ -2761,10 +2724,6 @@ object frmPhoneBook: TfrmPhoneBook
         Caption = 'Contacts'
         ImageIndex = 14
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
@@ -7168,7 +7127,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8461,7 +8420,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+          PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -8686,7 +8645,7 @@ object frmPhoneBook: TfrmPhoneBook
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+          PrinterSetup.PaperName = 'Letter'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -10199,7 +10158,7 @@ object frmPhoneBook: TfrmPhoneBook
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
