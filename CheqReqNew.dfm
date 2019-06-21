@@ -4,8 +4,8 @@ object frmCheqReqNew: TfrmCheqReqNew
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cheque Requisition'
-  ClientHeight = 606
-  ClientWidth = 522
+  ClientHeight = 597
+  ClientWidth = 524
   Color = clBtnFace
   Constraints.MinHeight = 551
   Constraints.MinWidth = 418
@@ -21,8 +21,8 @@ object frmCheqReqNew: TfrmCheqReqNew
   OnDestroy = FormDestroy
   OnShow = FormShow
   DesignSize = (
-    522
-    606)
+    524
+    597)
   PixelsPerInch = 96
   TextHeight = 15
   object lblInv: TLabel
@@ -133,11 +133,12 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblInvoiceMsg: TLabel
     Left = 239
     Top = 10
-    Width = 16
+    Width = 18
     Height = 15
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Bill'
     Visible = False
+    ExplicitWidth = 16
   end
   object lblInvoice: TLabel
     Left = 256
@@ -155,7 +156,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblMatterDescr: TLabel
     Left = 138
     Top = 89
-    Width = 373
+    Width = 375
     Height = 13
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
@@ -303,7 +304,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 5
-    Width = 300
+    ExplicitWidth = 300
+    Width = 302
   end
   object lblAccountType: TcxLabel
     Left = 9
@@ -450,7 +452,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 1
-    Width = 395
+    Width = 394
   end
   object tbDesc: TcxTextEdit
     Left = 114
@@ -463,7 +465,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     TabOrder = 10
     OnExit = tbPayeeExit
     OnKeyPress = tbPayeeKeyPress
-    Width = 395
+    Width = 394
   end
   object tbPayee: TcxButtonEdit
     Left = 114
@@ -518,7 +520,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     TabOrder = 8
     OnExit = tbPayeeExit
     OnKeyPress = tbPayeeKeyPress
-    Width = 395
+    Width = 394
   end
   object neAmount: TcxCurrencyEdit
     Left = 252
@@ -545,7 +547,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 14
-    Width = 173
+    ExplicitWidth = 173
+    Width = 175
   end
   object cbTaxType: TcxComboBox
     Left = 114
@@ -568,7 +571,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 9
-    Width = 238
+    ExplicitWidth = 238
+    Width = 240
   end
   object cmbAuthor: TcxLookupComboBox
     Left = 114
@@ -692,7 +696,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 204
   end
   object chkBill: TcxCheckBox
-    Left = 362
+    Left = 359
     Top = 470
     Anchors = [akTop, akRight]
     Caption = 'Must bill before paying '
@@ -710,7 +714,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     OnClick = chkBillClick
   end
   object chkUrgent: TcxCheckBox
-    Left = 443
+    Left = 440
     Top = 492
     Anchors = [akTop, akRight]
     AutoSize = False
@@ -730,7 +734,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 68
   end
   object chkHeld: TcxCheckBox
-    Left = 419
+    Left = 416
     Top = 449
     Anchors = [akTop, akRight]
     AutoSize = False
@@ -750,8 +754,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 92
   end
   object btnSave: TcxButton
-    Left = 284
-    Top = 548
+    Left = 334
+    Top = 538
     Width = 81
     Height = 27
     Caption = '&Ok'
@@ -848,8 +852,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     OnClick = btnSaveClick
   end
   object btnCancel: TcxButton
-    Left = 374
-    Top = 548
+    Left = 424
+    Top = 538
     Width = 81
     Height = 27
     Caption = '&Cancel'
@@ -961,13 +965,13 @@ object frmCheqReqNew: TfrmCheqReqNew
     OnExit = tbPayeeExit
     OnKeyPress = tbPayeeKeyPress
     Height = 46
-    Width = 500
+    Width = 499
   end
   object dtpReqDate: TEnforceCustomDateEdit
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43632.3659871644d
+    EditValue = 43636.8212636458d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -976,7 +980,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 0
     AllowForwardDating = True
-    Width = 221
+    ExplicitWidth = 221
+    Width = 223
   end
   object chkDeposit: TcxCheckBox
     Left = 6
@@ -1053,8 +1058,8 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object StatusBar: TdxStatusBar
     Left = 0
-    Top = 584
-    Width = 522
+    Top = 575
+    Width = 524
     Height = 22
     Panels = <
       item
@@ -1072,6 +1077,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
+    ExplicitTop = 584
+    ExplicitWidth = 522
   end
   object cxLabel1: TcxLabel
     Left = 9
@@ -1084,7 +1091,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Anchors = [akLeft, akTop, akRight]
     Properties.OnValidate = teChequeNoPropertiesValidate
     TabOrder = 15
-    Width = 226
+    ExplicitWidth = 226
+    Width = 228
   end
   object cmbInvoice: TcxLookupComboBox
     Left = 114
@@ -1124,9 +1132,44 @@ object frmCheqReqNew: TfrmCheqReqNew
     Top = 170
   end
   object qryCheqReq: TUniQuery
+    UpdatingTable = 'CHEQREQ'
+    KeyFields = 'ncheqreq'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT C.*, C.ROWID FROM CHEQREQ C WHERE C.NCHEQREQ = :NCHEQREQ')
+      
+        'SELECT c.ncheqreq, c.fileid, c.ledger, c.payee, c.descr, c.autho' +
+        'r, c.reqdate,'
+      
+        '       c.bank, c.held, c.groupable, c.anticipated, c.billed, c.n' +
+        'ote, c.nmemo,'
+      
+        '       c.invoicedate, c.converted, c.trust, c.PRIVATE, c.taxcode' +
+        ','
+      
+        '       c.sundrytype, c.invoicesupplied, c.nmatter, c.refno, c.ur' +
+        'gent,'
+      
+        '       c.billno, c.amount, c.tax, c.ncheque, c.rev_ncheqreq, c.s' +
+        'ystem_date,'
+      
+        '       c.forcepay, c.nname, c.creditor_invoice, c.credit_note, c' +
+        '.TYPE,'
+      
+        '       c.cheque_group_id, c.locus_txnum, c.authorised_by, c.auth' +
+        'orised,'
+      
+        '       c.dep_account_type, c.dep_account, c.mod_descr, c.ndeposi' +
+        'taccount,'
+      
+        '       c.chq_req_no, c.mod_date, c.mod_by, c.ninvoice, c.chqno, ' +
+        'c.printer,'
+      
+        '       c.PATH, c.cheqreq_copy_ext, c.entity, c.currency, c.fx_ra' +
+        'te,'
+      
+        '       c.base_ccy_amount, c.base_ccy_tax, c.transtype, c.rowid, ' +
+        'c.amount + c.tax as total'
+      '  FROM cheqreq c WHERE C.NCHEQREQ = :NCHEQREQ')
     CachedUpdates = True
     Left = 331
     Top = 99
