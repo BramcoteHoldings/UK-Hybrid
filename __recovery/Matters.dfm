@@ -528,10 +528,6 @@ object frmMatters: TfrmMatters
     object tabClient: TcxTabSheet
       Caption = 'Client'
       ImageIndex = 42
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGroupBox3: TcxGroupBox
         Left = 3
         Top = 348
@@ -1608,10 +1604,6 @@ object frmMatters: TfrmMatters
     object tabOverview: TcxTabSheet
       Caption = 'Ledgers'
       ImageIndex = 73
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1362
         527)
@@ -2920,10 +2912,6 @@ object frmMatters: TfrmMatters
     object tabArchive: TcxTabSheet
       Caption = 'Archived'
       ImageIndex = 44
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1362
         527)
@@ -3954,10 +3942,6 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3976,7 +3960,6 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
-          ExplicitHeight = 497
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4026,7 +4009,6 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
-            ExplicitTop = 469
           end
         end
         object tabCalculationData: TcxTabSheet
@@ -4043,10 +4025,6 @@ object frmMatters: TfrmMatters
     object tabInvoices: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel3: TPanel
         Left = 0
         Top = 495
@@ -4769,10 +4747,6 @@ object frmMatters: TfrmMatters
     object tabMatterNotes: TcxTabSheet
       Caption = 'Matter Notes'
       ImageIndex = 47
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel10: TPanel
         Left = 0
         Top = 492
@@ -5134,10 +5108,6 @@ object frmMatters: TfrmMatters
       Caption = 'Revenue Notes'
       ImageIndex = 45
       OnShow = tabDebtorNotesShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxgrdDebtorNotes: TcxGrid
         Left = 0
         Top = 0
@@ -5731,10 +5701,6 @@ object frmMatters: TfrmMatters
     object tabReceipts: TcxTabSheet
       Caption = 'Receipts'
       ImageIndex = 20
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pageReceipts: TcxPageControl
         Left = 0
         Top = 0
@@ -5753,10 +5719,6 @@ object frmMatters: TfrmMatters
         object tabReceiptList: TcxTabSheet
           Caption = 'Receipts'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object dbgrReceipts: TcxGrid
             Left = 0
             Top = 0
@@ -5951,10 +5913,6 @@ object frmMatters: TfrmMatters
           Caption = 'Receipt Requests'
           ImageIndex = 1
           OnShow = tabReceiptReqsShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 471
@@ -6101,7 +6059,6 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
-      ExplicitHeight = 505
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6368,10 +6325,6 @@ object frmMatters: TfrmMatters
       ImageIndex = 24
       OnResize = tabGraphResize
       OnShow = tabGraphShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object tabByAuthor: TcxPageControl
         Left = 0
         Top = 0
@@ -6390,10 +6343,6 @@ object frmMatters: TfrmMatters
         object tabBenchmark: TcxTabSheet
           Caption = 'By Author'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           DesignSize = (
             1332
             519)
@@ -6467,10 +6416,6 @@ object frmMatters: TfrmMatters
           Caption = 'Benchmark'
           ImageIndex = 1
           OnShow = cxTabSheet16Show
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           DesignSize = (
             1332
             519)
@@ -6780,7 +6725,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -6832,10 +6776,6 @@ object frmMatters: TfrmMatters
       Caption = 'Documents'
       ImageIndex = 33
       OnShow = tabDocsShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1362
         527)
@@ -6855,7 +6795,6 @@ object frmMatters: TfrmMatters
           Height = 527
           ParentShowHint = False
           ShowHint = False
-          ExplicitWidth = 1334
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -6883,7 +6822,6 @@ object frmMatters: TfrmMatters
             CustomCaptionButtons.Buttons = <>
             ShowCaption = False
             TabsProperties.CustomButtons.Buttons = <>
-            ExplicitWidth = 1334
             DockingType = 0
             OriginalWidth = 163
             OriginalHeight = 124
@@ -7991,10 +7929,6 @@ object frmMatters: TfrmMatters
     object tabTransit: TcxTabSheet
       Caption = 'Transit'
       ImageIndex = 14
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrTransit: TcxGrid
         Left = 0
         Top = 0
@@ -8415,10 +8349,6 @@ object frmMatters: TfrmMatters
     object tabProject: TcxTabSheet
       Caption = 'Projects'
       ImageIndex = 17
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pageProjectTasks: TcxPageControl
         Left = 0
         Top = 132
@@ -8479,7 +8409,6 @@ object frmMatters: TfrmMatters
               ParentColor = True
               ShowCaption = False
               TabOrder = 0
-              ExplicitHeight = 243
               object lblTotalProjTime: TcxLabel
                 Left = 6
                 Top = 10
@@ -9373,10 +9302,6 @@ object frmMatters: TfrmMatters
       Caption = 'Diary'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel4: TPanel
         Left = 0
         Top = 495
@@ -9635,10 +9560,6 @@ object frmMatters: TfrmMatters
       Caption = 'Tasks'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel1: TPanel
         Left = 0
         Top = 492
@@ -9906,10 +9827,6 @@ object frmMatters: TfrmMatters
     object tabAuthorChange: TcxTabSheet
       Caption = 'Carriage Changes'
       ImageIndex = 74
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrMatterAuthor: TcxGrid
         Left = 0
         Top = 0

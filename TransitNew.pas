@@ -14,7 +14,7 @@ uses
   dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
   dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxDBEditorLnks,
   dxPSTextLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
-  dxPScxSchedulerLnk;
+  dxPScxSchedulerLnk, cxClasses;
 
 type
   TfrmTransitNew = class(TForm)
@@ -234,8 +234,8 @@ begin
           Open;
         end;
 
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+        if dmAxiom.uniInsight.InTransaction = True then
+             dmAxiom.uniInsight.Rollback;
         dmAxiom.uniInsight.StartTransaction;
 
 {      if rgType.ItemIndex = 0 then

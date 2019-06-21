@@ -869,8 +869,8 @@ begin
           begin
             try
               bPostingFailed := False;
-              if dmAxiom.uniInsight.InTransaction then
-                dmAxiom.uniInsight.Commit;
+              if dmAxiom.uniInsight.InTransaction = True then
+                dmAxiom.uniInsight.Rollback;
               dmAxiom.uniInsight.StartTransaction;
               // Create the Cheque entry - as we are using Cached Updates
               // this won't save until we explicitly ApplyUpdates

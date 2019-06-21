@@ -1403,8 +1403,8 @@ begin
   try
     if dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '' then
     begin
-       if dmAxiom.uniInsight.InTransaction then
-          dmAxiom.uniInsight.Commit;
+       if dmAxiom.uniInsight.InTransaction = True then
+          dmAxiom.uniInsight.Rollback;
        dmAxiom.uniInsight.StartTransaction;
        // create an oposite alloc entry
 

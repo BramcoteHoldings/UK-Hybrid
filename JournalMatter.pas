@@ -275,8 +275,8 @@ begin
             Application.ProcessMessages;
       }
           bPostingFailed := False;
-          if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+          if dmAxiom.uniInsight.InTransaction = True then
+             dmAxiom.uniInsight.Rollback;
           dmAxiom.uniInsight.StartTransaction;
 
           case rgType.ItemIndex of
