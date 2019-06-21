@@ -129,7 +129,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label10: TLabel
     Left = 6
-    Top = 36
+    Top = 35
     Width = 36
     Height = 15
     Caption = 'Bill Ref'
@@ -1097,17 +1097,6 @@ object frmInvoice: TfrmInvoice
     Height = 19
     Width = 111
   end
-  object lblInvoice: TcxLabel
-    Left = 53
-    Top = 34
-    AutoSize = False
-    ParentFont = False
-    Style.StyleController = dmAxiom.LabelStyle
-    Properties.Alignment.Horz = taRightJustify
-    Height = 18
-    Width = 62
-    AnchorX = 115
-  end
   object lblNMemo: TcxLabel
     Left = 53
     Top = 56
@@ -1127,7 +1116,7 @@ object frmInvoice: TfrmInvoice
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvNone
     BevelOuter = bvNone
-    TabOrder = 31
+    TabOrder = 30
     LookAndFeel.NativeStyle = True
     RootLevelOptions.DetailTabsPosition = dtpTop
     object tvBillItems: TcxGridDBTableView
@@ -1836,7 +1825,7 @@ object frmInvoice: TfrmInvoice
     Style.Shadow = True
     Style.TransparentBorder = True
     StyleDisabled.LookAndFeel.NativeStyle = False
-    TabOrder = 32
+    TabOrder = 31
     Transparent = True
     Height = 132
     Width = 227
@@ -1978,7 +1967,7 @@ object frmInvoice: TfrmInvoice
     Width = 87
     Height = 23
     Caption = 'Apply Interim'
-    TabOrder = 33
+    TabOrder = 32
     OnClick = btnInterimDateClick
   end
   object dtpExpectedPayment: TDateTimePicker
@@ -1988,7 +1977,7 @@ object frmInvoice: TfrmInvoice
     Height = 23
     Date = 35855.939284826410000000
     Time = 35855.939284826410000000
-    TabOrder = 34
+    TabOrder = 33
   end
   object lblMatter: TcxLabel
     Left = 560
@@ -2007,7 +1996,7 @@ object frmInvoice: TfrmInvoice
     Top = 106
     Width = 198
     Height = 247
-    TabOrder = 36
+    TabOrder = 35
     Visible = False
     object lblUnProcessedTime: TLabel
       Left = 9
@@ -2059,7 +2048,7 @@ object frmInvoice: TfrmInvoice
       A0A0A0A0A0A0D6D6D6FFFFFFC4C4C4A4A4A4E4E4E4999999E5E5E5C8C8C89C9C
       9CE7E7E7FBFBFBE6E6E6FFFFFFFBFBFBA1A1A1929292F9F9F9FFFFFFC6C6C689
       89899E9E9E9C9C9CEEEEEEFDFDFDBCBCBC8E8E8EA4A4A48B8B8B}
-    TabOrder = 37
+    TabOrder = 36
     OnClick = pbSpellCheckClick
   end
   object edtDiscountGST: TEdit
@@ -2071,7 +2060,7 @@ object frmInvoice: TfrmInvoice
     AutoSize = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 38
+    TabOrder = 37
   end
   object btnNotes: TBitBtn
     Left = 556
@@ -2079,7 +2068,7 @@ object frmInvoice: TfrmInvoice
     Width = 87
     Height = 24
     Caption = 'Notes'
-    TabOrder = 43
+    TabOrder = 42
     OnClick = btnNotesClick
   end
   object neSundTax: TcxCurrencyEdit
@@ -2102,13 +2091,13 @@ object frmInvoice: TfrmInvoice
     Width = 86
   end
   object lblDraftBillCaption: TcxLabel
-    Left = 173
-    Top = 29
+    Left = 131
+    Top = 27
     Caption = 'Draft Bill'
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clWindowText
-    Style.Font.Height = -16
+    Style.Font.Height = -17
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = [fsBold]
     Style.IsFontAssigned = True
@@ -2171,7 +2160,7 @@ object frmInvoice: TfrmInvoice
     Anchors = [akRight, akBottom]
     AutoSize = False
     Caption = 'Show Unbilled Transactions'
-    TabOrder = 46
+    TabOrder = 45
     Transparent = True
     Visible = False
     OnClick = chkUnbilledTransactionsClick
@@ -2207,8 +2196,23 @@ object frmInvoice: TfrmInvoice
     Properties.SaveTime = False
     Properties.ShowTime = False
     Properties.UseNullString = True
-    TabOrder = 48
+    TabOrder = 47
     Width = 114
+  end
+  object lblInvoice: TcxTextEdit
+    Left = 53
+    Top = 30
+    AutoSize = False
+    BeepOnEnter = False
+    Properties.Alignment.Horz = taRightJustify
+    Style.BorderStyle = ebs3D
+    Style.LookAndFeel.NativeStyle = False
+    StyleDisabled.LookAndFeel.NativeStyle = False
+    StyleFocused.LookAndFeel.NativeStyle = False
+    StyleHot.LookAndFeel.NativeStyle = False
+    TabOrder = 52
+    Height = 23
+    Width = 62
   end
   object ilstItems: TImageList
     Left = 832

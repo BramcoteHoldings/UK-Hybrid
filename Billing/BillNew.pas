@@ -134,7 +134,6 @@ type
     qryInvoiceDraftBill: TUniQuery;
     qryMatterDraftBill: TUniQuery;
     lblDispatched: TcxLabel;
-    lblInvoice: TcxLabel;
     lblNMemo: TcxLabel;
     qrySubBills: TUniQuery;
     qryAllocSubBill: TUniQuery;
@@ -414,6 +413,7 @@ type
     qryCheqReqReverse: TUniQuery;
     lblCreatedBy: TLabel;
     lblPostedBy: TLabel;
+    lblInvoice: TcxTextEdit;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -782,7 +782,7 @@ begin
     if (MatterDefaultTax <> '') and (MatterDefaultTax <> DefaultTax) then
       DefaultTax := MatterDefaultTax;
 
-   lblInvoice.Caption := qryInvoice.FieldByName('REFNO').AsString;
+   lblInvoice.Text := qryInvoice.FieldByName('REFNO').AsString;
    lblNMemo.Caption := qryInvoice.FieldByName('NMEMO').AsString;
 
    // RDW - Added to dispalay Autorised By (if Applicable
@@ -809,7 +809,7 @@ begin
      lblDraftBillCaption.Visible := True;
      if PreassignBill() then
      begin
-       if VarIsNull(qryInvoice.FieldByName('DRAFT_BILL_NO').AsVariant) then
+       if VarIsNull(qryInvoice.FieldByName('DRAFT_BILL_NO').AsVariant) = True then
        begin
          qryInvoice.Edit;
          qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := NextRefno();
@@ -817,7 +817,7 @@ begin
             qryInvoice.FieldByName('BPAY_REFERENCE').AsString  := CreateBPayReference(qryInvoice.FieldByName('DRAFT_BILL_NO').AsString);
          qryInvoice.Post;
        end;
-       lblInvoice.Caption := qryInvoice.FieldByName('DRAFT_BILL_NO').AsString;
+       lblInvoice.Text := qryInvoice.FieldByName('DRAFT_BILL_NO').AsString;
      end;
 
       with procUnprocessedTime do
@@ -1986,26 +1986,26 @@ procedure TfrmInvoice.tbtnPostClick(Sender : TObject);
   end;
 
 function TfrmInvoice.SaveInvoice : Boolean;
-  var
+var
     CalculatedFeesTax, nFee, dGstFree : currency;
     bFeeTaxCorrect : Boolean;
-  begin
-    bFeeTaxCorrect := true;
-    if not bNoSave then
-    begin
+begin
+   bFeeTaxCorrect := true;
+   if not bNoSave then
+   begin
       try
-        if not qryInvoice.Modified then
-          qryInvoice.Edit;
+         if not qryInvoice.Modified then
+            qryInvoice.Edit;
 
-        qryFeeAmount.Close;
-        qryFeeAmount.ParamByName('nmatter').AsInteger := StrToInt(MatterString(qryInvoice.FieldByName('FILEID').AsString, 'NMATTER'));
-        qryFeeAmount.ParamByName('nmemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-        qryFeeAmount.Open;
+         qryFeeAmount.Close;
+         qryFeeAmount.ParamByName('nmatter').AsInteger := StrToInt(MatterString(qryInvoice.FieldByName('FILEID').AsString, 'NMATTER'));
+         qryFeeAmount.ParamByName('nmemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+         qryFeeAmount.Open;
 
-        nFee := qryFeeAmount.FieldByName('TAXABLE_AMOUNT').AsCurrency;
-        dGstFree := qryFeeAmount.FieldByName('AMOUNT').AsCurrency - qryFeeAmount.FieldByName('TAXABLE_AMOUNT').AsCurrency;
+         nFee := qryFeeAmount.FieldByName('TAXABLE_AMOUNT').AsCurrency;
+         dGstFree := qryFeeAmount.FieldByName('AMOUNT').AsCurrency - qryFeeAmount.FieldByName('TAXABLE_AMOUNT').AsCurrency;
 
-        nFee := neFees.AsCurrency - neFeesTaxFree.AsCurrency;
+         nFee := neFees.AsCurrency - neFeesTaxFree.AsCurrency;
         { if neFees.AsCurrency <> 0 then
           begin
           if (neFees.AsCurrency < nFee) then
@@ -2014,98 +2014,100 @@ function TfrmInvoice.SaveInvoice : Boolean;
           if (nFee > neFees.AsCurrency) then
           nFee := neFees.AsCurrency - nFee;
           end; }
-        if nFee <> 0
-        then
-        begin
-          if MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS') <> '' then
-            CalculatedFeesTax := TaxCalc(nFee, 'BILL', MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS'), TaxDate)
-          else
-            CalculatedFeesTax := TaxCalc(nFee, 'BILL', 'GST', Now);
+         if nFee <> 0 then
+         begin
+            if MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS') <> '' then
+               CalculatedFeesTax := TaxCalc(nFee, 'BILL', MatterString(qryInvoice.FieldByName('FILEID').AsString, 'FEE_TAX_BASIS'), TaxDate)
+            else
+               CalculatedFeesTax := TaxCalc(nFee, 'BILL', 'GST', Now);
 
-          if ((CalculatedFeesTax + 0.01) < neFeesTax.AsCurrency) and (qryInvoice.FieldByName('DISPATCHED').AsString = '') and (neFees.AsCurrency <> 0.00) then
-          begin
-            if MsgAsk('GST amount does not match the actual taxable amount.' + chr(13) + 'Would you like to continue?') = mrNO then
-              bFeeTaxCorrect := False;
-          end;
-        end;
-        if bFeeTaxCorrect then
-          if qryInvoice.FieldByName('DISPATCHED').IsNull then
-          begin
+            if ((CalculatedFeesTax + 0.01) < neFeesTax.AsCurrency) and (qryInvoice.FieldByName('DISPATCHED').AsString = '') and (neFees.AsCurrency <> 0.00) then
+            begin
+               if MsgAsk('GST amount does not match the actual taxable amount.' + chr(13) + 'Would you like to continue?') = mrNO then
+                  bFeeTaxCorrect := False;
+            end;
+         end;
+         if bFeeTaxCorrect then
+            if qryInvoice.FieldByName('DISPATCHED').IsNull then
+            begin
             //
             // Bill not yet finalised.
             //
             // Save the accounting stuff
-            qryInvoice.FieldByName('BANK_ACCT').AsString := dmAxiom.Entity;
-            qryInvoice.FieldByName('FEES').AsCurrency := neFees.AsCurrency;
+               qryInvoice.FieldByName('BANK_ACCT').AsString := dmAxiom.Entity;
+               qryInvoice.FieldByName('FEES').AsCurrency := neFees.AsCurrency;
             // qryInvoice.FieldByName('FEESTAX').AsCurrency := neFeesTax.AsCurrency;
-            qryInvoice.FieldByName('DISB').AsCurrency := neDisb.AsCurrency;
-            qryInvoice.FieldByName('ANTD').AsCurrency := neAntd.AsCurrency;
-            qryInvoice.FieldByName('UPCRED').AsCurrency := neUpCred.AsCurrency;
-            qryInvoice.FieldByName('SUND').AsCurrency := neSund.AsCurrency;
+               qryInvoice.FieldByName('DISB').AsCurrency := neDisb.AsCurrency;
+               qryInvoice.FieldByName('ANTD').AsCurrency := neAntd.AsCurrency;
+               qryInvoice.FieldByName('UPCRED').AsCurrency := neUpCred.AsCurrency;
+               qryInvoice.FieldByName('SUND').AsCurrency := neSund.AsCurrency;
 
-            qryInvoice.FieldByName('FEESTAX').AsCurrency := TaxFees;
-            qryInvoice.FieldByName('DISBTAX').AsCurrency := TaxDisb;
-            qryInvoice.FieldByName('ANTDTAX').AsCurrency := TaxAntD;
-            qryInvoice.FieldByName('UPCREDTAX').AsCurrency := TaxUpCred;
-            qryInvoice.FieldByName('SUNDTAX').AsCurrency := TaxSund;
+               qryInvoice.FieldByName('FEESTAX').AsCurrency := TaxFees;
+               qryInvoice.FieldByName('DISBTAX').AsCurrency := TaxDisb;
+               qryInvoice.FieldByName('ANTDTAX').AsCurrency := TaxAntD;
+               qryInvoice.FieldByName('UPCREDTAX').AsCurrency := TaxUpCred;
+               qryInvoice.FieldByName('SUNDTAX').AsCurrency := TaxSund;
 
-            qryInvoice.FieldByName('FEESTAXFREE').AsCurrency := neFeesTaxFree.AsCurrency;
-            qryInvoice.FieldByName('DISBTAXFREE').AsCurrency := neDisbTaxFree.AsCurrency;
-            qryInvoice.FieldByName('ANTDTAXFREE').AsCurrency := neAntdTaxFree.AsCurrency;
-            qryInvoice.FieldByName('UPCREDTAXFREE').AsCurrency := neUpCredTaxFree.AsCurrency;
-            qryInvoice.FieldByName('SUNDTAXFREE').AsCurrency := neSundTaxFree.AsCurrency;
+               qryInvoice.FieldByName('FEESTAXFREE').AsCurrency := neFeesTaxFree.AsCurrency;
+               qryInvoice.FieldByName('DISBTAXFREE').AsCurrency := neDisbTaxFree.AsCurrency;
+               qryInvoice.FieldByName('ANTDTAXFREE').AsCurrency := neAntdTaxFree.AsCurrency;
+               qryInvoice.FieldByName('UPCREDTAXFREE').AsCurrency := neUpCredTaxFree.AsCurrency;
+               qryInvoice.FieldByName('SUNDTAXFREE').AsCurrency := neSundTaxFree.AsCurrency;
 
-            qryInvoice.FieldByName('TAX').AsCurrency := TaxFees + TaxSund + TaxDisb + TaxAntD + TaxUpCred;
+               qryInvoice.FieldByName('TAX').AsCurrency := TaxFees + TaxSund + TaxDisb + TaxAntD + TaxUpCred;
 
-            qryInvoice.FieldByName('TRUST').AsCurrency := neTrust.AsCurrency;
-            qryInvoice.FieldByName('DEBTORS').AsCurrency := TableCurrency('MATTER', 'FILEID', qryInvoice.FieldByName('FILEID').AsString, 'DEBTORS');
+               qryInvoice.FieldByName('TRUST').AsCurrency := neTrust.AsCurrency;
+               qryInvoice.FieldByName('DEBTORS').AsCurrency := TableCurrency('MATTER', 'FILEID', qryInvoice.FieldByName('FILEID').AsString, 'DEBTORS');
 
-            if not dtpInterim.Checked then
-              qryInvoice.FieldByName('INTERIM').Value := Null
-            else
-              qryInvoice.FieldByName('INTERIM').AsDateTime := trunc(dtpInterim.DateTime);
+               if not dtpInterim.Checked then
+                  qryInvoice.FieldByName('INTERIM').Value := Null
+               else
+                  qryInvoice.FieldByName('INTERIM').AsDateTime := trunc(dtpInterim.DateTime);
 
-            qryInvoice.FieldByName('NBILL_TO').AsInteger := FNBill_To;
-            qryInvoice.FieldByName('BILL_TO').AsString := lblBillTo.Caption;
-            qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := StrToCurr(edtDiscountGST.Text);
-          end;
+               qryInvoice.FieldByName('NBILL_TO').AsInteger := FNBill_To;
+               qryInvoice.FieldByName('BILL_TO').AsString := lblBillTo.Caption;
+               qryInvoice.FieldByName('DISCOUNT_GST').AsCurrency := StrToCurr(edtDiscountGST.Text);
+            end;
 
-        qryInvoice.FieldByName('BILLTEMPLATE').AsString := lblBillTemplate.Caption;
+            qryInvoice.FieldByName('BILLTEMPLATE').AsString := lblBillTemplate.Caption;
         // qryInvoice.FieldByName('INV_NOTE').AsString := tbNote.Text;
         // qryInvoice.FieldByName('INV_NOTE').AsString := memoNotes.Text;
-        qryInvoice.FieldByName('EXPPAYMENT').AsDateTime := trunc(dtpExpectedPayment.DateTime);
+            qryInvoice.FieldByName('EXPPAYMENT').AsDateTime := trunc(dtpExpectedPayment.DateTime);
 
-        qryInvoice.FieldByName('AUTHORISED').AsString := 'N';
-        if qryInvoice.FieldByName('DISPATCHED').IsNull then
-          qryInvoice.FieldByName('IS_DRAFT').AsString := 'Y';
-        if Boolean(cbAuthorise.EditValue) then
-        begin
-          qryInvoice.FieldByName('AUTHORISED').AsString := 'Y';
-          if qryInvoice.FieldByName('DISPATCHED').IsNull then
-            qryInvoice.FieldByName('REFNO').AsString := SystemString('AUTH_BILL_REF');
-        end;
+            qryInvoice.FieldByName('AUTHORISED').AsString := 'N';
+            if qryInvoice.FieldByName('DISPATCHED').IsNull then
+               qryInvoice.FieldByName('IS_DRAFT').AsString := 'Y';
+            if Boolean(cbAuthorise.EditValue) then
+            begin
+               qryInvoice.FieldByName('AUTHORISED').AsString := 'Y';
+               if qryInvoice.FieldByName('DISPATCHED').IsNull then
+                  qryInvoice.FieldByName('REFNO').AsString := SystemString('AUTH_BILL_REF');
+            end;
 
-        qryInvoice.FieldByName('PRIVATE').AsString := 'N';
-        if Boolean(cbPrivate.EditValue) then
-          qryInvoice.FieldByName('PRIVATE').AsString := 'Y';
+            qryInvoice.FieldByName('PRIVATE').AsString := 'N';
+            if Boolean(cbPrivate.EditValue) then
+               qryInvoice.FieldByName('PRIVATE').AsString := 'Y';
 
-        qryInvoice.FieldByName('SPLIT_BILL').AsString := 'N';
-        if Boolean(cbSplitBill.EditValue) then
-          qryInvoice.FieldByName('SPLIT_BILL').AsString := 'Y';
+            qryInvoice.FieldByName('SPLIT_BILL').AsString := 'N';
+            if Boolean(cbSplitBill.EditValue) then
+               qryInvoice.FieldByName('SPLIT_BILL').AsString := 'Y';
 
-        qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'N';
-        if Boolean(cbAssessed.EditValue) then
-          qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'Y';
+            qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'N';
+            if Boolean(cbAssessed.EditValue) then
+               qryInvoice.FieldByName('ASSESSED_BILL').AsString := 'Y';
 
-        qryInvoice.FieldByName('PROFORMA').AsString := 'N';
-        if Boolean(cbProforma.EditValue) then
-          qryInvoice.FieldByName('PROFORMA').AsString := 'Y';
+            qryInvoice.FieldByName('PROFORMA').AsString := 'N';
+            if Boolean(cbProforma.EditValue) then
+               qryInvoice.FieldByName('PROFORMA').AsString := 'Y';
 
-        qryInvoice.FieldByName('MASTER_BILL').AsString := 'N';
-        if Boolean(cbMasterBill.EditValue) then
-          qryInvoice.FieldByName('MASTER_BILL').AsString := 'Y';
+            qryInvoice.FieldByName('MASTER_BILL').AsString := 'N';
+            if Boolean(cbMasterBill.EditValue) then
+               qryInvoice.FieldByName('MASTER_BILL').AsString := 'Y';
 
-        qryInvoice.FieldByName('BILL_DATE').AsDateTime := dtpBillDate.Date;
+            qryInvoice.FieldByName('BILL_DATE').AsDateTime := dtpBillDate.Date;
+
+//            qryInvoice.FieldByName('REFNO').AsString := lblInvoice.Text;
+            qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := lblInvoice.Text;
 
         { if edtDiscount.text <> '' then
           begin
@@ -2130,19 +2132,19 @@ function TfrmInvoice.SaveInvoice : Boolean;
           end;
           end; }
 
-        qryInvoice.Post;
+         qryInvoice.Post;
 
         // post the sub bills
-        if (SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('SPLIT_BILL').AsString = 'Y') then
-          dmAxiom.upDateSubBills(qryInvoice.FieldByName('NMEMO').AsInteger);
+         if (SystemString('ALLOW_SPLIT_BILLS') = 'Y') and (qryInvoice.FieldByName('SPLIT_BILL').AsString = 'Y') then
+            dmAxiom.upDateSubBills(qryInvoice.FieldByName('NMEMO').AsInteger);
 
         // qryInvoice.ApplyUpdates;
       except
-        bNoSave := true;
+         bNoSave := true;
       end;
-    end;
-    Result := bFeeTaxCorrect;
-  end;
+   end;
+   Result := bFeeTaxCorrect;
+end;
 
 procedure TfrmInvoice.FormClose(Sender: TObject; var Action : TCloseAction);
 var
