@@ -1926,13 +1926,16 @@ var
    ATabIndex: integer;
    Form: TCustomForm;
 begin
-  Form := GetParentForm(aForm);
+   Form := GetParentForm(aForm);
 
    try
     if not(fsModal in aForm.FormState) and (Form.Name = 'frmDesktop')  then
     begin
       aForm.Release;
-      ATabIndex := frmDesktop.TabIndex;
+      if dmAxiom.ATabIndex = -1 then
+         ATabIndex := frmDesktop.PageForms.ActivePageIndex
+      else
+         ATabIndex := dmAxiom.ATabIndex;
       if ATabIndex = -1 then
       begin
          if frmDesktop.pageForms.ActivePage <> NIL then

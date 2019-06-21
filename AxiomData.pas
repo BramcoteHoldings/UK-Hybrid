@@ -1004,6 +1004,7 @@ type
     FAuth_Password: string;
     FIs_Cashier: string;
     FIs_CreditController: string;
+    FTabIndex: integer;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1222,6 +1223,7 @@ type
     property Is_Credit_Controller: string read FIs_CreditController write FIs_CreditController;
 
     function Ping(const AHost : string) : Boolean;
+    property ATabIndex: integer read FTabIndex write FTabIndex;
   end;
 
 var
