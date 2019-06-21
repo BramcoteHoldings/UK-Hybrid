@@ -4041,7 +4041,8 @@ begin
    end;
 //  FreeAndNil(FOutlookIntegrator);
    if Assigned(MatterLabel) then
-      MatterLabel.Free;
+      FreeAndNil(MatterLabel);
+
    if frmDesktop.pagMainControl.ActivePageIndex = 1 then
    begin
       if Self.WindowState = wsMaximized then
