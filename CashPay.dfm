@@ -45,8 +45,6 @@ object frmCashpay: TfrmCashpay
       item
         Width = 50
       end>
-    ExplicitTop = 573
-    ExplicitWidth = 973
   end
   object pagCashbook: TcxPageControl
     Left = 0
@@ -60,8 +58,6 @@ object frmCashpay: TfrmCashpay
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
     OnPageChanging = pagCashbookPageChanging
-    ExplicitWidth = 973
-    ExplicitHeight = 545
     ClientRectBottom = 597
     ClientRectLeft = 4
     ClientRectRight = 1114
@@ -69,29 +65,28 @@ object frmCashpay: TfrmCashpay
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 8
+        Width = 1110
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         HotZone.SizePercent = 58
         AlignSplitter = salBottom
         Control = Panel3
+        ExplicitWidth = 8
       end
       object Panel1: TPanel
         Left = 0
         Top = 259
-        Width = 965
-        Height = 256
+        Width = 1110
+        Height = 312
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 965
+        ExplicitHeight = 256
         object Panel2: TPanel
           Left = 0
           Top = 0
@@ -197,7 +192,7 @@ object frmCashpay: TfrmCashpay
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 965
+        Width = 1110
         Height = 251
         Align = alTop
         BevelOuter = bvNone
@@ -206,7 +201,7 @@ object frmCashpay: TfrmCashpay
         object Panel4: TPanel
           Left = 0
           Top = 0
-          Width = 965
+          Width = 1110
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -229,7 +224,7 @@ object frmCashpay: TfrmCashpay
             Transparent = True
           end
           object Label17: TLabel
-            Left = 993
+            Left = 1138
             Top = 8
             Width = 35
             Height = 15
@@ -239,7 +234,7 @@ object frmCashpay: TfrmCashpay
             ExplicitLeft = 848
           end
           object tbSearch: TEdit
-            Left = 1041
+            Left = 1186
             Top = 5
             Width = 60
             Height = 23
@@ -612,8 +607,6 @@ object frmCashpay: TfrmCashpay
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 12
-      ExplicitWidth = 965
-      ExplicitHeight = 515
       object lblBank: TLabel
         Left = 9
         Top = 19
@@ -2625,7 +2618,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3176,7 +3169,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350

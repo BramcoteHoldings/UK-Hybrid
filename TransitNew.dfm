@@ -20,12 +20,12 @@ object frmTransitNew: TfrmTransitNew
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 13
   object lblInvoice: TLabel
     Left = 456
     Top = 488
     Width = 3
-    Height = 13
+    Height = 15
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -12
@@ -46,77 +46,77 @@ object frmTransitNew: TfrmTransitNew
     object Label2: TLabel
       Left = 16
       Top = 94
-      Width = 70
-      Height = 14
+      Width = 72
+      Height = 13
       Caption = 'Date Received'
     end
     object Label4: TLabel
       Left = 16
       Top = 277
-      Width = 37
-      Height = 14
+      Width = 38
+      Height = 13
       Caption = 'Reason'
     end
     object Label8: TLabel
       Left = 16
       Top = 117
-      Width = 37
-      Height = 14
+      Width = 41
+      Height = 13
       Caption = 'Amount'
     end
     object lblTaxDescr: TLabel
       Left = 200
       Top = 184
       Width = 3
-      Height = 14
+      Height = 13
     end
     object Label5: TLabel
       Left = 16
       Top = 399
       Width = 51
-      Height = 14
+      Height = 13
       Caption = 'Reference'
     end
     object Label6: TLabel
       Left = 16
       Top = 141
-      Width = 23
-      Height = 14
+      Width = 22
+      Height = 13
       Caption = 'Type'
     end
     object Label7: TLabel
       Left = 16
       Top = 165
-      Width = 24
-      Height = 14
+      Width = 26
+      Height = 13
       Caption = 'Bank'
     end
     object Label9: TLabel
       Left = 17
       Top = 234
-      Width = 46
-      Height = 14
+      Width = 50
+      Height = 13
       Caption = 'Cheque #'
     end
     object Label10: TLabel
       Left = 16
       Top = 257
-      Width = 57
-      Height = 14
+      Width = 63
+      Height = 13
       Caption = 'From Whom'
     end
     object Label11: TLabel
       Left = 16
       Top = 339
-      Width = 44
-      Height = 14
+      Width = 48
+      Height = 13
       Caption = 'To Whom'
     end
     object Label12: TLabel
       Left = 16
       Top = 424
-      Width = 47
-      Height = 14
+      Width = 50
+      Height = 13
       Caption = 'Date Sent'
     end
     object lblMatterDesc: TLabel
@@ -148,8 +148,8 @@ object frmTransitNew: TfrmTransitNew
     object Label3: TLabel
       Left = 247
       Top = 125
-      Width = 42
-      Height = 14
+      Width = 47
+      Height = 13
       Caption = 'Direction'
       Visible = False
     end
@@ -172,8 +172,8 @@ object frmTransitNew: TfrmTransitNew
     object Label1: TLabel
       Left = 16
       Top = 15
-      Width = 30
-      Height = 14
+      Width = 34
+      Height = 13
       Caption = 'Matter'
     end
     object lblMatter: TLabel
@@ -186,36 +186,36 @@ object frmTransitNew: TfrmTransitNew
     object Label13: TLabel
       Left = 16
       Top = 188
-      Width = 35
-      Height = 14
+      Width = 36
+      Height = 13
       Caption = 'Branch'
     end
     object Label14: TLabel
       Left = 16
       Top = 211
-      Width = 71
-      Height = 14
+      Width = 72
+      Height = 13
       Caption = 'BSB - Account'
     end
     object lblAddress: TLabel
       Left = 16
       Top = 359
-      Width = 42
-      Height = 14
+      Width = 41
+      Height = 13
       Caption = 'Address'
     end
     object Label15: TLabel
       Left = 16
       Top = 67
-      Width = 42
-      Height = 14
+      Width = 43
+      Height = 13
       Caption = 'Transit #'
     end
     object lblTransitNo: TLabel
       Left = 104
       Top = 67
       Width = 3
-      Height = 14
+      Height = 13
     end
     object neAmount: TNumberEdit
       Left = 104
@@ -467,7 +467,6 @@ object frmTransitNew: TfrmTransitNew
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 2
       Transparent = True
-      Width = 63
     end
   end
   object qryTransitInsert: TUniQuery
@@ -613,6 +612,7 @@ object frmTransitNew: TfrmTransitNew
     Version = 0
     Left = 326
     Top = 153
+    PixelsPerInch = 96
     object ComponentPrinterLink2: TdxCustomContainerReportLink
       Active = True
       Component = pnlReceived
@@ -638,7 +638,8 @@ object frmTransitNew: TfrmTransitNew
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 42471.636945648150000000
+      ReportDocument.CreationDate = 43636.953538530090000000
+      PixelsPerInch = 96
       BuiltInReportLink = True
       HiddenComponents = {}
       ExcludedComponents = {}

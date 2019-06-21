@@ -341,7 +341,7 @@ begin
    glComponentSetup := dmAxiom.getGlComponents;
    try
       if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
       // Create the Cheque entry
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
