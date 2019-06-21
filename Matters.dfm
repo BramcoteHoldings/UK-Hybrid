@@ -3954,6 +3954,10 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3972,6 +3976,7 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
+          ExplicitHeight = 497
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4021,6 +4026,7 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
+            ExplicitTop = 469
           end
         end
         object tabCalculationData: TcxTabSheet
@@ -6095,6 +6101,7 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
+      ExplicitHeight = 505
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6773,6 +6780,7 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
+        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -8459,7 +8467,6 @@ object frmMatters: TfrmMatters
             OnAfterEditing = ProjectsSchedulerAfterEditing
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
-            Selection = 1
             Splitters = {
               BA0400007E0000004905000083000000B604000001000000BA0400006C010000}
             StoredClientBounds = {0100000001000000490500006C010000}

@@ -45,7 +45,7 @@ uses
   cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
   RestClientt, RestUtils, REST.Client, Vcl.Grids,
   dxPScxEditorLnks, JamFilePreview, cxTL, cxTLdxBarBuiltInMenu,
-  cxInplaceContainer, cxTLData, cxDBTL;
+  cxInplaceContainer, cxTLData, cxDBTL, dxPSTextLnk;
 
 
 const
@@ -5271,8 +5271,8 @@ begin
       [mbYes, mbNo], 0) = mrYes then
    begin
       try
-      if dmAxiom.uniInsight.InTransaction then
-         dmAxiom.uniInsight.Commit;
+      if dmAxiom.uniInsight.InTransaction = True then
+         dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
       prcDeleteDBill.ParamByName('MEMONUMBER').AsInteger := qryInvoices.FieldByName('NMEMO').AsInteger;
       prcDeleteDBill.ExecProc;
