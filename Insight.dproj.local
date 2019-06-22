@@ -109,10 +109,10 @@
     <Transaction>2018/05/16 15:02:27.000.920,D:\Insight_XE4_Source\Insight\AccountPayable.pas=</Transaction>
     <Transaction>2018/05/16 15:02:27.000.888,D:\Insight_XE4_Source\Insight\AccountNew.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.562,D:\Insight_XE4_Source\Insight\CreditorSearch.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.534,D:\Insight_XE4_Source\Insight\Creditors.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.475,D:\Insight_XE4_Source\Insight\CreditorMerge.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.506,D:\Insight_XE4_Source\Insight\CreditorMergeProgress.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.534,D:\Insight_XE4_Source\Insight\Creditors.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
     <Transaction>2018/05/16 15:05:24.000.811,=D:\Insight_XE4_Source\Insight\Creditors\AccountCreate.pas</Transaction>
     <Transaction>2018/05/16 15:05:25.000.531,=D:\Insight_XE4_Source\Insight\Creditors\CreditorAccountsSearch.pas</Transaction>
     <Transaction>2018/05/16 15:05:25.000.833,=D:\Insight_XE4_Source\Insight\Creditors\CreditorMergeProgress.pas</Transaction>
@@ -147,7 +147,7 @@
     <Transaction>2019/05/14 10:42:51.000.543,D:\Insight_XE4_Source\UK-Hybrid\SubBill.pas=</Transaction>
     <Transaction>2019/05/14 10:46:31.000.684,=D:\Insight_XE4_Source\UK-Hybrid\Billing\SubBill.pas</Transaction>
   </Transactions>
-	<ProjectSortOrder AutoSort="0" SortType="0">
+	<ProjectSortOrder AutoSort="0" SortType="1">
     <File Path="Advertising"/>
     <File Path="Advertising\AdMaint.pas"/>
     <File Path="Advertising\AdMaint.dfm"/>
@@ -158,6 +158,8 @@
     <File Path="Advertising\AdvSupplier.pas"/>
     <File Path="Advertising\AdvSupplier.dfm"/>
     <File Path="Billing"/>
+    <File Path="Billing\AlterBilledTaxAmount.pas"/>
+    <File Path="Billing\AlterBilledTaxAmount.dfm"/>
     <File Path="Billing\BillCreateAsk.pas"/>
     <File Path="Billing\BillCreateAsk.dfm"/>
     <File Path="Billing\BillCredit.pas"/>
@@ -180,16 +182,14 @@
     <File Path="Billing\bill_narration.dfm"/>
     <File Path="Billing\Bill_narration_edit.pas"/>
     <File Path="Billing\Bill_narration_edit.dfm"/>
-    <File Path="Billing\InvPost.pas"/>
-    <File Path="Billing\InvPost.dfm"/>
-    <File Path="Billing\WriteOffs.pas"/>
-    <File Path="Billing\WriteOffs.dfm"/>
     <File Path="Billing\Bulkbills.pas"/>
     <File Path="Billing\Bulkbills.dfm"/>
-    <File Path="Billing\AlterBilledTaxAmount.pas"/>
-    <File Path="Billing\AlterBilledTaxAmount.dfm"/>
+    <File Path="Billing\InvPost.pas"/>
+    <File Path="Billing\InvPost.dfm"/>
     <File Path="Billing\SubBill.pas"/>
     <File Path="Billing\SubBill.dfm"/>
+    <File Path="Billing\WriteOffs.pas"/>
+    <File Path="Billing\WriteOffs.dfm"/>
     <File Path="Collections"/>
     <File Path="Collections\debtorDocumentMerge.pas"/>
     <File Path="Collections\debtorDocumentMerge.dfm"/>
@@ -286,12 +286,12 @@
     <File Path="Maintenance\cxOutlook2WaySynchronize.pas"/>
     <File Path="Maintenance\eMailList.pas"/>
     <File Path="Maintenance\eMailList.dfm"/>
+    <File Path="Maintenance\OptionsUser.pas"/>
+    <File Path="Maintenance\OptionsUser.dfm"/>
     <File Path="Maintenance\ResearchSites.pas"/>
     <File Path="Maintenance\ResearchSites.dfm"/>
     <File Path="Maintenance\SystemFile.pas"/>
     <File Path="Maintenance\SystemFile.dfm"/>
-    <File Path="Maintenance\OptionsUser.pas"/>
-    <File Path="Maintenance\OptionsUser.dfm"/>
     <File Path="MarketEvent"/>
     <File Path="MarketEvent\CopyEventParticipants.pas"/>
     <File Path="MarketEvent\CopyEventParticipants.dfm"/>
@@ -370,6 +370,8 @@
     <File Path="Time\FeeNew.dfm"/>
     <File Path="Time\FeeNotes.pas"/>
     <File Path="Time\FeeNotes.dfm"/>
+    <File Path="Time\FeeType.pas"/>
+    <File Path="Time\FeeType.dfm"/>
     <File Path="Time\TimeDiary.pas"/>
     <File Path="Time\TimeDiary.dfm"/>
     <File Path="Time\TimeDiaryNew.pas"/>
@@ -378,8 +380,6 @@
     <File Path="Time\TimeSht.dfm"/>
     <File Path="Time\WriteOffWIP.pas"/>
     <File Path="Time\WriteOffWIP.dfm"/>
-    <File Path="Time\FeeType.pas"/>
-    <File Path="Time\FeeType.dfm"/>
     <File Path="Workflow"/>
     <File Path="Workflow\CopyMoveFileDialog.pas"/>
     <File Path="Workflow\CopyMoveFileDialog.dfm"/>
@@ -393,9 +393,12 @@
     <File Path="Workflow\EmployeeFindDialog.dfm"/>
     <File Path="Workflow\FieldTypes.pas"/>
     <File Path="Workflow\FieldTypes.dfm"/>
+    <File Path="Workflow\GenericDocNoMerge.pas"/>
     <File Path="Workflow\HotDocs_TLB.pas"/>
     <File Path="Workflow\MatterDataForm.pas"/>
     <File Path="Workflow\MatterDataForm.dfm"/>
+    <File Path="Workflow\MatterReportBuilder.pas"/>
+    <File Path="Workflow\MatterReportBuilder.dfm"/>
     <File Path="Workflow\MSWordMerge.pas"/>
     <File Path="WorkFlow\WaitFormAppStop.pas"/>
     <File Path="WorkFlow\WaitFormAppStop.dfm"/>
@@ -462,9 +465,6 @@
     <File Path="Workflow\WorkflowType.dfm"/>
     <File Path="Workflow\WorkFlowWorldoxMerge.pas"/>
     <File Path="WorkFlow\WorkFlowXML.pas"/>
-    <File Path="Workflow\MatterReportBuilder.pas"/>
-    <File Path="Workflow\MatterReportBuilder.dfm"/>
-    <File Path="Workflow\GenericDocNoMerge.pas"/>
     <File Path="About.pas"/>
     <File Path="About.dfm"/>
     <File Path="AccountType.pas"/>
@@ -503,6 +503,7 @@
     <File Path="BatchChequePrint.dfm"/>
     <File Path="BatchReport.pas"/>
     <File Path="BatchReport.dfm"/>
+    <File Path="BHLStrUtils.pas"/>
     <File Path="BHLSupport.pas"/>
     <File Path="BHLSupport.dfm"/>
     <File Path="Branches.pas"/>
@@ -535,6 +536,8 @@
     <File Path="CheqReqPrint.dfm"/>
     <File Path="CheqReqReverse.pas"/>
     <File Path="CheqReqReverse.dfm"/>
+    <File Path="CheqReqs.pas"/>
+    <File Path="CheqReqs.dfm"/>
     <File Path="Cheque.pas"/>
     <File Path="Cheque.dfm"/>
     <File Path="ChequePresent.pas"/>
@@ -543,6 +546,8 @@
     <File Path="ChequePrint.dfm"/>
     <File Path="chequerenumber.pas"/>
     <File Path="chequerenumber.dfm"/>
+    <File Path="ChequeRev.pas"/>
+    <File Path="ChequeRev.dfm"/>
     <File Path="ChequeReverse.pas"/>
     <File Path="ChequeReverse.dfm"/>
     <File Path="ChequeUpCredAlloc.pas"/>
@@ -655,6 +660,8 @@
     <File Path="FileCopyDisplay.pas"/>
     <File Path="FileCopyDisplay.dfm"/>
     <File Path="fmxutils.pas"/>
+    <File Path="FolderTemplate.pas"/>
+    <File Path="FolderTemplate.dfm"/>
     <File Path="Forcepay.pas"/>
     <File Path="Forcepay.dfm"/>
     <File Path="Genders.pas"/>
@@ -711,6 +718,7 @@
     <File Path="Ledgers.dfm"/>
     <File Path="LockAcctsDlg.pas"/>
     <File Path="LockAcctsDlg.dfm"/>
+    <File Path="LoggingSnippet.pas"/>
     <File Path="MaintAncestor.pas"/>
     <File Path="MaintAncestor.dfm"/>
     <File Path="MaintAncestorNoRep.pas"/>
@@ -738,6 +746,8 @@
     <File Path="MatterNoteTypes.dfm"/>
     <File Path="MatterPartyRelate.pas"/>
     <File Path="MatterPartyRelate.dfm"/>
+    <File Path="MatterPositionRpt.pas"/>
+    <File Path="MatterPositionRpt.dfm"/>
     <File Path="Matters.pas"/>
     <File Path="Matters.dfm"/>
     <File Path="matterstatus.pas"/>
@@ -772,6 +782,8 @@
     <File Path="PhonebookImport.dfm"/>
     <File Path="PhoneBookNew.pas"/>
     <File Path="PhoneBookNew.dfm"/>
+    <File Path="Phonebook_Status.pas"/>
+    <File Path="Phonebook_Status.dfm"/>
     <File Path="PhoneMessage.pas"/>
     <File Path="PhoneMessage.dfm"/>
     <File Path="Postcode.pas"/>
@@ -784,6 +796,8 @@
     <File Path="Prac_num_process.dfm"/>
     <File Path="PrecCategories.pas"/>
     <File Path="PrecCategories.dfm"/>
+    <File Path="PrecedentSearchList.pas"/>
+    <File Path="PrecedentSearchList.dfm"/>
     <File Path="PresentedConfirmation.pas"/>
     <File Path="PresentedConfirmation.dfm"/>
     <File Path="printer.pas"/>
@@ -896,12 +910,16 @@
     <File Path="TaxTypes.dfm"/>
     <File Path="teams.pas"/>
     <File Path="teams.dfm"/>
+    <File Path="TemplateSelect.pas"/>
+    <File Path="TemplateSelect.dfm"/>
     <File Path="TransitNew.pas"/>
     <File Path="TransitNew.dfm"/>
     <File Path="TransitSearch.pas"/>
     <File Path="TransitSearch.dfm"/>
     <File Path="TrustJournal.pas"/>
     <File Path="TrustJournal.dfm"/>
+    <File Path="Unlock.pas"/>
+    <File Path="Unlock.dfm"/>
     <File Path="UnlockAcctsDlg.pas"/>
     <File Path="UnlockAcctsDlg.dfm"/>
     <File Path="UnrollAcctsDlg.pas"/>
@@ -922,23 +940,5 @@
     <File Path="YearEnd1.dfm"/>
     <File Path="YearEnd2.pas"/>
     <File Path="YearEnd2.dfm"/>
-    <File Path="CheqReqs.pas"/>
-    <File Path="CheqReqs.dfm"/>
-    <File Path="PrecedentSearchList.pas"/>
-    <File Path="PrecedentSearchList.dfm"/>
-    <File Path="Phonebook_Status.pas"/>
-    <File Path="Phonebook_Status.dfm"/>
-    <File Path="TemplateSelect.pas"/>
-    <File Path="TemplateSelect.dfm"/>
-    <File Path="FolderTemplate.pas"/>
-    <File Path="FolderTemplate.dfm"/>
-    <File Path="Unlock.pas"/>
-    <File Path="Unlock.dfm"/>
-    <File Path="MatterPositionRpt.pas"/>
-    <File Path="MatterPositionRpt.dfm"/>
-    <File Path="ChequeRev.pas"/>
-    <File Path="ChequeRev.dfm"/>
-    <File Path="BHLStrUtils.pas"/>
-    <File Path="LoggingSnippet.pas"/>
   </ProjectSortOrder>
 </BorlandProject>

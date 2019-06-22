@@ -1546,7 +1546,8 @@ var
    lTaxCode: string;
 begin
 //  lblExpenseTypeDescr.Caption := TableString('SUNDRYTYPE', 'CODE', cbExpenseType.Text, 'DESCR');
-   if cmbExpenseType.Text <> '' then
+   //if cmbExpenseType.Text <> '' then
+   if ((cmbExpenseType.Text <> '') and (FBankType <> 'T')) then
    begin
       lTaxCode := TableString('SUNDRYTYPE','CODE', string(cmbExpenseType.EditValue), 'TAXCODE');
       if (lTaxCode <> '') and (dmAxiom.qryEntityBank.FieldByName('TRUST').AsString <> 'T') then

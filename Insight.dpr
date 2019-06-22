@@ -380,7 +380,6 @@ uses
   NewTaskNew in 'Tasks\NewTaskNew.pas' {frmNewTaskNew},
   PrecedentSearchList in 'PrecedentSearchList.pas' {frmPrecedentSearch},
   TemplateSelect in 'TemplateSelect.pas' {FrmSelectTemplate},
-  CheqReqs in 'CheqReqs.pas' {frmCheqReqs},
   OptionsUser in 'Maintenance\OptionsUser.pas' {frmOptionsUser},
   AccountCreate in 'Creditors\AccountCreate.pas' {dmAccountCreate: TDataModule},
   AccountNew in 'Creditors\AccountNew.pas' {frmAccountNew},
@@ -406,7 +405,8 @@ uses
   LoggingSnippet in 'LoggingSnippet.pas',
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas',
   SubBill in 'Billing\SubBill.pas' {frmSubBill},
-  AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax};
+  AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax},
+  CheqReqs in 'CheqReqs.pas' {frmCheqReqs};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}
@@ -427,6 +427,7 @@ begin
   Application.CreateForm(TdmTableCache, dmTableCache);
   Application.CreateForm(TfrmDesktop, frmDesktop);
   Application.CreateForm(TfrmSubBill, frmSubBill);
+  Application.CreateForm(TfrmCheqReqs, frmCheqReqs);
   Application.ProcessMessages;
   Application.Run;
 end.
