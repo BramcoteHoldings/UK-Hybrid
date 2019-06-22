@@ -846,6 +846,7 @@ type
                              ATransAmount: double; var ACurrencyValBase, ACurrencyValEntity, ACurrencyValTran, AFXValue: double);
   procedure InvoiceMergeEmail(iInvoice: integer; nMatter: Integer; Template: string = '');
   function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string = ''): boolean;
+  function GetFileImage(sFilePath: string): Integer;
 
 type
   TRoundToRange = -37..37;
@@ -14728,12 +14729,14 @@ begin
                      //get destination folder shell item
                      r := SHCreateItemFromParsingName(PChar(destFileFolder), pbc, IShellItem, siDestFolder);
 
-                     if DeleteOrigDoc = False then
-                     //add copy operation
-                        if Succeeded(r) then r := fileOp.CopyItem(siSrcFile, siDestFolder, PChar(destFileName), nil)
-                     else
-                     //add move operation
-                        if Succeeded(r) then r := fileop.MoveItem(siSrcFile, siDestFolder, PChar(destFileName), nil)
+                     if DeleteOrigDoc then
+                     begin
+                        if Succeeded(r) then r := fileOp.MoveItem(siSrcFile, siDestFolder, PChar(destFileName), nil);
+                     end;
+                     if not DeleteOrigDoc then
+                     begin
+                        if Succeeded(r) then r := fileop.CopyItem(siSrcFile, siDestFolder, PChar(destFileName), nil);
+                     end;
                   end;
 
                   //execute
@@ -15087,5 +15090,27 @@ begin
    end;
 end;
 
+function GetFileImage(sFilePath: string): Integer;
+var
+    AExt: string;
+begin
+      AExt := UpperCase(sFilePath);
+      if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX') or (AExt = 'DOTM')) then
+         Result := 2
+      else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST') or (AExt = 'XLSX') or (AExt = 'XLSM')) then
+         Result := 3
+      else if ((AExt = 'EML') or (AExt = 'MSG')) then
+         Result := 4
+      else if AExt = 'PDF' then
+         Result := 5
+      else if (AExt = 'HTM') or (AExt = 'HTML') then
+         Result := 6
+      else if (AExt = 'PPT') or (AExt = 'PPTX') then
+         Result := 8
+      else if (AExt = 'ZIP') or (AExt = 'ZIPX') then
+         Result := 9
+      else
+         Result := 1;
+end;
 
 end.

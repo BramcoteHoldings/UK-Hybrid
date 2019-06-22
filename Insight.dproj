@@ -4,7 +4,7 @@
         <MainSource>Insight.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <TargetedPlatforms>3</TargetedPlatforms>
+        <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <ProjectVersion>18.4</ProjectVersion>
@@ -15,11 +15,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
         <Base_Win32>true</Base_Win32>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-        <Base_Win64>true</Base_Win64>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
@@ -34,12 +29,6 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
-        <Cfg_1_Win64>true</Cfg_1_Win64>
-        <CfgParent>Cfg_1</CfgParent>
-        <Cfg_1>true</Cfg_1>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
@@ -47,12 +36,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
         <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
-        <Cfg_2_Win64>true</Cfg_2_Win64>
         <CfgParent>Cfg_2</CfgParent>
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
@@ -99,21 +82,6 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>vcl;rtl;ExcelExportPackXE4;$(DCC_UsePackage)</DCC_UsePackage>
-        <VerInfo_MinorVer>1</VerInfo_MinorVer>
-        <DCC_DcuOutput>..\dcu\platform\win64</DCC_DcuOutput>
-        <DCC_ExeOutput>.\bin\platform\win64</DCC_ExeOutput>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.1.2;InternalName=;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.0.0.0;Comments=64-bit Windows platform;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
-        <VerInfo_Release>1</VerInfo_Release>
-        <VerInfo_Build>2</VerInfo_Build>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
@@ -129,19 +97,6 @@
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.20;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_MinorVer>1</VerInfo_MinorVer>
-        <DCC_MapFile>3</DCC_MapFile>
-        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
-        <DCC_DebugInformation>true</DCC_DebugInformation>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_ExeOutput>.\Bin\Platform\win64</DCC_ExeOutput>
-        <VerInfo_Build>2</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=9.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -161,19 +116,6 @@
         <DCC_MapFile>3</DCC_MapFile>
         <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.6;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <BT_BuildType>Debug</BT_BuildType>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_MinorVer>1</VerInfo_MinorVer>
-        <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <DCC_RemoteDebug>true</DCC_RemoteDebug>
-        <VerInfo_Build>2</VerInfo_Build>
-        <DCC_MapFile>3</DCC_MapFile>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Insight Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.1.0.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
@@ -1332,10 +1274,6 @@
             <Form>FrmSelectTemplate</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="CheqReqs.pas">
-            <Form>frmCheqReqs</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="Maintenance\OptionsUser.pas">
             <Form>frmOptionsUser</Form>
             <FormType>dfm</FormType>
@@ -1427,6 +1365,10 @@
             <Form>frmAdjustBilledTax</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="CheqReqs.pas">
+            <Form>frmCheqReqs</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="ModelSupport_Insight\default.txvpck"/>
         <None Include="ModelSupport_Insight\default.txaPackage"/>
         <BuildConfiguration Include="Debug">
@@ -1483,7 +1425,6 @@
             </Delphi.Personality>
             <Platforms>
                 <Platform value="Win32">True</Platform>
-                <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
                 <DeployFile LocalName="ModelSupport_Insight\default.txaPackage" Configuration="Release" Class="ProjectFile">

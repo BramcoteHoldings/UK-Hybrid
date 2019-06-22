@@ -111,6 +111,7 @@ type
     FDocId:          integer;
     FEditing:        boolean;
     FFileID:         string;
+    LFileID:         string;
     FNName:          integer;
     FNewCopyDoc:     boolean;
     FOrigDocPath:    string;
@@ -118,6 +119,7 @@ type
     FURLOnly:        boolean;
     sContactDocsSQL: string;
     FMatter:         integer;
+    bChangeMatter:   boolean;
   public
     { Public declarations }
     procedure DisplayMatter(sMatter: string);
@@ -128,6 +130,7 @@ type
     property ADocId: integer read FDocId write FDocId;
     property Editing: boolean read FEditing write FEditing default False;
     property AFileID: string read FFileID write FFileID;
+    property OFileID: string read LFileID write LFileID;
     property AMatter: integer read FMatter write FMatter;
     property ANName: integer read FNName write FNName;
     property NewCopyDoc: boolean read FNewCopyDoc write FNewCopyDoc default False;
@@ -196,7 +199,8 @@ begin
                   LNewDocDescr := FieldByName('DESCR').AsString;
                tbDescr.Text := LNewDocDescr;
 
-               FileList.Add(FieldByName('DISPLAY_PATH').AsString);
+               if not bChangeMatter then
+                  FileList.Add(FieldByName('DISPLAY_PATH').AsString);
 
                sMatter := FieldByName('NMATTER').AsString;
                cmbMatterAuthor.EditValue := FieldByName('AUTH1').AsString;
@@ -318,7 +322,9 @@ begin
       if frmMatterSearch.ShowModal = mrOK then
       begin
          AFileID := lblMatter.Caption;
+         bChangeMatter := True;
          DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString);
+         bChangeMatter := False;
       end;
    end
    else
@@ -357,7 +363,7 @@ var
    sDocID: string;
    sNewLine: string;
 //   LImportFile: array of string;
-   x, i, iWords, iCtr, FileImg: integer;
+   x, y, i, iWords, iCtr, FileImg: integer;
    NewPath, sWord: string;
    AExt: string;
    bMoveFiles, bMoveSuccess: boolean;
@@ -392,7 +398,8 @@ begin
    end
    else
    begin
-      if (AFileID <> lblMatter.Caption) and (AFileID <> '') then
+      //if (AFileID <> lblMatter.Caption) and (AFileID <> '') then
+      if (OFileID <> lblMatter.Caption) and (OFileID <> '') then
           if (MsgAsk('The matter number has changed.  This action will move this document to the new matter.  Continue?') = IDYES) then
              bMoveFiles := True;
 //      FDocId := 0;
@@ -437,7 +444,7 @@ begin
                   begin
                      Insert;
                      ParamByName('docid').AsInteger := ADocId;
-                     bMoveFiles := True;
+                     //bMoveFiles := True;
                   end;
 
                   if ((tbName.Text = '') or (edtPath.Text = '[** Documents **]')) then
@@ -486,6 +493,9 @@ begin
                         bStream.CopyFrom(fStream, fStream.Size);
                         bStream.free;
                         fStream.Free;
+                        FileImg := GetFileImage(FieldByName('FILE_EXTENSION').AsString);
+                        if (FileImg <> 4) then
+                            FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i])) {edPath.Text};
                      end;
                   end
                   else
@@ -510,8 +520,8 @@ begin
                               NewPath := NewPath + '/' + LImportFile[i];
                         end;  }
                         AExt := ExtractFileExt(FileList.Strings[i] {edtPath.Text});
-                       if bMoveFiles then
-                        begin
+                       //if bMoveFiles then
+                       // begin
                            NewDocName := SystemString('DRAG_DEFAULT_DIRECTORY');    // SystemString('DOC_DEFAULT_DIRECTORY');
 //                           MsgInfo('Path to use '+ NewDocName);
                            if (ExtractFileName(FileList.Strings[i] {edtPath.Text}) <> '') then
@@ -535,6 +545,11 @@ begin
                            begin
                                  AParsedDocName := AnsiMidStr(AParsedDocName,1, (length(AParsedDocName) - length(AExt))) + '_' + IntToStr(ADocID) + AExt;
                            end;
+                           FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(AParsedDocName),2, Length(ExtractFileExt(AParsedDocName)));
+                           AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
+                           FileImg := GetFileImage(FieldByName('FILE_EXTENSION').AsString);
+                           if (FileImg <> 4) then
+                               FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i])) {edPath.Text};
 
                            // 06 June 2018 DW to ensure uniqueness
                            //AParsedDocName := AnsiMidStr(AParsedDocName,1, (length(AParsedDocName) - length(AExt))) + '_' + IntToStr(ADocID);
@@ -550,6 +565,9 @@ begin
                               LNewDocPath := edtPath.Text;
                               bMoveSuccess := MoveMatterDoc(LNewDocPath, OrigDocPath, False);
                               FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(LNewDocPath),2, Length(ExtractFileExt(LNewDocPath)));
+                              FileImg := GetFileImage(FieldByName('FILE_EXTENSION').AsString);
+                              if (FileImg <> 4) then
+                                  FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i])) {edPath.Text};
 
                               FieldByName('PATH').AsString := IndexPath(LNewDocPath, 'DOC_SHARE_PATH');  //  NewPath;
                               FieldByName('DISPLAY_PATH').AsString := LNewDocPath;
@@ -566,49 +584,49 @@ begin
 //                                 {$IFDEF DEBUG}
 //                                    MsgInfo('OS version detected = ' + TOSVersion.Name);
 //                                 {$ENDIF}
-                                 if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows Server 2012'))) then
-                                    bMoveSuccess := CopyFileIFileOperationForceDirectories(FileList.Strings[i] {edtPath.Text}, AParsedDocName)
+                                 if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows 10') or (TOSVersion.Name = 'Windows Server 2012'))) then
+                                    bMoveSuccess := CopyFileIFileOperationForceDirectories(FileList.Strings[i] {edtPath.Text}, AParsedDocName, bMoveFiles)
                                  else
-                                    bMoveSuccess := MoveMatterDoc(AParsedDocName, FileList.Strings[i] {edtPath.Text}, False, False);
+                                    bMoveSuccess := MoveMatterDoc(AParsedDocName, FileList.Strings[i] {edtPath.Text}, bMoveFiles, False);
                               end;
                               moved := 'False';
 //                              if bMoveSuccess = True then
 //                                 moved := 'True';
 //                              MsgInfo('Was file save succesfull = ' + moved);
 
-                              FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(AParsedDocName),2, Length(ExtractFileExt(AParsedDocName)));
+                              //FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(AParsedDocName),2, Length(ExtractFileExt(AParsedDocName)));
 
                               FieldByName('PATH').AsString := IndexPath(AParsedDocName, 'DOC_SHARE_PATH');  //  NewPath;
                               FieldByName('DISPLAY_PATH').AsString := AParsedDocName;
                               edtPath.Text := AParsedDocName;
                            end;
-                        end
-                        else
-                        begin
-                           FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(FileList.Strings[i] {edtPath.Text}),2, Length(ExtractFileExt(FileList.Strings[i] {edtPath.Text})));
-                           FieldByName('PATH').AsString := IndexPath(FileList.Strings[i] {edtPath.Text}, 'DOC_SHARE_PATH');  //  NewPath;
-                           FieldByName('DISPLAY_PATH').AsString := FileList.Strings[i] {edtPath.Text};
-                        end;
+                        //end
+                        //else
+                        //begin
+                        //   FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(FileList.Strings[i] {edtPath.Text}),2, Length(ExtractFileExt(FileList.Strings[i] {edtPath.Text})));
+                        //   FieldByName('PATH').AsString := IndexPath(FileList.Strings[i] {edtPath.Text}, 'DOC_SHARE_PATH');  //  NewPath;
+                        //   FieldByName('DISPLAY_PATH').AsString := FileList.Strings[i] {edtPath.Text};
+                        //end;
                      end;
                   end;
 
-                  AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
-                  if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX') or (AExt = 'DOTM')) then
-                     FileImg := 2
-                  else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST') or (AExt = 'XLSX') or (AExt = 'XLSM')) then
-                     FileImg := 3
-                  else if ((AExt = 'EML') or (AExt = 'MSG')) then
-                     FileImg := 4
-                  else if AExt = 'PDF' then
-                     FileImg := 5
-                  else if (AExt = 'HTM') or (AExt = 'HTML') then
-                     FileImg := 6
-                  else if (AExt = 'PPT') or (AExt = 'PPTX') then
-                     FileImg := 8
-                  else if (AExt = 'ZIP') or (AExt = 'ZIPX') then
-                     FileImg := 9
-                  else
-                     FileImg := 1;
+                  //AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
+                  //if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX') or (AExt = 'DOTM')) then
+                  //   FileImg := 2
+                  //else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST') or (AExt = 'XLSX') or (AExt = 'XLSM')) then
+                  //   FileImg := 3
+                  //else if ((AExt = 'EML') or (AExt = 'MSG')) then
+                  //   FileImg := 4
+                  //else if AExt = 'PDF' then
+                  //   FileImg := 5
+                  //else if (AExt = 'HTM') or (AExt = 'HTML') then
+                  //   FileImg := 6
+                  //else if (AExt = 'PPT') or (AExt = 'PPTX') then
+                  //   FileImg := 8
+                  //else if (AExt = 'ZIP') or (AExt = 'ZIPX') then
+                  //   FileImg := 9
+                  //else
+                  //   FileImg := 1;
                  // 28 Aug 2018 DW add email from and to
                //if (dmAxiom.EMailProfileDefault <> '') then
               // begin
@@ -668,7 +686,8 @@ begin
                                              if (attachmentIsInline = False) then
                                              begin
                                                 // clean up subject line
-                                                for x := i + 1 to length(DispName) do
+                                                //for x := i + 1 to length(DispName) do
+                                                for x := y + 1 to length(DispName) do
                                                 begin
                                                    if (DispName[x] in ['/','\','?','"','<','>','|','*',':',';']) then
                                                       DispName[x] := ' ';
@@ -737,8 +756,8 @@ begin
                  // if (FileImg = 4) then
                  //    FieldByName('d_create').AsDateTime := EmailCreateDate
                  // else
-                   if (FileImg <> 4) then
-                     FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i] {edtPath.Text}));
+                   //if (FileImg <> 4) then
+                   //  FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i] {edtPath.Text}));
 
                   sDocID := qryPopDetails.FieldByName('DOCID').AsString;
 
@@ -888,6 +907,7 @@ begin
       end;}
       qryPRECCLASSIFICATION.Open;
       qryPRECCATEGORY.Open;
+      bChangeMatter := False;
    except
       //
    end;

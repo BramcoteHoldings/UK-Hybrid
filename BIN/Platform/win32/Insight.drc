@@ -18116,7 +18116,7 @@ BEGIN
 	System_SysConst_SInOutError,	L"I/O error %d"
 END
 
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\controls.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Controls.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxOffice11.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxSkinInfo.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\cxLookAndFeelPainters.res */
@@ -18125,20 +18125,20 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxScrollCursors.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressLibrary\Sources\dxShadowWindow.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Buttons.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutEditForm.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutCustomizeForm.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarNameEd.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarPopupMenuEd.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarItemEd.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarAddGroupItemsEd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutEditForm.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressLayout Control\Sources\dxLayoutCustomizeForm.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarNameEd.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarPopupMenuEd.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarItemEd.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarAddGroupItemsEd.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarCustomCustomizationForm.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarCustForm.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarCustForm.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBar.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\extdlgs.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\ExtDlgs.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\dxCameraControlRes.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\dxCameraDialog.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxImage.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\firtercontrolicons.RES */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\firtercontrolicons.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxFilterDialog.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxFilterControlDialog.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\dxSpreadSheetCore.res */
@@ -18170,14 +18170,14 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet Core\Sources\cxDataControllerConditionalFormattingRulesManagerDialog.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Vcl.DBLogDlg.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Vcl.DBPWDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\dbctrls.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\DBCtrls.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxScheduler.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceSelectionDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Scheduler\cxSchedulerEventEditor.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Scheduler\cxSchedulerEventEditor.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRecurrenceEditor.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerEventModernInfoContainer.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerReminderWindow.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\filectrl.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerReminderWindow.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\FileCtrl.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressEditors Library\Sources\cxShellBrowser.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerHolidaysEditor.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerHolidaysLocationHolidayEditor.dfm */
@@ -18193,31 +18193,31 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxStatusBar.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressScheduler\Sources\cxSchedulerRibbonStyleEventEditor.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSImgs.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwOpt.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmClr.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDfnStl.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmAutoHFTextFmt.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPgsDlg.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDTFmt.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmPNFmt.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwOpt.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmClr.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDfnStl.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmAutoHFTextFmt.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPgsDlg.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmDTFmt.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmPNFmt.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSExtDlgs.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmZoom.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxFEFDlg.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPrnDlg.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxpsfmEditDesc.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmLnkAdd.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSCPDsg.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmTtl.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmFootnotes.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmChFn.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmZoom.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxFEFDlg.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPrnDlg.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmEditDesc.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmLnkAdd.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSCPDsg.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmTtl.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmFootnotes.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxfmChFN.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmReportProperties.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionAdd.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionDsg.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionAdd.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSfmCompositionDsg.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPDFExportDialog.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwStd.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwStd.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarExtItems.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwAdv.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwAdv.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSPrVwRibbon.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSReportLinkDesignWindow.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSContainerLnk.dfm */
@@ -18230,45 +18230,45 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridTableViewInplaceEditFormCustomizationForm.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridChartView.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpreadSheet\Sources\dxSpreadSheetReportDesigner.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSdxSpreadSheetLnk.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxGridLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSdxSpreadSheetLnk.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxGridLnk.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\TeeFonts.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\TeeResou.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLbxLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLbxLnk.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSTextLnk.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxCheckListBoxLnk.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSTVLnk.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLVLnk.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSTVLnk.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPSLVLnk.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressPrinting System\Sources\dxPScxMCListBoxLnk.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppASDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppASDlg.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPrvBmp.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPrvDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNoDataDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbsRGB.RES */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbQRCode.RES */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPrvDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNoDataDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbsRGB.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbQRCode.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppEmailLoginDlg.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppEmailDlg.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbPrint.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmEDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTmEDlg.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressQuantumGrid\Sources\cxGridMenuOperations.res */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\DBAccess.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressDocking Library\Sources\dxDockStyleVS2005.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarDBNav.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbRAP.res */
-/* C:\jcl\lib\d25\win32\debug\JclUnicode.res */
-/* C:\jvcl\Resources\JvConsts.res */
+/* D:\Components-XE10\JCL\jcl\lib\d25\win32\JclUnicode.res */
+/* D:\Components-XE10\JCL\jvcl\Resources\JvConsts.res */
 /* D:\Components-XE10\VirtualTreeView\Source\VirtualTrees.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\CategoryButtons.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarCustomization.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarOffice12Views.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBarVistaViews.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressNavBar\Sources\dxNavBar.res */
-/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFields.dfm */
-/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiProperties.dfm */
-/* C:\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMapiFolderDialog.dfm */
+/* C:\Users\dbw\Documents\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMAPIFields.dfm */
+/* C:\Users\dbw\Documents\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMAPIProperties.DFM */
+/* C:\Users\dbw\Documents\RAPWare\source\ComponentSets\Components\mapi\VCL.fRwMAPIFolderDialog.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxCustomDictionaryDialog.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerOutlookDialog.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerWordDialog.dfm */
@@ -18277,92 +18277,92 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerExceptionsFrame.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSpellChecker\Sources\dxSpellCheckerAutoCorrectExceptionDialog.dfm */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\Ora.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\TableCache.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\TableCache.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppSynUEdit.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daJoinTableDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\dbgrids.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daPreviewDataDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daJoinTableDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\DBGrids.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daPreviewDataDlg.DFM */
 /* C:\Program Files (x86)\Devart\UniDAC for RAD Studio 10.2\Lib\Win32\UniConnectForm.dfm */
 /* C:\Program Files (x86)\Devart\ODAC for RAD Studio 10.2\Lib\Win32\ConnectForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LEDES1998B.dfm */
-/* C:\jvcl\Resources\JvToolEdit.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\WriteMerge.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\LEDES1998B.dfm */
+/* D:\Components-XE10\JCL\jvcl\Resources\JvToolEdit.res */
+/* D:\XE10_SOURCE\UK-Hybrid\WriteMerge.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxBarExtDBItems.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\mplayer.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\MPlayer.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressBars\Sources\dxRibbonCustomizationForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleMerge.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleRun.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleDocs.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataModuleTasks.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PrecedentSearchList.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\MyChkBox.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowAdminDocs.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\GenericSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowAddDocTemplateDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\CopyMoveFileDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowDocumentMergeOptions.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowAddAdminDocTemplateDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDocumentGroupsDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowDocTemplates.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ScaleCostNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ScaleCosts.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryBatch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DataFieldMemoEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\MatterDataForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowNewTaskDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PostcodeSearch.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\spin.res */
-/* C:\jvcl\Resources\JvSpin.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\SQLDesigner.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\UserStatementEditor.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\SystemFile.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketAddParticipant.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\EmployeeFindDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LabelSelect.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterLabelPrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Process.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowNoteEntryDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\DateEditDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowGenDocuments.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowParties.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkflowMatterTasks.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowTaskNotes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowToDo.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\recurring_fees.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ClientNoteNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SafeCustodyNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Archival.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RelateNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SafeCustMovementDtls.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RecordMovement.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SafeCustodyNewPacket.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\client_img_view.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Clients.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Conflicts\ConflictSelect.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PhoneBookNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EditContactNoteDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PhoneBook.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InsertTableForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\GenExport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BulkMailer.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\NSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowDataChangedDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowMergeDocument.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WaitAnimate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WaitAnimate.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DebtorNotes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Conflicts\SelectConflictDocName.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Conflicts\ConflictSearch.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataModuleMerge.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataModuleRun.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataModuleDocs.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataModuleTasks.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataModule.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PrecedentSearchList.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\myChkBox.res */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowAdminDocs.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\GenericSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowAddDocTemplateDialog.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\CopyMoveFileDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDocumentMergeOptions.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkflowAddAdminDocTemplateDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDocumentGroupsDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDocTemplates.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ScaleCostNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ScaleCosts.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryBatch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DataFieldMemoEdit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\MatterDataForm.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowNewTaskDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PostcodeSearch.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\SPIN.RES */
+/* D:\Components-XE10\JCL\jvcl\Resources\JvSpin.Res */
+/* D:\XE10_SOURCE\UK-Hybrid\SQLDesigner.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\UserStatementEditor.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\SystemFile.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventDataModule.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketAddParticipant.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\EmployeeFindDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\LabelSelect.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterLabelPrint.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Process.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowNoteEntryDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\DateEditDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowGenDocuments.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowParties.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowMatterTasks.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowTaskNotes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowToDo.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\recurring_fees.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ClientNoteNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SafeCustodyNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Archival.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RelateNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SafeCustMovementDtls.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DocSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RecordMovement.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\SafeCustodyNewPacket.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\client_img_view.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Clients.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Conflicts\ConflictSelect.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PhoneBookNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EditContactNoteDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PhoneBook.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\InsertTableForm.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\GenExport.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BulkMailer.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\NSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowDataChangedDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowMergeDocument.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WaitAnimate.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WaitAnimate.res */
+/* D:\XE10_SOURCE\UK-Hybrid\InvoiceSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DebtorNotes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Conflicts\SelectConflictDocName.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Conflicts\ConflictSearch.DFM */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlack.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlue.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinBlueprint.res */
@@ -18404,303 +18404,302 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinVS2010.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinWhiteprint.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressSkins Library\Sources\dxSkinXmas2008Blue.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\MaintAncestor.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MaintAncestorNoRep.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\printer.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MaintAncestor.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MaintAncestorNoRep.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\printer.DFM */
 /* D:\Components-XE10\glComponentSelection.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LedgerNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Bank.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Collections\DebtorTaskNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\InvPost.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqReqPrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqReqNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\SubBill.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\bill_narration.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeListDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeEditQuick.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\tabs.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRWzDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRichEd.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgSDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTxtDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrpDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppFmtDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrdDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppAbout.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppMemDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppClcDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRstDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppShfDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDemo.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPosDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDatDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBPsDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBarDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDrlDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppVarDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNewDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppLWzDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCOrDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgNDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\LedgerNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\LSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BankNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Bank.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Collections\DebtorTaskNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\InvPost.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqReqPrint.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqReqNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\SubBill.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\bill_narration.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeListDataModule.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeEditQuick.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\lib\Win32\release\Tabs.res */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRWzDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRichEd.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgSDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTxtDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrpDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppFmtDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGrdDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppAbout.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppMemDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppClcDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppRstDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppShfDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDemo.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPosDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDatDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBPsDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppBarDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDrlDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppVarDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppNewDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppLWzDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCOrDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppPgNDlg.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCheckTreeView.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppOutlineSettingsDialog.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppTextSearchSettingsDialog.dfm */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppIDEBmp.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbIDE.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppDsgner.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppParametersEd.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppParametersEd.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppGMapMarkerDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataViewToolWin.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daVisualLinkHint.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daMetaDataDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataSettingDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryDesigner.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCriteriaDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCalcDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizard.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daLinkDataViewDlg.dfm */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataViewToolWin.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daVisualLinkHint.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daMetaDataDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daDataSettingDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryDesigner.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCriteriaDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizardCalcDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daQueryWizard.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daLinkDataViewDlg.DFM */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\rbDADE.res */
 /* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\daIDEBmp.res */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCTDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCWzDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\raClcDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpDlg.dfm */
-/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpFrm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Password.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillTemplates.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillTemplatePrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EditText.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\billfeelist.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\GenEditor.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ExpTemplateSelection.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\AlterBilledTaxAmount.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReceiptPrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReceiptReverse.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\resettransaction.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\chequerenumber.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChequeReverse.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CashRcp.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReceiptDistribute.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqImport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SaveScreens\StencilSelect.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Receipt.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MasterBill.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillGLPosting.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\Bills.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankDeposit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\bankstatementimp.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankRecAddition.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChequePresent.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PresentedConfirmation.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankRec.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BASGroups.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillCredit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\About.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillCreditTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChequePrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorAccountsSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChequeUpCredAlloc.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqReqReverse.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqReqInvoiceDebit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BulkCheques.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CheqReqs.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceScan.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\AccountNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceDebitNote.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceReverse.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EFTFile.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\AccountPayable.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TemplateSelect.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChequeRev.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Cheque.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CashPay.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ClientGroups.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EntityChange.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\feebasis.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CodeRules.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReportAdd.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\rptViewer.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Reports.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorMerge.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\CreditorMergeProgress.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceChangeDueDate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\InvoiceAmountChange.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\Creditors.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowFieldTranslate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\DataForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Progress.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PhoneMessage.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\Diary.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryNotify.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerTrust.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerCombo.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BatchReport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryLoc.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryJur.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryEvt.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmpDept.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmpLaunch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Security.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmpType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LedgerBudget.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BudgetEntryDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmployeeBudget.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Budgets.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Employees.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Branches.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EntityNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LockAcctsDlg.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\UnlockAcctsDlg.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RollupAcctsDlg.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\UnrollAcctsDlg.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Entitys.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\FeeCodes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\DataFieldRules.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\FieldTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Genders.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Journal.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\JournalReverse.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Journals.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\JournalBill.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\JournalMatter.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\receiptInfo.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\JournalSplitFrm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LedgersRptDlg.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ChartTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ExpenseAllocation.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Ledgers.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DataReport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DataReportNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\MatterReportBuilder.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryTypeGroups.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\matterstatus.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryError.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MonitorImport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PettyCash.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PettyJournal.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PhonebookGroups.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Postcode.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ImageManager.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PrecCategories.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\QuickCodes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RelateDict.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Sounds.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SoftlogImport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SundryType.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartTemplates.RES */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartImages.RES */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCTDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppCWzDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\raClcDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpDlg.DFM */
+/* c:\program files (x86)\embarcadero\studio\19.0\RBuilder\Lib\Win32\ppExpFrm.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Password.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillTemplates.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillTemplatePrint.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EditText.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\billfeelist.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\GenEditor.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ExpTemplateSelection.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\AlterBilledTaxAmount.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ReceiptPrint.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ReceiptReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\resettransaction.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\chequerenumber.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ChequeReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CashRcp.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ReceiptDistribute.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqImport.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\SaveScreens\StencilSelect.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Receipt.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MasterBill.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillGLPosting.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\Bills.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BankDeposit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\bankstatementimp.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BankRecAddition.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ChequePresent.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PresentedConfirmation.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BankRec.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BASGroups.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillCredit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\About.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillCreditTypes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ChequePrint.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorAccountsSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ChequeUpCredAlloc.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqReqReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqReqInvoiceDebit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BulkCheques.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CheqReqs.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\InvoiceScan.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\AccountNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\InvoiceDebitNote.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\InvoiceReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EFTFile.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\AccountPayable.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\TemplateSelect.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ChequeRev.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Cheque.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CashPay.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ClientGroups.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EntityChange.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\feebasis.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\CodeRules.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ReportAdd.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\rptViewer.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Reports.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorMerge.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorMergeProgress.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\InvoiceChangeDueDate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\Creditors.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowFieldTranslate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\DataForm.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Progress.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PhoneMessage.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\Diary.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryNotify.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerTrust.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerCombo.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BatchReport.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryLoc.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryJur.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryEvt.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EmpDept.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EmpLaunch.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Security.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EmpType.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\LedgerBudget.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BudgetEntryDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EmployeeBudget.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Budgets.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Employees.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Branches.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EntityNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\LockAcctsDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\UnlockAcctsDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\RollupAcctsDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\UnrollAcctsDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Entitys.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\FeeCodes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\DataFieldRules.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\FieldTypes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Genders.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Journal.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\JournalReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Journals.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\JournalBill.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\JournalMatter.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\receiptInfo.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\JournalSplitFrm.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\LedgersRptDlg.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ChartTypes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ExpenseAllocation.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Ledgers.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterType.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DataReport.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DataReportNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\MatterReportBuilder.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryTypeGroups.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\matterstatus.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryError.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MonitorImport.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PettyCash.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PettyJournal.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PhonebookGroups.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Postcode.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\ImageManager.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PrecCategories.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\QuickCodes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RelateDict.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Sounds.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SoftlogImport.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryList.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SundryType.DFM */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartTemplates.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartImages.res */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressFlowChart\Sources\dxFlowChartCursors.res */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressOrgChart\Sources\dxorgcedadv.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Projects\project_chart.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Projects\ProjectNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Projects\Projects.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TaxTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeEnquiry.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SetFeeBasis.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\HelpForm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\QuickCodeSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\TimeSht.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TrustJournal.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Forcepay.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\WriteOffs.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankDepositQuery.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WriteOffDisb.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\jurisdiction.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\signature.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowNewTaskItemDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowCopyTemplate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkflowType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkflowTaskTemplates.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DebtorStatusList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventEventTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\documenttypelist.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEvent.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\GenericFileName.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\CopyEventParticipants.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventFilter.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventParticipants.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventExportFile.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketEventList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SolicitorCodeNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CourtAddress.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SolicitorCode.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\IndustryNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\InterestNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Unlock.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketReferralOther.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\TimeDiaryNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\TimeDiary.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReleaseNotes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WebFavourites.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\browseproperties.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BrowserOrgFavourites.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\browser.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BatchChequePrint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Collections\debtorDocumentMerge.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TextEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Collections\DebtorTaskDue.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Controlled Monies\InvestmentTransactionNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Controlled Monies\DepositAccount.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AccountType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Controlled Monies\InvestmentTransactions.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Collections\DebtorTaskTemplate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\teams.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Collections\DebtorNotesEntry.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\DashboardIndDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\FeesBilledBreakdown.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\FeesRecBreakdown.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\Breakdown_WIP.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\BreakDown_UnbilledWIP.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\Dashboard_Ind.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\DashboardTeamDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\Dashboard_Team.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\DashboardFirmDataModule.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\BreakDown_UnbilledWIP_Firm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Dashboard\Dashboard.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CustomProcedures.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CrystalReportDef.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\CriticalAlert.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\feeauthority.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AttachEmailToMatter.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\OutlookDiaryNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocumentList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ArchiveType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\dtSearchDocSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PrecClassifications.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmployeeList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocDescrEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\UserLogins.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BudgetImport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\GLReportGrp.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Splashscreen.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterNoteTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\Bulkbills.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AutoGenList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\invoicelist.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PhonebookImport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SettingsMaint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BHLSupport.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AxiomLogin.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketRelationshipTypes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketRelationshipStatus.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MarketEvent\MarketRelationshipAction.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\ResearchSites.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Advertising\AdMaint.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\AdvRegion.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Advertising\AdvSupplier.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Advertising\AdvMedia.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Advertising\AdvSubMedia.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\CountryList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankTransfer.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\documentcenter.dfm */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.OfficeImage.RES */
-/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.Cursors.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressOrgChart\Sources\dxorgcedadv.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Projects\project_chart.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Projects\ProjectNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Projects\Projects.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\TaxTypes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeEnquiry.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SetFeeBasis.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\HelpForm.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\QuickCodeSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\TimeSht.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\TrustJournal.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\forcepay.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\WriteOffs.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\BankDepositQuery.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WriteOffDisb.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Jurisdiction.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\signature.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowNewTaskItemDialog.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowCopyTemplate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkflowType.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowTaskTemplates.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DebtorStatusList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventEventTypes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\documenttypelist.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEvent.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\GenericFileName.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\CopyEventParticipants.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventFilter.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventParticipants.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventExportFile.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketEventList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\SolicitorCodeNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CourtAddress.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\SolicitorCode.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\IndustryNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\InterestNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Unlock.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketReferralOther.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\TimeDiaryNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\TimeDiary.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ReleaseNotes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WebFavourites.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\browseproperties.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BrowserOrgFavourites.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\browser.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BatchChequePrint.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Collections\debtorDocumentMerge.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\TextEdit.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Collections\DebtorTaskDue.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Controlled Monies\InvestmentTransactionNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Controlled Monies\DepositAccount.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\AccountType.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Controlled Monies\InvestmentTransactions.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Collections\DebtorTaskTemplate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\teams.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Collections\DebtorNotesEntry.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\DashboardIndDataModule.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\FeesBilledBreakdown.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\FeesRecBreakdown.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\Breakdown_WIP.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\BreakDown_UnbilledWIP.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\Dashboard_Ind.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\DashboardTeamDataModule.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\Dashboard_Team.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\DashboardFirmDataModule.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\BreakDown_UnbilledWIP_Firm.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Dashboard\Dashboard.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CustomProcedures.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CrystalReportDef.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\CriticalAlert.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\feeauthority.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\AttachEmailToMatter.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\OutlookDiaryNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocumentList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ArchiveType.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\dtSearchDocSearch.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PrecClassifications.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EmployeeList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocDescrEdit.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\UserLogins.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BudgetImport.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\GLReportGrp.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Splashscreen.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterNoteTypes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\Bulkbills.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\AutoGenList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\invoicelist.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\PhonebookImport.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SettingsMaint.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BHLSupport.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\AxiomLogin.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketRelationshipTypes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketRelationshipStatus.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MarketEvent\MarketRelationshipAction.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\ResearchSites.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Advertising\AdMaint.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\AdvRegion.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Advertising\AdvSupplier.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Advertising\AdvMedia.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Advertising\AdvSubMedia.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\CountryList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BankTransfer.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\documentcenter.dfm */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.OfficeImage.res */
+/* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Utils.Cursors.RES */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.DocumentModel.Images.RES */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Control.Images.RES */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.CustomDialog.dfm */
@@ -18740,85 +18739,85 @@ END
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.MergeOptions.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableOfContents.dfm */
 /* C:\Program Files (x86)\DevExpress\VCL\ExpressRichEdit Control\Sources\dxRichEdit.Dialogs.TableStyle.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplateAddEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplateRichEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmailTemplates.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\WriteOffWIP.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\BankRecEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Prac_num_process.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\prac_num.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DebtorTaskCodes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EntityGroups.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ExpenseTemplates.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\NewTaskNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Phonebook_Status.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\FolderTemplate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Document Search\SearchIndexConfig.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Desktop.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\axiomavi.RES */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\OptionsUser.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeNotes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\msearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\home.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Maintenance\eMailList.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\LEDES1998BI.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Creditors\AccountCreate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\EmailListener.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AxiomData.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\AutoCost.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MaisterAnalysis.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterAssociate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterPartyRelate.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerFees.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerDisb.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerDebt.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerSundry.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerCheqReq.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerUnconCheqReq.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\JournalDisbDebt.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\PrecNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerTransit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TransitSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\TransitNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\RptLedgerCreditors.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\matternotes.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterNotesAdd.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterNotesRptFrm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SendSMS.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\FileCopyDisplay.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocumentImportDirSelection.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\BillCreateAsk.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocumentCopyAsk.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocCopyMoveFileDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\doc_folder_sel.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\ReceiptReqNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Projects\ProjectMatter.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterPositionRpt.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterNotesFrm.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DocDescription.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Matters.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Diary\DiaryType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MatterTaskNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\YearEnd2.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\YearEnd1.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SingleFieldEdit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DataFormOtherParties.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\MultiSelect.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WaitFormAppStop.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\WorkFlow\WorkFlowTCPCommunication.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Workflow\WorkFlowEditDataFormDialog.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\DBGenEditor.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\SecureMatters.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskTempNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskItemNew.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskItemSearch.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\Tasks.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\TaskDecisions.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Billing\Bill_narration_edit.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Tasks\NewTask.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Time\FeeType.dfm */
-/* D:\Insight_XE4_Source\UK-Hybrid\Insight.res */
-/* D:\Insight_XE4_Source\UK-Hybrid\releasenotes.RES */
-/* D:\Insight_XE4_Source\UK-Hybrid\Insight.drf */
+/* D:\XE10_SOURCE\UK-Hybrid\EmailTemplateAddEdit.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EmailTemplateRichEdit.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EmailTemplates.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\WriteOffWIP.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\BankRecEdit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Prac_num_process.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\prac_num.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DebtorTaskCodes.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\EntityGroups.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ExpenseTemplates.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\NewTaskNew.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Phonebook_Status.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\FolderTemplate.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Document Search\SearchIndexConfig.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Desktop.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\AXIOMAVI.RES */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\OptionsUser.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeNotes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\home.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Maintenance\eMailList.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\LEDES1998BI.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\AccountCreate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\EmailListener.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\AxiomData.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\AutoCost.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MaisterAnalysis.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterAssociate.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterPartyRelate.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerFees.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerDisb.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerDebt.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerSundry.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerCheqReq.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerUnconCheqReq.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\JournalDisbDebt.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\PrecNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerTransit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\TransitSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\TransitNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\RptLedgerCreditors.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\matternotes.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterNotesAdd.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterNotesRptFrm.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SendSMS.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\FileCopyDisplay.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocumentImportDirSelection.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\BillCreateAsk.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocumentCopyAsk.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocCopyMoveFileDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\doc_folder_sel.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\ReceiptReqNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Projects\ProjectMatter.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterPositionRpt.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterNotesFrm.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DocDescription.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Matters.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Diary\DiaryType.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MatterTaskNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\YearEnd2.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\YearEnd1.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\SingleFieldEdit.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\DataFormOtherParties.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\MultiSelect.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WaitFormAppStop.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowTCPCommunication.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowEditDataFormDialog.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DBGenEditor.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\SecureMatters.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskTempNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskItemNew.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskItemSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\Tasks.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\TaskDecisions.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Billing\Bill_narration_edit.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Tasks\NewTask.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Time\FeeType.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Insight.RES */
+/* D:\XE10_SOURCE\UK-Hybrid\releasenotes.res */
+/* D:\XE10_SOURCE\UK-Hybrid\Insight.drf */

@@ -4504,6 +4504,7 @@ begin
                      LfrmDocNew.NewCopyDoc := True;
                      LfrmDocNew.ADocId := tvDocsDOCID.EditValue; // qryDocs.FieldByName('docid').AsInteger;
                      LfrmDocNew.FileID :=  qryMatter.FieldByName('FILEID').AsString; //tvDocsFILEID.EditValue;
+                     LfrmDocNew.OFileID :=  qryMatter.FieldByName('FILEID').AsString; //tvDocsFILEID.EditValue;
                      if LfrmDocNew.ShowModal = mrOk then
                      begin
 //                        with qryCreateDocCopy do
@@ -5728,6 +5729,10 @@ begin
 
 //   pageMatter.ActivePageIndex := SettingLoadInteger(dmAxiom.UserID, 'MATTER', 'OPENTAB');
 
+  if ((SystemString('DFLT_MATTER_DOC_TAB') = 'Y') and (dmAxiom.Security.Matter.Tabs.Documents = TRUE)) then
+       pageMatter.ActivePageIndex := 13;
+
+
    try
       if (not pageMatter.ActivePage.TabVisible) then
          pageMatter.ActivePageIndex := pageMatter.ActivePageIndex - 1;
@@ -6123,6 +6128,7 @@ begin
       LfrmDocNew := TfrmDocNew.Create(Self);
       LfrmDocNew.NewCopyDoc := False;
       LfrmDocNew.FileID := qryMatter.FieldByName('FILEID').AsString;
+      LfrmDocNew.OFileID := qryMatter.FieldByName('FILEID').AsString;
       LfrmDocNew.AMatter := qryMatter.FieldByName('NMATTER').AsInteger;
       if LfrmDocNew.ShowModal = mrOk then
       begin
@@ -10064,6 +10070,7 @@ begin
          LfrmDocNew.Editing := True;
          LfrmDocNew.ADocId := tvDocsDOCID.EditValue; // qryDocs.FieldByName('docid').AsInteger;
          LfrmDocNew.FileID :=  qryMatter.FieldByName('FILEID').AsString; //tvDocsFILEID.EditValue;
+         LfrmDocNew.OFileID :=  qryMatter.FieldByName('FILEID').AsString; //tvDocsFILEID.EditValue;
          LfrmDocNew.ShowModal;
       finally
          tvDocs.BeginUpdate();
