@@ -3905,48 +3905,48 @@ object frmMatters: TfrmMatters
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 0
-              Text = 'Name'
               Width = 200
+              WideText = 'Name'
             end
             item
               MaxWidth = 500
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 1
-              Text = 'Contact'
               Width = 350
+              WideText = 'Contact'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 2
-              Text = 'Work Phone'
               Width = 100
+              WideText = 'Work Phone'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 3
-              Text = 'Mobile'
               Width = 100
+              WideText = 'Mobile'
             end
             item
               MinWidth = 100
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 4
-              Text = 'Home Phone'
               Width = 100
+              WideText = 'Home Phone'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 5
-              Text = 'Fax'
               Width = 100
+              WideText = 'Fax'
             end
             item
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
-              Text = 'Email'
               Width = 410
+              WideText = 'Email'
             end>
         end
       end
@@ -3954,10 +3954,6 @@ object frmMatters: TfrmMatters
     object tabFields: TcxTabSheet
       Caption = 'Data'
       ImageIndex = 28
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxPageControl1: TcxPageControl
         Left = 0
         Top = 0
@@ -3976,7 +3972,6 @@ object frmMatters: TfrmMatters
         object tabFormData: TcxTabSheet
           Caption = 'Form Data'
           ImageIndex = 0
-          ExplicitHeight = 497
           object vtMatterData: TVirtualStringTree
             Left = 0
             Top = 0
@@ -4009,14 +4004,14 @@ object frmMatters: TfrmMatters
             Columns = <
               item
                 Position = 0
-                Text = 'Form / Field'
                 Width = 300
+                WideText = 'Form / Field'
               end
               item
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
-                Text = 'Value'
                 Width = 1032
+                WideText = 'Value'
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4026,7 +4021,6 @@ object frmMatters: TfrmMatters
             Height = 28
             Align = dalBottom
             BarManager = MatterBarManager
-            ExplicitTop = 469
           end
         end
         object tabCalculationData: TcxTabSheet
@@ -6101,7 +6095,6 @@ object frmMatters: TfrmMatters
     object tabControlledMoney: TcxTabSheet
       Caption = 'Controlled Monies'
       ImageIndex = 65
-      ExplicitHeight = 505
       object dxBarDockControl1: TdxBarDockControl
         Left = 0
         Top = 0
@@ -6780,7 +6773,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -8467,6 +8459,7 @@ object frmMatters: TfrmMatters
             OnAfterEditing = ProjectsSchedulerAfterEditing
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
+            Selection = 1
             Splitters = {
               BA0400007E0000004905000083000000B604000001000000BA0400006C010000}
             StoredClientBounds = {0100000001000000490500006C010000}
@@ -9993,7 +9986,7 @@ object frmMatters: TfrmMatters
     Left = 1146
     Top = 29
     Bitmap = {
-      494C010112001500040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101120015000C0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000080000000A000000001002000000000000040
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -16467,7 +16460,7 @@ object frmMatters: TfrmMatters
     Left = 848
     Top = 285
     Bitmap = {
-      494C01010A000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000D7D7D700D7D7D700D7D7
@@ -17379,7 +17372,7 @@ object frmMatters: TfrmMatters
     Left = 1073
     Top = 29
     Bitmap = {
-      494C01014B004D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014B004D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -21598,7 +21591,7 @@ object frmMatters: TfrmMatters
     Left = 570
     Top = 217
     Bitmap = {
-      494C01010C001100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010C0011000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

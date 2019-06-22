@@ -41,7 +41,7 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tabEmails
+    Properties.ActivePage = tabMatterDefaults
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
@@ -60,7 +60,7 @@ object frmSystemFile: TfrmSystemFile
       object DBText1: TDBText
         Left = 102
         Top = 3
-        Width = 143
+        Width = 172
         Height = 15
         AutoSize = True
         DataField = 'COMPANY'
@@ -1932,21 +1932,21 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxGroupBox10: TcxGroupBox
         Left = 18
-        Top = 156
+        Top = 176
         Caption = 'Archival Defaults'
         TabOrder = 9
-        Height = 156
-        Width = 353
+        Height = 117
+        Width = 631
         object Label51: TLabel
-          Left = 14
-          Top = 131
+          Left = 12
+          Top = 86
           Width = 104
           Height = 15
           Caption = 'Archive Review Age'
         end
         object cxDBSpinEdit5: TcxDBSpinEdit
-          Left = 120
-          Top = 128
+          Left = 122
+          Top = 83
           DataBinding.DataField = 'ARCHIVE_REVIEW_PERIOD'
           DataBinding.DataSource = dsSystemFile
           Style.LookAndFeel.Kind = lfStandard
@@ -2028,8 +2028,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 291
         end
         object cxDBCheckBox37: TcxDBCheckBox
-          Left = 12
-          Top = 73
+          Left = 322
+          Top = 20
           AutoSize = False
           Caption = 'Hide "Location" Column in Archive Details Grid'
           DataBinding.DataField = 'HIDE_LOCATION_COL_ARCHIVE'
@@ -2051,8 +2051,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 291
         end
         object cxDBCheckBox42: TcxDBCheckBox
-          Left = 12
-          Top = 91
+          Left = 322
+          Top = 38
           AutoSize = False
           Caption = 'Hide "Archive Type" selection box'
           DataBinding.DataField = 'HIDE_ARCHIVE_TYPE'
@@ -2074,8 +2074,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 291
         end
         object cxDBCheckBox48: TcxDBCheckBox
-          Left = 12
-          Top = 109
+          Left = 322
+          Top = 56
           AutoSize = False
           Caption = 'Close all outstanding Workflow tasks on Archive'
           DataBinding.DataField = 'STOP_WKFLOW_TASKS_ARCHIVE'
@@ -2097,11 +2097,11 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxGroupBox11: TcxGroupBox
         Left = 18
-        Top = 313
+        Top = 295
         Caption = 'Visibility'
         TabOrder = 10
-        Height = 229
-        Width = 353
+        Height = 138
+        Width = 631
         object cxDBCheckBox39: TcxDBCheckBox
           Left = 12
           Top = 19
@@ -2179,8 +2179,8 @@ object frmSystemFile: TfrmSystemFile
           TabOrder = 5
         end
         object cxDBCheckBox46: TcxDBCheckBox
-          Left = 12
-          Top = 120
+          Left = 320
+          Top = 13
           Caption = 'Hide Matter Carriage "Team"'
           DataBinding.DataField = 'HIDE_CARRIAGE_TEAM'
           DataBinding.DataSource = dsSystemFile
@@ -2190,8 +2190,8 @@ object frmSystemFile: TfrmSystemFile
           TabOrder = 6
         end
         object cxDBCheckBox50: TcxDBCheckBox
-          Left = 12
-          Top = 139
+          Left = 320
+          Top = 34
           AutoSize = False
           Caption = 'Hide "Label Code" field'
           DataBinding.DataField = 'HIDE_MATTER_LABEL_CODE'
@@ -2211,8 +2211,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 256
         end
         object cxDBCheckBox51: TcxDBCheckBox
-          Left = 12
-          Top = 155
+          Left = 320
+          Top = 51
           AutoSize = False
           Caption = 'Hide "Destroyed Date" field'
           DataBinding.DataField = 'HIDE_ARCH_DESTROY_DATE'
@@ -2232,8 +2232,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 256
         end
         object cxDBCheckBox59: TcxDBCheckBox
-          Left = 12
-          Top = 172
+          Left = 320
+          Top = 68
           AutoSize = False
           Caption = 'Hide "Matter Carriage Additional" Tab'
           DataBinding.DataField = 'HIDEMATTERCARRIAGEADDITIONAL'
@@ -2253,8 +2253,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 256
         end
         object cxDBCheckBox71: TcxDBCheckBox
-          Left = 12
-          Top = 188
+          Left = 320
+          Top = 85
           AutoSize = False
           Caption = 'Hide "Billing Plan" and "Hourly Rate" fields'
           DataBinding.DataField = 'HIDEBILLPLANHOURLYRATE'
@@ -2274,8 +2274,8 @@ object frmSystemFile: TfrmSystemFile
           Width = 256
         end
         object cxDBCheckBox72: TcxDBCheckBox
-          Left = 12
-          Top = 205
+          Left = 320
+          Top = 103
           AutoSize = False
           Caption = 'Hide "Expected Completion" field'
           DataBinding.DataField = 'HIDEEXPECTEDCOMPLETION'
@@ -2386,6 +2386,23 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 14
         Width = 183
+      end
+      object cxDBCheckBox75: TcxDBCheckBox
+        Left = 16
+        Top = 151
+        AutoSize = False
+        Caption = 'Make Documents tab the Default'
+        DataBinding.DataField = 'DFLT_MATTER_DOC_TAB'
+        DataBinding.DataSource = dsSystemFile
+        Properties.Alignment = taLeftJustify
+        Properties.ImmediatePost = True
+        Properties.MultiLine = True
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'Y'
+        Properties.ValueUnchecked = 'N'
+        TabOrder = 15
+        Height = 23
+        Width = 198
       end
     end
     object cxTabSheet1: TcxTabSheet
@@ -3254,7 +3271,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 12
-        Text = ''
+        Text = 'Std Bill'
         DataField = 'MEMO_BILL_DEFAULT'
         DataSource = dsSystemFile
       end
@@ -3267,7 +3284,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 13
-        Text = ''
+        Text = 'Std Bill'
         DataField = 'DRAFT_BILL_DEFAULT'
         DataSource = dsSystemFile
       end
@@ -3303,7 +3320,6 @@ object frmSystemFile: TfrmSystemFile
         Width = 112
         Height = 23
         ValueType = vtFloat
-        Value = 5.000000000000000000
         TabOrder = 16
         DataField = 'BILL_DISCOUNT'
         DataSource = dsSystemFile
@@ -4411,7 +4427,7 @@ object frmSystemFile: TfrmSystemFile
           Left = 9
           Top = 19
           Caption = 'Fee Alert Receipients'
-          EditValue = '0100'
+          EditValue = '0111'
           Properties.EditValueFormat = cvfStatesString
           Properties.Items = <
             item

@@ -550,6 +550,7 @@ type
     cxDBComboBox4: TcxDBComboBox;
     cxLabel42: TcxLabel;
     cxLabel43: TcxLabel;
+    cxDBCheckBox75: TcxDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
