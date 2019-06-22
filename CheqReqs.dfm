@@ -1610,7 +1610,7 @@ object frmCheqReqs: TfrmCheqReqs
     Left = 472
     Top = 20
     Bitmap = {
-      494C010111001500140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001500180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2682,6 +2682,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
     PrinterSetup.PaperSize = 9
+    Template.FileName = 'C:\Users\dbw\Documents\cheqreqrpt.rtm'
     Units = utMillimeters
     AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'

@@ -668,7 +668,7 @@ begin
    { Modified 28.10.2017 DW - to prevent second trust cheq req from overdrawing trust account }
    'left outer join (select ab.nmatter, SUM(ab.AMOUNT) as T_AMOUNT from ALLOC ab where ab.TRUST = ''T'' group by ab.nmatter) at on c.nmatter = at.nmatter '+
 
-   {modified 21.06.2019 DW - to provide chque number for report}
+   {modified 21.06.2019 DW - to provide cheque number for report}
    'left outer join (select chq.ncheque, chq.chqno from cheque chq) chq on c.ncheque = chq.ncheque ' +
 //   ',TAXRATE rr ' + //, cheqreq_trans tr, alloc cheq  ' +
 
