@@ -5484,13 +5484,15 @@ begin
    DC.BeginUpdate;
    Idx := DC.FocusedRowIndex;
 
+   SetCurrentDir(ExtractFilePath(Application.EXEName));
    try
       if GV.DataController.RowCount > 0 then
       begin
          Bitmap:= TBitmap.Create;
          if tvFeeTmpNewPROCESS.Tag = 0 then
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+            Bitmap.LoadFromFile(ExtractFilePath(Application.EXEName)+'\images\CHECKBOXUNTICK.bmp');
+//            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
             tvFeeTmpNewPROCESS.HeaderGlyph.Assign(Bitmap);
             tvFeeTmpNewPROCESS.Tag := 1;
             GV.ViewData.Records[0].Focused := True;
@@ -5505,7 +5507,8 @@ begin
          end
          else
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+            Bitmap.LoadFromFile(ExtractFilePath(Application.EXEName)+'\images\CHECKBOXTICK.bmp');
+//           Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
             tvFeeTmpNewPROCESS.HeaderGlyph.Assign(Bitmap);
             tvFeeTmpNewPROCESS.Tag := 0;
             GV.ViewData.Records[0].Focused := True;
@@ -5523,6 +5526,7 @@ begin
    finally
       DC.FocusedRowIndex := Idx;
       DC.EndUpdate;
+      SetCurrentDir(ExtractFilePath(Application.EXEName));
    end;
 end;
 

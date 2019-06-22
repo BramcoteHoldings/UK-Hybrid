@@ -777,38 +777,45 @@ begin
    DC.BeginUpdate;
    Idx := DC.FocusedRowIndex;
 
-   Bitmap:= TBitmap.Create;
-   if pbSelect.Caption = 'Select All' then
-   begin
-      pbSelect.Caption := 'DeSelect All';
-//      bbSelectAll.Caption := 'DeSelect All';
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
-      pbselect.Glyph.Assign(Bitmap);
-
-      GV.ViewData.Records[0].Focused := True;
-      for I := 0 to GV.ViewData.RowCount - 1 do
+   SetCurrentDir(ExtractFilePath(Application.EXEName));
+   try
+      Bitmap:= TBitmap.Create;
+      if pbSelect.Caption = 'Select All' then
       begin
-         GV.ViewData.Records[I].Focused := True;
-         tvMattersSELECTED.EditValue := true;
-      end;
-   end
-   else
-   begin
-      pbSelect.Caption := 'Select All';
-//      bbSelectAll.Caption := 'Select All';
-      Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
-      pbselect.Glyph.Assign(Bitmap);
+         pbSelect.Caption := 'DeSelect All';
+//         bbSelectAll.Caption := 'DeSelect All';
+         Bitmap.LoadFromFile(ExtractFilePath(Application.EXEName)+'\images\CHECKBOXUNTICK.bmp');
+//         Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+         pbselect.Glyph.Assign(Bitmap);
 
-      GV.ViewData.Records[0].Focused := True;
-      for I := 0 to GV.ViewData.RowCount - 1 do
+         GV.ViewData.Records[0].Focused := True;
+         for I := 0 to GV.ViewData.RowCount - 1 do
+         begin
+            GV.ViewData.Records[I].Focused := True;
+            tvMattersSELECTED.EditValue := true;
+         end;
+      end
+      else
       begin
-         GV.ViewData.Records[I].Focused := True;
-         tvMattersSELECTED.EditValue := false;
+         pbSelect.Caption := 'Select All';
+//         bbSelectAll.Caption := 'Select All';
+         Bitmap.LoadFromFile(ExtractFilePath(Application.EXEName)+'\images\CHECKBOXTICK.bmp');
+//         Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+         pbselect.Glyph.Assign(Bitmap);
+
+         GV.ViewData.Records[0].Focused := True;
+         for I := 0 to GV.ViewData.RowCount - 1 do
+         begin
+            GV.ViewData.Records[I].Focused := True;
+            tvMattersSELECTED.EditValue := false;
+         end;
       end;
+   finally
+      Bitmap.Free;
+      DC.FocusedRowIndex := Idx;
+      DC.EndUpdate;
+      SetCurrentDir(ExtractFilePath(Application.EXEName));
    end;
-   Bitmap.Free;
-   DC.FocusedRowIndex := Idx;
-   DC.EndUpdate;
 end;
 
 procedure TfrmBulkBills.Merge();

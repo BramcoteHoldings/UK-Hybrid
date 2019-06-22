@@ -4739,13 +4739,14 @@ var
    APageCount: integer;
 begin
    APageCount := pageForms.PageCount;
-   TabIndex := pageForms.Controller.HitTest.HitTab.Index;
-   ChildControl := pageForms.Pages[TabIndex].Controls[0];
+   dmAxiom.ATabIndex := pageForms.Controller.HitTest.HitTab.Index;
+   ChildControl := pageForms.Pages[dmAxiom.ATabIndex].Controls[0];
    TForm(ChildControl).Close;
    if APageCount = pageForms.PageCount then
-      pageForms.Pages[TabIndex].Destroy;
+      pageForms.Pages[dmAxiom.ATabIndex].Destroy;
 
    pageforms.Repaint;
+   dmAxiom.ATabIndex := -1;
 end;
 
 procedure TfrmDesktop.pageFormsUnDock(Sender: TObject; Client: TControl;
