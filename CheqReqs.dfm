@@ -81,7 +81,7 @@ object frmCheqReqs: TfrmCheqReqs
     Height = 618
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabFilter
+    Properties.ActivePage = tabCashbook
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
@@ -92,10 +92,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -430,10 +426,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1046
         588)
@@ -1618,7 +1610,7 @@ object frmCheqReqs: TfrmCheqReqs
     Left = 472
     Top = 20
     Bitmap = {
-      494C010111001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001500140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2680,7 +2672,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2781,7 +2773,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 799
+    Left = 823
     Top = 252
     Version = '19.02'
     mmColumnWidth = 0
@@ -2898,7 +2890,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
         Border.mmPadding = 0
-        Caption = 'Required'
+        Caption = 'Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
@@ -2907,10 +2899,10 @@ object frmCheqReqs: TfrmCheqReqs
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 3598
+        mmHeight = 3969
         mmLeft = 794
-        mmTop = 28422
-        mmWidth = 12954
+        mmTop = 28310
+        mmWidth = 6350
         BandType = 0
         LayerName = Foreground
       end
@@ -3028,7 +3020,7 @@ object frmCheqReqs: TfrmCheqReqs
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3598
-        mmLeft = 102129
+        mmLeft = 101599
         mmTop = 24342
         mmWidth = 10414
         BandType = 0
@@ -3049,7 +3041,7 @@ object frmCheqReqs: TfrmCheqReqs
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3598
-        mmLeft = 125677
+        mmLeft = 132567
         mmTop = 24342
         mmWidth = 11007
         BandType = 0
@@ -3059,7 +3051,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Label12'
         Border.mmPadding = 0
-        Caption = 'Received'
+        Caption = 'Tax'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
@@ -3069,10 +3061,10 @@ object frmCheqReqs: TfrmCheqReqs
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3598
-        mmLeft = 143669
+        mmHeight = 3969
+        mmLeft = 156104
         mmTop = 24342
-        mmWidth = 13293
+        mmWidth = 4763
         BandType = 0
         LayerName = Foreground
       end
@@ -3080,7 +3072,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
         Border.mmPadding = 0
-        Caption = 'Paid'
+        Caption = 'Total'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
@@ -3090,10 +3082,10 @@ object frmCheqReqs: TfrmCheqReqs
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3598
-        mmLeft = 170127
+        mmHeight = 3969
+        mmLeft = 178330
         mmTop = 24342
-        mmWidth = 6392
+        mmWidth = 7144
         BandType = 0
         LayerName = Foreground
       end
@@ -3101,7 +3093,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
         Border.mmPadding = 0
-        Caption = 'Payable'
+        Caption = 'Billed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
@@ -3111,10 +3103,10 @@ object frmCheqReqs: TfrmCheqReqs
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3598
-        mmLeft = 183621
+        mmHeight = 3968
+        mmLeft = 188913
         mmTop = 24342
-        mmWidth = 11515
+        mmWidth = 7673
         BandType = 0
         LayerName = Foreground
       end
@@ -3167,14 +3159,56 @@ object frmCheqReqs: TfrmCheqReqs
         BandType = 0
         LayerName = Foreground
       end
+      object ppLabel27: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label16'
+        Border.mmPadding = 0
+        Caption = 'Chq #'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 42863
+        mmTop = 28310
+        mmWidth = 8466
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel31: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label17'
+        Border.mmPadding = 0
+        Caption = 'Tx Code'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3968
+        mmLeft = 112977
+        mmTop = 24342
+        mmWidth = 11377
+        BandType = 0
+        LayerName = Foreground
+      end
     end
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
-      Border.mmPadding = 0
+      Border.BorderPositions = [bpTop]
+      Border.Visible = True
+      Border.mmPadding = 265
       PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 10319
+      mmHeight = 11113
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
@@ -3281,28 +3315,6 @@ object frmCheqReqs: TfrmCheqReqs
         BandType = 4
         LayerName = Foreground
       end
-      object ppDBText6: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText6'
-        Border.mmPadding = 0
-        DataField = 'DESCR'
-        DataPipeline = plCheqReqs
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        ParentDataPipeline = False
-        Transparent = True
-        WordWrap = True
-        DataPipelineName = 'plCheqReqs'
-        mmHeight = 4233
-        mmLeft = 54504
-        mmTop = 5292
-        mmWidth = 46639
-        BandType = 4
-        LayerName = Foreground
-      end
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
@@ -3320,7 +3332,7 @@ object frmCheqReqs: TfrmCheqReqs
         mmHeight = 4234
         mmLeft = 102129
         mmTop = 529
-        mmWidth = 20140
+        mmWidth = 9790
         BandType = 4
         LayerName = Foreground
       end
@@ -3338,10 +3350,10 @@ object frmCheqReqs: TfrmCheqReqs
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 102129
-        mmTop = 5556
-        mmWidth = 20140
+        mmHeight = 4233
+        mmLeft = 112977
+        mmTop = 529
+        mmWidth = 11377
         BandType = 4
         LayerName = Foreground
       end
@@ -3362,32 +3374,9 @@ object frmCheqReqs: TfrmCheqReqs
         Transparent = True
         DataPipelineName = 'plCheqReqs'
         mmHeight = 4234
-        mmLeft = 123296
+        mmLeft = 125413
         mmTop = 529
-        mmWidth = 13494
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppDBText10: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText10'
-        Border.mmPadding = 0
-        DataField = 'REC'
-        DataPipeline = plCheqReqs
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        ParentDataPipeline = False
-        TextAlignment = taRightJustified
-        Transparent = True
-        DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 138907
-        mmTop = 529
-        mmWidth = 17992
+        mmWidth = 18256
         BandType = 4
         LayerName = Foreground
       end
@@ -3395,7 +3384,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
         Border.mmPadding = 0
-        DataField = 'PAID'
+        DataField = 'TOTAL'
         DataPipeline = plCheqReqs
         DisplayFormat = '$#,0.00;($#,0.00)'
         Font.Charset = DEFAULT_CHARSET
@@ -3406,10 +3395,10 @@ object frmCheqReqs: TfrmCheqReqs
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 159544
-        mmTop = 529
-        mmWidth = 16933
+        mmHeight = 4233
+        mmLeft = 165894
+        mmTop = 265
+        mmWidth = 19579
         BandType = 4
         LayerName = Foreground
       end
@@ -3428,100 +3417,10 @@ object frmCheqReqs: TfrmCheqReqs
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 123296
-        mmTop = 5556
-        mmWidth = 13494
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppDBText14: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText14'
-        Border.mmPadding = 0
-        DataField = 'REC_TAX'
-        DataPipeline = plCheqReqs
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 138907
-        mmTop = 5556
-        mmWidth = 17992
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppDBText15: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText15'
-        Border.mmPadding = 0
-        DataField = 'PAID_TAX'
-        DataPipeline = plCheqReqs
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        DataPipelineName = 'plCheqReqs'
-        mmHeight = 4234
-        mmLeft = 159544
-        mmTop = 5556
-        mmWidth = 16933
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppVariable1: TppVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'Variable1'
-        AutoSize = False
-        Border.mmPadding = 0
-        BlankWhenZero = False
-        CalcOrder = 0
-        DataType = dtCurrency
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
         mmHeight = 4233
-        mmLeft = 178065
-        mmTop = 794
-        mmWidth = 17198
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppVariable5: TppVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'Variable5'
-        AutoSize = False
-        Border.mmPadding = 0
-        BlankWhenZero = False
-        CalcOrder = 1
-        DataType = dtCurrency
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial Narrow'
-        Font.Size = 9
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 4234
-        mmLeft = 178065
-        mmTop = 5556
-        mmWidth = 17198
+        mmLeft = 144466
+        mmTop = 529
+        mmWidth = 16404
         BandType = 4
         LayerName = Foreground
       end
@@ -3544,6 +3443,96 @@ object frmCheqReqs: TfrmCheqReqs
         mmWidth = 17972
         BandType = 4
         LayerName = Foreground
+      end
+      object ppDBText17: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText16'
+        Border.mmPadding = 0
+        DataField = 'CHQNO'
+        DataPipeline = plCheqReqs
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plCheqReqs'
+        mmHeight = 3969
+        mmLeft = 42863
+        mmTop = 5556
+        mmWidth = 11113
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText10'
+        Border.mmPadding = 0
+        DataField = 'BILLED'
+        DataPipeline = plCheqReqs
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'plCheqReqs'
+        mmHeight = 4498
+        mmLeft = 188913
+        mmTop = 265
+        mmWidth = 7673
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText14: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText14'
+        Border.mmPadding = 0
+        DataField = 'BILLNO'
+        DataPipeline = plCheqReqs
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'plCheqReqs'
+        mmHeight = 4498
+        mmLeft = 185473
+        mmTop = 5292
+        mmWidth = 11113
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBMemo1: TppDBMemo
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBMemo1'
+        Border.mmPadding = 0
+        CharWrap = False
+        DataField = 'DESCR'
+        DataPipeline = plCheqReqs
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial Narrow'
+        Font.Size = 9
+        Font.Style = []
+        RemoveEmptyLines = False
+        Stretch = True
+        Transparent = True
+        DataPipelineName = 'plCheqReqs'
+        mmHeight = 4498
+        mmLeft = 54504
+        mmTop = 5556
+        mmWidth = 46567
+        BandType = 4
+        LayerName = Foreground
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+        mmLeading = 0
       end
     end
     object ppSummaryBand1: TppSummaryBand
@@ -3605,9 +3594,9 @@ object frmCheqReqs: TfrmCheqReqs
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4191
-        mmLeft = 119592
+        mmLeft = 120650
         mmTop = 2117
-        mmWidth = 17198
+        mmWidth = 23019
         BandType = 7
         LayerName = Foreground
       end
@@ -3628,10 +3617,10 @@ object frmCheqReqs: TfrmCheqReqs
         ResetType = veReportStart
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3968
-        mmLeft = 142611
-        mmTop = 2117
-        mmWidth = 14287
+        mmHeight = 3969
+        mmLeft = 144463
+        mmTop = 2381
+        mmWidth = 16404
         BandType = 7
         LayerName = Foreground
       end
@@ -3655,7 +3644,7 @@ object frmCheqReqs: TfrmCheqReqs
         mmHeight = 3968
         mmLeft = 162190
         mmTop = 2117
-        mmWidth = 14287
+        mmWidth = 21960
         BandType = 7
         LayerName = Foreground
       end
@@ -3749,7 +3738,7 @@ object frmCheqReqs: TfrmCheqReqs
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc5'
         Border.mmPadding = 0
-        DataField = 'PAID'
+        DataField = 'TOTAL'
         DataPipeline = plCheqReqs
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3807,31 +3796,6 @@ object frmCheqReqs: TfrmCheqReqs
         BandType = 7
         LayerName = Foreground
       end
-      object ppVariable7: TppVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'Variable7'
-        AutoSize = False
-        Border.mmPadding = 0
-        BlankWhenZero = False
-        CalcOrder = 4
-        DataType = dtCurrency
-        DisplayFormat = '$#,0.00;($#,0.00)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Segoe UI'
-        Font.Size = 9
-        Font.Style = [fsBold]
-        LookAhead = True
-        ResetType = veReportStart
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 4191
-        mmLeft = 178065
-        mmTop = 2117
-        mmWidth = 17198
-        BandType = 7
-        LayerName = Foreground
-      end
     end
     object raCodeModule1: TraCodeModule
       object raProgramInfo1: TraProgramInfo
@@ -3845,41 +3809,19 @@ object frmCheqReqs: TfrmCheqReqs
           '  PaidTotal : Currency;'#13#10'  PaidTotalTax : Currency;'#13#10'  Payable :' +
           ' Currency;'#13#10'  PayableTax : Currency;'#13#10#13#10'begin'#13#10#13#10'end;'#13#10
       end
-      object raProgramInfo2: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'Variable1OnCalc'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure Variable1OnCalc(var Value: Variant);'#13#10'begin'#13#10'  Value :' +
-          '= plCheqReqs['#39'REC'#39']- plCheqReqs['#39'PAID'#39'];'#13#10'  Payable := Payable +' +
-          ' Value;'#13#10'end;'#13#10
-        raProgram.ComponentName = 'Variable1'
-        raProgram.EventName = 'OnCalc'
-        raProgram.EventID = 33
-      end
-      object raProgramInfo3: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'DBText6OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure DBText6OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   D' +
-          'BText6.Height := 4;'#13#10'   if Length(plCheqReqs['#39'DESCR'#39']) > 25 then' +
-          #13#10'   begin'#13#10'     LineNo := (Length(plCheqReqs['#39'DESCR'#39'])/25);'#13#10'  ' +
-          '   DBText6.Height := 4 * (LineNo+1);'#13#10'   end;'#13#10'end;'#13#10
-        raProgram.ComponentName = 'DBText6'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
-      end
       object raProgramInfo4: TraProgramInfo
         raClassName = 'TraEventHandler'
         raProgram.ProgramName = 'Variable2OnCalc'
         raProgram.ProgramType = ttProcedure
         raProgram.Source = 
           'procedure Variable2OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
-          ' :=   DBCalc1.Value + DBCalc2.Value;'#13#10#13#10'end;'#13#10
+          ' :=   DBCalc1.Value;'#13#10#13#10'end;'#13#10
         raProgram.ComponentName = 'Variable2'
         raProgram.EventName = 'OnCalc'
         raProgram.EventID = 33
+        raProgram.CaretPos = (
+          27
+          2)
       end
       object raProgramInfo5: TraProgramInfo
         raClassName = 'TraEventHandler'
@@ -3909,32 +3851,13 @@ object frmCheqReqs: TfrmCheqReqs
         raProgram.ProgramType = ttProcedure
         raProgram.Source = 
           'procedure Variable3OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'    Val' +
-          'ue :=   DBCalc3.Value + DBCalc4.Value;'#13#10#13#10'end;'#13#10
+          'ue :=   DBCalc2.Value;'#13#10#13#10'end;'#13#10
         raProgram.ComponentName = 'Variable3'
         raProgram.EventName = 'OnCalc'
         raProgram.EventID = 33
-      end
-      object raProgramInfo8: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'DBText10OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure DBText10OnPrint;'#13#10'begin'#13#10'   RecTotal := RecTotal + plC' +
-          'heqReqs['#39'REC'#39'];'#13#10'end;'#13#10
-        raProgram.ComponentName = 'DBText10'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
-      end
-      object raProgramInfo9: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'DBText14OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure DBText14OnPrint;'#13#10'begin'#13#10'    RecTotalTax := RecTotalTa' +
-          'x +  plCheqReqs['#39'REC_TAX'#39'];'#13#10'end;'#13#10
-        raProgram.ComponentName = 'DBText14'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
+        raProgram.CaretPos = (
+          29
+          2)
       end
       object raProgramInfo10: TraProgramInfo
         raClassName = 'TraEventHandler'
@@ -3946,29 +3869,6 @@ object frmCheqReqs: TfrmCheqReqs
         raProgram.ComponentName = 'DBText11'
         raProgram.EventName = 'OnPrint'
         raProgram.EventID = 32
-      end
-      object raProgramInfo11: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'DBText15OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure DBText15OnPrint;'#13#10'begin'#13#10'   PaidTotalTax := PaidTotalT' +
-          'ax + plCheqReqs['#39'PAID_TAX'#39'];'#13#10'end;'#13#10
-        raProgram.ComponentName = 'DBText15'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
-      end
-      object raProgramInfo12: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'Variable5OnCalc'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure Variable5OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
-          ' :=  plCheqReqs['#39'REC_TAX'#39'] - plCheqReqs['#39'PAID_TAX'#39'];'#13#10'  PayableT' +
-          'ax := PayableTax + Value;'#13#10'end;'#13#10
-        raProgram.ComponentName = 'Variable5'
-        raProgram.EventName = 'OnCalc'
-        raProgram.EventID = 33
       end
       object raProgramInfo13: TraProgramInfo
         raClassName = 'TraEventHandler'
@@ -3989,21 +3889,13 @@ object frmCheqReqs: TfrmCheqReqs
         raProgram.ProgramType = ttProcedure
         raProgram.Source = 
           'procedure Variable4OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'    Val' +
-          'ue :=   DBCalc5.Value + DBCalc6.Value;'#13#10#13#10'end;'#13#10
+          'ue :=   DBCalc5.Value;'#13#10#13#10'end;'#13#10
         raProgram.ComponentName = 'Variable4'
         raProgram.EventName = 'OnCalc'
         raProgram.EventID = 33
-      end
-      object raProgramInfo15: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'Variable7OnCalc'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure Variable7OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
-          ' := Payable + PayableTax;'#13#10#13#10'end;'#13#10
-        raProgram.ComponentName = 'Variable7'
-        raProgram.EventName = 'OnCalc'
-        raProgram.EventID = 33
+        raProgram.CaretPos = (
+          29
+          2)
       end
     end
     object ppDesignLayers1: TppDesignLayers
@@ -4026,7 +3918,7 @@ object frmCheqReqs: TfrmCheqReqs
       FieldName = 'NMEMO'
       FieldLength = 0
       DataType = dtLargeInt
-      DisplayWidth = 0
+      DisplayWidth = 15
       Position = 0
     end
     object plCheqReqsppField2: TppField
@@ -4354,8 +4246,8 @@ object frmCheqReqs: TfrmCheqReqs
     object plCheqReqsppField44: TppField
       FieldAlias = 'AUTHORISED_BY'
       FieldName = 'AUTHORISED_BY'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 43
     end
     object plCheqReqsppField45: TppField
@@ -4367,11 +4259,18 @@ object frmCheqReqs: TfrmCheqReqs
       Position = 44
     end
     object plCheqReqsppField46: TppField
+      FieldAlias = 'CHQNO'
+      FieldName = 'CHQNO'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 45
+    end
+    object plCheqReqsppField47: TppField
       FieldAlias = 'ROWID'
       FieldName = 'ROWID'
       FieldLength = 18
       DisplayWidth = 18
-      Position = 45
+      Position = 46
     end
   end
   object dxComponentPrinter1: TdxComponentPrinter
@@ -4412,8 +4311,8 @@ object frmCheqReqs: TfrmCheqReqs
   end
   object dsCheqReqRpt: TUniDataSource
     DataSet = qryCheqReqRpt
-    Left = 676
-    Top = 249
+    Left = 692
+    Top = 233
   end
   object qryCheqReqRpt: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -4439,33 +4338,35 @@ object frmCheqReqs: TfrmCheqReqs
       
         'nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payab' +
         'le ,nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C' +
-        '.AUTHORISED_BY, C.NINVOICE, C.ROWID'
+        '.AUTHORISED_BY, C.NINVOICE, chq.chqno, C.ROWID'
       'FROM CHEQREQ C ,'
       
         '(SELECT /*+ INDEX(alloc.ncheqreq)*/ SUM(AMOUNT)*-1 as AMOUNT,SUM' +
         '(TAX)*-1 AS TAX,NCHEQREQ FROM ALLOC WHERE NCHEQREQ IS NOT NULL G' +
         'ROUP BY NCHEQREQ) CHEQ ,'
+      '(SELECT NCHEQUE, CHQNO FROM CHEQUE) chq,'
       
         '(select sum(amount) as amount,ncheqreq from cheqreq_trans group ' +
         'by ncheqreq) tr ,TAXRATE rr where c.ncheqreq = cheq.ncheqreq (+)' +
-        ' and '
+        ' and C.NCHEQUE = chq.NCHEQUE (+) and '
       
         'c.ncheqreq = tr.ncheqreq (+) and c.TAXCODE = rr.TAXCODE (+) and ' +
         'C.REQDATE >= :P_DateFrom and C.REQDATE <= :P_DateTo  AND C.AMOUN' +
         'T > 0 AND C.CONVERTED = '#39'N'#39'  '
       'AND C.REV_NCHEQREQ IS NULL')
+    Active = True
     Left = 629
     Top = 246
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'P_DateFrom'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'P_DateTo'
-        Value = nil
+        Value = Null
       end>
   end
   object qryCheqReqsEffect: TUniQuery
@@ -4892,7 +4793,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

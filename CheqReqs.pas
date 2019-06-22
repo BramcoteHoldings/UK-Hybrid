@@ -63,7 +63,7 @@ uses
   System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ImgList,
   dxBar, cxClasses, Uni, MemDS, DBAccess, cxProgressBar, dxStatusBar, ppFileUtils,
   ppIniStorage, Variants, cxGridDBDataDefinitions, dxDateRanges,
-  dxPScxEditorLnks, System.ImageList, dxPSDBTCLnk;
+  dxPScxEditorLnks, System.ImageList, dxPSDBTCLnk, ppStrtch, ppMemo;
 
 const
   isREQUISITION = 0;
@@ -169,17 +169,11 @@ type
     ppDBText3: TppDBText;
     ppDBText4: TppDBText;
     ppDBText5: TppDBText;
-    ppDBText6: TppDBText;
     ppDBText7: TppDBText;
     ppDBText8: TppDBText;
     ppDBText9: TppDBText;
-    ppDBText10: TppDBText;
     ppDBText11: TppDBText;
     ppDBText13: TppDBText;
-    ppDBText14: TppDBText;
-    ppDBText15: TppDBText;
-    ppVariable1: TppVariable;
-    ppVariable5: TppVariable;
     ppSummaryBand1: TppSummaryBand;
     ppLine2: TppLine;
     ppLabel15: TppLabel;
@@ -193,7 +187,6 @@ type
     ppDBCalc5: TppDBCalc;
     ppDBCalc6: TppDBCalc;
     ppVariable6: TppVariable;
-    ppVariable7: TppVariable;
     raCodeModule1: TraCodeModule;
     btnPrintGrid: TdxBarButton;
     dxComponentPrinter1: TdxComponentPrinter;
@@ -329,6 +322,12 @@ type
     tvCheqReqNCHEQREQ: TcxGridDBColumn;
     ppDBText16: TppDBText;
     ppLabel24: TppLabel;
+    ppLabel27: TppLabel;
+    ppDBText17: TppDBText;
+    ppLabel31: TppLabel;
+    ppDBText10: TppDBText;
+    ppDBText14: TppDBText;
+    ppDBMemo1: TppDBMemo;
     procedure FormShow(Sender: TObject);
     procedure cbAuthorClick(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
@@ -635,7 +634,7 @@ begin
    'forcepay, C.GROUPABLE, C.LEDGER, C.INVOICEDATE, C.PRIVATE, C.SUNDRYTYPE, '+
    'nvl(C.AMOUNT,0) + nvl(C.TAX,0) as TOTAL, nvl(tr.amount-get_tax(tr.amount,c.TAXCODE, C.REQDATE),0) as rec, get_tax(tr.amount,c.TAXCODE,C.REQDATE) as rec_tax ' +
    ',nvl(cheq.amount,0) as paid, nvl(cheq.tax,0) as paid_tax, nvl(tr.amount,0) - (nvl(cheq.amount,0)+nvl(cheq.tax,0)) as payable ' +
-   ',nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, ' +
+   ',nname, reqdate, c.FILEID, C.CHEQUE_GROUP_ID, C.AUTHORISED, C.AUTHORISED_BY, C.NINVOICE, chq.chqno, ' +
    { Modified  23.10.2017 DW  -  to allow for checking if a bill has already been paid  }
    ' CANP.CAN_PAY, '+
    {Modified 28.10.2017 DW - to prevent subsequent Trust cheq reqs from overdrawing trust account}
@@ -669,6 +668,8 @@ begin
    { Modified 28.10.2017 DW - to prevent second trust cheq req from overdrawing trust account }
    'left outer join (select ab.nmatter, SUM(ab.AMOUNT) as T_AMOUNT from ALLOC ab where ab.TRUST = ''T'' group by ab.nmatter) at on c.nmatter = at.nmatter '+
 
+   {modified 21.06.2019 DW - to provide chque number for report}
+   'left outer join (select chq.ncheque, chq.chqno from cheque chq) chq on c.ncheque = chq.ncheque ' +
 //   ',TAXRATE rr ' + //, cheqreq_trans tr, alloc cheq  ' +
 
  //        'where c.nmatter = deb.nmatter (+) ' +

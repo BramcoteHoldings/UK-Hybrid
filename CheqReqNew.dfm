@@ -133,12 +133,11 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblInvoiceMsg: TLabel
     Left = 239
     Top = 10
-    Width = 18
+    Width = 16
     Height = 15
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Bill'
     Visible = False
-    ExplicitWidth = 16
   end
   object lblInvoice: TLabel
     Left = 256
@@ -304,7 +303,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 5
-    ExplicitWidth = 300
     Width = 302
   end
   object lblAccountType: TcxLabel
@@ -547,7 +545,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 14
-    ExplicitWidth = 173
     Width = 175
   end
   object cbTaxType: TcxComboBox
@@ -571,7 +568,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 9
-    ExplicitWidth = 238
     Width = 240
   end
   object cmbAuthor: TcxLookupComboBox
@@ -971,7 +967,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43636.8212636458d
+    EditValue = 43638.4246039005d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -980,7 +976,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 0
     AllowForwardDating = True
-    ExplicitWidth = 221
     Width = 223
   end
   object chkDeposit: TcxCheckBox
@@ -1077,8 +1072,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
-    ExplicitTop = 584
-    ExplicitWidth = 522
   end
   object cxLabel1: TcxLabel
     Left = 9
@@ -1091,7 +1084,6 @@ object frmCheqReqNew: TfrmCheqReqNew
     Anchors = [akLeft, akTop, akRight]
     Properties.OnValidate = teChequeNoPropertiesValidate
     TabOrder = 15
-    ExplicitWidth = 226
     Width = 228
   end
   object cmbInvoice: TcxLookupComboBox
