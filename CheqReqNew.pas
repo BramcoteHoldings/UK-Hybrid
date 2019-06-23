@@ -389,7 +389,7 @@ begin
          chkBill.Enabled := False;
 
          //pb- if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsInteger <> 0) then
-         if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsString <> '') then
+         if (FieldByName('BILLED').AsString = 'Y') and FieldByName('invoicedate').IsNull = False {(FieldByName('NMEMO').AsString <> '')} then
          begin
             ToggleFields(False);
             if (qryCheqReq.FieldByName('NCHEQUE').IsNull) and
