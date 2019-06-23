@@ -9,7 +9,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   Constraints.MinWidth = 723
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -20,33 +20,33 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     1066
     627)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label2: TLabel
     Left = 8
     Top = 40
-    Width = 27
-    Height = 17
+    Width = 24
+    Height = 15
     Caption = '&Date'
   end
   object Label8: TLabel
     Left = 8
     Top = 99
-    Width = 88
-    Height = 17
+    Width = 79
+    Height = 15
     Caption = 'Default &Reason'
   end
   object Label3: TLabel
     Left = 8
     Top = 67
-    Width = 41
-    Height = 17
+    Width = 36
+    Height = 15
     Caption = '&Ledger'
   end
   object lblLedgerDescr: TLabel
     Left = 245
     Top = 65
-    Width = 4
-    Height = 17
+    Width = 3
+    Height = 15
   end
   object lblUnallocated: TLabel
     Left = 166
