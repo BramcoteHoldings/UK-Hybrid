@@ -17,7 +17,8 @@ uses
   ppSubRpt, ppPrnabl, ppClass, ppCache, ppDB, ppDesignLayer, ppParameter,
   ppProd, ppComm, ppRelatv, ppDBPipe, ppModule, raCodMod, dxCore, cxNavigator,
   cxCheckBox, cxGridBandedTableView, cxGridDBBandedTableView, System.Actions,
-  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog;
+  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxDateRanges, System.ImageList;
 
 const
   isCASHBOOK = 0;

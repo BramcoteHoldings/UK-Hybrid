@@ -3939,40 +3939,9 @@ begin
           end;
         IMG_ANTD :
           begin
-{            LCheqReqNew := TfrmCheqReqNew.create(Self);
-            // Hide and resize for new reuqirements
-            LCheqReqNew.Caption := 'Anticipated Disbursement';
-            LCheqReqNew.gbBankDetails.Visible := False;
-            LCheqReqNew.chkFunds.Visible := False;
-            LCheqReqNew.chkInvoiceSupplied.Visible := False;
-            LCheqReqNew.chkPrint.Visible := False;
-            LCheqReqNew.chkNoExit.Visible := False;
-            LCheqReqNew.cbAuthorise.Visible := False;
-            LCheqReqNew.lblAutorised.Visible := False;
-            LCheqReqNew.chkHeld.Visible := False;
-            LCheqReqNew.chkBill.Visible := False;
-            LCheqReqNew.chkUrgent.Visible := False;
-            LCheqReqNew.tbMinor.Width := 280;
-            LCheqReqNew.tbMajor.Enabled := False;
-            LCheqReqNew.ClientHeight := 522;
-            LCheqReqNew.ClientWidth := 501;
-            LCheqReqNew.cmbExpenseType.Width := 200;
-            LCheqReqNew.Label2.Visible := False;
-            LCheqReqNew.Label3.Visible := False;
-            LCheqReqNew.cmbBank.Visible := False;
-            LCheqReqNew.rgChequeType.Visible := False;
-            LCheqReqNew.gbMajorMinor.Top := 8;
-            LCheqReqNew.gbDetails.top := 103;
-            LCheqReqNew.lblInvoiceMsg.Visible := False;
-
+            LCheqReqNew:= TfrmCheqReqNew.Create(Self);
             LCheqReqNew.DisplayCheqReq(LUnique);
-
-            LCheqReqNew.cmbExpenseType.Enabled := True;
-            LCheqReqNew.cbType.Enabled := True;
-            LCheqReqNew.cbTaxType.Enabled := True;
-            LCheqReqNew.neAmount.Enabled := True;
-            LCheqReqNew.tbPayee.Enabled := True;
-            LReturn := LCheqReqNew.ShowModal();     }
+            LReturn := LCheqReqNew.ShowModal();
           end;
         IMG_SUND :
           begin

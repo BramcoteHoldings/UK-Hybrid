@@ -360,7 +360,9 @@ begin
              else if qryAllocJournal.FieldByName('TYPE').AsString = 'J3' then
                sLedger := 'TRUST_BAL';
 
-             RvAlloc(qryAllocJournal, dtpReverse.Date, IntToStr(qryJournalInsert.ParamByName('NJOURNAL').AsInteger), tbReason.Text, 0, 0, qryJournalInsert.ParamByName('NJOURNAL').AsInteger, sLedger, qryAllocJournal.FieldByName('TYPE').AsString);
+             RvAlloc(qryAllocJournal, dtpReverse.Date, IntToStr(qryJournalInsert.ParamByName('NJOURNAL').AsInteger),
+                     tbReason.Text, 0, 0, qryJournalInsert.ParamByName('NJOURNAL').AsInteger, sLedger,
+                     qryAllocJournal.FieldByName('TYPE').AsString, 0, FALSE, 'Y');
              qryAllocJournal.Next;
            end;
         end;

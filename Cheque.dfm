@@ -875,7 +875,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43636.9511340394d
+    EditValue = 43638.5221648958d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -898,7 +898,7 @@ object frmCheque: TfrmCheque
     Width = 99
   end
   object cbBankImport: TComboBox
-    Left = 837
+    Left = 840
     Top = 94
     Width = 53
     Height = 23
@@ -1094,15 +1094,17 @@ object frmCheque: TfrmCheque
     Top = 232
   end
   object qryLedger: TUniQuery
+    UpdatingTable = 'LGRALLOC'
+    KeyFields = 'UNIQUEID'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
         'SELECT TYPE, REFNO, LONGDESC, REASON, AMOUNT, BILLED, UNIQUEID, ' +
-        'TAXCODE, TAX, ROWID, WITHHOLD, SUNDRYTYPE, '
+        'TAXCODE, TAX, WITHHOLD, SUNDRYTYPE, '
       
         'NCREDITOR, ACCOUNT_NAME, ACCOUNT, BSB, DEP_ACCOUNT_TYPE, NDEPOSI' +
         'TACCOUNT, ANTICIPATED, ORIGINAL_TX, CHART, BAS_TAX,'
-      'FILEID, NINVOICE'
+      'FILEID, NINVOICE, ROWID'
       'FROM LGRALLOC'
       'WHERE 1=2')
     CachedUpdates = True
