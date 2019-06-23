@@ -5657,7 +5657,7 @@ begin
 }
    if not qryOldNaccount.IsEmpty then
    begin
-      // Make a reversed copy of this record
+      // Make a reversed copy of this record transitem
       ParamsNullify(dmAxiom.qryNaccountsRV.Params);
       with dmAxiom.qryNaccountsRV do
       begin
@@ -5817,7 +5817,7 @@ begin
 //         if (iNewNjournal <> 0) or (IsAnticipated) then
 //            ParamByName('BILLED').AsString := qryOldAlloc.FieldByName('BILLED').AsString
 //         else
-            ParamByName('BILLED').AsString := 'Y';
+         ParamByName('BILLED').AsString := 'Y';
 
          ParamByName('CLIENT_NAME').AsString := qryOldAlloc.FieldByName('CLIENT_NAME').AsString;
          ParamByName('MATTER_DESC').AsString := qryOldAlloc.FieldByName('MATTER_DESC').AsString;
@@ -5862,9 +5862,17 @@ begin
          try
            qryAlloc.Connection:= dmAxiom.uniInsight;
            qryAlloc.SQL.Clear;
-           qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'' where nalloc = :nalloc');
-           qryAlloc.ParamByName('NALLOC').AsString:= qryOldAlloc.FieldByName('NALLOC').AsString;
-           qryAlloc.ParamByName('RV_NALLOC').AsString:= ParamByName('NALLOC').AsString;
+           if iNewNjournal <> 0 then
+           begin
+              qryAlloc.SQL.Add('update alloc set billed = ''N'', private = ''N'', N_WOFF = NULL where nalloc = :nalloc');
+              qryAlloc.ParamByName('NALLOC').AsInteger:= qryOldAlloc.FieldByName('N_WOFF').AsInteger;
+           end
+           ELSE
+           begin
+              qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'' where nalloc = :nalloc');
+              qryAlloc.ParamByName('NALLOC').AsString:= qryOldAlloc.FieldByName('NALLOC').AsString;
+              qryAlloc.ParamByName('RV_NALLOC').AsString:= ParamByName('NALLOC').AsString;
+           end;
            qryAlloc.ExecSQL;
          finally
            qryAlloc.Free

@@ -406,7 +406,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object dtpDate: TEnforceCustomDateEdit
     Left = 185
     Top = 36
-    EditValue = 43186.4341925231d
+    EditValue = 43639.3788802083d
     Properties.ShowTime = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -426,7 +426,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
         Glyph.SourceDPI = 96
         Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -480,7 +480,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
         Glyph.SourceDPI = 96
         Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000C0C0C000C0C0C000C0C0
+          000000000000C40E0000C40E00000000000000000000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
           C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
@@ -585,13 +585,13 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       '   TYPE, NCLIENT, NJOURNAL, PAYER, TRUST, BILLED, FILEID,'
       '   NALLOC, NMEMO, CLIENT_NAME, SYSTEM_DATE, MATTER_DESC,'
       '   PRIVATE, TAX,TAXCODE,SUNDRYTYPE, JOURNALTYPE, NINVOICE,'
-      '   UPCRED)'
+      '   UPCRED, N_WOFF)'
       'VALUES'
       '  (:AMOUNT, :DESCR, :CREATED, :ACCT, :NMATTER, :REFNO,'
       '   :TYPE, :NCLIENT, :NJOURNAL, :PAYER, '#39'G'#39', :BILLED, :FILEID,'
       '   :NALLOC, NULL, :CLIENT_NAME, SysDate, :MATTER_DESC,'
       '   '#39'N'#39', :TAX,:TAXCODE, :SUNDRYTYPE, :JOURNALTYPE, :NINVOICE,'
-      '   :UPCRED)')
+      '   :UPCRED, :N_WOFF)')
     Left = 102
     Top = 191
     ParamData = <
@@ -698,6 +698,11 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       item
         DataType = ftUnknown
         Name = 'UPCRED'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'N_WOFF'
         Value = nil
       end>
   end
@@ -862,13 +867,13 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object cxStyleRepository1: TcxStyleRepository
     Left = 112
     Top = 35
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object styChecked: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 16313312
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = []
       TextColor = 97182
@@ -882,7 +887,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -898,11 +903,11 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     UseSystemFont = False
     Left = 886
     Top = 8
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowClose = False
@@ -921,7 +926,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       FloatClientHeight = 43
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -989,12 +994,20 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object qryAllocUpdate: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'update alloc set billed = '#39'Y'#39
+      'update alloc '
+      'set '
+      'billed = '#39'Y'#39','
+      'N_WOFF = :NWOFF'
       'where'
       'nalloc = :nalloc')
     Left = 254
     Top = 197
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'NWOFF'
+        Value = nil
+      end
       item
         DataType = ftUnknown
         Name = 'nalloc'

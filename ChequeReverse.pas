@@ -131,21 +131,20 @@ end;
 
 procedure TfrmChequeReverse.actOkExecute(Sender: TObject);
 var
-  bOKtoPost: Boolean;
+   bOKtoPost: Boolean;
 begin
 {
   Added 25.10.2002 GG
 
   Show message if transaction is being posted into a locked period
 }
-  bOKtoPost:= (PostIntoLockedPeriod(dtpReverse.Date) in [prNotLocked, prOKToProceed]);
+   bOKtoPost:= (PostIntoLockedPeriod(dtpReverse.Date) in [prNotLocked, prOKToProceed]);
 
-  if bOKtoPost then
-  begin
-    ZeroLedgerTotal;
-    RvCheque(qryCheque.FieldByName('NCHEQUE').AsInteger, dtpReverse.Date, mlReason.Text);
-//    Self.Close;
-  end;
+   if bOKtoPost then
+   begin
+      ZeroLedgerTotal;
+      RvCheque(qryCheque.FieldByName('NCHEQUE').AsInteger, dtpReverse.Date, mlReason.Text);
+   end;
 end;
 
 procedure TfrmChequeReverse.actOkUpdate(Sender: TObject);
@@ -182,51 +181,52 @@ begin
    if OkToPost(iOldNcheque) then
    begin
       try
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
-        dmAxiom.uniInsight.StartTransaction;
+         if dmAxiom.uniInsight.InTransaction then
+             dmAxiom.uniInsight.Rollback;
+         dmAxiom.uniInsight.StartTransaction;
 
-        // Create a new record
-        with qryChequeRV do
-        begin
-//       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-          iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
-          ParamByName('NCHEQUE').AsInteger := iRvNcheque;
-          sRVChqno := qryCheque.FieldByName('CHQNO').AsString + 'RV';
-          ParamByName('CHQNO').AsString := sRVChqno;
-          ParamByName('RVBY').AsString := dmAxiom.UserID;
-          ParamByName('CREATED').AsDateTime := dtReverse;
-          ParamByName('PRESENTED').AsDateTime := dtReverse;
-          ParamByName('RECONDATE').AsDateTime := dtReverse;
-          ParamByName('ACCT').AsString := qryCheque.FieldByName('ACCT').AsString;
-          ParamByName('PAYEE').AsString := qryCheque.FieldByName('PAYEE').AsString;
-          ParamByName('APPROVAL').AsString := qryCheque.FieldByName('APPROVAL').AsString;
-          ParamByName('REQBY').AsString := qryCheque.FieldByName('REQBY').AsString;
-          ParamByName('TRUST').AsString := qryCheque.FieldByName('TRUST').AsString;
-          ParamByName('DESCR').AsString := sReason;
-          ParamByName('AMOUNT').AsFloat := 0 - qryCheque.FieldByName('AMOUNT').AsCurrency;
-          ExecSQL;
-        end;
+         // Create a new record
+         with qryChequeRV do
+         begin
+//          14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
+            iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
+            ParamByName('NCHEQUE').AsInteger := iRvNcheque;
+            sRVChqno := qryCheque.FieldByName('CHQNO').AsString + 'RV';
+            ParamByName('CHQNO').AsString := sRVChqno;
+            ParamByName('RVBY').AsString := dmAxiom.UserID;
+            ParamByName('CREATED').AsDateTime := dtReverse;
+            ParamByName('PRESENTED').AsDateTime := dtReverse;
+            ParamByName('RECONDATE').AsDateTime := dtReverse;
+            ParamByName('ACCT').AsString := qryCheque.FieldByName('ACCT').AsString;
+            ParamByName('PAYEE').AsString := qryCheque.FieldByName('PAYEE').AsString;
+            ParamByName('APPROVAL').AsString := qryCheque.FieldByName('APPROVAL').AsString;
+            ParamByName('REQBY').AsString := qryCheque.FieldByName('REQBY').AsString;
+            ParamByName('TRUST').AsString := qryCheque.FieldByName('TRUST').AsString;
+            ParamByName('DESCR').AsString := sReason;
+            ParamByName('AMOUNT').AsFloat := 0 - qryCheque.FieldByName('AMOUNT').AsCurrency;
+            ExecSQL;
+         end;
 
-        // Now reverse the Transaction Items
-        bGLExists := False;
-        qryTransitems.Close;
-        qryTransitems.ParamByName('NOWNER').AsInteger := iOldNcheque;
-        qryTransitems.Open;
+         // Now reverse the Transaction Items
+         bGLExists := False;
+         qryTransitems.Close;
+         qryTransitems.ParamByName('NOWNER').AsInteger := iOldNcheque;
+         qryTransitems.Open;
 
-        while not qryTransitems.EOF do
-        begin
-           bGLExists := True;
+         while not qryTransitems.EOF do
+         begin
+            bGLExists := True;
     //       qryTransitems.Edit;
     //       qryTransitems.FieldByName('REFNO').AsString := qryCheque.FieldByName('CHQNO').AsString + 'CN';
     //       qryTransitems.FieldByName('RVDATE').AsDateTime := dtReverse;
     //       qryTransitems.Post;
-           RvNaccount(qryTransitems, dtReverse, sRVChqno, sReason, 'CHEQUE', iRvNcheque);
+            RvNaccount(qryTransitems, dtReverse, sRVChqno, sReason, 'CHEQUE', iRvNcheque);
 
-           if qryTransitems.FieldByName('NINVOICE').AsInteger > 0 then
-           begin
+            if qryTransitems.FieldByName('NINVOICE').AsInteger > 0 then
+            begin
               // Reversing an invoice - reset the amount owing
-              qryInvoiceUpdate.ParamByName('AMOUNT').AsCurrency := qryTransitems.FieldByName('AMOUNT').AsCurrency;
+               qryInvoiceUpdate.ParamByName('AMOUNT').AsCurrency := qryTransitems.FieldByName('AMOUNT').AsCurrency +
+                                                                    qryTransitems.FieldByName('TAX').AsCurrency;
               {
                  Modified 6.12.2002 GG
 
@@ -234,190 +234,189 @@ begin
 
                  qryInvoiceUpdate.ParamByName('NCHEQUE').AsInteger := qryTransitems.FieldByName('NINVOICE').AsInteger;
               }
-              qryInvoiceUpdate.ParamByName('NINVOICE').AsInteger := qryTransitems.FieldByName('NINVOICE').AsInteger;
-              qryInvoiceUpdate.ExecSQL;
-           end;
-           qryTransitems.Next;
-        end;
+               qryInvoiceUpdate.ParamByName('NINVOICE').AsInteger := qryTransitems.FieldByName('NINVOICE').AsInteger;
+               qryInvoiceUpdate.ExecSQL;
+            end;
+            qryTransitems.Next;
+         end;
 
-        // Now reverse the Allocs
-        qryAllocs.Close;
-        qryAllocs.ParamByName('NCHEQUE').AsInteger := iOldNcheque;
-        qryAllocs.Open;
-        while not qryAllocs.EOF do
-        begin
-          if qryAllocs.FieldByName('TRUST').AsString = 'T' then
-          begin
-            ANInvoice := TableInteger('CHEQREQ','NCHEQUE', iOldNcheque,'NINVOICE');
-            if ANInvoice > 0 then
-               RVInvoice(ANInvoice, iOldNcheque)
-            else
-               RvAlloc(qryAllocs, dtReverse, sRVChqno, sReason, iRvNcheque, 0, 0, 'TRUST_BAL', 'RV', 0, False, 'Y');
-          end
-          else
-          begin
-            RvAlloc(qryAllocs, dtReverse, sRVChqno, sReason, iRvNcheque, 0, 0, 'UNBILL_DISB', 'RV', 0, False, 'Y');
-            if not bGLExists then
+         // Now reverse the Allocs
+         qryAllocs.Close;
+         qryAllocs.ParamByName('NCHEQUE').AsInteger := iOldNcheque;
+         qryAllocs.Open;
+         while not qryAllocs.EOF do
+         begin
+            if qryAllocs.FieldByName('TRUST').AsString = 'T' then
             begin
-              // Create the reversing entries for the General Ledger
-              if qryAllocs.FieldByName('TYPE').AsString = 'RF' then
-              begin
-                {post components}
-                sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
-
-                PostLedger(dtReverse
-                  , 0 - qryAllocs.FieldByName('AMOUNT').AsCurrency
-                  , 0 - qryAllocs.FieldByName('TAX').AsCurrency
-                  , sRVChqno
-                  , 'CHEQUE'
-                  , iRvNcheque
-                  , mlReason.Text
-                  , sLedgerKey
-                  , qryCheque.FieldByName('REQBY').AsString
-                  , -1
-                  , ''
-                  , qryAllocs.FieldByName('TAXCODE').AsString
-                  , FALSE
-                  , '0'
-                  , qryAllocs.FieldByName('NALLOC').AsInteger
-                  , qryAllocs.FieldByName('NMATTER').AsInteger
-                  , 0
-                  , False
-                  , 0
-                  , 0 - qryAllocs.FieldByName('TAX').AsCurrency);
-
-                iRevTotal := iRevTotal + qryAllocs.FieldByName('AMOUNT').AsCurrency;
-
-                if (IsGSTCheque(qryAllocs.FieldByName('TAXCODE').AsString)) then
-                begin
-
-                   {post components}
-                   sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryAllocs.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
-
-                     PostLedger(dtReverse
-                     , 0 - qryAllocs.FieldByName('TAX').AsCurrency
-                     , 0
-                     , sRVChqno
-                     , 'CHEQUE'
-                     , iRvNcheque
-                     , mlReason.Text
-                     , sLedgerKey
-                     , ''
-                     , -1
-                     , ''
-                     , qryAllocs.FieldByName('TAXCODE').AsString
-                     , FALSE
-                     , '0'
-                     , qryAllocs.FieldByName('NALLOC').AsInteger
-                     , qryAllocs.FieldByName('NMATTER').AsInteger);
-
-                     iRevTotal := iRevTotal + qryAllocs.FieldByName('TAX').AsCurrency;
-                end;
-              end
-              else
-              begin
-                 {post components}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR'),'',true,'');
-
-                   PostLedger(dtReverse
-                     , 0 - qryAllocs.FieldByName('AMOUNT').AsCurrency
-                     , 0 - qryAllocs.FieldByName('TAX').AsCurrency
-                     , sRVChqno
-                     , 'CHEQUE'
-                     , iRvNcheque
-                     , mlReason.Text
-                     , sLedgerKey
-                     , qryCheque.FieldByName('REQBY').AsString
-                     , -1
-                     , ''
-                     , qryAllocs.FieldByName('TAXCODE').AsString
-                     , FALSE
-                     , '0'
-                     , qryAllocs.FieldByName('NALLOC').AsInteger
-                     , qryAllocs.FieldByName('NMATTER').AsInteger
-                     , 0
-                     , False
-                     , 0
-                     , 0 - qryAllocs.FieldByName('TAX').AsCurrency);
-
-                   iRevTotal := iRevTotal + qryAllocs.FieldByName('AMOUNT').AsCurrency;
-
-                   if (IsGSTCheque(qryAllocs.FieldByName('TAXCODE').AsString)) then
-                   begin
+               ANInvoice := TableInteger('CHEQREQ','NCHEQUE', iOldNcheque,'NINVOICE');
+               if ANInvoice > 0 then
+                  RVInvoice(ANInvoice, iOldNcheque)
+               else
+                  RvAlloc(qryAllocs, dtReverse, sRVChqno, sReason, iRvNcheque, 0, 0, 'TRUST_BAL', 'RV', 0, False, 'Y');
+            end
+            else
+            begin
+               RvAlloc(qryAllocs, dtReverse, sRVChqno, sReason, iRvNcheque, 0, 0, 'UNBILL_DISB', 'RV', 0, False, 'Y');
+               if not bGLExists then
+               begin
+                  // Create the reversing entries for the General Ledger
+                  if qryAllocs.FieldByName('TYPE').AsString = 'RF' then
+                  begin
                      {post components}
-                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryAllocs.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
 
                      PostLedger(dtReverse
+                        , 0 - qryAllocs.FieldByName('AMOUNT').AsCurrency
                         , 0 - qryAllocs.FieldByName('TAX').AsCurrency
-                        , 0
                         , sRVChqno
                         , 'CHEQUE'
                         , iRvNcheque
                         , mlReason.Text
                         , sLedgerKey
-                        , ''
+                        , qryCheque.FieldByName('REQBY').AsString
                         , -1
                         , ''
                         , qryAllocs.FieldByName('TAXCODE').AsString
                         , FALSE
                         , '0'
                         , qryAllocs.FieldByName('NALLOC').AsInteger
-                        , qryAllocs.FieldByName('NMATTER').AsInteger);
+                        , qryAllocs.FieldByName('NMATTER').AsInteger
+                        , 0
+                        , False
+                        , 0
+                        , 0 - qryAllocs.FieldByName('TAX').AsCurrency);
 
-                     iRevTotal := iRevTotal + qryAllocs.FieldByName('TAX').AsCurrency;
-                   end;
+                     iRevTotal := iRevTotal + qryAllocs.FieldByName('AMOUNT').AsCurrency;
+
+                     if (IsGSTCheque(qryAllocs.FieldByName('TAXCODE').AsString)) then
+                     begin
+                        {post components}
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryAllocs.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+
+                        PostLedger(dtReverse
+                           , 0 - qryAllocs.FieldByName('TAX').AsCurrency
+                           , 0
+                           , sRVChqno
+                           , 'CHEQUE'
+                           , iRvNcheque
+                           , mlReason.Text
+                           , sLedgerKey
+                           , ''
+                           , -1
+                           , ''
+                           , qryAllocs.FieldByName('TAXCODE').AsString
+                           , FALSE
+                           , '0'
+                           , qryAllocs.FieldByName('NALLOC').AsInteger
+                           , qryAllocs.FieldByName('NMATTER').AsInteger);
+
+                        iRevTotal := iRevTotal + qryAllocs.FieldByName('TAX').AsCurrency;
+                     end;
+                  end
+                  else
+                  begin
+                     {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR'),'',true,'');
+
+                     PostLedger(dtReverse
+                        , 0 - qryAllocs.FieldByName('AMOUNT').AsCurrency
+                        , 0 - qryAllocs.FieldByName('TAX').AsCurrency
+                        , sRVChqno
+                        , 'CHEQUE'
+                        , iRvNcheque
+                        , mlReason.Text
+                        , sLedgerKey
+                        , qryCheque.FieldByName('REQBY').AsString
+                        , -1
+                        , ''
+                        , qryAllocs.FieldByName('TAXCODE').AsString
+                        , FALSE
+                        , '0'
+                        , qryAllocs.FieldByName('NALLOC').AsInteger
+                        , qryAllocs.FieldByName('NMATTER').AsInteger
+                        , 0
+                        , False
+                        , 0
+                        , 0 - qryAllocs.FieldByName('TAX').AsCurrency);
+
+                     iRevTotal := iRevTotal + qryAllocs.FieldByName('AMOUNT').AsCurrency;
+
+                     if (IsGSTCheque(qryAllocs.FieldByName('TAXCODE').AsString)) then
+                     begin
+                        {post components}
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryAllocs.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+
+                        PostLedger(dtReverse
+                           , 0 - qryAllocs.FieldByName('TAX').AsCurrency
+                           , 0
+                           , sRVChqno
+                           , 'CHEQUE'
+                           , iRvNcheque
+                           , mlReason.Text
+                           , sLedgerKey
+                           , ''
+                           , -1
+                           , ''
+                           , qryAllocs.FieldByName('TAXCODE').AsString
+                           , FALSE
+                           , '0'
+                           , qryAllocs.FieldByName('NALLOC').AsInteger
+                           , qryAllocs.FieldByName('NMATTER').AsInteger);
+
+                        iRevTotal := iRevTotal + qryAllocs.FieldByName('TAX').AsCurrency;
+                     end;
+                  end;
                end;
             end;
-          end;
-          qryAllocs.Next;
-        end;
+            qryAllocs.Next;
+         end;
 
-        if (not bGLExists) and (qryCheque.FieldByName('TRUST').AsString <> 'T') then
-        begin
+         if (not bGLExists) and (qryCheque.FieldByName('TRUST').AsString <> 'T') then
+         begin
           {post components}
-          sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('BANK', 'ACCT', qryCheque.FieldByName('ACCT').AsString, 'CASH_AT_BANK'),'',true,'');
+            sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('BANK', 'ACCT', qryCheque.FieldByName('ACCT').AsString, 'CASH_AT_BANK'),'',true,'');
 
           // Create the Cash at Bank reversing entries for the General Ledger
-          PostLedger(dtReverse
-            , iRevTotal
-            , 0
-            , sRVChqno
-            , 'CHEQUE'
-            , iRVNCheque
-            , mlReason.Text
-            , sLedgerKey
-            , qryCheque.FieldByName('REQBY').AsString
-            , -1
-            , ''
-            , ''
-            , FALSE
-            , '0'
-            , qryAllocs.FieldByName('NALLOC').AsInteger
-            , qryAllocs.FieldByName('NMATTER').AsInteger);
-          end;
+            PostLedger(dtReverse
+               , iRevTotal
+               , 0
+               , sRVChqno
+               , 'CHEQUE'
+               , iRVNCheque
+               , mlReason.Text
+               , sLedgerKey
+               , qryCheque.FieldByName('REQBY').AsString
+               , -1
+               , ''
+               , ''
+               , FALSE
+               , '0'
+               , qryAllocs.FieldByName('NALLOC').AsInteger
+               , qryAllocs.FieldByName('NMATTER').AsInteger);
+         end;
 
-        with qryCheque do
-        begin
-          Edit;
-          FieldByName('REVERSED').AsString := 'Y';
-          FieldByName('CHQNO').AsString :=   FieldByName('CHQNO').AsString + 'CN';
-          FieldByName('SUFCHQ').AsInteger := 1;
-          FieldByName('RVBY').AsString := dmAxiom.UserID;
-          FieldByName('PRESENTED').AsDateTime := dtReverse;
-          FieldByName('RECONDATE').AsDateTime := dtReverse;
-          Post;
-        end;
+         with qryCheque do
+         begin
+            Edit;
+            FieldByName('REVERSED').AsString := 'Y';
+            FieldByName('CHQNO').AsString :=   FieldByName('CHQNO').AsString + 'CN';
+            FieldByName('SUFCHQ').AsInteger := 1;
+            FieldByName('RVBY').AsString := dmAxiom.UserID;
+            FieldByName('PRESENTED').AsDateTime := dtReverse;
+            FieldByName('RECONDATE').AsDateTime := dtReverse;
+            Post;
+         end;
 
         // unconvert any cheqreq with this cheque number
         with dmAxiom.qryTmp do
         begin
-            Close;
-            SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''N'',NCHEQUE = null ' +
-                        'WHERE NCHEQUE = :NCHEQUE ' +
-                        'AND CONVERTED = ''Y''';
-            ParamByName('NCHEQUE').AsInteger := iOldNcheque;
-            ExecSql;
-            Close;
+           Close;
+           SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''N'',NCHEQUE = null ' +
+                       'WHERE NCHEQUE = :NCHEQUE ' +
+                       'AND CONVERTED = ''Y''';
+           ParamByName('NCHEQUE').AsInteger := iOldNcheque;
+           ExecSql;
+           Close;
         end;
 
         qryCheque.ApplyUpdates;
@@ -443,13 +442,12 @@ begin
         qryAllocs.Close;
         ModalResult := mrOk;
     //    Self.Close;
-
       except
-        On E: Exception do
-        begin
-          dmAxiom.uniInsight.Rollback;
-          MsgErr('Error reversing cheque:' + chr(13) + chr(13) + E.Message);
-        end;
+         On E: Exception do
+         begin
+            dmAxiom.uniInsight.Rollback;
+            MsgErr('Error reversing cheque:' + chr(13) + chr(13) + E.Message);
+         end;
       end;
    end;
 end;
@@ -495,7 +493,7 @@ begin
          // need to update original transaction
          qryInvUpdate.Close;
          // AES 14/09/2009changed this to use the cheque amount that is being reversed rather than the invoice amount as before
-         qryInvUpdate.ParamByName('PAMOUNT').AsCurrency := qryCheque.FieldByName('AMOUNT').AsCurrency;
+         qryInvUpdate.ParamByName('PAMOUNT').AsCurrency := qryCheque.FieldByName('AMOUNT').AsCurrency + qryCheque.FieldByName('TAX').AsCurrency ;
          qryInvUpdate.ParamByName('NINVOICE').AsInteger := ANInvoice;
          qryInvUpdate.ExecSQL;
 

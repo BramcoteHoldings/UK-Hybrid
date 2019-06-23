@@ -14,7 +14,7 @@ uses
   cxRadioGroup, cxLookAndFeelPainters, cxDropDownEdit, cxCalendar,
   EnforceCustomDateEdit, cxButtons, dxBarExtItems, dxBar, cxCurrencyEdit,
   Variants, cxLookAndFeels, dxCore, cxNavigator, cxDateUtils, cxBarEditItem,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   colREFNO = 0;
@@ -318,12 +318,14 @@ begin
                                     ParamByName('BILLED').AsString := 'Y'
                                  else
                                     ParamByName('BILLED').AsString := 'N';
+                                 ParamByName('N_WOFF').AsInteger := BandedTableViewDBBandedNALLOC.EditValue;
                                  ExecSQL;
 
-                              // 23-Nov-2011 AES un-commented this.  Issue with write-offs.  billed flag should be set to Y i think.
+                                 // 23-Nov-2011 AES un-commented this.  Issue with write-offs.  billed flag should be set to Y i think.
                                  if SystemString('WOF_DISB_BILLED_FLAG') = 'Y' then
                                  begin
                                     qryAllocUpdate.ParamByName('NALLOC').AsInteger := BandedTableViewDBBandedNALLOC.EditValue;
+                                    qryAllocUpdate.ParamByName('NWOFF').AsInteger := nAlloc;
                                     qryAllocUpdate.ExecSQL;
                                  end;
 
