@@ -524,7 +524,7 @@ type
   function MsgWarn(sMsg: string): Word;
   function NextRefno(PrevRefno: string; PadLength: Integer = -1): string; overload;
   function NextRefno : String; overload;
-  function IsRefnoExisting(sRefno : String) : Boolean;
+  function IsRefnoExisting(sRefno : String; ANMemo: integer = -1) : Boolean;
   procedure OpenPrecedent(FileName: string);
   procedure ParamsNullify(parClear: TParams);
   function PhoneBookMailingAddress(sSearch: string): string;
@@ -5272,9 +5272,9 @@ begin
             ParamsNullify(Params);
             // commented by AES
             // Build 26 will rely on trigger generating naccount
-{            if nAccount = 0 then
-               nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  // GetSeqnum('NACCOUNT');
-            ParamByName('NACCOUNT').AsInteger := nAccount;      }
+            if nAccount = 0 then
+               nAccount := GetSequenceNumber('sqnc_naccount');  // GetSeqnum('NACCOUNT');
+            ParamByName('NACCOUNT').AsInteger := nAccount;
             ParamByName('CREATED').AsDateTime := dtDate;
             ParamByName('ACCT').AsString := dmAxiom.Entity;
             ParamByName('AMOUNT').AsFloat := cAmount;
@@ -8928,14 +8928,20 @@ begin
   end;    //  end try-finally
 end;
 
-function IsRefnoExisting(sRefno : String) : Boolean;
+function IsRefnoExisting(sRefno : String; ANMemo: integer) : Boolean;
 begin
   try
     with dmAxiom.qryTmp do
       begin
         Close;
         SQL.Clear;
-        SQL.Add('SELECT REFNO FROM NMEMO WHERE REFNO = ' + QuotedStr(sRefno));
+        if ANMemo <> -1 then
+        begin
+           SQL.Add('SELECT REFNO FROM NMEMO WHERE NMEMO <> :NMEMO AND REFNO = ' + QuotedStr(sRefno));
+           ParamByName('NMEMO').AsInteger := ANMemo;
+        end
+        else
+           SQL.Add('SELECT REFNO FROM NMEMO WHERE REFNO = ' + QuotedStr(sRefno));
         Open;
         Result := (not dmAxiom.qryTmp.IsEmpty);
         Close;

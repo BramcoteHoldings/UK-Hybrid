@@ -1844,6 +1844,7 @@ begin
    TabImage.Picture.LoadFromFile('.\images\close_16.png');
    cxEventEditorClass := TfrmNewTaskNew;
    dmAxiom.bShutDown := False;
+   dmAxiom.ATabIndex := -1;
 end;
 
 procedure TfrmDesktop.FormDestroy(Sender: TObject);
