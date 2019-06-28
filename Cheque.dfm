@@ -123,7 +123,7 @@ object frmCheque: TfrmCheque
   end
   object lblBankTransferMsg: TLabel
     Left = 249
-    Top = 155
+    Top = 157
     Width = 186
     Height = 14
     AutoSize = False
@@ -133,7 +133,7 @@ object frmCheque: TfrmCheque
   end
   object lblBankTransferName: TLabel
     Left = 496
-    Top = 155
+    Top = 157
     Width = 224
     Height = 14
     AutoSize = False
@@ -143,7 +143,7 @@ object frmCheque: TfrmCheque
   end
   object Label11: TLabel
     Left = 9
-    Top = 125
+    Top = 128
     Width = 70
     Height = 14
     AutoSize = False
@@ -218,7 +218,7 @@ object frmCheque: TfrmCheque
   end
   object Label3: TLabel
     Left = 9
-    Top = 154
+    Top = 157
     Width = 64
     Height = 13
     AutoSize = False
@@ -302,7 +302,7 @@ object frmCheque: TfrmCheque
   end
   object cbBankTransfer: TComboBox
     Left = 436
-    Top = 151
+    Top = 154
     Width = 53
     Height = 23
     Sorted = True
@@ -365,7 +365,7 @@ object frmCheque: TfrmCheque
   end
   object cmbPrinter: TComboBox
     Left = 94
-    Top = 151
+    Top = 154
     Width = 147
     Height = 23
     Style = csDropDownList
@@ -875,7 +875,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43638.5221648958d
+    EditValue = 43643.5385590972d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1386,7 +1386,7 @@ object frmCheque: TfrmCheque
   object qryTransItem: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT naccount, chart, descr, ninvoice, refno, amount'
+      'SELECT naccount, chart, descr, ninvoice, refno, amount, tax'
       'FROM transitem'
       'WHERE ninvoice = :p_ninvoice'
       'and ncheque is null')

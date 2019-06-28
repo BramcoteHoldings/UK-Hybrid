@@ -1223,7 +1223,7 @@ type
     property Is_Credit_Controller: string read FIs_CreditController write FIs_CreditController;
 
     function Ping(const AHost : string) : Boolean;
-    property ATabIndex: integer read FTabIndex write FTabIndex;
+    property ATabIndex: integer read FTabIndex write FTabIndex default -1;
   end;
 
 var
