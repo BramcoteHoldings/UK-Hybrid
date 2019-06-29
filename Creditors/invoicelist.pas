@@ -15,7 +15,7 @@ uses
   ppPrnabl, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDB, ppDBPipe,
   cxGridExportLink, ppDesignLayer, cxPCdxBarPopupMenu, cxGroupBox,
   cxRadioGroup, cxNavigator, dxBarExtItems, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
    UM_CHECK = WM_USER + 10000;

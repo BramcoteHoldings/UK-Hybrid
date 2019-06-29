@@ -3,7 +3,7 @@
         <ProjectGuid>{1CE7716A-2E7B-47E8-8A23-92126A230F08}</ProjectGuid>
         <MainSource>Insight.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
@@ -89,16 +89,17 @@
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>20</VerInfo_Build>
-        <VerInfo_MinorVer>2</VerInfo_MinorVer>
+        <VerInfo_Build>24</VerInfo_Build>
         <DCC_MapFile>3</DCC_MapFile>
         <DCC_DebugInformation>true</DCC_DebugInformation>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.20;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.24;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved;LegalTrademarks=Bramcote Holdings Pty Ltd;OriginalFilename=;ProductName=Insight;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
+        <VerInfo_MinorVer>2</VerInfo_MinorVer>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
@@ -108,13 +109,13 @@
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <VerInfo_Build>6</VerInfo_Build>
+        <VerInfo_Build>9</VerInfo_Build>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_MinorVer>2</VerInfo_MinorVer>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_MapFile>3</DCC_MapFile>
-        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.6;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=BHL Software Pty Ltd;FileDescription=Insight Practice Management Software;FileVersion=9.2.0.9;InternalName=Insight.exe;LegalCopyright=© Bramcote Holdings Pty Ltd 2017 All Rights Reserved;LegalTrademarks=;OriginalFilename=;ProductVersion=9.2.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BT_BuildType>Debug</BT_BuildType>
@@ -202,9 +203,6 @@
         <DCCReference Include="Ledgers.pas">
             <Form>frmLedgers</Form>
         </DCCReference>
-        <DCCReference Include="InvoiceDebitNote.pas">
-            <Form>frmInvoiceDebit</Form>
-        </DCCReference>
         <DCCReference Include="Billing\WriteOffs.pas">
             <Form>frmWriteOff</Form>
         </DCCReference>
@@ -255,9 +253,6 @@
         </DCCReference>
         <DCCReference Include="ChequePresent.pas">
             <Form>frmChequePresent</Form>
-        </DCCReference>
-        <DCCReference Include="InvoiceSearch.pas">
-            <Form>frmInvoiceSearch</Form>
         </DCCReference>
         <DCCReference Include="Archival.pas">
             <Form>frmArchival</Form>
@@ -685,9 +680,6 @@
         <DCCReference Include="MarketReferralOther.pas">
             <Form>frmMarketReferralOther</Form>
         </DCCReference>
-        <DCCReference Include="InvoiceReverse.pas">
-            <Form>frmInvoiceReverse</Form>
-        </DCCReference>
         <DCCReference Include="Desktop.pas">
             <Form>frmDesktop</Form>
         </DCCReference>
@@ -810,9 +802,6 @@
         <DCCReference Include="CrystalReportDef.pas">
             <Form>frmCrystalReportDef</Form>
         </DCCReference>
-        <DCCReference Include="InvoiceScan.pas">
-            <Form>frmInvScan</Form>
-        </DCCReference>
         <DCCReference Include="SecureMatters.pas">
             <Form>frmSecureMatters</Form>
         </DCCReference>
@@ -849,12 +838,6 @@
         </DCCReference>
         <DCCReference Include="recurring_fees.pas">
             <Form>frmRecurringFees</Form>
-        </DCCReference>
-        <DCCReference Include="invoicelist.pas">
-            <Form>frmInvoiceList</Form>
-        </DCCReference>
-        <DCCReference Include="InvoiceChangeDueDate.pas">
-            <Form>frmInvoiceChangeDue</Form>
         </DCCReference>
         <DCCReference Include="SoftlogImport.pas">
             <Form>frmSoftlogImport</Form>
@@ -1367,6 +1350,30 @@
         </DCCReference>
         <DCCReference Include="CheqReqs.pas">
             <Form>frmCheqReqs</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\InvoiceChangeDueDate.pas">
+            <Form>frmInvoiceChangeDue</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\InvoiceDebitNote.pas">
+            <Form>frmInvoiceDebit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\invoicelist.pas">
+            <Form>frmInvoiceList</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\InvoiceReverse.pas">
+            <Form>frmInvoiceReverse</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\InvoiceScan.pas">
+            <Form>frmInvScan</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Creditors\InvoiceSearch.pas">
+            <Form>frmInvoiceSearch</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="ModelSupport_Insight\default.txvpck"/>

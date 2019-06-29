@@ -967,7 +967,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43639.4926847106d
+    EditValue = 43642.4812084028d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1146,9 +1146,7 @@ object frmCheqReqNew: TfrmCheqReqNew
       
         '       c.forcepay, c.nname, c.creditor_invoice, c.credit_note, c' +
         '.TYPE,'
-      
-        '       c.cheque_group_id, c.locus_txnum, c.authorised_by, c.auth' +
-        'orised,'
+      '       c.cheque_group_id, c.authorised_by, c.authorised,'
       
         '       c.dep_account_type, c.dep_account, c.mod_descr, c.ndeposi' +
         'taccount,'
@@ -1159,8 +1157,8 @@ object frmCheqReqNew: TfrmCheqReqNew
         '       c.PATH, c.cheqreq_copy_ext, c.entity, c.currency, c.fx_ra' +
         'te,'
       
-        '       c.base_ccy_amount, c.base_ccy_tax, c.transtype, c.rowid, ' +
-        'c.amount + c.tax as total'
+        '       c.base_ccy_amt, c.base_ccy_tax, c.transtype, c.rowid, c.a' +
+        'mount + c.tax as total'
       '  FROM cheqreq c WHERE C.NCHEQREQ = :NCHEQREQ')
     CachedUpdates = True
     Left = 331

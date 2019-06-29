@@ -2106,7 +2106,7 @@ begin
 
             qryInvoice.FieldByName('BILL_DATE').AsDateTime := dtpBillDate.Date;
 
-//            qryInvoice.FieldByName('REFNO').AsString := lblInvoice.Text;
+            qryInvoice.FieldByName('REFNO').AsString := lblInvoice.Text;
             qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := lblInvoice.Text;
 
         { if edtDiscount.text <> '' then

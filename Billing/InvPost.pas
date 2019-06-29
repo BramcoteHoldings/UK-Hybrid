@@ -229,7 +229,12 @@ begin
      if PreassignBill() then
        tbRefno.Text := qryBill.FieldByName('DRAFT_BILL_NO').AsString
      else
-       tbRefno.Text := NextRefno;
+     begin
+       if qryBill.FieldByName('REFNO').AsString = 'DRAFT' then
+          tbRefno.Text := NextRefno
+       else
+          tbRefno.Text := qryBill.FieldByName('REFNO').AsString;
+     end;
 
      lblFees.Caption := Format('%.2n', [qryBill.FieldByName('FEES').AsCurrency]);
      lblFeesTax.Caption := Format('%.2n', [qryBill.FieldByName('FEESTAX').AsCurrency]);
@@ -574,7 +579,7 @@ begin
       cAllocDisbTaxDiff := 0;
 
     // Make sure that this number has not been entered
-      if (IsRefnoExisting(tbRefno.Text)) then
+      if IsRefnoExisting(tbRefno.Text, qryBill.FieldByName('NMEMO').AsInteger) then
       begin
          if ClickPost then
          begin
@@ -2134,7 +2139,6 @@ begin
          MsgErr('Please allocate the correct amount of fees before posting');
    end;
 end;
-
 
 procedure TfrmInvPost.dbgrFeeDistColEnter(Sender: TObject);
 begin
