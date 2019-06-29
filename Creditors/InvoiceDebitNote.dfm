@@ -2,8 +2,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   Left = 293
   Top = 270
   Caption = 'Creditor Invoice Credit Note'
-  ClientHeight = 410
-  ClientWidth = 744
+  ClientHeight = 463
+  ClientWidth = 848
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    744
-    410)
+    848
+    463)
   PixelsPerInch = 96
   TextHeight = 15
   object Label2: TLabel
@@ -52,8 +52,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Caption = 'Creditor'
   end
   object lblAmountMsg: TLabel
-    Left = 606
-    Top = 388
+    Left = 710
+    Top = 441
     Width = 27
     Height = 15
     Anchors = [akRight, akBottom]
@@ -64,10 +64,12 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 606
+    ExplicitTop = 388
   end
   object lblTotal: TLabel
-    Left = 727
-    Top = 389
+    Left = 831
+    Top = 442
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -78,10 +80,12 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 727
+    ExplicitTop = 389
   end
   object lblTax: TLabel
-    Left = 727
-    Top = 371
+    Left = 831
+    Top = 424
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -92,10 +96,12 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 727
+    ExplicitTop = 371
   end
   object lblBalance: TLabel
-    Left = 638
-    Top = 370
+    Left = 742
+    Top = 423
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -106,6 +112,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    ExplicitLeft = 638
+    ExplicitTop = 370
   end
   object Label11: TLabel
     Left = 70
@@ -117,8 +125,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     FocusControl = neAmount
   end
   object lblUnallocatedMsg: TLabel
-    Left = 445
-    Top = 388
+    Left = 549
+    Top = 441
     Width = 66
     Height = 15
     Anchors = [akRight, akBottom]
@@ -130,10 +138,12 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
+    ExplicitLeft = 445
+    ExplicitTop = 388
   end
   object lblUnallocated: TLabel
-    Left = 599
-    Top = 388
+    Left = 703
+    Top = 441
     Width = 3
     Height = 15
     Alignment = taRightJustify
@@ -145,6 +155,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Font.Style = [fsBold]
     ParentFont = False
     Visible = False
+    ExplicitLeft = 599
+    ExplicitTop = 388
   end
   object tbRefno: TEdit
     Left = 119
@@ -161,85 +173,6 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     TabOrder = 2
     OnExit = tbDescExit
     OnKeyPress = tbDescKeyPress
-  end
-  object dbgrLedger: TDBGrid
-    Left = 7
-    Top = 114
-    Width = 730
-    Height = 248
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    Color = clInfoBk
-    DataSource = dsLedger
-    PopupMenu = popGrid
-    TabOrder = 4
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-    OnColExit = dbgrLedgerColExit
-    OnEditButtonClick = dbgrLedgerEditButtonClick
-    OnExit = dbgrLedgerExit
-    OnKeyPress = dbgrLedgerKeyPress
-    Columns = <
-      item
-        DropDownRows = 3
-        Expanded = False
-        FieldName = 'TYPE'
-        PickList.Strings = (
-          'Matter'
-          'Ledger')
-        Title.Caption = 'Type'
-        Width = 45
-        Visible = True
-      end
-      item
-        ButtonStyle = cbsEllipsis
-        Expanded = False
-        FieldName = 'REFNO'
-        Title.Caption = 'Reference'
-        Width = 75
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'LONGDESC'
-        ReadOnly = True
-        Title.Caption = 'Description'
-        Width = 180
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'REASON'
-        Title.Caption = 'Reason'
-        Width = 190
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'TAXCODE'
-        Title.Caption = 'Tax rate'
-        Width = 45
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'AMOUNT'
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Amount'
-        Width = 70
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'TAX'
-        ReadOnly = True
-        Title.Alignment = taRightJustify
-        Title.Caption = 'Tax'
-        Width = 55
-        Visible = True
-      end>
   end
   object neAmount: TNumberEdit
     Left = 119
@@ -271,7 +204,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   object dtpDate: TEnforceCustomDateEdit
     Left = 119
     Top = 37
-    EditValue = 43607.576831331d
+    EditValue = 43644.896005162d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -296,6 +229,100 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = []
     Style.IsFontAssigned = True
+    Transparent = True
+  end
+  object grdLedger: TcxGrid
+    Left = 6
+    Top = 114
+    Width = 834
+    Height = 297
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 9
+    object tvLedger: TcxGridDBTableView
+      PopupMenu = popGrid
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsLedger
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsBehavior.FocusCellOnTab = True
+      OptionsBehavior.FocusCellOnCycle = True
+      OptionsCustomize.ColumnFiltering = False
+      OptionsCustomize.ColumnGrouping = False
+      OptionsCustomize.ColumnMoving = False
+      OptionsData.Appending = True
+      OptionsView.ColumnAutoWidth = True
+      OptionsView.GroupByBox = False
+      object tvLedgerTYPE: TcxGridDBColumn
+        Caption = 'Type'
+        DataBinding.FieldName = 'TYPE'
+        PropertiesClassName = 'TcxComboBoxProperties'
+        Properties.ImmediatePost = True
+        Properties.Items.Strings = (
+          'Matter'
+          'Ledger')
+        Properties.OnChange = tvLedgerTYPEPropertiesChange
+        Width = 72
+      end
+      object tvLedgerREFNO: TcxGridDBColumn
+        Caption = 'Reference'
+        DataBinding.FieldName = 'REFNO'
+        PropertiesClassName = 'TcxButtonEditProperties'
+        Properties.Buttons = <
+          item
+            Default = True
+            Kind = bkEllipsis
+          end>
+        Properties.OnButtonClick = tvLedgerREFNOPropertiesButtonClick
+        Width = 79
+      end
+      object tvLedgerLONGDESC: TcxGridDBColumn
+        Caption = 'Description'
+        DataBinding.FieldName = 'LONGDESC'
+        Options.Editing = False
+        Options.Focusing = False
+        Width = 192
+      end
+      object tvLedgerREASON: TcxGridDBColumn
+        Caption = 'Rwason'
+        DataBinding.FieldName = 'REASON'
+        Width = 225
+      end
+      object tvLedgerTAXCODE: TcxGridDBColumn
+        Caption = 'Tax rate'
+        DataBinding.FieldName = 'TAXCODE'
+        PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.DropDownAutoSize = True
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'CODE'
+        Properties.ListColumns = <
+          item
+            FieldName = 'CODE'
+          end
+          item
+            FieldName = 'DESCR'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
+        Properties.ListSource = dmAxiom.dsTaxList
+        Width = 53
+      end
+      object tvLedgerAMOUNT: TcxGridDBColumn
+        Caption = 'Amount'
+        DataBinding.FieldName = 'AMOUNT'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Width = 70
+      end
+      object tvLedgerTAX: TcxGridDBColumn
+        Caption = 'Tax'
+        DataBinding.FieldName = 'TAX'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Width = 37
+      end
+    end
+    object grdLedgerLevel1: TcxGridLevel
+      GridView = tvLedger
+    end
   end
   object dsAllocs: TUniDataSource
     DataSet = qryAllocs
@@ -438,8 +465,8 @@ object frmInvoiceDebit: TfrmInvoiceDebit
     ImageOptions.Images = dmAxiom.ilstToolbar
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 641
-    Top = 67
+    Left = 681
+    Top = 51
     PixelsPerInch = 96
     DockControlHeights = (
       0

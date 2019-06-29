@@ -34,7 +34,6 @@ uses
   ChequePrint in 'ChequePrint.pas' {frmChequePrint},
   LedgerNew in 'LedgerNew.pas' {frmLedgerNew},
   Ledgers in 'Ledgers.pas' {frmLedgers},
-  InvoiceDebitNote in 'InvoiceDebitNote.pas' {frmInvoiceDebit},
   WriteOffs in 'Billing\WriteOffs.pas' {frmWriteOff},
   EntityChange in 'EntityChange.pas' {frmEntityChange},
   TransitSearch in 'TransitSearch.pas' {frmTransitSearch},
@@ -52,7 +51,6 @@ uses
   MatterType in 'MatterType.pas' {frmMatterType},
   MatterAssociate in 'MatterAssociate.pas' {frmMatterAssociate},
   ChequePresent in 'ChequePresent.pas' {frmChequePresent},
-  InvoiceSearch in 'InvoiceSearch.pas' {frmInvoiceSearch},
   Archival in 'Archival.pas' {frmArchival},
   WriteMerge in 'WriteMerge.pas' {frmWriteMerge},
   PhonebookGroups in 'PhonebookGroups.pas' {frmPhonebookGroups},
@@ -199,7 +197,6 @@ uses
   InterestNew in 'MarketEvent\InterestNew.pas' {frmInterestNew},
   RptLedgerCreditors in 'RptLedgerCreditors.pas' {frmRptLedgerCreditors},
   MarketReferralOther in 'MarketReferralOther.pas' {frmMarketReferralOther},
-  InvoiceReverse in 'InvoiceReverse.pas' {frmInvoiceReverse},
   Desktop in 'Desktop.pas' {frmDesktop},
   SolicitorCodeNew in 'SolicitorCodeNew.pas' {frmSolicitorCodeNew},
   CheqReqInvoiceDebit in 'CheqReqInvoiceDebit.pas' {frmCheqReqInvoiceDebit},
@@ -242,7 +239,6 @@ uses
   ExpenseAllocation in 'ExpenseAllocation.pas' {frmExpenseAllocations},
   WorkFlowParties in 'Workflow\WorkFlowParties.pas' {frmWorkFlowParties},
   CrystalReportDef in 'CrystalReportDef.pas' {frmCrystalReportDef},
-  InvoiceScan in 'InvoiceScan.pas' {frmInvScan},
   SecureMatters in 'SecureMatters.pas' {frmSecureMatters},
   bankstatementimp in 'bankstatementimp.pas' {frmBankStmntImport},
   Splashscreen in 'Splashscreen.pas' {frmSplashScreen},
@@ -256,8 +252,6 @@ uses
   SendSMS in 'SendSMS.pas' {frmSendSMS},
   MatterNew in 'MatterNew.pas' {spb},
   recurring_fees in 'recurring_fees.pas' {frmRecurringFees},
-  invoicelist in 'invoicelist.pas' {frmInvoiceList},
-  InvoiceChangeDueDate in 'InvoiceChangeDueDate.pas' {frmInvoiceChangeDue},
   SoftlogImport in 'SoftlogImport.pas' {frmSoftlogImport},
   GenEditor in 'GenEditor.pas' {frmGenEditor},
   MatterReportBuilder in 'Workflow\MatterReportBuilder.pas' {frmMatterReportBuilder},
@@ -406,7 +400,13 @@ uses
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas',
   SubBill in 'Billing\SubBill.pas' {frmSubBill},
   AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax},
-  CheqReqs in 'CheqReqs.pas' {frmCheqReqs};
+  CheqReqs in 'CheqReqs.pas' {frmCheqReqs},
+  InvoiceChangeDueDate in 'Creditors\InvoiceChangeDueDate.pas' {frmInvoiceChangeDue},
+  InvoiceDebitNote in 'Creditors\InvoiceDebitNote.pas' {frmInvoiceDebit},
+  invoicelist in 'Creditors\invoicelist.pas' {frmInvoiceList},
+  InvoiceReverse in 'Creditors\InvoiceReverse.pas' {frmInvoiceReverse},
+  InvoiceScan in 'Creditors\InvoiceScan.pas' {frmInvScan},
+  InvoiceSearch in 'Creditors\InvoiceSearch.pas' {frmInvoiceSearch};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}

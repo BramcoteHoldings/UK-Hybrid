@@ -74,15 +74,15 @@ end;
 
 procedure TfrmInvScan.btnCancelClick(Sender: TObject);
 begin
-   Try
-      if Twain <> nil then
-      begin
+   if (Twain <> nil) then
+   begin
+      try
          if Twain.LibraryLoaded  = True then
             Twain.UnloadLibrary;
+      finally
+         Twain.UnloadSourceManager(True);
+         Close;
       end;
-   finally
-      Twain.UnloadSourceManager(True);
-      Close;
    end;
 end;
 

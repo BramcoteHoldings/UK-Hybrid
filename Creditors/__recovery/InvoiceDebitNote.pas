@@ -4,12 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
+  StdCtrls, ComCtrls, Db, DBCtrls, Menus, Buttons,
   ExtCtrls, OracleUniProvider, Uni, DBAccess, MemDS,
   citfunc, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
   cxContainer, cxEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar,
   EnforceCustomDateEdit, NumberEdit, dxCore, cxDateUtils, dxBar, cxClasses,
-  cxLabel;
+  cxLabel, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator,
+  dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog,
+  cxDBData, cxButtonEdit, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridLevel, cxGridCustomView, cxGrid, cxCurrencyEdit,
+  cxDBLookupComboBox;
 
 const
   colTYPE = 0;
@@ -30,7 +34,6 @@ type
     tbDesc: TEdit;
     dsAllocs: TUniDataSource;
     dsAccount: TUniDataSource;
-    dbgrLedger: TDBGrid;
     qryAccount: TUniQuery;
     qryAllocs: TUniQuery;
     qryLedger: TUniQuery;
@@ -62,6 +65,16 @@ type
     btnOk: TdxBarButton;
     dxBarButton2: TdxBarButton;
     lblCreditor: TcxLabel;
+    tvLedger: TcxGridDBTableView;
+    grdLedgerLevel1: TcxGridLevel;
+    grdLedger: TcxGrid;
+    tvLedgerTYPE: TcxGridDBColumn;
+    tvLedgerREFNO: TcxGridDBColumn;
+    tvLedgerLONGDESC: TcxGridDBColumn;
+    tvLedgerREASON: TcxGridDBColumn;
+    tvLedgerAMOUNT: TcxGridDBColumn;
+    tvLedgerTAXCODE: TcxGridDBColumn;
+    tvLedgerTAX: TcxGridDBColumn;
     procedure dbgrLedgerEditButtonClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure dbgrLedgerColExit(Sender: TObject);
@@ -81,6 +94,10 @@ type
     procedure neAmountExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dxBarButton2Click(Sender: TObject);
+    procedure tvLedgerREFNOPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure tvLedgerTYPEPropertiesChange(Sender: TObject);
+    procedure tvLedgerAMOUNTPropertiesChange(Sender: TObject);
   private
     { Private declarations }
     Balance, Tax, TotalAmt, WithholdTax: currency;
@@ -117,6 +134,87 @@ begin
 end;
 
 
+procedure TfrmInvoiceDebit.tvLedgerAMOUNTPropertiesChange(
+  Sender: TObject);
+begin
+   UpdateTotal;
+end;
+
+procedure TfrmInvoiceDebit.tvLedgerREFNOPropertiesButtonClick(
+  Sender: TObject; AButtonIndex: Integer);
+begin
+    if tvLedgerTYPE.EditValue = 'Matter' then
+    begin
+      if (not FormExists(frmMatterSearch)) then
+        Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+
+      if frmMatterSearch.ShowModal = mrOk then
+      begin
+        qryLedger.Edit;
+        qryLedger.FieldByName('REFNO').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+        qryLedger.FieldByName('LONGDESC').AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+
+        if qryLedger.FieldByName('REASON').AsString = '' then
+          qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+      end;
+    end;
+
+    if tvLedgerTYPE.EditValue = 'Ledger' then
+    begin
+      if not FormExists(frmLedgerSearch) then
+        Application.CreateForm(TfrmLedgerSearch, frmLedgerSearch);
+
+      if frmLedgerSearch.ShowModal = mrOk then
+      begin
+        qryLedger.Edit;
+        qryLedger.FieldByName('REFNO').AsString := frmLedgerSearch.qryLedgers.FieldByName('CODE').AsString;
+        qryLedger.FieldByName('LONGDESC').AsString := frmLedgerSearch.qryLedgers.FieldByName('REPORT_DESC').AsString;
+
+        if qryLedger.FieldByName('REASON').AsString = '' then
+          qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+      end;
+    end;
+end;
+
+procedure TfrmInvoiceDebit.tvLedgerTYPEPropertiesChange(
+  Sender: TObject);
+var
+  glInstance: TglComponentInstance;
+begin
+   begin
+      if not qryLedger.Modified then
+         qryLedger.Edit;
+      if tvLedgerTYPE.EditValue = 'Matter' then
+         qryLedger.FieldByName('LONGDESC').AsString := MatterString(string(tvLedgerREFNO.EditValue ), 'MATLOCATE');
+      if tvLedgerTYPE.EditValue = 'Ledger' then
+      begin
+   //    lookup the ledger code based on the value entered
+         glInstance := dmAxiom.getGlComponents.parseString(tvLedgerREFNO.EditValue, true);
+         if not glInstance.valid then
+         begin
+            glInstance.displayError;
+            tvLedgerREFNO.EditValue := '';
+            tvLedgerLONGDESC.EditValue := '';
+            glInstance.free;
+            exit;
+         end
+         else
+         begin
+            tvLedgerREFNO.EditValue := glInstance.fullCode;
+            qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
+         end;
+
+         if not AllowDirectPost(glInstance.ledgerKey) then
+         begin
+            MsgErr('You may not post to ledger Reference #' + glInstance.fullCode);
+            tvLedgerREFNO.EditValue := '';
+            tvLedgerLONGDESC.EditValue := '';
+         end;
+         SetDefaultTaxType;
+      end;
+   end;
+end;
+
 procedure TfrmInvoiceDebit.DisplayCreditor(NCreditor: integer);
 begin
   lblCreditor.Caption := TableString('CREDITOR', 'NCREDITOR', NCreditor, 'SEARCH');
@@ -139,7 +237,7 @@ end;
 
 procedure TfrmInvoiceDebit.dbgrLedgerEditButtonClick(Sender: TObject);
 begin
-  if dbgrLedger.SelectedIndex = colREFNO then
+{  if dbgrLedger.SelectedIndex = colREFNO then
   begin
     if dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Matter' then
     begin
@@ -172,7 +270,7 @@ begin
           qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
       end;
     end;
-  end;
+  end;  }
 end;
 
 
@@ -555,7 +653,6 @@ begin
           end;
         end;
 
-
         if not bPostingFailed then
            Self.Close;
       end
@@ -566,7 +663,7 @@ procedure TfrmInvoiceDebit.dbgrLedgerColExit(Sender: TObject);
 var
   glInstance: TglComponentInstance;
 begin
-  case dbgrLedger.SelectedIndex of
+{  case dbgrLedger.SelectedIndex of
     colREFNO: // Display the long Description
       begin
         if not qryLedger.Modified then
@@ -602,7 +699,7 @@ begin
       end;
     colAMOUNT:
       UpdateTotal;
-  end;
+  end;   }
 end;
 
 procedure TfrmInvoiceDebit.qryLedgerAfterInsert(DataSet: TDataSet);
@@ -665,7 +762,7 @@ procedure TfrmInvoiceDebit.dbgrLedgerKeyPress(Sender: TObject;
 var
   sType: string;
 begin
-  if Key = #13 then
+{  if Key = #13 then
     case dbgrLedger.SelectedIndex of
       colAMOUNT, colTAXCODE, colTAX:
         UpdateTotal;
@@ -690,7 +787,7 @@ begin
       qryLedger.FieldByName('TYPE').AsString := sType;
       dbgrLedger.SelectedIndex := colREFNO;
     end;
-  end;
+  end;     }
 
 end;
 
@@ -700,7 +797,9 @@ begin
   lblUnallocatedMsg.Visible := dmAxiom.Security.Invoice.ForceTally;
   lblUnallocated.Visible := dmAxiom.Security.Invoice.ForceTally;
 
-  with qryTmp do
+  dmAxiom.qryTaxList.Open;
+
+{  with qryTmp do
   begin
     Close;
     SQL.Text := 'SELECT CODE FROM TAXTYPE ORDER BY CODE';
@@ -712,7 +811,7 @@ begin
       Next;
     end;
     Close;
-  end;
+  end;      }
 
   qryLedger.open;
 end;
@@ -769,13 +868,14 @@ begin
   them from changing the transaction date into the locked period
 }
   dtpDate.EnforceLock := not dmAxiom.Security.PriorPeriodTransactions.Post;
+  qryLedger.Insert;
 end;
 
 procedure TfrmInvoiceDebit.SetDefaultTaxType;
 var
    defaultLedgerTaxCode : String;
 begin
-  defaultLedgerTaxCode := LedgerString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'DEFAULT_TAXCODE');
+  defaultLedgerTaxCode := LedgerString(tvLedgerREFNO.EditValue, 'DEFAULT_TAXCODE');
 
   if defaultLedgerTaxCode <> '' then
     qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode

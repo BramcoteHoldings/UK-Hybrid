@@ -26,14 +26,13 @@ object frmInvoiceList: TfrmInvoiceList
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
-    TabSlants.Kind = skCutCorner
     OnChange = pagInvoicesChange
     ExplicitTop = 26
     ExplicitHeight = 566
     ClientRectBottom = 560
     ClientRectLeft = 4
     ClientRectRight = 1020
-    ClientRectTop = 23
+    ClientRectTop = 24
     object tabInvoices: TcxTabSheet
       Caption = 'Invoices'
       ImageIndex = 0
@@ -211,8 +210,8 @@ object frmInvoiceList: TfrmInvoiceList
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 329
-        Width = 7
-        Height = 7
+        Width = 8
+        Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
@@ -1055,6 +1054,7 @@ object frmInvoiceList: TfrmInvoiceList
     DataPipeline = plInvoices
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Creditor Transactions Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -1080,15 +1080,22 @@ object frmInvoiceList: TfrmInvoiceList
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1103,26 +1110,30 @@ object frmInvoiceList: TfrmInvoiceList
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 822
     Top = 101
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'plInvoices'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 21960
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Creditor Transactions'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 16
         Font.Style = [fsBold, fsUnderline]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 6646
         mmLeft = 60590
@@ -1134,13 +1145,15 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Invoice Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4657
         mmLeft = 2117
@@ -1152,13 +1165,15 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Refno'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4657
         mmLeft = 40217
@@ -1170,13 +1185,15 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Due Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4657
         mmLeft = 76729
@@ -1188,13 +1205,15 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Owing'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4657
@@ -1207,13 +1226,15 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4657
@@ -1226,6 +1247,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         Pen.Color = clGray
         Pen.Width = 2
         ParentWidth = True
@@ -1242,6 +1264,7 @@ object frmInvoiceList: TfrmInvoiceList
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 12965
@@ -1249,6 +1272,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'CREATED'
         DataPipeline = plInvoices
         DisplayFormat = 'dd/mm/yyyy'
@@ -1269,6 +1293,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
+        Border.mmPadding = 0
         DataField = 'CHQNO'
         DataPipeline = plInvoices
         Font.Charset = DEFAULT_CHARSET
@@ -1288,6 +1313,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
+        Border.mmPadding = 0
         DataField = 'DESCR_1'
         DataPipeline = plInvoices
         Font.Charset = DEFAULT_CHARSET
@@ -1307,6 +1333,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
+        Border.mmPadding = 0
         DataField = 'AMOUNT_1'
         DataPipeline = plInvoices
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1328,6 +1355,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'CHART'
         DataPipeline = plInvoices
         Font.Charset = DEFAULT_CHARSET
@@ -1347,6 +1375,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plInvoices
         Font.Charset = DEFAULT_CHARSET
@@ -1366,6 +1395,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'OWNER_CODE'
         DataPipeline = plInvoices
         Font.Charset = DEFAULT_CHARSET
@@ -1385,12 +1415,14 @@ object frmInvoiceList: TfrmInvoiceList
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 8996
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1408,6 +1440,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1425,6 +1458,7 @@ object frmInvoiceList: TfrmInvoiceList
       object ppLine4: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line4'
+        Border.mmPadding = 0
         Pen.Color = clGray
         Pen.Width = 2
         ParentWidth = True
@@ -1452,6 +1486,7 @@ object frmInvoiceList: TfrmInvoiceList
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 20108
         mmPrintPosition = 0
@@ -1475,6 +1510,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText6: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText6'
+          Border.mmPadding = 0
           DataField = 'INVOICE_DATE'
           DataPipeline = plInvoices
           DisplayFormat = 'dd/mm/yyyy'
@@ -1496,6 +1532,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText1: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'REFNO'
           DataPipeline = plInvoices
           Font.Charset = DEFAULT_CHARSET
@@ -1516,6 +1553,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText8: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText8'
+          Border.mmPadding = 0
           DataField = 'DUE_DATE'
           DataPipeline = plInvoices
           DisplayFormat = 'dd/mm/yyyy'
@@ -1537,6 +1575,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText10: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText10'
+          Border.mmPadding = 0
           DataField = 'OWING'
           DataPipeline = plInvoices
           DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1559,6 +1598,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText7: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText7'
+          Border.mmPadding = 0
           DataField = 'DESCR'
           DataPipeline = plInvoices
           Font.Charset = DEFAULT_CHARSET
@@ -1579,6 +1619,7 @@ object frmInvoiceList: TfrmInvoiceList
         object ppDBText9: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText9'
+          Border.mmPadding = 0
           DataField = 'AMOUNT'
           DataPipeline = plInvoices
           DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1601,13 +1642,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel7: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label7'
+          Border.mmPadding = 0
           Caption = 'Chart'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 3969
@@ -1620,13 +1663,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel8: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label8'
+          Border.mmPadding = 0
           Caption = 'Date'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 43921
@@ -1639,13 +1684,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel9: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label9'
+          Border.mmPadding = 0
           Caption = 'Matter'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 74083
@@ -1658,13 +1705,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel10: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label10'
+          Border.mmPadding = 0
           Caption = 'Type'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 100542
@@ -1677,13 +1726,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel11: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label11'
+          Border.mmPadding = 0
           Caption = 'Cheque'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 113771
@@ -1696,13 +1747,15 @@ object frmInvoiceList: TfrmInvoiceList
         object ppLabel12: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label12'
+          Border.mmPadding = 0
           Caption = 'Amount'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold, fsUnderline]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 177007
@@ -1715,6 +1768,7 @@ object frmInvoiceList: TfrmInvoiceList
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0

@@ -11,7 +11,7 @@ uses
   cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxContainer,
   cxGroupBox, cxPC, cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu,
   dxCore, cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TfrmInvoiceSearch = class(TForm)
