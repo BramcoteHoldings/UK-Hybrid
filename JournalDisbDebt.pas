@@ -100,7 +100,7 @@ begin
         ParamByName('PAYER').AsString := 'Journal ' + IntToStr(iJournal);
         ParamByName('DESCR').AsString := edReason.Text;
         ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-        ParamByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+        ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
         ParamByName('CLIENT_NAME').AsString := qryMatter.FieldByName('TITLE').AsString;
         ParamByName('MATTER_DESC').AsString := qryMatter.FieldByName('SHORTDESCR').AsString;
         ExecSQL;
@@ -135,7 +135,7 @@ begin
         ParamByName('PAYER').AsString := 'Journal ' + IntToStr(iJournal);
         ParamByName('DESCR').AsString := edReason.Text;
         ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-        ParamByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+        ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
         ParamByName('CLIENT_NAME').AsString := qryMatter.FieldByName('TITLE').AsString;
         ParamByName('MATTER_DESC').AsString := qryMatter.FieldByName('SHORTDESCR').AsString;
         ExecSQL;

@@ -170,7 +170,7 @@ begin
     // insert alloc/invoice record
     qryAllocUpdate.Open;
     qryAllocUpdate.Insert;
-    qryAllocUpdate.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+    qryAllocUpdate.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
     qryAllocUpdate.FieldByName('NINVOICE').AsInteger := qryCheque.FieldByName('UNIQUEID').AsInteger;
     qryAllocUpdate.FieldByName('AMOUNT').AsCurrency := qryAlloc.FieldByName('AMOUNT').AsCurrency;
     qryAllocUpdate.FieldByName('TAX').AsCurrency := qryAlloc.FieldByName('TAX').AsCurrency;
@@ -192,7 +192,7 @@ begin
 
     // insert the disb record
     qryAllocUpdate.Insert;
-    qryAllocUpdate.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+    qryAllocUpdate.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
     qryAllocUpdate.FieldByName('NCHEQUE').AsInteger := iNchequeId;
     qryAllocUpdate.FieldByName('AMOUNT').AsCurrency := qryAlloc.FieldByName('AMOUNT').AsCurrency * -1;
     qryAllocUpdate.FieldByName('TAX').AsCurrency := qryAlloc.FieldByName('TAX').AsCurrency * -1;

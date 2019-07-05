@@ -1106,7 +1106,7 @@ begin
                      if bTrustInvoice then
                         ANInvoice := TableInteger('CHEQREQ','NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsString,'NINVOICE');
                      qryAllocs.Insert;
-                     lNewNAlloc := GetSeqnum('NALLOC');
+                     lNewNAlloc := GetSequenceNumber('SQNC_NALLOC');  // GetSeqnum('NALLOC');
                      qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
                      qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
                      qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
@@ -1828,7 +1828,7 @@ begin
                      qryCheque.Post;
 
                      qryAllocs.Insert;
-                     lNewNAlloc := GetSeqnum('NALLOC');
+                     lNewNAlloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                      qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
                      qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
                      qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
@@ -2813,7 +2813,7 @@ begin
           sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
           sSQL := sSQL + 'INNER JOIN MATTER M ON T.NMATTER = M.NMATTER ';
           sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE NOT IN (''CRED'',''GSTINP'') ';
-          sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
+          sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON t.taxcode = r.taxcode AND ((trunc(r.commence) >= :commence) and (trunc(r.commence) <= :commence))';
           sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';
           sSQL := sSQL + 'group by ABS(R.RATE), I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, T.TAXCODE, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX ';
  {         sSQL := sSQL + 'UNION ALL ';

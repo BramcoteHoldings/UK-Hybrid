@@ -437,7 +437,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 110
     Top = 5
     AutoSize = False
-    EditValue = 43633.4802449653d
+    EditValue = 43651.4930112384d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard

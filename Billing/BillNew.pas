@@ -1989,6 +1989,7 @@ function TfrmInvoice.SaveInvoice : Boolean;
 var
     CalculatedFeesTax, nFee, dGstFree : currency;
     bFeeTaxCorrect : Boolean;
+    sBillNoTest: integer;
 begin
    bFeeTaxCorrect := true;
    if not bNoSave then
@@ -2107,7 +2108,8 @@ begin
             qryInvoice.FieldByName('BILL_DATE').AsDateTime := dtpBillDate.Date;
 
             qryInvoice.FieldByName('REFNO').AsString := lblInvoice.Text;
-            qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := lblInvoice.Text;
+            if TryStrToInt(lblInvoice.Text, sBillNoTest) then
+               qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := lblInvoice.Text;
 
         { if edtDiscount.text <> '' then
           begin
