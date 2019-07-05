@@ -185,7 +185,7 @@ begin
       if not qryLedger.Modified then
          qryLedger.Edit;
       if tvLedgerTYPE.EditValue = 'Matter' then
-         qryLedger.FieldByName('LONGDESC').AsString := MatterString(string(tvLedgerREFNO.EditValue), 'MATLOCATE');
+         qryLedger.FieldByName('LONGDESC').AsString := MatterString(string(tvLedgerREFNO.EditValue ), 'MATLOCATE');
       if tvLedgerTYPE.EditValue = 'Ledger' then
       begin
    //    lookup the ledger code based on the value entered
@@ -416,7 +416,7 @@ begin
           if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
           begin
             qryAllocs.Insert;
-            qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+            qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
             qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
             qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
             qryAllocs.FieldByName('NMEMO').AsInteger := 0;

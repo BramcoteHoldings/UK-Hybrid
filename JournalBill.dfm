@@ -46,7 +46,7 @@ object frmJournalBill: TfrmJournalBill
     Left = 572
     Top = 316
     Width = 27
-    Height = 16
+    Height = 15
     Anchors = [akRight, akBottom]
     Caption = 'Total'
     Font.Charset = DEFAULT_CHARSET
@@ -60,7 +60,7 @@ object frmJournalBill: TfrmJournalBill
     Left = 692
     Top = 316
     Width = 3
-    Height = 16
+    Height = 15
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
@@ -81,7 +81,7 @@ object frmJournalBill: TfrmJournalBill
     Left = 386
     Top = 316
     Width = 66
-    Height = 16
+    Height = 15
     Anchors = [akRight, akBottom]
     Caption = 'Unallocated'
     Font.Charset = DEFAULT_CHARSET
@@ -96,7 +96,7 @@ object frmJournalBill: TfrmJournalBill
     Left = 547
     Top = 316
     Width = 3
-    Height = 16
+    Height = 15
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
@@ -314,7 +314,7 @@ object frmJournalBill: TfrmJournalBill
   object dtpDate: TEnforceCustomDateEdit
     Left = 82
     Top = 7
-    EditValue = 43630.9588359838d
+    EditValue = 43651.49437d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard

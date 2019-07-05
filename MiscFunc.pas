@@ -5732,7 +5732,7 @@ begin
       with dmAxiom.qryAllocsRV do
       begin
          // Make a reversed copy of this record
-         lNAlloc := GetSeqnum('NALLOC');
+         lNAlloc := GetSequenceNumber('SQNC_NALLOC');  //GetSeqnum('NALLOC');
          ParamByName('NALLOC').AsInteger := lNAlloc;
          ParamByName('CREATED').AsDateTime := dtReversal;
          ParamByName('REFNO').AsString := sRefno;
@@ -14104,7 +14104,7 @@ begin
             SQL.Add('SELECT SUM(AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0,');
             SQL.Add(' NVL(a.tax, 0), NVL(a.amount, 0)),0,0,AMOUNT)) as TAXABLE_AMOUNT, ');
             SQL.Add('SUM(NVL(A.TAX,0)) AS ITEMTAX ,');
-            SQL.Add('CASE WHEN :DEFAULTTAX = ''GST'' THEN SUM(NVL(A.AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS TAX ');
+            SQL.Add('CASE WHEN :DEFAULTTAX = (SELECT CODE FROM TAXTYPE WHERE DEFAULTTAX = ''Y'') THEN SUM(NVL(A.AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS TAX ');
 //            SQL.Add('SUM( DECODE(NVL(A.TAX,0),0,(NVL(A.AMOUNT, 0)*(ABS(NVL(R.RATE, 0))/100)), NVL(a.tax, 0)) ) AS TAX ');
          end
          else
@@ -14112,7 +14112,7 @@ begin
             SQL.Add('SELECT SUM (task_amount) as amount, sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0,');
             SQL.Add(' NVL(a.tax, 0), NVL(a.task_amount, 0)),0,0,task_AMOUNT)) as TAXABLE_AMOUNT, ');
             SQL.Add('SUM(NVL(A.TAX,0)) AS TAX ,');
-            SQL.Add('CASE WHEN :DEFAULTTAX = ''GST'' THEN SUM(NVL(A.TASK_AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS ITEMTAX ');
+            SQL.Add('CASE WHEN :DEFAULTTAX = (SELECT CODE FROM TAXTYPE WHERE DEFAULTTAX = ''Y'') THEN SUM(NVL(A.TASK_AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS ITEMTAX ');
 //            SQL.Add('SUM( DECODE(NVL(A.TAX,0),0,(NVL(A.task_AMOUNT, 0)*(ABS(NVL(R.RATE, 0))/100)), NVL(a.tax, 0)) ) AS TAX ');
          end;
          dmAxiom.qryGetBillTemplate.Close;
@@ -14181,7 +14181,7 @@ begin
       SQL.Add('AND NVL(S.zero_billed,''N'') = ''N'' ');
     end; }
 
-      if dmAxiom.runningide and (sType = 'ALLOC') then {sType = 'CHEQREQ' then }
+      if dmAxiom.runningide and (sType = 'FEE') then {sType = 'CHEQREQ' then }
          dmAxiom.qryTmp.SQL.SaveToFile('C:\tmp\qryBills.sql');
 
       // AES 06/09/2017 new parameter to calculate gst

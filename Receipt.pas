@@ -2462,22 +2462,22 @@ begin
             begin
                ErrorText := 'You may not Bank money to a matter that is archived.';
                Error := True;
+            end
+            else
+            begin
+               if qryLedger.State = dsBrowse then
+                  qryLedger.Edit;
+               qryLedger.FieldByName('REFNO').AsString := ARefNo;
+               qryLedger.FieldByName('DESCR').AsString := MatterString(ARefNo,'TITLE');
+               if (chkCheckMultipleMatters.Checked) then
+               begin
+                  CheckForMultipleMatters(ARefNo);
+                  MultipleCheck := True;
+               end;
+            end;
          end
          else
          begin
-            if qryLedger.State = dsBrowse then
-               qryLedger.Edit;
-            qryLedger.FieldByName('REFNO').AsString := ARefNo;
-            qryLedger.FieldByName('DESCR').AsString := MatterString(ARefNo,'TITLE');
-            if (chkCheckMultipleMatters.Checked) then
-            begin
-               CheckForMultipleMatters(ARefNo);
-               MultipleCheck := True;
-            end;
-         end;
-      end
-      else
-      begin
             ErrorText := 'This matter #' + ARefNo +
                 ' is not valid for the current Entity.';
             Error := True;
@@ -2487,12 +2487,11 @@ begin
       begin
          ErrorText := ErrorMessage;
          Error := True;
-	end;
+	   end;
    end;
 
    if tvLedgerTYPE.DataBinding.Field.Text = 'Ledger' then
    begin
-
       // lookup the ledger code based on the value entered
       glInstance := dmAxiom.getGlComponents.parseString(ARefNo,true);
 
@@ -2529,14 +2528,23 @@ begin
       begin
          if IsRefnoExisting(ARefNo) then
          begin
-            qryBill.Close;
-            qryBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',ARefNo,'NMEMO');
-            qryBill.Open;
-            SetupBill;
-            DistributeBill;
+            if Tablestring('NMEMO', 'REFNO', ARefNo, 'IS_Draft') = 'N' then
+            begin
+               qryBill.Close;
+               qryBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',ARefNo,'NMEMO');
+               qryBill.Open;
+               SetupBill;
+               DistributeBill;
 
-            CheckUnpaidCreditors(ARefNo);
-
+               CheckUnpaidCreditors(ARefNo);
+            end
+            else
+            begin
+               ErrorText := 'This Bill #' + ARefNo +
+                  ' is a DRAFT Bill.  Please post prior to receipting.';
+               Error := True;
+               DisplayValue := '';
+            end;
          end
          else
          begin
@@ -2907,7 +2915,7 @@ begin
                            if MatterExists(qryLedger.FieldByName('REFNO').AsString) then
                            begin
                              qryAllocs.Insert;
-                             qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                             qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                              qryMatters.Close;
                              qryMatters.ParamByName('P_File').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString,'FILEID');
                              qryMatters.Open;
@@ -3016,7 +3024,7 @@ begin
                               if MatterExists(qryLedger.FieldByName('FILEID').AsString) then
                               begin
                                  qryAllocs.Insert;
-                                 qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                                 qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                                  qryMatters.Close;
                                  qryMatters.ParamByName('P_File').AsString := qryLedger.FieldByName('FILEID').AsString;
                                  qryMatters.Open;
@@ -3143,7 +3151,7 @@ begin
                            qryMatters.Open;
 
                            qryAllocs.Insert;
-                           qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                           qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                            qryAllocs.FieldByName('NMATTER').AsInteger := qryMatters.FieldByName('NMATTER').AsInteger;
                            qryAllocs.FieldByName('NCLIENT').AsInteger := qryMatters.FieldByName('NCLIENT').AsInteger;
                            qryAllocs.FieldByName('FILEID').AsString := qryMatters.FieldByName('FILEID').AsString;

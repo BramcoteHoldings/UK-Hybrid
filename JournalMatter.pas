@@ -336,7 +336,7 @@ begin
                       ParamByName('PAYER').AsString := 'Journal ' + IntToStr(iJournal);
                       ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
                       ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
-                      ParamByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                      ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                       ParamByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'TITLE');
                       ParamByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
                       ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;

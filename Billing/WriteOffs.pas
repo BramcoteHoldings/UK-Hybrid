@@ -823,7 +823,7 @@ begin
             ParamByName('UPCRED').AsFloat := neUpCred.AsCurrency;
         end;
 
-      fiNAlloc := GetSeqnum('NALLOC');
+      fiNAlloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
 
       ParamByName('DESCR').AsString := mmoDesc.Lines.text;
       ParamByName('APPROVAL').AsString := dmAxiom.UserID;

@@ -75,10 +75,10 @@ object frmInvoice: TfrmInvoice
   end
   object Label7: TLabel
     Left = 6
-    Top = 146
-    Width = 90
+    Top = 149
+    Width = 64
     Height = 15
-    Caption = 'Anticipated Disb.'
+    Caption = 'Cheque Req'
   end
   object lblAntdAvail: TLabel
     Left = 108
@@ -91,7 +91,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label9: TLabel
     Left = 6
-    Top = 198
+    Top = 199
     Width = 45
     Height = 15
     Caption = 'Sundries'
@@ -200,7 +200,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label16: TLabel
     Left = 6
-    Top = 172
+    Top = 174
     Width = 48
     Height = 15
     Caption = 'Creditors'
@@ -574,7 +574,7 @@ object frmInvoice: TfrmInvoice
     OnKeyUp = neFeesKeyUp
   end
   object neAntd: TNumberEdit
-    Left = 184
+    Left = 185
     Top = 146
     Width = 86
     Height = 23
@@ -2087,7 +2087,7 @@ object frmInvoice: TfrmInvoice
     Style.Font.Style = []
     Style.IsFontAssigned = True
     TabOrder = 19
-    Height = 20
+    Height = 23
     Width = 86
   end
   object lblDraftBillCaption: TcxLabel
@@ -3626,6 +3626,23 @@ object frmInvoice: TfrmInvoice
   object qryUpCred: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      
+        'SELECT 4 AS TYPE, created, descr, amount * -1 AS amount, refno A' +
+        'S author,'
+      '       nalloc AS uniqueid, taxcode,'
+      '       CASE'
+      '          WHEN (tax <> 0)'
+      '             THEN tax * -1'
+      '          ELSE billed_tax_amount * -1'
+      
+        '       END AS tax, NULL AS PRIVATE, payer AS payee, approval, 0 ' +
+        'AS units,'
+      '       NULL AS task, nalloc AS uniqueid, 0 AS unbilled'
+      '  FROM alloc'
+      ' WHERE'
+      '--NMATTER = :P_Matter AND'
+      '       nmemo = :p_invoice AND ninvoice IS NOT NULL'
+      '/*'
       'SELECT'
       ' 4 as type, '
       ' CREATED,'
@@ -3644,7 +3661,8 @@ object frmInvoice: TfrmInvoice
       'FROM ALLOC WHERE '
       '--NMATTER = :P_Matter AND '
       'NMEMO = :P_Invoice'
-      'AND NINVOICE IS NOT NULL')
+      'AND NINVOICE IS NOT NULL'
+      '*/')
     Options.StrictUpdate = False
     Left = 1015
     Top = 354

@@ -327,7 +327,7 @@ begin
               // create alloc
               qryAllocs.Open;
               qryAllocs.Insert;
-              qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+              qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
               qryAllocs.FieldByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
               qryAllocs.FieldByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
               qryAllocs.FieldByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;

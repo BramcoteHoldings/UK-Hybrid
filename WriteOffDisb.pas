@@ -289,7 +289,7 @@ begin
                            BandedTableView.DataController.FocusedRowIndex := Row;
                            if BandedTableView.DataController.GetValue(Row, BandedTableViewDBBandedWriteOff.Index) = True then
                            begin
-                              nAlloc := GetSeqnum('NALLOC');
+                              nAlloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                               with qryAllocInsert do
                               begin
                                  ParamByName('AMOUNT').AsCurrency := BandedTableViewDBBandedAMOUNT.EditValue;
@@ -565,7 +565,7 @@ begin
                            BandedTableView.DataController.FocusedRowIndex := Row;
                            if BandedTableView.DataController.GetValue(Row, BandedTableViewDBBandedWriteOff.Index) = True then
                            begin
-                              nAlloc := GetSeqnum('NALLOC');
+                              nAlloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                               with qryAllocInsert do
                               begin
                                  ParamByName('AMOUNT').AsCurrency := BandedTableViewDBBandedAMOUNT.EditValue;
