@@ -2404,6 +2404,23 @@ object frmSystemFile: TfrmSystemFile
         Height = 23
         Width = 198
       end
+      object cxDBCheckBox76: TcxDBCheckBox
+        Left = 269
+        Top = 151
+        AutoSize = False
+        Caption = 'Restrict Matter Financials to Team'
+        DataBinding.DataField = 'RESTRICT_MATFIN_TO_TEAM'
+        DataBinding.DataSource = dsSystemFile
+        Properties.Alignment = taLeftJustify
+        Properties.ImmediatePost = True
+        Properties.MultiLine = True
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'Y'
+        Properties.ValueUnchecked = 'N'
+        TabOrder = 16
+        Height = 23
+        Width = 212
+      end
     end
     object cxTabSheet1: TcxTabSheet
       Caption = 'Accounting Defaults'
