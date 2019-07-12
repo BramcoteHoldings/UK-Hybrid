@@ -14068,7 +14068,7 @@ begin
          SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0 - a.tax, 0)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (rate = 0) then 0 ');
-         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax, a.taxcode, a.billing_taxcode ');
+         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax ');
 
 //        SQL.Add('SELECT SUM(0 - AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0, NVL(a.tax, 0), NVL(a.amount, 0)),0,0,0-AMOUNT)) as TAXABLE_AMOUNT, ');
 //        SQL.Add('SUM(NVL(0 - A.TAX, 0)) as ITEMTAX, ');
@@ -14077,7 +14077,7 @@ begin
       else if sType = 'CHEQREQ' then
       begin
          SQL.Add('select sum(amount) amount, sum(taxable_amount) taxable_amount,');
-         SQL.Add(' sum(itemtax) itemtax, sum(tax) tax, taxcode, billing_taxcode from (');
+         SQL.Add(' sum(itemtax) itemtax, sum(tax) tax from (');
          //SQL.Add('SELECT SUM (0 - amount) AS amount, ');
          //SQL.Add('SUM(case when (rate = 0) then 0 else 0 - amount ');
          //SQL.Add('end  ) AS taxable_amount,');
@@ -14093,7 +14093,7 @@ begin
          SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (a.tax, 0)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (r.rate = 0) then 0 ');
-         SQL.Add('else  ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100) end),2) AS tax, A.taxcode, billing_taxcode ');
+         SQL.Add('else  ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100) end),2) AS tax ');
 
 //         SQL.Add('SELECT SUM(AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0, NVL(a.tax, 0), NVL(a.amount, 0)),0,0,AMOUNT)) as TAXABLE_AMOUNT, ');
 //         SQL.Add('SUM(NVL(A.TAX,0)) as ITEMTAX, ');
@@ -14203,7 +14203,7 @@ begin
 
       if sType = 'CHEQREQ' then
       begin
-         SQL.Add(' group by ncheqreq, a.taxcode, A.BILLING_CODE) ');
+         SQL.Add(' group by ncheqreq, a.taxcode, A.BILLING_TAXCODE) ');
       end;
 
       // AES 06/09/2017 new parameter to calculate gst
@@ -14254,15 +14254,7 @@ begin
             dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);
          end
          else
-            if (sType = 'ALLOC') or (sType = 'CHEQREQ') then
-            begin
-               if (FieldByName('billing_taxcode').IsNull = True) then
-                  dTax := FieldByName('ITEMTAX').AsCurrency
-               else if (FieldByName('billing_taxcode').IsNull = False) and (FieldByName('billing_taxcode').AsString <> FieldByName('taxcode').AsString) then
-                  dTax := FieldByName('TAXABLE_AMOUNT').AsFloat;
-            end
-            else
-               dTax := FieldByName('ITEMTAX').AsCurrency;
+            dTax := FieldByName('ITEMTAX').AsCurrency;
       end;
 
       dgstFree :=  FieldByName('AMOUNT').AsCurrency -  FieldByName('TAXABLE_AMOUNT').AsCurrency;
@@ -14305,15 +14297,7 @@ begin
                     dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);
                  end
                  else
-                    if (sType = 'ALLOC') or (sType = 'CHEQREQ') then
-                     begin
-                        if (FieldByName('billing_taxcode').IsNull = True) then
-                           dTax := FieldByName('ITEMTAX').AsCurrency
-                        else if (FieldByName('billing_taxcode').IsNull = False) and (FieldByName('billing_taxcode').AsString <> FieldByName('taxcode').AsString) then
-                           dTax := FieldByName('TAXABLE_AMOUNT').AsFloat;
-                     end
-                     else
-                        dTax := FieldByName('ITEMTAX').AsCurrency;
+                    dTax := FieldByName('ITEMTAX').AsCurrency;
 
               if sType = 'FEE' then
               begin
@@ -14336,15 +14320,7 @@ begin
                   dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);
               end
               else
-                 if (sType = 'ALLOC') or (sType = 'CHEQREQ') then
-                  begin
-                     if (FieldByName('billing_taxcode').IsNull = True) then
-                        dTax := FieldByName('ITEMTAX').AsCurrency
-                     else if (FieldByName('billing_taxcode').IsNull = False) and (FieldByName('billing_taxcode').AsString <> FieldByName('taxcode').AsString) then
-                        dTax := FieldByName('TAXABLE_AMOUNT').AsFloat;
-                  end
-                  else
-                     dTax := FieldByName('ITEMTAX').AsCurrency;
+                 dTax := FieldByName('ITEMTAX').AsCurrency;
 
                //dTax := FieldByName('ITEMTAX').AsCurrency//TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate)
            end
