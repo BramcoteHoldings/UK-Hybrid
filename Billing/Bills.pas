@@ -341,6 +341,7 @@ type
     dxBarButton8: TdxBarButton;
     dxBarButton9: TdxBarButton;
     tvBillsIS_DRAFT: TcxGridDBColumn;
+    tvBillsSTATUS: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure cbAuthorClick(Sender: TObject);
     procedure pagBillsChange(Sender: TObject);
@@ -698,7 +699,18 @@ begin
     sSQL := sSQL + 'NMEMO.MODBY, NMEMO.CREATEDBY, NMEMO.DISCOUNT, NMEMO.SPELL_CHK_DONE, ';
     sSQL := sSQL + 'NMEMO.Original_fees, case when (NVL(NMEMO.Original_Fees,0) > 0) then((NMEMO.Fees - NMEMO.Original_Fees)/NMEMO.Original_Fees)*100  else 0 end as Variance , ';
     sSQL := sSQL + '(NMEMO.Fees - NVL(NMEMO.Original_Fees,0)) Diff, MATTER.SHORTDESCR, ';
-    sSQL := sSQL + ' MATTER.CONTROLLER, PHONEBOOK.EMAIL, NMEMO.NBILL_TO, IS_DRAFT ';
+    sSQL := sSQL + ' MATTER.CONTROLLER, PHONEBOOK.EMAIL, NMEMO.NBILL_TO, IS_DRAFT, ';
+    sSQL := sSQL + 'NMEMO.AUTHORISED_BY, NMEMO.AUTHORISED_DATE, NMEMO.DISPATCHED_BY, ';
+
+    ssql := sSql + ' CASE  ';
+    { WHEN NMEMO.REJECTED = ''Y'' then ''Rejected''';
+    ssql := sSql + ' WHEN NMEMO.REJECTED = ''N'' and NMEMO.PRIVATE = ''Y'' then ''Private''';  }
+    ssql := sSql + ' WHEN NMEMO.PRIVATE = ''N'' and NMEMO.IS_DRAFT = ''Y'' then ''Draft''';
+    ssql := sSql + ' WHEN NMEMO.PRIVATE = ''N'' and NMEMO.REFNO = ''AUTH'' then ''Authorised''';
+    ssql := sSql + ' WHEN NMEMO.IS_DRAFT = ''N'' then ''Posted'' ';
+    ssql := sSql + ' END as STATUS ';
+
+ //   ssql := sSql + ' ,ENTITY.NAME as ENTITY_NAME ';
     sSQL := sSql + 'FROM NMEMO, MATTER, MASTERBILLS, PHONEBOOK ';
     sSQL := sSql + 'WHERE NMEMO.NMATTER  = Matter.NMATTER ';
     sSQL := sSql + 'AND MASTERBILLS.NMASTER (+) = NMEMO.NMASTER  ';

@@ -1068,7 +1068,7 @@ object frmInvoice: TfrmInvoice
         Caption = 'Disbursements'
       end
       item
-        Caption = 'Anticipated Disbs.'
+        Caption = 'Cheque Req'
       end
       item
         Caption = 'Creditors'
@@ -3444,6 +3444,29 @@ object frmInvoice: TfrmInvoice
   object qryAntd: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      
+        'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author, c.nche' +
+        'qreq AS uniqueid,'
+      '       c.taxcode,'
+      '       CASE'
+      '          WHEN (c.taxcode = '#39'FUB'#39')'
+      '             THEN ROUND (c.amount * ABS (r.rate)) / 100'
+      '          ELSE tax'
+      '       END AS tax,'
+      '       NULL AS PRIVATE, c.payee, NULL, 0 AS units, NULL AS task,'
+      '       c.ncheqreq AS uniqueid, 0 AS unbilled'
+      '  FROM cheqreq c, taxrate r'
+      ' WHERE'
+      '-- NMATTER = :P_Matter'
+      '--AND'
+      '       c.nmemo = :p_invoice'
+      '   AND c.trust <> '#39'T'#39
+      '   AND c.taxcode = r.taxcode(+)'
+      '   AND TRUNC (c.reqdate) >= r.commence'
+      '   AND TRUNC (c.reqdate) <= NVL (r.end_period, SYSDATE + 1000)'
+      ''
+      ''
+      '/*'
       'SELECT'
       '  2 as type,  '
       '  REQDATE,'
@@ -3465,7 +3488,8 @@ object frmInvoice: TfrmInvoice
       '-- NMATTER = :P_Matter '
       '--AND '
       ' NMEMO = :P_Invoice'
-      'And Trust <> '#39'T'#39)
+      'And Trust <> '#39'T'#39
+      '*/')
     Options.StrictUpdate = False
     Left = 1017
     Top = 308
@@ -4202,6 +4226,13 @@ object frmInvoice: TfrmInvoice
       Hint = 'Edit Tax'
       Visible = ivAlways
       OnClick = tbtnEditTaxClick
+    end
+    object barbtnTaxcodeList: TdxBarSubItem
+      Caption = 'Modify Tax Code'
+      Category = 0
+      Visible = ivAlways
+      ItemLinks = <>
+      OnPopup = barbtnTaxcodeListPopup
     end
     object dxBarButton1: TdxBarButton
       Caption = 'Draft'
@@ -7145,7 +7176,7 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
-        ItemName = 'tbtnAddGST'
+        ItemName = 'barbtnTaxcodeList'
       end
       item
         Visible = True

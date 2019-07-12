@@ -414,6 +414,7 @@ type
     lblCreatedBy: TLabel;
     lblPostedBy: TLabel;
     lblInvoice: TcxTextEdit;
+    barbtnTaxcodeList: TdxBarSubItem;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -587,6 +588,7 @@ type
     procedure btnAddChequeRequestClick(Sender : TObject);
     procedure ReverseAnticipatedDisbursement(nOldCheqnum: integer);
     procedure edtDiscountPropertiesChange(Sender: TObject);
+    procedure barbtnTaxcodeListPopup(Sender: TObject);
     // procedure tbtnRemoveClick(Sender: TObject);
     private
       { Private declarations }
@@ -646,6 +648,7 @@ type
       procedure ControlEditFields(AState : Boolean);
       procedure CalcDiscountEntry;
       procedure DoAuthorise;
+      procedure btnTaxCodeClick(Sender: TObject);
     public
       { Public declarations }
       property OwnerForm : TComponent read FForm write FForm;
@@ -1245,7 +1248,7 @@ begin
     qryNew.SQL.Text := 'SELECT SUM(AMOUNT) AS TOT FROM CHEQREQ WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
     // QuotedStr(TableString('MATTER', 'NMATTER', qryInvoice.FieldByName('NMATTER').AsInteger, 'FILEID')) +
       ' AND ((NMEMO is null AND BILLED = ''N'' AND TRUST <> ''T'') OR ' + ' (NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger) + '))' +
-      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 And ANTICIPATED = ''Y''';
+      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 /*And ANTICIPATED = ''Y''*/ ';
     qryNew.Open;
     if not qryNew.IsEmpty
     then
@@ -4057,8 +4060,7 @@ begin
                     SQL.Text := 'SELECT CREATED, TAX FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                     // SQL.Text := 'SELECT CREATED, TAX FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsTYPE.EditValue);
                     Open;
-                    if not IsEmpty
-                    then
+                    if not IsEmpty then
                     begin
                       dtTax := FieldByName('CREATED').AsDateTime;
                       cTax := FieldByName('TAX').AsCurrency;
@@ -4073,8 +4075,7 @@ begin
                     SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                     // SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
                     Open;
-                    if not IsEmpty
-                    then
+                    if not IsEmpty then
                     begin
                       dtTax := FieldByName('CREATED').AsDateTime;
                       cTax := FieldByName('TAX').AsCurrency;
@@ -4089,8 +4090,7 @@ begin
                     SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                     // SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
                     Open;
-                    if not IsEmpty
-                    then
+                    if not IsEmpty then
                     begin
                       dtTax := FieldByName('REQDATE').AsDateTime;
                       cTax := FieldByName('TAX').AsCurrency;
@@ -4105,8 +4105,7 @@ begin
                     SQL.Text := 'SELECT CREATED, TAX FROM SUNDRY WHERE NSUNDRY = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                     // SQL.Text := 'SELECT CREATED, TAX FROM SUNDRY WHERE NSUNDRY = ' + IntToStr(tvBillItemsTYPE.EditValue);
                     Open;
-                    if not IsEmpty
-                    then
+                    if not IsEmpty then
                     begin
                       dtTax := FieldByName('CREATED').AsDateTime;
                       cTax := FieldByName('TAX').AsCurrency;
@@ -4121,8 +4120,7 @@ begin
                     SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                     // SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
                     Open;
-                    if not IsEmpty
-                    then
+                    if not IsEmpty then
                     begin
                       dtTax := FieldByName('CREATED').AsDateTime;
                       cTax := FieldByName('TAX').AsCurrency;
@@ -5678,6 +5676,169 @@ procedure TfrmInvoice.dxBarButton4Click(Sender : TObject);
       end;
     end;
   end;
+
+procedure TfrmInvoice.barbtnTaxcodeListPopup(Sender: TObject);
+var
+   btnTaxCode: TdxBarButton;
+begin
+   if dmAxiom.qryTaxList.Active = False then
+      dmAxiom.qryTaxList.Open;
+
+   while dmAxiom.qryTaxList.eof = False do
+   begin
+      btnTaxCode := TdxBarButton.Create(Self);
+      with btnTaxCode do
+      begin
+         Caption := dmAxiom.qryTaxList.FieldByName('code').AsString;
+         Hint := 'Click to select Tax Type';
+         PaintStyle := psCaption;
+         OnClick := btnTaxCodeClick;
+      end;
+
+  // Adds an item to a submenu
+      barbtnTaxcodeList.ItemLinks.Add.Item := btnTaxCode;
+
+      dmAxiom.qryTaxList.Next;
+   end;
+end;
+
+procedure TfrmInvoice.btnTaxCodeClick(Sender: TObject);
+var
+  cbTaxType: TdxBarButton;
+   dtTax : TDateTime;
+   iCtr : Integer;
+   cTax : currency;
+   AView : TcxGridTableView;
+   sTaxCode : string;
+begin
+   sTaxCode := TdxBarButton(Sender).Caption;
+//   staxTypeSelected := cbTaxtype.Caption;
+   AView := tvBillItems;
+   if AView.DataController.GetSelectedCount > 0 then
+   begin
+      try
+        // 25-08-2018 DW added to accomodate Singapore tax codes
+ //       sTaxCode := TableString('TAXDEFAULT', 'TYPE', 'Bill', 'CODE');
+        if sTaxCode = ''
+        then
+          sTaxCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'FEE_TAX_BASIS');
+        if sTaxCode = ''
+        then
+          sTaxCode := dmAxiom.DefaultTax;
+        // -----------------
+        for iCtr := AView.DataController.RecordCount - 1 downto 0 do
+        begin
+          if AView.DataController.IsRowSelected(iCtr)
+          then
+          begin
+            with qryNew do
+            begin
+              dtTax := Now;
+              cTax := 1;
+              SQL.Clear;
+              case tvBillItemsTYPE.EditValue of
+                IMG_FEES :
+                  begin
+                    SQL.Text := 'SELECT CREATED, TAX FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'SELECT CREATED, TAX FROM FEE WHERE NFEE = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                    Open;
+                    if not IsEmpty then
+                    begin
+                      dtTax := FieldByName('CREATED').AsDateTime;
+                      cTax := FieldByName('TAX').AsCurrency;
+                    end;
+                    Close;
+                    SQL.Text := 'UPDATE FEE SET TAXCODE = ''' + sTaxCode + ''', TAX = AMOUNT * :TaxRate WHERE NFEE = ' +
+                      IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'UPDATE FEE SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NFEE = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                  end;
+                IMG_DISB :
+                  begin
+                    SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                    Open;
+                    if not IsEmpty then
+                    begin
+                      dtTax := FieldByName('CREATED').AsDateTime;
+                      cTax := FieldByName('TAX').AsCurrency;
+                    end;
+                    Close;
+                    if sTaxCode = 'FUB' then
+                       SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''' + sTaxCode +
+                           ''', BILLED_TAX_AMOUNT = AMOUNT * :TaxRate  WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue)
+                    else
+                       SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''' + sTaxCode +
+                           '''TAX = AMOUNT * :TaxRate, BILLED_TAX_AMOUNT = AMOUNT * :TaxRate  WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                  end;
+                IMG_ANTD :
+                  begin
+                    SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                    Open;
+                    if not IsEmpty then
+                    begin
+                      dtTax := FieldByName('REQDATE').AsDateTime;
+                      cTax := FieldByName('TAX').AsCurrency;
+                    end;
+                    Close;
+                    if sTaxCode = 'FUB' then
+                      SQL.Text := 'UPDATE CHEQREQ SET TAXCODE = ''' + sTaxCode + ''' WHERE NCHEQREQ = ' +
+                                    IntToStr(tvBillItemsUNIQUEID.EditValue)
+                    else
+                      SQL.Text := 'UPDATE CHEQREQ SET TAXCODE = ''' + sTaxCode + ''', TAX = AMOUNT * :TaxRate WHERE NCHEQREQ = ' +
+                                    IntToStr(tvBillItemsUNIQUEID.EditValue)
+                    // SQL.Text := 'UPDATE CHEQREQ SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                  end;
+                IMG_SUND :
+                  begin
+                    SQL.Text := 'SELECT CREATED, TAX FROM SUNDRY WHERE NSUNDRY = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'SELECT CREATED, TAX FROM SUNDRY WHERE NSUNDRY = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                    Open;
+                    if not IsEmpty then
+                    begin
+                      dtTax := FieldByName('CREATED').AsDateTime;
+                      cTax := FieldByName('TAX').AsCurrency;
+                    end;
+                    Close;
+                    SQL.Text := 'UPDATE SUNDRY SET TAXCODE = ''' + sTaxCode + ''', TAX = AMOUNT * :TaxRate WHERE NSUNDRY = ' +
+                      IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'UPDATE SUNDRY SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NSUNDRY = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                  end;
+                IMG_UPCRED :
+                  begin
+                    SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                    Open;
+                    if not IsEmpty then
+                    begin
+                      dtTax := FieldByName('CREATED').AsDateTime;
+                      cTax := FieldByName('TAX').AsCurrency;
+                    end;
+                    Close;
+                    SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''' + sTaxCode +
+                      ''', TAX = AMOUNT * :TaxRate, BILLED_TAX_AMOUNT = AMOUNT * :TaxRate  WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                    // SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                  end;
+              end;
+              if cTax = 0
+              then
+              begin
+                ParamByName('TaxRate').AsFloat := TaxRate('', '' + sTaxCode + '', dtTax);
+                // ParamByName('TaxRate').AsFloat := TaxRate('', 'GST', dtTax);
+                ExecSQL;
+                Close;
+              end;
+            end;
+          end;
+        end;
+        DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger);
+      finally
+        RestoreSelectedItems();
+      end;
+    end;
+end;
+
 
 procedure TfrmInvoice.dxBbtnAddExpTemplateClick(Sender : TObject);
   var
