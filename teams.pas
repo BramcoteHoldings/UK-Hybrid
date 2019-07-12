@@ -4,18 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, MaintAncestor, cxMaskEdit, cxButtonEdit, cxDBEdit, cxControls,
-  cxContainer, cxEdit, cxTextEdit, StdCtrls, dxBarDBNav, dxBar, DB, MemDS,
-  DBAccess, OracleUniProvider, Uni, ImgList, ExtCtrls, ComCtrls,
-  cxLookAndFeelPainters, cxButtons, cxListBox, cxStyles, cxCustomData,
-  cxGraphics, cxFilter, cxData, cxDataStorage, cxDBData, cxCheckBox,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxGridCustomView, cxGrid, ActnList, ActnMan, cxGroupBox,
-  cxGridBandedTableView, cxGridDBBandedTableView, cxDropDownEdit,
-  cxLookAndFeels, XPStyleActnCtrls, ppDB, ppDBPipe, ppBands, ppCtrls,
-  ppPrnabl, ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport,
-  ppParameter, ppDesignLayer, cxNavigator, System.Actions,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  Dialogs, MaintAncestor, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxStyles, cxCustomData, cxFilter,
+  cxData, cxDataStorage, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxDBLookupComboBox, cxCheckBox, cxTextEdit, System.Actions, Vcl.ActnList,
+  Vcl.XPStyleActnCtrls, Vcl.ActnMan, ppDB, dxBar, cxGridLevel,
+  cxGridBandedTableView, cxGridDBBandedTableView, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, cxGroupBox,
+  cxMaskEdit, cxButtonEdit, cxDBEdit, Vcl.StdCtrls, ppDBPipe, ppParameter,
+  ppDesignLayer, ppBands, ppCtrls, ppPrnabl, ppClass, ppVar, ppCache, ppComm,
+  ppRelatv, ppProd, ppReport, dxBarDBNav, cxClasses, MemDS, DBAccess, Uni,
+  System.ImageList, Vcl.ImgList;
 
 type
   TfrmTeams = class(TfrmMaint)
@@ -30,7 +30,6 @@ type
     grdEmpList: TcxGrid;
     grdEmpListDBTableView1: TcxGridDBTableView;
     grdEmpListDBTableView1Member: TcxGridDBColumn;
-    grdEmpListDBTableView1CODE: TcxGridDBColumn;
     grdEmpListDBTableView1NAME: TcxGridDBColumn;
     grdEmpListLevel1: TcxGridLevel;
     dxBarButton1: TdxBarButton;
@@ -44,6 +43,8 @@ type
     tvEmpListMember: TcxGridDBBandedColumn;
     qryTemp: TUniQuery;
     tvEmpListDESCR: TcxGridDBBandedColumn;
+    qryTeamEmployees: TUniQuery;
+    dsTeamEmployees: TUniDataSource;
     procedure dbtbCodePropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure actTeamSaveUpdate(Sender: TObject);
@@ -53,6 +54,10 @@ type
     procedure qrySourceAfterInsert(DataSet: TDataSet);
     procedure qrySourceAfterScroll(DataSet: TDataSet);
     procedure tvEmpListWkflowMemberPropertiesChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure qryTeamEmployeesAfterInsert(DataSet: TDataSet);
+    procedure grdEmpListDBTableView1MemberPropertiesChange(Sender: TObject);
+    procedure qryTeamEmployeesNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
     ListChanged: boolean;
@@ -93,32 +98,34 @@ end;
 procedure TfrmTeams.actTeamSaveExecute(Sender: TObject);
 var
    Row: integer;
+   AView: TcxCustomGridView;
+   ADataController: TcxCustomDataController;
 begin
    inherited;
-   qryTemp.Close;
+   qryTeamEmployees.Post;
+   ListChanged := False;
+{   qryTemp.Close;
    qryTemp.SQL.Clear;
    qryTemp.SQL.Text := 'delete from team_employee where team_code = ' + QuotedStr(dbtbCode.Text);
    qryTemp.ExecSQL;
    qryTemp.Close;
    qryTemp.SQL.Clear;
-   tvEmpList.BeginUpdate;
    try
-      for Row := 0 to tvEmpList.DataController.RecordCount - 1 do
+      AView := grdEmpListDBTableView1;
+      ADataController := Aview.DataController;
+      AView.BeginUpdate;
+      for Row := 0 to ADataController.RecordCount - 1 do
       begin
-         tvEmpList.DataController.FocusedRowIndex := Row;
-         if tvEmpList.DataController.GetValue(Row, tvEmpListMember.Index) = True then
-         begin
-            qryTemp.SQL.Text := 'insert into team_employee values('+
-                                QuotedStr(dbtbCode.Text) +',' +QuotedStr(tvEmpList.DataController.GetValue(Row, tvEmpListCODE.Index)) + ')';
-            qryTemp.ExecSQL;
-         end;
+         ADataController.FocusedRowIndex := Row;
+         qryTemp.SQL.Text := 'insert into team_employee (team_code, emp_code) values('+
+                              QuotedStr(dbtbCode.Text) +',' +QuotedStr(ADataController.GetValue(Row, 0)) + ')';
+         qryTemp.ExecSQL;
       end;
-   except
-     //
-   end;
-   tvEmpList.EndUpdate;
-   ListChanged := False;
-   tvEmpList.DataController.FocusedRowIndex := 0;
+   finally
+      AView.EndUpdate;
+      ListChanged := False;
+      ADataController.FocusedRowIndex := 0;
+   end;     }
 end;
 
 procedure TfrmTeams.tvEmpListMemberPropertiesChange(Sender: TObject);
@@ -133,28 +140,23 @@ var
 begin
   inherited;
    qrySource.Open;
-   qryEmployee.Open;
-   tvEmpList.BeginUpdate;
-   for Row := 0 to tvEmpList.DataController.RecordCount - 1 do
-   begin
-      qryEmployeeCode.Close;
-      qryEmployeeCode.ParamByName('code').AsString := dbtbCode.Text;
-      qryEmployeeCode.ParamByName('emp').AsString := tvEmpList.DataController.GetValue(Row, tvEmpListCODE.Index);
-      qryEmployeeCode.Open;
-      tvEmpList.DataController.FocusedRowIndex := Row;
-      if qryEmployeeCode.Eof then
-      begin
-         tvEmpList.DataController.SetValue(Row, tvEmpListMember.Index, False);
-//         tvEmpList.DataController.SetValue(Row, tvEmpListWkflowMember.Index, '');
-      end
-      else
-      begin
-         tvEmpList.DataController.SetValue(Row, tvEmpListMember.Index, True);
- //        tvEmpList.DataController.SetValue(Row, tvEmpListWkflowMember.Index, qryEmployeeCode.FieldByName('WORKFLOW_TEAM').AsString);
-      end;
-   end;
-   tvEmpList.EndUpdate;
-   tvEmpList.DataController.FocusedRowIndex := 0;
+   if dmAxiom.qryEmplyeeList.Active = False then
+      dmAxiom.qryEmplyeeList.Open;
+end;
+
+procedure TfrmTeams.FormShow(Sender: TObject);
+begin
+  inherited;
+  qryTeamEmployees.Close;
+  qryTeamEmployees.ParamByName('code').AsString := dbtbCode.Text;
+  qryTeamEmployees.Open;
+end;
+
+procedure TfrmTeams.grdEmpListDBTableView1MemberPropertiesChange(
+  Sender: TObject);
+begin
+  inherited;
+  ListChanged := True;
 end;
 
 procedure TfrmTeams.qrySourceAfterInsert(DataSet: TDataSet);
@@ -178,28 +180,21 @@ var
    Row: integer;
 begin
    inherited;
-   tvEmpList.BeginUpdate;
-   for Row := 0 to tvEmpList.DataController.RecordCount - 1 do
-   begin
-      qryEmployeeCode.Close;
-      qryEmployeeCode.ParamByName('code').AsString := dbtbCode.Text;
-      qryEmployeeCode.ParamByName('emp').AsString := tvEmpList.DataController.GetValue(Row, tvEmpListCODE.Index);
-      qryEmployeeCode.Open;
-      tvEmpList.DataController.FocusedRowIndex := Row;
-      if qryEmployeeCode.Eof then
-      begin
-         tvEmpList.DataController.SetValue(Row, tvEmpListMember.Index, False);
-//         tvEmpList.DataController.SetValue(Row, tvEmpListWkflowMember.Index, '');
-      end
-      else
-      begin
-         tvEmpList.DataController.SetValue(Row, tvEmpListMember.Index, True);
-//         tvEmpList.DataController.SetValue(Row, tvEmpListWkflowMember.Index, qryEmployeeCode.FieldByName('WORKFLOW_TEAM').AsString);
-      end;
-   end;
-   tvEmpList.EndUpdate;
-   tvEmpList.DataController.FocusedRowIndex := 0;
+   qryTeamEmployees.Close;
+   qryTeamEmployees.ParamByName('code').AsString := dbtbCode.Text;
+   qryTeamEmployees.Open;
+end;
 
+procedure TfrmTeams.qryTeamEmployeesAfterInsert(DataSet: TDataSet);
+begin
+   inherited;
+   ListChanged := True;
+end;
+
+procedure TfrmTeams.qryTeamEmployeesNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  DataSet.FieldByName('team_code').AsString := dbtbCode.Text;
 end;
 
 procedure TfrmTeams.tvEmpListWkflowMemberPropertiesChange(Sender: TObject);
