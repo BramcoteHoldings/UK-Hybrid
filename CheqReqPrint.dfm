@@ -14,7 +14,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
   Scaled = False
   OnClose = FormClose
   OnCreate = FormCreate
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object qryDetail: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -53,13 +53,14 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       item
         DataType = ftUnknown
         Name = 'NCHEQREQ'
-        Value = nil
+        Value = Null
       end>
   end
   object CheqReqPrint: TppReport
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -85,15 +86,22 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -108,12 +116,14 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 24
     Top = 45
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -121,12 +131,14 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -154,7 +166,8 @@ object frmCheqReqPrint: TfrmCheqReqPrint
   object rptCheqReq: TppReport
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -180,15 +193,22 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
     RTFSettings.DefaultFont.Color = clWindowText
     RTFSettings.DefaultFont.Height = -13
@@ -201,12 +221,14 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 174
     Top = 122
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 87313
@@ -214,6 +236,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
@@ -230,13 +253,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Office Cheque Requisition'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 16
         Font.Style = [fsBold, fsItalic, fsUnderline]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 8682
@@ -250,13 +275,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
+        Border.mmPadding = 0
         Caption = 'Insight Software'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 16
         Font.Style = [fsBold, fsItalic]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 8682
@@ -269,13 +296,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Date Required'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -287,13 +316,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Payee'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 9260
@@ -305,13 +336,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Details'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -323,13 +356,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -341,6 +376,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'DUEDATE'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -361,6 +397,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'PAYEE'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -381,6 +418,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -401,6 +439,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plHeader
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -422,13 +461,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Tax'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4234
         mmLeft = 86784
@@ -440,6 +481,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'TAX'
         DataPipeline = plHeader
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -461,13 +503,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Total'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 141552
@@ -479,6 +523,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'TOTAL'
         DataPipeline = plHeader
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -500,13 +545,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 9260
@@ -518,6 +565,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'BANK'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -538,6 +586,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'BANKNAME'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -558,13 +607,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Requested By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -576,6 +627,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText9'
+        Border.mmPadding = 0
         DataField = 'NAME'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -596,13 +648,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Authorised.....................................................'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 121973
@@ -614,13 +668,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label12'
+        Border.mmPadding = 0
         Caption = 'Entered By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -632,6 +688,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText10'
+        Border.mmPadding = 0
         DataField = 'HoldDescr'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -652,13 +709,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Note'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 9260
@@ -670,6 +729,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBMemo1: TppDBMemo
         DesignLayer = ppDesignLayer2
         UserName = 'DBMemo1'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'NOTE'
         DataPipeline = plHeader
@@ -698,13 +758,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object pplblEnteredBy: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'lblEnteredBy'
+        Border.mmPadding = 0
         Caption = 'Entered By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 35719
@@ -717,13 +779,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Label14'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Type'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 794
@@ -736,13 +800,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Label15'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Refno'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 18521
@@ -755,13 +821,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Label16'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 46038
@@ -774,6 +842,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Line1'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 265
@@ -787,13 +856,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
         DesignLayer = ppDesignLayer2
         UserName = 'Label17'
         Anchors = [atLeft, atBottom]
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3968
@@ -806,13 +877,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel18: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label18'
+        Border.mmPadding = 0
         Caption = 'CheqReq#'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 146050
@@ -824,6 +897,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText16: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText16'
+        Border.mmPadding = 0
         DataField = 'REFNO'
         DataPipeline = plHeader
         Font.Charset = ANSI_CHARSET
@@ -844,13 +918,15 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppLabel19: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label19'
+        Border.mmPadding = 0
         Caption = 'Cheque No:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4074
         mmLeft = 84108
@@ -862,6 +938,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText17: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText17'
+        Border.mmPadding = 0
         DataField = 'CHQNO'
         DataPipeline = plHeader
         Font.Charset = DEFAULT_CHARSET
@@ -883,12 +960,14 @@ object frmCheqReqPrint: TfrmCheqReqPrint
     object ppDetailBand2: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 10319
       mmPrintPosition = 0
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'TYPE'
         DataPipeline = plDetail
         Font.Charset = DEFAULT_CHARSET
@@ -909,6 +988,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText12'
+        Border.mmPadding = 0
         DataField = 'REFNO'
         DataPipeline = plDetail
         Font.Charset = DEFAULT_CHARSET
@@ -929,6 +1009,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText13'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plDetail
         Font.Charset = DEFAULT_CHARSET
@@ -949,6 +1030,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText14'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plDetail
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -971,6 +1053,7 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       object ppDBText15: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText15'
+        Border.mmPadding = 0
         DataField = 'MATTER'
         DataPipeline = plDetail
         Font.Charset = DEFAULT_CHARSET
@@ -990,18 +1073,19 @@ object frmCheqReqPrint: TfrmCheqReqPrint
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D65060F
-        4C6162656C314F6E476574546578740B50726F6772616D54797065070B747450
-        726F63656475726506536F7572636506C270726F636564757265204C6162656C
-        314F6E476574546578742876617220546578743A20537472696E67293B0D0A62
-        6567696E0D0A202020696620706C4865616465725B275452555354275D203D20
-        275427207468656E0D0A20202020202054657874203A3D202754727573742043
-        6865717565205265717569736974696F6E270D0A202020656C73650D0A202020
-        20202054657874203A3D20274F66666963652043686571756520526571756973
-        6974696F6E273B0D0A0D0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D
-        6506064C6162656C31094576656E744E616D6506094F6E476574546578740745
-        76656E7449440235084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Label1OnGetText'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Label1OnGetText(var Text: String);'#13#10'begin'#13#10'   if plHea' +
+          'der['#39'TRUST'#39'] = '#39'T'#39' then'#13#10'      Text := '#39'Trust Cheque Requisition' +
+          #39#13#10'   else'#13#10'      Text := '#39'Office Cheque Requisition'#39';'#13#10#13#10#13#10'end;' +
+          #13#10
+        raProgram.ComponentName = 'Label1'
+        raProgram.EventName = 'OnGetText'
+        raProgram.EventID = 53
+      end
     end
     object ppDesignLayers2: TppDesignLayers
       object ppDesignLayer2: TppDesignLayer

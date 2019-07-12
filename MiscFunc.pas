@@ -767,6 +767,7 @@ type
   function IndexPath(PathText, PathLoc: string): string;
   function ClearTrustFromStoredProc(sFileID : String) : Currency;
   function MatterDocAccess(ANMatter, AEmpCode: string ): boolean;
+  function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
   function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
   procedure Split(const S: String; Separator: Char; MyStringList: TStringList);
   function ParseMacros(AFileName: String; ANMatter: Integer = -1; ADocID: Integer = -1; ADocDescr: string = ''; ANMemo: integer = -1): String;
@@ -11937,6 +11938,41 @@ begin
    qryLookup.Free;
 end;
 
+function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
+begin
+   with dmAxiom.procTemp do
+   begin
+      Close;
+      StoredProcName := 'matterfinaccess';
+      PrepareSQL;
+      Params[1].AsString  := ANMatter;
+      Params[2].AsString  := AEmpCode;
+      Execute;
+      Result := (Params[0].AsInteger = 0);
+   end;
+
+{   qryLookup := TUniQuery.Create(nil);
+   qryLookup.Connection := dmAxiom.uniInsight;
+   with qryLookup do
+   begin
+      SQL.Text := 'SELECT ''x'' FROM matter WHERE nmatter = ' + ANMatter;
+      SQL.Text := SQL.Text + ' AND CASE WHEN (author = :p_author ';
+      SQL.Text := SQL.Text + 'OR partner = :p_authore OR controller = :p_author OR OPERATOR = :p_author OR paralegal = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_1 = :p_author OR wkflow_per_level_2 = :p_author OR wkflow_per_level_3 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_4 = :p_author OR wkflow_per_level_5 = :p_author OR wkflow_per_level_6 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_7 = :p_author OR wkflow_per_level_8 = :p_author OR wkflow_per_level_9 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_10 = :p_author) THEN 1 ELSE 0 END = 1 ';
+      ParamByName('P_AUTHOR').AsString := AEmpCode;
+      Open;
+      if (not EOF) then
+         Result := True
+      else
+         Result := False;
+      Close;
+   end;
+   qryLookup.Free;   }
+end;
+
 function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
 var
    Index: integer;
@@ -14032,7 +14068,7 @@ begin
          SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0 - a.tax, 0)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (rate = 0) then 0 ');
-         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax, a.taxcode ');
+         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax ');
 
 //        SQL.Add('SELECT SUM(0 - AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0, NVL(a.tax, 0), NVL(a.amount, 0)),0,0,0-AMOUNT)) as TAXABLE_AMOUNT, ');
 //        SQL.Add('SUM(NVL(0 - A.TAX, 0)) as ITEMTAX, ');
@@ -14148,23 +14184,26 @@ begin
 
       SQL.Add('  AND NMEMO = ' + IntToStr(nNMEMO));
 
-      SQL.Add(' AND A.TAXCODE = R.TAXCODE (+) ');
+      if (sType = 'ALLOC') or (sType = 'CHEQREQ') then
+         SQL.Add(' AND nvl(a.billing_taxcode, a.taxcode) = r.taxcode(+) ')
+      else
+         SQL.Add(' AND a.taxcode = r.taxcode(+) ');
 
       if sType = 'ALLOC' then
       begin
          SQL.Add('  AND NINVOICE IS NULL AND (nvl(NRECEIPT,0) = 0 OR (NVL(NRECEIPT, 0) > 0 AND TYPE = ''DR''))');
-         SQL.Add(' group by nalloc, a.taxcode) ');
+         SQL.Add(' group by nalloc, a.taxcode, a.billing_taxcode ) ');
       end;
 
       if sType = 'UPCRED' then
       begin
          SQL.Add('  AND NINVOICE IS NOT NULL');
-         SQL.Add(' group by nalloc, a.taxcode) ');
+         SQL.Add(' group by nalloc, a.taxcode, a.billing_taxcode ) ');
       end;
 
       if sType = 'CHEQREQ' then
       begin
-         SQL.Add(' group by ncheqreq, a.taxcode) ');
+         SQL.Add(' group by ncheqreq, a.taxcode, A.BILLING_TAXCODE) ');
       end;
 
       // AES 06/09/2017 new parameter to calculate gst
@@ -14181,7 +14220,7 @@ begin
       SQL.Add('AND NVL(S.zero_billed,''N'') = ''N'' ');
     end; }
 
-      if dmAxiom.runningide and (sType = 'FEE') then {sType = 'CHEQREQ' then }
+      if dmAxiom.runningide and {(sType = 'FEE')} (sType = 'ALLOC') then
          dmAxiom.qryTmp.SQL.SaveToFile('C:\tmp\qryBills.sql');
 
       // AES 06/09/2017 new parameter to calculate gst
@@ -14281,7 +14320,8 @@ begin
                   dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);
               end
               else
-                  dTax := FieldByName('ITEMTAX').AsCurrency;
+                 dTax := FieldByName('ITEMTAX').AsCurrency;
+
                //dTax := FieldByName('ITEMTAX').AsCurrency//TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate)
            end
            else
