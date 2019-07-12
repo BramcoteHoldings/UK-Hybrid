@@ -2,7 +2,7 @@ object frmBank: TfrmBank
   Left = 748
   Top = 181
   Caption = 'Bank Account Details'
-  ClientHeight = 760
+  ClientHeight = 749
   ClientWidth = 638
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -289,6 +289,13 @@ object frmBank: TfrmBank
     Transparent = True
     WordWrap = True
   end
+  object Label22: TLabel
+    Left = 325
+    Top = 158
+    Width = 117
+    Height = 15
+    Caption = 'Default payment type:'
+  end
   object DBEdit1: TDBEdit
     Left = 113
     Top = 104
@@ -573,8 +580,8 @@ object frmBank: TfrmBank
     Top = 442
     Width = 173
     Height = 23
-    Date = 43542.727033564810000000
-    Time = 43542.727033564810000000
+    Date = 43653.727033564810000000
+    Time = 43653.727033564810000000
     ShowCheckbox = True
     Checked = False
     TabOrder = 25
@@ -600,7 +607,7 @@ object frmBank: TfrmBank
   end
   object pagDocs: TcxPageControl
     Left = 0
-    Top = 499
+    Top = 488
     Width = 638
     Height = 261
     Align = alBottom
@@ -679,10 +686,6 @@ object frmBank: TfrmBank
     object tabReceipt: TcxTabSheet
       Caption = 'Receipts'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgRePrinter: TcxGrid
         Left = 0
         Top = 0
@@ -778,8 +781,20 @@ object frmBank: TfrmBank
     Style.BorderColor = clWindowFrame
     Style.BorderStyle = ebs3D
     Style.HotTrack = False
-    TabOrder = 34
+    TabOrder = 32
     Width = 107
+  end
+  object cmbPaymentType: TcxDBComboBox
+    Left = 448
+    Top = 155
+    DataBinding.DataField = 'DFLT_PAY_TYPE'
+    DataBinding.DataSource = dsBank
+    Properties.Items.Strings = (
+      'CQ - Cheque'
+      'DD - Direct Debit')
+    Properties.MaxLength = 2
+    TabOrder = 35
+    Width = 121
   end
   object qryBank: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1379,8 +1394,8 @@ object frmBank: TfrmBank
     Top = 221
   end
   object PrinterMenu: TPopupMenu
-    Left = 336
-    Top = 127
+    Left = 352
+    Top = 103
     object New1: TMenuItem
       Caption = 'New'
       OnClick = New1Click
@@ -1766,7 +1781,19 @@ object frmBank: TfrmBank
     DataSource = dsBank
     DBCheckLinks = <>
     VisibleButtons = [dxbnFirst, dxbnPrior, dxbnNext, dxbnLast, dxbnPost]
-    Left = 487
-    Top = 158
+    Left = 471
+    Top = 206
+  end
+  object qryPaymentType: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select * from payment_type')
+    Left = 536
+    Top = 184
+  end
+  object dsPaymentType: TUniDataSource
+    DataSet = qryPaymentType
+    Left = 576
+    Top = 240
   end
 end

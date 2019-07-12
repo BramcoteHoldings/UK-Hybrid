@@ -14,7 +14,7 @@ uses
   cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu, vcl.Themes,
   OracleUniProvider, Uni, cxNavigator, DBDateTimePicker,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
-  dxDateRanges, System.ImageList;
+  dxDateRanges, System.ImageList, cxDropDownEdit;
 
 
 
@@ -118,6 +118,10 @@ type
     Label8: TLabel;
     Label18: TLabel;
     Label21: TLabel;
+    Label22: TLabel;
+    qryPaymentType: TUniQuery;
+    dsPaymentType: TUniDataSource;
+    cmbPaymentType: TcxDBComboBox;
     procedure qryBankBeforePost(DataSet: TDataSet);
     procedure qryBankAfterScroll(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
@@ -222,6 +226,11 @@ begin
   begin
     Close;
     ParamByName('ENTITY').AsString := dmAxiom.Entity;
+    Open;
+  end;
+  with qryPaymentType do
+  begin
+    Close;
     Open;
   end;
   //with cbChequePrint do

@@ -653,10 +653,6 @@ object frmClients: TfrmClients
     object tabArchive: TcxTabSheet
       Caption = 'Archive'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrArchived: TcxGrid
         Left = 0
         Top = 0
@@ -2219,10 +2215,6 @@ object frmClients: TfrmClients
         object tabCurrentGroups: TcxTabSheet
           Caption = 'Client Groups'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object grdClientGroups: TcxGrid
             Left = 0
             Top = 0
@@ -2386,10 +2378,6 @@ object frmClients: TfrmClients
       Caption = 'Custom Data'
       ImageIndex = 6
       OnShow = tsCustomDataShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -2424,7 +2412,7 @@ object frmClients: TfrmClients
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
             Position = 1
             Text = 'Value'
-            Width = 799
+            Width = 795
           end>
       end
     end
@@ -4010,10 +3998,6 @@ object frmClients: TfrmClients
     object tsOtherClients: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 10
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgOtherClients: TcxGrid
         Left = 0
         Top = 0
@@ -4155,10 +4139,6 @@ object frmClients: TfrmClients
     object tabEvent: TcxTabSheet
       Caption = 'Event'
       ImageIndex = 12
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdParticipantEvents: TcxGrid
         Left = 0
         Top = 0
