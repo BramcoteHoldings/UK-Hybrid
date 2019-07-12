@@ -2603,47 +2603,51 @@ object frmInvoice: TfrmInvoice
   object qryDisb: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT 1 as type, '
-      '      ALLOC.CREATED,'#9'  '
-      #9'  ALLOC.DESCR,'#9'  '
-      #9'  (ALLOC.BILLED_AMOUNT*-1) as AMOUNT,'
-      #9'  ALLOC.REFNO as AUTHOR,'
-      #9'  ALLOC.NALLOC AS UniqueID,'
-      #9'  ALLOC.TAXCODE,'
-      'DECODE('
-      '  NVL(alloc.BILLED_TAX_AMOUNT,0),'
-      '  0,'
-      '  DECODE('
-      '    alloc.billed,'
-      '    '#39'Y'#39','
-      '    alloc.BILLED_TAX_AMOUNT,'
-      '    DECODE('
-      '      (r.rate - r.bill_rate),'
-      '      '#39'0'#39','
-      '      alloc.BILLED_TAX_AMOUNT,'
-      '      ROUND((alloc.BILLED_amount) * ABS(r.rate)) / 100'
-      '    )'
-      '  ),'
-      '  alloc.BILLED_TAX_AMOUNT'
-      ') * -1 AS tax,'
+      'SELECT 1 AS TYPE, alloc.created, alloc.descr,'
       
-        'SUBBILLS.DEBTOR_NAME, ALLOC.PAYER AS PAYEE,  ALLOC.APPROVAL, 0 a' +
-        's Units, null as Task, nalloc as uniqueid, 0 as unbilled  '
-      'FROM ALLOC,TAXRATE R,SUBBILLS'
-      'WHERE '
+        '       (alloc.billed_amount * -1) AS amount, alloc.refno AS auth' +
+        'or,'
+      
+        '       alloc.nalloc AS uniqueid, nvl(alloc.billing_taxcode, allo' +
+        'c.taxcode) taxcode,'
+      '         DECODE (NVL (alloc.billed_tax_amount, 0),'
+      '                 0, DECODE (alloc.billed,'
+      '                            '#39'Y'#39', alloc.billed_tax_amount,'
+      '                            DECODE ((r.rate - r.bill_rate),'
+      
+        '                                    '#39'0'#39', alloc.billed_tax_amount' +
+        ','
+      
+        '                                      ROUND (  (alloc.billed_amo' +
+        'unt)'
+      '                                             * ABS (r.rate)'
+      '                                            )'
+      '                                    / 100'
+      '                                   )'
+      '                           ),'
+      '                 alloc.billed_tax_amount'
+      '                )'
+      '       * -1 AS tax,'
+      
+        '       subbills.debtor_name, alloc.payer AS payee, alloc.approva' +
+        'l, 0 AS units,'
+      '       NULL AS task, nalloc AS uniqueid, 0 AS unbilled'
+      '  FROM alloc, taxrate r, subbills'
+      ' WHERE'
       '--ALLOC.NMATTER = :P_Matter'
-      '--AND '
-      'ALLOC.NMEMO = :P_Invoice'
+      '--AND'
+      '       alloc.nmemo = :p_invoice'
       
-        'AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = '#39'DR'#39 +
-        '))'
-      'AND NINVOICE IS NULL'
-      'AND ALLOC.TAXCODE = R.TAXCODE (+)'
+        '   AND (NVL (nreceipt, 0) = 0 OR (NVL (nreceipt, 0) > 0 AND TYPE' +
+        ' = '#39'DR'#39'))'
+      '   AND ninvoice IS NULL'
+      '   AND nvl(alloc.billing_taxcode, alloc.taxcode) = r.taxcode(+)'
+      '   AND TRUNC (alloc.created) >= r.commence'
       
-        'AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created' +
-        ') <= nvl(r.end_period,sysdate + 1000)'
-      'AND ALLOC.NMEMO = SUBBILLS.NMEMO (+)'
-      'AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+)')
+        '   AND TRUNC (alloc.created) <= NVL (r.end_period, SYSDATE + 100' +
+        '0)'
+      '   AND alloc.nmemo = subbills.nmemo(+)'
+      '   AND alloc.nsubbill = subbills.nsubbill(+)')
     Options.StrictUpdate = False
     Left = 1020
     Top = 155
@@ -3447,7 +3451,7 @@ object frmInvoice: TfrmInvoice
       
         'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author, c.nche' +
         'qreq AS uniqueid,'
-      '       c.taxcode,'
+      '       nvl(c.billing_taxcode, c.taxcode) taxcode,'
       '       CASE'
       '          WHEN (c.taxcode = '#39'FUB'#39')'
       '             THEN ROUND (c.amount * ABS (r.rate)) / 100'
@@ -3461,7 +3465,7 @@ object frmInvoice: TfrmInvoice
       '--AND'
       '       c.nmemo = :p_invoice'
       '   AND c.trust <> '#39'T'#39
-      '   AND c.taxcode = r.taxcode(+)'
+      '   AND nvl(c.billing_taxcode, c.taxcode) = r.taxcode(+)'
       '   AND TRUNC (c.reqdate) >= r.commence'
       '   AND TRUNC (c.reqdate) <= NVL (r.end_period, SYSDATE + 1000)'
       ''
@@ -4474,7 +4478,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4893,7 +4897,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5096,7 +5100,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -7184,6 +7188,10 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
+        ItemName = 'tbtnAddGST'
+      end
+      item
+        Visible = True
         ItemName = 'tbtnPrivate'
       end
       item
@@ -7308,7 +7316,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
