@@ -670,7 +670,7 @@ object frmMatterNew: TfrmMatterNew
     Width = 511
     Height = 356
     TabOrder = 17
-    Properties.ActivePage = tabBalances
+    Properties.ActivePage = tabStaff
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pageMatterChange
@@ -963,7 +963,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object cmbTeam: TcxPopupEdit
             Left = 161
-            Top = 171
+            Top = 170
             Properties.ButtonGlyph.SourceDPI = 96
             Properties.ButtonGlyph.Data = {
               424D360400000000000036000000280000001000000010000000010020000000
@@ -5429,7 +5429,8 @@ object frmMatterNew: TfrmMatterNew
       'select distinct t.code as team_code,t.descr,e.name, e.code'
       'from team_employee te, team t, employee e'
       'where  te.emp_code = e.code'
-      'and te.team_code = t.code')
+      'and te.team_code = t.code'
+      'order by team_code')
     Left = 160
     Top = 185
     object qryEmployeeCodeTEAM_CODE: TStringField
