@@ -767,6 +767,7 @@ type
   function IndexPath(PathText, PathLoc: string): string;
   function ClearTrustFromStoredProc(sFileID : String) : Currency;
   function MatterDocAccess(ANMatter, AEmpCode: string ): boolean;
+  function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
   function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
   procedure Split(const S: String; Separator: Char; MyStringList: TStringList);
   function ParseMacros(AFileName: String; ANMatter: Integer = -1; ADocID: Integer = -1; ADocDescr: string = ''; ANMemo: integer = -1): String;
@@ -11935,6 +11936,41 @@ begin
       Close;
    end;
    qryLookup.Free;
+end;
+
+function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
+begin
+   with dmAxiom.procTemp do
+   begin
+      Close;
+      StoredProcName := 'matterfinaccess';
+      PrepareSQL;
+      Params[1].AsString  := ANMatter;
+      Params[2].AsString  := AEmpCode;
+      Execute;
+      Result := (Params[0].AsInteger = 0);
+   end;
+
+{   qryLookup := TUniQuery.Create(nil);
+   qryLookup.Connection := dmAxiom.uniInsight;
+   with qryLookup do
+   begin
+      SQL.Text := 'SELECT ''x'' FROM matter WHERE nmatter = ' + ANMatter;
+      SQL.Text := SQL.Text + ' AND CASE WHEN (author = :p_author ';
+      SQL.Text := SQL.Text + 'OR partner = :p_authore OR controller = :p_author OR OPERATOR = :p_author OR paralegal = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_1 = :p_author OR wkflow_per_level_2 = :p_author OR wkflow_per_level_3 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_4 = :p_author OR wkflow_per_level_5 = :p_author OR wkflow_per_level_6 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_7 = :p_author OR wkflow_per_level_8 = :p_author OR wkflow_per_level_9 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_10 = :p_author) THEN 1 ELSE 0 END = 1 ';
+      ParamByName('P_AUTHOR').AsString := AEmpCode;
+      Open;
+      if (not EOF) then
+         Result := True
+      else
+         Result := False;
+      Close;
+   end;
+   qryLookup.Free;   }
 end;
 
 function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
