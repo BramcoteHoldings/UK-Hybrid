@@ -938,6 +938,10 @@ begin
                qryCheque.FieldbyName('NNAME').AsString := sNName;
 //             qryCheque.FieldbyName('EFT').AsString
 
+               if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                  (qryLedger.FieldByName('TYPE').AsString = 'Protected')then
+                  qryCheque.FieldByName('BILLING_TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+
                qryCheque.Post; // Puts cheque into cached buffer
 
               // Create Cash At Bank Entry
