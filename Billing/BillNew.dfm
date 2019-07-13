@@ -4195,12 +4195,12 @@ object frmInvoice: TfrmInvoice
       Visible = ivAlways
       OnClick = tbtnQuickEditClick
     end
-    object dxBarButton4: TdxBarButton
+    object barbtnReassignFees: TdxBarButton
       Caption = 'Re Assign selected Fees'
       Category = 0
       Hint = 'Re Assign selected Fees'
       Visible = ivAlways
-      OnClick = dxBarButton4Click
+      OnClick = barbtnReassignFeesClick
     end
     object dxBbtnAddExpTemplate: TdxBarButton
       Caption = 'Add Expense Template ...'
@@ -4478,7 +4478,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4897,7 +4897,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5100,7 +5100,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -7200,7 +7200,7 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
-        ItemName = 'dxBarButton4'
+        ItemName = 'barbtnReassignFees'
       end
       item
         Visible = True
@@ -7316,7 +7316,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
