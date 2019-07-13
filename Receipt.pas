@@ -382,7 +382,7 @@ uses
   System.UITypes, AxiomData, CashRcp, InvoiceSearch, Matters, MSearch, MiscFunc, LSearch, NSearch,
   ReceiptPrint, ReceiptDistribute, Desktop, citfunc,glComponentUtil, cxGridDBDataDefinitions,
   cxLookupDBGrid, CheqImport, Vcl.Styles.FormStyleHooks, uRwSysUtils, VCL.uRwBoxes, uRwMAPIProps,
-  ScreenSave, StencilSelect;
+  ScreenSave, StencilSelect, DisbSearch;
 
 {$R *.DFM}
 
@@ -2379,7 +2379,7 @@ begin
       end;
    end;
 
-{   if (tvLedgerTYPE.DataBinding.Field.Text = 'Disburse') then
+   if (tvLedgerTYPE.DataBinding.Field.Text = 'Disburse') then
    begin
       try
          frmDisbSearch := TfrmDisbSearch.Create(Self);
@@ -2402,7 +2402,7 @@ begin
 
          frmDisbSearch.Free();
       end;
-   end;       }
+   end;
 
    if ((chkCheckMultipleMatters.Checked) and not MultipleCheck) then
        CheckForMultipleMatters(ADispValue);
@@ -2478,17 +2478,30 @@ begin
          end
          else
          begin
-            ErrorText := 'This matter #' + ARefNo +
-                ' is not valid for the current Entity.';
-            Error := True;
+            if qryLedger.State = dsBrowse then
+               qryLedger.Edit;
+            qryLedger.FieldByName('REFNO').AsString := ARefNo;
+            qryLedger.FieldByName('DESCR').AsString := MatterString(ARefNo,'TITLE');
+            if (chkCheckMultipleMatters.Checked) then
+            begin
+               CheckForMultipleMatters(ARefNo);
+               MultipleCheck := True;
+            end;
          end;
       end
       else
       begin
+            ErrorText := 'This matter #' + ARefNo +
+                ' is not valid for the current Entity.';
+            Error := True;
+      end;
+   end
+   else
+      begin
          ErrorText := ErrorMessage;
          Error := True;
 	   end;
-   end;
+//   end;
 
    if tvLedgerTYPE.DataBinding.Field.Text = 'Ledger' then
    begin
@@ -2867,7 +2880,7 @@ begin
                     qryReceipt.FieldByName('PRINTED').AsString := 'N';
                     qryReceipt.Post; // Puts Receipt into cached buffer
 
-                    nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
+                    nAccount := GetSequenceNumber('sqnc_naccount');
                     if qryReceipt.FieldByName('TRUST').AsString <> 'T' then
 		      	        begin
                       {post components}

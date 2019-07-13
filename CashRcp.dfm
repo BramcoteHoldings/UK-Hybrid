@@ -33,8 +33,6 @@ object frmCashRcp: TfrmCashRcp
       item
         Width = 50
       end>
-    ExplicitTop = 656
-    ExplicitWidth = 990
   end
   object pagCashbook: TcxPageControl
     Left = 0
@@ -47,9 +45,6 @@ object frmCashRcp: TfrmCashRcp
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
-    ExplicitTop = 53
-    ExplicitWidth = 990
-    ExplicitHeight = 603
     ClientRectBottom = 673
     ClientRectLeft = 4
     ClientRectRight = 1200
@@ -57,9 +52,6 @@ object frmCashRcp: TfrmCashRcp
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
-      ExplicitTop = 28
-      ExplicitWidth = 982
-      ExplicitHeight = 571
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 250
@@ -69,7 +61,6 @@ object frmCashRcp: TfrmCashRcp
         HotZoneClassName = 'TcxSimpleStyle'
         HotZone.SizePercent = 53
         AlignSplitter = salTop
-        ExplicitWidth = 982
       end
       object Panel3: TPanel
         Left = 0
@@ -78,7 +69,6 @@ object frmCashRcp: TfrmCashRcp
         Height = 250
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 982
         object Panel1: TPanel
           Left = 1
           Top = 1
@@ -95,7 +85,6 @@ object frmCashRcp: TfrmCashRcp
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 980
           DesignSize = (
             1194
             27)
@@ -124,7 +113,6 @@ object frmCashRcp: TfrmCashRcp
             TabOrder = 0
             OnChange = tbSearchChange
             OnKeyDown = tbSearchKeyDown
-            ExplicitLeft = 816
           end
         end
         object dbgrReceipts: TcxGrid
@@ -135,7 +123,6 @@ object frmCashRcp: TfrmCashRcp
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 980
           object tvReceipts: TcxGridDBTableView
             PopupMenu = pmReceipts
             OnDblClick = tvReceiptsDblClick
@@ -253,8 +240,6 @@ object frmCashRcp: TfrmCashRcp
         Height = 389
         Align = alClient
         TabOrder = 2
-        ExplicitWidth = 982
-        ExplicitHeight = 313
         object Panel2: TPanel
           Left = 1
           Top = 1
@@ -271,7 +256,6 @@ object frmCashRcp: TfrmCashRcp
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 980
           object rbMatters: TcxRadioButton
             Left = 113
             Top = 5
@@ -315,8 +299,6 @@ object frmCashRcp: TfrmCashRcp
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 980
-          ExplicitHeight = 284
           object tvAllocations: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsNallocs
@@ -368,9 +350,6 @@ object frmCashRcp: TfrmCashRcp
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 11
-      ExplicitTop = 28
-      ExplicitWidth = 982
-      ExplicitHeight = 571
       DesignSize = (
         1196
         647)
@@ -761,8 +740,6 @@ object frmCashRcp: TfrmCashRcp
         NumGlyphs = 2
         TabOrder = 24
         OnClick = btnClearAllClick
-        ExplicitLeft = 898
-        ExplicitTop = 543
       end
     end
   end
@@ -1623,7 +1600,7 @@ object frmCashRcp: TfrmCashRcp
       NotDocking = [dsNone]
       OldName = 'Toolbar'
       OneOnRow = True
-      Row = 1
+      Row = 0
       UseOwnFont = True
       Visible = True
       WholeRow = True
@@ -1911,7 +1888,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2424,7 +2401,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3703,7 +3680,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3860,7 +3837,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4858,7 +4835,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
