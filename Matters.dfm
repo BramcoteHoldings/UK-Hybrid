@@ -8442,6 +8442,7 @@ object frmMatters: TfrmMatters
             OnAfterEditing = ProjectsSchedulerAfterEditing
             OnAfterSizingEvent = ProjectsSchedulerAfterSizingEvent
             OnBeforeEditing = ProjectsSchedulerBeforeEditing
+            Selection = 1
             Splitters = {
               BA0400007E0000004905000083000000B604000001000000BA0400006C010000}
             StoredClientBounds = {0100000001000000490500006C010000}

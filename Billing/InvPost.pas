@@ -555,6 +555,7 @@ var
   frmDebtorTaskNew : TfrmDebtorTasknew;
   iModResult : integer;
   ReqDate: TDateTime;
+  sBillNoTest: integer;
 begin
  // get the gl component setup
    glComponentSetup := dmAxiom.getGlComponents;
@@ -1429,7 +1430,7 @@ begin
                 qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
                 qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
                 qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
-                qrySetup.SQL.Add('  AND ALLOC.TAXCODE = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
+                qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
                 qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
                 qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
                 qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
@@ -1449,7 +1450,7 @@ begin
                 qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
                 qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
                 qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
-                qrySetup.SQL.Add('  AND ALLOC.TAXCODE = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
+                qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
                 qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
                 qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
                 qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
@@ -1655,10 +1656,8 @@ begin
                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
                     'BILL_UPCRED', Self.qryBill.FieldByName('UPCRED').AsCurrency);
 
-
                  {post componsnts}
                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_DR'),'',false,'Error with Unpaid Creditors Chart');
-
 
                  PostLedger(dtpDispatched.Date
                     , (Self.qryBill.FieldByName('UPCRED').AsCurrency {+ Self.qryBill.FieldByName('UPCREDTAXFREE').AsCurrency})
@@ -1689,7 +1688,6 @@ begin
 
                       {post componsnts}
                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillUpCredTaxSubDR,'',false,'Error with Unpaid Creditors Tax Chart');
-
 
                       PostLedger(dtpDispatched.Date
                         , - Self.qryBill.FieldByName('UPCREDTAX').AsCurrency
@@ -1990,7 +1988,10 @@ begin
             // 30/09/2004 TH - Commented nulling of DRAFT_BILL_NO
             // qryBill.SQL.Add(' DRAFT_BILL_NO = NULL, ');
             Self.qryBill.SQL.Add(' DRAFT_BILL_NO = ' + QuotedStr(tbRefno.Text) + ', ');
-            Self.qryBill.SQL.Add(' BPAY_REFERENCE = ' + QuotedStr(CreateBPayReference(tbRefno.Text)) + ', ');
+
+            if TryStrToInt(tbRefno.Text, sBillNoTest) then
+               Self.qryBill.SQL.Add(' BPAY_REFERENCE = ' + QuotedStr(CreateBPayReference(tbRefno.Text)) + ', ');
+
             Self.qryBill.SQL.Add('FEES_PAID = 0, DISB_PAID = 0, UPCRED_PAID = 0, ANTD_PAID = 0, SUND_PAID = 0, ');
             Self.qryBill.SQL.Add('TAX_PAID = 0, FEESTAX_PAID = 0, DISBTAX_PAID = 0, UPCREDTAX_PAID = 0, ANTDTAX_PAID = 0, SUNDTAX_PAID = 0');
             Self.qryBill.SQL.Add(', IS_DRAFT = ''N'' ');
