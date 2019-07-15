@@ -8143,9 +8143,16 @@ object dmAxiom: TdmAxiom
     Connection = uniInsight
     SQL.Strings = (
       'SELECT CODE, DESCR FROM TAXTYPE'
+      'WHERE USE_FOR_BILLING = NVL(:USE_FOR_BILLING, USE_FOR_BILLING)'
       'Order By Code')
     Left = 813
     Top = 284
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'USE_FOR_BILLING'
+        Value = nil
+      end>
   end
   object dsTaxList: TUniDataSource
     DataSet = qryTaxList

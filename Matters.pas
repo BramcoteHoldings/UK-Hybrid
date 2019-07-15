@@ -8719,10 +8719,18 @@ begin
          tvProjectTaskItems.DataController.RecordCount := 0;
 
          if (MatterFinAccess(qryMatter.FieldByName('NMATTER').AsString, dmAxiom.UserID)) then
-            TabOverview.TabVisible := True
+         begin
+            TabOverview.TabVisible := True;
+            tabBalances.TabVisible := True;
+            tabInvoices.TabVisible := True;
+            tabReceipts.TabVisible := True;
+         end
          else
          begin
             TabOverview.TabVisible := False;
+            tabBalances.TabVisible := False;
+            tabInvoices.TabVisible := False;
+            tabReceipts.TabVisible := False;
             if (SystemString('DFLT_MATTER_DOC_TAB') = 'N') then
                pageMatter.ActivePageIndex := 0;
          end;
