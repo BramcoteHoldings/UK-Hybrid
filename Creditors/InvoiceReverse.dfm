@@ -446,7 +446,7 @@ object frmInvoiceReverse: TfrmInvoiceReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 77
     Top = 133
-    EditValue = 43607.5742965046d
+    EditValue = 43662.5031682523d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     StyleDisabled.LookAndFeel.Kind = lfStandard
@@ -545,15 +545,15 @@ object frmInvoiceReverse: TfrmInvoiceReverse
     SQL.Strings = (
       'INSERT INTO INVOICE'
       
-        '  (ACCT, TYPE, CREDITOR, NCREDITOR, NCHEQUE, AMOUNT, CREDITED, R' +
-        'EFNO,'
+        '  (ACCT, TYPE, CREDITOR, NCREDITOR, NINVOICE, AMOUNT, CREDITED, ' +
+        'REFNO,'
       
         '   DESCR, INVOICE_DATE, DUE_DATE, HOLD, LAST_PAYMENT, OWING, NIN' +
         'VOICE)'
       'VALUES'
       
-        '  (:ACCT, '#39'RV'#39', :CREDITOR, :NCREDITOR, :NCHEQUE, :AMOUNT, :AMOUN' +
-        'T, :REFNO,'
+        '  (:ACCT, '#39'RV'#39', :CREDITOR, :NCREDITOR, :NINVOICE, :AMOUNT, :AMOU' +
+        'NT, :REFNO,'
       
         '   :DESCR, :INVOICE_DATE,  :INVOICE_DATE, '#39'N'#39', SysDate, 0, :NINV' +
         'OICE)'
@@ -578,7 +578,7 @@ object frmInvoiceReverse: TfrmInvoiceReverse
       end
       item
         DataType = ftUnknown
-        Name = 'NCHEQUE'
+        Name = 'NINVOICE'
         Value = nil
       end
       item
@@ -599,11 +599,6 @@ object frmInvoiceReverse: TfrmInvoiceReverse
       item
         DataType = ftUnknown
         Name = 'INVOICE_DATE'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'NINVOICE'
         Value = nil
       end>
   end
