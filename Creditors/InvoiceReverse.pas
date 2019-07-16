@@ -129,13 +129,13 @@ begin
 
       // Create a new record
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-      iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
-      liInvoiceNum := GetSequenceNumber('sqnc_ncheqreq');
+//      iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
+      liInvoiceNum := GetSequenceNumber('SQNC_INVOICE');
 
       qryInvoiceReverse.ParamByName('ACCT').AsString := qryInvoice.FieldByName('ACCT').AsString;
       qryInvoiceReverse.ParamByName('CREDITOR').AsString := qryInvoice.FieldByName('CREDITOR').AsString;
       qryInvoiceReverse.ParamByName('NCREDITOR').AsInteger := qryInvoice.FieldByName('NCREDITOR').AsInteger;
-      qryInvoiceReverse.ParamByName('NCHEQUE').AsInteger := iRvNcheque;
+//      qryInvoiceReverse.ParamByName('NCHEQUE').AsInteger := iRvNcheque;
       qryInvoiceReverse.ParamByName('AMOUNT').AsFloat := 0 - qryInvoice.FieldByName('AMOUNT').AsCurrency;
       qryInvoiceReverse.ParamByName('REFNO').AsString := Copy(qryInvoice.FieldByName('REFNO').AsString + 'RV', 1, 10);
       qryInvoiceReverse.ParamByName('DESCR').AsString := mlReason.Text;  // qryInvoice.FieldByName('DESCR').AsString;
@@ -144,10 +144,11 @@ begin
       qryInvoiceReverse.ExecSQL;
 
       // need to update original transaction
-      qryInvUpdate.Close;
+{      qryInvUpdate.Close;
       qryInvUpdate.ParamByName('NCHEQUE').AsInteger := iRvNcheque;
       qryInvUpdate.ParamByName('NINVOICE').AsInteger := qryInvoice.FieldByName('NINVOICE').AsInteger;
       qryInvUpdate.ExecSQL;
+ }
 
       // Now sum the gl transactions
       qryTransitemSum.Close;
