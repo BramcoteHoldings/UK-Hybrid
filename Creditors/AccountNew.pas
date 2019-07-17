@@ -444,7 +444,7 @@ begin
           qryLedger.Next;
         end;
 
-        iNINVOICE := GetSeqNum('NINVOICE');
+        iNINVOICE := GetSequenceNumber('SQNC_NINVOICE');
         qryAccount.FieldByName('ACCT').AsString := dmAxiom.Entity;
         qryAccount.FieldByName('TYPE').AsString := 'IV';
         qryAccount.FieldByName('CREDITOR').AsString := lblCreditor.Caption;

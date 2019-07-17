@@ -15,7 +15,7 @@ uses
   ppPrnabl, ppClass, ppCache, ppComm, ppRelatv, ppProd, ppReport,
   dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses,
   dxLayoutLookAndFeels, dxLayoutContainer, dxLayoutControl, dxSkinsCore, dxSpellCheckerCore,
-  dxSpellChecker;
+  dxSpellChecker, System.ImageList;
 
 const
    NotesLabel = 'Notes: '+chr(13)+chr(10)+'(Max 4000 Characters)'+ chr(13)+chr(10)+ '%s/4000';
@@ -448,7 +448,7 @@ begin
   bBeenHere := False;
 //  cmbMatterFind.SetFocus;
    // 14 Sept 2018
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    //dmAxiom.TSSpellChecker.Check(TcxRichEdit(tvFeeListDESCR));
 end;
 

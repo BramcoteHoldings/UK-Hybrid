@@ -7789,35 +7789,36 @@ function TableString(Table, LookupField, LookupValue, ReturnField: string): stri
 var
   qryLookup: TUniQuery;
 begin
+   if dmAxiom.bShutDown = False then
+   begin
+      if (Table = 'TAXTYPE') AND ((ReturnField = 'LEDGER') OR  (ReturnField = 'OUTPUTLEDGER') OR (ReturnField = 'ADJUSTLEDGER')) then
+      begin
+         qryLookup := TUniQuery.Create(nil);
+         qryLookup.Connection := dmAxiom.uniInsight;
+         with qryLookup do
+         begin
+            SQL.Text := 'SELECT ' + ReturnField + ' FROM TAXTYPE_LEDGER WHERE ' + LookupField + ' = :' + LookupField + ' and entity = :entity ';
+            ParamByName(LookupField).AsString := LookupValue;
+            ParamByName('ENTITY').AsString := dmAxiom.Entity;
+            open;
+            Result := Fields[0].AsString;
+            Close;
+         end;
+          exit;
+      end;
 
-  if (Table = 'TAXTYPE') AND ((ReturnField = 'LEDGER') OR  (ReturnField = 'OUTPUTLEDGER') OR (ReturnField = 'ADJUSTLEDGER'))
-  then
-  begin
-    qryLookup := TUniQuery.Create(nil);
-    qryLookup.Connection := dmAxiom.uniInsight;
-    with qryLookup do
-        begin
-        SQL.Text := 'SELECT ' + ReturnField + ' FROM TAXTYPE_LEDGER WHERE ' + LookupField + ' = :' + LookupField + ' and entity = :entity ';
-        ParamByName(LookupField).AsString := LookupValue;
-        ParamByName('ENTITY').AsString := dmAxiom.Entity;
-        open;
-        Result := Fields[0].AsString;
-        Close;
-        end;
-    exit;
-  end;
-
-  qryLookup := TUniQuery.Create(nil);
-  qryLookup.Connection := dmAxiom.uniInsight;
-  with qryLookup do
-  begin
-    SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :LookupField';
-    Params[0].AsString := LookupValue;
-    Open;
-    Result := Fields[0].AsString;
-    Close;
-  end;
-  qryLookup.Free;
+      qryLookup := TUniQuery.Create(nil);
+      qryLookup.Connection := dmAxiom.uniInsight;
+      with qryLookup do
+      begin
+         SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :LookupField';
+         Params[0].AsString := LookupValue;
+         Open;
+         Result := Fields[0].AsString;
+         Close;
+      end;
+      qryLookup.Free;
+   end;
 end;
 
 function TableStringEntity(aTable, aLookupField: string; aLookupValue: Integer; aReturnField: string; aEntity: string): string; overload;

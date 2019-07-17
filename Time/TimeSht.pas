@@ -1962,7 +1962,7 @@ begin
    MakeSQL;
    tvFeeTmp.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
    // 14 Sept 2018
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    dmAxiom.TSSpellChecker.Check(TcxRichEdit(tvFeeTmpNewReason));
 
    lblMyDailyBudget.Caption := 'Daily budget: '+FloatToStrF(DailyBudget, ffCurrency, 8,2);

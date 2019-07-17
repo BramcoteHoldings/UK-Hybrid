@@ -5293,6 +5293,8 @@ begin
       end;
    end; }
 
+
+
    bOk  := CheckReqFields('PHONEBOOK',qPhonebook);
    // client tab
    if tsClient.TabVisible then
@@ -5303,8 +5305,9 @@ begin
 
    if pnlNRIC.visible = True then
    begin
-      if imgbadNRIC.Visible = True then
+      if (dbedNRIC.Text <> '') then
       begin
+         validateNRIC(dbedNRIC.Text);
          OKtoPost := False;
          MsgErr('The NRIC is not valid.  Please re-enter and try to save.');
          Exit;

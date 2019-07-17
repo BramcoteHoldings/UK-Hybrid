@@ -755,7 +755,7 @@ uses
   EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
   Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
-  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer;
+  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer, dxSpellChecker;
 
 
 {$R *.DFM}
@@ -776,6 +776,8 @@ var
    SplashScreen: TfrmSplashScreen;
    bLoginSuccess: boolean;
    OutlookApp: oleVariant;
+   AItem: TdxSpellCheckerDictionaryItem;
+   cAItem: TdxUserSpellCheckerDictionary;
 begin
    // This is not nice, but seems to be necessary.
    // The conflict search text control seems to keep shrinking at design time,
@@ -1035,6 +1037,17 @@ begin
          chkIncludeClosed.EditValue := SettingLoadBoolean('DESKTOP','SHOWALLMATTERS');
          barDocCenter.Visible := (SystemString('SHOW_DOCUMENT_CENTER') = 'Y');
          BarConflicts.Visible := DirectoryExists(SystemString('CONFLICT_DOC_FOLDER'));
+
+         // load dictionaries
+         AItem := dmAxiom.TSSpellChecker.DictionaryItems.Add;
+         AItem.DictionaryTypeClass := TdxUserSpellCheckerDictionary ;
+
+         cAItem := TdxUserSpellCheckerDictionary (AItem.DictionaryType);
+         cAItem.DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+         cAItem.Enabled := True;
+//         TdxUserSpellCheckerDictionary(AItem).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//         TdxUserSpellCheckerDictionary(AItem).Enabled := True;
+         dmAxiom.TSSpellChecker.LoadDictionaries();
       end;
    finally
       dmAxiom.qryEmpsLogin.Close;
