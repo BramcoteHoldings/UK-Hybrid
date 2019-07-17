@@ -1063,7 +1063,7 @@ begin
    cbAuthorPropertiesChange(Self);
    cbTaxTypeChange(Self);
    // 14 Sept 2018
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    dmAxiom.TSSpellChecker.Check(TcxRichEdit(mmoDesc));
 end;
 
