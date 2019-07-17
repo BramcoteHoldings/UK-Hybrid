@@ -2912,7 +2912,7 @@ begin
    AUserDictionary.Options := AUserDictionary.Options + [udSaveOnUnload];
    AUserDictionary.Unload;
    AUserDictionary.Load;
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := True;
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := True;
 end;
 
 procedure TdmAxiom.TSSpellCheckerSpellingComplete(Sender: TdxCustomSpellChecker;
