@@ -13,7 +13,7 @@ uses
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.DBCGrids, cxMemo, cxDBRichEdit,
   Vcl.Menus, cxButtons, cxCurrencyEdit, Vcl.Buttons,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxSpellCheckerCore,
-  dxSpellChecker ;
+  dxSpellChecker, dxDateRanges ;
 
 type
   TfrmBillFeeList = class(TForm)
@@ -76,7 +76,7 @@ begin
    lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
    TppIniStoragePlugIn.SetStorageName(lsStorageName);
    // 14 Sept 2018
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    dmAxiom.TSSpellChecker.Check(TcxRichEdit(tvFeeListDESCR));
 
 end;

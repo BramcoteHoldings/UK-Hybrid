@@ -884,6 +884,9 @@ type
     procedure TSSpellCheckerSpellingComplete(Sender: TdxCustomSpellChecker;
       var AHandled: Boolean);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure TSSpellCheckerAddWord(
+      AUserDictionary: TdxUserSpellCheckerDictionary; const AWord: WideString;
+      var AHandled: Boolean);
   private
     { Private declarations }
     FAdminMode,
@@ -2204,6 +2207,7 @@ begin
    QueryTracing := False;
    QueryTolerance := 1;
    FSqlLogFile := ExtractFilePath(ParamStr(0)) + 'sql.log';
+//   TSSpellChecker.Dictionaries[2].Load();
 end;
 
 // dw 19/9/2018 cleanup Datamodule string list
@@ -2212,6 +2216,9 @@ begin
     FreeandNil(strEmployees);
     FreeandNil(strPartners);
     FreeandNil(strAuthors);
+//    TdxUserSpellCheckerDictionary(TSSpellChecker).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//    TdxUserSpellCheckerDictionary(TSSpellChecker).Options := TdxUserSpellCheckerDictionary(TSSpellChecker).Options - [udSaveOnUnload];
+//    TSSpellChecker.UnloadDictionaries;
 end;
 
 procedure TdmAxiom.uniInsightConnectChange(Sender: TObject;
@@ -2887,6 +2894,25 @@ end;
 procedure TdmAxiom.SetUserPassword(sUserPassword: string);
 begin
   FUserPassword := sUserPassword;
+end;
+
+procedure TdmAxiom.TSSpellCheckerAddWord(
+  AUserDictionary: TdxUserSpellCheckerDictionary; const AWord: WideString;
+  var AHandled: Boolean);
+begin
+   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := False;
+   AUserDictionary.DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+   AUserDictionary.Options := AUserDictionary.Options - [udSaveOnUnload];
+   AUserDictionary.Unload;
+   AUserDictionary.Load;
+
+   AHandled := True;
+   AUserDictionary.AddWord(AWord);
+
+   AUserDictionary.Options := AUserDictionary.Options + [udSaveOnUnload];
+   AUserDictionary.Unload;
+   AUserDictionary.Load;
+   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := True;
 end;
 
 procedure TdmAxiom.TSSpellCheckerSpellingComplete(Sender: TdxCustomSpellChecker;

@@ -19,7 +19,6 @@ object dmAxiom: TdmAxiom
     Debug = True
     Username = 'axiom'
     Server = 'dev-oracle:1521:BBSLAW'
-    Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -6751,7 +6750,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7602,7 +7601,6 @@ object dmAxiom: TdmAxiom
       end>
   end
   object TSSpellChecker: TdxSpellChecker
-    AutoLoadDictionaries = True
     CheckAsYouTypeOptions.Active = True
     DictionaryItems = <
       item
@@ -7613,9 +7611,11 @@ object dmAxiom: TdmAxiom
       end
       item
         DictionaryTypeClassName = 'TdxUserSpellCheckerDictionary'
+        DictionaryType.Enabled = False
         DictionaryType.DictionaryPath = '.\Spelling\user.dic'
+        DictionaryType.Options = []
       end>
-    UseThreadedLoad = True
+    OnAddWord = TSSpellCheckerAddWord
     OnSpellingComplete = TSSpellCheckerSpellingComplete
     Left = 870
     Top = 754
