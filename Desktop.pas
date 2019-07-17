@@ -1758,6 +1758,8 @@ var
   regAxiom : TRegistry;
 begin
    try
+      TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := False;
+ //     TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
       // Get rid of the user from the registry so that they can't run reports
       // without being in Insight
       if (dmAxiom.USE_ACTIVE_DIRECTORY = 'N') then

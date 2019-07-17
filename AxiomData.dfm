@@ -19,6 +19,7 @@ object dmAxiom: TdmAxiom
     Debug = True
     Username = 'axiom'
     Server = 'dev-oracle:1521:BBSLAW'
+    Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -6750,7 +6751,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7615,6 +7616,7 @@ object dmAxiom: TdmAxiom
         DictionaryType.DictionaryPath = '.\Spelling\user.dic'
         DictionaryType.Options = []
       end>
+    SpellingOptions.IgnoreRepeatedWords = True
     OnAddWord = TSSpellCheckerAddWord
     OnSpellingComplete = TSSpellCheckerSpellingComplete
     Left = 870

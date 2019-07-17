@@ -8,7 +8,7 @@ uses
   DateChangeButton, NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DeskTop,
   ppParameter, ppDesignLayer, ppModule, raCodMod, ppBands, ppVar, ppCtrls,
   ppRegion, ppMemo, ppStrtch, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
-  ppDB, ppComm, ppRelatv, ppDBPipe;
+  ppDB, ppComm, ppRelatv, ppDBPipe, ppFileUtils, ppIniStorage;
 
 type
   TfrmRptLedgerCombo = class(TForm)
@@ -997,8 +997,12 @@ begin
 end;
 
 procedure TfrmRptLedgerCombo.FormCreate(Sender: TObject);
+var
+  lsStorageName: String;
 begin
   frmRptLedgerCombo := Self;
+  lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
+  TppIniStoragePlugIn.SetStorageName(lsStorageName);
   sTable := 'MATTER M, PHONEBOOK P';
   //{$IFDEF AXIOM}
   if Assigned(dmAxiom) then
