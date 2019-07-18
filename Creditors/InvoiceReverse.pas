@@ -124,13 +124,12 @@ begin
     { Reverses the Invoice specified by the qryInvoice }
     try
       if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
 
       // Create a new record
 //       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-//      iRvNcheque := GetSequenceNumber('SQNC_NCHEQUE');
-      liInvoiceNum := GetSequenceNumber('SQNC_INVOICE');
+      liInvoiceNum := GetSequenceNumber('SQNC_NINVOICE');
 
       qryInvoiceReverse.ParamByName('ACCT').AsString := qryInvoice.FieldByName('ACCT').AsString;
       qryInvoiceReverse.ParamByName('CREDITOR').AsString := qryInvoice.FieldByName('CREDITOR').AsString;

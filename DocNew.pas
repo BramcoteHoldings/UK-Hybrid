@@ -541,7 +541,7 @@ begin
                                  AParsedDocName := ParseMacros(NewDocName,TableInteger('MATTER','FILEID',uppercase(lblMatter.Caption),'NMATTER'), FDocId, tbDescr.Text);
                            end;
                            // 6 Oct 2018 DW only appeand docid if file already exists in dest directory
-                           if (SystemString('doc_seq_append') = 'Y') or (FileExists(AParsedDocName) = True) then
+                           if ((SystemString('doc_seq_append') = 'Y') or (FileExists(AParsedDocName) = True) and (FEditing = False)) then
                            begin
                                  AParsedDocName := AnsiMidStr(AParsedDocName,1, (length(AParsedDocName) - length(AExt))) + '_' + IntToStr(ADocID) + AExt;
                            end;
