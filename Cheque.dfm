@@ -83,7 +83,7 @@ object frmCheque: TfrmCheque
   end
   object lblAuthByName: TLabel
     Left = 377
-    Top = 43
+    Top = 42
     Width = 173
     Height = 14
     AutoSize = False
@@ -226,7 +226,7 @@ object frmCheque: TfrmCheque
   end
   object lblName: TLabel
     Left = 378
-    Top = 72
+    Top = 69
     Width = 105
     Height = 15
     Caption = '                                   '
@@ -875,7 +875,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43655.8147235301d
+    EditValue = 43664.6566045718d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1023,7 +1023,7 @@ object frmCheque: TfrmCheque
       '   C.PRINTED, C.RECONDATE, C.NNAME, '
       '   C.AMOUNT, C.EFT, C.CHEQUE_GROUP_ID, '
       '   C.CHEQUE_NO, C.TAKE_ON, C.NJOURNAL, '
-      '   C.WHO, C.ROWID'
+      '   C.WHO, C.BILLING_TAXCODE, C.ROWID'
       'FROM CHEQUE C'
       'WHERE C.NCHEQUE = :P_Ncheque')
     CachedUpdates = True
