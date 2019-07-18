@@ -686,7 +686,8 @@ begin
     try
       Close;
       ParamByName('DATAFORM').AsString := sDataForm;
-      ParamByName('DOCID').AsInteger := DocID;
+      if Pos(':DOCID', qryDataFormFields.SQL.Text) > 0 then
+         ParamByName('DOCID').AsInteger := DocID;
       Open;
     except
        //
@@ -725,13 +726,10 @@ begin
         Parent := Self;
         Transparent := True;
         Caption := qryFieldType.FieldByName('CAPTION').AsString;
-        Hint := qryFieldType.FieldByName('CAPTION').AsString;
         Left := iLeftMsg;
-        width := 245;
+        width := 265;
         Autosize := False;
-        Transparent := True;
         Properties.Wordwrap := True;
-        ShowHint := True;
         Top := iTop+3;
         if qryFieldType.FieldByName('MANDATORY').AsString = 'Y' then
            Font.Style := [fsBold];
@@ -817,6 +815,7 @@ begin
         with TDataFormDateTimePicker.Create(Self) do
         begin
           Parent := Self;
+
 //          ShowCheckBox := True;
           if not qryFieldValue.IsEmpty then
             Date := qryFieldValue.FieldByName('DATEVALUE').AsDateTime
@@ -1606,7 +1605,8 @@ begin
       if (Self.Components[iCtr] as TDataFormDateTimePicker).Tag = 1 then
       begin
 //       if not (Self.Components[iCtr] as TDataFormDateTimePicker).Checked then
-            sTmp := sTmp + '       ' + (Self.Components[iCtr] as TDataFormDateTimePicker).Hint + Chr(13);
+          if ((Self.Components[iCtr] as TDataFormDateTimePicker).Date = NullDate) then
+             sTmp := sTmp + '       ' + (Self.Components[iCtr] as TDataFormDateTimePicker).Hint + Chr(13);
       end;
     end;
    end;
