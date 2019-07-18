@@ -684,8 +684,12 @@ begin
 
                varDoc.SaveAs(ADocumentPath);
 
-               FMacro := SystemString('WORD_SAVE_MACRO');
-               if FMacro <> '' then varWord.Run(FMacro);
+               try
+                  FMacro := SystemString('WORD_SAVE_MACRO');
+                  if FMacro <> '' then varWord.Run(FMacro);
+               except
+                 // ignore
+               end;
 
                // save back to the database for the matter the document path.
             end;
