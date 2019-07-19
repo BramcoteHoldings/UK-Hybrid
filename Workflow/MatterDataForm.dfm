@@ -3,8 +3,8 @@ object frmMatterDataForm: TfrmMatterDataForm
   Top = 389
   BorderIcons = [biSystemMenu]
   Caption = 'Matter DataForm'
-  ClientHeight = 120
-  ClientWidth = 823
+  ClientHeight = 106
+  ClientWidth = 726
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,20 +19,20 @@ object frmMatterDataForm: TfrmMatterDataForm
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   DesignSize = (
-    823
-    120)
-  PixelsPerInch = 106
+    726
+    106)
+  PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
-    Left = 8
-    Top = 8
+    Left = 7
+    Top = 7
     Width = 35
     Height = 15
     Caption = 'Matter'
   end
   object lblMatter: TLabel
-    Left = 155
-    Top = 8
+    Left = 137
+    Top = 7
     Width = 3
     Height = 15
     Color = clBtnFace
@@ -40,26 +40,26 @@ object frmMatterDataForm: TfrmMatterDataForm
     ShowAccelChar = False
   end
   object lblClient: TLabel
-    Left = 257
-    Top = 8
-    Width = 161
-    Height = 15
+    Left = 227
+    Top = 7
+    Width = 142
+    Height = 13
     AutoSize = False
     ShowAccelChar = False
   end
   object lblMatterDesc: TLabel
-    Left = 155
-    Top = 25
-    Width = 242
-    Height = 14
+    Left = 137
+    Top = 22
+    Width = 213
+    Height = 12
     AutoSize = False
     ShowAccelChar = False
   end
   object btnPrev: TcxButton
-    Left = 483
-    Top = 87
-    Width = 79
-    Height = 29
+    Left = 426
+    Top = 77
+    Width = 70
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Prev'
     Enabled = False
@@ -100,15 +100,14 @@ object frmMatterDataForm: TfrmMatterDataForm
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    OptionsImage.Spacing = 5
     TabOrder = 0
     OnClick = btnPrevClick
   end
   object btnNext: TcxButton
-    Left = 566
-    Top = 87
-    Width = 80
-    Height = 29
+    Left = 499
+    Top = 77
+    Width = 71
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Next'
     Enabled = False
@@ -150,15 +149,14 @@ object frmMatterDataForm: TfrmMatterDataForm
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     OptionsImage.Layout = blGlyphRight
-    OptionsImage.Spacing = 5
     TabOrder = 1
     OnClick = btnNextClick
   end
   object btnOK: TcxButton
-    Left = 649
-    Top = 87
-    Width = 79
-    Height = 29
+    Left = 573
+    Top = 77
+    Width = 69
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&OK'
     LookAndFeel.NativeStyle = True
@@ -199,14 +197,13 @@ object frmMatterDataForm: TfrmMatterDataForm
       FF00FF00FF00FF00FF0000FF00FF00FF00FF000000FFFF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-    OptionsImage.Spacing = 5
     TabOrder = 2
   end
   object btnCancel: TcxButton
-    Left = 734
-    Top = 87
-    Width = 78
-    Height = 29
+    Left = 648
+    Top = 77
+    Width = 68
+    Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Cancel'
     LookAndFeel.NativeStyle = True
@@ -247,7 +244,6 @@ object frmMatterDataForm: TfrmMatterDataForm
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    OptionsImage.Spacing = 5
     TabOrder = 3
   end
   object qryMatter: TUniQuery

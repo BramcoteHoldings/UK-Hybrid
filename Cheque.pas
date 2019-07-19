@@ -821,7 +821,7 @@ begin
    iNcheque:= 0;
 
    if not (IsValidBankForEntity(cbBank.Text)) then
-       MsgErr('The bank chosen does not belong to the selected entity. '+
+      MsgErr('The bank chosen does not belong to the selected entity. '+
               'The transaction cannot be applied')
    else
    begin
@@ -848,622 +848,624 @@ begin
 
       if ((not IsBankOverDrawn) AND (IsValidMatterForAccount) AND (bTrustCheckProceed)) then
       begin
-          ZeroLedgerTotal;
-          if qryLedger.Modified then
-             qryLedger.Post;
-          bProceed := OKtoPost(True);
+         ZeroLedgerTotal;
+         if qryLedger.Modified then
+            qryLedger.Post;
+         bProceed := OKtoPost(True);
         {
           Added 25.10.2002 GG
           Show message if transaction is being posted into a locked period
         }
-          if bProceed then
+         if bProceed then
             bProceed:= (PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed]);
 
-          if bProceed then
-             if qryLedger.IsEmpty then
-                if MsgAsk('There are no transactions entered.' + #13#13 + 'Are you sure you want to post this cheque?') = mrNo then
-                   bProceed := False;
+         if bProceed then
+            if qryLedger.IsEmpty then
+               if MsgAsk('There are no transactions entered.' + #13#13 + 'Are you sure you want to post this cheque?') = mrNo then
+                  bProceed := False;
 
           // Beginning to post ledgers
-          if bProceed then
-          begin
+         if bProceed then
+         begin
             try
-              bPostingFailed := False;
-              if dmAxiom.uniInsight.InTransaction = True then
-                dmAxiom.uniInsight.Rollback;
-              dmAxiom.uniInsight.StartTransaction;
+               bPostingFailed := False;
+               if dmAxiom.uniInsight.InTransaction = True then
+                  dmAxiom.uniInsight.Rollback;
+               dmAxiom.uniInsight.StartTransaction;
               // Create the Cheque entry - as we are using Cached Updates
               // this won't save until we explicitly ApplyUpdates
               // 22/05/2018 - AES changed to use sequence rather than seqnum table.  needs reset sequence to be run
-              iNcheque := GetSequenceNumber('SQNC_NCHEQUE');
-              qryCheque.ParamByName('P_Ncheque').AsInteger := iNcheque;
-              qryCheque.Open;
+               iNcheque := GetSequenceNumber('SQNC_NCHEQUE');
+               qryCheque.ParamByName('P_Ncheque').AsInteger := iNcheque;
+               qryCheque.Open;
 
-              qryCheque.Insert;
-              qryCheque.FieldByName('NCHEQUE').AsInteger := iNcheque;
-              qryCheque.FieldByName('PRINTER').AsString := cmbPrinter.Text;
-              qryCheque.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-              if rgType.ItemIndex = 1 then
-              begin
-                if SystemString('SHOW_DD_CHEQUE_NO') = 'Y' then
-                begin
-                   qryPrinter.Edit;
-                   qryPrinter.FieldByName('NUM_LAST').AsString :=  tbChqno.Text;
-                   qryPrinter.Post;
-                   qryCheque.FieldByName('CHQNO').AsString := 'BP' + tbChqno.Text;
-                end
-                else
-                   qryCheque.FieldByName('CHQNO').AsString := 'BP' + IntToStr(iNCheque);
-                qryCheque.FieldByName('BANKED').AsString := 'N';
-                if (TableString('BANK','ACCT', cbBank.Text, 'AUTO_PRESENT_EFT') = 'Y') then
-                begin
-                  qryCheque.FieldByName('PRESENTED').AsDateTime := dtpDate.Date;
-                  qryCheque.FieldByName('BANKED').AsString := 'Y';
-                end;
-                qryCheque.FieldByName('TYPE').AsString := 'BP';
-                if (grpDirectDebit.Visible = True) then
-                begin
-                   qryCheque.FieldByName('DESCR').AsString := tbDesc.Text + ' ('+ dfBSB.Text +'-'+dfAccount.Text +' '+ dfAccountName.Text +')';
+               qryCheque.Insert;
+               qryCheque.FieldByName('NCHEQUE').AsInteger := iNcheque;
+               qryCheque.FieldByName('PRINTER').AsString := cmbPrinter.Text;
+               qryCheque.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+               if rgType.ItemIndex = 1 then
+               begin
+                  if SystemString('SHOW_DD_CHEQUE_NO') = 'Y' then
+                  begin
+                     qryPrinter.Edit;
+                     qryPrinter.FieldByName('NUM_LAST').AsString :=  tbChqno.Text;
+                     qryPrinter.Post;
+                     qryCheque.FieldByName('CHQNO').AsString := 'BP' + tbChqno.Text;
+                  end
+                  else
+                     qryCheque.FieldByName('CHQNO').AsString := 'BP' + IntToStr(iNCheque);
+                  qryCheque.FieldByName('BANKED').AsString := 'N';
+                  if (TableString('BANK','ACCT', cbBank.Text, 'AUTO_PRESENT_EFT') = 'Y') then
+                  begin
+                     qryCheque.FieldByName('PRESENTED').AsDateTime := dtpDate.Date;
+                     qryCheque.FieldByName('BANKED').AsString := 'Y';
+                  end;
+                  qryCheque.FieldByName('TYPE').AsString := 'BP';
+                  if (grpDirectDebit.Visible = True) then
+                  begin
+                     qryCheque.FieldByName('DESCR').AsString := tbDesc.Text + ' ('+ dfBSB.Text +'-'+dfAccount.Text +' '+ dfAccountName.Text +')';
 //                  qryCheque.FieldByName('ACCOUNT').AsString := dfAccount.Text;
 //                   qryCheque.FieldByName('ACCOUNT_NAME').AsString := dfAccountName.Text;
-                end
-                else
-                  qryCheque.FieldByName('DESCR').AsString := tbDesc.Text;
-              end
-              else
-              begin
-                qryCheque.FieldByName('CHQNO').AsString := tbChqno.Text;
-                qryCheque.FieldByName('TYPE').AsString := 'PY';
-                qryCheque.FieldByName('BANKED').AsString := 'N';
+                  end
+                  else
+                     qryCheque.FieldByName('DESCR').AsString := tbDesc.Text;
+               end
+               else
+               begin
+                  qryCheque.FieldByName('CHQNO').AsString := tbChqno.Text;
+                  qryCheque.FieldByName('TYPE').AsString := 'PY';
+                  qryCheque.FieldByName('BANKED').AsString := 'N';
 
-                if (qryPrinter.FieldByName('CODE').IsNull = True) then
-                begin
-                   qryPrinter.Close;
-                   qryPrinter.ParamByName('CODE').AsString := cmbPrinter.Text;
-                   qryPrinter.Open;
-                end;
-                qryPrinter.Edit;
-                qryPrinter.FieldByName('NUM_LAST').AsString :=  qryCheque.FieldByName('CHQNO').AsString;
-                qryCheque.FieldByName('DESCR').AsString := tbDesc.Text;
-                qryPrinter.Post;
-              end;
+                  if (qryPrinter.FieldByName('CODE').IsNull = True) then
+                  begin
+                     qryPrinter.Close;
+                     qryPrinter.ParamByName('CODE').AsString := cmbPrinter.Text;
+                     qryPrinter.Open;
+                  end;
+                  qryPrinter.Edit;
+                  qryPrinter.FieldByName('NUM_LAST').AsString :=  qryCheque.FieldByName('CHQNO').AsString;
+                  qryCheque.FieldByName('DESCR').AsString := tbDesc.Text;
+                  qryPrinter.Post;
+               end;
 //              qryCheque.FieldByName('SYSTEM_DATE').AsDateTime := Date;
-              qryCheque.FieldByName('ACCT').AsString := cbBank.Text;
-              qryCheque.FieldByName('REQBY').AsString := cbAuthby.Text;
-              qryCheque.FieldByName('PAYEE').AsString := tbPayee.Text;
-              qryCheque.FieldByName('AMOUNT').AsCurrency := TotalAmt - WithholdTax;
-              qryCheque.FieldByName('TRUST').AsString := qryBank.FieldByName('TRUST').AsString;
-              qryCheque.FieldByName('REVERSED').AsString := 'N';
-              qryCheque.FieldByName('PRINTED').AsString := 'N';
-              qryCheque.FieldbyName('NNAME').AsString := sNName;
+               qryCheque.FieldByName('ACCT').AsString := cbBank.Text;
+               qryCheque.FieldByName('REQBY').AsString := cbAuthby.Text;
+               qryCheque.FieldByName('PAYEE').AsString := tbPayee.Text;
+               qryCheque.FieldByName('AMOUNT').AsCurrency := TotalAmt - WithholdTax;
+               qryCheque.FieldByName('TRUST').AsString := qryBank.FieldByName('TRUST').AsString;
+               qryCheque.FieldByName('REVERSED').AsString := 'N';
+               qryCheque.FieldByName('PRINTED').AsString := 'N';
+               qryCheque.FieldbyName('NNAME').AsString := sNName;
 //             qryCheque.FieldbyName('EFT').AsString
 
-              qryCheque.Post; // Puts cheque into cached buffer
+               if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                  (qryLedger.FieldByName('TYPE').AsString = 'Protected')then
+                  qryCheque.FieldByName('BILLING_TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+
+               qryCheque.Post; // Puts cheque into cached buffer
 
               // Create Cash At Bank Entry
-              nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
-              if qryCheque.FieldByName('TRUST').AsString <> 'T' then
-              begin
+               nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));
+               if qryCheque.FieldByName('TRUST').AsString <> 'T' then
+               begin
                 // If it's a Ledger cheque, need to save chart used on posting
-                if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
-                begin
+                  if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+                  begin
                    {post components}
-                   sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryBank.FieldByName('CASH_AT_BANK').AsString,'',true,'');
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryBank.FieldByName('CASH_AT_BANK').AsString,'',true,'');
 
-                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                     , TotalAmt - WithholdTax
-                     , 0
-                     , qryCheque.FieldByName('CHQNO').AsString
-                     , 'CHEQUE'
-                     , qryCheque.FieldByName('NCHEQUE').AsInteger
-                     , qryCheque.FieldByName('DESCR').AsString
-                     , sLedgerKey
-                     , qryCheque.FieldByName('REQBY').AsString
-                     , -1
-                     , ''
-                     , qryLedger.FieldByName('TAXCODE').AsString
-                     , False
-                     , sLedgerKey
-                     , 0
-                     , 0
-                     , nAccount
-                      , FALSE
-                      , 0
-                      , 0 - qryLedger.FieldByName('TAX').AsCurrency );
-                     end
-                else
-                begin
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                        , TotalAmt - WithholdTax
+                        , 0
+                        , qryCheque.FieldByName('CHQNO').AsString
+                        , 'CHEQUE'
+                        , qryCheque.FieldByName('NCHEQUE').AsInteger
+                        , qryCheque.FieldByName('DESCR').AsString
+                        , sLedgerKey
+                        , qryCheque.FieldByName('REQBY').AsString
+                        , -1
+                        , ''
+                        , qryLedger.FieldByName('TAXCODE').AsString
+                        , False
+                        , sLedgerKey
+                        , 0
+                        , 0
+                        , nAccount
+                         , FALSE
+                         , 0
+                         , 0 - qryLedger.FieldByName('TAX').AsCurrency );
+                  end
+                  else
+                  begin
+                     {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryBank.FieldByName('CASH_AT_BANK').AsString,'',true,'');
 
-                   {post components}
-                   sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryBank.FieldByName('CASH_AT_BANK').AsString,'',true,'');
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                        , TotalAmt - WithholdTax
+                        , 0
+                        , qryCheque.FieldByName('CHQNO').AsString
+                        , 'CHEQUE'
+                        , qryCheque.FieldByName('NCHEQUE').AsInteger
+                        , qryCheque.FieldByName('DESCR').AsString
+                        , sLedgerKey
+                        , qryCheque.FieldByName('REQBY').AsString
+                        , -1
+                        , ''
+                        , qryLedger.FieldByName('TAXCODE').AsString
+                        , False
+                        , '0'
+                        , 0
+                        , 0
+                        , nAccount );
+                  end;
+               end;
+               // END: Create Cash At Bank Entry
 
-                   PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                     , TotalAmt - WithholdTax
-                     , 0
-                     , qryCheque.FieldByName('CHQNO').AsString
-                     , 'CHEQUE'
-                     , qryCheque.FieldByName('NCHEQUE').AsInteger
-                     , qryCheque.FieldByName('DESCR').AsString
-                     , sLedgerKey
-                     , qryCheque.FieldByName('REQBY').AsString
-                     , -1
-                     , ''
-                     , qryLedger.FieldByName('TAXCODE').AsString
-                     , False
-                     , '0'
-                     , 0
-                     , 0
-                     , nAccount );
-                end;
-              end;
-              // END: Create Cash At Bank Entry
+               // Update the last cheque number and balance
+               with qryBankBalance do
+               begin
+                  sSQL := 'UPDATE BANK SET BALANCE = ' + CurrToStrF(qryBank.FieldByName('BALANCE').AsCurrency + qryCheque.FieldByName('AMOUNT').AsCurrency, ffFixed, 15) + ', CL_BALANCE = ' + CurrToStrF(qryBank.FieldByName('CL_BALANCE').AsCurrency + qryCheque.FieldByName('AMOUNT').AsCurrency, ffFixed, 15);
+                  if rgType.ItemIndex <> 1 then
+                     sSQL := sSQL + ', LASTCHQ = ''' + qryCheque.FieldByName('CHQNO').AsString + '''';
+                  sSQLWhere := ' WHERE ACCT = ''' + qryCheque.FieldByName('ACCT').AsString + '''';
+                  Close;
+                  SQL.Text := sSQL + sSQLWhere;
+                  ExecSQL;
+                  Close;
+               end;
+               MatterList := TStringList.Create;
+               MatterAmountList := TStringList.Create;
+               ProtectedList := TStringList.Create;
+               ProtectedAmountList := TStringList.Create;
+               // END: Update the last cheque number and balance
 
-              // Update the last cheque number and balance
-              with qryBankBalance do
-              begin
-                sSQL := 'UPDATE BANK SET BALANCE = ' + CurrToStrF(qryBank.FieldByName('BALANCE').AsCurrency + qryCheque.FieldByName('AMOUNT').AsCurrency, ffFixed, 15) + ', CL_BALANCE = ' + CurrToStrF(qryBank.FieldByName('CL_BALANCE').AsCurrency + qryCheque.FieldByName('AMOUNT').AsCurrency, ffFixed, 15);
-                if rgType.ItemIndex <> 1 then
-                  sSQL := sSQL + ', LASTCHQ = ''' + qryCheque.FieldByName('CHQNO').AsString + '''';
-                sSQLWhere := ' WHERE ACCT = ''' + qryCheque.FieldByName('ACCT').AsString + '''';
-                Close;
-                SQL.Text := sSQL + sSQLWhere;
-                ExecSQL;
-                Close;
-              end;
-              MatterList := TStringList.Create;
-              MatterAmountList := TStringList.Create;
-              ProtectedList := TStringList.Create;
-              ProtectedAmountList := TStringList.Create;
-              // END: Update the last cheque number and balance
-
-              // if (qryAllocs.FieldByName('AMOUNT').AsCurrency + cTrust) < 0 then
-              bMatterAccumulate := False;
-              bProtectedAccumulate := False;
-              qryLedger.First;
-              while not qryLedger.EOF do
-              begin
-                if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
-                   (qryLedger.FieldByName('TYPE').AsString = 'Protected'){ or
+               // if (qryAllocs.FieldByName('AMOUNT').AsCurrency + cTrust) < 0 then
+               bMatterAccumulate := False;
+               bProtectedAccumulate := False;
+               qryLedger.First;
+               while not qryLedger.EOF do
+               begin
+                  if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                     (qryLedger.FieldByName('TYPE').AsString = 'Protected'){ or
                    (qryLedger.FieldByName('TYPE').AsString = 'Debtors') } then
-                begin
-                   if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
-                   begin
-                      if MatterList.Count > 0 then
-                      begin
-                         for n :=0 to MatterList.Count - 1 do
-                         begin
-                            if qryLedger.FieldByName('REFNO').AsString = MatterList.Strings[n] then
-                            begin
+                  begin
+                     if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
+                     begin
+                        if MatterList.Count > 0 then
+                        begin
+                           for n :=0 to MatterList.Count - 1 do
+                           begin
+                              if qryLedger.FieldByName('REFNO').AsString = MatterList.Strings[n] then
+                              begin
                                  MatterAmountList.Strings[n] := floattostr(strtofloat(MatterAmountList.Strings[n]) +
                                                         qryLedger.FieldByName('AMOUNT').AsCurrency );
                                  bMatterAccumulate := True;
-                               break;
-                            end
-                         end;
+                                 break;
+                              end
+                           end;
                            if not bMatterAccumulate then
-                         begin
-                            MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
-                              MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
-                         end;
-                      end
-                      else
-                      begin
-                         MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
-                         MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
-                      end;
-                   end
-                   else
-                   if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
-                   begin
-                     if ProtectedList.Count > 0 then
-                     begin
-                        for n :=0 to ProtectedList.Count - 1 do
-                        begin
-                           if qryLedger.FieldByName('REFNO').AsString = ProtectedList.Strings[n] then
                            begin
-                              ProtectedAmountList.Strings[n] := floattostr(strtofloat(ProtectedAmountList.Strings[n]) +
-                                                               qryLedger.FieldByName('AMOUNT').AsCurrency );
-                              bProtectedAccumulate := True;
-                              break;
-                           end
+                              MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
+                              MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
+                           end;
+                        end
+                        else
+                        begin
+                           MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
+                           MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
                         end;
-                        if not bProtectedAccumulate then
+                     end
+                     else
+                     if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
+                     begin
+                        if ProtectedList.Count > 0 then
+                        begin
+                           for n :=0 to ProtectedList.Count - 1 do
+                           begin
+                              if qryLedger.FieldByName('REFNO').AsString = ProtectedList.Strings[n] then
+                              begin
+                                 ProtectedAmountList.Strings[n] := floattostr(strtofloat(ProtectedAmountList.Strings[n]) +
+                                                               qryLedger.FieldByName('AMOUNT').AsCurrency );
+                                 bProtectedAccumulate := True;
+                                 break;
+                              end
+                           end;
+                           if not bProtectedAccumulate then
+                           begin
+                              ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
+                              ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
+                           end;
+                        end
+                        else
                         begin
                            ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
                            ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
                         end;
                      end
-                     else
-                     begin
-                        ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
-                        ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
-                   end;
-                   end
-                end;
-                bMatterAccumulate := False;
-                bProtectedAccumulate := False;
-                qryLedger.Next;
-              end;
-              // END: qryLedger.First;
+                  end;
+                  bMatterAccumulate := False;
+                  bProtectedAccumulate := False;
+                  qryLedger.Next;
+               end;
+               // END: qryLedger.First;
 
-              // Now, iterate through the entered Ledger Entries
-              qryLedger.First;
-              qryAllocs.Open;
-              ItemCount := 0;
+               // Now, iterate through the entered Ledger Entries
+               qryLedger.First;
+               qryAllocs.Open;
+               ItemCount := 0;
 //              if grpDirectDebit.Visible then
 //                 sBankDetails := ' ('+ dfBSB.Text +'-'+dfAccount.Text +' '+ dfAccountName.Text +')';
-              bTrustInvoice := False;
-              while not qryLedger.EOF do
-              begin
-                if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
-                   (qryLedger.FieldByName('TYPE').AsString = 'Protected')
+               bTrustInvoice := False;
+               while not qryLedger.EOF do
+               begin
+                  if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                     (qryLedger.FieldByName('TYPE').AsString = 'Protected')
                   {or (qryLedger.FieldByName('TYPE').AsString = 'Debtors')} then
-                // begin
+                  // begin
                   //////////////////////////////////////////////////////////////////
                   if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then
                   begin
                      bTrustInvoice := ((SystemString('INVOICE_FROM_TRUST') = 'Y') and
                                       (TableString('CHEQREQ','NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsString,'NINVOICE') <> ''));
-                    if bTrustInvoice then
-                       ANInvoice := TableInteger('CHEQREQ','NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsString,'NINVOICE');
-                    qryAllocs.Insert;
-                    lNewNAlloc := GetSeqnum('NALLOC');
-                    qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
-                    qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
-                    qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
-                    qryAllocs.FieldByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
+                     if bTrustInvoice then
+                        ANInvoice := TableInteger('CHEQREQ','NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsString,'NINVOICE');
+                     qryAllocs.Insert;
+                     lNewNAlloc := GetSequenceNumber('SQNC_NALLOC');  // GetSeqnum('NALLOC');
+                     qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
+                     qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
+                     qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
+                     qryAllocs.FieldByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
 //                    if grpDirectDebit.Visible then
 //                      qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString + sBankDetails
 //                    else
-                      qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-                    qryAllocs.FieldByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'CLIENT_NAME');
-                    qryAllocs.FieldByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
-                    qryAllocs.FieldByName('CLEARED').AsString := 'Y';
-                    qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
+                     qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                     qryAllocs.FieldByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'CLIENT_NAME');
+                     qryAllocs.FieldByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
+                     qryAllocs.FieldByName('CLEARED').AsString := 'Y';
+                     qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
 //                    qryAllocs.FieldByName('SYSTEM_DATE').AsDateTime := Date;
-                    qryAllocs.FieldByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
-                    qryAllocs.FieldByName('TAX').AsCurrency := 0 - qryLedger.FieldByName('TAX').AsCurrency;
-                    qryAllocs.FieldByName('AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-                    qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-                    qryAllocs.FieldByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
-                    if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-                       qryAllocs.FieldByName('BILLED_TAX_AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('TAX').AsCurrency;
+                     qryAllocs.FieldByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                     qryAllocs.FieldByName('TAX').AsCurrency := 0 - qryLedger.FieldByName('TAX').AsCurrency;
+                     qryAllocs.FieldByName('AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                     qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                     qryAllocs.FieldByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
+                     if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                        qryAllocs.FieldByName('BILLED_TAX_AMOUNT').AsCurrency := 0 - qryLedger.FieldByName('TAX').AsCurrency;
 
-                    // Check we won't overdraw trust
-                    qryAllocs.FieldByName('TRUST').AsString := qryCheque.FieldByName('TRUST').AsString;
-                    if qryAllocs.FieldByName('TRUST').AsString = 'T' then
-                    begin
-                      qryAllocs.FieldByName('PRIORBALANCE').AsCurrency := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'TRUST_BAL');
+                     // Check we won't overdraw trust
+                     qryAllocs.FieldByName('TRUST').AsString := qryCheque.FieldByName('TRUST').AsString;
+                     if qryAllocs.FieldByName('TRUST').AsString = 'T' then
+                     begin
+                        qryAllocs.FieldByName('PRIORBALANCE').AsCurrency := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'TRUST_BAL');
 
-                      // cTrust := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'CL_TRUST_BAL');
-                      cTrust := ClearTrust(qryLedger.FieldByName('REFNO').AsString);
+                        // cTrust := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'CL_TRUST_BAL');
+                        cTrust := ClearTrust(qryLedger.FieldByName('REFNO').AsString);
 
-                      cProtected := TableCurrency('ALLOC', 'NMATTER', TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'sum(SPEC_PURPOSE)');
-                      if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
-                         (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
-                      begin
-                        // MGD - 20/9/02 - fixed this so it works correctly, added password check..
-
-                        if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
+                        cProtected := TableCurrency('ALLOC', 'NMATTER', TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'sum(SPEC_PURPOSE)');
+                        if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                           (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
                         begin
-                           for n :=0 to MatterList.Count - 1 do
+                           // MGD - 20/9/02 - fixed this so it works correctly, added password check..
+
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
                            begin
-                              if MatterList.Strings[n] = qryLedger.FieldByName('REFNO').AsString then
+                              for n :=0 to MatterList.Count - 1 do
                               begin
-                                 ItemCount := n;
-                                 break;
+                                 if MatterList.Strings[n] = qryLedger.FieldByName('REFNO').AsString then
+                                 begin
+                                    ItemCount := n;
+                                    break;
+                                 end;
+                              end;
+                              try
+                                 cTrust := ClearTrust(MatterList.Strings[n]);
+                              except
+                                 ctrust := 0;
                               end;
                            end;
-                           try
-                              cTrust := ClearTrust(MatterList.Strings[n]);
-                           except
-                              ctrust := 0;
-                           end;
-                        end;
 
-                        if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
-                        begin
-                           for n :=0 to ProtectedList.Count - 1 do
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
                            begin
-                              if ProtectedList.Strings[n] = qryLedger.FieldByName('REFNO').AsString then
+                              for n :=0 to ProtectedList.Count - 1 do
                               begin
-                                 ItemCount := n;
-                                 break;
+                                 if ProtectedList.Strings[n] = qryLedger.FieldByName('REFNO').AsString then
+                                 begin
+                                    ItemCount := n;
+                                    break;
+                                 end;
+                              end;
+                              try
+                                 cTrust := 0;
+                                 cProtected := ClearProtectedTrust(ProtectedList.Strings[n]);
+                              except
+                                 cProtected := 0;
                               end;
                            end;
-                           try
-                              cTrust := 0;
-                              cProtected := ClearProtectedTrust(ProtectedList.Strings[n]);
-                           except
-                              cProtected := 0;
+
+                           if (cProtected > 0) then
+                              cAvailTrust := cTrust - cProtected
+                           else
+                              cAvailTrust := cTrust;
+
+                           Overdrawn := False;
+
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
+                           begin
+                              if ((MatterAmountList.Count > 0) and
+                                 (((StrToCurr(MatterAmountList.Strings[ItemCount]) * -1) + cAvailTrust) < 0)) then
+                                 Overdrawn := True;
                            end;
-                        end;
 
-                        if (cProtected > 0) then
-                           cAvailTrust := cTrust - cProtected
-                        else
-                           cAvailTrust := cTrust;
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
+                           begin
+                              if ((ProtectedList.Count > 0) and
+                                 (((StrToCurr(ProtectedAmountList.Strings[ItemCount]) * -1) + cProtected) < 0))  then
+                                 Overdrawn := True;
+                           end;
 
-                        Overdrawn := False;
-
-                        if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
-                        begin
-                           if ((MatterAmountList.Count > 0) and
-                              (((StrToCurr(MatterAmountList.Strings[ItemCount]) * -1) + cAvailTrust) < 0)) then
-                              Overdrawn := True;
-                        end;
-
-                        if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
-                        begin
-                           if ((ProtectedList.Count > 0) and
-                              (((StrToCurr(ProtectedAmountList.Strings[ItemCount]) * -1) + cProtected) < 0))  then
-                              Overdrawn := True;
-                        end;
-
-                        if Overdrawn then
-                        begin
-                          // Does this person have enough access to overdraw trust?
-//                          if TableInteger('EMPLOYEE', 'CODE', dmAxiom.UserID, 'ACCESSLEVEL') = 0 then
-                          if dmAxiom.Security.Trust.PasswdOverdraw then
-                          begin
-                            LTries := 0;
-                            while(LTries < 3) do
-                            begin
-                               LEntered := '';
-                               if(cTrust >= 0) then
-                                  LMsg := Format('There is %m in cleared Trust funds on File %s'#13#10'Continuing will result in the Trust funds being overdrawn by %m',
-                                                [cTrust,qryLedger.FieldByName('REFNO').AsString, -(cAvailTrust - StrToCurr(MatterAmountList.Strings[ItemCount]) )])
-                               else
-                                  LMsg := Format('The Trust funds for File %s is overdrawn by %m.'#13#10'Continuing will result in the Trust funds being overdrawn by %m',
+                           if Overdrawn then
+                           begin
+                              // Does this person have enough access to overdraw trust?
+//                            if TableInteger('EMPLOYEE', 'CODE', dmAxiom.UserID, 'ACCESSLEVEL') = 0 then
+                              if dmAxiom.Security.Trust.PasswdOverdraw then
+                              begin
+                                 LTries := 0;
+                                 while(LTries < 3) do
+                                 begin
+                                    LEntered := '';
+                                    if(cTrust >= 0) then
+                                       LMsg := Format('There is %m in cleared Trust funds on File %s'#13#10'Continuing will result in the Trust funds being overdrawn by %m',
+                                                   [cTrust,qryLedger.FieldByName('REFNO').AsString, -(cAvailTrust - StrToCurr(MatterAmountList.Strings[ItemCount]) )])
+                                    else
+                                       LMsg := Format('The Trust funds for File %s is overdrawn by %m.'#13#10'Continuing will result in the Trust funds being overdrawn by %m',
                                                 [qryLedger.FieldByName('REFNO').AsString, -(cAvailTrust), -(cAvailTrust - StrToCurr(MatterAmountList.Strings[ItemCount]) )]);
-                               if(InputQueryPassword('Insight', LMsg + #13#10'To continue, please enter the password',LEntered)) then
-                               begin
-                                  if (LEntered = LTrustODPasswd) then
-                                     Break;
-                               end
-                               else
-                                  Break;
-                               Inc(LTries);
-                            end;
+                                    if(InputQueryPassword('Insight', LMsg + #13#10'To continue, please enter the password',LEntered)) then
+                                    begin
+                                       if (LEntered = LTrustODPasswd) then
+                                       Break;
+                                    end
+                                    else
+                                       Break;
+                                    Inc(LTries);
+                                 end;
 
-                            if (LEntered <> LTrustODPasswd) then
-                              raise ETrustOverDraw.Create('Cleared Trust would have overdrawn on File ' + qryLedger.FieldByName('REFNO').AsString)
-                            else
-                            begin
-                               if (cProtected > 0) then
-                                  qryAllocs.FieldByName('OVERDRAWN').AsString := 'P'
-                               else
-                                  qryAllocs.FieldByName('OVERDRAWN').AsString := 'Y';
-                            end;
-                          end
-                          else
-                            raise ETrustOverDraw.Create('Trust would have overdrawn on File ' + qryLedger.FieldByName('REFNO').AsString + #13 + #13 + 'You do not have sufficient access to overdraw Trust Accounts');
-                          // END: Does this person have enough access to overdraw trust?
-                        end
-                        else
-                       if (qryLedger.FieldByName('TYPE').AsString = 'Matter') and
-                          (MatterAmountList.Count > 0 ) and
-                          (((cTrust - Abs(StrToCurr(MatterAmountList.Strings[ItemCount]))) - cProtected) < -0.001) and
-                          (StrToCurr(MatterAmountList.Strings[ItemCount]) > 0) then
-                        begin
-                          //check to see if it's a stat deposit transaction
-                          if not (TableInteger('BANK', 'ACCT', cbBank.Text, 'STAT_DEP_MATTER') = qryAllocs.FieldbyName('NMATTER').AsInteger) then
-                             raise ETrustOverDraw.Create('Not enough unprotected Trust funds on File ' + qryLedger.FieldByName('REFNO').AsString);
-                        end
-                        // end ?
-                        else
-                        if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
-                        begin
-                           if StrToCurr(ProtectedAmountList.Strings[ItemCount]) > cProtected then
-                             raise ETrustOverDraw.Create('Trust would have overdrawn. There is only ' + Format('%m', [cProtected]) + ' in the Protected Trust Balance of File ' + qryLedger.FieldByName('REFNO').AsString);
+                              if (LEntered <> LTrustODPasswd) then
+                                 raise ETrustOverDraw.Create('Cleared Trust would have overdrawn on File ' + qryLedger.FieldByName('REFNO').AsString)
+                              else
+                              begin
+                                 if (cProtected > 0) then
+                                    qryAllocs.FieldByName('OVERDRAWN').AsString := 'P'
+                                 else
+                                    qryAllocs.FieldByName('OVERDRAWN').AsString := 'Y';
+                              end;
+                           end
+                           else
+                              raise ETrustOverDraw.Create('Trust would have overdrawn on File ' + qryLedger.FieldByName('REFNO').AsString + #13 + #13 + 'You do not have sufficient access to overdraw Trust Accounts');
+                              // END: Does this person have enough access to overdraw trust?
+                           end
+                           else
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Matter') and
+                              (MatterAmountList.Count > 0 ) and
+                              (((cTrust - Abs(StrToCurr(MatterAmountList.Strings[ItemCount]))) - cProtected) < -0.001) and
+                              (StrToCurr(MatterAmountList.Strings[ItemCount]) > 0) then
+                           begin
+                              //check to see if it's a stat deposit transaction
+                              if not (TableInteger('BANK', 'ACCT', cbBank.Text, 'STAT_DEP_MATTER') = qryAllocs.FieldbyName('NMATTER').AsInteger) then
+                                 raise ETrustOverDraw.Create('Not enough unprotected Trust funds on File ' + qryLedger.FieldByName('REFNO').AsString);
+                           end
+                           // end ?
+                           else
+                           if (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
+                           begin
+                              if StrToCurr(ProtectedAmountList.Strings[ItemCount]) > cProtected then
+                                 raise ETrustOverDraw.Create('Trust would have overdrawn. There is only ' + Format('%m', [cProtected]) + ' in the Protected Trust Balance of File ' + qryLedger.FieldByName('REFNO').AsString);
+                           end;
+                           // END: if ((StrToCurr(AmountList.Strings[n]) * -1) + cTrust) < 0 then
                         end;
-                        // END: if ((StrToCurr(AmountList.Strings[n]) * -1) + cTrust) < 0 then
-                      end;
-                      // END: if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
-                    end;
-                    // END: if qryAllocs.FieldByName('TRUST').AsString = 'T' then
+                        // END: if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
+                     end;
+                     // END: if qryAllocs.FieldByName('TRUST').AsString = 'T' then
 
-                    qryAllocs.FieldByName('PAYER').AsString := qryCheque.FieldByName('PAYEE').AsString;
+                     qryAllocs.FieldByName('PAYER').AsString := qryCheque.FieldByName('PAYEE').AsString;
 
-                    qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
-                    qryAllocs.FieldByName('BANK').AsString := cbBank.Text;
+                     qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
+                     qryAllocs.FieldByName('BANK').AsString := cbBank.Text;
 
-                    qryAllocs.FieldByName('TYPE').AsString := qryCheque.FieldByName('TYPE').AsString;
-                    qryAllocs.FieldByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
-                    qryAllocs.FieldByName('REFNO').AsString := qryCheque.FieldByName('CHQNO').AsString;
-                    qryAllocs.FieldByName('BILLED').AsString := qryLedger.FieldByName('BILLED').AsString;
-                    qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-                    if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
-                      qryAllocs.FieldByName('SPEC_PURPOSE').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                     qryAllocs.FieldByName('TYPE').AsString := qryCheque.FieldByName('TYPE').AsString;
+                     qryAllocs.FieldByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
+                     qryAllocs.FieldByName('REFNO').AsString := qryCheque.FieldByName('CHQNO').AsString;
+                     qryAllocs.FieldByName('BILLED').AsString := qryLedger.FieldByName('BILLED').AsString;
+                     qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+                     if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
+                        qryAllocs.FieldByName('SPEC_PURPOSE').AsCurrency := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
 
-                    if nAccount > 0 then begin
-                      TransItemUpdate(nAccount, qryAllocs.FieldByName('NMATTER').AsInteger,qryAllocs.FieldByName('NALLOC').AsInteger);
-                      nAccount := 0;
-                    end;
+                     if nAccount > 0 then begin
+                        TransItemUpdate(nAccount, qryAllocs.FieldByName('NMATTER').AsInteger,qryAllocs.FieldByName('NALLOC').AsInteger);
+                        nAccount := 0;
+                     end;
 
-                    if qryAllocs.FieldByName('TRUST').AsString = 'G' then
-                    begin
-{                      if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
+                     if qryAllocs.FieldByName('TRUST').AsString = 'G' then
+                     begin
+{                       if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
                         begin
                           qryAllocs.FieldByName('PRIORBALANCE').AsCurrency := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'DEBTORS');
                           qryAllocs.FieldByName('TYPE').AsString := 'RF';
                           qryAllocs.FieldByName('BILLED').AsString := 'Y';
                         end
                         else  }
-                          qryAllocs.FieldByName('PRIORBALANCE').AsCurrency := 0 - TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'UNBILL_DISB');
-                    end;
+                       qryAllocs.FieldByName('PRIORBALANCE').AsCurrency := 0 - TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'UNBILL_DISB');
+                     end;
 
-                    // update the ncheqreq field here....
-                    if (qryAllocs.FieldByName('TRUST').AsString = 'G') and (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) then
-                      qryAllocs.FieldbyName('NCHEQREQ').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
+                     // update the ncheqreq field here....
+                     if (qryAllocs.FieldByName('TRUST').AsString = 'G') and (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) then
+                        qryAllocs.FieldbyName('NCHEQREQ').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
 
-                    qryAllocs.Post;  // Put it into the cached buffer
-                    if qryAllocs.FieldByName('TRUST').AsString = 'T' then
-                    begin
-                      MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'TRUST_BAL', qryAllocs.FieldByName('AMOUNT').AsCurrency);
-                      MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'CL_TRUST_BAL', qryAllocs.FieldByName('AMOUNT').AsCurrency);
-                      if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
-                        MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'SPEC_PURPOSE', qryAllocs.FieldByName('AMOUNT').AsCurrency);
-                    end;
+                     qryAllocs.Post;  // Put it into the cached buffer
+                     if qryAllocs.FieldByName('TRUST').AsString = 'T' then
+                     begin
+                        MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'TRUST_BAL', qryAllocs.FieldByName('AMOUNT').AsCurrency);
+                        MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'CL_TRUST_BAL', qryAllocs.FieldByName('AMOUNT').AsCurrency);
+                        if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
+                           MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'SPEC_PURPOSE', qryAllocs.FieldByName('AMOUNT').AsCurrency);
+                     end;
 
-                    if qryAllocs.FieldByName('TRUST').AsString = 'G' then
-                    begin
-                      if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
-                      begin
-                        MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (qryAllocs.FieldByName('AMOUNT').AsCurrency + qryAllocs.FieldByName('TAX').AsCurrency));
+                     if qryAllocs.FieldByName('TRUST').AsString = 'G' then
+                     begin
+                        if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
+                        begin
+                           MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (qryAllocs.FieldByName('AMOUNT').AsCurrency + qryAllocs.FieldByName('TAX').AsCurrency));
                         // Now make the General Ledger entry
 
                         // post components
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
+                           sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_DR'),'',true,'');
 
 
-                        PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                            , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                            , 0
-                            , qryCheque.FieldByName('CHQNO').AsString
-                            , 'CHEQUE'
-                            , qryCheque.FieldByName('NCHEQUE').AsInteger
-                            , qryLedger.FieldByName('REASON').AsString
-                            , sLedgerKey
-                            , qryCheque.FieldByName('REQBY').AsString
-                            , -1
-                            , ''
-                            , qryLedger.FieldByName('TAXCODE').AsString
-                            , FALSE
-                            , '0'
-                            , qryAllocs.FieldByName('NALLOC').AsInteger
-                            , qryAllocs.FieldByName('NMATTER').AsInteger
-                            , 0
-                            , FALSE
-                            , 0
-                            , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
-                      end
-                      else
-                      begin
-                        // Now make the General Ledger entry
-                        sLedger := 'NEW_DISB_DR';
-                        if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-                          cAmount := 0 - (qryLedger.FieldByName('AMOUNT').AsCurrency
-                              + qryLedger.FieldByName('TAX').AsCurrency)
+                           PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                               , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                               , 0
+                               , qryCheque.FieldByName('CHQNO').AsString
+                               , 'CHEQUE'
+                               , qryCheque.FieldByName('NCHEQUE').AsInteger
+                               , qryLedger.FieldByName('REASON').AsString
+                               , sLedgerKey
+                               , qryCheque.FieldByName('REQBY').AsString
+                               , -1
+                               , ''
+                               , qryLedger.FieldByName('TAXCODE').AsString
+                               , FALSE
+                               , '0'
+                               , qryAllocs.FieldByName('NALLOC').AsInteger
+                               , qryAllocs.FieldByName('NMATTER').AsInteger
+                               , 0
+                               , FALSE
+                               , 0
+                               , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
+                        end
                         else
-                          cAmount := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-
-                        if qryLedger.FieldByName('UNIQUEID').AsInteger > 0 then
                         begin
-                          // It is a CheqReq
-                          if TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'ANTICIPATED') = 'Y' then
-                          begin
-                            // Pretend the anticipated disbursement never happened
-                            ConvertTagCheqreq(iNcheque);
-                            if qryLedger.FieldByName('BILLED').AsString = 'Y' then
-                              sLedger := 'NEW_ANTD_CR';
-                          end;
-                          // If this allocation is not for the same amount as the original CheqReq, we must adjust the ledgers
-                          qryTmp.Close;
-                          qryTmp.SQL.Text := 'SELECT AMOUNT, TAX, TAXCODE FROM CHEQREQ WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
-                          qryTmp.Open;
+                           // Now make the General Ledger entry
+                           sLedger := 'NEW_DISB_DR';
+                           if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                              cAmount := 0 - (qryLedger.FieldByName('AMOUNT').AsCurrency
+                                          + qryLedger.FieldByName('TAX').AsCurrency)
+                           else
+                              cAmount := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
 
-                          qryTmp.Close;
+                           if qryLedger.FieldByName('UNIQUEID').AsInteger > 0 then
+                           begin
+                              // It is a CheqReq
+                              if TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'ANTICIPATED') = 'Y' then
+                              begin
+                                 // Pretend the anticipated disbursement never happened
+                                 ConvertTagCheqreq(iNcheque);
+                                 if qryLedger.FieldByName('BILLED').AsString = 'Y' then
+                                    sLedger := 'NEW_ANTD_CR';
+                              end;
+                              // If this allocation is not for the same amount as the original CheqReq, we must adjust the ledgers
+                              qryTmp.Close;
+                              qryTmp.SQL.Text := 'SELECT AMOUNT, TAX, TAXCODE FROM CHEQREQ WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
+                              qryTmp.Open;
+
+                              qryTmp.Close;
+                           end;
+
+                           MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'UNBILL_DISB', 0 - (cAmount));
+
+                           {post components}
+                           sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',true,'');
+
+                           PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                               , cAmount
+                               , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                               , qryCheque.FieldByName('CHQNO').AsString
+                               , 'CHEQUE'
+                               , qryCheque.FieldByName('NCHEQUE').AsInteger
+                               , qryLedger.FieldByName('REASON').AsString
+                               , sLedgerKey
+                               , qryCheque.FieldByName('REQBY').AsString
+                               , -1
+                               , ''
+                               , qryLedger.FieldByName('TAXCODE').AsString
+                               , FALSE
+                               , '0'
+                               , qryAllocs.FieldByName('NALLOC').AsInteger
+                               , qryAllocs.FieldByName('NMATTER').AsInteger
+                               , 0
+                               , FALSE
+                               , 0
+                               , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
                         end;
-
-                        MatterUpdate(qryAllocs.FieldByName('NMATTER').AsInteger, 'UNBILL_DISB', 0 - (cAmount));
-
-                        {post components}
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, sLedger),'',true,'');
-
-
-                        PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                            , cAmount
-                            , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                            , qryCheque.FieldByName('CHQNO').AsString
-                            , 'CHEQUE'
-                            , qryCheque.FieldByName('NCHEQUE').AsInteger
-                            , qryLedger.FieldByName('REASON').AsString
-                            , sLedgerKey
-                            , qryCheque.FieldByName('REQBY').AsString
-                            , -1
-                            , ''
-                            , qryLedger.FieldByName('TAXCODE').AsString
-                            , FALSE
-                            , '0'
-                            , qryAllocs.FieldByName('NALLOC').AsInteger
-                            , qryAllocs.FieldByName('NMATTER').AsInteger
-                            , 0
-                            , FALSE
-                            , 0
-                            , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
-                      end;
-                      // END: if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
-                    end;
-                    // END: if qryAllocs.FieldByName('TRUST').AsString = 'G' then
-                  // end; ?
+                        // END: if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
+                     end;
+                     // END: if qryAllocs.FieldByName('TRUST').AsString = 'G' then
+                     // end; ?
                   end // END ELSE: if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then
                   else // Matter does not exist
-                    raise EInvalidMatter.Create('Matter ' + qryLedger.FieldByName('REFNO').AsString + ' is not current');
-                  // end; ?
-                  // END: if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then => old note: End of Type = 'Matter'
-                  //////////////////////////////////////////////////////////////////
+                     raise EInvalidMatter.Create('Matter ' + qryLedger.FieldByName('REFNO').AsString + ' is not current');
+                     // end; ?
+                     // END: if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then => old note: End of Type = 'Matter'
+                     //////////////////////////////////////////////////////////////////
 
-                  // Or is it a General Ledger Allocation?
-                if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
-                begin
-                  if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-                    cAmount := 0 - (qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency)
-                  else
-                    cAmount := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                     // Or is it a General Ledger Allocation?
+                  if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+                  begin
+                     if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                        cAmount := 0 - (qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency)
+                     else
+                        cAmount := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
 
-                    // lookup the ledger code cased on the value entered
-                    glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
+                     // lookup the ledger code cased on the value entered
+                     glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
 
-                    if not glInstance.valid then
-                            begin
-                            // something has gone very wrong !
-                            raise Exception.create('Error invalid ledger key');
-                    end;
+                     if not glInstance.valid then
+                     begin
+                        // something has gone very wrong !
+                        raise Exception.create('Error invalid ledger key');
+                     end;
 
-                  PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                      , cAmount
-                      , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                      , qryCheque.FieldByName('CHQNO').AsString
-                      , 'CHEQUE'
-                      , qryCheque.FieldByName('NCHEQUE').AsInteger
-                      , qryLedger.FieldByName('REASON').AsString
-                      , glInstance.ledgerKey
-                      , qryCheque.FieldByName('REQBY').AsString
-                      , -1
-                      , ''
-                      , qryLedger.FieldByName('TAXCODE').AsString
-                      , FALSE
-                      , ''
-                      , 0
-                      , 0
-                      , 0
-                      , FALSE
-                      , 0
-                      , 0 - qryLedger.FieldByName('TAX').AsCurrency );
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                         , cAmount
+                         , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                         , qryCheque.FieldByName('CHQNO').AsString
+                         , 'CHEQUE'
+                         , qryCheque.FieldByName('NCHEQUE').AsInteger
+                         , qryLedger.FieldByName('REASON').AsString
+                         , glInstance.ledgerKey
+                         , qryCheque.FieldByName('REQBY').AsString
+                         , -1
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , ''
+                         , 0
+                         , 0
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0 - qryLedger.FieldByName('TAX').AsCurrency );
 
-                      glInstance.Free;
-                end;
+                     glInstance.Free;
+                  end;
                 // END: Or is it a General Ledger Allocation?
 
                 // Or is it a Creditor Account Payable?
-                if qryLedger.FieldByName('TYPE').AsString = 'Invoice' then
-                begin
+                  if qryLedger.FieldByName('TYPE').AsString = 'Invoice' then
+                  begin
                   //create two allocs one to reduce upcred and another to add a disb
 
                   // check creditor screen first, else use the creditor code from the entity;
-                  sNCreditor := TableString('INVOICE', 'NINVOICE', qryLedger.FieldByName('UNIQUEID').AsInteger, 'NCREDITOR');
+                     sNCreditor := TableString('INVOICE', 'NINVOICE', qryLedger.FieldByName('UNIQUEID').AsInteger, 'NCREDITOR');
                   {
                     Code Modified 20.01.2003 GG
                     Now needs to search on entity as well as chart.
                     sLedgerCode := TableString('CREDITOR', 'NCREDITOR', sNCreditor, 'CHART');
                   }
 
-                  sLedgerCode := TableStringEntity('CREDITOR', 'NCREDITOR', sNCreditor, 'CHART', dmAxiom.Entity);
-                  if not ValidLedger(dmAxiom.Entity, sLedgerCode) then
-                    sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'CREDITORS');
+                     sLedgerCode := TableStringEntity('CREDITOR', 'NCREDITOR', sNCreditor, 'CHART', dmAxiom.Entity);
+                     if not ValidLedger(dmAxiom.Entity, sLedgerCode) then
+                        sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'CREDITORS');
 
-                  sLegalCode    := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_UPCRED_DR');
+                     sLegalCode    := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_UPCRED_DR');
                   // sCreditorCode := TableString('CREDITOR', 'NCREDITOR', sNCreditor, 'CODE');
 
                   {
@@ -1471,68 +1473,70 @@ begin
                     Get records from TransItem using NINVOICE to determine
                     the amounts for legal (matter) and trade (ledger) respectively.
                   }
-                  qryTransItem.Close;
-                  qryTransItem.ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
-                  qryTransItem.Open;
+                     qryTransItem.Close;
+                     qryTransItem.ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
+                     qryTransItem.Open;
 
                   // Initialise the totals for legal (matter) and ledger (trade) creditors amount
-                  cMatterTotalTax   := 0;
-                  cTradeTotalTax    := 0;
+                     cMatterTotalTax   := 0;
+                     cTradeTotalTax    := 0;
 
-                  with qryInvoiceCRAmount do
-                  begin
-                      Close;
-                      ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
-                      Open;
-                      cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                      cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                      cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat - cTradeTotalTax;
-                      cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat - cMatterTotalTax;
-                      if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
+                     with qryInvoiceCRAmount do
+                     begin
+                        Close;
+                        ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
+                        Open;
+                        cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                        cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                        if FieldByName('trade_cr_amount').AsFloat <> 0 then
+                           cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
+                        if FieldByName('legal_cr_amount').AsFloat <> 0 then
+                           cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
+                        if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
                           //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                           //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
-                      begin
-                        cMatterTotalTax := FieldByName('legal_cr_amount').AsFloat/
-                                         (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                        cTradeTotalTax := FieldByName('trade_cr_amount').AsFloat/
-                                        (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                      end;
-                  end;
+                        begin
+                           cMatterTotalTax := FieldByName('legal_cr_amount').AsFloat/
+                                             (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                           cTradeTotalTax := FieldByName('trade_cr_amount').AsFloat/
+                                             (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                        end;
+                     end;
 
                   // this test is for invoices that were created prior to version 314
-                  if (cMatterTotal + cTradeTotal) = 0 then
-                  begin
-                     // we need to look this value up in the chart table
-                     // so we can find the ledger key
-
-                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
-
-                     while not qryTransItem.EOF do
+                     if (cMatterTotal + cTradeTotal) = 0 then
                      begin
+                        // we need to look this value up in the chart table
+                        // so we can find the ledger key
+
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+
+                        while not qryTransItem.EOF do
+                        begin
                         // If trade
-                        if qryTransItem.FieldByName('CHART').AsString = sLedgerKey then
-                        begin
-                          cTradeTotal := cTradeTotal + qryTransItem.FieldByName('AMOUNT').AsFloat;
-                          cTradeTotalTax := cTradeTotalTax + qryTransItem.FieldByName('TAX').AsFloat;
-                        end
-                        else if qryTransItem.FieldByName('CHART').AsString = sLedgerKey then
-                        begin
-                          cMatterTotal := cMatterTotal + qryTransItem.FieldByName('AMOUNT').AsFloat;
-                          cMatterTotalTax := cMatterTotalTax + qryTransItem.FieldByName('TAX').AsFloat;
+                           if qryTransItem.FieldByName('CHART').AsString = sLedgerKey then
+                           begin
+                              cTradeTotal := cTradeTotal + qryTransItem.FieldByName('AMOUNT').AsFloat;
+                              cTradeTotalTax := cTradeTotalTax + qryTransItem.FieldByName('TAX').AsFloat;
+                           end
+                           else if qryTransItem.FieldByName('CHART').AsString = sLedgerKey then
+                           begin
+                              cMatterTotal := cMatterTotal + qryTransItem.FieldByName('AMOUNT').AsFloat;
+                              cMatterTotalTax := cMatterTotalTax + qryTransItem.FieldByName('TAX').AsFloat;
+                           end;
+
+                           qryTransItem.Next;
                         end;
-
-                        qryTransItem.Next;
                      end;
-                  end;
 
-                  if (qryLedger.FieldByName('AMOUNT').AsFloat <>  (cMatterTotal + cTradeTotal)) then
-                  begin
-                     if cMatterTotal <> 0 then
+                     if (qryLedger.FieldByName('AMOUNT').AsFloat <>  (cMatterTotal + cTradeTotal)) then
                      begin
-						      cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
-                        cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
-                        if (qryLedger.FieldByName('TAX').AsFloat = 0) then
-                           cMatterTotalTax := 0;
+                        if cMatterTotal <> 0 then
+                        begin
+						         cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
+                           cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
+                           if (qryLedger.FieldByName('TAX').AsFloat = 0) then
+                              cMatterTotalTax := 0;
 
 {                        if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
                             cMatterTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cTradeTotal;
@@ -1541,71 +1545,70 @@ begin
                            cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2)
                         else
                            cMatterTotalTax := 0;}
+                        end;
+
+                        if cTradeTotal <> 0 then
+                        begin
+                           if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
+                              cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cMatterTotal
+                           else
+                              cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat - cMatterTotal;
+                           cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat - cMatterTotalTax;
+                        end;
                      end;
 
-                     if cTradeTotal <> 0 then
-                     begin
-                        if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
-                             cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cMatterTotal
-                        else
-                            cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat - cMatterTotal;
-                        cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat - cMatterTotalTax;
-                     end;
-                  end;
+                     // Check if totals are equal to Ledger amount??
+                     // Post for trade
 
-                  // Check if totals are equal to Ledger amount??
-                  // Post for trade
+                     {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                        //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                         , 0 - cTradeTotal
+                         , 0 - cTradeTotalTax
+                         , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
+                         , qryCheque.FieldByName('NCHEQUE').AsInteger
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , qryCheque.FieldByName('REQBY').AsString
+                         , qryLedger.FieldByName('UNIQUEID').AsInteger
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , qryAllocs.FieldByName('NALLOC').AsInteger
+                         , qryAllocs.FieldByName('NMATTER').AsInteger
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0 - cTradeTotalTax );
 
-                  {post components}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
-                  PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                      //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                      , 0 - cTradeTotal
-                      , 0 - cTradeTotalTax
-                      , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
-                      , qryCheque.FieldByName('NCHEQUE').AsInteger
-                      , qryLedger.FieldByName('REASON').AsString
-                      , sLedgerKey
-                      , qryCheque.FieldByName('REQBY').AsString
-                      , qryLedger.FieldByName('UNIQUEID').AsInteger
-                      , ''
-                      , qryLedger.FieldByName('TAXCODE').AsString
-                      , FALSE
-                      , '0'
-                      , qryAllocs.FieldByName('NALLOC').AsInteger
-                      , qryAllocs.FieldByName('NMATTER').AsInteger
-                      , 0
-                      , FALSE
-                      , 0
-                      , 0 - cTradeTotalTax );
+                     // Post for legal
+                     {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
 
-                  // Post for legal
-                  {post components}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
-
-                  PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                      , 0 - cMatterTotal
-                      , 0 - cMatterTotalTax
-                      , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
-                      , qryCheque.FieldByName('NCHEQUE').AsInteger
-                      , qryLedger.FieldByName('REASON').AsString
-                      , sLedgerKey
-                      , qryCheque.FieldByName('REQBY').AsString
-                      , qryLedger.FieldByName('UNIQUEID').AsInteger
-                      , ''
-                      , qryLedger.FieldByName('TAXCODE').AsString
-                      , FALSE
-                      , '0'
-                      , qryAllocs.FieldByName('NALLOC').AsInteger
-                      , qryAllocs.FieldByName('NMATTER').AsInteger
-                      , 0
-                      , FALSE
-                      , 0
-                      , 0 - cMatterTotalTax );
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                         , 0 - cMatterTotal
+                         , 0 - cMatterTotalTax
+                         , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
+                         , qryCheque.FieldByName('NCHEQUE').AsInteger
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , qryCheque.FieldByName('REQBY').AsString
+                         , qryLedger.FieldByName('UNIQUEID').AsInteger
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , qryAllocs.FieldByName('NALLOC').AsInteger
+                         , qryAllocs.FieldByName('NMATTER').AsInteger
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0 - cMatterTotalTax );
 
 
-                 {
-                 21 nov 2017 --  commented out to remove duplicate tax calculation
+//                 21 nov 2017 --  commented out to remove duplicate tax calculation
                  if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
                   begin
                     //post components
@@ -1625,41 +1628,41 @@ begin
                       , '0'
                       , qryAllocs.FieldByName('NALLOC').AsInteger
                       , qryAllocs.FieldByName('NMATTER').AsInteger );
-                  end;  }
-
-                  with qryInvoiceUpdate do
-                  begin
-                     ParamByName('AMOUNT').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat);
-                     ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
-                     ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
-                     ParamByName('NINVOICE').AsInteger := qryLedger.FieldByName('NINVOICE').AsInteger;
-                     ParamByName('LegalAmount').AsFloat := (cMatterTotal + cMatterTotalTax);
-                     ParamByName('TradeAmount').AsFloat := (cTradeTotal + cTradeTotalTax);
-                     ExecSQL;
-                     Close;
                   end;
 
-                  MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
-                end;
+                     with qryInvoiceUpdate do
+                     begin
+                        ParamByName('AMOUNT').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat);
+                        ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
+                        ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
+                        ParamByName('NINVOICE').AsInteger := qryLedger.FieldByName('NINVOICE').AsInteger;
+                        ParamByName('LegalAmount').AsFloat := (cMatterTotal + cMatterTotalTax);
+                        ParamByName('TradeAmount').AsFloat := (cTradeTotal + cTradeTotalTax);
+                        ExecSQL;
+                        Close;
+                     end;
+
+                     MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
+                  end;
                 // END: Or is it a Creditor Account Payable?
 
-                if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and
-                   (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
-                begin
-                  // It's a CheqReq - Flag it as converted but only if fully paid
-                  //qryTmp.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y''  WHERE NCHEQREQ = ' + IntToStr(qryLedger.FieldByName('UNIQUEID').AsInteger);
-                  qryTmp.Close;
-                  qryTmp.SQL.Text := 'SELECT nvl(SUM(AMOUNT),0) *-1 as AMOUNT,nvl(SUM(TAX),0) *-1 as TAX FROM ALLOC WHERE NCHEQREQ = :NCHEQREQ';
-                  qryTmp.ParamByName('NCHEQREQ').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
-                  qryTmp.Open;
-                  iCheqReqAmount := qryTmp.FieldByName('AMOUNT').AsFloat;
-                  iCheqReqTax :=  qryTmp.FieldByName('TAX').AsFloat;
-                  qryTmp.Close;
+                  if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and
+                     (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
+                  begin
+                     // It's a CheqReq - Flag it as converted but only if fully paid
+                     //qryTmp.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y''  WHERE NCHEQREQ = ' + IntToStr(qryLedger.FieldByName('UNIQUEID').AsInteger);
+                     qryTmp.Close;
+                     qryTmp.SQL.Text := 'SELECT nvl(SUM(AMOUNT),0) *-1 as AMOUNT,nvl(SUM(TAX),0) *-1 as TAX FROM ALLOC WHERE NCHEQREQ = :NCHEQREQ';
+                     qryTmp.ParamByName('NCHEQREQ').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
+                     qryTmp.Open;
+                     iCheqReqAmount := qryTmp.FieldByName('AMOUNT').AsFloat;
+                     iCheqReqTax :=  qryTmp.FieldByName('TAX').AsFloat;
+                     qryTmp.Close;
 
-                  qryTmp.SQL.Text := 'SELECT AMOUNT,TAX FROM CHEQREQ WHERE NCHEQREQ = :NCHEQREQ';
-                  qryTmp.ParamByName('NCHEQREQ').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
-                  qryTmp.Open;
-                  // floating poing error maybe?
+                     qryTmp.SQL.Text := 'SELECT AMOUNT,TAX FROM CHEQREQ WHERE NCHEQREQ = :NCHEQREQ';
+                     qryTmp.ParamByName('NCHEQREQ').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
+                     qryTmp.Open;
+                     // floating poing error maybe?
 
                   {
                     Code Modified 9.9.02 G.Groube
@@ -1667,320 +1670,320 @@ begin
                   }
                   // if qryTmp.FieldByName('AMOUNT').asCurrency <= ((iCheqReqAmount + qryLedger.FieldByName('AMOUNT').AsCurrency) + 0.001) then
                   // made abs by AES 16/06/2008
-                  if abs(qryTmp.FieldByName('AMOUNT').asCurrency) <=
-                     abs((iCheqReqAmount + iCheqReqTax + qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat) + 0.001) then
+                     if abs(qryTmp.FieldByName('AMOUNT').asCurrency) <=
+                        abs((iCheqReqAmount + iCheqReqTax + qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat) + 0.001) then
                   {
                     End code modified 9.9.02
                   }
-                  begin
-                    qryTmp.Close;
-                    qryTmp.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y'', NCHEQUE = ' + InttoStr(iNcheque) + ' WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
-                    qryTmp.ExecSQL;
-                  end;
+                     begin
+                        qryTmp.Close;
+                        qryTmp.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y'', NCHEQUE = ' + InttoStr(iNcheque) + ' WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
+                        qryTmp.ExecSQL;
+                     end;
 
-                  qryTmp.Close;
-                end;
+                     qryTmp.Close;
+                  end;
                 // END: if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and ...
 
-                if (qryLedger.FieldByName('TAX').AsFloat <> 0) then
-                begin
-                  // For ledger cheque, need to store chart used when posting
-                  if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+                  if (qryLedger.FieldByName('TAX').AsFloat <> 0) then
                   begin
-                    if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-                    begin
+                     // For ledger cheque, need to store chart used when posting
+                     if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+                     begin
+                        if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                        begin
                       {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                           sLedgerKey := glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-                      PostLedger(dtpDate.Date
-                           , qryLedger.FieldByName('TAX').AsFloat
-                           , 0
-                           , tbChqno.Text
-                           , 'CHEQUE'
-                           , qryCheque.FieldByName('NCHEQUE').AsInteger
-                           , qryLedger.FieldByName('REASON').AsString
-                           , sLedgerKey
-                           , ''
-                           , -1
-                           , ''
-                           , qryLedger.FieldByName('TAXCODE').AsString
-                           , FALSE
-                           , sLedgerKey
-                           , qryAllocs.FieldByName('NALLOC').AsInteger
-                           , qryAllocs.FieldByName('NMATTER').AsInteger );
-                      end
-                    else
-                      begin
-                      {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                           PostLedger(dtpDate.Date
+                              , qryLedger.FieldByName('TAX').AsFloat
+                              , 0
+                              , tbChqno.Text
+                              , 'CHEQUE'
+                              , qryCheque.FieldByName('NCHEQUE').AsInteger
+                              , qryLedger.FieldByName('REASON').AsString
+                              , sLedgerKey
+                              , ''
+                              , -1
+                              , ''
+                              , qryLedger.FieldByName('TAXCODE').AsString
+                              , FALSE
+                              , sLedgerKey
+                              , qryAllocs.FieldByName('NALLOC').AsInteger
+                              , qryAllocs.FieldByName('NMATTER').AsInteger );
+                        end
+                        else
+                        begin
+                        {post components}
+                           sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-                      PostLedger(dtpDate.Date
-                           , 0 - qryLedger.FieldByName('TAX').AsFloat
-                           , 0
-                           , tbChqno.Text
-                           , 'CHEQUE'
-                           , qryCheque.FieldByName('NCHEQUE').AsInteger
-                           , qryLedger.FieldByName('REASON').AsString
-                           , sLedgerKey
-                           , ''
-                           , -1
-                           , ''
-                           , qryLedger.FieldByName('TAXCODE').AsString
-                           , FALSE
-                           , sLedgerKey
-                           , qryAllocs.FieldByName('NALLOC').AsInteger
-                           , qryAllocs.FieldByName('NMATTER').AsInteger )
-                      end;
-                  end // END ELSE: For ledger cheque, need to store chart used when posting
-                  else
-                  begin
-                    if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-                    begin
-                     {post components}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
-
-                      PostLedger(dtpDate.Date
-                           , qryLedger.FieldByName('TAX').AsFloat
-                           , 0
-                           , tbChqno.Text
-                           , 'CHEQUE'
-                           , qryCheque.FieldByName('NCHEQUE').AsInteger
-                           , qryLedger.FieldByName('REASON').AsString
-                           , sLedgerKey
-                           , ''
-                           , -1
-                           , ''
-                           , qryLedger.FieldByName('TAXCODE').AsString
-                           , FALSE
-                           , '0'
-                           , qryAllocs.FieldByName('NALLOC').AsInteger
-                           , qryAllocs.FieldByName('NMATTER').AsInteger );
-                           end
-                    else
-                    begin
-                      {post components}
-                      if (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
-                      begin
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
-
-                        PostLedger(dtpDate.Date
-                           , 0 - qryLedger.FieldByName('TAX').AsFloat
-                           , 0
-                           , tbChqno.Text
-                           , 'CHEQUE'
-                           , qryCheque.FieldByName('NCHEQUE').AsInteger
-                           , qryLedger.FieldByName('REASON').AsString
-                           , sLedgerKey
-                           , ''
-                           , -1
-                           , ''
-                           , qryLedger.FieldByName('TAXCODE').AsString
-                           , FALSE
-                           , '0'
-                           , qryAllocs.FieldByName('NALLOC').AsInteger
-                           , qryAllocs.FieldByName('NMATTER').AsInteger );
-
+                           PostLedger(dtpDate.Date
+                              , 0 - qryLedger.FieldByName('TAX').AsFloat
+                              , 0
+                              , tbChqno.Text
+                              , 'CHEQUE'
+                              , qryCheque.FieldByName('NCHEQUE').AsInteger
+                              , qryLedger.FieldByName('REASON').AsString
+                              , sLedgerKey
+                              , ''
+                              , -1
+                              , ''
+                              , qryLedger.FieldByName('TAXCODE').AsString
+                              , FALSE
+                              , sLedgerKey
+                              , qryAllocs.FieldByName('NALLOC').AsInteger
+                              , qryAllocs.FieldByName('NMATTER').AsInteger )
                         end;
-                    end;
-                  end;
+                     end // END ELSE: For ledger cheque, need to store chart used when posting
+                     else
+                     begin
+                        if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                        begin
+                           {post components}
+                           sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+
+                           PostLedger(dtpDate.Date
+                              , qryLedger.FieldByName('TAX').AsFloat
+                              , 0
+                              , tbChqno.Text
+                              , 'CHEQUE'
+                              , qryCheque.FieldByName('NCHEQUE').AsInteger
+                              , qryLedger.FieldByName('REASON').AsString
+                              , sLedgerKey
+                              , ''
+                              , -1
+                              , ''
+                              , qryLedger.FieldByName('TAXCODE').AsString
+                              , FALSE
+                              , '0'
+                              , qryAllocs.FieldByName('NALLOC').AsInteger
+                              , qryAllocs.FieldByName('NMATTER').AsInteger );
+                        end
+                        else
+                        begin
+                           {post components}
+                           if (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
+                           begin
+                              sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+
+                              PostLedger(dtpDate.Date
+                                 , 0 - qryLedger.FieldByName('TAX').AsFloat
+                                 , 0
+                                 , tbChqno.Text
+                                 , 'CHEQUE'
+                                 , qryCheque.FieldByName('NCHEQUE').AsInteger
+                                 , qryLedger.FieldByName('REASON').AsString
+                                 , sLedgerKey
+                                 , ''
+                                 , -1
+                                 , ''
+                                 , qryLedger.FieldByName('TAXCODE').AsString
+                                 , FALSE
+                                 , '0'
+                                 , qryAllocs.FieldByName('NALLOC').AsInteger
+                                 , qryAllocs.FieldByName('NMATTER').AsInteger );
+
+                           end;
+                        end;
+                     end;
                   // END: For ledger cheque, need to store chart used when posting
-                end;
-                // END: if qryLedger.FieldByName('TAX').AsFloat <> 0 then
+                  end;
+                  // END: if qryLedger.FieldByName('TAX').AsFloat <> 0 then
 
-//              do trans for cheqreq
-               if qryLedger.FieldByName('DEP_ACCOUNT_TYPE').AsString <> '' then
-               begin
+//                do trans for cheqreq
+                  if qryLedger.FieldByName('DEP_ACCOUNT_TYPE').AsString <> '' then
+                  begin
 //                  if iTransId <= 0 then
-                  iTransId := strToInt(dmAxiom.GetSeqNumber('SQNC_NINVTRAN'));
-                  qryInvestmentTrans.Close;
-                  qryInvestmentTrans.Open;
-                  qryInvestmentTrans.insert;
-                  qryInvestmentTrans.FieldByName('NINVTRAN').AsInteger := iTransId;
-                  qryInvestmentTrans.FieldByName('NMATTER').AsInteger := qryAllocs.FieldByName('NMATTER').AsInteger;
-                  qryInvestmentTrans.FieldByName('NDEPOSITACCOUNT').AsInteger := qryLedger.FieldByName('NDEPOSITACCOUNT').AsInteger;
-                  qryInvestmentTrans.FieldByName('TYPE').AsString := 'DEP';
-                  qryInvestmentTrans.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-                  qryInvestmentTrans.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-                  qryInvestmentTrans.FieldByName('Reference').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
-                  qryInvestmentTrans.FieldByName('PayeePayor').AsString := tbPayee.Text;
-                  qryInvestmentTrans.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
+                     iTransId := strToInt(dmAxiom.GetSeqNumber('SQNC_NINVTRAN'));
+                     qryInvestmentTrans.Close;
+                     qryInvestmentTrans.Open;
+                     qryInvestmentTrans.insert;
+                     qryInvestmentTrans.FieldByName('NINVTRAN').AsInteger := iTransId;
+                     qryInvestmentTrans.FieldByName('NMATTER').AsInteger := qryAllocs.FieldByName('NMATTER').AsInteger;
+                     qryInvestmentTrans.FieldByName('NDEPOSITACCOUNT').AsInteger := qryLedger.FieldByName('NDEPOSITACCOUNT').AsInteger;
+                     qryInvestmentTrans.FieldByName('TYPE').AsString := 'DEP';
+                     qryInvestmentTrans.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+                     qryInvestmentTrans.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                     qryInvestmentTrans.FieldByName('Reference').AsString := qryLedger.FieldByName('UNIQUEID').AsString;
+                     qryInvestmentTrans.FieldByName('PayeePayor').AsString := tbPayee.Text;
+                     qryInvestmentTrans.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
 
-                  qryInvestmentTrans.post;
-               end;
-
-               if bTrustInvoice then
-               begin
-                  with qryJournalInsert do
-                  begin
-                     ANJournal := GetJournal;
-                     ParamByName('NJOURNAL').AsInteger := ANJournal;
-                     ParamByName('CREATED').AsDateTime := dtpDate.Date;
-                     ParamByName('ACCT').AsString := dmAxiom.Entity;
-                     ParamByName('REASON').AsString := 'Creditor Payment from Trust-' + qryLedger.FieldByName('REASON').AsString ;
-                     ParamByName('AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsFloat;
-                     ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');  //qryAllocs.FieldByName('NMEMO').AsString;
-
-                     ExecSQL; // Puts Journal into cached buffer
+                     qryInvestmentTrans.post;
                   end;
 
-                  if qryCheque.State = dsBrowse then
-                     qryCheque.Edit;
-                  qryCheque.FieldByName('NJOURNAL').AsInteger := ANJournal;
-                  qryCheque.Post;
+                  if bTrustInvoice then
+                  begin
+                     with qryJournalInsert do
+                     begin
+                        ANJournal := GetJournal;
+                        ParamByName('NJOURNAL').AsInteger := ANJournal;
+                        ParamByName('CREATED').AsDateTime := dtpDate.Date;
+                        ParamByName('ACCT').AsString := dmAxiom.Entity;
+                        ParamByName('REASON').AsString := 'Creditor Payment from Trust-' + qryLedger.FieldByName('REASON').AsString ;
+                        ParamByName('AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsFloat;
+                        ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');  //qryAllocs.FieldByName('NMEMO').AsString;
 
-                  qryAllocs.Insert;
-                  lNewNAlloc := GetSeqnum('NALLOC');
-                  qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
-                  qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
-                  qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
-                  qryAllocs.FieldByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
-                  qryAllocs.FieldByName('CLIENT_NAME').AsString := TableString('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'CLIENT_NAME');
-                  qryAllocs.FieldByName('MATTER_DESC').AsString := TableString('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
-                  qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
-                  qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-                  qryAllocs.FieldByName('TRUST').AsString := 'G';
-                  qryAllocs.FieldByName('PAYER').AsString := 'Journal ' + qryJournalInsert.ParamByName('NJOURNAL').AsString;
-                  qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
-                  qryAllocs.FieldByName('TYPE').AsString := 'J1';
-                  qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
-                  qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
-                  qryAllocs.FieldByName('TAX').AsFloat := 0;
-                  qryAllocs.FieldByName('CLEARED').AsString := 'Y';
-                  qryAllocs.FieldByName('NRECEIPT').AsInteger := 0;
-                  qryAllocs.FieldByName('REFNO').AsString := qryJournalInsert.ParamByName('NJOURNAL').AsString;
-                  qryAllocs.FieldByName('BILLED').AsString := 'N';
-                  qryAllocs.FieldByName('UPCRED').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
-                  qryAllocs.FieldByName('NINVOICE_PAID').AsInteger := ANInvoice;
+                        ExecSQL; // Puts Journal into cached buffer
+                     end;
+
+                     if qryCheque.State = dsBrowse then
+                        qryCheque.Edit;
+                     qryCheque.FieldByName('NJOURNAL').AsInteger := ANJournal;
+                     qryCheque.Post;
+
+                     qryAllocs.Insert;
+                     lNewNAlloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
+                     qryAllocs.FieldByName('NALLOC').AsInteger := lNewNAlloc;
+                     qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
+                     qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
+                     qryAllocs.FieldByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
+                     qryAllocs.FieldByName('CLIENT_NAME').AsString := TableString('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'CLIENT_NAME');
+                     qryAllocs.FieldByName('MATTER_DESC').AsString := TableString('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
+                     qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
+                     qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                     qryAllocs.FieldByName('TRUST').AsString := 'G';
+                     qryAllocs.FieldByName('PAYER').AsString := 'Journal ' + qryJournalInsert.ParamByName('NJOURNAL').AsString;
+                     qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
+                     qryAllocs.FieldByName('TYPE').AsString := 'J1';
+                     qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
+                     qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
+                     qryAllocs.FieldByName('TAX').AsFloat := 0;
+                     qryAllocs.FieldByName('CLEARED').AsString := 'Y';
+                     qryAllocs.FieldByName('NRECEIPT').AsInteger := 0;
+                     qryAllocs.FieldByName('REFNO').AsString := qryJournalInsert.ParamByName('NJOURNAL').AsString;
+                     qryAllocs.FieldByName('BILLED').AsString := 'N';
+                     qryAllocs.FieldByName('UPCRED').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
+                     qryAllocs.FieldByName('NINVOICE_PAID').AsInteger := ANInvoice;
 //                  qryAllocs.FieldByName('SUNDRY').AsFloat := qryLedger.FieldByName('SUNDCR').AsFloat;
-                  qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-                  qryAllocs.FieldByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
-                  qryAllocs.FieldByName('NJOURNAL').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
+                     qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+                     qryAllocs.FieldByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
+                     qryAllocs.FieldByName('NJOURNAL').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
 
-                  qryAllocs.Post;  // Put it into the cached buffer
+                     qryAllocs.Post;  // Put it into the cached buffer
 
-                  sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_UPCRED_DR');
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
-                  // do creditor control account
+                     sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_UPCRED_DR');
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                     // do creditor control account
 
-                  PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                      , 0 - qryLedger.FieldByName('AMOUNT').AsFloat
-                      , 0 - qryLedger.FieldByName('TAX').AsFloat
-                      , qryJournalInsert.ParamByName('NJOURNAL').AsString
-                      , 'JOURNAL'
-                      , qryJournalInsert.ParamByName('NJOURNAL').AsInteger
-                      , qryLedger.FieldByName('REASON').AsString
-                      , sLedgerKey
-                      , qryCheque.FieldByName('REQBY').AsString
-                      , ANInvoice
-                      , ''
-                      , qryLedger.FieldByName('TAXCODE').AsString
-                      , FALSE
-                      , '0'
-                      , qryAllocs.FieldByName('NALLOC').AsInteger
-                      , qryAllocs.FieldByName('NMATTER').AsInteger );
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                         , 0 - qryLedger.FieldByName('AMOUNT').AsFloat
+                         , 0 - qryLedger.FieldByName('TAX').AsFloat
+                         , qryJournalInsert.ParamByName('NJOURNAL').AsString
+                         , 'JOURNAL'
+                         , qryJournalInsert.ParamByName('NJOURNAL').AsInteger
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , qryCheque.FieldByName('REQBY').AsString
+                         , ANInvoice
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , qryAllocs.FieldByName('NALLOC').AsInteger
+                         , qryAllocs.FieldByName('NMATTER').AsInteger );
 
-                  sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR');
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
-                  // do debtor control account
+                     sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR');
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
+                     // do debtor control account
 
-                  PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                      , qryLedger.FieldByName('AMOUNT').AsFloat
-                      , qryLedger.FieldByName('TAX').AsFloat
-                      , qryJournalInsert.ParamByName('NJOURNAL').AsString
-                      , 'JOURNAL'
-                      , qryJournalInsert.ParamByName('NJOURNAL').AsInteger
-                      , qryLedger.FieldByName('REASON').AsString
-                      , sLedgerKey
-                      , qryCheque.FieldByName('REQBY').AsString
-                      , -1
-                      , ''
-                      , qryLedger.FieldByName('TAXCODE').AsString
-                      , FALSE
-                      , '0'
-                      , qryAllocs.FieldByName('NALLOC').AsInteger
-                      , qryAllocs.FieldByName('NMATTER').AsInteger );
+                     PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                         , qryLedger.FieldByName('AMOUNT').AsFloat
+                         , qryLedger.FieldByName('TAX').AsFloat
+                         , qryJournalInsert.ParamByName('NJOURNAL').AsString
+                         , 'JOURNAL'
+                         , qryJournalInsert.ParamByName('NJOURNAL').AsInteger
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , qryCheque.FieldByName('REQBY').AsString
+                         , -1
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , qryAllocs.FieldByName('NALLOC').AsInteger
+                         , qryAllocs.FieldByName('NMATTER').AsInteger );
 
-                  with qryInvoiceUpdate do
-                  begin
-                    ParamByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
-                    ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
-                    ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
-                    ParamByName('NINVOICE').AsInteger := ANInvoice;
-                    ExecSQL;
-                  end;
-
-                  with qryNMEMOUpdate do
-                  begin
-                     if not qryInvoiceCRAmount.Active then
+                     with qryInvoiceUpdate do
                      begin
+                        ParamByName('AMOUNT').AsFloat := qryLedger.FieldByName('AMOUNT').AsFloat;
+                        ParamByName('Last_Payment').AsDateTime := qryCheque.FieldByName('CREATED').AsDateTime;
+                        ParamByName('NCHEQUE').AsInteger := qryCheque.FieldByName('NCHEQUE').AsInteger;
+                        ParamByName('NINVOICE').AsInteger := ANInvoice;
+                        ExecSQL;
+                     end;
+
+                     with qryNMEMOUpdate do
+                     begin
+                        if not qryInvoiceCRAmount.Active then
+                        begin
+                           qryInvoiceCRAmount.Close;
+                           qryInvoiceCRAmount.ParamByName('p_ninvoice').AsInteger := ANInvoice;
+                           qryInvoiceCRAmount.Open;
+                        end;
+
+                        with qryBill do
+                        begin
+                           Close;
+                           ParamByName('nmemo').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');;
+                           Open;
+                        end;
+                        SplitPercent := RoundTo(qryLedger.FieldByName('AMOUNT').AsFloat/(qryBill.FieldByName('UPCRED').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat),-2);
+
+                        TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
+                        ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalc;
+                        ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalc);
+
+                        ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
+                        ParamByName('TAX_PAID').AsCurrency := TaxCalc;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
+                        ExecSQL;
+                        qryBill.Close;
                         qryInvoiceCRAmount.Close;
-                        qryInvoiceCRAmount.ParamByName('p_ninvoice').AsInteger := ANInvoice;
-                        qryInvoiceCRAmount.Open;
                      end;
-
-                     with qryBill do
-                     begin
-                        Close;
-                        ParamByName('nmemo').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');;
-                        Open;
-                     end;
-                     SplitPercent := RoundTo(qryLedger.FieldByName('AMOUNT').AsFloat/(qryBill.FieldByName('UPCRED').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat),-2);
-
-                     TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
-                     ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalc;
-                     ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalc);
-
-                     ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
-                     ParamByName('TAX_PAID').AsCurrency := TaxCalc;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
-                     ExecSQL;
-                     qryBill.Close;
-                     qryInvoiceCRAmount.Close;
                   end;
-               end;
 
-                sOldMatter := qryLedger.FieldByName('REFNO').AsString;
-                qryLedger.Next;
-                if sOldMatter <> qryLedger.FieldByName('REFNO').AsString then
-                  inc(ItemCount);
-              end;
+                  sOldMatter := qryLedger.FieldByName('REFNO').AsString;
+                  qryLedger.Next;
+                  if sOldMatter <> qryLedger.FieldByName('REFNO').AsString then
+                     inc(ItemCount);
+               end;
               // ***************   end of loop through G/L entries
               // END:  while not qryLedger.EOF do
 
-              qryCheque.ApplyUpdates;
-              qryAllocs.ApplyUpdates;
-              qryPrinter.ApplyUpdates;
+               qryCheque.ApplyUpdates;
+               qryAllocs.ApplyUpdates;
+               qryPrinter.ApplyUpdates;
               // AES 06/08/2018
-              if (chkReplacementCheque.Checked = True) and (FNCheque <> -1) then
-              begin
-                 try
-                    if not assigned(dmChequeRev) then
-                       dmChequeRev := TdmChequeRev.Create(Self);
-                    dmChequeRev.dReverseDate := dtpDate.Date;
-                    dmChequeRev.sReason := tbDesc.Text;
-                    dmChequeRev.nNMemo := FNMemo;
-                    dmChequeRev.nNMatter := qryAllocs.FieldByName('NMATTER').AsInteger;
-                    dmChequeRev.RvCheque(FNCheque, dtpDate.Date, 'Cheque reissue');
-                    if FNMemo > 0 then
-                    begin
-                       with dmAxiom.qryTmp do
-                       begin
-                          Close;
-                          SQL.Text := 'UPDATE ALLOC SET NMEMO = :NMEMO, BILLED = ''Y'' ' +
+               if (chkReplacementCheque.Checked = True) and (FNCheque <> -1) then
+               begin
+                  try
+                     if not assigned(dmChequeRev) then
+                        dmChequeRev := TdmChequeRev.Create(Self);
+                     dmChequeRev.dReverseDate := dtpDate.Date;
+                     dmChequeRev.sReason := tbDesc.Text;
+                     dmChequeRev.nNMemo := FNMemo;
+                     dmChequeRev.nNMatter := qryAllocs.FieldByName('NMATTER').AsInteger;
+                     dmChequeRev.RvCheque(FNCheque, dtpDate.Date, 'Cheque reissue');
+                     if FNMemo > 0 then
+                     begin
+                        with dmAxiom.qryTmp do
+                        begin
+                           Close;
+                           SQL.Text := 'UPDATE ALLOC SET NMEMO = :NMEMO, BILLED = ''Y'' ' +
                                        'WHERE NALLOC = :NALLOC ';
-                          ParamByName('NALLOC').AsInteger := lNewNAlloc;
-                          ParamByName('NMEMO').AsInteger := FNMemo;
-                          ExecSql;
-                          Close;
-                       end;
-                    end;
-                 finally
-                    FreeAndNil(dmChequeRev);
-                 end;
-              end;
+                           ParamByName('NALLOC').AsInteger := lNewNAlloc;
+                           ParamByName('NMEMO').AsInteger := FNMemo;
+                           ExecSql;
+                           Close;
+                        end;
+                     end;
+                  finally
+                     FreeAndNil(dmChequeRev);
+                  end;
+               end;
 
-              CheckLedgerTotal;
+               CheckLedgerTotal;
 
-              except
+            except
                  on E: Exception do
                  begin
                     if dmAxiom.uniInsight.InTransaction then
@@ -1992,113 +1995,113 @@ begin
                     bPostingFailed := True;
                     MsgErr('Posting failed:' + #13#13 + E.Message);
                  end;
-              end;
+            end;
 
-              if not bPostingFailed then
-              begin
-                 if dmAxiom.uniInsight.InTransaction then
-                    dmAxiom.uniInsight.Commit;
-                 if rgType.ItemIndex = 1 then
-                    MsgInfo('The Direct Debit no ['+ qryCheque.FieldByName('CHQNO').AsString +'] was saved to the database.');
+            if not bPostingFailed then
+            begin
+               if dmAxiom.uniInsight.InTransaction then
+                  dmAxiom.uniInsight.Commit;
+               if rgType.ItemIndex = 1 then
+                  MsgInfo('The Direct Debit no ['+ qryCheque.FieldByName('CHQNO').AsString +'] was saved to the database.');
 
-                 qryAllocs.Close;
-                 qryCheque.Close;
-                 qryPrinter.Close;
+               qryAllocs.Close;
+               qryCheque.Close;
+               qryPrinter.Close;
 
                  // Do the trust transfer receipt into general if required
-                 if cbBankTransfer.Text <> '' then
-                 begin
-                    with TfrmReceipt.Create(Application) do
-                    begin
-                       TrustTransfer(cbBankTransfer.Text, iNcheque);
-                       Show;
-                    end;
-                 end;
+               if cbBankTransfer.Text <> '' then
+               begin
+                  with TfrmReceipt.Create(Application) do
+                  begin
+                     TrustTransfer(cbBankTransfer.Text, iNcheque);
+                     Show;
+                  end;
+               end;
 
                  // print the cheque if set
-                 try
-                   if chkPrint.Visible and chkPrint.Checked then
+               try
+                  if chkPrint.Visible and chkPrint.Checked then
                      with TfrmChequePrint.Create(Self) do
                      begin;
-                       PrinterPath := cmbPrinter.Text;
-                       PrintCheque(iNcheque);
+                        PrinterPath := cmbPrinter.Text;
+                        PrintCheque(iNcheque);
                      end;
-                 except
-                   on E: Exception do
+               except
+                  on E: Exception do
                      MsgErr('Printing failed:' + #13 + E.Message + #13#13 + 'You may print this cheque by locating it in the Cheques screen');
-                 end;
+               end;
 
                  // Refresh the Cah Payments screen
-                 iCtr := 0;
-                 bFormUpdated := False;
-                 while (iCtr < Screen.FormCount) and not bFormUpdated do
-                 begin
-                   if Screen.Forms[iCtr].ClassName = 'TfrmCashPay' then
-                   begin
+               iCtr := 0;
+               bFormUpdated := False;
+               while (iCtr < Screen.FormCount) and not bFormUpdated do
+               begin
+                  if Screen.Forms[iCtr].ClassName = 'TfrmCashPay' then
+                  begin
                      (Screen.Forms[iCtr] as TfrmCashPay).MakeSQL;
                      bFormUpdated := True;
-                   end
-                   else
-                   if Screen.Forms[iCtr].ClassName = 'TfrmCheqReqs' then
-                   begin
+                  end
+                  else
+                  if Screen.Forms[iCtr].ClassName = 'TfrmCheqReqs' then
+                  begin
                      (Screen.Forms[iCtr] as TfrmCheqReqs).MakeSQL;
                      bFormUpdated := True;
-                   end
-                   else
-                   if Screen.Forms[iCtr].ClassName = 'TfrmAcctPayable' then
-                   begin
+                  end
+                  else
+                  if Screen.Forms[iCtr].ClassName = 'TfrmAcctPayable' then
+                  begin
                      (Screen.Forms[iCtr] as TfrmAcctPayable).MakeSQL;
                      bFormUpdated := True;
-                   end;
-                   iCtr := iCtr + 1;
-                 end;
+                  end;
+                  iCtr := iCtr + 1;
+               end;
 
-                 if chkNoExit.Checked then
-                 begin
-                   // Create a new cheque
-                   sNName := '';
-                   tbPayee.Text := '';
-                   tbDesc.Text := '';
-                   DefaultDescr := '';
-                   neAmount.AsCurrency := 0;
-                   TotalAmt := 0;
-                   Balance := 0;
-                   Tax := 0;
-                   lblBalance.Caption := '0.00';
-                   lblTotal.Caption := '0.00';
-                   lblTax.Caption := '0.00';
-                   lblUnallocated.Caption := '0.00';
-                   lblName.Caption := '';
-                   lblAddress.Caption := '';
+               if chkNoExit.Checked then
+               begin
+                  // Create a new cheque
+                  sNName := '';
+                  tbPayee.Text := '';
+                  tbDesc.Text := '';
+                  DefaultDescr := '';
+                  neAmount.AsCurrency := 0;
+                  TotalAmt := 0;
+                  Balance := 0;
+                  Tax := 0;
+                  lblBalance.Caption := '0.00';
+                  lblTotal.Caption := '0.00';
+                  lblTax.Caption := '0.00';
+                  lblUnallocated.Caption := '0.00';
+                  lblName.Caption := '';
+                  lblAddress.Caption := '';
 
-                   qryLedger.Close;
-                   qryPrinter.Close;
-                   qryBank.Close;
-                   qryInvoiceCRAmount.Close;
+                  qryLedger.Close;
+                  qryPrinter.Close;
+                  qryBank.Close;
+                  qryInvoiceCRAmount.Close;
 
-                   qryBank.Open;
-                   qryLedger.Open;
-                   qryPrinter.Open;
+                  qryBank.Open;
+                  qryLedger.Open;
+                  qryPrinter.Open;
 
-                   NextChqno;
-                   Created := True;
-                   tbPayee.SetFocus;
-                 end
-                 else
-                   Self.Close;
-              end
-              else
-                 begin
-                   if dmAxiom.uniInsight.InTransaction then
-                       dmAxiom.uniInsight.Rollback;
-                   showmessage('Transaction Cancelled.');
-                 end;
-              end;
-          end;    //  end if
-          if MatterList <> nil then MatterList.Destroy;
-          if MatterAmountList <> nil then MatterAmountList.Destroy;
-          if ProtectedList <> nil then ProtectedList.Destroy;
-          if ProtectedAmountList <> nil then ProtectedAmountList.Destroy;
+                  NextChqno;
+                  Created := True;
+                  tbPayee.SetFocus;
+               end
+               else
+                  Self.Close;
+            end
+            else
+            begin
+               if dmAxiom.uniInsight.InTransaction then
+                  dmAxiom.uniInsight.Rollback;
+                  showmessage('Transaction Cancelled.');
+            end;
+         end;
+      end;    //  end if
+      if MatterList <> nil then MatterList.Destroy;
+      if MatterAmountList <> nil then MatterAmountList.Destroy;
+      if ProtectedList <> nil then ProtectedList.Destroy;
+      if ProtectedAmountList <> nil then ProtectedAmountList.Destroy;
    end;
 end;
 
@@ -2800,25 +2803,24 @@ begin
       iType := 0;
       if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
       BEGIN
-          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC) ';
+          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), TAXCODE ';
           sSQL := sSQL + 'FROM INVOICE P, ALLOC A WHERE A.NINVOICE = P.NINVOICE AND P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT ';
-          SQL.Text := sSQL;
+          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, TAXCODE ';          SQL.Text := sSQL;
       END
       ELSE
       BEGIN
           //SQL.Text := 'SELECT * FROM INVOICE, ALLOC WHERE ALLOC.NINVOICE = INVOICE.NINVOICE AND INVOICE.NINVOICE = ' + InttoStr(NCheque);
-          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX ';
+          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX, P.TAXCODE ';
           sSQL := sSQL + 'FROM ';
-          sSQL := sSQL + '(SELECT ABS(R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, MAX(R.COMMENCE) ';
+          sSQL := sSQL + '(SELECT (R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, (R.COMMENCE), T.TAXCODE ';
           sSQL := sSQL + 'FROM INVOICE I ';
           sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
           sSQL := sSQL + 'INNER JOIN MATTER M ON T.NMATTER = M.NMATTER ';
           sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE NOT IN (''CRED'',''GSTINP'') ';
-          sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
+          sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON t.taxcode = r.taxcode AND ((trunc(r.commence) >= :commence) and (trunc(r.commence) <= :commence))';
           sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'group by ABS(R.RATE), I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX ';
-          sSQL := sSQL + 'UNION ALL ';
+ //         sSQL := sSQL + 'group by ABS(R.RATE), I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, T.TAXCODE, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX ';
+ {         sSQL := sSQL + 'UNION ALL ';
           sSQL := sSQL + 'SELECT ABS(R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT AS U_AMOUNT, T.TAX AS U_TAX, 0 AS T_AMOUNT, 0 AS T_TAX, MAX(R.COMMENCE) ';
           sSQL := sSQL + 'FROM INVOICE I ';
           sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NINVOICE AND T.OWNER_CODE = ''CHEQUE'' ';
@@ -2826,9 +2828,9 @@ begin
           sSQL := sSQL + 'INNER JOIN MATTER M ON S.NMATTER = M.NMATTER ';
           sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE = ''CRED'' ';
           sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
-          sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX) P ';
-          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
+          sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';  }
+          sSQL := sSQL + {'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX} ') P ';
+          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
           SQL.Text := sSQL;
           ParamByName('COMMENCE').AsDateTime := Trunc(Now);
       END;
@@ -2846,7 +2848,7 @@ begin
           Close;
           if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
           BEGIN
-              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX ';
+              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE ';
               sSQL := sSQL + 'FROM INVOICE P WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
               SQL.Text := sSQL;
           END
@@ -2860,13 +2862,13 @@ begin
               sSQL := sSQL + '(T.AMOUNT - ((I.OWING/I.AMOUNT) * T.AMOUNT)) AS U_AMOUNT, (T.TAX - ((I.OWING/I.AMOUNT) * T.TAX)) AS U_TAX, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.amount else t.amount * -1 end AS t_amount, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.tax else t.tax * -1 end AS t_tax, MAX(R.COMMENCE) ';
-              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, MAX(R.COMMENCE) ';
+              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, MAX(R.COMMENCE), T.TAXCODE ';
               sSQL := sSQL + 'FROM INVOICE I ';
               sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
               sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE NOT IN (''CRED'',''GSTINP'') ';
               sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
               sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';
-              sSQL := sSQL + 'group by R.RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX ';
+//              sSQL := sSQL + 'group by R.RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, T.TAXCODE, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX ';
               //sSQL := sSQL + 'UNION ALL ';
               //sSQL := sSQL + 'SELECT ABS(R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT AS U_AMOUNT, T.TAX AS U_TAX, 0 AS T_AMOUNT, 0 AS T_TAX, MAX(R.COMMENCE) ';
               //sSQL := sSQL + 'FROM INVOICE I ';
@@ -2958,13 +2960,14 @@ begin
               if qryDetails.FindField('FILEID') <> nil then
                  FieldByName('FILEID').AsString := qryDetails.FieldByName('FILEID').AsString;
               FieldByName('NINVOICE').AsInteger := qryDetails.FieldByName('NINVOICE').AsInteger;
+              FieldByName('TAXCODE').AsString := qryDetails.FieldByName('TAXCODE').AsString;
               Edit;
   {
     Added 17.12.2002 GG
 
     Make the Tax Rate column Read-Only if converted from a billed cheqreq
   }
-              tvLedger.Columns[colTAXCODE].Properties.ReadOnly:= True;
+//              tvLedger.Columns[colTAXCODE].Properties.ReadOnly:= True;
   //      dbgrLedger.Columns[colTAXCODE].Font.Color:= clGray;
   {
     Modified 20.12.2002 GG
@@ -3000,14 +3003,17 @@ begin
                 ' to pay this invoice.' );
          Self.Close;  }
 
-              DefaultTax := GetDefaultTax('Invoice', 'NOTAX');
+//              DefaultTax := GetDefaultTax('Invoice', 'NOTAX');
+
+{
               if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
                   FieldByName('TAXCODE').AsString := DefaultTax
               else
               begin
-                  sTaxCode := TaxCode('BOTH', qryDetails.FieldByName('TAX_RATE').AsFloat, Now);
+                  sTaxCode := TaxCode('BOTH', qryDetails.FieldByName('TAXCODE').AsString, Now);
                   FieldByName('TAXCODE').AsString := sTaxCode;
               end;
+ }
               Edit;
               qryLedger.FieldByName('UNIQUEID').AsInteger := NCheque;
               // 11 Feb 2019 DW handle Invoice GST defaul tax setting

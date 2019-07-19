@@ -524,7 +524,7 @@ type
   function MsgWarn(sMsg: string): Word;
   function NextRefno(PrevRefno: string; PadLength: Integer = -1): string; overload;
   function NextRefno : String; overload;
-  function IsRefnoExisting(sRefno : String) : Boolean;
+  function IsRefnoExisting(sRefno : String; ANMemo: integer = -1) : Boolean;
   procedure OpenPrecedent(FileName: string);
   procedure ParamsNullify(parClear: TParams);
   function PhoneBookMailingAddress(sSearch: string): string;
@@ -767,6 +767,7 @@ type
   function IndexPath(PathText, PathLoc: string): string;
   function ClearTrustFromStoredProc(sFileID : String) : Currency;
   function MatterDocAccess(ANMatter, AEmpCode: string ): boolean;
+  function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
   function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
   procedure Split(const S: String; Separator: Char; MyStringList: TStringList);
   function ParseMacros(AFileName: String; ANMatter: Integer = -1; ADocID: Integer = -1; ADocDescr: string = ''; ANMemo: integer = -1): String;
@@ -1927,13 +1928,16 @@ var
    ATabIndex: integer;
    Form: TCustomForm;
 begin
-  Form := GetParentForm(aForm);
+   Form := GetParentForm(aForm);
 
    try
     if not(fsModal in aForm.FormState) and (Form.Name = 'frmDesktop')  then
     begin
       aForm.Release;
-      ATabIndex := frmDesktop.TabIndex;
+      if dmAxiom.ATabIndex = -1 then
+         ATabIndex := frmDesktop.PageForms.ActivePageIndex
+      else
+         ATabIndex := dmAxiom.ATabIndex;
       if ATabIndex = -1 then
       begin
          if frmDesktop.pageForms.ActivePage <> NIL then
@@ -5269,9 +5273,9 @@ begin
             ParamsNullify(Params);
             // commented by AES
             // Build 26 will rely on trigger generating naccount
-{            if nAccount = 0 then
-               nAccount := StrToInt(dmAxiom.GetSeqNumber('sqnc_naccount'));  // GetSeqnum('NACCOUNT');
-            ParamByName('NACCOUNT').AsInteger := nAccount;      }
+            if nAccount = 0 then
+               nAccount := GetSequenceNumber('sqnc_naccount');  // GetSeqnum('NACCOUNT');
+            ParamByName('NACCOUNT').AsInteger := nAccount;
             ParamByName('CREATED').AsDateTime := dtDate;
             ParamByName('ACCT').AsString := dmAxiom.Entity;
             ParamByName('AMOUNT').AsFloat := cAmount;
@@ -5654,7 +5658,7 @@ begin
 }
    if not qryOldNaccount.IsEmpty then
    begin
-      // Make a reversed copy of this record
+      // Make a reversed copy of this record transitem
       ParamsNullify(dmAxiom.qryNaccountsRV.Params);
       with dmAxiom.qryNaccountsRV do
       begin
@@ -5729,7 +5733,7 @@ begin
       with dmAxiom.qryAllocsRV do
       begin
          // Make a reversed copy of this record
-         lNAlloc := GetSeqnum('NALLOC');
+         lNAlloc := GetSequenceNumber('SQNC_NALLOC');  //GetSeqnum('NALLOC');
          ParamByName('NALLOC').AsInteger := lNAlloc;
          ParamByName('CREATED').AsDateTime := dtReversal;
          ParamByName('REFNO').AsString := sRefno;
@@ -5814,7 +5818,7 @@ begin
 //         if (iNewNjournal <> 0) or (IsAnticipated) then
 //            ParamByName('BILLED').AsString := qryOldAlloc.FieldByName('BILLED').AsString
 //         else
-            ParamByName('BILLED').AsString := 'Y';
+         ParamByName('BILLED').AsString := 'Y';
 
          ParamByName('CLIENT_NAME').AsString := qryOldAlloc.FieldByName('CLIENT_NAME').AsString;
          ParamByName('MATTER_DESC').AsString := qryOldAlloc.FieldByName('MATTER_DESC').AsString;
@@ -5859,9 +5863,17 @@ begin
          try
            qryAlloc.Connection:= dmAxiom.uniInsight;
            qryAlloc.SQL.Clear;
-           qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'' where nalloc = :nalloc');
-           qryAlloc.ParamByName('NALLOC').AsString:= qryOldAlloc.FieldByName('NALLOC').AsString;
-           qryAlloc.ParamByName('RV_NALLOC').AsString:= ParamByName('NALLOC').AsString;
+           if iNewNjournal <> 0 then
+           begin
+              qryAlloc.SQL.Add('update alloc set billed = ''N'', private = ''N'', N_WOFF = NULL where nalloc = :nalloc');
+              qryAlloc.ParamByName('NALLOC').AsInteger:= qryOldAlloc.FieldByName('N_WOFF').AsInteger;
+           end
+           ELSE
+           begin
+              qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'' where nalloc = :nalloc');
+              qryAlloc.ParamByName('NALLOC').AsString:= qryOldAlloc.FieldByName('NALLOC').AsString;
+              qryAlloc.ParamByName('RV_NALLOC').AsString:= ParamByName('NALLOC').AsString;
+           end;
            qryAlloc.ExecSQL;
          finally
            qryAlloc.Free
@@ -7777,35 +7789,36 @@ function TableString(Table, LookupField, LookupValue, ReturnField: string): stri
 var
   qryLookup: TUniQuery;
 begin
+   if dmAxiom.bShutDown = False then
+   begin
+      if (Table = 'TAXTYPE') AND ((ReturnField = 'LEDGER') OR  (ReturnField = 'OUTPUTLEDGER') OR (ReturnField = 'ADJUSTLEDGER')) then
+      begin
+         qryLookup := TUniQuery.Create(nil);
+         qryLookup.Connection := dmAxiom.uniInsight;
+         with qryLookup do
+         begin
+            SQL.Text := 'SELECT ' + ReturnField + ' FROM TAXTYPE_LEDGER WHERE ' + LookupField + ' = :' + LookupField + ' and entity = :entity ';
+            ParamByName(LookupField).AsString := LookupValue;
+            ParamByName('ENTITY').AsString := dmAxiom.Entity;
+            open;
+            Result := Fields[0].AsString;
+            Close;
+         end;
+          exit;
+      end;
 
-  if (Table = 'TAXTYPE') AND ((ReturnField = 'LEDGER') OR  (ReturnField = 'OUTPUTLEDGER') OR (ReturnField = 'ADJUSTLEDGER'))
-  then
-  begin
-    qryLookup := TUniQuery.Create(nil);
-    qryLookup.Connection := dmAxiom.uniInsight;
-    with qryLookup do
-        begin
-        SQL.Text := 'SELECT ' + ReturnField + ' FROM TAXTYPE_LEDGER WHERE ' + LookupField + ' = :' + LookupField + ' and entity = :entity ';
-        ParamByName(LookupField).AsString := LookupValue;
-        ParamByName('ENTITY').AsString := dmAxiom.Entity;
-        open;
-        Result := Fields[0].AsString;
-        Close;
-        end;
-    exit;
-  end;
-
-  qryLookup := TUniQuery.Create(nil);
-  qryLookup.Connection := dmAxiom.uniInsight;
-  with qryLookup do
-  begin
-    SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :LookupField';
-    Params[0].AsString := LookupValue;
-    Open;
-    Result := Fields[0].AsString;
-    Close;
-  end;
-  qryLookup.Free;
+      qryLookup := TUniQuery.Create(nil);
+      qryLookup.Connection := dmAxiom.uniInsight;
+      with qryLookup do
+      begin
+         SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :LookupField';
+         Params[0].AsString := LookupValue;
+         Open;
+         Result := Fields[0].AsString;
+         Close;
+      end;
+      qryLookup.Free;
+   end;
 end;
 
 function TableStringEntity(aTable, aLookupField: string; aLookupValue: Integer; aReturnField: string; aEntity: string): string; overload;
@@ -8917,14 +8930,20 @@ begin
   end;    //  end try-finally
 end;
 
-function IsRefnoExisting(sRefno : String) : Boolean;
+function IsRefnoExisting(sRefno : String; ANMemo: integer) : Boolean;
 begin
   try
     with dmAxiom.qryTmp do
       begin
         Close;
         SQL.Clear;
-        SQL.Add('SELECT REFNO FROM NMEMO WHERE REFNO = ' + QuotedStr(sRefno));
+        if ANMemo <> -1 then
+        begin
+           SQL.Add('SELECT REFNO FROM NMEMO WHERE NMEMO <> :NMEMO AND REFNO = ' + QuotedStr(sRefno));
+           ParamByName('NMEMO').AsInteger := ANMemo;
+        end
+        else
+           SQL.Add('SELECT REFNO FROM NMEMO WHERE REFNO = ' + QuotedStr(sRefno));
         Open;
         Result := (not dmAxiom.qryTmp.IsEmpty);
         Close;
@@ -11920,6 +11939,41 @@ begin
    qryLookup.Free;
 end;
 
+function MatterFinAccess(ANMatter, AEmpCode: string ): boolean;
+begin
+   with dmAxiom.procTemp do
+   begin
+      Close;
+      StoredProcName := 'matterfinaccess';
+      PrepareSQL;
+      Params[1].AsString  := ANMatter;
+      Params[2].AsString  := AEmpCode;
+      Execute;
+      Result := (Params[0].AsInteger = 0);
+   end;
+
+{   qryLookup := TUniQuery.Create(nil);
+   qryLookup.Connection := dmAxiom.uniInsight;
+   with qryLookup do
+   begin
+      SQL.Text := 'SELECT ''x'' FROM matter WHERE nmatter = ' + ANMatter;
+      SQL.Text := SQL.Text + ' AND CASE WHEN (author = :p_author ';
+      SQL.Text := SQL.Text + 'OR partner = :p_authore OR controller = :p_author OR OPERATOR = :p_author OR paralegal = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_1 = :p_author OR wkflow_per_level_2 = :p_author OR wkflow_per_level_3 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_4 = :p_author OR wkflow_per_level_5 = :p_author OR wkflow_per_level_6 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_7 = :p_author OR wkflow_per_level_8 = :p_author OR wkflow_per_level_9 = :p_author ';
+      SQL.Text := SQL.Text + 'OR wkflow_per_level_10 = :p_author) THEN 1 ELSE 0 END = 1 ';
+      ParamByName('P_AUTHOR').AsString := AEmpCode;
+      Open;
+      if (not EOF) then
+         Result := True
+      else
+         Result := False;
+      Close;
+   end;
+   qryLookup.Free;   }
+end;
+
 function GetNextToken(Const S: string; Separator: char; var StartPos: integer): String;
 var
    Index: integer;
@@ -14015,7 +14069,7 @@ begin
          SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0 - a.tax, 0)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (rate = 0) then 0 ');
-         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax, a.taxcode ');
+         SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax ');
 
 //        SQL.Add('SELECT SUM(0 - AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0, NVL(a.tax, 0), NVL(a.amount, 0)),0,0,0-AMOUNT)) as TAXABLE_AMOUNT, ');
 //        SQL.Add('SUM(NVL(0 - A.TAX, 0)) as ITEMTAX, ');
@@ -14087,7 +14141,7 @@ begin
             SQL.Add('SELECT SUM(AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0,');
             SQL.Add(' NVL(a.tax, 0), NVL(a.amount, 0)),0,0,AMOUNT)) as TAXABLE_AMOUNT, ');
             SQL.Add('SUM(NVL(A.TAX,0)) AS ITEMTAX ,');
-            SQL.Add('CASE WHEN :DEFAULTTAX = ''GST'' THEN SUM(NVL(A.AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS TAX ');
+            SQL.Add('CASE WHEN :DEFAULTTAX = (SELECT CODE FROM TAXTYPE WHERE DEFAULTTAX = ''Y'') THEN SUM(NVL(A.AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS TAX ');
 //            SQL.Add('SUM( DECODE(NVL(A.TAX,0),0,(NVL(A.AMOUNT, 0)*(ABS(NVL(R.RATE, 0))/100)), NVL(a.tax, 0)) ) AS TAX ');
          end
          else
@@ -14095,7 +14149,7 @@ begin
             SQL.Add('SELECT SUM (task_amount) as amount, sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0,');
             SQL.Add(' NVL(a.tax, 0), NVL(a.task_amount, 0)),0,0,task_AMOUNT)) as TAXABLE_AMOUNT, ');
             SQL.Add('SUM(NVL(A.TAX,0)) AS TAX ,');
-            SQL.Add('CASE WHEN :DEFAULTTAX = ''GST'' THEN SUM(NVL(A.TASK_AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS ITEMTAX ');
+            SQL.Add('CASE WHEN :DEFAULTTAX = (SELECT CODE FROM TAXTYPE WHERE DEFAULTTAX = ''Y'') THEN SUM(NVL(A.TASK_AMOUNT, 0))*(ABS(NVL(R.RATE, 0))/100) ELSE 0 END AS ITEMTAX ');
 //            SQL.Add('SUM( DECODE(NVL(A.TAX,0),0,(NVL(A.task_AMOUNT, 0)*(ABS(NVL(R.RATE, 0))/100)), NVL(a.tax, 0)) ) AS TAX ');
          end;
          dmAxiom.qryGetBillTemplate.Close;
@@ -14131,23 +14185,26 @@ begin
 
       SQL.Add('  AND NMEMO = ' + IntToStr(nNMEMO));
 
-      SQL.Add(' AND A.TAXCODE = R.TAXCODE (+) ');
+      if (sType = 'ALLOC') or (sType = 'CHEQREQ') then
+         SQL.Add(' AND nvl(a.billing_taxcode, a.taxcode) = r.taxcode(+) ')
+      else
+         SQL.Add(' AND a.taxcode = r.taxcode(+) ');
 
       if sType = 'ALLOC' then
       begin
          SQL.Add('  AND NINVOICE IS NULL AND (nvl(NRECEIPT,0) = 0 OR (NVL(NRECEIPT, 0) > 0 AND TYPE = ''DR''))');
-         SQL.Add(' group by nalloc, a.taxcode) ');
+         SQL.Add(' group by nalloc, a.taxcode, a.billing_taxcode ) ');
       end;
 
       if sType = 'UPCRED' then
       begin
          SQL.Add('  AND NINVOICE IS NOT NULL');
-         SQL.Add(' group by nalloc, a.taxcode) ');
+         SQL.Add(' group by nalloc, a.taxcode, a.billing_taxcode ) ');
       end;
 
       if sType = 'CHEQREQ' then
       begin
-         SQL.Add(' group by ncheqreq, a.taxcode) ');
+         SQL.Add(' group by ncheqreq, a.taxcode, A.BILLING_TAXCODE) ');
       end;
 
       // AES 06/09/2017 new parameter to calculate gst
@@ -14164,7 +14221,7 @@ begin
       SQL.Add('AND NVL(S.zero_billed,''N'') = ''N'' ');
     end; }
 
-      if dmAxiom.runningide and (sType = 'ALLOC') then {sType = 'CHEQREQ' then }
+      if dmAxiom.runningide and {(sType = 'FEE')} (sType = 'ALLOC') then
          dmAxiom.qryTmp.SQL.SaveToFile('C:\tmp\qryBills.sql');
 
       // AES 06/09/2017 new parameter to calculate gst
@@ -14264,7 +14321,8 @@ begin
                   dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);
               end
               else
-                  dTax := FieldByName('ITEMTAX').AsCurrency;
+                 dTax := FieldByName('ITEMTAX').AsCurrency;
+
                //dTax := FieldByName('ITEMTAX').AsCurrency//TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate)
            end
            else

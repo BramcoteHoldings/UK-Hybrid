@@ -46,6 +46,8 @@ object frmBills: TfrmBills
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
+        ExplicitLeft = 48
+        ExplicitTop = -3
         object tvBills: TcxGridDBTableView
           PopupMenu = popAuthorise
           OnDblClick = dbgrBillsDblClick
@@ -147,6 +149,12 @@ object frmBills: TfrmBills
           Preview.LeftIndent = 19
           Styles.OnGetContentStyle = tvBillsStylesGetContentStyle
           OnColumnHeaderClick = tvBillsColumnHeaderClick
+          object tvBillsSTATUS: TcxGridDBColumn
+            Caption = 'Status'
+            DataBinding.FieldName = 'STATUS'
+            Options.Editing = False
+            Options.Focusing = False
+          end
           object tvBillsNSUBBILL: TcxGridDBColumn
             DataBinding.FieldName = 'NSUBBILL'
             Visible = False
@@ -228,7 +236,7 @@ object frmBills: TfrmBills
             Width = 61
           end
           object tvBillsANTD: TcxGridDBColumn
-            Caption = 'Anticipated'
+            Caption = 'Cheque Req'
             DataBinding.FieldName = 'ANTD'
             PropertiesClassName = 'TcxCurrencyEditProperties'
             HeaderAlignmentHorz = taRightJustify
@@ -580,10 +588,6 @@ object frmBills: TfrmBills
     object tabTotals: TcxTabSheet
       Caption = 'Totals'
       ImageIndex = 19
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object nlFees: TNumberLabel
         Left = 228
         Top = 17
@@ -2702,7 +2706,21 @@ object frmBills: TfrmBills
         '    NMEMO.Original_fees, (NMEMO.Original_Fees - NMEMO.Fees) Vari' +
         'ance, (NMEMO.Fees - NMEMO.Original_Fees) Diff, SHORTDESCR, contr' +
         'oller, '#39#39' as email,'
-      '    NMEMO.PATH, nmemo.nbill_to, IS_DRAFT'
+      '    NMEMO.PATH, nmemo.nbill_to, IS_DRAFT,'
+      
+        '    NMEMO.AUTHORISED_BY, NMEMO.AUTHORISED_DATE, NMEMO.DISPATCHED' +
+        '_BY,'
+      '    CASE -- WHEN NMEMO.REJECTED = '#39'Y'#39' then '#39'Rejected'#39
+      
+        '-- WHEN NMEMO.REJECTED = '#39'N'#39' and NMEMO.PRIVATE = '#39'Y'#39' then '#39'Priva' +
+        'te'#39
+      
+        ' WHEN NMEMO.PRIVATE = '#39'N'#39' and NMEMO.IS_DRAFT = '#39'Y'#39' then '#39'Submitt' +
+        'ed'#39
+      
+        ' WHEN NMEMO.PRIVATE = '#39'N'#39' and NMEMO.REFNO = '#39'AUTH'#39' then '#39'Authori' +
+        'sed'#39
+      ' WHEN NMEMO.IS_DRAFT = '#39'N'#39' then '#39'Posted'#39' END as STATUS'
       'FROM NMEMO, AllMatters, MASTERBILLS'
       'WHERE NMEMO.NMATTER = AllMatters.NMATTER'
       '      AND MASTERBILLS.NMASTER = NMEMO.NMASTER (+)'
@@ -5492,7 +5510,7 @@ object frmBills: TfrmBills
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Totals'
-      ReportDocument.CreationDate = 42838.453496805550000000
+      ReportDocument.CreationDate = 42838.453496805560000000
       TimeFormat = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

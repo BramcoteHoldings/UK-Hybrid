@@ -14,7 +14,8 @@ uses
   dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
   dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxDBEditorLnks,
   dxPSTextLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
-  dxPScxSchedulerLnk, cxClasses;
+  dxPScxSchedulerLnk, cxClasses, dxLayoutContainer, dxLayoutcxEditAdapters,
+  dxLayoutControlAdapters, dxLayoutControl;
 
 type
   TfrmTransitNew = class(TForm)
@@ -22,17 +23,6 @@ type
     qryMatter: TUniQuery;
     lblInvoice: TLabel;
     qryTransit: TUniQuery;
-    pnlReceived: TPanel;
-    Label2: TLabel;
-    Label4: TLabel;
-    Label8: TLabel;
-    lblTaxDescr: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
     neAmount: TNumberEdit;
     dtpCreated: TDateTimePicker;
     edtRefNo: TEdit;
@@ -40,35 +30,56 @@ type
     edtCheque: TEdit;
     edtFrom: TEdit;
     edtTo: TEdit;
-    Panel2: TPanel;
     btnCancel: TBitBtn;
     btnSave: TBitBtn;
     ComponentPrinter: TdxComponentPrinter;
     ComponentPrinterLink2: TdxCustomContainerReportLink;
     dtpSent: TDateTimePicker;
-    Label12: TLabel;
     lblMatterDesc: TLabel;
     lblClient: TLabel;
-    Label3: TLabel;
-    rgDirection: TRadioGroup;
     btnMatterFind: TSpeedButton;
-    Label1: TLabel;
     mmoDesc: TMemo;
     cbPrint: TcxCheckBox;
     lblMatter: TLabel;
     edtBranch: TEdit;
-    Label13: TLabel;
-    Label14: TLabel;
     edtBSB: TEdit;
     edtBankAcct: TEdit;
-    lblAddress: TLabel;
     mmoAddress: TMemo;
     cmbPaymentType: TcxLookupComboBox;
     qryPaymentType: TUniQuery;
     dsPaymentType: TUniDataSource;
     chkSent: TCheckBox;
-    Label15: TLabel;
     lblTransitNo: TLabel;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem11: TdxLayoutItem;
+    dxLayoutItem12: TdxLayoutItem;
+    dxLayoutItem13: TdxLayoutItem;
+    dxLayoutItem14: TdxLayoutItem;
+    dxLayoutItem15: TdxLayoutItem;
+    dxLayoutItem16: TdxLayoutItem;
+    dxLayoutItem17: TdxLayoutItem;
+    dxLayoutItem18: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem19: TdxLayoutItem;
+    dxLayoutItem20: TdxLayoutItem;
+    dxLayoutGroup4: TdxLayoutGroup;
+    dxLayoutItem21: TdxLayoutItem;
+    dxLayoutItem22: TdxLayoutItem;
+    dxLayoutItem23: TdxLayoutItem;
+    dxLayoutGroup5: TdxLayoutGroup;
     procedure btnSaveClick(Sender: TObject);
     procedure neRateChange(Sender: TObject);
     procedure neUnitsChange(Sender: TObject);
@@ -349,8 +360,8 @@ begin
       sTmp := sTmp + '       Matter' + Chr(13);
    if mmoDesc.Text = '' then
       sTmp := sTmp + '       Reason' + Chr(13);
-   if (rgDirection.ItemIndex = -1) then
-      sTmp := sTmp + '       Direction' + Chr(13);
+//   if (rgDirection.ItemIndex = -1) then
+//      sTmp := sTmp + '       Direction' + Chr(13);
    if cmbPaymentType.Text = '' then
       sTmp := sTmp + '       Payment Type' + Chr(13);
   if sTmp <> '' then

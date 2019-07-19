@@ -91,6 +91,7 @@ type
     cmbInvoice: TcxLookupComboBox;
     qryInv: TUniQuery;
     dsInv: TUniDataSource;
+    chkPreviewPDF: TcxCheckBox;
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure cbBankChange(Sender: TObject);
@@ -389,7 +390,8 @@ begin
          chkBill.Enabled := False;
 
          //pb- if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsInteger <> 0) then
-         if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsString <> '') then
+         if (FieldByName('BILLED').AsString = 'Y') and
+             FieldByName('invoicedate').IsNull = False {(FieldByName('NMEMO').AsString <> '')} then
          begin
             ToggleFields(False);
             if (qryCheqReq.FieldByName('NCHEQUE').IsNull) and
@@ -416,7 +418,11 @@ begin
             lblInvoice.Caption := TableString('NMEMO', 'NMEMO', FieldByName('NMEMO').AsInteger, 'REFNO');
             cmbBills.EditValue := lblInvoice.Caption;
             edtBillRef.Text := lblInvoice.Caption;
-         end;
+         end
+         else
+         if ((FieldByName('BILLED').AsString = 'Y') and
+            (FieldByName('NMEMO').IsNull = False)) then
+            ToggleFields(False);
       end
       else
          Self.Close;
@@ -440,6 +446,7 @@ begin
    chkDeposit.Enabled := bEnable;
    cxCBAccountType.Enabled := bEnable;
    cmbInvoice.Enabled := bEnable;
+   neAmount.Enabled := bEnable;
 end;
 
 function TfrmCheqReqNew.OKtoPost : Boolean;
@@ -506,7 +513,8 @@ var
   iTransId : Integer;
   bContinuePosting: boolean;
   CheqReqAmt, BillOwing: Currency;
-  bCheck: boolean;
+  bCheck,
+  bPreviewPDF: boolean;
 
   function decodeGlInstance(glInstance: TglComponentInstance): string;
   begin
@@ -962,7 +970,7 @@ begin
                    end
                else
                   if ((qryCheqReq.State = dsInsert) and (qryCheqReq.FieldByName('BILLED').AsString = 'N') and not chkBill.Checked) then
-                   begin
+                  begin
                      // It is originally flagged to be billed, but now not to be billed
                      // Take it off the matter
                      MatterUpdate(TableInteger('MATTER', 'FILEID'
@@ -1036,9 +1044,10 @@ begin
                        , tbLedger.Text
                        , 0
                        , qryCheqReq.FieldByName('NMATTER').AsInteger );
-                   end;
+                  end;
              end;
 
+             qryCheqReq.FieldByName('BILLED').AsString := 'N';
              if chkBill.Checked then
                qryCheqReq.FieldByName('ANTICIPATED').AsString := 'Y'
              else
@@ -1052,9 +1061,9 @@ begin
              if (qryCheqReq.FieldByName('NMEMO').AsString <> '') then
                 qryCheqReq.FieldByName('BILLED').AsString := 'Y';
 
-             qryCheqReq.FieldByName('BILLED').AsString := 'N';
              //pb- if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and (qryCheqReq.FieldByName('NMEMO').AsInteger = 0))
-             if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and (qryCheqReq.FieldByName('NMEMO').AsString = '')) or
+             if ((qryCheqReq.FieldByName('BILLED').AsString = 'Y') and
+                (qryCheqReq.FieldByName('NMEMO').AsString = '')) or
                 (qryCheqReq.State = dsInsert) then
              begin
                if chkBill.Checked then
@@ -1104,17 +1113,22 @@ begin
 
           if not bPostingFailed then
           begin
+             if (iCheqReq <> 0) then
+               MessageDlg('Cheque Requisition Created CQR' + inttostr(iCheqReq),mtInformation,[mbOK],0);
+
              qryCheqReq.ApplyUpdates;
              dmAxiom.uniInsight.Commit;
              if chkPrint.Checked then
              begin
+                bPreviewPDF := False;
+                if chkPreviewPDF.Visible = True then
+                   bPreviewPDF := chkPreviewPDF.Checked;
                 with TfrmCheqReqPrint.Create(Self) do
-                   PrintCheqReq(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
+                   PrintCheqReq(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger, bPreviewPDF);
 
              end;
              qryCheqReq.Close;
-             if (iCheqReq <> 0) then
-               MessageDlg('Cheque Requisition Created CQR' + inttostr(iCheqReq),mtInformation,[mbOK],0);
+
              if not chkNoExit.Checked then
                Self.Close
              else
@@ -1467,19 +1481,21 @@ begin
    lblBillNo.Visible := dmAxiom.Security.Bill.Post;
    edtBillRef.Visible := dmAxiom.Security.Bill.Post;
 
-  dmAxiom.qryEmplyeeList.Open;
+   chkPreviewPDF.Visible := (SystemString('SaveCheqReq_as_pdf') = 'Y');
 
-  dtpReqDate.EditValue := trunc(Now());
-  neTax.EditValue := 0.00;
-  FBankType := '';
+   dmAxiom.qryEmplyeeList.Open;
 
-  dmAxiom.qryEntityBank.Close;
-  dmAxiom.qryEntityBank.ParamByName('ENTITY').AsString := dmAxiom.Entity;
-  dmAxiom.qryEntityBank.Open;
-  StringPopulate(cbTaxType.Properties.Items, 'TAXTYPE', 'CODE');
+   dtpReqDate.EditValue := trunc(Now());
+   neTax.EditValue := 0.00;
+   FBankType := '';
 
-  qrySundryType.ParamByName('ENTITY').AsString := dmAxiom.Entity;
-  qrySundryType.Open;
+   dmAxiom.qryEntityBank.Close;
+   dmAxiom.qryEntityBank.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   dmAxiom.qryEntityBank.Open;
+   StringPopulate(cbTaxType.Properties.Items, 'TAXTYPE', 'CODE');
+
+   qrySundryType.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   qrySundryType.Open;
 
    DefaultTax := get_default_gst('ChequeRequisition');
 
@@ -1639,51 +1655,55 @@ procedure TfrmCheqReqNew.teChequeNoPropertiesValidate(Sender: TObject;
   var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
 var
    ADefPrinter: string;
+   iCheqNoTest: integer;
 begin
    if VarIsNull(DisplayValue) = False then
    begin
-      if dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'G' then
+      if (TryStrToInt(string(DisplayValue), iCheqNoTest) = true) then
       begin
-         if (dmAxiom.UserChequePrinter = '') then
+         if dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'G' then
          begin
-            MsgInfo('Office Cheque Printer not set up. Please ask your System Administrator to set up a default Office Cheque printer in the Employee screen');
-            Error := False;
-            teChequeNo.Clear;
-            DisplayValue := '';
-            Exit;
-         end;
-      end
-      else if dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'T' then
-      begin
-         if (dmAxiom.UserTrustChequePrinter = '') then
+            if (dmAxiom.UserChequePrinter = '')  then
+            begin
+               MsgInfo('Office Cheque Printer not set up. Please ask your System Administrator to set up a default Office Cheque printer in the Employee screen');
+               Error := False;
+               teChequeNo.Clear;
+               DisplayValue := '';
+               Exit;
+            end;
+         end
+         else if dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'T' then
          begin
-            MsgInfo('Trust Cheque Printer not set up. Please ask your System Administrator to set up a default Trust Cheque printer in the Employee screen');
-            Error := False;
-            teChequeNo.Clear;
-            DisplayValue := '';
-            Exit;
+            if (dmAxiom.UserTrustChequePrinter = '') then
+            begin
+               MsgInfo('Trust Cheque Printer not set up. Please ask your System Administrator to set up a default Trust Cheque printer in the Employee screen');
+               Error := False;
+               teChequeNo.Clear;
+               DisplayValue := '';
+               Exit;
+            end;
          end;
-      end;
-      with qryChequeRange do
-      begin
-         if (dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'G') then
-            ADefPrinter := dmAxiom.UserChequePrinter
-         else
-            ADefPrinter := dmAxiom.UserTrustChequePrinter;
-         ParamByName('NUM_LAST').AsString := DisplayValue;
-         ParamByName('P_Printer').AsString := dmAxiom.UserChequePrinter;
-         Prepare;
-         Open;
-         if EOF then
-         begin
-            MsgErr('This Cheque Number is outside the range set for the printer.  Either enter a new number or adjust the range for the printer.');
-            Error := False;
-            teChequeNo.Clear;
-            DisplayValue := '';
-            Exit;
-         end;
-      end;
 
+         with qryChequeRange do
+         begin
+            if (dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'G') then
+               ADefPrinter := dmAxiom.UserChequePrinter
+            else
+               ADefPrinter := dmAxiom.UserTrustChequePrinter;
+            ParamByName('NUM_LAST').AsString := DisplayValue;
+            ParamByName('P_Printer').AsString := dmAxiom.UserChequePrinter;
+            Prepare;
+            Open;
+            if EOF then
+            begin
+               MsgErr('This Cheque Number is outside the range set for the printer.  Either enter a new number or adjust the range for the printer.');
+               Error := False;
+               teChequeNo.Clear;
+               DisplayValue := '';
+               Exit;
+            end;
+         end;
+      end;
    end;
 end;
 
@@ -1813,13 +1833,24 @@ procedure TfrmCheqReqNew.cmbInvoicePropertiesCloseUp(Sender: TObject);
 var
    cTrust: Currency;
    cCreditor: Currency;
+   cCreditorOwing: Currency;
 begin
    try
       cTrust := ClearTrust(tbFile.Text);
       cCreditor := TableCurrency('INVOICE', 'NINVOICE', integer(cmbInvoice.EditValue), 'AMOUNT');
-      fcCurrentAmount := cCreditor;
+      cCreditorOwing := TableCurrency('INVOICE', 'NINVOICE', integer(cmbInvoice.EditValue), 'OWING');
+      if cCreditor > cCreditorOwing then
+      begin
+          fcCurrentAmount := cCreditorOwing;
+          neAmount.EditValue := cCreditorOwing;
+      end
+      else
+      begin
+          fcCurrentAmount := cCreditor;
+          neAmount.EditValue := cCreditor;
+      end;
 
-      neAmount.EditValue := cCreditor;
+      //neAmount.EditValue := cCreditor;
       tbPayee.Text := TableString('INVOICE', 'NINVOICE', integer(cmbInvoice.EditValue), 'CREDITOR'); // frmPhoneBookSearch.qryPhoneBook.FieldByName('NAME').AsString;
       FNName := TableInteger('CREDITOR', 'NCREDITOR', TableInteger('INVOICE', 'NINVOICE', integer(cmbInvoice.EditValue), 'NCREDITOR'), 'NNAME');  //frmPhoneBookSearch.qryPhoneBook.FieldByName('NNAME').AsInteger;
       tbDesc.Text := TableString('INVOICE', 'NINVOICE', integer(cmbInvoice.EditValue), 'DESCR');

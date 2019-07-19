@@ -343,7 +343,7 @@ begin
                 ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
                 ParamByName('NJOURNAL').AsInteger := iJournal;
                 ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
-                ParamByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                 ParamByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'TITLE');
                 ParamByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
                 ParamByName('TAX').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);

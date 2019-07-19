@@ -75,10 +75,10 @@ object frmInvoice: TfrmInvoice
   end
   object Label7: TLabel
     Left = 6
-    Top = 146
-    Width = 90
+    Top = 149
+    Width = 64
     Height = 15
-    Caption = 'Anticipated Disb.'
+    Caption = 'Cheque Req'
   end
   object lblAntdAvail: TLabel
     Left = 108
@@ -91,7 +91,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label9: TLabel
     Left = 6
-    Top = 198
+    Top = 199
     Width = 45
     Height = 15
     Caption = 'Sundries'
@@ -200,7 +200,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label16: TLabel
     Left = 6
-    Top = 172
+    Top = 174
     Width = 48
     Height = 15
     Caption = 'Creditors'
@@ -574,7 +574,7 @@ object frmInvoice: TfrmInvoice
     OnKeyUp = neFeesKeyUp
   end
   object neAntd: TNumberEdit
-    Left = 184
+    Left = 185
     Top = 146
     Width = 86
     Height = 23
@@ -1068,7 +1068,7 @@ object frmInvoice: TfrmInvoice
         Caption = 'Disbursements'
       end
       item
-        Caption = 'Anticipated Disbs.'
+        Caption = 'Cheque Req'
       end
       item
         Caption = 'Creditors'
@@ -2087,7 +2087,7 @@ object frmInvoice: TfrmInvoice
     Style.Font.Style = []
     Style.IsFontAssigned = True
     TabOrder = 19
-    Height = 20
+    Height = 23
     Width = 86
   end
   object lblDraftBillCaption: TcxLabel
@@ -2603,47 +2603,51 @@ object frmInvoice: TfrmInvoice
   object qryDisb: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT 1 as type, '
-      '      ALLOC.CREATED,'#9'  '
-      #9'  ALLOC.DESCR,'#9'  '
-      #9'  (ALLOC.BILLED_AMOUNT*-1) as AMOUNT,'
-      #9'  ALLOC.REFNO as AUTHOR,'
-      #9'  ALLOC.NALLOC AS UniqueID,'
-      #9'  ALLOC.TAXCODE,'
-      'DECODE('
-      '  NVL(alloc.BILLED_TAX_AMOUNT,0),'
-      '  0,'
-      '  DECODE('
-      '    alloc.billed,'
-      '    '#39'Y'#39','
-      '    alloc.BILLED_TAX_AMOUNT,'
-      '    DECODE('
-      '      (r.rate - r.bill_rate),'
-      '      '#39'0'#39','
-      '      alloc.BILLED_TAX_AMOUNT,'
-      '      ROUND((alloc.BILLED_amount) * ABS(r.rate)) / 100'
-      '    )'
-      '  ),'
-      '  alloc.BILLED_TAX_AMOUNT'
-      ') * -1 AS tax,'
+      'SELECT 1 AS TYPE, alloc.created, alloc.descr,'
       
-        'SUBBILLS.DEBTOR_NAME, ALLOC.PAYER AS PAYEE,  ALLOC.APPROVAL, 0 a' +
-        's Units, null as Task, nalloc as uniqueid, 0 as unbilled  '
-      'FROM ALLOC,TAXRATE R,SUBBILLS'
-      'WHERE '
+        '       (alloc.billed_amount * -1) AS amount, alloc.refno AS auth' +
+        'or,'
+      
+        '       alloc.nalloc AS uniqueid, nvl(alloc.billing_taxcode, allo' +
+        'c.taxcode) taxcode,'
+      '         DECODE (NVL (alloc.billed_tax_amount, 0),'
+      '                 0, DECODE (alloc.billed,'
+      '                            '#39'Y'#39', alloc.billed_tax_amount,'
+      '                            DECODE ((r.rate - r.bill_rate),'
+      
+        '                                    '#39'0'#39', alloc.billed_tax_amount' +
+        ','
+      
+        '                                      ROUND (  (alloc.billed_amo' +
+        'unt)'
+      '                                             * ABS (r.rate)'
+      '                                            )'
+      '                                    / 100'
+      '                                   )'
+      '                           ),'
+      '                 alloc.billed_tax_amount'
+      '                )'
+      '       * -1 AS tax,'
+      
+        '       subbills.debtor_name, alloc.payer AS payee, alloc.approva' +
+        'l, 0 AS units,'
+      '       NULL AS task, nalloc AS uniqueid, 0 AS unbilled'
+      '  FROM alloc, taxrate r, subbills'
+      ' WHERE'
       '--ALLOC.NMATTER = :P_Matter'
-      '--AND '
-      'ALLOC.NMEMO = :P_Invoice'
+      '--AND'
+      '       alloc.nmemo = :p_invoice'
       
-        'AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = '#39'DR'#39 +
-        '))'
-      'AND NINVOICE IS NULL'
-      'AND ALLOC.TAXCODE = R.TAXCODE (+)'
+        '   AND (NVL (nreceipt, 0) = 0 OR (NVL (nreceipt, 0) > 0 AND TYPE' +
+        ' = '#39'DR'#39'))'
+      '   AND ninvoice IS NULL'
+      '   AND nvl(alloc.billing_taxcode, alloc.taxcode) = r.taxcode(+)'
+      '   AND TRUNC (alloc.created) >= r.commence'
       
-        'AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created' +
-        ') <= nvl(r.end_period,sysdate + 1000)'
-      'AND ALLOC.NMEMO = SUBBILLS.NMEMO (+)'
-      'AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+)')
+        '   AND TRUNC (alloc.created) <= NVL (r.end_period, SYSDATE + 100' +
+        '0)'
+      '   AND alloc.nmemo = subbills.nmemo(+)'
+      '   AND alloc.nsubbill = subbills.nsubbill(+)')
     Options.StrictUpdate = False
     Left = 1020
     Top = 155
@@ -3444,6 +3448,29 @@ object frmInvoice: TfrmInvoice
   object qryAntd: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      
+        'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author, c.nche' +
+        'qreq AS uniqueid,'
+      '       nvl(c.billing_taxcode, c.taxcode) taxcode,'
+      '       CASE'
+      '          WHEN (c.taxcode = '#39'FUB'#39')'
+      '             THEN ROUND (c.amount * ABS (r.rate)) / 100'
+      '          ELSE tax'
+      '       END AS tax,'
+      '       NULL AS PRIVATE, c.payee, NULL, 0 AS units, NULL AS task,'
+      '       c.ncheqreq AS uniqueid, 0 AS unbilled'
+      '  FROM cheqreq c, taxrate r'
+      ' WHERE'
+      '-- NMATTER = :P_Matter'
+      '--AND'
+      '       c.nmemo = :p_invoice'
+      '   AND c.trust <> '#39'T'#39
+      '   AND nvl(c.billing_taxcode, c.taxcode) = r.taxcode(+)'
+      '   AND TRUNC (c.reqdate) >= r.commence'
+      '   AND TRUNC (c.reqdate) <= NVL (r.end_period, SYSDATE + 1000)'
+      ''
+      ''
+      '/*'
       'SELECT'
       '  2 as type,  '
       '  REQDATE,'
@@ -3465,7 +3492,8 @@ object frmInvoice: TfrmInvoice
       '-- NMATTER = :P_Matter '
       '--AND '
       ' NMEMO = :P_Invoice'
-      'And Trust <> '#39'T'#39)
+      'And Trust <> '#39'T'#39
+      '*/')
     Options.StrictUpdate = False
     Left = 1017
     Top = 308
@@ -3626,6 +3654,23 @@ object frmInvoice: TfrmInvoice
   object qryUpCred: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      
+        'SELECT 4 AS TYPE, created, descr, amount * -1 AS amount, refno A' +
+        'S author,'
+      '       nalloc AS uniqueid, taxcode,'
+      '       CASE'
+      '          WHEN (tax <> 0)'
+      '             THEN tax * -1'
+      '          ELSE billed_tax_amount * -1'
+      
+        '       END AS tax, NULL AS PRIVATE, payer AS payee, approval, 0 ' +
+        'AS units,'
+      '       NULL AS task, nalloc AS uniqueid, 0 AS unbilled'
+      '  FROM alloc'
+      ' WHERE'
+      '--NMATTER = :P_Matter AND'
+      '       nmemo = :p_invoice AND ninvoice IS NOT NULL'
+      '/*'
       'SELECT'
       ' 4 as type, '
       ' CREATED,'
@@ -3644,7 +3689,8 @@ object frmInvoice: TfrmInvoice
       'FROM ALLOC WHERE '
       '--NMATTER = :P_Matter AND '
       'NMEMO = :P_Invoice'
-      'AND NINVOICE IS NOT NULL')
+      'AND NINVOICE IS NOT NULL'
+      '*/')
     Options.StrictUpdate = False
     Left = 1015
     Top = 354
@@ -4149,12 +4195,12 @@ object frmInvoice: TfrmInvoice
       Visible = ivAlways
       OnClick = tbtnQuickEditClick
     end
-    object dxBarButton4: TdxBarButton
+    object barbtnReassignFees: TdxBarButton
       Caption = 'Re Assign selected Fees'
       Category = 0
       Hint = 'Re Assign selected Fees'
       Visible = ivAlways
-      OnClick = dxBarButton4Click
+      OnClick = barbtnReassignFeesClick
     end
     object dxBbtnAddExpTemplate: TdxBarButton
       Caption = 'Add Expense Template ...'
@@ -4184,6 +4230,13 @@ object frmInvoice: TfrmInvoice
       Hint = 'Edit Tax'
       Visible = ivAlways
       OnClick = tbtnEditTaxClick
+    end
+    object barbtnTaxcodeList: TdxBarSubItem
+      Caption = 'Modify Tax Code'
+      Category = 0
+      Visible = ivAlways
+      ItemLinks = <>
+      OnPopup = barbtnTaxcodeListPopup
     end
     object dxBarButton1: TdxBarButton
       Caption = 'Draft'
@@ -7127,11 +7180,15 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
-        ItemName = 'tbtnAddGST'
+        ItemName = 'barbtnTaxcodeList'
       end
       item
         Visible = True
         ItemName = 'tbtnEditTax'
+      end
+      item
+        Visible = True
+        ItemName = 'tbtnAddGST'
       end
       item
         Visible = True
@@ -7143,7 +7200,7 @@ object frmInvoice: TfrmInvoice
       end
       item
         Visible = True
-        ItemName = 'dxBarButton4'
+        ItemName = 'barbtnReassignFees'
       end
       item
         Visible = True

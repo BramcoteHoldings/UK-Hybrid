@@ -6,8 +6,8 @@ object frmTransitNew: TfrmTransitNew
     's dispatched.'
   BorderStyle = bsDialog
   Caption = 'Transit Item Creation'
-  ClientHeight = 478
-  ClientWidth = 382
+  ClientHeight = 537
+  ClientWidth = 423
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,95 +34,27 @@ object frmTransitNew: TfrmTransitNew
     ParentFont = False
     Visible = False
   end
-  object pnlReceived: TPanel
+  object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 382
-    Height = 443
+    Width = 423
+    Height = 537
     Align = alClient
-    BevelOuter = bvNone
-    ShowCaption = False
+    ParentBackground = True
     TabOrder = 0
-    object Label2: TLabel
-      Left = 16
-      Top = 94
-      Width = 72
-      Height = 13
-      Caption = 'Date Received'
-    end
-    object Label4: TLabel
-      Left = 16
-      Top = 277
-      Width = 38
-      Height = 13
-      Caption = 'Reason'
-    end
-    object Label8: TLabel
-      Left = 16
-      Top = 117
-      Width = 41
-      Height = 13
-      Caption = 'Amount'
-    end
-    object lblTaxDescr: TLabel
-      Left = 200
-      Top = 184
-      Width = 3
-      Height = 13
-    end
-    object Label5: TLabel
-      Left = 16
-      Top = 399
-      Width = 51
-      Height = 13
-      Caption = 'Reference'
-    end
-    object Label6: TLabel
-      Left = 16
-      Top = 141
-      Width = 22
-      Height = 13
-      Caption = 'Type'
-    end
-    object Label7: TLabel
-      Left = 16
-      Top = 165
-      Width = 26
-      Height = 13
-      Caption = 'Bank'
-    end
-    object Label9: TLabel
-      Left = 17
-      Top = 234
-      Width = 50
-      Height = 13
-      Caption = 'Cheque #'
-    end
-    object Label10: TLabel
-      Left = 16
-      Top = 257
-      Width = 63
-      Height = 13
-      Caption = 'From Whom'
-    end
-    object Label11: TLabel
-      Left = 16
-      Top = 339
-      Width = 48
-      Height = 13
-      Caption = 'To Whom'
-    end
-    object Label12: TLabel
-      Left = 16
-      Top = 424
-      Width = 50
-      Height = 13
-      Caption = 'Date Sent'
-    end
+    Transparent = True
+    AutoSize = True
+    ExplicitLeft = 388
+    ExplicitTop = 8
+    ExplicitWidth = 437
+    ExplicitHeight = 561
+    DesignSize = (
+      423
+      537)
     object lblMatterDesc: TLabel
-      Left = 86
-      Top = 23
-      Width = 219
+      Left = 11
+      Top = 38
+      Width = 391
       Height = 13
       AutoSize = False
       Font.Charset = DEFAULT_CHARSET
@@ -133,9 +65,9 @@ object frmTransitNew: TfrmTransitNew
       ParentFont = False
     end
     object lblClient: TLabel
-      Left = 86
-      Top = 36
-      Width = 157
+      Left = 11
+      Top = 57
+      Width = 392
       Height = 13
       AutoSize = False
       Font.Charset = DEFAULT_CHARSET
@@ -145,17 +77,9 @@ object frmTransitNew: TfrmTransitNew
       Font.Style = []
       ParentFont = False
     end
-    object Label3: TLabel
-      Left = 247
-      Top = 125
-      Width = 47
-      Height = 13
-      Caption = 'Direction'
-      Visible = False
-    end
     object btnMatterFind: TSpeedButton
-      Left = 54
-      Top = 12
+      Left = 89
+      Top = 11
       Width = 21
       Height = 21
       Glyph.Data = {
@@ -169,60 +93,26 @@ object frmTransitNew: TfrmTransitNew
         88888880F08880F0888888800088800088888888888888888888}
       OnClick = btnMatterFindClick
     end
-    object Label1: TLabel
-      Left = 16
-      Top = 15
-      Width = 34
-      Height = 13
-      Caption = 'Matter'
-    end
     object lblMatter: TLabel
-      Left = 84
+      Left = 116
       Top = 11
       Width = 288
       Height = 13
       AutoSize = False
     end
-    object Label13: TLabel
-      Left = 16
-      Top = 188
-      Width = 36
-      Height = 13
-      Caption = 'Branch'
-    end
-    object Label14: TLabel
-      Left = 16
-      Top = 211
-      Width = 72
-      Height = 13
-      Caption = 'BSB - Account'
-    end
-    object lblAddress: TLabel
-      Left = 16
-      Top = 359
-      Width = 41
-      Height = 13
-      Caption = 'Address'
-    end
-    object Label15: TLabel
-      Left = 16
-      Top = 67
-      Width = 43
-      Height = 13
-      Caption = 'Transit #'
-    end
     object lblTransitNo: TLabel
-      Left = 104
-      Top = 67
+      Left = 89
+      Top = 76
       Width = 3
-      Height = 13
+      Height = 14
     end
     object neAmount: TNumberEdit
-      Left = 104
-      Top = 114
+      Left = 91
+      Top = 126
       Width = 105
-      Height = 21
+      Height = 17
       Alignment = taRightJustify
+      BorderStyle = bsNone
       DecimalPlaces = 2
       DisplayFormat = dfCurrency
       EditText = '0'
@@ -242,127 +132,155 @@ object frmTransitNew: TfrmTransitNew
       FontBetween.Name = 'Segoe UI'
       FontBetween.Style = []
       NoZero = False
-      TabOrder = 2
+      TabOrder = 1
       Text = '0'
       OnEnter = neAmountEnter
       OnExit = neAmountExit
     end
     object dtpCreated: TDateTimePicker
-      Left = 104
-      Top = 91
+      Left = 89
+      Top = 96
       Width = 105
       Height = 22
       Date = 36720.664084305600000000
       Time = 36720.664084305600000000
-      TabOrder = 1
+      TabOrder = 0
     end
     object edtRefNo: TEdit
-      Left = 104
-      Top = 396
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 446
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 12
-      TabOrder = 13
+      TabOrder = 12
     end
     object edtBank: TEdit
-      Left = 104
-      Top = 162
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 180
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
+      Ctl3D = False
       MaxLength = 60
-      TabOrder = 4
+      ParentCtl3D = False
+      TabOrder = 3
     end
     object edtCheque: TEdit
-      Left = 104
-      Top = 231
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 261
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 12
-      TabOrder = 8
+      TabOrder = 7
     end
     object edtFrom: TEdit
-      Left = 104
-      Top = 254
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 288
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 40
-      TabOrder = 9
+      TabOrder = 8
     end
     object edtTo: TEdit
-      Left = 104
-      Top = 336
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 378
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 40
-      TabOrder = 11
+      TabOrder = 10
     end
     object dtpSent: TDateTimePicker
-      Left = 127
-      Top = 420
+      Left = 112
+      Top = 471
       Width = 107
       Height = 22
       Date = 36720.664084305600000000
       Time = 36720.664084305600000000
       TabOrder = 14
     end
-    object rgDirection: TRadioGroup
-      Left = 220
-      Top = 88
-      Width = 149
-      Height = 31
-      Columns = 2
-      ItemIndex = 0
-      Items.Strings = (
-        'Received'
-        'Sent')
-      TabOrder = 0
-      Visible = False
-      OnClick = rgDirectionClick
-    end
     object mmoDesc: TMemo
-      Left = 104
-      Top = 277
-      Width = 265
-      Height = 57
+      Left = 91
+      Top = 315
+      Width = 311
+      Height = 53
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 1000
-      TabOrder = 10
+      TabOrder = 9
       OnExit = mmoDescExit
       OnKeyPress = mmoDescKeyPress
     end
     object edtBranch: TEdit
-      Left = 104
-      Top = 185
-      Width = 177
-      Height = 22
+      Left = 91
+      Top = 207
+      Width = 311
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
+      MaxLength = 60
+      TabOrder = 4
+    end
+    object edtBSB: TEdit
+      Left = 91
+      Top = 234
+      Width = 46
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 60
       TabOrder = 5
     end
-    object edtBSB: TEdit
-      Left = 104
-      Top = 208
-      Width = 46
-      Height = 22
+    object edtBankAcct: TEdit
+      Left = 147
+      Top = 234
+      Width = 123
+      Height = 17
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
       MaxLength = 60
       TabOrder = 6
     end
-    object edtBankAcct: TEdit
-      Left = 158
-      Top = 208
-      Width = 123
-      Height = 22
-      MaxLength = 60
-      TabOrder = 7
-    end
     object mmoAddress: TMemo
-      Left = 104
-      Top = 359
-      Width = 265
-      Height = 35
-      TabOrder = 12
+      Left = 91
+      Top = 405
+      Width = 311
+      Height = 31
+      BevelInner = bvNone
+      BevelKind = bkFlat
+      BevelOuter = bvSpace
+      BorderStyle = bsNone
+      TabOrder = 11
     end
     object cmbPaymentType: TcxLookupComboBox
-      Left = 104
-      Top = 138
+      Left = 89
+      Top = 151
       Properties.ImmediatePost = True
       Properties.KeyFieldNames = 'CODE'
       Properties.ListColumns = <
@@ -371,37 +289,31 @@ object frmTransitNew: TfrmTransitNew
         end>
       Properties.ListOptions.ShowHeader = False
       Properties.ListSource = dsPaymentType
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
       Style.LookAndFeel.Kind = lfStandard
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
       StyleDisabled.LookAndFeel.Kind = lfStandard
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
-      TabOrder = 3
-      Width = 145
+      TabOrder = 2
+      Width = 315
     end
     object chkSent: TCheckBox
-      Left = 104
-      Top = 422
+      Left = 89
+      Top = 471
       Width = 17
       Height = 17
       Checked = True
       State = cbChecked
-      TabOrder = 15
+      TabOrder = 13
       OnClick = chkSentClick
     end
-  end
-  object Panel2: TPanel
-    Left = 0
-    Top = 443
-    Width = 382
-    Height = 35
-    Align = alBottom
-    TabOrder = 1
-    DesignSize = (
-      382
-      35)
     object btnCancel: TBitBtn
-      Left = 294
-      Top = 4
+      Left = 329
+      Top = 499
       Width = 75
       Height = 25
       Anchors = [akRight, akBottom]
@@ -425,12 +337,12 @@ object frmTransitNew: TfrmTransitNew
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
-      TabOrder = 0
+      TabOrder = 17
       OnClick = btnCancelClick
     end
     object btnSave: TBitBtn
-      Left = 213
-      Top = 4
+      Left = 248
+      Top = 499
       Width = 75
       Height = 25
       Anchors = [akRight, akBottom]
@@ -454,19 +366,303 @@ object frmTransitNew: TfrmTransitNew
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
-      TabOrder = 1
+      TabOrder = 16
       OnClick = btnSaveClick
     end
     object cbPrint: TcxCheckBox
-      Left = 8
-      Top = 6
+      Left = 11
+      Top = 499
       Caption = 'Print ?'
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
       Style.LookAndFeel.NativeStyle = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
-      TabOrder = 2
+      TabOrder = 15
       Transparent = True
+    end
+    object dxLayoutControl1Group_Root: TdxLayoutGroup
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ShowBorder = False
+      Index = -1
+    end
+    object dxLayoutGroup1: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem1: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      SizeOptions.AssignedValues = [sovSizableHorz]
+      SizeOptions.SizableHorz = True
+      SizeOptions.Width = 391
+      Control = lblMatterDesc
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 398
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem2: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = lblMatter
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 288
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem3: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      CaptionOptions.Text = 'Matter'
+      Control = btnMatterFind
+      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalWidth = 21
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem4: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      SizeOptions.AssignedValues = [sovSizableHorz]
+      SizeOptions.SizableHorz = True
+      Control = lblClient
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 392
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object dxLayoutItem5: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      CaptionOptions.Text = 'Transit #'
+      Control = lblTransitNo
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 3
+      ControlOptions.ShowBorder = False
+      Index = 3
+    end
+    object dxLayoutItem6: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      CaptionOptions.Text = 'Date Received'
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = True
+      SizeOptions.SizableVert = False
+      Control = dtpCreated
+      ControlOptions.OriginalHeight = 22
+      ControlOptions.OriginalWidth = 105
+      ControlOptions.ShowBorder = False
+      Index = 4
+    end
+    object dxLayoutItem7: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Amount'
+      Control = neAmount
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 105
+      Index = 5
+    end
+    object dxLayoutItem8: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Type'
+      Control = cmbPaymentType
+      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalWidth = 145
+      ControlOptions.ShowBorder = False
+      Index = 6
+    end
+    object dxLayoutItem9: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Bank'
+      Control = edtBank
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 7
+    end
+    object dxLayoutItem10: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Branch'
+      Control = edtBranch
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 8
+    end
+    object dxLayoutGroup2: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 9
+    end
+    object dxLayoutItem11: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'BSB - Account'
+      Control = edtBSB
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 46
+      Index = 0
+    end
+    object dxLayoutItem12: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = edtBankAcct
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 123
+      Index = 1
+    end
+    object dxLayoutItem13: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Cheque #'
+      Control = edtCheque
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 10
+    end
+    object dxLayoutItem14: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'From Whom'
+      Control = edtFrom
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 11
+    end
+    object dxLayoutItem15: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Reason'
+      Control = mmoDesc
+      ControlOptions.OriginalHeight = 53
+      ControlOptions.OriginalWidth = 265
+      Index = 12
+    end
+    object dxLayoutItem16: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'To Whom'
+      Control = edtTo
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 13
+    end
+    object dxLayoutItem17: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Address'
+      Control = mmoAddress
+      ControlOptions.OriginalHeight = 31
+      ControlOptions.OriginalWidth = 265
+      Index = 14
+    end
+    object dxLayoutItem18: TdxLayoutItem
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'Reference'
+      Control = edtRefNo
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 177
+      Index = 15
+    end
+    object dxLayoutGroup3: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 16
+    end
+    object dxLayoutItem19: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'Date Sent'
+      Control = chkSent
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 17
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem20: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = dtpSent
+      ControlOptions.OriginalHeight = 22
+      ControlOptions.OriginalWidth = 107
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutGroup4: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 17
+    end
+    object dxLayoutItem21: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = cbPrint
+      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalWidth = 56
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem22: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      CaptionOptions.AlignHorz = taRightJustify
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = btnSave
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem23: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      CaptionOptions.AlignHorz = taRightJustify
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = btnCancel
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutGroup5: TdxLayoutGroup
+      Parent = dxLayoutGroup4
+      AlignHorz = ahRight
+      CaptionOptions.AlignHorz = taRightJustify
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 1
     end
   end
   object qryTransitInsert: TUniQuery
@@ -614,8 +810,6 @@ object frmTransitNew: TfrmTransitNew
     Top = 153
     PixelsPerInch = 96
     object ComponentPrinterLink2: TdxCustomContainerReportLink
-      Active = True
-      Component = pnlReceived
       PrinterPage.DMPaper = 9
       PrinterPage.Footer = 6350
       PrinterPage.GrayShading = True
@@ -638,7 +832,7 @@ object frmTransitNew: TfrmTransitNew
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43636.953538530090000000
+      ReportDocument.CreationDate = 43661.935363344910000000
       PixelsPerInch = 96
       BuiltInReportLink = True
       HiddenComponents = {}

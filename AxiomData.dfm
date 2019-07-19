@@ -18,7 +18,8 @@ object dmAxiom: TdmAxiom
     Pooling = True
     Debug = True
     Username = 'axiom'
-    Server = 'dev-oracle:1521:XE'
+    Server = 'dev-oracle:1521:BBSLAW'
+    Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -459,7 +460,7 @@ object dmAxiom: TdmAxiom
     SQL.Strings = (
       'INSERT INTO TRANSITEM (NACCOUNT, CREATED, ACCT, '
       'AMOUNT, REFNO, DESCR, CHART, OWNER_CODE, NOWNER, '
-      'NCHEQUE, NRECEIPT, NJOURNAL, WHO, VERSION, BAS_TAX) '
+      'NCHEQUE, NRECEIPT, NJOURNAL, WHO, VERSION, BAS_TAX,TAX) '
       'VALUES '
       '(:NACCOUNT,'
       ':CREATED, '
@@ -475,7 +476,8 @@ object dmAxiom: TdmAxiom
       ':NJOURNAL,'
       ':WHO,'
       ':VERSION,'
-      ':BAS_TAX)')
+      ':BAS_TAX,'
+      ':TAX)')
     Left = 389
     Top = 350
     ParamData = <
@@ -553,6 +555,11 @@ object dmAxiom: TdmAxiom
         DataType = ftUnknown
         Name = 'BAS_TAX'
         Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TAX'
+        Value = nil
       end>
   end
   object qryTransItemInsert: TUniQuery
@@ -570,7 +577,9 @@ object dmAxiom: TdmAxiom
         '             rvdate, VERSION, ntrans, bas_tax, CURRENCY, FX_RATE' +
         ', BASE_CCY_AMT, '
       '             BASE_CCY_TAX, ENTITY_CCY_AMT, ENTITY_CCY_TAX, '
-      '             TRAN_CURRENCY, TRAN_CCY_AMT, TRAN_CCY_TAX '
+      
+        '             TRAN_CURRENCY, TRAN_CCY_AMT, TRAN_CCY_TAX, naccount' +
+        ' '
       '            )'
       
         '     VALUES (:created, :acct, :amount, :tax, :refno, :descr, :ch' +
@@ -585,7 +594,9 @@ object dmAxiom: TdmAxiom
         '             :rvdate, :VERSION, :ntrans, :bas_tax, :CURRENCY, :F' +
         'X_RATE, :BASE_CCY_AMT, '
       '             :BASE_CCY_TAX, :ENTITY_CCY_AMT, :ENTITY_CCY_TAX, '
-      '             :TRAN_CURRENCY, :TRAN_CCY_AMT, :TRAN_CCY_TAX'
+      
+        '             :TRAN_CURRENCY, :TRAN_CCY_AMT, :TRAN_CCY_TAX, :nacc' +
+        'ount'
       '            )')
     Left = 479
     Top = 15
@@ -748,6 +759,11 @@ object dmAxiom: TdmAxiom
       item
         DataType = ftUnknown
         Name = 'TRAN_CCY_TAX'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'naccount'
         Value = nil
       end>
   end
@@ -2047,7 +2063,7 @@ object dmAxiom: TdmAxiom
     Left = 649
     Top = 178
     Bitmap = {
-      494C010102000500100020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3241,7 +3257,7 @@ object dmAxiom: TdmAxiom
     Left = 629
     Top = 15
     Bitmap = {
-      494C01012A002D00100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012A002D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000B0000000010020000000000000B0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5283,7 +5299,7 @@ object dmAxiom: TdmAxiom
     Left = 889
     Top = 189
     Bitmap = {
-      494C010101000500100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000008686860033660000336600003333
       6600333366003333660080000000800000008000000066006600660066006600
@@ -7586,7 +7602,6 @@ object dmAxiom: TdmAxiom
       end>
   end
   object TSSpellChecker: TdxSpellChecker
-    AutoLoadDictionaries = True
     CheckAsYouTypeOptions.Active = True
     DictionaryItems = <
       item
@@ -7597,9 +7612,12 @@ object dmAxiom: TdmAxiom
       end
       item
         DictionaryTypeClassName = 'TdxUserSpellCheckerDictionary'
+        DictionaryType.Enabled = False
         DictionaryType.DictionaryPath = '.\Spelling\user.dic'
+        DictionaryType.Options = []
       end>
-    UseThreadedLoad = True
+    SpellingOptions.IgnoreRepeatedWords = True
+    OnAddWord = TSSpellCheckerAddWord
     OnSpellingComplete = TSSpellCheckerSpellingComplete
     Left = 870
     Top = 754
@@ -8127,9 +8145,16 @@ object dmAxiom: TdmAxiom
     Connection = uniInsight
     SQL.Strings = (
       'SELECT CODE, DESCR FROM TAXTYPE'
+      'WHERE USE_FOR_BILLING = NVL(:USE_FOR_BILLING, USE_FOR_BILLING)'
       'Order By Code')
     Left = 813
     Top = 284
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'USE_FOR_BILLING'
+        Value = nil
+      end>
   end
   object dsTaxList: TUniDataSource
     DataSet = qryTaxList

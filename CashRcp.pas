@@ -528,7 +528,7 @@ begin
           qryReceipts.SQL.Add(' BANK, BRANCH, CHQNO, REVERSED, RVBY, DCLEARDATE, CCTYPE, BANKED, CLEARED,');
           qryReceipts.SQL.Add(' NTRANS, TRUST, SUFCHQ, DESCR, NBANKDEP, SYSTEM_DATE, PRINTED, NNAME, AMOUNT,');
           qryReceipts.SQL.Add(' DECODE(BANKED,''Y'',AMOUNT,0) AS BANKED_AMT, NCHEQUE, WHO, RECEIPT_NO, TAKE_ON, rvby as rcpt_by, ');
-          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE CREATED >= :P_DateFrom AND CREATED < :P_DateTo ' + sSQLWhere );
+          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere );
           qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RCPTNO  ');
           sSQLWhere := sSQLWhere + ' ORDER BY trunc(CREATED), RCPTNO  ';
        end;
@@ -545,7 +545,7 @@ begin
           qryReceipts.SQL.Add(' BANK, BRANCH, CHQNO, REVERSED, RVBY, DCLEARDATE, CCTYPE, BANKED, CLEARED,');
           qryReceipts.SQL.Add(' NTRANS, TRUST, SUFCHQ, DESCR, NBANKDEP, SYSTEM_DATE, PRINTED, NNAME, AMOUNT,');
           qryReceipts.SQL.Add(' DECODE(BANKED,''Y'',AMOUNT,0) AS BANKED_AMT, NCHEQUE, WHO, RECEIPT_NO, TAKE_ON, rvby as rcpt_by, ');
-          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE CREATED >= :P_DateFrom AND CREATED < :P_DateTo ' + sSQLWhere + ' ORDER BY RECEIPT_NO ASC');
+          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere + ' ORDER BY RECEIPT_NO ASC');
           sSQLWhere := sSQLWhere + ' ORDER BY RECEIPT_NO ASC ';
        end;
    end;

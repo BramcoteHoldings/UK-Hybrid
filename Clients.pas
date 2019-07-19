@@ -1367,15 +1367,15 @@ var
 
 procedure TfrmClients.DisplayClient(Search: string);
 begin
-  Screen.Cursor := crSQLWait;
-  if not FormExists(frmClientSearch) then
-    Application.CreateForm(TfrmClientSearch, frmClientSearch);
+   Screen.Cursor := crSQLWait;
+   if not FormExists(frmClientSearch) then
+      Application.CreateForm(TfrmClientSearch, frmClientSearch);
 
-  qryClient.Close();
+   qryClient.Close();
 //  qryClient.SQL.Text := 'SELECT P.*, P.ROWID FROM PHONEBOOK P WHERE P.SEARCH = ' + QuotedStr(Search) + ' AND NCLIENT IS NOT NULL';
 //  qryClient.SQL.Text := 'SELECT C.*, C.ROWID FROM CLIENT C WHERE C.SEARCH = ' + QuotedStr(Search);
 //  qryClient.SQL.Text := 'SELECT C.*, C.ROWID FROM CLIENT C WHERE C.NCLIENT = ' + Search;
-  qryClient.SQL.Text := 'SELECT C.ROWID, C.NCLIENT, C.NAME, C.GENDER, C.CLIENTGROUP, '+
+   qryClient.SQL.Text := 'SELECT C.ROWID, C.NCLIENT, C.NAME, C.GENDER, C.CLIENTGROUP, '+
                         'P.SEARCH, C.MATTERS, C.PARTNER, C.ARCHIVES, C.BANKERS, C.CREDIT_RATING, '+
                         'C.PREV_NCMAUDIT, C.TAXNO, C.INTRODUCED, C.INTRODUCER, C.CODE, C.FEECODE,'+
                         'C.FORMAT_FILE, C.MATTERSEQ, C.BILLTEMPLATE, C.ARCHVLOCN, C.DATEARCHV, '+
@@ -1392,27 +1392,28 @@ begin
                         'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, SC.DESCR, P.ACN '+
                         'FROM SUPERCLIENT SC, PHONEBOOK P, CLIENT C WHERE C.CODE = ' + quotedstr(Search) +
                         ' AND C.NCLIENT = P.NCLIENT AND P.SUPERCLIENT(+) = SC.CODE';
-  qryClient.Open();
-  if qryClient.IsEmpty then
-  begin
-    MessageDlg('Cannot find ''' + Search + ''' as a Client.', mtWarning, [mbOK], 0);
-    Close();
-  end else
-  begin
-    actNewMatter.Enabled := (TableString('PHONEBOOK','NCLIENT',qryClient.FieldByName('nclient').AsInteger,'ARCHIVED') = 'N');
-    qryArchiveTblCount.Close();
-    qryArchiveTblCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
-    qryArchiveTblCount.Open();
-    pagDetails.Pages[1].TabVisible := (qryArchiveTblCount.FieldByName('ARCH_COUNT').AsInteger > 0);
-    qryMatterCount.Close();
-    qryMatterCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
-    qryMatterCount.Open();
-    qryArchMatterCount.Close();
-    qryArchMatterCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
-    qryArchMatterCount.Open();
-    ShowDetails();
-  end;
-  Screen.Cursor := crDefault;
+   qryClient.Open();
+   if qryClient.IsEmpty then
+   begin
+      MessageDlg('Cannot find ''' + Search + ''' as a Client.', mtWarning, [mbOK], 0);
+      Close();
+   end else
+   begin
+      ReopenListUpdate('CLIENT', qryClient.FieldByName('nclient').AsString);
+      actNewMatter.Enabled := (TableString('PHONEBOOK','NCLIENT',qryClient.FieldByName('nclient').AsInteger,'ARCHIVED') = 'N');
+      qryArchiveTblCount.Close();
+      qryArchiveTblCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
+      qryArchiveTblCount.Open();
+      pagDetails.Pages[1].TabVisible := (qryArchiveTblCount.FieldByName('ARCH_COUNT').AsInteger > 0);
+      qryMatterCount.Close();
+      qryMatterCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
+      qryMatterCount.Open();
+      qryArchMatterCount.Close();
+      qryArchMatterCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
+      qryArchMatterCount.Open();
+      ShowDetails();
+   end;
+   Screen.Cursor := crDefault;
 end;
 
 
@@ -1449,6 +1450,7 @@ begin
         Close()
       else
       begin
+         ReopenListUpdate('CLIENT', qryClient.FieldByName('nclient').AsString);
          actNewMatter.Enabled := (TableString('PHONEBOOK','NCLIENT',qryClient.FieldByName('nclient').AsInteger,'ARCHIVED') = 'N');
          qryArchiveTblCount.Close();
          qryArchiveTblCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
@@ -1503,7 +1505,6 @@ begin
       barEditProspective.Visible := ivAlways
    else
       barEditProspective.Visible := ivNever;
-
 
    if qryMatterCount.Active then
       actDeleteClient.Enabled := (qryMatterCount.FieldByName('MATTERS').AsInteger + qryArchMatterCount.FieldByName('ARCHIVES').AsInteger) = 0
@@ -2420,7 +2421,15 @@ begin
       if not qryClient.IsEmpty then
       begin
         if (qryClient.FieldByName('GENDER').AsString = 'C') or (qryClient.FieldByName('GENDER').AsString = 'G') then
-          lblTaxNumberMsg.Caption := qryGender.FieldByName('ACNCAPTION').AsString
+        begin
+          if qryGender.Active = False then
+          begin
+             qryGender.ParamByName('gender').AsString := qryClient.FieldByName('GENDER').AsString;
+             qryGender.Open;
+          end;
+
+          lblTaxNumberMsg.Caption := qryGender.FieldByName('ACNCAPTION').AsString;
+        end
         else
           lblTaxNumberMsg.Caption := 'T.F.N.';
         if qryMatterCount.Active then

@@ -85,7 +85,7 @@ type
     procedure PrintReport(pprptCheqReq: TppReport); overload;
   public
     { Public declarations }
-    procedure PrintCheqReq(NCheqReq: integer);
+    procedure PrintCheqReq(NCheqReq: integer; APreviewPDF: boolean = False);
     procedure PrintInvoice(NCheque: integer);
   end;
 
@@ -99,8 +99,9 @@ uses
 var
   nmatter, nmemo, nclient, nname, nreceipt, ncheque, acct, sLedger, sFileID: string;
   Ancheqreq: integer;
+  lbPreviewPDF: boolean;
 
-procedure TfrmCheqReqPrint.PrintCheqReq(NCheqReq: integer);
+procedure TfrmCheqReqPrint.PrintCheqReq(NCheqReq: integer; APreviewPDF: boolean);
 var
    sChqReq: string;
    sTmp, sTmp2 : string;
@@ -112,6 +113,7 @@ var
    Dest, Bind,   sSQL: string;
    NewChar : char;
 begin
+   lbPreviewPDF := APreviewPDF;
    with qryHeader do
    begin
       SQL.Clear;
@@ -419,7 +421,7 @@ begin
          pprptCheqReq.AllowPrintToFile := True;
          pprptCheqReq.ShowPrintDialog := False;
          pprptCheqReq.DeviceType := 'PDF';
-         pprptCheqReq.PDFSettings.OpenPDFFile := False;
+         pprptCheqReq.PDFSettings.OpenPDFFile := lbPreviewPDF;
          pprptCheqReq.TextFileName := AParsedDocName;
          pprptCheqReq.ModalPreview := False;
 

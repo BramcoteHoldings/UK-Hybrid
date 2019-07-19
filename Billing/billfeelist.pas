@@ -13,7 +13,7 @@ uses
   Vcl.StdCtrls, Vcl.DBCtrls, Vcl.DBCGrids, cxMemo, cxDBRichEdit,
   Vcl.Menus, cxButtons, cxCurrencyEdit, Vcl.Buttons,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxSpellCheckerCore,
-  dxSpellChecker ;
+  dxSpellChecker, dxDateRanges ;
 
 type
   TfrmBillFeeList = class(TForm)
@@ -76,7 +76,7 @@ begin
    lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
    TppIniStoragePlugIn.SetStorageName(lsStorageName);
    // 14 Sept 2018
-   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    dmAxiom.TSSpellChecker.Check(TcxRichEdit(tvFeeListDESCR));
 
 end;
@@ -123,107 +123,59 @@ var
    I:     Integer;
    AView: TcxGridDBTableView;
 begin
-//   if dmAxiom.DictionaryInstalled then
-//   begin
    AView := tvFeeList;
-//       gridFeeList.BeginUpdate();
-//       dmAxiom.Addict.StartSequenceCheck;
-   AView.ViewData.Records[0].Focused := True;
-   dmAxiom.TSSpellChecker.OnSpellingComplete := dmAxiom.TSSpellCheckerSpellingComplete;
-   for I := 0 to tvFeeList.ViewData.RecordCount - 1 do
-   begin
-        // First we give the grid focus, as it will not bring up the editor unless
-        // it actually has focus.  Next we give the appropriate field in the
-        // grid focus and then bring up the in-place editor.
-
-      gridFeeList.SetFocus;
-      tvFeeList.ViewData.GridView.Focused := True;
-      AView.ViewData.Records[I].Focused := True;
-      tvFeeList.Controller.EditingController.ShowEdit(tvFeeListDESCR);
-
-      if (not Assigned(tvFeeList.Controller.EditingController.Edit)) then
+//   Aview.BeginUpdate();
+   try
+      AView.ViewData.Records[0].Focused := True;
+ //     dmAxiom.TSSpellChecker.OnSpellingComplete := dmAxiom.TSSpellCheckerSpellingComplete;
+      for I := 0 to tvFeeList.ViewData.RecordCount - 1 do
       begin
-         break;
+           // First we give the grid focus, as it will not bring up the editor unless
+           // it actually has focus.  Next we give the appropriate field in the
+           // grid focus and then bring up the in-place editor.
+
+         gridFeeList.SetFocus;
+         tvFeeList.ViewData.GridView.Focused := True;
+         AView.ViewData.Records[I].Focused := True;
+         tvFeeList.Controller.EditingController.ShowEdit(tvFeeListDESCR);
+
+         if (not Assigned(tvFeeList.Controller.EditingController.Edit)) then
+         begin
+            break;
+         end;
+
+         if (AView.Controller.EditingController.Edit is TcxMemo) then
+         begin
+            (AView.Controller.EditingController.Edit as TcxMemo).Properties.HideSelection := False;
+         end
+         else if (AView.Controller.EditingController.Edit is TcxRichEdit) then
+         begin
+            (AView.Controller.EditingController.Edit as TcxRichEdit).Properties.HideSelection := False;
+            TcxCustomRichEditAccess(tvFeeList.Controller.EditingController.Edit).InnerRich.HideSelection  := False;
+         end;
+
+  //               dmAxiom.Addict.CheckWinControl(AView.Controller.EditingController.Edit, ctAll );
+         dmAxiom.TSSpellChecker.Check(AView.Controller.EditingController.Edit);
+
+         TcxCustomDataProviderAccess(AView.DataController.Provider).SetChanging;
+         AView.Controller.EditingController.Edit.ModifiedAfterEnter := True;
+      //     end;
+
+           // Now we hide the edit to move on the next record.
+
+         AView.Controller.EditingController.HideEdit(True);
       end;
-
-        // If there are errors in our current control, then we'll bring up the
-        // spelling dialog to check them...
-
-//        if (dmAxiom.Addict.ErrorsPresentInWinControl(AView.Controller.EditingController.Edit, ctAll)) then
-//        begin
-            // If we've already displayed our spelling check dialog as part of
-            // this "sequence check" then we ensure it has focus so the user can
-            // interact with it.
-
- //           if (Assigned(dmAxiom.Addict.DialogForm)) then
- //           begin
- //               dmAxiom.Addict.DialogForm.SetFocus;
- //           end;
-
-            // Tell the DX control not to hide the selection when the control doesn't
-            // actually have focus.  (That way we can see the selected word when the
-            // spell check dialog is up).
-
-      if (AView.Controller.EditingController.Edit is TcxMemo) then
-      begin
-         (AView.Controller.EditingController.Edit as TcxMemo).Properties.HideSelection := False;
-      end
-      else if (AView.Controller.EditingController.Edit is TcxRichEdit) then
-      begin
-         (AView.Controller.EditingController.Edit as TcxRichEdit).Properties.HideSelection := False;
-         TcxCustomRichEditAccess(tvFeeList.Controller.EditingController.Edit).InnerRich.HideSelection  := False;
-      end;
-
-            // Tell Addict to perform the actual spelling check...
-
-
-//            dmAxiom.Addict.CheckWinControl(AView.Controller.EditingController.Edit, ctAll );
-      dmAxiom.TSSpellChecker.Check(AView.Controller.EditingController.Edit);
-
-            // Ensure that the user hasn't stopped editing while in the middle
-            // of the Check call.  If they have, then we'll just stop the
-            // spelling check and bail.  Other implementations may wish to watch
-            // editing events and automatically dismiss the spelling dialog, or
-            // perhaps reassign the edit control and resume...
-
- {           if (not(Assigned(AView.Controller.EditingController.Edit))) then
-            begin
-                dmAxiom.Addict.StopCheck(True);
-                dmAxiom.Addict.EndMessage := emNever;
-                break;
-            end;
-  }
-            // When completing a spelling check, we need to ensure that the value
-            // the spelling dialog has udpate is committed to the database (if
-            // needed):
-
-      TcxCustomDataProviderAccess(AView.DataController.Provider).SetChanging;
-      AView.Controller.EditingController.Edit.ModifiedAfterEnter := True;
-   //     end;
-
-        // Now we hide the edit to move on the next record.
-
-      AView.Controller.EditingController.HideEdit(True);
-
-        // If the user canceled the spelling check, then we'll break out of the
-        // enumeration of the remaining items...
-
-//        if (dmAxiom.Addict.CheckCanceled) then
-//        begin
-//            break;
-//        end;
+//   dmAxiom.TSSpellChecker.OnSpellingComplete := nil;
+   finally
+//      Aview.EndUpdate;
+      MsgInfo('Spell Check of Fee entries is complete');
    end;
-   dmAxiom.TSSpellChecker.OnSpellingComplete := nil;
-   MsgInfo('Spell Check of Fee entries is complete');
-//       dmAxiom.Addict.StopSequenceCheck;
-//       gridFeeList.EndUpdate;
-//   end;
 end;
 
 procedure TfrmBillFeeList.TSSpellCheckerSpellingComplete(
   Sender: TdxCustomSpellChecker; var AHandled: Boolean);
 begin
-   AHandled := True;
+ //  AHandled := True;
 end;
 
 procedure TfrmBillFeeList.btnSaveClick(Sender: TObject);

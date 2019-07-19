@@ -967,7 +967,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43638.4246039005d
+    EditValue = 43655.8207822569d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1118,6 +1118,25 @@ object frmCheqReqNew: TfrmCheqReqNew
     TabOrder = 30
     Width = 263
   end
+  object chkPreviewPDF: TcxCheckBox
+    Left = 90
+    Top = 471
+    AutoSize = False
+    Caption = 'Preview PDF'
+    ParentBackground = False
+    ParentColor = False
+    State = cbsChecked
+    Style.Color = clWindow
+    Style.LookAndFeel.NativeStyle = True
+    StyleDisabled.Color = clWindow
+    StyleDisabled.LookAndFeel.NativeStyle = True
+    StyleFocused.LookAndFeel.NativeStyle = True
+    StyleHot.LookAndFeel.NativeStyle = True
+    TabOrder = 31
+    Transparent = True
+    Height = 23
+    Width = 100
+  end
   object dsCheqReq: TUniDataSource
     DataSet = qryCheqReq
     Left = 62
@@ -1146,9 +1165,7 @@ object frmCheqReqNew: TfrmCheqReqNew
       
         '       c.forcepay, c.nname, c.creditor_invoice, c.credit_note, c' +
         '.TYPE,'
-      
-        '       c.cheque_group_id, c.locus_txnum, c.authorised_by, c.auth' +
-        'orised,'
+      '       c.cheque_group_id, c.authorised_by, c.authorised,'
       
         '       c.dep_account_type, c.dep_account, c.mod_descr, c.ndeposi' +
         'taccount,'
@@ -1159,8 +1176,8 @@ object frmCheqReqNew: TfrmCheqReqNew
         '       c.PATH, c.cheqreq_copy_ext, c.entity, c.currency, c.fx_ra' +
         'te,'
       
-        '       c.base_ccy_amount, c.base_ccy_tax, c.transtype, c.rowid, ' +
-        'c.amount + c.tax as total'
+        '       c.base_ccy_amt, c.base_ccy_tax, c.transtype, c.rowid, c.a' +
+        'mount + c.tax as total'
       '  FROM cheqreq c WHERE C.NCHEQREQ = :NCHEQREQ')
     CachedUpdates = True
     Left = 331
@@ -1223,8 +1240,8 @@ object frmCheqReqNew: TfrmCheqReqNew
       '   TYPE, CREATED,'
       '   DESCR, AMOUNT,Reference,PayeePayor,REV_NINVTRAN'
       'FROM INVESTMENT_TRANS')
-    Left = 246
-    Top = 387
+    Left = 294
+    Top = 307
   end
   object qryMatterBills: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1260,8 +1277,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Top = 120
   end
   object cxEditRepository1: TcxEditRepository
-    Left = 347
-    Top = 401
+    Left = 387
+    Top = 297
     PixelsPerInch = 96
     object cxEditRepository1CurrencyItem1: TcxEditRepositoryCurrencyItem
       Properties.Alignment.Horz = taRightJustify
@@ -1349,8 +1366,8 @@ object frmCheqReqNew: TfrmCheqReqNew
       'WHERE CODE = :CODE'
       'and bank_acct = :acct')
     CachedUpdates = True
-    Left = 251
-    Top = 463
+    Left = 411
+    Top = 367
     ParamData = <
       item
         DataType = ftString
@@ -1370,8 +1387,8 @@ object frmCheqReqNew: TfrmCheqReqNew
         'SELECT CHQNO FROM CHEQUE WHERE ACCT = :P_Acct AND CHQNO = :P_Chq' +
         'no')
     CachedUpdates = True
-    Left = 201
-    Top = 484
+    Left = 417
+    Top = 204
     ParamData = <
       item
         DataType = ftUnknown
@@ -1396,8 +1413,8 @@ object frmCheqReqNew: TfrmCheqReqNew
         'and to_number(:NUM_LAST) BETWEEN to_number(NUM_FROM) AND to_numb' +
         'er(NUM_TO)')
     CachedUpdates = True
-    Left = 233
-    Top = 431
+    Left = 217
+    Top = 271
     ParamData = <
       item
         DataType = ftUnknown

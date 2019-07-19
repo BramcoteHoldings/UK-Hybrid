@@ -451,7 +451,7 @@ begin
                           qryAllocInsert.ParamByName('PAYER').AsString := 'Trust Journal ' + IntToStr(iJournal);
                           qryAllocInsert.ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
                           qryAllocInsert.ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
-                          qryAllocInsert.ParamByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                          qryAllocInsert.ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
               { Code modified 9.10.2002 GG
 
                 This column is only 40 chars wide, whereas the source coulmn is 85.  Instead

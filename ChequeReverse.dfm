@@ -71,7 +71,7 @@ object frmChequeReverse: TfrmChequeReverse
   object dtpReverse: TEnforceCustomDateEdit
     Left = 94
     Top = 163
-    EditValue = 43607.5757979282d
+    EditValue = 43638.5378141204d
     Properties.ButtonGlyph.SourceDPI = 96
     Properties.ButtonGlyph.Data = {
       424DF6030000000000003600000028000000100000000F000000010020000000
@@ -655,11 +655,23 @@ object frmChequeReverse: TfrmChequeReverse
   object qryInvoiceUpdate: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'UPDATE INVOICE SET '
-      '  OWING = (OWING - :AMOUNT), '
-      '  CREDITED = (CREDITED + :AMOUNT),'
-      '  NCHEQUE = NULL'
-      'WHERE NINVOICE = :NINVOICE')
+      'UPDATE invoice'
+      '   SET owing = (owing - :amount),'
+      '       credited = (credited - :amount),'
+      '       ncheque = NULL,'
+      '       legal_cr_amount_owing ='
+      '          CASE'
+      '             WHEN (legal_cr_amount_owing > 0)'
+      '                THEN (legal_cr_amount_owing - :amount)'
+      '             ELSE 0'
+      '          END,'
+      '       trade_cr_amount_owing ='
+      '          CASE'
+      '             WHEN (trade_cr_amount_owing > 0)'
+      '                THEN (trade_cr_amount_owing - :amount)'
+      '             ELSE 0'
+      '          END'
+      ' WHERE ninvoice = :ninvoice')
     Left = 23
     Top = 268
     ParamData = <
@@ -720,11 +732,10 @@ object frmChequeReverse: TfrmChequeReverse
     SQL.Strings = (
       'update invoice '
       'set ncheque = null,'
-      '/*'
-      'amount = amount - :pamount,'
-      '*/'
       'last_payment = null,'
-      'owing = owing + :pamount'
+      'owing = owing + :pamount,'
+      'legal_cr_amount_owing = legal_cr_amount_owing + :pamount,'
+      'trade_cr_amount_owing = trade_cr_amount_owing + :pamount'
       'where ninvoice = :ninvoice ')
     Left = 92
     Top = 218

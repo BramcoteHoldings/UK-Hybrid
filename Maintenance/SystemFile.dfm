@@ -41,7 +41,7 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tabMatterDefaults
+    Properties.ActivePage = tsGeneral
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
@@ -60,7 +60,7 @@ object frmSystemFile: TfrmSystemFile
       object DBText1: TDBText
         Left = 102
         Top = 3
-        Width = 172
+        Width = 155
         Height = 15
         AutoSize = True
         DataField = 'COMPANY'
@@ -2404,6 +2404,23 @@ object frmSystemFile: TfrmSystemFile
         Height = 23
         Width = 198
       end
+      object cxDBCheckBox76: TcxDBCheckBox
+        Left = 269
+        Top = 151
+        AutoSize = False
+        Caption = 'Restrict Matter Financials to Team'
+        DataBinding.DataField = 'RESTRICT_MATFIN_TO_TEAM'
+        DataBinding.DataSource = dsSystemFile
+        Properties.Alignment = taLeftJustify
+        Properties.ImmediatePost = True
+        Properties.MultiLine = True
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'Y'
+        Properties.ValueUnchecked = 'N'
+        TabOrder = 16
+        Height = 23
+        Width = 212
+      end
     end
     object cxTabSheet1: TcxTabSheet
       Caption = 'Accounting Defaults'
@@ -3271,7 +3288,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 12
-        Text = 'Std Bill'
+        Text = ''
         DataField = 'MEMO_BILL_DEFAULT'
         DataSource = dsSystemFile
       end
@@ -3284,7 +3301,7 @@ object frmSystemFile: TfrmSystemFile
         LookupField = 'ITEM_ID'
         LookupSource = dmAxiom.dsRB_Item
         TabOrder = 13
-        Text = 'Std Bill'
+        Text = ''
         DataField = 'DRAFT_BILL_DEFAULT'
         DataSource = dsSystemFile
       end

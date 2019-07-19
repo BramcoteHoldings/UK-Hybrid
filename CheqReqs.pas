@@ -3555,7 +3555,7 @@ begin
                             end;
 
                             qryAllocs.Insert;
-                            qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+                            qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
                             qryAllocs.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryCheqReqsSelected.FieldByName('FILEID').AsString, 'NMATTER');
                             qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryCheqReqsSelected.FieldByName('FILEID').AsString, 'NCLIENT');
                             qryAllocs.FieldByName('FILEID').AsString := qryCheqReqsSelected.FieldByName('REFNO').AsString;

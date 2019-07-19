@@ -1415,7 +1415,7 @@ begin
          ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
          ParamByName('DESCR').AsString := 'Transferred to file ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ':' + qryAllocs.FieldByName('ALLOC_DESCR').AsString;
          ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
-         ParamByName('ALLOC_NEW').AsInteger := GetSeqNum('NALLOC');
+         ParamByName('ALLOC_NEW').AsInteger := GetSequenceNumber('SQNC_NALLOC');  //GetSeqNum('NALLOC');
          ParamByName('AMOUNT').AsCurrency := qryAllocs.FieldByName('AMOUNT_EXTAX').AsCurrency;
          ParamByName('TAX').AsCurrency := 0-qryAllocs.FieldByName('TAX').AsCurrency;
          ParamByName('TYPE').AsString := 'RV';
@@ -1434,7 +1434,7 @@ begin
          //ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
          ParamByName('DESCR').AsString := qryAllocs.FieldByName('ALLOC_DESCR').AsString;
          ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
-         ParamByName('ALLOC_NEW').AsInteger := GetSeqNum('NALLOC');
+         ParamByName('ALLOC_NEW').AsInteger := GetSequenceNumber('SQNC_NALLOC');  //GetSeqNum('NALLOC');
          ParamByName('AMOUNT').AsCurrency := 0-qryAllocs.FieldByName('AMOUNT_EXTAX').AsCurrency;
          ParamByName('TAX').AsCurrency := qryAllocs.FieldByName('TAX').AsCurrency;
          ParamByName('TYPE').AsString := qryAllocs.FieldByName('TYPE').AsString;

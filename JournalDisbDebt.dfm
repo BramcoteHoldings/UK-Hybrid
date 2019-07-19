@@ -116,8 +116,8 @@ object frmJournalDisbDebt: TfrmJournalDisbDebt
     Top = 45
     Width = 98
     Height = 22
-    Date = 42543.567640532400000000
-    Time = 42543.567640532400000000
+    Date = 43651.493385000000000000
+    Time = 43651.493385000000000000
     TabOrder = 1
     DataSet = dmAxiom.qryEntity
     Field = 'LOCKDATE'

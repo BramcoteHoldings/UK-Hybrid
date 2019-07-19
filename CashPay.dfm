@@ -65,17 +65,20 @@ object frmCashpay: TfrmCashpay
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 1110
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
         HotZone.SizePercent = 58
         AlignSplitter = salBottom
         Control = Panel3
-        ExplicitWidth = 8
       end
       object Panel1: TPanel
         Left = 0
@@ -607,6 +610,10 @@ object frmCashpay: TfrmCashpay
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lblBank: TLabel
         Left = 9
         Top = 19

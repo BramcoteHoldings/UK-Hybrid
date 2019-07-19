@@ -1149,7 +1149,7 @@ object frmBulkBills: TfrmBulkBills
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43630.957679560180000000
+      ReportDocument.CreationDate = 43637.818057418980000000
       TimeFormat = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

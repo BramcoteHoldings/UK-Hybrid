@@ -2,12 +2,13 @@ inherited frmTeams: TfrmTeams
   Left = 709
   Top = 74
   Caption = 'Teams'
-  ClientHeight = 565
-  ClientWidth = 592
+  ClientHeight = 595
+  ClientWidth = 834
   OldCreateOrder = True
-  ExplicitWidth = 598
-  ExplicitHeight = 596
-  PixelsPerInch = 106
+  OnShow = FormShow
+  ExplicitWidth = 840
+  ExplicitHeight = 624
+  PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel [0]
     Left = 10
@@ -48,7 +49,7 @@ inherited frmTeams: TfrmTeams
         Glyph.SourceDPI = 96
         Glyph.Data = {
           424D360400000000000036000000280000001000000010000000010020000000
-          0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+          000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -100,23 +101,33 @@ inherited frmTeams: TfrmTeams
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 2
-    DesignSize = (
-      570
-      465)
-    Height = 465
-    Width = 570
+    ExplicitWidth = 570
+    ExplicitHeight = 465
+    Height = 495
+    Width = 812
     object grdEmpList: TcxGrid
-      Left = 4
-      Top = 44
-      Width = 562
-      Height = 416
-      Anchors = [akLeft, akTop, akRight, akBottom]
+      Left = 2
+      Top = 48
+      Width = 808
+      Height = 445
+      Align = alClient
       TabOrder = 0
       LookAndFeel.NativeStyle = True
-      ExplicitHeight = 388
+      ExplicitWidth = 566
+      ExplicitHeight = 415
       object grdEmpListDBTableView1: TcxGridDBTableView
+        Navigator.Buttons.ConfirmDelete = True
         Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsEmployee
+        Navigator.Buttons.Post.Enabled = False
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.SaveBookmark.Enabled = False
+        Navigator.Buttons.SaveBookmark.Visible = False
+        Navigator.Buttons.GotoBookmark.Enabled = False
+        Navigator.Buttons.GotoBookmark.Visible = False
+        Navigator.Buttons.Filter.Enabled = False
+        Navigator.Buttons.Filter.Visible = False
+        Navigator.Visible = True
+        DataController.DataSource = dsTeamEmployees
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -135,24 +146,38 @@ inherited frmTeams: TfrmTeams
         Preview.RightIndent = 6
         object grdEmpListDBTableView1Member: TcxGridDBColumn
           Caption = 'Member'
-          DataBinding.ValueType = 'Boolean'
-          PropertiesClassName = 'TcxCheckBoxProperties'
-          Properties.NullStyle = nssUnchecked
-          Width = 62
-        end
-        object grdEmpListDBTableView1CODE: TcxGridDBColumn
-          Caption = 'Code'
-          DataBinding.FieldName = 'CODE'
-          Options.Editing = False
-          Options.Focusing = False
-          Width = 70
+          DataBinding.FieldName = 'EMP_CODE'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.ImmediatePost = True
+          Properties.KeyFieldNames = 'CODE'
+          Properties.ListColumns = <
+            item
+              FieldName = 'CODE'
+            end
+            item
+              FieldName = 'NAME'
+            end>
+          Properties.ListOptions.ShowHeader = False
+          Properties.ListOptions.SyncMode = True
+          Properties.ListSource = dmAxiom.dsEmplyeeList
+          Properties.OnChange = grdEmpListDBTableView1MemberPropertiesChange
+          Width = 94
         end
         object grdEmpListDBTableView1NAME: TcxGridDBColumn
           Caption = 'Name'
-          DataBinding.FieldName = 'NAME'
+          DataBinding.FieldName = 'EMP_CODE'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.KeyFieldNames = 'CODE'
+          Properties.ListColumns = <
+            item
+              FieldName = 'NAME'
+            end>
+          Properties.ListOptions.ShowHeader = False
+          Properties.ListOptions.SyncMode = True
+          Properties.ListSource = dmAxiom.dsEmplyeeList
           Options.Editing = False
           Options.Focusing = False
-          Width = 336
+          Width = 369
         end
       end
       object grdEmpListBandedTableView1: TcxGridBandedTableView
@@ -251,16 +276,17 @@ inherited frmTeams: TfrmTeams
         end
       end
       object grdEmpListLevel1: TcxGridLevel
-        GridView = tvEmpList
+        GridView = grdEmpListDBTableView1
       end
     end
     object dxBarDockControl1: TdxBarDockControl
       Left = 2
       Top = 20
-      Width = 566
-      Height = 30
+      Width = 808
+      Height = 28
       Align = dalTop
       BarManager = bmMain
+      ExplicitWidth = 566
     end
   end
   inherited dsSource: TUniDataSource
@@ -306,8 +332,9 @@ inherited frmTeams: TfrmTeams
       True)
     Left = 385
     Top = 65
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
+      Font.Height = -9
       IsMainMenu = True
       MultiLine = True
       OldName = 'Main Menu1'
@@ -318,7 +345,6 @@ inherited frmTeams: TfrmTeams
       IsMainMenu = False
       MultiLine = False
       OldName = 'Toolbar1'
-      Row = 1
       WholeRow = False
     end
     object bmMainBar3: TdxBar [2]
@@ -338,7 +364,7 @@ inherited frmTeams: TfrmTeams
       FloatClientHeight = 24
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -427,28 +453,14 @@ inherited frmTeams: TfrmTeams
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
       end
     end
   end
@@ -528,5 +540,26 @@ inherited frmTeams: TfrmTeams
     Connection = dmAxiom.uniInsight
     Left = 304
     Top = 304
+  end
+  object qryTeamEmployees: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select t.*, t.rowid from team_employee t'
+      'where t.team_code = :code')
+    AfterInsert = qryTeamEmployeesAfterInsert
+    OnNewRecord = qryTeamEmployeesNewRecord
+    Left = 60
+    Top = 363
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'code'
+        Value = nil
+      end>
+  end
+  object dsTeamEmployees: TUniDataSource
+    DataSet = qryTeamEmployees
+    Left = 146
+    Top = 373
   end
 end

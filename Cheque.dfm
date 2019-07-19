@@ -83,7 +83,7 @@ object frmCheque: TfrmCheque
   end
   object lblAuthByName: TLabel
     Left = 377
-    Top = 43
+    Top = 42
     Width = 173
     Height = 14
     AutoSize = False
@@ -123,7 +123,7 @@ object frmCheque: TfrmCheque
   end
   object lblBankTransferMsg: TLabel
     Left = 249
-    Top = 155
+    Top = 157
     Width = 186
     Height = 14
     AutoSize = False
@@ -133,7 +133,7 @@ object frmCheque: TfrmCheque
   end
   object lblBankTransferName: TLabel
     Left = 496
-    Top = 155
+    Top = 157
     Width = 224
     Height = 14
     AutoSize = False
@@ -143,7 +143,7 @@ object frmCheque: TfrmCheque
   end
   object Label11: TLabel
     Left = 9
-    Top = 125
+    Top = 128
     Width = 70
     Height = 14
     AutoSize = False
@@ -218,7 +218,7 @@ object frmCheque: TfrmCheque
   end
   object Label3: TLabel
     Left = 9
-    Top = 154
+    Top = 157
     Width = 64
     Height = 13
     AutoSize = False
@@ -226,7 +226,7 @@ object frmCheque: TfrmCheque
   end
   object lblName: TLabel
     Left = 378
-    Top = 72
+    Top = 69
     Width = 105
     Height = 15
     Caption = '                                   '
@@ -302,7 +302,7 @@ object frmCheque: TfrmCheque
   end
   object cbBankTransfer: TComboBox
     Left = 436
-    Top = 151
+    Top = 154
     Width = 53
     Height = 23
     Sorted = True
@@ -365,7 +365,7 @@ object frmCheque: TfrmCheque
   end
   object cmbPrinter: TComboBox
     Left = 94
-    Top = 151
+    Top = 154
     Width = 147
     Height = 23
     Style = csDropDownList
@@ -875,7 +875,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43636.9511340394d
+    EditValue = 43665.8323138773d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -898,7 +898,7 @@ object frmCheque: TfrmCheque
     Width = 99
   end
   object cbBankImport: TComboBox
-    Left = 837
+    Left = 840
     Top = 94
     Width = 53
     Height = 23
@@ -1023,7 +1023,7 @@ object frmCheque: TfrmCheque
       '   C.PRINTED, C.RECONDATE, C.NNAME, '
       '   C.AMOUNT, C.EFT, C.CHEQUE_GROUP_ID, '
       '   C.CHEQUE_NO, C.TAKE_ON, C.NJOURNAL, '
-      '   C.WHO, C.ROWID'
+      '   C.WHO, C.BILLING_TAXCODE, C.ROWID'
       'FROM CHEQUE C'
       'WHERE C.NCHEQUE = :P_Ncheque')
     CachedUpdates = True
@@ -1094,15 +1094,17 @@ object frmCheque: TfrmCheque
     Top = 232
   end
   object qryLedger: TUniQuery
+    UpdatingTable = 'LGRALLOC'
+    KeyFields = 'UNIQUEID'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
         'SELECT TYPE, REFNO, LONGDESC, REASON, AMOUNT, BILLED, UNIQUEID, ' +
-        'TAXCODE, TAX, ROWID, WITHHOLD, SUNDRYTYPE, '
+        'TAXCODE, TAX, WITHHOLD, SUNDRYTYPE, '
       
         'NCREDITOR, ACCOUNT_NAME, ACCOUNT, BSB, DEP_ACCOUNT_TYPE, NDEPOSI' +
         'TACCOUNT, ANTICIPATED, ORIGINAL_TX, CHART, BAS_TAX,'
-      'FILEID, NINVOICE'
+      'FILEID, NINVOICE, ROWID'
       'FROM LGRALLOC'
       'WHERE 1=2')
     CachedUpdates = True
@@ -1384,7 +1386,7 @@ object frmCheque: TfrmCheque
   object qryTransItem: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT naccount, chart, descr, ninvoice, refno, amount'
+      'SELECT naccount, chart, descr, ninvoice, refno, amount, tax'
       'FROM transitem'
       'WHERE ninvoice = :p_ninvoice'
       'and ncheque is null')

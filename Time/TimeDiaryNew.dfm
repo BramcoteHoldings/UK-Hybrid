@@ -1692,7 +1692,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
   object ppFileNoteRpt: TppReport
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1718,15 +1719,22 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1741,25 +1749,29 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 218
     Top = 464
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 16404
       mmPrintPosition = 0
       object pplblTransTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblTransTitle'
+        Border.mmPadding = 0
         Caption = 'lblTransTitle'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4022
@@ -1772,13 +1784,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Matter Filenote'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4191
@@ -1792,6 +1806,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 51329
@@ -1799,13 +1814,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Matter #'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4233
@@ -1818,13 +1835,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Matter:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4233
@@ -1837,13 +1856,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Client:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4234
@@ -1856,13 +1877,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Units:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4233
@@ -1875,13 +1898,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 'Minutes:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4234
@@ -1894,13 +1919,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Details:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4234
@@ -1913,13 +1940,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object pplblMatter: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblMatter'
+        Border.mmPadding = 0
         Caption = 'lblMatter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 34661
@@ -1931,13 +1960,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object pplblMatterDesc: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblMatterDesc'
+        Border.mmPadding = 0
         Caption = 'lblMatterDesc'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 34660
@@ -1949,13 +1980,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object pplblClient: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblClient'
+        Border.mmPadding = 0
         Caption = 'lblClient'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 34660
@@ -1967,13 +2000,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object pplblUnits: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblUnits'
+        Border.mmPadding = 0
         Caption = 'lblUnits'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 34660
@@ -1985,13 +2020,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object pplblMinutes: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblMinutes'
+        Border.mmPadding = 0
         Caption = 'lblMinutes'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 34660
@@ -2003,6 +2040,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppMemoDetails: TppMemo
         DesignLayer = ppDesignLayer1
         UserName = 'MemoDetails'
+        Border.mmPadding = 0
         Caption = 'MemoDetails'
         CharWrap = False
         Font.Charset = DEFAULT_CHARSET
@@ -2044,13 +2082,15 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
         object ppLabel8: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label8'
+          Border.mmPadding = 0
           Caption = 'Notes:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -2063,6 +2103,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
         object ppMemoNotes: TppMemo
           DesignLayer = ppDesignLayer1
           UserName = 'MemoNotes'
+          Border.mmPadding = 0
           Caption = 'MemoNotes'
           CharWrap = False
           Font.Charset = DEFAULT_CHARSET
@@ -2089,19 +2130,22 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 7673
       mmPrintPosition = 0
       object pplblFooter: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblFooter'
+        Border.mmPadding = 0
         Caption = 'lblFooter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3969
@@ -2114,6 +2158,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 524

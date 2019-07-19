@@ -606,7 +606,7 @@ object frmInvPost: TfrmInvPost
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43607.5723026968d
+    EditValue = 43658.8740855556d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

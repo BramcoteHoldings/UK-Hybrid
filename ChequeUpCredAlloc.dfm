@@ -16,12 +16,12 @@ object frmChequeUpCredAlloc: TfrmChequeUpCredAlloc
     616
     268)
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 15
   object lblUnallocatedMsg: TLabel
     Left = 43
     Top = 243
-    Width = 75
-    Height = 18
+    Width = 83
+    Height = 20
     Anchors = [akRight, akBottom]
     Caption = 'Unallocated'
     Font.Charset = DEFAULT_CHARSET
@@ -34,8 +34,8 @@ object frmChequeUpCredAlloc: TfrmChequeUpCredAlloc
   object lblUnalloc: TLabel
     Left = 104
     Top = 229
-    Width = 3
-    Height = 18
+    Width = 4
+    Height = 20
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -46,8 +46,8 @@ object frmChequeUpCredAlloc: TfrmChequeUpCredAlloc
   object lblAmountMsg: TLabel
     Left = 255
     Top = 243
-    Width = 30
-    Height = 18
+    Width = 35
+    Height = 20
     Anchors = [akRight, akBottom]
     Caption = 'Total'
     Font.Charset = DEFAULT_CHARSET
@@ -60,8 +60,8 @@ object frmChequeUpCredAlloc: TfrmChequeUpCredAlloc
   object lblTotal: TLabel
     Left = 272
     Top = 229
-    Width = 3
-    Height = 18
+    Width = 4
+    Height = 20
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15

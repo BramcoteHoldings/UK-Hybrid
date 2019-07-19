@@ -424,7 +424,7 @@ begin
       // Create a INVOICE entry
       try
         if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
         dmAxiom.uniInsight.StartTransaction;
         if not qryAccount.Modified then
           qryAccount.Edit;
@@ -444,7 +444,7 @@ begin
           qryLedger.Next;
         end;
 
-        iNINVOICE := GetSeqNum('NINVOICE');
+        iNINVOICE := GetSequenceNumber('SQNC_NINVOICE');
         qryAccount.FieldByName('ACCT').AsString := dmAxiom.Entity;
         qryAccount.FieldByName('TYPE').AsString := 'IV';
         qryAccount.FieldByName('CREDITOR').AsString := lblCreditor.Caption;
@@ -530,7 +530,7 @@ begin
           begin
             nmatter := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
             qryAllocs.Insert;
-            qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+            qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
             qryAllocs.FieldByName('NMATTER').AsInteger := nmatter; // TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
             qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
             //qryAllocs.FieldByName('NMEMO').AsInteger := 0;

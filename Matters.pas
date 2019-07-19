@@ -1546,6 +1546,7 @@ type
     cxDBTreeList1PARENT_ID: TcxDBTreeListColumn;
     cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
     tvDocsFOLDER_ID: TcxGridDBBandedColumn;
+    actBillDelete: TAction;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -1624,7 +1625,6 @@ type
     procedure tbtnMatterEditClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure qryInvoicesAfterScroll(DataSet: TDataSet);
-    procedure btnDeleteDraftClick(Sender: TObject);
     procedure tbnCloseMatterClick(Sender: TObject);
     procedure btnModifyCreateNewClick(Sender: TObject);
     procedure btnWIPLedgerClick(Sender: TObject);
@@ -2002,6 +2002,12 @@ type
     procedure tvDocsMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure tvMatterNotesDblClick(Sender: TObject);
+    procedure tvInvoicesCellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure actBillDeleteExecute(Sender: TObject);
+    procedure actBillDeleteUpdate(Sender: TObject);
+    procedure actDeleteBillExecute(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -4041,7 +4047,8 @@ begin
    end;
 //  FreeAndNil(FOutlookIntegrator);
    if Assigned(MatterLabel) then
-      MatterLabel.Free;
+      FreeAndNil(MatterLabel);
+
    if frmDesktop.pagMainControl.ActivePageIndex = 1 then
    begin
       if Self.WindowState = wsMaximized then
@@ -5245,11 +5252,11 @@ begin
             btnAutoReceipt.Enabled := False;
       end;
 
-      // Check if the Bill is a draft and enable the delete button
+{      // Check if the Bill is a draft and enable the delete button
       if ((DataSet.FieldByName('IS_DRAFT').AsString = 'Y') and (dmAxiom.Security.Bill.Delete)) then
         btnDeleteDraft.Enabled := True
       else
-        btnDeleteDraft.Enabled := False;
+        btnDeleteDraft.Enabled := False;    }
    end;
    btnEmailBill.Enabled := False;
    pbViewBill.Enabled := False;
@@ -5264,27 +5271,6 @@ begin
          btnEmailBill.Enabled := True;
       end;
    end;
-end;
-
-procedure TfrmMatters.btnDeleteDraftClick(Sender: TObject);
-begin
-   if MessageDlg('Are you sure you want to delete this DRAFT Bill?', mtConfirmation,
-      [mbYes, mbNo], 0) = mrYes then
-   begin
-      try
-      if dmAxiom.uniInsight.InTransaction = True then
-         dmAxiom.uniInsight.Rollback;
-      dmAxiom.uniInsight.StartTransaction;
-      prcDeleteDBill.ParamByName('MEMONUMBER').AsInteger := qryInvoices.FieldByName('NMEMO').AsInteger;
-      prcDeleteDBill.ExecProc;
-      dmAxiom.uniInsight.Commit;
-      PlaySound('Delete');
-      qryInvoices.Close;
-      qryInvoices.Open;
-    except
-      dmAxiom.uniInsight.Rollback;
-    end;
-  end;
 end;
 
 procedure TfrmMatters.tbnCloseMatterClick(Sender: TObject);
@@ -5727,6 +5713,8 @@ begin
    pageMatter.ActivePageIndex := 2;
 
 //   pageMatter.ActivePageIndex := SettingLoadInteger(dmAxiom.UserID, 'MATTER', 'OPENTAB');
+   if (SystemString('MATTER_CONTACT_TAB_DEFAULT') = 'Y') and (dmAxiom.Security.Matter.Tabs.Contacts = TRUE) then
+      pageMatter.ActivePageIndex := 4;
 
   if ((SystemString('DFLT_MATTER_DOC_TAB') = 'Y') and (dmAxiom.Security.Matter.Tabs.Documents = TRUE)) then
        pageMatter.ActivePageIndex := 13;
@@ -5738,6 +5726,26 @@ begin
    except
       pageMatter.ActivePageIndex := 1;
    end;
+   if SystemString('RESTRICT_MATFIN_TO_TEAM') = 'Y' then
+   begin
+       if (MatterFinAccess(qryMatter.FieldByName('NMATTER').AsString, dmAxiom.UserID)) then
+       begin
+           TabOverview.TabVisible := True;
+           tabBalances.TabVisible := True;
+           tabReceipts.TabVisible := True;
+           tabInvoices.TabVisible := True;
+       end
+       else
+       begin
+           TabOverview.TabVisible := False;
+           tabBalances.TabVisible := False;
+           tabReceipts.TabVisible := False;
+           tabInvoices.TabVisible := False;
+           if (SystemString('DFLT_MATTER_DOC_TAB') = 'N') then
+               pageMatter.ActivePageIndex := 0;
+       end;
+   end;
+
 
    if MatterReset then
    begin
@@ -6632,10 +6640,12 @@ end;
 
 procedure TfrmMatters.pmDocFoldersPopup(Sender: TObject);
 begin
-   EditFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
-                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
-   DeleteFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
-                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   EditFolder1.Enabled :=           (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   DeleteFolder1.Enabled :=         (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   RemoveDocsfromFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
 end;
 
 procedure TfrmMatters.qryMatterPartyAfterOpen(DataSet: TDataSet);
@@ -8709,6 +8719,23 @@ begin
          frmDesktop.qryDiary.Open;
          frmDesktop.tvTaskList.EndUpdate;
          tvProjectTaskItems.DataController.RecordCount := 0;
+
+         if (MatterFinAccess(qryMatter.FieldByName('NMATTER').AsString, dmAxiom.UserID)) then
+         begin
+            TabOverview.TabVisible := True;
+            tabBalances.TabVisible := True;
+            tabInvoices.TabVisible := True;
+            tabReceipts.TabVisible := True;
+         end
+         else
+         begin
+            TabOverview.TabVisible := False;
+            tabBalances.TabVisible := False;
+            tabInvoices.TabVisible := False;
+            tabReceipts.TabVisible := False;
+            if (SystemString('DFLT_MATTER_DOC_TAB') = 'N') then
+               pageMatter.ActivePageIndex := 0;
+         end;
       end;
    end;
 end;
@@ -8815,7 +8842,7 @@ begin
 
    finally
       fmdoc_folder_sel.Free;
-      MsgInfo(IntToStr(Count) + ' Documents Added ' + lFolderName);
+      MsgInfo(IntToStr(Count+1) + ' Documents Added ' + lFolderName);
    end;
 end;
 
@@ -11169,6 +11196,17 @@ begin
    end;
 end;
 
+procedure TfrmMatters.tvInvoicesCellClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+   // Check if the Bill is a draft and enable the delete button
+{   if ((qryInvoices.FieldByName('IS_DRAFT').AsString = 'Y') and (dmAxiom.Security.Bill.Delete)) then
+      btnDeleteDraft.Enabled := True
+   else
+      btnDeleteDraft.Enabled := False;  }
+end;
+
 procedure TfrmMatters.tvInvoicesDataControllerSummaryAfterSummary(
   ASender: TcxDataSummary);
 begin
@@ -13000,6 +13038,56 @@ begin
     TAction(Sender).Enabled := (LData.Email <> '');
   end else
     TAction(Sender).Enabled := False;
+end;
+
+procedure TfrmMatters.actBillDeleteExecute(Sender: TObject);
+begin
+   if MessageDlg('Are you sure you want to delete this DRAFT Bill?', mtConfirmation,
+      [mbYes, mbNo], 0) = mrYes then
+   begin
+      try
+      if dmAxiom.uniInsight.InTransaction = True then
+         dmAxiom.uniInsight.Rollback;
+      dmAxiom.uniInsight.StartTransaction;
+      prcDeleteDBill.ParamByName('MEMONUMBER').AsInteger := qryInvoices.FieldByName('NMEMO').AsInteger;
+      prcDeleteDBill.ExecProc;
+      dmAxiom.uniInsight.Commit;
+      PlaySound('Delete');
+      qryInvoices.Close;
+      qryInvoices.Open;
+    except
+      dmAxiom.uniInsight.Rollback;
+    end;
+  end;
+end;
+
+procedure TfrmMatters.actBillDeleteUpdate(Sender: TObject);
+begin
+   actBillDelete.Enabled := ((tvInvoices.DataController.RecordCount > 0) and
+                            (tvInvoices.Controller.SelectedRowCount = 1) and
+                            (qryInvoices.FieldByName('IS_DRAFT').AsString = 'Y') and
+                            (dmAxiom.Security.Bill.Delete));
+end;
+
+procedure TfrmMatters.actDeleteBillExecute(Sender: TObject);
+begin
+   if MessageDlg('Are you sure you want to delete this DRAFT Bill?', mtConfirmation,
+      [mbYes, mbNo], 0) = mrYes then
+   begin
+      try
+      if dmAxiom.uniInsight.InTransaction = True then
+         dmAxiom.uniInsight.Rollback;
+      dmAxiom.uniInsight.StartTransaction;
+      prcDeleteDBill.ParamByName('MEMONUMBER').AsInteger := qryInvoices.FieldByName('NMEMO').AsInteger;
+      prcDeleteDBill.ExecProc;
+      dmAxiom.uniInsight.Commit;
+      PlaySound('Delete');
+      qryInvoices.Close;
+      qryInvoices.Open;
+    except
+      dmAxiom.uniInsight.Rollback;
+    end;
+  end;
 end;
 
 procedure TfrmMatters.aProjectExecute(Sender: TObject);

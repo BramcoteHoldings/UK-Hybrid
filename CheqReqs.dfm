@@ -81,7 +81,7 @@ object frmCheqReqs: TfrmCheqReqs
     Height = 618
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabCashbook
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
@@ -1610,7 +1610,7 @@ object frmCheqReqs: TfrmCheqReqs
     Left = 472
     Top = 20
     Bitmap = {
-      494C010111001500180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2672,7 +2672,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4355,7 +4355,6 @@ object frmCheqReqs: TfrmCheqReqs
         'C.REQDATE >= :P_DateFrom and C.REQDATE <= :P_DateTo  AND C.AMOUN' +
         'T > 0 AND C.CONVERTED = '#39'N'#39'  '
       'AND C.REV_NCHEQREQ IS NULL')
-    Active = True
     Left = 629
     Top = 246
     ParamData = <
@@ -4794,7 +4793,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

@@ -755,7 +755,7 @@ uses
   EntityGroups, ExpenseTemplates, NewTaskNew, PrecedentSearchList,
   Phonebook_Status, EmployeeFindDialog,
   FolderTemplate, JCLStrings, System.UITypes, System.Types, ConflictSelect,
-  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer;
+  WinAPI.ShellAPI, SearchIndexConfig, BulkMailer, dxSpellChecker;
 
 
 {$R *.DFM}
@@ -776,6 +776,8 @@ var
    SplashScreen: TfrmSplashScreen;
    bLoginSuccess: boolean;
    OutlookApp: oleVariant;
+   AItem: TdxSpellCheckerDictionaryItem;
+   cAItem: TdxUserSpellCheckerDictionary;
 begin
    // This is not nice, but seems to be necessary.
    // The conflict search text control seems to keep shrinking at design time,
@@ -1035,6 +1037,17 @@ begin
          chkIncludeClosed.EditValue := SettingLoadBoolean('DESKTOP','SHOWALLMATTERS');
          barDocCenter.Visible := (SystemString('SHOW_DOCUMENT_CENTER') = 'Y');
          BarConflicts.Visible := DirectoryExists(SystemString('CONFLICT_DOC_FOLDER'));
+
+         // load dictionaries
+         AItem := dmAxiom.TSSpellChecker.DictionaryItems.Add;
+         AItem.DictionaryTypeClass := TdxUserSpellCheckerDictionary ;
+
+         cAItem := TdxUserSpellCheckerDictionary (AItem.DictionaryType);
+         cAItem.DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+         cAItem.Enabled := True;
+//         TdxUserSpellCheckerDictionary(AItem).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
+//         TdxUserSpellCheckerDictionary(AItem).Enabled := True;
+         dmAxiom.TSSpellChecker.LoadDictionaries();
       end;
    finally
       dmAxiom.qryEmpsLogin.Close;
@@ -1745,6 +1758,8 @@ var
   regAxiom : TRegistry;
 begin
    try
+      TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).Enabled := False;
+ //     TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
       // Get rid of the user from the registry so that they can't run reports
       // without being in Insight
       if (dmAxiom.USE_ACTIVE_DIRECTORY = 'N') then
@@ -1844,6 +1859,7 @@ begin
    TabImage.Picture.LoadFromFile('.\images\close_16.png');
    cxEventEditorClass := TfrmNewTaskNew;
    dmAxiom.bShutDown := False;
+   dmAxiom.ATabIndex := -1;
 end;
 
 procedure TfrmDesktop.FormDestroy(Sender: TObject);
@@ -4739,13 +4755,14 @@ var
    APageCount: integer;
 begin
    APageCount := pageForms.PageCount;
-   TabIndex := pageForms.Controller.HitTest.HitTab.Index;
-   ChildControl := pageForms.Pages[TabIndex].Controls[0];
+   dmAxiom.ATabIndex := pageForms.Controller.HitTest.HitTab.Index;
+   ChildControl := pageForms.Pages[dmAxiom.ATabIndex].Controls[0];
    TForm(ChildControl).Close;
    if APageCount = pageForms.PageCount then
-      pageForms.Pages[TabIndex].Destroy;
+      pageForms.Pages[dmAxiom.ATabIndex].Destroy;
 
    pageforms.Repaint;
+   dmAxiom.ATabIndex := -1;
 end;
 
 procedure TfrmDesktop.pageFormsUnDock(Sender: TObject; Client: TControl;

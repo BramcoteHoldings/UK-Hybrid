@@ -102,7 +102,7 @@ begin
 
       nmatter := AMATTER;
       qryAllocs.Insert;
-      qryAllocs.FieldByName('NALLOC').AsInteger := GetSeqnum('NALLOC');
+      qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
       qryAllocs.FieldByName('NMATTER').AsInteger := nmatter;
       qryAllocs.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'NMATTER', AMatter, 'NCLIENT');
       qryAllocs.FieldByName('FILEID').AsString := AFileID;
