@@ -6640,10 +6640,12 @@ end;
 
 procedure TfrmMatters.pmDocFoldersPopup(Sender: TObject);
 begin
-   EditFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
-                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
-   DeleteFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
-                          and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   EditFolder1.Enabled :=           (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   DeleteFolder1.Enabled :=         (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
+   RemoveDocsfromFolder1.Enabled := (cxDBTreeList1DESCR.Value <> 'All Files')
+                                    and (cxDBTreeList1DESCR.Value <> 'Unallocated Files');
 end;
 
 procedure TfrmMatters.qryMatterPartyAfterOpen(DataSet: TDataSet);
@@ -8840,7 +8842,7 @@ begin
 
    finally
       fmdoc_folder_sel.Free;
-      MsgInfo(IntToStr(Count) + ' Documents Added ' + lFolderName);
+      MsgInfo(IntToStr(Count+1) + ' Documents Added ' + lFolderName);
    end;
 end;
 

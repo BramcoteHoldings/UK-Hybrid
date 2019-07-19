@@ -37,6 +37,7 @@ const
   SBARAMOUNT = 3;
   days: array[1..7] of string = ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
   WM_REFRESHGRID = WM_USER + 2;
+  WM_MYWIP = WM_USER + 3;
   cRed = $000C1DFC;
   cOrange = $003684FA;
   cGreen = $002CCB73;
@@ -471,7 +472,7 @@ type
     bLocalUpdate:       boolean;
     iUnits:             integer;
 
-    procedure SetMyWIP;
+//    procedure SetMyWIP;
     function GetEmpDailyBudget: currency;
     function GetEmpMonthlyBudget: currency;
     function GetEmpYearlyBudget: currency;
@@ -501,6 +502,7 @@ type
     procedure StartStopTimer(APrevUniqueID: integer = -1);
     procedure ProcessTimeSheet(APrevUniqueID: integer = -1);
 //    property MyWIP: currency read SetMyWIP write FMyWIP;
+    procedure SetMyWIP(var Message: TMessage); message WM_MYWIP;
   public
     { Public declarations }
   end;
@@ -1601,7 +1603,8 @@ begin
   CalcUnpostedAmountTotals;
   CalcDailyTotal;
   FLineCopied := False;
-  SetMyWIP;
+  PostMessage(Self.Handle, WM_MYWIP , 1, 0);
+//  SetMyWIP;
   dxBarButtonSave.Enabled := False;
 end;
 
@@ -1973,6 +1976,7 @@ begin
    tvFeeTmpNew.DataController.Summary.FooterSummaryItems[0].Format := GetCurrencySymbol+',0.00';
    tvFeeTmpNew.DataController.Summary.FooterSummaryItems[3].Format := GetCurrencySymbol+',0.00';
    tvFeeTmpNew.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
+   PostMessage(Self.Handle, WM_MYWIP , 1, 0);
 //   SetMyWIP;
 //   CalcAmount;
 end;
@@ -2870,7 +2874,8 @@ begin
 
       CalcUnpostedTotals;
       CalcUnpostedAmountTotals;
-      SetMyWIP;
+      PostMessage(Self.Handle, WM_MYWIP , 1, 0);
+//      SetMyWIP;
       lblDailyBudgetUnits.Caption := IntToStr(GetEmpDailyUnitsBudget(dtpDate.Date));
 
 //      lblTimeToday.Caption := cbAuthor.EditValue + ' - time today';
@@ -3225,7 +3230,8 @@ begin
       end;
       lblDay.Caption := days[DayOfWeek(dtpDate.Date)];
       CalcDailyTotal;
-      SetMyWIP;
+      PostMessage(Self.Handle, WM_MYWIP , 1, 0);
+//      SetMyWIP;
    finally
       tvFeeTmpNew.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
    end;
@@ -5629,7 +5635,7 @@ begin
    end;
 end;
 
-procedure TfrmTimeSheet.SetMyWIP;
+procedure TfrmTimeSheet.SetMyWIP(var Message: TMessage);
 var
    lDailyTotal_Wip,
    lDailyWIP_Ratio,
