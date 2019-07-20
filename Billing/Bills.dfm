@@ -38,6 +38,10 @@ object frmBills: TfrmBills
     object tabBills: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrBills: TcxGrid
         Left = 0
         Top = 0
@@ -588,6 +592,10 @@ object frmBills: TfrmBills
     object tabTotals: TcxTabSheet
       Caption = 'Totals'
       ImageIndex = 19
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object nlFees: TNumberLabel
         Left = 228
         Top = 17
@@ -1741,7 +1749,7 @@ object frmBills: TfrmBills
     Left = 601
     Top = 34
     Bitmap = {
-      494C010119001D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010119001D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

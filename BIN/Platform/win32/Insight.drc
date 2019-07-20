@@ -18359,7 +18359,7 @@ END
 /* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowMergeDocument.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\WaitAnimate.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\WaitAnimate.res */
-/* D:\XE10_SOURCE\UK-Hybrid\InvoiceSearch.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\InvoiceSearch.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\DebtorNotes.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Conflicts\SelectConflictDocName.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Conflicts\ConflictSearch.DFM */
@@ -18486,6 +18486,7 @@ END
 /* D:\XE10_SOURCE\UK-Hybrid\ReceiptDistribute.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\CheqImport.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\SaveScreens\StencilSelect.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\DisbSearch.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\Receipt.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\MasterBill.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Billing\BillGLPosting.dfm */
@@ -18507,10 +18508,10 @@ END
 /* D:\XE10_SOURCE\UK-Hybrid\CheqReqInvoiceDebit.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\BulkCheques.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\CheqReqs.DFM */
-/* D:\XE10_SOURCE\UK-Hybrid\InvoiceScan.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\InvoiceScan.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Creditors\AccountNew.DFM */
-/* D:\XE10_SOURCE\UK-Hybrid\InvoiceDebitNote.DFM */
-/* D:\XE10_SOURCE\UK-Hybrid\InvoiceReverse.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\InvoiceDebitNote.DFM */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\InvoiceReverse.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\EFTFile.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Creditors\AccountPayable.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\TemplateSelect.dfm */
@@ -18526,7 +18527,7 @@ END
 /* D:\XE10_SOURCE\UK-Hybrid\Reports.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorMerge.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Creditors\CreditorMergeProgress.dfm */
-/* D:\XE10_SOURCE\UK-Hybrid\InvoiceChangeDueDate.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\InvoiceChangeDueDate.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Creditors\Creditors.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\WorkFlowFieldTranslate.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\WorkFlow\DataForm.DFM */
@@ -18681,7 +18682,7 @@ END
 /* D:\XE10_SOURCE\UK-Hybrid\MatterNoteTypes.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\Billing\Bulkbills.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\AutoGenList.dfm */
-/* D:\XE10_SOURCE\UK-Hybrid\invoicelist.dfm */
+/* D:\XE10_SOURCE\UK-Hybrid\Creditors\invoicelist.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\PhonebookImport.DFM */
 /* D:\XE10_SOURCE\UK-Hybrid\SettingsMaint.dfm */
 /* D:\XE10_SOURCE\UK-Hybrid\BHLSupport.dfm */
