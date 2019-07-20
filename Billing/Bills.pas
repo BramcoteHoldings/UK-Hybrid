@@ -24,7 +24,7 @@ uses
   NumberLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, OracleUniProvider,
   uRwMAPIMsgStoreEvents, uRwMAPIInterfaces, Variants, dxCore, ppFileUtils,
-  ppIniStorage, cxGridExportLink, ShellAPI;
+  ppIniStorage, cxGridExportLink, ShellAPI, DateUtils;
 
 const
  NMEMOSEARCHDATES: array[0..2] of string = ('GENERATED','DISPATCHED','EXPPAYMENT');
@@ -1351,6 +1351,13 @@ begin
 //            if MsgAsk('Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?') = mrYes then
 //            begin
                dTmp := Now;
+               if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+                  dTmp := SystemDate('DFLT_BILL_DISPATCHED_DATE');
+               if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+               begin
+                   if (DateOf(qryBills.FieldByName('DISPATCHED').AsDateTime) > DateOf(dTmp)) then
+                      dTmp := Now;
+               end;
                if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?',  dTmp)) then
                begin
                   bOKtoPost:= (PostIntoLockedPeriod(dTmp) in [prNotLocked, prOKToProceed]);
