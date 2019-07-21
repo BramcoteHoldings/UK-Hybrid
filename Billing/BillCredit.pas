@@ -198,7 +198,8 @@ begin
       BillCred := qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency;
       sbarDetails.Panels[pnlCREDITORS].Text := 'Creditors: ' + Format('%.2n', [BillCred]);
 
-      if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency) > 0 then
+      //if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency) > 0 then
+      if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency + qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency) > 0 then
       begin
         if MatterIsCurrent(qryBill.FieldByName('FILEID').AsString) then
         begin
