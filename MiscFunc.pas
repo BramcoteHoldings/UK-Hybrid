@@ -89,6 +89,7 @@ const
   C_MACRO_REFNO         = '[REFNO]';
   C_MACRO_ENTITY        = '[NAME]';
   C_MACRO_USERPROFILE   = '[USERPROFILE]';
+  C_MACRO_CLIENT_NAME   = '[CLIENTNAME]';
 
   wdFormatPDF           = 17;
   xlTypePDF             = 0;
@@ -111,11 +112,11 @@ const
 
   // If order is none on a column, default it to ascending.
   const SortOrders : array [TcxDataSortOrder] of string = ( ' ASC', ' ASC', ' DESC');
-  EmailMatterMacrosDescr: array[0..4] of string = ('[CLIENTID] = Client Code','[FILEID]=File Number','[AUTHOR]=Matter Author', '[OPREF]=Client Reference', '[SHORTDESCR]=Matter Description');
-  EmailMatterMacrosValues: array[0..4] of string = ('[CLIENTID]','[FILEID]','[AUTHOR]','[OPREF]', '[SHORTDESCR]');
+  EmailMatterMacrosDescr: array[0..5] of string = ('[CLIENTID] = Client Code','[FILEID]=File Number','[AUTHOR]=Matter Author', '[OPREF]=Client Reference', '[SHORTDESCR]=Matter Description','[CLIENTNAME]=Client Name');
+  EmailMatterMacrosValues: array[0..5] of string = ('[CLIENTID]','[FILEID]','[AUTHOR]','[OPREF]', '[SHORTDESCR],','[CLIENTNAME]');
 
-  EmailBillMacrosDescr: array[0..6] of string = ('[CLIENTID] = Client Code','[FILEID]=File Number','[AUTHOR]=Matter Author', '[OPREF]=Client Reference', '[SHORTDESCR]=Matter Description', '[REFNO]=Bill Number', '[NAME]=Entity');
-  EmailBillMacrosValues: array[0..6] of string = ('[CLIENTID]','[FILEID]','[AUTHOR]','[OPREF]', '[SHORTDESCR]','[REFNO]','[NAME]');
+  EmailBillMacrosDescr: array[0..7] of string = ('[CLIENTID] = Client Code','[FILEID]=File Number','[AUTHOR]=Matter Author', '[OPREF]=Client Reference', '[SHORTDESCR]=Matter Description', '[REFNO]=Bill Number', '[NAME]=Entity', '[CLIENTNAME]=Client Name');
+  EmailBillMacrosValues: array[0..7] of string = ('[CLIENTID]','[FILEID]','[AUTHOR]','[OPREF]', '[SHORTDESCR]','[REFNO]','[NAME],','[CLIENTNAME]');
 
 
   // Axiom variables
@@ -12011,55 +12012,56 @@ end;
 
 function ParseMacros(AFileName: String; ANMatter: Integer; ADocID: Integer; ADocDescr: string; ANMemo: integer): String;
 var
-  LBfr: Array[0..MAX_PATH] of Char;
-  lEntity: string;
+   LBfr: Array[0..MAX_PATH] of Char;
+   lEntity: string;
 begin
-  if(GHomePath = '') then
-    GHomePath := GetEnvironmentVariable('HOMEDRIVE') + GetEnvironmentVariable('HOMEPATH');
-  if (GUserProfile = '') then
-     GUserProfile := GetEnvironmentVariable('USERPROFILE');
+   if(GHomePath = '') then
+      GHomePath := GetEnvironmentVariable('HOMEDRIVE') + GetEnvironmentVariable('HOMEPATH');
+   if (GUserProfile = '') then
+      GUserProfile := GetEnvironmentVariable('USERPROFILE');
 
-  if(GTempPath = '') then
-  begin
-    GetTempPath(MAX_PATH,Lbfr);
-    GTempPath := String(LBfr);
-  end;
+   if(GTempPath = '') then
+   begin
+      GetTempPath(MAX_PATH,Lbfr);
+      GTempPath := String(LBfr);
+   end;
 
-  Result := AFileName;
+   Result := AFileName;
 
-  result := StringReplace(Result,C_MACRO_USERHOME,GHomePath,[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_USERPROFILE,GUserProfile,[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_TEMPDIR,GTempPath,[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_NMATTER,IntToStr(ANMatter),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_FILEID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'FILEID'),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_CLIENTID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'CLIENTID'),[rfReplaceAll, rfIgnoreCase]);
+   result := StringReplace(Result,C_MACRO_USERHOME,GHomePath,[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_USERPROFILE,GUserProfile,[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_TEMPDIR,GTempPath,[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_NMATTER,IntToStr(ANMatter),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_FILEID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'FILEID'),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_CLIENTID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'CLIENTID'),[rfReplaceAll, rfIgnoreCase]);
 
-  Result := StringReplace(Result,C_MACRO_DATE,FormatDateTime('dd-mm-yyyy',Now()) ,[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_TIME,FormatDateTime('hh-nn-ss',Now()),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_DATETIME,FormatDateTime('dd-mm-yyyy-hh-nn-ss',Now()),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_DATE,FormatDateTime('dd-mm-yyyy',Now()) ,[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_TIME,FormatDateTime('hh-nn-ss',Now()),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_DATETIME,FormatDateTime('dd-mm-yyyy-hh-nn-ss',Now()),[rfReplaceAll, rfIgnoreCase]);
 
-  Result := StringReplace(Result,C_MACRO_AUTHOR, TableString('MATTER','NMATTER',IntToStr(ANMatter),'AUTHOR'),[rfReplaceAll, rfIgnoreCase]);
-  if (ADocDescr <> '')  then
-     Result := StringReplace(Result,C_MACRO_DOCDESCR, ADocDescr ,[rfReplaceAll, rfIgnoreCase]);
-  if (pos(C_MACRO_DOCSEQUENCE,UpperCase(Result)) > 0) then
-     Result := StringReplace(Result,C_MACRO_DOCSEQUENCE, ProcString('getDocSequence',ANMatter),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_USERINITIALS, dmAxiom.UserID ,[rfReplaceAll, rfIgnoreCase]);
-  if ADocID > 0 then
-     Result := StringReplace(Result,C_MACRO_DOCID, IntToStr(ADocID),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_AUTHOR, TableString('MATTER','NMATTER',IntToStr(ANMatter),'AUTHOR'),[rfReplaceAll, rfIgnoreCase]);
+   if (ADocDescr <> '')  then
+      Result := StringReplace(Result,C_MACRO_DOCDESCR, ADocDescr ,[rfReplaceAll, rfIgnoreCase]);
+   if (pos(C_MACRO_DOCSEQUENCE,UpperCase(Result)) > 0) then
+      Result := StringReplace(Result,C_MACRO_DOCSEQUENCE, ProcString('getDocSequence',ANMatter),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_USERINITIALS, dmAxiom.UserID ,[rfReplaceAll, rfIgnoreCase]);
+   if ADocID > 0 then
+      Result := StringReplace(Result,C_MACRO_DOCID, IntToStr(ADocID),[rfReplaceAll, rfIgnoreCase]);
 
-  if(Pos(C_MACRO_TEMPFILE,Result) > 0) then
-  begin
-    GetTempFileName(PChar(GTempPath),'axm',0,LBfr);
-    Result := StringReplace(Result,C_MACRO_TEMPFILE,String(LBfr),[rfReplaceAll, rfIgnoreCase]);
-  end;
-  Result := StringReplace(Result,C_MACRO_OPREF, TableString('MATTER','NMATTER',IntToStr(ANMatter),'OPREF'),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_SHORTDESCR, TableString('MATTER','NMATTER',IntToStr(ANMatter),'SHORTDESCR'),[rfReplaceAll, rfIgnoreCase]);
-  Result := StringReplace(Result,C_MACRO_REFNO, TableString('NMEMO','NMEMO',IntToStr(ANMemo),'REFNO'),[rfReplaceAll, rfIgnoreCase]);
-  if (Pos(C_MACRO_ENTITY, Result) > 0) then
-  begin
-     lEntity := TableString('NMEMO','NMEMO',IntToStr(ANMemo),'BANK_ACCT');
-     Result := StringReplace(Result,C_MACRO_ENTITY, TableString('ENTITY','CODE',lEntity,'NAME'),[rfReplaceAll, rfIgnoreCase]);
-  end;
+   if(Pos(C_MACRO_TEMPFILE,Result) > 0) then
+   begin
+      GetTempFileName(PChar(GTempPath),'axm',0,LBfr);
+      Result := StringReplace(Result,C_MACRO_TEMPFILE,String(LBfr),[rfReplaceAll, rfIgnoreCase]);
+   end;
+   Result := StringReplace(Result,C_MACRO_OPREF, TableString('MATTER','NMATTER',IntToStr(ANMatter),'OPREF'),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_SHORTDESCR, TableString('MATTER','NMATTER',IntToStr(ANMatter),'SHORTDESCR'),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_REFNO, TableString('NMEMO','NMEMO',IntToStr(ANMemo),'REFNO'),[rfReplaceAll, rfIgnoreCase]);
+   if (Pos(C_MACRO_ENTITY, Result) > 0) then
+   begin
+      lEntity := TableString('NMEMO','NMEMO',IntToStr(ANMemo),'BANK_ACCT');
+      Result := StringReplace(Result,C_MACRO_ENTITY, TableString('ENTITY','CODE',lEntity,'NAME'),[rfReplaceAll, rfIgnoreCase]);
+   end;
+   Result := StringReplace(Result,C_MACRO_CLIENT_NAME, TableString('MATTER','NMATTER',IntToStr(ANMatter),'TITLE'),[rfReplaceAll, rfIgnoreCase]);
 end;
 
 procedure SaveBill(ADoc_Name, AAuth, APath, ADescr, AFileid, APrecCategory,

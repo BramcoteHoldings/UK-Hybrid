@@ -520,7 +520,7 @@ begin
    else if (not cbIncludeNegative.Checked) then
      sSQLWhere := sSQLWhere + sAND + 'C.AMOUNT > 0';
    if tbAmountTo.Text <> '' then
-     sSQLWhere := sSQLWhere + sAND + 'C.AMOUNT <= ' + tbAmountTo.Text;
+      sSQLWhere := sSQLWhere + sAND + 'C.AMOUNT <= ' + tbAmountTo.Text;
 
    if cbTrustCreditorPayments.Checked then
       sSQLWhere := sSQLWhere + sAND + 'C.NINVOICE IS NOT NULL';
@@ -530,9 +530,14 @@ begin
    Select converted cheqreqs if user asks to see them
  }
    if cbConverted.Checked then
-     sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED <> ''N'' '
+      sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''Y'' '
    else
-     sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
+   begin
+      if chkRev.Checked then
+         sSQLWhere := sSqlWhere + sAND + '(C.REV_NCHEQREQ IS NOT NULL) OR C.CONVERTED IN (''R'', ''N'') '
+      else
+         sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
+   end;
 
    if cbToBeBilled.Checked then
       sSQLWhere := sSQLWhere + sAND + 'C.ANTICIPATED = ''Y'' ';
@@ -578,8 +583,7 @@ begin
    //rb
    if chkUrgent.Checked then
      sSQLWhere := sSqlWhere + sAND + 'C.URGENT = ''Y''';
-   if not chkRev.Checked then
-     sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NULL ';
+
 
 
    if (cbExcludeTrust.Checked) and (not cbIncludeTrust.Checked) then
@@ -693,8 +697,8 @@ begin
       sSql := sSql + 'and C.REQDATE <= :P_DateTo ';
    if (chkOwing.Checked) then
    begin
-   sSql := sSql + ' and ((nvl(tr.amount,0) - (nvl(cheq.AMOUNT,0)+ nvl(cheq.tax,0)) > 0)'  +
-                ' or (C.CONVERTED = ''N'' and C.FORCEPAY = 1)) ';
+      sSql := sSql + ' and ((nvl(tr.amount,0) - (nvl(cheq.AMOUNT,0)+ nvl(cheq.tax,0)) > 0)'  +
+                  ' or (C.CONVERTED = ''N'' and C.FORCEPAY = 1)) ';
    end;
 
    sSql := sSql + sSQLWhere;

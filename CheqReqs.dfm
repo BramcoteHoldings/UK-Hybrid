@@ -2405,8 +2405,8 @@ object frmCheqReqs: TfrmCheqReqs
   end
   object dsLedger: TUniDataSource
     DataSet = qryLedger
-    Left = 448
-    Top = 392
+    Left = 496
+    Top = 384
   end
   object qryCheque: TUniQuery
     Connection = dmAxiom.uniInsight

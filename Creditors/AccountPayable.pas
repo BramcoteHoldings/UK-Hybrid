@@ -471,143 +471,152 @@ var
   ARowIndex: Integer;
 begin
    sBank := cbBank.EditValue;
-   tvInvoices.BeginUpdate();
+
    if tvInvoices.GroupedColumnCount > 0 then
    begin
       bConversionOn := True;
       qryTransactions.Close;
       if (AllAcctPayableTheSame) then
       begin
-         Screen.Cursor := crHourGlass;
-         progBarProcess.Position := 0;
-         progBarProcess.Visible := True;
-         Application.ProcessMessages;
-         dbgrInvoices.FocusedView.DataController.Groups.FullExpand;
-         tvInvoices.DataController.FocusedRowIndex := 0;
-         qryLedger.Open;
-         progBarProcess.Properties.Max := tvInvoices.DataController.RowCount;
-//         tvInvoices.DataController.DataSet.DisableControls;
-         for nRowCount := 0 to tvInvoices.DataController.RowCount - 1 do
-         begin
-            if (qryAccounts.FieldByName('ACCT').AsString <> dmAxiom.Entity) then Exit;
-            if (tvInvoices.ViewData.Records[nRowCount].Level = 0) then
-            begin
-               if nRowCount > 0 then
-               begin
-                  qryLedger.Insert;
-                  qryLedger.FieldByName('TYPE').AsString := 'Invoice';
-                  qryLedger.FieldByName('REFNO').AsString := qryAccounts.FieldByName('REFNO').AsString;
-                  qryLedger.FieldByName('LONGDESC').AsString := qryAccounts.FieldByName('CREDITOR').AsString;
-
-                  qryLedger.FieldByName('PAYEE').AsString := qryAccounts.FieldByName('NAME').AsString;
-
-                  qryLedger.FieldByName('REASON').AsString := qryAccounts.FieldByName('DESCR').AsString;
-
-                  qryLedger.FieldByName('AMOUNT').AsFloat := iCheqreqAmount;
-
-                  lsDefaultTax := GetDefaultTax('CreditorInvoice', 'NOTAX');
-
-                  qryLedger.FieldByName('TAXCODE').AsString := lsDefaultTax;
-                  qryLedger.FieldByName('TAX').AsFloat := 0;
-                  qryLedger.FieldByName('BILLED').AsString := 'Y';
-
-                  qryLedger.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
-                  qryLedger.FieldByName('BANK').AsString := sBank;
-                  qryLedger.FieldByName('PROCESS').AsString := 'N';
-                  qryLedger.FieldByName('NCREDITOR').AsInteger := qryAccounts.FieldByName('NCREDITOR').AsInteger;
-                  qryLedger.FieldByName('NCHEQUE').AsInteger := iNcheque;
-                  qryLedger.FieldByName('FILEID').AsString := qryAccounts.FieldByName('NCREDITOR').AsString;
-                  qryLedger.FieldByName('CREATED').AsDateTime := Date;
-                  qryLedger.FieldByName('NCHEQREQ_LIST').AsString := lsNAccPay_List;
-
-                  qryLedger.Post;
-               end;
-               X := GetNextSequence('SEQ_CHEQUE_GROUP_ID');
-//       14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
-               iNcheque := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
-               iCheqreqAmount := 0;
-               iCheqreqTax := 0;
-               lsNAccPay_List := '';
-               progBarProcess.Position := nRowCount;
-               Application.ProcessMessages;
-            end
-            else
-            begin
-               tvInvoices.ViewData.Records[nRowCount].Focused := True;
-               if qryAccounts.State <> dsEdit then
-                  qryAccounts.Edit;
-               qryAccounts.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
-
-               iCheqreqAmount := iCheqreqAmount + qryAccounts.FieldByName('OWING').AsFloat;
-               iCheqreqTax := iCheqreqTax + qryAccounts.FieldByName('TAX').AsFloat;
-
-               If lsNAccPay_List <> '' then
-                  lsNAccPay_List := lsNAccPay_List + ',';
-               lsNAccPay_List := lsNAccPay_List + '''' + qryAccounts.FieldByName('NINVOICE').AsString + '''';
-
-               progBarProcess.Position := nRowCount;
-               Application.ProcessMessages;
-            end;
-         end;
-
-         // this is here to handle the last row in the grid
-         qryLedger.Insert;
-
-         qryLedger.FieldByName('TYPE').AsString := 'Invoice';
-         qryLedger.FieldByName('REFNO').AsString := qryAccounts.FieldByName('REFNO').AsString;
-         qryLedger.FieldByName('LONGDESC').AsString := qryAccounts.FieldByName('CREDITOR').AsString;
-
-         qryLedger.FieldByName('PAYEE').AsString := qryAccounts.FieldByName('NAME').AsString;
-
-         qryLedger.FieldByName('REASON').AsString := qryAccounts.FieldByName('DESCR').AsString;
-
-         qryLedger.FieldByName('AMOUNT').AsFloat := iCheqreqAmount;
-
-         lsDefaultTax := GetDefaultTax('CreditorInvoice', 'NOTAX');
-
-         qryLedger.FieldByName('TAXCODE').AsString := lsDefaultTax;
-         qryLedger.FieldByName('TAX').AsFloat := 0;
-         qryLedger.FieldByName('BILLED').AsString := 'Y';
-
-         qryLedger.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
-         qryLedger.FieldByName('BANK').AsString := sBank;
-         qryLedger.FieldByName('PROCESS').AsString := 'N';
-//         qryLedger.FieldByName('NCREDITOR').AsInteger := qryAccounts.FieldByName('NCREDITOR').AsInteger;
-         qryLedger.FieldByName('FILEID').AsString := qryAccounts.FieldByName('NCREDITOR').AsString;
-         qryLedger.FieldByName('NCHEQUE').AsInteger := iNcheque;
-         qryLedger.FieldByName('CREATED').AsDateTime := Date;
-         qryLedger.FieldByName('NCHEQREQ_LIST').AsString := lsNAccPay_List;
-
-         qryLedger.Post;
-         if qryAccounts.Modified then
-            qryAccounts.Post;
-
-         if qryAccounts.Modified then
-            qryAccounts.Post;
-         progBarProcess.Visible := False;
-
-//         tvInvoices.DataController.DataSet.EnableControls;
-         // Now lets show the list of cheques created
          try
-            frmBulkCheques:= TfrmBulkCheques.Create(frmAcctPayable);
-            frmBulkCheques.DefaultBank := cbBank.EditValue;
-            frmBulkCheques.tvBulkCheques.DataController.DataSource := dsLedger;
-            frmBulkCheques.CreateCheque := cbCheque.Checked;
-
-            Screen.Cursor := crDefault;
-            if frmBulkCheques.ShowModal = mrOk then
+            Screen.Cursor := crHourGlass;
+            // will not work if not expanded
+            dbgrInvoices.FocusedView.DataController.Groups.FullExpand;
+            tvInvoices.BeginUpdate();
+            progBarProcess.Position := 0;
+            progBarProcess.Visible := True;
+            Application.ProcessMessages;
+            dbgrInvoices.FocusedView.DataController.Groups.FullExpand;
+            tvInvoices.DataController.FocusedRowIndex := 0;
+            qryLedger.Open;
+            progBarProcess.Properties.Max := tvInvoices.DataController.RowCount;
+//            tvInvoices.DataController.DataSet.DisableControls;
+            for nRowCount := 0 to tvInvoices.DataController.RowCount - 1 do
             begin
-               // let's create them
-               if PostInvoices(frmBulkCheques.cmbPrinter.Text, frmBulkCheques.cbAuthBy.EditValue, frmBulkCheques.EFTBankCode, frmBulkCheques.teRefNo.Text, qryLedger.FieldByName('REFNO').AsString) then
+               if (qryAccounts.FieldByName('ACCT').AsString <> dmAxiom.Entity) then Exit;
+               if (tvInvoices.ViewData.Records[nRowCount].Level = 0) then
                begin
-                  tvInvoices.GroupedColumns[0].GroupIndex := -1;
-                  MakeSQL;
+                  if nRowCount > 0 then
+                  begin
+                     qryLedger.Insert;
+                     qryLedger.FieldByName('TYPE').AsString := 'Invoice';
+                     qryLedger.FieldByName('REFNO').AsString := qryAccounts.FieldByName('REFNO').AsString;
+                     qryLedger.FieldByName('LONGDESC').AsString := qryAccounts.FieldByName('CREDITOR').AsString;
+
+                     qryLedger.FieldByName('PAYEE').AsString := qryAccounts.FieldByName('NAME').AsString;
+
+                     qryLedger.FieldByName('REASON').AsString := qryAccounts.FieldByName('DESCR').AsString;
+
+                     qryLedger.FieldByName('AMOUNT').AsFloat := iCheqreqAmount;
+
+                     lsDefaultTax := GetDefaultTax('CreditorInvoice', 'NOTAX');
+
+                     qryLedger.FieldByName('TAXCODE').AsString := lsDefaultTax;
+                     qryLedger.FieldByName('TAX').AsFloat := 0;
+                     qryLedger.FieldByName('BILLED').AsString := 'Y';
+
+                     qryLedger.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
+                     qryLedger.FieldByName('BANK').AsString := sBank;
+                     qryLedger.FieldByName('PROCESS').AsString := 'N';
+                     qryLedger.FieldByName('NCREDITOR').AsInteger := qryAccounts.FieldByName('NCREDITOR').AsInteger;
+                     qryLedger.FieldByName('NCHEQUE').AsInteger := iNcheque;
+                     qryLedger.FieldByName('FILEID').AsString := qryAccounts.FieldByName('NCREDITOR').AsString;
+                     qryLedger.FieldByName('CREATED').AsDateTime := Date;
+                     qryLedger.FieldByName('NCHEQREQ_LIST').AsString := lsNAccPay_List;
+
+                     qryLedger.Post;
+                  end;
+                  X := GetNextSequence('SEQ_CHEQUE_GROUP_ID');
+//          14/06/2018 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
+                  iNcheque := GetSequenceNumber('SQNC_NCHEQUE');  //GetSeqnum('NCHEQUE');
+                  iCheqreqAmount := 0;
+                  iCheqreqTax := 0;
+                  lsNAccPay_List := '';
+                  progBarProcess.Position := nRowCount;
+                  Application.ProcessMessages;
+               end
+               else
+               begin
+                  tvInvoices.ViewData.Records[nRowCount].Focused := True;
+                  if qryAccounts.State <> dsEdit then
+                     qryAccounts.Edit;
+                  qryAccounts.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
+
+                  iCheqreqAmount := iCheqreqAmount + qryAccounts.FieldByName('OWING').AsFloat;
+                  iCheqreqTax := iCheqreqTax + qryAccounts.FieldByName('TAX').AsFloat;
+
+                  If lsNAccPay_List <> '' then
+                     lsNAccPay_List := lsNAccPay_List + ',';
+                  lsNAccPay_List := lsNAccPay_List + '''' + qryAccounts.FieldByName('NINVOICE').AsString + '''';
+
+                  progBarProcess.Position := nRowCount;
+                  Application.ProcessMessages;
                end;
+            end;
+
+            // this is here to handle the last row in the grid
+            qryLedger.Insert;
+
+            qryLedger.FieldByName('TYPE').AsString := 'Invoice';
+            qryLedger.FieldByName('REFNO').AsString := qryAccounts.FieldByName('REFNO').AsString;
+            qryLedger.FieldByName('LONGDESC').AsString := qryAccounts.FieldByName('CREDITOR').AsString;
+
+            qryLedger.FieldByName('PAYEE').AsString := qryAccounts.FieldByName('NAME').AsString;
+
+            qryLedger.FieldByName('REASON').AsString := qryAccounts.FieldByName('DESCR').AsString;
+
+            qryLedger.FieldByName('AMOUNT').AsFloat := iCheqreqAmount;
+
+            lsDefaultTax := GetDefaultTax('CreditorInvoice', 'NOTAX');
+
+            qryLedger.FieldByName('TAXCODE').AsString := lsDefaultTax;
+            qryLedger.FieldByName('TAX').AsFloat := 0;
+            qryLedger.FieldByName('BILLED').AsString := 'Y';
+
+            qryLedger.FieldByName('CHEQUE_GROUP_ID').AsInteger := X;
+            qryLedger.FieldByName('BANK').AsString := sBank;
+            qryLedger.FieldByName('PROCESS').AsString := 'N';
+//            qryLedger.FieldByName('NCREDITOR').AsInteger := qryAccounts.FieldByName('NCREDITOR').AsInteger;
+            qryLedger.FieldByName('FILEID').AsString := qryAccounts.FieldByName('NCREDITOR').AsString;
+            qryLedger.FieldByName('NCHEQUE').AsInteger := iNcheque;
+            qryLedger.FieldByName('CREATED').AsDateTime := Date;
+            qryLedger.FieldByName('NCHEQREQ_LIST').AsString := lsNAccPay_List;
+
+            qryLedger.Post;
+            if qryAccounts.Modified then
+               qryAccounts.Post;
+
+            if qryAccounts.Modified then
+               qryAccounts.Post;
+            progBarProcess.Visible := False;
+
+//            tvInvoices.DataController.DataSet.EnableControls;
+            // Now lets show the list of cheques created
+            try
+               frmBulkCheques:= TfrmBulkCheques.Create(frmAcctPayable);
+               frmBulkCheques.DefaultBank := cbBank.EditValue;
+               frmBulkCheques.tvBulkCheques.DataController.DataSource := dsLedger;
+               frmBulkCheques.CreateCheque := cbCheque.Checked;
+
+               Screen.Cursor := crDefault;
+               if frmBulkCheques.ShowModal = mrOk then
+               begin
+                  // let's create them
+                  if PostInvoices(frmBulkCheques.cmbPrinter.Text, frmBulkCheques.cbAuthBy.EditValue, frmBulkCheques.EFTBankCode, frmBulkCheques.teRefNo.Text, qryLedger.FieldByName('REFNO').AsString) then
+                  begin
+                     tvInvoices.GroupedColumns[0].GroupIndex := -1;
+                     MakeSQL;
+                  end;
+               end;
+            finally
+               qryLedger.Close;
+               frmBulkCheques.Free;
             end;
          finally
-            qryLedger.Close;
-            frmBulkCheques.Free;
+            tvInvoices.EndUpdate();
+            Screen.Cursor := crDefault;
          end;
+
       end
       else
          MsgInfo('Mixed E.F.T. and Cheque transactions cannot be processed together.  Please use the '+
@@ -695,7 +704,6 @@ begin
          end; // else for case
       end; // case
    end;
-   tvInvoices.EndUpdate();
    bConversionOn := False;
 end;
 

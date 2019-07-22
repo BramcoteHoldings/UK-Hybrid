@@ -229,7 +229,7 @@ begin
                   end
                   else
                      edtPath.Text := FieldByName('DISPLAY_PATH').AsString;
-                  edtPath.Enabled := True;
+//                  edtPath.Enabled := True;
                end
                else
                   edtPath.Clear;
@@ -519,6 +519,9 @@ begin
                            if LImportFile[i] <> '' then
                               NewPath := NewPath + '/' + LImportFile[i];
                         end;  }
+
+                     if FEditing = False then
+                     begin
                         AExt := ExtractFileExt(FileList.Strings[i] {edtPath.Text});
                        //if bMoveFiles then
                        // begin
@@ -555,6 +558,7 @@ begin
                            //AParsedDocName := AnsiMidStr(AParsedDocName,1, (length(AParsedDocName) - length(AExt))) + '_' + IntToStr(ADocID);
 
                            FieldByName('DOC_NAME').AsString := ExtractFileName(AParsedDocName);
+                     end;
 
                            //AParsedDocName := AParsedDocName + AExt;
 
@@ -574,31 +578,34 @@ begin
                            end
                            else
                            begin
-                              if (DocName <> '') then
-                              BEGIN
-                                 bMoveSuccess := MoveMatterDoc(AParsedDocName, DocName, False, False);
-                                 //MsgInfo('OS version detected = ' + TOSVersion.Name);
-                              END
-                              else
+                              if (FEditing = False) then
                               begin
-//                                 {$IFDEF DEBUG}
-//                                    MsgInfo('OS version detected = ' + TOSVersion.Name);
-//                                 {$ENDIF}
-                                 if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows 10') or (TOSVersion.Name = 'Windows Server 2012'))) then
-                                    bMoveSuccess := CopyFileIFileOperationForceDirectories(FileList.Strings[i] {edtPath.Text}, AParsedDocName, bMoveFiles)
+                                 if (DocName <> '') then
+                                 BEGIN
+                                    bMoveSuccess := MoveMatterDoc(AParsedDocName, DocName, False, False);
+                                    //MsgInfo('OS version detected = ' + TOSVersion.Name);
+                                 END
                                  else
-                                    bMoveSuccess := MoveMatterDoc(AParsedDocName, FileList.Strings[i] {edtPath.Text}, bMoveFiles, False);
-                              end;
-                              moved := 'False';
+                                 begin
+//                                    {$IFDEF DEBUG}
+//                                       MsgInfo('OS version detected = ' + TOSVersion.Name);
+//                                    {$ENDIF}
+                                    if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows 10') or (TOSVersion.Name = 'Windows Server 2012'))) then
+                                       bMoveSuccess := CopyFileIFileOperationForceDirectories(FileList.Strings[i] {edtPath.Text}, AParsedDocName, bMoveFiles)
+                                    else
+                                       bMoveSuccess := MoveMatterDoc(AParsedDocName, FileList.Strings[i] {edtPath.Text}, bMoveFiles, False);
+                                 end;
+                                 moved := 'False';
 //                              if bMoveSuccess = True then
 //                                 moved := 'True';
 //                              MsgInfo('Was file save succesfull = ' + moved);
 
                               //FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(AParsedDocName),2, Length(ExtractFileExt(AParsedDocName)));
 
-                              FieldByName('PATH').AsString := IndexPath(AParsedDocName, 'DOC_SHARE_PATH');  //  NewPath;
-                              FieldByName('DISPLAY_PATH').AsString := AParsedDocName;
-                              edtPath.Text := AParsedDocName;
+                                 FieldByName('PATH').AsString := IndexPath(AParsedDocName, 'DOC_SHARE_PATH');  //  NewPath;
+                                 FieldByName('DISPLAY_PATH').AsString := AParsedDocName;
+                                 edtPath.Text := AParsedDocName;
+                              end;
                            end;
                         //end
                         //else
@@ -610,23 +617,24 @@ begin
                      end;
                   end;
 
-                  //AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
-                  //if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX') or (AExt = 'DOTM')) then
-                  //   FileImg := 2
-                  //else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST') or (AExt = 'XLSX') or (AExt = 'XLSM')) then
-                  //   FileImg := 3
-                  //else if ((AExt = 'EML') or (AExt = 'MSG')) then
-                  //   FileImg := 4
-                  //else if AExt = 'PDF' then
-                  //   FileImg := 5
-                  //else if (AExt = 'HTM') or (AExt = 'HTML') then
-                  //   FileImg := 6
-                  //else if (AExt = 'PPT') or (AExt = 'PPTX') then
-                  //   FileImg := 8
-                  //else if (AExt = 'ZIP') or (AExt = 'ZIPX') then
-                  //   FileImg := 9
-                  //else
-                  //   FileImg := 1;
+                  AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
+                  if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX') or (AExt = 'DOTM')) then
+                     FileImg := 2
+                  else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST') or (AExt = 'XLSX') or (AExt = 'XLSM')) then
+                     FileImg := 3
+                  else if ((AExt = 'EML') or (AExt = 'MSG')) then
+                     FileImg := 4
+                  else if AExt = 'PDF' then
+                     FileImg := 5
+                  else if (AExt = 'HTM') or (AExt = 'HTML') then
+                     FileImg := 6
+                  else if (AExt = 'PPT') or (AExt = 'PPTX') then
+                     FileImg := 8
+                  else if (AExt = 'ZIP') or (AExt = 'ZIPX') then
+                     FileImg := 9
+                  else
+                     FileImg := 1;
+
                  // 28 Aug 2018 DW add email from and to
                //if (dmAxiom.EMailProfileDefault <> '') then
               // begin
