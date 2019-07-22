@@ -579,7 +579,7 @@ begin
    if chkUrgent.Checked then
      sSQLWhere := sSqlWhere + sAND + 'C.URGENT = ''Y''';
    if not chkRev.Checked then
-     sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NULL ';
+     sSQLWhere := sSqlWhere + sAND + '(C.REV_NCHEQREQ IS NULL) OR (C.CONVERTED = ''R'') ';
 
 
    if (cbExcludeTrust.Checked) and (not cbIncludeTrust.Checked) then
