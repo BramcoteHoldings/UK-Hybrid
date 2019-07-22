@@ -1480,6 +1480,8 @@ begin
                   // Initialise the totals for legal (matter) and ledger (trade) creditors amount
                      cMatterTotalTax   := 0;
                      cTradeTotalTax    := 0;
+                     cTradeTotal       := 0;
+                     cMatterTotal      := 0;
 
                      with qryInvoiceCRAmount do
                      begin
@@ -1489,17 +1491,19 @@ begin
                         cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                         cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                         if FieldByName('trade_cr_amount').AsFloat <> 0 then
-                           cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
+                           cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat;// - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
                         if FieldByName('legal_cr_amount').AsFloat <> 0 then
-                           cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
+                           cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat; // - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
                         if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
                           //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                           //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
                         begin
-                           cMatterTotalTax := FieldByName('legal_cr_amount').AsFloat/
-                                             (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                           cTradeTotalTax := FieldByName('trade_cr_amount').AsFloat/
-                                             (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                           if cMatterTotal > 0 then
+                              cMatterTotalTax := qryLedger.FieldByName('TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
+                                           //  (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                           if cTradeTotal > 0 then
+                              cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat; //FieldByName('trade_cr_amount').AsFloat/
+                                            // (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                         end;
                      end;
 
@@ -1552,8 +1556,8 @@ begin
                            if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
                               cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cMatterTotal
                            else
-                              cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat - cMatterTotal;
-                           cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat - cMatterTotalTax;
+                              cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat;// - cMatterTotal;
+                           cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat;// - cMatterTotalTax;
                         end;
                      end;
 
@@ -1564,7 +1568,7 @@ begin
                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
                      PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                         //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                         , 0 - cTradeTotal
+                         , 0 - (cTradeTotal - cTradeTotalTax)
                          , 0 - cTradeTotalTax
                          , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                          , qryCheque.FieldByName('NCHEQUE').AsInteger
@@ -1588,7 +1592,7 @@ begin
                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
 
                      PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                         , 0 - cMatterTotal
+                         , 0 - (cMatterTotal - cMatterTotalTax)
                          , 0 - cMatterTotalTax
                          , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                          , qryCheque.FieldByName('NCHEQUE').AsInteger
