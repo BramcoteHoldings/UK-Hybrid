@@ -875,7 +875,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43668.6618979745d
+    EditValue = 43668.8663368171d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
