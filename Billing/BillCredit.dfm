@@ -368,7 +368,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43587.4909176042d
+    EditValue = 43666.5985278588d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
