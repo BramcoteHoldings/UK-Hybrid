@@ -347,6 +347,11 @@ object frmCheqReqs: TfrmCheqReqs
               DataBinding.FieldName = 'TPAY'
               Width = 88
             end
+            object tvCheqReqCONVERTED: TcxGridDBColumn
+              DataBinding.FieldName = 'CONVERTED'
+              Visible = False
+              VisibleForCustomization = False
+            end
           end
           object dbgrCheqReqLevel1: TcxGridLevel
             GridView = tvCheqReq
@@ -515,6 +520,14 @@ object frmCheqReqs: TfrmCheqReqs
         Width = 35
         Height = 15
         Caption = 'Memo'
+        Transparent = True
+      end
+      object Label6: TLabel
+        Left = 247
+        Top = 133
+        Width = 70
+        Height = 15
+        Caption = 'CheqReq No:'
         Transparent = True
       end
       object btnClearAll: TcxButton
@@ -1045,6 +1058,14 @@ object frmCheqReqs: TfrmCheqReqs
         Height = 23
         TabOrder = 38
       end
+      object teCheqReqNo: TEdit
+        Left = 330
+        Top = 130
+        Width = 81
+        Height = 23
+        CharCase = ecUpperCase
+        TabOrder = 39
+      end
     end
   end
   object dsCheqReq: TUniDataSource
@@ -1422,22 +1443,14 @@ object frmCheqReqs: TfrmCheqReqs
       OnClick = mnuFileDeleteClick
     end
     object mnuFileConvertReq: TdxBarButton
-      Caption = 'Convert'
+      Action = actConvert
       Category = 0
       Enabled = False
-      Hint = 'Convert Selected Cheque Requisition(s)'
-      Visible = ivAlways
-      ImageIndex = 7
-      OnClick = mnuFileConvertReqClick
     end
     object mnuFileConvertAll: TdxBarButton
-      Caption = 'Convert All'
+      Action = actConvertAll
       Category = 0
       Enabled = False
-      Hint = 'Convert All Cheque Requisitions'
-      Visible = ivAlways
-      ImageIndex = 8
-      OnClick = mnuFileConvertAllClick
     end
     object mnuFilePrint: TdxBarButton
       Action = actPrint
