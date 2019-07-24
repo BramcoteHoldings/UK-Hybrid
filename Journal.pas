@@ -564,109 +564,114 @@ end;
 
 procedure TfrmJournal.SaveJournalEntry;
 var
-  iJournal : Integer;
+  iJournal,
+  iRows : Integer;
   cAmt, cTax     : Currency;
   glInstance : TglComponentInstance ;
 begin
    if qryLedger.Modified then
       qryLedger.Post;
 
-   OKtoPost;
-
-   if PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed] then
+   if (OKtoPost = True) then
    begin
-     // Create a Cheque entry
-      try
-//         if dmAxiom.uniInsight.InTransaction then
-//             dmAxiom.uniInsight.Commit;
-//         dmAxiom.uniInsight.StartTransaction;
+      if PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed] then
+      begin
+        // Create a Journal entry
+         try
+//            if dmAxiom.uniInsight.InTransaction then
+//                dmAxiom.uniInsight.Commit;
+//            dmAxiom.uniInsight.StartTransaction;
 
-         iJournal := GetJournal;
+            iJournal := GetJournal;
 
-         if iJournal = -1 then
-            Raise EPostError.Create('Could not get next Journal number for Entity ' + dmAxiom.Entity);
+            if iJournal = -1 then
+               Raise EPostError.Create('Could not get next Journal number for Entity.  Exiting... ' + dmAxiom.Entity);
 
-         qryJournal.FieldByName('NJOURNAL').AsInteger := iJournal;
-         qryJournal.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-         qryJournal.FieldByName('ACCT').AsString := dmAxiom.Entity;
-         qryJournal.FieldByName('ENTITY').AsString := dmAxiom.Entity;
-         qryJournal.FieldByName('REASON').AsString := tbDesc.Text;
-         qryJournal.FieldByName('AMOUNT').AsCurrency := cTotalDebit;
-         qryJournal.FieldByName('TRUST').AsString := 'G';
-         qryJournal.FieldByName('REFNO').AsString := dfReference.Text;
-         if chkMarkRecurring.Checked then
-            qryJournal.FieldByName('RECURRING').AsString := 'Y';
+            qryJournal.FieldByName('NJOURNAL').AsInteger := iJournal;
+            qryJournal.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+            qryJournal.FieldByName('ACCT').AsString := dmAxiom.Entity;
+            qryJournal.FieldByName('ENTITY').AsString := dmAxiom.Entity;
+            qryJournal.FieldByName('REASON').AsString := tbDesc.Text;
+            qryJournal.FieldByName('AMOUNT').AsCurrency := cTotalDebit;
+            qryJournal.FieldByName('TRUST').AsString := 'G';
+            qryJournal.FieldByName('REFNO').AsString := dfReference.Text;
+            if chkMarkRecurring.Checked then
+               qryJournal.FieldByName('RECURRING').AsString := 'Y';
 
-         qryJournal.Post; // Puts journal into cached buffer
+            qryJournal.Post; // Puts journal into cached buffer
 
-         // Now, iterate through the entered Ledger Entries
-         qryLedger.First;
-
-         while (not qryLedger.EOF) do
-         begin
-            if qryLedger.FieldByName('REFNO').AsString <> '' then
-            begin
-               cAmt := qryLedger.FieldByName('CREDIT').AsCurrency - qryLedger.FieldByName('DEBIT').AsCurrency;
-
-               if cAmt < 0 then
-                  cTax := 0 - qryLedger.FieldByName('TAX').AsCurrency
-               else
-                  cTax := qryLedger.FieldByName('TAX').AsCurrency;
-
-               if (qryLedger.FieldByName('REFNO').AsString <> '') then
+            // Now, iterate through the entered Ledger Entries
+//            qryLedger.First;
+            try
+               with tvLedger.DataController do
                begin
-                  // lookup the ledger code cased on the value entered
-                  glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
-
-                  if not glInstance.valid then
+                  for iRows := 0 to RecordCount - 1 do  // while (not qryLedger.EOF) do
                   begin
-                     // something has gone very wrong !
-                     raise Exception.create('Error invalid ledger key');
+                     tvLedger.ViewData.Records[iRows].Focused := True;
+                     if  qryLedger.FieldByName('REFNO').AsString <> '' then
+                     begin
+                        cAmt := qryLedger.FieldByName('CREDIT').AsCurrency - qryLedger.FieldByName('DEBIT').AsCurrency;
+
+                        if cAmt < 0 then
+                           cTax := 0 - qryLedger.FieldByName('TAX').AsCurrency
+                        else
+                           cTax := qryLedger.FieldByName('TAX').AsCurrency;
+
+                        if (qryLedger.FieldByName('REFNO').AsString <> '') then
+                        begin
+                           // lookup the ledger code cased on the value entered
+                           glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
+
+                           if not glInstance.valid then
+                           begin
+                              // something has gone very wrong !
+                              raise Exception.create('Error invalid ledger key');
+                           end;
+
+                           PostLedger(dtpDate.Date
+                              , cAmt
+                              , cTax
+                              , IntToStr(iJournal)
+                              , 'JOURNAL'
+                              , iJournal
+                              , qryLedger.FieldByName('REASON').AsString
+                              , glInstance.ledgerKey
+                              , ''
+                              , -1
+                              , ''
+                              , qryLedger.FieldByName('TAXCODE').AsString
+                              , IsJournalSplittingChart(qryLedger.FieldByName('CHART').AsString, dmAxiom.Entity)
+                              , glInstance.ledgerKey
+                              , 0
+                              , 0
+                              , 0
+                              , False
+                              , 0
+                              , cTax);
+                        end;    //  end if
+
+                        SaveTaxAmount(iJournal, cAmt,glInstance.ledgerKey);
+                     end;
+//                     qryLedger.Next;
                   end;
+               end;
+            finally
+               // Alex check totals prior to applying records
+               CheckLedgerTotal;
 
-                  PostLedger(dtpDate.Date
-                     , cAmt
-                     , cTax
-                     , IntToStr(iJournal)
-                     , 'JOURNAL'
-                     , iJournal
-                     , qryLedger.FieldByName('REASON').AsString
-                     , glInstance.ledgerKey
-                     , ''
-                     , -1
-                     , ''
-                     , qryLedger.FieldByName('TAXCODE').AsString
-                     , IsJournalSplittingChart(qryLedger.FieldByName('CHART').AsString, dmAxiom.Entity)
-                     , glInstance.ledgerKey
-                     , 0
-                     , 0
-                     , 0
-                     , False
-                     , 0
-                     , cTax);
-               end;    //  end if
+               // Now save the general ledger items
+               qryJournal.ApplyUpdates;
+               qryJournal.Close;
 
-               SaveTaxAmount(iJournal, cAmt,glInstance.ledgerKey);
+//            dmAxiom.uniInsight.Commit;
+               MsgInfo('Posted Journal ' + IntToStr(iJournal));
             end;
-            qryLedger.Next;
-         end;
-         // Alex check totals prior to applying records
-         CheckLedgerTotal;
-
-         // Now save the general ledger items
-         qryJournal.ApplyUpdates;
-         qryJournal.Close;
-
-// /        CheckLedgerTotal;
-
-//         dmAxiom.uniInsight.Commit;
-         MsgInfo('Posted Journal ' + IntToStr(iJournal));
-
-      except
-         on E: Exception do
-         begin
-//            dmAxiom.uniInsight.Rollback;
-            Raise;
+         except
+            on E: Exception do
+            begin
+//               dmAxiom.uniInsight.Rollback;
+               Raise;
+            end;
          end;
       end;
    end;
