@@ -486,7 +486,6 @@ begin
             progBarProcess.Position := 0;
             progBarProcess.Visible := True;
             Application.ProcessMessages;
-            dbgrInvoices.FocusedView.DataController.Groups.FullExpand;
             tvInvoices.DataController.FocusedRowIndex := 0;
             qryLedger.Open;
             progBarProcess.Properties.Max := tvInvoices.DataController.RowCount;
