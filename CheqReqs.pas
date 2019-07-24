@@ -328,6 +328,9 @@ type
     ppDBText10: TppDBText;
     ppDBText14: TppDBText;
     ppDBMemo1: TppDBMemo;
+    tvCheqReqCONVERTED: TcxGridDBColumn;
+    teCheqReqNo: TEdit;
+    Label6: TLabel;
     procedure FormShow(Sender: TObject);
     procedure cbAuthorClick(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
@@ -534,7 +537,7 @@ begin
    else
    begin
       if chkRev.Checked then
-         sSQLWhere := sSqlWhere + sAND + '(C.REV_NCHEQREQ IS NOT NULL) OR C.CONVERTED IN (''R'', ''N'') '
+         sSQLWhere := sSqlWhere + sAND + ' ((C.REV_NCHEQREQ IS NOT NULL) OR C.CONVERTED IN (''R'', ''N'')) '
       else
          sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
    end;
@@ -583,6 +586,9 @@ begin
    //rb
    if chkUrgent.Checked then
      sSQLWhere := sSqlWhere + sAND + 'C.URGENT = ''Y''';
+
+   if (teCheqReqNo.Text <> '') then
+      sSQLWhere := sSqlWhere + sAND + 'C.NCHEQREQ = ' + QuotedStr(teCheqReqNo.Text);
 
 
 
@@ -770,15 +776,15 @@ begin
                         ;
 //   mnuFileConvertReq.Enabled := (not qryCheqReq.IsEmpty) and (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull);
 
-   mnuFileConvertReq.Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
+{   mnuFileConvertReq.Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
                               and (not qryCheqReq.IsEmpty) and
                               (not chkRev.Checked) and (not cbConverted.Checked))
 
     { Modified  23.10.2017 DW - to allow for checking if a bill has already been paid}
-                              and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
+ {                             and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')    }
 
     { Modified  28.10.2017 DW - to prevent subsequent trust cheq reqs from overdrawing the trust account}
-                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
+ {                             and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
    ;
 
    mnuFileConvertAll.Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
@@ -849,6 +855,7 @@ begin
   tbAmountFrom.Text := '';
   tbAmountTo.Text := '';
   cbAuthor.Text := '';
+  teCheqReqNo.Text := '';
 end;
 
 procedure TfrmCheqReqs.mnuFilePrintCashBookClick(Sender: TObject);
@@ -3330,11 +3337,16 @@ var
    AColumn: TcxCustomGridTableItem;
    BColumn: TcxCustomGridTableItem;
    CColumn: TcxCustomGridTableItem;
+   DColumn: TcxCustomGridTableItem;
 begin
    AColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('HELD');
    BColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('CAN_PAY');
    CColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('TPAY');
-   if (VarToStr(ARecord.Values[AColumn.Index]) = 'W') or (VarToStr(ARecord.Values[BColumn.Index]) = 'N')  or (VarToStr(ARecord.Values[CColumn.Index]) = 'N') then
+   DColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('CONVERTED');
+   if (VarToStr(ARecord.Values[AColumn.Index]) = 'W') or
+      (VarToStr(ARecord.Values[BColumn.Index]) = 'N')  or
+      (VarToStr(ARecord.Values[CColumn.Index]) = 'N') or
+      (VarToStr(ARecord.Values[DColumn.Index]) = 'R') then
       AStyle := cxStyleW
    else if VarToStr(ARecord.Values[AColumn.Index]) = 'Y' then
       AStyle := cxStyleY
@@ -3988,17 +4000,21 @@ end;
 
 procedure TfrmCheqReqs.actConvertUpdate(Sender: TObject);
 begin
-   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and tabCashbook.Visible
+   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
                               and (not qryCheqReq.IsEmpty) and
-                              (not chkRev.Checked) and (not cbConverted.Checked);
+                              (not chkRev.Checked) and (not cbConverted.Checked)
+                              and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
+                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y'));
 end;
 
 procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
 begin
-   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and tabCashbook.Visible
-                               and (tvCheqReq.GroupedColumnCount = 0)
-                               and (not qryCheqReq.IsEmpty) and (not chkRev.Checked)
-                               and (not cbConverted.Checked);
+   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
+                              and (tvCheqReq.GroupedColumnCount = 0)
+                              and (not qryCheqReq.IsEmpty) and (not chkRev.Checked)
+                              and (not cbConverted.Checked)
+                              and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
+                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y'));
 end;
 
 procedure TfrmCheqReqs.bbtnAuthoriseClick(Sender: TObject);

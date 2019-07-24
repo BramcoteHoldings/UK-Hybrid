@@ -2676,15 +2676,15 @@ var
    MsgStore: IRwMapiMsgStore;
 begin
     // check that sub bills are selected.
-    bTrustCheckProceed := True;
-    bReceiptTax := False;
-    if qryLedger.Modified then
-       qryLedger.ApplyUpdates();
+   bTrustCheckProceed := True;
+   bReceiptTax := False;
+   if qryLedger.Modified then
+      qryLedger.ApplyUpdates();
 
-    qryLedger.first;
-    while not qryLedger.Eof do
-    begin
-       if qryLedger.fieldByName('type').AsString <> 'Bill' then
+   qryLedger.first;
+   while not qryLedger.Eof do
+   begin
+      if qryLedger.fieldByName('type').AsString <> 'Bill' then
        begin
           qryLedger.Next;
           continue;
@@ -2787,7 +2787,7 @@ begin
                   try
                     bPostingFailed := False;
                     if dmAxiom.uniInsight.InTransaction then
-                        dmAxiom.uniInsight.Commit;
+                        dmAxiom.uniInsight.Rollback;
                     dmAxiom.uniInsight.StartTransaction;
 
                     // Create the RECEIPT entry - as we are using Cached Updates
@@ -3733,8 +3733,11 @@ begin
                            end;
 
                            cAmt := qryLedger.FieldByName('CREDIT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency;
-                           if DefaultTax <> '' then
-                              cTax := CalcTax(cAmt, DefaultTax);
+
+                           if (DefaultTax <> '') and (qryLedger.FieldByName('TAX').AsFloat = 0) then
+                              cTax := CalcTax(cAmt, DefaultTax)
+                           else
+                              cTax := qryLedger.FieldByName('TAX').AsFloat;
 
                            PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
                              , qryLedger.FieldByName('CREDIT').AsCurrency
