@@ -63,7 +63,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object Label8: TLabel
     Left = 200
-    Top = 271
+    Top = 270
     Width = 47
     Height = 15
     Caption = '&Amount:'
@@ -170,7 +170,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object lblTaxType: TLabel
     Left = 9
-    Top = 271
+    Top = 270
     Width = 46
     Height = 15
     Caption = 'Tax type:'
@@ -522,7 +522,11 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object neAmount: TcxCurrencyEdit
     Left = 252
-    Top = 269
+    Top = 267
+    EditValue = 0.000000000000000000
+    Properties.ClearKey = 46
+    Properties.Nullable = False
+    Properties.UseThousandSeparator = True
     Properties.OnChange = neAmountChange
     Style.LookAndFeel.NativeStyle = True
     Style.TransparentBorder = True
@@ -535,7 +539,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object neTax: TcxCurrencyEdit
     Left = 335
-    Top = 269
+    Top = 267
     Anchors = [akLeft, akTop, akRight]
     Enabled = False
     Properties.ReadOnly = True
@@ -549,7 +553,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   end
   object cbTaxType: TcxComboBox
     Left = 114
-    Top = 269
+    Top = 267
     Properties.OnChange = cbTaxTypeChange
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -967,7 +971,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43655.8207822569d
+    EditValue = 43671.4769288657d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
