@@ -1493,13 +1493,8 @@ object frmCheqReqs: TfrmCheqReqs
       OnClick = btnRefreshClick
     end
     object bbtnRev: TdxBarButton
-      Caption = 'Reverse'
+      Action = actReverse
       Category = 1
-      Enabled = False
-      Hint = 'Reverse Selected Cheque Requisition'
-      Visible = ivAlways
-      ImageIndex = 12
-      OnClick = bbtnRevClick
     end
     object btnCreditNote: TdxBarButton
       Action = actCreditNote
@@ -2305,6 +2300,7 @@ object frmCheqReqs: TfrmCheqReqs
     object actReverse: TAction
       Category = 'Credit'
       Caption = 'Reverse'
+      Enabled = False
       ImageIndex = 12
       OnExecute = actReverseExecute
       OnUpdate = actReverseUpdate

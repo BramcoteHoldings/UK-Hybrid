@@ -494,6 +494,9 @@ begin
       end;
    end;
 
+   if neAmount.Value < 1 then
+      sTmp := sTmp + '       Amount should be 1 or greater' + #13;
+
    if sTmp <> '' then
    begin
       MsgInfo('Please complete the following Cheque Requisition details before saving:    ' + #13#13 + sTmp);

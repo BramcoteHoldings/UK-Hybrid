@@ -770,10 +770,12 @@ procedure TfrmCheqReqs.SetButtons;
 begin
    bbtnGroup.Enabled := not qryCheqReq.IsEmpty;
    mnuFileDelete.Enabled := ((not qryCheqReq.IsEmpty) and dmAxiom.Security.CheqReq.Delete);
-   bbtnrev.Enabled := ((not qryCheqReq.IsEmpty) and dmAxiom.Security.CheqReq.Reverse and (qryCheqReq.FieldByName('NCHEQUE').IsNull)
-                        and (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and (qryCheqReq.FieldByName('NMEMO').IsNull))
-                        or (qryCheqReq.FieldByName('TRUST').AsString <> 'G')
-                        ;
+
+//   bbtnrev.Enabled := ((not qryCheqReq.IsEmpty) and dmAxiom.Security.CheqReq.Reverse and (qryCheqReq.FieldByName('NCHEQUE').IsNull)
+//                        and (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and (qryCheqReq.FieldByName('NMEMO').IsNull))
+//                        or (qryCheqReq.FieldByName('TRUST').AsString <> 'G')
+//                        ;
+
 //   mnuFileConvertReq.Enabled := (not qryCheqReq.IsEmpty) and (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull);
 
 {   mnuFileConvertReq.Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
@@ -2996,8 +2998,12 @@ end;
 
 procedure TfrmCheqReqs.actReverseUpdate(Sender: TObject);
 begin
-   if (qryCheqReq.State <> (dsInactive)) and dmAxiom.Security.CheqReq.Reverse then
-      actReverse.Enabled := (qryCheqReq.FieldByName('BILLED').AsString = 'N');
+   if pagCashbook.ActivePage = tabCashbook then
+      actReverse.Enabled := ((not qryCheqReq.IsEmpty) and dmAxiom.Security.CheqReq.Reverse and (qryCheqReq.FieldByName('NCHEQUE').IsNull) and (qryCheqReq.State <> (dsInactive))
+                              and (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and (qryCheqReq.FieldByName('NMEMO').IsNull) and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'))
+                              or (qryCheqReq.FieldByName('TRUST').AsString <> 'G')
+   else
+      actReverse.Enabled := False;
 end;
 
 procedure TfrmCheqReqs.actReverseExecute(Sender: TObject);
@@ -3014,205 +3020,213 @@ begin
 
   Show message if transaction is being posted into a locked period
 }
-
   glComponentSetup := dmAxiom.getGlComponents;
 
   bbtnrev.Enabled := False;
   bOKtoPost:= (PostIntoLockedPeriod(Date) in [prNotLocked, prOKToProceed]);
 
-  if bOKtoPost then
-  begin
-    if IsMatterArchived(qryCheqreq.FieldByName('CREFNO').AsString) then
-       MsgErr('Cheque Requisition cannot be reversed for an archived matter.')
-    else
-    if qryCheqReq.FieldByName('ANTICIPATED').AsString = 'N' then
-    begin
-       if MsgAsk('Do you want reverse this Cheque Requisition?') = mrYes then
-       begin
-         LfrmCheqReqReverse := TfrmCheqReqReverse.Create(frmCheqReqs);
-         LfrmCheqReqReverse.DisplayInvoice(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
-         try
-            if LfrmCheqReqReverse.ShowModal = mrOk then
-            begin
-               qryCheqReq.Close;
-               qryCheqReq.Open;
-            end
-            else
-               bbtnrev.Enabled := True;
-         finally
-               LfrmCheqReqReverse.Free;
-         end;
-         //*****************************************************
-         // AES 13/9/2004
-         // following code commented out as it is now handled in the cheque reversal
-         // dialog
-         //*****************************************************
-         {
-         nCheqReq := GetSeqnum('NCHEQREQ');
-         // It was just a request - simply delete it
-         qryUpdate.SQL.Clear;
-         qryUpdate.SQL.Add('INSERT INTO CHEQREQ');
-         qryUpdate.SQL.Add('(REV_NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
-         qryUpdate.SQL.Add('SELECT NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, ''Deleted - '' || DESCR, 0-AMOUNT, AUTHOR, SysDate, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, 0-TAX, SUNDRYTYPE');
-         qryUpdate.SQL.Add('FROM CHEQREQ');
-         qryUpdate.SQL.Add('WHERE NCHEQREQ = ' + qryCheqreq.FieldByName('NCHEQREQ').AsString);
-         qryUpdate.ParamByName('NCHEQREQ').AsInteger := nCheqReq;
-         qryUpdate.ExecSQL;
-         qryUpdate.Close;
-
-         qryUpdate.SQL.Text := 'UPDATE CHEQREQ SET REV_NCHEQREQ = ' + qryUpdate.ParamByName('NCHEQREQ').AsString + ' WHERE NCHEQREQ = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
-         qryUpdate.ExecSQL;
-         qryUpdate.Close;      }
-
-{         qryUpdate.SQL.Text := 'UPDATE TRANSITEM SET NOWNER = ' + qryUpdate.ParamByName('NCHEQREQ').AsString + ' WHERE NOWNER = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
-         qryCheqReq.Close;
-         qryUpdate.ExecSQL;
-         qryUpdate.Close;  }
-
-       end;
-
-    end
-    else if (qryCheqReq.FieldByName('BILLED').AsString = 'N') and
-            (MsgAsk('Do you want reverse this Cheque Requisition?') = mrYes) then
-    begin
-      // reverse the ledgers for the cheqreq
-
-      LfrmCheqReqReverse := TfrmCheqReqReverse.Create(Self);
-      LfrmCheqReqReverse.DisplayInvoice(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
-      try
-         if LfrmCheqReqReverse.ShowModal = mrOk then
+   if bOKtoPost then
+   begin
+      if IsMatterArchived(qryCheqreq.FieldByName('CREFNO').AsString) then
+         MsgErr('Cheque Requisition cannot be reversed for an archived matter.')
+      else
+      if ((not qryCheqReq.FieldByName('NMEMO').IsNull) and
+         (qryCheqReq.FieldByName('TRUST').AsString = 'G'))  then
+         MsgErr('Cheque Requisition has been billed. It cannot be reversed.')
+      else
+      if (not qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) then
+         MsgErr('Cheque Requisition has already been reversed.')
+      else
+      if (qryCheqReq.FieldByName('ANTICIPATED').AsString = 'N') then
+      begin
+         if MsgAsk('Do you want reverse this Cheque Requisition?') = mrYes then
          begin
-            if dmAxiom.uniInsight.InTransaction then
-              dmAxiom.uniInsight.Commit;
-            dmAxiom.uniInsight.StartTransaction;
-            try
-
-                {post components}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR'),'',true,'');
-
-
-                 PostLedger(Date
-                   , qryCheqReq.FieldByName('AMOUNT').AsCurrency
-                   , qryCheqReq.FieldByName('TAX').AsCurrency
-                   , qryCheqReq.FieldByName('FILEID').AsString
-                   , 'CHEQREQ'
-                   , LfrmCheqReqReverse.nCheqReq
-                   , LfrmCheqReqReverse.mlReason.Text          //  qryCheqReq.FieldByName('DESCR').AsString
-                   , sLedgerKey
-                   , ''
-                   , -1
-                   , ''
-                   , qryCheqReq.FieldByName('TAXCODE').AsString
-                   , FALSE
-                   , '0'
-                   , 0
-                   , qryCheqReq.FieldByName('NMATTER').AsInteger
-                   , 0
-                   , TRUE );
-
-              // Debit the GST Input Tax Credits ledger the tax amount
-              if qryCheqReq.FieldByName('TAX').AsCurrency <> 0 then
+           LfrmCheqReqReverse := TfrmCheqReqReverse.Create(frmCheqReqs);
+           LfrmCheqReqReverse.DisplayInvoice(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
+           try
+              if LfrmCheqReqReverse.ShowModal = mrOk then
               begin
-                {post components}
-                sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryCheqReq.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                 qryCheqReq.Close;
+                 qryCheqReq.Open;
+              end
+              else
+                 bbtnrev.Enabled := True;
+           finally
+                 LfrmCheqReqReverse.Free;
+           end;
+           //*****************************************************
+           // AES 13/9/2004
+           // following code commented out as it is now handled in the cheque reversal
+           // dialog
+           //*****************************************************
+           {
+           nCheqReq := GetSeqnum('NCHEQREQ');
+           // It was just a request - simply delete it
+           qryUpdate.SQL.Clear;
+           qryUpdate.SQL.Add('INSERT INTO CHEQREQ');
+           qryUpdate.SQL.Add('(REV_NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
+           qryUpdate.SQL.Add('SELECT NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, ''Deleted - '' || DESCR, 0-AMOUNT, AUTHOR, SysDate, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, 0-TAX, SUNDRYTYPE');
+           qryUpdate.SQL.Add('FROM CHEQREQ');
+           qryUpdate.SQL.Add('WHERE NCHEQREQ = ' + qryCheqreq.FieldByName('NCHEQREQ').AsString);
+           qryUpdate.ParamByName('NCHEQREQ').AsInteger := nCheqReq;
+           qryUpdate.ExecSQL;
+           qryUpdate.Close;
 
-                PostLedger(Date
-                  , qryCheqReq.FieldByName('TAX').AsCurrency
-                  , 0
-                  , qryCheqReq.FieldByName('FILEID').AsString
-                  , 'CHEQREQ'
-                  , LfrmCheqReqReverse.nCheqReq
-                  , LfrmCheqReqReverse.mlReason.Text    //  qryCheqReq.FieldByName('DESCR').AsString
-                  , sLedgerKey
-                  , ''
-                  , -1
-                  , ''
-                  , qryCheqReq.FieldByName('TAXCODE').AsString
-                  , FALSE
-                  , '0'
-                  , 0
-                  , qryCheqReq.FieldByName('NMATTER').AsInteger
-                  , 0
-                  , TRUE );
-                end;
-              // Credit Anticipated disbursements liability the full amount
+           qryUpdate.SQL.Text := 'UPDATE CHEQREQ SET REV_NCHEQREQ = ' + qryUpdate.ParamByName('NCHEQREQ').AsString + ' WHERE NCHEQREQ = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
+           qryUpdate.ExecSQL;
+           qryUpdate.Close;      }
 
-              {post components}
-              sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_CR'),'',true,'');
+  {         qryUpdate.SQL.Text := 'UPDATE TRANSITEM SET NOWNER = ' + qryUpdate.ParamByName('NCHEQREQ').AsString + ' WHERE NOWNER = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
+           qryCheqReq.Close;
+           qryUpdate.ExecSQL;
+           qryUpdate.Close;  }
 
-              PostLedger(Date
-                , 0-(qryCheqReq.FieldByName('AMOUNT').AsCurrency + qryCheqReq.FieldByName('TAX').AsCurrency)
-                , 0
-                , qryCheqReq.FieldByName('FILEID').AsString
-                , 'CHEQREQ'
-                , LfrmCheqReqReverse.nCheqReq
-                , LfrmCheqReqReverse.mlReason.Text    //  qryCheqReq.FieldByName('DESCR').AsString
-                , sLedgerKey
-                , TableString('MATTER', 'FILEID', qryCheqReq.FieldByName('FILEID').AsString, 'AUTHOR')
-                , -1
-                , ''
-                , qryCheqReq.FieldByName('TAXCODE').AsString
-                , FALSE
-                , '0'
-                , 0
-                , qryCheqReq.FieldByName('NMATTER').AsInteger
-                , 0
-                , TRUE );
+         end;
+      end
+      else
+      if (((qryCheqReq.FieldByName('BILLED').AsString = 'N') and (qryCheqReq.FieldByName('NMEMO').IsNull))
+         or (qryCheqReq.FieldByName('TRUST').AsString = 'T')) then
+      begin
+         if (MsgAsk('Do you want reverse this Cheque Requisition?') = mrYes) then
+         begin
+          // reverse the ledgers for the cheqreq
+            LfrmCheqReqReverse := TfrmCheqReqReverse.Create(Self);
+            LfrmCheqReqReverse.DisplayInvoice(Self.qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
+            try
+               if LfrmCheqReqReverse.ShowModal = mrOk then
+               begin
+                  if dmAxiom.uniInsight.InTransaction then
+                    dmAxiom.uniInsight.Commit;
+                  dmAxiom.uniInsight.StartTransaction;
+                  try
+                     {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR'),'',true,'');
 
-         //*****************************************************
-         // AES 13/9/2004
-         // following code commented out as it is now handled in the cheque reversal
-         // dialog
-         //*****************************************************
 
-                // delete the cheqreq
-   //             qryUpdate.SQL.Clear;
-   //             qryUpdate.SQL.Add('INSERT INTO CHEQREQ');
-   //             qryUpdate.SQL.Add('(REV_NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
-   //             qryUpdate.SQL.Add('SELECT NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, ''Deleted - '' || DESCR, 0-AMOUNT, AUTHOR, SysDate, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, 0-TAX, SUNDRYTYPE');
-   //             qryUpdate.SQL.Add('FROM CHEQREQ');
-   //             qryUpdate.SQL.Add('WHERE NCHEQREQ = ' + qryCheqreq.FieldByName('NCHEQREQ').AsString);
-   //             qryUpdate.ParamByName('NCHEQREQ').AsInteger := nCheqReq;
-   //             qryUpdate.ExecSQL;
-   //             qryUpdate.Close;
+                     PostLedger(Date
+                       , qryCheqReq.FieldByName('AMOUNT').AsCurrency
+                       , qryCheqReq.FieldByName('TAX').AsCurrency
+                       , qryCheqReq.FieldByName('FILEID').AsString
+                       , 'CHEQREQ'
+                       , LfrmCheqReqReverse.nCheqReq
+                       , LfrmCheqReqReverse.mlReason.Text          //  qryCheqReq.FieldByName('DESCR').AsString
+                       , sLedgerKey
+                       , ''
+                       , -1
+                       , ''
+                       , qryCheqReq.FieldByName('TAXCODE').AsString
+                       , FALSE
+                       , '0'
+                       , 0
+                       , qryCheqReq.FieldByName('NMATTER').AsInteger
+                       , 0
+                       , TRUE );
 
-   //             nRVCheqReq := qryUpdate.ParamByName('NCHEQREQ').AsString;
-   //             qryUpdate.SQL.Text := 'UPDATE CHEQREQ SET REV_NCHEQREQ = ' + nRVCheqReq + ' WHERE NCHEQREQ = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
-      //          qryCheqReq.Close;
-   //             qryUpdate.ExecSQL;
-   //             qryUpdate.Close;
+                     // Debit the GST Input Tax Credits ledger the tax amount
+                     if qryCheqReq.FieldByName('TAX').AsCurrency <> 0 then
+                     begin
+                       {post components}
+                       sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryCheqReq.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-   //             qryUpdate.SQL.Text := 'UPDATE TRANSITEM SET NOWNER = ' + nRVCheqReq + ' WHERE RVDATE IS NOT NULL AND NOWNER = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
-   //             qryCheqReq.Close;
-   //             qryUpdate.ExecSQL;
-   //             qryUpdate.Close;
+                       PostLedger(Date
+                        , qryCheqReq.FieldByName('TAX').AsCurrency
+                        , 0
+                        , qryCheqReq.FieldByName('FILEID').AsString
+                        , 'CHEQREQ'
+                        , LfrmCheqReqReverse.nCheqReq
+                        , LfrmCheqReqReverse.mlReason.Text    //  qryCheqReq.FieldByName('DESCR').AsString
+                        , sLedgerKey
+                        , ''
+                        , -1
+                        , ''
+                        , qryCheqReq.FieldByName('TAXCODE').AsString
+                        , FALSE
+                        , '0'
+                        , 0
+                        , qryCheqReq.FieldByName('NMATTER').AsInteger
+                        , 0
+                        , TRUE );
+                     end;
+                    // Credit Anticipated disbursements liability the full amount
 
-                qryCheqReq.Open;
+                    {post components}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('', TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_CR'),'',true,'');
 
-            CheckLedgerTotal;
+                     PostLedger(Date
+                      , 0-(qryCheqReq.FieldByName('AMOUNT').AsCurrency + qryCheqReq.FieldByName('TAX').AsCurrency)
+                      , 0
+                      , qryCheqReq.FieldByName('FILEID').AsString
+                      , 'CHEQREQ'
+                      , LfrmCheqReqReverse.nCheqReq
+                      , LfrmCheqReqReverse.mlReason.Text    //  qryCheqReq.FieldByName('DESCR').AsString
+                      , sLedgerKey
+                      , TableString('MATTER', 'FILEID', qryCheqReq.FieldByName('FILEID').AsString, 'AUTHOR')
+                      , -1
+                      , ''
+                      , qryCheqReq.FieldByName('TAXCODE').AsString
+                      , FALSE
+                      , '0'
+                      , 0
+                      , qryCheqReq.FieldByName('NMATTER').AsInteger
+                      , 0
+                      , TRUE );
 
-            except
-            on Exception do
-                begin
-                    dmAxiom.uniInsight.RollBack;
-                    bbtnrev.Enabled := True;
-                    //re raise the exception
-                    raise;
-                end;
+               //*****************************************************
+               // AES 13/9/2004
+               // following code commented out as it is now handled in the cheque reversal
+               // dialog
+               //*****************************************************
+
+                      // delete the cheqreq
+     //                 qryUpdate.SQL.Clear;
+     //                 qryUpdate.SQL.Add('INSERT INTO CHEQREQ');
+     //                 qryUpdate.SQL.Add('(REV_NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
+     //                 qryUpdate.SQL.Add('SELECT NCHEQREQ,FILEID,NMATTER, LEDGER, PAYEE, ''Deleted - '' || DESCR, 0-AMOUNT, AUTHOR, SysDate, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, 0-TAX, SUNDRYTYPE');
+     //                 qryUpdate.SQL.Add('FROM CHEQREQ');
+     //                 qryUpdate.SQL.Add('WHERE NCHEQREQ = ' + qryCheqreq.FieldByName('NCHEQREQ').AsString);
+     //                 qryUpdate.ParamByName('NCHEQREQ').AsInteger := nCheqReq;
+     //                 qryUpdate.ExecSQL;
+     //                 qryUpdate.Close;
+
+     //                 nRVCheqReq := qryUpdate.ParamByName('NCHEQREQ').AsString;
+     //                 qryUpdate.SQL.Text := 'UPDATE CHEQREQ SET REV_NCHEQREQ = ' + nRVCheqReq + ' WHERE NCHEQREQ = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
+            //          qryCheqReq.Close;
+     //                 qryUpdate.ExecSQL;
+     //                 qryUpdate.Close;
+
+     //                 qryUpdate.SQL.Text := 'UPDATE TRANSITEM SET NOWNER = ' + nRVCheqReq + ' WHERE RVDATE IS NOT NULL AND NOWNER = ' + qryCheqReq.FieldByName('NCHEQREQ').AsString;
+     //                 qryCheqReq.Close;
+     //                 qryUpdate.ExecSQL;
+     //                 qryUpdate.Close;
+
+                      qryCheqReq.Close;
+                      qryCheqReq.Open;
+
+                      CheckLedgerTotal;
+                  except
+                     on Exception do
+                     begin
+                        dmAxiom.uniInsight.RollBack;
+                        bbtnrev.Enabled := True;
+                          //re raise the exception
+                        raise;
+                     end;
+                  end;
+               end
+               else
+                  bbtnrev.Enabled := True;
+            finally
+               LfrmCheqReqReverse.Free;
+               dmAxiom.uniInsight.Commit;
             end;
-         end
-         else
-            bbtnrev.Enabled := True;
-      finally
-         LfrmCheqReqReverse.Free;
-         dmAxiom.uniInsight.Commit;
+         end;
+      end
+      else
+      begin
+         ShowMessage('Cheque Requisition has been billed, cannot be reversed');
+         bbtnrev.Enabled := True;
       end;
-    end
-    else begin
-       ShowMessage('Cheque Requisition has been billed, cannot be reversed');
-       bbtnrev.Enabled := True;
-    end;
-  end;
+   end;
 end;
 
 procedure TfrmCheqReqs.CMExpandGroups(var Msg: TMessage);
@@ -4004,7 +4018,8 @@ begin
                               and (not qryCheqReq.IsEmpty) and
                               (not chkRev.Checked) and (not cbConverted.Checked)
                               and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
-                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y'));
+                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
+                              and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'));
 end;
 
 procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
@@ -4014,7 +4029,8 @@ begin
                               and (not qryCheqReq.IsEmpty) and (not chkRev.Checked)
                               and (not cbConverted.Checked)
                               and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
-                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y'));
+                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
+                              and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'));
 end;
 
 procedure TfrmCheqReqs.bbtnAuthoriseClick(Sender: TObject);
