@@ -622,7 +622,7 @@ object frmJournal: TfrmJournal
   object dtpDate: TEnforceCustomDateEdit
     Left = 66
     Top = 4
-    EditValue = 43670.4908621181d
+    EditValue = 43672.5021517361d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True

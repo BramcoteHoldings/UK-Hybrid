@@ -525,15 +525,15 @@ procedure TfrmJournal.btnOKClick(Sender: TObject);
 var
    Row: integer;
 begin
-  for Row := 0 to tvLedger.DataController.RecordCount - 1 do
-  begin
-     tvLedger.DataController.FocusedRowIndex := Row;
-     if tvLedger.DataController.GetDisplayText(Row, tvLedgerREFNO.Index) = '' then
-        tvLedger.DataController.DeleteFocused;
-  end;
+   for Row := 0 to tvLedger.DataController.RecordCount - 1 do
+   begin
+      tvLedger.DataController.FocusedRowIndex := Row;
+      if tvLedger.DataController.GetDisplayText(Row, tvLedgerREFNO.Index) = '' then
+         tvLedger.DataController.DeleteFocused;
+   end;
 
-  try
-    if (tbDesc.Text <> '') then
+   try
+      if (tbDesc.Text <> '') then
       begin
         if (IsDirectPostingAllowed(qryLedger)) then
           begin
@@ -545,21 +545,21 @@ begin
               Close;
           end;    //  end if
       end
-    else
+      else
       begin
         qryJournal.Edit;
         qryLedger.Edit;
         MessageDlg('Please enter a reason before posting.', mtError, [mbOK], 0);
         tbDesc.SetFocus;
       end;    //  end if-else
-  except
-    on E: Exception do
-    begin
-      MsgErr('Posting failed' + #13 + #13 + E.Message);
-      qryJournal.Edit;
-      qryLedger.Edit;
-    end;
-  end;
+   except
+      on E: Exception do
+      begin
+         MsgErr('Posting failed' + #13 + #13 + E.Message);
+         qryJournal.Edit;
+         qryLedger.Edit;
+      end;
+   end;
 end;
 
 procedure TfrmJournal.SaveJournalEntry;
@@ -647,7 +647,19 @@ begin
                               , 0
                               , False
                               , 0
-                              , cTax);
+                              , cTax
+                              , '' //sTranCurrency
+                              , 0 // lcFXRate
+                              , 0 //lcValBase
+                              , 0 //lcCurrencyTaxValBase
+                              , 0 //LcValEntity
+                              , 0 //lcCurrencyTaxValEntity
+                              , '' //tvLedgerBRANCH.EditValue
+                              , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                              , '' //vartostr(tvLedgerDEPT.EditValue)
+                              , 'N'
+                              );
+
                         end;    //  end if
 
                         SaveTaxAmount(iJournal, cAmt,glInstance.ledgerKey);
