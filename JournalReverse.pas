@@ -9,14 +9,13 @@ uses
   DateTimeAccount, cxLookAndFeelPainters, cxMemo, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxCalendar, EnforceCustomDateEdit, cxButtons, cxControls,
   cxContainer, cxEdit, cxLabel, cxDBLabel, cxGroupBox, Menus, cxGraphics,
-  cxLookAndFeels, dxCore, cxDateUtils;
+  cxLookAndFeels, dxCore, cxDateUtils, dxLayoutcxEditAdapters,
+  dxLayoutControlAdapters, dxLayoutContainer, cxClasses, dxLayoutControl;
 
 type
   TfrmJournalReverse = class(TForm)
     qryJournal: TUniQuery;
     dsJournal: TUniDataSource;
-    Label5: TLabel;
-    Label6: TLabel;
     qryJournalInsert: TUniQuery;
     qryTransItems: TUniQuery;
     qryTransItemInsert: TUniQuery;
@@ -29,21 +28,30 @@ type
     btnCancel: TcxButton;
     tbReason: TcxMemo;
     qryNmemoUpdate: TUniQuery;
-    cxGroupBox1: TcxGroupBox;
-    Label7: TLabel;
     cxDBLabel1: TcxDBLabel;
     cxDBLabel2: TcxDBLabel;
-    Label1: TLabel;
-    Label2: TLabel;
     cxDBLabel3: TcxDBLabel;
     cxDBLabel4: TcxDBLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     cxDBLabel5: TcxDBLabel;
     qryJournalTotal: TUniQuery;
     dsJournalTotal: TUniDataSource;
     qryAllocInsert: TUniQuery;
     qryAllocJournal: TUniQuery;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
@@ -167,6 +175,7 @@ begin
         qryJournalInsert.ParamByName('REFNO').AsString := qryJournal.FieldByName('REFNO').AsString;
         qryJournalInsert.ParamByName('TYPE').AsString := qryJournal.FieldByName('TYPE').AsString;
         qryJournalInsert.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+        qryJournalInsert.ParamByName('TRAN_TYPE').AsString := 'C';
         qryJournalInsert.ExecSQL;
 
         // update the original journal record with the rev_njournal number
@@ -176,6 +185,7 @@ begin
         if (qryJournal.FieldByName('NMEMO').AsInteger > 0) then
            qryUpdateJournal.ParamByName('NMEMO').AsInteger     := qryJournal.FieldByName('NMEMO').AsInteger;
         qryUpdateJournal.ParamByName('ACCT').AsString          := qryJournal.FieldByName('ACCT').AsString;
+        qryUpdateJournal.ParamByName('TRAN_TYPE').AsString     := 'R';
         qryUpdateJournal.ExecSQL;
         qryUpdateJournal.Close;
 
@@ -240,6 +250,7 @@ begin
                qryUpdateTransItem.ParamByName('NJOURNAL').AsInteger := qryJournal.FieldByName('NJOURNAL').AsInteger;
                qryUpdateTransItem.ParamByName('REV_NJOURNAL').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
                qryUpdateTransItem.ParamByName('ACCT').AsString := qryJournal.FieldByName('ACCT').AsString;
+               qryUpdateTransItem.ParamByName('TRAN_TYPE').AsString := 'R';
                qryUpdateTransItem.ExecSQL;
                qryUpdateTransItem.Close;
 
@@ -254,9 +265,11 @@ begin
            qryTransItemInsert.ParamByName('NOWNER').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
            qryTransItemInsert.ParamByName('REV_NJOURNAL').AsInteger := 0; //qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
           // ToDo: Either populate version with information or don't save this.
-//           qryTransItemInsert.ParamByName('VERSION').AsString := dmAxiom.Version + '.' + IntToStr(dmAxiom.BuildNumber);
+           qryTransItemInsert.ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;;
            qryTransItemInsert.ParamByName('NMATTER').AsInteger := qryTransItems.FieldByName('NMATTER').AsInteger;
            qryTransItemInsert.ParamByName('WHO').AsString := dmAxiom.UserID;
+           qryTransItemInsert.ParamByName('TRAN_TYPE').AsString := 'C';
+           qryTransItemInsert.ParamByName('PROGRAM_NAME').AsString := 'Journal Reverse';
 
            qryJournal.First;
            while (not qryJournal.Eof) do

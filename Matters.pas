@@ -1547,6 +1547,7 @@ type
     cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
     tvDocsFOLDER_ID: TcxGridDBBandedColumn;
     actBillDelete: TAction;
+    tvInvoicesSTATUS: TcxGridDBColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
