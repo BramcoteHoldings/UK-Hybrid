@@ -50,7 +50,7 @@ object frmInvoice: TfrmInvoice
     Visible = False
   end
   object Label3: TLabel
-    Left = 254
+    Left = 255
     Top = 69
     Width = 16
     Height = 15
@@ -98,9 +98,9 @@ object frmInvoice: TfrmInvoice
   end
   object lblSundAvail: TLabel
     Left = 108
-    Top = 201
+    Top = 199
     Width = 73
-    Height = 14
+    Height = 19
     Alignment = taRightJustify
     AutoSize = False
     Visible = False
@@ -223,7 +223,7 @@ object frmInvoice: TfrmInvoice
     AutoSize = False
   end
   object lblGst: TLabel
-    Left = 339
+    Left = 349
     Top = 69
     Width = 17
     Height = 15
@@ -246,7 +246,7 @@ object frmInvoice: TfrmInvoice
     Caption = 'lblEntity'
   end
   object Label18: TLabel
-    Left = 416
+    Left = 419
     Top = 69
     Width = 42
     Height = 15
@@ -765,8 +765,8 @@ object frmInvoice: TfrmInvoice
     OnClick = btnUpCredRebuildClick
   end
   object btnAddTrust: TBitBtn
-    Left = 276
-    Top = 222
+    Left = 280
+    Top = 223
     Width = 113
     Height = 22
     Caption = 'Apply Trust'
@@ -776,7 +776,7 @@ object frmInvoice: TfrmInvoice
     OnClick = btnAddTrustClick
   end
   object neFeesTax: TNumberEdit
-    Left = 276
+    Left = 280
     Top = 94
     Width = 86
     Height = 23
@@ -805,7 +805,7 @@ object frmInvoice: TfrmInvoice
     OnChange = neFeesTaxChange
   end
   object neDisbTax: TNumberEdit
-    Left = 276
+    Left = 280
     Top = 120
     Width = 86
     Height = 23
@@ -834,7 +834,7 @@ object frmInvoice: TfrmInvoice
     OnChange = neDisbTaxChange
   end
   object neAntdTax: TNumberEdit
-    Left = 276
+    Left = 280
     Top = 146
     Width = 86
     Height = 23
@@ -863,7 +863,7 @@ object frmInvoice: TfrmInvoice
     OnChange = neAntdTaxChange
   end
   object neUpCredTax: TNumberEdit
-    Left = 276
+    Left = 280
     Top = 171
     Width = 86
     Height = 23
@@ -962,7 +962,7 @@ object frmInvoice: TfrmInvoice
     OnChange = neUpCredTaxChange
   end
   object neAntdTaxFree: TNumberEdit
-    Left = 376
+    Left = 375
     Top = 146
     Width = 86
     Height = 23
@@ -2072,7 +2072,7 @@ object frmInvoice: TfrmInvoice
     OnClick = btnNotesClick
   end
   object neSundTax: TcxCurrencyEdit
-    Left = 276
+    Left = 280
     Top = 197
     AutoSize = False
     EditValue = 0.000000000000000000
@@ -2218,7 +2218,7 @@ object frmInvoice: TfrmInvoice
     Left = 832
     Top = 57
     Bitmap = {
-      494C010105000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       00000000000000000000000000000000000000000000FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -2701,7 +2701,7 @@ object frmInvoice: TfrmInvoice
     Left = 785
     Top = 60
     Bitmap = {
-      494C010113001500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010113001500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3655,21 +3655,46 @@ object frmInvoice: TfrmInvoice
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
-        'SELECT 4 AS TYPE, created, descr, amount * -1 AS amount, refno A' +
-        'S author,'
-      '       nalloc AS uniqueid, taxcode,'
-      '       CASE'
-      '          WHEN (tax <> 0)'
-      '             THEN tax * -1'
-      '          ELSE billed_tax_amount * -1'
+        ' SELECT 4 AS TYPE, alloc.created, alloc.descr, alloc.amount * -1' +
+        ' AS amount, alloc.refno AS author,'
+      '       nalloc AS uniqueid, alloc.taxcode,'
+      '         DECODE (NVL (alloc.billed_tax_amount, 0),'
+      '                 0, DECODE (alloc.billed,'
+      '                            '#39'Y'#39', alloc.billed_tax_amount,'
+      '                            DECODE ((r.rate - r.bill_rate),'
       
-        '       END AS tax, NULL AS PRIVATE, payer AS payee, approval, 0 ' +
-        'AS units,'
-      '       NULL AS task, nalloc AS uniqueid, 0 AS unbilled'
-      '  FROM alloc'
+        '                                    '#39'0'#39', alloc.billed_tax_amount' +
+        ','
+      
+        '                                      ROUND (  (alloc.billed_amo' +
+        'unt)'
+      '                                             * ABS (r.rate)'
+      '                                            )'
+      '                                    / 100'
+      '                                   )'
+      '                           ),'
+      '                 alloc.billed_tax_amount'
+      '                )'
+      '       * -1 AS tax,'
+      
+        '       NULL AS PRIVATE, payer AS payee, approval, 0 AS units, NU' +
+        'LL AS task,'
+      '       nalloc AS uniqueid, 0 AS unbilled'
+      '  FROM alloc, taxrate r'
       ' WHERE'
       '--NMATTER = :P_Matter AND'
-      '       nmemo = :p_invoice AND ninvoice IS NOT NULL'
+      '    nmemo = :p_invoice AND ninvoice IS NOT NULL'
+      '   AND  alloc.nmemo = :p_invoice'
+      '   AND (NVL (ninvoice, 0) = 0 OR (NVL (ninvoice, 0) > 0 ))'
+      '   AND nvl(alloc.billing_taxcode, alloc.taxcode) = r.taxcode(+)'
+      '   AND TRUNC (alloc.created) >= r.commence'
+      
+        '   AND TRUNC (alloc.created) <= NVL (r.end_period, SYSDATE + 100' +
+        '0)'
+      '   '
+      ''
+      ''
+      ''
       '/*'
       'SELECT'
       ' 4 as type, '
@@ -4478,7 +4503,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4897,7 +4922,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5100,7 +5125,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -7316,7 +7341,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

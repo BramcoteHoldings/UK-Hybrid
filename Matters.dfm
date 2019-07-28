@@ -745,8 +745,8 @@ object frmMatters: TfrmMatters
         Width = 1182
         object lblPhoneBookKey: TLabel
           Left = 9
-          Top = 14
-          Width = 78
+          Top = 13
+          Width = 80
           Height = 31
           AutoSize = False
           Caption = 'Key Name (Search)'
@@ -754,14 +754,14 @@ object frmMatters: TfrmMatters
         end
         object Label18: TLabel
           Left = 9
-          Top = 48
+          Top = 46
           Width = 32
           Height = 15
           Caption = 'Name'
         end
         object Label19: TLabel
           Left = 9
-          Top = 72
+          Top = 71
           Width = 23
           Height = 15
           Caption = 'Title'
@@ -798,21 +798,21 @@ object frmMatters: TfrmMatters
         end
         object Label28: TLabel
           Left = 346
-          Top = 48
+          Top = 46
           Width = 49
           Height = 15
           Caption = 'Facsimile'
         end
         object Label26: TLabel
           Left = 346
-          Top = 72
+          Top = 71
           Width = 70
           Height = 15
           Caption = 'Home Phone'
         end
         object Label34: TLabel
           Left = 346
-          Top = 99
+          Top = 96
           Width = 37
           Height = 15
           Caption = 'Mobile'
@@ -832,6 +832,7 @@ object frmMatters: TfrmMatters
           Height = 15
           Alignment = taRightJustify
           Caption = 'Date Of Birth:'
+          Visible = False
         end
         object Label84: TLabel
           Left = 13
@@ -850,14 +851,14 @@ object frmMatters: TfrmMatters
           Caption = 'E-Mail 2'
         end
         object Label87: TLabel
-          Left = 561
+          Left = 569
           Top = 46
           Width = 25
           Height = 15
           Caption = 'ACN'
         end
         object dbtbKeyName: TDBEdit
-          Left = 93
+          Left = 90
           Top = 18
           Width = 243
           Height = 23
@@ -869,8 +870,8 @@ object frmMatters: TfrmMatters
           TabOrder = 0
         end
         object dbtbPBName: TDBEdit
-          Left = 93
-          Top = 42
+          Left = 90
+          Top = 43
           Width = 243
           Height = 23
           Color = clMoneyGreen
@@ -881,8 +882,8 @@ object frmMatters: TfrmMatters
           TabOrder = 1
         end
         object dbtbTitle: TDBEdit
-          Left = 93
-          Top = 69
+          Left = 90
+          Top = 68
           Width = 243
           Height = 23
           Color = clMoneyGreen
@@ -931,7 +932,7 @@ object frmMatters: TfrmMatters
         end
         object dbtbMobile: TDBEdit
           Left = 423
-          Top = 94
+          Top = 93
           Width = 129
           Height = 23
           Color = clMoneyGreen
@@ -943,7 +944,7 @@ object frmMatters: TfrmMatters
         end
         object dbtbHomePhone: TDBEdit
           Left = 423
-          Top = 69
+          Top = 68
           Width = 129
           Height = 23
           Color = clMoneyGreen
@@ -955,7 +956,7 @@ object frmMatters: TfrmMatters
         end
         object dbtbFax: TDBEdit
           Left = 423
-          Top = 42
+          Top = 43
           Width = 129
           Height = 23
           Color = clMoneyGreen
@@ -978,7 +979,7 @@ object frmMatters: TfrmMatters
           TabOrder = 8
         end
         object eInternetEmail: TcxDBButtonEdit
-          Left = 93
+          Left = 90
           Top = 245
           DataBinding.DataField = 'EMAIL'
           DataBinding.DataSource = dsPhonebook
@@ -1091,7 +1092,7 @@ object frmMatters: TfrmMatters
           Width = 321
         end
         object cxDBButtonEdit1: TcxDBButtonEdit
-          Left = 93
+          Left = 90
           Top = 273
           DataBinding.DataField = 'EMAIL1'
           DataBinding.DataSource = dsPhonebook
@@ -1147,7 +1148,7 @@ object frmMatters: TfrmMatters
           Width = 321
         end
         object cxDBButtonEdit2: TcxDBButtonEdit
-          Left = 93
+          Left = 90
           Top = 301
           DataBinding.DataField = 'EMAIL2'
           DataBinding.DataSource = dsPhonebook
@@ -1331,7 +1332,7 @@ object frmMatters: TfrmMatters
             end
             object dbmmoAddress: TDBMemo
               Left = 75
-              Top = 1
+              Top = 3
               Width = 244
               Height = 44
               Color = clMoneyGreen
@@ -1357,7 +1358,7 @@ object frmMatters: TfrmMatters
             ImageIndex = 1
             object Label40: TLabel
               Left = 1
-              Top = 0
+              Top = 2
               Width = 42
               Height = 15
               Caption = 'Address'
@@ -1426,7 +1427,7 @@ object frmMatters: TfrmMatters
             end
             object dbmmoPostalAddress: TDBMemo
               Left = 75
-              Top = 1
+              Top = 3
               Width = 244
               Height = 44
               Color = clMoneyGreen
@@ -1452,7 +1453,7 @@ object frmMatters: TfrmMatters
             ImageIndex = 2
             object Label55: TLabel
               Left = 1
-              Top = 0
+              Top = 2
               Width = 42
               Height = 15
               Caption = 'Address'
@@ -1486,8 +1487,8 @@ object frmMatters: TfrmMatters
               Caption = 'Postcode'
             end
             object DBMemo1: TDBMemo
-              Left = 75
-              Top = 1
+              Left = 76
+              Top = 3
               Width = 244
               Height = 44
               Color = clMoneyGreen
@@ -4362,6 +4363,11 @@ object frmMatters: TfrmMatters
           Preview.LeftIndent = 19
           Styles.OnGetContentStyle = tvInvoicesStylesGetContentStyle
           Styles.Footer = styBillTotals
+          object tvInvoicesSTATUS: TcxGridDBColumn
+            Caption = 'Status'
+            DataBinding.FieldName = 'STATUS'
+            Options.Editing = False
+          end
           object tvInvoicesDISPATCHED: TcxGridDBColumn
             Caption = 'Dispatched'
             DataBinding.FieldName = 'DISPATCHED'
@@ -23333,7 +23339,16 @@ object frmMatters: TfrmMatters
       
         ',TOTAL, OWING, UPCRED, UPCRED_PAID,SPLIT_BILL, EXPPAYMENT, INV_N' +
         'OTE, AUTHORISED, '
-      'invoice_copy, invoice_copy_ext, nbill_to, path, IS_DRAFT'
+      'invoice_copy, invoice_copy_ext, nbill_to, path, IS_DRAFT, '
+      'CASE -- WHEN NMEMO.REJECTED = '#39'Y'#39' then '#39'Rejected'#39
+      
+        '-- WHEN NMEMO.REJECTED = '#39'N'#39' and NMEMO.PRIVATE = '#39'Y'#39' then '#39'Priva' +
+        'te'#39
+      ' WHEN NMEMO.PRIVATE = '#39'N'#39' and NMEMO.IS_DRAFT = '#39'Y'#39' then '#39'Draft'#39
+      
+        ' WHEN NMEMO.PRIVATE = '#39'N'#39' and NMEMO.REFNO = '#39'AUTH'#39' then '#39'Authori' +
+        'sed'#39
+      ' WHEN NMEMO.IS_DRAFT = '#39'N'#39' then '#39'Posted'#39' END as STATUS'
       'FROM NMEMO'
       'WHERE NMATTER  = :P_Matter'
       'ORDER BY NMEMO DESC'

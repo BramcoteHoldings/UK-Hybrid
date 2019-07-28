@@ -208,9 +208,9 @@ object frmJournal: TfrmJournal
   end
   object dbgrLedger: TcxGrid
     Left = 7
-    Top = 78
+    Top = 81
     Width = 812
-    Height = 244
+    Height = 241
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 3
     OnEnter = dbgrLedgerEnter
@@ -550,11 +550,11 @@ object frmJournal: TfrmJournal
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 8
     Transparent = True
-    Height = 67
+    Height = 69
     Width = 189
     object btnImport: TcxButton
       Left = 99
-      Top = 38
+      Top = 41
       Width = 84
       Height = 23
       Caption = 'Import File'
@@ -601,7 +601,7 @@ object frmJournal: TfrmJournal
     end
     object cmbFileType: TcxComboBox
       Left = 53
-      Top = 14
+      Top = 17
       Properties.Items.Strings = (
         'Micropay')
       Properties.OnChange = cmbFileTypePropertiesChange
@@ -615,14 +615,14 @@ object frmJournal: TfrmJournal
     end
     object cxLabel2: TcxLabel
       Left = 13
-      Top = 16
+      Top = 19
       Caption = 'Type'
     end
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 66
     Top = 4
-    EditValue = 43620.5968570833d
+    EditValue = 43672.5021517361d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True

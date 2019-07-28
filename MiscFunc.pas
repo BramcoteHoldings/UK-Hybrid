@@ -539,7 +539,8 @@ type
     nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: integer = 0;
     cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
     dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
-    dEntity_CCY_Tax: double = 0);
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
   procedure SaveLedger(dtDate: TDateTime; cAmount: currency; cTax: Currency;
     sRefno, sOwnerCode: string; iOwner: integer; sDesc,
     sFullLedger, sAuthor: string; iInvoice: Integer;
@@ -547,20 +548,26 @@ type
     nAccount: integer = 0; UseRvDate: Boolean = FALSE; nTrans: integer = 0;
     cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
     dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
-    dEntity_CCY_Tax: double = 0);
-  procedure PostLedgers(dtDate: TDateTime; cAmount: currency; sRefno: string;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
+ procedure PostLedgers(dtDate: TDateTime; cAmount: currency; sRefno: string;
     sOwnerCode: string; iOwner: int64; sDesc: string; sDrLedger,
     sCrLedger: string; sAuthor: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
     sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
     nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0;
     cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
     dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
-    dEntity_CCY_Tax: double = 0);
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
   procedure PostLedgersGST(dtDate: TDateTime; cAmount, cGSTAmount: currency; sRefno: string;
     sOwnerCode: string; iOwner: int64; sDesc: string; sGSTLedger,
     sDrLedger, sCrLedger: string; sAuthor: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
     sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
-    nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0);
+    nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0;
+    cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
+    dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
   procedure QuickCode(Sender: TObject; DisplayValue: String = '');
   function QuoteFix(sFix: string): string;
   procedure ReceiptClear(iNreceipt: integer);
@@ -5124,14 +5131,15 @@ end;
 
 
 procedure PostLedger(dtDate: TDateTime; cAmount: currency; cTax: Currency;
-  sRefno: string; sOwnerCode: string; iOwner: int64; sDesc: string;
-  sLedger: string; sAuthor: string; iInvoice: int64;
-  CreditorCode: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
-  sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
-  nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: integer = 0;
-  cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
-  dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
-  dEntity_CCY_Tax: double = 0);
+    sRefno: string; sOwnerCode: string; iOwner: int64; sDesc: string;
+    sLedger: string; sAuthor: string; iInvoice: int64;
+    CreditorCode: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
+    sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
+    nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: integer = 0;
+    cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
+    dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
 var
   sFullLedger : String;
   sSubChart,sRoundChart : String;
@@ -5172,10 +5180,10 @@ begin
            if eof then
            begin
               SaveLedger(dtDate, cAmount, cTax, sRefno, sOwnerCode, iOwner, sDesc,
-              sFullLedger, sAuthor, iInvoice, CreditorCode, sTaxCode,
-              sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
-              sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
-              dEntity_CCY_Tax);
+                        sFullLedger, sAuthor, iInvoice, CreditorCode, sTaxCode,
+                        sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
+                        sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
+                        dEntity_CCY_Tax, sBranch, sEmp_code, sDept_Code, sEntity, sTran_Type);
            end
            else
            begin
@@ -5206,10 +5214,10 @@ begin
                     fTotalTaxPosted := fTotalTaxPosted + fSubChartAmountTax;
 
                     SaveLedger(dtDate, fSubChartAmount, fSubChartAmountTax, sRefno, sOwnerCode, iOwner, sDesc,
-                    sSubChart, sAuthor, iInvoice, CreditorCode, sTaxCode,
-                    sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
-                    sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
-                    dEntity_CCY_Tax);
+                              sSubChart, sAuthor, iInvoice, CreditorCode, sTaxCode,
+                              sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
+                              sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
+                              dEntity_CCY_Tax, sBranch, sEmp_Code, sDept_Code, sEntity, sTran_Type);
                  end;
                  next;
               end;
@@ -5221,10 +5229,10 @@ begin
                  raise Exception.Create('Total percentage in expense allocations must be 100%');
 
               SaveLedger(dtDate, cAmount-fTotalPosted, cTax-fTotalTaxPosted, sRefno, sOwnerCode, iOwner, sDesc,
-                  sRoundChart, sAuthor, iInvoice, CreditorCode, sTaxCode,
-                  sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
-                  sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
-                  dEntity_CCY_Tax);
+                       sRoundChart, sAuthor, iInvoice, CreditorCode, sTaxCode,
+                       sParentChart, nAlloc, nMatter, nAccount,UseRvDate, nTrans, cBAS_Tax,
+                       sCurrency, dFX_Rate, dBase_CCY_Amt, dBase_CCY_Tax, dEntity_CCY_Amt,
+                       dEntity_CCY_Tax, sBranch, sEmp_code, sDept_Code, sEntity, sTran_Type);
            end;
            close;
         end;
@@ -5240,12 +5248,14 @@ begin
 end;
 
 procedure SaveLedger(dtDate: TDateTime; cAmount: currency; cTax: Currency;
-  sRefno, sOwnerCode: string; iOwner: integer; sDesc, sFullLedger, sAuthor: string;
-  iInvoice: Integer; CreditorCode, sTaxCode, sParentChart: String; nAlloc: integer = 0;
-  nMatter: int64 = 0; nAccount: integer = 0; UseRvDate: boolean = FALSE; nTrans: integer = 0;
-  cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
-  dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
-  dEntity_CCY_Tax: double = 0);
+    sRefno, sOwnerCode: string; iOwner: integer; sDesc,
+    sFullLedger, sAuthor: string; iInvoice: Integer;
+    CreditorCode, sTaxCode, sParentChart: String; nAlloc: integer = 0; nMatter: int64 = 0;
+    nAccount: integer = 0; UseRvDate: Boolean = FALSE; nTrans: integer = 0;
+    cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
+    dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
 const
   TransactionsFile = 'Transactions.log';
 var
@@ -5331,6 +5341,7 @@ begin
             ParamByName('BASE_CCY_TAX').AsFloat := dBase_CCY_Tax;
             ParamByName('ENTITY_CCY_TAX').AsFloat := dEntity_CCY_Amt;
             ParamByName('TRAN_CCY_AMT').AsFloat := dEntity_CCY_Tax;
+            ParamByName('TRAN_TYPE').AsString := sTran_Type;
             ExecSQL;
             Close;
 
@@ -5362,7 +5373,6 @@ begin
               WriteLn(t, DateTimeToStr(Now()), ':- ', Text);
               Flush(t);
               CloseFile(t);
-
             end;
           end;
         except
@@ -5376,143 +5386,192 @@ begin
 end;
 
 procedure PostLedgers(dtDate: TDateTime; cAmount: currency; sRefno: string;
- sOwnerCode: string; iOwner: int64; sDesc: string; sDrLedger, sCrLedger: string;
- sAuthor: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
- sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
- nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0;
- cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
- dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
- dEntity_CCY_Tax: double = 0);
+    sOwnerCode: string; iOwner: int64; sDesc: string; sDrLedger,
+    sCrLedger: string; sAuthor: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
+    sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
+    nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0;
+    cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
+    dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
 begin
-  if cAmount <> 0 then
-  begin
-    PostLedger(dtDate
-      , 0 - cAmount
-      , 0
-      , sRefno
-      , sOwnerCode
-      , iOwner
-      , sDesc
-      , sDrLedger
-      , sAuthor
-      , -1
-      , ''
-      , sTaxCode
-      , bJournalSplit
-      , sParentChart
-      , nAlloc
-      , nMatter
-      , nAccount
-      , UseRvDate
-      , nTrans
-      , cBAS_Tax
-      , sCurrency
-      , dFX_Rate
-      , dBase_CCY_Amt
-      , dBase_CCY_Tax
-      , dEntity_CCY_Amt
-      , dEntity_CCY_Tax );
+   if cAmount <> 0 then
+   begin
+      PostLedger(dtDate
+         , 0 - cAmount
+         , 0
+         , sRefno
+         , sOwnerCode
+         , iOwner
+         , sDesc
+         , sDrLedger
+         , sAuthor
+         , -1
+         , ''
+         , sTaxCode
+         , bJournalSplit
+         , sParentChart
+         , nAlloc
+         , nMatter
+         , nAccount
+         , UseRvDate
+         , nTrans
+         , cBAS_Tax
+         , sCurrency
+         , dFX_Rate
+         , dBase_CCY_Amt
+         , dBase_CCY_Tax
+         , dEntity_CCY_Amt
+         , dEntity_CCY_Tax
+         , sBranch
+         , sEmp_Code
+         , sDept_Code
+         , sEntity
+         , sTran_Type );
 
-    PostLedger(dtDate
-      , cAmount
-      , 0
-      , sRefno
-      , sOwnerCode
-      , iOwner
-      , sDesc
-      , sCrLedger
-      , sAuthor
-      , -1
-      , ''
-      , sTaxCode
-      , bJournalSplit
-      , sParentChart
-      , nAlloc
-      , nMatter
-      , nAccount
-      , UseRvDate
-      , nTrans
-      , cBAS_Tax
-      , sCurrency
-      , dFX_Rate
-      , dBase_CCY_Amt
-      , dBase_CCY_Tax
-      , dEntity_CCY_Amt
-      , dEntity_CCY_Tax  );
-  end;
+      PostLedger(dtDate
+         , cAmount
+         , 0
+         , sRefno
+         , sOwnerCode
+         , iOwner
+         , sDesc
+         , sCrLedger
+         , sAuthor
+         , -1
+         , ''
+         , sTaxCode
+         , bJournalSplit
+         , sParentChart
+         , nAlloc
+         , nMatter
+         , nAccount
+         , UseRvDate
+         , nTrans
+         , cBAS_Tax
+         , sCurrency
+         , dFX_Rate
+         , dBase_CCY_Amt
+         , dBase_CCY_Tax
+         , dEntity_CCY_Amt
+         , dEntity_CCY_Tax
+         , sBranch
+         , sEmp_Code
+         , sDept_Code
+         , sEntity
+         , sTran_Type );
+   end;
 end;
 
-procedure PostLedgersGST(dtDate: TDateTime; cAmount, cGSTAmount: currency;
-  sRefno: string; sOwnerCode: string; iOwner: int64; sDesc: string;
-  sGSTLedger, sDrLedger, sCrLedger: string; sAuthor: string; sTaxCode : String;
-  bJournalSplit : Boolean = FALSE;
-  sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
-  nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0);
+procedure PostLedgersGST(dtDate: TDateTime; cAmount, cGSTAmount: currency; sRefno: string;
+    sOwnerCode: string; iOwner: int64; sDesc: string; sGSTLedger,
+    sDrLedger, sCrLedger: string; sAuthor: string; sTaxCode : String; bJournalSplit : Boolean = FALSE;
+    sParentChart : String = '0'; nAlloc: int64 = 0; nMatter: int64 = 0;
+    nAccount: int64 = 0; UseRvDate: Boolean = FALSE; nTrans: int64 = 0;
+    cBAS_Tax: double = 0; sCurrency: string = ''; dFX_Rate: double = 0;
+    dBase_CCY_Amt: double = 0; dBase_CCY_Tax: double = 0; dEntity_CCY_Amt: double = 0;
+    dEntity_CCY_Tax: double = 0; sBranch: string = ''; sEmp_Code: string = '';
+    sDept_Code: string = ''; sEntity: string = ''; sTRAN_TYPE: string = '');
 begin
-    if (cAmount <> 0) or (cGSTAmount <> 0) then
-    begin
+   if (cAmount <> 0) or (cGSTAmount <> 0) then
+   begin
+      if (cGSTAmount <> 0) then
+         PostLedger(dtDate
+         , 0- cGSTAmount
+         , 0
+         , sRefno
+         , sOwnerCode
+         , iOwner
+         , sDesc
+         , sGSTLedger
+         , sAuthor
+         , -1
+         , ''
+         , sTaxCode
+         , bJournalSplit
+         , sParentChart
+         , nAlloc
+         , nMatter
+         , nAccount
+         , UseRvDate
+         , nTrans
+         , cBAS_Tax
+         , sCurrency
+         , dFX_Rate
+         , dBase_CCY_Amt
+         , dBase_CCY_Tax
+         , dEntity_CCY_Amt
+         , dEntity_CCY_Tax
+         , sBranch
+         , sEmp_Code
+         , sDept_Code
+         , sEntity
+         , sTran_Type  );
 
-    if (cGSTAmount <> 0) then
-      PostLedger(dtDate
-        , 0- cGSTAmount
-        , 0
-        , sRefno
-        , sOwnerCode
-        , iOwner
-        , sDesc
-        , sGSTLedger
-        , sAuthor
-        , -1
-        , ''
-        , sTaxCode
-        , bJournalSplit
-        , sParentChart
-        , nAlloc
-        , nMatter
-        , nAccount
-      , UseRvDate
-      , nTrans  );
+      if cAmount <> 0 then
+         PostLedger(dtDate
+               , 0 - cAmount
+               , 0
+               , sRefno
+               , sOwnerCode
+               , iOwner
+               , sDesc
+               , sDrLedger
+               , sAuthor
+               , -1
+               , ''
+               , sTaxCode
+               , bJournalSplit
+               , sParentChart
+               , nAlloc
+               , nMatter
+               , nAccount
+               , UseRvDate
+               , nTrans
+               , cBAS_Tax
+               , sCurrency
+               , dFX_Rate
+               , dBase_CCY_Amt
+               , dBase_CCY_Tax
+               , dEntity_CCY_Amt
+               , dEntity_CCY_Tax
+               , sBranch
+               , sEmp_Code
+               , sDept_Code
+               , sEntity
+               , sTran_Type  );
 
-    if cAmount <> 0 then
-    PostLedger(dtDate
-      , 0 - cAmount
-      , 0
-      , sRefno
-      , sOwnerCode
-      , iOwner
-      , sDesc
-      , sDrLedger
-      , sAuthor
-      , -1
-      , ''
-      , sTaxCode
-      , bJournalSplit
-      , sParentChart
-      , nAlloc
-      , nMatter
-      , nAccount
-      , UseRvDate
-      , nTrans  );
-
-    PostLedger(dtDate
-      , cAmount + cGSTAmount
-      , 0
-      , sRefno
-      , sOwnerCode
-      , iOwner
-      , sDesc
-      , sCrLedger
-      , sAuthor
-      , -1
-      , ''
-      , sTaxCode
-      , bJournalSplit
-      , sParentChart
-      , nAlloc
-      , nMatter
-      , nAccount
-      , UseRvDate
-      , nTrans  );
+         PostLedger(dtDate
+               , cAmount + cGSTAmount
+               , 0
+               , sRefno
+               , sOwnerCode
+               , iOwner
+               , sDesc
+               , sCrLedger
+               , sAuthor
+               , -1
+               , ''
+               , sTaxCode
+               , bJournalSplit
+               , sParentChart
+               , nAlloc
+               , nMatter
+               , nAccount
+               , UseRvDate
+               , nTrans
+               , cBAS_Tax
+               , sCurrency
+               , dFX_Rate
+               , dBase_CCY_Amt
+               , dBase_CCY_Tax
+               , dEntity_CCY_Amt
+               , dEntity_CCY_Tax
+               , sBranch
+               , sEmp_Code
+               , sDept_Code
+               , sEntity
+               , sTran_Type  );
     end;
 
 end;

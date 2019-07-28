@@ -849,7 +849,9 @@ procedure TfrmDocNew.cxButtonEdit1PropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 var
    I: integer;
+   CurrDir: string;
 begin
+   CurrDir := GetCurrentDir;
    case AButtonIndex of
       0: begin
            if odFile.Execute then
@@ -870,6 +872,7 @@ begin
          end;
       1: edtPath.Text := SystemString('DOC_DEFAULT_DIRECTORY');
    end;
+   SetCurrentDir(CurrDir);
 end;
 
 procedure TfrmDocNew.cxComboBox1PropertiesInitPopup(Sender: TObject);
