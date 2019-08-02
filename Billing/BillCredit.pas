@@ -270,7 +270,7 @@ begin
     begin
       try
         if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
         dmAxiom.uniInsight.StartTransaction;
 
         cDebtors := StrToCurr(ProcString('getDebtorsAmount',qryBill.FieldByName('NMATTER').AsInteger));   // TableCurrency('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'DEBTORS');

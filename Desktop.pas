@@ -1045,8 +1045,6 @@ begin
          cAItem := TdxUserSpellCheckerDictionary (AItem.DictionaryType);
          cAItem.DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
          cAItem.Enabled := True;
-//         TdxUserSpellCheckerDictionary(AItem).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
-//         TdxUserSpellCheckerDictionary(AItem).Enabled := True;
          dmAxiom.TSSpellChecker.LoadDictionaries();
       end;
    finally
@@ -1829,6 +1827,8 @@ begin
       dmAxiom.qryBanks.Close;
       if dmAxiom.qryEmpAuthor.Active = True then
          dmAxiom.qryEmpAuthor.Close;
+      if dmAxiom.qryCurrencyList.Active = True then
+         dmAxiom.qryCurrencyList.Close;
 
       try
          if finYearStart <> nil then

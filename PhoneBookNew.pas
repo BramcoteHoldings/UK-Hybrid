@@ -3604,7 +3604,7 @@ begin
          qCreditorCheck.Close;
          qCreditorCheck.SQL.Text := 'SELECT NCREDITOR FROM SEQNUMS';
          qCreditorCheck.Open;
-         LCreditorCode := IntToStr(qCreditorCheck.FieldByName('NCREDITOR').AsInteger);
+         LCreditorCode := qCreditorCheck.FieldByName('NCREDITOR').AsString;
          qCreditorCheck.Close;
          // and pad it
          if Length(LCreditorCode) < qCodeRules.FieldByName('CREDITORPAD').AsInteger then
