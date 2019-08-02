@@ -21,7 +21,8 @@ uses
   dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxEditorProducers,
   dxPScxExtEditorProducers, ppStrtch, ppSubRpt, dxPSCore, cxNavigator,
   MemDS, dxPScxSchedulerLnk,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
+  dxDateRanges, System.ImageList;
 
 type
   TfrmFeeCode = class(TfrmMaint)
@@ -122,6 +123,8 @@ type
     cxGrid1DBTableView1EFFECTIVE_FROM: TcxGridDBColumn;
     cxGrid1DBTableView1EFFECTIVE_TO: TcxGridDBColumn;
     cxGrid1Level1: TcxGridLevel;
+    tvFeeRatesColumn1: TcxGridDBColumn;
+    cxGrid1DBTableView1CURRENCY: TcxGridDBColumn;
     procedure qrySourceBeforeScroll(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure qrySourceBeforePost(DataSet: TDataSet);
@@ -232,6 +235,8 @@ begin
    qryEmptype.Open;
    qryEmpRates.Open;
    qryFeeRates.Open;
+   if dmAxiom.qryCurrencyList.Active = False then
+      dmAxiom.qryCurrencyList.Open;
 end;
 
 procedure TfrmFeeCode.qryEmpRatesAfterInsert(DataSet: TDataSet);

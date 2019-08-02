@@ -1749,7 +1749,7 @@ object frmBills: TfrmBills
     Left = 601
     Top = 34
     Bitmap = {
-      494C010119001D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010119001D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3779,7 +3779,7 @@ object frmBills: TfrmBills
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 4350

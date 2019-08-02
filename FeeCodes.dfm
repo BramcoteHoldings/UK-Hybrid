@@ -2,16 +2,16 @@ inherited frmFeeCode: TfrmFeeCode
   Left = 882
   Top = 100
   Caption = 'Fee Rate Codes'
-  ClientHeight = 802
+  ClientHeight = 691
   ClientWidth = 1375
   OldCreateOrder = True
   ExplicitWidth = 1381
-  ExplicitHeight = 833
-  PixelsPerInch = 106
+  ExplicitHeight = 720
+  PixelsPerInch = 96
   TextHeight = 15
   object grdFeeCodes: TcxGrid [0]
     Left = 0
-    Top = 30
+    Top = 28
     Width = 1375
     Height = 198
     Align = alTop
@@ -52,9 +52,9 @@ inherited frmFeeCode: TfrmFeeCode
   end
   object cxSplitter1: TcxSplitter [1]
     Left = 0
-    Top = 228
+    Top = 226
     Width = 1375
-    Height = 9
+    Height = 8
     HotZoneClassName = 'TcxSimpleStyle'
     HotZone.SizePercent = 73
     AlignSplitter = salTop
@@ -62,12 +62,13 @@ inherited frmFeeCode: TfrmFeeCode
   end
   object Panel1: TPanel [2]
     Left = 0
-    Top = 237
+    Top = 234
     Width = 1375
-    Height = 565
+    Height = 457
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 6
+    ExplicitHeight = 568
     object gbFeeRates: TcxGroupBox
       Left = 0
       Top = 0
@@ -76,35 +77,38 @@ inherited frmFeeCode: TfrmFeeCode
       Style.LookAndFeel.NativeStyle = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       TabOrder = 0
-      Height = 565
+      ExplicitHeight = 568
+      Height = 457
       Width = 1375
       object cxPageControl1: TcxPageControl
         Left = 2
         Top = 20
         Width = 1371
-        Height = 543
+        Height = 435
         Align = alClient
         TabOrder = 0
         Properties.ActivePage = tsEmpTypeRates
         Properties.CustomButtons.Buttons = <>
         Properties.TabSlants.Kind = skCutCorner
         LookAndFeel.NativeStyle = True
-        TabSlants.Kind = skCutCorner
-        ClientRectBottom = 539
+        ExplicitHeight = 546
+        ClientRectBottom = 431
         ClientRectLeft = 4
         ClientRectRight = 1367
-        ClientRectTop = 27
+        ClientRectTop = 26
         object tsEmpTypeRates: TcxTabSheet
           Caption = 'Employee Type Rates'
           ImageIndex = 0
+          ExplicitHeight = 516
           object dbgrFeeRates: TcxGrid
             Left = 0
             Top = 0
             Width = 1363
-            Height = 512
+            Height = 405
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
+            ExplicitHeight = 516
             object tvFeeRates: TcxGridDBTableView
               Navigator.Buttons.ConfirmDelete = True
               Navigator.Buttons.CustomButtons = <>
@@ -174,6 +178,22 @@ inherited frmFeeCode: TfrmFeeCode
                 PropertiesClassName = 'TcxCurrencyEditProperties'
                 Width = 137
               end
+              object tvFeeRatesColumn1: TcxGridDBColumn
+                Caption = 'Currency'
+                DataBinding.FieldName = 'CURRENCY'
+                PropertiesClassName = 'TcxLookupComboBoxProperties'
+                Properties.KeyFieldNames = 'ISO4217_CURRENCY_CODE'
+                Properties.ListColumns = <
+                  item
+                    FieldName = 'ISO4217_CURRENCY_CODE'
+                  end
+                  item
+                    FieldName = 'MAX(ISO4217_CURRENCY_NAME)'
+                  end>
+                Properties.ListOptions.ShowHeader = False
+                Properties.ListOptions.SyncMode = True
+                Properties.ListSource = dmAxiom.dsCurrencyList
+              end
               object tvFeeRatesEFFECTIVE_FROM: TcxGridDBColumn
                 Caption = 'Effective From'
                 DataBinding.FieldName = 'EFFECTIVE_FROM'
@@ -201,15 +221,11 @@ inherited frmFeeCode: TfrmFeeCode
         object tsEmployeeRates: TcxTabSheet
           Caption = 'Employee Rates'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object cxGrid1: TcxGrid
             Left = 0
             Top = 0
-            Width = 982
-            Height = 391
+            Width = 1363
+            Height = 405
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
@@ -275,6 +291,22 @@ inherited frmFeeCode: TfrmFeeCode
                 DataBinding.FieldName = 'RATE'
                 PropertiesClassName = 'TcxCurrencyEditProperties'
                 Width = 103
+              end
+              object cxGrid1DBTableView1CURRENCY: TcxGridDBColumn
+                Caption = 'Currency'
+                DataBinding.FieldName = 'CURRENCY'
+                PropertiesClassName = 'TcxLookupComboBoxProperties'
+                Properties.KeyFieldNames = 'ISO4217_CURRENCY_CODE'
+                Properties.ListColumns = <
+                  item
+                    FieldName = 'ISO4217_CURRENCY_CODE'
+                  end
+                  item
+                    FieldName = 'MAX(ISO4217_CURRENCY_NAME)'
+                  end>
+                Properties.ListOptions.ShowHeader = False
+                Properties.ListOptions.SyncMode = True
+                Properties.ListSource = dmAxiom.dsCurrencyList
               end
               object cxGrid1DBTableView1EFFECTIVE_FROM: TcxGridDBColumn
                 Caption = 'Effective From'
@@ -869,13 +901,14 @@ inherited frmFeeCode: TfrmFeeCode
     CanCustomize = False
     Left = 443
     Top = 33
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
       AllowClose = True
       AllowCustomizing = True
       AllowQuickCustomizing = True
       AllowReset = True
-      DockedTop = 28
+      DockedTop = 25
+      Font.Height = -9
       ItemLinks = <
         item
           Visible = True
@@ -891,7 +924,6 @@ inherited frmFeeCode: TfrmFeeCode
     inherited bmMainBar2: TdxBar
       AllowClose = False
       AllowReset = False
-      Font.Height = -12
       ItemLinks = <
         item
           Visible = True
@@ -959,29 +991,20 @@ inherited frmFeeCode: TfrmFeeCode
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
         mmHeight = 3704
         mmWidth = 35454
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
         Caption = 'Fee Rate Codes Report'
         mmHeight = 4022
         mmLeft = 80415
         mmWidth = 37084
-        LayerName = Foreground
       end
     end
     inherited ppMaintDetailBand: TppDetailBand
@@ -1010,6 +1033,7 @@ inherited frmFeeCode: TfrmFeeCode
           DataPipeline = ppDBPipeline1
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
@@ -1021,24 +1045,27 @@ inherited frmFeeCode: TfrmFeeCode
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'ppDBPipeline1'
           object ppTitleBand2: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 11906
             mmPrintPosition = 0
             object ppLabel1: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label1'
+              Border.mmPadding = 0
               Caption = 'Role'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 3175
@@ -1050,13 +1077,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel2: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label2'
+              Border.mmPadding = 0
               Caption = 'Description'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 14552
@@ -1068,13 +1097,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel3: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label3'
+              Border.mmPadding = 0
               Caption = 'Rate'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 101600
@@ -1086,13 +1117,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel4: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label4'
+              Border.mmPadding = 0
               Caption = 'Effective From'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 127794
@@ -1104,13 +1137,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel5: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label5'
+              Border.mmPadding = 0
               Caption = 'Effective To'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 161396
@@ -1122,13 +1157,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel11: TppLabel
               DesignLayer = ppDesignLayer2
               UserName = 'Label11'
+              Border.mmPadding = 0
               Caption = 'Employee Type Rates'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 3440
@@ -1141,12 +1178,14 @@ inherited frmFeeCode: TfrmFeeCode
           object ppDetailBand1: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText3: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText3'
+              Border.mmPadding = 0
               DataField = 'EMPTYPE'
               DataPipeline = ppDBPipeline1
               Font.Charset = DEFAULT_CHARSET
@@ -1166,6 +1205,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText4: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText4'
+              Border.mmPadding = 0
               DataField = 'RATE'
               DataPipeline = ppDBPipeline1
               Font.Charset = DEFAULT_CHARSET
@@ -1185,6 +1225,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText5: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText5'
+              Border.mmPadding = 0
               DataField = 'EFFECTIVE_FROM'
               DataPipeline = ppDBPipeline1
               Font.Charset = DEFAULT_CHARSET
@@ -1204,6 +1245,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText6: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText6'
+              Border.mmPadding = 0
               DataField = 'EFFECTIVE_TO'
               DataPipeline = ppDBPipeline1
               Font.Charset = DEFAULT_CHARSET
@@ -1223,6 +1265,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText11: TppDBText
               DesignLayer = ppDesignLayer2
               UserName = 'DBText11'
+              Border.mmPadding = 0
               DataField = 'DESCR'
               DataPipeline = ppDBPipeline1
               Font.Charset = DEFAULT_CHARSET
@@ -1242,12 +1285,14 @@ inherited frmFeeCode: TfrmFeeCode
           end
           object ppSummaryBand1: TppSummaryBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 1852
             mmPrintPosition = 0
             object ppLine3: TppLine
               DesignLayer = ppDesignLayer2
               UserName = 'Line3'
+              Border.mmPadding = 0
               Pen.Color = clGray
               Pen.Width = 2
               Weight = 1.500000000000000000
@@ -1292,6 +1337,7 @@ inherited frmFeeCode: TfrmFeeCode
           DataPipeline = ppDBPipeline2
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
@@ -1303,24 +1349,27 @@ inherited frmFeeCode: TfrmFeeCode
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '19.02'
           mmColumnWidth = 0
           DataPipelineName = 'ppDBPipeline2'
           object ppTitleBand1: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 11906
             mmPrintPosition = 0
             object ppLabel6: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label6'
+              Border.mmPadding = 0
               Caption = 'Employee'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 3175
@@ -1332,13 +1381,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel7: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label7'
+              Border.mmPadding = 0
               Caption = 'Name'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 22754
@@ -1350,13 +1401,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel8: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label8'
+              Border.mmPadding = 0
               Caption = 'Rate'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 101600
@@ -1368,13 +1421,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel9: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label9'
+              Border.mmPadding = 0
               Caption = 'Effective From'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 127794
@@ -1386,13 +1441,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel10: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label10'
+              Border.mmPadding = 0
               Caption = 'Effective To'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 161396
@@ -1404,13 +1461,15 @@ inherited frmFeeCode: TfrmFeeCode
             object ppLabel12: TppLabel
               DesignLayer = ppDesignLayer3
               UserName = 'Label12'
+              Border.mmPadding = 0
               Caption = 'Employee Rates'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Segoe UI'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4191
               mmLeft = 3440
@@ -1423,12 +1482,14 @@ inherited frmFeeCode: TfrmFeeCode
           object ppDetailBand2: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 5292
             mmPrintPosition = 0
             object ppDBText7: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText7'
+              Border.mmPadding = 0
               DataField = 'EMP_CODE'
               DataPipeline = ppDBPipeline2
               Font.Charset = DEFAULT_CHARSET
@@ -1449,6 +1510,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText8: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText8'
+              Border.mmPadding = 0
               DataField = 'RATE'
               DataPipeline = ppDBPipeline2
               Font.Charset = DEFAULT_CHARSET
@@ -1469,6 +1531,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText9: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText9'
+              Border.mmPadding = 0
               DataField = 'EFFECTIVE_FROM'
               DataPipeline = ppDBPipeline2
               Font.Charset = DEFAULT_CHARSET
@@ -1489,6 +1552,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText10: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText10'
+              Border.mmPadding = 0
               DataField = 'EFFECTIVE_TO'
               DataPipeline = ppDBPipeline2
               Font.Charset = DEFAULT_CHARSET
@@ -1509,6 +1573,7 @@ inherited frmFeeCode: TfrmFeeCode
             object ppDBText12: TppDBText
               DesignLayer = ppDesignLayer3
               UserName = 'DBText12'
+              Border.mmPadding = 0
               DataField = 'NAME'
               DataPipeline = ppDBPipeline2
               Font.Charset = DEFAULT_CHARSET
@@ -1536,11 +1601,6 @@ inherited frmFeeCode: TfrmFeeCode
         end
       end
     end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
-      end
-    end
     object ppGroup1: TppGroup [3]
       BreakName = 'CODE'
       DataPipeline = plSource
@@ -1556,6 +1616,7 @@ inherited frmFeeCode: TfrmFeeCode
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 6085
         mmPrintPosition = 0
@@ -1577,6 +1638,7 @@ inherited frmFeeCode: TfrmFeeCode
         object ppDBText1: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'CODE'
           DataPipeline = plSource
           Font.Charset = DEFAULT_CHARSET
@@ -1597,6 +1659,7 @@ inherited frmFeeCode: TfrmFeeCode
         object ppDBText2: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText2'
+          Border.mmPadding = 0
           DataField = 'DESCR'
           DataPipeline = plSource
           Font.Charset = DEFAULT_CHARSET
@@ -1617,6 +1680,7 @@ inherited frmFeeCode: TfrmFeeCode
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0
@@ -1732,7 +1796,7 @@ inherited frmFeeCode: TfrmFeeCode
         'TE,'
       
         'FEECODE_EMP.EFFECTIVE_FROM, FEECODE_EMP.EFFECTIVE_TO, FEECODE_EM' +
-        'P.ROWID'
+        'P.CURRENCY, FEECODE_EMP.ROWID'
       'FROM FEECODE_EMP '
       'WHERE FEECODE_EMP.FEECODE = :CODE'
       'ORDER BY 2')
@@ -1803,7 +1867,7 @@ inherited frmFeeCode: TfrmFeeCode
         'E,'
       
         'FEECODETYPE.EFFECTIVE_FROM, FEECODETYPE.EFFECTIVE_TO, FEECODETYP' +
-        'E.ROWID'
+        'E.CURRENCY, FEECODETYPE.ROWID'
       'FROM FEECODETYPE '
       'WHERE FEECODETYPE.FEECODE = :CODE'
       'ORDER BY 2')
@@ -1840,7 +1904,7 @@ inherited frmFeeCode: TfrmFeeCode
     Version = 0
     Left = 268
     Top = 474
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object OraQuery1: TUniQuery
     Connection = dmAxiom.uniInsight
