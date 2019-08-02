@@ -3208,7 +3208,6 @@ procedure TfrmInvoice.btnUpCredRebuildClick(Sender : TObject);
     if bAttachBillTemplate
     then
       UpCredRebuild()
-
   end;
 
 procedure TfrmInvoice.neUpCredExitChanged(Sender : TObject);

@@ -1547,6 +1547,7 @@ type
     cxDBTreeList1FOLDER_LEVEL: TcxDBTreeListColumn;
     tvDocsFOLDER_ID: TcxGridDBBandedColumn;
     actBillDelete: TAction;
+    tvInvoicesSTATUS: TcxGridDBColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -9793,9 +9794,22 @@ begin
             else
                Msg.Subject := 'Our Ref #' + trim(qryMatter.FieldByName('fileid').AsString);
 
+            if ARecipientsList.Count > 0 then
+            begin
+               try
+                  for I := 0 to ARecipientsList.Count - 1 do
+                  begin
+                     Msg.AddRecipients(ARecipientsList.Strings[i], rtTo, True);
+                  end;
+               finally
+               end;
+            end;
+
             try
                 //FormMgr.NewMessage(Folder);
-                FormMgr.ShowMessage(Msg);
+
+               Msg.SaveChanges(smKeepOpenReadWrite);
+               FormMgr.ShowMessage(Msg);
             except on e:exception do
  	              WriteLog('EmailClick: Failed to Formmgr the message: ' + E.Message);
             end;

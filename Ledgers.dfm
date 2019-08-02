@@ -31,14 +31,12 @@ object frmLedgers: TfrmLedgers
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    Properties.ActivePage = tabLedger
+    Properties.ActivePage = tabFilter
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
     OnChange = pagCashbook1Change
-    ExplicitWidth = 1115
-    ExplicitHeight = 592
     ClientRectBottom = 622
     ClientRectLeft = 4
     ClientRectRight = 1254
@@ -46,8 +44,6 @@ object frmLedgers: TfrmLedgers
     object tabLedger: TcxTabSheet
       Caption = 'Ledger'
       ImageIndex = 0
-      ExplicitWidth = 1107
-      ExplicitHeight = 562
       object Panel1: TPanel
         Left = 0
         Top = 246
@@ -56,8 +52,6 @@ object frmLedgers: TfrmLedgers
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
-        ExplicitWidth = 1107
-        ExplicitHeight = 316
         object Label17: TLabel
           Left = 13
           Top = 7
@@ -80,8 +74,6 @@ object frmLedgers: TfrmLedgers
           PopupMenu = pmCreateCheque
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1105
-          ExplicitHeight = 314
           object tvTransactions: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsNaccounts
@@ -152,7 +144,6 @@ object frmLedgers: TfrmLedgers
         Align = alTop
         Caption = 'Panel2'
         TabOrder = 1
-        ExplicitWidth = 1107
         object grdLedgers: TcxGrid
           Left = 1
           Top = 1
@@ -161,7 +152,6 @@ object frmLedgers: TfrmLedgers
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1105
           object tvLedgers: TcxGridDBTableView
             OnDblClick = mnuFileEditClick
             Navigator.Buttons.CustomButtons = <>
@@ -264,7 +254,6 @@ object frmLedgers: TfrmLedgers
         Height = 28
         Align = alTop
         TabOrder = 2
-        ExplicitWidth = 1107
         DesignSize = (
           1250
           28)
@@ -311,7 +300,6 @@ object frmLedgers: TfrmLedgers
           TabOrder = 0
           OnChange = tbLedgerSearchChange
           OnKeyDown = tbLedgerSearchKeyDown
-          ExplicitLeft = 808
         end
         object tbReportSearch: TEdit
           Left = 1101
@@ -321,7 +309,6 @@ object frmLedgers: TfrmLedgers
           Anchors = [akTop, akRight]
           TabOrder = 1
           OnChange = tbReportSearchChange
-          ExplicitLeft = 958
         end
         object chkGroupBy: TcxCheckBox
           Left = 77
@@ -344,14 +331,11 @@ object frmLedgers: TfrmLedgers
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
         Control = Panel2
-        ExplicitWidth = 1107
       end
     end
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 1
-      ExplicitWidth = 1107
-      ExplicitHeight = 562
       DesignSize = (
         1250
         596)
@@ -620,8 +604,6 @@ object frmLedgers: TfrmLedgers
         OptionsImage.NumGlyphs = 2
         TabOrder = 2
         OnClick = btnClearAllClick
-        ExplicitLeft = 1008
-        ExplicitTop = 529
       end
       object grpTrans: TcxGroupBox
         Left = 10
@@ -868,8 +850,6 @@ object frmLedgers: TfrmLedgers
         Width = 50
       end>
     ParentBiDiMode = False
-    ExplicitTop = 620
-    ExplicitWidth = 1115
   end
   object dsCharts: TUniDataSource
     AutoEdit = False
@@ -2368,7 +2348,7 @@ object frmLedgers: TfrmLedgers
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3686,7 +3666,7 @@ object frmLedgers: TfrmLedgers
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

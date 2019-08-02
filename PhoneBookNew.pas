@@ -5256,6 +5256,7 @@ var
   bOk,
   bClientOk,
   bCreditorOk : boolean;
+  str: string;
 begin
    bClientOk := True;
    bCreditorOk := True;
@@ -5305,12 +5306,16 @@ begin
 
    if pnlNRIC.visible = True then
    begin
+      str := dbedNRIC.Text;
       if (dbedNRIC.Text <> '') then
       begin
-         validateNRIC(dbedNRIC.Text);
-         OKtoPost := False;
-         MsgErr('The NRIC is not valid.  Please re-enter and try to save.');
-         Exit;
+         if (length(str) <> 9) and (str[9] <> validateNRIC(str)) then
+//         if imgbadNRIC.Visible = True then
+         begin
+            OKtoPost := False;
+            MsgErr('The NRIC is not valid.  Please re-enter and try to save.');
+            Exit;
+         end;
       end;
    end;
       
