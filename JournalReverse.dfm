@@ -1,10 +1,11 @@
 object frmJournalReverse: TfrmJournalReverse
   Left = 652
   Top = 126
+  AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Journal Reversal'
   ClientHeight = 300
-  ClientWidth = 310
+  ClientWidth = 311
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,21 +21,18 @@ object frmJournalReverse: TfrmJournalReverse
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 310
+    Width = 311
     Height = 300
     Align = alClient
     ParentBackground = True
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitLeft = 384
-    ExplicitTop = 32
-    ExplicitWidth = 473
-    ExplicitHeight = 369
+    ExplicitWidth = 310
     object btnOriginal: TcxButton
       Left = 188
       Top = 187
-      Width = 101
+      Width = 94
       Height = 25
       Caption = 'Original &date'
       LookAndFeel.NativeStyle = True
@@ -113,7 +111,7 @@ object frmJournalReverse: TfrmJournalReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 187
-      EditValue = 43672.5108014352d
+      EditValue = 43677.4386646991d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -338,7 +336,7 @@ object frmJournalReverse: TfrmJournalReverse
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 7
       Height = 33
-      Width = 211
+      Width = 196
     end
     object cxDBLabel1: TcxDBLabel
       Left = 92
@@ -489,13 +487,19 @@ object frmJournalReverse: TfrmJournalReverse
       CaptionOptions.Visible = False
       Control = btnOriginal
       ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 101
+      ControlOptions.OriginalWidth = 94
       ControlOptions.ShowBorder = False
       Index = 1
     end
     object dxLayoutItem8: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
+      CaptionOptions.AlignVert = tavTop
       CaptionOptions.Text = 'Reason'
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = True
+      SizeOptions.SizableVert = False
+      SizeOptions.Width = 269
       Control = tbReason
       ControlOptions.OriginalHeight = 33
       ControlOptions.OriginalWidth = 203
