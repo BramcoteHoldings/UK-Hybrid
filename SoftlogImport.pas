@@ -14,7 +14,7 @@ uses
   cxGrid, cxDropDownEdit, cxProgressBar, cxCalendar, cxLookupEdit,
   cxDBLookupEdit, cxDBLookupComboBox, cxLabel, cxMaskEdit, cxButtonEdit,
   cxButtons, cxPC, cxCheckBox, System.Actions, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
    Delim: array[0..2] of char = (#44,#9,#59);
@@ -263,35 +263,35 @@ var
   ColumnListName, ColumnListIdx:TStringList;
 begin
    icount := 0;
-  if (tbFile.Text <> '') then
-  begin
-    bProceed := True;
-    if not FileExists(tbFile.Text) then
-    begin
-      MsgErr('The import file does not exist');
-      bProceed := False;
-    end;
-    if bProceed then
-    begin
-      with qryTmp do
+   if (tbFile.Text <> '') then
+   begin
+      bProceed := True;
+      if not FileExists(tbFile.Text) then
       begin
-        SQL.Text := 'SELECT MAX(NSUNDRYERROR) AS NSUNDRYERROR FROM SUNDRYERROR';
-        Prepare;
-        Open;
-        iSundryError := FieldByName('NSUNDRYERROR').AsInteger;
+         MsgErr('The import file does not exist');
+         bProceed := False;
       end;
-
-      if rFileType.ItemIndex <> 2 then
+      if bProceed then
       begin
-         AssignFile(fSoftlog, tbFile.Text);
-         Reset(fSoftlog);
-
-         if rFileType.ItemIndex = 0 then
+         with qryTmp do
          begin
-           while not Eof(fSoftlog) do
+            SQL.Text := 'SELECT MAX(NSUNDRYERROR) AS NSUNDRYERROR FROM SUNDRYERROR';
+            Prepare;
+            Open;
+            iSundryError := FieldByName('NSUNDRYERROR').AsInteger;
+         end;
+
+         if rFileType.ItemIndex <> 2 then
+         begin
+            AssignFile(fSoftlog, tbFile.Text);
+            Reset(fSoftlog);
+
+            if rFileType.ItemIndex = 0 then
+            begin
+               while not Eof(fSoftlog) do
                begin
-               Readln(fSoftlog, sNewline);
-               sError := '';
+                  Readln(fSoftlog, sNewline);
+                  sError := '';
 
                // get the date
        //        try
@@ -301,166 +301,78 @@ begin
                   recSundry.Created := dptSund.Date;;
       //         end;
 
-               // Set up the sundry record
-               recSundry.FileID := Trim(Copy(sNewline,15, 14));
+                  // Set up the sundry record
+                  recSundry.FileID := Trim(Copy(sNewline,15, 14));
 
-               // remove 0 from front of file
+                  // remove 0 from front of file
 
-               while (length(recSundry.FileID) > 1) and (recSundry.FileID[1] = '0') do
-                  recSundry.FileID := copy(recSundry.FileID,2,999999);
+                  while (length(recSundry.FileID) > 1) and (recSundry.FileID[1] = '0') do
+                     recSundry.FileID := copy(recSundry.FileID,2,999999);
 
-               // get the type
-               recSundry.SundryType := cmbsundryType.EditValue;
+                  // get the type
+                  recSundry.SundryType := cmbsundryType.EditValue;
 
-               // get the amount & check the amount
-               try
-                  recSundry.Amount := StrToCurr(Trim(Copy(sNewline, 58, 10)));
-               except
-                  sError := 'Invalid amount';
-                  recSundry.Amount := 0;
-               end;
+                  // get the amount & check the amount
+                  try
+                     recSundry.Amount := StrToCurr(Trim(Copy(sNewline, 58, 10)));
+                  except
+                     sError := 'Invalid amount';
+                     recSundry.Amount := 0;
+                  end;
 
-                // get the descr
-               recSundry.Descr := Copy(sNewline, 36, 20);
+                  // get the descr
+                  recSundry.Descr := Copy(sNewline, 36, 20);
 
-               try
-                  recSundry.Units := StrToInt(Trim(Copy(sNewline, 31, 5)));
-                  if recSundry.Units = 0 then
-                     recSundry.Units := 1;
-               except
-                  sError := 'Invalid units';
-                  qrySundryInsert.ParamByName('UNITS').AsInteger := 0;
-               end;
+                  try
+                     recSundry.Units := StrToInt(Trim(Copy(sNewline, 31, 5)));
+                     if recSundry.Units = 0 then
+                        recSundry.Units := 1;
+                  except
+                     sError := 'Invalid units';
+                     qrySundryInsert.ParamByName('UNITS').AsInteger := 0;
+                  end;
 
-               // check the fileid
-               qryMatter.Close;
-               qryMatter.ParamByName('FILEID').AsString := recSundry.FileID;
-               qryMatter.Open;
+                  // check the fileid
+                  qryMatter.Close;
+                  qryMatter.ParamByName('FILEID').AsString := recSundry.FileID;
+                  qryMatter.Open;
 
-               if qryMatter.IsEmpty then
-                   sError := sError +'Matter ' + recSundry.FileID + ' not found'+ #13
-               else if qryMatter.FieldByName('CLOSED').AsInteger = 1 then
-                   sError := sError +'Matter ' + recSundry.FileID + ' is not open'+ #13;
+                  if qryMatter.IsEmpty then
+                     sError := sError +'Matter ' + recSundry.FileID + ' not found'+ #13
+                  else if qryMatter.FieldByName('CLOSED').AsInteger = 1 then
+                     sError := sError +'Matter ' + recSundry.FileID + ' is not open'+ #13;
 
-               recSundry.NMatter := qryMatter.FieldByName('NMATTER').AsInteger;
-               recSundry.nclient := qryMatter.FieldByName('NCLIENT').AsInteger;
-               qryMatter.Close;
+                  recSundry.NMatter := qryMatter.FieldByName('NMATTER').AsInteger;
+                  recSundry.nclient := qryMatter.FieldByName('NCLIENT').AsInteger;
+                  qryMatter.Close;
 
     // (:ACCT, :CREATED, :AMOUNT, 'N', :DESCR, :NMATTER, :NCLIENT,
     //  :PERUNIT, :UNITS, 0, :TYPE, 'N', :FILEID, :TAX)
 
-               qrySundryTypes.Close;
-               qrySundryTypes.ParamByName('TYPE').AsString := recSundry.SundryType;
-               qrySundryTypes.open;
+                  qrySundryTypes.Close;
+                  qrySundryTypes.ParamByName('TYPE').AsString := recSundry.SundryType;
+                  qrySundryTypes.open;
 
-               if sError = '' then
-               begin // insert the sundry
-                   qrySundryInsert.Close;
-                   qrySundryInsert.ParamByName('ACCT').AsString := TableString('MATTER', 'NMATTER', recSundry.NMATTER, 'ENTITY');
-                   qrySundryInsert.ParamByName('CREATED').AsDateTime := recSundry.Created;
+                  if sError = '' then
+                  begin // insert the sundry
+                     qrySundryInsert.Close;
+                     qrySundryInsert.ParamByName('ACCT').AsString := TableString('MATTER', 'NMATTER', recSundry.NMATTER, 'ENTITY');
+                     qrySundryInsert.ParamByName('CREATED').AsDateTime := recSundry.Created;
 
-                   qrySundryInsert.ParamByName('DESCR').AsString := trim(recSundry.Descr);
-                   qrySundryInsert.ParamByName('NMATTER').AsInteger := recSundry.NMATTER;
-                   qrySundryInsert.ParamByName('NCLIENT').AsInteger := recSundry.NCLIENT;
-                   qrySundryInsert.ParamByName('PERUNIT').AsCurrency := qrySundryTypes.FieldByName('RATE').AsCurrency;
-                   qrySundryInsert.ParamByName('UNITS').AsInteger := recSundry.Units;  //1;
-                   qrySundryInsert.ParamByName('TYPE').AsString := recSundry.SundryType;
-                   qrySundryInsert.ParamByName('FILEID').AsString := PadFileID(recSundry.FileId);
-                   dAmount := recSundry.Amount;
-                   qrySundryInsert.ParamByName('TAX').AsCurrency := TaxCalc(dAmount, '', qrySundryTypes.FieldByName('TAXCODE').AsString, recSundry.Created);
-                   qrySundryInsert.ParamByName('AMOUNT').AsCurrency := dAmount;
-                   qrySundryInsert.ParamByName('TAXCODE').AsString := qrySundryTypes.FieldByName('TAXCODE').AsString;
-                   qrySundryInsert.ExecSql;
-                   inc(icount);
-                   if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
-                     PostLedgers(qrySundryInsert.ParamByName('CREATED').AsDateTime
-                       , qrySundryInsert.ParamByName('AMOUNT').AsFloat
-                       , qrySundryInsert.ParamByName('FILEID').AsString
-                       , 'SUNDRY'
-                       , qrySundryInsert.ParamByName('NSUNDRY').AsInteger
-                       , qrySundryInsert.ParamByName('DESCR').AsString
-                       , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR')
-                       , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_CR')
-                       , qryMatter.FieldByName('AUTHOR').AsString
-                       , qrySundryTypes.FieldByName('TAXCODE').AsString);
-
-                   qrySundryInsert.Close;
-               end
-               else
-                  SaveError(sError);
-           end;
-   //        qrySundryTypes.Close;
-           ShowMessage(inttostr(icount) + ' Sundries imported');
-           CloseFile(fSoftlog);
-         end
-         else
-         begin
-            while not Eof(fSoftlog) do
-            begin
-               Readln(fSoftlog, sNewline);
-               sError := '';
-               // Set up the sundry record
-               recSundry.FileID := Trim(Copy(sNewline, 1, 15));
-               try
-                  recSundry.Created := EncodeDate(2000 + StrToInt(Copy(sNewline, 54, 2)), StrToInt(Copy(sNewline, 52, 2)), StrToInt(Copy(sNewline, 50, 2)));
-               except
-                  sError := 'Invalid date';
-                  recSundry.Created := Now;
-               end;
-               try
-                  recSundry.Amount := StrToInt(Trim(Copy(sNewline, 23, 7))) / 100;
-               except
-                  sError := 'Invalid amount';
-                  recSundry.Amount := 0;
-               end;
-               try
-                  recSundry.Units := StrToInt(Trim(Copy(sNewline, 19, 4)));
-                  if recSundry.Units = 0 then
-                     recSundry.Units := 1;
-               except
-                  sError := 'Invalid units';
-                  qrySundryInsert.ParamByName('UNITS').AsInteger := 0;
-               end;
-               recSundry.SundryType := Copy(sNewline, 16, 3);
-               if not qrySundryTypes.Locate('CODE', recSundry.SundryType, []) then
-                  sError := 'Invalid Sundry Type';
-
-               recSundry.Descr := Copy(sNewline, 30, 16);
-
-               if sError <> '' then
-                  SaveError(sError)
-               else
-               with qryMatter do
-               begin
-                  Close;
-                  ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
-                  Prepare;
-                  Open;
-                  if IsEmpty then
-                    // No such matter - make an error entry
-                    SaveError('Not a current Matter')
-                  else
-                  begin
-                    if FieldByName('COMPLETED').Value = Null then
-                    begin
-                      qrySundryInsert.ParamByName('ACCT').AsString := dmAxiom.Entity;
-                   if recSundry.Created = 0 then
-                     recSundry.Created := dptSund.Date;
-                      qrySundryInsert.ParamByName('CREATED').AsDateTime := recSundry.Created;
-                      qrySundryInsert.ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
-                      qrySundryInsert.ParamByName('NMATTER').AsInteger := FieldByName('NMATTER').AsInteger;
-                      qrySundryInsert.ParamByName('NCLIENT').AsInteger := FieldByName('NCLIENT').AsInteger;
-                      qrySundryInsert.ParamByName('UNITS').AsInteger := recSundry.Units;
-                      qrySundryInsert.ParamByName('PERUNIT').AsFloat := qrySundryInsert.ParamByName('AMOUNT').AsFloat / qrySundryInsert.ParamByName('UNITS').AsInteger;
-                      qrySundryInsert.ParamByName('TYPE').AsString := recSundry.SundryType;
-                   qrySundryInsert.ParamByName('DESCR').AsString := Trim(qrySundryTypes.FieldByName('DESCR').AsString) + ' ' + Trim(recSundry.Descr);
-                      dAmount := recSundry.Amount;
-                      qrySundryInsert.ParamByName('TAX').AsFloat := TaxCalc(dAmount, '', qrySundryTypes.FieldByName('TAXCODE').AsString, recSundry.Created);
-                      qrySundryInsert.ParamByName('AMOUNT').AsFloat := dAmount;
-                      qrySundryInsert.ExecSQL;
-
-                      MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'UNBILL_SUND', qrySundryInsert.ParamByName('AMOUNT').AsFloat);
-                      if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
+                     qrySundryInsert.ParamByName('DESCR').AsString := trim(recSundry.Descr);
+                     qrySundryInsert.ParamByName('NMATTER').AsInteger := recSundry.NMATTER;
+                     qrySundryInsert.ParamByName('NCLIENT').AsInteger := recSundry.NCLIENT;
+                     qrySundryInsert.ParamByName('PERUNIT').AsCurrency := qrySundryTypes.FieldByName('RATE').AsCurrency;
+                     qrySundryInsert.ParamByName('UNITS').AsInteger := recSundry.Units;  //1;
+                     qrySundryInsert.ParamByName('TYPE').AsString := recSundry.SundryType;
+                     qrySundryInsert.ParamByName('FILEID').AsString := PadFileID(recSundry.FileId);
+                     dAmount := recSundry.Amount;
+                     qrySundryInsert.ParamByName('TAX').AsCurrency := TaxCalc(dAmount, '', qrySundryTypes.FieldByName('TAXCODE').AsString, recSundry.Created);
+                     qrySundryInsert.ParamByName('AMOUNT').AsCurrency := dAmount;
+                     qrySundryInsert.ParamByName('TAXCODE').AsString := qrySundryTypes.FieldByName('TAXCODE').AsString;
+                     qrySundryInsert.ExecSql;
+                     inc(icount);
+                     if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
                         PostLedgers(qrySundryInsert.ParamByName('CREATED').AsDateTime
                           , qrySundryInsert.ParamByName('AMOUNT').AsFloat
                           , qrySundryInsert.ParamByName('FILEID').AsString
@@ -471,185 +383,275 @@ begin
                           , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_CR')
                           , qryMatter.FieldByName('AUTHOR').AsString
                           , qrySundryTypes.FieldByName('TAXCODE').AsString);
-                    end
-                    else
-                      // Matter completed
-                      SaveError('Matter has been completed');
-                  end;
+
+                     qrySundryInsert.Close;
+                  end
+                  else
+                     SaveError(sError);
                end;
-            end;
-            CloseFile(fSoftlog);
-         end;
-      end
-      else
-      begin
-         with tvImport do
-         begin
-            if DataController.RowCount > 0 then
+   //          qrySundryTypes.Close;
+               ShowMessage(inttostr(icount) + ' Sundries imported');
+               CloseFile(fSoftlog);
+            end
+            else
             begin
-               ColumnListName := TStringList.Create;
-               ColumnListIdx := TStringList.Create;
-               bColDefined := False;
-               for i := 0 to ColumnCount - 1 do
+               while not Eof(fSoftlog) do
                begin
-                  if (Copy(Columns[i].Caption,1,3) <> 'Col') then
+                  Readln(fSoftlog, sNewline);
+                  sError := '';
+                  // Set up the sundry record
+                  recSundry.FileID := Trim(Copy(sNewline, 1, 15));
+                  try
+                     recSundry.Created := EncodeDate(2000 + StrToInt(Copy(sNewline, 54, 2)), StrToInt(Copy(sNewline, 52, 2)), StrToInt(Copy(sNewline, 50, 2)));
+                  except
+                     sError := 'Invalid date';
+                     recSundry.Created := Now;
+                  end;
+                  try
+                     recSundry.Amount := StrToInt(Trim(Copy(sNewline, 23, 7))) / 100;
+                  except
+                     sError := 'Invalid amount';
+                     recSundry.Amount := 0;
+                  end;
+                  try
+                     recSundry.Units := StrToInt(Trim(Copy(sNewline, 19, 4)));
+                     if recSundry.Units = 0 then
+                        recSundry.Units := 1;
+                  except
+                     sError := 'Invalid units';
+                     qrySundryInsert.ParamByName('UNITS').AsInteger := 0;
+                  end;
+                  recSundry.SundryType := Copy(sNewline, 16, 3);
+                  if not qrySundryTypes.Locate('CODE', recSundry.SundryType, []) then
+                     sError := 'Invalid Sundry Type';
+
+                  recSundry.Descr := Copy(sNewline, 30, 16);
+
+                  if sError <> '' then
+                     SaveError(sError)
+                  else
+                  with qryMatter do
                   begin
-                     ColumnListName.Add(Columns[i].Caption);
-                     ColumnListIdx.Add(IntToStr(i));
-                     bColDefined := True;
+                     Close;
+                     ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
+                     Prepare;
+                     Open;
+                     if IsEmpty then
+                        // No such matter - make an error entry
+                        SaveError('Not a current Matter')
+                     else
+                     begin
+                        if FieldByName('COMPLETED').Value = Null then
+                        begin
+                           qrySundryInsert.ParamByName('ACCT').AsString := dmAxiom.Entity;
+                           if recSundry.Created = 0 then
+                              recSundry.Created := dptSund.Date;
+                           qrySundryInsert.ParamByName('CREATED').AsDateTime := recSundry.Created;
+                           qrySundryInsert.ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
+                           qrySundryInsert.ParamByName('NMATTER').AsInteger := FieldByName('NMATTER').AsInteger;
+                           qrySundryInsert.ParamByName('NCLIENT').AsInteger := FieldByName('NCLIENT').AsInteger;
+                           qrySundryInsert.ParamByName('UNITS').AsInteger := recSundry.Units;
+                           qrySundryInsert.ParamByName('PERUNIT').AsFloat := qrySundryInsert.ParamByName('AMOUNT').AsFloat / qrySundryInsert.ParamByName('UNITS').AsInteger;
+                           qrySundryInsert.ParamByName('TYPE').AsString := recSundry.SundryType;
+                           qrySundryInsert.ParamByName('DESCR').AsString := Trim(qrySundryTypes.FieldByName('DESCR').AsString) + ' ' + Trim(recSundry.Descr);
+                           dAmount := recSundry.Amount;
+                           qrySundryInsert.ParamByName('TAX').AsFloat := TaxCalc(dAmount, '', qrySundryTypes.FieldByName('TAXCODE').AsString, recSundry.Created);
+                           qrySundryInsert.ParamByName('AMOUNT').AsFloat := dAmount;
+                           qrySundryInsert.ExecSQL;
+
+                           MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'UNBILL_SUND', qrySundryInsert.ParamByName('AMOUNT').AsFloat);
+                           if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
+                              PostLedgers(qrySundryInsert.ParamByName('CREATED').AsDateTime
+                                , qrySundryInsert.ParamByName('AMOUNT').AsFloat
+                                , qrySundryInsert.ParamByName('FILEID').AsString
+                                , 'SUNDRY'
+                                , qrySundryInsert.ParamByName('NSUNDRY').AsInteger
+                                , qrySundryInsert.ParamByName('DESCR').AsString
+                                , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR')
+                                , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_CR')
+                                , qryMatter.FieldByName('AUTHOR').AsString
+                                , qrySundryTypes.FieldByName('TAXCODE').AsString);
+                        end
+                        else
+                           // Matter completed
+                           SaveError('Matter has been completed');
+                     end;
                   end;
                end;
-               if bColDefined then
+               CloseFile(fSoftlog);
+            end;
+         end
+         else
+         begin
+            with tvImport do
+            begin
+               if DataController.RowCount > 0 then
                begin
-                  try
-                     for x := 0 to DataController.RowCount - 1 do
+                  ColumnListName := TStringList.Create;
+                  ColumnListIdx := TStringList.Create;
+                  bColDefined := False;
+                  for i := 0 to ColumnCount - 1 do
+                  begin
+                     if (Copy(Columns[i].Caption,1,3) <> 'Col') then
                      begin
-                        for r := 0 to ColumnListName.Count - 1 do
+                        ColumnListName.Add(Columns[i].Caption);
+                        ColumnListIdx.Add(IntToStr(i));
+                        bColDefined := True;
+                     end;
+                  end;
+                  if bColDefined then
+                  begin
+                     try
+                        for x := 0 to DataController.RowCount - 1 do
                         begin
-                           if UpperCase(ColumnListName[r]) = 'CREATED' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.Created := dmAxiom.ConvertDate(DataController.GetValue(x,StrToInt(ColumnListIdx[r])),string(cmbDateFormat.Text));
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'CREATED' then
+                              begin
+                                 recSundry.Created := dmAxiom.ConvertDate(DataController.GetValue(x,StrToInt(ColumnListIdx[r])),string(cmbDateFormat.Text));
+                                 break;
+                              end;
                            end;
-                        end;
-                        try
-                           if cmbSundryType.Text <> '' then
-                           begin
-                              recSundry.SundryType := cmbSundryType.EditValue;
-                              recSundry.TaxCode :=  TableString('SUNDRYTYPE','CODE',recSundry.SundryType,'TAXCODE');
+                           try
+                              if cmbSundryType.Text <> '' then
+                              begin
+                                 recSundry.SundryType := cmbSundryType.EditValue;
+                                 recSundry.TaxCode :=  TableString('SUNDRYTYPE','CODE',recSundry.SundryType,'TAXCODE');
+                              end;
+                           except
+                           //
                            end;
-                        except
-                          //
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'TYPE' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              AType := DataController.GetValue(x,StrToInt(ColumnListIdx[r]));
-                              recSundry.SundryType := TableString('SUNDRYTYPE','SOFTLOG_CODE',AType,'CODE');
-                              recSundry.TaxCode :=  TableString('SUNDRYTYPE','SOFTLOG_CODE',AType,'TAXCODE');
-                              if (recSundry.SundryType = '') then
-                                 try
-                                    recSundry.SundryType := cmbSundryType.EditValue;
-                                 except
-                                    exit;
-                                 end;
+                              if UpperCase(ColumnListName[r]) = 'TYPE' then
+                              begin
+                                 AType := DataController.GetValue(x,StrToInt(ColumnListIdx[r]));
+                                 recSundry.SundryType := TableString('SUNDRYTYPE','SOFTLOG_CODE',AType,'CODE');
+                                 recSundry.TaxCode :=  TableString('SUNDRYTYPE','SOFTLOG_CODE',AType,'TAXCODE');
+                                 if (recSundry.SundryType = '') then
+                                    try
+                                       recSundry.SundryType := cmbSundryType.EditValue;
+                                    except
+                                       exit;
+                                    end;
                                  recSundry.TaxCode :=  TableString('SUNDRYTYPE','CODE',recSundry.SundryType,'TAXCODE');
                                  recSundry.Descr := TableString('SUNDRYTYPE','CODE',recSundry.SundryType,'DESCR');
-                              break;
+                                 break;
+                              end;
                            end;
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'MATTER' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.FileID := DataController.GetValue(x,StrToInt(ColumnListIdx[r]));
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'MATTER' then
+                              begin
+                                 recSundry.FileID := DataController.GetValue(x,StrToInt(ColumnListIdx[r]));
+                                 break;
+                              end;
                            end;
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'UNITS' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.Units := StrToInt(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'UNITS' then
+                              begin
+                                 recSundry.Units := StrToInt(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
+                                 break;
+                              end;
                            end;
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'AMOUNT' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.Amount := StrToCurr(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'AMOUNT' then
+                              begin
+                                 recSundry.Amount := StrToCurr(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
+                                 break;
+                              end;
                            end;
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'TAX' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.Tax := StrToCurr(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
-                              recSundry.TaxIncluded := True;
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'TAX' then
+                              begin
+                                 recSundry.Tax := StrToCurr(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
+                                 recSundry.TaxIncluded := True;
+                                 break;
+                              end;
                            end;
-                        end;
-                        for r := 0 to ColumnListName.Count - 1 do
-                        begin
-                           if UpperCase(ColumnListName[r]) = 'DESCRIPTION' then
+                           for r := 0 to ColumnListName.Count - 1 do
                            begin
-                              recSundry.Descr := Trim(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
-                              break;
+                              if UpperCase(ColumnListName[r]) = 'DESCRIPTION' then
+                              begin
+                                 recSundry.Descr := Trim(DataController.GetValue(x,StrToInt(ColumnListIdx[r])));
+                                 break;
+                              end;
                            end;
-                        end;
 
-                        if recSundry.Created = 0 then
-                           recSundry.Created := dptSund.Date;
+                           if recSundry.Created = 0 then
+                              recSundry.Created := dptSund.Date;
 
-                        with qryMatter do
-                        begin
-                           Close;
-                           ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
-                           Prepare;
-                           Open;
-                           if IsEmpty then
-                              // No such matter - make an error entry
-                              SaveError('Not a current Matter')
-                           else
-                              InsertSundry(recSundry);
-                           inc(icount);
+                           with qryMatter do
+                           begin
+                              Close;
+                              ParamByName('FILEID').AsString := PadFileID(recSundry.FileID);
+                              Prepare;
+                              Open;
+                              if IsEmpty then
+                                 // No such matter - make an error entry
+                                 SaveError('Not a current Matter')
+                              else
+                                 InsertSundry(recSundry);
+                              inc(icount);
+                           end;
                         end;
-                     end;
-                     MsgInfo(inttostr(icount) + ' Sundries imported');
-                  except
+                        MsgInfo(inttostr(icount) + ' Sundries imported');
+                     except
                      //
+                     end;
+                  end
+                  else
+                  begin
+                     MsgInfo('There are no columns defined.  Please define columns');
+                     Exit;
                   end;
                end
                else
-               begin
-                  MsgInfo('There are no columns defined.  Please define columns');
-                  Exit;
-               end;
+                  MsgInfo('No Records to Import');
+            end;
+         end;
+
+         if bErrors then
+            with TfrmSundryError.Create(Self) do ShowModal;
+
+         if not bErrors then
+         begin
+            if cbDeleteImportFile.Checked then
+            begin
+               if bErrors then
+                  RenameFile(tbFile.Text, DateToStr(Now)+'_'+tbFile.Text)
+               else
+                  DeleteFile(tbFile.Text);
+            end;
+
+            if not cbKeepOpen.Checked then
+            begin
+               Self.Close;
+//             RemoveFromDesktop(Self);
             end
             else
-               MsgInfo('No Records to Import');
-         end;
-      end;
-
-      if bErrors then
-         with TfrmSundryError.Create(Self) do ShowModal;
-
-//      if not bErrors then
-      if cbDeleteImportFile.Checked then
-      begin
-         if bErrors then
-            RenameFile(tbFile.Text, DateToStr(Now)+'_'+tbFile.Text)
-         else
-            DeleteFile(tbFile.Text);
-      end;
-
-      if not cbKeepOpen.Checked then
-      begin
-         Self.Close;
-//         RemoveFromDesktop(Self);
-      end
-      else
-      begin
-         if rFileType.ItemIndex = 2 then
-         begin
-            tvImport.BeginUpdate;
-            if tvImport.DataController.RecordCount > 0 then
             begin
-               for NumRecords := tvImport.DataController.RecordCount - 1 downto 0 do
-                  tvImport.DataController.DeleteRecord(0);
+               if rFileType.ItemIndex = 2 then
+               begin
+                  tvImport.BeginUpdate;
+                  if tvImport.DataController.RecordCount > 0 then
+                  begin
+                     for NumRecords := tvImport.DataController.RecordCount - 1 downto 0 do
+                        tvImport.DataController.DeleteRecord(0);
+                  end;
+                  tvImport.EndUpdate;
+                  Progress.Position := 0;
+               end;
+               btnOk.Enabled := (rFileType.ItemIndex <> 2);
             end;
-            tvImport.EndUpdate;
-            Progress.Position := 0;
          end;
-         btnOk.Enabled := (rFileType.ItemIndex <> 2);
       end;
-    end;
-  end
-  else
-    MsgErr('Please enter the file names');
+   end
+   else
+      MsgErr('Please enter the file names');
 end;
 
 procedure TfrmSoftlogImport.pbCancelClick(Sender: TObject);

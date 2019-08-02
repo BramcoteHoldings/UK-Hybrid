@@ -90,7 +90,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Height = 22
     Date = 35612.524133958300000000
     Time = 35612.524133958300000000
-    TabOrder = 0
+    TabOrder = 1
   end
   object dtpTo: TDateTimePicker
     Left = 104
@@ -99,7 +99,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Height = 22
     Date = 35976.524408888900000000
     Time = 35976.524408888900000000
-    TabOrder = 1
+    TabOrder = 2
   end
   object DateChangeButton1: TDateChangeButton
     Left = 206
@@ -107,7 +107,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 85
     Height = 22
     Caption = 'Today'
-    TabOrder = 2
+    TabOrder = 3
     TabStop = False
     ChangeType = ctToday
     DateFrom = dtpFrom
@@ -121,7 +121,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 85
     Height = 23
     Caption = 'Yesterday'
-    TabOrder = 3
+    TabOrder = 4
     TabStop = False
     ChangeType = ctYesterday
     DateFrom = dtpFrom
@@ -135,7 +135,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 86
     Height = 22
     Caption = 'This Week'
-    TabOrder = 4
+    TabOrder = 5
     TabStop = False
     ChangeType = ctThisWeek
     DateFrom = dtpFrom
@@ -149,7 +149,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 86
     Height = 23
     Caption = 'Last Week'
-    TabOrder = 5
+    TabOrder = 6
     TabStop = False
     ChangeType = ctLastWeek
     DateFrom = dtpFrom
@@ -163,7 +163,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 86
     Height = 22
     Caption = 'This Month'
-    TabOrder = 6
+    TabOrder = 7
     TabStop = False
     ChangeType = ctThisMonth
     DateFrom = dtpFrom
@@ -177,7 +177,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 86
     Height = 23
     Caption = 'Last Month'
-    TabOrder = 7
+    TabOrder = 8
     TabStop = False
     ChangeType = ctLastMonth
     DateFrom = dtpFrom
@@ -191,7 +191,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 85
     Height = 22
     Caption = 'Year To Date'
-    TabOrder = 8
+    TabOrder = 9
     TabStop = False
     ChangeType = ctYearToDate
     DateFrom = dtpFrom
@@ -205,7 +205,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 85
     Height = 23
     Caption = 'Last Year'
-    TabOrder = 9
+    TabOrder = 10
     TabStop = False
     ChangeType = ctLastYear
     DateFrom = dtpFrom
@@ -230,7 +230,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       0F880FFFFF0788E7F0080FFFFF08888780880FFFFF08E88780880FFFFF07EE87
       F0880FFFFFF0788708880FFFFFFF000088880FFFFFFFFFF088880FFFFFFF0000
       88880FFFFFFF080888880FFFFFFF008888880000000008888888}
-    TabOrder = 10
+    TabOrder = 22
     OnClick = btnPrintClick
   end
   object btnMatter: TBitBtn
@@ -247,7 +247,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       0008000000080000000800F000000F00000800F000800F00000800F000800F00
       00088000000000000088880F00080F0008888800000800000888888000888000
       88888880F08880F0888888800088800088888888888888888888}
-    TabOrder = 11
+    TabOrder = 0
     OnClick = btnMatterClick
   end
   object chkFees: TCheckBox
@@ -258,7 +258,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Caption = 'Print Fees?'
     Checked = True
     State = cbChecked
-    TabOrder = 12
+    TabOrder = 11
   end
   object chkUnbilled: TCheckBox
     Left = 86
@@ -266,7 +266,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 171
     Height = 18
     Caption = 'Print only &unbilled items'
-    TabOrder = 13
+    TabOrder = 12
   end
   object chkWrap: TCheckBox
     Left = 86
@@ -274,7 +274,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 128
     Height = 18
     Caption = '&Wrap description?'
-    TabOrder = 14
+    TabOrder = 13
   end
   object cbHideStripe: TCheckBox
     Left = 86
@@ -282,7 +282,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 147
     Height = 18
     Caption = '&Hide stripe printing'
-    TabOrder = 15
+    TabOrder = 14
   end
   object chkGst: TCheckBox
     Left = 86
@@ -292,15 +292,15 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Caption = 'Include Tax on Disbursements'
     Checked = True
     State = cbChecked
-    TabOrder = 16
+    TabOrder = 15
   end
   object chkShowSundry: TCheckBox
     Left = 86
-    Top = 223
+    Top = 225
     Width = 155
     Height = 18
     Caption = 'Show Tax Component'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = chkShowSundryClick
   end
   object chkRev: TCheckBox
@@ -311,7 +311,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Caption = 'Show Reversed Antd'
     Checked = True
     State = cbChecked
-    TabOrder = 18
+    TabOrder = 17
     Visible = False
   end
   object chkOwing: TCheckBox
@@ -322,7 +322,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Caption = 'Show Payable Antd'
     Checked = True
     State = cbChecked
-    TabOrder = 19
+    TabOrder = 18
     Visible = False
   end
   object cbExcludeNonBillableWIP: TCheckBox
@@ -331,7 +331,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Width = 235
     Height = 18
     Caption = 'Exclude Non Billable WIP'
-    TabOrder = 20
+    TabOrder = 19
   end
   object chkFrom: TCheckBox
     Left = 86
@@ -340,7 +340,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Height = 19
     Checked = True
     State = cbChecked
-    TabOrder = 21
+    TabOrder = 20
   end
   object chkTo: TCheckBox
     Left = 86
@@ -349,7 +349,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     Height = 18
     Checked = True
     State = cbChecked
-    TabOrder = 22
+    TabOrder = 21
   end
   object qryMatter: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -563,8 +563,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       '  /*decode(trim(code),'#39'R'#39',0,'
       '                    disbdr) AS disbdr,*/'
       '  disbcr,'
-      '  decode(trim(code),'#39'wo'#39',0,'
-      '                           '
+      '  decode(trim(code),'#39'wo'#39',0,                           '
       '                    sunddr) AS sunddr,'
       '  sundcr,'
       '  decode(trim(code),'#39'wo'#39',0,'
@@ -1451,7 +1450,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1521,42 +1520,6 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       mmBottomOffset = 0
       mmHeight = 54769
       mmPrintPosition = 0
-      object ppSystemVariable1: TppSystemVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'SystemVariable1'
-        Border.mmPadding = 0
-        VarType = vtPrintDateTime
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 9
-        Font.Style = []
-        Transparent = True
-        mmHeight = 3969
-        mmLeft = 2381
-        mmTop = 529
-        mmWidth = 34925
-        BandType = 0
-        LayerName = Foreground
-      end
-      object ppSystemVariable2: TppSystemVariable
-        DesignLayer = ppDesignLayer1
-        UserName = 'SystemVariable2'
-        Border.mmPadding = 0
-        VarType = vtPageNoDesc
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 9
-        Font.Style = []
-        Transparent = True
-        mmHeight = 3969
-        mmLeft = 277019
-        mmTop = 794
-        mmWidth = 10319
-        BandType = 0
-        LayerName = Foreground
-      end
       object lblTitle: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblTitle'
@@ -1785,9 +1748,9 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3471
-        mmLeft = 111390
+        mmLeft = 108215
         mmTop = 49477
-        mmWidth = 10848
+        mmWidth = 14023
         BandType = 0
         LayerName = Foreground
       end
@@ -2908,6 +2871,64 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
         LayerName = Foreground
       end
     end
+    object ppFooterBand1: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 7144
+      mmPrintPosition = 0
+      object ppLine8: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line8'
+        Border.mmPadding = 0
+        Pen.Color = clMedGray
+        Pen.Width = 2
+        ParentWidth = True
+        Weight = 1.500000000000000000
+        mmHeight = 1058
+        mmLeft = 0
+        mmTop = 265
+        mmWidth = 290200
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppSystemVariable1: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable1'
+        Border.mmPadding = 0
+        VarType = vtPrintDateTime
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGrayText
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3704
+        mmLeft = 2381
+        mmTop = 1852
+        mmWidth = 27517
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppSystemVariable2: TppSystemVariable
+        DesignLayer = ppDesignLayer1
+        UserName = 'SystemVariable2'
+        Border.mmPadding = 0
+        VarType = vtPageNoDesc
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clGrayText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 277284
+        mmTop = 1852
+        mmWidth = 10319
+        BandType = 8
+        LayerName = Foreground
+      end
+    end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
@@ -3162,7 +3183,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc10'
         Border.mmPadding = 0
-        DataField = 'ANTDDR'
+        DataField = 'DEBIT'
         DataPipeline = plRptLedger
         DisplayFormat = '#,0.00;(#,0.00)'
         Font.Charset = DEFAULT_CHARSET
@@ -3173,7 +3194,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'plRptLedger'
-        mmHeight = 3471
+        mmHeight = 3440
         mmLeft = 138377
         mmTop = 16404
         mmWidth = 13494

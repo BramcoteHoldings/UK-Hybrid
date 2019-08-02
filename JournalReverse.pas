@@ -170,7 +170,7 @@ begin
         qryJournalInsert.ParamByName('AMOUNT').AsFloat := qryJournalTotal.FieldByName('AMOUNT').AsCurrency;
         qryJournalInsert.ParamByName('REASON').AsString := tbReason.Text;
         qryJournalInsert.ParamByName('TRUST').AsString := qryJournal.FieldByName('TRUST').AsString;
-        qryJournalInsert.ParamByName('REV_NJOURNAL').AsInteger := 0; //qryJournal.FieldByName('NJOURNAL').AsInteger;
+        qryJournalInsert.ParamByName('REV_NJOURNAL').AsInteger := qryJournal.FieldByName('NJOURNAL').AsInteger;
         qryJournalInsert.ParamByName('NMEMO').AsInteger := qryJournal.FieldByName('NMEMO').AsInteger;
         qryJournalInsert.ParamByName('REFNO').AsString := qryJournal.FieldByName('REFNO').AsString;
         qryJournalInsert.ParamByName('TYPE').AsString := qryJournal.FieldByName('TYPE').AsString;
@@ -263,7 +263,7 @@ begin
            qryTransItemInsert.ParamByName('NJOURNAL').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
            qryTransItemInsert.ParamByName('REFNO').AsString := IntToStr(qryJournalInsert.ParamByName('NJOURNAL').AsInteger);
            qryTransItemInsert.ParamByName('NOWNER').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
-           qryTransItemInsert.ParamByName('REV_NJOURNAL').AsInteger := 0; //qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
+           qryTransItemInsert.ParamByName('REV_NJOURNAL').AsInteger := qryJournalInsert.ParamByName('NJOURNAL').AsInteger;
           // ToDo: Either populate version with information or don't save this.
            qryTransItemInsert.ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;;
            qryTransItemInsert.ParamByName('NMATTER').AsInteger := qryTransItems.FieldByName('NMATTER').AsInteger;

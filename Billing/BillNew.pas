@@ -4381,7 +4381,7 @@ procedure TfrmInvoice.tbtnNewFeeClick(Sender : TObject);
   end; }
 
 procedure TfrmInvoice.tbtnRemoveItemsClick(Sender : TObject);
-  var
+var
     iCtr, ImageIndex, RecIdx, grpItemCount : Integer;
     sTable : string;
     cFees, cDisb, cAntd, cSund, cUpCred : currency;
@@ -4389,7 +4389,7 @@ procedure TfrmInvoice.tbtnRemoveItemsClick(Sender : TObject);
     GroupRow : TcxCustomGridRow;
     AView : TcxGridTableView;
     // AView: TcxGridDBTableView;
-  begin
+begin
     AView := tvBillItems;
     AView.BeginUpdate;
     if (AView.DataController.GetSelectedCount > 0)
@@ -4479,9 +4479,7 @@ procedure TfrmInvoice.tbtnRemoveItemsClick(Sender : TObject);
             then
             begin
               qryNew.SQL.Text := '';
-              //qryNew.SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NCHEQREQ = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
-              // RDW - Reverse it
-              ReverseAnticipatedDisbursement(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
+              qryNew.SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NCHEQREQ = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
             end
             else
               qryNew.SQL.Text := 'UPDATE ' + sTable + ' SET NMEMO = null WHERE N' + sTable + ' = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
@@ -4565,7 +4563,8 @@ procedure TfrmInvoice.tbtnRemoveItemsClick(Sender : TObject);
     finally
       CalcDiscount;
     end;
-  end;
+end;
+
 // RDW
 procedure TfrmInvoice.ReverseAnticipatedDisbursement(nOldCheqnum: integer);
 var
@@ -6710,67 +6709,66 @@ procedure TfrmInvoice.btnMergePrintClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.btnNotesClick(Sender : TObject);
-  var
+var
     LfrmNotesMatter : TfrmGenEditor; { TfrmNotesMatter; }
-  begin
-    try
+begin
+   try
       LfrmNotesMatter := TfrmGenEditor.create(Self);
       LfrmNotesMatter.DisplayBillNotes(qryInvoice.FieldByName('NMEMO').AsInteger);
-      if LfrmNotesMatter.ShowModal = mrOK
-      then
+      if LfrmNotesMatter.ShowModal = mrOK then
         // dxbtnRefresh.Click;
       finally
-        LfrmNotesMatter.Free;
-      end;
-    end;
+         LfrmNotesMatter.Free;
+   end;
+end;
 
-    procedure TfrmInvoice.ViewAttacheInvoice(AUnique : Integer);
-      var
-        sFileName : string;
-        bStream, fStream : TStream;
-        OpenFileErr : Integer;
-      begin
+procedure TfrmInvoice.ViewAttacheInvoice(AUnique : Integer);
+var
+  sFileName : string;
+  bStream, fStream : TStream;
+  OpenFileErr : Integer;
+begin
+  try
+    with dmAxiom.qryTmp do
+    begin
+      Close;
+      SQL.Text := 'select invoice_copy, INVOICE_COPY_EXT, ninvoice from invoice where ninvoice = :invoice';
+      ParamByName('invoice').AsInteger := AUnique;
+      Open;
+
+      if FieldByName('INVOICE_COPY').IsNull
+      then
+        Exit;
+
+      try
+        // load the image in external application
         try
-          with dmAxiom.qryTmp do
-          begin
-            Close;
-            SQL.Text := 'select invoice_copy, INVOICE_COPY_EXT, ninvoice from invoice where ninvoice = :invoice';
-            ParamByName('invoice').AsInteger := AUnique;
-            Open;
+          bStream := CreateBlobStream(FieldByName('INVOICE_COPY'), bmRead);
 
-            if FieldByName('INVOICE_COPY').IsNull
-            then
-              Exit;
-
-            try
-              // load the image in external application
-              try
-                bStream := CreateBlobStream(FieldByName('INVOICE_COPY'), bmRead);
-
-                sFileName := dmAxiom.GetEnvVar('TMP') + '\';
-                sFileName := sFileName + FieldByName('ninvoice').AsString + '_safe.' + FieldByName('INVOICE_COPY_EXT').AsString;
-                try
-                  fStream := TFileStream.create(sFileName, fmCreate);
-                  fStream.CopyFrom(bStream, bStream.Size);
-                finally
-                  FreeAndNil(fStream);
-                end;
-              finally
-                FreeAndNil(bStream);
-              end;
-
-              OpenFileErr := ShellExecute(Handle, 'open', PChar(sFileName), nil, nil, SW_SHOWNORMAL);
-              if OpenFileErr = SE_ERR_NOASSOC
-              then
-                MsgInfo('There is no application associated with the given filename extension.');
-            except
-              Raise;
-            end;
-          end
+          sFileName := dmAxiom.GetEnvVar('TMP') + '\';
+          sFileName := sFileName + FieldByName('ninvoice').AsString + '_safe.' + FieldByName('INVOICE_COPY_EXT').AsString;
+          try
+            fStream := TFileStream.create(sFileName, fmCreate);
+            fStream.CopyFrom(bStream, bStream.Size);
+          finally
+            FreeAndNil(fStream);
+          end;
         finally
-          dmAxiom.qryTmp.Close;
+          FreeAndNil(bStream);
         end;
+
+        OpenFileErr := ShellExecute(Handle, 'open', PChar(sFileName), nil, nil, SW_SHOWNORMAL);
+        if OpenFileErr = SE_ERR_NOASSOC
+        then
+          MsgInfo('There is no application associated with the given filename extension.');
+      except
+        Raise;
       end;
+    end
+  finally
+    dmAxiom.qryTmp.Close;
+  end;
+end;
 
     procedure TfrmInvoice.CalcDiscount;
       begin

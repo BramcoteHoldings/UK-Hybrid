@@ -166,6 +166,8 @@ type
     qryPhoneBookPOSTCODE: TStringField;
     qryPhoneBookCOUNTRY: TStringField;
     qryPhoneBookWHICHADDRESS: TStringField;
+    ppFooterBand1: TppFooterBand;
+    ppLine8: TppLine;
     procedure FormShow(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
     procedure btnMatterClick(Sender: TObject);
@@ -303,50 +305,50 @@ begin
 
    if chkFees.Checked and not chkShowSundry.Checked then
    begin
-     qryFeesLedger.Close;
-     qryFeesLedger.SQL.Clear;
-     qryFeesLedger.SQL.Add('SELECT distinct F.CREATED, F.BANK_ACCT, F.AMOUNT, ');
-     qryFeesLedger.SQL.Add('DECODE(F.BILLED,''Y'',TAX,(F.AMOUNT*(abs(R.RATE)/100))) AS TAX,');
-     qryFeesLedger.SQL.Add(' F.DESCR, F.UNITS, F.MINS, F.BILLED, F.AUTHOR, F.PARTNER, F.NMEMO,');
-     qryFeesLedger.SQL.Add(' F.TYPE, F.ROWID');
-     qryFeesLedger.SQL.Add(' FROM FEE F,TAXRATE R');
-     qryFeesLedger.SQL.Add(' WHERE F.NMATTER = ' + qryMatter.FieldByName('NMATTER').AsString);
-     qryFeesLedger.SQL.Add(' AND F.TAXCODE = R.TAXCODE (+) ');
-     if cbExcludeNonBillableWIP.Checked then
-        qryFeesLedger.SQL.Add(' AND F.BILLTYPE = ''Billable'' ');
-     if chkFrom.Checked and not(FArchiveBatchMode) then
-     begin
-       qryFeesLedger.SQL.Add('  AND CREATED >= :FROMDATE');
-       qryFeesLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
-     end;
-     if chkTo.Checked and not(FArchiveBatchMode) then
-     begin
-       qryFeesLedger.SQL.Add('  AND CREATED < :TODATE');
-       qryFeesLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
-     end;
-     if chkUnbilled.Checked then
-       qryFeesLedger.SQL.Add('  AND BILLED = ''N'' AND F.BILLTYPE = ''Billable'' ');
-     qryFeesLedger.Open;
-     while not qryFeesLedger.EOF do
-     begin
-       qryTmpLedger.Insert;
-       qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-       qryTmpLedger.FieldByName('CREATED').AsDateTime := qryFeesLedger.FieldByName('CREATED').AsDateTime;
-       qryTmpLedger.FieldByName('TYPE').AsString := 'Fee';
-       qryTmpLedger.FieldByName('REFNO').AsString := qryFeesLedger.FieldByName('AUTHOR').AsString;
-       qryTmpLedger.FieldByName('DESCR').AsString := qryFeesLedger.FieldByName('DESCR').AsString;
-       qryTmpLedger.FieldByName('BANK').AsString := qryFeesLedger.FieldByName('BANK_ACCT').AsString;
-       qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryFeesLedger.FieldByName('AMOUNT').AsCurrency ;
-       qryTmpLedger.FieldByName('CODE').AsString := qryFeesLedger.FieldByName('TYPE').AsString ;
-       if chkGst.Checked then
-         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryTmpLedger.FieldByName('FEESDR').AsCurrency + qryFeesLedger.FieldByName('TAX').AsCurrency;
-       qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryFeesLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
-       qryTmpLedger.Post;
+      qryFeesLedger.Close;
+      qryFeesLedger.SQL.Clear;
+      qryFeesLedger.SQL.Add('SELECT distinct F.CREATED, F.BANK_ACCT, F.AMOUNT, ');
+      qryFeesLedger.SQL.Add('DECODE(F.BILLED,''Y'',TAX,(F.AMOUNT*(abs(R.RATE)/100))) AS TAX,');
+      qryFeesLedger.SQL.Add(' F.DESCR, F.UNITS, F.MINS, F.BILLED, F.AUTHOR, F.PARTNER, F.NMEMO,');
+      qryFeesLedger.SQL.Add(' F.TYPE, F.ROWID');
+      qryFeesLedger.SQL.Add(' FROM FEE F,TAXRATE R');
+      qryFeesLedger.SQL.Add(' WHERE F.NMATTER = ' + qryMatter.FieldByName('NMATTER').AsString);
+      qryFeesLedger.SQL.Add(' AND F.TAXCODE = R.TAXCODE (+) ');
+      if cbExcludeNonBillableWIP.Checked then
+         qryFeesLedger.SQL.Add(' AND F.BILLTYPE = ''Billable'' ');
+      if chkFrom.Checked and not(FArchiveBatchMode) then
+      begin
+         qryFeesLedger.SQL.Add('  AND trunc(CREATED) >= trunc(:FROMDATE)');
+         qryFeesLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      end;
+      if chkTo.Checked and not(FArchiveBatchMode) then
+      begin
+         qryFeesLedger.SQL.Add('  AND trunc(CREATED) < trunc(:TODATE)');
+         qryFeesLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      end;
+      if chkUnbilled.Checked then
+         qryFeesLedger.SQL.Add('  AND BILLED = ''N'' AND F.BILLTYPE = ''Billable'' ');
+      qryFeesLedger.Open;
+      while not qryFeesLedger.EOF do
+      begin
+         qryTmpLedger.Insert;
+         qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+         qryTmpLedger.FieldByName('CREATED').AsDateTime := qryFeesLedger.FieldByName('CREATED').AsDateTime;
+         qryTmpLedger.FieldByName('TYPE').AsString := 'Fee';
+         qryTmpLedger.FieldByName('REFNO').AsString := qryFeesLedger.FieldByName('AUTHOR').AsString;
+         qryTmpLedger.FieldByName('DESCR').AsString := qryFeesLedger.FieldByName('DESCR').AsString;
+         qryTmpLedger.FieldByName('BANK').AsString := qryFeesLedger.FieldByName('BANK_ACCT').AsString;
+         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryFeesLedger.FieldByName('AMOUNT').AsCurrency ;
+         qryTmpLedger.FieldByName('CODE').AsString := qryFeesLedger.FieldByName('TYPE').AsString ;
+         if chkGst.Checked then
+            qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryTmpLedger.FieldByName('FEESDR').AsCurrency + qryFeesLedger.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryFeesLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
+         qryTmpLedger.Post;
 
-       qryFeesLedger.Next;
-     end;
+         qryFeesLedger.Next;
+      end;
 
-     qryFeesLedger.Close;
+      qryFeesLedger.Close;
    end;
 
    qrySundLedger.Close;
@@ -364,42 +366,47 @@ begin
    qrySundLedger.SQL.Add(' AND TRUNC(SUNDRY.CREATED) >= commence and TRUNC(SUNDRY.CREATED) <= nvl(end_period,sysdate + 1000) ');
    if chkFrom.Checked and not(FArchiveBatchMode) then
    begin
-     qrySundLedger.SQL.Add('  AND CREATED >= :FROMDATE');
-     qrySundLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      qrySundLedger.SQL.Add('  AND trunc(CREATED) >= trunc(:FROMDATE)');
+      qrySundLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
    end;
    if chkTo.Checked and not(FArchiveBatchMode) then
    begin
-     qrySundLedger.SQL.Add('  AND CREATED < :TODATE');
-     qrySundLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      qrySundLedger.SQL.Add('  AND trunc(CREATED) < trunc(:TODATE)');
+      qrySundLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
    end;
    if chkUnbilled.Checked then
-     qrySundLedger.SQL.Add('  AND BILLED = ''N''');
+      qrySundLedger.SQL.Add('  AND BILLED = ''N''');
    qrySundLedger.Open;
    while not qrySundLedger.EOF do
    begin
-     qryTmpLedger.Insert;
-     qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-     qryTmpLedger.FieldByName('CREATED').AsDateTime := qrySundLedger.FieldByName('CREATED').AsDateTime;
-     qryTmpLedger.FieldByName('TYPE').AsString := 'Sundry';
-     qryTmpLedger.FieldByName('REFNO').AsString := qrySundLedger.FieldByName('TYPEDESC').AsString;
-     qryTmpLedger.FieldByName('BANK').AsString := qrySundLedger.FieldByName('ACCT').AsString;
-     qryTmpLedger.FieldByName('DESCR').AsString := qrySundLedger.FieldByName('DESCR').AsString;
-     qryTmpLedger.FieldByName('CODE').AsString := qrySundLedger.FieldByName('TYPE').AsString;
+      qryTmpLedger.Insert;
+      qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+      qryTmpLedger.FieldByName('CREATED').AsDateTime := qrySundLedger.FieldByName('CREATED').AsDateTime;
+      qryTmpLedger.FieldByName('TYPE').AsString := 'Sundry';
+      qryTmpLedger.FieldByName('REFNO').AsString := qrySundLedger.FieldByName('TYPEDESC').AsString;
+      qryTmpLedger.FieldByName('BANK').AsString := qrySundLedger.FieldByName('ACCT').AsString;
+      qryTmpLedger.FieldByName('DESCR').AsString := qrySundLedger.FieldByName('DESCR').AsString;
+      qryTmpLedger.FieldByName('CODE').AsString := qrySundLedger.FieldByName('TYPE').AsString;
 
-     if chkGst.Checked and chkShowSundry.Checked then
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency
-     else if chkGst.Checked then
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency
-     else
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency;
-     qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qrySundLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
+      if chkGst.Checked and chkShowSundry.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency
+      else
+      if chkGst.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency
+      else
+      if chkShowSundry.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency
+      else
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency;
 
-     if chkShowSundry.Checked then
+      qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qrySundLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
+
+      if chkShowSundry.Checked then
          qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
 
-     qryTmpLedger.Post;
+      qryTmpLedger.Post;
 
-     qrySundLedger.Next;
+      qrySundLedger.Next;
    end;
 
    qrySundLedger.Close;
@@ -419,44 +426,44 @@ begin
 
    if chkFrom.Checked and not(FArchiveBatchMode) then
    begin
-     qryAntdLedger.SQL.Add('  AND REQDATE >= :FROMDATE');
-     qryAntdLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      qryAntdLedger.SQL.Add('  AND trunc(REQDATE) >= trunc(:FROMDATE)');
+      qryAntdLedger.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
    end;
    if chkTo.Checked and not(FArchiveBatchMode) then
    begin
-     qryAntdLedger.SQL.Add('  AND REQDATE < :TODATE');
-     qryAntdLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      qryAntdLedger.SQL.Add('  AND trunc(REQDATE) < trunc(:TODATE)');
+      qryAntdLedger.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
    end;
    if chkUnbilled.Checked then
-     qryAntdLedger.SQL.Add('  AND BILLED = ''N''');
+      qryAntdLedger.SQL.Add('  AND BILLED = ''N''');
 
    qryAntdLedger.Open;
    while not qryAntdLedger.EOF do
    begin
-     if ((qryAntdLedger.FieldByName('NMEMO').AsInteger > 0) and (qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'Y'))
-       or (qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'Y')
-       or ((qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'N') and (qryAntdLedger.FieldByName('NMEMO').AsInteger > 0)) then
-     begin
-       qryTmpLedger.Insert;
-       qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-       qryTmpLedger.FieldByName('CREATED').AsDateTime := qryAntdLedger.FieldByName('REQDATE').AsDateTime;
-       qryTmpLedger.FieldByName('TYPE').AsString := 'CheqReq';
-       qryTmpLedger.FieldByName('REFNO').AsString := qryAntdLedger.FieldByName('NCHEQREQ').AsString;
-       qryTmpLedger.FieldByName('DESCR').AsString := qryAntdLedger.FieldByName('PAYEE').AsString + #13 + qryAntdLedger.FieldByName('DESCR').AsString;
-       qryTmpLedger.FieldByName('BANK').AsString := qryAntdLedger.FieldByName('BANK').AsString;
-       qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryAntdLedger.FieldByName('AMOUNT').AsCurrency;
-       if chkGst.Checked then
-         qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency + qryAntdLedger.FieldByName('TAX').AsCurrency;
-       qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryAntdLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
-       if chkShowSundry.Checked then
-           qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qryAntdLedger.FieldByName('TAX').AsCurrency;
+      if ((qryAntdLedger.FieldByName('NMEMO').AsInteger > 0) and (qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'Y')) or
+         (qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'Y') or
+         ((qryAntdLedger.FieldByName('ANTICIPATED').AsString = 'N') and (qryAntdLedger.FieldByName('NMEMO').AsInteger > 0)) then
+      begin
+         qryTmpLedger.Insert;
+         qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+         qryTmpLedger.FieldByName('CREATED').AsDateTime := qryAntdLedger.FieldByName('REQDATE').AsDateTime;
+         qryTmpLedger.FieldByName('TYPE').AsString := 'CheqReq';
+         qryTmpLedger.FieldByName('REFNO').AsString := qryAntdLedger.FieldByName('NCHEQREQ').AsString;
+         qryTmpLedger.FieldByName('DESCR').AsString := qryAntdLedger.FieldByName('PAYEE').AsString + #13 + qryAntdLedger.FieldByName('DESCR').AsString;
+         qryTmpLedger.FieldByName('BANK').AsString := qryAntdLedger.FieldByName('BANK').AsString;
+         qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryAntdLedger.FieldByName('AMOUNT').AsCurrency;
+         if chkGst.Checked then
+            qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency + qryAntdLedger.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryAntdLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
+         if chkShowSundry.Checked then
+            qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qryAntdLedger.FieldByName('TAX').AsCurrency;
        // rb
        //if (qryAntdLedger.FieldByName('NMEMO').AsInteger > 0) and (qryANtDLedger.FieldByName('ANTICIPATED').AsString = 'Y') and (qryANtDLedger.FieldByName('BILLED').AsString = 'Y') then
        //  qryTmpLedger.FieldByName('DISBCR').AsCurrency := qryAntdLedger.FieldByName('AMOUNT').AsCurrency + qryAntdLedger.FieldByName('TAX').AsCurrency;
 
-       qryTmpLedger.Post;
-     end;
-     qryAntdLedger.Next;
+         qryTmpLedger.Post;
+      end;
+      qryAntdLedger.Next;
    end;
 
    qryAntdLedger.Close;
@@ -480,18 +487,18 @@ begin
    qryTmpSQL.SQL.Add(' AND (NCHEQUE IS NOT NULL OR NRECEIPT IS NOT NULL OR NJOURNAL IS NOT NULL OR NINVOICE IS NOT NULL)');
    if chkFrom.Checked and not(FArchiveBatchMode) then
    begin
-     qryTmpSQL.SQL.Add('  AND A.CREATED >= :FROMDATE');
-     qryTmpSQL.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      qryTmpSQL.SQL.Add('  AND trunc(A.CREATED) >= trunc(:FROMDATE)');
+      qryTmpSQL.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
    end;
    if chkTo.Checked and not(FArchiveBatchMode) then
    begin
-     qryTmpSQL.SQL.Add('  AND A.CREATED < :TODATE');
-     qryTmpSQL.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      qryTmpSQL.SQL.Add('  AND trunc(A.CREATED) < trunc(:TODATE)');
+      qryTmpSQL.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
    end;
    if chkUnbilled.Checked then
    begin
-     qryTmpSQL.SQL.Add('  AND A.BILLED = ''N''');
-     qryTmpSQL.SQL.Add('  AND A.TRUST <> ''T''');
+      qryTmpSQL.SQL.Add('  AND A.BILLED = ''N''');
+      qryTmpSQL.SQL.Add('  AND A.TRUST <> ''T''');
    end;
    qryTmpSQL.Open;
 
@@ -500,10 +507,10 @@ begin
 
    while not qryTmpSQL.EOF do
    begin
-     qryTmpLedger.Insert;
-     qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-     qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
-     qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryTmpSQL.FieldByName('NMEMO').AsInteger, 'REFNO');
+      qryTmpLedger.Insert;
+      qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+      qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
+      qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qryTmpSQL.FieldByName('NMEMO').AsInteger, 'REFNO');
  {
    Modified 18.10.2002 GG
 
@@ -513,71 +520,75 @@ begin
 
      if qryTmpSQL.FieldByName('NCHEQUE').AsInteger > 0 then
  }
-     if qryTmpSQL.FieldByName('NCHEQUE').AsInteger >= 0 then
-       qryTmpLedger.FieldByName('TYPE').AsString := 'Payment';
-     if qryTmpSQL.FieldByName('NRECEIPT').AsInteger > 0 then
-       qryTmpLedger.FieldByName('TYPE').AsString := 'Receipt';
-     if qryTmpSQL.FieldByName('NJOURNAL').AsInteger > 0 then
-       qryTmpLedger.FieldByName('TYPE').AsString := 'Journal';
-     if qryTmpSQL.FieldByName('TYPE').AsString = 'RV' then
-       qryTmpLedger.FieldByName('TYPE').AsString := 'Reversal';
-     if qryTmpSQL.FieldByName('SPEC_PURPOSE').AsCurrency <> 0 then
-       qryTmpLedger.FieldByName('REFNO').AsString := '[' + qryTmpSQL.FieldByName('REFNO').AsString + ']'
-     else
-       qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
-     if qryTmpSQL.FieldByName('PAYER').AsString <> '' then
-       qryTmpLedger.FieldByName('DESCR').AsString := qryTmpSQL.FieldByName('PAYER').AsString + #13 + qryTmpSQL.FieldByName('DESCR').AsString
-     else
-       qryTmpLedger.FieldByName('DESCR').AsString := qryTmpSQL.FieldByName('DESCR').AsString;
-     qryTmpLedger.FieldByName('BANK').AsString := qryTmpSQL.FieldByName('ACCT').AsString;
-     if qryTmpSQL.FieldByName('TRUST').AsString = 'T' then
-     begin
+      if qryTmpSQL.FieldByName('NCHEQUE').AsInteger >= 0 then
+         qryTmpLedger.FieldByName('TYPE').AsString := 'Payment';
+      if qryTmpSQL.FieldByName('NRECEIPT').AsInteger > 0 then
+         qryTmpLedger.FieldByName('TYPE').AsString := 'Receipt';
+      if qryTmpSQL.FieldByName('NJOURNAL').AsInteger > 0 then
+         qryTmpLedger.FieldByName('TYPE').AsString := 'Journal';
+      if qryTmpSQL.FieldByName('TYPE').AsString = 'RV' then
+         qryTmpLedger.FieldByName('TYPE').AsString := 'Reversal';
+      if qryTmpSQL.FieldByName('SPEC_PURPOSE').AsCurrency <> 0 then
+         qryTmpLedger.FieldByName('REFNO').AsString := '[' + qryTmpSQL.FieldByName('REFNO').AsString + ']'
+      else
+         qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
+
+      if qryTmpSQL.FieldByName('PAYER').AsString <> '' then
+         qryTmpLedger.FieldByName('DESCR').AsString := qryTmpSQL.FieldByName('PAYER').AsString + #13 + qryTmpSQL.FieldByName('DESCR').AsString
+      else
+         qryTmpLedger.FieldByName('DESCR').AsString := qryTmpSQL.FieldByName('DESCR').AsString;
+
+      qryTmpLedger.FieldByName('BANK').AsString := qryTmpSQL.FieldByName('ACCT').AsString;
+      if qryTmpSQL.FieldByName('TRUST').AsString = 'T' then
+      begin
        // Trust transactions
-       if qryTmpSQL.FieldByName('AMOUNT').AsCurrency < 0.0 then
-         qryTmpLedger.FieldByName('TRUSTDR').AsCurrency := 0 - qryTmpSQL.FieldByName('AMOUNT').AsCurrency
-       else
-         qryTmpLedger.FieldByName('TRUSTCR').AsCurrency := qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
-     end
-     else if (qryTmpSQL.FieldByName('TYPE').AsString = 'J1') or
-             (qryTmpSQL.FieldByName('TYPE').AsString = 'RF') or
-             ((qryTmpSQL.FieldByName('NRECEIPT').AsInteger > 0) and (qryTmpSQL.FieldByName('TYPE').AsString <> 'DR')) then
-     begin
-       // Receipts or Debtors Journals
-       // but only if billed 
-       if not chkUnbilled.Checked then
-       begin
-       if qryTmpSQL.FieldByName('AMOUNT').AsCurrency < 0.0 then
-       begin
-         qryTmpLedger.FieldByName('DEBTDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency );
-         if {chkGst.Checked} true then
-           qryTmpLedger.FieldByName('DEBTDR').AsCurrency := qryTmpLedger.FieldByName('DEBTDR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
-       end else
-       begin
-         qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpSQL.FieldByName('AMOUNT').AsCurrency ;
-         if {chkGst.Checked} true then
-           qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpLedger.FieldByName('DEBTCR').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency;
-       end;
-       end;
-       if qryTmpSQL.FieldByName('TYPE').AsString = 'J1' then
-       begin
-         // Debtor Journal - probably a write off
-         if chkFees.Checked then
+         if qryTmpSQL.FieldByName('AMOUNT').AsCurrency < 0.0 then
+            qryTmpLedger.FieldByName('TRUSTDR').AsCurrency := 0 - qryTmpSQL.FieldByName('AMOUNT').AsCurrency
+         else
+            qryTmpLedger.FieldByName('TRUSTCR').AsCurrency := qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
+      end
+      else if (qryTmpSQL.FieldByName('TYPE').AsString = 'J1') or
+              (qryTmpSQL.FieldByName('TYPE').AsString = 'RF') or
+              ((qryTmpSQL.FieldByName('NRECEIPT').AsInteger > 0) and (qryTmpSQL.FieldByName('TYPE').AsString <> 'DR')) then
+      begin
+         // Receipts or Debtors Journals
+         // but only if billed
+         if not chkUnbilled.Checked then
          begin
-           if qryTmpSQL.FieldByName('FEE').AsCurrency <> 0 then
-             qryTmpLedger.FieldByName('FEESDR').AsCurrency := 0; // - qryTmpSQL.FieldByName('FEE').AsCurrency;
+            if qryTmpSQL.FieldByName('AMOUNT').AsCurrency < 0.0 then
+            begin
+               qryTmpLedger.FieldByName('DEBTDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency );
+               if {chkGst.Checked} true then
+                  qryTmpLedger.FieldByName('DEBTDR').AsCurrency := qryTmpLedger.FieldByName('DEBTDR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
+            end else
+            begin
+               qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpSQL.FieldByName('AMOUNT').AsCurrency ;
+               if {chkGst.Checked} true then
+                  qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpLedger.FieldByName('DEBTCR').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency;
+            end;
          end;
-         if qryTmpSQL.FieldByName('SUNDRY').AsCurrency <> 0  then
-           qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0; // - qryTmpSQL.FieldByName('SUNDRY').AsCurrency;
-       end;
+         if qryTmpSQL.FieldByName('TYPE').AsString = 'J1' then
+         begin
+            // Debtor Journal - probably a write off
+            if chkFees.Checked then
+            begin
+               if qryTmpSQL.FieldByName('FEE').AsCurrency <> 0 then
+                  qryTmpLedger.FieldByName('FEESDR').AsCurrency := 0; // - qryTmpSQL.FieldByName('FEE').AsCurrency;
+            end;
+            if qryTmpSQL.FieldByName('SUNDRY').AsCurrency <> 0  then
+               qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0; // - qryTmpSQL.FieldByName('SUNDRY').AsCurrency;
+         end;
 
-     end else if (qryTmpSQL.FieldByName('NINVOICE').AsInteger > 0) or (qryTmpSQL.FieldByName('TYPE').AsString = 'IV') then
-     begin
+      end
+      else
+      if (qryTmpSQL.FieldByName('NINVOICE').AsInteger > 0) or (qryTmpSQL.FieldByName('TYPE').AsString = 'IV') then
+      begin
      //    ****************  DEBIT
-       qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency );
-       if chkGst.Checked then
-         qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency );
+         if chkGst.Checked then
+            qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
 
-     end
+      end
  {
    Modified 18.10.2002 GG
 
@@ -587,14 +598,14 @@ begin
 
      end else if (qryTmpSQL.FieldByName('NCHEQUE').AsInteger > 0) or (qryTmpSQL.FieldByName('TYPE').AsString = 'J2') or (qryTmpSQL.FieldByName('TYPE').AsString = 'DR') then
  }
-     else if (qryTmpSQL.FieldByName('NCHEQUE').AsInteger >= 0) or (qryTmpSQL.FieldByName('TYPE').AsString = 'J2') or (qryTmpSQL.FieldByName('TYPE').AsString = 'DR') then
-     begin
+      else if (qryTmpSQL.FieldByName('NCHEQUE').AsInteger >= 0) or (qryTmpSQL.FieldByName('TYPE').AsString = 'J2') or (qryTmpSQL.FieldByName('TYPE').AsString = 'DR') then
+      begin
        // Cheque or disbursement journal or disbursement receipt
        //if qryTmpSQL.FieldByName('AMOUNT').AsCurrency < 0.0 then
        //begin
          qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency );
          if chkGst.Checked then
-           qryTmpLedger.FieldByName('DISBDR').AsCurrency := qryTmpLedger.FieldByName('DISBDR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
+            qryTmpLedger.FieldByName('DISBDR').AsCurrency := qryTmpLedger.FieldByName('DISBDR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
          //pb qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency)
        //end
        //else
@@ -606,90 +617,90 @@ begin
          //pb qryTmpLedger.FieldByName('DISBCR').AsCurrency := qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
        //end;
 
-     end;
+      end;
 
      // MGD 26/09/02 -- CheqReq number added to description..
      // MGD 25/10/02 -- Moved outside so it may appear more
-     if(qryTmpSQL.FieldByName('NCHEQREQ').AsInteger > 0) then
-       qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSQL.FieldByName('NCHEQREQ').AsString +
-         #13#10 + qryTmpLedger.FieldByName('DESCR').AsString;
+      if(qryTmpSQL.FieldByName('NCHEQREQ').AsInteger > 0) then
+         qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSQL.FieldByName('NCHEQREQ').AsString +
+                                                       #13#10 + qryTmpLedger.FieldByName('DESCR').AsString;
 
-     if chkShowSundry.Checked then
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
+      if chkShowSundry.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
 
-     qryTmpLedger.Post;
-     qryTmpSQL.Next;
+      qryTmpLedger.Post;
+      qryTmpSQL.Next;
    end;
 
    // load the cheqreq_trans items
    if (chkOwing.Checked) and (not chkUnbilled.Checked) then
    begin
 
-     qryTmpSql.Close;
-     qryTmpSql.SQL.Clear;
-     // MGD 25/10/02 - added ncheqreq to add to the description..
-     qryTmpSql.SQL.Add('SELECT T.NCHEQREQ, MAX(nvl(A.DESCR,'' '')) as DESCR,');
-     qryTmpSql.SQL.Add('MAX(C.BANK) as BANK,MAX(nvl(A.CREATED,C.REQDATE)) AS CREATED,');
-     qryTmpSql.SQL.Add('MAX(nvl(C.REFNO,'' '')) as REFNO,');
-     qryTmpSql.SQL.Add('SUM(T.AMOUNT) as AMOUNT,');
+      qryTmpSql.Close;
+      qryTmpSql.SQL.Clear;
+      // MGD 25/10/02 - added ncheqreq to add to the description..
+      qryTmpSql.SQL.Add('SELECT T.NCHEQREQ, MAX(nvl(A.DESCR,'' '')) as DESCR,');
+      qryTmpSql.SQL.Add('MAX(C.BANK) as BANK,MAX(nvl(A.CREATED,C.REQDATE)) AS CREATED,');
+      qryTmpSql.SQL.Add('MAX(nvl(C.REFNO,'' '')) as REFNO,');
+      qryTmpSql.SQL.Add('SUM(T.AMOUNT) as AMOUNT,');
 //     qryTmpSql.SQL.Add('SUM(T.AMOUNT - GET_TAX(T.AMOUNT,C.TAXCODE)) as AMOUNT,');
-     qryTmpSql.SQL.Add('SUM(GET_TAX(T.AMOUNT,C.TAXCODE,C.REQDATE)) as TAX, A.TYPE, C.TAXCODE ');
-     qryTmpSql.SQL.Add('FROM CHEQREQ C, CHEQREQ_TRANS T,ALLOC A ');
-     qryTmpSql.SQL.Add('WHERE C.NCHEQREQ = T.NCHEQREQ ');
-     qryTmpSql.SQL.Add('AND T.NALLOC = A.NALLOC ');
-     qryTmpSql.SQL.Add('AND A.TYPE <> ''J1'' ');
-     qryTmpSql.SQL.Add('AND C.NMATTER = :NMATTER');
-     if chkFrom.Checked and not(FArchiveBatchMode) then
-     begin
-       qryTmpSql.SQL.Add('  AND A.CREATED >= :FROMDATE');
-       qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
-     end;
-     if chkTo.Checked and not(FArchiveBatchMode) then
-     begin
-       qryTmpSql.SQL.Add('  AND A.CREATED < :TODATE');
-       qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
-     end;
-     qryTmpSql.SQL.Add('GROUP BY T.NCHEQREQ,A.TYPE, C.TAXCODE');
-     qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-     qryTmpSql.Open();
+      qryTmpSql.SQL.Add('SUM(GET_TAX(T.AMOUNT,C.TAXCODE,C.REQDATE)) as TAX, A.TYPE, C.TAXCODE ');
+      qryTmpSql.SQL.Add('FROM CHEQREQ C, CHEQREQ_TRANS T,ALLOC A ');
+      qryTmpSql.SQL.Add('WHERE C.NCHEQREQ = T.NCHEQREQ ');
+      qryTmpSql.SQL.Add('AND T.NALLOC = A.NALLOC ');
+      qryTmpSql.SQL.Add('AND A.TYPE <> ''J1'' ');
+      qryTmpSql.SQL.Add('AND C.NMATTER = :NMATTER');
+      if chkFrom.Checked and not(FArchiveBatchMode) then
+      begin
+         qryTmpSql.SQL.Add('  AND trunc(A.CREATED) >= trunc(:FROMDATE)');
+         qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      end;
+      if chkTo.Checked and not(FArchiveBatchMode) then
+      begin
+         qryTmpSql.SQL.Add('  AND trunc(A.CREATED) < trunc(:TODATE)');
+         qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      end;
+      qryTmpSql.SQL.Add('GROUP BY T.NCHEQREQ,A.TYPE, C.TAXCODE');
+      qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      qryTmpSql.Open();
    end;
 
    while not qryTmpSQL.EOF do
    begin
-     qryTmpLedger.Insert;
-     qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-     qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
-     qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
-     qryTmpLedger.FieldByName('CODE').AsString := qryTmpSQL.FieldByName('TYPE').AsString;
+      qryTmpLedger.Insert;
+      qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+      qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
+      qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
+      qryTmpLedger.FieldByName('CODE').AsString := qryTmpSQL.FieldByName('TYPE').AsString;
 
      // ADD NCheqReq to the description.
-     if(qryTmpSql.FieldByName('NCHEQREQ').AsInteger > 0) then
-       qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSql.FieldByName('NCHEQREQ').AsString +
-         #13#10 + qryTmpSql.FieldByName('DESCR').AsString;
+      if(qryTmpSql.FieldByName('NCHEQREQ').AsInteger > 0) then
+         qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSql.FieldByName('NCHEQREQ').AsString +
+                                                       #13#10 + qryTmpSql.FieldByName('DESCR').AsString;
 
-     dmAxiom.qryGetBillRate.Close;
-     dmAxiom.qryGetBillRate.ParamByName('TAXCODE').AsString := qryTmpSQL.FieldByName('TAXCODE').AsString;
-     dmAxiom.qryGetBillRate.Open;
-     if dmAxiom.qryGetBillRate.FieldByName('BILL_RATE').AsFloat = 0 then
+      dmAxiom.qryGetBillRate.Close;
+      dmAxiom.qryGetBillRate.ParamByName('TAXCODE').AsString := qryTmpSQL.FieldByName('TAXCODE').AsString;
+      dmAxiom.qryGetBillRate.Open;
+      if dmAxiom.qryGetBillRate.FieldByName('BILL_RATE').AsFloat = 0 then
          PayableAmount := qryTmpSQL.FieldByName('AMOUNT').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency
-     else
+      else
          PayableAmount := qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
 
-     qryTmpLedger.FieldByName('DISBDR').AsCurrency :=  0-PayableAmount;
+      qryTmpLedger.FieldByName('DISBDR').AsCurrency :=  0-PayableAmount;
 
-     qryTmpLedger.FieldByName('TYPE').AsString := 'Payable';
+      qryTmpLedger.FieldByName('TYPE').AsString := 'Payable';
 //   ***** AES 19/10/2004 commented - all payables no need to include tax. just use what's in
 //   ***** cheqreq_trans.
 //     if chkGst.Checked then
 //       qryTmpLedger.FieldByName('DISBDR').AsCurrency := qryTmpLedger.FieldByName('DISBDR').AsCurrency + (0-qryTmpSQL.FieldByName('TAX').AsCurrency);
 
-     if chkShowSundry.Checked then
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
+      if chkShowSundry.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
 
 //     if qryTmpSQL.FieldByName('TYPE').AsString = 'J1' then
 //       qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0;
-     qryTmpLedger.Post;
-     qryTmpSQL.Next;
+      qryTmpLedger.Post;
+      qryTmpSQL.Next;
    end;
 
    // *********  AES
@@ -699,51 +710,51 @@ begin
    // only.  no impact on data.
    if (chkOwing.Checked) and (not chkUnbilled.Checked) then
    begin
-     qryTmpSql.Close;
-     qryTmpSql.SQL.Clear;
-     qryTmpSql.SQL.Add('SELECT C.NCHEQREQ, MAX(nvl(C.DESCR,'' '')) as DESCR,');
-     qryTmpSql.SQL.Add('MAX(C.BANK) as BANK,MAX(C.REQDATE) AS CREATED,');
-     qryTmpSql.SQL.Add('MAX(nvl(C.REFNO,'' '')) as REFNO,');
-     qryTmpSql.SQL.Add('SUM(C.AMOUNT) as AMOUNT,');
-     qryTmpSql.SQL.Add('SUM(C.TAX) as TAX, C.TAXCODE ');
-     qryTmpSql.SQL.Add('FROM CHEQREQ C, NMEMO N ');
-     qryTmpSql.SQL.Add('WHERE C.NMATTER = :NMATTER ');
-     qryTmpSql.SQL.Add('AND C.NMEMO = N.NMEMO ');
-     qryTmpSql.SQL.Add('AND C.CREDIT_NOTE IS NULL ');
-     qryTmpSql.SQL.Add('AND NVL( c.REV_NCHEQREQ, 0) = 0 ');
+      qryTmpSql.Close;
+      qryTmpSql.SQL.Clear;
+      qryTmpSql.SQL.Add('SELECT C.NCHEQREQ, MAX(nvl(C.DESCR,'' '')) as DESCR,');
+      qryTmpSql.SQL.Add('MAX(C.BANK) as BANK,MAX(C.REQDATE) AS CREATED,');
+      qryTmpSql.SQL.Add('MAX(nvl(C.REFNO,'' '')) as REFNO,');
+      qryTmpSql.SQL.Add('SUM(C.AMOUNT) as AMOUNT,');
+      qryTmpSql.SQL.Add('SUM(C.TAX) as TAX, C.TAXCODE ');
+      qryTmpSql.SQL.Add('FROM CHEQREQ C, NMEMO N ');
+      qryTmpSql.SQL.Add('WHERE C.NMATTER = :NMATTER ');
+      qryTmpSql.SQL.Add('AND C.NMEMO = N.NMEMO ');
+      qryTmpSql.SQL.Add('AND C.CREDIT_NOTE IS NULL ');
+      qryTmpSql.SQL.Add('AND NVL( c.REV_NCHEQREQ, 0) = 0 ');
 //     qryTmpSql.SQL.Add('AND NVL(c.ncheque, 0) = 0 ');
-     qryTmpSql.SQL.Add('AND (N.ANTD + N.DISB + N.FEES + N.SUND + N.UPCRED+ N.TAX) - '+
+      qryTmpSql.SQL.Add('AND (N.ANTD + N.DISB + N.FEES + N.SUND + N.UPCRED+ N.TAX) - '+
                        '(N.ANTD_WOFF + N.DISB_WOFF + N.FEES_WOFF + N.SUND_WOFF + N.UPCRED_WOFF + N.TAX_WOFF) - '+
 	                    '(N.TAX_PAID + N.ANTD_PAID + N.DISB_PAID + N.FEES_PAID + N.SUND_PAID + N.UPCRED_PAID ) = 0 ');
-     qryTmpSql.SQL.Add(' AND (N.ANTD_WOFF + N.DISB_WOFF + N.FEES_WOFF + N.SUND_WOFF + N.UPCRED_WOFF + N.TAX_WOFF) <> 0 ');
-     qryTmpSql.SQL.Add('HAVING SUM(c.AMOUNT + c.TAX) > 0 ');
-     if chkFrom.Checked and not(FArchiveBatchMode) then
-     begin
-       qryTmpSql.SQL.Add('  AND trunc(C.REQDATE) >= :FROMDATE');
-       qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
-     end;
-     if chkTo.Checked and not(FArchiveBatchMode) then
-     begin
-       qryTmpSql.SQL.Add('  AND trunc(C.REQDATE) < :TODATE');
-       qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
-     end;
-     qryTmpSql.SQL.Add('GROUP BY C.NCHEQREQ, N.NMEMO, C.TAXCODE, C.REQDATE');
-     qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-     qryTmpSql.Open();
+      qryTmpSql.SQL.Add(' AND (N.ANTD_WOFF + N.DISB_WOFF + N.FEES_WOFF + N.SUND_WOFF + N.UPCRED_WOFF + N.TAX_WOFF) <> 0 ');
+      qryTmpSql.SQL.Add('HAVING SUM(c.AMOUNT + c.TAX) > 0 ');
+      if chkFrom.Checked and not(FArchiveBatchMode) then
+      begin
+         qryTmpSql.SQL.Add('  AND trunc(C.REQDATE) >= trunc(:FROMDATE)');
+         qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      end;
+      if chkTo.Checked and not(FArchiveBatchMode) then
+      begin
+         qryTmpSql.SQL.Add('  AND trunc(C.REQDATE) < trunc(:TODATE)');
+         qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      end;
+      qryTmpSql.SQL.Add('GROUP BY C.NCHEQREQ, N.NMEMO, C.TAXCODE, C.REQDATE');
+      qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      qryTmpSql.Open();
    end;
 
    while not qryTmpSQL.EOF do
    begin
-     qryTmpLedger.Insert;
-     qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-     qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
-     qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
-     qryTmpLedger.FieldByName('CODE').AsString := 'J1';
+      qryTmpLedger.Insert;
+      qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+      qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('CREATED').AsDateTime;
+      qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
+      qryTmpLedger.FieldByName('CODE').AsString := 'J1';
 
      // ADD NCheqReq to the description.
-     if(qryTmpSql.FieldByName('NCHEQREQ').AsInteger > 0) then
-       qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSql.FieldByName('NCHEQREQ').AsString +
-         #13#10 + qryTmpSql.FieldByName('DESCR').AsString;
+      if(qryTmpSql.FieldByName('NCHEQREQ').AsInteger > 0) then
+         qryTmpLedger.FieldByName('DESCR').AsString := 'From CheqReq# ' + qryTmpSql.FieldByName('NCHEQREQ').AsString +
+                                                       #13#10 + qryTmpSql.FieldByName('DESCR').AsString;
 
 //     dmAxiom.qryGetBillRate.Close;
 //     dmAxiom.qryGetBillRate.ParamByName('TAXCODE').AsString := qryTmpSQL.FieldByName('TAXCODE').AsString;
@@ -753,90 +764,90 @@ begin
 //     else
 //         PayableAmount := qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
 
-     if chkGst.Checked then
-        qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency)
-     else
-        qryTmpLedger.FieldByName('DISBDR').AsCurrency :=  0 - qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
+      if chkGst.Checked then
+         qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('AMOUNT').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency)
+      else
+         qryTmpLedger.FieldByName('DISBDR').AsCurrency :=  0 - qryTmpSQL.FieldByName('AMOUNT').AsCurrency;
 
-     qryTmpLedger.FieldByName('TYPE').AsString := 'Firm Payable';
+      qryTmpLedger.FieldByName('TYPE').AsString := 'Firm Payable';
 
-     if chkShowSundry.Checked then
-       qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
+      if chkShowSundry.Checked then
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0-qryTmpSQL.FieldByName('TAX').AsCurrency;
 
-     qryTmpLedger.Post;
-     qryTmpSQL.Next;
+      qryTmpLedger.Post;
+      qryTmpSQL.Next;
    end;
 
    // If not Print only unbilled -> Print unbilled
    if not chkUnbilled.Checked then
    begin
-     // Load the Bills
-     qryTmpSql.Close;
-     qryTmpSql.SQL.Clear;
-     //  11 May 2018 add in cross ref to orginal bill refno for credit note
-     //qryTmpSql.SQL.Add('SELECT * ');
-     //qryTmpSql.SQL.Add('FROM NMEMO ');
-     //qryTmpSql.SQL.Add('WHERE NMATTER = :NMatter ');
-     qryTmpSql.SQL.Add('SELECT n.*, x.REFNO as X_REFNO ');
-     qryTmpSql.SQL.Add('FROM NMEMO n LEFT OUTER JOIN (SELECT NMEMO, REFNO FROM NMEMO) x ON n.RV_NMEMO = x.NMEMO ');
-     qryTmpSql.SQL.Add('WHERE n.NMATTER = :NMatter ');
-     qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-     if chkFrom.Checked and not(FArchiveBatchMode) then
-     begin
-       //qryTmpSql.SQL.Add(' AND DISPATCHED >= :FROMDATE ');
-       qryTmpSql.SQL.Add(' AND n.DISPATCHED >= :FROMDATE ');
-       qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
-     end;
-     if chkTo.Checked and not(FArchiveBatchMode) then
-     begin
-       //qryTmpSql.SQL.Add(' AND DISPATCHED < :TODATE ');
-       qryTmpSql.SQL.Add(' AND n.DISPATCHED < :TODATE ');
-       qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
-     end;
+      // Load the Bills
+      qryTmpSql.Close;
+      qryTmpSql.SQL.Clear;
+      //  11 May 2018 add in cross ref to orginal bill refno for credit note
+      //qryTmpSql.SQL.Add('SELECT * ');
+      //qryTmpSql.SQL.Add('FROM NMEMO ');
+      //qryTmpSql.SQL.Add('WHERE NMATTER = :NMatter ');
+      qryTmpSql.SQL.Add('SELECT n.*, x.REFNO as X_REFNO ');
+      qryTmpSql.SQL.Add('FROM NMEMO n LEFT OUTER JOIN (SELECT NMEMO, REFNO FROM NMEMO) x ON n.RV_NMEMO = x.NMEMO ');
+      qryTmpSql.SQL.Add('WHERE n.NMATTER = :NMatter ');
+      qryTmpSql.ParamByName('NMatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+      if chkFrom.Checked and not(FArchiveBatchMode) then
+      begin
+         //qryTmpSql.SQL.Add(' AND DISPATCHED >= :FROMDATE ');
+         qryTmpSql.SQL.Add(' AND trunc(n.DISPATCHED) >= trunc(:FROMDATE) ');
+         qryTmpSql.ParamByName('FROMDATE').AsDateTime := dtpFrom.DateTime;
+      end;
+      if chkTo.Checked and not(FArchiveBatchMode) then
+      begin
+         //qryTmpSql.SQL.Add(' AND DISPATCHED < :TODATE ');
+         qryTmpSql.SQL.Add(' AND trunc(n.DISPATCHED) < trunc(:TODATE) ');
+         qryTmpSql.ParamByName('TODATE').AsDateTime := dtpTo.DateTime+1;
+      end;
      qryTmpSql.Open;
 
-     while not qryTmpSQL.EOF do
-     begin
-       if qryTmpSQL.FieldByName('DISPATCHED').AsString <> '' then
-       begin
-         qryTmpLedger.Insert;
-         qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
-         qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('DISPATCHED').AsDateTime;
-         qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
-         qryTmpLedger.FieldByName('BANK').AsString := qryTmpSQL.FieldByName('BANK_ACCT').AsString;
-         qryTmpLedger.FieldByName('REASON').AsString := qryTmpSQL.FieldByName('BILL_TO').AsString;
-         qryTmpLedger.FieldByName('CODE').AsString := qryTmpSQL.FieldByName('RV_TYPE').AsString;
-         if qryTmpSQL.FieldByName('RV_TYPE').AsString = 'D' then
+      while not qryTmpSQL.EOF do
+      begin
+         if qryTmpSQL.FieldByName('DISPATCHED').AsString <> '' then
          begin
-           qryTmpLedger.FieldByName('DESCR').AsString := 'Disbursement Letter ' + IntToStr(qryTmpSQL.FieldByName('NMEMO').AsInteger);
-           qryTmpLedger.FieldByName('TYPE').AsString := 'Letter';
-         end else
-         begin
-           // 11 May 2018 DW separate credit notes from normal bills to ebale labelling
-           if qryTmpSQL.FieldByName('RV_TYPE').AsString = 'X' then
-           begin
-              qryTmpLedger.FieldByName('DESCR').AsString := 'Credit note on bill ' + qryTmpSQL.FieldByName('X_REFNO').AsString;
-              qryTmpLedger.FieldByName('TYPE').AsString := 'Credit note';
-           end
-           else
-           begin
-              qryTmpLedger.FieldByName('DESCR').AsString := 'Bill ' + qryTmpSQL.FieldByName('REFNO').AsString;
-              qryTmpLedger.FieldByName('TYPE').AsString := 'Bill';
-           end;
-         end;
+            qryTmpLedger.Insert;
+            qryTmpLedger.FieldByName('REPORTER').AsString := UserId;
+            qryTmpLedger.FieldByName('CREATED').AsDateTime := qryTmpSQL.FieldByName('DISPATCHED').AsDateTime;
+            qryTmpLedger.FieldByName('REFNO').AsString := qryTmpSQL.FieldByName('REFNO').AsString;
+            qryTmpLedger.FieldByName('BANK').AsString := qryTmpSQL.FieldByName('BANK_ACCT').AsString;
+            qryTmpLedger.FieldByName('REASON').AsString := qryTmpSQL.FieldByName('BILL_TO').AsString;
+            qryTmpLedger.FieldByName('CODE').AsString := qryTmpSQL.FieldByName('RV_TYPE').AsString;
+            if qryTmpSQL.FieldByName('RV_TYPE').AsString = 'D' then
+            begin
+               qryTmpLedger.FieldByName('DESCR').AsString := 'Disbursement Letter ' + IntToStr(qryTmpSQL.FieldByName('NMEMO').AsInteger);
+               qryTmpLedger.FieldByName('TYPE').AsString := 'Letter';
+            end else
+            begin
+               // 11 May 2018 DW separate credit notes from normal bills to ebale labelling
+               if qryTmpSQL.FieldByName('RV_TYPE').AsString = 'X' then
+               begin
+                  qryTmpLedger.FieldByName('DESCR').AsString := 'Credit note on bill ' + qryTmpSQL.FieldByName('X_REFNO').AsString;
+                  qryTmpLedger.FieldByName('TYPE').AsString := 'Credit note';
+               end
+               else
+               begin
+                  qryTmpLedger.FieldByName('DESCR').AsString := 'Bill ' + qryTmpSQL.FieldByName('REFNO').AsString;
+                  qryTmpLedger.FieldByName('TYPE').AsString := 'Bill';
+               end;
+            end;
          if chkFees.Checked then
          begin
-           if qryTmpSQL.FieldByName('FEES').AsCurrency <> 0 then
-           begin
-             qryTmpLedger.FieldByName('FEESDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('FEES').AsCurrency);
-             if chkGst.Checked then
-               qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryTmpLedger.FieldByName('FEESDR').AsCurrency - qryTmpSQL.FieldByName('FEESTAX').AsCurrency
-           end;
+            if qryTmpSQL.FieldByName('FEES').AsCurrency <> 0 then
+            begin
+               qryTmpLedger.FieldByName('FEESDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('FEES').AsCurrency);
+               if chkGst.Checked then
+                  qryTmpLedger.FieldByName('FEESDR').AsCurrency := qryTmpLedger.FieldByName('FEESDR').AsCurrency - qryTmpSQL.FieldByName('FEESTAX').AsCurrency
+            end;
          end;
          if qryTmpSQL.FieldByName('SUND').AsCurrency <> 0 then
          begin
-           qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('SUND').AsCurrency );
-           if chkGst.Checked then
+            qryTmpLedger.FieldByName('SUNDDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('SUND').AsCurrency );
+            if chkGst.Checked then
  {
    Modified 4.11.2002 GG
 
@@ -845,35 +856,35 @@ begin
 
              qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qryTmpLedger.FieldByName('SUNDDR').AsCurrency + qryTmpSQL.FieldByName('SUNDTAX').AsCurrency;
  }
-             qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qryTmpLedger.FieldByName('SUNDDR').AsCurrency - qryTmpSQL.FieldByName('SUNDTAX').AsCurrency;
+               qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qryTmpLedger.FieldByName('SUNDDR').AsCurrency - qryTmpSQL.FieldByName('SUNDTAX').AsCurrency;
          end;
          if qryTmpSQL.FieldByName('RV_TYPE').AsString <> 'X' then
          begin
-           // Ordinary bills
-           if qryTmpSQL.FieldByName('ANTD').AsCurrency <> 0 then
-             qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0 - (qryTmpSQL.FieldByName('ANTD').AsCurrency)
-           else
-             qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0;
+            // Ordinary bills
+            if qryTmpSQL.FieldByName('ANTD').AsCurrency <> 0 then
+               qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0 - (qryTmpSQL.FieldByName('ANTD').AsCurrency)
+            else
+               qryTmpLedger.FieldByName('DEBIT').AsCurrency := 0;
            // 04/06/2004 Creditors work: Tony
            // For now, add legal creditors to debit (anticipated disbursements)
-           if qryTmpSQL.FieldByName('UPCRED').AsCurrency <> 0 then
-             qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('UPCRED').AsCurrency;
+            if qryTmpSQL.FieldByName('UPCRED').AsCurrency <> 0 then
+               qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('UPCRED').AsCurrency;
 
-           if chkGst.Checked then
-           begin
-             if qryTmpSQL.FieldByName('ANTD').AsCurrency <> 0 then
-               qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('ANTDTAX').AsCurrency;
-             if qryTmpSQL.FieldByName('UPCRED').AsCurrency <> 0 then
-               qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('UPCREDTAX').AsCurrency;
-           end;
+            if chkGst.Checked then
+            begin
+               if qryTmpSQL.FieldByName('ANTD').AsCurrency <> 0 then
+                  qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('ANTDTAX').AsCurrency;
+               if qryTmpSQL.FieldByName('UPCRED').AsCurrency <> 0 then
+                  qryTmpLedger.FieldByName('DEBIT').AsCurrency := qryTmpLedger.FieldByName('DEBIT').AsCurrency - qryTmpSQL.FieldByName('UPCREDTAX').AsCurrency;
+            end;
 
            //if qryTmpSQL.FieldByName('DISB').AsCurrency < 0 then
            //begin
-           qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('DISB').AsCurrency);
-           if chkGst.Checked then
+            qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('DISB').AsCurrency);
+            if chkGst.Checked then
                qryTmpLedger.FieldByName('DISBDR').AsCurrency := qryTmpLedger.FieldByName('DISBDR').AsCurrency - qryTmpSQL.FieldByName('DISBTAX').AsCurrency;
 
-           if chkShowSundry.Checked then
+            if chkShowSundry.Checked then
                qryTmpLedger.FieldByName('SUNDDR').AsCurrency := - (qryTmpSQL.FieldByName('DISBTAX').AsCurrency + qryTmpSQL.FieldByName('ANTDTAX').AsCurrency);
 
 
@@ -891,8 +902,8 @@ begin
            // If it is a credit note, treat antdisb as disb
            //if (qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency) < 0 then
            //begin
-           qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('DISB').AsCurrency  + qryTmpSQL.FieldByName('ANTD').AsCurrency );
-           if chkGst.Checked then
+            qryTmpLedger.FieldByName('DISBDR').AsCurrency := 0 - (qryTmpSQL.FieldByName('DISB').AsCurrency  + qryTmpSQL.FieldByName('ANTD').AsCurrency );
+            if chkGst.Checked then
                qryTmpLedger.FieldByName('DISBDR').AsCurrency := qryTmpLedger.FieldByName('DISBDR').AsCurrency - qryTmpSQL.FieldByName('DISBTAX').AsCurrency - qryTmpSQL.FieldByName('ANTDTAX').AsCurrency;
            //end;
            //if (qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency) > 0 then
@@ -902,16 +913,17 @@ begin
            //      qryTmpLedger.FieldByName('DISBCR').AsCurrency := qryTmpLedger.FieldByName('DISBCR').AsCurrency + qryTmpSQL.FieldByName('DISBTAX').AsCurrency + qryTmpSQL.FieldByName('ANTDTAX').AsCurrency
            //end;
          end;
+
          if (qryTmpSQL.FieldByName('FEES').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency + qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('SUND').AsCurrency + qryTmpSQL.FieldByName('UPCRED').AsCurrency) > 0 then
          begin
-           qryTmpLedger.FieldByName('DEBTDR').AsCurrency := (qryTmpSQL.FieldByName('FEES').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency + qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('SUND').AsCurrency + qryTmpSQL.FieldByName('UPCRED').AsCurrency);
-           if {chkGst.checked} true then
-             qryTmpLedger.FieldByName('DEBTDR').AsCurrency := qryTmpLedger.FieldByName('DEBTDR').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency;
+            qryTmpLedger.FieldByName('DEBTDR').AsCurrency := (qryTmpSQL.FieldByName('FEES').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency + qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('SUND').AsCurrency + qryTmpSQL.FieldByName('UPCRED').AsCurrency);
+            if {chkGst.checked} true then
+               qryTmpLedger.FieldByName('DEBTDR').AsCurrency := qryTmpLedger.FieldByName('DEBTDR').AsCurrency + qryTmpSQL.FieldByName('TAX').AsCurrency;
          end else
          begin
-           qryTmpLedger.FieldByName('DEBTCR').AsCurrency := 0 - (qryTmpSQL.FieldByName('FEES').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency + qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('SUND').AsCurrency + qryTmpSQL.FieldByName('UPCRED').AsCurrency);
-           if {chkGst.Checked} true then
-             qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpLedger.FieldByName('DEBTCR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
+            qryTmpLedger.FieldByName('DEBTCR').AsCurrency := 0 - (qryTmpSQL.FieldByName('FEES').AsCurrency + qryTmpSQL.FieldByName('DISB').AsCurrency + qryTmpSQL.FieldByName('ANTD').AsCurrency + qryTmpSQL.FieldByName('SUND').AsCurrency + qryTmpSQL.FieldByName('UPCRED').AsCurrency);
+            if {chkGst.Checked} true then
+               qryTmpLedger.FieldByName('DEBTCR').AsCurrency := qryTmpLedger.FieldByName('DEBTCR').AsCurrency - qryTmpSQL.FieldByName('TAX').AsCurrency;
          end;
          qryTmpLedger.Post;
        end;
@@ -936,8 +948,8 @@ begin
 //     qrComboLedger.qrlblArchivedMsg.Enabled := FArchived;
 //     qrComboLedger.qrdbtbArchived.Enabled   := FArchived;
 
-     Screen.Cursor := crDefault;
-     rptCombo.Print;
+      Screen.Cursor := crDefault;
+      rptCombo.Print;
 {     if AutoPrint then
        qrComboLedger.Print
      else
@@ -950,7 +962,7 @@ begin
    ResetLedger();
 
    if Visible then
-     Close();
+      Close();
 end;
 
 

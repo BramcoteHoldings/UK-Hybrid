@@ -460,7 +460,9 @@ object dmAxiom: TdmAxiom
     SQL.Strings = (
       'INSERT INTO TRANSITEM (NACCOUNT, CREATED, ACCT, '
       'AMOUNT, REFNO, DESCR, CHART, OWNER_CODE, NOWNER, '
-      'NCHEQUE, NRECEIPT, NJOURNAL, WHO, VERSION, BAS_TAX,TAX) '
+      
+        'NCHEQUE, NRECEIPT, NJOURNAL, WHO, VERSION, BAS_TAX,TAX, TRAN_TYP' +
+        'E, PROGRAM_NAME) '
       'VALUES '
       '(:NACCOUNT,'
       ':CREATED, '
@@ -477,7 +479,9 @@ object dmAxiom: TdmAxiom
       ':WHO,'
       ':VERSION,'
       ':BAS_TAX,'
-      ':TAX)')
+      ':TAX,'
+      ':TRAN_TYPE,'
+      ':PROGRAM_NAME)')
     Left = 389
     Top = 350
     ParamData = <
@@ -560,6 +564,16 @@ object dmAxiom: TdmAxiom
         DataType = ftUnknown
         Name = 'TAX'
         Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TRAN_TYPE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PROGRAM_NAME'
+        Value = nil
       end>
   end
   object qryTransItemInsert: TUniQuery
@@ -579,7 +593,7 @@ object dmAxiom: TdmAxiom
       '             BASE_CCY_TAX, ENTITY_CCY_AMT, ENTITY_CCY_TAX, '
       
         '             TRAN_CURRENCY, TRAN_CCY_AMT, TRAN_CCY_TAX, naccount' +
-        ' '
+        ', TRAN_TYPE, PROGRAM_NAME '
       '            )'
       
         '     VALUES (:created, :acct, :amount, :tax, :refno, :descr, :ch' +
@@ -596,7 +610,7 @@ object dmAxiom: TdmAxiom
       '             :BASE_CCY_TAX, :ENTITY_CCY_AMT, :ENTITY_CCY_TAX, '
       
         '             :TRAN_CURRENCY, :TRAN_CCY_AMT, :TRAN_CCY_TAX, :nacc' +
-        'ount'
+        'ount, :TRAN_TYPE, :PROGRAM_NAME '
       '            )')
     Left = 479
     Top = 15
@@ -764,6 +778,16 @@ object dmAxiom: TdmAxiom
       item
         DataType = ftUnknown
         Name = 'naccount'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TRAN_TYPE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'PROGRAM_NAME'
         Value = nil
       end>
   end

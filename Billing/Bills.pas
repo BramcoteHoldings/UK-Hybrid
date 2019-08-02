@@ -28,6 +28,7 @@ uses
 
 const
  NMEMOSEARCHDATES: array[0..2] of string = ('GENERATED','DISPATCHED','EXPPAYMENT');
+ CM_REFRESHBILLSGRID = WM_USER + 1003;
 
 type
                   
@@ -460,6 +461,8 @@ type
     procedure CreateInterestBill();
     procedure SendBills;
     procedure GetEmailTemplate(var AEmailTemplate: string);
+
+    procedure CMRefreshBills(var Msg: TMessage); message CM_REFRESHBILLSGRID;
   public
     { Public declarations }
     procedure DisplayRange(iBillMin, iBillMax: integer);
@@ -1043,24 +1046,28 @@ var
    I, iCtr, RecIdx, ColIdx: Integer;
    NMemoVal: Variant;
 begin
-   if tvBills.Controller.SelectedRowCount <= 1 then
-   begin
-      if not qryBills.FieldByName('DISPATCHED').IsNull then
-         (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(qryBills.FieldByName('NMEMO').AsInteger)
-   end else
-   begin
-      for I := 0 to tvBills.Controller.SelectedRecordCount - 1 do
+   try
+      if tvBills.Controller.SelectedRowCount <= 1 then
       begin
-         // RecordIndex provides the absolute index
-         RecIdx := tvBills.Controller.SelectedRecords[I].RecordIndex;
-         // Gets the column index of the Description field
-         ColIdx := tvBills.DataController.GetItemByFieldName('NMEMO').Index;
-         // Obtains the value of the required field
-         NMemoVal := tvBills.DataController.Values[RecIdx, ColIdx];
-         VarCast(NMemoVal, NMemoVal, varInteger);
          if not qryBills.FieldByName('DISPATCHED').IsNull then
-            (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(NMemoVal);
+            (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(qryBills.FieldByName('NMEMO').AsInteger)
+      end else
+      begin
+         for I := 0 to tvBills.Controller.SelectedRecordCount - 1 do
+         begin
+            // RecordIndex provides the absolute index
+            RecIdx := tvBills.Controller.SelectedRecords[I].RecordIndex;
+            // Gets the column index of the Description field
+            ColIdx := tvBills.DataController.GetItemByFieldName('NMEMO').Index;
+            // Obtains the value of the required field
+            NMemoVal := tvBills.DataController.Values[RecIdx, ColIdx];
+            VarCast(NMemoVal, NMemoVal, varInteger);
+            if not qryBills.FieldByName('DISPATCHED').IsNull then
+               (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(NMemoVal);
+         end;
       end;
+   finally
+//      PostMessage(Handle, CM_REFRESHBILLSGRID, 0, 0);
    end;
 end;
 
@@ -2900,6 +2907,11 @@ begin
    finally
 
    end;
+end;
+
+procedure TfrmBills.CMRefreshBills(var Msg: TMessage);
+begin
+   MakeSQL;
 end;
 
 end.

@@ -7,7 +7,7 @@ object frmCodeRules: TfrmCodeRules
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -15
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -15,39 +15,40 @@ object frmCodeRules: TfrmCodeRules
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 120
-  TextHeight = 20
+  TextHeight = 15
   object pagTypes: TcxPageControl
     Left = 12
     Top = 53
     Width = 643
     Height = 388
     TabOrder = 0
-    Properties.ActivePage = tabMatter
+    Properties.ActivePage = tabClient
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.Kind = lfFlat
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     ClientRectBottom = 384
     ClientRectLeft = 4
     ClientRectRight = 639
-    ClientRectTop = 33
+    ClientRectTop = 26
     object tabClient: TcxTabSheet
       Caption = 'Client'
       ImageIndex = 0
+      ExplicitTop = 31
+      ExplicitHeight = 353
       object Label2: TLabel
         Left = 11
         Top = 132
-        Width = 112
-        Height = 20
+        Width = 91
+        Height = 15
         Caption = 'Number Padding'
       end
       object Label8: TLabel
         Left = 11
         Top = 171
-        Width = 123
-        Height = 20
+        Width = 97
+        Height = 15
         Caption = 'Number Separator'
       end
       object dbrgClientCode: TDBRadioGroup
@@ -77,15 +78,15 @@ object frmCodeRules: TfrmCodeRules
         object Label1: TLabel
           Left = 11
           Top = 21
-          Width = 110
-          Height = 20
+          Width = 89
+          Height = 15
           Caption = 'Number of chars'
         end
         object dbtbClientLength: TDBEdit
           Left = 151
           Top = 17
           Width = 42
-          Height = 28
+          Height = 23
           DataField = 'CLIENTLENGTH'
           DataSource = dsCodeRules
           TabOrder = 0
@@ -119,7 +120,7 @@ object frmCodeRules: TfrmCodeRules
         Left = 149
         Top = 132
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'CLIENTPAD'
         DataSource = dsCodeRules
         TabOrder = 2
@@ -128,7 +129,7 @@ object frmCodeRules: TfrmCodeRules
         Left = 149
         Top = 165
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'CLIENTSEPARATOR'
         DataSource = dsCodeRules
         TabOrder = 3
@@ -147,8 +148,8 @@ object frmCodeRules: TfrmCodeRules
         object lblUseEntityLength: TLabel
           Left = 11
           Top = 52
-          Width = 110
-          Height = 20
+          Width = 89
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -158,8 +159,8 @@ object frmCodeRules: TfrmCodeRules
         object lblEntitySeparator: TLabel
           Left = 12
           Top = 96
-          Width = 104
-          Height = 20
+          Width = 82
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -186,7 +187,7 @@ object frmCodeRules: TfrmCodeRules
           Left = 151
           Top = 52
           Width = 42
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -199,7 +200,7 @@ object frmCodeRules: TfrmCodeRules
           Left = 151
           Top = 91
           Width = 42
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -223,8 +224,8 @@ object frmCodeRules: TfrmCodeRules
         object Label9: TLabel
           Left = 11
           Top = 56
-          Width = 110
-          Height = 20
+          Width = 89
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -234,8 +235,8 @@ object frmCodeRules: TfrmCodeRules
         object Label10: TLabel
           Left = 11
           Top = 96
-          Width = 130
-          Height = 20
+          Width = 104
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -262,7 +263,7 @@ object frmCodeRules: TfrmCodeRules
           Left = 179
           Top = 52
           Width = 40
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -275,7 +276,7 @@ object frmCodeRules: TfrmCodeRules
           Left = 179
           Top = 91
           Width = 40
-          Height = 28
+          Height = 23
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -289,11 +290,13 @@ object frmCodeRules: TfrmCodeRules
     object tabCreditor: TcxTabSheet
       Caption = 'Creditor'
       ImageIndex = 1
+      ExplicitTop = 31
+      ExplicitHeight = 353
       object Label6: TLabel
         Left = 11
         Top = 133
-        Width = 112
-        Height = 20
+        Width = 91
+        Height = 15
         Caption = 'Number Padding'
       end
       object dbrgCreditorCode: TDBRadioGroup
@@ -323,15 +326,15 @@ object frmCodeRules: TfrmCodeRules
         object Label5: TLabel
           Left = 11
           Top = 21
-          Width = 110
-          Height = 20
+          Width = 89
+          Height = 15
           Caption = 'Number of chars'
         end
         object dbtbCreditorLength: TDBEdit
           Left = 144
           Top = 17
           Width = 43
-          Height = 28
+          Height = 23
           DataField = 'CREDITORLENGTH'
           DataSource = dsCodeRules
           TabOrder = 0
@@ -353,7 +356,7 @@ object frmCodeRules: TfrmCodeRules
         Left = 153
         Top = 128
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'CREDITORPAD'
         DataSource = dsCodeRules
         TabOrder = 2
@@ -362,32 +365,34 @@ object frmCodeRules: TfrmCodeRules
     object tabMatter: TcxTabSheet
       Caption = 'Matter'
       ImageIndex = 2
+      ExplicitTop = 31
+      ExplicitHeight = 353
       object Label3: TLabel
         Left = 396
         Top = 20
-        Width = 112
-        Height = 20
+        Width = 91
+        Height = 15
         Caption = 'Number Padding'
       end
       object Label4: TLabel
         Left = 396
         Top = 53
-        Width = 123
-        Height = 20
+        Width = 97
+        Height = 15
         Caption = 'Number Separator'
       end
       object Label7: TLabel
         Left = 396
         Top = 85
-        Width = 85
-        Height = 20
+        Width = 67
+        Height = 15
         Caption = 'Matter Prefix'
       end
       object dbtbMatterPad: TDBEdit
         Left = 567
         Top = 16
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'MATTERPAD'
         DataSource = dsCodeRules
         TabOrder = 0
@@ -396,7 +401,7 @@ object frmCodeRules: TfrmCodeRules
         Left = 567
         Top = 48
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'MATTERSEPERATOR'
         DataSource = dsCodeRules
         TabOrder = 1
@@ -405,7 +410,7 @@ object frmCodeRules: TfrmCodeRules
         Left = 567
         Top = 81
         Width = 44
-        Height = 28
+        Height = 23
         DataField = 'MATTERPREFIX'
         DataSource = dsCodeRules
         TabOrder = 2
@@ -480,7 +485,7 @@ object frmCodeRules: TfrmCodeRules
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
@@ -494,11 +499,11 @@ object frmCodeRules: TfrmCodeRules
     UseSystemFont = False
     Left = 459
     Top = 62
-    PixelsPerInch = 120
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      32
+      28
       0)
     object dxBarManager1Bar1: TdxBar
       AllowClose = False
