@@ -11,7 +11,7 @@ object frmSoftlogImport: TfrmSoftlogImport
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
-  Font.Name = 'Tahoma'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
@@ -22,7 +22,7 @@ object frmSoftlogImport: TfrmSoftlogImport
     872
     641)
   PixelsPerInch = 106
-  TextHeight = 14
+  TextHeight = 15
   object cbKeepOpen: TcxCheckBox
     Left = 5
     Top = 617
@@ -53,21 +53,23 @@ object frmSoftlogImport: TfrmSoftlogImport
     object tabImport: TcxTabSheet
       Caption = 'Import'
       ImageIndex = 0
+      ExplicitTop = 25
+      ExplicitHeight = 485
       DesignSize = (
         848
         484)
       object Label3: TLabel
         Left = 9
         Top = 13
-        Width = 87
-        Height = 14
+        Width = 86
+        Height = 15
         Caption = 'Import from File'
       end
       object Label1: TLabel
         Left = 9
         Top = 69
-        Width = 68
-        Height = 14
+        Width = 64
+        Height = 15
         Caption = 'Sundry Date'
       end
       object btnOK: TcxButton
@@ -82,7 +84,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D560A00000000000036000000280000002400000012000000010020000000
-          0000000000004D1000004D100000000000000000000000808000008080000080
+          000000000000C40E0000C40E0000000000000000000000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
@@ -166,6 +168,7 @@ object frmSoftlogImport: TfrmSoftlogImport
           80000080800000808000008080000080800000808000}
         OptionsImage.NumGlyphs = 2
         TabOrder = 0
+        ExplicitTop = 455
       end
       object pbCancel: TcxButton
         Left = 764
@@ -178,7 +181,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         OptionsImage.Glyph.SourceDPI = 96
         OptionsImage.Glyph.Data = {
           424D560A00000000000036000000280000002400000012000000010020000000
-          0000000000004D1000004D100000000000000000000000808000008080000080
+          000000000000C40E0000C40E0000000000000000000000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
           8000008080000080800000808000008080000080800000808000008080000080
@@ -263,9 +266,10 @@ object frmSoftlogImport: TfrmSoftlogImport
         OptionsImage.NumGlyphs = 2
         TabOrder = 1
         OnClick = pbCancelClick
+        ExplicitTop = 455
       end
       object tbFile: TcxButtonEdit
-        Left = 94
+        Left = 106
         Top = 6
         Properties.Buttons = <
           item
@@ -273,7 +277,7 @@ object frmSoftlogImport: TfrmSoftlogImport
             Glyph.SourceDPI = 96
             Glyph.Data = {
               424D360400000000000036000000280000001000000010000000010020000000
-              0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+              000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
               FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
               FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
               FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -318,16 +322,17 @@ object frmSoftlogImport: TfrmSoftlogImport
       end
       object cxLabel1: TcxLabel
         Left = 9
-        Top = 39
+        Top = 36
         Caption = 'Sundry Type'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
+        Transparent = True
       end
       object cmbSundryType: TcxLookupComboBox
-        Left = 94
-        Top = 37
+        Left = 106
+        Top = 35
         Properties.ImmediatePost = True
         Properties.KeyFieldNames = 'CODE'
         Properties.ListColumns = <
@@ -344,7 +349,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         Width = 211
       end
       object dptSund: TcxDateEdit
-        Left = 94
+        Left = 106
         Top = 64
         Properties.ImmediatePost = True
         Properties.ShowTime = False
@@ -364,6 +369,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 6
+        Transparent = True
       end
       object grdImport: TcxGrid
         Left = 3
@@ -374,6 +380,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         TabOrder = 7
         Visible = False
         LookAndFeel.NativeStyle = True
+        ExplicitHeight = 322
         object tvImport: TcxGridTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -439,6 +446,7 @@ object frmSoftlogImport: TfrmSoftlogImport
         Top = 66
         Anchors = [akTop, akRight]
         Caption = 'Import Date Format:'
+        Transparent = True
         Visible = False
       end
       object pnlGrid: TPanel
@@ -517,6 +525,8 @@ object frmSoftlogImport: TfrmSoftlogImport
     object tabExport: TcxTabSheet
       Caption = 'Export'
       ImageIndex = 1
+      ExplicitTop = 25
+      ExplicitHeight = 485
       object rgExpCurrentMatters: TcxGroupBox
         Left = 16
         Top = 13
@@ -529,15 +539,15 @@ object frmSoftlogImport: TfrmSoftlogImport
         object Label5: TLabel
           Left = 9
           Top = 55
-          Width = 53
-          Height = 14
+          Width = 55
+          Height = 15
           Caption = 'MarkerFile'
         end
         object Label6: TLabel
           Left = 9
           Top = 26
-          Width = 32
-          Height = 14
+          Width = 30
+          Height = 15
           Caption = 'Entity'
         end
         object edMarker: TcxTextEdit
@@ -561,7 +571,7 @@ object frmSoftlogImport: TfrmSoftlogImport
           OptionsImage.Glyph.SourceDPI = 96
           OptionsImage.Glyph.Data = {
             424D360800000000000036000000280000002000000010000000010020000000
-            0000000000004D1000004D100000000000000000000000808000008080000080
+            000000000000C40E0000C40E0000000000000000000000808000008080000080
             8000008080000080800000808000008080000080800000808000008080000000
             00FF008080000080800000808000008080000080800000808000008080000080
             8000008080000080800000808000008080000080800000808000008080007F7F
@@ -873,7 +883,7 @@ object frmSoftlogImport: TfrmSoftlogImport
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Categories.Strings = (
@@ -892,14 +902,13 @@ object frmSoftlogImport: TfrmSoftlogImport
     UseSystemFont = False
     Left = 555
     Top = 17
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      30
+      28
       0)
     object dxBarManager1Bar1: TdxBar
-      AllowClose = False
       AllowCustomizing = False
       AllowQuickCustomizing = False
       AllowReset = False
@@ -916,7 +925,7 @@ object frmSoftlogImport: TfrmSoftlogImport
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
         item
@@ -1037,7 +1046,7 @@ object frmSoftlogImport: TfrmSoftlogImport
     UseOwnFont = False
     Left = 195
     Top = 301
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object cxGridPopupMenu1: TcxGridPopupMenu
     Grid = grdImport
