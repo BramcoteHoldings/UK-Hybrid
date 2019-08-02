@@ -22,7 +22,7 @@ object frmCodeRules: TfrmCodeRules
     Width = 643
     Height = 388
     TabOrder = 0
-    Properties.ActivePage = tabCreditor
+    Properties.ActivePage = tabClient
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
