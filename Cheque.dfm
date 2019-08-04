@@ -496,7 +496,9 @@ object frmCheque: TfrmCheque
       Navigator.Buttons.CustomButtons = <>
       OnEditing = tvLedgerEditing
       OnEditKeyPress = tvLedgerEditKeyPress
+      DataController.DataModeController.GridMode = True
       DataController.DataSource = dsLedger
+      DataController.KeyFieldNames = 'UNIQUEID'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
@@ -875,7 +877,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43668.8663368171d
+    EditValue = 43681.8070186458d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1095,7 +1097,7 @@ object frmCheque: TfrmCheque
   end
   object qryLedger: TUniQuery
     UpdatingTable = 'LGRALLOC'
-    KeyFields = 'UNIQUEID'
+    KeyFields = 'lgralloc_id'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
@@ -1104,7 +1106,7 @@ object frmCheque: TfrmCheque
       
         'NCREDITOR, ACCOUNT_NAME, ACCOUNT, BSB, DEP_ACCOUNT_TYPE, NDEPOSI' +
         'TACCOUNT, ANTICIPATED, ORIGINAL_TX, CHART, BAS_TAX,'
-      'FILEID, NINVOICE, ROWID'
+      'FILEID, NINVOICE, lgralloc_id, ROWID'
       'FROM LGRALLOC'
       'WHERE 1=2')
     CachedUpdates = True
@@ -1206,6 +1208,9 @@ object frmCheque: TfrmCheque
     end
     object qryLedgerNINVOICE: TLargeintField
       FieldName = 'NINVOICE'
+    end
+    object qryLedgerLGRALLOC_ID: TFloatField
+      FieldName = 'LGRALLOC_ID'
     end
   end
   object dsLedger: TUniDataSource
