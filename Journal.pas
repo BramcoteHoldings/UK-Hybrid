@@ -808,7 +808,24 @@ begin
                 , ''
                 , lsDefaultTax
                 , IsJournalSplittingChart(qryLedger.FieldByName('CHART').AsString, dmAxiom.Entity)
-                , sParent);
+                , sParent
+                , 0
+                , 0
+                , 0
+                , False
+                , 0
+                , lcTax
+                , '' //sTranCurrency
+                , 0 // lcFXRate
+                , 0 //lcValBase
+                , 0 //lcCurrencyTaxValBase
+                , 0 //LcValEntity
+                , 0 //lcCurrencyTaxValEntity
+                , '' //tvLedgerBRANCH.EditValue
+                , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                , '' //vartostr(tvLedgerDEPT.EditValue)
+                , 'N'
+                );
          end;    //  end if
       end;    //  end if
    except
