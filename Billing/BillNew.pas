@@ -5368,7 +5368,7 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
         Free;
       end;
 
-      with dmAxiom.qryTmp do
+{      with dmAxiom.qryTmp do
       begin
         Close;
         SQL.Text := 'select ncheque, ninvoice, njournal, acct from alloc where nalloc = :nalloc';
@@ -5445,10 +5445,9 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
           ParamByName('entity').AsString := lsAcct;
           ExecSQL;
         end;
-      end;
+      end; }
 
-      if iResult = mrOK
-      then
+      if iResult = mrOK then
       begin
         qryAllocDescription.Close;
         qryAllocDescription.ParamByName('DESCR').AsString := sDescr;
