@@ -145,6 +145,7 @@ object frmPettyJournal: TfrmPettyJournal
       PopupMenu = popGrid
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = dsLedger
+      DataController.KeyFieldNames = 'LGRALLOC_ID'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
@@ -248,6 +249,11 @@ object frmPettyJournal: TfrmPettyJournal
         Properties.ListSource = dsSundryType
         Width = 50
       end
+      object tvLedgerLGRALLOC_ID: TcxGridDBColumn
+        DataBinding.FieldName = 'LGRALLOC_ID'
+        Visible = False
+        VisibleForCustomization = False
+      end
     end
     object dbgrLedgerLevel1: TcxGridLevel
       GridView = tvLedger
@@ -349,10 +355,10 @@ object frmPettyJournal: TfrmPettyJournal
     TabOrder = 2
     Text = 'tbPettyCash'
     OnExit = tbPettyCashExit
-    Width = 86
+    Width = 107
   end
   object lblPettyCashDescr: TcxLabel
-    Left = 352
+    Left = 376
     Top = 69
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
@@ -364,13 +370,13 @@ object frmPettyJournal: TfrmPettyJournal
     StyleHot.LookAndFeel.NativeStyle = False
     Properties.Alignment.Vert = taVCenter
     Height = 24
-    Width = 508
+    Width = 484
     AnchorY = 81
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 89
     Top = 30
-    EditValue = 43651.492463206d
+    EditValue = 43682.7891969444d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -521,7 +527,7 @@ object frmPettyJournal: TfrmPettyJournal
     SQL.Strings = (
       
         'SELECT ROWID, TYPE, REFNO, LONGDESC, REASON, AMOUNT, TAXCODE, TA' +
-        'XRATE, TAX, WITHHOLD, SUNDRYTYPE, CHART'
+        'XRATE, TAX, WITHHOLD, SUNDRYTYPE, CHART, LGRALLOC_ID'
       'FROM LGRALLOC'
       'WHERE REFNO IS NULL')
     CachedUpdates = True

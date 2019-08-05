@@ -1,4 +1,4 @@
-unit PettyJournal;
+unit MatterGLOfficeJournal;
 
 interface
 
@@ -79,6 +79,7 @@ type
     btnSave: TdxBarButton;
     btnClose: TdxBarButton;
     rgType: TcxRadioGroup;
+    tvLedgerLGRALLOC_ID: TcxGridDBColumn;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure qryLedgerAfterInsert(DataSet: TDataSet);
@@ -230,265 +231,353 @@ var
   sJournalMessage: string;
   iJournal: integer;
   dAmount: double;
-  iSign: integer;
+  iSign,
+  iRows,
+  iNalloc: integer;
   glInstance : TglComponentInstance ;
   glComponentSetup : TglComponentSetup;
   sLedgerKey,sLedgerKeyDr : String;
   Row: integer;
 begin
-  screen.Cursor := crHourGlass;
-  glComponentSetup := dmAxiom.getGlComponents;
-  if qryLedger.Modified then
-    qryLedger.Post;
+   screen.Cursor := crHourGlass;
+   glComponentSetup := dmAxiom.getGlComponents;
+   if qryLedger.Modified then
+      qryLedger.Post;
 
-  for Row := 0 to tvLedger.DataController.RecordCount - 1 do
-  begin
-     tvLedger.DataController.FocusedRowIndex := Row;
-     if tvLedger.DataController.GetDisplayText(Row, tvLedgerREFNO.Index) = '' then
-        tvLedger.DataController.DeleteFocused;
-  end;
+   for Row := 0 to tvLedger.DataController.RecordCount - 1 do
+   begin
+      tvLedger.DataController.FocusedRowIndex := Row;
+      if tvLedger.DataController.GetDisplayText(Row, tvLedgerREFNO.Index) = '' then
+         tvLedger.DataController.DeleteFocused;
+   end;
 
-  if OKtoPost(True) then
-  begin
-    if (PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed]) then
-    begin
+   if OKtoPost(True) then
+   begin
+      if (PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed]) then
+      begin
   {
-    Modified 25.10.2002 GG
-    Removed compiler warning
+      Modified 25.10.2002 GG
+      Removed compiler warning
   }
-      iSign:= 1;
-      try
-        // Tell the user what we are doing
-  {      frmProcess := TfrmProcess.Create(Self);
-        frmProcess.lblProcess.Caption := 'Posting Petty Cash Transactions';
-        qryLedger.Last;
-        frmProcess.pbProcess.Max := qryLedger.Recno;
-        frmProcess.Show;
-        Application.ProcessMessages;
-  }
-        case rgSign.itemIndex of
-          0: iSign := 1;
-          1: iSign := -1;
-        end;
+         iSign:= 1;
+         try
+            case rgSign.itemIndex of
+               0: iSign := 1;
+               1: iSign := -1;
+            end;
 
-        PostingFailed := False;
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
-        dmAxiom.uniInsight.StartTransaction;
+            PostingFailed := False;
+            if dmAxiom.uniInsight.InTransaction then
+               dmAxiom.uniInsight.Rollback;
+            dmAxiom.uniInsight.StartTransaction;
 
         // Set up a journal
-        iJournal := GetJournal;
-        if iJournal = -1 then
-          raise EPostError.Create('Could not get next Journal number for Entity ' + dmAxiom.Entity);
+            iJournal := GetJournal;
+            if iJournal = -1 then
+               raise EPostError.Create('Could not get next Journal number for Entity ' + dmAxiom.Entity);
 
-        qryJournal.Open;
-        qryJournal.Insert;
-        qryJournal.FieldByName('ACCT').AsString := dmAxiom.Entity;
-        qryJournal.FieldByName('NJOURNAL').AsInteger := iJournal;
-        qryJournal.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-        qryJournal.FieldByName('REASON').AsString := tbDesc.Text;
-        qryJournal.FieldByName('TRUST').AsString := 'G';
-        if rgType.ItemIndex = 0 then
-           qryJournal.FieldByName('TYPE').AsString := '2'
-        else
-           qryJournal.FieldByName('TYPE').AsString := '1';
-        qryJournal.FieldByName('AMOUNT').AsCurrency := iSign * (TotalAmt - WithholdTax);
-        qryJournal.Post; // Puts journal into cached buffer
+            qryJournal.Open;
+            qryJournal.Insert;
+            qryJournal.FieldByName('ACCT').AsString := dmAxiom.Entity;
+            qryJournal.FieldByName('NJOURNAL').AsInteger := iJournal;
+            qryJournal.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+            qryJournal.FieldByName('REASON').AsString := tbDesc.Text;
+            qryJournal.FieldByName('TRUST').AsString := 'G';
+            if rgType.ItemIndex = 0 then
+               qryJournal.FieldByName('TYPE').AsString := '2'
+            else
+               qryJournal.FieldByName('TYPE').AsString := '1';
+            qryJournal.FieldByName('AMOUNT').AsCurrency := iSign * (TotalAmt - WithholdTax);
+            qryJournal.Post; // Puts journal into cached buffer
 
-        qryLedger.First;
-        while not qryLedger.EOF do
-        begin
-          // Now load the transactions
-          if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
-          begin
-             // lookup the ledger code cased on the value entered
-             glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
-
-             if not glInstance.valid then
-             begin
-                   // something has gone very wrong !
-                   raise Exception.create('Error invalid ledger key');
-             end;
-
-               // frmProcess.pbProcess.Position := frmProcess.pbProcess.Position + 1;
-               PostLedger(dtpDate.Date
-                 , iSign * (0 - qryLedger.FieldByName('AMOUNT').AsCurrency)
-                 , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
-                 , IntToStr(iJournal)
-                 , 'JOURNAL'
-                 , iJournal
-                 , qryLedger.FieldByName('REASON').AsString
-                 , glInstance.ledgerKey
-                 , ''
-                 , -1
-                 , ''
-                 , qryLedger.FieldByName('TAXCODE').AsString);
-                 glInstance.Free;
-          end
-          else
-          if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
-          begin
-            // frmProcess.pbProcess.Position := frmProcess.pbProcess.Position + 1;
-            if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then
+            qryLedger.First;
+            while not qryLedger.EOF do
             begin
-              // Create an Alloc for this transaction
-              with qryAllocInsert do
-              begin
-                ParamByName('ACCT').AsString := dmAxiom.Entity;
-                ParamByName('CREATED').AsDateTime := dtpDate.Date;
-                ParamByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
-                ParamByName('REFNO').AsString := IntToStr(iJournal);
-                ParamByName('PAYER').AsString := 'Journal ' + IntToStr(iJournal);
-                ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-                ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
-                ParamByName('NJOURNAL').AsInteger := iJournal;
-                ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
-                ParamByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
-                ParamByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'TITLE');
-                ParamByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
-                ParamByName('TAX').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);
-                ParamByName('AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('AMOUNT').AsFloat);
-                ParamByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
-                ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
-                ParamByName('BILLED_TAX_AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);
-                if rgType.ItemIndex = 0 then
-                  ParamByName('TYPE').AsString := 'J2'
-                else
-                  ParamByName('TYPE').AsString := 'J1';
-                ExecSQL;
-                MatterUpdate(ParamByName('NMATTER').AsInteger, 'UNBILL_DISB', iSign * (qryLedger.FieldByName('AMOUNT').AsCurrency));
-              end;
-              // Update the ledger (minus withholding tax if applicable)
-              if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-                dAmount := iSign * (0 - (qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency))
-              else
-                dAmount := iSign * (0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
+              // Now load the transactions
+               if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+               begin
+                // lookup the ledger code cased on the value entered
+                  glInstance := dmAxiom.getGlComponents.parseString(qryLedger.FieldByName('REFNO').AsString,true);
 
+                  if not glInstance.valid then
+                  begin
+                      // something has gone very wrong !
+                      raise Exception.create('Error invalid ledger key');
+                  end;
 
-                {post components}
-              if rgType.ItemIndex = 0 then
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR'),'',true,'')
-              else
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_FEE_CR'),'',true,'');
-              PostLedger(dtpDate.Date
-                , dAmount
-                , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
-                , IntToStr(iJournal)
-                , 'JOURNAL'
-                , iJournal
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
+                  // frmProcess.pbProcess.Position := frmProcess.pbProcess.Position + 1;
+                  PostLedger(dtpDate.Date
+                    , iSign * (0 - qryLedger.FieldByName('AMOUNT').AsCurrency)
+                    , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
+                    , IntToStr(iJournal)
+                    , 'JOURNAL'
+                    , iJournal
+                    , qryLedger.FieldByName('REASON').AsString
+                    , glInstance.ledgerKey
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString
+                    , FALSE
+                    , '0'
+                    , 0
+                    , 0
+                    , 0
+                    , FALSE
+                    , 0
+                    , 0
+                    , '' //sTranCurrency
+                    , 0 // lcFXRate
+                    , 0 //lcValBase
+                    , 0 //lcCurrencyTaxValBase
+                    , 0 //LcValEntity
+                    , 0 //lcCurrencyTaxValEntity
+                    , '' //tvLedgerBRANCH.EditValue
+                    , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                    , '' //vartostr(tvLedgerDEPT.EditValue)
+                    , 'N'
+                    );
+                    glInstance.Free;
+               end
+               else
+               if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
+               begin
+               // frmProcess.pbProcess.Position := frmProcess.pbProcess.Position + 1;
+                  if MatterIsCurrent(qryLedger.FieldByName('REFNO').AsString) then
+                  begin
+                     // Create an Alloc for this transaction
+                     with qryAllocInsert do
+                     begin
+                        iNalloc := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
+                        ParamByName('ACCT').AsString := dmAxiom.Entity;
+                        ParamByName('CREATED').AsDateTime := dtpDate.Date;
+                        ParamByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER');
+                        ParamByName('REFNO').AsString := IntToStr(iJournal);
+                        ParamByName('PAYER').AsString := 'Journal ' + IntToStr(iJournal);
+                        ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                        ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NCLIENT');
+                        ParamByName('NJOURNAL').AsInteger := iJournal;
+                        ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
+                        ParamByName('NALLOC').AsInteger := iNalloc;
+                        ParamByName('CLIENT_NAME').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'TITLE');
+                        ParamByName('MATTER_DESC').AsString := MatterString(qryLedger.FieldByName('REFNO').AsString, 'SHORTDESCR');
+                        ParamByName('TAX').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);
+                        ParamByName('AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('AMOUNT').AsFloat);
+                        ParamByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
+                        ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                        ParamByName('BILLED_TAX_AMOUNT').AsFloat := iSign * (0 - qryLedger.FieldByName('TAX').AsFloat);
+                        if rgType.ItemIndex = 0 then
+                           ParamByName('TYPE').AsString := 'J2'
+                        else
+                           ParamByName('TYPE').AsString := 'J1';
+                        ExecSQL;
+                        MatterUpdate(ParamByName('NMATTER').AsInteger, 'UNBILL_DISB', iSign * (qryLedger.FieldByName('AMOUNT').AsCurrency));
+                     end;
+                     // Update the ledger (minus withholding tax if applicable)
+                     if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                        dAmount := iSign * (0 - (qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency))
+                     else
+                        dAmount := iSign * (0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
 
-            end
-            else
-              raise Exception.Create('Matter ' + qryLedger.FieldByName('REFNO').AsString + ' is not current');
-          end;
+                     {post components}
+                     if rgType.ItemIndex = 0 then
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR'),'',true,'')
+                     else
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_FEE_CR'),'',true,'');
 
-          // Now post the tax
-          if qryLedger.FieldByName('TAX').AsFloat <> 0 then
-          begin
-            if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-              begin
+                     PostLedger(dtpDate.Date
+                         , dAmount
+                         , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
+                         , IntToStr(iJournal)
+                         , 'JOURNAL'
+                         , iJournal
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , ''
+                         , -1
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , iNalloc
+                         , TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER')
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0
+                         , '' //sTranCurrency
+                         , 0 // lcFXRate
+                         , 0 //lcValBase
+                         , 0 //lcCurrencyTaxValBase
+                         , 0 //LcValEntity
+                         , 0 //lcCurrencyTaxValEntity
+                         , '' //tvLedgerBRANCH.EditValue
+                         , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                         , '' //vartostr(tvLedgerDEPT.EditValue)
+                         , 'N'
+                         );
 
-              sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                  end
+                  else
+                     raise Exception.Create('Matter ' + qryLedger.FieldByName('REFNO').AsString + ' is not current');
+               end;
 
-              PostLedger(dtpDate.Date
-                , iSign * qryLedger.FieldByName('TAX').AsCurrency
-                , 0
-                , IntToStr(iJournal)
-                , 'JOURNAL'
-                , iJournal
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-                end
-            else
-              begin
-              sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+               // Now post the tax
+               if qryLedger.FieldByName('TAX').AsFloat <> 0 then
+               begin
+                  if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+                  begin
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-              PostLedger(dtpDate.Date
-                , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
-                , 0
-                , IntToStr(iJournal)
-                , 'JOURNAL'
-                , iJournal
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-                end;
-          end;
+                     PostLedger(dtpDate.Date
+                         , iSign * qryLedger.FieldByName('TAX').AsCurrency
+                         , 0
+                         , IntToStr(iJournal)
+                         , 'JOURNAL'
+                         , iJournal
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , ''
+                         , -1
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , iNalloc
+                         , TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER')
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0
+                         , '' //sTranCurrency
+                         , 0 // lcFXRate
+                         , 0 //lcValBase
+                         , 0 //lcCurrencyTaxValBase
+                         , 0 //LcValEntity
+                         , 0 //lcCurrencyTaxValEntity
+                         , '' //tvLedgerBRANCH.EditValue
+                         , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                         , '' //vartostr(tvLedgerDEPT.EditValue)
+                         , 'N'
+                         );
+                  end
+                  else
+                  begin
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-          qryLedger.Next;
-        end; // While not EOF loop
+                     PostLedger(dtpDate.Date
+                         , iSign * (0 - qryLedger.FieldByName('TAX').AsCurrency)
+                         , 0
+                         , IntToStr(iJournal)
+                         , 'JOURNAL'
+                         , iJournal
+                         , qryLedger.FieldByName('REASON').AsString
+                         , sLedgerKey
+                         , ''
+                         , -1
+                         , ''
+                         , qryLedger.FieldByName('TAXCODE').AsString
+                         , FALSE
+                         , '0'
+                         , iNalloc
+                         , TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER')
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0
+                         , '' //sTranCurrency
+                         , 0 // lcFXRate
+                         , 0 //lcValBase
+                         , 0 //lcCurrencyTaxValBase
+                         , 0 //LcValEntity
+                         , 0 //lcCurrencyTaxValEntity
+                         , '' //tvLedgerBRANCH.EditValue
+                         , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                         , '' //vartostr(tvLedgerDEPT.EditValue)
+                         , 'N'
+                         );
+                  end;
+               end;
+               qryLedger.Next;
+            end; // While not EOF loop
 
         // lookup the ledger code based on the value entered
-        glInstance := dmAxiom.getGlComponents.parseString(tbPettyCash.Text   ,true);
-        if not glInstance.valid then
-        begin
-           // something has gone very wrong !
-           raise Exception.create('Error invalid ledger key');
-        end;
+            glInstance := dmAxiom.getGlComponents.parseString(tbPettyCash.Text   ,true);
+            if not glInstance.valid then
+            begin
+               // something has gone very wrong !
+               raise Exception.create('Error invalid ledger key');
+            end;
 
-        // Post a transaction to the consolidated ledger
-        PostLedger(dtpDate.Date
-          , iSign * (TotalAmt - WithholdTax)
-          , 0
-          , IntToStr(iJournal)
-          , 'JOURNAL'
-          , iJournal
-          , tbDesc.Text
-          ,glInstance.ledgerKey
-          , ''
-          , -1
-          , ''
-          , qryLedger.FieldByName('TAXCODE').AsString);
+            // Post a transaction to the consolidated ledger
+            PostLedger(dtpDate.Date
+                , iSign * (TotalAmt - WithholdTax)
+                , 0
+                , IntToStr(iJournal)
+                , 'JOURNAL'
+                , iJournal
+                , tbDesc.Text
+                ,glInstance.ledgerKey
+                , ''
+                , -1
+                , ''
+                , qryLedger.FieldByName('TAXCODE').AsString
+                , FALSE
+                , '0'
+                , 0
+                , 0
+                , 0
+                , FALSE
+                , 0
+                , 0
+                , '' //sTranCurrency
+                , 0 // lcFXRate
+                , 0 //lcValBase
+                , 0 //lcCurrencyTaxValBase
+                , 0 //LcValEntity
+                , 0 //lcCurrencyTaxValEntity
+                , '' //tvLedgerBRANCH.EditValue
+                , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                , '' //vartostr(tvLedgerDEPT.EditValue)
+                , 'N'
+                );
 
-          glInstance.free;
+            glInstance.free;
 
-        sJournalMessage := 'Posted Journal ' + IntToStr(iJournal) + ' for ' + Format('%m', [TotalAmt]) + ' on ' + FormatDateTime('ddddd', dtpDate.Date);
+            sJournalMessage := 'Posted Journal ' + IntToStr(iJournal) + ' for ' + Format('%m', [TotalAmt]) + ' on ' + FormatDateTime('ddddd', dtpDate.Date);
 
-        // Now save the general ledger items
-        qryJournal.ApplyUpdates;
-        qryLedger.CancelUpdates;
-
-        CheckLedgerTotal;
-
-        dmAxiom.uniInsight.Commit;
-      except
-        on E: Exception do
-        begin
-          if qryJournal.UpdatesPending then
-            qryJournal.CancelUpdates;
-          if qryLedger.UpdatesPending then
+            // Now save the general ledger items
+            qryJournal.ApplyUpdates;
             qryLedger.CancelUpdates;
-          dmAxiom.uniInsight.Rollback;
-          PostingFailed := True;
-          screen.Cursor := crDefault;
-          MsgErr('Posting failed:' + chr(13) + chr(13) + E.Message);
-        end;
-      end;
 
-      if not PostingFailed then
-      begin
-        SettingSave('Petty Journal', 'Ledger', tbPettyCash.Text);
+            CheckLedgerTotal;
+
+            dmAxiom.uniInsight.Commit;
+         except
+            on E: Exception do
+            begin
+               if qryJournal.UpdatesPending then
+                  qryJournal.CancelUpdates;
+               if qryLedger.UpdatesPending then
+                  qryLedger.CancelUpdates;
+               dmAxiom.uniInsight.Rollback;
+               PostingFailed := True;
+               screen.Cursor := crDefault;
+               MsgErr('Posting failed:' + chr(13) + chr(13) + E.Message);
+            end;
+         end;
+
+         if not PostingFailed then
+         begin
+            SettingSave('Petty Journal', 'Ledger', tbPettyCash.Text);
 //        SettingSave('Petty Journal', 'Descr', tbDesc.Text);
-        MsgInfo(sJournalMessage);
-        screen.Cursor := crDefault;
-        Self.Close;
+            MsgInfo(sJournalMessage);
+            screen.Cursor := crDefault;
+         Self.Close;
 //        RemoveFromDesktop(Self);
+         end;
       end;
-    end;
-  end
+   end
 end;
 
 procedure TfrmPettyJournal.qryLedgerAfterInsert(DataSet: TDataSet);
