@@ -636,8 +636,11 @@ begin
             qrySetup.Close;
 
             qrySetup.SQL.Text := 'UPDATE CHEQREQ CR SET '+
-                                 'TAX =(SELECT (CR.AMOUNT*(ABS(RATE)/100)) '+
-                                 'FROM TAXRATE WHERE TAXCODE=CR.TAXCODE AND TRUNC(CR.REQDATE) >= commence and TRUNC(CR.REQDATE) <= nvl(end_period,sysdate+1000)) '+
+                                 'TAX =(SELECT (CR.AMOUNT*(ABS(BILL_RATE)/100)) '+
+                                 'FROM TAXRATE WHERE TAXCODE=CR.TAXCODE AND TRUNC(CR.REQDATE) >= commence and TRUNC(CR.REQDATE) <= nvl(end_period,sysdate+1000)), '+
+                                 'BILLED_TAX = (SELECT (CR.AMOUNT*(ABS(RATE)/100)) '+
+                                 'FROM TAXRATE WHERE TAXCODE=CR.TAXCODE AND TRUNC(CR.REQDATE) >= commence and TRUNC(CR.REQDATE) <= nvl(end_period,sysdate+1000)), '+
+                                 'CR.BILLED_AMOUNT = CR.AMOUNT '+
                                  'WHERE TAX = 0 AND FILEID = ' + QuotedStr(Self.qryBill.FieldByName('FILEID').AsString) + ' AND '+
                                  'NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger);
             qrySetup.ExecSQL;

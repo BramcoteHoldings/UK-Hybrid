@@ -148,7 +148,6 @@ type
     pplblPaid: TppLabel;
     ppDetailBand2: TppDetailBand;
     ppBank: TppDBText;
-    ppDesc: TppDBText;
     ppAuthor: TppDBText;
     ppBillNo: TppDBText;
     ppAmount: TppDBText;
@@ -162,8 +161,6 @@ type
     ppDBPayable: TppDBText;
     ppFooterBand1: TppFooterBand;
     ppSystemVariable2: TppSystemVariable;
-    ppSystemVariable3: TppSystemVariable;
-    ppLabel30: TppLabel;
     ppSummaryBand1: TppSummaryBand;
     ppLine5: TppLine;
     ppLine6: TppLine;
@@ -1548,6 +1545,9 @@ type
     tvDocsFOLDER_ID: TcxGridDBBandedColumn;
     actBillDelete: TAction;
     tvInvoicesSTATUS: TcxGridDBColumn;
+    ppDBMemo4: TppDBMemo;
+    ppSystemVariable1: TppSystemVariable;
+    ppLine9: TppLine;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
