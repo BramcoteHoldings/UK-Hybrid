@@ -68,7 +68,7 @@ uses
   YearEnd2 in 'YearEnd2.pas' {frmYearEnd2},
   FeeCodes in 'FeeCodes.pas' {frmFeeCode},
   RptLedgerCheqReq in 'RptLedgerCheqReq.pas' {frmRptLedgerCheqReq},
-  PettyJournal in 'PettyJournal.pas' {frmPettyJournal},
+  MatterGLOfficeJournal in 'MatterGLOfficeJournal.pas' {frmPettyJournal},
   ClientGroups in 'ClientGroups.pas' {frmClientGroups},
   MonitorImport in 'MonitorImport.pas' {frmMonitorImport},
   GenericSearch in 'GenericSearch.pas' {frmGenericSearch},

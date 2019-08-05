@@ -663,8 +663,8 @@ object frmCheque: TfrmCheque
     OnClick = chkPrintClick
   end
   object btnOK: TcxButton
-    Left = 798
-    Top = 504
+    Left = 795
+    Top = 502
     Width = 79
     Height = 27
     Anchors = [akRight, akBottom]
@@ -877,7 +877,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43681.8070186458d
+    EditValue = 43682.4841991782d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday

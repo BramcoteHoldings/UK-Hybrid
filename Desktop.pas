@@ -727,7 +727,7 @@ uses
   Entitys, FeeNew, FeeCodes, {FeeType,} FieldTypes, Genders,
   JournalBill, JournalMatter, Journals, Ledgers,
   Matters, MatterType, MatterReportBuilder, AxiomData,  TableCache, MatterStatus,
-  MonitorImport, OptionsUser, {Overview,} Password, PettyCash, PettyJournal,
+  MonitorImport, OptionsUser, {Overview,} Password, PettyCash, MatterGLOfficeJournal,
   Phonebook, PhonebookGroups, Printer,
   PhoneBookNew, Postcode, PostcodeSearch, PrecCategories, Quickcodes, Receipt,
   RelateDict, Reports, ScaleCosts, Sounds, SoftlogImport, SundryNew,
@@ -829,7 +829,7 @@ begin
 
             //************************************************
 
-            try
+{            try
             // see if the dictionary is installed
               if  not DirectoryExists(ExtractFilePath(Application.EXEName) + 'Dictionaries') then
                  CreateDir(ExtractFilePath(Application.EXEName) + 'Dictionaries');
@@ -837,7 +837,7 @@ begin
                                              (FileExists(ExtractFilePath(Application.EXEName) + 'Spelling\en_US.dic'));
             except
               // silent
-            end;
+            end;    }
 
             application.helpfile := SystemString('HELP_FILE_PATH');
 
@@ -1046,6 +1046,7 @@ begin
          cAItem.DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
          cAItem.Enabled := True;
          dmAxiom.TSSpellChecker.LoadDictionaries();
+
       end;
    finally
       dmAxiom.qryEmpsLogin.Close;
