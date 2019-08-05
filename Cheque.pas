@@ -1049,85 +1049,83 @@ begin
                // if (qryAllocs.FieldByName('AMOUNT').AsCurrency + cTrust) < 0 then
                bMatterAccumulate := False;
                bProtectedAccumulate := False;
-//               qryLedger.First;
-               with tvLedger.DataController do
+               qryLedger.First;
+               while not qryLedger.EOF do
                begin
-                  for iRows := 0 to RecordCount - 1 do   //while not qryLedger.EOF do
+                  if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+                     (qryLedger.FieldByName('TYPE').AsString = 'Protected'){ or
+                   (qryLedger.FieldByName('TYPE').AsString = 'Debtors') } then
                   begin
-                     tvLedger.ViewData.Records[iRows].Focused := True;
-                     if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
-                        (qryLedger.FieldByName('TYPE').AsString = 'Protected'){ or
-                      (qryLedger.FieldByName('TYPE').AsString = 'Debtors') } then
+                     if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
                      begin
-                        if qryLedger.FieldByName('TYPE').AsString = 'Matter' then
+                        if MatterList.Count > 0 then
                         begin
-                           if MatterList.Count > 0 then
+                           for n :=0 to MatterList.Count - 1 do
                            begin
-                              for n :=0 to MatterList.Count - 1 do
+                              if qryLedger.FieldByName('REFNO').AsString = MatterList.Strings[n] then
                               begin
-                                 if qryLedger.FieldByName('REFNO').AsString = MatterList.Strings[n] then
-                                 begin
-                                    MatterAmountList.Strings[n] := floattostr(strtofloat(MatterAmountList.Strings[n]) +
-                                                           qryLedger.FieldByName('AMOUNT').AsCurrency );
-                                    bMatterAccumulate := True;
-                                    break;
-                                 end
-                              end;
-                              if not bMatterAccumulate then
-                              begin
-                                 MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
-                                 MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
-                              end;
-                           end
-                           else
+                                 MatterAmountList.Strings[n] := floattostr(strtofloat(MatterAmountList.Strings[n]) +
+                                                        qryLedger.FieldByName('AMOUNT').AsCurrency );
+                                 bMatterAccumulate := True;
+                                 break;
+                              end
+                           end;
+                           if not bMatterAccumulate then
                            begin
                               MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
                               MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
                            end;
                         end
                         else
-                        if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
                         begin
-                           if ProtectedList.Count > 0 then
+                           MatterList.Add(qryLedger.FieldByName('REFNO').AsString);
+                           MatterAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
+                        end;
+                     end
+                     else
+                     if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
+                     begin
+                        if ProtectedList.Count > 0 then
+                        begin
+                           for n :=0 to ProtectedList.Count - 1 do
                            begin
-                              for n :=0 to ProtectedList.Count - 1 do
+                              if qryLedger.FieldByName('REFNO').AsString = ProtectedList.Strings[n] then
                               begin
-                                 if qryLedger.FieldByName('REFNO').AsString = ProtectedList.Strings[n] then
-                                 begin
-                                    ProtectedAmountList.Strings[n] := floattostr(strtofloat(ProtectedAmountList.Strings[n]) +
-                                                                  qryLedger.FieldByName('AMOUNT').AsCurrency );
-                                    bProtectedAccumulate := True;
-                                    break;
-                                 end
-                              end;
-                              if not bProtectedAccumulate then
-                              begin
-                                 ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
-                                 ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
-                              end;
-                           end
-                           else
+                                 ProtectedAmountList.Strings[n] := floattostr(strtofloat(ProtectedAmountList.Strings[n]) +
+                                                               qryLedger.FieldByName('AMOUNT').AsCurrency );
+                                 bProtectedAccumulate := True;
+                                 break;
+                              end
+                           end;
+                           if not bProtectedAccumulate then
                            begin
                               ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
                               ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
                            end;
                         end
-                     end;
-                     bMatterAccumulate := False;
-                     bProtectedAccumulate := False;
-//                     qryLedger.Next;
-//                  end;
+                        else
+                        begin
+                           ProtectedList.Add(qryLedger.FieldByName('REFNO').AsString);
+                           ProtectedAmountList.Add(qryLedger.FieldByName('AMOUNT').AsString);
+                        end;
+                     end
+                  end;
+                  bMatterAccumulate := False;
+                  bProtectedAccumulate := False;
+                  qryLedger.Next;
+               end;
                   // END: qryLedger.First;
 
-                  // Now, iterate through the entered Ledger Entries
-                  qryLedger.First;
-                  qryAllocs.Open;
-                  RowItemCount := 0;
-//                 if grpDirectDebit.Visible then
-//                    sBankDetails := ' ('+ dfBSB.Text +'-'+dfAccount.Text +' '+ dfAccountName.Text +')';
-                  bTrustInvoice := False;
-//                  while not qryLedger.EOF do
-//                  begin
+               // Now, iterate through the entered Ledger Entries
+               qryLedger.First;
+               qryAllocs.Open;
+               RowItemCount := 0;
+//              if grpDirectDebit.Visible then
+//                 sBankDetails := ' ('+ dfBSB.Text +'-'+dfAccount.Text +' '+ dfAccountName.Text +')';
+               bTrustInvoice := False;
+               while not qryLedger.EOF do
+                  begin
+//               b   egin
                      if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
                         (qryLedger.FieldByName('TYPE').AsString = 'Protected')
                      {or (qryLedger.FieldByName('TYPE').AsString = 'Debtors')} then
@@ -1276,7 +1274,7 @@ begin
                               else
                               if (qryLedger.FieldByName('TYPE').AsString = 'Matter') and
                                  (MatterAmountList.Count > 0 ) and
-                                 (((cTrust - Abs(StrToCurr(MatterAmountList.Strings[ItemCount]))) - cProtected) < -0.001) and
+                                 (((cTrust - Abs(StrToCurr(MatterAmountList.Strings[RowItemCount]))) - cProtected) < -0.001) and
                                  (StrToCurr(MatterAmountList.Strings[RowItemCount]) > 0) then
                               begin
                                  //check to see if it's a stat deposit transaction
@@ -1369,7 +1367,18 @@ begin
                                   , 0
                                   , FALSE
                                   , 0
-                                  , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
+                                  , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                                  , '' //sTranCurrency
+                                  , 0 // lcFXRate
+                                  , 0 //lcValBase
+                                  , 0 //lcCurrencyTaxValBase
+                                  , 0 //LcValEntity
+                                  , 0 //lcCurrencyTaxValEntity
+                                  , '' //tvLedgerBRANCH.EditValue
+                                  , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                  , '' //vartostr(tvLedgerDEPT.EditValue)
+                                  , 'N'
+                                  );
                            end
                            else
                            begin
@@ -1423,7 +1432,18 @@ begin
                                   , 0
                                   , FALSE
                                   , 0
-                                  , 0 - qryLedger.FieldByName('TAX').AsCurrency  );
+                                  , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                                  , '' //sTranCurrency
+                                  , 0 // lcFXRate
+                                  , 0 //lcValBase
+                                  , 0 //lcCurrencyTaxValBase
+                                  , 0 //LcValEntity
+                                  , 0 //lcCurrencyTaxValEntity
+                                  , '' //tvLedgerBRANCH.EditValue
+                                  , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                  , '' //vartostr(tvLedgerDEPT.EditValue)
+                                  , 'N'
+                                  );
                            end;
                            // END: if qryLedger.FieldByName('TYPE').AsString = 'Debtors' then
                         end;
@@ -1472,13 +1492,24 @@ begin
                             , 0
                             , FALSE
                             , 0
-                            , 0 - qryLedger.FieldByName('TAX').AsCurrency );
+                            , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                            , '' //sTranCurrency
+                            , 0 // lcFXRate
+                            , 0 //lcValBase
+                            , 0 //lcCurrencyTaxValBase
+                            , 0 //LcValEntity
+                            , 0 //lcCurrencyTaxValEntity
+                            , '' //tvLedgerBRANCH.EditValue
+                            , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                            , '' //vartostr(tvLedgerDEPT.EditValue)
+                            , 'N'
+                            );
 
                         glInstance.Free;
                      end;
-                   // END: Or is it a General Ledger Allocation?
+                //    END: Or is it a General Ledger Allocation?
 
-                   // Or is it a Creditor Account Payable?
+                //    Or is it a Creditor Account Payable?
                      if qryLedger.FieldByName('TYPE').AsString = 'Invoice' then
                      begin
                      //create two allocs one to reduce upcred and another to add a disb
@@ -1567,7 +1598,7 @@ begin
                         begin
                            if cMatterTotal <> 0 then
                            begin
-					   	         cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
+						            cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
                               cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
                               if (qryLedger.FieldByName('TAX').AsFloat = 0) then
                                  cMatterTotalTax := 0;
@@ -1615,8 +1646,18 @@ begin
                             , 0
                             , FALSE
                             , 0
-                            , 0 - cTradeTotalTax );
-
+                            , 0 - cTradeTotalTax
+                            , '' //sTranCurrency
+                            , 0 // lcFXRate
+                            , 0 //lcValBase
+                            , 0 //lcCurrencyTaxValBase
+                            , 0 //LcValEntity
+                            , 0 //lcCurrencyTaxValEntity
+                            , '' //tvLedgerBRANCH.EditValue
+                            , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                            , '' //vartostr(tvLedgerDEPT.EditValue)
+                            , 'N'
+                            );
                         // Post for legal
                         {post components}
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
@@ -1639,11 +1680,21 @@ begin
                             , 0
                             , FALSE
                             , 0
-                            , 0 - cMatterTotalTax );
-
+                            , 0 - cMatterTotalTax
+                            , '' //sTranCurrency
+                            , 0 // lcFXRate
+                            , 0 //lcValBase
+                            , 0 //lcCurrencyTaxValBase
+                            , 0 //LcValEntity
+                            , 0 //lcCurrencyTaxValEntity
+                            , '' //tvLedgerBRANCH.EditValue
+                            , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                            , '' //vartostr(tvLedgerDEPT.EditValue)
+                            , 'N'
+                            );
 
 //                    21 nov 2017 --  commented out to remove duplicate tax calculation
-                    if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                     if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
                      begin
                        //post components
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE',qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
@@ -1661,7 +1712,22 @@ begin
                          , FALSE
                          , '0'
                          , qryAllocs.FieldByName('NALLOC').AsInteger
-                         , qryAllocs.FieldByName('NMATTER').AsInteger );
+                         , qryAllocs.FieldByName('NMATTER').AsInteger
+                         , 0
+                         , FALSE
+                         , 0
+                         , 0
+                         , '' //sTranCurrency
+                         , 0 // lcFXRate
+                         , 0 //lcValBase
+                         , 0 //lcCurrencyTaxValBase
+                         , 0 //LcValEntity
+                         , 0 //lcCurrencyTaxValEntity
+                         , '' //tvLedgerBRANCH.EditValue
+                         , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                         , '' //vartostr(tvLedgerDEPT.EditValue)
+                         , 'N'
+                         );
                      end;
 
                         with qryInvoiceUpdate do
@@ -1678,7 +1744,7 @@ begin
 
                         MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
                      end;
-                   // END: Or is it a Creditor Account Payable?
+                //    END: Or is it a Creditor Account Payable?
 
                      if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and
                         (qryLedger.FieldByName('TYPE').AsString <> 'Invoice') then
@@ -1717,7 +1783,7 @@ begin
 
                         qryTmp.Close;
                      end;
-                   // END: if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and ...
+                //    END: if (qryLedger.FieldByName('UNIQUEID').AsInteger > 0) and ...
 
                      if (qryLedger.FieldByName('TAX').AsFloat <> 0) then
                      begin
@@ -1744,7 +1810,22 @@ begin
                                  , FALSE
                                  , sLedgerKey
                                  , qryAllocs.FieldByName('NALLOC').AsInteger
-                                 , qryAllocs.FieldByName('NMATTER').AsInteger );
+                                 , qryAllocs.FieldByName('NMATTER').AsInteger
+                                 , 0
+                                 , FALSE
+                                 , 0
+                                 , 0
+                                 , '' //sTranCurrency
+                                 , 0 // lcFXRate
+                                 , 0 //lcValBase
+                                 , 0 //lcCurrencyTaxValBase
+                                 , 0 //LcValEntity
+                                 , 0 //lcCurrencyTaxValEntity
+                                 , '' //tvLedgerBRANCH.EditValue
+                                 , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                 , '' //vartostr(tvLedgerDEPT.EditValue)
+                                 , 'N'
+                                 );
                            end
                            else
                            begin
@@ -1766,7 +1847,22 @@ begin
                                  , FALSE
                                  , sLedgerKey
                                  , qryAllocs.FieldByName('NALLOC').AsInteger
-                                 , qryAllocs.FieldByName('NMATTER').AsInteger )
+                                 , qryAllocs.FieldByName('NMATTER').AsInteger
+                                 , 0
+                                 , FALSE
+                                 , 0
+                                 , 0
+                                 , '' //sTranCurrency
+                                 , 0 // lcFXRate
+                                 , 0 //lcValBase
+                                 , 0 //lcCurrencyTaxValBase
+                                 , 0 //LcValEntity
+                                 , 0 //lcCurrencyTaxValEntity
+                                 , '' //tvLedgerBRANCH.EditValue
+                                 , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                 , '' //vartostr(tvLedgerDEPT.EditValue)
+                                 , 'N'
+                                 );
                            end;
                         end // END ELSE: For ledger cheque, need to store chart used when posting
                         else
@@ -1791,7 +1887,22 @@ begin
                                  , FALSE
                                  , '0'
                                  , qryAllocs.FieldByName('NALLOC').AsInteger
-                                 , qryAllocs.FieldByName('NMATTER').AsInteger );
+                                 , qryAllocs.FieldByName('NMATTER').AsInteger
+                                 , 0
+                                 , FALSE
+                                 , 0
+                                 , 0
+                                 , '' //sTranCurrency
+                                 , 0 // lcFXRate
+                                 , 0 //lcValBase
+                                 , 0 //lcCurrencyTaxValBase
+                                 , 0 //LcValEntity
+                                 , 0 //lcCurrencyTaxValEntity
+                                 , '' //tvLedgerBRANCH.EditValue
+                                 , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                 , '' //vartostr(tvLedgerDEPT.EditValue)
+                                 , 'N'
+                                 );
                            end
                            else
                            begin
@@ -1815,8 +1926,22 @@ begin
                                     , FALSE
                                     , '0'
                                     , qryAllocs.FieldByName('NALLOC').AsInteger
-                                    , qryAllocs.FieldByName('NMATTER').AsInteger );
-
+                                    , qryAllocs.FieldByName('NMATTER').AsInteger
+                                    , 0
+                                    , FALSE
+                                    , 0
+                                    , 0
+                                    , '' //sTranCurrency
+                                    , 0 // lcFXRate
+                                    , 0 //lcValBase
+                                    , 0 //lcCurrencyTaxValBase
+                                    , 0 //LcValEntity
+                                    , 0 //lcCurrencyTaxValEntity
+                                    , '' //tvLedgerBRANCH.EditValue
+                                    , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                                    , '' //vartostr(tvLedgerDEPT.EditValue)
+                                    , 'N'
+                                    );
                               end;
                            end;
                         end;
@@ -1914,7 +2039,22 @@ begin
                             , FALSE
                             , '0'
                             , qryAllocs.FieldByName('NALLOC').AsInteger
-                            , qryAllocs.FieldByName('NMATTER').AsInteger );
+                            , qryAllocs.FieldByName('NMATTER').AsInteger
+                            , 0
+                            , FALSE
+                            , 0
+                            , 0
+                            , '' //sTranCurrency
+                            , 0 // lcFXRate
+                            , 0 //lcValBase
+                            , 0 //lcCurrencyTaxValBase
+                            , 0 //LcValEntity
+                            , 0 //lcCurrencyTaxValEntity
+                            , '' //tvLedgerBRANCH.EditValue
+                            , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                            , '' //vartostr(tvLedgerDEPT.EditValue)
+                            , 'N'
+                            );
 
                         sLedgerCode := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR');
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
@@ -1935,7 +2075,22 @@ begin
                             , FALSE
                             , '0'
                             , qryAllocs.FieldByName('NALLOC').AsInteger
-                            , qryAllocs.FieldByName('NMATTER').AsInteger );
+                            , qryAllocs.FieldByName('NMATTER').AsInteger
+                            , 0
+                            , FALSE
+                            , 0
+                            , 0
+                            , '' //sTranCurrency
+                            , 0 // lcFXRate
+                            , 0 //lcValBase
+                            , 0 //lcCurrencyTaxValBase
+                            , 0 //LcValEntity
+                            , 0 //lcCurrencyTaxValEntity
+                            , '' //tvLedgerBRANCH.EditValue
+                            , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                            , '' //vartostr(tvLedgerDEPT.EditValue)
+                            , 'N'
+                            );
 
                         with qryInvoiceUpdate do
                         begin
@@ -1976,11 +2131,10 @@ begin
                      end;
 
                      sOldMatter := qryLedger.FieldByName('REFNO').AsString;
- //                    qryLedger.Next;
+                     qryLedger.Next;
                      if sOldMatter <> qryLedger.FieldByName('REFNO').AsString then
                         inc(RowItemCount);
                   end;
-               end;
               // ***************   end of loop through G/L entries
               // END:  while not qryLedger.EOF do
 
