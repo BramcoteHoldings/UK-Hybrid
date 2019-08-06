@@ -118,6 +118,7 @@ type
     chkTo: TCheckBox;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
+    ppLine5: TppLine;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnMatterClick(Sender: TObject);

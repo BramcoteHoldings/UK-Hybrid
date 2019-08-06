@@ -3925,8 +3925,10 @@ var
    LFeeNew : TfrmFeeNew;
    LCheqReqNew : TfrmCheqReqNew;
    LSundryNew : TfrmSundryNew;
-   LUnique, LReturn : Integer;
+   LUnique, LReturn,
+   LItemType : Integer;
    dGstFree : double;
+
 begin
    SaveSelectedItems();
    try
@@ -3934,6 +3936,7 @@ begin
       case tvBillItemsTYPE.EditValue of
         IMG_FEES :
           begin
+            LItemType := IMG_FEES;
             if dmAxiom.Security.Fee.Edit
             then
             begin
@@ -3950,12 +3953,14 @@ begin
           end;
         IMG_ANTD :
           begin
+            LItemType := IMG_ANTD;
             LCheqReqNew:= TfrmCheqReqNew.Create(Self);
             LCheqReqNew.DisplayCheqReq(LUnique);
             LReturn := LCheqReqNew.ShowModal();
           end;
         IMG_SUND :
           begin
+            LItemType := IMG_SUND;
             LSundryNew := TfrmSundryNew.create(Self);
             LSundryNew.DisplaySundry(LUnique);
             LReturn := LSundryNew.ShowModal();
@@ -3963,63 +3968,70 @@ begin
             if LReturn <> mrCancel
             then
             begin
-              procBillAddSundryOnly.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-              procBillAddSundryOnly.Execute;
+               procBillAddSundryOnly.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+               procBillAddSundryOnly.Execute;
             end;
           end;
         IMG_UPCRED :
           begin
+            LItemType := IMG_UPCRED;
             ViewAttacheInvoice(LUnique);
           end;
       end;
-      if LReturn <> mrCancel
-      then
+
+      if (LReturn <> mrCancel) then
       begin
         SaveInvoice;
         DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger);
-        if tvBillItemsTYPE.EditValue = IMG_FEES
+        if LItemType = IMG_FEES
         then
         begin
           neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-            qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+               qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
           TaxFees := neFeesTax.AsCurrency;
           neFeesTaxFree.AsCurrency := dGstFree;
           // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
           lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
         end;
         // AES 26/11/09  added this to re calculate sundry gst when editing/adding sundry
-        if tvBillItemsTYPE.EditValue = IMG_SUND
-        then
+        if LItemType = IMG_SUND then
         begin
-          neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-            qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-          TaxSund := neSundTax.Value;
-          neSundTaxFree.AsCurrency := dGstFree;
-          // sgrTotals.Cells[0, 0] := Format('%10.2f', [neSundTax.Value]);
-          lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
+           neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+               qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+           TaxSund := neSundTax.Value;
+           neSundTaxFree.AsCurrency := dGstFree;
+           // sgrTotals.Cells[0, 0] := Format('%10.2f', [neSundTax.Value]);
+           lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
+           with qryNew do
+           begin
+              SQL.Text := 'UPDATE SUNDRY SET BILLED_AMOUNT = AMOUNT, BILLED_TAX = AMOUNT * :TaxRate '+
+                                    ' WHERE NSUNDRY = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+
+              ParamByName('TaxRate').AsFloat := TaxRate('BILL', '' + DefaultTax + '', qryInvoice.FieldByName('GENERATED').AsDateTime);
+              ExecSQL;
+              Close;
+           end;
         end;
-
-
       end;
     finally
 
       if tvBillItemsTYPE.EditValue = IMG_ANTD then      // RDW
-        begin
+      begin
          qryNew.SQL.Text := 'SELECT SUM(AMOUNT) AS TOT, SUM(TAX) AS TAX FROM CHEQREQ WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
             ' AND ((NMEMO is null AND BILLED = ''N'' AND TRUST <> ''T'') OR ' + ' (NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger) + '))' +
-        ' AND REV_NCHEQREQ is null AND AMOUNT > 0';
+            ' AND REV_NCHEQREQ is null AND AMOUNT > 0';
 
-        qryNew.Open;
+         qryNew.Open;
 
-        neAntd.Text :=  qryNew.FieldByName('TOT').AsString;
-        neAntdTax.Text := qryNew.FieldByName('TAX').Asstring;
-            qryNew.Close;
-            procBillAddAntd.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-            procBillAddAntd.Execute;
-            FCheqReqRebuilt := true;
-               SaveInvoice;
-             DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
-        end;
+         neAntd.Text :=  qryNew.FieldByName('TOT').AsString;
+         neAntdTax.Text := qryNew.FieldByName('TAX').Asstring;
+         qryNew.Close;
+         procBillAddAntd.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+         procBillAddAntd.Execute;
+         FCheqReqRebuilt := true;
+         SaveInvoice;
+         DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+      end;
 
       SaveInvoice;
       CalcTotal;
@@ -5772,13 +5784,14 @@ begin
                         SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
                        // SQL.Text := 'SELECT REQDATE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
                         Open;
-                        if not IsEmpty then
+                        if (IsEmpty = False) then
                         begin
                            dtTax := FieldByName('REQDATE').AsDateTime;
                            cTax := FieldByName('TAX').AsCurrency;
                         end;
                         Close;
-                        SQL.Text := 'UPDATE CHEQREQ SET BILLING_TAXCODE = ''' + sTaxCode + ''' WHERE NCHEQREQ = ' +
+                        SQL.Text := 'UPDATE CHEQREQ SET BILLED_AMOUNT = AMOUNT, BILLED_TAX = AMOUNT * :TaxRate, '+
+                                    ' BILLING_TAXCODE = ''' + sTaxCode + ''' WHERE NCHEQREQ = ' +
                                     IntToStr(tvBillItemsUNIQUEID.EditValue);
 
                        // SQL.Text := 'UPDATE CHEQREQ SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
@@ -5786,7 +5799,7 @@ begin
                end;
                if cTax = 0 then
                begin
-                  ParamByName('TaxRate').AsFloat := TaxRate('', '' + sTaxCode + '', dtTax);
+                  ParamByName('TaxRate').AsFloat := TaxRate('BILL', '' + sTaxCode + '', dtTax);
                   // ParamByName('TaxRate').AsFloat := TaxRate('', 'GST', dtTax);
                   ExecSQL;
                   Close;

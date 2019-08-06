@@ -1105,8 +1105,8 @@ object frmInvoice: TfrmInvoice
     Style.StyleController = dmAxiom.LabelStyle
     Properties.Alignment.Horz = taRightJustify
     Height = 18
-    Width = 62
-    AnchorX = 115
+    Width = 66
+    AnchorX = 119
   end
   object grdBillItems: TcxGrid
     Left = 8
@@ -2091,7 +2091,7 @@ object frmInvoice: TfrmInvoice
     Width = 86
   end
   object lblDraftBillCaption: TcxLabel
-    Left = 131
+    Left = 140
     Top = 27
     Caption = 'Draft Bill'
     ParentFont = False
@@ -2212,7 +2212,7 @@ object frmInvoice: TfrmInvoice
     StyleHot.LookAndFeel.NativeStyle = False
     TabOrder = 52
     Height = 23
-    Width = 62
+    Width = 66
   end
   object ilstItems: TImageList
     Left = 832
@@ -2669,7 +2669,7 @@ object frmInvoice: TfrmInvoice
       '  TYPE AS AUTHOR,'
       '  NSUNDRY  AS UniqueID,'
       '  TAXCODE,'
-      '  TAX,'
+      '  nvl(billed_tax, TAX) as tax,'
       '  '#39'N'#39' as Private,'
       '  null AS PAYEE,'
       '  null,'
@@ -3448,13 +3448,15 @@ object frmInvoice: TfrmInvoice
   object qryAntd: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
+      'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author,'
       
-        'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author, c.nche' +
-        'qreq AS uniqueid,'
-      '       nvl(c.billing_taxcode, c.taxcode) taxcode,'
+        '       c.ncheqreq AS uniqueid, NVL (c.billing_taxcode, c.taxcode' +
+        ') taxcode,'
       '       CASE'
       '          WHEN (c.taxcode = '#39'FUB'#39')'
       '             THEN ROUND (c.amount * ABS (r.rate)) / 100'
+      '          WHEN (c.billing_taxcode IS NOT NULL)'
+      '             THEN billed_tax'
       '          ELSE tax'
       '       END AS tax,'
       '       NULL AS PRIVATE, c.payee, NULL, 0 AS units, NULL AS task,'
@@ -3465,7 +3467,7 @@ object frmInvoice: TfrmInvoice
       '--AND'
       '       c.nmemo = :p_invoice'
       '   AND c.trust <> '#39'T'#39
-      '   AND nvl(c.billing_taxcode, c.taxcode) = r.taxcode(+)'
+      '   AND NVL (c.billing_taxcode, c.taxcode) = r.taxcode(+)'
       '   AND TRUNC (c.reqdate) >= r.commence'
       '   AND TRUNC (c.reqdate) <= NVL (r.end_period, SYSDATE + 1000)'
       ''
@@ -4564,6 +4566,7 @@ object frmInvoice: TfrmInvoice
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4595,7 +4598,7 @@ object frmInvoice: TfrmInvoice
     XLSSettings.WorksheetName = 'Report'
     Left = 1181
     Top = 35
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -4933,7 +4936,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plSummaryBill'
           object ppDetailBand2: TppDetailBand
@@ -5136,7 +5139,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plSummaryBill'
           object ppDetailBand3: TppDetailBand
@@ -7404,6 +7407,7 @@ object frmInvoice: TfrmInvoice
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -7436,7 +7440,7 @@ object frmInvoice: TfrmInvoice
     XLSSettings.WorksheetName = 'Report'
     Left = 1053
     Top = 100
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plItems'
     object ppHeaderBand2: TppHeaderBand
@@ -9816,7 +9820,7 @@ object frmInvoice: TfrmInvoice
       '          FROM sundry'
       '         WHERE nmatter = :p_matter AND nmemo IS NULL')
     Left = 438
-    Top = 674
+    Top = 618
     ParamData = <
       item
         DataType = ftUnknown
