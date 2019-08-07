@@ -8299,8 +8299,8 @@ begin
             TaxRate := FieldByName('BILL_RATE').AsFloat / 100;
       end;
       Close;
-  end;
-  qryRate.Free;
+   end;
+   qryRate.Free;
 end;
 
 function TaxCode(RateType: String; TaxRate: Double; Commence: TDateTime): String;
@@ -14311,6 +14311,9 @@ begin
       // AES 13/06/2018 removed abs call for gst
       // dbw 28 Nov 2018 turned off at instruction from IM
       // dbw 25 Jan 2019 changed to only apply GST application flag to fees
+         if (sType = 'SUNDRY') then
+            dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate)
+         else
          if ((dmAxiom.GSTUseBillTotal = 'Y') and (sType = 'FEE')) then
          begin
             dTax := TaxCalc(dAmount, 'BILL', sDefaultTax, dTaxDate);

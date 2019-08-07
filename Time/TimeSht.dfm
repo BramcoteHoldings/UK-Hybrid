@@ -764,7 +764,7 @@ object frmTimeSheet: TfrmTimeSheet
           Properties.AssignedValues.EditFormat = True
           Properties.ImmediatePost = True
           Properties.Increment = 0.500000000000000000
-          Properties.MaxValue = 500.000000000000000000
+          Properties.MaxValue = 700.000000000000000000
           Properties.ValueType = vtFloat
           Properties.OnValidate = tvFeeTmpUNITSPropertiesValidate
           Options.Moving = False
@@ -3517,6 +3517,7 @@ object frmTimeSheet: TfrmTimeSheet
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3549,7 +3550,7 @@ object frmTimeSheet: TfrmTimeSheet
     XLSSettings.WorksheetName = 'Report'
     Left = 378
     Top = 390
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plFeeTmpRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -4753,6 +4754,7 @@ object frmTimeSheet: TfrmTimeSheet
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4787,7 +4789,7 @@ object frmTimeSheet: TfrmTimeSheet
     XLSSettings.WorksheetName = 'Report'
     Left = 375
     Top = 540
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plTmpProcess'
     object ppHeaderBand2: TppHeaderBand

@@ -130,10 +130,8 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     Height = 26
     Caption = 'Preview'
     Glyph.Data = {
-      76040000424DB604000000000000B60000002800000010000000100000000100
-      2000000000000004000000000000000000001000000000000000000000000000
-      8000008000000080800080000000800080008080000080808000C0C0C0000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00C0C0C000C0C0
+      36040000424D7604000000000000760000002800000010000000100000000100
+      2000000000000004000000000000000000001000000000000000C0C0C000C0C0
       C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
       C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -364,6 +362,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -374,6 +373,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     PrinterSetup.mmPaperHeight = 297127
     PrinterSetup.mmPaperWidth = 210079
     PrinterSetup.PaperSize = 9
+    Units = utMillimeters
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     BeforePrint = rbRptUnconCheqReqBeforePrint
     DeviceType = 'Screen'
@@ -389,15 +389,22 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
     RTFSettings.DefaultFont.Color = clWindowText
     RTFSettings.DefaultFont.Height = -13
@@ -410,13 +417,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 248
     Top = 248
-    Version = '16.03'
+    Version = '19.02'
     mmColumnWidth = 0
     DataPipelineName = 'ppUnconCheqReq'
     object ppTitleBand1: TppTitleBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 44450
       mmPrintPosition = 0
@@ -425,6 +434,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Label8'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Unconverted Cheque Requisitions Ledger'
         Color = 13816530
         Font.Charset = DEFAULT_CHARSET
@@ -432,7 +442,8 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         mmHeight = 4924
         mmLeft = 2117
@@ -445,13 +456,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'lblMatter'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 2117
@@ -464,13 +477,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'lblDescription'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 2117
@@ -483,13 +498,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Matter'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 21167
@@ -503,13 +520,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Description'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         WordWrap = True
         mmHeight = 8202
@@ -523,13 +542,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'lblClient'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 2117
@@ -542,13 +563,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Client'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Client'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 21167
@@ -562,13 +585,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'For'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'For'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 2117
@@ -582,12 +607,14 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'FilterDate'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 21167
@@ -601,12 +628,14 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Filter'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 21167
@@ -618,140 +647,168 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     end
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 25135
       mmPrintPosition = 0
       object pplblFor: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblFor'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'For'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 2117
         mmTop = 5556
-        mmWidth = 4762
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblBank: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblBank'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 24606
         mmTop = 5556
-        mmWidth = 6879
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblPayeeDesc: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblPayeeDesc'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Payee'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 38365
         mmTop = 5556
-        mmWidth = 8731
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblReqBy: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblReqBy'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Req By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 107686
-        mmTop = 5556
-        mmWidth = 9789
+        mmLeft = 102394
+        mmTop = 6615
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblBill: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblBill'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Bill Number'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 123031
         mmTop = 5556
-        mmWidth = 17198
+        mmWidth = 20643
         BandType = 0
         LayerName = Foreground
       end
       object pplblStatus: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblStatus'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Status'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 149754
         mmTop = 5556
-        mmWidth = 8996
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblAmount: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblAmount'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 177800
         mmTop = 5556
-        mmWidth = 11907
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
@@ -759,6 +816,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 2117
         mmLeft = 1588
@@ -771,6 +829,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 2117
         mmLeft = 1588
@@ -782,111 +841,133 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
       object pplblBilled: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblBilled'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Billed'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3968
-        mmLeft = 123031
+        mmLeft = 126476
         mmTop = 11113
-        mmWidth = 7938
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblOwing: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblOwing'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Owing'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 123031
+        mmLeft = 126476
         mmTop = 16669
-        mmWidth = 9261
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblPayable: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblPayable'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Payable'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 149754
         mmTop = 16669
-        mmWidth = 11113
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblTax: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblTax'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Tax'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3968
-        mmLeft = 184944
+        mmLeft = 177789
         mmTop = 11113
-        mmWidth = 4763
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object pplblPaid: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lblPaid'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Paid'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 183621
+        mmLeft = 177789
         mmTop = 16669
-        mmWidth = 6086
+        mmWidth = 17198
         BandType = 0
         LayerName = Foreground
       end
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = ' Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
         mmLeft = 38365
@@ -899,6 +980,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 19844
       mmPrintPosition = 0
@@ -907,6 +989,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Bank'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'BANK'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -927,6 +1010,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Desc'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -948,6 +1032,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Author'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'AUTHOR'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -969,6 +1054,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'BillNo'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'BILLNO'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -979,7 +1065,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
         mmHeight = 3968
-        mmLeft = 123296
+        mmLeft = 133620
         mmTop = 1588
         mmWidth = 10054
         BandType = 4
@@ -990,6 +1076,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Amount'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1002,7 +1089,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
         mmHeight = 3968
-        mmLeft = 176742
+        mmLeft = 181512
         mmTop = 1588
         mmWidth = 12965
         BandType = 4
@@ -1013,6 +1100,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'ReqDate'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'REQDATE'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = 'dd/mm/yyyy'
@@ -1035,6 +1123,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Tax'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TAX'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1047,8 +1136,8 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
         mmHeight = 3968
-        mmLeft = 184415
-        mmTop = 8467
+        mmLeft = 189185
+        mmTop = 8202
         mmWidth = 5292
         BandType = 4
         LayerName = Foreground
@@ -1058,6 +1147,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Paid'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'PAID'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1069,10 +1159,10 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
-        mmHeight = 3968
-        mmLeft = 182827
-        mmTop = 14817
-        mmWidth = 6880
+        mmHeight = 3969
+        mmLeft = 187646
+        mmTop = 14846
+        mmWidth = 6879
         BandType = 4
         LayerName = Foreground
       end
@@ -1081,6 +1171,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'Status'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'STATUS'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -1088,12 +1179,13 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
+        TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
-        mmHeight = 3968
-        mmLeft = 149754
-        mmTop = 1588
-        mmWidth = 10319
+        mmHeight = 4498
+        mmLeft = 152664
+        mmTop = 1323
+        mmWidth = 14288
         BandType = 4
         LayerName = Foreground
       end
@@ -1102,6 +1194,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'InvoiceDate'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'INVOICEDATE'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -1111,10 +1204,10 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Font.Style = []
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
-        mmHeight = 3968
-        mmLeft = 123031
-        mmTop = 8467
-        mmWidth = 19051
+        mmHeight = 3969
+        mmLeft = 124624
+        mmTop = 8208
+        mmWidth = 19050
         BandType = 4
         LayerName = Foreground
       end
@@ -1122,6 +1215,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Owing'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -1134,7 +1228,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         OnCalc = ppOwingCalc
         Transparent = True
         mmHeight = 3968
-        mmLeft = 123031
+        mmLeft = 134413
         mmTop = 14817
         mmWidth = 9261
         BandType = 4
@@ -1144,6 +1238,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Payable'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -1153,11 +1248,12 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Font.Size = 10
         Font.Style = []
         OnCalc = ppPayableCalc
+        TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3968
-        mmLeft = 149754
-        mmTop = 14817
-        mmWidth = 11642
+        mmHeight = 4498
+        mmLeft = 155046
+        mmTop = 14824
+        mmWidth = 11906
         BandType = 4
         LayerName = Foreground
       end
@@ -1165,6 +1261,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'DBPayable'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'PAYABLE'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -1172,12 +1269,13 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
+        TextAlignment = taRightJustified
         Transparent = True
         Visible = False
         DataPipelineName = 'ppUnconCheqReq'
-        mmHeight = 4022
-        mmLeft = 152136
-        mmTop = 8467
+        mmHeight = 3969
+        mmLeft = 149754
+        mmTop = 8210
         mmWidth = 17198
         BandType = 4
         LayerName = Foreground
@@ -1186,6 +1284,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'PAYEE'
         DataPipeline = ppUnconCheqReq
         Font.Charset = DEFAULT_CHARSET
@@ -1205,6 +1304,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 9525
       mmPrintPosition = 0
@@ -1212,17 +1312,18 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clGrayText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
         Transparent = True
-        mmHeight = 3968
+        mmHeight = 4497
         mmLeft = 2117
-        mmTop = 3440
-        mmWidth = 34660
+        mmTop = 1588
+        mmWidth = 33602
         BandType = 8
         LayerName = Foreground
       end
@@ -1230,24 +1331,41 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clGrayText
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3968
-        mmLeft = 184944
-        mmTop = 3440
-        mmWidth = 9525
+        mmHeight = 4497
+        mmLeft = 183886
+        mmTop = 1588
+        mmWidth = 10583
+        BandType = 8
+        LayerName = Foreground
+      end
+      object ppLine5: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line5'
+        Border.mmPadding = 0
+        Pen.Color = clGrayText
+        Pen.Width = 2
+        ParentWidth = True
+        Weight = 1.500000000000000000
+        mmHeight = 1323
+        mmLeft = 0
+        mmTop = 265
+        mmWidth = 197379
         BandType = 8
         LayerName = Foreground
       end
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 24606
       mmPrintPosition = 0
@@ -1255,6 +1373,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Line3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 2117
         mmLeft = 1852
@@ -1267,6 +1386,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Line4'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 527
         mmLeft = 1852
@@ -1279,6 +1399,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'TotalAmount'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1291,7 +1412,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
         mmHeight = 4191
-        mmLeft = 175267
+        mmLeft = 180037
         mmTop = 3704
         mmWidth = 14442
         BandType = 7
@@ -1302,6 +1423,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         UserName = 'TotalTax'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TAX'
         DataPipeline = ppUnconCheqReq
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1313,10 +1435,10 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppUnconCheqReq'
-        mmHeight = 3969
-        mmLeft = 175684
+        mmHeight = 4498
+        mmLeft = 177808
         mmTop = 10583
-        mmWidth = 14023
+        mmWidth = 16669
         BandType = 7
         LayerName = Foreground
       end
@@ -1324,13 +1446,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 149754
@@ -1343,13 +1467,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Tax'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 149754
@@ -1362,13 +1488,15 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
         mmLeft = 149754
@@ -1381,6 +1509,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         DesignLayer = ppDesignLayer1
         UserName = 'Total'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -1394,7 +1523,7 @@ object frmRptLedgerUnconCheqReq: TfrmRptLedgerUnconCheqReq
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 182563
+        mmLeft = 187333
         mmTop = 17198
         mmWidth = 7144
         BandType = 7

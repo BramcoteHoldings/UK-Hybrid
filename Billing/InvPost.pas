@@ -613,7 +613,7 @@ begin
             bPostingFailed := False;
             bTaxDiff := False;
             if dmAxiom.uniInsight.InTransaction then
-              dmAxiom.uniInsight.Commit;
+              dmAxiom.uniInsight.Rollback;
             dmAxiom.uniInsight.StartTransaction;
 
             cDebtors := qryMatter.FieldByName('DEBTORS').AsCurrency;
@@ -2106,6 +2106,7 @@ begin
 //                end;
             end;
             Self.qryBill.Close;
+
             try
                dmAxiom.uniInsight.Commit;
             finally
