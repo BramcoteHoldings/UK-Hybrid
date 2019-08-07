@@ -829,7 +829,7 @@ begin
 
             //************************************************
 
-{            try
+            try
             // see if the dictionary is installed
               if  not DirectoryExists(ExtractFilePath(Application.EXEName) + 'Dictionaries') then
                  CreateDir(ExtractFilePath(Application.EXEName) + 'Dictionaries');
@@ -837,7 +837,7 @@ begin
                                              (FileExists(ExtractFilePath(Application.EXEName) + 'Spelling\en_US.dic'));
             except
               // silent
-            end;    }
+            end;
 
             application.helpfile := SystemString('HELP_FILE_PATH');
 
