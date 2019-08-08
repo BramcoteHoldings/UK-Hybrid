@@ -600,32 +600,32 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 9
     Transparent = True
-    Height = 119
+    Height = 122
     Width = 261
     object lblChequeDrawer: TLabel
       Left = 6
-      Top = 20
+      Top = 19
       Width = 37
       Height = 15
       Caption = 'Drawer'
     end
     object lblChequeBank: TLabel
       Left = 6
-      Top = 45
+      Top = 44
       Width = 26
       Height = 15
       Caption = 'Bank'
     end
     object lblCheque: TLabel
       Left = 6
-      Top = 97
+      Top = 94
       Width = 41
       Height = 15
       Caption = 'Cheque'
     end
     object lblChequeBranch: TLabel
       Left = 6
-      Top = 71
+      Top = 69
       Width = 37
       Height = 15
       Caption = 'Branch'
@@ -647,7 +647,7 @@ object frmReceipt: TfrmReceipt
     object tbChqBank: TcxTextEdit
       Tag = 1
       Left = 51
-      Top = 42
+      Top = 41
       Properties.CharCase = ecUpperCase
       Style.LookAndFeel.NativeStyle = True
       StyleDisabled.LookAndFeel.NativeStyle = True
@@ -660,7 +660,7 @@ object frmReceipt: TfrmReceipt
     object tbBranch: TcxTextEdit
       Tag = 1
       Left = 51
-      Top = 68
+      Top = 66
       Style.LookAndFeel.NativeStyle = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       StyleFocused.LookAndFeel.NativeStyle = True
@@ -673,7 +673,7 @@ object frmReceipt: TfrmReceipt
     object tbChqno: TcxTextEdit
       Tag = 1
       Left = 51
-      Top = 95
+      Top = 91
       Style.LookAndFeel.NativeStyle = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       StyleFocused.LookAndFeel.NativeStyle = True
@@ -906,7 +906,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43677.518012338d
+    EditValue = 43685.5209780324d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
