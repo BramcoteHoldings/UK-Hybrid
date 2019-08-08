@@ -2519,6 +2519,7 @@ begin
       else
       begin
         DisplayValue := glInstance.fullCode;
+        qryLedger.FieldByName('DESCR').AsString := glInstance.chartDescription;
       end;
 
       if not AllowDirectPost(glInstance.ledgerkey) then
