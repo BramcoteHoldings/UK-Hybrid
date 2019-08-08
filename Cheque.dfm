@@ -28,7 +28,6 @@ object frmCheque: TfrmCheque
     Height = 14
     AutoSize = False
     Caption = '&Bank '
-    FocusControl = cbBank
   end
   object Label2: TLabel
     Left = 9
@@ -71,10 +70,9 @@ object frmCheque: TfrmCheque
     Height = 15
     AutoSize = False
     Caption = 'A&uthorised by'
-    FocusControl = cbAuthBy
   end
   object lblBankName: TLabel
-    Left = 377
+    Left = 393
     Top = 14
     Width = 173
     Height = 14
@@ -82,10 +80,10 @@ object frmCheque: TfrmCheque
     ShowAccelChar = False
   end
   object lblAuthByName: TLabel
-    Left = 377
+    Left = 393
     Top = 42
     Width = 173
-    Height = 14
+    Height = 16
     AutoSize = False
   end
   object lblAmountMsg: TLabel
@@ -225,7 +223,7 @@ object frmCheque: TfrmCheque
     Caption = 'Printer'
   end
   object lblName: TLabel
-    Left = 378
+    Left = 393
     Top = 69
     Width = 105
     Height = 15
@@ -249,7 +247,7 @@ object frmCheque: TfrmCheque
     ExplicitTop = 463
   end
   object lblAddress: TLabel
-    Left = 378
+    Left = 393
     Top = 88
     Width = 238
     Height = 54
@@ -257,46 +255,22 @@ object frmCheque: TfrmCheque
     ShowAccelChar = False
     WordWrap = True
   end
-  object cbBank: TComboBox
-    Left = 317
-    Top = 10
-    Width = 53
-    Height = 23
-    Style = csDropDownList
-    Sorted = True
-    TabOrder = 1
-    OnChange = cbBankChange
-    OnClick = cbBankClick
-  end
-  object cbAuthBy: TComboBox
-    Left = 317
-    Top = 39
-    Width = 53
-    Height = 23
-    Style = csDropDownList
-    Sorted = True
-    TabOrder = 3
-    OnChange = cbAuthByChange
-    OnClick = cbAuthByClick
-    OnDropDown = cbAuthByDropDown
-    OnExit = cbAuthByExit
-  end
   object tbChqno: TEdit
     Left = 94
     Top = 39
     Width = 98
     Height = 23
     MaxLength = 8
-    TabOrder = 2
+    TabOrder = 1
     OnExit = tbChqnoExit
   end
   object tbDesc: TEdit
     Left = 94
     Top = 95
-    Width = 276
+    Width = 291
     Height = 23
     MaxLength = 100
-    TabOrder = 5
+    TabOrder = 3
     OnExit = tbPayeeExit
     OnKeyPress = tbDescKeyPress
   end
@@ -306,7 +280,7 @@ object frmCheque: TfrmCheque
     Width = 53
     Height = 23
     Sorted = True
-    TabOrder = 18
+    TabOrder = 16
     Visible = False
     OnClick = cbBankTransferClick
   end
@@ -334,7 +308,7 @@ object frmCheque: TfrmCheque
     FontBetween.Name = 'Segoe UI'
     FontBetween.Style = []
     NoZero = True
-    TabOrder = 6
+    TabOrder = 4
     OnExit = neAmountExit
   end
   object sbarBalances: TStatusBar
@@ -369,7 +343,7 @@ object frmCheque: TfrmCheque
     Width = 147
     Height = 23
     Style = csDropDownList
-    TabOrder = 7
+    TabOrder = 5
     OnChange = cmbPrinterChange
   end
   object edtImport: TEdit
@@ -378,7 +352,7 @@ object frmCheque: TfrmCheque
     Width = 121
     Height = 23
     Anchors = [akTop, akRight]
-    TabOrder = 11
+    TabOrder = 9
   end
   object btnImport: TcxButton
     Left = 895
@@ -457,7 +431,7 @@ object frmCheque: TfrmCheque
       80007F7F7FFF0080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 12
+    TabOrder = 10
     OnClick = btnImportClick
   end
   object rgType: TcxRadioGroup
@@ -475,7 +449,7 @@ object frmCheque: TfrmCheque
     ItemIndex = 0
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 8
+    TabOrder = 6
     Transparent = True
     OnClick = rgTypeClick
     Height = 63
@@ -487,7 +461,7 @@ object frmCheque: TfrmCheque
     Width = 956
     Height = 243
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 13
+    TabOrder = 11
     OnEnter = cxGrid1Enter
     OnExit = cxGrid1Exit
     LookAndFeel.NativeStyle = True
@@ -659,12 +633,12 @@ object frmCheque: TfrmCheque
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 15
+    TabOrder = 13
     OnClick = chkPrintClick
   end
   object btnOK: TcxButton
     Left = 795
-    Top = 502
+    Top = 504
     Width = 79
     Height = 27
     Anchors = [akRight, akBottom]
@@ -707,7 +681,7 @@ object frmCheque: TfrmCheque
       FF00FF00FF00FF00FF0000FF00FF00FF00FF000000FFFF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-    TabOrder = 16
+    TabOrder = 14
     OnClick = btnOKClick
   end
   object btnCancel: TcxButton
@@ -755,7 +729,7 @@ object frmCheque: TfrmCheque
       F2D2A6A6CD5CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    TabOrder = 17
+    TabOrder = 15
     OnClick = btnCancelClick
   end
   object grpDirectDebit: TcxGroupBox
@@ -765,7 +739,7 @@ object frmCheque: TfrmCheque
     Caption = 'Direct Debit Payments'
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 14
+    TabOrder = 12
     Transparent = True
     Visible = False
     Height = 73
@@ -868,16 +842,16 @@ object frmCheque: TfrmCheque
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 4
+    TabOrder = 2
     OnExit = tbPayeeExit
     OnKeyPress = tbDescKeyPress
-    Width = 276
+    Width = 291
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43682.4841991782d
+    EditValue = 43685.6773089005d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -907,7 +881,7 @@ object frmCheque: TfrmCheque
     Style = csDropDownList
     Anchors = [akTop, akRight]
     Sorted = True
-    TabOrder = 10
+    TabOrder = 8
     OnChange = cbBankChange
     OnClick = cbBankClick
   end
@@ -916,7 +890,7 @@ object frmCheque: TfrmCheque
     Top = 484
     Anchors = [akRight, akBottom]
     Caption = 'Template'
-    TabOrder = 9
+    TabOrder = 7
     Height = 50
     Width = 210
     object btnChooseTemplate: TcxButton
@@ -1000,7 +974,7 @@ object frmCheque: TfrmCheque
     Top = 509
     Anchors = [akLeft, akBottom]
     Caption = 'Keep cheque form open after posting?'
-    TabOrder = 20
+    TabOrder = 18
     OnContextPopup = chkNoExitContextPopup
   end
   object chkReplacementCheque: TcxCheckBox
@@ -1008,9 +982,53 @@ object frmCheque: TfrmCheque
     Top = 509
     Anchors = [akLeft, akBottom]
     Caption = 'Issue replacement cheque'
-    TabOrder = 21
+    TabOrder = 19
     Visible = False
     OnClick = chkReplacementChequeClick
+  end
+  object cbBank: TcxLookupComboBox
+    Left = 312
+    Top = 10
+    Properties.CharCase = ecUpperCase
+    Properties.DropDownAutoSize = True
+    Properties.DropDownRows = 12
+    Properties.KeyFieldNames = 'ACCT'
+    Properties.ListColumns = <
+      item
+        FieldName = 'ACCT'
+      end
+      item
+        FieldName = 'NAME'
+      end
+      item
+        FieldName = 'TRUST'
+      end>
+    Properties.ListOptions.ShowHeader = False
+    Properties.ListOptions.SyncMode = True
+    Properties.ListSource = dmAxiom.dsBankList
+    Properties.OnChange = cbBankPropertiesChange
+    TabOrder = 20
+    Width = 73
+  end
+  object cbAuthBy: TcxLookupComboBox
+    Left = 312
+    Top = 39
+    Properties.DropDownAutoSize = True
+    Properties.ImmediatePost = True
+    Properties.KeyFieldNames = 'CODE'
+    Properties.ListColumns = <
+      item
+        FieldName = 'CODE'
+      end
+      item
+        FieldName = 'NAME'
+      end>
+    Properties.ListOptions.ShowHeader = False
+    Properties.ListOptions.SyncMode = True
+    Properties.ListSource = dmAxiom.dsEmplyeeList
+    Properties.OnEditValueChanged = cbAuthByPropertiesEditValueChanged
+    TabOrder = 21
+    Width = 73
   end
   object qryCheque: TUniQuery
     Connection = dmAxiom.uniInsight

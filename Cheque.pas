@@ -15,7 +15,7 @@ uses
   cxMemo, cxImageComboBox, DateUtils, EnforceCustomDateEdit, cxLookAndFeels,
   dxCore, vcl.Themes, cxNavigator, cxDateUtils, System.Win.ComObj,
   cxDataControllerConditionalFormattingRulesManagerDialog,
-  System.Actions, Vcl.ActnList, dxDateRanges;
+  System.Actions, Vcl.ActnList, dxDateRanges, cxLookupEdit, cxDBLookupEdit;
 
 const
   colTYPE = 0;
@@ -52,8 +52,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label7: TLabel;
-    cbBank: TComboBox;
-    cbAuthBy: TComboBox;
     tbChqno: TEdit;
     tbDesc: TEdit;
     lblBankName: TLabel;
@@ -182,6 +180,8 @@ type
     qryInvoiceUpdate: TUniQuery;
     qryLedgerNINVOICE: TLargeintField;
     qryLedgerLGRALLOC_ID: TFloatField;
+    cbBank: TcxLookupComboBox;
+    cbAuthBy: TcxLookupComboBox;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure cbAuthByClick(Sender: TObject);
@@ -260,6 +260,8 @@ type
       var Handled: Boolean);
     procedure tvLedgerTYPEPropertiesCloseUp(Sender: TObject);
     procedure chkReplacementChequeClick(Sender: TObject);
+    procedure cbBankPropertiesChange(Sender: TObject);
+    procedure cbAuthByPropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     FCurrentTemplateDescr: String;
@@ -360,34 +362,42 @@ begin
   cmbPrinter.Text := dmAxiom.UserChequePrinter;
   cmbPrinterChange(Self);
   cbBankChange(Self);  }
+
+//        dmaxiom.qryBranchList.Close;
+//      dmaxiom.qryBranchList.ParamByName('ENTITY').AsString:=dmaxiom.Entity;
+//      dmaxiom.qryBranchList.Open;
+//      dmaxiom.qryDepartment.Close;
+//      dmaxiom.qryDepartment.Open;
 end;
 
 procedure TfrmCheque.CreateCheque;
 var
   sBank : string;
 begin
-  if not Created then
-  begin
-    if cbBank.Text = '' then
-    begin
-      AddBanks(cbBank, 'G,T,C');
-      AddBanks(cbBankImport, 'G');
-      sBank := SettingLoadString('CHEQUE', 'BANK');
-      if sBank <> '' then
-        cbBank.ItemIndex := cbBank.Items.IndexOf(sBank)
-      else
-        cbBank.ItemIndex := cbBank.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
-      cbBank.OnClick(Self);
-    end;
-    if cbAuthBy.Items.Count = 0 then
-      cbAuthBy.Items := dmAxiom.Employees;
-    cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(dmAxiom.UserID);
-    if Self.Visible then
-      tbPayee.SetFocus;
-    Created := True;
-  end;
-end;
+   if not Created then
+   begin
+      if cbBank.Text = '' then
+      begin
+//      AddBanks(cbBank, 'G,T,C');
+//      AddBanks(cbBankImport, 'G');
+         sBank := SettingLoadString('CHEQUE', 'BANK');
+         if sBank <> '' then
+        //cbBank.ItemIndex := cbBank.Items.IndexOf(sBank)
+            cbBank.Text := sBank
+         else
+            //cbBank.ItemIndex := cbBank.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
+            cbBank.Text := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
+            //cbBank.OnClick(Self);
+      end;
+//    if cbAuthBy.Items.Count = 0 then
+//      cbAuthBy.Text := dmAxiom.Employees;
+      cbAuthBy.Text := dmAxiom.UserID;
+      if Self.Visible then
+         tbPayee.SetFocus;
 
+      Created := True;
+   end;
+end;
 
 procedure TfrmCheque.cbBankClick(Sender: TObject);
 begin
@@ -480,6 +490,84 @@ begin
    StatusDisplay;
 end;
 
+
+procedure TfrmCheque.cbBankPropertiesChange(Sender: TObject);
+begin
+   SaveColumnSettings;
+   RestoreColumnSettings;
+   LastBank := cbBank.Text;
+
+   TFormStyleHookBackground.BackGroundSettings.Enabled := True;
+   TFormStyleHookBackground.BackGroundSettings.UseColor := True;
+   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.Text);
+
+   Self.Invalidate;
+   Self.Perform(WM_PAINT, 0, 0);
+
+   with qryBank do
+   begin
+     Close;
+     ParamByName('P_Entity').AsString := dmAxiom.Entity;
+     ParamByName('P_Code').AsString := cbBank.Text;
+     Prepare;
+     Open;
+     lblBankName.Caption := qryBank.FieldByName('NAME').AsString + ' - (' + qryBank.FieldByname('CURRENCY').AsString + ')';
+   end;
+   TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Clear;
+   tvLedgerTAX.Visible := True;
+   tvLedgerTAXCODE.Visible := True;
+
+   lblBalance.Visible := True;
+   lblTax.Visible := True;
+
+   DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
+   //AES 06/08/2018
+   chkReplacementCheque.Visible := False;
+   if qryBank.FieldByName('TRUST').AsString = 'T' then
+   begin
+      if not dmAxiom.Security.Receipt.ForbidDisbursements
+      then
+      Begin
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Disburse');
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Bill');
+      End;
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Protected');
+     tvLedgerTAX.Visible := False;
+     tvLedgerTAXCODE.Visible := False;
+
+     lblBalance.Visible := False;
+     lblTax.Visible := False;
+     DefaultTax := 'NOTAX';
+     SetBankTransfer(True);
+     grpDirectDebit.Visible := (GetEnforceBSBDD(cbBank.Text) = 'Y') and (rgType.ItemIndex = 1);
+   end
+   else if qryBank.FieldByName('TRUST').AsString = 'G' then
+   begin
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
+
+     SetBankTransfer(False);
+     chkReplacementCheque.Visible := True;
+   end
+   else if qryBank.FieldByName('TRUST').AsString = 'C' then
+   begin
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
+     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
+     SetBankTransfer(False);
+   end;
+
+   NextChqno;
+
+   cmbPrinter.Items.Clear;
+   tbChqNo.Text := '';
+   cmbPrinter.Text := '';
+   StringPopulate(cmbPrinter.Items, 'PRINTER', 'CODE', 'TYPE = ''C'' AND BANK_ACCT = ''' + cbBank.Text + '''');
+   cmbPrinter.Enabled := True;
+   StatusDisplay;
+
+end;
 
 procedure TfrmCheque.cbAuthByClick(Sender: TObject);
 begin
@@ -2662,11 +2750,33 @@ end;
 
 procedure TfrmCheque.AutoCheque(sBank, sPayee, sDesc, sFile, sLedger, sReqBy, sBilled: string; cAmount: Currency; iNCheqReq: integer);
 begin
-  // This procedure sets up a Cheque Automagically from the
+   // This procedure sets up a Cheque Automagically from the
+   // details supplied
+   CreateCheque;
+   //if cbBank.Items.Count = 0 then
+    //AddBanks(cbBank, 'G,T,C');
+   cbBank.Text := sBank;
+   //cbBankClick(Self);
+   cbBankPropertiesChange(Self);
+   tbPayee.Text := sPayee;
+   tbDesc.Text := sDesc;
+   cbAuthBy.Text := sReqBy;
+//  cbAuthBy.OnClick(Self);
+   AutoChequeAdd(sFile, sLedger, sDesc, sBilled, cAmount, iNCheqReq);
+   if iNCheqReq = 0 then
+      tbPayee.SetFocus
+   else
+   begin
+      dbgrLedger.SetFocus;
+//    dbgrLedger.SelectedIndex := colAMOUNT;
+      tvLedgerAMOUNT.Focused := true;
+   end;
+
+{  // This procedure sets up a Cheque Automagically from the
   // details supplied
   CreateCheque;
-  if cbBank.Items.Count = 0 then
-    AddBanks(cbBank, 'G,T,C');
+//  if cbBank.Items.Count = 0 then
+//    AddBanks(cbBank, 'G,T,C');
   cbBank.ItemIndex := cbBank.Items.IndexOf(sBank);
   cbBankClick(Self);
   tbPayee.Text := sPayee;
@@ -2681,7 +2791,7 @@ begin
     dbgrLedger.SetFocus;
 //    dbgrLedger.SelectedIndex := colAMOUNT;
     tvLedgerAMOUNT.Focused := true;
-  end;
+  end;  }
 end;
 
 procedure TfrmCheque.AutoChequeFromCheqReq(iNCheqReq: integer);
@@ -2736,17 +2846,18 @@ begin
       begin
          // Create a new cheque
          CreateCheque;
-         if cbBank.Items.Count = 0 then
-            AddBanks(cbBank, 'G,T,C');
+        //if cbBank.Items.Count = 0 then
+           // AddBanks(cbBank, 'G,T,C');
          //ShowMessage(FieldByName('BANK').AsString);
-         cbBank.ItemIndex := cbBank.Items.IndexOf(FieldByName('BANK').AsString);
-         cbBankClick(Self);
-         cbBankChange(Self);
+         cbBank.Text := FieldByName('BANK').AsString;
+         //cbBankClick(Self);
+         cbBankPropertiesChange(Self);
+        // cbBankChange(Self);
          cbBank.Enabled := False;
          tbPayee.Text := FieldByName('PAYEE').AsString;
          tbDesc.Text := FieldByName('DESCR').AsString;
-         cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(FieldByName('AUTHOR').AsString);
-         cbAuthBy.OnClick(Self);
+         cbAuthBy.Text := FieldByName('AUTHOR').AsString;
+//         cbAuthBy.OnClick(Self);
          if FieldByName('PRINTER').AsString <> '' then
          begin
 
@@ -3117,14 +3228,14 @@ begin
   //    begin
   //      CreateCheque;
             dOwingPC := qryDetails.FieldByName('OWING').AsFloat / qryDetails.FieldByName('AMOUNT').AsFloat;
-           if cbBank.Items.Count = 0 then
-             AddBanks(cbBank, 'G,T,C');
-           cbBank.ItemIndex := cbBank.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
-           cbBankClick(Self);
-           if cbAuthBy.Items.Count = 0 then
-             cbAuthBy.Items := dmAxiom.Employees;
-           cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(dmAxiom.UserID);
-           cbAuthBy.OnClick(Self);
+//           if cbBank.Items.Count = 0 then
+//             AddBanks(cbBank, 'G,T,C');
+            cbBank.Text := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
+            cbBankPropertiesChange(Self);
+//         if cbAuthBy.Items.Count = 0 then
+//           cbAuthBy.Text := dmAxiom.Employees;
+            cbAuthBy.Text := dmAxiom.UserID;
+//         cbAuthBy.OnClick(Self);
            tbPayee.Text := qryDetails.FieldByName('CREDITOR').AsString; //TableString('PHONEBOOK', 'SEARCH', qryDetails.FieldByName('CREDITOR').AsString, 'LONGNAME');
            tbDesc.Text := qryDetails.FieldByName('DESCR').AsString;
   //       end;
@@ -3286,14 +3397,14 @@ begin
 
    if bProceed then
    begin
-      if cbBank.Items.Count = 0 then
-         AddBanks(cbBank, 'G,T,C');
-      cbBank.ItemIndex := cbBank.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
-      cbBankClick(Self);
-      if cbAuthBy.Items.Count = 0 then
-         cbAuthBy.Items := dmAxiom.Employees;
-      cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(dmAxiom.UserID);
-      cbAuthBy.OnClick(Self);
+      //if cbBank.Items.Count = 0 then
+       //  AddBanks(cbBank, 'G,T,C');
+      cbBank.Text := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
+      cbBankPropertiesChange(Self);
+//      if cbAuthBy.Items.Count = 0 then
+//         cbAuthBy.Text := dmAxiom.Employees;
+      cbAuthBy.Text := dmAxiom.UserID;
+//      cbAuthBy.OnClick(Self);
 
       tbPayee.Text :=  TableString('PHONEBOOK', 'NCREDITOR', ANCreditor, 'NAME');
       tbDesc.Text := 'InfoTrack Invoices';
@@ -3438,14 +3549,14 @@ begin
 
    if not qryDetails.IsEmpty then
    begin
-      cbBank.ItemIndex := cbBank.Items.IndexOf(qryDetails.FieldByName('ACCT').AsString);
+      cbBank.Text := qryDetails.FieldByName('ACCT').AsString;  //ItemIndex := cbBank.Items.IndexOf(qryDetails.FieldByName('ACCT').AsString);
       cbBankClick(Self);
       cbBankChange(Self);
       cbBank.Enabled := False;
       tbPayee.Text := qryDetails.FieldByName('PAYEE').AsString;
       tbDesc.Text := qryDetails.FieldByName('DESCR').AsString;
-      cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(qryDetails.FieldByName('REQBY').AsString);
-      cbAuthBy.OnClick(Self);
+      cbAuthBy.Text := qryDetails.FieldByName('REQBY').AsString;   //.ItemIndex := cbAuthBy.Items.IndexOf(qryDetails.FieldByName('REQBY').AsString);
+//      cbAuthBy.OnClick(Self);
       cmbPrinter.ItemIndex := cmbPrinter.Items.IndexOf(FChequePrinter);
       cmbPrinterChange(Self);
 
@@ -3674,6 +3785,13 @@ begin
    lblBankName.AutoSize := TRUE;
    lblAuthByName.AutoSize := TRUE;
 
+   dmAxiom.qryCurrencyList.Open;
+   dmAxiom.qryBankList.Open;
+
+   if dmAxiom.qryEmplyeeList.Active = False then
+   dmAxiom.qryEmplyeeList.Open;
+
+ //  qryDepartment.Open;
    DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
    // 27/04/2004 Tony
    // Obtain default tax for DefaultInvoice
@@ -3981,8 +4099,8 @@ end;
 
 procedure TfrmCheque.cbAuthByDropDown(Sender: TObject);
 begin
-  cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(dmAxiom.UserID);
-  cbAuthBy.OnClick(Self);
+//  cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(dmAxiom.UserID);
+//  cbAuthBy.OnClick(Self);
 end;
 
 procedure TfrmCheque.qryLedgerAfterScroll(DataSet: TDataSet);
@@ -4006,6 +4124,12 @@ begin
   btnOK.Enabled := OKtoPost(False);
 end;
 
+
+procedure TfrmCheque.cbAuthByPropertiesEditValueChanged(Sender: TObject);
+begin
+   lblAuthByName.Caption := TableString('EMPLOYEE', 'CODE', cbAuthBy.Text, 'NAME');
+   btnOK.Enabled := OKtoPost(False);
+end;
 
 procedure TfrmCheque.qryLedgerAMOUNTChange(Sender: TField);
 begin
@@ -4670,8 +4794,8 @@ begin
                qryLedger.FieldByName('LONGDESC').AsString := MatterString(ARefNo, 'MATLOCATE');
                if cbAuthBy.Text = '' then
                begin
-                  cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(ARefNo, 'AUTHOR'));
-                  cbAuthBy.OnClick(Self);
+                  cbAuthBy.Text := MatterString(ARefNo, 'AUTHOR');   //cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(ARefNo, 'AUTHOR'));
+//                  cbAuthBy.OnClick(Self);
                end;
             end
             else
@@ -4697,8 +4821,8 @@ begin
                qryLedger.FieldByName('REFNO').AsString := ARefNo;
                if cbAuthBy.Text = '' then
                begin
-                  cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(ARefNo, 'AUTHOR'));
-                  cbAuthBy.OnClick(Self);
+                  cbAuthBy.Text := MatterString(ARefNo, 'AUTHOR');   //cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(ARefNo, 'AUTHOR'));
+//                  cbAuthBy.OnClick(Self);
                end;
             end
             else

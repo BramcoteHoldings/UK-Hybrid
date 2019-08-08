@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabOverview
+    Properties.ActivePage = tabTransit
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -7994,7 +7994,7 @@ object frmMatters: TfrmMatters
           1461
           30)
         object Button1: TButton
-          Left = 1108
+          Left = 1197
           Top = 1
           Width = 81
           Height = 26
@@ -8004,7 +8004,7 @@ object frmMatters: TfrmMatters
           OnClick = Add1Click
         end
         object Button2: TButton
-          Left = 1196
+          Left = 1285
           Top = 1
           Width = 77
           Height = 26
@@ -8014,7 +8014,7 @@ object frmMatters: TfrmMatters
           OnClick = dbgrTransitDblClick
         end
         object Button3: TButton
-          Left = 1279
+          Left = 1368
           Top = 1
           Width = 82
           Height = 26
@@ -12825,6 +12825,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -12856,7 +12857,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1095
     Top = 379
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'ppUnconCheqReq'
     object ppTitleBand1: TppTitleBand
@@ -14045,6 +14046,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -14077,7 +14079,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 409
     Top = 258
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterNotes'
     object ppHeaderBand3: TppHeaderBand
@@ -15119,6 +15121,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -15151,7 +15154,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 320
     Top = 385
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 197379
     DataPipelineName = 'ppDocList'
     object ppHeaderBand4: TppHeaderBand
@@ -15853,6 +15856,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -15885,7 +15889,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1296
     Top = 680
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plUnpresentedCheques'
     object ppHeaderBand5: TppHeaderBand
@@ -16750,6 +16754,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -16782,7 +16787,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 269
     Top = 394
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterNotes'
     object ppHeaderBand6: TppHeaderBand
@@ -21195,6 +21200,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -21225,7 +21231,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 871
     Top = 75
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand8: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -21987,6 +21993,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -22019,7 +22026,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1238
     Top = 518
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand9: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -22263,6 +22270,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -22295,7 +22303,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1399
     Top = 300
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plDep'
     object ppDetailBand11: TppDetailBand
@@ -26090,6 +26098,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -26123,7 +26132,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 954
     Top = 665
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand10: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -33178,6 +33187,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -33209,7 +33219,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1368
     Top = 458
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plReceipts'
     object ppHeaderBand11: TppHeaderBand
@@ -33878,6 +33888,7 @@ object frmMatters: TfrmMatters
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -33908,7 +33919,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1037
     Top = 326
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterAuthor'
     object ppHeaderBand7: TppHeaderBand
