@@ -14,7 +14,8 @@ uses
   cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu, vcl.Themes,
   OracleUniProvider, Uni, cxNavigator, DBDateTimePicker,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxBarBuiltInMenu,
-  dxDateRanges, System.ImageList, cxDropDownEdit;
+  dxDateRanges, System.ImageList, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxButtonEdit;
 
 
 
@@ -34,7 +35,6 @@ type
     Label4: TLabel;
     DBEdit5: TDBEdit;
     Label5: TLabel;
-    dbeCode: TDBEdit;
     Label12: TLabel;
     dblblLongType: TDBText;
     Label13: TLabel;
@@ -122,6 +122,9 @@ type
     qryPaymentType: TUniQuery;
     dsPaymentType: TUniDataSource;
     cmbPaymentType: TcxDBComboBox;
+    cxLabel1: TcxLabel;
+    cmbCurrency: TcxDBLookupComboBox;
+    dbeCode: TcxButtonEdit;
     procedure qryBankBeforePost(DataSet: TDataSet);
     procedure qryBankAfterScroll(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
@@ -148,6 +151,10 @@ type
       var DisplayValue: Variant; var ErrorText: TCaption;
       var Error: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure dbeCodeKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fdefaultStyleName:  String;
@@ -163,7 +170,7 @@ implementation
 
 uses
   AxiomData, BankNew, MSearch, MiscFunc, Vcl.Styles,
-  Vcl.Styles.FormStyleHooks;
+  Vcl.Styles.FormStyleHooks, GenericSearch;
 
 
 {$R *.DFM}
@@ -344,6 +351,9 @@ begin
       lblBPayCode.Visible := False;
       edBPayCode.Visible := False;
    end;
+
+   if dmAxiom.qryCurrencyList.Active = False then
+      dmAxiom.qryCurrencyList.Open;
 end;
 
 procedure TfrmBank.cbChequePrintChange(Sender: TObject);
@@ -438,6 +448,38 @@ procedure TfrmBank.btnExitClick(Sender: TObject);
 begin
    Close;
 //   RemoveFromDesktop(Self);
+end;
+
+procedure TfrmBank.dbeCodeKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if dbeCODE.Text <> '' then
+   begin
+      if key = vk_Return then
+         qryBank.Locate('ACCT', dbeCODE.Text , [loCaseInsensitive] );
+   end;
+end;
+
+procedure TfrmBank.cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+var
+   frmGenericSearch: TfrmGenericSearch;
+begin
+   try
+      frmGenericSearch := TfrmGenericSearch.Create(Self);
+      with frmGenericSearch do
+      begin
+         SQL := 'SELECT ACCT AS CODE, NAME as descr FROM BANK WHERE ENTITY = '+quotedstr(dmAxiom.Entity)+' ORDER BY CODE';
+         SearchField := sfCode;
+         if ShowModal = mrOK then
+         begin
+            Self.dbeCode.Text := tvLookupCODE.EditValue;
+            Self.qryBank.Locate('ACCT', Self.dbeCode.Text , [loCaseInsensitive] );
+       end;
+      end;
+   finally
+      frmGenericSearch.Free;
+   end;
 end;
 
 procedure TfrmBank.cxDBMaskEdit1PropertiesValidate(Sender: TObject;
