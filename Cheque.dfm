@@ -851,7 +851,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43685.6773089005d
+    EditValue = 43686.7845323495d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1068,7 +1068,7 @@ object frmCheque: TfrmCheque
     SQL.Strings = (
       'SELECT'
       ' NAME, CASH_AT_BANK, LASTCHQ, CHEQUE, TRUST,'
-      ' CL_BALANCE, BALANCE, ROWID'
+      ' CL_BALANCE, BALANCE, CURRENCY, ROWID'
       'FROM'
       ' BANK'
       'WHERE ACCT = :P_Code'

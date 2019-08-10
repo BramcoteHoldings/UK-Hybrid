@@ -18,15 +18,15 @@ object frmBank: TfrmBank
   PixelsPerInch = 96
   TextHeight = 15
   object lblType: TLabel
-    Left = 168
-    Top = 81
+    Left = 201
+    Top = 79
     Width = 25
     Height = 15
     Caption = 'Type'
   end
   object Label1: TLabel
     Left = 25
-    Top = 107
+    Top = 105
     Width = 80
     Height = 15
     Alignment = taRightJustify
@@ -71,7 +71,7 @@ object frmBank: TfrmBank
   end
   object Label12: TLabel
     Left = 29
-    Top = 81
+    Top = 79
     Width = 76
     Height = 15
     Alignment = taRightJustify
@@ -79,8 +79,8 @@ object frmBank: TfrmBank
     Transparent = True
   end
   object dblblLongType: TDBText
-    Left = 202
-    Top = 81
+    Left = 235
+    Top = 79
     Width = 121
     Height = 14
     DataField = 'LongType'
@@ -298,12 +298,12 @@ object frmBank: TfrmBank
   end
   object DBEdit1: TDBEdit
     Left = 113
-    Top = 104
+    Top = 102
     Width = 216
     Height = 23
     DataField = 'NAME'
     DataSource = dsBank
-    TabOrder = 1
+    TabOrder = 2
   end
   object DBEdit2: TDBEdit
     Left = 113
@@ -312,7 +312,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'BANKNAME'
     DataSource = dsBank
-    TabOrder = 2
+    TabOrder = 3
   end
   object DBEdit3: TDBEdit
     Left = 113
@@ -321,7 +321,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'ADDRESS'
     DataSource = dsBank
-    TabOrder = 5
+    TabOrder = 6
   end
   object DBEdit4: TDBEdit
     Left = 113
@@ -330,7 +330,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'SUBURB'
     DataSource = dsBank
-    TabOrder = 6
+    TabOrder = 7
   end
   object DBEdit5: TDBEdit
     Left = 113
@@ -339,17 +339,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'ACCOUNTNUMBER'
     DataSource = dsBank
-    TabOrder = 8
-  end
-  object dbeCode: TDBEdit
-    Left = 113
-    Top = 78
-    Width = 36
-    Height = 23
-    DataField = 'ACCT'
-    DataSource = dsBank
-    ReadOnly = True
-    TabOrder = 0
+    TabOrder = 9
   end
   object dbtbAbbrev: TDBEdit
     Left = 113
@@ -359,7 +349,7 @@ object frmBank: TfrmBank
     CharCase = ecUpperCase
     DataField = 'BANK_ABBREV'
     DataSource = dsBank
-    TabOrder = 3
+    TabOrder = 4
   end
   object dbtbCAB: TDBEdit
     Left = 113
@@ -368,7 +358,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'CASH_AT_BANK'
     DataSource = dsBank
-    TabOrder = 9
+    TabOrder = 10
   end
   object DBEdit8: TDBEdit
     Left = 113
@@ -377,7 +367,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'BRANCH'
     DataSource = dsBank
-    TabOrder = 4
+    TabOrder = 5
   end
   object DBEdit11: TDBEdit
     Left = 353
@@ -386,7 +376,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'CLEARANCE'
     DataSource = dsBank
-    TabOrder = 10
+    TabOrder = 11
     Visible = False
   end
   object DBEdit6: TDBEdit
@@ -396,7 +386,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'BANK_CLEARANCE'
     DataSource = dsBank
-    TabOrder = 11
+    TabOrder = 12
     Visible = False
   end
   object edtStatDepMat: TDBEdit
@@ -406,17 +396,17 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'STAT_DEP_MATTER'
     DataSource = dsBank
-    TabOrder = 12
+    TabOrder = 13
     OnChange = edtStatDepMatChange
   end
   object DBEdit7: TDBEdit
     Left = 562
-    Top = 308
+    Top = 312
     Width = 27
     Height = 23
     DataField = 'INTERNATIONAL_CLEARANCE'
     DataSource = dsBank
-    TabOrder = 13
+    TabOrder = 14
     Visible = False
   end
   object cxDBMaskEdit1: TcxDBMaskEdit
@@ -437,7 +427,7 @@ object frmBank: TfrmBank
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 7
+    TabOrder = 8
     Width = 88
   end
   object cxDBCheckBox1: TcxDBCheckBox
@@ -454,7 +444,7 @@ object frmBank: TfrmBank
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 14
+    TabOrder = 15
     Transparent = True
   end
   object cbEnforceBSBDD: TcxDBCheckBox
@@ -470,10 +460,10 @@ object frmBank: TfrmBank
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 15
+    TabOrder = 16
   end
   object cmbAcctType: TDBComboBox
-    Left = 112
+    Left = 113
     Top = 50
     Width = 216
     Height = 23
@@ -482,7 +472,7 @@ object frmBank: TfrmBank
     Items.Strings = (
       'Office'
       'Service')
-    TabOrder = 16
+    TabOrder = 0
   end
   object cbDefault: TcxDBCheckBox
     Left = 37
@@ -580,8 +570,8 @@ object frmBank: TfrmBank
     Top = 442
     Width = 173
     Height = 23
-    Date = 43653.727033564810000000
-    Time = 43653.727033564810000000
+    Date = 43686.727033564810000000
+    Time = 43686.727033564810000000
     ShowCheckbox = True
     Checked = False
     TabOrder = 25
@@ -607,16 +597,16 @@ object frmBank: TfrmBank
   end
   object pagDocs: TcxPageControl
     Left = 0
-    Top = 488
+    Top = 501
     Width = 638
-    Height = 261
+    Height = 248
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 27
     Properties.ActivePage = tabCheque
     Properties.CustomButtons.Buttons = <>
     OnChange = pagDocsChange
-    ClientRectBottom = 257
+    ClientRectBottom = 244
     ClientRectLeft = 4
     ClientRectRight = 634
     ClientRectTop = 26
@@ -627,7 +617,7 @@ object frmBank: TfrmBank
         Left = 0
         Top = 0
         Width = 630
-        Height = 231
+        Height = 218
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -690,7 +680,7 @@ object frmBank: TfrmBank
         Left = 0
         Top = 0
         Width = 630
-        Height = 231
+        Height = 218
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -781,7 +771,7 @@ object frmBank: TfrmBank
     Style.BorderColor = clWindowFrame
     Style.BorderStyle = ebs3D
     Style.HotTrack = False
-    TabOrder = 32
+    TabOrder = 30
     Width = 107
   end
   object cmbPaymentType: TcxDBComboBox
@@ -793,8 +783,79 @@ object frmBank: TfrmBank
       'CQ - Cheque'
       'DD - Direct Debit')
     Properties.MaxLength = 2
-    TabOrder = 35
+    TabOrder = 34
     Width = 121
+  end
+  object cxLabel1: TcxLabel
+    Left = 339
+    Top = 285
+    Caption = 'Currency'
+    Transparent = True
+  end
+  object cmbCurrency: TcxDBLookupComboBox
+    Left = 397
+    Top = 284
+    DataBinding.DataField = 'CURRENCY'
+    DataBinding.DataSource = dsBank
+    Properties.DropDownAutoSize = True
+    Properties.KeyFieldNames = 'ISO4217_CURRENCY_CODE'
+    Properties.ListColumns = <
+      item
+        Width = 90
+        FieldName = 'ISO4217_CURRENCY_CODE'
+      end
+      item
+        FieldName = 'MAX(ISO4217_CURRENCY_NAME)'
+      end>
+    Properties.ListOptions.ShowHeader = False
+    Properties.ListOptions.SyncMode = True
+    Properties.ListSource = dmAxiom.dsCurrencyList
+    TabOrder = 37
+    Width = 189
+  end
+  object dbeCode: TcxButtonEdit
+    Left = 113
+    Top = 76
+    Properties.Buttons = <
+      item
+        Default = True
+        Glyph.SourceDPI = 96
+        Glyph.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001B744558745469746C650046696E643B49643B4C6F636174653B5365
+          61726368C8CDD75F0000030649444154785E7D917D48956718C6AFF77C7276CC
+          CF91D91F4EC630883119B431DBFA10E940DB6A30A441E8C650823111B2F6E138
+          466C8A68D4C6CC1811AB34B659C3CA5C9B6EC23A9BA1B639AC88697E24C7E6D9
+          396AE9793FCFF3BCEFBDE71CE478FEA85DF7F3E37EFEB8B92E9EE796B02A4960
+          17D8042430059620758690222282ADEEE80F10B295BFDFF2746D53D7950F9ABB
+          E59A86F33DBBCB3F2EAC3974A6E0D0177DDDFE2FFBF4BA6357BBABFDEDF900A4
+          DAA64B491387C118849C99B9051D6FEE282A7E32D383EB7F4EF84CFEFC687A76
+          06BDB6ADD09D95EE41FFC0ADD7C7B4B40C0025319D994891ADECDDC692CF5A7F
+          A250244A81A1316A6EEDA4AA8F3AE8C3233D149C7B486353613AFD6D3F55D77F
+          4315FBDB8A0148C927C4D3DDE959951B9F59074D6750748E60308CF1F109C114
+          54838320C1E57183330516B9AA00D893E98545A56B9DAE35651B84C103594754
+          D5B1ACE86006038B19C2D004B7086E8F174EBB056E626FD1CB65D9C9CFDDF5CE
+          91F68E8BC3B4B8AC11E3268DDF0BD3270D5FD3AE8A463A7AB287EE879729AAE8
+          64C418CDCECD53E7E5DFA8A5ED42AFCFE7F302B0496F541ED7DB1A2BDCD70667
+          D0F5CBDF287B7523729E3070F3CE0C466FDFC1FCFC42727B92A8D45D1259D71C
+          86CEED99E96E5C0D4C20A7740B7E1CBA8196EAAD989C0E21140A61F34B2F8228
+          310D1224CA1210F0C7C8C8369B66C8C1C999084A5F29C0D2F020B66FCAC7DDA9
+          39C8D1A507266350550DF507CA31F76F04FE8315F01F781B5E8F0B8AAA807306
+          DB42E8EEE7A73B7FC553B9AE44729E9770E6BB5ECCCE4E7771C6A1280A4CCB82
+          AE69B044AFAA6E40CD7B6F419565F01887E3F6EF67DB754571FEDC3FB08F206D
+          88694BE3F2C3FBA79E2D705E34B1BE5295E30648189826A069AAE80459159D0B
+          0300D189BFBEFF0AC0398153C005726C31DB5EF8DC5A31A82492755D17468453
+          273EC5E1A6135015159C73484484474992A4B417B6EC89E6E6AD07630CA0F859
+          FD48BBCD8EC548040E3C5E66CC3002FF0467B7AE2C0E04098943144F80C959E0
+          FF0C8CD1E1CB3B579E2521A9E49D04B1FF0031E8A6CDA38412D6000000004945
+          4E44AE426082}
+        Kind = bkGlyph
+      end>
+    Properties.CharCase = ecUpperCase
+    Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
+    TabOrder = 1
+    OnKeyDown = dbeCodeKeyDown
+    Width = 81
   end
   object qryBank: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1362,8 +1423,8 @@ object frmBank: TfrmBank
       000000000000}
   end
   object cdlgColour: TColorDialog
-    Left = 304
-    Top = 65
+    Left = 576
+    Top = 73
   end
   object qryPrinter: TUniQuery
     UpdatingTable = 'PRINTER'
