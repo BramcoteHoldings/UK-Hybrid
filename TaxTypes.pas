@@ -16,7 +16,8 @@ uses
   ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport,
   cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu, ppParameter,
   ppDesignLayer, cxNavigator, dxGDIPlusClasses, dxDPIAwareUtils,
-  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog;
+  dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
+  dxDateRanges, System.ImageList;
 
 type
   TfrmTaxTypes = class(TfrmMaint)
@@ -104,6 +105,13 @@ type
     qrySourceWITHHOLDING: TStringField;
     qrySourceTAXTYPE: TStringField;
     cxDBCheckBox2: TcxDBCheckBox;
+    cxDBCheckBox3: TcxDBCheckBox;
+    qrySourceACTIVE: TStringField;
+    qrySourceUSE_FOR_BILLING: TStringField;
+    cxDBCheckBox4: TcxDBCheckBox;
+    cxDBLookupComboBox1: TcxDBLookupComboBox;
+    Label1: TLabel;
+    qrySourceTAX_CODE_BILLING: TStringField;
     procedure qrySourceBeforeScroll(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -156,6 +164,8 @@ begin
   qryTaxDefault.Open;
   qryTaxType.Open;
   qryEntities.Open;
+  if dmAxiom.qryTaxList.Active = False then
+     dmAxiom.qryTaxList.Open;
 //  StringPopulate(tvGrdDefaultTax.Properties.Items,'TAXTYPE','CODE','1=1');
 //  pagTaxRates.ActivePageIndex := 0;
 end;

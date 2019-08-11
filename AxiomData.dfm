@@ -18,8 +18,7 @@ object dmAxiom: TdmAxiom
     Pooling = True
     Debug = True
     Username = 'axiom'
-    Server = '192.168.0.22:1521:marketing'
-    Connected = True
+    Server = 'dev-oracle:1521:hohlaw'
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
     OnError = uniInsightError
@@ -2087,7 +2086,7 @@ object dmAxiom: TdmAxiom
     Left = 649
     Top = 178
     Bitmap = {
-      494C010102000500040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500080020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3281,7 +3280,7 @@ object dmAxiom: TdmAxiom
     Left = 629
     Top = 15
     Bitmap = {
-      494C01012A002D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012A002D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000B0000000010020000000000000B0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5323,7 +5322,7 @@ object dmAxiom: TdmAxiom
     Left = 889
     Top = 189
     Bitmap = {
-      494C010101000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000500080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000008686860033660000336600003333
       6600333366003333660080000000800000008000000066006600660066006600
@@ -6775,7 +6774,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -6801,6 +6800,7 @@ object dmAxiom: TdmAxiom
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -6835,7 +6835,7 @@ object dmAxiom: TdmAxiom
     XLSSettings.WorksheetName = 'Report'
     Left = 416
     Top = 691
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plTmpProcess'
     object ppHeaderBand2: TppHeaderBand
