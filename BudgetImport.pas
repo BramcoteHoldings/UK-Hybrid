@@ -11,7 +11,7 @@ uses
   cxGridDBTableView, cxGrid, Menus, cxLookAndFeelPainters, cxProgressBar,
   dxStatusBar, StdCtrls, cxButtons, cxDropDownEdit, MemDS, DBAccess, OracleUniProvider, Uni,
   cxGroupBox, cxRadioGroup, cxLabel, cxLookAndFeels, cxNavigator,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   PerMonths: array[1..12] of integer = ( 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6 );
@@ -105,7 +105,7 @@ procedure TfrmBudgetImport.pbImportClick(Sender: TObject);
       Result := tvBudgetImp.DataController.GetValue(ARecordIndex, AItemIndex);
    end;
 var
-   i, X: integer;
+   i, X, M: integer;
    slImport: TStrings;
    StatementFileName: string;
    sNewline, sWord: string;
@@ -119,6 +119,7 @@ begin
            Exit;
         end;
      try
+        M := SystemInteger('FINYEAR_START_MONTH');
         StatusBar.Panels.Items[0].Text := 'Importing Budget....';
         ProgressBar.Properties.Max := tvBudgetImp.DataController.RowCount;
         ProgressBar.Position := 0;
@@ -164,7 +165,7 @@ begin
                  end;
 
                  ParamByName('FINANCIAL_YEAR').AsString := cmbPeriod.EditValue;
-                 ParamByName('MONTH').AsInteger := PerMonths[X];
+                 //ParamByName('MONTH').AsInteger := PerMonths[X];
 
                  if cmbType.Text = 'General Ledger' then
                  begin
@@ -183,10 +184,20 @@ begin
                  end;
                  ParamByName('ENTITY').AsString := dmAxiom.Entity;
                  ParamByName('PERIOD').AsInteger := X;
-                 if X <= 5 then
-                    ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1
+                 //if X <= 5 then
+                 //   ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1
+                 //else
+                 //   ParamByName('CALENDAR_YEAR').AsString := cmbPeriod.EditValue;
+                  if (X + M - 1) <= 12 then
+                 begin
+                    ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1;
+                    ParamByName('MONTH').AsInteger := M + X - 1;
+                 end
                  else
+                 begin
                     ParamByName('CALENDAR_YEAR').AsString := cmbPeriod.EditValue;
+                    ParamByName('MONTH').AsInteger := (M + X - 1) - 12;
+                 end;
                  Execute;
                  if RowsAffected = 0 then
                  begin
@@ -195,10 +206,20 @@ begin
                        ParamByName('ENTITY').AsString := dmAxiom.Entity;
                        ParamByName('CREATED').AsDateTime := Now;
                        ParamByName('PERIOD').AsInteger := X;
-                       if X <= 6 then
-                          ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1
+                       //if X <= 6 then
+                       //   ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1
+                       //else
+                       //   ParamByName('CALENDAR_YEAR').AsString := cmbPeriod.EditValue;
+                       if (X + M - 1) <= 12 then
+                       begin
+                          ParamByName('CALENDAR_YEAR').AsInteger := integer(cmbPeriod.EditValue) - 1;
+                          ParamByName('MONTH').AsInteger := M + X - 1;
+                       end
                        else
+                       begin
                           ParamByName('CALENDAR_YEAR').AsString := cmbPeriod.EditValue;
+                          ParamByName('MONTH').AsInteger := (M + X - 1) - 12;
+                       end;
 
                        if cmbType.Text = 'Author' then
                           ParamByName('EMPLOYEE').AsString := GetRecordValue(I,0);
@@ -207,7 +228,7 @@ begin
                           ParamByName('DEPARTMENT').AsString := GetRecordValue(I,0);
 
                        ParamByName('FINANCIAL_YEAR').AsString := cmbPeriod.EditValue;
-                       ParamByName('MONTH').AsInteger := PerMonths[X];
+                       //ParamByName('MONTH').AsInteger := PerMonths[X];
 
                        if cmbType.Text = 'General Ledger' then
                        begin
