@@ -673,7 +673,7 @@ begin
          end;
 
          if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
          dmAxiom.uniInsight.StartTransaction;
 
        // set the sequence

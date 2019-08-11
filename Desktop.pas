@@ -1830,6 +1830,8 @@ begin
          dmAxiom.qryEmpAuthor.Close;
       if dmAxiom.qryCurrencyList.Active = True then
          dmAxiom.qryCurrencyList.Close;
+      if dmAxiom.qryTaxList.Active = True then
+        dmAxiom.qryTaxList.Close;
 
       try
          if finYearStart <> nil then

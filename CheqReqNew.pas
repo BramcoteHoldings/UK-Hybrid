@@ -627,7 +627,18 @@ begin
                 dmAxiom.uniInsight.Rollback;
              dmAxiom.uniInsight.StartTransaction;
              if qryCheqReq.Active then
-               qryCheqReq.Edit
+             begin
+               qryCheqReq.Edit;
+               if qryCheqReq.ParamByName('NCHEQREQ').IsNull then
+               begin
+                  iCheqReq := GetSequenceNumber('sqnc_ncheqreq');
+                  qryCheqReq.ParamByName('NCHEQREQ').AsInteger := iCheqReq;
+                  qryCheqReq.Open;
+                  qryCheqReq.Insert;
+                  qryCheqReq.FieldByName('NCHEQREQ').AsInteger := iCheqReq;
+                  qryCheqReq.FieldByName('CONVERTED').AsString := 'N';
+               end;
+             end
              else
              begin
                iCheqReq := GetSequenceNumber('sqnc_ncheqreq');
