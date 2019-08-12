@@ -1835,7 +1835,7 @@ begin
 
       try
          if finYearStart <> nil then
-            finYearStart.Free;
+            FreeAndNil(finYearStart);  //.Free;
       finally
          if (dmAxiom.orsAxiom.Connected = True) then
             dmAxiom.orsAxiom.Disconnect;
