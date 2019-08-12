@@ -7,7 +7,8 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Mask, cxLookAndFeelPainters, cxButtons, cxControls, cxContainer, cxEdit,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxDBEdit, cxCurrencyEdit,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, Menus, cxGraphics,
-  cxLookAndFeels;
+  cxLookAndFeels, dxLayoutcxEditAdapters, dxLayoutControlAdapters,
+  dxLayoutContainer, cxClasses, dxLayoutControl;
 const
   C_DEPTWHERE = 'AND dept = :dept';
 type
@@ -23,14 +24,6 @@ type
     dsAccountCodes: TUniDataSource;
     qAccountCodesKEY: TStringField;
     qAccountCodesDISPLAY: TStringField;
-    Label1: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label2: TLabel;
     qMonth: TUniQuery;
     dsMonth: TUniDataSource;
     qMonthKEY: TFloatField;
@@ -60,6 +53,21 @@ type
     qBudgetFINANCIAL_YEAR: TFloatField;
     qBudgetMONTH: TFloatField;
     cbEmployee: TcxDBLookupComboBox;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
     procedure cbEmployeeChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OKBtnClick(Sender: TObject);

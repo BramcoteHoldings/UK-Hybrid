@@ -32,7 +32,7 @@ object frmSundryNew: TfrmSundryNew
     Width = 309
     object Label9: TLabel
       Left = 9
-      Top = 18
+      Top = 19
       Width = 46
       Height = 15
       Caption = 'Tax Rate:'
@@ -53,7 +53,7 @@ object frmSundryNew: TfrmSundryNew
     end
     object Label13: TLabel
       Left = 9
-      Top = 99
+      Top = 100
       Width = 20
       Height = 15
       Caption = 'Tax:'
@@ -102,7 +102,7 @@ object frmSundryNew: TfrmSundryNew
     end
     object neTax: TcxDBTextEdit
       Left = 83
-      Top = 96
+      Top = 97
       DataBinding.DataField = 'TAX'
       DataBinding.DataSource = dsSundry
       Style.LookAndFeel.Kind = lfStandard
@@ -135,7 +135,7 @@ object frmSundryNew: TfrmSundryNew
     end
     object cbTaxType: TcxDBLookupComboBox
       Left = 83
-      Top = 15
+      Top = 16
       DataBinding.DataField = 'TAXCODE'
       DataBinding.DataSource = dsSundry
       Properties.ImmediatePost = True
@@ -226,7 +226,7 @@ object frmSundryNew: TfrmSundryNew
     end
     object Label3: TLabel
       Left = 9
-      Top = 50
+      Top = 51
       Width = 28
       Height = 15
       Caption = 'Type:'
@@ -631,12 +631,14 @@ object frmSundryNew: TfrmSundryNew
       
         '  (NSUNDRY, ACCT, CREATED, BILLED, DESCR, NMATTER, NCLIENT, NTRA' +
         'NS, UNITS, NMEMO, TYPE, PRIVATE, FILEID, NCHEQUE, TAXCODE, REFNO' +
-        ', AMOUNT, PERUNIT, TAX)'
+        ', AMOUNT, PERUNIT, TAX, BILLED_AMOUNT, BILLED_TAX, BILLING_TAXCO' +
+        'DE)'
       'VALUES'
       
         '  (:NSUNDRY, :ACCT, :CREATED, :BILLED, :DESCR, :NMATTER, :NCLIEN' +
         'T, :NTRANS, :UNITS, :NMEMO, :TYPE, :PRIVATE, :FILEID, :NCHEQUE, ' +
-        ':TAXCODE, :REFNO, :AMOUNT, :PERUNIT, :TAX)')
+        ':TAXCODE, :REFNO, :AMOUNT, :PERUNIT, :TAX, :BILLED_AMOUNT, :BILL' +
+        'ED_TAX, :BILLING_TAXCODE)')
     SQLDelete.Strings = (
       'DELETE FROM SUNDRY'
       'WHERE'
@@ -662,7 +664,10 @@ object frmSundryNew: TfrmSundryNew
       '  REFNO = :REFNO,'
       '  AMOUNT = :AMOUNT,'
       '  PERUNIT = :PERUNIT,'
-      '  TAX = :TAX'
+      '  TAX = :TAX,'
+      '  BILLED_AMOUNT = :BILLED_AMOUNT, '
+      '  BILLED_TAX = :BILLED_TAX, '
+      '  BILLING_TAXCODE = :BILLING_TAXCODE'
       'WHERE'
       '  NSUNDRY = :OLD_NSUNDRY')
     SQLLock.Strings = (
