@@ -32,3 +32,5 @@ BIN/Platform/win32/Insight.ini
 BIN/Platform/win32/Insight.drc
 BIN/Platform/win32/RBuilder.ini
 *.res
+Insight.stat
+Insight.identcache

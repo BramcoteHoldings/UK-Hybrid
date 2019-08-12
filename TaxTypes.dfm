@@ -23,7 +23,6 @@ inherited frmTaxTypes: TfrmTaxTypes
     Properties.ShowFrame = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    TabSlants.Kind = skCutCorner
     ClientRectBottom = 583
     ClientRectLeft = 4
     ClientRectRight = 911
@@ -33,33 +32,36 @@ inherited frmTaxTypes: TfrmTaxTypes
       ImageIndex = 0
       object cxPageControl2: TcxPageControl
         Left = 0
-        Top = 120
+        Top = 145
         Width = 907
-        Height = 437
+        Height = 412
         Align = alClient
         TabOrder = 0
         Properties.ActivePage = cxTabSheet3
         Properties.CustomButtons.Buttons = <>
         Properties.TabSlants.Kind = skCutCorner
         LookAndFeel.NativeStyle = True
-        TabSlants.Kind = skCutCorner
-        ClientRectBottom = 433
+        ExplicitTop = 120
+        ExplicitHeight = 437
+        ClientRectBottom = 408
         ClientRectLeft = 4
         ClientRectRight = 903
         ClientRectTop = 26
         object cxTabSheet3: TcxTabSheet
           Caption = 'Tax Rates'
           ImageIndex = 0
+          ExplicitHeight = 407
           object cxGrid2: TcxGrid
             Left = 0
             Top = 0
             Width = 899
-            Height = 407
+            Height = 382
             Align = alClient
             PopupMenu = popTaxRate
             TabOrder = 0
             LookAndFeel.Kind = lfFlat
             LookAndFeel.NativeStyle = True
+            ExplicitHeight = 407
             object tvTaxRates: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               Navigator.Buttons.PriorPage.Visible = False
@@ -127,14 +129,16 @@ inherited frmTaxTypes: TfrmTaxTypes
         object cxTabSheet4: TcxTabSheet
           Caption = 'Ledgers'
           ImageIndex = 1
+          ExplicitHeight = 407
           object cxGrid3: TcxGrid
             Left = 0
             Top = 0
             Width = 899
-            Height = 407
+            Height = 382
             Align = alClient
             TabOrder = 0
             LookAndFeel.Kind = lfFlat
+            ExplicitHeight = 407
             object cxGrid3DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dsTaxTypeLedger
@@ -202,7 +206,7 @@ inherited frmTaxTypes: TfrmTaxTypes
         Left = 0
         Top = 0
         Width = 907
-        Height = 120
+        Height = 145
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
@@ -232,16 +236,24 @@ inherited frmTaxTypes: TfrmTaxTypes
           Visible = False
         end
         object Label11: TLabel
-          Left = 10
-          Top = 85
+          Left = 8
+          Top = 89
           Width = 45
           Height = 15
           Caption = 'Tax Type'
           Transparent = True
         end
+        object Label1: TLabel
+          Left = 8
+          Top = 116
+          Width = 99
+          Height = 15
+          Caption = 'Tax Type for billing'
+          Transparent = True
+        end
         object cbTaxType: TcxDBImageComboBox
-          Left = 105
-          Top = 84
+          Left = 115
+          Top = 85
           DataBinding.DataField = 'TAXTYPE'
           DataBinding.DataSource = dsSource
           Properties.Items = <
@@ -274,7 +286,7 @@ inherited frmTaxTypes: TfrmTaxTypes
           Width = 221
         end
         object cxDBTextEdit3: TcxDBTextEdit
-          Left = 105
+          Left = 115
           Top = 58
           DataBinding.DataField = 'LEDGER'
           DataBinding.DataSource = dsSource
@@ -287,7 +299,7 @@ inherited frmTaxTypes: TfrmTaxTypes
           Width = 121
         end
         object cxDBTextEdit2: TcxDBTextEdit
-          Left = 105
+          Left = 115
           Top = 32
           DataBinding.DataField = 'DESCR'
           DataBinding.DataSource = dsSource
@@ -299,7 +311,7 @@ inherited frmTaxTypes: TfrmTaxTypes
           Width = 294
         end
         object cxDBTextEdit1: TcxDBTextEdit
-          Left = 105
+          Left = 115
           Top = 6
           DataBinding.DataField = 'CODE'
           DataBinding.DataSource = dsSource
@@ -309,10 +321,10 @@ inherited frmTaxTypes: TfrmTaxTypes
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 3
-          Width = 54
+          Width = 68
         end
         object cxDBCheckBox1: TcxDBCheckBox
-          Left = 200
+          Left = 192
           Top = 6
           Caption = 'Default'
           DataBinding.DataField = 'DEFAULTTAX'
@@ -328,10 +340,9 @@ inherited frmTaxTypes: TfrmTaxTypes
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 4
-          Width = 64
         end
         object cxDBCheckBox2: TcxDBCheckBox
-          Left = 301
+          Left = 262
           Top = 6
           Caption = 'Whithholding'
           DataBinding.DataField = 'WITHHOLDING'
@@ -347,7 +358,61 @@ inherited frmTaxTypes: TfrmTaxTypes
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 5
-          Width = 102
+        end
+        object cxDBCheckBox3: TcxDBCheckBox
+          Left = 367
+          Top = 6
+          Caption = 'Use for Billing'
+          DataBinding.DataField = 'TAXTYPE'
+          DataBinding.DataSource = dsSource
+          Properties.Alignment = taRightJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
+          Style.LookAndFeel.NativeStyle = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          TabOrder = 6
+        end
+        object cxDBCheckBox4: TcxDBCheckBox
+          Left = 469
+          Top = 6
+          Caption = 'Active'
+          DataBinding.DataField = 'ACTIVE'
+          DataBinding.DataSource = dsSource
+          Properties.Alignment = taRightJustify
+          Properties.DisplayChecked = 'Y'
+          Properties.DisplayUnchecked = 'N'
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
+          Style.LookAndFeel.NativeStyle = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          TabOrder = 7
+        end
+        object cxDBLookupComboBox1: TcxDBLookupComboBox
+          Left = 115
+          Top = 113
+          DataBinding.DataField = 'TAX_CODE_BILLING'
+          DataBinding.DataSource = dsSource
+          Properties.KeyFieldNames = 'CODE'
+          Properties.ListColumns = <
+            item
+              FieldName = 'DESCR'
+            end
+            item
+              FieldName = 'CODE'
+            end>
+          Properties.ListOptions.ShowHeader = False
+          Properties.ListOptions.SyncMode = True
+          Properties.ListSource = dmAxiom.dsTaxList
+          TabOrder = 8
+          Width = 149
         end
       end
     end
@@ -416,7 +481,7 @@ inherited frmTaxTypes: TfrmTaxTypes
     Left = 375
     Top = 148
     Bitmap = {
-      494C01010C001100240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010C001100280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -992,15 +1057,22 @@ inherited frmTaxTypes: TfrmTaxTypes
       FixedChar = True
       Size = 5
     end
+    object qrySourceACTIVE: TStringField
+      FieldName = 'ACTIVE'
+      Size = 1
+    end
+    object qrySourceUSE_FOR_BILLING: TStringField
+      FieldName = 'USE_FOR_BILLING'
+      Size = 1
+    end
+    object qrySourceTAX_CODE_BILLING: TStringField
+      FieldName = 'TAX_CODE_BILLING'
+    end
   end
   inherited bmMain: TdxBarManager
     Left = 156
     Top = 140
-    DockControlHeights = (
-      0
-      0
-      28
-      0)
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
       OldName = 'Main Menu1'
     end
@@ -1018,29 +1090,21 @@ inherited frmTaxTypes: TfrmTaxTypes
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
       end
     end
     inherited ppMaintDetailBand: TppDetailBand
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1060,6 +1124,7 @@ inherited frmTaxTypes: TfrmTaxTypes
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1079,6 +1144,7 @@ inherited frmTaxTypes: TfrmTaxTypes
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'LEDGER'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1098,6 +1164,7 @@ inherited frmTaxTypes: TfrmTaxTypes
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'OUTPUTLEDGER'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1117,6 +1184,7 @@ inherited frmTaxTypes: TfrmTaxTypes
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'ADJUSTLEDGER'
         DataPipeline = plSource
         Font.Charset = ANSI_CHARSET
@@ -1133,76 +1201,6 @@ inherited frmTaxTypes: TfrmTaxTypes
         BandType = 4
         LayerName = Foreground
       end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
-        LayerName = Foreground
-      end
-    end
-  end
-  inherited plSource: TppDBPipeline
-    object plSourceppField1: TppField
-      FieldAlias = 'CODE'
-      FieldName = 'CODE'
-      FieldLength = 0
-      DisplayWidth = 0
-      Position = 0
-    end
-    object plSourceppField2: TppField
-      FieldAlias = 'DESCR'
-      FieldName = 'DESCR'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 1
-    end
-    object plSourceppField3: TppField
-      FieldAlias = 'LEDGER'
-      FieldName = 'LEDGER'
-      FieldLength = 12
-      DisplayWidth = 12
-      Position = 2
-    end
-    object plSourceppField4: TppField
-      FieldAlias = 'OUTPUTLEDGER'
-      FieldName = 'OUTPUTLEDGER'
-      FieldLength = 12
-      DisplayWidth = 12
-      Position = 3
-    end
-    object plSourceppField5: TppField
-      FieldAlias = 'ADJUSTLEDGER'
-      FieldName = 'ADJUSTLEDGER'
-      FieldLength = 12
-      DisplayWidth = 12
-      Position = 4
-    end
-    object plSourceppField6: TppField
-      FieldAlias = 'DEFAULTTAX'
-      FieldName = 'DEFAULTTAX'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 5
-    end
-    object plSourceppField7: TppField
-      FieldAlias = 'ROWID'
-      FieldName = 'ROWID'
-      FieldLength = 18
-      DisplayWidth = 18
-      Position = 6
-    end
-    object plSourceppField8: TppField
-      FieldAlias = 'TAXTYPE'
-      FieldName = 'TAXTYPE'
-      FieldLength = 5
-      DisplayWidth = 5
-      Position = 7
-    end
-    object plSourceppField9: TppField
-      FieldAlias = 'WITHHOLDING'
-      FieldName = 'WITHHOLDING'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 8
     end
   end
   object dsTaxRates: TUniDataSource
@@ -1427,7 +1425,7 @@ inherited frmTaxTypes: TfrmTaxTypes
     Left = 375
     Top = 148
     Bitmap = {
-      494C01010A000D001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
