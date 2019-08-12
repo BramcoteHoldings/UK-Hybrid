@@ -3,8 +3,8 @@ object fmBudgetEntryDialog: TfmBudgetEntryDialog
   Top = 429
   BorderStyle = bsDialog
   Caption = 'Budget Entry'
-  ClientHeight = 219
-  ClientWidth = 316
+  ClientHeight = 264
+  ClientWidth = 312
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,282 +17,545 @@ object fmBudgetEntryDialog: TfmBudgetEntryDialog
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 14
-  object Label1: TLabel
-    Left = 46
-    Top = 14
-    Width = 53
-    Height = 14
-    Caption = 'Employee'
-  end
-  object Label3: TLabel
-    Left = 188
-    Top = 39
-    Width = 23
-    Height = 14
-    Caption = 'Year'
-  end
-  object Label4: TLabel
-    Left = 37
-    Top = 64
-    Width = 62
-    Height = 14
-    Caption = 'Billed Fees'
-  end
-  object Label5: TLabel
-    Left = 78
-    Top = 89
-    Width = 21
-    Height = 14
-    Caption = 'WIP'
-  end
-  object Label6: TLabel
-    Left = 29
-    Top = 114
-    Width = 70
-    Height = 14
-    Caption = 'Time (Hours)'
-  end
-  object Label7: TLabel
-    Left = 23
-    Top = 164
-    Width = 76
-    Height = 14
-    Caption = 'Account Value'
-  end
-  object Label8: TLabel
-    Left = 27
-    Top = 139
-    Width = 72
-    Height = 14
-    Caption = 'Account Code'
-  end
-  object Label2: TLabel
-    Left = 64
-    Top = 39
-    Width = 35
-    Height = 14
-    Caption = 'Month'
-  end
-  object OKBtn: TcxButton
-    Left = 107
-    Top = 187
-    Width = 75
-    Height = 25
-    Caption = '&OK'
-    LookAndFeel.NativeStyle = True
-    ModalResult = 1
-    OptionsImage.Glyph.Data = {
-      DE010000424DDE01000000000000760000002800000024000000120000000100
-      0400000000006801000000000000000000001000000000000000000000000000
-      8000008000000080800080000000800080008080000080808000C0C0C0000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-      3333333333333333333333330000333333333333333333333333F33333333333
-      00003333344333333333333333377F3333333333000033334224333333333333
-      337337F3333333330000333422224333333333333733337F3333333300003342
-      222224333333333373333337F3333333000034222A22224333333337F337F333
-      7F33333300003222A3A2224333333337F3737F337F33333300003A2A333A2224
-      33333337F73337F337F33333000033A33333A222433333337333337F337F3333
-      0000333333333A222433333333333337F337F33300003333333333A222433333
-      333333337F337F33000033333333333A222433333333333337F337F300003333
-      33333333A222433333333333337F337F00003333333333333A22433333333333
-      3337F37F000033333333333333A223333333333333337F730000333333333333
-      333A333333333333333337330000333333333333333333333333333333333333
-      0000}
-    OptionsImage.NumGlyphs = 2
-    TabOrder = 7
-    OnClick = OKBtnClick
-  end
-  object CancelBtn: TcxButton
-    Left = 192
-    Top = 187
-    Width = 75
-    Height = 25
-    Caption = 'Cancel'
-    LookAndFeel.NativeStyle = True
-    ModalResult = 2
-    OptionsImage.Glyph.Data = {
-      DE010000424DDE01000000000000760000002800000024000000120000000100
-      0400000000006801000000000000000000001000000000000000000000000000
-      80000080000000808000800000008000800080800000C0C0C000808080000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-      333333333333333333333333000033338833333333333333333F333333333333
-      0000333911833333983333333388F333333F3333000033391118333911833333
-      38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
-      911118111118333338F3338F833338F3000033333911111111833333338F3338
-      3333F8330000333333911111183333333338F333333F83330000333333311111
-      8333333333338F3333383333000033333339111183333333333338F333833333
-      00003333339111118333333333333833338F3333000033333911181118333333
-      33338333338F333300003333911183911183333333383338F338F33300003333
-      9118333911183333338F33838F338F33000033333913333391113333338FF833
-      38F338F300003333333333333919333333388333338FFF830000333333333333
-      3333333333333333333888330000333333333333333333333333333333333333
-      0000}
-    OptionsImage.NumGlyphs = 2
-    TabOrder = 8
-    OnClick = CancelBtnClick
-  end
-  object cbYear: TcxDBComboBox
-    Left = 216
-    Top = 35
-    DataBinding.DataField = 'CALENDAR_YEAR'
-    DataBinding.DataSource = dsBudget
-    Properties.Items.Strings = (
-      '2002'
-      '2003'
-      '2004'
-      '2005'
-      '2006'
-      '2007'
-      '2008'
-      '2009'
-      '2010'
-      '2011'
-      '2012'
-      '2013'
-      '2014'
-      '2015'
-      '2016'
-      '2017'
-      '2018'
-      '2019'
-      '2020')
-    Style.LookAndFeel.Kind = lfFlat
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.Kind = lfFlat
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.Kind = lfFlat
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.Kind = lfFlat
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 2
-    Width = 90
-  end
-  object cbMonth: TcxDBLookupComboBox
-    Left = 107
-    Top = 35
-    DataBinding.DataField = 'PERIOD'
-    DataBinding.DataSource = dsBudget
-    Properties.DropDownRows = 12
-    Properties.KeyFieldNames = 'KEY'
-    Properties.ListColumns = <
-      item
-        FieldName = 'VALUE'
-      end>
-    Properties.ListOptions.GridLines = glNone
-    Properties.ListOptions.ShowHeader = False
-    Properties.ListSource = dsMonth
-    Properties.OnChange = cbEmployeeChange
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 1
-    Width = 73
-  end
-  object eBilledFees: TcxDBCurrencyEdit
-    Left = 107
-    Top = 60
-    DataBinding.DataField = 'BILLEDFEES'
-    DataBinding.DataSource = dsBudget
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 3
-    Width = 135
-  end
-  object eWIP: TcxDBCurrencyEdit
-    Left = 107
-    Top = 85
-    DataBinding.DataField = 'WIP'
-    DataBinding.DataSource = dsBudget
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 4
-    Width = 135
-  end
-  object eTime: TcxDBTextEdit
-    Left = 107
-    Top = 110
-    DataBinding.DataField = 'TIME'
-    DataBinding.DataSource = dsBudget
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 5
-    Width = 135
-  end
-  object eAccountValue: TcxDBTextEdit
-    Left = 107
-    Top = 160
-    DataBinding.DataField = 'ACCOUNTVALUE'
-    DataBinding.DataSource = dsBudget
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 6
-    Width = 135
-  end
-  object cxDBLookupComboBox1: TcxDBLookupComboBox
-    Left = 107
-    Top = 135
-    DataBinding.DataField = 'ACCOUNTCODE'
-    DataBinding.DataSource = dsBudget
-    Properties.DropDownAutoSize = True
-    Properties.DropDownRows = 15
-    Properties.DropDownSizeable = True
-    Properties.KeyFieldNames = 'KEY'
-    Properties.ListColumns = <
-      item
-        FieldName = 'KEY'
-      end
-      item
-        FieldName = 'DISPLAY'
-      end>
-    Properties.ListOptions.GridLines = glVertical
-    Properties.ListOptions.ShowHeader = False
-    Properties.ListSource = dsAccountCodes
-    Properties.OnChange = cbEmployeeChange
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 9
-    Width = 135
-  end
-  object cbEmployee: TcxDBLookupComboBox
-    Left = 107
-    Top = 9
-    DataBinding.DataField = 'EMPLOYEE'
-    DataBinding.DataSource = dsBudget
-    Properties.DropDownAutoSize = True
-    Properties.DropDownRows = 20
-    Properties.KeyFieldNames = 'CODE'
-    Properties.ListColumns = <
-      item
-        FieldName = 'CODE'
-      end
-      item
-        FieldName = 'NAME'
-      end>
-    Properties.ListOptions.ShowHeader = False
-    Properties.ListSource = dsEmployee
-    Properties.OnChange = cbEmployeeChange
-    Style.LookAndFeel.Kind = lfStandard
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.Kind = lfStandard
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.Kind = lfStandard
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.Kind = lfStandard
-    StyleHot.LookAndFeel.NativeStyle = True
+  TextHeight = 15
+  object dxLayoutControl1: TdxLayoutControl
+    Left = 0
+    Top = 0
+    Width = 312
+    Height = 264
+    Align = alClient
+    ParentBackground = True
     TabOrder = 0
-    Width = 200
+    Transparent = True
+    AutoSize = True
+    ExplicitLeft = 48
+    ExplicitWidth = 545
+    ExplicitHeight = 441
+    object OKBtn: TcxButton
+      Left = 75
+      Top = 222
+      Width = 75
+      Height = 25
+      Caption = '&OK'
+      LookAndFeel.NativeStyle = True
+      ModalResult = 1
+      OptionsImage.Glyph.SourceDPI = 96
+      OptionsImage.Glyph.Data = {
+        424D560A00000000000036000000280000002400000012000000010020000000
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000FFFFFFFF00808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000800000FF800000FF0080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000008080000080800000808000808080FF808080FFFFFFFFFF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000800000FF008000FF0080
+        00FF800000FF0080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080008080
+        80FF0080800000808000808080FFFFFFFFFF0080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000800000FF008000FF008000FF008000FF008000FF800000FF008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000808080FF008080000080800000808000008080008080
+        80FFFFFFFFFF0080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000800000FF008000FF008000FF008000FF0080
+        00FF008000FF008000FF800000FF008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000808080FF008080000080
+        800000808000008080000080800000808000808080FFFFFFFFFF008080000080
+        8000008080000080800000808000008080000080800000808000800000FF0080
+        00FF008000FF008000FF00FF00FF008000FF008000FF008000FF008000FF8000
+        00FF008080000080800000808000008080000080800000808000008080000080
+        8000808080FFFFFFFFFF0080800000808000808080FFFFFFFFFF008080000080
+        800000808000808080FFFFFFFFFF008080000080800000808000008080000080
+        80000080800000808000008000FF008000FF008000FF00FF00FF0080800000FF
+        00FF008000FF008000FF008000FF800000FF0080800000808000008080000080
+        800000808000008080000080800000808000808080FFFFFFFFFF008080008080
+        80FF00808000808080FFFFFFFFFF0080800000808000808080FFFFFFFFFF0080
+        800000808000008080000080800000808000008080000080800000FF00FF0080
+        00FF00FF00FF00808000008080000080800000FF00FF008000FF008000FF0080
+        00FF800000FF0080800000808000008080000080800000808000008080000080
+        8000808080FFFFFFFFFF808080FF008080000080800000808000808080FFFFFF
+        FFFF0080800000808000808080FFFFFFFFFF0080800000808000008080000080
+        800000808000008080000080800000FF00FF0080800000808000008080000080
+        80000080800000FF00FF008000FF008000FF008000FF800000FF008080000080
+        80000080800000808000008080000080800000808000808080FF008080000080
+        8000008080000080800000808000808080FFFFFFFFFF00808000008080008080
+        80FFFFFFFFFF0080800000808000008080000080800000808000008080000080
+        800000808000008080000080800000808000008080000080800000FF00FF0080
+        00FF008000FF008000FF800000FF008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000808080FFFFFFFFFF0080800000808000808080FFFFFFFFFF008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000008080000080800000FF00FF008000FF008000FF008000FF8000
+        00FF008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000808080FFFFFFFFFF0080
+        800000808000808080FFFFFFFFFF008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000FF00FF008000FF008000FF008000FF800000FF00808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000808080FFFFFFFFFF0080800000808000808080FFFFFF
+        FFFF008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000FF00FF008000FF0080
+        00FF008000FF800000FF00808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080008080
+        80FFFFFFFFFF0080800000808000808080FFFFFFFFFF00808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000FF00FF008000FF008000FF800000FF008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000008080000080800000808000808080FFFFFFFFFF008080008080
+        80FFFFFFFFFF0080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000008080000080800000FF
+        00FF008000FF008000FF00808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000808080FFFFFFFFFF808080FF0080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000FF00FF00808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000}
+      OptionsImage.NumGlyphs = 2
+      TabOrder = 8
+      OnClick = OKBtnClick
+    end
+    object CancelBtn: TcxButton
+      Left = 157
+      Top = 222
+      Width = 75
+      Height = 25
+      Caption = 'Cancel'
+      LookAndFeel.NativeStyle = True
+      ModalResult = 2
+      OptionsImage.Glyph.SourceDPI = 96
+      OptionsImage.Glyph.Data = {
+        424D560A00000000000036000000280000002400000012000000010020000000
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000808080FF808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000FFFFFFFF0080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000000FFFF000080FF000080FF808080FF0080800000808000008080000080
+        8000008080000000FFFF808080FF008080000080800000808000008080000080
+        8000008080000080800000808000808080FF808080FFFFFFFFFF008080000080
+        800000808000008080000080800000808000FFFFFFFF00808000008080000080
+        8000008080000080800000808000008080000000FFFF000080FF000080FF0000
+        80FF808080FF0080800000808000008080000000FFFF000080FF000080FF8080
+        80FF008080000080800000808000008080000080800000808000808080FFFFFF
+        FFFF00808000808080FFFFFFFFFF008080000080800000808000FFFFFFFF8080
+        80FF808080FFFFFFFFFF00808000008080000080800000808000008080000080
+        80000000FFFF000080FF000080FF000080FF000080FF808080FF008080000000
+        FFFF000080FF000080FF000080FF000080FF808080FF00808000008080000080
+        80000080800000808000808080FFFFFFFFFF0080800000808000808080FFFFFF
+        FFFF00808000FFFFFFFF808080FF0080800000808000808080FFFFFFFFFF0080
+        800000808000008080000080800000808000008080000000FFFF000080FF0000
+        80FF000080FF000080FF808080FF000080FF000080FF000080FF000080FF0000
+        80FF808080FF0080800000808000008080000080800000808000808080FFFFFF
+        FFFF008080000080800000808000808080FFFFFFFFFF808080FF008080000080
+        80000080800000808000808080FFFFFFFFFF0080800000808000008080000080
+        800000808000008080000000FFFF000080FF000080FF000080FF000080FF0000
+        80FF000080FF000080FF000080FF808080FF0080800000808000008080000080
+        8000008080000080800000808000808080FFFFFFFFFF00808000008080000080
+        8000808080FF00808000008080000080800000808000FFFFFFFF808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000000
+        FFFF000080FF000080FF000080FF000080FF000080FF000080FF808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000808080FFFFFFFFFF00808000008080000080800000808000008080000080
+        8000FFFFFFFF808080FF00808000008080000080800000808000008080000080
+        800000808000008080000080800000808000000080FF000080FF000080FF0000
+        80FF000080FF808080FF00808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000808080FFFFFFFFFF0080
+        800000808000008080000080800000808000808080FF00808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000000FFFF000080FF000080FF000080FF000080FF808080FF008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000808080FFFFFFFFFF0080800000808000008080008080
+        80FF008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000000FFFF000080FF000080FF000080FF0000
+        80FF000080FF808080FF00808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000808080FF0080
+        8000008080000080800000808000808080FFFFFFFFFF00808000008080000080
+        80000080800000808000008080000080800000808000008080000000FFFF0000
+        80FF000080FF000080FF808080FF000080FF000080FF000080FF808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000808080FF00808000008080000080800000808000008080008080
+        80FFFFFFFFFF0080800000808000008080000080800000808000008080000080
+        8000008080000000FFFF000080FF000080FF000080FF808080FF008080000000
+        FFFF000080FF000080FF000080FF808080FF0080800000808000008080000080
+        800000808000008080000080800000808000808080FF00808000008080000080
+        8000808080FFFFFFFFFF0080800000808000808080FFFFFFFFFF008080000080
+        800000808000008080000080800000808000008080000000FFFF000080FF0000
+        80FF808080FF0080800000808000008080000000FFFF000080FF000080FF0000
+        80FF808080FF0080800000808000008080000080800000808000008080008080
+        80FFFFFFFFFF0080800000808000808080FF00808000808080FFFFFFFFFF0080
+        800000808000808080FFFFFFFFFF008080000080800000808000008080000080
+        800000808000008080000000FFFF000080FF0080800000808000008080000080
+        8000008080000000FFFF000080FF000080FF000080FF00808000008080000080
+        8000008080000080800000808000808080FFFFFFFFFFFFFFFFFF808080FF0080
+        80000080800000808000808080FFFFFFFFFF0080800000808000808080FFFFFF
+        FFFF008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000008080000000FFFF0000
+        80FF0000FFFF0080800000808000008080000080800000808000008080000080
+        8000808080FF808080FF00808000008080000080800000808000008080008080
+        80FFFFFFFFFFFFFFFFFFFFFFFFFF808080FF0080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        800000808000008080000080800000808000808080FF808080FF808080FF0080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        8000008080000080800000808000008080000080800000808000008080000080
+        80000080800000808000008080000080800000808000}
+      OptionsImage.NumGlyphs = 2
+      TabOrder = 9
+      OnClick = CancelBtnClick
+    end
+    object cbYear: TcxDBComboBox
+      Left = 204
+      Top = 42
+      DataBinding.DataField = 'CALENDAR_YEAR'
+      DataBinding.DataSource = dsBudget
+      Properties.Items.Strings = (
+        '2002'
+        '2003'
+        '2004'
+        '2005'
+        '2006'
+        '2007'
+        '2008'
+        '2009'
+        '2010'
+        '2011'
+        '2012'
+        '2013'
+        '2014'
+        '2015'
+        '2016'
+        '2017'
+        '2018'
+        '2019'
+        '2020')
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.Kind = lfFlat
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.Kind = lfFlat
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.Kind = lfFlat
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.Kind = lfFlat
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 2
+      Width = 90
+    end
+    object cbMonth: TcxDBLookupComboBox
+      Left = 95
+      Top = 42
+      DataBinding.DataField = 'PERIOD'
+      DataBinding.DataSource = dsBudget
+      Properties.DropDownRows = 12
+      Properties.KeyFieldNames = 'KEY'
+      Properties.ListColumns = <
+        item
+          FieldName = 'VALUE'
+        end>
+      Properties.ListOptions.GridLines = glNone
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = dsMonth
+      Properties.OnChange = cbEmployeeChange
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 1
+      Width = 73
+    end
+    object eBilledFees: TcxDBCurrencyEdit
+      Left = 95
+      Top = 72
+      DataBinding.DataField = 'BILLEDFEES'
+      DataBinding.DataSource = dsBudget
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 3
+      Width = 135
+    end
+    object eWIP: TcxDBCurrencyEdit
+      Left = 95
+      Top = 102
+      DataBinding.DataField = 'WIP'
+      DataBinding.DataSource = dsBudget
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 4
+      Width = 135
+    end
+    object eTime: TcxDBTextEdit
+      Left = 95
+      Top = 132
+      DataBinding.DataField = 'TIME'
+      DataBinding.DataSource = dsBudget
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 5
+      Width = 135
+    end
+    object eAccountValue: TcxDBTextEdit
+      Left = 95
+      Top = 192
+      DataBinding.DataField = 'ACCOUNTVALUE'
+      DataBinding.DataSource = dsBudget
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 7
+      Width = 135
+    end
+    object cxDBLookupComboBox1: TcxDBLookupComboBox
+      Left = 95
+      Top = 162
+      DataBinding.DataField = 'ACCOUNTCODE'
+      DataBinding.DataSource = dsBudget
+      Properties.DropDownAutoSize = True
+      Properties.DropDownRows = 15
+      Properties.DropDownSizeable = True
+      Properties.KeyFieldNames = 'KEY'
+      Properties.ListColumns = <
+        item
+          FieldName = 'KEY'
+        end
+        item
+          FieldName = 'DISPLAY'
+        end>
+      Properties.ListOptions.GridLines = glVertical
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = dsAccountCodes
+      Properties.OnChange = cbEmployeeChange
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 6
+      Width = 135
+    end
+    object cbEmployee: TcxDBLookupComboBox
+      Left = 95
+      Top = 12
+      DataBinding.DataField = 'EMPLOYEE'
+      DataBinding.DataSource = dsBudget
+      Properties.DropDownAutoSize = True
+      Properties.DropDownRows = 20
+      Properties.KeyFieldNames = 'CODE'
+      Properties.ListColumns = <
+        item
+          FieldName = 'CODE'
+        end
+        item
+          FieldName = 'NAME'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListSource = dsEmployee
+      Properties.OnChange = cbEmployeeChange
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.Kind = lfStandard
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.Kind = lfStandard
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.Kind = lfStandard
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.Kind = lfStandard
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 0
+      Width = 200
+    end
+    object dxLayoutControl1Group_Root: TdxLayoutGroup
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = -1
+    end
+    object dxLayoutGroup1: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      AlignVert = avTop
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ItemIndex = 7
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem1: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Employee'
+      Control = cbEmployee
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 200
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutGroup2: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem2: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'Month'
+      Control = cbMonth
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 73
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem3: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'Year'
+      Control = cbYear
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 90
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem4: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Billed Fees'
+      Control = eBilledFees
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 135
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object dxLayoutItem5: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'WIP'
+      Control = eWIP
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 135
+      ControlOptions.ShowBorder = False
+      Index = 3
+    end
+    object dxLayoutItem6: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Time (Hours)'
+      Control = eTime
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 135
+      ControlOptions.ShowBorder = False
+      Index = 4
+    end
+    object dxLayoutItem7: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Account Code'
+      Control = cxDBLookupComboBox1
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 135
+      ControlOptions.ShowBorder = False
+      Index = 5
+    end
+    object dxLayoutItem8: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Account Value'
+      Control = eAccountValue
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 135
+      ControlOptions.ShowBorder = False
+      Index = 6
+    end
+    object dxLayoutGroup3: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahCenter
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 7
+    end
+    object dxLayoutItem9: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'OKBtn'
+      CaptionOptions.Visible = False
+      Control = OKBtn
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem10: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      CaptionOptions.Text = 'CancelBtn'
+      CaptionOptions.Visible = False
+      Control = CancelBtn
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
   end
   object qBudget: TUniQuery
     KeyFields = 'NBUDGET'

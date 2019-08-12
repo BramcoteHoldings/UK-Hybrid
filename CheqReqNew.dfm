@@ -971,7 +971,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43688.7272796296d
+    EditValue = 43689.795111331d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1181,7 +1181,8 @@ object frmCheqReqNew: TfrmCheqReqNew
         'te,'
       
         '       c.base_ccy_amt, c.base_ccy_tax, c.transtype, c.rowid, c.a' +
-        'mount + c.tax as total'
+        'mount + c.tax as total,'
+      '       c.billed_amount, c.billed_tax, c.billing_taxcode'
       '  FROM cheqreq c WHERE C.NCHEQREQ = :NCHEQREQ')
     CachedUpdates = True
     Left = 331

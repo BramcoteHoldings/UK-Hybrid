@@ -83,10 +83,10 @@ type
   private
     { Private declarations }
     FEditing: boolean;
-    FOldAmount, FEnterAmount: currency;
+    FOldAmount, FEnterAmount: Double;
     procedure UpdateAmount(pAmount: Variant);
     function OKtoPost : boolean;
-    function CalcTax(pAmount: Variant): Currency;
+    function CalcTax(pAmount: Variant): Double;
     function SaveSundry: Integer;
 
   public
@@ -169,7 +169,7 @@ begin
         neTax.Enabled := False;
       end;
 
-      FOldAmount := FieldByName('AMOUNT').AsCurrency;
+      FOldAmount := FieldByName('AMOUNT').AsFloat;
 //      dtpCreated.DateTime := FieldByName('CREATED').AsDateTime;
 
       //StringPopulate(cbType.Items, 'SUNDRYTYPE', 'CODE', 'UPPER(CODE) = CODE');
@@ -204,8 +204,8 @@ begin
     qrySundry.FieldByName('TYPE').AsString:= sType;
     qrySundry.FieldByName('DESCR').AsString := sDesc;
 
-    qrySundry.FieldByName('RATE').AsCurrency := TableCurrency('SUNDRYTYPE', 'CODE', sType, 'RATE');
-    qrySundry.FieldByName('AMOUNT').AsCurrency := cAmount;
+    qrySundry.FieldByName('RATE').AsFloat := TableCurrency('SUNDRYTYPE', 'CODE', sType, 'RATE');
+    qrySundry.FieldByName('AMOUNT').AsFloat := cAmount;
   end;
 end;
 
@@ -242,9 +242,9 @@ begin
    if (qrySundry.State = dsInsert) or (qrySundry.State = dsEdit) then
    begin
       try
-//         qrySundry.FieldByName('AMOUNT').AsCurrency := qrySundry.FieldByName('UNITS').AsInteger * qrySundry.FieldByName('PERUNIT').AsCurrency;
-         qrySundry.FieldByName('AMOUNT').AsCurrency := neUnits.DataBinding.DisplayValue * neRate.DataBinding.DisplayValue;
-         pAmount := qrySundry.FieldByName('AMOUNT').AsCurrency;
+//         qrySundry.FieldByName('AMOUNT').AsFloat := qrySundry.FieldByName('UNITS').AsInteger * qrySundry.FieldByName('PERUNIT').AsCurrency;
+         qrySundry.FieldByName('AMOUNT').AsFloat := neUnits.DataBinding.DisplayValue * neRate.DataBinding.DisplayValue;
+         pAmount := qrySundry.FieldByName('AMOUNT').AsFloat;
       except
          //
       end;
@@ -268,7 +268,7 @@ begin
   //if (mmoDesc.Text = sPrevDescr) or (mmoDesc.Text = '') then
   //  mmoDesc.Text := lblTypeDesc.Caption;
 
-  qrySundry.FieldByName('PERUNIT').AsCurrency := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
+  qrySundry.FieldByName('PERUNIT').AsFloat := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
 //  iIdx := cbTaxType.Properties.Items.IndexOf(TableString('SUNDRYTYPE', 'DESCR', cbType.Text, 'TAXCODE'));
   qrySundry.FieldByName('TAXCODE').AsString := TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE');
   //cbTaxType.EditValue := TableString('SUNDRYTYPE', 'DESCR', string(cbType.EditValue), 'TAXCODE');
@@ -393,23 +393,36 @@ begin
 end;
 
 
-function TfrmSundryNew.CalcTax(pAmount: variant): currency;
+function TfrmSundryNew.CalcTax(pAmount: variant): Double;
 var
   dAmount: Double;
 begin
    if pAmount > 0 then
       dAmount := pAmount
    else
-      dAmount := qrySundry.FieldByName('AMOUNT').AsCurrency;
+      dAmount := qrySundry.FieldByName('AMOUNT').AsFloat;
 
    try
-      qrySundry.FieldByName('TAX').AsCurrency := TaxCalc(dAmount, '', string(cbTaxType.EditValue), dtpCreated.Date);
+      qrySundry.FieldByName('TAX').AsFloat := TaxCalc(dAmount, '', string(cbTaxType.EditValue), dtpCreated.Date);
    except
    ;
    end;
    neAmount.EditValue := dAmount;
-   neTax.EditValue := qrySundry.FieldByName('TAX').AsCurrency;
-   qrySundry.FieldByName('AMOUNT').AsCurrency := dAmount;
+   neTax.EditValue := qrySundry.FieldByName('TAX').AsFloat;
+   qrySundry.FieldByName('AMOUNT').AsFloat := dAmount;
+
+   qrySundry.FieldByName('BILLING_TAXCODE').AsString := TableString('TAXTYPE', 'CODE', string(cbTaxType.EditValue), 'tax_code_billing');
+   if qrySundry.FieldByName('BILLING_TAXCODE').IsNull = False then
+   begin
+      qrySundry.FieldByName('BILLED_TAX').AsFloat := TaxCalc(dAmount, 'BILL', string(cbTaxType.EditValue), dtpCreated.Date);
+      qrySundry.FieldByName('BILLED_AMOUNT').AsFloat := dAmount;
+   end
+   else
+   begin
+      qrySundry.FieldByName('BILLED_TAX').AsFloat := 0;
+      qrySundry.FieldByName('BILLED_AMOUNT').AsFloat := 0;
+   end;
+
    Result := dAmount;
 end;
 
@@ -420,7 +433,7 @@ end;
 
 procedure TfrmSundryNew.qrySundryNewRecord(DataSet: TDataSet);
 begin
-  if qrySundry.Active then
+   if qrySundry.Active then
     begin
       qrySundry.Edit;
       qrySundry.FieldByName('CREATED').AsDateTime := Date;
@@ -430,8 +443,7 @@ begin
       qrySundry.FieldByName('AMOUNT').AsInteger := 0;
       qrySundry.FieldByName('TAX').AsInteger := 0;
     end;
-
-end;
+          end;
 
 procedure TfrmSundryNew.edTypeCodeEnter(Sender: TObject);
 begin
@@ -468,9 +480,9 @@ procedure TfrmSundryNew.neAmountPropertiesValidate(Sender: TObject;
 var
   dAmount: Double;
 begin
-//      if qrySundry.FieldByName('AMOUNT').AsCurrency <> FEnterAmount then
+//      if qrySundry.FieldByName('AMOUNT').AsFloat <> FEnterAmount then
    neAmount.EditValue := DisplayValue;
-   qrySundry.FieldByName('AMOUNT').AsCurrency := DisplayValue;
+   qrySundry.FieldByName('AMOUNT').AsFloat := DisplayValue;
    DisplayValue := CalcTax(DisplayValue);
 end;
 
@@ -558,7 +570,7 @@ begin
           end;
       end;
 
-      qrySundry.FieldByName('PERUNIT').AsCurrency := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
+      qrySundry.FieldByName('PERUNIT').AsFloat := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
       qrySundry.FieldByName('TAXCODE').AsString := sTaxCode;
 
       //cbTaxType.EditValue := TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE');
@@ -575,11 +587,11 @@ end;
 
 procedure TfrmSundryNew.cbTypePropertiesCloseUp(Sender: TObject);
 var
-  iIdx       : Integer;
-  sPrevDescr : String;
-  sTaxCode : String;
-  sTaxType : String;
-  dTaxRate : Double;
+  iIdx:        Integer;
+  sPrevDescr:  String;
+  sTaxCode:    String;
+  sTaxType:    String;
+  dTaxRate:    Double;
 begin
    sPrevDescr := mmoDesc.Text;
 
@@ -592,50 +604,50 @@ begin
       // if the sundry type has no tax code set
       if (TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE') = '') then
       begin
-          // if there is a default tax code
-          if (TableString('TAXTYPE', 'DEFAULTTAX', 'Y', 'CODE') <> '') then
-          begin
-              sTaxType :=  TableString('TAXTYPE', 'DEFAULTTAX', 'Y', 'CODE');
-              // if there is a tax rate set up for the default tax code
-              if (TableString('TAXRATE', 'TAXCODE', sTaxType, 'TAXCODE') <> '') then
-              begin
-                  sTaxCode := TableString('TAXRATE', 'TAXCODE', sTaxType, 'TAXCODE');
-                  dTaxRate := TableFloat('TAXRATE', 'TAXCODE', sTaxCode, 'BILL_RATE');
-                  dTaxRate := abs(dTaxRate);
-              end
-              else
-              begin
-                  MsgInfo('There is no Tax Code set on this Sundry type and the default tax code does not have a tax rate.  You need to set the tax rate for the default tax code');
-              end;
-          end
-          else
-          begin
-              MsgInfo('There is no Tax Code set on this Sundry type and no default tax code.  You need to set a default tax code');
-          end;
+         // if there is a default tax code
+         if (TableString('TAXTYPE', 'DEFAULTTAX', 'Y', 'CODE') <> '') then
+         begin
+            sTaxType :=  TableString('TAXTYPE', 'DEFAULTTAX', 'Y', 'CODE');
+            // if there is a tax rate set up for the default tax code
+            if (TableString('TAXRATE', 'TAXCODE', sTaxType, 'TAXCODE') <> '') then
+            begin
+               sTaxCode := TableString('TAXRATE', 'TAXCODE', sTaxType, 'TAXCODE');
+               dTaxRate := TableFloat('TAXRATE', 'TAXCODE', sTaxCode, 'BILL_RATE');
+               dTaxRate := abs(dTaxRate);
+            end
+            else
+            begin
+               MsgInfo('There is no Tax Code set on this Sundry type and the default tax code does not have a tax rate.  You need to set the tax rate for the default tax code');
+            end;
+         end
+         else
+         begin
+            MsgInfo('There is no Tax Code set on this Sundry type and no default tax code.  You need to set a default tax code');
+         end;
       end
       else
       begin
-          // get the tax code for the sundry type and the tax rate
-          sTaxCode := TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE');
-          dTaxRate := TableFloat('TAXRATE', 'TAXCODE', sTaxCode, 'BILL_RATE');
-          dTaxRate := abs(dTaxRate);
+         // get the tax code for the sundry type and the tax rate
+         sTaxCode := TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE');
+         dTaxRate := TableFloat('TAXRATE', 'TAXCODE', sTaxCode, 'BILL_RATE');
+         dTaxRate := abs(dTaxRate);
       end;
       // check if the matter has a tax rate which is less than the tax rate for the sundry type
       if (sttMatter.Caption <> '') then
       begin
-          if (TableString('MATTER', 'FILEID', sttMatter.Caption, 'FEE_TAX_BASIS') <> '') then
-          begin
-             sTaxType := TableString('MATTER', 'FILEID', sttMatter.Caption, 'FEE_TAX_BASIS');
-             if (abs(TableFloat('TAXRATE', 'TAXCODE', sTaxType, 'BILL_RATE')) < dTaxRate)  then
-             begin
-                sTaxCode := sTaxType;
-                dTaxRate := abs(TableFloat('TAXRATE', 'TAXCODE', sTaxType, 'BILL_RATE'));
-                cbTaxType.EditText := sTaxCode;
-             end;
-          end;
+         if (TableString('MATTER', 'FILEID', sttMatter.Caption, 'FEE_TAX_BASIS') <> '') then
+         begin
+            sTaxType := TableString('MATTER', 'FILEID', sttMatter.Caption, 'FEE_TAX_BASIS');
+            if (abs(TableFloat('TAXRATE', 'TAXCODE', sTaxType, 'BILL_RATE')) < dTaxRate)  then
+            begin
+               sTaxCode := sTaxType;
+               dTaxRate := abs(TableFloat('TAXRATE', 'TAXCODE', sTaxType, 'BILL_RATE'));
+               cbTaxType.EditText := sTaxCode;
+            end;
+         end;
       end;
 
-      qrySundry.FieldByName('PERUNIT').AsCurrency := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
+      qrySundry.FieldByName('PERUNIT').AsFloat := TableCurrency('SUNDRYTYPE', 'CODE', qrySundry.FieldByName('TYPE').AsString, 'RATE');
       qrySundry.FieldByName('TAXCODE').AsString := sTaxCode;
       //cbTaxType.EditValue := TableString('SUNDRYTYPE', 'CODE', string(cbType.EditValue), 'TAXCODE');
       cbTaxType.Properties.OnChange(Self);
@@ -673,25 +685,25 @@ begin
          end;
 
          if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Rollback;
+            dmAxiom.uniInsight.Rollback;
          dmAxiom.uniInsight.StartTransaction;
 
        // set the sequence
 
          if not FEditing then
          begin
-           qrySundry.FieldByName('NSUNDRY').AsString := dmAxiom.GetSeqNumber('SUNDRY_NSUNDRY');
-           qrySundry.FieldByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-           qrySundry.FieldByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-           qrySundry.FieldByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
-           //qrySundry.FieldByName('AMOUNT').AsCurrency := neAmount.Field.AsCurrency;
+            qrySundry.FieldByName('NSUNDRY').AsString := dmAxiom.GetSeqNumber('SUNDRY_NSUNDRY');
+            qrySundry.FieldByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+            qrySundry.FieldByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
+            qrySundry.FieldByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
+            //qrySundry.FieldByName('AMOUNT').AsCurrency := neAmount.Field.AsCurrency;
 
-           qrySundry.FieldByName('BILLED').AsString := 'N';
+            qrySundry.FieldByName('BILLED').AsString := 'N';
          end;
 
          if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
            PostLedgers(dtpCreated.Date
-             , qrySundry.FieldByName('AMOUNT').AsCurrency - FOldAmount
+             , qrySundry.FieldByName('AMOUNT').AsFloat - FOldAmount
              , sttMatter.Caption
              , 'SUNDRY'
              , qrySundry.FieldByName('NSUNDRY').AsInteger
@@ -702,7 +714,7 @@ begin
              , TableString('SUNDRYTYPE', 'CODE', string(cbType.Editvalue), 'TAXCODE'));
 
          //qrySundry.Edit;
-         //qrySundry.FieldByName('AMOUNT').AsCurrency := neAmount.Field.AsCurrency;
+         //qrySundry.FieldByName('AMOUNT').AsFloat := neAmount.Field.AsFloat;
          qrySundry.ApplyUpdates;
          dmAxiom.uniInsight.Commit;
 

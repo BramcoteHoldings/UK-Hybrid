@@ -518,6 +518,7 @@ var
   CheqReqAmt, BillOwing: Currency;
   bCheck,
   bPreviewPDF: boolean;
+  dAmount: double;
 
   function decodeGlInstance(glInstance: TglComponentInstance): string;
   begin
@@ -688,6 +689,19 @@ begin
 
              qryCheqReq.FieldByName('CREDITOR_INVOICE').AsString := dfSlipNo.Text;
              qryCheqReq.FieldByName('NNAME').AsInteger := FNName;
+
+             qryCheqReq.FieldByName('BILLING_TAXCODE').AsString := TableString('TAXTYPE', 'CODE', cbTaxType.Text, 'tax_code_billing');
+             if qryCheqReq.FieldByName('BILLING_TAXCODE').IsNull = False then
+             begin
+                dAmount := neAmount.EditValue;
+                qryCheqReq.FieldByName('BILLED_TAX').AsFloat := TaxCalc(dAmount, 'BILL', cbTaxType.Text, dtpReqDate.Date);
+                qryCheqReq.FieldByName('BILLED_AMOUNT').AsFloat := neAmount.EditValue;
+             end
+             else
+             begin
+                qryCheqReq.FieldByName('BILLED_TAX').AsFloat := 0;
+                qryCheqReq.FieldByName('BILLED_AMOUNT').AsFloat := 0;
+             end;
 
              if (teChequeNo.Text <> '') then
              begin
