@@ -5796,6 +5796,24 @@ begin
 
                        // SQL.Text := 'UPDATE CHEQREQ SET TAXCODE = ''GST'', TAX = AMOUNT * :TaxRate WHERE NCHEQREQ = ' + IntToStr(tvBillItemsTYPE.EditValue);
                      end;
+                  IMG_UPCRED :
+                     begin
+                       SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                       // SQL.Text := 'SELECT CREATED, TAX FROM ALLOC WHERE NALLOC = ' + IntToStr(tvBillItemsTYPE.EditValue);
+                       Open;
+                       if not IsEmpty then
+                       begin
+                           dtTax := FieldByName('CREATED').AsDateTime;
+                           cTax := FieldByName('TAX').AsCurrency;
+                       end;
+                       Close;
+                       if (StrToInt(TableString('TAXRATE','TAXCODE', sTaxCode, 'BILL_RATE')) = 0)  then
+                          SQL.Text := 'UPDATE ALLOC SET BILLING_TAXCODE = ''' + sTaxCode +
+                              ''', BILLED_TAX_AMOUNT = AMOUNT * :TaxRate  WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue)
+                       else
+                          SQL.Text := 'UPDATE ALLOC SET TAXCODE = ''' + sTaxCode +
+                              '''TAX = AMOUNT * :TaxRate, BILLED_TAX_AMOUNT = AMOUNT * :TaxRate  WHERE NALLOC = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                     end;
                end;
                if cTax = 0 then
                begin
@@ -5809,6 +5827,7 @@ begin
          case tvBillItemsTYPE.EditValue of
             IMG_DISB : btnDisbRebuild.Click;
             IMG_ANTD:  btnAntdRebuild.Click;
+            IMG_UPCRED: btnUpCredRebuild.Click;
          end;
       finally
          RestoreSelectedItems();
