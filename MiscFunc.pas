@@ -10477,48 +10477,51 @@ var
 	weighted_total: integer;
 	k, i, R, Tmp: integer;
 	BPay_digit, BPay_Array: integer;
-   BPayLength: integer;
+   BPayLength, BPayInt: integer;
 begin
-   BPayLength := SystemInteger('bpay_code_length');
-   if length(BPay) < (BPayLength - 1) then
+   if (TryStrToInt(BPay, BPayInt) = True) then
    begin
-      for i := 1 to (BPayLength - 1) - length(BPay) do
+      BPayLength := SystemInteger('bpay_code_length');
+      if length(BPay) < (BPayLength - 1) then
       begin
-         BPay := '0'+ BPay;
-         {if length(BPay) = 7 then exit;}
+         for i := 1 to (BPayLength - 1) - length(BPay) do
+         begin
+            BPay := '0'+ BPay;
+            {if length(BPay) = 7 then exit;}
+         end;
       end;
-   end;
 
-   // --- strip out formatting
-   for i := 1 to length(BPay) do
-   begin
-      if ((BPay[i] >= '0') AND (BPay[i] <= '9')) then
+      // --- strip out formatting
+      for i := 1 to length(BPay) do
       begin
-         BPay_code := BPay_code + BPay[i];
+         if ((BPay[i] >= '0') AND (BPay[i] <= '9')) then
+         begin
+            BPay_code := BPay_code + BPay[i];
+         end;
       end;
-   end;
 
-   weighted_total := 0;
-   BPay_Array := 20;
-   for  i := length(BPay) downto 1 do
-   begin
-      BPay_digit := StrToInt(BPay_code[i]);
-      Tmp := (BPay_digit * BPay_WEIGHTING[BPay_Array]);
-      if Length(IntToStr(Tmp)) > 1 then
+      weighted_total := 0;
+      BPay_Array := 20;
+      for  i := length(BPay) downto 1 do
       begin
-         sTmp := IntToStr(Tmp);
-         k := StrToInt(sTmp[1]) + StrToInt(sTmp[2]);
-         Tmp := k;
+         BPay_digit := StrToInt(BPay_code[i]);
+         Tmp := (BPay_digit * BPay_WEIGHTING[BPay_Array]);
+         if Length(IntToStr(Tmp)) > 1 then
+         begin
+            sTmp := IntToStr(Tmp);
+            k := StrToInt(sTmp[1]) + StrToInt(sTmp[2]);
+            Tmp := k;
+         end;
+         weighted_total := weighted_total + Tmp;
+         Dec(BPay_Array);
       end;
-      weighted_total := weighted_total + Tmp;
-      Dec(BPay_Array);
-   end;
-   R := (weighted_total mod 10);
+      R := (weighted_total mod 10);
 
-   if R = 0 then
-      Result := BPay_code + ' ' + IntToStr(0)
-   else
-      Result := BPay_code + ' ' + IntToStr(10 - R);
+      if R = 0 then
+         Result := BPay_code + ' ' + IntToStr(0)
+      else
+         Result := BPay_code + ' ' + IntToStr(10 - R);
+   end;
 end;
 
 procedure CloseOpenTabs;
