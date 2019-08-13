@@ -1066,6 +1066,17 @@ object frmCheqReqs: TfrmCheqReqs
         CharCase = ecUpperCase
         TabOrder = 39
       end
+      object chkShowReversed: TcxCheckBox
+        Left = 854
+        Top = 79
+        Caption = 'Reversed'
+        Properties.NullStyle = nssUnchecked
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 40
+      end
     end
   end
   object dsCheqReq: TUniDataSource
@@ -2753,6 +2764,7 @@ object frmCheqReqs: TfrmCheqReqs
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2785,7 +2797,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 823
     Top = 252
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqs'
     object ppHeaderBand1: TppHeaderBand
@@ -4873,6 +4885,7 @@ object frmCheqReqs: TfrmCheqReqs
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4905,7 +4918,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 847
     Top = 312
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqsEffect'
     object ppHeaderBand2: TppHeaderBand
