@@ -389,20 +389,29 @@ begin
       qryTmpLedger.FieldByName('CODE').AsString := qrySundLedger.FieldByName('TYPE').AsString;
 
       if chkGst.Checked and chkShowSundry.Checked then
-         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency
+      begin
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
+      end
       else
       if chkGst.Checked then
-         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency
+      begin
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
+      end
       else
       if chkShowSundry.Checked then
-         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency
+      begin
+         qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('TAX').AsCurrency;
+         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency;
+      end
       else
          qryTmpLedger.FieldByName('SUNDDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency;
 
       qryTmpLedger.FieldByName('REASON').AsString := TableString('NMEMO', 'NMEMO', qrySundLedger.FieldByName('NMEMO').AsInteger, 'REFNO');
 
-      if chkShowSundry.Checked then
-         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
+//      if chkShowSundry.Checked then
+//         qryTmpLedger.FieldByName('FEESDR').AsCurrency := qrySundLedger.FieldByName('AMOUNT').AsCurrency + qrySundLedger.FieldByName('TAX').AsCurrency;
 
       qryTmpLedger.Post;
 

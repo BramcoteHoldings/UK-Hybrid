@@ -1450,7 +1450,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1478,6 +1478,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1510,7 +1511,7 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     XLSSettings.WorksheetName = 'Report'
     Left = 21
     Top = 115
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 288200
     DataPipelineName = 'plRptLedger'
     object ppHeaderBand1: TppHeaderBand
