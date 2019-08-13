@@ -851,7 +851,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43686.7845323495d
+    EditValue = 43690.3981986458d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -987,7 +987,7 @@ object frmCheque: TfrmCheque
     OnClick = chkReplacementChequeClick
   end
   object cbBank: TcxLookupComboBox
-    Left = 312
+    Left = 314
     Top = 10
     Properties.CharCase = ecUpperCase
     Properties.DropDownAutoSize = True

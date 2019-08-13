@@ -331,6 +331,7 @@ type
     tvCheqReqCONVERTED: TcxGridDBColumn;
     teCheqReqNo: TEdit;
     Label6: TLabel;
+    chkShowReversed: TcxCheckBox;
     procedure FormShow(Sender: TObject);
     procedure cbAuthorClick(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
@@ -589,6 +590,11 @@ begin
 
    if (teCheqReqNo.Text <> '') then
       sSQLWhere := sSqlWhere + sAND + 'C.NCHEQREQ = ' + QuotedStr(teCheqReqNo.Text);
+
+   if (chkShowReversed.Checked = True) then
+      sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NOT NULL '
+   else
+      sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NULL ';
 
 
 

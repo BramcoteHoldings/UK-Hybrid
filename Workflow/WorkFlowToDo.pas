@@ -11,7 +11,7 @@ uses
   cxLookAndFeelPainters, cxClasses, ppVar, ppStrtch, ppMemo, ppCtrls,
   ppPrnabl, ppClass, ppBands, ppCache, ppDB, ppDesignLayer, ppParameter,
   ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, DB, OracleUniProvider, Uni,
-  DBAccess, MemDS, System.Actions, cxBarEditItem;
+  DBAccess, MemDS, System.Actions, cxBarEditItem, System.ImageList;
 
 type
   TToDoView = (tdvNone, tdvMatter, tdvDate, tdvSequence);
@@ -292,9 +292,6 @@ type
     procedure vtTasksCollapsing(Sender: TBaseVirtualTree;
       Node: PVirtualNode; var Allowed: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree;
-      Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-      var Ghosted: Boolean; var ImageIndex: Integer);
     procedure aCloseWindowExecute(Sender: TObject);
     procedure aMergeExecute(Sender: TObject);
     procedure aMergeUpdate(Sender: TObject);
@@ -359,6 +356,9 @@ type
       Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
     procedure bcmbDateToCurChange(Sender: TObject);
     procedure cbExcCritDatePropertiesEditValueChanged(Sender: TObject);
+    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
   private
     { Private declarations }
     FDateFrom,
@@ -1283,39 +1283,6 @@ begin
 
    cbExcCritDate.EditValue := (SettingLoadString(C_SETTINGOWNER, 'EXCLUDECRITICALDATE') = 'Y');
    RefreshTree;
-end;
-
-procedure TfmWorkFlowToDo.vtTasksGetImageIndex(Sender: TBaseVirtualTree;
-  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-  var Ghosted: Boolean; var ImageIndex: Integer);
-var
-  LData: PToDoTask;
-begin
-  LData := Sender.GetNodeData(Node);
-  ImageIndex := -1;
-  case ViewType of
-    tdvMatter:
-      begin
-        if (TToDoColumnsMatter(Column) = tdcmDocs) and (LData.HasDocuments > 0) then
-          ImageIndex := 12
-        else if (TToDoColumnsMatter(Column) = tdcmNotes) and (LData.HasNotes > 0) then
-          ImageIndex := 10
-      end;
-    tdvSequence:
-      begin
-        if (TToDoColumnsMatter(Column) = tdcmDocs) and (LData.HasDocuments > 0) then
-          ImageIndex := 12
-        else if (TToDoColumnsMatter(Column) = tdcmNotes) and (LData.HasNotes > 0) then
-          ImageIndex := 10
-      end;
-    tdvDate:
-      begin
-        if (TToDoColumnsDate(Column) = tdcdDocs) and (LData.HasDocuments > 0) then
-          ImageIndex := 12
-        else if (TToDoColumnsDate(Column) = tdcdNotes) and (LData.HasNotes > 0) then
-          ImageIndex := 10
-      end;
-  end;
 end;
 
 procedure TfmWorkFlowToDo.aCloseWindowExecute(Sender: TObject);
@@ -2285,6 +2252,39 @@ begin
     finally
       dmWorkflowDataModuleRun.qLatestTaskNote.Close();
     end;
+  end;
+end;
+
+procedure TfmWorkFlowToDo.vtTasksGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: TImageIndex);
+var
+  LData: PToDoTask;
+begin
+  LData := Sender.GetNodeData(Node);
+  ImageIndex := -1;
+  case ViewType of
+    tdvMatter:
+      begin
+        if (TToDoColumnsMatter(Column) = tdcmDocs) and (LData.HasDocuments > 0) then
+          ImageIndex := 12
+        else if (TToDoColumnsMatter(Column) = tdcmNotes) and (LData.HasNotes > 0) then
+          ImageIndex := 10
+      end;
+    tdvSequence:
+      begin
+        if (TToDoColumnsMatter(Column) = tdcmDocs) and (LData.HasDocuments > 0) then
+          ImageIndex := 12
+        else if (TToDoColumnsMatter(Column) = tdcmNotes) and (LData.HasNotes > 0) then
+          ImageIndex := 10
+      end;
+    tdvDate:
+      begin
+        if (TToDoColumnsDate(Column) = tdcdDocs) and (LData.HasDocuments > 0) then
+          ImageIndex := 12
+        else if (TToDoColumnsDate(Column) = tdcdNotes) and (LData.HasNotes > 0) then
+          ImageIndex := 10
+      end;
   end;
 end;
 
