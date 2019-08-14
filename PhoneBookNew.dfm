@@ -88,7 +88,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Width = 558
     Height = 593
     TabOrder = 5
-    Properties.ActivePage = tsCreditor
+    Properties.ActivePage = tsName
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pcPagesChange
@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43679.419444675930000000
-        Time = 43679.419444675930000000
+        Date = 43691.419444675930000000
+        Time = 43691.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -6183,11 +6183,11 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
-        'SELECT e.CLIENTCODE, e.CLIENTACRONYM, e.CLIENTPAD, e.CLIENTLENGT' +
-        'H,'
+        'SELECT e.CLIENTCODE, e.CLIENTACRONYM, nvl(e.CLIENTPAD,0) CLIENTP' +
+        'AD, e.CLIENTLENGTH,'
       
-        'e.CREDITORCODE, e.CREDITORACRONYM, e.CREDITORPAD, e.CREDITORLENG' +
-        'TH, e.CLIENTSEPARATOR,'
+        'e.CREDITORCODE, e.CREDITORACRONYM, nvl(e.CREDITORPAD,0) CREDITOR' +
+        'PAD, e.CREDITORLENGTH, e.CLIENTSEPARATOR,'
       
         'e.USE_ENTITY_CODE, e.USE_ENTITY_LENGTH, e.USE_ENTITY_SEPARATOR, ' +
         'e.CODE AS ENTITY_CODE,'
