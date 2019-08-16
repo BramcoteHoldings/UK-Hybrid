@@ -79,7 +79,7 @@ begin
             dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
             dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
             dmAxiom.MapiSession.Active                       := True;
-         finally
+         except
 //
          end;
       end;
@@ -223,7 +223,8 @@ begin
                bMoveSuccess := True
             else
             begin
-               if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows Server 2012')) and (SystemString('THIN_PROVISIONED_DISK') = 'N')) then
+               if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows Server 2012') or (TOSVersion.Name = 'Windows 10'))
+                  and (SystemString('THIN_PROVISIONED_DISK') = 'N')) then
                   bMoveSuccess := CopyFileIFileOperationForceDirectories(FileName, AParsedDocName, bCopyMove)
                else
                   bMoveSuccess := MoveMatterDoc(AParsedDocName, FileName, bCopyMove, False);

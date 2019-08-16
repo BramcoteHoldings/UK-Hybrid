@@ -3948,7 +3948,7 @@ object frmInvoice: TfrmInvoice
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'dxBarBtnCashierNotes'
+          ItemName = 'cbProforma'
         end>
       NotDocking = [dsNone]
       OldName = 'toolbar'
@@ -4437,13 +4437,15 @@ object frmInvoice: TfrmInvoice
       InternalEditValue = False
     end
     object cbProforma: TcxBarEditItem
-      Caption = 'Proforma '
+      Caption = 'Proforma'
       Category = 2
-      Hint = 'Proforma '
+      Hint = 'Proforma'
       Visible = ivAlways
       ShowCaption = True
       Width = 0
       PropertiesClassName = 'TcxCheckBoxProperties'
+      BarStyleDropDownButton = False
+      Properties.Alignment = taLeftJustify
       Properties.ImmediatePost = True
       Properties.NullStyle = nssUnchecked
       InternalEditValue = False
@@ -4481,6 +4483,14 @@ object frmInvoice: TfrmInvoice
       Visible = ivAlways
       ImageIndex = 8
       OnClick = btnAddChequeRequestClick
+    end
+    object cxBarEditItem1: TcxBarEditItem
+      Caption = 'xx'
+      Category = 2
+      Hint = 'xx'
+      Visible = ivAlways
+      ShowCaption = True
+      PropertiesClassName = 'TcxCheckBoxProperties'
     end
   end
   object dxBarPopupMenu1: TdxBarPopupMenu

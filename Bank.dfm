@@ -182,7 +182,7 @@ object frmBank: TfrmBank
   end
   object DBText1: TDBText
     Left = 113
-    Top = 55
+    Top = 54
     Width = 121
     Height = 14
     DataField = 'ACCT_TYPE'
@@ -296,7 +296,7 @@ object frmBank: TfrmBank
     Height = 15
     Caption = 'Default payment type:'
   end
-  object DBEdit1: TDBEdit
+  object dbeAccountName: TDBEdit
     Left = 113
     Top = 102
     Width = 216
@@ -305,7 +305,7 @@ object frmBank: TfrmBank
     DataSource = dsBank
     TabOrder = 2
   end
-  object DBEdit2: TDBEdit
+  object dbeBankName: TDBEdit
     Left = 113
     Top = 129
     Width = 216
@@ -314,32 +314,32 @@ object frmBank: TfrmBank
     DataSource = dsBank
     TabOrder = 3
   end
-  object DBEdit3: TDBEdit
+  object dbeBankAddress: TDBEdit
     Left = 113
     Top = 207
     Width = 216
     Height = 23
     DataField = 'ADDRESS'
     DataSource = dsBank
-    TabOrder = 6
+    TabOrder = 8
   end
-  object DBEdit4: TDBEdit
+  object dbeSuburb: TDBEdit
     Left = 113
     Top = 232
     Width = 216
     Height = 23
     DataField = 'SUBURB'
     DataSource = dsBank
-    TabOrder = 7
+    TabOrder = 9
   end
-  object DBEdit5: TDBEdit
+  object dbeAcctNo: TDBEdit
     Left = 113
     Top = 284
     Width = 216
     Height = 23
     DataField = 'ACCOUNTNUMBER'
     DataSource = dsBank
-    TabOrder = 9
+    TabOrder = 11
   end
   object dbtbAbbrev: TDBEdit
     Left = 113
@@ -358,16 +358,16 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'CASH_AT_BANK'
     DataSource = dsBank
-    TabOrder = 10
+    TabOrder = 15
   end
-  object DBEdit8: TDBEdit
+  object dbeBranch: TDBEdit
     Left = 113
     Top = 181
     Width = 216
     Height = 23
     DataField = 'BRANCH'
     DataSource = dsBank
-    TabOrder = 5
+    TabOrder = 7
   end
   object DBEdit11: TDBEdit
     Left = 353
@@ -376,7 +376,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'CLEARANCE'
     DataSource = dsBank
-    TabOrder = 11
+    TabOrder = 16
     Visible = False
   end
   object DBEdit6: TDBEdit
@@ -386,7 +386,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'BANK_CLEARANCE'
     DataSource = dsBank
-    TabOrder = 12
+    TabOrder = 17
     Visible = False
   end
   object edtStatDepMat: TDBEdit
@@ -396,7 +396,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'STAT_DEP_MATTER'
     DataSource = dsBank
-    TabOrder = 13
+    TabOrder = 18
     OnChange = edtStatDepMatChange
   end
   object DBEdit7: TDBEdit
@@ -406,10 +406,10 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'INTERNATIONAL_CLEARANCE'
     DataSource = dsBank
-    TabOrder = 14
+    TabOrder = 19
     Visible = False
   end
-  object cxDBMaskEdit1: TcxDBMaskEdit
+  object dbeBSB: TcxDBMaskEdit
     Left = 113
     Top = 258
     Hint = 'Enter B.S.B. in the format 999-999'
@@ -427,10 +427,10 @@ object frmBank: TfrmBank
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 8
+    TabOrder = 10
     Width = 88
   end
-  object cxDBCheckBox1: TcxDBCheckBox
+  object chkEFTTrans: TcxDBCheckBox
     Left = 197
     Top = 155
     Caption = 'EFT Transactions'
@@ -444,7 +444,7 @@ object frmBank: TfrmBank
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 15
+    TabOrder = 5
     Transparent = True
   end
   object cbEnforceBSBDD: TcxDBCheckBox
@@ -460,11 +460,11 @@ object frmBank: TfrmBank
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 16
+    TabOrder = 20
   end
   object cmbAcctType: TDBComboBox
     Left = 113
-    Top = 50
+    Top = 49
     Width = 216
     Height = 23
     DataField = 'ACCT_TYPE'
@@ -474,7 +474,7 @@ object frmBank: TfrmBank
       'Service')
     TabOrder = 0
   end
-  object cbDefault: TcxDBCheckBox
+  object chkDefaultTrust: TcxDBCheckBox
     Left = 37
     Top = 416
     AutoSize = False
@@ -489,23 +489,10 @@ object frmBank: TfrmBank
     StyleDisabled.LookAndFeel.Kind = lfStandard
     StyleFocused.LookAndFeel.Kind = lfStandard
     StyleHot.LookAndFeel.Kind = lfStandard
-    TabOrder = 17
+    TabOrder = 21
     Transparent = True
     Height = 23
     Width = 91
-  end
-  object DBCheckBox1: TDBCheckBox
-    Left = 139
-    Top = 416
-    Width = 88
-    Height = 23
-    Alignment = taLeftJustify
-    Caption = 'Default Print '
-    DataField = 'DEFAULT_PRINT'
-    DataSource = dsBank
-    TabOrder = 18
-    ValueChecked = 'Y'
-    ValueUnchecked = 'N'
   end
   object DBEdit9: TDBEdit
     Left = 390
@@ -514,7 +501,7 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'NJOURNAL'
     DataSource = dsBank
-    TabOrder = 19
+    TabOrder = 22
   end
   object edBPayCode: TDBEdit
     Left = 113
@@ -523,38 +510,25 @@ object frmBank: TfrmBank
     Height = 23
     DataField = 'BPAY_BILLER_CODE'
     DataSource = dsBank
-    TabOrder = 20
+    TabOrder = 23
   end
-  object DBEdit12: TDBEdit
+  object dbeABANo: TDBEdit
     Left = 353
     Top = 312
     Width = 99
     Height = 23
     DataField = 'ABA_NUMBER'
     DataSource = dsBank
-    TabOrder = 21
+    TabOrder = 14
   end
-  object DBEdit13: TDBEdit
+  object dbeRemitter: TDBEdit
     Left = 113
     Top = 311
     Width = 130
     Height = 23
     DataField = 'REMITTER'
     DataSource = dsBank
-    TabOrder = 22
-  end
-  object DBCheckBox2: TDBCheckBox
-    Left = 238
-    Top = 416
-    Width = 55
-    Height = 23
-    Alignment = taLeftJustify
-    Caption = 'Active'
-    DataField = 'ACTIVE'
-    DataSource = dsBank
-    TabOrder = 23
-    ValueChecked = 'Y'
-    ValueUnchecked = 'N'
+    TabOrder = 13
   end
   object edtBANK_RECEIPT_SEQ: TDBEdit
     Left = 390
@@ -570,8 +544,8 @@ object frmBank: TfrmBank
     Top = 442
     Width = 173
     Height = 23
-    Date = 43686.727033564810000000
-    Time = 43686.727033564810000000
+    Date = 43693.727033564810000000
+    Time = 43693.727033564810000000
     ShowCheckbox = True
     Checked = False
     TabOrder = 25
@@ -602,7 +576,7 @@ object frmBank: TfrmBank
     Height = 248
     Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 27
+    TabOrder = 28
     Properties.ActivePage = tabCheque
     Properties.CustomButtons.Buttons = <>
     OnChange = pagDocsChange
@@ -744,7 +718,7 @@ object frmBank: TfrmBank
     Style.BorderColor = clWindowFrame
     Style.BorderStyle = ebs3D
     Style.HotTrack = False
-    TabOrder = 28
+    TabOrder = 29
     Width = 118
   end
   object cxDBTextEdit1: TcxDBTextEdit
@@ -755,7 +729,7 @@ object frmBank: TfrmBank
     Style.BorderColor = clWindowFrame
     Style.BorderStyle = ebs3D
     Style.HotTrack = False
-    TabOrder = 29
+    TabOrder = 30
     Width = 117
   end
   object cxDBMaskEdit2: TcxDBMaskEdit
@@ -771,7 +745,7 @@ object frmBank: TfrmBank
     Style.BorderColor = clWindowFrame
     Style.BorderStyle = ebs3D
     Style.HotTrack = False
-    TabOrder = 30
+    TabOrder = 31
     Width = 107
   end
   object cmbPaymentType: TcxDBComboBox
@@ -783,7 +757,7 @@ object frmBank: TfrmBank
       'CQ - Cheque'
       'DD - Direct Debit')
     Properties.MaxLength = 2
-    TabOrder = 34
+    TabOrder = 6
     Width = 121
   end
   object cxLabel1: TcxLabel
@@ -810,12 +784,12 @@ object frmBank: TfrmBank
     Properties.ListOptions.ShowHeader = False
     Properties.ListOptions.SyncMode = True
     Properties.ListSource = dmAxiom.dsCurrencyList
-    TabOrder = 37
+    TabOrder = 12
     Width = 189
   end
   object dbeCode: TcxButtonEdit
     Left = 113
-    Top = 76
+    Top = 75
     Properties.Buttons = <
       item
         Default = True
@@ -856,6 +830,46 @@ object frmBank: TfrmBank
     TabOrder = 1
     OnKeyDown = dbeCodeKeyDown
     Width = 81
+  end
+  object chkActive: TcxDBCheckBox
+    Left = 234
+    Top = 416
+    AutoSize = False
+    Caption = 'Active'
+    DataBinding.DataField = 'ACTIVE'
+    DataBinding.DataSource = dsBank
+    Properties.Alignment = taRightJustify
+    Properties.NullStyle = nssUnchecked
+    Properties.ValueChecked = 'Y'
+    Properties.ValueUnchecked = 'N'
+    Style.LookAndFeel.Kind = lfStandard
+    StyleDisabled.LookAndFeel.Kind = lfStandard
+    StyleFocused.LookAndFeel.Kind = lfStandard
+    StyleHot.LookAndFeel.Kind = lfStandard
+    TabOrder = 27
+    Transparent = True
+    Height = 23
+    Width = 61
+  end
+  object chkDefaultPrint: TcxDBCheckBox
+    Left = 136
+    Top = 416
+    AutoSize = False
+    Caption = 'Default Print'
+    DataBinding.DataField = 'DEFAULT_PRINT'
+    DataBinding.DataSource = dsBank
+    Properties.Alignment = taRightJustify
+    Properties.NullStyle = nssUnchecked
+    Properties.ValueChecked = 'Y'
+    Properties.ValueUnchecked = 'N'
+    Style.LookAndFeel.Kind = lfStandard
+    StyleDisabled.LookAndFeel.Kind = lfStandard
+    StyleFocused.LookAndFeel.Kind = lfStandard
+    StyleHot.LookAndFeel.Kind = lfStandard
+    TabOrder = 37
+    Transparent = True
+    Height = 23
+    Width = 91
   end
   object qryBank: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1435,8 +1449,8 @@ object frmBank: TfrmBank
       'WHERE BANK_ACCT = :BANK'
       'AND TYPE = :TYPE'
       'AND P.BRANCH_CODE = B.CODE')
-    Left = 325
-    Top = 189
+    Left = 365
+    Top = 181
     ParamData = <
       item
         DataType = ftUnknown
@@ -1451,7 +1465,7 @@ object frmBank: TfrmBank
   end
   object dsPrinter: TUniDataSource
     DataSet = qryPrinter
-    Left = 325
+    Left = 389
     Top = 221
   end
   object PrinterMenu: TPopupMenu
