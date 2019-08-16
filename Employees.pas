@@ -852,6 +852,17 @@ begin
    if cmbBxProfiles.Visible = True then
    begin
       try
+        if dmAxiom.MapiSession.Active = False then
+        begin
+           dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
+           dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;
+           dmAxiom.MapiSession.LogonInfo.Password           := '';
+           dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
+           dmAxiom.MapiSession.LogonInfo.NewSession         := False;
+           dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
+           dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
+           dmAxiom.MapiSession.Active                       := True;
+        end;
         cmbBxProfiles.Properties.Items.Text := dmAxiom.MapiSession.GetProfiles(#13#10);
         cmbBxProfiles.Properties.Items.Add(''); // also add empty profilename for testing purposes
         cmbBxProfiles.ItemIndex  := cmbBxProfiles.Properties.Items.IndexOf(dmAxiom.MapiSession.GetDefaultProfile);
