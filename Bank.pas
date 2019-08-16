@@ -26,14 +26,14 @@ type
     lblType: TLabel;
     ilstToolbar: TImageList;
     Label1: TLabel;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
+    dbeAccountName: TDBEdit;
+    dbeBankName: TDBEdit;
     Label2: TLabel;
-    DBEdit3: TDBEdit;
+    dbeBankAddress: TDBEdit;
     Label3: TLabel;
-    DBEdit4: TDBEdit;
+    dbeSuburb: TDBEdit;
     Label4: TLabel;
-    DBEdit5: TDBEdit;
+    dbeAcctNo: TDBEdit;
     Label5: TLabel;
     Label12: TLabel;
     dblblLongType: TDBText;
@@ -44,7 +44,7 @@ type
     dbtbCAB: TDBEdit;
     Label15: TLabel;
     cdlgColour: TColorDialog;
-    DBEdit8: TDBEdit;
+    dbeBranch: TDBEdit;
     Label16: TLabel;
     Label17: TLabel;
     DBEdit11: TDBEdit;
@@ -58,7 +58,7 @@ type
     edtStatDepMat: TDBEdit;
     lblStatDepMat: TLabel;
     DBEdit7: TDBEdit;
-    cxDBMaskEdit1: TcxDBMaskEdit;
+    dbeBSB: TcxDBMaskEdit;
     dxBarManager1: TdxBarManager;
     tbtnNew: TdxBarButton;
     tbtnDelete: TdxBarButton;
@@ -70,14 +70,13 @@ type
     tbtnColour: TdxBarButton;
     tbtnPrint: TdxBarButton;
     btnExit: TdxBarButton;
-    cxDBCheckBox1: TcxDBCheckBox;
+    chkEFTTrans: TcxDBCheckBox;
     cbEnforceBSBDD: TcxDBCheckBox;
     Label20: TLabel;
     DBText1: TDBText;
     cmbAcctType: TDBComboBox;
-    cbDefault: TcxDBCheckBox;
+    chkDefaultTrust: TcxDBCheckBox;
     dxBarDBNavPost1: TdxBarDBNavButton;
-    DBCheckBox1: TDBCheckBox;
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
@@ -85,9 +84,8 @@ type
     Label19: TLabel;
     DBEdit9: TDBEdit;
     edBPayCode: TDBEdit;
-    DBEdit12: TDBEdit;
-    DBEdit13: TDBEdit;
-    DBCheckBox2: TDBCheckBox;
+    dbeABANo: TDBEdit;
+    dbeRemitter: TDBEdit;
     lblBANK_RECEIPT_SEQ: TLabel;
     edtBANK_RECEIPT_SEQ: TDBEdit;
     DBDateTimePicker1: TDBDateTimePicker;
@@ -125,6 +123,8 @@ type
     cxLabel1: TcxLabel;
     cmbCurrency: TcxDBLookupComboBox;
     dbeCode: TcxButtonEdit;
+    chkActive: TcxDBCheckBox;
+    chkDefaultPrint: TcxDBCheckBox;
     procedure qryBankBeforePost(DataSet: TDataSet);
     procedure qryBankAfterScroll(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
@@ -183,18 +183,19 @@ end;
 
 procedure TfrmBank.qryBankAfterScroll(DataSet: TDataSet);
 begin
-   lblEntityName.Caption := TableString('ENTITY', 'CODE', qryBank.FieldByName('ENTITY').AsString, 'NAME');
+   dbeCode.Text := DataSet.FieldByName('ACCT').AsString;
+   lblEntityName.Caption := TableString('ENTITY', 'CODE', DataSet.FieldByName('ENTITY').AsString, 'NAME');
    lblStatDepMat.Caption := TableString('MATTER', 'NMATTER', edtStatDepMat.Text, 'FILEID');
 
 //   cbEnforceBSBDD.Enabled := (qryBank.FieldByName('TRUST').AsString = 'T');
-   cbDefault.Visible := (qryBank.FieldByName('TRUST').AsString = 'T');
+   chkDefaultTrust.Visible := (DataSet.FieldByName('TRUST').AsString = 'T');
 
-   edtBANK_RECEIPT_SEQ.Visible := (qryBank.FieldByName('TRUST').AsString = 'I');
-   lblBANK_RECEIPT_SEQ.Visible := (qryBank.FieldByName('TRUST').AsString = 'I');
+   edtBANK_RECEIPT_SEQ.Visible := (DataSet.FieldByName('TRUST').AsString = 'I');
+   lblBANK_RECEIPT_SEQ.Visible := (DataSet.FieldByName('TRUST').AsString = 'I');
 
   //cbChequePrint.Text := qryBank.FieldByName('CHEQUEPRINTER').AsString;
   //cbReceiptPrint.Text := qryBank.FieldByName('RECEIPTPRINTER').AsString;
-   if (qryBank.BOF = True) then
+   if (DataSet.RecNo = 1) then
    begin
       tbtnFirst.Enabled := False;
       tbtnPrev.Enabled := False;
@@ -204,7 +205,7 @@ begin
       tbtnFirst.Enabled := True;
       tbtnPrev.Enabled := True;
    end;
-   if qryBank.EOF then
+   if (DataSet.RecordCount = DataSet.RecNo) then
    begin
       tbtnNext.Enabled := False;
       tbtnLast.Enabled := False;
@@ -215,14 +216,30 @@ begin
       tbtnLast.Enabled := True;
    end;
 
+    qryPrinter.Close;
+
+  if pagDocs.ActivePage = tabCheque then
+  begin
+     qryPrinter.ParamByName('TYPE').AsString := 'C';
+     qryPrinter.ParamByName('BANK').AsString := dbeCode.Text;
+     qryPrinter.Open;
+  end;
+
+  if pagDocs.ActivePage = tabReceipt then
+  begin
+     qryPrinter.ParamByName('TYPE').AsString := 'R';
+     qryPrinter.ParamByName('BANK').AsString := dbeCode.Text;
+     qryPrinter.Open;
+  end;
+
    TFormStyleHookBackground.BackGroundSettings.Enabled := True;
    TFormStyleHookBackground.BackGroundSettings.UseColor := True;
-   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(qryBank.FieldByName('ACCT').AsString);
+   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(DataSet.FieldByName('ACCT').AsString);
    Self.Invalidate;
    Self.Perform(WM_PAINT, 0, 0);
 
-   cbEnforceBSBDD.Style.Color := BankColour(qryBank.FieldByName('ACCT').AsString);
-   cbEnforceBSBDD.StyleDisabled.Color := BankColour(qryBank.FieldByName('ACCT').AsString);
+   cbEnforceBSBDD.Style.Color := BankColour(DataSet.FieldByName('ACCT').AsString);
+   cbEnforceBSBDD.StyleDisabled.Color := BankColour(DataSet.FieldByName('ACCT').AsString);
 end;
 
 
@@ -412,7 +429,7 @@ end;
 
 procedure TfrmBank.dsBankDataChange(Sender: TObject; Field: TField);
 begin
-  pagDocsChange(Self);
+//  pagDocsChange(Self);
 end;
 
 procedure TfrmBank.Edit1Click(Sender: TObject);
