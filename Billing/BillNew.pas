@@ -415,6 +415,7 @@ type
     lblPostedBy: TLabel;
     lblInvoice: TcxTextEdit;
     barbtnTaxcodeList: TdxBarSubItem;
+    cxBarEditItem1: TcxBarEditItem;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
