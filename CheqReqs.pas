@@ -113,7 +113,7 @@ type
     actCreditNote: TAction;
     actReverse: TAction;
     cxStyleRepository3: TcxStyleRepository;
-    cxStyleW: TcxStyle;
+    cxStyleR: TcxStyle;
     cxStyleN: TcxStyle;
     cxStyleY: TcxStyle;
     cxStyleD: TcxStyle;
@@ -332,6 +332,9 @@ type
     teCheqReqNo: TEdit;
     Label6: TLabel;
     chkShowReversed: TcxCheckBox;
+    cxStyleB: TcxStyle;
+    tvCheqReqNMEMO: TcxGridDBColumn;
+    tvCheqReqREV_NCHEQREQ: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure cbAuthorClick(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
@@ -538,7 +541,7 @@ begin
    else
    begin
       if chkRev.Checked then
-         sSQLWhere := sSqlWhere + sAND + ' ((C.REV_NCHEQREQ IS NOT NULL) OR C.CONVERTED IN (''R'', ''N'')) '
+         sSQLWhere := sSqlWhere + sAND + ' (C.REV_NCHEQREQ IS NOT NULL) OR (C.CONVERTED IN (''R'', ''N'')) '
       else
          sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
    end;
@@ -592,9 +595,9 @@ begin
       sSQLWhere := sSqlWhere + sAND + 'C.NCHEQREQ = ' + QuotedStr(teCheqReqNo.Text);
 
    if (chkShowReversed.Checked = True) then
-      sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NOT NULL '
+      sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NOT NULL '
    else
-      sSQLWhere := sSqlWhere + sAND + 'C.REV_NCHEQREQ IS NULL ';
+      sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NULL ';
 
 
 
@@ -3358,20 +3361,26 @@ var
    BColumn: TcxCustomGridTableItem;
    CColumn: TcxCustomGridTableItem;
    DColumn: TcxCustomGridTableItem;
+   EColumn, FColumn: TcxCustomGridTableItem;
 begin
    AColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('HELD');
    BColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('CAN_PAY');
    CColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('TPAY');
    DColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('CONVERTED');
+   EColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('NMEMO');
+   FColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('REV_NCHEQREQ');
    if (VarToStr(ARecord.Values[AColumn.Index]) = 'W') or
       (VarToStr(ARecord.Values[BColumn.Index]) = 'N')  or
-      (VarToStr(ARecord.Values[CColumn.Index]) = 'N') or
-      (VarToStr(ARecord.Values[DColumn.Index]) = 'R') then
-      AStyle := cxStyleW
+      (VarToStr(ARecord.Values[CColumn.Index]) = 'N') then
+      AStyle := cxStyleB
    else if VarToStr(ARecord.Values[AColumn.Index]) = 'Y' then
       AStyle := cxStyleY
    else if VarToStr(ARecord.Values[AColumn.Index]) = 'N' then
       AStyle := cxStyleN
+   else if ((VarToStr(ARecord.Values[DColumn.Index]) = 'R') or
+           (VarIsEmpty(ARecord.Values[EColumn.Index]) = FALSE) or
+           (VarIsEmpty(ARecord.Values[FColumn.Index]) = FALSE))  then
+      AStyle := cxStyleR
    else
       AStyle := cxStyleD;
 end;

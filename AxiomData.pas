@@ -1227,6 +1227,9 @@ type
 
     function Ping(const AHost : string) : Boolean;
     property ATabIndex: integer read FTabIndex write FTabIndex default -1;
+
+    function GetEntityDefaultBranch: string;
+    function GetEntityDefaultDepartment: string;
   end;
 
 var
@@ -1378,6 +1381,26 @@ begin
    try
       if (Self.qryEntity.Active = True) then
          Result := qryEntity.FieldByName('CODE').AsString;
+   finally
+
+   end;
+end;
+
+function TdmAxiom.GetEntityDefaultBranch: string;
+begin
+   try
+      if (Self.qryEntity.Active = True) then
+         Result := qryEntity.FieldByName('DEFAULT_BRANCH').AsString;
+   finally
+
+   end;
+end;
+
+function TdmAxiom.GetEntityDefaultDepartment: string;
+begin
+   try
+      if (Self.qryEntity.Active = True) then
+         Result := qryEntity.FieldByName('DEFAULT_DEPARTMENT').AsString;
    finally
 
    end;

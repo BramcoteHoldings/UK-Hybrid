@@ -13,7 +13,7 @@ uses
   ppDesignLayer, ppModule, raCodMod, ppVar, ppBands, ppCtrls, ppStrtch,
   ppRegion, Vcl.Imaging.jpeg, ppPrnabl, ppClass, ppCache, ppParameter, ppComm,
   ppRelatv, ppProd, ppReport, ppDB, ppDBPipe, ppSubRpt, ppMemo, dxBarBuiltInMenu,
-  cxColorComboBox, cxDBColorComboBox, cxCalendar, System.ImageList;
+  cxColorComboBox, cxDBColorComboBox, cxCalendar, System.ImageList, cxCheckBox;
 
 type
   TfrmEntity = class(TForm)
@@ -334,6 +334,21 @@ type
     dbtbWoffBadDebtDR: TcxDBTextEdit;
     dbtbWoffBadDebtCR: TcxDBTextEdit;
     dbtFinYearEnd: TcxDBDateEdit;
+    cxGroupBox1: TcxGroupBox;
+    Label14: TLabel;
+    Label15: TLabel;
+    txtDefDept: TcxDBTextEdit;
+    txtDefBranch: TcxDBTextEdit;
+    grpMultiCurrency: TcxGroupBox;
+    cxDBTextEdit10: TcxDBTextEdit;
+    cxLabel1: TcxLabel;
+    cxLabel2: TcxLabel;
+    cxLabel3: TcxLabel;
+    txtFXGain: TcxDBTextEdit;
+    cxLabel4: TcxLabel;
+    txtFXLoss: TcxDBTextEdit;
+    cmbCurrency: TcxDBLookupComboBox;
+    cbMultiCurrency: TcxDBCheckBox;
     procedure qryEntitySetButtons(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure tbtnFirstClick(Sender: TObject);
@@ -373,6 +388,7 @@ type
     procedure dxBarDBNavLast1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure dxBarButton4Click(Sender: TObject);
+    procedure cbMultiCurrencyPropertiesEditValueChanged(Sender: TObject);
 
 
 
@@ -777,6 +793,8 @@ end;
 
 procedure TfrmEntity.FormCreate(Sender: TObject);
 begin
+   if dmAxiom.qryCurrencyList.Active = False then
+      dmAxiom.qryCurrencyList.Open;
    if SystemString('LOCALE_NAME') <> '' then
    begin
       lblBPayCode.Visible := False;
@@ -1100,6 +1118,11 @@ begin
 //   RemoveFromDesktop(Self);
 end;
 
+procedure TfrmEntity.cbMultiCurrencyPropertiesEditValueChanged(Sender: TObject);
+begin
+   grpMultiCurrency.Enabled := cbMultiCurrency.Checked;
+end;
+
 procedure TfrmEntity.cxDBButtonEdit1PropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
@@ -1117,14 +1140,14 @@ end;
 procedure TfrmEntity.dxBarDBNavPost1Click(Sender: TObject);
 var sError : String;
 begin
-    sError := validateFields;
+   sError := validateFields;
 
-    if sError <> '' then
-    begin
-        MsgErr(sError);
-    end
-    else
-        qryEntity.Post;
+   if sError <> '' then
+   begin
+      MsgErr(sError);
+   end
+   else
+      qryEntity.Post;
 end;
 
 function TfrmEntity.validateFields():String;

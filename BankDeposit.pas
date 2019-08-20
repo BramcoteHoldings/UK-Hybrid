@@ -12,7 +12,7 @@ uses
   Menus, cxGraphics, cxLookAndFeels, cxClasses, dxCore, ppParameter,
   ppDesignLayer, ppVar, ppCtrls, ppBands, ppPrnabl, ppClass, ppCache,
   ppProd, ppReport, ppDB, ppComm, ppRelatv, ppDBPipe, ppModule, raCodMod,
-  VCL.Themes, cxDateUtils;
+  VCL.Themes, cxDateUtils, System.ImageList;
 
 type
   TfrmBankDeposit = class(TForm)
@@ -441,6 +441,12 @@ begin
                 iLastNreceipt := qryAdjust.FieldByName('NRECEIPT').AsInteger;
               qryDepositReceipt.ParamByName('NRECEIPT').AsInteger := qryAdjust.FieldByName('NRECEIPT').AsInteger;
               qryDepositReceipt.ParamByName('BANKED_DATE').AsDateTime := deDeposited.Date;
+              qryDepositReceipt.ParamByName('DCLEARDATE').AsDateTime := GetClearDate(deDeposited.Date, qryAdjust.FieldByName('TYPE').AsString);
+              if GetClearDate(deDeposited.Date, qryAdjust.FieldByName('TYPE').AsString) > trunc(deDeposited.Date) then
+                  qryDepositReceipt.ParamByName('CLEARED').AsString := 'N'
+              else
+                  qryDepositReceipt.ParamByName('CLEARED').AsString := 'Y';
+
               qryDepositReceipt.ExecSQL;
             end;
           end;
