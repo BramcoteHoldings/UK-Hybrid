@@ -544,6 +544,10 @@ begin
          sSQLWhere := sSqlWhere + sAND + ' (C.REV_NCHEQREQ IS NOT NULL) OR (C.CONVERTED IN (''R'', ''N'')) '
       else
          sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
+         if (chkShowReversed.Checked = True) then
+            sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NOT NULL '
+         else
+            sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NULL ';
    end;
 
    if cbToBeBilled.Checked then
@@ -594,10 +598,7 @@ begin
    if (teCheqReqNo.Text <> '') then
       sSQLWhere := sSqlWhere + sAND + 'C.NCHEQREQ = ' + QuotedStr(teCheqReqNo.Text);
 
-   if (chkShowReversed.Checked = True) then
-      sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NOT NULL '
-   else
-      sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NULL ';
+
 
 
 
@@ -3369,18 +3370,22 @@ begin
    DColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('CONVERTED');
    EColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('NMEMO');
    FColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('REV_NCHEQREQ');
+
    if (VarToStr(ARecord.Values[AColumn.Index]) = 'W') or
       (VarToStr(ARecord.Values[BColumn.Index]) = 'N')  or
       (VarToStr(ARecord.Values[CColumn.Index]) = 'N') then
       AStyle := cxStyleB
+
    else if VarToStr(ARecord.Values[AColumn.Index]) = 'Y' then
       AStyle := cxStyleY
+
+   else if (VarToStr(ARecord.Values[DColumn.Index]) = 'R') or
+           (VarToStr(ARecord.Values[EColumn.Index]) <> '') or
+           (VarToStr(ARecord.Values[FColumn.Index]) <> '')  then
+      AStyle := cxStyleR
+
    else if VarToStr(ARecord.Values[AColumn.Index]) = 'N' then
       AStyle := cxStyleN
-   else if ((VarToStr(ARecord.Values[DColumn.Index]) = 'R') or
-           (VarIsEmpty(ARecord.Values[EColumn.Index]) = FALSE) or
-           (VarIsEmpty(ARecord.Values[FColumn.Index]) = FALSE))  then
-      AStyle := cxStyleR
    else
       AStyle := cxStyleD;
 end;

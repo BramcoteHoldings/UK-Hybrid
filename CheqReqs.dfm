@@ -48,7 +48,6 @@ object frmCheqReqs: TfrmCheqReqs
     Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
-    ExplicitWidth = 1054
     object dxStatusBar1Container2: TdxStatusBarContainerControl
       Left = 996
       Top = 4
@@ -86,7 +85,6 @@ object frmCheqReqs: TfrmCheqReqs
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
-    ExplicitWidth = 1054
     ClientRectBottom = 614
     ClientRectLeft = 4
     ClientRectRight = 1208
@@ -94,7 +92,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
-      ExplicitWidth = 1046
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -113,7 +110,6 @@ object frmCheqReqs: TfrmCheqReqs
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 0
-        ExplicitWidth = 1046
         object dbgrCheqReq: TcxGrid
           Left = 1
           Top = 1
@@ -123,7 +119,6 @@ object frmCheqReqs: TfrmCheqReqs
           TabOrder = 0
           LookAndFeel.Kind = lfFlat
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1044
           object tvCheqReq: TcxGridDBTableView
             PopupMenu = popGrid
             OnDblClick = mnuFileOpenClick
@@ -381,7 +376,6 @@ object frmCheqReqs: TfrmCheqReqs
         Align = alClient
         Caption = 'Panel2'
         TabOrder = 1
-        ExplicitWidth = 1046
         object cxGrid1: TcxGrid
           Left = 1
           Top = 1
@@ -391,7 +385,6 @@ object frmCheqReqs: TfrmCheqReqs
           TabOrder = 0
           LookAndFeel.Kind = lfOffice11
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 1044
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsData
@@ -448,7 +441,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
-      ExplicitWidth = 1046
       DesignSize = (
         1204
         588)
@@ -628,7 +620,6 @@ object frmCheqReqs: TfrmCheqReqs
         OptionsImage.NumGlyphs = 2
         TabOrder = 0
         OnClick = btnClearAllClick
-        ExplicitLeft = 943
       end
       object btnTrust: TButton
         Left = 310
@@ -2715,7 +2706,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4837,7 +4828,7 @@ object frmCheqReqs: TfrmCheqReqs
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
