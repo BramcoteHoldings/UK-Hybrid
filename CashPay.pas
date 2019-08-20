@@ -273,6 +273,8 @@ type
     rbCreditors: TcxRadioButton;
     qryCreditors: TUniQuery;
     dsCreditors: TUniDataSource;
+    edClient: TEdit;
+    Label23: TLabel;
     procedure FormShow(Sender: TObject);
     procedure qryChequesAfterScroll(DataSet: TDataSet);
     procedure mnuFileNewClick(Sender: TObject);
@@ -581,6 +583,10 @@ begin
 
    if edtMatter.Text <> '' then
       sSQLWhere := sSQLWhere + sAND + ' ncheque in (select ncheque from alloc where fileid = :fileid) ';
+
+   if edClient.Text <> '' then
+      sSQLWhere := sSQLWhere + sAND + ' ncheque in (select a.ncheque from alloc a, phonebook p where a.nclient = p.phonebook and a.NCHEQUE is not null and and CONTAINS(dummy,'+ QuotedStr('%'+ edClient.Text + '%') + ', 1) > 0 )';
+
 
    if cbBank.Text <> '' then
      sSQLWhere := sSQLWhere + sAND + 'C.ACCT = ' + QuotedStr(cbBank.Text)

@@ -107,7 +107,7 @@ uses
   ppPrnabl, ppVar, ppParameter, cxClasses, ppDesignLayer, Ora, ppFormWrapper,
   ppRptExp, dxLayoutcxEditAdapters, dxLayoutContainer, dxLayoutControlAdapters,
   dxLayoutControl, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
-  cxDBLookupComboBox;
+  cxDBLookupComboBox, System.ImageList;
 
 type
   TfrmBillTemplates = class(TfrmMaint)
