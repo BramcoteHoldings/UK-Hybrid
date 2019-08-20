@@ -1097,6 +1097,10 @@ object frmEmployees: TfrmEmployees
     object tabRoles: TcxTabSheet
       Caption = 'Roles'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gbShowAs: TcxGroupBox
         Left = 6
         Top = 7
@@ -1708,6 +1712,10 @@ object frmEmployees: TfrmEmployees
     object tabSecurity: TcxTabSheet
       Caption = 'Security'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label4: TLabel
         Left = 15
         Top = 30
@@ -5247,6 +5255,7 @@ object frmEmployees: TfrmEmployees
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -5279,7 +5288,7 @@ object frmEmployees: TfrmEmployees
     XLSSettings.WorksheetName = 'Report'
     Left = 782
     Top = 47
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plEmployeeList'
     object ppHeaderBand1: TppHeaderBand

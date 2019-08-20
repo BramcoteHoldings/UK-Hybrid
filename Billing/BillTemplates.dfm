@@ -2,25 +2,27 @@ inherited frmBillTemplates: TfrmBillTemplates
   Left = 422
   Top = 283
   Caption = 'Bill Templates'
-  ClientHeight = 623
-  ClientWidth = 1437
+  ClientHeight = 551
+  ClientWidth = 1073
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 1443
-  ExplicitHeight = 654
-  PixelsPerInch = 106
+  ExplicitWidth = 1079
+  ExplicitHeight = 580
+  PixelsPerInch = 96
   TextHeight = 15
   object dxLayoutControl1: TdxLayoutControl [0]
     Left = 0
-    Top = 30
-    Width = 1437
-    Height = 593
+    Top = 28
+    Width = 1073
+    Height = 523
     Align = alClient
     TabOrder = 4
     AutoSize = True
+    ExplicitWidth = 1437
+    ExplicitHeight = 595
     object dbtbPath: TcxDBButtonEdit
       Left = 192
-      Top = 75
+      Top = 73
       DataBinding.DataField = 'PATH'
       DataBinding.DataSource = dsSource
       Properties.Buttons = <
@@ -29,7 +31,7 @@ inherited frmBillTemplates: TfrmBillTemplates
           Glyph.SourceDPI = 96
           Glyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
-            0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+            000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -70,7 +72,7 @@ inherited frmBillTemplates: TfrmBillTemplates
           Glyph.SourceDPI = 96
           Glyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
-            0000000000004D1000004D1000000000000000000000FFFFFF00000000FF0000
+            000000000000C40E0000C40E00000000000000000000FFFFFF00000000FF0000
             00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
             00FF000000FF000000FF000000FF000000FFFFFFFF00FFFFFF00868686FF66CC
             FFFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -136,7 +138,7 @@ inherited frmBillTemplates: TfrmBillTemplates
           Glyph.SourceDPI = 96
           Glyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
-            0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+            000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
             FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -186,7 +188,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object cxDBRadioGroup1: TcxDBRadioGroup
       Left = 12
-      Top = 205
+      Top = 201
       Caption = 'Trust or Office Remmitter'
       DataBinding.DataField = 'TRUST_USE'
       DataBinding.DataSource = dsSource
@@ -213,7 +215,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object dbcPrinter: TDBComboBox
       Left = 192
-      Top = 268
+      Top = 264
       Width = 733
       Height = 23
       Hint = 
@@ -227,7 +229,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object dbcFinalPrinterPath: TDBComboBox
       Left = 192
-      Top = 298
+      Top = 294
       Width = 733
       Height = 23
       Hint = 
@@ -241,7 +243,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object rgLEDESFormat: TcxDBRadioGroup
       Left = 12
-      Top = 328
+      Top = 324
       Caption = 'LEDES Format'
       DataBinding.DataField = 'LEDES_TEMPLATE_FORMAT'
       DataBinding.DataSource = dsSource
@@ -345,7 +347,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object cbEntity: TcxDBLookupComboBox
       Left = 192
-      Top = 138
+      Top = 134
       DataBinding.DataField = 'ENTITY'
       DataBinding.DataSource = dsSource
       Properties.KeyFieldNames = 'CODE'
@@ -370,7 +372,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object dbtbParamList: TcxDBTextEdit
       Left = 192
-      Top = 108
+      Top = 104
       DataBinding.DataField = 'PARAM_LIST'
       DataBinding.DataSource = dsSource
       Style.BorderColor = clWindowFrame
@@ -381,7 +383,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object dbtbDescr: TcxDBTextEdit
       Left = 192
-      Top = 45
+      Top = 43
       DataBinding.DataField = 'DESCR'
       DataBinding.DataSource = dsSource
       Style.BorderColor = clWindowFrame
@@ -392,7 +394,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     end
     object cbBranch: TcxDBLookupComboBox
       Left = 192
-      Top = 168
+      Top = 164
       DataBinding.DataField = 'BRANCH'
       DataBinding.DataSource = dsSource
       Properties.KeyFieldNames = 'CODE'
@@ -442,7 +444,7 @@ inherited frmBillTemplates: TfrmBillTemplates
       Control = dbtbCode
       ControlOptions.MinHeight = 22
       ControlOptions.MinWidth = 22
-      ControlOptions.OriginalHeight = 26
+      ControlOptions.OriginalHeight = 24
       ControlOptions.OriginalWidth = 179
       ControlOptions.ShowBorder = False
       Index = 0
@@ -512,7 +514,7 @@ inherited frmBillTemplates: TfrmBillTemplates
       Control = dbtbPath
       ControlOptions.MinHeight = 22
       ControlOptions.MinWidth = 22
-      ControlOptions.OriginalHeight = 26
+      ControlOptions.OriginalHeight = 24
       ControlOptions.OriginalWidth = 490
       ControlOptions.ShowBorder = False
       Index = 2
@@ -1192,8 +1194,9 @@ inherited frmBillTemplates: TfrmBillTemplates
   inherited bmMain: TdxBarManager
     Left = 574
     Top = 189
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     inherited bmMainBar1: TdxBar
+      Font.Height = -9
       IsMainMenu = True
       ItemLinks = <
         item
@@ -1246,29 +1249,21 @@ inherited frmBillTemplates: TfrmBillTemplates
     DataPipelineName = 'plSource'
     inherited ppMaintHeaderBand: TppHeaderBand
       inherited ppLine1: TppLine [0]
-        LayerName = Foreground
       end
       inherited ppSystemVariable1: TppSystemVariable [1]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited ppSystemVariable2: TppSystemVariable [2]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblEntity: TppLabel [3]
-        SaveOrder = -1
-        LayerName = Foreground
       end
       inherited pplblTitle: TppLabel [4]
-        SaveOrder = -1
-        LayerName = Foreground
       end
     end
     inherited ppMaintDetailBand: TppDetailBand
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plSource
         Font.Charset = DEFAULT_CHARSET
@@ -1288,6 +1283,7 @@ inherited frmBillTemplates: TfrmBillTemplates
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plSource
         Font.Charset = DEFAULT_CHARSET
@@ -1307,6 +1303,7 @@ inherited frmBillTemplates: TfrmBillTemplates
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'PATH'
         DataPipeline = plSource
         Font.Charset = DEFAULT_CHARSET
@@ -1321,11 +1318,6 @@ inherited frmBillTemplates: TfrmBillTemplates
         mmTop = 794
         mmWidth = 75406
         BandType = 4
-        LayerName = Foreground
-      end
-    end
-    inherited ppMaintSummaryBand: TppSummaryBand
-      inherited ppLine2: TppLine
         LayerName = Foreground
       end
     end
@@ -1512,6 +1504,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     DataPipeline = plBillTemplate
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -1537,15 +1530,23 @@ inherited frmBillTemplates: TfrmBillTemplates
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1560,13 +1561,15 @@ inherited frmBillTemplates: TfrmBillTemplates
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 629
     Top = 357
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plBillTemplate'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -1574,12 +1577,14 @@ inherited frmBillTemplates: TfrmBillTemplates
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 13229
       mmPrintPosition = 0
@@ -1685,7 +1690,7 @@ inherited frmBillTemplates: TfrmBillTemplates
     FormTop = 50
     FormWidth = 600
     Left = 421
-    Top = 351
+    Top = 359
   end
   object qryEntity: TUniQuery
     Connection = dmAxiom.uniInsight

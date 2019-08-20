@@ -419,8 +419,8 @@ begin
    end
    else
    begin
-      qrySundry.FieldByName('BILLED_TAX').AsFloat := 0;
-      qrySundry.FieldByName('BILLED_AMOUNT').AsFloat := 0;
+      qrySundry.FieldByName('BILLED_TAX').Clear;
+      qrySundry.FieldByName('BILLED_AMOUNT').Clear;
    end;
 
    Result := dAmount;

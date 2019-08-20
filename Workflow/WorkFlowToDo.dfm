@@ -19,21 +19,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
   TextHeight = 15
   object vtTasks: TVirtualStringTree
     Left = 0
-    Top = 56
+    Top = 51
     Width = 1261
-    Height = 528
+    Height = 533
     Align = alClient
     ButtonStyle = bsTriangle
     Colors.UnfocusedColor = clMedGray
     DefaultNodeHeight = 22
     Header.AutoSizeIndex = -1
-    Header.Font.Charset = DEFAULT_CHARSET
-    Header.Font.Color = clWindowText
-    Header.Font.Height = -11
-    Header.Font.Name = 'Segoe UI'
-    Header.Font.Style = []
     Header.Options = [hoColumnResize, hoDrag, hoVisible]
-    HintAnimation = hatFade
     HintMode = hmHint
     Images = ImageList
     LineMode = lmBands
@@ -41,6 +35,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     ParentShowHint = False
     PopupMenu = pmTasks
     ShowHint = True
+    StateImages = ImageList
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoSpanColumns, toAutoTristateTracking, toAutoDeleteMovedNodes]
     TreeOptions.MiscOptions = [toAcceptOLEDrop, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
@@ -59,43 +54,43 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     Columns = <
       item
         Position = 0
+        Text = 'Task'
         Width = 100
-        WideText = 'Task'
       end
       item
         MaxWidth = 20
         MinWidth = 20
         Position = 1
+        Text = 'D'
         Width = 20
-        WideText = 'D'
       end
       item
         MaxWidth = 20
         MinWidth = 20
         Position = 2
+        Text = 'N'
         Width = 20
-        WideText = 'N'
       end
       item
         Position = 3
+        Text = 'Description'
         Width = 200
-        WideText = 'Description'
       end
       item
         Position = 4
+        Text = 'Started'
         Width = 100
-        WideText = 'Started'
       end
       item
         Position = 5
+        Text = 'Due By'
         Width = 100
-        WideText = 'Due By'
       end
       item
         Alignment = taRightJustify
         Position = 6
+        Text = 'Overdue Days'
         Width = 80
-        WideText = 'Overdue Days'
       end>
   end
   object ActionManager: TActionManager
@@ -1903,7 +1898,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     CanCustomize = False
@@ -1934,11 +1929,11 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     UseSystemFont = False
     Left = 473
     Top = 149
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
-      56
+      51
       0)
     object dxBarManager1Bar1: TdxBar
       AllowCustomizing = False
@@ -1956,7 +1951,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       FloatClientHeight = 19
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = []
       IsMainMenu = True
@@ -1991,7 +1986,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       CaptionButtons = <>
       DockedDockingStyle = dsTop
       DockedLeft = 0
-      DockedTop = 26
+      DockedTop = 23
       DockingStyle = dsTop
       FloatLeft = 154
       FloatTop = 307
@@ -1999,7 +1994,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       FloatClientHeight = 97
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
@@ -2045,7 +2040,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         end
         item
           UserDefine = [udWidth]
-          UserWidth = 53
+          UserWidth = 48
           Visible = True
           ItemName = 'edBeSeq'
         end
@@ -2111,7 +2106,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -2145,7 +2140,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
         00FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       ShowCaption = True
-      Width = 121
+      Width = 110
       Text = 'Wed 22/09/2004'
       DateOnStart = bdsCustom
     end
@@ -2157,7 +2152,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       Glyph.SourceDPI = 96
       Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -2190,7 +2185,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         00FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
         00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
         00FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-      Width = 121
+      Width = 110
       Text = 'Wed 22/09/2004'
       DateOnStart = bdsCustom
     end
@@ -2210,7 +2205,6 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       Hint = 'Task Number'
       Visible = ivNever
       OnChange = edBeSeqChange
-      Width = 110
     end
     object dxBarStatic2: TdxBarStatic
       Caption = 'Task#'
@@ -2486,20 +2480,20 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     UseOwnFont = False
     Left = 577
     Top = 148
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object pmEmployeeList: TdxBarPopupMenu
     BarManager = dxBarManager1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
     ItemLinks = <>
     UseOwnFont = True
     Left = 669
     Top = 95
-    PixelsPerInch = 106
+    PixelsPerInch = 96
   end
   object qryWorkFlowTaskReport: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -2911,6 +2905,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -2936,15 +2931,23 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -2959,26 +2962,30 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 860
     Top = 302
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plWorkFlowTaskReport'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 31485
       mmPrintPosition = 0
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Insight Workflow'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 794
@@ -2991,13 +2998,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4022
@@ -3010,13 +3019,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'WorkFlow ToDo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 18
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 7535
@@ -3030,13 +3041,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
         OnGetText = ppLabel4GetText
+        Border.mmPadding = 0
         Caption = 'Label4'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5027
@@ -3050,13 +3063,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
         OnGetText = ppLabel5GetText
+        Border.mmPadding = 0
         Caption = 'Label5'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -3072,13 +3087,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Task'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 1323
@@ -3093,13 +3110,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 38365
@@ -3114,13 +3133,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Started'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -3136,13 +3157,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Due By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4191
@@ -3158,13 +3181,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Over Due'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4191
@@ -3178,12 +3203,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5027
       mmPrintPosition = 0
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'FULLSEQUENCE'
         DataPipeline = plWorkFlowTaskReport
         Font.Charset = ANSI_CHARSET
@@ -3204,6 +3231,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBMemo1: TppDBMemo
         DesignLayer = ppDesignLayer1
         UserName = 'DBMemo1'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'TASKDESCRIPTION'
         DataPipeline = plWorkFlowTaskReport
@@ -3231,6 +3259,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'STARTED'
         DataPipeline = plWorkFlowTaskReport
         DisplayFormat = 'dd mmm yyyy'
@@ -3253,6 +3282,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'COMPLETEBYDATE'
         DataPipeline = plWorkFlowTaskReport
         DisplayFormat = 'dd mmm yyyy'
@@ -3275,6 +3305,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'DAYSOVERDUE'
         DataPipeline = plWorkFlowTaskReport
         Font.Charset = ANSI_CHARSET
@@ -3296,12 +3327,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6615
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3319,6 +3352,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppSystemVariable2: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -3350,19 +3384,22 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 10054
         mmPrintPosition = 0
         object ppLabel6: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label6'
+          Border.mmPadding = 0
           Caption = 'Matter'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -3376,13 +3413,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppLabel7: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label7'
+          Border.mmPadding = 0
           Caption = 'Client'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -3396,6 +3435,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText1: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'FILEID'
           DataPipeline = plWorkFlowTaskReport
           Font.Charset = DEFAULT_CHARSET
@@ -3417,6 +3457,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText2: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText2'
+          Border.mmPadding = 0
           DataField = 'SHORTDESCR'
           DataPipeline = plWorkFlowTaskReport
           Font.Charset = DEFAULT_CHARSET
@@ -3438,6 +3479,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText3: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText3'
+          Border.mmPadding = 0
           DataField = 'CLIENTNAME'
           DataPipeline = plWorkFlowTaskReport
           Font.Charset = DEFAULT_CHARSET
@@ -3459,6 +3501,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppLine1: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line1'
+          Border.mmPadding = 0
           ParentWidth = True
           Weight = 0.750000000000000000
           mmHeight = 529
@@ -3472,6 +3515,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0
@@ -3899,6 +3943,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -3924,15 +3969,23 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -3947,26 +4000,30 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 872
     Top = 373
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plToDoTasksDate'
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 31485
       mmPrintPosition = 0
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Insight Workflow'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 794
@@ -3979,13 +4036,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer2
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4022
@@ -3998,13 +4057,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppLabel15: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'WorkFlow ToDo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 18
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 7535
@@ -4018,13 +4079,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer2
         UserName = 'Label4'
         OnGetText = ppLabel4GetText
+        Border.mmPadding = 0
         Caption = 'Label4'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5027
@@ -4038,13 +4101,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer2
         UserName = 'Label5'
         OnGetText = ppLabel5GetText
+        Border.mmPadding = 0
         Caption = 'Label5'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -4060,13 +4125,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Task'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 1323
@@ -4081,13 +4148,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Description'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 38365
@@ -4102,13 +4171,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Started'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -4122,12 +4193,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     object ppDetailBand2: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5027
       mmPrintPosition = 0
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'FULLSEQUENCE'
         DataPipeline = plToDoTasksDate
         Font.Charset = ANSI_CHARSET
@@ -4148,6 +4221,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBMemo2: TppDBMemo
         DesignLayer = ppDesignLayer2
         UserName = 'DBMemo1'
+        Border.mmPadding = 0
         CharWrap = False
         DataField = 'TASKDESCRIPTION'
         DataPipeline = plToDoTasksDate
@@ -4175,6 +4249,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'STARTED'
         DataPipeline = plToDoTasksDate
         DisplayFormat = 'dd mmm yyyy'
@@ -4197,12 +4272,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     end
     object ppFooterBand2: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6615
       mmPrintPosition = 0
       object ppSystemVariable3: TppSystemVariable
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -4220,6 +4297,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppSystemVariable4: TppSystemVariable
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -4250,6 +4328,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       NewFile = False
       object ppGroupHeaderBand2: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 5821
         mmPrintPosition = 0
@@ -4270,6 +4349,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText15: TppDBText
           DesignLayer = ppDesignLayer2
           UserName = 'DBText8'
+          Border.mmPadding = 0
           DataField = 'COMPLETEBYDATE'
           DataPipeline = plToDoTasksDate
           Font.Charset = DEFAULT_CHARSET
@@ -4291,13 +4371,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppLabel25: TppLabel
           DesignLayer = ppDesignLayer2
           UserName = 'Label13'
+          Border.mmPadding = 0
           Caption = 'Due'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 10319
@@ -4310,6 +4392,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText11: TppDBText
           DesignLayer = ppDesignLayer2
           UserName = 'DBText11'
+          Border.mmPadding = 0
           DataField = 'DAYSOVERDUE'
           DataPipeline = plToDoTasksDate
           Font.Charset = DEFAULT_CHARSET
@@ -4331,13 +4414,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppLabel21: TppLabel
           DesignLayer = ppDesignLayer2
           UserName = 'Label21'
+          Border.mmPadding = 0
           Caption = 'Days Overdue:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4233
           mmLeft = 138377
@@ -4350,6 +4435,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       end
       object ppGroupFooterBand2: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0
@@ -4371,19 +4457,22 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       NewFile = False
       object ppGroupHeaderBand3: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 10848
         mmPrintPosition = 0
         object ppLabel23: TppLabel
           DesignLayer = ppDesignLayer2
           UserName = 'Label6'
+          Border.mmPadding = 0
           Caption = 'Matter'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -4397,13 +4486,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppLabel24: TppLabel
           DesignLayer = ppDesignLayer2
           UserName = 'Label7'
+          Border.mmPadding = 0
           Caption = 'Client'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taCentered
           Transparent = True
           mmHeight = 4233
@@ -4417,6 +4508,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText12: TppDBText
           DesignLayer = ppDesignLayer2
           UserName = 'DBText1'
+          Border.mmPadding = 0
           DataField = 'FILEID'
           DataPipeline = plToDoTasksDate
           Font.Charset = DEFAULT_CHARSET
@@ -4438,6 +4530,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText13: TppDBText
           DesignLayer = ppDesignLayer2
           UserName = 'DBText2'
+          Border.mmPadding = 0
           DataField = 'SHORTDESCR'
           DataPipeline = plToDoTasksDate
           Font.Charset = DEFAULT_CHARSET
@@ -4459,6 +4552,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText14: TppDBText
           DesignLayer = ppDesignLayer2
           UserName = 'DBText3'
+          Border.mmPadding = 0
           DataField = 'CLIENTNAME'
           DataPipeline = plToDoTasksDate
           Font.Charset = DEFAULT_CHARSET
@@ -4480,6 +4574,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       end
       object ppGroupFooterBand3: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0
@@ -4874,6 +4969,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -4899,15 +4995,23 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -4922,26 +5026,30 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 869
     Top = 441
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plWorkflowToDoSequence'
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 31485
       mmPrintPosition = 0
       object ppLabel22: TppLabel
         DesignLayer = ppDesignLayer3
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Insight Workflow'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4022
         mmLeft = 794
@@ -4954,13 +5062,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer3
         UserName = 'Label2'
         OnGetText = ppLabel2GetText
+        Border.mmPadding = 0
         Caption = 'Label2'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4022
@@ -4973,13 +5083,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppLabel27: TppLabel
         DesignLayer = ppDesignLayer3
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'WorkFlow ToDo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 18
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 7535
@@ -4993,13 +5105,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer3
         UserName = 'Label4'
         OnGetText = ppLabel4GetText
+        Border.mmPadding = 0
         Caption = 'Label4'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5027
@@ -5013,13 +5127,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         DesignLayer = ppDesignLayer3
         UserName = 'Label5'
         OnGetText = ppLabel5GetText
+        Border.mmPadding = 0
         Caption = 'Label5'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4995
@@ -5035,13 +5151,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Started'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -5057,13 +5175,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Due By'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4191
@@ -5079,13 +5199,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Over Due'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4191
@@ -5101,13 +5223,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         AutoSize = False
         Border.BorderPositions = [bpBottom]
         Border.Visible = True
+        Border.mmPadding = 0
         Caption = 'Matter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4191
         mmLeft = 0
@@ -5120,12 +5244,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     object ppDetailBand3: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 9790
       mmPrintPosition = 0
       object ppDBText16: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'STARTED'
         DataPipeline = plWorkflowToDoSequence
         DisplayFormat = 'dd mmm yyyy'
@@ -5148,6 +5274,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText17: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'COMPLETEBYDATE'
         DataPipeline = plWorkflowToDoSequence
         DisplayFormat = 'dd mmm yyyy'
@@ -5170,6 +5297,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText18: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'DAYSOVERDUE'
         DataPipeline = plWorkflowToDoSequence
         Font.Charset = ANSI_CHARSET
@@ -5191,6 +5319,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText19: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plWorkflowToDoSequence
         Font.Charset = DEFAULT_CHARSET
@@ -5211,6 +5340,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText20: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'SHORTDESCR'
         DataPipeline = plWorkflowToDoSequence
         Font.Charset = DEFAULT_CHARSET
@@ -5231,13 +5361,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppLabel36: TppLabel
         DesignLayer = ppDesignLayer3
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 'Client:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3768
@@ -5250,6 +5382,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppDBText21: TppDBText
         DesignLayer = ppDesignLayer3
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'CLIENTNAME'
         DataPipeline = plWorkflowToDoSequence
         Font.Charset = DEFAULT_CHARSET
@@ -5270,12 +5403,14 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
     end
     object ppFooterBand3: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6615
       mmPrintPosition = 0
       object ppSystemVariable5: TppSystemVariable
         DesignLayer = ppDesignLayer3
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -5293,6 +5428,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       object ppSystemVariable6: TppSystemVariable
         DesignLayer = ppDesignLayer3
         UserName = 'SystemVariable2'
+        Border.mmPadding = 0
         VarType = vtPageNoDesc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -5324,6 +5460,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       NewFile = False
       object ppGroupHeaderBand4: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 11642
         mmPrintPosition = 0
@@ -5331,13 +5468,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
           DesignLayer = ppDesignLayer3
           UserName = 'Label8'
           AutoSize = False
+          Border.mmPadding = 0
           Caption = 'Task'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 1588
@@ -5350,6 +5489,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBText10: TppDBText
           DesignLayer = ppDesignLayer3
           UserName = 'DBText4'
+          Border.mmPadding = 0
           DataField = 'FULLSEQUENCE'
           DataPipeline = plWorkflowToDoSequence
           Font.Charset = DEFAULT_CHARSET
@@ -5372,13 +5512,15 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
           DesignLayer = ppDesignLayer3
           UserName = 'Label9'
           AutoSize = False
+          Border.mmPadding = 0
           Caption = 'Description'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 10
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 4191
           mmLeft = 1588
@@ -5391,6 +5533,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
         object ppDBMemo3: TppDBMemo
           DesignLayer = ppDesignLayer3
           UserName = 'DBMemo1'
+          Border.mmPadding = 0
           CharWrap = False
           DataField = 'TASKDESCRIPTION'
           DataPipeline = plWorkflowToDoSequence
@@ -5419,6 +5562,7 @@ object fmWorkFlowToDo: TfmWorkFlowToDo
       end
       object ppGroupFooterBand4: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 0

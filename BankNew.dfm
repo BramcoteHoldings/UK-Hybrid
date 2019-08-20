@@ -1,9 +1,10 @@
 object frmBankNew: TfrmBankNew
   Left = 643
   Top = 189
+  BorderStyle = bsDialog
   Caption = 'Bank Account Creation'
-  ClientHeight = 674
-  ClientWidth = 665
+  ClientHeight = 684
+  ClientWidth = 675
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,14 +22,18 @@ object frmBankNew: TfrmBankNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 665
-    Height = 674
+    Width = 675
+    Height = 684
     Align = alClient
+    ParentBackground = True
     TabOrder = 0
+    Transparent = True
     AutoSize = True
+    ExplicitWidth = 665
+    ExplicitHeight = 674
     DesignSize = (
-      665
-      674)
+      675
+      684)
     object Label19: TLabel
       Left = 173
       Top = 469
@@ -785,7 +790,7 @@ object frmBankNew: TfrmBankNew
       SizeOptions.Width = 382
       Control = cmbCurrency
       ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 145
+      ControlOptions.OriginalWidth = 325
       ControlOptions.ShowBorder = False
       Index = 2
     end

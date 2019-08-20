@@ -1802,6 +1802,7 @@ begin
       TfrmConflictSearch.FinishWithSearchScreen;
 
       dmAxiom.qryBankList.Close;
+      dmAxiom.qryCurrencyList.Close;
 
       if dmAxiom.PostTimeOnExit = 'Y' then
       begin

@@ -536,9 +536,13 @@ begin
      tvLedgerTAX.Visible := False;
      tvLedgerTAXCODE.Visible := False;
 
+     DefaultTax := GetDefaultTax('Trust Cheque', 'NOTAX');
+
+     tvLedgerTAXCODE.EditValue := DefaultTax;
+
      lblBalance.Visible := False;
      lblTax.Visible := False;
-     DefaultTax := 'NOTAX';
+//     DefaultTax := 'NOTAX';
      SetBankTransfer(True);
      grpDirectDebit.Visible := (GetEnforceBSBDD(cbBank.Text) = 'Y') and (rgType.ItemIndex = 1);
    end

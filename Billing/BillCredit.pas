@@ -673,7 +673,7 @@ begin
 
         with qryBillRV do
         begin
-           ParamByName('DISPATCHED').AsDateTime := qryBill.FieldByName('DISPATCHED').AsDateTime;
+           ParamByName('DISPATCHED').AsDateTime := dtpDate.Date;  //qryBill.FieldByName('DISPATCHED').AsDateTime;
            ParamByName('FEES').AsFloat := 0 - TotalFees;
            ParamByName('DISB').AsFloat := 0 - TotalDisb;
            ParamByName('ANTD').AsFloat := 0 - TotalAntd;

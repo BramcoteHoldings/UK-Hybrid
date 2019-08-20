@@ -3,7 +3,7 @@ object frmCheqReqs: TfrmCheqReqs
   Top = 223
   Caption = 'Cheque Requests'
   ClientHeight = 666
-  ClientWidth = 1054
+  ClientWidth = 1212
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,7 +23,7 @@ object frmCheqReqs: TfrmCheqReqs
   object sbarInfo: TdxStatusBar
     Left = 0
     Top = 646
-    Width = 1054
+    Width = 1212
     Height = 20
     Panels = <
       item
@@ -48,8 +48,9 @@ object frmCheqReqs: TfrmCheqReqs
     Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
+    ExplicitWidth = 1054
     object dxStatusBar1Container2: TdxStatusBarContainerControl
-      Left = 838
+      Left = 996
       Top = 4
       Width = 198
       Height = 14
@@ -77,7 +78,7 @@ object frmCheqReqs: TfrmCheqReqs
   object pagCashbook: TcxPageControl
     Left = 0
     Top = 28
-    Width = 1054
+    Width = 1212
     Height = 618
     Align = alClient
     TabOrder = 5
@@ -85,17 +86,19 @@ object frmCheqReqs: TfrmCheqReqs
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     OnChange = pagCashbookChange
+    ExplicitWidth = 1054
     ClientRectBottom = 614
     ClientRectLeft = 4
-    ClientRectRight = 1050
+    ClientRectRight = 1208
     ClientRectTop = 26
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
+      ExplicitWidth = 1046
       object Splitter1: TSplitter
         Left = 0
         Top = 249
-        Width = 1046
+        Width = 1204
         Height = 7
         Cursor = crVSplit
         Align = alTop
@@ -105,20 +108,22 @@ object frmCheqReqs: TfrmCheqReqs
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1046
+        Width = 1204
         Height = 249
         Align = alTop
         Caption = 'Panel1'
         TabOrder = 0
+        ExplicitWidth = 1046
         object dbgrCheqReq: TcxGrid
           Left = 1
           Top = 1
-          Width = 1044
+          Width = 1202
           Height = 247
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfFlat
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 1044
           object tvCheqReq: TcxGridDBTableView
             PopupMenu = popGrid
             OnDblClick = mnuFileOpenClick
@@ -352,6 +357,16 @@ object frmCheqReqs: TfrmCheqReqs
               Visible = False
               VisibleForCustomization = False
             end
+            object tvCheqReqNMEMO: TcxGridDBColumn
+              DataBinding.FieldName = 'NMEMO'
+              Visible = False
+              VisibleForCustomization = False
+            end
+            object tvCheqReqREV_NCHEQREQ: TcxGridDBColumn
+              DataBinding.FieldName = 'REV_NCHEQREQ'
+              Visible = False
+              VisibleForCustomization = False
+            end
           end
           object dbgrCheqReqLevel1: TcxGridLevel
             GridView = tvCheqReq
@@ -361,20 +376,22 @@ object frmCheqReqs: TfrmCheqReqs
       object Panel2: TPanel
         Left = 0
         Top = 256
-        Width = 1046
+        Width = 1204
         Height = 332
         Align = alClient
         Caption = 'Panel2'
         TabOrder = 1
+        ExplicitWidth = 1046
         object cxGrid1: TcxGrid
           Left = 1
           Top = 1
-          Width = 1044
+          Width = 1202
           Height = 330
           Align = alClient
           TabOrder = 0
           LookAndFeel.Kind = lfOffice11
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 1044
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsData
@@ -431,8 +448,9 @@ object frmCheqReqs: TfrmCheqReqs
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 16
+      ExplicitWidth = 1046
       DesignSize = (
-        1046
+        1204
         588)
       object Label1: TLabel
         Left = 8
@@ -531,7 +549,7 @@ object frmCheqReqs: TfrmCheqReqs
         Transparent = True
       end
       object btnClearAll: TcxButton
-        Left = 943
+        Left = 1101
         Top = 557
         Width = 100
         Height = 28
@@ -610,6 +628,7 @@ object frmCheqReqs: TfrmCheqReqs
         OptionsImage.NumGlyphs = 2
         TabOrder = 0
         OnClick = btnClearAllClick
+        ExplicitLeft = 943
       end
       object btnTrust: TButton
         Left = 310
@@ -797,7 +816,7 @@ object frmCheqReqs: TfrmCheqReqs
         Left = 252
         Top = 293
         AutoSize = False
-        Caption = 'Show Reversed Items'
+        Caption = 'Include Reversed Items'
         Properties.Alignment = taRightJustify
         Properties.NullStyle = nssUnchecked
         Style.LookAndFeel.NativeStyle = True
@@ -1065,6 +1084,17 @@ object frmCheqReqs: TfrmCheqReqs
         Height = 23
         CharCase = ecUpperCase
         TabOrder = 39
+      end
+      object chkShowReversed: TcxCheckBox
+        Left = 854
+        Top = 79
+        Caption = 'Reversed'
+        Properties.NullStyle = nssUnchecked
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 40
       end
     end
   end
@@ -2343,7 +2373,7 @@ object frmCheqReqs: TfrmCheqReqs
     Left = 79
     Top = 58
     PixelsPerInch = 96
-    object cxStyleW: TcxStyle
+    object cxStyleR: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = clWindow
       Font.Charset = DEFAULT_CHARSET
@@ -2372,6 +2402,10 @@ object frmCheqReqs: TfrmCheqReqs
       Font.Height = -11
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
+    end
+    object cxStyleB: TcxStyle
+      AssignedValues = [svTextColor]
+      TextColor = clBlue
     end
   end
   object qryCheqreqUpdate: TUniQuery
@@ -2753,6 +2787,7 @@ object frmCheqReqs: TfrmCheqReqs
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2785,7 +2820,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 823
     Top = 252
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqs'
     object ppHeaderBand1: TppHeaderBand
@@ -4873,6 +4908,7 @@ object frmCheqReqs: TfrmCheqReqs
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4905,7 +4941,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 847
     Top = 312
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqsEffect'
     object ppHeaderBand2: TppHeaderBand

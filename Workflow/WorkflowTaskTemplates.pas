@@ -18,7 +18,7 @@ uses
   cxLookAndFeels, cxLookAndFeelPainters, cxClasses, ppVar, ppCtrls,
   ppPrnabl, ppClass, ppBands, ppCache, ppDB, ppDesignLayer, ppParameter,
   OracleUniProvider, Uni, DBAccess, ppDBPipe, ppComm, ppRelatv, ppProd, ppReport, ppStrtch,
-  ppRegion, ppSubRpt, System.Actions, ppMemo;
+  ppRegion, ppSubRpt, System.Actions, ppMemo, System.ImageList;
 
 type
   TAddToTreeAs = (tatAbove,tatBelow,tatChild);
@@ -216,9 +216,6 @@ type
     procedure vtTasksAfterCellPaint(Sender: TBaseVirtualTree;
       TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
       CellRect: TRect);
-    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree;
-      Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-      var Ghosted: Boolean; var ImageIndex: Integer);
     procedure aDeleteExecute(Sender: TObject);
     procedure aEditExecute(Sender: TObject);
     procedure vtTasksDragAllowed(Sender: TBaseVirtualTree;
@@ -274,6 +271,9 @@ type
     procedure dxBarButton13Click(Sender: TObject);
     procedure btnAddWorkflowClick(Sender: TObject);
     procedure cmbWorkflowTypePropertiesInitPopup(Sender: TObject);
+    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
   private
     { Private declarations }
     FCurrentWorkflowType: String;
@@ -884,9 +884,9 @@ begin
 
 end;
 
-procedure TfmWorkFlowTaskTemplates.vtTasksGetImageIndex(Sender: TBaseVirtualTree;
-  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-  var Ghosted: Boolean; var ImageIndex: Integer);
+procedure TfmWorkFlowTaskTemplates.vtTasksGetImageIndex(
+  Sender: TBaseVirtualTree; Node: PVirtualNode; Kind: TVTImageKind;
+  Column: TColumnIndex; var Ghosted: Boolean; var ImageIndex: TImageIndex);
 var
   LData: PTaskData;
 begin
