@@ -22,14 +22,14 @@ object frmBankDeposit: TfrmBankDeposit
   object Label1: TLabel
     Left = 6
     Top = 64
-    Width = 168
+    Width = 157
     Height = 15
     Caption = 'Receipts available for Banking'
   end
   object Label2: TLabel
     Left = 385
     Top = 64
-    Width = 150
+    Width = 130
     Height = 15
     Caption = 'Receipts for this Banking'
   end
@@ -113,7 +113,6 @@ object frmBankDeposit: TfrmBankDeposit
     FontBetween.Name = 'Segoe UI'
     FontBetween.Style = []
     NoZero = False
-    ExplicitTop = 433
   end
   object nlCash: TNumberLabel
     Left = 580
@@ -142,7 +141,6 @@ object frmBankDeposit: TfrmBankDeposit
     FontBetween.Name = 'Segoe UI'
     FontBetween.Style = []
     NoZero = False
-    ExplicitTop = 449
   end
   object nlCredit: TNumberLabel
     Left = 580
@@ -171,7 +169,6 @@ object frmBankDeposit: TfrmBankDeposit
     FontBetween.Name = 'Segoe UI'
     FontBetween.Style = []
     NoZero = False
-    ExplicitTop = 465
   end
   object nlTotal: TNumberLabel
     Left = 564
@@ -200,7 +197,6 @@ object frmBankDeposit: TfrmBankDeposit
     FontBetween.Name = 'Segoe UI'
     FontBetween.Style = [fsBold]
     NoZero = False
-    ExplicitTop = 489
   end
   object Label8: TLabel
     Left = 385
@@ -248,43 +244,42 @@ object frmBankDeposit: TfrmBankDeposit
     Height = 25
     Caption = 'Unselect'
     LookAndFeel.NativeStyle = True
+    OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
-      76040000424D7604000000000000760000002800000010000000100000000100
-      2000000000000004000000000000000000001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00BFBFBF00BFBF
+      424D360400000000000036000000280000001000000010000000010020000000
+      000000000000C40E0000C40E00000000000000000000BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FFFF0000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
     TabOrder = 4
     OnClick = btnReceiptUnselectClick
   end
@@ -295,43 +290,42 @@ object frmBankDeposit: TfrmBankDeposit
     Height = 25
     Caption = 'None'
     LookAndFeel.NativeStyle = True
+    OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
-      76040000424D7604000000000000760000002800000010000000100000000100
-      2000000000000004000000000000000000001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00BFBFBF00BFBF
+      424D360400000000000036000000280000001000000010000000010020000000
+      000000000000C40E0000C40E00000000000000000000BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF000000FF00BFBFBF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF000000FF000000
-      FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF000000FF00BFBFBF000000FF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF000000
-      FF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF000000FF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF000000FF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF000000FF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF000000FF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF000000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF000000
+      FFFF0000FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFF0000FFFFBFBFBF000000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF000000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFF0000FFFFBFBFBF000000FFFF0000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF000000
+      FFFF0000FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF000000FFFF0000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF000000
+      FFFF0000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF000000FFFF0000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF000000FFFF0000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF000000FFFFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
     TabOrder = 5
     OnClick = btnReceiptNoneClick
   end
@@ -342,43 +336,42 @@ object frmBankDeposit: TfrmBankDeposit
     Height = 25
     Caption = 'All'
     LookAndFeel.NativeStyle = True
+    OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
-      76040000424D7604000000000000760000002800000010000000100000000100
-      2000000000000004000000000000000000001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00BFBFBF00BFBF
+      424D360400000000000036000000280000001000000010000000010020000000
+      000000000000C40E0000C40E00000000000000000000BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF0000BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF0000FF000000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF0000BFBFBF0000FF000000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF
-      000000FF000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF0000BFBFBF0000FF000000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF0000FF000000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF000000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF0000BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FFBFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF00FFBFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
     TabOrder = 6
     OnClick = btnReceiptAllClick
   end
@@ -389,43 +382,42 @@ object frmBankDeposit: TfrmBankDeposit
     Height = 25
     Caption = 'Select'
     LookAndFeel.NativeStyle = True
+    OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
-      76040000424D7604000000000000760000002800000010000000100000000100
-      2000000000000004000000000000000000001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00BFBFBF00BFBF
+      424D360400000000000036000000280000001000000010000000010020000000
+      000000000000C40E0000C40E00000000000000000000BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF000000FF0000BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      000000FF0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF
-      0000BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FF00FF00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FF00FF
+      00FFBFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF0000FF00FFBFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
       BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
-      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBF
+      BF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00BFBFBF00}
     TabOrder = 7
     OnClick = btnReceiptSelectClick
   end
@@ -462,13 +454,12 @@ object frmBankDeposit: TfrmBankDeposit
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 9
     Transparent = True
-    Width = 325
   end
   object ilstToolbar: TImageList
     Left = 324
     Top = 15
     Bitmap = {
-      494C010105000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000E6E6E619B2B2B24D9292926D8D8D8D729B9B9B64C7C7C738F9F9
@@ -854,6 +845,7 @@ object frmBankDeposit: TfrmBankDeposit
     UseSystemFont = False
     Left = 217
     Top = 30
+    PixelsPerInch = 96
     DockControlHeights = (
       0
       0
@@ -957,7 +949,7 @@ object frmBankDeposit: TfrmBankDeposit
       item
         DataType = ftUnknown
         Name = 'bank'
-        Value = nil
+        Value = Null
       end>
   end
   object dsBankDtls: TUniDataSource
@@ -1078,6 +1070,7 @@ object frmBankDeposit: TfrmBankDeposit
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -1103,15 +1096,23 @@ object frmBankDeposit: TfrmBankDeposit
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1126,19 +1127,22 @@ object frmBankDeposit: TfrmBankDeposit
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 280
     Top = 158
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plDepositedReceipts'
     object ppTitleBand1: TppTitleBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 44186
       mmPrintPosition = 0
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'BANKNAME'
         DataPipeline = plBankDtls
         Font.Charset = DEFAULT_CHARSET
@@ -1159,6 +1163,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'NAME'
         DataPipeline = plBankDtls
         Font.Charset = DEFAULT_CHARSET
@@ -1179,6 +1184,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'ACCOUNTNUMBER'
         DataPipeline = plBankDtls
         Font.Charset = DEFAULT_CHARSET
@@ -1199,13 +1205,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label12'
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3852
         mmLeft = 1058
@@ -1217,13 +1225,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Account Name'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3852
         mmLeft = 1058
@@ -1235,13 +1245,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Account Number'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3852
         mmLeft = 1058
@@ -1254,13 +1266,15 @@ object frmBankDeposit: TfrmBankDeposit
         DesignLayer = ppDesignLayer1
         UserName = 'LabelEntity'
         OnGetText = ppLabelEntityGetText
+        Border.mmPadding = 0
         Caption = 'LabelEntity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Century'
         Font.Size = 14
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 6086
         mmLeft = 1058
@@ -1272,13 +1286,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel16: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label16'
+        Border.mmPadding = 0
         Caption = 'Deposited Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3852
         mmLeft = 1058
@@ -1290,13 +1306,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel17: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label17'
+        Border.mmPadding = 0
         Caption = 'Bank Deposit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 11
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4784
         mmLeft = 1058
@@ -1308,6 +1326,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        Border.mmPadding = 0
         DataField = 'BRANCH'
         DataPipeline = plBankDtls
         Font.Charset = DEFAULT_CHARSET
@@ -1328,13 +1347,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel18: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label18'
+        Border.mmPadding = 0
         Caption = 'Branch'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3852
         mmLeft = 1058
@@ -1347,6 +1368,7 @@ object frmBankDeposit: TfrmBankDeposit
         OnPrint = ppVarDepDatePrint
         DesignLayer = ppDesignLayer1
         UserName = 'VarDepDate'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtDate
@@ -1368,12 +1390,14 @@ object frmBankDeposit: TfrmBankDeposit
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 5292
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CHQNO'
         DataPipeline = plDepositedReceipts
         Font.Charset = DEFAULT_CHARSET
@@ -1393,6 +1417,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'DESCR'
         DataPipeline = plDepositedReceipts
         Font.Charset = DEFAULT_CHARSET
@@ -1412,6 +1437,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'PAY_BANK'
         DataPipeline = plDepositedReceipts
         Font.Charset = DEFAULT_CHARSET
@@ -1431,6 +1457,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'BRANCH'
         DataPipeline = plDepositedReceipts
         Font.Charset = DEFAULT_CHARSET
@@ -1450,6 +1477,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plDepositedReceipts
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1471,12 +1499,14 @@ object frmBankDeposit: TfrmBankDeposit
     end
     object ppFooterBand1: TppFooterBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1494,6 +1524,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLine2: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line2'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 1058
@@ -1506,12 +1537,14 @@ object frmBankDeposit: TfrmBankDeposit
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 35983
       mmPrintPosition = 0
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 
           'Depositor'#39's Signature...........................................' +
           '...................................'
@@ -1520,7 +1553,8 @@ object frmBankDeposit: TfrmBankDeposit
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4276
         mmLeft = 1058
@@ -1532,6 +1566,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 
           'Teller'#39's Signature..............................................' +
           '................................'
@@ -1540,7 +1575,8 @@ object frmBankDeposit: TfrmBankDeposit
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4276
         mmLeft = 1058
@@ -1552,13 +1588,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Total Cheques, EFT'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3968
         mmLeft = 145257
@@ -1570,6 +1608,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plDepositedReceipts
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1591,13 +1630,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Cash'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4276
         mmLeft = 145257
@@ -1609,13 +1650,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Credit Card'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4276
         mmLeft = 145257
@@ -1627,13 +1670,15 @@ object frmBankDeposit: TfrmBankDeposit
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Total Deposit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Segoe UI'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4276
@@ -1646,6 +1691,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText12'
+        Border.mmPadding = 0
         DataField = 'NVL(CCCHQ,0)'
         DataPipeline = plTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1668,6 +1714,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText13'
+        Border.mmPadding = 0
         DataField = 'NVL(CAAMT,0)'
         DataPipeline = plTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1690,6 +1737,7 @@ object frmBankDeposit: TfrmBankDeposit
       object ppDBText14: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText14'
+        Border.mmPadding = 0
         DataField = 'NVL(CCAMT,0)'
         DataPipeline = plTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1724,12 +1772,14 @@ object frmBankDeposit: TfrmBankDeposit
       NewFile = False
       object ppGroupHeaderBand1: TppGroupHeaderBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         mmBottomOffset = 0
         mmHeight = 12435
         mmPrintPosition = 0
         object ppDBText9: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText9'
+          Border.mmPadding = 0
           DataField = 'TYPE'
           DataPipeline = plDepositedReceipts
           Font.Charset = DEFAULT_CHARSET
@@ -1751,13 +1801,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel1: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label1'
+          Border.mmPadding = 0
           Caption = 'Cheque #'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3852
           mmLeft = 1058
@@ -1770,13 +1822,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel2: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label2'
+          Border.mmPadding = 0
           Caption = 'Drawer'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           Transparent = True
           mmHeight = 3852
           mmLeft = 27517
@@ -1789,13 +1843,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel3: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label3'
+          Border.mmPadding = 0
           Caption = 'Bank'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 3852
@@ -1809,13 +1865,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel4: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label4'
+          Border.mmPadding = 0
           Caption = 'Branch'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 3852
@@ -1829,13 +1887,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel5: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label5'
+          Border.mmPadding = 0
           Caption = 'Amount'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 3852
@@ -1849,6 +1909,7 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLine1: TppLine
           DesignLayer = ppDesignLayer1
           UserName = 'Line1'
+          Border.mmPadding = 0
           ParentWidth = True
           Weight = 0.750000000000000000
           mmHeight = 794
@@ -1862,6 +1923,7 @@ object frmBankDeposit: TfrmBankDeposit
         object ppDBText10: TppDBText
           DesignLayer = ppDesignLayer1
           UserName = 'DBText10'
+          Border.mmPadding = 0
           DataField = 'TYPE_DESC'
           DataPipeline = plDepositedReceipts
           Font.Charset = DEFAULT_CHARSET
@@ -1882,6 +1944,7 @@ object frmBankDeposit: TfrmBankDeposit
       end
       object ppGroupFooterBand1: TppGroupFooterBand
         Background.Brush.Style = bsClear
+        Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
         mmHeight = 7144
@@ -1889,6 +1952,7 @@ object frmBankDeposit: TfrmBankDeposit
         object ppDBCalc2: TppDBCalc
           DesignLayer = ppDesignLayer1
           UserName = 'DBCalc2'
+          Border.mmPadding = 0
           DataField = 'AMOUNT'
           DataPipeline = plDepositedReceipts
           DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1912,13 +1976,15 @@ object frmBankDeposit: TfrmBankDeposit
         object ppLabel15: TppLabel
           DesignLayer = ppDesignLayer1
           UserName = 'Label15'
+          Border.mmPadding = 0
           Caption = 'Total:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = [fsBold]
-          FormField = False
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
           Transparent = True
           mmHeight = 3852
@@ -1932,58 +1998,59 @@ object frmBankDeposit: TfrmBankDeposit
       end
     end
     object raCodeModule1: TraCodeModule
-      ProgramStream = {
-        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D65060F
-        4C6162656C314F6E476574546578740B50726F6772616D54797065070B747450
-        726F63656475726506536F7572636506F270726F636564757265204C6162656C
-        314F6E476574546578742876617220546578743A20537472696E67293B0D0A62
-        6567696E0D0A202069662028706C4465706F736974656452656365697074735B
-        2754595045275D203D202743412729206F722028706C4465706F736974656452
-        656365697074735B2754595045275D203D202743432729207468656E0D0A2020
-        20202054657874203A3D2027270D0A2020656C736520696620706C4465706F73
-        6974656452656365697074735B2754595045275D203D2027435127207468656E
-        0D0A202020202054657874203A3D202743686571756523273B0D0A0D0A656E64
-        3B0D0A0D436F6D706F6E656E744E616D6506064C6162656C31094576656E744E
-        616D6506094F6E47657454657874074576656E7449440235084361726574506F
-        730102000200000001060F5472614576656E7448616E646C65720B50726F6772
-        616D4E616D65060F4C6162656C324F6E476574546578740B50726F6772616D54
-        797065070B747450726F63656475726506536F757263650C0001000070726F63
-        6564757265204C6162656C324F6E476574546578742876617220546578743A20
-        537472696E67293B0D0A626567696E0D0A0D0A2020202069662028706C446570
-        6F736974656452656365697074735B2754595045275D203D202743412729206F
-        722028706C4465706F736974656452656365697074735B2754595045275D203D
-        202743432729207468656E0D0A202020202054657874203A3D20274465736372
-        697074696F6E270D0A2020656C736520696620706C4465706F73697465645265
-        6365697074735B2754595045275D203D2027435127207468656E0D0A20202020
-        2054657874203A3D2027447261776572273B0D0A0D0A656E643B0D0A0D436F6D
-        706F6E656E744E616D6506064C6162656C32094576656E744E616D6506094F6E
-        47657454657874074576656E7449440235084361726574506F73010200020000
-        0001060F5472614576656E7448616E646C65720B50726F6772616D4E616D6506
-        0F4C6162656C334F6E476574546578740B50726F6772616D54797065070B7474
-        50726F63656475726506536F7572636506F870726F636564757265204C616265
-        6C334F6E476574546578742876617220546578743A20537472696E67293B0D0A
-        626567696E0D0A0D0A2020202069662028706C4465706F736974656452656365
-        697074735B2754595045275D203D202743412729206F722028706C4465706F73
-        6974656452656365697074735B2754595045275D203D20274343272920746865
-        6E0D0A202020202054657874203A3D20275061796F72270D0A2020656C736520
-        696620706C4465706F736974656452656365697074735B2754595045275D203D
-        2027435127207468656E0D0A202020202054657874203A3D202742616E6B273B
-        0D0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506064C6162656C33
-        094576656E744E616D6506094F6E47657454657874074576656E744944023508
-        4361726574506F730102000200000001060F5472614576656E7448616E646C65
-        720B50726F6772616D4E616D65060F4C6162656C344F6E476574546578740B50
-        726F6772616D54797065070B747450726F63656475726506536F757263650C0C
-        01000070726F636564757265204C6162656C344F6E4765745465787428766172
-        20546578743A20537472696E67293B0D0A626567696E0D0A202020696620706C
-        4465706F736974656452656365697074735B2754595045275D203D2027434127
-        207468656E0D0A202020202054657874203A3D2027273B0D0A20202069662070
-        6C4465706F736974656452656365697074735B2754595045275D203D20274351
-        27207468656E0D0A202020202054657874203A3D20274272616E6368273B0D0A
-        202020696620706C4465706F736974656452656365697074735B275459504527
-        5D203D2027434327207468656E0D0A202020202054657874203A3D2027526566
-        204E6F273B0D0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506064C
-        6162656C34094576656E744E616D6506094F6E47657454657874074576656E74
-        49440235084361726574506F730102000200000000}
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Label1OnGetText'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Label1OnGetText(var Text: String);'#13#10'begin'#13#10'  if (plDep' +
+          'ositedReceipts['#39'TYPE'#39'] = '#39'CA'#39') or (plDepositedReceipts['#39'TYPE'#39'] =' +
+          ' '#39'CC'#39') then'#13#10'     Text := '#39#39#13#10'  else if plDepositedReceipts['#39'TYP' +
+          'E'#39'] = '#39'CQ'#39' then'#13#10'     Text := '#39'Cheque#'#39';'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Label1'
+        raProgram.EventName = 'OnGetText'
+        raProgram.EventID = 53
+      end
+      object raProgramInfo2: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Label2OnGetText'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Label2OnGetText(var Text: String);'#13#10'begin'#13#10#13#10'    if (p' +
+          'lDepositedReceipts['#39'TYPE'#39'] = '#39'CA'#39') or (plDepositedReceipts['#39'TYPE' +
+          #39'] = '#39'CC'#39') then'#13#10'     Text := '#39'Description'#39#13#10'  else if plDeposit' +
+          'edReceipts['#39'TYPE'#39'] = '#39'CQ'#39' then'#13#10'     Text := '#39'Drawer'#39';'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Label2'
+        raProgram.EventName = 'OnGetText'
+        raProgram.EventID = 53
+      end
+      object raProgramInfo3: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Label3OnGetText'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Label3OnGetText(var Text: String);'#13#10'begin'#13#10#13#10'    if (p' +
+          'lDepositedReceipts['#39'TYPE'#39'] = '#39'CA'#39') or (plDepositedReceipts['#39'TYPE' +
+          #39'] = '#39'CC'#39') then'#13#10'     Text := '#39'Payor'#39#13#10'  else if plDepositedRece' +
+          'ipts['#39'TYPE'#39'] = '#39'CQ'#39' then'#13#10'     Text := '#39'Bank'#39';'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Label3'
+        raProgram.EventName = 'OnGetText'
+        raProgram.EventID = 53
+      end
+      object raProgramInfo4: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Label4OnGetText'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Label4OnGetText(var Text: String);'#13#10'begin'#13#10'   if plDep' +
+          'ositedReceipts['#39'TYPE'#39'] = '#39'CA'#39' then'#13#10'     Text := '#39#39';'#13#10'   if plDe' +
+          'positedReceipts['#39'TYPE'#39'] = '#39'CQ'#39' then'#13#10'     Text := '#39'Branch'#39';'#13#10'   ' +
+          'if plDepositedReceipts['#39'TYPE'#39'] = '#39'CC'#39' then'#13#10'     Text := '#39'Ref No' +
+          #39';'#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Label4'
+        raProgram.EventName = 'OnGetText'
+        raProgram.EventID = 53
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -2003,6 +2070,8 @@ object frmBankDeposit: TfrmBankDeposit
       'BANKED = '#39'Y'#39', '
       'NBANKDEP = :NBANKDEP,'
       'BANKED_DATE = :BANKED_DATE'
+      'DCLEARDATE = :DCLEARDATE,'
+      'CLEARED = :CLEARED'
       'WHERE NRECEIPT = :NRECEIPT')
     Left = 646
     Top = 250
@@ -2015,6 +2084,16 @@ object frmBankDeposit: TfrmBankDeposit
       item
         DataType = ftUnknown
         Name = 'BANKED_DATE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DCLEARDATE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CLEARED'
         Value = nil
       end
       item
