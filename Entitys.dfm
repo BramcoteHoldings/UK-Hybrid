@@ -2,7 +2,7 @@ object frmEntity: TfrmEntity
   Left = 664
   Top = 394
   Caption = 'Entities'
-  ClientHeight = 539
+  ClientHeight = 603
   ClientWidth = 835
   Color = clBtnFace
   Constraints.MinHeight = 384
@@ -1573,6 +1573,151 @@ object frmEntity: TfrmEntity
     DataBinding.DataSource = dsEntity
     TabOrder = 11
     Width = 122
+  end
+  object cxGroupBox1: TcxGroupBox
+    Left = 392
+    Top = 444
+    Caption = 'Default Branch / Dept for Ledger Postings'
+    TabOrder = 22
+    Height = 117
+    Width = 336
+    object Label14: TLabel
+      Left = 24
+      Top = 30
+      Width = 104
+      Height = 15
+      Alignment = taRightJustify
+      Caption = 'Default Department'
+    end
+    object Label15: TLabel
+      Left = 50
+      Top = 61
+      Width = 78
+      Height = 15
+      Alignment = taRightJustify
+      Caption = 'Default Branch'
+    end
+    object txtDefDept: TcxDBTextEdit
+      Left = 134
+      Top = 29
+      DataBinding.DataField = 'DEFAULT_DEPARTMENT'
+      DataBinding.DataSource = dsEntity
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 0
+      Width = 115
+    end
+    object txtDefBranch: TcxDBTextEdit
+      Left = 134
+      Top = 58
+      DataBinding.DataField = 'DEFAULT_BRANCH'
+      DataBinding.DataSource = dsEntity
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 1
+      Width = 115
+    end
+  end
+  object grpMultiCurrency: TcxGroupBox
+    Left = 18
+    Top = 444
+    Enabled = False
+    TabOrder = 24
+    Transparent = True
+    Height = 117
+    Width = 328
+    object cxDBTextEdit10: TcxDBTextEdit
+      Left = 100
+      Top = 56
+      DataBinding.DataField = 'ENTITY_GROUP_CURRENCY'
+      DataBinding.DataSource = dsEntity
+      TabOrder = 1
+      Width = 61
+    end
+    object cxLabel1: TcxLabel
+      Left = 6
+      Top = 30
+      Caption = 'Currency'
+      Properties.Alignment.Horz = taLeftJustify
+      Transparent = True
+    end
+    object cxLabel2: TcxLabel
+      Left = 6
+      Top = 55
+      Caption = 'Group Currency'
+      Properties.Alignment.Horz = taLeftJustify
+      Transparent = True
+    end
+    object cxLabel3: TcxLabel
+      Left = 6
+      Top = 86
+      Caption = 'FX Gain'
+      Properties.Alignment.Horz = taLeftJustify
+      Transparent = True
+    end
+    object txtFXGain: TcxDBTextEdit
+      Left = 62
+      Top = 85
+      DataBinding.DataField = 'FX_GAIN_ADJ'
+      DataBinding.DataSource = dsEntity
+      TabOrder = 2
+      Width = 98
+    end
+    object cxLabel4: TcxLabel
+      Left = 176
+      Top = 86
+      Caption = 'FX Loss'
+      Transparent = True
+    end
+    object txtFXLoss: TcxDBTextEdit
+      Left = 227
+      Top = 85
+      DataBinding.DataField = 'FX_LOSS_ADJ'
+      DataBinding.DataSource = dsEntity
+      TabOrder = 3
+      Width = 94
+    end
+    object cmbCurrency: TcxDBLookupComboBox
+      Left = 100
+      Top = 27
+      DataBinding.DataField = 'CURRENCY'
+      DataBinding.DataSource = dsEntity
+      Properties.DropDownAutoSize = True
+      Properties.KeyFieldNames = 'ISO4217_CURRENCY_CODE'
+      Properties.ListColumns = <
+        item
+          FieldName = 'MAX(ISO4217_CURRENCY_NAME)'
+        end
+        item
+          FieldName = 'ISO4217_CURRENCY_CODE'
+        end>
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dmAxiom.dsCurrencyList
+      TabOrder = 0
+      Width = 221
+    end
+  end
+  object cbMultiCurrency: TcxDBCheckBox
+    Left = 24
+    Top = 440
+    AutoSize = False
+    Caption = 'Use Multi currency'
+    DataBinding.DataField = 'USE_MULTICURRENCY'
+    DataBinding.DataSource = dsEntity
+    Properties.ImmediatePost = True
+    Properties.NullStyle = nssUnchecked
+    Properties.ReadOnly = False
+    Properties.ValueChecked = 'Y'
+    Properties.ValueUnchecked = 'N'
+    Properties.OnEditValueChanged = cbMultiCurrencyPropertiesEditValueChanged
+    TabOrder = 25
+    Height = 23
+    Width = 123
   end
   object qryEntity: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -3828,6 +3973,7 @@ object frmEntity: TfrmEntity
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3860,7 +4006,7 @@ object frmEntity: TfrmEntity
     XLSSettings.WorksheetName = 'Report'
     Left = 564
     Top = 452
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'peEntityPrint'
     object ppHeaderBand2: TppHeaderBand
@@ -5785,7 +5931,7 @@ object frmEntity: TfrmEntity
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'peEntityGroup'
           object ppTitleBand2: TppTitleBand
@@ -6172,7 +6318,7 @@ object frmEntity: TfrmEntity
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'peTax'
           object ppTitleBand1: TppTitleBand
