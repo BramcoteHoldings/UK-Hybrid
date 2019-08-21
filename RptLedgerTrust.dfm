@@ -525,8 +525,8 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     object plMatterppField7: TppField
       FieldAlias = 'ADDRESS'
       FieldName = 'ADDRESS'
-      FieldLength = 120
-      DisplayWidth = 120
+      FieldLength = 250
+      DisplayWidth = 250
       Position = 6
     end
     object plMatterppField8: TppField
@@ -694,7 +694,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -722,6 +722,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -754,7 +755,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     XLSSettings.WorksheetName = 'Report'
     Left = 481
     Top = 4
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plTrustLedger'
     object ppHeaderBand1: TppHeaderBand
@@ -1099,7 +1100,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
         Border.mmPadding = 0
-        Caption = 'Trans Date'
+        Caption = 'Entry Date'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
@@ -1108,10 +1109,10 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 3704
+        mmHeight = 3968
         mmLeft = 2117
         mmTop = 49213
-        mmWidth = 15610
+        mmWidth = 14287
         BandType = 0
         LayerName = Foreground
       end
