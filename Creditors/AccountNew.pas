@@ -562,13 +562,13 @@ begin
             if qryAllocs.FieldByName('BILLING_TAXCODE').IsNull = False then
             begin
                dAmount := qryLedger.FieldByName('AMOUNT').AsCurrency;
-               qryAllocs.FieldByName('BILLED_TAX').AsFloat := 0 - TaxCalc(dAmount, 'BILL', qryLedger.FieldByName('TAXCODE').AsString, dtpDate.Date);
+               qryAllocs.FieldByName('BILLED_TAX_AMOUNT').AsFloat := 0 - TaxCalc(dAmount, 'BILL', qryLedger.FieldByName('TAXCODE').AsString, dtpDate.Date);
                qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := 0 - dAmount;
             end
             else
             begin
-               qryAllocs.FieldByName('BILLED_TAX').AsFloat := 0;
-               qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := 0;
+               qryAllocs.FieldByName('BILLED_TAX_AMOUNT').Clear;
+               qryAllocs.FieldByName('BILLED_AMOUNT').Clear;
             end;
 
             qryAllocs.Post;  // Put it into the cached bufer
