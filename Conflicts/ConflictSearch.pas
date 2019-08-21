@@ -312,7 +312,7 @@ type
     function GenerateConflictPDF: String;
     function GetCurrentNConflictID: Integer;
     procedure DisplayNewPhoneBookDialog;
-    procedure ShowPhoneBook(AClientID: Integer);
+    procedure ShowClient(AClientID: Integer);
     procedure ShowMatter(AFileID: String);
     procedure ShowDetailLink(ACellViewInfo: TcxGridTableDataCellViewInfo);
     function SaveConflict: Boolean;
@@ -320,6 +320,7 @@ type
     function SaveDocument: Boolean;
     function SaveEverything: Boolean;
     procedure SaveAndClose;
+    procedure ShowPhoneBook(AClientID: Integer);
   protected
     FSaveChanges: Boolean;
   public
@@ -756,14 +757,26 @@ begin
 end;
 
 
-procedure TfrmConflictSearch.ShowPhoneBook(AClientID: Integer);
+procedure TfrmConflictSearch.ShowClient(AClientID: Integer);
 var
   frmClient: TfrmClients;
 begin
-  frmClient := TfrmClients.Create(Self);
-  if frmDeskTop.pagMainControl.ActivePageIndex = 0 then
-    frmDeskTop.AddFormToTab(frmClient,1);
-  frmClient.DisplayClient(AClientID);
+   frmClient := TfrmClients.Create(Self);
+   if frmDeskTop.pagMainControl.ActivePageIndex = 0 then
+      frmDeskTop.AddFormToTab(frmClient,1);
+   frmClient.DisplayClient(AClientID);
+end;
+
+procedure TfrmConflictSearch.ShowPhoneBook(AClientID: Integer);
+var
+  frmPhonebook: TfrmPhonebook;
+begin
+   frmPhonebook := TfrmPhonebook.Create(Self);
+   frmPhoneBook.Search := IntToStr(AClientID);
+   frmPhoneBook.NName := AClientID;
+   if frmDeskTop.pagMainControl.ActivePageIndex = 0 then
+      frmDeskTop.AddFormToTab(frmPhonebook,1);
+   frmPhoneBook.Show;
 end;
 
 
@@ -805,7 +818,7 @@ begin
   if StrMatches('Client*', Category) then
   begin
     ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
-    ShowPhoneBook(ACellViewInfo.GridRecord.Values[ColIdx])
+    ShowClient(ACellViewInfo.GridRecord.Values[ColIdx])
   end
   else if (StrMatches('Matter*', Category))
     // Field data is matter related. Handle as matter.

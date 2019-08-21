@@ -65,10 +65,14 @@ object frmCashpay: TfrmCashpay
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 1110
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -369,6 +373,10 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -598,8 +606,6 @@ object frmCashpay: TfrmCashpay
     object tabFilter: TcxTabSheet
       Caption = 'Filter'
       ImageIndex = 12
-      ExplicitLeft = 3
-      ExplicitTop = 27
       object lblBank: TLabel
         Left = 9
         Top = 19
@@ -2627,7 +2633,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3179,7 +3185,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350

@@ -585,7 +585,7 @@ begin
       sSQLWhere := sSQLWhere + sAND + ' ncheque in (select ncheque from alloc where fileid = :fileid) ';
 
    if edClient.Text <> '' then
-      sSQLWhere := sSQLWhere + sAND + ' ncheque in (select a.ncheque from alloc a, phonebook p where a.nclient = p.phonebook and a.NCHEQUE is not null and and CONTAINS(dummy,'+ QuotedStr('%'+ edClient.Text + '%') + ', 1) > 0 )';
+      sSQLWhere := sSQLWhere + sAND + ' ncheque in (select a.ncheque from alloc a, phonebook p where a.nclient = p.phonebook and a.NCHEQUE is not null and CONTAINS(dummy,'+ QuotedStr('%'+ edClient.Text + '%') + ', 1) > 0 )';
 
 
    if cbBank.Text <> '' then
