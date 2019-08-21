@@ -159,7 +159,7 @@ object frmCashRcp: TfrmCashRcp
               Width = 48
             end
             object tvReceiptsCREATED: TcxGridDBColumn
-              Caption = 'Date'
+              Caption = 'Transaction Date'
               DataBinding.FieldName = 'CREATED'
               Width = 116
             end
@@ -1888,7 +1888,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1914,6 +1914,7 @@ object frmCashRcp: TfrmCashRcp
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1946,7 +1947,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 694
     Top = 337
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 284427
     DataPipelineName = 'plReceiptsBankDepsRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -2401,7 +2402,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -2412,7 +2413,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plNallocsRpt'
           object ppDetailBand2: TppDetailBand
@@ -3680,7 +3681,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3706,6 +3707,7 @@ object frmCashRcp: TfrmCashRcp
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3738,7 +3740,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 970
     Top = 295
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plReceiptPrint'
     object ppHeaderBand2: TppHeaderBand
@@ -3837,7 +3839,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3848,7 +3850,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plAllocPrint'
           object ppDetailBand4: TppDetailBand
@@ -4835,7 +4837,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4861,6 +4863,7 @@ object frmCashRcp: TfrmCashRcp
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4893,7 +4896,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 885
     Top = 394
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 197200
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
