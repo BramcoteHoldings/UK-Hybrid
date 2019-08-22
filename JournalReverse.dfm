@@ -28,7 +28,6 @@ object frmJournalReverse: TfrmJournalReverse
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 310
     object btnOriginal: TcxButton
       Left = 188
       Top = 187
@@ -111,7 +110,7 @@ object frmJournalReverse: TfrmJournalReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 187
-      EditValue = 43677.4386646991d
+      EditValue = 43699.4771436806d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -502,7 +501,7 @@ object frmJournalReverse: TfrmJournalReverse
       SizeOptions.Width = 269
       Control = tbReason
       ControlOptions.OriginalHeight = 33
-      ControlOptions.OriginalWidth = 203
+      ControlOptions.OriginalWidth = 196
       ControlOptions.ShowBorder = False
       Index = 2
     end
