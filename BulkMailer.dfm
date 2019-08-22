@@ -165,6 +165,7 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
+              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -381,9 +382,9 @@ object frmBulkMailer: TfrmBulkMailer
         OriginalHeight = 150
         object grdEmails: TcxGrid
           Left = 0
-          Top = 0
+          Top = 29
           Width = 195
-          Height = 541
+          Height = 512
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -391,6 +392,9 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitLeft = -3
+          ExplicitTop = 43
+          ExplicitHeight = 541
           object tvEmails: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataModeController.SmartRefresh = True
@@ -477,6 +481,37 @@ object frmBulkMailer: TfrmBulkMailer
           end
           object lvEmails: TcxGridLevel
             GridView = tvEmails
+          end
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 0
+          Width = 195
+          Height = 29
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 1
+          object rbDebtors: TcxRadioButton
+            Tag = 1
+            Left = 8
+            Top = 5
+            Width = 65
+            Height = 17
+            Caption = 'Debtors'
+            Checked = True
+            TabOrder = 0
+            TabStop = True
+            OnClick = rbDebtorsClick
+          end
+          object rbMatters: TcxRadioButton
+            Tag = 1
+            Left = 94
+            Top = 5
+            Width = 65
+            Height = 17
+            Caption = 'Matters'
+            TabOrder = 1
+            OnClick = rbMattersClick
           end
         end
       end
@@ -8514,6 +8549,7 @@ object frmBulkMailer: TfrmBulkMailer
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -8546,7 +8582,7 @@ object frmBulkMailer: TfrmBulkMailer
     XLSSettings.WorksheetName = 'Report'
     Left = 755
     Top = 443
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -8595,7 +8631,7 @@ object frmBulkMailer: TfrmBulkMailer
           PrinterSetup.mmPaperHeight = 296900
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           object ppTitleBand1: TppTitleBand
             Background.Brush.Style = bsClear

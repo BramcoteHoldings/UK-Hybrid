@@ -229,6 +229,9 @@ type
     qryRB_ItemsMODIFIED: TFloatField;
     qryRB_ItemsDELETED: TFloatField;
     qryRB_ItemsTEMPLATE: TMemoField;
+    Panel3: TPanel;
+    rbDebtors: TcxRadioButton;
+    rbMatters: TcxRadioButton;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -278,6 +281,8 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure IdSMTP1Status(ASender: TObject; const AStatus: TIdStatus;
       const AStatusText: string);
+    procedure rbDebtorsClick(Sender: TObject);
+    procedure rbMattersClick(Sender: TObject);
   private
     { Private declarations }
     FEditorValue: TMemoryStream;
@@ -312,6 +317,7 @@ type
     procedure SaveEmail(ANName: integer; ASubject: string);
     procedure SearchAndReplace(InSearch, InReplace: string);
     procedure LoadTemplate(ATemplateID: Integer);
+    procedure PopulateGrid;
   public
     { Public declarations }
     HTMLEditBaseDir:string;
@@ -486,7 +492,7 @@ begin
 //   dxBarButtonUndo.Enabled := SendMessage(Editor.Handle, EM_CANUNDO, 0, 0) <> 0;
 end;
 
-procedure TfrmBulkMailer.FormShow(Sender: TObject);
+procedure TfrmBulkMailer.PopulateGrid;
 var
    i: integer;
 begin
@@ -500,6 +506,11 @@ begin
       end;
       EndUpdate;
    end;
+end;
+
+procedure TfrmBulkMailer.FormShow(Sender: TObject);
+begin
+   PopulateGrid;
 {   if FEditorValue <> nil then
    begin
       FEditorValue.Position := 0;
@@ -978,6 +989,26 @@ begin
       end;
    end;
 
+end;
+
+procedure TfrmBulkMailer.rbDebtorsClick(Sender: TObject);
+begin
+   DebtorStatements := 1;
+
+   EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL '+
+                'FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
+                'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+   PopulateGrid;
+end;
+
+procedure TfrmBulkMailer.rbMattersClick(Sender: TObject);
+begin
+   DebtorStatements := 1;
+
+   EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL '+
+                'FROM AXIOM.MATTER m, nmemo where m.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
+                'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+   PopulateGrid;
 end;
 
 procedure TfrmBulkMailer.btnFontClick(Sender: TObject);
