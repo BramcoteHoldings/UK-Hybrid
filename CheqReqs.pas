@@ -540,14 +540,22 @@ begin
       sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''Y'' '
    else
    begin
-      if chkRev.Checked then
-         sSQLWhere := sSqlWhere + sAND + ' (C.REV_NCHEQREQ IS NOT NULL) OR (C.CONVERTED IN (''R'', ''N'')) '
+      if (chkRev.Checked = True) then
+      begin
+         sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
+
+         sSQLWhere := sSqlWhere + sAND + ' case when (c.rev_ncheqreq IS NOT NULL) then 1  '+
+                                         '      when (c.converted IN (''R'', ''N'')) then 1 '+
+                                         '      else 0 end = 1 '
+      end
       else
+      begin
          sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
          if (chkShowReversed.Checked = True) then
             sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NOT NULL '
          else
             sSQLWhere := sSqlWhere + sAND + ' C.REV_NCHEQREQ IS NULL ';
+      end;
    end;
 
    if cbToBeBilled.Checked then
@@ -707,9 +715,9 @@ begin
  }
 
    // 24/08/2004 TH - Added date checks
-   if (chkDateFrom.Checked) then
+   if (chkDateFrom.Checked = True) then
       sSql := sSql + 'and C.REQDATE >= :P_DateFrom ';
-   if (chkDateTo.Checked) then
+   if (chkDateTo.Checked = True) then
       sSql := sSql + 'and C.REQDATE <= :P_DateTo ';
    if (chkOwing.Checked) then
    begin
@@ -4040,10 +4048,10 @@ begin
                               and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
                               and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
                               and ((qryCheqReq.FieldByName('CONVERTED').asString = 'N') or (qryCheqReq.FieldByName('CONVERTED').asString = 'R'))
-                              and (qryCheqReq.FieldByName('REV_NCHEQREQ').ISNULL = True)
-                              and (qryCheqReq.FieldByName('NMEMO').IsNull = True));
+                              and (qryCheqReq.FieldByName('REV_NCHEQREQ').ISNULL = True));
 end;
-         procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
+
+procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
 begin
    TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
                               and (tvCheqReq.GroupedColumnCount = 0)
