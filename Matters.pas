@@ -711,7 +711,6 @@ type
     dbtbKeyName: TDBEdit;
     dbtbPBName: TDBEdit;
     dbtbTitle: TDBEdit;
-    dbmmoNotes: TDBMemo;
     pbEditClient: TBitBtn;
     dbtbMobile: TDBEdit;
     dbtbHomePhone: TDBEdit;
@@ -1548,6 +1547,7 @@ type
     ppDBMemo4: TppDBMemo;
     ppSystemVariable1: TppSystemVariable;
     ppLine9: TppLine;
+    dbmmoNotes: TcxDBRichEdit;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);

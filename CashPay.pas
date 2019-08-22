@@ -47,7 +47,8 @@ uses
   Vcl.ComCtrls, Vcl.DBCtrls, Vcl.Buttons, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   cxSplitter, cxPC, System.Classes, citfunc, DateUtils, Variants, ppFileUtils,
-  ppIniStorage, dxCore, cxGridExportLink, cxGridDBDataDefinitions;
+  ppIniStorage, dxCore, cxGridExportLink, cxGridDBDataDefinitions,
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
 
 
 
@@ -275,6 +276,8 @@ type
     dsCreditors: TUniDataSource;
     edClient: TEdit;
     Label23: TLabel;
+    ActionManager1: TActionManager;
+    actReverse: TAction;
     procedure FormShow(Sender: TObject);
     procedure qryChequesAfterScroll(DataSet: TDataSet);
     procedure mnuFileNewClick(Sender: TObject);
@@ -292,7 +295,6 @@ type
     procedure rbCreditorsClick(Sender: TObject);
     procedure btnLastMonthClick(Sender: TObject);
     procedure tbtnNewClick(Sender: TObject);
-    procedure tbtnReverseClick(Sender: TObject);
     procedure tbtnPrintClick(Sender: TObject);
     procedure qrBarGraphAfterPrint(Sender: TObject);
     procedure tbtnBarGraphClick(Sender: TObject);
@@ -350,6 +352,8 @@ type
     procedure mMoveMatterPopup(Sender: TObject);
     procedure pagCashbookPageChanging(Sender: TObject; NewPage: TcxTabSheet;
       var AllowChange: Boolean);
+    procedure actReverseExecute(Sender: TObject);
+    procedure actReverseUpdate(Sender: TObject);
   private
     { Private declarations }
     bPrint: boolean;
@@ -442,13 +446,7 @@ begin
       qryCreditors.Open;
    end;
 
-   if ((qryCheques.FieldByName('REVERSED').AsString = 'Y') OR
-      (qryCheques.FieldByName('TAKE_ON').AsString = 'Y') OR
-      (not qryCheques.FieldByName('PRESENTED').IsNull)) then
-      tbtnReverse.Enabled := False
-   else
-      if dmAxiom.Security.Cheque.Reverse then
-         tbtnReverse.Enabled := True;
+
 
    if qryCheques.FieldByName('PRESENTED').AsString = '' then
    begin
@@ -587,7 +585,6 @@ begin
    if edClient.Text <> '' then
       sSQLWhere := sSQLWhere + sAND + ' ncheque in (select a.ncheque from alloc a, phonebook p where a.nclient = p.nclient and a.NCHEQUE is not null and CONTAINS(dummy,'+ QuotedStr('%'+ edClient.Text + '%') + ', 1) > 0 )';
 
-
    if cbBank.Text <> '' then
      sSQLWhere := sSQLWhere + sAND + 'C.ACCT = ' + QuotedStr(cbBank.Text)
    else
@@ -638,7 +635,6 @@ begin
 
        if chkUnpresented.Checked then
          sSQLWhere := sSQLWhere + sAND + 'C.PRESENTED IS NULL';
-
      end;    //  end if
 
    if chkNoReversals.Checked then
@@ -945,46 +941,6 @@ procedure TfrmCashpay.tbtnNewClick(Sender: TObject);
 begin
   NewCheque;
 end;
-
-procedure TfrmCashpay.tbtnReverseClick(Sender: TObject);
-var
-  ChequeBookmark: TBookmark;
-  frmChequeReverse: TfrmChequeReverse;
-  bReverseContinue : boolean;
-begin
-   ChequeBookmark := qryCheques.GetBookmark;
-
-   bReverseContinue := True;
-   if qryCheques.FieldByName('CHQNO').AsString <> '' then
-   begin
-      if rbMatters.Checked then
-      begin
-         if (IsMatterArchived(qryAllocs.FieldByName('CODE').AsString)) then
-         begin
-            MsgErr('Cheques cannot be reversed for a matter that has been archived.');
-            bReverseContinue := False;
-         end;
-      end;
-
-      if bReverseContinue then
-      begin
-         try
-            frmChequeReverse := TfrmChequeReverse.Create(Self);
-            frmChequeReverse.DisplayCheque(Self.qryCheques.FieldByName('NCheque').AsInteger);
-            if frmChequeReverse.ShowModal = mrOK then
-            begin
-               qryCheques.Close;
-               qryCheques.Open;
-//               qryCheques.GotoBookmark(ChequeBookmark);
-            end;
-         finally
-            frmChequeReverse.Free ;
-         end;
-      end;
-   end;
-   qryCheques.FreeBookmark(ChequeBookmark);
-end;
-
 
 procedure TfrmCashpay.tbtnPrintClick(Sender: TObject);
 begin
@@ -1610,6 +1566,60 @@ end;
 procedure TfrmCashpay.CMExpandGroups(var Msg: TMessage);
 begin
    TcxGridDBDataController(Msg.WParam).Groups.FullExpand;
+end;
+
+procedure TfrmCashpay.actReverseExecute(Sender: TObject);
+var
+//  ChequeBookmark: TBookmark;
+  frmChequeReverse: TfrmChequeReverse;
+  bReverseContinue : boolean;
+begin
+//   ChequeBookmark := qryCheques.GetBookmark;
+   if (TableString('ALLOC', 'NCHEQUE', qryCheques.FieldByName('NCHEQUE').AsInteger, 'NMEMO') = '') then
+   begin
+      bReverseContinue := True;
+      if qryCheques.FieldByName('CHQNO').AsString <> '' then
+      begin
+         if rbMatters.Checked then
+         begin
+            if (IsMatterArchived(qryAllocs.FieldByName('CODE').AsString)) then
+            begin
+               MsgErr('Cheques cannot be reversed for a matter that has been archived.');
+               bReverseContinue := False;
+            end;
+         end;
+
+         if bReverseContinue then
+         begin
+            try
+               frmChequeReverse := TfrmChequeReverse.Create(Self);
+               frmChequeReverse.DisplayCheque(Self.qryCheques.FieldByName('NCheque').AsInteger);
+               if frmChequeReverse.ShowModal = mrOK then
+               begin
+                  qryCheques.Close;
+                  qryCheques.Open;
+//                  qryCheques.GotoBookmark(ChequeBookmark);
+               end;
+            finally
+               frmChequeReverse.Free ;
+            end;
+         end;
+      end;
+//      qryCheques.FreeBookmark(ChequeBookmark);
+   end
+   else
+      MsgErr('This Cheque cannot be reversed. It''s attached to a bill');
+end;
+
+procedure TfrmCashpay.actReverseUpdate(Sender: TObject);
+begin
+   if tabCashbook.Visible then
+   begin
+      TAction(Sender).Enabled := ((qryCheques.FieldByName('REVERSED').AsString = 'N') OR
+                                 (qryCheques.FieldByName('TAKE_ON').AsString = 'N') OR
+                                 (qryCheques.FieldByName('PRESENTED').IsNull = True)) and
+                                 dmAxiom.Security.Cheque.Reverse = True;
+   end;
 end;
 
 procedure TfrmCashpay.bbtnEFTFileClick(Sender: TObject);
