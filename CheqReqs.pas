@@ -4039,10 +4039,11 @@ begin
                               (not chkRev.Checked) and (not cbConverted.Checked)
                               and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
                               and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
-                              and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'));
+                              and ((qryCheqReq.FieldByName('CONVERTED').asString = 'N') or (qryCheqReq.FieldByName('CONVERTED').asString = 'R'))
+                              and (qryCheqReq.FieldByName('REV_NCHEQREQ').ISNULL = True)
+                              and (qryCheqReq.FieldByName('NMEMO').IsNull = True));
 end;
-
-procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
+         procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
 begin
    TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
                               and (tvCheqReq.GroupedColumnCount = 0)
