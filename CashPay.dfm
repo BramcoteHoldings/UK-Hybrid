@@ -369,10 +369,6 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -2081,13 +2077,12 @@ object frmCashpay: TfrmCashpay
       OnClick = tbtnBarGraphClick
     end
     object tbtnPresent: TdxBarButton
-      Caption = 'Present Selected Cheque'
+      Caption = '&Reverse Selected Cheque'
       Category = 0
       Enabled = False
-      Hint = 'Present this cheque...'
       Visible = ivAlways
       ImageIndex = 6
-      OnClick = tbtnPresentClick
+      OnClick = btnPresentClick
     end
     object bbtnEFTFile: TdxBarButton
       Caption = 'Generate EFT File'
@@ -2206,15 +2201,8 @@ object frmCashpay: TfrmCashpay
       OnClick = tbtnBatchPresentClick
     end
     object tbtnReverse: TdxBarButton
-      Caption = '&Reverse Selected Cheque'
+      Action = actReverse
       Category = 1
-      Enabled = False
-      Hint = 
-        'Creates an Equal but Opposite Payment Entry to Cancel this Chequ' +
-        'e'
-      Visible = ivAlways
-      ImageIndex = 1
-      OnClick = tbtnReverseClick
     end
     object mnuFileExit: TdxBarButton
       Align = iaRight
@@ -3734,5 +3722,18 @@ object frmCashpay: TfrmCashpay
     DataSet = qryCreditors
     Left = 460
     Top = 134
+  end
+  object ActionManager1: TActionManager
+    Images = ilstToolbar
+    Left = 868
+    Top = 286
+    StyleName = 'Platform Default'
+    object actReverse: TAction
+      Caption = '&Reverse Selected Cheque'
+      Enabled = False
+      ImageIndex = 1
+      OnExecute = actReverseExecute
+      OnUpdate = actReverseUpdate
+    end
   end
 end

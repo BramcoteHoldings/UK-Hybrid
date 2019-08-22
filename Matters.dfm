@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabTransit
+    Properties.ActivePage = tabClient
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -893,19 +893,6 @@ object frmMatters: TfrmMatters
           ReadOnly = True
           TabOrder = 2
         end
-        object dbmmoNotes: TDBMemo
-          Left = 346
-          Top = 138
-          Width = 829
-          Height = 98
-          Anchors = [akLeft, akTop, akRight]
-          Color = clMoneyGreen
-          DataField = 'NOTE'
-          DataSource = dsPhonebook
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 3
-        end
         object pbEditClient: TBitBtn
           Left = 1089
           Top = 301
@@ -927,7 +914,7 @@ object frmMatters: TfrmMatters
             3333333377F333F7333333333C4CCCC333333333377F37733333333333C4C333
             3333333333777333333333333333333333333333333333333333}
           NumGlyphs = 2
-          TabOrder = 4
+          TabOrder = 3
           OnClick = pbEditClientClick
         end
         object dbtbMobile: TDBEdit
@@ -940,7 +927,7 @@ object frmMatters: TfrmMatters
           DataSource = dsPhonebook
           Enabled = False
           ReadOnly = True
-          TabOrder = 5
+          TabOrder = 4
         end
         object dbtbHomePhone: TDBEdit
           Left = 423
@@ -952,7 +939,7 @@ object frmMatters: TfrmMatters
           DataSource = dsPhonebook
           Enabled = False
           ReadOnly = True
-          TabOrder = 6
+          TabOrder = 5
         end
         object dbtbFax: TDBEdit
           Left = 423
@@ -964,7 +951,7 @@ object frmMatters: TfrmMatters
           DataSource = dsPhonebook
           Enabled = False
           ReadOnly = True
-          TabOrder = 7
+          TabOrder = 6
         end
         object dbtbWorkPhone: TDBEdit
           Left = 423
@@ -976,7 +963,7 @@ object frmMatters: TfrmMatters
           DataSource = dsPhonebook
           Enabled = False
           ReadOnly = True
-          TabOrder = 8
+          TabOrder = 7
         end
         object eInternetEmail: TcxDBButtonEdit
           Left = 90
@@ -1026,12 +1013,12 @@ object frmMatters: TfrmMatters
             end>
           Properties.MaxLength = 0
           Properties.OnButtonClick = eInternetEmailPropertiesButtonClick
-          Style.Color = clMoneyGreen
+          Style.Color = clWindow
           Style.LookAndFeel.Kind = lfStandard
           StyleDisabled.LookAndFeel.Kind = lfStandard
           StyleFocused.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.Kind = lfStandard
-          TabOrder = 9
+          TabOrder = 8
           Width = 321
         end
         object eInternetWWW: TcxDBButtonEdit
@@ -1083,12 +1070,12 @@ object frmMatters: TfrmMatters
             end>
           Properties.MaxLength = 0
           Properties.OnButtonClick = eInternetWWWPropertiesButtonClick
-          Style.Color = clMoneyGreen
+          Style.Color = clWindow
           Style.LookAndFeel.Kind = lfStandard
           StyleDisabled.LookAndFeel.Kind = lfStandard
           StyleFocused.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.Kind = lfStandard
-          TabOrder = 10
+          TabOrder = 9
           Width = 321
         end
         object cxDBButtonEdit1: TcxDBButtonEdit
@@ -1139,12 +1126,12 @@ object frmMatters: TfrmMatters
             end>
           Properties.MaxLength = 0
           Properties.OnButtonClick = eInternetEmailPropertiesButtonClick
-          Style.Color = clMoneyGreen
+          Style.Color = clWindow
           Style.LookAndFeel.Kind = lfStandard
           StyleDisabled.LookAndFeel.Kind = lfStandard
           StyleFocused.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.Kind = lfStandard
-          TabOrder = 11
+          TabOrder = 10
           Width = 321
         end
         object cxDBButtonEdit2: TcxDBButtonEdit
@@ -1195,12 +1182,12 @@ object frmMatters: TfrmMatters
             end>
           Properties.MaxLength = 0
           Properties.OnButtonClick = eInternetEmailPropertiesButtonClick
-          Style.Color = clMoneyGreen
+          Style.Color = clWindow
           Style.LookAndFeel.Kind = lfStandard
           StyleDisabled.LookAndFeel.Kind = lfStandard
           StyleFocused.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.Kind = lfStandard
-          TabOrder = 12
+          TabOrder = 11
           Width = 321
         end
         object DBEdit5: TDBEdit
@@ -1213,7 +1200,7 @@ object frmMatters: TfrmMatters
           DataSource = dsPhonebook
           Enabled = False
           ReadOnly = True
-          TabOrder = 13
+          TabOrder = 12
         end
         object cxGroupBox2: TcxGroupBox
           Left = 906
@@ -1221,7 +1208,7 @@ object frmMatters: TfrmMatters
           Caption = 'Image ID'
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
-          TabOrder = 15
+          TabOrder = 14
           Transparent = True
           Height = 133
           Width = 162
@@ -1251,7 +1238,7 @@ object frmMatters: TfrmMatters
           Top = 93
           Width = 331
           Height = 150
-          TabOrder = 14
+          TabOrder = 13
           Properties.ActivePage = tabStreetAddress
           Properties.CustomButtons.Buttons = <>
           ClientRectBottom = 146
@@ -1270,28 +1257,28 @@ object frmMatters: TfrmMatters
             end
             object Label36: TLabel
               Left = 1
-              Top = 52
+              Top = 51
               Width = 72
               Height = 15
               Caption = 'Town/Suburb'
             end
             object lStreetState: TLabel
               Left = 1
-              Top = 78
+              Top = 75
               Width = 26
               Height = 15
               Caption = 'State'
             end
             object Label39: TLabel
               Left = 1
-              Top = 102
+              Top = 100
               Width = 43
               Height = 15
               Caption = 'Country'
             end
             object Label38: TLabel
               Left = 209
-              Top = 78
+              Top = 75
               Width = 49
               Height = 15
               Caption = 'Postcode'
@@ -1583,6 +1570,19 @@ object frmMatters: TfrmMatters
               TabOrder = 1
             end
           end
+        end
+        object dbmmoNotes: TcxDBRichEdit
+          Left = 346
+          Top = 138
+          Anchors = [akLeft, akTop, akRight]
+          DataBinding.DataField = 'NOTE'
+          DataBinding.DataSource = dsPhonebook
+          Properties.MemoMode = True
+          Properties.ReadOnly = True
+          Style.Color = clWindow
+          TabOrder = 15
+          Height = 98
+          Width = 828
         end
       end
     end

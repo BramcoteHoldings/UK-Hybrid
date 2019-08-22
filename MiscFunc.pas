@@ -5878,7 +5878,7 @@ begin
 //         if (iNewNjournal <> 0) or (IsAnticipated) then
 //            ParamByName('BILLED').AsString := qryOldAlloc.FieldByName('BILLED').AsString
 //         else
-         ParamByName('BILLED').AsString := 'Y';
+//         ParamByName('BILLED').AsString := 'Y';
 
          ParamByName('CLIENT_NAME').AsString := qryOldAlloc.FieldByName('CLIENT_NAME').AsString;
          ParamByName('MATTER_DESC').AsString := qryOldAlloc.FieldByName('MATTER_DESC').AsString;
