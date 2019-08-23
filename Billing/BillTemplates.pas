@@ -413,9 +413,11 @@ end;
 procedure TfrmBillTemplates.dbtbPathPropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 var
-   tmpPath: string;
+   tmpPath,
+   OriginalPath: string;
 begin
    inherited;
+   OriginalPath := GetCurrentDir;
    case AButtonIndex of
       0: begin
             if odlgFile.Execute then
@@ -468,6 +470,7 @@ begin
             ppReportExplorer.Execute;
          end;
    end;
+   SetCurrentDir(OriginalPath)
 end;
 
 procedure TfrmBillTemplates.ppDesignerClose(Sender: TObject;
