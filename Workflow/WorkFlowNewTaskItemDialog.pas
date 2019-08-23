@@ -17,7 +17,7 @@ uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   cxGridDBTableView, cxSplitter, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxClasses, cxGridCustomView, cxGrid, cxCheckBox,
   cxImageComboBox, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit,
-  cxMaskEdit, cxDropDownEdit, cxPC, DBAccess, Uni, MemDS;
+  cxMaskEdit, cxDropDownEdit, cxPC, DBAccess, Uni, MemDS, dxDateRanges;
 
 type
   TfmWorkFlowNewTaskItemDialog = class(TForm)
