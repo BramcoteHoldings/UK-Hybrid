@@ -1791,7 +1791,7 @@ end;
 
 procedure TfrmDesktop.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-   if MsgAsk('Are you sure you want to close '+CN_PROGRAM_NAME +'.?') = mrNo then
+   if MsgAsk('Are you sure you want to close '+CN_PROGRAM_NAME +'?') = mrNo then
       CanClose := False
    else
    begin
