@@ -5543,7 +5543,7 @@ begin
 
          PostLedger(dtDate
                , cAmount + cGSTAmount
-               , 0
+               , cGSTAmount
                , sRefno
                , sOwnerCode
                , iOwner
@@ -5573,7 +5573,6 @@ begin
                , sEntity
                , sTran_Type  );
     end;
-
 end;
 
 function QuoteFix(sFix: string): string;
