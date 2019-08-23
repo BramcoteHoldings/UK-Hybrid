@@ -4,7 +4,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   BorderStyle = bsDialog
   Caption = 'Matter Trust Ledger'
   ClientHeight = 303
-  ClientWidth = 666
+  ClientWidth = 669
   Color = clBtnFace
   Constraints.MinHeight = 299
   Constraints.MinWidth = 669
@@ -19,7 +19,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    666
+    669
     303)
   PixelsPerInch = 106
   TextHeight = 15
@@ -222,7 +222,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   end
   object btnPrint: TBitBtn
     Left = 554
-    Top = 268
+    Top = 267
     Width = 97
     Height = 31
     Anchors = [akRight, akBottom]
@@ -259,7 +259,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   end
   object BitBtn1: TBitBtn
     Left = 10
-    Top = 268
+    Top = 267
     Width = 114
     Height = 31
     Anchors = [akLeft, akBottom]
@@ -769,7 +769,6 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         UserName = 'Shape1'
         Brush.Color = 14211288
         Pen.Style = psClear
-        Shape = stRoundRect
         mmHeight = 15081
         mmLeft = 46302
         mmTop = 18256
@@ -921,6 +920,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText11'
+        HyperlinkEnabled = False
         Border.mmPadding = 0
         DataField = 'LONGDESCR'
         DataPipeline = plMatter
@@ -1448,7 +1448,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           mmHeight = 3704
           mmLeft = 121444
           mmTop = 6350
-          mmWidth = 12435
+          mmWidth = 15346
           BandType = 4
           LayerName = Foreground
         end
@@ -1883,16 +1883,16 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
       ' WHERE trust = '#39'T'#39
       '   AND matter.acct = bank.acct'
       '   AND matter.nmatter = :nmatter'
-      '   AND active = '#39'Y'#39
+      '   AND active = '#39'Y'#39'   '
       'UNION'
       'SELECT bank.acct, bank.NAME, bank.trust'
       '  FROM bank'
-      ' WHERE trust = '#39'T'#39' AND bank.acct IN (SELECT bank'
+      ' WHERE trust = '#39'T'#39' AND bank.acct IN ( SELECT bank'
       '                                       FROM bank_matter_trust'
       
-        '                                      WHERE bank.nmatter = :nmat' +
-        'ter)'
-      '       AND active = '#39'Y'#39)
+        '                                      WHERE bank_matter_trust.nm' +
+        'atter = :nmatter)'
+      '       AND bank.active = '#39'Y'#39';')
     Left = 344
     Top = 257
     ParamData = <

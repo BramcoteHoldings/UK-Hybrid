@@ -18,8 +18,6 @@ inherited frmBillTemplates: TfrmBillTemplates
     Align = alClient
     TabOrder = 4
     AutoSize = True
-    ExplicitWidth = 1437
-    ExplicitHeight = 595
     object dbtbPath: TcxDBButtonEdit
       Left = 192
       Top = 73

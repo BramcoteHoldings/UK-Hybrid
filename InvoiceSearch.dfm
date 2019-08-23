@@ -36,6 +36,8 @@ object frmInvoiceSearch: TfrmInvoiceSearch
     object tabGrid: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 820
       ExplicitHeight = 639
       DesignSize = (
@@ -216,8 +218,6 @@ object frmInvoiceSearch: TfrmInvoiceSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitWidth = 729
-      ExplicitHeight = 639
       DesignSize = (
         742
         624)

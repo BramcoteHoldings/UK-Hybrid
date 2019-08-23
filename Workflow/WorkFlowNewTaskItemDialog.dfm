@@ -160,7 +160,7 @@ object fmWorkFlowNewTaskItemDialog: TfmWorkFlowNewTaskItemDialog
     Width = 437
     Height = 384
     TabOrder = 8
-    Properties.ActivePage = tsAssignWatch
+    Properties.ActivePage = tsActions
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     ClientRectBottom = 380
@@ -568,6 +568,10 @@ object fmWorkFlowNewTaskItemDialog: TfmWorkFlowNewTaskItemDialog
     object tsFeeDate: TcxTabSheet
       Caption = 'Fee / Linked Date'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gbLinkDueDate: TGroupBox
         Left = 6
         Top = 7
@@ -683,6 +687,10 @@ object fmWorkFlowNewTaskItemDialog: TfmWorkFlowNewTaskItemDialog
     object tsDocuments: TcxTabSheet
       Caption = 'Document Template'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         429
         354)

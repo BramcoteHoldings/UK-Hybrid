@@ -163,7 +163,6 @@ object frmDesktop: TfrmDesktop
       Caption = 'tsAxiomNew'
       ImageIndex = 0
       TabVisible = False
-      ExplicitHeight = 572
       DesignSize = (
         1256
         541)
@@ -175,7 +174,6 @@ object frmDesktop: TfrmDesktop
         ManagerFont = False
         ParentFont = True
         Align = alClient
-        ExplicitHeight = 572
         DockingType = 5
         OriginalWidth = 1256
         OriginalHeight = 541
@@ -192,7 +190,6 @@ object frmDesktop: TfrmDesktop
           ManagerFont = False
           ParentShowHint = False
           ShowHint = False
-          ExplicitHeight = 572
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -215,7 +212,6 @@ object frmDesktop: TfrmDesktop
               Top = 0
               Width = 1198
               Height = 541
-              ExplicitHeight = 572
               DockingType = 0
               OriginalWidth = 265
               OriginalHeight = 176
@@ -237,7 +233,6 @@ object frmDesktop: TfrmDesktop
               CustomCaptionButtons.Buttons = <>
               ShowCaption = False
               TabsProperties.CustomButtons.Buttons = <>
-              ExplicitHeight = 572
               DockingType = 0
               OriginalWidth = 163
               OriginalHeight = 124
@@ -256,7 +251,6 @@ object frmDesktop: TfrmDesktop
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                ExplicitHeight = 568
                 object pageForms: TcxPageControl
                   Left = 1
                   Top = 1
@@ -292,7 +286,6 @@ object frmDesktop: TfrmDesktop
                   OnPageChanging = pageFormsPageChanging
                   OnStartDrag = pageFormsStartDrag
                   OnUnDock = pageFormsUnDock
-                  ExplicitHeight = 566
                   ClientRectBottom = 535
                   ClientRectRight = 1192
                   ClientRectTop = 0
@@ -304,7 +297,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 124
+            Height = 541
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -324,7 +317,7 @@ object frmDesktop: TfrmDesktop
             OriginalHeight = 124
             object Panel2: TPanel
               Left = 0
-              Top = -32
+              Top = 481
               Width = 378
               Height = 32
               Align = alBottom
@@ -387,7 +380,7 @@ object frmDesktop: TfrmDesktop
               Left = 0
               Top = 0
               Width = 378
-              Height = 490
+              Height = 481
               Align = alClient
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -1491,7 +1484,7 @@ object frmDesktop: TfrmDesktop
     Left = 574
     Top = 196
     Bitmap = {
-      494C010116001900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010116001900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2351,7 +2344,7 @@ object frmDesktop: TfrmDesktop
     Left = 518
     Top = 190
     Bitmap = {
-      494C01010B000D00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2784,7 +2777,7 @@ object frmDesktop: TfrmDesktop
     Left = 572
     Top = 243
     Bitmap = {
-      494C0101CC00D100080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101CC00D100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004003000001002000000000000040
       0300000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -9879,7 +9872,7 @@ object frmDesktop: TfrmDesktop
     Left = 543
     Top = 150
     Bitmap = {
-      494C010104000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -14823,7 +14816,7 @@ object frmDesktop: TfrmDesktop
     Left = 935
     Top = 352
     Bitmap = {
-      494C010104000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
