@@ -465,29 +465,32 @@ var
 begin
 //  vtTasks.BeginUpdate();
 //  try
-    vtTasks.Clear();
-    vtTasks.RootNodeCount := 0;
+    if (dmAxiom.bShutDown = False) then
+    begin
+       vtTasks.Clear();
+       vtTasks.RootNodeCount := 0;
 
-    LParentLineID := 0;
-    FCurrentParentLineID := LParentLineID;
+       LParentLineID := 0;
+       FCurrentParentLineID := LParentLineID;
 
-    ValidateSequence(LParentLineID);
+       ValidateSequence(LParentLineID);
 
-    dmWorkFlowDataModuleTasks.qTaskChildCount.Close();
-    dmWorkFlowDataModuleTasks.qTaskChildCount.ParamByName('workflowtypecode').AsString := FCurrentWorkflowType;
-    dmWorkFlowDataModuleTasks.qTaskChildCount.ParamByName('parentlineid').AsInteger := LParentLineID;
-    dmWorkFlowDataModuleTasks.qTaskChildCount.Open();
+       dmWorkFlowDataModuleTasks.qTaskChildCount.Close();
+       dmWorkFlowDataModuleTasks.qTaskChildCount.ParamByName('workflowtypecode').AsString := FCurrentWorkflowType;
+       dmWorkFlowDataModuleTasks.qTaskChildCount.ParamByName('parentlineid').AsInteger := LParentLineID;
+       dmWorkFlowDataModuleTasks.qTaskChildCount.Open();
 
-    try
-      if(not dmWorkFlowDataModuleTasks.qTaskChildCount.Eof) then
-        vtTasks.RootNodeCount := dmWorkFlowDataModuleTasks.qTaskChildCountCHILDCOUNT.AsInteger
-    finally
-      dmWorkFlowDataModuleTasks.qTaskChildCount.Close();
-    end;
+       try
+         if(not dmWorkFlowDataModuleTasks.qTaskChildCount.Eof) then
+           vtTasks.RootNodeCount := dmWorkFlowDataModuleTasks.qTaskChildCountCHILDCOUNT.AsInteger
+       finally
+         dmWorkFlowDataModuleTasks.qTaskChildCount.Close();
+       end;
 //  finally
 //    vtTasks.EndUpdate();
 //  end;
-  FEmptyTree := vtTasks.RootNodeCount = 0;
+      FEmptyTree := vtTasks.RootNodeCount = 0;
+    end;
 end;
 
 // initalise the tree node's data.

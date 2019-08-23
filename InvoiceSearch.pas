@@ -11,7 +11,7 @@ uses
   cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxContainer,
   cxGroupBox, cxPC, cxLookAndFeels, cxLookAndFeelPainters, cxPCdxBarPopupMenu,
   dxCore, cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TfrmInvoiceSearch = class(TForm)
@@ -153,7 +153,7 @@ begin
   // Build the SQL Filter query
   qryInvoices.Close;
 
-  sWhereClause := ' WHERE NMEMO.NMATTER = MATTER.NMATTER AND MATTER.NCLIENT = PHONEBOOK.NCLIENT AND NMEMO.DISPATCHED IS NOT NULL ';
+  sWhereClause := ' WHERE NMEMO.NMATTER = MATTER.NMATTER AND MATTER.NCLIENT = PHONEBOOK.NCLIENT AND NMEMO.DISPATCHED IS NOT NULL AND MATTER.ENTITY = ' + QuotedStr(dmAxiom.Entity);
   sAND := ' AND  ';
 
   if cbPartner.Text <> '' then
