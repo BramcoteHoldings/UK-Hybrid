@@ -26,7 +26,7 @@ object frmInvoiceSearch: TfrmInvoiceSearch
     Height = 654
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
-    Properties.ActivePage = tabGrid
+    Properties.ActivePage = tabFilters
     Properties.CustomButtons.Buttons = <>
     OnChange = pageSearchChange
     ClientRectBottom = 650
