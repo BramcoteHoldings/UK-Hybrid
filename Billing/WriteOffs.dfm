@@ -3,7 +3,7 @@ object frmWriteOff: TfrmWriteOff
   Top = 155
   Caption = 'Write Off'
   ClientHeight = 526
-  ClientWidth = 546
+  ClientWidth = 614
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,19 +34,18 @@ object frmWriteOff: TfrmWriteOff
   object StatusBar1: TStatusBar
     Left = 0
     Top = 507
-    Width = 546
+    Width = 614
     Height = 19
     Panels = <>
     ParentShowHint = False
     ShowHint = True
     SimplePanel = True
-    ExplicitTop = 510
-    ExplicitWidth = 544
+    ExplicitWidth = 546
   end
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 24
-    Width = 546
+    Width = 614
     Height = 483
     Align = alClient
     ParentBackground = True
@@ -55,11 +54,9 @@ object frmWriteOff: TfrmWriteOff
     TabOrder = 6
     Transparent = True
     AutoSize = True
-    ExplicitTop = 28
-    ExplicitWidth = 544
-    ExplicitHeight = 482
+    ExplicitWidth = 546
     DesignSize = (
-      546
+      614
       483)
     object lblClient: TLabel
       Left = 196
@@ -72,15 +69,15 @@ object frmWriteOff: TfrmWriteOff
     end
     object lblMatterDesc: TLabel
       Left = 12
-      Top = 43
-      Width = 516
+      Top = 44
+      Width = 587
       Height = 17
       AutoSize = False
       ShowAccelChar = False
     end
     object lblAuthor: TLabel
       Left = 175
-      Top = 321
+      Top = 322
       Width = 69
       Height = 15
       Caption = '                       '
@@ -88,7 +85,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object lblDept: TLabel
       Left = 175
-      Top = 351
+      Top = 352
       Width = 69
       Height = 15
       Caption = '                       '
@@ -96,7 +93,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object Label10: TLabel
       Left = 119
-      Top = 101
+      Top = 102
       Width = 52
       Height = 15
       Alignment = taRightJustify
@@ -111,7 +108,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object Label11: TLabel
       Left = 178
-      Top = 101
+      Top = 102
       Width = 61
       Height = 15
       Alignment = taRightJustify
@@ -126,7 +123,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object Label13: TLabel
       Left = 332
-      Top = 101
+      Top = 102
       Width = 95
       Height = 15
       Alignment = taRightJustify
@@ -141,7 +138,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object Label15: TLabel
       Left = 434
-      Top = 101
+      Top = 102
       Width = 91
       Height = 15
       Alignment = taRightJustify
@@ -156,13 +153,14 @@ object frmWriteOff: TfrmWriteOff
     end
     object lblfileid: TLabel
       Left = 499
-      Top = 16
-      Width = 3
-      Height = 15
+      Top = 12
+      Width = 100
+      Height = 25
+      AutoSize = False
     end
     object Label16: TLabel
       Left = 246
-      Top = 101
+      Top = 102
       Width = 79
       Height = 15
       Alignment = taRightJustify
@@ -186,7 +184,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object mmoDesc: TMemo
       Left = 109
-      Top = 379
+      Top = 380
       Width = 197
       Height = 54
       BevelInner = bvNone
@@ -197,7 +195,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object cbAuthor: TComboBox
       Left = 107
-      Top = 317
+      Top = 318
       Width = 61
       Height = 23
       Style = csDropDownList
@@ -207,7 +205,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object cbDept: TComboBox
       Left = 107
-      Top = 347
+      Top = 348
       Width = 61
       Height = 23
       Sorted = True
@@ -216,7 +214,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object chkPrivate: TCheckBox
       Left = 315
-      Top = 387
+      Top = 388
       Width = 143
       Height = 16
       Caption = 'Private?'
@@ -226,7 +224,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neFees: TNumberEdit
       Left = 109
-      Top = 129
+      Top = 130
       Width = 61
       Height = 21
       Alignment = taRightJustify
@@ -255,7 +253,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neDisb: TNumberEdit
       Left = 109
-      Top = 161
+      Top = 162
       Width = 61
       Height = 21
       Alignment = taRightJustify
@@ -283,7 +281,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neSund: TNumberEdit
       Left = 109
-      Top = 257
+      Top = 258
       Width = 61
       Height = 21
       Alignment = taRightJustify
@@ -312,7 +310,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neAntD: TNumberEdit
       Left = 109
-      Top = 225
+      Top = 226
       Width = 61
       Height = 21
       Alignment = taRightJustify
@@ -340,7 +338,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neFeesTax: TNumberEdit
       Left = 181
-      Top = 129
+      Top = 130
       Width = 60
       Height = 21
       Alignment = taRightJustify
@@ -368,7 +366,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neDisbTax: TNumberEdit
       Left = 181
-      Top = 161
+      Top = 162
       Width = 60
       Height = 21
       Alignment = taRightJustify
@@ -396,7 +394,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neSundTax: TNumberEdit
       Left = 181
-      Top = 257
+      Top = 258
       Width = 60
       Height = 21
       Alignment = taRightJustify
@@ -424,7 +422,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neAntdTax: TNumberEdit
       Left = 181
-      Top = 225
+      Top = 226
       Width = 60
       Height = 21
       Alignment = taRightJustify
@@ -452,7 +450,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neUpCred: TNumberEdit
       Left = 109
-      Top = 193
+      Top = 194
       Width = 61
       Height = 21
       Alignment = taRightJustify
@@ -480,7 +478,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neUpCredTax: TNumberEdit
       Left = 181
-      Top = 193
+      Top = 194
       Width = 60
       Height = 21
       Alignment = taRightJustify
@@ -508,7 +506,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edAdjust: TEdit
       Left = 317
-      Top = 349
+      Top = 350
       Width = 90
       Height = 19
       BevelInner = bvNone
@@ -519,7 +517,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edDisbWOCR: TEdit
       Left = 335
-      Top = 161
+      Top = 162
       Width = 90
       Height = 19
       AutoSize = False
@@ -531,7 +529,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edUpCredWOCR: TEdit
       Left = 335
-      Top = 193
+      Top = 194
       Width = 90
       Height = 19
       AutoSize = False
@@ -543,7 +541,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edAntdWOCR: TEdit
       Left = 335
-      Top = 225
+      Top = 226
       Width = 90
       Height = 19
       AutoSize = False
@@ -555,7 +553,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edSundWOCR: TEdit
       Left = 335
-      Top = 257
+      Top = 258
       Width = 90
       Height = 19
       AutoSize = False
@@ -567,7 +565,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edFeeWOCR: TEdit
       Left = 335
-      Top = 129
+      Top = 130
       Width = 90
       Height = 19
       AutoSize = False
@@ -579,7 +577,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edSundWODR: TEdit
       Left = 436
-      Top = 257
+      Top = 258
       Width = 90
       Height = 19
       AutoSize = False
@@ -591,7 +589,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edAntdWODR: TEdit
       Left = 436
-      Top = 225
+      Top = 226
       Width = 90
       Height = 19
       AutoSize = False
@@ -603,7 +601,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edUpCredWODR: TEdit
       Left = 436
-      Top = 193
+      Top = 194
       Width = 90
       Height = 19
       AutoSize = False
@@ -615,7 +613,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edDisbWODR: TEdit
       Left = 436
-      Top = 161
+      Top = 162
       Width = 90
       Height = 19
       AutoSize = False
@@ -627,7 +625,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edFeeWODR: TEdit
       Left = 436
-      Top = 129
+      Top = 130
       Width = 90
       Height = 19
       AutoSize = False
@@ -639,7 +637,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalFees: TNumberEdit
       Left = 252
-      Top = 129
+      Top = 130
       Width = 72
       Height = 21
       TabStop = False
@@ -669,7 +667,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalDisbs: TNumberEdit
       Left = 252
-      Top = 161
+      Top = 162
       Width = 72
       Height = 21
       TabStop = False
@@ -699,7 +697,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalSundries: TNumberEdit
       Left = 252
-      Top = 257
+      Top = 258
       Width = 72
       Height = 21
       TabStop = False
@@ -729,7 +727,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalAntDisbs: TNumberEdit
       Left = 252
-      Top = 225
+      Top = 226
       Width = 72
       Height = 21
       TabStop = False
@@ -759,7 +757,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalUPCreds: TNumberEdit
       Left = 252
-      Top = 193
+      Top = 194
       Width = 72
       Height = 21
       TabStop = False
@@ -789,7 +787,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object neTotalofTotals: TNumberEdit
       Left = 251
-      Top = 289
+      Top = 290
       Width = 74
       Height = 17
       TabStop = False
@@ -819,7 +817,8 @@ object frmWriteOff: TfrmWriteOff
     end
     object cxDBLSubBill: TcxLookupComboBox
       Left = 107
-      Top = 67
+      Top = 68
+      AutoSize = False
       Properties.KeyFieldNames = 'NSUBBILL'
       Properties.ListColumns = <
         item
@@ -837,11 +836,12 @@ object frmWriteOff: TfrmWriteOff
       StyleFocused.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.Kind = lfStandard
       TabOrder = 1
-      Width = 421
+      Height = 23
+      Width = 142
     end
     object chkNoExit: TcxCheckBox
       Left = 12
-      Top = 442
+      Top = 443
       Anchors = [akLeft, akBottom]
       Caption = '&Keep form open after posting?'
       Style.BorderColor = clWindowFrame
@@ -917,9 +917,9 @@ object frmWriteOff: TfrmWriteOff
     end
     object dtpCreated: TEnforceCustomDateEdit
       Left = 107
-      Top = 287
+      Top = 288
       AutoSize = False
-      EditValue = 43700.4922078588d
+      EditValue = 43702.3841928819d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -938,7 +938,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object cbNoDistribute: TCheckBox
       Left = 315
-      Top = 410
+      Top = 411
       Width = 143
       Height = 15
       Hint = 
@@ -949,7 +949,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object chkBadDebtWO: TcxCheckBox
       Left = 12
-      Top = 97
+      Top = 98
       Caption = 'Bad Debt W/O'
       Properties.ImmediatePost = True
       Properties.NullStyle = nssUnchecked
@@ -961,7 +961,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edBadDebtWOCR: TcxTextEdit
       Left = 334
-      Top = 287
+      Top = 288
       AutoSize = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -976,7 +976,7 @@ object frmWriteOff: TfrmWriteOff
     end
     object edBadDebtWODR: TcxTextEdit
       Left = 433
-      Top = 287
+      Top = 288
       AutoSize = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -999,7 +999,6 @@ object frmWriteOff: TfrmWriteOff
       AlignVert = avTop
       ButtonOptions.Buttons = <>
       Hidden = True
-      ItemIndex = 7
       ShowBorder = False
       Index = -1
     end
@@ -1057,7 +1056,12 @@ object frmWriteOff: TfrmWriteOff
     end
     object dxLayoutItem5: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahLeft
       CaptionOptions.Text = 'Subbill'
+      SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
+      SizeOptions.SizableHorz = True
+      SizeOptions.SizableVert = False
+      SizeOptions.Width = 237
       Control = cxDBLSubBill
       ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 138
@@ -1408,13 +1412,12 @@ object frmWriteOff: TfrmWriteOff
     end
     object dxLayoutItem37: TdxLayoutItem
       Parent = dxLayoutGroup1
-      AlignVert = avCenter
       CaptionOptions.Text = 'New Item'
       CaptionOptions.Visible = False
       Control = lblfileid
       ControlOptions.AutoColor = True
-      ControlOptions.OriginalHeight = 15
-      ControlOptions.OriginalWidth = 3
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 100
       ControlOptions.ShowBorder = False
       Index = 3
     end
@@ -2091,8 +2094,8 @@ object frmWriteOff: TfrmWriteOff
       '  (:FILEID, :PAYEE, :DESCR, :AMOUNT, :AUTHOR, :REQDATE, :BANK,'
       '   '#39'N'#39', '#39'N'#39', '#39'Y'#39', '#39'Y'#39', :NCHEQREQ,'
       '   '#39'Y'#39', '#39'G'#39', '#39'N'#39', :NMATTER)')
-    Left = 522
-    Top = 59
+    Left = 554
+    Top = 115
     ParamData = <
       item
         DataType = ftUnknown

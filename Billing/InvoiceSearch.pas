@@ -153,7 +153,8 @@ begin
   // Build the SQL Filter query
   qryInvoices.Close;
 
-  sWhereClause := ' WHERE NMEMO.NMATTER = MATTER.NMATTER AND MATTER.NCLIENT = PHONEBOOK.NCLIENT AND NMEMO.DISPATCHED IS NOT NULL ';
+  sWhereClause := ' WHERE NMEMO.NMATTER = MATTER.NMATTER AND MATTER.NCLIENT = PHONEBOOK.NCLIENT AND NMEMO.DISPATCHED IS NOT NULL AND NMEMO.BANK_ACCT = ' + QuotedStr(dmAxiom.Entity);
+
   sAND := ' AND  ';
 
   if cbPartner.Text <> '' then
@@ -186,8 +187,6 @@ begin
   if tbBillNo.Text <> '' then
   begin
     sWhereClause := sWhereClause + sAND + ' contains (refno, ' + QuotedStr('%' + tbBillNo.Text + '%') +') > 0';
-//    sWhereClause := sWhereClause + sAND + 'NMEMO.REFNO LIKE ' + QuotedStr('%' + tbBillNo.Text + '%');
-//    sAND := ' AND ';
   end;
   if tbMatterSearch.Text <> '' then
   begin
