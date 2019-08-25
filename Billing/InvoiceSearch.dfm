@@ -36,10 +36,6 @@ object frmInvoiceSearch: TfrmInvoiceSearch
     object tabGrid: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 820
-      ExplicitHeight = 639
       DesignSize = (
         742
         624)
@@ -218,10 +214,6 @@ object frmInvoiceSearch: TfrmInvoiceSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 729
-      ExplicitHeight = 639
       DesignSize = (
         742
         624)
@@ -261,28 +253,28 @@ object frmInvoiceSearch: TfrmInvoiceSearch
         Width = 296
         object Label4: TLabel
           Left = 15
-          Top = 24
+          Top = 23
           Width = 31
           Height = 15
           Caption = 'Client'
         end
         object Label7: TLabel
           Left = 14
-          Top = 48
+          Top = 49
           Width = 65
           Height = 15
           Caption = 'File Number'
         end
         object tbClient: TEdit
           Left = 87
-          Top = 21
+          Top = 20
           Width = 135
           Height = 23
           TabOrder = 0
         end
         object tbFile: TEdit
           Left = 87
-          Top = 45
+          Top = 46
           Width = 90
           Height = 23
           CharCase = ecUpperCase
