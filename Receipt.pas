@@ -4169,29 +4169,31 @@ var
 begin
    DC := TcxGridDBDataController(Sender.DataController);
    colBillIndex := DC.GetItemByFieldName('REFNO').Index;
-   BillValue := DC.Values[DC.FocusedRecordIndex, colBillIndex];
-   try
-      if (AItem = tvLedgerNSUBBILL_ID) then  // subbill Name
-      begin
-         LGrid := TcxLookupComboBox(AEdit).Properties.Grid;
-         with LGrid.DataController.Filter do
+   if VarIsNull(colBillIndex) = False then
+   begin
+      BillValue := DC.Values[DC.FocusedRecordIndex, colBillIndex];
+      try
+         if (AItem = tvLedgerNSUBBILL_ID) then  // subbill Name
          begin
-            if qryFilterSubBill.Active then
-               qryFilterSubBill.Close;
+            LGrid := TcxLookupComboBox(AEdit).Properties.Grid;
+            with LGrid.DataController.Filter do
+            begin
+               if qryFilterSubBill.Active then
+                  qryFilterSubBill.Close;
 
-            qryFilterSubBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',string(BillValue),'NMEMO');
+               qryFilterSubBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',string(BillValue),'NMEMO');
 
-            LookupProp := TcxLookupComboBox(AEdit).Properties;
-            LookupProp.ListSource := dsFilterSubBill;
-            LookupProp.KeyFieldNames := 'NSUBBILL_ID';
-            LookupProp.ListFieldNames := 'DEBTOR_NAME;OWING';
-            qryFilterSubBill.Open;
+               LookupProp := TcxLookupComboBox(AEdit).Properties;
+               LookupProp.ListSource := dsFilterSubBill;
+               LookupProp.KeyFieldNames := 'NSUBBILL_ID';
+               LookupProp.ListFieldNames := 'DEBTOR_NAME;OWING';
+               qryFilterSubBill.Open;
+            end;
          end;
+      except
+         ;
       end;
-   except
-      ;
    end;
-
 end;
 
 procedure TfrmReceipt.CmShownEditor(var Msg: TMessage);
