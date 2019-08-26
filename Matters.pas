@@ -13294,7 +13294,7 @@ begin
                   ' max(ot_version) over (partition by parentdocid) max_ot_version, folder_id ' +
                   'FROM DOC '+
                   ' WHERE nmatter = :nmatter '+
-                  ' AND is_attachment = ''N'' '+
+//                  ' AND is_attachment = ''N'' '+
                   '  AND CASE '+
                   '         WHEN (:folder_id = -2) '+
                   '            THEN 1  '+                                         // all filess
