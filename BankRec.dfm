@@ -8,7 +8,7 @@ object frmBankRec: TfrmBankRec
   Constraints.MinWidth = 728
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   KeyPreview = True
@@ -22,7 +22,7 @@ object frmBankRec: TfrmBankRec
     1068
     654)
   PixelsPerInch = 96
-  TextHeight = 17
+  TextHeight = 15
   object Splitter1: TSplitter
     Left = 0
     Top = 299
@@ -39,31 +39,37 @@ object frmBankRec: TfrmBankRec
     Width = 1068
     Height = 141
     Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     object Label1: TLabel
       Left = 87
       Top = 10
-      Width = 30
-      Height = 17
+      Width = 29
+      Height = 15
       Caption = 'Bank:'
     end
     object Label2: TLabel
       Left = 8
       Top = 38
-      Width = 109
-      Height = 17
+      Width = 101
+      Height = 15
       Caption = 'Statement Balance:'
     end
     object Label3: TLabel
       Left = 6
-      Top = 66
-      Width = 111
-      Height = 17
+      Top = 67
+      Width = 103
+      Height = 15
       Caption = 'Calculated Balance:'
     end
     object Label4: TLabel
       Left = 61
-      Top = 96
+      Top = 94
       Width = 56
       Height = 17
       Caption = 'Variance:'
@@ -77,68 +83,68 @@ object frmBankRec: TfrmBankRec
     object Label5: TLabel
       Left = 752
       Top = 10
-      Width = 101
-      Height = 17
+      Width = 93
+      Height = 15
       Caption = 'Opening Balance:'
     end
     object Label6: TLabel
       Left = 728
       Top = 38
-      Width = 125
-      Height = 17
+      Width = 114
+      Height = 15
       Caption = 'Payments this period:'
     end
     object Label7: TLabel
       Left = 734
-      Top = 66
-      Width = 119
-      Height = 17
+      Top = 67
+      Width = 106
+      Height = 15
       Caption = 'Receipts this period:'
     end
     object Label8: TLabel
-      Left = 509
-      Top = 12
-      Width = 92
-      Height = 17
+      Left = 517
+      Top = 10
+      Width = 84
+      Height = 15
       Alignment = taRightJustify
       Caption = 'Statement Date:'
     end
     object Label9: TLabel
-      Left = 480
+      Left = 492
       Top = 38
-      Width = 121
-      Height = 17
+      Width = 109
+      Height = 15
       Alignment = taRightJustify
       Caption = 'Last reconciled Date:'
     end
     object Label10: TLabel
       Left = 8
       Top = 122
-      Width = 96
-      Height = 17
+      Width = 86
+      Height = 15
       Caption = 'Additions/Errors'
     end
     object Label11: TLabel
-      Left = 745
-      Top = 94
-      Width = 109
-      Height = 34
+      Left = 734
+      Top = 92
+      Width = 120
+      Height = 30
       Alignment = taRightJustify
       Caption = 'Closing Cashbook Balance:'
       WordWrap = True
     end
     object lblDRCR: TLabel
       Left = 987
-      Top = 96
-      Width = 17
-      Height = 17
+      Top = 97
+      Width = 15
+      Height = 15
       Caption = 'DR'
     end
     object Label12: TLabel
-      Left = 368
+      Left = 390
       Top = 92
-      Width = 233
-      Height = 34
+      Width = 211
+      Height = 30
       Alignment = taRightJustify
       Caption = 
         'Entries backdated to current period and entered in future period' +
@@ -146,10 +152,10 @@ object frmBankRec: TfrmBankRec
       WordWrap = True
     end
     object Label13: TLabel
-      Left = 368
+      Left = 414
       Top = 58
-      Width = 233
-      Height = 34
+      Width = 187
+      Height = 30
       Alignment = taRightJustify
       Caption = 'Unpresented cheques, receipts and Adjustments:'
       WordWrap = True
@@ -158,7 +164,7 @@ object frmBankRec: TfrmBankRec
       Left = 121
       Top = 7
       Width = 49
-      Height = 25
+      Height = 23
       Style = csDropDownList
       Sorted = True
       TabOrder = 0
@@ -169,7 +175,7 @@ object frmBankRec: TfrmBankRec
       Left = 607
       Top = 7
       Width = 111
-      Height = 25
+      Height = 23
       Date = 36716.509550173600000000
       Time = 36716.509550173600000000
       Checked = False
@@ -255,7 +261,7 @@ object frmBankRec: TfrmBankRec
     end
     object cmbDRCR: TcxComboBox
       Left = 248
-      Top = 37
+      Top = 35
       Properties.ImmediatePost = True
       Properties.Items.Strings = (
         'DR'
@@ -269,7 +275,7 @@ object frmBankRec: TfrmBankRec
       Left = 607
       Top = 35
       Width = 111
-      Height = 25
+      Height = 23
       Date = 42662.509550173600000000
       Time = 42662.509550173600000000
       Checked = False
@@ -892,7 +898,7 @@ object frmBankRec: TfrmBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -918,6 +924,7 @@ object frmBankRec: TfrmBankRec
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -950,7 +957,7 @@ object frmBankRec: TfrmBankRec
     XLSSettings.WorksheetName = 'Report'
     Left = 945
     Top = 345
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plBankRec'
     object ppHeaderBand1: TppHeaderBand

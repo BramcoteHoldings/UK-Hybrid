@@ -113,11 +113,6 @@ type
     qClient: TUniQuery;
     dsClient: TDataSource;
     qCodeRules: TUniQuery;
-    qCodeRulesCLIENTCODE: TStringField;
-    qCodeRulesCLIENTACRONYM: TStringField;
-    qCodeRulesCLIENTPAD: TIntegerField;
-    qCodeRulesCLIENTLENGTH: TIntegerField;
-    qCodeRulesROWID: TStringField;
     qClientCheck: TUniQuery;
     qGetCodes: TUniQuery;
     qActiveEmployees: TUniQuery;
@@ -143,10 +138,6 @@ type
     qCreditor: TUniQuery;
     dsCreditor: TDataSource;
     qCreditorCheck: TUniQuery;
-    qCodeRulesCREDITORCODE: TStringField;
-    qCodeRulesCREDITORACRONYM: TStringField;
-    qCodeRulesCREDITORPAD: TStringField;
-    qCodeRulesCREDITORLENGTH: TIntegerField;
     qryMasterPhoneBookEntry: TUniQuery;
     qryMasterPhoneBookEntrySEARCH: TStringField;
     dsMasterPhoneBookEntry: TUniDataSource;
@@ -240,17 +231,7 @@ type
     dlFile: TOpenDialog;
     qPhoneBookImage: TUniQuery;
     dsPhoneBookImage: TUniDataSource;
-    qCodeRulesCLIENTSEPARATOR: TStringField;
-    qCodeRulesUSE_PHONEBOOK_NAME: TStringField;
     OpenDialog1: TOpenDialog;
-    qCodeRulesUSE_ENTITY_LENGTH: TIntegerField;
-    qCodeRulesUSE_ENTITY_CODE: TStringField;
-    qCodeRulesUSE_ENTITY_SEPARATOR: TStringField;
-    qCodeRulesENTITY_CODE: TStringField;
-    qCodeRulesUSE_ENTGRP_CODE: TStringField;
-    qCodeRulesUSE_ENTGRP_LENGTH: TSmallintField;
-    qCodeRulesUSE_ENTGRP_SEPARATOR: TStringField;
-    qCodeRulesENTITY_GROUP_CODE: TStringField;
     procCreateContactfromExisting: TUniStoredProc;
     Label18: TLabel;
     qrySuperClient: TUniQuery;
@@ -1392,14 +1373,14 @@ begin
       Exit;
    end;
 
-   if eInternetEmail.Text = '' then
+{   if eInternetEmail.Text = '' then
    begin
       if MsgWarn('Email Address is blank. Would you like to enter an email Address?') = mrYes then
       begin
          Result := False;
          Exit;
       end;
-   end;
+   end;  }
 
    try
       if dmAxiom.uniInsight.InTransaction then
