@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43691.419444675930000000
-        Time = 43691.419444675930000000
+        Date = 43703.419444675930000000
+        Time = 43703.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -6207,78 +6207,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Name = 'Entity'
         Value = nil
       end>
-    object qCodeRulesCLIENTCODE: TStringField
-      FieldName = 'CLIENTCODE'
-      Size = 1
-    end
-    object qCodeRulesCLIENTACRONYM: TStringField
-      FieldName = 'CLIENTACRONYM'
-      Size = 1
-    end
-    object qCodeRulesCLIENTPAD: TIntegerField
-      FieldName = 'CLIENTPAD'
-    end
-    object qCodeRulesCLIENTLENGTH: TIntegerField
-      FieldName = 'CLIENTLENGTH'
-    end
-    object qCodeRulesROWID: TStringField
-      FieldName = 'ROWID'
-      Size = 18
-    end
-    object qCodeRulesCREDITORCODE: TStringField
-      FieldName = 'CREDITORCODE'
-      Size = 1
-    end
-    object qCodeRulesCREDITORACRONYM: TStringField
-      FieldName = 'CREDITORACRONYM'
-      Size = 1
-    end
-    object qCodeRulesCREDITORPAD: TStringField
-      FieldName = 'CREDITORPAD'
-      Size = 1
-    end
-    object qCodeRulesCREDITORLENGTH: TIntegerField
-      FieldName = 'CREDITORLENGTH'
-    end
-    object qCodeRulesCLIENTSEPARATOR: TStringField
-      FieldName = 'CLIENTSEPARATOR'
-      Size = 1
-    end
-    object qCodeRulesUSE_PHONEBOOK_NAME: TStringField
-      FieldName = 'USE_PHONEBOOK_NAME'
-      Size = 1
-    end
-    object qCodeRulesUSE_ENTITY_LENGTH: TIntegerField
-      FieldName = 'USE_ENTITY_LENGTH'
-    end
-    object qCodeRulesUSE_ENTITY_CODE: TStringField
-      FieldName = 'USE_ENTITY_CODE'
-      Size = 1
-    end
-    object qCodeRulesUSE_ENTITY_SEPARATOR: TStringField
-      FieldName = 'USE_ENTITY_SEPARATOR'
-      Size = 1
-    end
-    object qCodeRulesENTITY_CODE: TStringField
-      FieldName = 'ENTITY_CODE'
-      Size = 2
-    end
-    object qCodeRulesUSE_ENTGRP_CODE: TStringField
-      FieldName = 'USE_ENTGRP_CODE'
-      Size = 1
-    end
-    object qCodeRulesUSE_ENTGRP_LENGTH: TSmallintField
-      FieldName = 'USE_ENTGRP_LENGTH'
-    end
-    object qCodeRulesUSE_ENTGRP_SEPARATOR: TStringField
-      FieldName = 'USE_ENTGRP_SEPARATOR'
-      Size = 1
-    end
-    object qCodeRulesENTITY_GROUP_CODE: TStringField
-      FieldName = 'ENTITY_GROUP_CODE'
-      ReadOnly = True
-      Size = 10
-    end
   end
   object qClientCheck: TUniQuery
     Connection = dmAxiom.uniInsight
