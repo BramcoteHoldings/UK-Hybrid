@@ -222,7 +222,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   end
   object btnPrint: TBitBtn
     Left = 554
-    Top = 267
+    Top = 264
     Width = 97
     Height = 31
     Anchors = [akRight, akBottom]
@@ -390,7 +390,11 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     SQL.Strings = (
       
         'SELECT FILEID, NMATTER, NVL(P.NAME, P.SEARCH) AS SEARCH, SHORTDE' +
-        'SCR, OPENED, LONGDESCR,'
+        'SCR, OPENED, '
+      
+        'case when (select matter_trust_short_desc from systemfile) = '#39'Y'#39 +
+        ' then SHORTDESCR'
+      'else  LONGDESCR end as LONGDESCR,'
       'NVL(P.ADDRESS, F.ADDRESS) as ADDRESS,'
       
         'DECODE(P.ADDRESS, NULL, NVL(P.SUBURB, F.SUBURB), P.SUBURB) ||'#39'  ' +
@@ -478,64 +482,6 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     UserName = 'plMatter'
     Left = 611
     Top = 3
-    object plMatterppField1: TppField
-      FieldAlias = 'FILEID'
-      FieldName = 'FILEID'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 0
-    end
-    object plMatterppField2: TppField
-      FieldAlias = 'NMATTER'
-      FieldName = 'NMATTER'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 1
-    end
-    object plMatterppField3: TppField
-      FieldAlias = 'SEARCH'
-      FieldName = 'SEARCH'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 2
-    end
-    object plMatterppField4: TppField
-      FieldAlias = 'SHORTDESCR'
-      FieldName = 'SHORTDESCR'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 3
-    end
-    object plMatterppField5: TppField
-      FieldAlias = 'OPENED'
-      FieldName = 'OPENED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 4
-    end
-    object plMatterppField6: TppField
-      FieldAlias = 'LONGDESCR'
-      FieldName = 'LONGDESCR'
-      FieldLength = 400
-      DisplayWidth = 400
-      Position = 5
-    end
-    object plMatterppField7: TppField
-      FieldAlias = 'ADDRESS'
-      FieldName = 'ADDRESS'
-      FieldLength = 250
-      DisplayWidth = 250
-      Position = 6
-    end
-    object plMatterppField8: TppField
-      FieldAlias = 'SUBURB'
-      FieldName = 'SUBURB'
-      FieldLength = 126
-      DisplayWidth = 126
-      Position = 7
-    end
   end
   object plTrustLedger: TppDBPipeline
     DataSource = dsTrustLedger
