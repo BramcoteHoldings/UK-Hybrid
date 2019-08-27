@@ -239,7 +239,7 @@ begin
             0 : // Unbilled Disbursements
                begin
                   if dmAxiom.uniInsight.InTransaction then
-                     dmAxiom.uniInsight.Commit;
+                     dmAxiom.uniInsight.Rollback;
                   dmAxiom.uniInsight.StartTransaction;
                   iJournal:= 0;
                   try
@@ -703,6 +703,7 @@ begin
             else
             begin
 //               tbDesc.Text := '';
+               qryDisb.Close;
                beMatterNo.Text := '';
                dblblMatterDescr.Caption := '';
                TotalAmt := 0;
