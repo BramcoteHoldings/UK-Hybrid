@@ -15,7 +15,7 @@ uses
   dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPSDBTCLnk, dxPScxDBEditorLnks,
   dxPSTextLnk, dxPScxEditorProducers, dxPScxExtEditorProducers,
   dxPScxSchedulerLnk, cxClasses, dxLayoutContainer, dxLayoutcxEditAdapters,
-  dxLayoutControlAdapters, dxLayoutControl;
+  dxLayoutControlAdapters, dxLayoutControl, dxPSdxLCLnk;
 
 type
   TfrmTransitNew = class(TForm)
