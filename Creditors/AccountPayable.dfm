@@ -307,6 +307,7 @@ object frmAcctPayable: TfrmAcctPayable
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 0
+        Transparent = True
         Height = 126
         Width = 661
         object lblDateFrom: TLabel
@@ -475,6 +476,7 @@ object frmAcctPayable: TfrmAcctPayable
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           TabOrder = 10
+          Transparent = True
           Height = 40
           Width = 640
         end
@@ -502,6 +504,7 @@ object frmAcctPayable: TfrmAcctPayable
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 1
+        Transparent = True
         Height = 47
         Width = 334
         object cbOutstanding: TcxCheckBox
@@ -514,6 +517,7 @@ object frmAcctPayable: TfrmAcctPayable
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
+          Transparent = True
         end
         object cbNotHeld: TcxCheckBox
           Left = 141
@@ -525,6 +529,7 @@ object frmAcctPayable: TfrmAcctPayable
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 1
+          Transparent = True
         end
         object cbPaid: TcxCheckBox
           Left = 266
@@ -535,6 +540,7 @@ object frmAcctPayable: TfrmAcctPayable
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 2
+          Transparent = True
         end
       end
       object cxGroupBox3: TcxGroupBox
@@ -544,6 +550,7 @@ object frmAcctPayable: TfrmAcctPayable
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 2
+        Transparent = True
         Height = 47
         Width = 303
         object cbCheque: TcxCheckBox
@@ -556,6 +563,7 @@ object frmAcctPayable: TfrmAcctPayable
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 0
+          Transparent = True
         end
         object cbEFT: TcxCheckBox
           Left = 165
@@ -567,6 +575,7 @@ object frmAcctPayable: TfrmAcctPayable
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 1
+          Transparent = True
         end
       end
       object cxGroupBox4: TcxGroupBox
@@ -576,6 +585,7 @@ object frmAcctPayable: TfrmAcctPayable
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         TabOrder = 3
+        Transparent = True
         Height = 108
         Width = 395
         object cxLabel1: TcxLabel

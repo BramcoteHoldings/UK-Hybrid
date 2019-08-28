@@ -7,7 +7,7 @@ uses
   StdCtrls, DBCtrls, Mask, ComCtrls, Db, NumberEdit, OracleUniProvider, Uni, MemDS,
   DBAccess, cxPC, cxControls, ExtCtrls, cxPCdxBarPopupMenu, cxGraphics,
   cxLookAndFeels, cxLookAndFeelPainters, dxBar, cxClasses, dxBarBuiltInMenu,
-  cxContainer, cxEdit, cxGroupBox, cxRadioGroup, cxDBEdit;
+  cxContainer, cxEdit, cxGroupBox, cxRadioGroup, cxDBEdit, cxCheckBox;
 
 type
   TfrmCodeRules = class(TForm)
@@ -28,7 +28,6 @@ type
     gbCreditorName: TGroupBox;
     Label5: TLabel;
     dbtbCreditorLength: TDBEdit;
-    dbchkCreditorAcronym: TDBCheckBox;
     Label6: TLabel;
     dbtbCreditorPad: TDBEdit;
     Label3: TLabel;
@@ -57,12 +56,14 @@ type
     Label10: TLabel;
     tdbEGSeparator: TDBEdit;
     dbrgMatterCode: TcxDBRadioGroup;
+    dbchkCreditorAcronym: TcxDBCheckBox;
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure dbrgClientCodeChange(Sender: TObject);
+    procedure dbrgCreditorCodeChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -124,10 +125,26 @@ end;
 
 procedure TfrmCodeRules.dbrgClientCodeChange(Sender: TObject);
 begin
-  if dbrgClientCode.ItemIndex = 0 then
-    gbClientName.Visible := False
-  else
-    gbClientName.Visible := True;
+   if dbrgClientCode.ItemIndex = 0 then
+   begin
+      gbClientName.Visible := False;
+      grpbxEntityGroupPrefix.Enabled := False;
+      grpbxEntityPrefix.Enabled := False;
+   end
+   else
+   begin
+      gbClientName.Visible := True;
+      grpbxEntityGroupPrefix.Enabled := True;
+      grpbxEntityPrefix.Enabled := True;
+   end;
+end;
+
+procedure TfrmCodeRules.dbrgCreditorCodeChange(Sender: TObject);
+begin
+   if dbrgCreditorCode.ItemIndex = 0 then
+      gbCreditorName.Enabled := False
+   else
+      gbCreditorName.Enabled := True;
 end;
 
 end.
