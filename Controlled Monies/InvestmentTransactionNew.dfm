@@ -496,8 +496,10 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
       Checked = True
       TabOrder = 2
       TabStop = True
+      StyleElements = [seFont, seClient]
       OnClick = rbCapitalClick
       LookAndFeel.NativeStyle = True
+      Transparent = True
     end
     object rbInterest: TcxRadioButton
       Left = 175
@@ -506,8 +508,10 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
       Height = 17
       Caption = 'Interest'
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnClick = rbInterestClick
       LookAndFeel.NativeStyle = True
+      Transparent = True
     end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
       AlignHorz = ahClient
@@ -1280,6 +1284,7 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1312,7 +1317,7 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     XLSSettings.WorksheetName = 'Report'
     Left = 383
     Top = 320
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plDep'
     object ppDetailBand1: TppDetailBand
@@ -1940,6 +1945,7 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1972,7 +1978,7 @@ object frmInvestmentTransactionNew: TfrmInvestmentTransactionNew
     XLSSettings.WorksheetName = 'Report'
     Left = 240
     Top = 386
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
