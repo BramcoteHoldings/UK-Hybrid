@@ -17,10 +17,10 @@ inherited frmDepositAccount: TfrmDepositAccount
     Width = 367
     Height = 231
     Align = alClient
+    ParentBackground = True
     TabOrder = 4
+    Transparent = True
     AutoSize = True
-    ExplicitWidth = 314
-    ExplicitHeight = 183
     object cxDBLabel1: TcxDBLabel
       Left = 98
       Top = 12
@@ -848,7 +848,6 @@ inherited frmDepositAccount: TfrmDepositAccount
     inherited bmMainBar2: TdxBar
       AllowClose = False
       AllowReset = False
-      Font.Height = -12
       IsMainMenu = False
       ItemLinks = <
         item
