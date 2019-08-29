@@ -208,7 +208,6 @@ type
     procedure qryLedgerBeforeScroll(DataSet: TDataSet);
     procedure dbgrLedgerEnter(Sender: TObject);
     procedure dbgrLedgerColEnter(Sender: TObject);
-    procedure cbBankChange(Sender: TObject);
     procedure cbAuthByDropDown(Sender: TObject);
     procedure qryLedgerAfterScroll(DataSet: TDataSet);
     procedure popGridPopup(Sender: TObject);
@@ -3555,7 +3554,7 @@ begin
    begin
       cbBank.Text := qryDetails.FieldByName('ACCT').AsString;  //ItemIndex := cbBank.Items.IndexOf(qryDetails.FieldByName('ACCT').AsString);
       cbBankClick(Self);
-      cbBankChange(Self);
+      cbBankPropertiesChange(Self);
       cbBank.Enabled := False;
       tbPayee.Text := qryDetails.FieldByName('PAYEE').AsString;
       tbDesc.Text := qryDetails.FieldByName('DESCR').AsString;
@@ -3790,6 +3789,9 @@ begin
    lblAuthByName.AutoSize := TRUE;
 
    dmAxiom.qryCurrencyList.Open;
+   if dmAxiom.qryBankList.Active = True then
+      dmAxiom.qryBankList.Close;
+   dmAxiom.qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
    dmAxiom.qryBankList.Open;
 
    if dmAxiom.qryEmplyeeList.Active = False then
@@ -3879,7 +3881,7 @@ begin
       CreateCheque;
    cmbPrinter.Text := dmAxiom.UserChequePrinter;
    cmbPrinterChange(Self);
-   cbBankChange(Self);
+   cbBankPropertiesChange(Self);
    lblAddress.Color := Self.Color;
    ActTemplateUpdate(nil);
 
@@ -4053,52 +4055,6 @@ begin
     dbgrLedger.Columns.Items[colREASON].Field.Text := DefaultDescr;
   end;
 }
-end;
-
-procedure TfrmCheque.cbBankChange(Sender: TObject);
-begin
-  {qryLedger.CancelUpdates;
-  qryLedger.Close;
-  qryLedger.Open;}
-  cmbPrinter.Items.Clear;
-  tbChqNo.Text := '';
-  cmbPrinter.Text := '';
-  StringPopulate(cmbPrinter.Items, 'PRINTER', 'CODE', 'TYPE = ''C'' AND BANK_ACCT = ''' + cbBank.Text + '''');
-  cmbPrinter.Enabled := True;
-  //cmbPrinterChange(Self);
-//  StatusDisplay;
-   grpDirectDebit.Visible := False;
-   TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Clear;
-   DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
-   if qryBank.FieldByName('TRUST').AsString = 'T' then
-   begin
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Protected');
-     tvLedgerTAX.Visible := False;
-     tvLedgerTAXCODE.Visible := False;
-
-     lblBalance.Visible := False;
-     lblTax.Visible := False;
-     DefaultTax := 'NOTAX';
-     SetBankTransfer(True);
-     grpDirectDebit.Visible := (GetEnforceBSBDD(cbBank.Text) = 'Y') and (rgType.ItemIndex = 1);
-   end
-   else if qryBank.FieldByName('TRUST').AsString = 'G' then
-   begin
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
-//     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Debtors');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
-
-     SetBankTransfer(False);
-   end
-   else if qryBank.FieldByName('TRUST').AsString = 'C' then
-   begin
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
-
-     SetBankTransfer(False);
-   end;
 end;
 
 procedure TfrmCheque.cbAuthByDropDown(Sender: TObject);

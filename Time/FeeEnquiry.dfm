@@ -1246,8 +1246,6 @@ object frmFeeListNew: TfrmFeeListNew
           object cxTabSheet3: TcxTabSheet
             Caption = 'By Author'
             ImageIndex = 1
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object dbchFeePie: TDBChart
               Left = 316
               Top = 0
@@ -1377,8 +1375,6 @@ object frmFeeListNew: TfrmFeeListNew
           object cxTabSheet1: TcxTabSheet
             Caption = 'Benchmark'
             ImageIndex = 2
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object DBChart1: TDBChart
               Left = 0
               Top = 0
@@ -1498,10 +1494,6 @@ object frmFeeListNew: TfrmFeeListNew
         ImageIndex = 2
         TabVisible = False
         OnShow = tsBudgetShow
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object pcBudgetGraphs: TcxPageControl
           Left = 0
           Top = 0
@@ -1524,8 +1516,6 @@ object frmFeeListNew: TfrmFeeListNew
           object tsBudgetMonth: TcxTabSheet
             Caption = 'Month'
             ImageIndex = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object pagBudgetMonthYear: TcxPageControl
               Left = 0
               Top = 0
@@ -1546,9 +1536,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetMonthShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1625,9 +1612,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeesBudgetMonthShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chFeeBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1692,9 +1676,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Time'
                 ImageIndex = 2
                 OnShow = tsTimeBudgetMonthShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chTimeBudgetMonth: TDBChart
                   Left = 0
                   Top = 0
@@ -1770,8 +1751,6 @@ object frmFeeListNew: TfrmFeeListNew
             Caption = 'Quarter'
             ImageIndex = 1
             TabVisible = False
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object cxPageControl3: TcxPageControl
               Left = 0
               Top = 0
@@ -1788,9 +1767,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetQtrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chWIPBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -1869,9 +1845,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeeBudgetQtrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chFeesBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -1925,9 +1898,6 @@ object frmFeeListNew: TfrmFeeListNew
                 ImageIndex = 2
                 TabVisible = False
                 OnShow = tsBudgetHoursQtrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chHoursBudgetQuarter: TDBChart
                   Left = 0
                   Top = 0
@@ -2008,8 +1978,6 @@ object frmFeeListNew: TfrmFeeListNew
           object tsBudgetYear: TcxTabSheet
             Caption = 'Year'
             ImageIndex = 2
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object cxPageControl4: TcxPageControl
               Left = 0
               Top = 0
@@ -2028,9 +1996,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'W.I.P.'
                 ImageIndex = 0
                 OnShow = tsWIPBudgetYrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chBudgetYear: TDBChart
                   Left = 0
                   Top = 0
@@ -2105,9 +2070,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Fees'
                 ImageIndex = 1
                 OnShow = tsFeeBudgetYrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chBudgetYearFee: TDBChart
                   Left = 0
                   Top = 0
@@ -2170,9 +2132,6 @@ object frmFeeListNew: TfrmFeeListNew
                 Caption = 'Time'
                 ImageIndex = 2
                 OnShow = tsTimeBudgetYrShow
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object chBudgetYearTime: TDBChart
                   Left = 0
                   Top = 0
@@ -4702,7 +4661,7 @@ object frmFeeListNew: TfrmFeeListNew
       FieldName = 'NMEMO'
       FieldLength = 0
       DataType = dtLargeInt
-      DisplayWidth = 15
+      DisplayWidth = 0
       Position = 0
     end
     object dbpipeFeeRptppField2: TppField
@@ -4716,8 +4675,8 @@ object frmFeeListNew: TfrmFeeListNew
     object dbpipeFeeRptppField3: TppField
       FieldAlias = 'AUTHOR'
       FieldName = 'AUTHOR'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 2
     end
     object dbpipeFeeRptppField4: TppField
@@ -4833,22 +4792,22 @@ object frmFeeListNew: TfrmFeeListNew
     object dbpipeFeeRptppField18: TppField
       FieldAlias = 'TITLE'
       FieldName = 'TITLE'
-      FieldLength = 85
-      DisplayWidth = 85
+      FieldLength = 100
+      DisplayWidth = 100
       Position = 17
     end
     object dbpipeFeeRptppField19: TppField
       FieldAlias = 'SHORTDESCR'
       FieldName = 'SHORTDESCR'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 60
+      DisplayWidth = 60
       Position = 18
     end
     object dbpipeFeeRptppField20: TppField
       FieldAlias = 'BRANCH'
       FieldName = 'BRANCH'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 5
+      DisplayWidth = 5
       Position = 19
     end
   end
@@ -4870,6 +4829,7 @@ object frmFeeListNew: TfrmFeeListNew
         'WHERE FEE.NMATTER = MATTER.NMATTER AND FEE.NMEMO = NMEMO.NMEMO(+' +
         ')'
       'AND MATTER.NCLIENT = PHONEBOOK.NCLIENT')
+    Active = True
     Left = 587
     Top = 110
   end
@@ -4898,6 +4858,7 @@ object frmFeeListNew: TfrmFeeListNew
     PrinterSetup.mmPaperWidth = 297000
     PrinterSetup.PaperSize = 9
     Units = utMillimeters
+    AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     BeforePrint = feeRptBeforePrint
     DeviceType = 'Screen'
@@ -4913,6 +4874,7 @@ object frmFeeListNew: TfrmFeeListNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -4935,15 +4897,16 @@ object frmFeeListNew: TfrmFeeListNew
     RTFSettings.DefaultFont.Style = []
     TextFileName = '($MyDocuments)\Report.pdf'
     TextSearchSettings.DefaultString = '<FindText>'
-    TextSearchSettings.Enabled = False
+    TextSearchSettings.Enabled = True
     XLSSettings.AppName = 'ReportBuilder'
     XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.DefaultBands = [btHeader, btColumnHeader, btGroupHeader, btDetail, btGroupFooter]
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 728
     Top = 199
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'dbpipeFeeRpt'
     object ppTitleBand1: TppTitleBand
@@ -5473,7 +5436,7 @@ object frmFeeListNew: TfrmFeeListNew
           mmHeight = 3969
           mmLeft = 174361
           mmTop = 6350
-          mmWidth = 794
+          mmWidth = 16404
           BandType = 4
           LayerName = Foreground1
         end
@@ -5561,9 +5524,9 @@ object frmFeeListNew: TfrmFeeListNew
           Transparent = True
           DataPipelineName = 'dbpipeFeeRpt'
           mmHeight = 3969
-          mmLeft = 272521
+          mmLeft = 270669
           mmTop = 1323
-          mmWidth = 10055
+          mmWidth = 11907
           BandType = 4
           LayerName = Foreground1
         end
@@ -6069,6 +6032,7 @@ object frmFeeListNew: TfrmFeeListNew
     PrinterSetup.mmPaperWidth = 210000
     PrinterSetup.PaperSize = 9
     Units = utMillimeters
+    AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
@@ -6083,6 +6047,7 @@ object frmFeeListNew: TfrmFeeListNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -6108,12 +6073,13 @@ object frmFeeListNew: TfrmFeeListNew
     TextSearchSettings.Enabled = True
     XLSSettings.AppName = 'ReportBuilder'
     XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.DefaultBands = [btHeader, btDetail, btSummary]
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 966
     Top = 283
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plAuthorSummary'
     object ppHeaderBand2: TppHeaderBand
@@ -6542,6 +6508,7 @@ object frmFeeListNew: TfrmFeeListNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -6574,7 +6541,7 @@ object frmFeeListNew: TfrmFeeListNew
     XLSSettings.WorksheetName = 'Report'
     Left = 619
     Top = 306
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear

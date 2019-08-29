@@ -35,8 +35,6 @@ object frmCodeRules: TfrmCodeRules
     object tabClient: TcxTabSheet
       Caption = 'Client'
       ImageIndex = 0
-      ExplicitTop = 31
-      ExplicitHeight = 353
       object Label2: TLabel
         Left = 11
         Top = 132
@@ -290,8 +288,6 @@ object frmCodeRules: TfrmCodeRules
     object tabCreditor: TcxTabSheet
       Caption = 'Creditor'
       ImageIndex = 1
-      ExplicitTop = 31
-      ExplicitHeight = 353
       object Label6: TLabel
         Left = 11
         Top = 133
@@ -314,7 +310,7 @@ object frmCodeRules: TfrmCodeRules
         Values.Strings = (
           'N'
           'A')
-        OnChange = dbrgClientCodeChange
+        OnChange = dbrgCreditorCodeChange
       end
       object gbCreditorName: TGroupBox
         Left = 201
@@ -339,17 +335,16 @@ object frmCodeRules: TfrmCodeRules
           DataSource = dsCodeRules
           TabOrder = 0
         end
-        object dbchkCreditorAcronym: TDBCheckBox
+        object dbchkCreditorAcronym: TcxDBCheckBox
           Left = 11
-          Top = 64
-          Width = 149
-          Height = 21
+          Top = 61
           Caption = 'Create Acronym?'
-          DataField = 'CREDITORACRONYM'
-          DataSource = dsCodeRules
+          DataBinding.DataField = 'CREDITORACRONYM'
+          DataBinding.DataSource = dsCodeRules
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
           TabOrder = 1
-          ValueChecked = 'Y'
-          ValueUnchecked = 'N'
         end
       end
       object dbtbCreditorPad: TDBEdit
@@ -365,8 +360,6 @@ object frmCodeRules: TfrmCodeRules
     object tabMatter: TcxTabSheet
       Caption = 'Matter'
       ImageIndex = 2
-      ExplicitTop = 31
-      ExplicitHeight = 353
       object Label3: TLabel
         Left = 396
         Top = 20

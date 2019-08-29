@@ -2069,7 +2069,7 @@ object frmBankDeposit: TfrmBankDeposit
       'SET '
       'BANKED = '#39'Y'#39', '
       'NBANKDEP = :NBANKDEP,'
-      'BANKED_DATE = :BANKED_DATE'
+      'BANKED_DATE = :BANKED_DATE,'
       'DCLEARDATE = :DCLEARDATE,'
       'CLEARED = :CLEARED'
       'WHERE NRECEIPT = :NRECEIPT')

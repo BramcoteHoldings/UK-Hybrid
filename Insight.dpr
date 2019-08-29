@@ -406,7 +406,7 @@ uses
   invoicelist in 'Creditors\invoicelist.pas' {frmInvoiceList},
   InvoiceReverse in 'Creditors\InvoiceReverse.pas' {frmInvoiceReverse},
   InvoiceScan in 'Creditors\InvoiceScan.pas' {frmInvScan},
-  InvoiceSearch in 'Creditors\InvoiceSearch.pas' {frmInvoiceSearch};
+  InvoiceSearch in 'Billing\InvoiceSearch.pas' {frmInvoiceSearch};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}
@@ -426,8 +426,6 @@ begin
   Application.CreateForm(TdmAxiom, dmAxiom);
   Application.CreateForm(TdmTableCache, dmTableCache);
   Application.CreateForm(TfrmDesktop, frmDesktop);
-  Application.CreateForm(TfrmSubBill, frmSubBill);
-  Application.CreateForm(TfrmCheqReqs, frmCheqReqs);
   Application.ProcessMessages;
   Application.Run;
 end.

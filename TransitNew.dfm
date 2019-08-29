@@ -44,10 +44,6 @@ object frmTransitNew: TfrmTransitNew
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitLeft = 388
-    ExplicitTop = 8
-    ExplicitWidth = 437
-    ExplicitHeight = 561
     DesignSize = (
       423
       537)
@@ -288,6 +284,7 @@ object frmTransitNew: TfrmTransitNew
           FieldName = 'DESCR'
         end>
       Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
       Properties.ListSource = dsPaymentType
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -411,7 +408,7 @@ object frmTransitNew: TfrmTransitNew
       Control = lblMatterDesc
       ControlOptions.AutoColor = True
       ControlOptions.OriginalHeight = 13
-      ControlOptions.OriginalWidth = 398
+      ControlOptions.OriginalWidth = 391
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -810,6 +807,7 @@ object frmTransitNew: TfrmTransitNew
     Top = 153
     PixelsPerInch = 96
     object ComponentPrinterLink2: TdxCustomContainerReportLink
+      Component = Owner
       PrinterPage.DMPaper = 9
       PrinterPage.Footer = 6350
       PrinterPage.GrayShading = True

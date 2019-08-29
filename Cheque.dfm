@@ -120,9 +120,9 @@ object frmCheque: TfrmCheque
     ExplicitTop = 454
   end
   object lblBankTransferMsg: TLabel
-    Left = 249
+    Left = 257
     Top = 157
-    Width = 186
+    Width = 171
     Height = 14
     AutoSize = False
     Caption = '&General Bank for Trust Transfer'
@@ -851,7 +851,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43690.3981986458d
+    EditValue = 43706.6998100694d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -882,7 +882,6 @@ object frmCheque: TfrmCheque
     Anchors = [akTop, akRight]
     Sorted = True
     TabOrder = 8
-    OnChange = cbBankChange
     OnClick = cbBankClick
   end
   object gbChequeTemplate: TcxGroupBox
@@ -987,8 +986,8 @@ object frmCheque: TfrmCheque
     OnClick = chkReplacementChequeClick
   end
   object cbBank: TcxLookupComboBox
-    Left = 314
-    Top = 10
+    Left = 312
+    Top = 11
     Properties.CharCase = ecUpperCase
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 12

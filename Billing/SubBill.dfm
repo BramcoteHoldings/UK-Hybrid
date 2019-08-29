@@ -4,7 +4,7 @@ object frmSubBill: TfrmSubBill
   Anchors = [akRight, akBottom]
   BorderStyle = bsDialog
   Caption = 'Sub Bill'
-  ClientHeight = 503
+  ClientHeight = 506
   ClientWidth = 956
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,15 +13,16 @@ object frmSubBill: TfrmSubBill
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   DesignSize = (
     956
-    503)
+    506)
   PixelsPerInch = 96
   TextHeight = 15
   object Label3: TLabel
     Left = 19
-    Top = 484
+    Top = 487
     Width = 56
     Height = 15
     Anchors = [akLeft, akBottom]
@@ -30,7 +31,7 @@ object frmSubBill: TfrmSubBill
   end
   object lblTotalPercent: TLabel
     Left = 76
-    Top = 484
+    Top = 487
     Width = 14
     Height = 15
     Anchors = [akLeft, akBottom]
@@ -39,7 +40,7 @@ object frmSubBill: TfrmSubBill
   end
   object Label4: TLabel
     Left = 191
-    Top = 484
+    Top = 487
     Width = 69
     Height = 15
     Anchors = [akLeft, akBottom]
@@ -48,7 +49,7 @@ object frmSubBill: TfrmSubBill
   end
   object lblTotalPercentUn: TLabel
     Left = 264
-    Top = 484
+    Top = 487
     Width = 14
     Height = 15
     Anchors = [akLeft, akBottom]
@@ -58,13 +59,11 @@ object frmSubBill: TfrmSubBill
   object cxGridSubbills: TcxGrid
     Left = 6
     Top = 42
-    Width = 942
-    Height = 405
+    Width = 931
+    Height = 408
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 2
+    TabOrder = 1
     LookAndFeel.NativeStyle = True
-    ExplicitWidth = 943
-    ExplicitHeight = 383
     object cxGridSubbillsDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = dsSubBills
@@ -154,8 +153,8 @@ object frmSubBill: TfrmSubBill
     end
   end
   object rgEntryType: TcxRadioGroup
-    Left = 694
-    Top = 448
+    Left = 684
+    Top = 451
     Anchors = [akRight, akBottom]
     Properties.Columns = 2
     Properties.Items = <
@@ -167,8 +166,6 @@ object frmSubBill: TfrmSubBill
       end>
     TabOrder = 5
     OnClick = rgEntryTypeClick
-    ExplicitLeft = 684
-    ExplicitTop = 431
     Height = 42
     Width = 253
   end
@@ -267,7 +264,7 @@ object frmSubBill: TfrmSubBill
       item
         DataType = ftUnknown
         Name = 'nmemo'
-        Value = Null
+        Value = nil
       end>
   end
   object dsSubBills: TUniDataSource

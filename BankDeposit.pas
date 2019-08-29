@@ -566,96 +566,99 @@ var
 begin 
    try
       try
-         loReceipts := TStringList.Create;
-         GetReceipts(loReceipts);
-         lsReceipts := QuotedStr(loReceipts.Strings[0]);
-
-         for liCtr := 1 to (loReceipts.Count - 1) do
+         if (lbReceiptsSelected.Items.Count > 0) then
          begin
-            lsReceipts := lsReceipts + ', ' + QuotedStr(loReceipts.Strings[liCtr])
-         end;    //  end for
+            loReceipts := TStringList.Create;
+            GetReceipts(loReceipts);
+            lsReceipts := QuotedStr(loReceipts.Strings[0]);
 
-         with qryReceiptsRpt do
-         begin
-            Close;
-            SQL.Clear;
-            SQL.Text := 'SELECT RCPTNO, CREATED, case when type = ''CA'' then '+
-                        'DESCR when type = ''CC'' then DESCR else drawer end as descr, '+
-                        'TYPE, AMOUNT, PAYOR, BANK, '+
-                        'case when type = ''CC'' then RCPTNO else BRANCH end as branch, CHQNO, BANKED, NRECEIPT, '+
-                        'BANK_CLEARANCE_DAYS.DESCRIPTION AS TYPE_DESC, '+
-//                        'case when type = ''CA'' then ''Cash'' when type = ''CC'' then ''Credit Card'' else '+
-//                        ' ''Cheque'' end as type_desc, '+
-                        'case when type = ''CA'' then payor when type = ''CC'' then payor else bank end as pay_bank '+
-                        'FROM RECEIPT, BANK_CLEARANCE_DAYS '+
-                        'WHERE ACCT = :P_Bank  '+
-                        'AND CREATED < :Deposit '+
-                        'AND REVERSED <> ''Y'' '+
-                        'AND BANKED <> ''Y'' '+
-                        'AND NBANKDEP IS NULL '+
-                        'AND TYPE = BANK_CLEARANCE_DAYS.code '+
-                        'AND BANK_DEPOSIT = ''Y'' '+
-//                        'AND TYPE IN (''CA'',''CC'',''CQ'',''BC'',''MO'',''OS'') '+
-                        'AND RCPTNO in (' + lsReceipts + ')' +
-                        'ORDER BY type, RCPTNO  ';
-            ParamByName('P_Bank').AsString := cbBank.Text;
-            ParamByName('Deposit').AsDateTime := Trunc(deDeposited.Date)+1;
-            Open;
+            for liCtr := 1 to (loReceipts.Count - 1) do
+            begin
+               lsReceipts := lsReceipts + ', ' + QuotedStr(loReceipts.Strings[liCtr])
+            end;    //  end for
+
+            with qryReceiptsRpt do
+            begin
+               Close;
+               SQL.Clear;
+               SQL.Text := 'SELECT RCPTNO, CREATED, case when type = ''CA'' then '+
+                           'DESCR when type = ''CC'' then DESCR else drawer end as descr, '+
+                           'TYPE, AMOUNT, PAYOR, BANK, '+
+                           'case when type = ''CC'' then RCPTNO else BRANCH end as branch, CHQNO, BANKED, NRECEIPT, '+
+                           'BANK_CLEARANCE_DAYS.DESCRIPTION AS TYPE_DESC, '+
+//                           'case when type = ''CA'' then ''Cash'' when type = ''CC'' then ''Credit Card'' else '+
+//                           ' ''Cheque'' end as type_desc, '+
+                           'case when type = ''CA'' then payor when type = ''CC'' then payor else bank end as pay_bank '+
+                           'FROM RECEIPT, BANK_CLEARANCE_DAYS '+
+                           'WHERE ACCT = :P_Bank  '+
+                           'AND CREATED < :Deposit '+
+                           'AND REVERSED <> ''Y'' '+
+                           'AND BANKED <> ''Y'' '+
+                           'AND NBANKDEP IS NULL '+
+                           'AND TYPE = BANK_CLEARANCE_DAYS.code '+
+                           'AND BANK_DEPOSIT = ''Y'' '+
+//                           'AND TYPE IN (''CA'',''CC'',''CQ'',''BC'',''MO'',''OS'') '+
+                           'AND RCPTNO in (' + lsReceipts + ')' +
+                           'ORDER BY type, RCPTNO  ';
+               ParamByName('P_Bank').AsString := cbBank.Text;
+               ParamByName('Deposit').AsDateTime := Trunc(deDeposited.Date)+1;
+               Open;
+            end;
+
+            with qryTotals do
+            begin
+               Close;
+               SQL.Clear;
+               SQL.Text := 'select nvl(caamt,0), nvl(ccamt,0), nvl(ccchq,0) from '+
+                           '( '+
+                           'SELECT sum(AMOUNT) caamt '+
+                           'FROM RECEIPT '+
+                           'WHERE ACCT = :P_Bank  '+
+                           'AND CREATED < :Deposit '+
+                           'AND REVERSED <> ''Y''  '+
+                           'AND BANKED <> ''Y''  '+
+                           'AND NBANKDEP IS NULL  '+
+                           'AND RCPTNO in (' + lsReceipts + ')' +
+                           'and type = ''CA'' '+
+                           '), '+
+                           '(  '+
+                           'SELECT sum(AMOUNT) ccamt '+
+                           'FROM RECEIPT  '+
+                           'WHERE ACCT = :P_Bank  '+
+                           'AND CREATED < :Deposit '+
+                           'AND REVERSED <> ''Y''  '+
+                           'AND BANKED <> ''Y''  '+
+                           'AND NBANKDEP IS NULL  '+
+                           'and type = ''CC'' '+
+                           'AND RCPTNO in (' + lsReceipts + ')' +
+                           '), '+
+                           '(  '+
+                           'SELECT sum(AMOUNT) ccchq  '+
+                           'FROM RECEIPT  '+
+                           'WHERE ACCT = :P_Bank  '+
+                           'AND CREATED < :Deposit  '+
+                           'AND REVERSED <> ''Y''  '+
+                           'AND BANKED <> ''Y'' '+
+                           'AND NBANKDEP IS NULL  '+
+                           'AND RCPTNO in (' + lsReceipts + ')' +
+//                           'and type NOT in (''CC'',''CA'')  '+
+                           'AND TYPE IN (SELECT CODE FROM BANK_CLEARANCE_DAYS WHERE BANK_DEPOSIT = ''Y'' AND CODE NOT in (''CC'',''CA'') )'+
+                           ')  ';
+               ParamByName('P_Bank').AsString := cbBank.Text;
+               ParamByName('Deposit').AsDateTime := Trunc(deDeposited.Date)+1;
+               Open;
+            end;
+
+            with qryBankDtls do
+            begin
+               Close;
+               ParamByName('Bank').AsString := cbBank.Text;
+               Open;
+            end;
+
+            ppReport1.DeviceType := 'Screen';
+            ppReport1.Print;
          end;
-
-         with qryTotals do
-         begin
-            Close;
-            SQL.Clear;
-            SQL.Text := 'select nvl(caamt,0), nvl(ccamt,0), nvl(ccchq,0) from '+
-                        '( '+
-                        'SELECT sum(AMOUNT) caamt '+
-                        'FROM RECEIPT '+
-                        'WHERE ACCT = :P_Bank  '+
-                        'AND CREATED < :Deposit '+
-                        'AND REVERSED <> ''Y''  '+
-                        'AND BANKED <> ''Y''  '+
-                        'AND NBANKDEP IS NULL  '+
-                        'AND RCPTNO in (' + lsReceipts + ')' +
-                        'and type = ''CA'' '+
-                        '), '+
-                        '(  '+
-                        'SELECT sum(AMOUNT) ccamt '+
-                        'FROM RECEIPT  '+
-                        'WHERE ACCT = :P_Bank  '+
-                        'AND CREATED < :Deposit '+
-                        'AND REVERSED <> ''Y''  '+
-                        'AND BANKED <> ''Y''  '+
-                        'AND NBANKDEP IS NULL  '+
-                        'and type = ''CC'' '+
-                        'AND RCPTNO in (' + lsReceipts + ')' +
-                        '), '+
-                        '(  '+
-                        'SELECT sum(AMOUNT) ccchq  '+
-                        'FROM RECEIPT  '+
-                        'WHERE ACCT = :P_Bank  '+
-                        'AND CREATED < :Deposit  '+
-                        'AND REVERSED <> ''Y''  '+
-                        'AND BANKED <> ''Y'' '+
-                        'AND NBANKDEP IS NULL  '+
-                        'AND RCPTNO in (' + lsReceipts + ')' +
-//                        'and type NOT in (''CC'',''CA'')  '+
-                        'AND TYPE IN (SELECT CODE FROM BANK_CLEARANCE_DAYS WHERE BANK_DEPOSIT = ''Y'' AND CODE NOT in (''CC'',''CA'') )'+
-                        ')  ';
-            ParamByName('P_Bank').AsString := cbBank.Text;
-            ParamByName('Deposit').AsDateTime := Trunc(deDeposited.Date)+1;
-            Open;
-         end;
-
-         with qryBankDtls do
-         begin
-            Close;
-            ParamByName('Bank').AsString := cbBank.Text;
-            Open;
-         end;
-
-         ppReport1.DeviceType := 'Screen';
-         ppReport1.Print;
       finally
          FreeAndNil(loReceipts);
       end;    //  end try-finally
