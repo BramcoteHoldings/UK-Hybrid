@@ -1095,7 +1095,6 @@ type
     Label80: TLabel;
     Label83: TLabel;
     DBText8: TDBText;
-    DBText7: TDBText;
     cxDBNavigator1: TcxDBNavigator;
     dbgrTransactions: TcxGrid;
     tvTransactions: TcxGridDBTableView;
@@ -1548,6 +1547,11 @@ type
     ppSystemVariable1: TppSystemVariable;
     ppLine9: TppLine;
     dbmmoNotes: TcxDBRichEdit;
+    actCMADeposit: TAction;
+    actCMAWithdrawal: TAction;
+    actCMACharges: TAction;
+    actCMAReverse: TAction;
+    cxDBCurrencyEdit1: TcxDBCurrencyEdit;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -1899,16 +1903,11 @@ type
     procedure bbtnDeleteDocumentClick(Sender: TObject);
     procedure chkPreviewPaneClick(Sender: TObject);
     procedure btnNewControlledMoneyClick(Sender: TObject);
-    procedure dxbReceiptClick(Sender: TObject);
     procedure qryControlledTotalAfterOpen(DataSet: TDataSet);
-    procedure dxbPaymentClick(Sender: TObject);
-    procedure dxBFeeClick(Sender: TObject);
     procedure dxBarButton5Click(Sender: TObject);
     procedure dxBarButton6Click(Sender: TObject);
-    procedure qryInvestmentTransactionsAfterOpen(DataSet: TDataSet);
     procedure btnCopyDocClick(Sender: TObject);
     procedure cbGroupExpandedClick(Sender: TObject);
-    procedure dxbReversalClick(Sender: TObject);
     procedure btnTaskEditClick(Sender: TObject);
     procedure tvTasksDblClick(Sender: TObject);
     procedure chkExcludeBillReversalsClick(Sender: TObject);
@@ -2009,6 +2008,14 @@ type
     procedure actBillDeleteExecute(Sender: TObject);
     procedure actBillDeleteUpdate(Sender: TObject);
     procedure actDeleteBillExecute(Sender: TObject);
+    procedure actCMADepositExecute(Sender: TObject);
+    procedure actCMADepositUpdate(Sender: TObject);
+    procedure actCMAWithdrawalExecute(Sender: TObject);
+    procedure actCMAWithdrawalUpdate(Sender: TObject);
+    procedure actCMAChargesExecute(Sender: TObject);
+    procedure actCMAChargesUpdate(Sender: TObject);
+    procedure actCMAReverseExecute(Sender: TObject);
+    procedure actCMAReverseUpdate(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -5229,13 +5236,6 @@ begin
    GetLocaleFormatSettings(LOCALE_SYSTEM_DEFAULT, formatSettings);
 
    Screen.Cursor := crDefault;
-end;
-
-procedure TfrmMatters.qryInvestmentTransactionsAfterOpen(DataSet: TDataSet);
-begin
-   dxbPayment.Enabled := (DataSet.RecordCount > 0) and dmAxiom.Security.Matter.ControlledMonies.CanAddWithdrawl;
-   dxBFee.Enabled := (DataSet.RecordCount > 0) and dmAxiom.Security.Matter.ControlledMonies.CanAddCharges;
-   dxbReversal.Enabled := (DataSet.RecordCount > 0) and dmAxiom.Security.Matter.ControlledMonies.CanReverseDeposit;
 end;
 
 procedure TfrmMatters.qryInvoicesAfterScroll(DataSet: TDataSet);
@@ -11979,21 +11979,6 @@ begin
     PrintInvReceipt(qryInvestmentTransactions.fieldByname('ninvtran').AsInteger);
 end;
 
-procedure TfrmMatters.dxbReversalClick(Sender: TObject);
-begin
-   newTransaction(cniREVERSAL);
-end;
-
-procedure TfrmMatters.dxbPaymentClick(Sender: TObject);
-begin
-   newTransaction(cniWITHDRAWAL);
-end;
-
-procedure TfrmMatters.dxbReceiptClick(Sender: TObject);
-begin
-   newTransaction(cnIDEPOSIT);
-end;
-
 procedure TfrmMatters.btnAutoTimerClick(Sender: TObject);
 begin
    if (frmDesktop.btnAutoTimer.Down = True) then
@@ -13104,6 +13089,50 @@ begin
   end;
 end;
 
+procedure TfrmMatters.actCMAChargesExecute(Sender: TObject);
+begin
+   newTransaction(cniCharge);
+end;
+
+procedure TfrmMatters.actCMAChargesUpdate(Sender: TObject);
+begin
+   if qryControlledTotal.Active = True then
+      TAction(Sender).Enabled := ((qryControlledTotal.FieldByName('BALANCE').AsFloat > 0) and dmAxiom.Security.Matter.ControlledMonies.CanAddCharges);
+end;
+
+procedure TfrmMatters.actCMADepositExecute(Sender: TObject);
+begin
+   newTransaction(cnIDEPOSIT);
+end;
+
+procedure TfrmMatters.actCMADepositUpdate(Sender: TObject);
+begin
+   if qryControlledTotal.Active = True then
+      TAction(Sender).Enabled := (qryControlledTotal.FieldByName('ndepositAccount').IsNull = False) and dmaxiom.Security.Matter.ControlledMonies.CanAddDeposit;
+end;
+
+procedure TfrmMatters.actCMAReverseExecute(Sender: TObject);
+begin
+   newTransaction(cniREVERSAL);
+end;
+
+procedure TfrmMatters.actCMAReverseUpdate(Sender: TObject);
+begin
+   if qryInvestmentTransactions.Active = True then
+      TAction(Sender).Enabled := (tvTransactions.Controller.SelectedRecordCount > 0) and dmAxiom.Security.Matter.ControlledMonies.CanReverseDeposit;
+end;
+
+procedure TfrmMatters.actCMAWithdrawalExecute(Sender: TObject);
+begin
+   newTransaction(cniWITHDRAWAL);
+end;
+
+procedure TfrmMatters.actCMAWithdrawalUpdate(Sender: TObject);
+begin
+   if qryControlledTotal.Active = True then
+      TAction(Sender).Enabled := ((qryControlledTotal.FieldByName('BALANCE').AsFloat > 0) and dmAxiom.Security.Matter.ControlledMonies.CanAddWithdrawl);
+end;
+
 procedure TfrmMatters.aProjectExecute(Sender: TObject);
 var
   LMT: TfrmProjectMatter;
@@ -13522,7 +13551,7 @@ end;
 procedure TfrmMatters.qryControlledTotalAfterOpen(DataSet: TDataSet);
 begin
 //   dxBDepositEdit.Enabled := (not DataSet.fieldByName('ndepositAccount').IsNull);
-   dxbReceipt.Enabled := (not DataSet.fieldByName('ndepositAccount').IsNull) and dmaxiom.Security.Matter.ControlledMonies.CanAddDeposit;
+
 end;
 
 procedure TfrmMatters.qryControlledTotalAfterScroll(DataSet: TDataSet);
@@ -13829,11 +13858,6 @@ begin
   dxbbtnCreateReceipt.Enabled := (dmAxiom.Security.Receipt.Create and (qryInvoices.FieldByName('Owing').AsInteger > 0));
 end;
 
-
-procedure TfrmMatters.dxBFeeClick(Sender: TObject);
-begin
-   newTransaction(cniCharge);
-end;
 
 function TfrmMatters.GetAttachBillFile(var ADocIDList: TStringList): TStringList;  //string;
 var
