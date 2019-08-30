@@ -54,7 +54,6 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label7: TLabel;
-    lblBankName: TLabel;
     dsReceipt: TUniDataSource;
     lblAmountMsg: TLabel;
     lblTotal: TLabel;
@@ -104,7 +103,6 @@ type
     tbDesc: TcxTextEdit;
     tbPayee: TcxButtonEdit;
     cmbPrinter: TcxComboBox;
-    cbBank: TcxComboBox;
     gbCheque: TcxGroupBox;
     lblChequeDrawer: TLabel;
     lblChequeBank: TLabel;
@@ -214,6 +212,8 @@ type
     ActSelectTemplate: TAction;
     edtSaveNeAmount: TEdit;
     Label18: TLabel;
+    lblBankName: TLabel;
+    cbBank: TcxLookupComboBox;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure dbgrLedgerExit(Sender: TObject);
@@ -291,6 +291,7 @@ type
     procedure btnChooseTemplateClick(Sender: TObject);
     procedure ActSaveExecute(Sender: TObject);
     procedure ActDeleteExecute(Sender: TObject);
+    procedure cbBankPropertiesChange(Sender: TObject);
   protected
     procedure CmShownEditor(var Msg: TMessage); message CM_SHOWNEDITOR;
   private
@@ -403,11 +404,11 @@ begin
    begin
       try
          dtpDate.Properties.OnChange := nil;
-         AddBanks(cbBank, 'G,T,C');
+//         AddBanks(cbBank, 'G,T,C');
 
 
          cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
-         cbBank.OnClick(Self);
+//         cbBank.OnClick(Self);
          cbBank.Properties.OnCloseUp(Self);
 
          cbType.EditValue := 'CQ';
@@ -430,7 +431,7 @@ begin
          begin
             cmbPrinter.Text := dmAxiom.UserReceiptPrinter;
             cmbPrinterChange(Self);
-            cbBankChange(Self);
+            cbBank.Properties.OnChange(Self);
             sCheque := '';
          end;
       finally
@@ -471,7 +472,7 @@ begin
 
    if not qryBanks.IsEmpty then
    begin
-      lblBankName.Caption := qryBanks.FieldByName('NAME').AsString;
+      lblBankName.Caption := qryBanks.FieldByName('NAME').AsString + ' - (' + qryBanks.FieldByname('CURRENCY').AsString + ')';
    end;
 
    TcxCurrencyEditProperties(tvLedgerCREDIT.Properties).MaxValue := 0;
@@ -1096,25 +1097,27 @@ end;
 
 procedure TfrmReceipt.qryLedgerAfterInsert(DataSet: TDataSet);
 begin
+   if qryBanks.State = dsInactive then
+      qryBanks.Open;
 
-  if AllocType = '' then
-  begin
-    if qryBanks.FieldByName('TRUST').AsString = 'C' then
-      qryLedger.FieldByName('TYPE').AsString := 'Ledger'
-    else if qryBanks.FieldByName('TRUST').AsString = 'T' then
-      qryLedger.FieldByName('TYPE').AsString := 'Matter'
-    else
-      qryLedger.FieldByName('TYPE').AsString := 'Bill';
-  end
-  else
-    qryLedger.FieldByName('TYPE').AsString := AllocType;
+   if AllocType = '' then
+   begin
+      if qryBanks.FieldByName('TRUST').AsString = 'C' then
+         qryLedger.FieldByName('TYPE').AsString := 'Ledger'
+      else if qryBanks.FieldByName('TRUST').AsString = 'T' then
+         qryLedger.FieldByName('TYPE').AsString := 'Matter'
+      else
+         qryLedger.FieldByName('TYPE').AsString := 'Bill';
+   end
+   else
+      qryLedger.FieldByName('TYPE').AsString := AllocType;
 
-  qryLedger.FieldByName('REASON').AsString := DefaultDescr;
-  qryLedger.FieldByName('DEBIT').AsCurrency := 0.0;
-  qryLedger.FieldByName('FEESDR').AsCurrency := 0.0;
-  qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
-  qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
-  qryLedger.FieldByName('SUNDDR').AsCurrency := 0.0;
+   qryLedger.FieldByName('REASON').AsString := DefaultDescr;
+   qryLedger.FieldByName('DEBIT').AsCurrency := 0.0;
+   qryLedger.FieldByName('FEESDR').AsCurrency := 0.0;
+   qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
+   qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
+   qryLedger.FieldByName('SUNDDR').AsCurrency := 0.0;
 end;
 
 
@@ -1253,7 +1256,12 @@ begin
    //rb
    bUpdateStatus := True;
    AddBanks(cbBankImport, 'T');
-   AddBanks(cbBank, 'G,T,C');
+//   AddBanks(cbBank, 'G,T,C');
+
+   if dmAxiom.qryBankList.Active = True then
+      dmAxiom.qryBankList.Close;
+   dmAxiom.qryBankList.ParamByName('entity').AsString := dmAxiom.Entity;
+   dmAxiom.qryBankList.Open;
 
    if (IsTrustAccount(cbBank.Text) = True) then
       cbTrustCheck.Checked := (SystemString('CHECK_TRUST_ODRAW_TTO') = 'Y');
@@ -4026,6 +4034,35 @@ end;
 procedure TfrmReceipt.actCancelExecute(Sender: TObject);
 begin
    Self.Close;
+end;
+
+procedure TfrmReceipt.cbBankPropertiesChange(Sender: TObject);
+begin
+ // this is to stop the qryledger being reset during a trust transfer
+    if ((not bTrustTrans) and (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0))
+    then
+    begin
+      qryLedger.Close;
+      qryLedger.Open;
+      bTrustTrans := False;
+      foMatterTotals.Clear;
+      foMultipleMatters.Clear;
+      foBillsTotal.Clear;
+      lblUnallocated.Caption := '';
+      lblTotal.Caption := '';
+    end;
+
+    if (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0)
+    then
+    begin
+      tbRcptno.Text := '';
+      cmbPrinter.Properties.Items.Clear;
+      cmbPrinter.Text := '';
+      StringPopulate(cmbPrinter.Properties.Items, 'PRINTER', 'CODE', 'TYPE = ''R'' AND BANK_ACCT = ''' + cbBank.Text + '''');
+      cmbPrinter.Enabled := True;
+      cmbPrinterChange(Self);
+      FBank := cbBank.Text;
+    end;
 end;
 
 procedure TfrmReceipt.cbBankPropertiesCloseUp(Sender: TObject);
