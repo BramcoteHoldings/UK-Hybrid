@@ -64,13 +64,6 @@ object frmReceipt: TfrmReceipt
     Height = 15
     Caption = 'Payment Type:'
   end
-  object lblBankName: TLabel
-    Left = 174
-    Top = 37
-    Width = 3
-    Height = 15
-    ShowAccelChar = False
-  end
   object lblAmountMsg: TLabel
     Left = 818
     Top = 451
@@ -158,6 +151,13 @@ object frmReceipt: TfrmReceipt
     Caption = 'This is for debugging...'
     Visible = False
   end
+  object lblBankName: TLabel
+    Left = 206
+    Top = 37
+    Width = 3
+    Height = 15
+    ShowAccelChar = False
+  end
   object edtSaveNeAmount: TEdit
     Left = 203
     Top = 159
@@ -167,7 +167,7 @@ object frmReceipt: TfrmReceipt
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
-    TabOrder = 17
+    TabOrder = 16
     Visible = False
   end
   object dbgrLedger: TcxGrid
@@ -176,7 +176,7 @@ object frmReceipt: TfrmReceipt
     Width = 951
     Height = 236
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 11
+    TabOrder = 10
     OnEnter = dbgrLedgerEnter
     OnExit = dbgrLedgerExit
     LookAndFeel.NativeStyle = True
@@ -414,7 +414,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 12
+    TabOrder = 11
     Transparent = True
   end
   object cbTrustCheck: TcxCheckBox
@@ -427,7 +427,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 13
+    TabOrder = 12
     Transparent = True
     OnClick = cbTrustCheckClick
   end
@@ -440,7 +440,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 14
+    TabOrder = 13
     Transparent = True
   end
   object chkUpdateStatus: TcxCheckBox
@@ -452,7 +452,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 15
+    TabOrder = 14
     Transparent = True
   end
   object chkNoExit: TcxCheckBox
@@ -464,7 +464,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 16
+    TabOrder = 15
     Transparent = True
   end
   object neAmount: TcxCurrencyEdit
@@ -477,7 +477,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 7
+    TabOrder = 6
     OnExit = neAmountExit
     Width = 109
   end
@@ -489,7 +489,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 4
+    TabOrder = 3
     OnExit = tbRcptnoExit
     Width = 81
   end
@@ -501,7 +501,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 6
+    TabOrder = 5
     OnExit = tbPayeeExit
     OnKeyPress = tbPayeeKeyPress
     Width = 326
@@ -557,7 +557,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 5
+    TabOrder = 4
     OnExit = tbPayeeExit
     OnKeyPress = tbPayeeKeyPress
     Width = 326
@@ -571,23 +571,8 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 8
+    TabOrder = 7
     Width = 180
-  end
-  object cbBank: TcxComboBox
-    Tag = 1
-    Left = 89
-    Top = 34
-    Properties.OnChange = cbBankChange
-    Properties.OnCloseUp = cbBankPropertiesCloseUp
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 0
-    OnClick = cbBankClick
-    OnExit = tbRcptnoExit
-    Width = 81
   end
   object gbCheque: TcxGroupBox
     Left = 699
@@ -598,7 +583,7 @@ object frmReceipt: TfrmReceipt
     Style.LookAndFeel.NativeStyle = True
     Style.Shadow = False
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 9
+    TabOrder = 8
     Transparent = True
     Height = 122
     Width = 261
@@ -690,7 +675,7 @@ object frmReceipt: TfrmReceipt
     Caption = 'Import Cheque '
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
-    TabOrder = 10
+    TabOrder = 9
     Transparent = True
     Height = 75
     Width = 261
@@ -890,7 +875,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 1
+    TabOrder = 0
     Width = 139
   end
   object dtClearanceDate: TDateTimePicker
@@ -900,13 +885,13 @@ object frmReceipt: TfrmReceipt
     Height = 23
     Date = 39582.514682291700000000
     Time = 39582.514682291700000000
-    TabOrder = 3
+    TabOrder = 2
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43700.9404943519d
+    EditValue = 43707.4210145949d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
@@ -918,7 +903,7 @@ object frmReceipt: TfrmReceipt
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 2
+    TabOrder = 1
     DataSet = dmAxiom.qryEntity
     Field = 'LOCKDATE'
     Height = 24
@@ -951,7 +936,7 @@ object frmReceipt: TfrmReceipt
       333A333333333333333338330000333333333333333333333333333333333333
       0000}
     NumGlyphs = 2
-    TabOrder = 18
+    TabOrder = 17
   end
   object btnCancel: TBitBtn
     Left = 883
@@ -961,7 +946,7 @@ object frmReceipt: TfrmReceipt
     Anchors = [akRight, akBottom]
     Kind = bkCancel
     NumGlyphs = 2
-    TabOrder = 19
+    TabOrder = 18
     OnClick = btnCancelClick
   end
   object dtBankedDate: TDateTimePicker
@@ -971,14 +956,14 @@ object frmReceipt: TfrmReceipt
     Height = 23
     Date = 41985.514682291700000000
     Time = 41985.514682291700000000
-    TabOrder = 20
+    TabOrder = 19
     Visible = False
   end
   object gbPayorAddress: TcxGroupBox
     Left = 432
     Top = 84
     Caption = 'Payor Address'
-    TabOrder = 21
+    TabOrder = 20
     Transparent = True
     Height = 119
     Width = 260
@@ -1088,7 +1073,7 @@ object frmReceipt: TfrmReceipt
     Top = 470
     Anchors = [akRight, akBottom]
     Caption = 'Template'
-    TabOrder = 22
+    TabOrder = 21
     Height = 51
     Width = 210
     object btnChooseTemplate: TcxButton
@@ -1168,6 +1153,34 @@ object frmReceipt: TfrmReceipt
       OptionsImage.Spacing = 5
       TabOrder = 2
     end
+  end
+  object cbBank: TcxLookupComboBox
+    Left = 89
+    Top = 34
+    Properties.CharCase = ecUpperCase
+    Properties.DropDownAutoSize = True
+    Properties.KeyFieldNames = 'ACCT'
+    Properties.ListColumns = <
+      item
+        FieldName = 'ACCT'
+      end
+      item
+        FieldName = 'NAME'
+      end
+      item
+        FieldName = 'TRUST'
+      end
+      item
+        FieldName = 'CURRENCY'
+      end>
+    Properties.ListOptions.ShowHeader = False
+    Properties.ListOptions.SyncMode = True
+    Properties.ListSource = dmAxiom.dsBankList
+    Properties.OnChange = cbBankPropertiesChange
+    Properties.OnCloseUp = cbBankPropertiesCloseUp
+    TabOrder = 23
+    OnClick = cbBankClick
+    Width = 102
   end
   object dsReceipt: TUniDataSource
     DataSet = qryReceipt
@@ -1346,7 +1359,7 @@ object frmReceipt: TfrmReceipt
     SQL.Strings = (
       
         'SELECT ACCT, "NAME", CASH_AT_BANK, RECEIPT, BALANCE, CL_BALANCE,' +
-        ' TRUST, LASTRCP, CLEARANCE,BANK_CLEARANCE, ROWID'
+        ' TRUST, LASTRCP, CLEARANCE,BANK_CLEARANCE, CURRENCY, ROWID'
       'FROM BANK '
       'WHERE ACCT = :P_Acct')
     Left = 199
@@ -2222,11 +2235,6 @@ object frmReceipt: TfrmReceipt
   end
   object PropsReceipt: TcxPropertiesStore
     Components = <
-      item
-        Component = cbBank
-        Properties.Strings = (
-          'Text')
-      end
       item
         Component = cbBankImport
         Properties.Strings = (

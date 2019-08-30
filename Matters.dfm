@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabOverview
+    Properties.ActivePage = tabInvoices
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -4064,7 +4064,7 @@ object frmMatters: TfrmMatters
           OnClick = btnInvWordClick
         end
         object btnInvOpen: TBitBtn
-          Left = 84
+          Left = 85
           Top = 3
           Width = 80
           Height = 26
@@ -4089,29 +4089,15 @@ object frmMatters: TfrmMatters
           OnClick = btnInvOpenClick
         end
         object btnAutoReceipt: TBitBtn
-          Left = 166
+          Left = 167
           Top = 3
           Width = 80
           Height = 26
+          Action = actAutoReceipt
           Anchors = [akLeft, akBottom]
-          Caption = '&Receipt'
-          Enabled = False
-          Glyph.Data = {
-            76010000424D7601000000000000760000002800000020000000100000000100
-            0400000000000001000000000000000000001000000010000000000000000000
-            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00500000000000
-            0000577777777777777708888888880888807FFFFFFFFF7F5557000000000008
-            888077777777777F55570FFFFFFFFF0888807F5F5F5F5F7F55570F0F0F0F0F08
-            88807F757575757F55570FFFFFFFFF0888807F5F5F5F5F7F55570F0F0F0F0F08
-            88807F7575757575F5570FFFFFFFFFF0888075F5F5F5F5F75F5750F0F0F0F0FF
-            088057575757575575F7550FFFFFFFFFF080557FFFFFFFFFF7F7550000000000
-            0000557777777777777755088888888888805575555555555557550888888888
-            8880557FFFFFFFFFFFF7550000000000000055777777777777775508888888FF
-            99F05575FFFFFFFFFFF755500000000000055557777777777775}
+          Caption = 'Receipt'
           NumGlyphs = 2
           TabOrder = 2
-          OnClick = btnAutoReceiptClick
         end
         object btnDeleteDraft: TBitBtn
           Left = 1370
@@ -4152,32 +4138,19 @@ object frmMatters: TfrmMatters
           Top = 3
           Width = 92
           Height = 26
+          Action = actEmailBill
           Anchors = [akLeft, akBottom]
           Caption = 'Email Bill'
-          Enabled = False
-          Glyph.Data = {
-            56010000424D5601000000000000560000002800000010000000100000000100
-            08000000000000010000C40E0000C40E00000800000008000000FF00FF00A79A
-            420080800000CC666600FFFFFF00663333002222220080808000000000010607
-            0707000000000000000000000001010607070707070000000000000000010102
-            0607070707070707070006060606010202060707070707070707000505050505
-            0505050505050505070000030404040404040404040404050700000304040404
-            0404040404040405070000030404030303030304040404050700000304040404
-            0404040404040405070000030404030303030304030304050700000304040404
-            0404040403030405060000030404040404040404040404050206000303030303
-            0303030303030303020200000000000000000000010202020200000000000000
-            0000000000010202000000000000000000000000000001000000}
           TabOrder = 5
-          OnClick = btnEmailBillClick
         end
         object pbViewBill: TBitBtn
           Left = 344
           Top = 3
           Width = 85
           Height = 26
+          Action = actViewBill
           Anchors = [akLeft, akBottom]
           Caption = 'View Bill'
-          Enabled = False
           Glyph.Data = {
             36050000424D3605000000000000360400002800000010000000100000000100
             0800000000000001000000000000000000000001000000000000000000000000
@@ -4222,7 +4195,6 @@ object frmMatters: TfrmMatters
             2020201FECFFFFF192072020202020202020201FF7FFF192EFFFFFFFFF92FFF4
             F4F3F3F207F1F7EFFFFFFFFFFFEF9292ED92EDEDED9207FFFFFF}
           TabOrder = 6
-          OnClick = pbViewBillClick
         end
         object chkExcludeBillReversals: TcxCheckBox
           Left = 446
@@ -4515,6 +4487,16 @@ object frmMatters: TfrmMatters
             Options.Editing = False
             Options.Focusing = False
           end
+          object tvInvoicesFEES_WOFF: TcxGridDBColumn
+            Caption = 'Fees Woff'
+            DataBinding.FieldName = 'FEES_WOFF'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+          end
+          object tvInvoicesWOFF_DISBS: TcxGridDBColumn
+            Caption = 'Disbs Woff'
+            DataBinding.FieldName = 'WOFF_DISBS'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+          end
           object tvInvoicesGENERATED: TcxGridDBColumn
             Caption = 'Generated'
             DataBinding.FieldName = 'GENERATED'
@@ -4576,6 +4558,22 @@ object frmMatters: TfrmMatters
             Visible = False
             MinWidth = 18
             Options.Editing = False
+            VisibleForCustomization = False
+          end
+          object tvInvoicesNBILL_TO: TcxGridDBColumn
+            DataBinding.FieldName = 'NBILL_TO'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object tvInvoicesIS_DRAFT: TcxGridDBColumn
+            DataBinding.FieldName = 'IS_DRAFT'
+            Visible = False
+            VisibleForCustomization = False
+            VisibleForEditForm = bFalse
+          end
+          object tvInvoicesEMAIL: TcxGridDBColumn
+            DataBinding.FieldName = 'EMAIL'
+            Visible = False
             VisibleForCustomization = False
           end
         end
@@ -12673,6 +12671,29 @@ object frmMatters: TfrmMatters
       ImageIndex = 59
       OnExecute = actCMAReverseExecute
       OnUpdate = actCMAReverseUpdate
+    end
+    object actEmailBill: TAction
+      Category = 'Bills'
+      Caption = 'Email Bill'
+      Enabled = False
+      ImageIndex = 57
+      OnExecute = actEmailBillExecute
+      OnUpdate = actEmailBillUpdate
+    end
+    object actViewBill: TAction
+      Category = 'Bills'
+      Caption = 'View Bill'
+      Enabled = False
+      OnExecute = actViewBillExecute
+      OnUpdate = actViewBillUpdate
+    end
+    object actAutoReceipt: TAction
+      Category = 'Bills'
+      Caption = 'Receipt'
+      Enabled = False
+      ImageIndex = 20
+      OnExecute = actAutoReceiptExecute
+      OnUpdate = actAutoReceiptUpdate
     end
   end
   object popTransit: TPopupMenu
@@ -21046,7 +21067,6 @@ object frmMatters: TfrmMatters
       Category = 10
       Hint = 'Create Receipt'
       Visible = ivAlways
-      OnClick = btnAutoReceiptClick
     end
     object dxBarButton4: TdxBarButton
       Caption = 'Export Grid to Excel'
@@ -23316,15 +23336,19 @@ object frmMatters: TfrmMatters
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
-        'SELECT BILL_TO,DISPATCHED, GENERATED, NMEMO, REFNO, FEES, DISB, ' +
-        'ANTD, SUND, TAX, '
+        'SELECT NMEMO.BILL_TO, NMEMO.DISPATCHED, NMEMO.GENERATED, NMEMO.N' +
+        'MEMO, NMEMO.REFNO, NMEMO.FEES, NMEMO.DISB, NMEMO.ANTD, NMEMO.SUN' +
+        'D, NMEMO.TAX, '
       
-        'TRUST, FEES_PAID, DISB_PAID, ANTD_PAID, SUND_PAID, TAX_PAID, RV_' +
-        'NMEMO, RV_TYPE'
+        'NMEMO.TRUST, NMEMO.FEES_PAID, NMEMO.DISB_PAID, NMEMO.ANTD_PAID, ' +
+        'NMEMO.SUND_PAID, NMEMO.TAX_PAID, NMEMO.RV_NMEMO, NMEMO.RV_TYPE'
       
-        ',TOTAL, OWING, UPCRED, UPCRED_PAID,SPLIT_BILL, EXPPAYMENT, INV_N' +
-        'OTE, AUTHORISED, '
-      'invoice_copy, invoice_copy_ext, nbill_to, path, IS_DRAFT, '
+        ',NMEMO.TOTAL, NMEMO.OWING, NMEMO.UPCRED, NMEMO.UPCRED_PAID, NMEM' +
+        'O.SPLIT_BILL, NMEMO.EXPPAYMENT, NMEMO.INV_NOTE, NMEMO.AUTHORISED' +
+        ', '
+      
+        'NMEMO.invoice_copy, NMEMO.invoice_copy_ext, NMEMO.nbill_to, NMEM' +
+        'O.path, NMEMO.IS_DRAFT, '
       'CASE -- WHEN NMEMO.REJECTED = '#39'Y'#39' then '#39'Rejected'#39
       
         '-- WHEN NMEMO.REJECTED = '#39'N'#39' and NMEMO.PRIVATE = '#39'Y'#39' then '#39'Priva' +
@@ -23333,10 +23357,17 @@ object frmMatters: TfrmMatters
       
         ' WHEN NMEMO.PRIVATE = '#39'N'#39' and NMEMO.REFNO = '#39'AUTH'#39' then '#39'Authori' +
         'sed'#39
-      ' WHEN NMEMO.IS_DRAFT = '#39'N'#39' then '#39'Posted'#39' END as STATUS'
-      'FROM NMEMO'
-      'WHERE NMATTER  = :P_Matter'
+      
+        ' WHEN NMEMO.IS_DRAFT = '#39'N'#39' then '#39'Posted'#39' END as STATUS, EMAIL, N' +
+        'MEMO.FEES_WOFF  , NMEMO.DISB_WOFF + ANTD_WOFF + UPCRED_WOFF + SU' +
+        'ND_WOFF AS WOFF_DISBS'
+      'FROM PHONEBOOK, NMEMO'
+      'WHERE NMEMO.NMATTER  = :P_Matter'
+      'AND NMEMO.NBILL_TO = PHONEBOOK.NNAME(+)'
       'ORDER BY NMEMO DESC'
+      ''
+      ''
+      ''
       ''
       ''
       '/*'
@@ -23360,6 +23391,7 @@ object frmMatters: TfrmMatters
       'FROM NMEMO'
       'WHERE NMATTER  = :P_Matter'
       'ORDER BY NMEMO DESC    */')
+    Active = True
     Filter = 'rv_nmemo is null'
     AfterScroll = qryInvoicesAfterScroll
     Left = 255
@@ -23368,7 +23400,7 @@ object frmMatters: TfrmMatters
       item
         DataType = ftUnknown
         Name = 'P_Matter'
-        Value = nil
+        Value = Null
       end>
   end
   object qryCriticalDates: TUniQuery

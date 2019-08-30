@@ -1,7 +1,14 @@
 Insight Build 9.2.0
 
-Build 33
+Build 36
 ========
+- Bills tab on Matter now displays Fees and Disbursement write offs
+- fixed issue with bank selection in Cheque Creation to be entity aware.
+- Fixed refresh issues with buttons on Matter Controlled Money tab.
+
+
+Build 33 - 35
+=============
 - Fixed bill selection grid to use Entity as part of filter when doing receipt.
 - Saving tax amount when doing Bill Write - off and choosing the Bad Debt W/O option.
 - Fixed issue with displaying Trust Bank when viewing a Matter Ledger Trust report and multiple trust banks have been added to matter.
