@@ -1552,6 +1552,14 @@ type
     actCMACharges: TAction;
     actCMAReverse: TAction;
     cxDBCurrencyEdit1: TcxDBCurrencyEdit;
+    actEmailBill: TAction;
+    actViewBill: TAction;
+    tvInvoicesNBILL_TO: TcxGridDBColumn;
+    tvInvoicesIS_DRAFT: TcxGridDBColumn;
+    tvInvoicesEMAIL: TcxGridDBColumn;
+    tvInvoicesFEES_WOFF: TcxGridDBColumn;
+    tvInvoicesWOFF_DISBS: TcxGridDBColumn;
+    actAutoReceipt: TAction;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -1604,7 +1612,6 @@ type
     procedure dbgrMatterPartyDblClick(Sender: TObject);
     procedure btnPartyOpenClick(Sender: TObject);
     procedure btnMatterPartyNewClick(Sender: TObject);
-    procedure btnAutoReceiptClick(Sender: TObject);
     procedure qryReceiptsCalcFields(DataSet: TDataSet);
     procedure dbgrDiaryDblClick(Sender: TObject);
     procedure qryDiaryDESCRGetText(Sender: TField; var Text: String;
@@ -1860,9 +1867,7 @@ type
     procedure btnSendSMSClick(Sender: TObject);
     procedure qryPopDetailsNewRecord(DataSet: TDataSet);
     procedure SendSMS1Click(Sender: TObject);
-    procedure btnEmailBillClick(Sender: TObject);
     procedure dxBarPopupMenuBillsPopup(Sender: TObject);
-    procedure pbViewBillClick(Sender: TObject);
     procedure btnPrintArchiveLAbelClick(Sender: TObject);
     procedure pmSMSPopup(Sender: TObject);
     procedure btnReceiptReqCreateClick(Sender: TObject);
@@ -2016,6 +2021,12 @@ type
     procedure actCMAChargesUpdate(Sender: TObject);
     procedure actCMAReverseExecute(Sender: TObject);
     procedure actCMAReverseUpdate(Sender: TObject);
+    procedure actEmailBillExecute(Sender: TObject);
+    procedure actEmailBillUpdate(Sender: TObject);
+    procedure actViewBillExecute(Sender: TObject);
+    procedure actViewBillUpdate(Sender: TObject);
+    procedure actAutoReceiptUpdate(Sender: TObject);
+    procedure actAutoReceiptExecute(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -4356,33 +4367,6 @@ begin
    end;
 end;
 
-procedure TfrmMatters.btnAutoReceiptClick(Sender: TObject);
-var
-   I, iCtr, RecIdx, ColIdx: Integer;
-   NMemoVal: Variant;
-begin
-   if tvInvoices.Controller.SelectedRowCount <= 1 then
-   begin
-      if not qryInvoices.FieldByName('DISPATCHED').IsNull then
-         (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(qryInvoices.FieldByName('NMEMO').AsInteger)
-   end else
-   begin
-      for I := 0 to tvInvoices.Controller.SelectedRecordCount - 1 do
-      begin
-         // RecordIndex provides the absolute index
-         RecIdx := tvInvoices.Controller.SelectedRecords[I].RecordIndex;
-         // Gets the column index of the Description field
-         ColIdx := tvInvoices.DataController.GetItemByFieldName('NMEMO').Index;
-         // Obtains the value of the required field
-         NMemoVal := tvInvoices.DataController.Values[RecIdx, ColIdx];
-         VarCast(NMemoVal, NMemoVal, varInteger);
-         if not qryInvoices.FieldByName('DISPATCHED').IsNull then
-            (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(NMemoVal);
-      end;
-   end;
-end;
-
-
 procedure TfrmMatters.qryReceiptsCalcFields(DataSet: TDataSet);
 begin
 {
@@ -4978,7 +4962,7 @@ begin
    mnuFileNewInvoice.Enabled           := dmAxiom.Security.Bill.Create;
    btnInvOpen.Enabled                  := dmAxiom.Security.Bill.Edit;
    btnNewInvoice.Enabled               := dmAxiom.Security.Bill.Create;
-   btnAutoReceipt.Enabled              := dmAxiom.Security.Receipt.Create;
+//   btnAutoReceipt.Enabled              := dmAxiom.Security.Receipt.Create;
    dxbtnMAtterEdit.Enabled             := dmAxiom.Security.Matter.Edit;
    btnMaister.Enabled                  := dmAxiom.Security.Matter.FeeAnalysis;
    dxbtnReopenMatter.Enabled           := dmAxiom.Security.Matter.Reopen;
@@ -5240,38 +5224,14 @@ end;
 
 procedure TfrmMatters.qryInvoicesAfterScroll(DataSet: TDataSet);
 begin
-   if (not IsClosedArchivedMatter) then
-   begin
-      // check if this Invoice has been paid and disable AutoReceipt button appropriately
-      if (DataSet.FieldByName('Owing').AsInteger <= 0) then
-        btnAutoReceipt.Enabled := False
-      else
-      begin
-         if (DataSet.FieldByName('IS_DRAFT').AsString = 'N') then
-            btnAutoReceipt.Enabled := True
-         else
-            btnAutoReceipt.Enabled := False;
-      end;
+
 
 {      // Check if the Bill is a draft and enable the delete button
       if ((DataSet.FieldByName('IS_DRAFT').AsString = 'Y') and (dmAxiom.Security.Bill.Delete)) then
         btnDeleteDraft.Enabled := True
       else
         btnDeleteDraft.Enabled := False;    }
-   end;
-   btnEmailBill.Enabled := False;
-   pbViewBill.Enabled := False;
-//   btnInvWord.Enabled := False;
-   if (DataSet.FieldByName('IS_DRAFT').AsString = 'N') then
-   begin
-      if (DataSet.FieldByName('PATH').IsNull = False) then
-          pbViewBill.Enabled := True;
-      if (TableString('PHONEBOOK','NNAME', DataSet.FieldByName('NBILL_TO').AsInteger, 'EMAIL') <> '') AND
-         (not DataSet.FieldByName('PATH').IsNull) then
-      begin
-         btnEmailBill.Enabled := True;
-      end;
-   end;
+
 end;
 
 procedure TfrmMatters.tbnCloseMatterClick(Sender: TObject);
@@ -7759,7 +7719,7 @@ begin
   dxbtnCloseMatter.Enabled    := dmAxiom.Security.Matter.Close;;
   dxbtnReopenMatter.Enabled   := dmAxiom.Security.Matter.Reopen;  //  bEnabled;
   btnInvOpen.Enabled        := (dmAxiom.Security.Bill.Edit and (qryMatter.FieldByName('PROSPECTIVE').AsString = 'N'));
-  btnAutoReceipt.Enabled    := dmAxiom.Security.Receipt.Create;
+//  btnAutoReceipt.Enabled    := dmAxiom.Security.Receipt.Create;
   btnNewInvoice.Enabled     := (dmAxiom.Security.Bill.Create and (qryMatter.FieldByName('PROSPECTIVE').AsString = 'N'));
   btnAutoTimer.Enabled      := (qryMatter.FieldByName('PROSPECTIVE').AsString = 'N');
   dxbtnMAtterEdit.Enabled    := dmAxiom.Security.Matter.Edit;
@@ -7930,7 +7890,7 @@ begin
 //  else
      dxbtnReopenMatter.Enabled   := dmAxiom.Security.Matter.Reopen;  //  bEnabled;
   btnInvOpen.Enabled        := bEnabled;
-  btnAutoReceipt.Enabled    := bEnabled;
+// btnAutoReceipt.Enabled    := bEnabled;
   btnNewInvoice.Enabled     := bEnabled;
   btnAutoTimer.Enabled       := bEnabled;
 
@@ -13039,6 +12999,43 @@ begin
     TAction(Sender).Enabled := False;
 end;
 
+procedure TfrmMatters.actAutoReceiptExecute(Sender: TObject);
+var
+   I, iCtr, RecIdx, ColIdx: Integer;
+   NMemoVal: Variant;
+begin
+   if tvInvoices.Controller.SelectedRowCount <= 1 then
+   begin
+      if not qryInvoices.FieldByName('DISPATCHED').IsNull then
+         (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(qryInvoices.FieldByName('NMEMO').AsInteger)
+   end else
+   begin
+      for I := 0 to tvInvoices.Controller.SelectedRecordCount - 1 do
+      begin
+         // RecordIndex provides the absolute index
+         RecIdx := tvInvoices.Controller.SelectedRecords[I].RecordIndex;
+         // Gets the column index of the Description field
+         ColIdx := tvInvoices.DataController.GetItemByFieldName('NMEMO').Index;
+         // Obtains the value of the required field
+         NMemoVal := tvInvoices.DataController.Values[RecIdx, ColIdx];
+         VarCast(NMemoVal, NMemoVal, varInteger);
+         if not qryInvoices.FieldByName('DISPATCHED').IsNull then
+            (FindOrCreateClassic(TfrmReceipt, 31) as TfrmReceipt).AutoReceipt(NMemoVal);
+      end;
+   end;
+end;
+
+procedure TfrmMatters.actAutoReceiptUpdate(Sender: TObject);
+begin
+   if (not IsClosedArchivedMatter) then
+   begin
+      // check if this Invoice has been paid and disable AutoReceipt button appropriately
+      actAutoReceipt.Enabled := ((VarToStr(tvInvoicesIS_DRAFT.EditValue) = 'N') and (tvInvoicesOwing.EditValue > 0) and
+                                 dmAxiom.Security.Receipt.Create = True);
+   end;
+
+end;
+
 procedure TfrmMatters.actBillDeleteExecute(Sender: TObject);
 begin
    if MessageDlg('Are you sure you want to delete this DRAFT Bill?', mtConfirmation,
@@ -13087,6 +13084,147 @@ begin
       dmAxiom.uniInsight.Rollback;
     end;
   end;
+end;
+
+procedure TfrmMatters.actEmailBillExecute(Sender: TObject);
+var
+   OldCursor: TCursor;
+   Folder  : IRwMapiFolder;
+   MsgStore: IRwMapiMsgStore;
+   AAttachList,
+   AAttachDocID,
+   ARecipientsList: TStringList;
+   sSubject,
+   tmpFileName: string;
+   Msg: IRwMAPIMailMessage;
+   i: integer;
+begin
+   if SystemString('email_reg') = C_EMAILPASSWORD then
+   begin
+      FAttachDoc := True;
+      AAttachDocID := TStringList.Create;
+      AAttachList := GetAttachbillFile(AAttachDocID);
+      ARecipientsList := TStringList.Create;
+      GetEmailAddresses(ARecipientsList, qryMatter.FieldByName('nclient').AsInteger);
+
+            // if outlook not running, start it
+      if IsObjectActive('Outlook.Application') = False then
+         CreateOleObject('Outlook.Application');
+
+      if (dmAxiom.MapiSession.Active = False) then
+      begin
+         WriteLog('EmailBillClick: Establishing MAPI session ');
+         OldCursor := Screen.Cursor;
+         Screen.Cursor := crHourGlass;
+         try
+            try
+                dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
+                dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;    //'Outlook';
+                dmAxiom.MapiSession.LogonInfo.Password           := '';
+                dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
+                dmAxiom.MapiSession.LogonInfo.NewSession         := False;
+                dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
+                dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
+                dmAxiom.MapiSession.Active                       := True;
+            except on e:exception do
+	              WriteLog('Failed to establish MAPI session: ' + e.message);
+            end;
+         finally
+            Screen.Cursor := OldCursor;
+         end;
+      end;
+
+      try
+         begin
+            // dw 20 Sep 2018 handle where user does not select an email
+            if (AAttachList = nil) then
+                 exit;
+            // dw 19 sep 2018 assign in isolated method
+            WriteLog('There are attachments to send ');
+
+            FAttachFileName.text := AAttachList.text;
+            FRecipientsList.text := ARecipientsList.text;
+            try
+               MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
+            except on e:exception do
+               WriteLog('Formgr failed to send message: ' + e.message);
+            end;
+            try
+               // 07 Mar 2017 DW open folder offline for O365 issue
+               Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
+            except on e:exception do
+               WriteLog('Formgr failed to send message: ' + e.message);
+            end;
+
+            Msg := Folder.CreateMessage('IPM.Note') As IRwMapiMailMessage;
+
+            if SystemString('BILL_EMAIL_SUBJECT') <> '' then
+               FBillSubject := ParseMacros(SystemString('BILL_EMAIL_SUBJECT'),qryMatter.FieldByName('nmatter').AsInteger, -1, '', integer(tvInvoicesNMEMO.EditValue))
+            else
+               FBillSubject := dmAxiom.EntityName + ' Invoice ' + tvInvoicesREFNO.EditValue;
+
+            Msg.PropByName(PR_SUBJECT).AsString := FBillSubject;
+            // create a new message in the drafts folder
+//            Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
+
+{            WriteLog('Message subject is: ' + FBillSubject);
+            try
+               FormMgr.NewMessage(Folder);
+            except on e:exception do
+               WriteLog('Formgr failed to send message: ' + e.message);
+            end;
+ }
+
+            for i := 0 to AAttachList.Count - 1 do
+            begin
+               if tmpFileName <> '' then
+                  tmpFileName := tmpFileName + ',';
+               tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
+               Msg.AddFileAttachment(AAttachList.Strings[i]);
+            end;
+            FileAttachList := tmpFileName;
+
+            if ARecipientsList.Count > 0 then
+            begin
+               try
+                  for I := 0 to ARecipientsList.Count - 1 do
+                  begin
+                     Msg.AddRecipients(ARecipientsList.Strings[i], rtTo, True);
+                  end;
+               finally
+               end;
+            end;
+
+//            dmAxiom.qryEmailTemplates.Open;
+//            Msg.SetMessageText(dmAxiom.qryEmailTemplates.FieldByName('body_text').AsString, fmtHTML );
+//            dmAxiom.qryEmailTemplates.Close;
+            Msg.SaveChanges(smKeepOpenReadWrite);
+
+            Msg.ShowForm;
+//            FormMgr.ShowMessage(Msg);
+         end;
+      finally
+         if (AAttachList <> nil) then
+            AAttachList.Free;
+         ARecipientsList.Free;
+         //FreeAndNil(FRecipientsList);     dw 19 sept 2018 this gets freed on formclose
+         AAttachDocID.Free;
+      end;
+   end
+   else
+      MsgInfo(dmAxiom.Registered_Message);
+end;
+
+procedure TfrmMatters.actEmailBillUpdate(Sender: TObject);
+begin
+   if (IsClosedArchivedMatter= False) then
+   begin
+      if tvInvoices.Controller.SelectedRowCount > 0 then
+      begin
+         actEmailBill.Enabled := ((VarIsEmpty(tvInvoicesEMAIL.EditValue) = False ) AND
+                                 (VarIsEmpty(tvInvoicesPATH.EditValue) = False ) and (VarToStr(tvInvoicesIS_DRAFT.EditValue) = 'N'));
+      end;
+   end;
 end;
 
 procedure TfrmMatters.actCMAChargesExecute(Sender: TObject);
@@ -13160,6 +13298,22 @@ end;
 procedure TfrmMatters.actRelateUpdate(Sender: TObject);
 begin
    actRelate.Enabled := (qryMatterParty.IsEmpty = False);
+end;
+
+procedure TfrmMatters.actViewBillExecute(Sender: TObject);
+begin
+   ViewAttacheInvoice;
+end;
+
+procedure TfrmMatters.actViewBillUpdate(Sender: TObject);
+begin
+   if (IsClosedArchivedMatter= False) then
+   begin
+      if tvInvoices.Controller.SelectedRowCount > 0 then
+      begin
+         actViewBill.Enabled := ((VarIsEmpty(tvInvoicesPATH.EditValue) = False ) and (VarToStr(tvInvoicesIS_DRAFT.EditValue) = 'N'));
+      end;
+   end;
 end;
 
 procedure TfrmMatters.tmrAutocostTimer(Sender: TObject);
@@ -13723,135 +13877,6 @@ begin
       MsgInfo(dmAxiom.Registered_Message);
 end;
 
-procedure TfrmMatters.btnEmailBillClick(Sender: TObject);
-var
-   OldCursor: TCursor;
-   Folder  : IRwMapiFolder;
-   MsgStore: IRwMapiMsgStore;
-   AAttachList,
-   AAttachDocID,
-   ARecipientsList: TStringList;
-   sSubject,
-   tmpFileName: string;
-   Msg: IRwMAPIMailMessage;
-   i: integer;
-begin
-   if SystemString('email_reg') = C_EMAILPASSWORD then
-   begin
-      FAttachDoc := True;
-      AAttachDocID := TStringList.Create;
-      AAttachList := GetAttachbillFile(AAttachDocID);
-      ARecipientsList := TStringList.Create;
-      GetEmailAddresses(ARecipientsList, qryMatter.FieldByName('nclient').AsInteger);
-
-            // if outlook not running, start it
-      if IsObjectActive('Outlook.Application') = False then
-         CreateOleObject('Outlook.Application');
-
-      if (dmAxiom.MapiSession.Active = False) then
-      begin
-         WriteLog('EmailBillClick: Establishing MAPI session ');
-         OldCursor := Screen.Cursor;
-         Screen.Cursor := crHourGlass;
-         try
-            try
-                dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-                dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault;    //'Outlook';
-                dmAxiom.MapiSession.LogonInfo.Password           := '';
-                dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
-                dmAxiom.MapiSession.LogonInfo.NewSession         := False;
-                dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := False;
-                dmAxiom.MapiSession.Active                       := True;
-            except on e:exception do
-	              WriteLog('Failed to establish MAPI session: ' + e.message);
-            end;
-         finally
-            Screen.Cursor := OldCursor;
-         end;
-      end;
-
-      try
-         begin
-            // dw 20 Sep 2018 handle where user does not select an email
-            if (AAttachList = nil) then
-                 exit;
-            // dw 19 sep 2018 assign in isolated method
-            WriteLog('There are attachments to send ');
-
-            FAttachFileName.text := AAttachList.text;
-            FRecipientsList.text := ARecipientsList.text;
-            try
-               MsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadWrite, False);
-            except on e:exception do
-               WriteLog('Formgr failed to send message: ' + e.message);
-            end;
-            try
-               // 07 Mar 2017 DW open folder offline for O365 issue
-               Folder := MsgStore.OpenFolderByType(ftDraft, alReadWrite, False);
-            except on e:exception do
-               WriteLog('Formgr failed to send message: ' + e.message);
-            end;
-
-            Msg := Folder.CreateMessage('IPM.Note') As IRwMapiMailMessage;
-
-            if SystemString('BILL_EMAIL_SUBJECT') <> '' then
-               FBillSubject := ParseMacros(SystemString('BILL_EMAIL_SUBJECT'),qryMatter.FieldByName('nmatter').AsInteger, -1, '', integer(tvInvoicesNMEMO.EditValue))
-            else
-               FBillSubject := dmAxiom.EntityName + ' Invoice ' + tvInvoicesREFNO.EditValue;
-
-            Msg.PropByName(PR_SUBJECT).AsString := FBillSubject;
-            // create a new message in the drafts folder
-//            Msg := Folder.CreateMessage('IPM.Note') as IRwMapiMailMessage;
-
-{            WriteLog('Message subject is: ' + FBillSubject);
-            try
-               FormMgr.NewMessage(Folder);
-            except on e:exception do
-               WriteLog('Formgr failed to send message: ' + e.message);
-            end;
- }
-
-            for i := 0 to AAttachList.Count - 1 do
-            begin
-               if tmpFileName <> '' then
-                  tmpFileName := tmpFileName + ',';
-               tmpFileName := tmpFileName + ExtractFileName(AAttachList.Strings[i]);
-               Msg.AddFileAttachment(AAttachList.Strings[i]);
-            end;
-            FileAttachList := tmpFileName;
-
-            if ARecipientsList.Count > 0 then
-            begin
-               try
-                  for I := 0 to ARecipientsList.Count - 1 do
-                  begin
-                     Msg.AddRecipients(ARecipientsList.Strings[i], rtTo, True);
-                  end;
-               finally
-               end;
-            end;
-
-//            dmAxiom.qryEmailTemplates.Open;
-//            Msg.SetMessageText(dmAxiom.qryEmailTemplates.FieldByName('body_text').AsString, fmtHTML );
-//            dmAxiom.qryEmailTemplates.Close;
-            Msg.SaveChanges(smKeepOpenReadWrite);
-
-            Msg.ShowForm;
-//            FormMgr.ShowMessage(Msg);
-         end;
-      finally
-         if (AAttachList <> nil) then
-            AAttachList.Free;
-         ARecipientsList.Free;
-         //FreeAndNil(FRecipientsList);     dw 19 sept 2018 this gets freed on formclose
-         AAttachDocID.Free;
-      end;
-   end
-   else
-      MsgInfo(dmAxiom.Registered_Message);
-end;
-
 procedure TfrmMatters.dxBarPopupMenuBillsPopup(Sender: TObject);
 begin
   btnViewBill.Enabled := (not qryInvoices.fieldByname('PATH').IsNull);
@@ -13962,11 +13987,6 @@ begin
    except
      //
    end;
-end;
-
-procedure TfrmMatters.pbViewBillClick(Sender: TObject);
-begin
-  ViewAttacheInvoice;
 end;
 
 procedure TfrmMatters.btnPrintArchiveLAbelClick(Sender: TObject);

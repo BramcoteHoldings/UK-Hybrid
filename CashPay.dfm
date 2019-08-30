@@ -369,6 +369,10 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -1819,7 +1823,7 @@ object frmCashpay: TfrmCashpay
       
         '             tax, priorbalance, disb_crdit, antd_crdit, fees_crd' +
         'it, tax_crdit,'
-      '             disb, ncheqreq)'
+      '             disb, ncheqreq, billed_amount, billed_tax_amount)'
       
         '   SELECT :alloc_new, a.bank, :descr, a.ncheque, a.approval, a.n' +
         'receipt,'
@@ -1844,7 +1848,7 @@ object frmCashpay: TfrmCashpay
       
         '          a.disb_crdit, a.antd_crdit, a.fees_crdit, a.tax_crdit,' +
         ' a.disb,'
-      '          a.ncheqreq'
+      '          a.ncheqreq, billed_amount, billed_tax_amount'
       '     FROM alloc a, matter m'
       '    WHERE nalloc = :alloc_old AND m.fileid = :fileid')
     Left = 496
