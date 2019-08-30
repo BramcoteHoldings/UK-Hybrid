@@ -109,10 +109,10 @@
     <Transaction>2018/05/16 15:02:27.000.920,D:\Insight_XE4_Source\Insight\AccountPayable.pas=</Transaction>
     <Transaction>2018/05/16 15:02:27.000.888,D:\Insight_XE4_Source\Insight\AccountNew.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.562,D:\Insight_XE4_Source\Insight\CreditorSearch.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.534,D:\Insight_XE4_Source\Insight\Creditors.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.475,D:\Insight_XE4_Source\Insight\CreditorMerge.pas=</Transaction>
     <Transaction>2018/05/16 15:04:40.000.506,D:\Insight_XE4_Source\Insight\CreditorMergeProgress.pas=</Transaction>
-    <Transaction>2018/05/16 15:04:40.000.402,D:\Insight_XE4_Source\Insight\CreditorAccountsSearch.pas=</Transaction>
+    <Transaction>2018/05/16 15:04:40.000.534,D:\Insight_XE4_Source\Insight\Creditors.pas=</Transaction>
     <Transaction>2018/05/16 15:05:24.000.811,=D:\Insight_XE4_Source\Insight\Creditors\AccountCreate.pas</Transaction>
     <Transaction>2018/05/16 15:05:25.000.531,=D:\Insight_XE4_Source\Insight\Creditors\CreditorAccountsSearch.pas</Transaction>
     <Transaction>2018/05/16 15:05:25.000.833,=D:\Insight_XE4_Source\Insight\Creditors\CreditorMergeProgress.pas</Transaction>
@@ -147,7 +147,7 @@
     <Transaction>2019/05/14 10:42:51.000.543,D:\Insight_XE4_Source\UK-Hybrid\SubBill.pas=</Transaction>
     <Transaction>2019/05/14 10:46:31.000.684,=D:\Insight_XE4_Source\UK-Hybrid\Billing\SubBill.pas</Transaction>
   </Transactions>
-	<ProjectSortOrder AutoSort="0" SortType="1">
+	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Advertising"/>
     <File Path="Advertising\AdMaint.pas"/>
     <File Path="Advertising\AdMaint.dfm"/>
@@ -184,6 +184,8 @@
     <File Path="Billing\Bill_narration_edit.dfm"/>
     <File Path="Billing\Bulkbills.pas"/>
     <File Path="Billing\Bulkbills.dfm"/>
+    <File Path="Billing\InvoiceSearch.pas"/>
+    <File Path="Billing\InvoiceSearch.dfm"/>
     <File Path="Billing\InvPost.pas"/>
     <File Path="Billing\InvPost.dfm"/>
     <File Path="Billing\SubBill.pas"/>
@@ -245,8 +247,6 @@
     <File Path="Creditors\InvoiceReverse.dfm"/>
     <File Path="Creditors\InvoiceScan.pas"/>
     <File Path="Creditors\InvoiceScan.dfm"/>
-    <File Path="Creditors\InvoiceSearch.pas"/>
-    <File Path="Creditors\InvoiceSearch.dfm"/>
     <File Path="Dashboard"/>
     <File Path="Dashboard\BreakDown_UnbilledWIP.pas"/>
     <File Path="Dashboard\BreakDown_UnbilledWIP.dfm"/>
@@ -729,6 +729,8 @@
     <File Path="MasterBill.dfm"/>
     <File Path="MatterAssociate.pas"/>
     <File Path="MatterAssociate.dfm"/>
+    <File Path="MatterGLOfficeJournal.pas"/>
+    <File Path="MatterGLOfficeJournal.dfm"/>
     <File Path="MatterLabel.pas"/>
     <File Path="MatterLabelPrint.pas"/>
     <File Path="MatterLabelPrint.dfm"/>
@@ -772,8 +774,6 @@
     <File Path="Password.dfm"/>
     <File Path="PettyCash.pas"/>
     <File Path="PettyCash.dfm"/>
-    <File Path="PettyJournal.pas"/>
-    <File Path="PettyJournal.dfm"/>
     <File Path="PhoneBook.pas"/>
     <File Path="PhoneBook.dfm"/>
     <File Path="PhonebookGroups.pas"/>
