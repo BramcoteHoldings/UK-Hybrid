@@ -607,8 +607,8 @@ begin
                                  end;
 
                                  // 27-Mar-2012 AES need to make the original Invoice paid so that it will not appear again
-                                 qryInvoiceUpdate.ParamByName('ninvoice').AsInteger := BandedTableViewDBBandedNINVOICE.EditValue;
-                                 qryInvoiceUpdate.ExecSQL;
+                                 //qryInvoiceUpdate.ParamByName('ninvoice').AsInteger := BandedTableViewDBBandedNINVOICE.EditValue;
+                                 //qryInvoiceUpdate.ExecSQL;
 
                                  {post components}
                                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR'),'',true,'');
