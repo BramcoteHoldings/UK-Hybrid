@@ -408,7 +408,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object dtpDate: TEnforceCustomDateEdit
     Left = 185
     Top = 36
-    EditValue = 43708.6733422685d
+    EditValue = 43708.6915973148d
     Properties.ShowTime = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
