@@ -123,6 +123,7 @@ type
     procedure BandedTableViewStylesGetContentStyle(
       Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
       AItem: TcxCustomGridTableItem; var AStyle: TcxStyle);
+    procedure rgTypePropertiesChange(Sender: TObject);
   private
     { Private declarations }
     Balance, Tax, TotalAmt,TotalAmtEx, WithholdTax, TotalTax: currency;
@@ -606,8 +607,8 @@ begin
                                  end;
 
                                  // 27-Mar-2012 AES need to make the original Invoice paid so that it will not appear again
-                                 qryInvoiceUpdate.ParamByName('ninvoice').AsInteger := BandedTableViewDBBandedNINVOICE.EditValue;
-                                 qryInvoiceUpdate.ExecSQL;
+                                 //qryInvoiceUpdate.ParamByName('ninvoice').AsInteger := BandedTableViewDBBandedNINVOICE.EditValue;
+                                 //qryInvoiceUpdate.ExecSQL;
 
                                  {post components}
                                  sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR'),'',true,'');
@@ -909,6 +910,24 @@ begin
 end;
 
 
+procedure TfrmWriteOffDisb.rgTypePropertiesChange(Sender: TObject);
+var
+  AMatterNo : string;
+begin
+      AMatterNo := beMatterNo.Text;
+      if (MatterIsCurrent(AMatterNo)) then
+      begin
+         qryDisb.close;
+         qryDisb.ParamByName('p_file').AsString := matterstring(qryLedger.FieldByName('REFNO').AsString,'NMATTER');
+         if rgtype.ItemIndex = 0 then
+            qryDisb.ParamByName('w_type').AsString := 'C'
+         else
+            qryDisb.ParamByName('w_type').AsString := 'I';
+         qryDisb.Open;
+         GenerateUnboundData;
+      end;
+end;
+
 procedure TfrmWriteOffDisb.tbLedgerChange(Sender: TObject);
 var
 stmp : String;
@@ -993,6 +1012,10 @@ begin
          qryMatters.Close;
          qryDisb.close;
          qryDisb.ParamByName('p_file').AsString := matterstring(qryLedger.FieldByName('REFNO').AsString,'NMATTER');
+         if rgtype.ItemIndex = 0 then
+            qryDisb.ParamByName('w_type').AsString := 'C'
+         else
+            qryDisb.ParamByName('w_type').AsString := 'I';
          qryDisb.Open;
          GenerateUnboundData;
       end
@@ -1132,6 +1155,10 @@ begin
       qryMatters.Close;
       qryDisb.close;
       qryDisb.ParamByName('p_file').AsString := matterstring(qryLedger.FieldByName('REFNO').AsString,'NMATTER');
+      if rgtype.ItemIndex = 0 then
+          qryDisb.ParamByName('w_type').AsString := 'C'
+      else
+          qryDisb.ParamByName('w_type').AsString := 'I';
       qryDisb.Open;
       GenerateUnboundData;
    end;
