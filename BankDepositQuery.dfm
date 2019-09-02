@@ -49,7 +49,6 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     BevelOuter = bvNone
     BorderWidth = 5
     TabOrder = 1
-    ExplicitTop = 27
     DesignSize = (
       1029
       574)
@@ -64,7 +63,6 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       Properties.CustomButtons.Buttons = <>
       Properties.ShowFrame = True
       Properties.TabSlants.Kind = skCutCorner
-      TabSlants.Kind = skCutCorner
       OnChange = pagDepositsChange
       ClientRectBottom = 566
       ClientRectLeft = 4
@@ -1329,6 +1327,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -1354,15 +1353,23 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
@@ -1377,19 +1384,22 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
     Left = 832
     Top = 98
-    Version = '16.03'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plDepositedReceipts'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 33338
       mmPrintPosition = 0
       object ppSystemVariable1: TppSystemVariable
         DesignLayer = ppDesignLayer1
         UserName = 'SystemVariable1'
+        Border.mmPadding = 0
         VarType = vtPrintDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1407,13 +1417,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel1: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label1'
+        Border.mmPadding = 0
         Caption = 'Cheque #'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 1058
@@ -1425,13 +1437,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
+        Border.mmPadding = 0
         Caption = 'Drawer'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3768
@@ -1444,13 +1458,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel3: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3768
@@ -1463,13 +1479,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
+        Border.mmPadding = 0
         Caption = 'Branch'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3768
@@ -1482,13 +1500,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel5: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label5'
+        Border.mmPadding = 0
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3768
@@ -1501,6 +1521,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLine1: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line1'
+        Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 794
@@ -1513,6 +1534,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText6: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText6'
+        Border.mmPadding = 0
         DataField = 'BANKNAME'
         DataPipeline = plBankDtls
         Font.Charset = ANSI_CHARSET
@@ -1533,6 +1555,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText7: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText7'
+        Border.mmPadding = 0
         DataField = 'NAME'
         DataPipeline = plBankDtls
         Font.Charset = ANSI_CHARSET
@@ -1553,6 +1576,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText8'
+        Border.mmPadding = 0
         DataField = 'ACCOUNTNUMBER'
         DataPipeline = plBankDtls
         Font.Charset = ANSI_CHARSET
@@ -1573,13 +1597,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label12'
+        Border.mmPadding = 0
         Caption = 'Bank'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 1058
@@ -1591,13 +1617,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel13: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label13'
+        Border.mmPadding = 0
         Caption = 'Account Name'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 1058
@@ -1609,13 +1637,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel14: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label14'
+        Border.mmPadding = 0
         Caption = 'Account Number'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 9
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3768
         mmLeft = 1058
@@ -1627,13 +1657,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabelEntity: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'LabelEntity'
+        Border.mmPadding = 0
         Caption = 'LabelEntity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 4911
@@ -1647,12 +1679,14 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 6350
       mmPrintPosition = 0
       object ppDBText1: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText1'
+        Border.mmPadding = 0
         DataField = 'CHQNO'
         DataPipeline = plDepositedReceipts
         Font.Charset = ANSI_CHARSET
@@ -1672,6 +1706,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText2: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
+        Border.mmPadding = 0
         DataField = 'PAYOR'
         DataPipeline = plDepositedReceipts
         Font.Charset = ANSI_CHARSET
@@ -1691,6 +1726,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText3: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
+        Border.mmPadding = 0
         DataField = 'BANK'
         DataPipeline = plDepositedReceipts
         Font.Charset = ANSI_CHARSET
@@ -1710,6 +1746,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText4: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText4'
+        Border.mmPadding = 0
         DataField = 'BRANCH'
         DataPipeline = plDepositedReceipts
         Font.Charset = ANSI_CHARSET
@@ -1729,6 +1766,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBText5: TppDBText
         DesignLayer = ppDesignLayer1
         UserName = 'DBText5'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plDepositedReceipts
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1750,12 +1788,14 @@ object frmBankDepositQuery: TfrmBankDepositQuery
     end
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 35983
       mmPrintPosition = 0
       object ppLabel6: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label6'
+        Border.mmPadding = 0
         Caption = 
           'Depositor'#39's Signature...........................................' +
           '...................................'
@@ -1764,7 +1804,8 @@ object frmBankDepositQuery: TfrmBankDepositQuery
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 1058
@@ -1776,6 +1817,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel7: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label7'
+        Border.mmPadding = 0
         Caption = 
           'Teller'#39's Signature..............................................' +
           '................................'
@@ -1784,7 +1826,8 @@ object frmBankDepositQuery: TfrmBankDepositQuery
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 1058
@@ -1796,13 +1839,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel8: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label8'
+        Border.mmPadding = 0
         Caption = 'Total Cheques'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 145257
@@ -1814,6 +1859,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppDBCalc1: TppDBCalc
         DesignLayer = ppDesignLayer1
         UserName = 'DBCalc1'
+        Border.mmPadding = 0
         DataField = 'AMOUNT'
         DataPipeline = plDepositedReceipts
         Font.Charset = ANSI_CHARSET
@@ -1834,13 +1880,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
+        Border.mmPadding = 0
         Caption = 'Cash'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 145257
@@ -1852,13 +1900,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
+        Border.mmPadding = 0
         Caption = 'Credit Card'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 145257
@@ -1870,6 +1920,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppVarCash: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'VarCash'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 0
         DataType = dtCurrency
@@ -1890,6 +1941,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppVarCredit: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'VarCredit'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 1
         DataType = dtCurrency
@@ -1910,13 +1962,15 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label11'
+        Border.mmPadding = 0
         Caption = 'Total Deposit'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial Narrow'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -1929,6 +1983,7 @@ object frmBankDepositQuery: TfrmBankDepositQuery
       object ppVarTotal: TppVariable
         DesignLayer = ppDesignLayer1
         UserName = 'VarTotal'
+        Border.mmPadding = 0
         BlankWhenZero = False
         CalcOrder = 2
         DataType = dtCurrency

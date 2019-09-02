@@ -65,10 +65,14 @@ object frmCashpay: TfrmCashpay
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 1110
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -2086,7 +2090,7 @@ object frmCashpay: TfrmCashpay
       Enabled = False
       Visible = ivAlways
       ImageIndex = 6
-      OnClick = btnPresentClick
+      OnClick = tbtnPresentClick
     end
     object bbtnEFTFile: TdxBarButton
       Caption = 'Generate EFT File'
