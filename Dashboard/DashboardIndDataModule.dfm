@@ -2855,7 +2855,7 @@ object dmDashboardInd: TdmDashboardInd
       
         '                         ) BETWEEN :year_start_date AND :year_en' +
         'd_date) a,'
-      '         (SELECT nvl(SUM (billedfees),0) fees_budget, period,'
+      '         (SELECT nvl(SUM (receivedfees),0) fees_budget, period,'
       
         '                 TO_CHAR (TO_DATE (MONTH || '#39'-'#39' || calendar_year' +
         ', '#39'MM-YYYY'#39'),'

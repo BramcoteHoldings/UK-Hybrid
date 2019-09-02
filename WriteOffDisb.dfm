@@ -262,8 +262,8 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     end
   end
   object dblblMatterDescr: TcxDBLabel
-    Left = 295
-    Top = 125
+    Left = 310
+    Top = 124
     DataBinding.DataField = 'LONGDESC'
     DataBinding.DataSource = dsLedger
     ParentFont = False
@@ -277,7 +277,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     Style.IsFontAssigned = True
     Height = 27
     Width = 564
-    AnchorY = 139
+    AnchorY = 138
   end
   object cxDBLabel2: TcxDBLabel
     Left = 185
@@ -365,8 +365,8 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     Width = 283
   end
   object rgledgertype: TcxRadioGroup
-    Left = 581
-    Top = 36
+    Left = 718
+    Top = 38
     Caption = 'Ledger Type'
     Properties.Items = <
       item
@@ -380,13 +380,14 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 4
     Transparent = True
+    Visible = False
     OnClick = rgledgertypeClick
     Height = 81
     Width = 139
   end
   object rgType: TcxRadioGroup
-    Left = 724
-    Top = 36
+    Left = 579
+    Top = 38
     Caption = 'Type'
     Properties.Items = <
       item
@@ -395,6 +396,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       item
         Caption = 'Creditor Invoices'
       end>
+    Properties.OnChange = rgTypePropertiesChange
     ItemIndex = 0
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -406,7 +408,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   object dtpDate: TEnforceCustomDateEdit
     Left = 185
     Top = 36
-    EditValue = 43704.6334680556d
+    EditValue = 43708.6915973148d
     Properties.ShowTime = False
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -473,7 +475,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
   end
   object beMatterNo: TcxButtonEdit
     Left = 185
-    Top = 125
+    Top = 124
     Properties.Buttons = <
       item
         Default = True
@@ -523,7 +525,7 @@ object frmWriteOffDisb: TfrmWriteOffDisb
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 3
-    Width = 107
+    Width = 119
   end
   object lblLedgerDesc: TcxLabel
     Left = 301
@@ -825,10 +827,12 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       '   AND NVL (billed, '#39'N'#39') = '#39'N'#39' '
       '   AND nmemo is null'
       '   AND NVL (trust, '#39'G'#39') <> '#39'T'#39
-      '   AND (   (ninvoice IS NOT NULL AND rv_nalloc IS NULL)'
       
-        '        OR (NVL (ncheque, 0) > 0 OR (NVL (njournal, 0) > 0 AND T' +
-        'YPE = '#39'J2'#39'))'
+        '   AND ((:w_type = '#39'I'#39' AND ninvoice IS NOT NULL AND rv_nalloc IS' +
+        ' NULL)'
+      
+        '        OR (:w_type = '#39'C'#39' AND (NVL (ncheque, 0) > 0 OR (NVL (njo' +
+        'urnal, 0) > 0 AND TYPE = '#39'J2'#39')))'
       '       )'
       ''
       ''
@@ -856,6 +860,11 @@ object frmWriteOffDisb: TfrmWriteOffDisb
       item
         DataType = ftUnknown
         Name = 'P_File'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'w_type'
         Value = nil
       end>
   end
