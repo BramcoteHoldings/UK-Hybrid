@@ -182,6 +182,7 @@ type
     qryLedgerLGRALLOC_ID: TFloatField;
     cbBank: TcxLookupComboBox;
     cbAuthBy: TcxLookupComboBox;
+    qryLedgerINV_TAX: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure cbAuthByClick(Sender: TObject);
@@ -897,7 +898,9 @@ var
   bTrustInvoice: boolean;
   ANInvoice, ANJournal: integer;
   SplitPercent: Real;
-  TaxCalc: Currency;
+  TaxCalculated: Currency;
+  Bas_Tax,
+  dAmount: double;
 begin
 {
   Code Modified 9.9.02 G.Groube
@@ -1692,7 +1695,15 @@ begin
 						            cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
                               cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
                               if (qryLedger.FieldByName('TAX').AsFloat = 0) then
-                                 cMatterTotalTax := 0;
+                              begin
+                                 if qryLedger.FieldByName('INV_TAX').AsFloat <> 0 then
+                                 begin
+                                    dAmount := qryLedger.FieldByName('AMOUNT').AsFloat;
+                                    cMatterTotalTax := TaxCalc(dAmount, 'CHEQUE', DefaultTax, dtpDate.Date);
+                                 end
+                                 else
+                                    cMatterTotalTax := 0;
+                              end;
 
 {                           if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
                                cMatterTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cTradeTotal;
@@ -1716,11 +1727,13 @@ begin
                         // Check if totals are equal to Ledger amount??
                         // Post for trade
 
+
+
                         {post components}
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                            //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                            , 0 - (cTradeTotal - cTradeTotalTax)
+                            , 0 - cTradeTotal   //(cTradeTotal - cTradeTotalTax)
                             , 0 - cTradeTotalTax
                             , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                             , qryCheque.FieldByName('NCHEQUE').AsInteger
@@ -1754,7 +1767,7 @@ begin
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
 
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                            , 0 - (cMatterTotal - cMatterTotalTax)
+                            , 0 - cMatterTotal  //(cMatterTotal - cMatterTotalTax)
                             , 0 - cMatterTotalTax
                             , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                             , qryCheque.FieldByName('NCHEQUE').AsInteger
@@ -2209,12 +2222,12 @@ begin
                            end;
                            SplitPercent := RoundTo(qryLedger.FieldByName('AMOUNT').AsFloat/(qryBill.FieldByName('UPCRED').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat),-2);
 
-                           TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
-                           ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalc;
-                           ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalc);
+                           TaxCalculated := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
+                           ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalculated;
+                           ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalculated);
 
                            ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
-                           ParamByName('TAX_PAID').AsCurrency := TaxCalc;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
+                           ParamByName('TAX_PAID').AsCurrency := TaxCalculated;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
                            ExecSQL;
                            qryBill.Close;
                            qryInvoiceCRAmount.Close;
@@ -3096,7 +3109,7 @@ var
   sSQL, sTaxCode : string;
 begin
    // This procedure sets up a Cheque Automagically from the Invoice identified by NCheque
-   DefaultTax := GetDefaultTax('Invoice', 'NOTAX');
+   DefaultTax := GetDefaultTax('InvoicePayment', 'NOTAX');
 
    qryDetails := TUniQuery.Create(Self);
    with qryDetails do
@@ -3106,16 +3119,18 @@ begin
       iType := 0;
       if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
       BEGIN
-          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), TAXCODE ';
+          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, ';
+          sSQL := sSQL + 'P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), A.TAXCODE, P.TAX AS INV_TAX ';
           sSQL := sSQL + 'FROM INVOICE P, ALLOC A WHERE A.NINVOICE = P.NINVOICE AND P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, TAXCODE ';          SQL.Text := sSQL;
+          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, A.TAXCODE, P.TAX ';
+          SQL.Text := sSQL;
       END
       ELSE
       BEGIN
           //SQL.Text := 'SELECT * FROM INVOICE, ALLOC WHERE ALLOC.NINVOICE = INVOICE.NINVOICE AND INVOICE.NINVOICE = ' + InttoStr(NCheque);
-          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX, P.TAXCODE ';
+          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX, P.TAXCODE, P.INV_TAX ';
           sSQL := sSQL + 'FROM ';
-          sSQL := sSQL + '(SELECT (R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, (R.COMMENCE), T.TAXCODE ';
+          sSQL := sSQL + '(SELECT (R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, (R.COMMENCE), T.TAXCODE, I.TAX AS INV_TAX ';
           sSQL := sSQL + 'FROM INVOICE I ';
           sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
           sSQL := sSQL + 'INNER JOIN MATTER M ON T.NMATTER = M.NMATTER ';
@@ -3133,7 +3148,7 @@ begin
           sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
           sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';  }
           sSQL := sSQL + {'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX} ') P ';
-          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
+          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR, I.INV_TAX ';
           SQL.Text := sSQL;
           ParamByName('COMMENCE').AsDateTime := Trunc(Now);
       END;
@@ -3151,7 +3166,7 @@ begin
           Close;
           if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
           BEGIN
-              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE ';
+              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE, 0 AS INV_TAX ';
               sSQL := sSQL + 'FROM INVOICE P WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
               SQL.Text := sSQL;
           END
@@ -3165,7 +3180,7 @@ begin
               sSQL := sSQL + '(T.AMOUNT - ((I.OWING/I.AMOUNT) * T.AMOUNT)) AS U_AMOUNT, (T.TAX - ((I.OWING/I.AMOUNT) * T.TAX)) AS U_TAX, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.amount else t.amount * -1 end AS t_amount, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.tax else t.tax * -1 end AS t_tax, MAX(R.COMMENCE) ';
-              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, (R.COMMENCE), T.TAXCODE ';
+              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, (R.COMMENCE), T.TAXCODE, I.TAX AS INV_TAX ';
               sSQL := sSQL + 'FROM INVOICE I ';
               sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
               sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE NOT IN (''CRED'',''GSTINP'') ';
@@ -3194,7 +3209,7 @@ begin
    if (qryDetails.IsEmpty = False) then
    begin
       if (qryDetails.FieldByName('ACCT').AsString = dmAxiom.Entity) then
-      qryDetails.First;
+         qryDetails.First;
       while not qryDetails.Eof do
       begin
          {if cbBank.Items.Count = 0 then
@@ -3264,6 +3279,7 @@ begin
                  FieldByName('FILEID').AsString := qryDetails.FieldByName('FILEID').AsString;
               FieldByName('NINVOICE').AsInteger := qryDetails.FieldByName('NINVOICE').AsInteger;
               FieldByName('TAXCODE').AsString := qryDetails.FieldByName('TAXCODE').AsString;
+              FieldByName('INV_TAX').AsFloat := qryDetails.FieldByName('INV_TAX').AsFloat;
               Edit;
   {
     Added 17.12.2002 GG
@@ -3360,6 +3376,8 @@ begin
            UpdateTotal;
            tvLedgerAMOUNT.Focused := True;
            qryLedgerTYPE.OnChange := qryLedgerTYPEChange;
+           tvLedgerTAXCODE.Visible := False;
+           tvLedgerTAX.Visible := False;
         end
         else
         begin
