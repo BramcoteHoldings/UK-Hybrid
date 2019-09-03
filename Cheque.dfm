@@ -851,7 +851,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43706.6998100694d
+    EditValue = 43711.6010990046d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1123,7 +1123,7 @@ object frmCheque: TfrmCheque
       
         'NCREDITOR, ACCOUNT_NAME, ACCOUNT, BSB, DEP_ACCOUNT_TYPE, NDEPOSI' +
         'TACCOUNT, ANTICIPATED, ORIGINAL_TX, CHART, BAS_TAX,'
-      'FILEID, NINVOICE, lgralloc_id, ROWID'
+      'FILEID, NINVOICE, lgralloc_id, INV_TAX, ROWID'
       'FROM LGRALLOC'
       'WHERE 1=2')
     CachedUpdates = True
@@ -1228,6 +1228,9 @@ object frmCheque: TfrmCheque
     end
     object qryLedgerLGRALLOC_ID: TFloatField
       FieldName = 'LGRALLOC_ID'
+    end
+    object qryLedgerINV_TAX: TFloatField
+      FieldName = 'INV_TAX'
     end
   end
   object dsLedger: TUniDataSource
