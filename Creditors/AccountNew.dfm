@@ -307,7 +307,7 @@ object frmAccountNew: TfrmAccountNew
   object dtpDate: TEnforceCustomDateEdit
     Left = 120
     Top = 4
-    EditValue = 43697.7852750463d
+    EditValue = 43712.4972780556d
     Properties.MinDate = 1.000000000000000000
     Properties.ShowTime = False
     Properties.OnChange = EnforceCustomDateEdit1PropertiesChange
@@ -345,8 +345,8 @@ object frmAccountNew: TfrmAccountNew
     OnClick = btnCancelClick
   end
   object btnOK: TBitBtn
-    Left = 649
-    Top = 454
+    Left = 657
+    Top = 455
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -839,7 +839,7 @@ object frmAccountNew: TfrmAccountNew
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43697.785274722220000000
+      ReportDocument.CreationDate = 43712.497277835650000000
       ShrinkToPageWidth = True
       PixelsPerInch = 96
       BuiltInReportLink = True

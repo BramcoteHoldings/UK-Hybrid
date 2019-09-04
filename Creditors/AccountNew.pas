@@ -559,17 +559,9 @@ begin
             qryAllocs.FieldByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;;
 
             qryAllocs.FieldByName('BILLING_TAXCODE').AsString := TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'tax_code_billing');
-            if qryAllocs.FieldByName('BILLING_TAXCODE').IsNull = False then
-            begin
-               dAmount := qryLedger.FieldByName('AMOUNT').AsCurrency;
-               qryAllocs.FieldByName('BILLED_TAX_AMOUNT').AsFloat := 0 - TaxCalc(dAmount, 'BILL', qryLedger.FieldByName('TAXCODE').AsString, dtpDate.Date);
-               qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := 0 - dAmount;
-            end
-            else
-            begin
-               qryAllocs.FieldByName('BILLED_TAX_AMOUNT').Clear;
-               qryAllocs.FieldByName('BILLED_AMOUNT').Clear;
-            end;
+            dAmount := qryLedger.FieldByName('AMOUNT').AsCurrency;
+            qryAllocs.FieldByName('BILLED_TAX_AMOUNT').AsFloat := 0 - TaxCalc(dAmount, 'BILL', qryLedger.FieldByName('TAXCODE').AsString, dtpDate.Date);
+            qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := 0 - dAmount;
 
             qryAllocs.Post;  // Put it into the cached bufer
 
