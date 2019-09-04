@@ -416,6 +416,8 @@ type
     lblInvoice: TcxTextEdit;
     barbtnTaxcodeList: TdxBarSubItem;
     cxBarEditItem1: TcxBarEditItem;
+    procBillAddSingleUpCred: TUniStoredProc;
+    procBillAddSingleUpAntd: TUniStoredProc;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -716,7 +718,8 @@ const
   C_COLUMNPOSITION = 'ColumnPosition';
 
 var
-  bNoSave : Boolean;
+  bNoSave,
+  bFeesMsgAsked : Boolean;
   BillFeeTotal : double;
 
 procedure TfrmInvoice.DisplayInvoice(iMemo: Integer; AForm: TComponent; AFromBillGrid: Boolean);
@@ -1063,21 +1066,21 @@ begin
       neFeesTaxFree.Enabled := False;
       neFeesTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeFeesTax;
 
-      neDisb.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeDisbursments;
+//      neDisb.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeDisbursments;
       neDisbTaxFree.Enabled := False;
-      neDisbTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeDisbursmentsTax;
+//      neDisbTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeDisbursmentsTax;
 
-      neAntd.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeChequeReq;
+//      neAntd.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeChequeReq;
       neAntdTaxFree.Enabled := False;
-      neAntdTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeChequeReqTax;
+//      neAntdTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeChequeReqTax;
 
       neSund.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeSundrys;
       neSundTaxFree.Enabled := False;
       neSundTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeSundrysTax;
 
-      neUpCred.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeUnpaidCreditors;
+//      neUpCred.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeUnpaidCreditors;
       neUpCredTaxFree.Enabled := False;
-      neUpCredTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeUnpaidCreditorsTax;
+//      neUpCredTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeUnpaidCreditorsTax;
 
       neTrust.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeTrust and dmAxiom.Security.Bill.Post and dmAxiom.Security.Bill.TrustTransfer;
       neTrust.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeTrust and dmAxiom.Security.Bill.TrustTransfer;
@@ -1996,6 +1999,14 @@ var
     sBillNoTest: integer;
 begin
    bFeeTaxCorrect := true;
+
+   if (bFeesMsgAsked = False) and ((neFees.AsCurrency = 0) and (qryInvoice.FieldByName('FEES').AsCurrency <> 0)) then
+   begin
+      bFeesMsgAsked := False;
+      if MsgAsk('Do you want to remove all Fees from this bill?') = mrYes then
+         tbtnRemoveFees.Click;
+   end;
+
    if not bNoSave then
    begin
       try
@@ -2547,20 +2558,22 @@ procedure TfrmInvoice.tbtnReverseClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.FormCreate(Sender : TObject);
-  var
+var
     sWordProc, lsStorageName : String;
     AEdit : TcxCustomEdit;
     iCtr : Integer;
-  begin
-    lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
-    TppIniStoragePlugIn.SetStorageName(lsStorageName);
+begin
+   lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
+   TppIniStoragePlugIn.SetStorageName(lsStorageName);
 
-    SettingLoadStream(dmAxiom.UserID, 'tvBillItems Layout', tvBillItems);
+   // AES 04/09/2019
+   bFeesMsgAsked := False;
 
-    try
-      if dmAxiom.uniInsight.InTransaction
-      then
-        dmAxiom.uniInsight.Commit;
+   SettingLoadStream(dmAxiom.UserID, 'tvBillItems Layout', tvBillItems);
+
+   try
+      if dmAxiom.uniInsight.InTransaction then
+         dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
       with dmAxiom.qrySettingLoad do
       begin
@@ -2568,8 +2581,7 @@ procedure TfrmInvoice.FormCreate(Sender : TObject);
         ParamByName('Owner').AsString := 'tvBillItems';
         ParamByName('Item').AsString := 'SingleLine';
         Open();
-        if (Eof)
-        then
+        if (Eof) then
         begin
           with dmAxiom.procSettingSave do
           begin
@@ -2582,53 +2594,51 @@ procedure TfrmInvoice.FormCreate(Sender : TObject);
           end;
         end;
       end;
-    finally
+   finally
       dmAxiom.uniInsight.Commit;
       tvBillItems.OptionsView.CellAutoHeight := (SettingLoadBoolean('tvBillItems', 'SingleLine'));
-    end;
+   end;
 
-    pbSpellCheck.Enabled := False;
-    if dmAxiom.DictionaryInstalled
-    then
-    begin
+   pbSpellCheck.Enabled := False;
+   if dmAxiom.DictionaryInstalled then
+   begin
       // AEdit := TcxRichEdit(tvBillItemsDESCR);
       // dmAxiom.AddictLiveSpell.AddControl(memoNotes);
       // dmAxiom.AddictLiveSpell.AddControl(AEdit);
       // AddictRichEdit1.AddictSpell := dmAxiom.Addict;
       pbSpellCheck.Enabled := true;
-    end;
+   end;
 
-    FForm := nil;
-    SetLength(FSelectedItems, 0);
-    bPosting := False;
-    bNoSave := False;
-    TaxFees := 0;
-    TaxDisb := 0;
-    TaxAntD := 0;
-    TaxSund := 0;
-    TaxUpCred := 0;
-    TaxDate := trunc(Date);
+   FForm := nil;
+   SetLength(FSelectedItems, 0);
+   bPosting := False;
+   bNoSave := False;
+   TaxFees := 0;
+   TaxDisb := 0;
+   TaxAntD := 0;
+   TaxSund := 0;
+   TaxUpCred := 0;
+   TaxDate := trunc(Date);
 
-    sWordProc := SystemString('WORDPROC');
+   sWordProc := SystemString('WORDPROC');
     // if sWordProc = 'WORDPERFECT8' then
     // tbtnWord.ImageIndex := 5;
 
-    if grdBillItems.Font.Size <> dmAxiom.GridFont
-    then
+   if grdBillItems.Font.Size <> dmAxiom.GridFont  then
       grdBillItems.Font.Size := dmAxiom.GridFont;
 
     // dtpInterim.Date := Trunc(Date);
 
-    tbtnReverse.Enabled := dmAxiom.Security.Bill.Reverse;
-    edtDiscount.Enabled := dmAxiom.Security.Bill.Discount.Edit;
-    edtDiscountGST.Enabled := dmAxiom.Security.Bill.Discount.Edit;
+   tbtnReverse.Enabled := dmAxiom.Security.Bill.Reverse;
+   edtDiscount.Enabled := dmAxiom.Security.Bill.Discount.Edit;
+   edtDiscountGST.Enabled := dmAxiom.Security.Bill.Discount.Edit;
 
     // tbtnPost.Visible := dmAxiom.Security.Bill.Post;
 
     // btnAddTrust.Visible := dmAxiom.Security.Bill.Post;
     // ****** 18/09/2003 AES
     // *** user can only do Trust Transfer if they have authority.
-    btnAddTrust.Enabled := dmAxiom.Security.Bill.TrustTransfer;
+   btnAddTrust.Enabled := dmAxiom.Security.Bill.TrustTransfer;
   //  dxBarButton4.Enabled := (dmAxiom.Is_Cashier = 'Y');
 
     {
@@ -2637,52 +2647,48 @@ procedure TfrmInvoice.FormCreate(Sender : TObject);
       Now hiding Trust Edit box
     }
     //neTrust.Visible := dmAxiom.Security.Bill.Post;
-    neTrust.Visible := true;
-    dtpExpectedPayment.Enabled := dmAxiom.Security.Bill.ChangePaymentDueDate;
+   neTrust.Visible := true;
+   dtpExpectedPayment.Enabled := dmAxiom.Security.Bill.ChangePaymentDueDate;
 
-    DefaultTax := get_default_gst('Bill');
-    if DefaultTax = ''
-    then
+   DefaultTax := get_default_gst('Bill');
+   if DefaultTax = '' then
       DefaultTax := dmAxiom.DefaultTax;
 
     // FLastSortColumn := lvItems.Columns[0];
-    bDateSort := true;
+   bDateSort := true;
 
-    SettingLoadStream(dmAxiom.UserID, 'BillItems Layout', tvBillItems);
+   SettingLoadStream(dmAxiom.UserID, 'BillItems Layout', tvBillItems);
     // LoadColumnData();
-    FLastKey := VK_NONAME;
+   FLastKey := VK_NONAME;
 
-    FFeeRebuilt := False;
-    FDisbsRebuilt := False;
-    FCheqReqRebuilt := False;
-    FCredRebuilt := False;
-    FSundRebuilt := False;
-    IsBillItem := 'N';
-    if SystemString('LOCALE_NAME') <> ''
-    then
-    begin
+   FFeeRebuilt := False;
+   FDisbsRebuilt := False;
+   FCheqReqRebuilt := False;
+   FCredRebuilt := False;
+   FSundRebuilt := False;
+   IsBillItem := 'N';
+   if SystemString('LOCALE_NAME') <> '' then
+   begin
       btnAddTrust.Caption := 'Apply Trust';
       lblLessTrust.Caption := 'Less Trust';
       lblDiscountCaption.Caption := 'Discount (% or ' + GetCurrencySymbol + ' amount. eg 5% or 200)';
       lblDiscountCaption.Hint := 'Discount (% or ' + GetCurrencySymbol + ' amount. eg 5% or 200)';
       chkUnbilledTransactions.Visible := true;
-    end;
+   end;
     // AES 18/10/2017  set formatting of bills footers
-    for iCtr := 0 to tvBillItems.DataController.Summary.FooterSummaryItems.Count - 1 do
-    begin
-      if tvBillItems.DataController.Summary.FooterSummaryItems[iCtr].Tag <> 2
-      then
+   for iCtr := 0 to tvBillItems.DataController.Summary.FooterSummaryItems.Count - 1 do
+   begin
+      if tvBillItems.DataController.Summary.FooterSummaryItems[iCtr].Tag <> 2  then
         tvBillItems.DataController.Summary.FooterSummaryItems[iCtr].Format := GetCurrencySymbol + ',0.00';
-    end;
+   end;
 
     // 19 Oct 2018 DBW add flag to allow alter transactional billed tax amount
     // on cheque Creditor and sundry
-    if dmaxiom.Is_Cashier = 'Y' then
+   if dmaxiom.Is_Cashier = 'Y' then
       bAlterGSTAmount := True
-    else
+   else
       bAlterGSTAmount := SystemVal('ALTER_BILL_DISB_TAX');
-
-  end;
+end;
 
 procedure TfrmInvoice.dtpInterimChange(Sender : TObject);
   begin
@@ -3082,25 +3088,25 @@ procedure TfrmInvoice.RemoveUPCred;
   end;
 
 procedure TfrmInvoice.neFeesExitChanged(Sender : TObject);
-  var
-    dGstFree : double;
-  begin
-    if (neFees.AsCurrency = 0) and (qryInvoice.FieldByName('FEES').AsCurrency <> 0)
-    then
-      if MsgAsk('Do you want to remove all Fees from this bill?') = mrYes
-      then
-        tbtnRemoveFees.Click;
+var
+   dGstFree : double;
+begin
+   if (neFees.AsCurrency = 0) and (qryInvoice.FieldByName('FEES').AsCurrency <> 0) then
+   begin
+      bFeesMsgAsked := True;
+      if MsgAsk('Do you want to remove all Fees from this bill?') = mrYes then
+         tbtnRemoveFees.Click;
+   end;
 
-    neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-      qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-    TaxFees := neFeesTax.AsCurrency;
-    neFeesTaxFree.AsCurrency := dGstFree;
+   neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+                           qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxFees := neFeesTax.AsCurrency;
+   neFeesTaxFree.AsCurrency := dGstFree;
     // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
-    lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
+   lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
 
-    if SystemString('CREATE_SUNDRY_FEE') = 'Y'
-    THEN
-    begin
+   if SystemString('CREATE_SUNDRY_FEE') = 'Y' THEN
+   begin
       SaveInvoice;
 
       procBillEditSundPercent.ParamByName('P_NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
@@ -3114,10 +3120,10 @@ procedure TfrmInvoice.neFeesExitChanged(Sender : TObject);
       neSundTaxFree.AsCurrency := dGstFree;
       // sgrTotals.Cells[0, 0] := Format('%10.2f', [neSundTax.Value]);
       lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
-    end;
-    CalcTotal;
-    CalcDiscount;
-  end;
+   end;
+   CalcTotal;
+   CalcDiscount;
+end;
 
 procedure TfrmInvoice.neDisbExitChanged(Sender : TObject);
   var
@@ -4155,7 +4161,7 @@ begin
                  if cTax = 0
                  then
                  begin
-                   ParamByName('TaxRate').AsFloat := TaxRate('', '' + sTaxCode + '', dtTax);
+                   ParamByName('TaxRate').AsFloat := TaxRate('', QuotedStr(sTaxCode), dtTax);
                    // ParamByName('TaxRate').AsFloat := TaxRate('', 'GST', dtTax);
                    ExecSQL;
                    Close;
@@ -4701,22 +4707,19 @@ procedure TfrmInvoice.tbtnRemoveCheqReqClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.tbtnRemoveUpCredClick(Sender : TObject);
-  var
+var
     bRemove : Boolean;
     dGstFree : double;
-  begin
-    bRemove := true;
-    if Sender is TdxBarButton
-    then
-      if MsgAsk('Remove Unpaid Creditors?') = mrNO
-      then
-        bRemove := False;
+begin
+   bRemove := true;
+   if Sender is TdxBarButton then
+      if MsgAsk('Remove Unpaid Creditors?') = mrNO then
+         bRemove := False;
 
-    if bRemove
-    then
-    begin
+   if bRemove then
+   begin
       qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NINVOICE IS NOT NULL AND NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
-        ' AND NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
+                         ' AND NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
       qryNew.ExecSQL;
       qryNew.Close;
       neUpCred.AsCurrency := 0;
@@ -4725,38 +4728,35 @@ procedure TfrmInvoice.tbtnRemoveUpCredClick(Sender : TObject);
       qryInvoice.Post;
       DisplayItems;
       neUpCredTax.AsCurrency := ShowTax(neUpCred.AsCurrency, dGstFree, 'UPCRED', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-        qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
       TaxUpCred := neUpCredTax.AsCurrency;
       neUpCredTaxFree.AsCurrency := dGstFree;
       // sgrTotals.Cells[0, 0] := Format('%10.2f', [neUpCredTax.AsCurrency]);
       lblCredTotal.Caption := Format('%10.2f', [neUpCredTax.AsCurrency]);
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tbtnRemoveSundriesClick(Sender : TObject);
-  var
+var
     bRemove : Boolean;
     dGstFree : double;
-  begin
-    bRemove := true;
-    if Sender is TdxBarButton
-    then
-      if MsgAsk('Remove Sundries?') = mrNO
-      then
-        bRemove := False;
+begin
+   bRemove := true;
+   if Sender is TdxBarButton then
+      if MsgAsk('Remove Sundries?') = mrNO then
+         bRemove := False;
 
-    if bRemove
-    then
-    begin
+   if bRemove then
+   begin
       // 25/11/2009
       // delete any ia sundry transactions prior to rebuild
       qryNew.SQL.Text := 'DELETE FROM SUNDRY WHERE TYPE = ''ia'' AND NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) + ' AND NMEMO = ' +
-        IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
+                         IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
       qryNew.ExecSQL;
       qryNew.Close;
 
       qryNew.SQL.Text := 'UPDATE SUNDRY SET NMEMO = null WHERE NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) + ' AND NMEMO = ' +
-        IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
+                         IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
       qryNew.ExecSQL;
       qryNew.Close;
       RemoveDisbSund;
@@ -4767,13 +4767,13 @@ procedure TfrmInvoice.tbtnRemoveSundriesClick(Sender : TObject);
       qryInvoice.Post;
       DisplayItems;
       neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-        qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                         qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
       TaxSund := neSundTax.Value;
       neSundTaxFree.AsCurrency := dGstFree;
       // sgrTotals.Cells[0, 0] := Format('%10.2f', [neSundTax.Value]);
       lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tbtnRemoveAllClick(Sender : TObject);
   var
@@ -4976,7 +4976,7 @@ begin
          if (ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) then
             tbtnEditDescription.Visible := ivAlways;
 
-         bbtnAdjDisbTotal.Enabled := (ImageIndex = IMG_DISB) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
+         bbtnAdjDisbTotal.Enabled := ((ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) or (ImageIndex = IMG_UPCRED)) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
          barbtnTaxcodeList.Enabled := ((tvBillItemsTYPE.EditValue = IMG_DISB) or (tvBillItemsTYPE.EditValue = IMG_ANTD));
       end;
 
@@ -5001,6 +5001,7 @@ begin
          else
             btnExpand.Visible := ivNever;
       end;
+
       if ((bAlterGSTAmount) and (rgFilter.ItemIndex in [2, 4, 5]) and (qryBillItems.RecordCount > 0) and (qryInvoice.FieldByName('DISPATCHED').IsNull)) then
       begin
          tbtnEditTax.Enabled := true;
@@ -6218,8 +6219,7 @@ end;
 procedure TfrmInvoice.lvBillItemsDESCRPropertiesPopup(Sender : TObject);
 begin
     // FPopupForm := GetParentForm(TControl(Sender));
-
-end;
+ end;
 
 procedure TfrmInvoice.tvBillItemsEditKeyDown(
   Sender  : TcxCustomGridTableView;
@@ -6227,34 +6227,32 @@ procedure TfrmInvoice.tvBillItemsEditKeyDown(
   AEdit   : TcxCustomEdit;
   var Key : Word;
   Shift   : TShiftState);
-  begin
-    FLastKey := Key;
-  end;
+begin
+   FLastKey := Key;
+end;
 
 procedure TfrmInvoice.tvBillItemsMouseDown(
   Sender : TObject;
   Button : TMouseButton;
   Shift  : TShiftState;
   X, Y   : Integer);
-  var
+var
     LRecCount : Integer;
     ARowIndex, iCtr : Integer;
     tv : TcxGridDBTableView;
     Data : TcxCustomDataController;
     DC : TcxGridTableController;
     HitTest : TcxCustomGridHitTest;
-  begin
+begin
     // Note that the Sender parameter is a Site
     HitTest := (Sender as TcxGridSite).GridView.ViewInfo.GetHitTest(X, Y);
     // The point belongs to a record
-    if (HitTest is TcxGridRecordHitTest) and IsGroupedRecord(TcxGridRecordHitTest(HitTest).GridRecord)
-    then
+    if (HitTest is TcxGridRecordHitTest) and IsGroupedRecord(TcxGridRecordHitTest(HitTest).GridRecord) then
     begin
       FLastKey := VK_NONAME;
     end;
 
-    if ssShift in Shift
-    then
+    if ssShift in Shift then
     begin
       tv := grdBillItems.FocusedView as TcxGridDBTableView;
       tv.BeginUpdate;
@@ -6273,9 +6271,8 @@ procedure TfrmInvoice.tvBillItemsMouseDown(
       tv.EndUpdate;
     end;
     // pressed the Ctrl
-    if ssCtrl in Shift
-    then
-    begin
+    if ssCtrl in Shift then
+   begin
       tv := grdBillItems.FocusedView as TcxGridDBTableView;
       tv.BeginUpdate;
       Data := tv.DataController;
@@ -6286,8 +6283,8 @@ procedure TfrmInvoice.tvBillItemsMouseDown(
       Data.Values[ARowIndex, 0] := true;
 
       tv.EndUpdate;
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.tvBillItemsStylesGetContentStyle(Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
                   AItem: TcxCustomGridTableItem; var AStyle: TcxStyle);
@@ -6349,29 +6346,73 @@ procedure TfrmInvoice.barbtnRemoveDiscountClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.bbtnAdjDisbTotalClick(Sender : TObject);
-  var
-    lAmount, lOrigAmount, cAllocDisbAmountDiff, cAllocDisbTaxDiff, dGstFree : double;
-  begin
-    lAmount := tvBillItemsAMOUNT.EditValue;
-    lOrigAmount := lAmount;
-    if InputQueryAmount('Adjust Disbursement Amount', 'Enter New Amount:', lAmount) = true
-    then
-    begin
-      with dmAxiom.qryTmp do
-      begin
-        Close;
-        SQL.Text := 'update alloc set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where nalloc = :nalloc';
-        ParamByName('amount').AsFloat := lAmount * - 1;
-        ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
-        ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
-        ExecSQL;
-      end;
-    end;
-    procBillAddSingleDisb.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-    procBillAddSingleDisb.ParamByName('p_created').AsDateTime := qryInvoice.FieldByName('GENERATED').AsDateTime;
-    procBillAddSingleDisb.Execute;
-    DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger);
-  end;
+var
+   lAmount,
+   lOrigAmount,
+   cAllocDisbAmountDiff,
+   cAllocDisbTaxDiff,
+   dGstFree : double;
+begin
+   lAmount := tvBillItemsAMOUNT.EditValue;
+   lOrigAmount := lAmount;
+   case tvBillItemsTYPE.EditValue of
+      IMG_DISB:
+         begin
+            if (InputQueryAmount('Adjust Disbursement Amount', 'Enter New Amount:', lAmount) = true) then
+            begin
+               with dmAxiom.qryTmp do
+               begin
+                 Close;
+                 SQL.Text := 'update alloc set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where nalloc = :nalloc';
+                 ParamByName('amount').AsFloat := lAmount * - 1;
+                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+               end;
+            end;
+            procBillAddSingleDisb.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+            procBillAddSingleDisb.ParamByName('p_created').AsDateTime := qryInvoice.FieldByName('GENERATED').AsDateTime;
+            procBillAddSingleDisb.Execute;
+         end;
+      IMG_ANTD:
+         begin
+            if (InputQueryAmount('Adjust Cheque Req Amount', 'Enter New Amount:', lAmount) = true) then
+            begin
+               with dmAxiom.qryTmp do
+               begin
+                 Close;
+                 SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where ncheqreq = :ncheqreq';
+                 ParamByName('amount').AsFloat := lAmount * - 1;
+                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 ParamByName('ncheqreq').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+               end;
+            end;
+            procBillAddSingleUpAntd.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+            procBillAddSingleUpAntd.ParamByName('p_created').AsDateTime := qryInvoice.FieldByName('GENERATED').AsDateTime;
+            procBillAddSingleUpAntd.Execute;
+         end;
+      IMG_UPCRED:
+         begin
+            if (InputQueryAmount('Adjust Cheque Req Amount', 'Enter New Amount:', lAmount) = true) then
+            begin
+               with dmAxiom.qryTmp do
+               begin
+                 Close;
+                 SQL.Text := 'update alloc set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where nalloc = :nalloc';
+                 ParamByName('amount').AsFloat := lAmount * - 1;
+                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+               end;
+            end;
+            procBillAddSingleUpCred.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+            procBillAddSingleUpCred.ParamByName('p_created').AsDateTime := qryInvoice.FieldByName('GENERATED').AsDateTime;
+            procBillAddSingleUpCred.Execute;
+         end;
+   end;
+   DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger);
+end;
 
 procedure TfrmInvoice.bbtnBillNotesClick(Sender : TObject);
   var
@@ -6802,145 +6843,137 @@ begin
   end;
 end;
 
-    procedure TfrmInvoice.CalcDiscount;
-      begin
-        if SystemFloat('BILL_DISCOUNT') > 0
-        then
-        begin
-          try
-            if qryInvoice.state = dsBrowse
-            then
-              qryInvoice.Edit;
-            if (neFees.AsCurrency > 0)
-            then
-            begin
-              qryInvoice.FieldByName('discount').AsFloat := ((neFees.AsCurrency + neFeesTax.AsCurrency) * (SystemFloat('BILL_DISCOUNT')) / 100) * - 1;
-            end;
-          finally
-            edtDiscount.Text := FloatToStr(((neFees.AsCurrency + neFeesTax.AsCurrency) * (SystemFloat('BILL_DISCOUNT')) / 100) * - 1);
-            lblDiscount.Caption := edtDiscount.Text;
-            qryInvoice.Refresh;
-          end;
-        end;
+procedure TfrmInvoice.CalcDiscount;
+begin
+   if SystemFloat('BILL_DISCOUNT') > 0 then
+   begin
+      try
+         if qryInvoice.state = dsBrowse then
+            qryInvoice.Edit;
+         if (neFees.AsCurrency > 0) then
+         begin
+            qryInvoice.FieldByName('discount').AsFloat := ((neFees.AsCurrency + neFeesTax.AsCurrency) * (SystemFloat('BILL_DISCOUNT')) / 100) * - 1;
+         end;
+      finally
+         edtDiscount.Text := FloatToStr(((neFees.AsCurrency + neFeesTax.AsCurrency) * (SystemFloat('BILL_DISCOUNT')) / 100) * - 1);
+         lblDiscount.Caption := edtDiscount.Text;
+         qryInvoice.Refresh;
       end;
+   end;
+end;
 
-    procedure TfrmInvoice.DisplayTaxValues;
-      var
-        dGstFree : double;
-      begin
-        neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-        TaxFees := neFeesTax.AsCurrency;
-        neFeesTaxFree.AsCurrency := dGstFree;
-        // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
-        lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
+procedure TfrmInvoice.DisplayTaxValues;
+var
+   dGstFree : double;
+begin
+   neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxFees := neFeesTax.AsCurrency;
+   neFeesTaxFree.AsCurrency := dGstFree;
+   // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
+   lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
 
-        neDisbTax.AsCurrency := ShowTax(neDisb.AsCurrency, dGstFree, 'ALLOC', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-        TaxDisb := neDisbTax.AsCurrency;
-        neDisbTaxFree.AsCurrency := dGstFree;
-        // sgrTotals.Cells[0, 1] := Format('%10.2f', [neDisbTax.AsCurrency]);
-        lblDisbTotal.Caption := Format('%10.2f', [neDisbTax.AsCurrency]);
+   neDisbTax.AsCurrency := ShowTax(neDisb.AsCurrency, dGstFree, 'ALLOC', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxDisb := neDisbTax.AsCurrency;
+   neDisbTaxFree.AsCurrency := dGstFree;
+   // sgrTotals.Cells[0, 1] := Format('%10.2f', [neDisbTax.AsCurrency]);
+   lblDisbTotal.Caption := Format('%10.2f', [neDisbTax.AsCurrency]);
 
-        neAntdTax.AsCurrency := ShowTax(neAntd.AsCurrency, dGstFree, 'CHEQREQ', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-        TaxAntD := neAntdTax.AsCurrency;
-        neAntdTaxFree.AsCurrency := dGstFree;
-        // sgrTotals.Cells[0, 2] := Format('%10.2f', [neAntdTax.AsCurrency]);
-        lblAntdTotal.Caption := Format('%10.2f', [neAntdTax.AsCurrency]);
+   neAntdTax.AsCurrency := ShowTax(neAntd.AsCurrency, dGstFree, 'CHEQREQ', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxAntD := neAntdTax.AsCurrency;
+   neAntdTaxFree.AsCurrency := dGstFree;
+   // sgrTotals.Cells[0, 2] := Format('%10.2f', [neAntdTax.AsCurrency]);
+   lblAntdTotal.Caption := Format('%10.2f', [neAntdTax.AsCurrency]);
 
-        neUpCredTax.AsCurrency := ShowTax(neUpCred.AsCurrency, dGstFree, 'UPCRED', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-        TaxUpCred := neUpCredTax.AsCurrency;
-        neUpCredTaxFree.AsCurrency := dGstFree;
-        // sgrTotals.Cells[0, 3] := Format('%10.2f', [neUpCredTax.AsCurrency]);
-        lblCredTotal.Caption := Format('%10.2f', [neUpCredTax.AsCurrency]);
+   neUpCredTax.AsCurrency := ShowTax(neUpCred.AsCurrency, dGstFree, 'UPCRED', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxUpCred := neUpCredTax.AsCurrency;
+   neUpCredTaxFree.AsCurrency := dGstFree;
+   // sgrTotals.Cells[0, 3] := Format('%10.2f', [neUpCredTax.AsCurrency]);
+   lblCredTotal.Caption := Format('%10.2f', [neUpCredTax.AsCurrency]);
 
-        neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-        TaxSund := neSundTax.Value;
-        neSundTaxFree.AsCurrency := dGstFree;
-        // sgrTotals.Cells[0, 4] := Format('%10.2f', [neSundTax.Value]);
-        lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
+   neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+   TaxSund := neSundTax.Value;
+   neSundTaxFree.AsCurrency := dGstFree;
+   // sgrTotals.Cells[0, 4] := Format('%10.2f', [neSundTax.Value]);
+   lblSundTotal.Caption := Format('%10.2f', [neSundTax.Value]);
 
-        CalcTotal();
-      end;
+   CalcTotal();
+end;
 
-    procedure TfrmInvoice.ControlEditFields(AState : Boolean);
-      begin
-        if AState
-        Then
-        begin
-          neDisb.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeDisbursments;
-          neDisbTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeDisbursmentsTax;
-        end
-        else
-        begin
-          neDisb.Enabled := False;
-          neDisbTax.Enabled := False;
-        end;
+procedure TfrmInvoice.ControlEditFields(AState : Boolean);
+begin
+//   if AState Then
+//   begin
+//      neDisb.Enabled := dmAxiom.Security.Bill.LockAmounts.ChangeDisbursments;
+//      neDisbTax.Enabled := dmAxiom.Security.Bill.LockTaxAmounts.ChangeDisbursmentsTax;
+//   end
+//   else
+//   begin
+      neDisb.Enabled := False;
+      neDisbTax.Enabled := False;
+//   end;
 
-        neFees.Enabled := AState;
-        neAntd.Enabled := AState;
-        neSund.Enabled := AState;
-        neTrust.Enabled := AState;
-        neUpCred.Enabled := AState;
-        neFeesTax.Enabled := AState;
-        neAntdTax.Enabled := AState;
-        neUpCredTax.Enabled := AState;
-        neSundTaxFree.Enabled := AState;
-        neUpCredTaxFree.Enabled := AState;
-        neAntdTaxFree.Enabled := AState;
-        neDisbTaxFree.Enabled := AState;
-        neFeesTaxFree.Enabled := AState;
-        neSundTax.Enabled := AState;
-        neDisbTaxFree.Enabled := AState;
-        edtDiscount.Enabled := AState;
-        edtDiscountGST.Enabled := AState;
-        btnFeesRebuild.Enabled := AState;
-        btnDisbRebuild.Enabled := AState;
-        btnAntdRebuild.Enabled := AState;
-        btnSundRebuild.Enabled := AState;
-        btnUpCredRebuild.Enabled := AState;
-        btnAddTrust.Enabled := AState;
-        dtpBillDate.Enabled := AState;
+   neFees.Enabled := AState;
+//   neAntd.Enabled := AState;
+   neSund.Enabled := AState;
+   neTrust.Enabled := AState;
+//        neUpCred.Enabled := AState;
+   neFeesTax.Enabled := AState;
+//        neAntdTax.Enabled := AState;
+//        neUpCredTax.Enabled := AState;
+   neSundTaxFree.Enabled := AState;
+//        neUpCredTaxFree.Enabled := AState;
+//        neAntdTaxFree.Enabled := AState;
+//        neDisbTaxFree.Enabled := AState;
+   neFeesTaxFree.Enabled := AState;
+   neSundTax.Enabled := AState;
+//        neDisbTaxFree.Enabled := AState;
+   edtDiscount.Enabled := AState;
+   edtDiscountGST.Enabled := AState;
+   btnFeesRebuild.Enabled := AState;
+   btnDisbRebuild.Enabled := AState;
+   btnAntdRebuild.Enabled := AState;
+   btnSundRebuild.Enabled := AState;
+   btnUpCredRebuild.Enabled := AState;
+   btnAddTrust.Enabled := AState;
+   dtpBillDate.Enabled := AState;
+end;
 
-      end;
+procedure TfrmInvoice.DisbRebuild();
+Begin
+   SaveInvoice;
+   procBillAddDisb.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+   procBillAddDisb.Execute;
+   procbill_add_disb_percent.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+   procbill_add_disb_percent.Execute;
+   FDisbsRebuilt := true;
+   DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+End;
 
-    procedure TfrmInvoice.DisbRebuild();
-    Begin
-      SaveInvoice;
-      procBillAddDisb.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-      procBillAddDisb.Execute;
-      procbill_add_disb_percent.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-      procbill_add_disb_percent.Execute;
-      FDisbsRebuilt := true;
-      DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+procedure TfrmInvoice.SundRebuild();
+Begin
+   SaveInvoice;
+   procBillAddSund.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+   procBillAddSund.Execute;
+   { RemoveDisbSund;
+   procbill_add_disb_percent.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+   procbill_add_disb_percent.Execute; }
+   FSundRebuilt := true;
+   DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+End;
 
-    End;
-
-    procedure TfrmInvoice.SundRebuild();
-    Begin
-
-      SaveInvoice;
-      procBillAddSund.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-      procBillAddSund.Execute;
-      { RemoveDisbSund;
-      procbill_add_disb_percent.ParamByName('p_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-      procbill_add_disb_percent.Execute; }
-      FSundRebuilt := true;
-      DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
-
-    End;
-
-  procedure TfrmInvoice.UpCredRebuild();
-  begin
-    RemoveUPCred;
-    SaveInvoice;
-    procBillAddUpCred.ParamByName('P_NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-    procBillAddUpCred.Execute;
-    FCredRebuilt := true;
-    DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
-  End;
+procedure TfrmInvoice.UpCredRebuild();
+begin
+   RemoveUPCred;
+   SaveInvoice;
+   procBillAddUpCred.ParamByName('P_NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+   procBillAddUpCred.Execute;
+   FCredRebuilt := true;
+   DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+End;
 
 end.
