@@ -641,9 +641,8 @@ object frmCheque: TfrmCheque
     Top = 504
     Width = 79
     Height = 27
+    Action = actOK
     Anchors = [akRight, akBottom]
-    Caption = '&OK'
-    Enabled = False
     LookAndFeel.NativeStyle = True
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
@@ -682,7 +681,6 @@ object frmCheque: TfrmCheque
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     TabOrder = 14
-    OnClick = btnOKClick
   end
   object btnCancel: TcxButton
     Left = 880
@@ -851,7 +849,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43711.6010990046d
+    EditValue = 43712.4870733796d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -907,7 +905,7 @@ object frmCheque: TfrmCheque
       Top = 20
       Width = 62
       Height = 24
-      Action = ActSave
+      Action = ActSaveTemplte
       LookAndFeel.NativeStyle = True
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
@@ -941,7 +939,7 @@ object frmCheque: TfrmCheque
       Top = 20
       Width = 62
       Height = 24
-      Action = ActDelete
+      Action = ActDeleteTemplate
       LookAndFeel.NativeStyle = True
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
@@ -1677,21 +1675,33 @@ object frmCheque: TfrmCheque
     Top = 328
   end
   object ActionList1: TActionList
+    Images = dmAxiom.ilstToolbar
     Left = 824
     Top = 134
-    object ActSave: TAction
+    object ActSaveTemplte: TAction
+      Category = 'Template'
       Caption = 'Save'
-      OnExecute = ActSaveExecute
+      Enabled = False
+      OnExecute = ActSaveTemplteExecute
     end
-    object ActDelete: TAction
+    object ActDeleteTemplate: TAction
+      Category = 'Template'
       Caption = 'Delete'
-      OnExecute = ActDeleteExecute
-      OnUpdate = ActDeleteUpdate
+      OnExecute = ActDeleteTemplateExecute
+      OnUpdate = ActDeleteTemplateUpdate
     end
     object ActTemplate: TAction
+      Category = 'Template'
       Caption = 'Template'
       OnExecute = btnChooseTemplateClick
       OnUpdate = ActTemplateUpdate
+    end
+    object actOK: TAction
+      Caption = 'Save'
+      Enabled = False
+      ImageIndex = 8
+      OnExecute = actOKExecute
+      OnUpdate = actOKUpdate
     end
   end
   object QryTransTmpl: TUniQuery
