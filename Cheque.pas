@@ -162,8 +162,8 @@ type
     tvLedgerFILEID: TcxGridDBColumn;
     qryLedgerFILEID: TStringField;
     QryChequeTmpl: TUniQuery;
-    ActSave: TAction;
-    ActDelete: TAction;
+    ActSaveTemplte: TAction;
+    ActDeleteTemplate: TAction;
     ActTemplate: TAction;
     QryTransTmpl: TUniQuery;
     QryLastChequeTmplID: TUniQuery;
@@ -182,11 +182,12 @@ type
     qryLedgerLGRALLOC_ID: TFloatField;
     cbBank: TcxLookupComboBox;
     cbAuthBy: TcxLookupComboBox;
+    qryLedgerINV_TAX: TFloatField;
+    actOK: TAction;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure cbAuthByClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
-    procedure btnOKClick(Sender: TObject);
     procedure dbgrLedgerColExit(Sender: TObject);
     procedure btnPhoneBookClick(Sender: TObject);
     procedure qryLedgerAfterInsert(DataSet: TDataSet);
@@ -250,17 +251,20 @@ type
       var DisplayValue: Variant; var ErrorText: TCaption;
       var Error: Boolean);
     procedure btnChooseTemplateClick(Sender: TObject);
-    procedure ActDeleteExecute(Sender: TObject);
-    procedure ActSaveExecute(Sender: TObject);
+    procedure ActDeleteTemplateExecute(Sender: TObject);
+    procedure ActSaveTemplteExecute(Sender: TObject);
     procedure ActTemplateUpdate(Sender: TObject);
     procedure dsLedgerTemplateStateChange(Sender: TObject);
-    procedure ActDeleteUpdate(Sender: TObject);
+    procedure ActDeleteTemplateUpdate(Sender: TObject);
     procedure chkNoExitContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
     procedure tvLedgerTYPEPropertiesCloseUp(Sender: TObject);
     procedure chkReplacementChequeClick(Sender: TObject);
     procedure cbBankPropertiesChange(Sender: TObject);
     procedure cbAuthByPropertiesEditValueChanged(Sender: TObject);
+    procedure ActSaveUpdate(Sender: TObject);
+    procedure actOKUpdate(Sender: TObject);
+    procedure actOKExecute(Sender: TObject);
   private
     { Private declarations }
     FCurrentTemplateDescr: String;
@@ -575,7 +579,7 @@ end;
 procedure TfrmCheque.cbAuthByClick(Sender: TObject);
 begin
   lblAuthByName.Caption := TableString('EMPLOYEE', 'CODE', cbAuthBy.Text, 'NAME');
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 
@@ -639,7 +643,7 @@ begin
    else if QryChequeTmpl.RecordCount = 1 then
       RestoreScreenControlValues(QryChequeTmpl);
 
-   ActDeleteUpdate(nil);
+   ActDeleteTemplateUpdate(nil);
 end;
 
 procedure TfrmCheque.StatusDisplay;
@@ -795,7 +799,7 @@ begin
   end;
   if (neAmount.AsCurrency <> 0) or dmAxiom.Security.Cheque.ForceTally then
     lblUnallocated.Caption := Format('%m', [neAmount.AsCurrency - TotalAmt]);
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 
@@ -857,7 +861,339 @@ begin
 end;
 
 
-procedure TfrmCheque.btnOKClick(Sender: TObject);
+procedure TfrmCheque.ConvertTagCheqReq(iNCheque : Integer);
+var
+  {iNCheqreq,} iNMemo: integer;
+  qryUpd: TUniQuery;
+  msg, sBilled, sWaiting: string;
+begin
+  if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
+  begin
+    qryUpd := TUniQuery.Create(nil);
+    qryUpd.Connection := dmAxiom.uniInsight;
+    iNMemo := TableInteger('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'NMEMO');
+    sBilled := TableString('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'BILLED');
+    sWaiting := TableString('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'HELD');
+    if (iNMemo = 0) or (sBilled = 'N') or (sWaiting = 'W') then
+    begin
+(*
+      // Create a deleted CheqReq for the ledger card
+      qryUpd.SQL.Clear;
+      qryUpd.SQL.Add('INSERT INTO CHEQREQ');
+      qryUpd.SQL.Add('(FILEID, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
+      qryUpd.SQL.Add('SELECT FILEID, LEDGER, PAYEE, ''Converted - '' || DESCR, 0-AMOUNT, AUTHOR, :ReqDate, BANK, ''N'', GROUPABLE, ANTICIPATED, ''Y'', NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, ''Y'', TRUST, ''N'', TAXCODE, 0-TAX, SUNDRYTYPE');
+      qryUpd.SQL.Add('FROM CHEQREQ');
+      qryUpd.SQL.Add('WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString);
+      iNCheqreq := GetSeqnum('NCHEQREQ');
+      qryUpd.ParamByName('NCHEQREQ').AsInteger := iNCheqreq;
+      qryUpd.ParamByName('ReqDate').AsDateTime := dtpDate.Date;
+      qryUpd.ExecSQL;
+      qryUpd.Close;
+      qryUpd.SQL.Clear;
+      qryUpd.SQL.Text := 'SELECT AMOUNT, TAXCODE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
+      qryUpd.Open;
+
+      //pb-
+      //MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryUpd.FieldByName('AMOUNT').AsCurrency);
+      //MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_CREQ', 0 - qryUpd.FieldByName('AMOUNT').AsCurrency);
+
+      // Debit Anticipated creditors liability the full amount
+      PostLedger(dtpDate.Date, 0 - (qryUpd.FieldByName('AMOUNT').AsFloat
+        + qryUpd.FieldByName('TAX').AsFloat), 0
+        , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
+        , qryLedger.FieldByName('REASON').AsString
+        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_CR'), '');
+      // Credit the Unbilled Anticipated Disbursements ledger the tax free amount
+      PostLedger(dtpDate.Date, qryUpd.FieldByName('AMOUNT').AsFloat
+        , qryUpd.FieldByName('TAX').AsFloat
+        , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
+        , qryLedger.FieldByName('REASON').AsString
+        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR'), '');
+      // Credit the Tax Adjustment ledger the tax amount
+      if qryUpd.FieldByName('TAX').AsFloat <> 0 then
+        PostLedger(dtpDate.Date, qryUpd.FieldByName('TAX').AsFloat, 0
+          , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
+          , qryLedger.FieldByName('REASON').AsString
+          , TableString('TAXTYPE', 'CODE', qryUpd.FieldByName('TAXCODE').AsString
+          , 'LEDGER'), '');
+*)
+{
+      // Debit the Unbilled Disbursements ledger the paid amount
+      PostLedger(dtpDate.Date,
+        0 - (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat),
+        0
+        , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
+        , qryCheque.FieldByName('NCHEQUE').AsInteger
+        , qryLedger.FieldByName('REASON').AsString
+        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR')
+        , qryCheque.FieldByName('REQBY').AsString);
+      // Credit the Unbilled Anticipated Disbursements ledger the paid amount
+      PostLedger(dtpDate.Date
+        , qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat
+        , 0
+        , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
+        , qryCheque.FieldByName('NCHEQUE').AsInteger
+        , qryLedger.FieldByName('REASON').AsString
+        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR')
+        , qryCheque.FieldByName('REQBY').AsString);
+}
+      msg:= 'This Anticipated Disbursement has not been billed.' + #10#13#10#13 +
+            'You cannot pay an unbilled Anticipated Disbursement.' + #10#13#10#13 +
+            'Reverse out this Anticipated Disbursement, raise a ' + #10#13 +
+            'disbursement for the amount you want to pay, and re-raise' + #10#13 +
+            'an Anticipated Disbursement for the remaining amount' + #10#13;
+      raise Exception.Create(msg)
+    end
+    else
+    begin
+      // if it is on a draft bill, alter the amount of the bill
+      qryUpd.SQL.Text := 'UPDATE NMEMO SET ANTD = ANTD - :ADJUST WHERE DISPATCHED IS NULL AND NMEMO = ' + IntToStr(iNMemo);
+      qryUpd.ParamByName('ADJUST').AsFloat := qryLedger.FieldByName('AMOUNT').AsCurrency;
+      qryUpd.ExecSQL;
+      qryUpd.Close;
+    end;
+    qryUpd.Close;
+    //qryUpd.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y'', HELD = ''N'', NCHEQUE = ' + InttoStr(iNcheque) + ' WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
+    //qryUpd.ExecSQL;
+    //qryUpd.Close;
+    qryUpd.Free;
+    end
+end;
+
+procedure TfrmCheque.dbgrLedgerColExit(Sender: TObject);
+{
+var
+
+  defaultLedgerTaxCode : String;
+  glInstance : TglComponentInstance ;
+  }
+begin
+{   case dbgrLedger.SelectedIndex of
+    //pb - added colTYPE from frmReceipt
+   colTYPE:
+   begin
+      if not qryLedger.Modified then
+         qryLedger.Edit;
+      if dbgrLedger.Columns.Items[colTYPE].Field.Text <> '' then
+         dbgrLedger.Columns.Items[colTYPE].Field.Text := Trim(dbgrLedger.Columns.Items[colTYPE].Field.Text);
+    end;
+    colREFNO: // Display the long Description
+    begin
+       if dbgrLedger.Columns.Items[colREFNO].Field.Text <> '' then
+       begin
+          if not qryLedger.Modified then
+             qryLedger.Edit;
+          dbgrLedger.Columns.Items[colREFNO].Field.Text := Trim(dbgrLedger.Columns.Items[colREFNO].Field.Text);
+          dbgrLedger.Columns.Items[colREFNO].Field.Text := UpperCase(dbgrLedger.Columns.Items[colREFNO].Field.Text);
+          if (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Matter') then
+          begin
+          // AES 15/08/2003
+          // test to ensure that matter is current and that the matter is valid for
+          // the current entity.
+             if MatterIsCurrent(dbgrLedger.Columns.Items[colREFNO].Field.Text) and
+                not (IsMatterArchived(dbgrLedger.Columns.Items[colREFNO].Field.Text)) then
+                if IsValidMatterForEntity(dbgrLedger.Columns.Items[colREFNO].Field.Text) then
+                begin
+                   qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
+                   if cbAuthBy.Text = '' then
+                   begin
+                      cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'AUTHOR'));
+                      cbAuthBy.OnClick(Self);
+                   end;
+                end
+                else
+                begin
+                   MsgErr('This matter #' + qryLedger.FieldByName('REFNO').AsString +
+                          ' is not valid for the current Entity.');
+                   qryLedger.Delete;
+                end
+             else
+                begin
+                   MsgErr('This matter #' + dbgrLedger.Columns.Items[colREFNO].Field.Text +
+                          ' is closed or does not exist');
+                   qryLedger.Delete;
+                end;
+          end;
+
+          if (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Protected') or
+             (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Debtors') then
+          begin
+             if MatterIsCurrent(dbgrLedger.Columns.Items[colREFNO].Field.Text) then
+             begin
+                qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
+                if cbAuthBy.Text = '' then
+                begin
+                   cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'AUTHOR'));
+                   cbAuthBy.OnClick(Self);
+                end;
+             end
+             else
+             begin
+                MessageDlg('This matter #' + dbgrLedger.Columns.Items[colREFNO].Field.Text + ' is closed or does not exist',mtError, [mbOK], 0);
+                qryLedger.Delete;
+             end;
+          end;
+
+          if dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Ledger' then
+          begin
+                // lookup the ledger code based on the value entered
+             glInstance := dmAxiom.getGlComponents.parseString(dbgrLedger.Columns.Items[colREFNO].Field.Text,true);
+             if not glInstance.valid then
+             begin
+                glInstance.displayError;
+                qryLedger.FieldByName('REFNO').AsString := '';
+                qryLedger.FieldByName('LONGDESC').AsString := '';
+                glInstance.free;
+                exit;
+             end
+             else
+             begin
+                qryLedger.FieldByName('REFNO').AsString  := glInstance.fullCode;
+             end;
+
+             if not AllowDirectPost(glInstance.ledgerKey) then
+             begin
+                MsgErr('You may not post to ledger Reference #' + dbgrLedger.Columns.Items[colREFNO].Field.Text);
+                dbgrLedger.Columns.Items[colREFNO].Field.Text := '';
+             end
+             else
+             begin
+                if not LedgerHead(glInstance.ledgerKey) then
+                begin
+                   qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
+                   // Tony
+                   // 03/05/2004
+                   // Obtain default_taxcode (if any)
+                   defaultLedgerTaxCode := LedgerString(glInstance.ledgerKey, 'DEFAULT_TAXCODE');
+
+                   if defaultLedgerTaxCode <> '' then
+                     qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode;
+                end
+                else
+                begin
+                   MsgErr('You may not post to a header ledger');
+                   dbgrLedger.Columns.Items[colREFNO].Field.Text := '';
+                end;
+             end;
+          end;
+
+          if dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Invoice' then
+          begin
+             with qryInvoice do
+             begin
+                Close;
+                ParamByName('Acct').AsString := dmAxiom.Entity;
+                ParamByName('Refno').AsString := dbgrLedger.Columns.Items[colREFNO].Field.Text;
+                Prepare;
+                Open;
+                if not IsEmpty then
+                begin
+                   if not qryLedger.Modified then
+                      qryLedger.Edit;
+                   if (IsValidInvoice(qryInvoice.FieldByName('OWING').AsCurrency,
+                       qryInvoice.FieldByName('TYPE').AsString)) then
+                   begin
+                      qryLedgerAMOUNT.OnChange := nil;
+                      qryLedger.FieldByName('LONGDESC').AsString := qryInvoice.FieldByName('CREDITOR').AsString;
+                      qryLedger.FieldByName('REASON').AsString := qryInvoice.FieldByName('DESCR').AsString;
+                      qryLedger.FieldByName('AMOUNT').AsCurrency := qryInvoice.FieldByName('OWING').AsCurrency;
+                      qryLedger.FieldByName('UNIQUEID').AsInteger := qryInvoice.FieldByName('NINVOICE').AsInteger;
+                      qryLedgerAMOUNT.OnChange := qryLedgerAMOUNTChange;
+                   end
+                   else
+                   begin
+                      MsgErr('There is nothing owing on this Invoice');
+                      qryLedger.FieldByName('REFNO').AsString := '';
+                   end;
+                end
+                else
+                begin
+                   MsgErr('Invalid Invoice number');
+                   qryLedger.FieldByName('REFNO').AsString := '';
+                end;
+            Close;
+          end;
+        end;
+      end;
+//      StatusDisplay;
+    end;
+    colREASON:
+    begin
+      if not qryLedger.Modified then
+        qryLedger.Edit;
+      QuickCode(dbgrLedger.Columns.Items[colREASON].Field);
+    end;
+  end;                                                  }
+end;
+
+
+procedure TfrmCheque.ActDeleteTemplateExecute(Sender: TObject);
+var
+   DlgString: String;
+begin
+   // No template selected, just exit.
+   if FCurrentTemplateDescr = '' then
+      exit;
+
+   DlgString := Format('Delete template %s ?', [FCurrentTemplateDescr]);
+   if MessageDlg(DlgString, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+      QryChequeTmpl.Delete;
+
+      if QryTransTmpl.RowsAffected <> 0 then
+         QryChequeTmpl.CommitUpdates;
+
+      ClearHeaderControls;
+      ClearTransGrid;
+   end;
+
+   // Delete the Transaction details from the grid.
+   FGridUpdatingByTemplate := True;
+   try
+      QryTransTmpl.First;
+      QryTransTmpl.Edit;
+      while QryTransTmpl.RecordCount > 0 do
+      begin
+         QryTransTmpl.Delete;
+         //QryLedger.Delete;
+      end;
+      if QryTransTmpl.RowsAffected <> 0 then
+         QryTransTmpl.CommitUpdates;
+      if QryLedger.RowsAffected <> 0 then
+         QryLedger.CommitUpdates;
+
+      DefaultDescr := '';
+      qryLedger.Close;
+      qryLedger.Open;
+
+      tvLedger.DataController.DataSource := nil;
+      tvLedger.DataController.DataSource := dsLedger;
+
+
+      tvLedger.DataController.RecordCount := 0;
+      tvLedger.ViewChanged;
+
+      //   tvLedger.DataController.d
+      tvLedger.DataController.RefreshExternalData;
+   finally
+      FGridUpdatingByTemplate := false;
+      ActTemplateUpdate(nil);
+      ClearTotal;
+   end;
+end;
+
+procedure TfrmCheque.ActTemplateUpdate(Sender: TObject);
+begin
+   ActTemplate.Enabled := (QryChequeTmpl.Active)
+      and (QryChequeTmpl.RecordCount > 0);
+end;
+
+procedure TfrmCheque.ActDeleteTemplateUpdate(Sender: TObject);
+begin
+   ActDeleteTemplate.Enabled := QryChequeTmpl.RecordCount > 0;
+end;
+
+procedure TfrmCheque.actOKExecute(Sender: TObject);
 var
   iNcheque: Integer;
   bProceed, bPostingFailed, bMatterAccumulate, bProtectedAccumulate: Boolean;
@@ -897,7 +1233,9 @@ var
   bTrustInvoice: boolean;
   ANInvoice, ANJournal: integer;
   SplitPercent: Real;
-  TaxCalc: Currency;
+  TaxCalculated: Currency;
+  Bas_Tax,
+  dAmount: double;
 begin
 {
   Code Modified 9.9.02 G.Groube
@@ -1692,7 +2030,15 @@ begin
 						            cMatterTotal := RoundTo((qryLedger.FieldByName('AMOUNT').AsFloat/(cMatterTotal + cTradeTotal))* cMatterTotal,-2);
                               cMatterTotalTax := RoundTo((qryLedger.FieldByName('TAX').AsFloat/(cMatterTotalTax + cTradeTotalTax))* cMatterTotalTax,-2);
                               if (qryLedger.FieldByName('TAX').AsFloat = 0) then
-                                 cMatterTotalTax := 0;
+                              begin
+                                 if qryLedger.FieldByName('INV_TAX').AsFloat <> 0 then
+                                 begin
+                                    dAmount := qryLedger.FieldByName('AMOUNT').AsFloat;
+                                    cMatterTotalTax := TaxCalc(dAmount, 'CHEQUE', DefaultTax, dtpDate.Date);
+                                 end
+                                 else
+                                    cMatterTotalTax := 0;
+                              end;
 
 {                           if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
                                cMatterTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cTradeTotal;
@@ -1716,11 +2062,13 @@ begin
                         // Check if totals are equal to Ledger amount??
                         // Post for trade
 
+
+
                         {post components}
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
                            //, 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                            , 0 - (cTradeTotal - cTradeTotalTax)
+                            , 0 - cTradeTotal   //(cTradeTotal - cTradeTotalTax)
                             , 0 - cTradeTotalTax
                             , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                             , qryCheque.FieldByName('NCHEQUE').AsInteger
@@ -1754,7 +2102,7 @@ begin
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLegalCode,'',true,'');
 
                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                            , 0 - (cMatterTotal - cMatterTotalTax)
+                            , 0 - cMatterTotal  //(cMatterTotal - cMatterTotalTax)
                             , 0 - cMatterTotalTax
                             , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
                             , qryCheque.FieldByName('NCHEQUE').AsInteger
@@ -2209,12 +2557,12 @@ begin
                            end;
                            SplitPercent := RoundTo(qryLedger.FieldByName('AMOUNT').AsFloat/(qryBill.FieldByName('UPCRED').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat),-2);
 
-                           TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
-                           ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalc;
-                           ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalc);
+                           TaxCalculated := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
+                           ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalculated;
+                           ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('AMOUNT').AsFloat - TaxCalculated);
 
                            ParamByName('NMEMO').AsString := TableString('CHEQREQ','NCHEQREQ',qryLedger.FieldByName('UNIQUEID').AsInteger,'NMEMO');
-                           ParamByName('TAX_PAID').AsCurrency := TaxCalc;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
+                           ParamByName('TAX_PAID').AsCurrency := TaxCalculated;  //qryInvoiceCRAmount.FieldByName('TAX').AsCurrency;
                            ExecSQL;
                            qryBill.Close;
                            qryInvoiceCRAmount.Close;
@@ -2385,340 +2733,12 @@ begin
    end;
 end;
 
-
-procedure TfrmCheque.ConvertTagCheqReq(iNCheque : Integer);
-var
-  {iNCheqreq,} iNMemo: integer;
-  qryUpd: TUniQuery;
-  msg, sBilled, sWaiting: string;
+procedure TfrmCheque.actOKUpdate(Sender: TObject);
 begin
-  if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
-  begin
-    qryUpd := TUniQuery.Create(nil);
-    qryUpd.Connection := dmAxiom.uniInsight;
-    iNMemo := TableInteger('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'NMEMO');
-    sBilled := TableString('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'BILLED');
-    sWaiting := TableString('CHEQREQ', 'NCHEQREQ', qryLedger.FieldByName('UNIQUEID').AsInteger, 'HELD');
-    if (iNMemo = 0) or (sBilled = 'N') or (sWaiting = 'W') then
-    begin
-(*
-      // Create a deleted CheqReq for the ledger card
-      qryUpd.SQL.Clear;
-      qryUpd.SQL.Add('INSERT INTO CHEQREQ');
-      qryUpd.SQL.Add('(FILEID, LEDGER, PAYEE, DESCR, AMOUNT, AUTHOR, REQDATE, BANK, HELD, GROUPABLE, ANTICIPATED, BILLED, NOTE, NMEMO, NCHEQREQ, INVOICEDATE, CONVERTED, TRUST, PRIVATE, TAXCODE, TAX, SUNDRYTYPE)');
-      qryUpd.SQL.Add('SELECT FILEID, LEDGER, PAYEE, ''Converted - '' || DESCR, 0-AMOUNT, AUTHOR, :ReqDate, BANK, ''N'', GROUPABLE, ANTICIPATED, ''Y'', NOTE, NMEMO, :NCHEQREQ, INVOICEDATE, ''Y'', TRUST, ''N'', TAXCODE, 0-TAX, SUNDRYTYPE');
-      qryUpd.SQL.Add('FROM CHEQREQ');
-      qryUpd.SQL.Add('WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString);
-      iNCheqreq := GetSeqnum('NCHEQREQ');
-      qryUpd.ParamByName('NCHEQREQ').AsInteger := iNCheqreq;
-      qryUpd.ParamByName('ReqDate').AsDateTime := dtpDate.Date;
-      qryUpd.ExecSQL;
-      qryUpd.Close;
-      qryUpd.SQL.Clear;
-      qryUpd.SQL.Text := 'SELECT AMOUNT, TAXCODE, TAX FROM CHEQREQ WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
-      qryUpd.Open;
-
-      //pb-
-      //MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_ANTD', 0 - qryUpd.FieldByName('AMOUNT').AsCurrency);
-      //MatterUpdate(TableInteger('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'NMATTER'), 'UNBILL_CREQ', 0 - qryUpd.FieldByName('AMOUNT').AsCurrency);
-
-      // Debit Anticipated creditors liability the full amount
-      PostLedger(dtpDate.Date, 0 - (qryUpd.FieldByName('AMOUNT').AsFloat
-        + qryUpd.FieldByName('TAX').AsFloat), 0
-        , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
-        , qryLedger.FieldByName('REASON').AsString
-        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_CR'), '');
-      // Credit the Unbilled Anticipated Disbursements ledger the tax free amount
-      PostLedger(dtpDate.Date, qryUpd.FieldByName('AMOUNT').AsFloat
-        , qryUpd.FieldByName('TAX').AsFloat
-        , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
-        , qryLedger.FieldByName('REASON').AsString
-        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR'), '');
-      // Credit the Tax Adjustment ledger the tax amount
-      if qryUpd.FieldByName('TAX').AsFloat <> 0 then
-        PostLedger(dtpDate.Date, qryUpd.FieldByName('TAX').AsFloat, 0
-          , qryLedger.FieldByName('REFNO').AsString, 'CHEQREQ', iNCheqreq
-          , qryLedger.FieldByName('REASON').AsString
-          , TableString('TAXTYPE', 'CODE', qryUpd.FieldByName('TAXCODE').AsString
-          , 'LEDGER'), '');
-*)
-{
-      // Debit the Unbilled Disbursements ledger the paid amount
-      PostLedger(dtpDate.Date,
-        0 - (qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat),
-        0
-        , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
-        , qryCheque.FieldByName('NCHEQUE').AsInteger
-        , qryLedger.FieldByName('REASON').AsString
-        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_DISB_DR')
-        , qryCheque.FieldByName('REQBY').AsString);
-      // Credit the Unbilled Anticipated Disbursements ledger the paid amount
-      PostLedger(dtpDate.Date
-        , qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat
-        , 0
-        , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
-        , qryCheque.FieldByName('NCHEQUE').AsInteger
-        , qryLedger.FieldByName('REASON').AsString
-        , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_ANTD_DR')
-        , qryCheque.FieldByName('REQBY').AsString);
-}
-      msg:= 'This Anticipated Disbursement has not been billed.' + #10#13#10#13 +
-            'You cannot pay an unbilled Anticipated Disbursement.' + #10#13#10#13 +
-            'Reverse out this Anticipated Disbursement, raise a ' + #10#13 +
-            'disbursement for the amount you want to pay, and re-raise' + #10#13 +
-            'an Anticipated Disbursement for the remaining amount' + #10#13;
-      raise Exception.Create(msg)
-    end
-    else
-    begin
-      // if it is on a draft bill, alter the amount of the bill
-      qryUpd.SQL.Text := 'UPDATE NMEMO SET ANTD = ANTD - :ADJUST WHERE DISPATCHED IS NULL AND NMEMO = ' + IntToStr(iNMemo);
-      qryUpd.ParamByName('ADJUST').AsFloat := qryLedger.FieldByName('AMOUNT').AsCurrency;
-      qryUpd.ExecSQL;
-      qryUpd.Close;
-    end;
-    qryUpd.Close;
-    //qryUpd.SQL.Text := 'UPDATE CHEQREQ SET CONVERTED = ''Y'', BILLED = ''Y'', HELD = ''N'', NCHEQUE = ' + InttoStr(iNcheque) + ' WHERE NCHEQREQ = ' + qryLedger.FieldByName('UNIQUEID').AsString;
-    //qryUpd.ExecSQL;
-    //qryUpd.Close;
-    qryUpd.Free;
-    end
+   TAction(Sender).Enabled := OKtoPost(False);
 end;
 
-procedure TfrmCheque.dbgrLedgerColExit(Sender: TObject);
-{
-var
-
-  defaultLedgerTaxCode : String;
-  glInstance : TglComponentInstance ;
-  }
-begin
-{   case dbgrLedger.SelectedIndex of
-    //pb - added colTYPE from frmReceipt
-   colTYPE:
-   begin
-      if not qryLedger.Modified then
-         qryLedger.Edit;
-      if dbgrLedger.Columns.Items[colTYPE].Field.Text <> '' then
-         dbgrLedger.Columns.Items[colTYPE].Field.Text := Trim(dbgrLedger.Columns.Items[colTYPE].Field.Text);
-    end;
-    colREFNO: // Display the long Description
-    begin
-       if dbgrLedger.Columns.Items[colREFNO].Field.Text <> '' then
-       begin
-          if not qryLedger.Modified then
-             qryLedger.Edit;
-          dbgrLedger.Columns.Items[colREFNO].Field.Text := Trim(dbgrLedger.Columns.Items[colREFNO].Field.Text);
-          dbgrLedger.Columns.Items[colREFNO].Field.Text := UpperCase(dbgrLedger.Columns.Items[colREFNO].Field.Text);
-          if (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Matter') then
-          begin
-          // AES 15/08/2003
-          // test to ensure that matter is current and that the matter is valid for
-          // the current entity.
-             if MatterIsCurrent(dbgrLedger.Columns.Items[colREFNO].Field.Text) and
-                not (IsMatterArchived(dbgrLedger.Columns.Items[colREFNO].Field.Text)) then
-                if IsValidMatterForEntity(dbgrLedger.Columns.Items[colREFNO].Field.Text) then
-                begin
-                   qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
-                   if cbAuthBy.Text = '' then
-                   begin
-                      cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'AUTHOR'));
-                      cbAuthBy.OnClick(Self);
-                   end;
-                end
-                else
-                begin
-                   MsgErr('This matter #' + qryLedger.FieldByName('REFNO').AsString +
-                          ' is not valid for the current Entity.');
-                   qryLedger.Delete;
-                end
-             else
-                begin
-                   MsgErr('This matter #' + dbgrLedger.Columns.Items[colREFNO].Field.Text +
-                          ' is closed or does not exist');
-                   qryLedger.Delete;
-                end;
-          end;
-
-          if (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Protected') or
-             (dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Debtors') then
-          begin
-             if MatterIsCurrent(dbgrLedger.Columns.Items[colREFNO].Field.Text) then
-             begin
-                qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
-                if cbAuthBy.Text = '' then
-                begin
-                   cbAuthBy.ItemIndex := cbAuthBy.Items.IndexOf(MatterString(dbgrLedger.Columns.Items[colREFNO].Field.Text, 'AUTHOR'));
-                   cbAuthBy.OnClick(Self);
-                end;
-             end
-             else
-             begin
-                MessageDlg('This matter #' + dbgrLedger.Columns.Items[colREFNO].Field.Text + ' is closed or does not exist',mtError, [mbOK], 0);
-                qryLedger.Delete;
-             end;
-          end;
-
-          if dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Ledger' then
-          begin
-                // lookup the ledger code based on the value entered
-             glInstance := dmAxiom.getGlComponents.parseString(dbgrLedger.Columns.Items[colREFNO].Field.Text,true);
-             if not glInstance.valid then
-             begin
-                glInstance.displayError;
-                qryLedger.FieldByName('REFNO').AsString := '';
-                qryLedger.FieldByName('LONGDESC').AsString := '';
-                glInstance.free;
-                exit;
-             end
-             else
-             begin
-                qryLedger.FieldByName('REFNO').AsString  := glInstance.fullCode;
-             end;
-
-             if not AllowDirectPost(glInstance.ledgerKey) then
-             begin
-                MsgErr('You may not post to ledger Reference #' + dbgrLedger.Columns.Items[colREFNO].Field.Text);
-                dbgrLedger.Columns.Items[colREFNO].Field.Text := '';
-             end
-             else
-             begin
-                if not LedgerHead(glInstance.ledgerKey) then
-                begin
-                   qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
-                   // Tony
-                   // 03/05/2004
-                   // Obtain default_taxcode (if any)
-                   defaultLedgerTaxCode := LedgerString(glInstance.ledgerKey, 'DEFAULT_TAXCODE');
-
-                   if defaultLedgerTaxCode <> '' then
-                     qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode;
-                end
-                else
-                begin
-                   MsgErr('You may not post to a header ledger');
-                   dbgrLedger.Columns.Items[colREFNO].Field.Text := '';
-                end;
-             end;
-          end;
-
-          if dbgrLedger.Columns.Items[colTYPE].Field.Text = 'Invoice' then
-          begin
-             with qryInvoice do
-             begin
-                Close;
-                ParamByName('Acct').AsString := dmAxiom.Entity;
-                ParamByName('Refno').AsString := dbgrLedger.Columns.Items[colREFNO].Field.Text;
-                Prepare;
-                Open;
-                if not IsEmpty then
-                begin
-                   if not qryLedger.Modified then
-                      qryLedger.Edit;
-                   if (IsValidInvoice(qryInvoice.FieldByName('OWING').AsCurrency,
-                       qryInvoice.FieldByName('TYPE').AsString)) then
-                   begin
-                      qryLedgerAMOUNT.OnChange := nil;
-                      qryLedger.FieldByName('LONGDESC').AsString := qryInvoice.FieldByName('CREDITOR').AsString;
-                      qryLedger.FieldByName('REASON').AsString := qryInvoice.FieldByName('DESCR').AsString;
-                      qryLedger.FieldByName('AMOUNT').AsCurrency := qryInvoice.FieldByName('OWING').AsCurrency;
-                      qryLedger.FieldByName('UNIQUEID').AsInteger := qryInvoice.FieldByName('NINVOICE').AsInteger;
-                      qryLedgerAMOUNT.OnChange := qryLedgerAMOUNTChange;
-                   end
-                   else
-                   begin
-                      MsgErr('There is nothing owing on this Invoice');
-                      qryLedger.FieldByName('REFNO').AsString := '';
-                   end;
-                end
-                else
-                begin
-                   MsgErr('Invalid Invoice number');
-                   qryLedger.FieldByName('REFNO').AsString := '';
-                end;
-            Close;
-          end;
-        end;
-      end;
-//      StatusDisplay;
-    end;
-    colREASON:
-    begin
-      if not qryLedger.Modified then
-        qryLedger.Edit;
-      QuickCode(dbgrLedger.Columns.Items[colREASON].Field);
-    end;
-  end;                                                  }
-end;
-
-
-procedure TfrmCheque.ActDeleteExecute(Sender: TObject);
-var
-   DlgString: String;
-begin
-   // No template selected, just exit.
-   if FCurrentTemplateDescr = '' then
-      exit;
-
-   DlgString := Format('Delete template %s ?', [FCurrentTemplateDescr]);
-   if MessageDlg(DlgString, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-   begin
-      QryChequeTmpl.Delete;
-
-      if QryTransTmpl.RowsAffected <> 0 then
-         QryChequeTmpl.CommitUpdates;
-
-      ClearHeaderControls;
-      ClearTransGrid;
-   end;
-
-   // Delete the Transaction details from the grid.
-   FGridUpdatingByTemplate := True;
-   try
-      QryTransTmpl.First;
-      QryTransTmpl.Edit;
-      while QryTransTmpl.RecordCount > 0 do
-      begin
-         QryTransTmpl.Delete;
-         //QryLedger.Delete;
-      end;
-      if QryTransTmpl.RowsAffected <> 0 then
-         QryTransTmpl.CommitUpdates;
-      if QryLedger.RowsAffected <> 0 then
-         QryLedger.CommitUpdates;
-
-      DefaultDescr := '';
-      qryLedger.Close;
-      qryLedger.Open;
-
-      tvLedger.DataController.DataSource := nil;
-      tvLedger.DataController.DataSource := dsLedger;
-
-
-      tvLedger.DataController.RecordCount := 0;
-      tvLedger.ViewChanged;
-
-      //   tvLedger.DataController.d
-      tvLedger.DataController.RefreshExternalData;
-   finally
-      FGridUpdatingByTemplate := false;
-      ActTemplateUpdate(nil);
-      ClearTotal;
-   end;
-end;
-
-procedure TfrmCheque.ActTemplateUpdate(Sender: TObject);
-begin
-   ActTemplate.Enabled := (QryChequeTmpl.Active)
-      and (QryChequeTmpl.RecordCount > 0);
-end;
-
-procedure TfrmCheque.ActDeleteUpdate(Sender: TObject);
-begin
-   ActDelete.Enabled := QryChequeTmpl.RecordCount > 0;
-end;
-
-procedure TfrmCheque.ActSaveExecute(Sender: TObject);
+procedure TfrmCheque.ActSaveTemplteExecute(Sender: TObject);
 var
    DlgString: String;
 begin
@@ -2737,6 +2757,11 @@ begin
 
    SaveTemplate;
    ActTemplateUpdate(nil);
+end;
+
+procedure TfrmCheque.ActSaveUpdate(Sender: TObject);
+begin
+   TAction(Sender).Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.SaveTemplate;
@@ -3096,7 +3121,7 @@ var
   sSQL, sTaxCode : string;
 begin
    // This procedure sets up a Cheque Automagically from the Invoice identified by NCheque
-   DefaultTax := GetDefaultTax('Invoice', 'NOTAX');
+   DefaultTax := GetDefaultTax('InvoicePayment', 'NOTAX');
 
    qryDetails := TUniQuery.Create(Self);
    with qryDetails do
@@ -3106,16 +3131,18 @@ begin
       iType := 0;
       if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
       BEGIN
-          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), TAXCODE ';
+          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, ';
+          sSQL := sSQL + 'P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), A.TAXCODE, P.TAX AS INV_TAX ';
           sSQL := sSQL + 'FROM INVOICE P, ALLOC A WHERE A.NINVOICE = P.NINVOICE AND P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, TAXCODE ';          SQL.Text := sSQL;
+          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, A.TAXCODE, P.TAX ';
+          SQL.Text := sSQL;
       END
       ELSE
       BEGIN
           //SQL.Text := 'SELECT * FROM INVOICE, ALLOC WHERE ALLOC.NINVOICE = INVOICE.NINVOICE AND INVOICE.NINVOICE = ' + InttoStr(NCheque);
-          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX, P.TAXCODE ';
+          sSQL := 'SELECT P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.TAX, P.REFNO, P.NCREDITOR, SUM(P.U_AMOUNT) AS U_AMOUNT, SUM(P.U_TAX) AS U_TAX, SUM(P.T_AMOUNT) AS T_AMOUNT, SUM(P.T_TAX) AS T_TAX, P.TAXCODE, P.INV_TAX ';
           sSQL := sSQL + 'FROM ';
-          sSQL := sSQL + '(SELECT (R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, (R.COMMENCE), T.TAXCODE ';
+          sSQL := sSQL + '(SELECT (R.RATE) AS TAX_RATE,  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, 0 AS U_AMOUNT, 0 AS U_TAX, T.AMOUNT AS T_AMOUNT, T.TAX AS T_TAX, (R.COMMENCE), T.TAXCODE, I.TAX AS INV_TAX ';
           sSQL := sSQL + 'FROM INVOICE I ';
           sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
           sSQL := sSQL + 'INNER JOIN MATTER M ON T.NMATTER = M.NMATTER ';
@@ -3133,7 +3160,7 @@ begin
           sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
           sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';  }
           sSQL := sSQL + {'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX} ') P ';
-          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
+          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR, I.INV_TAX ';
           SQL.Text := sSQL;
           ParamByName('COMMENCE').AsDateTime := Trunc(Now);
       END;
@@ -3151,7 +3178,7 @@ begin
           Close;
           if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
           BEGIN
-              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE ';
+              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE, 0 AS INV_TAX ';
               sSQL := sSQL + 'FROM INVOICE P WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
               SQL.Text := sSQL;
           END
@@ -3165,7 +3192,7 @@ begin
               sSQL := sSQL + '(T.AMOUNT - ((I.OWING/I.AMOUNT) * T.AMOUNT)) AS U_AMOUNT, (T.TAX - ((I.OWING/I.AMOUNT) * T.TAX)) AS U_TAX, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.amount else t.amount * -1 end AS t_amount, ';
 //              sSQL := sSQL + 'case when i.amount > 0 then t.tax else t.tax * -1 end AS t_tax, MAX(R.COMMENCE) ';
-              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, (R.COMMENCE), T.TAXCODE ';
+              sSQL := sSQL + 't.amount as t_amount , t.tax as t_tax, (R.COMMENCE), T.TAXCODE, I.TAX AS INV_TAX ';
               sSQL := sSQL + 'FROM INVOICE I ';
               sSQL := sSQL + 'INNER JOIN TRANSITEM T ON I.NINVOICE = T.NOWNER AND T.OWNER_CODE = ''INVOICE'' ';
               sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE NOT IN (''CRED'',''GSTINP'') ';
@@ -3194,7 +3221,7 @@ begin
    if (qryDetails.IsEmpty = False) then
    begin
       if (qryDetails.FieldByName('ACCT').AsString = dmAxiom.Entity) then
-      qryDetails.First;
+         qryDetails.First;
       while not qryDetails.Eof do
       begin
          {if cbBank.Items.Count = 0 then
@@ -3264,6 +3291,7 @@ begin
                  FieldByName('FILEID').AsString := qryDetails.FieldByName('FILEID').AsString;
               FieldByName('NINVOICE').AsInteger := qryDetails.FieldByName('NINVOICE').AsInteger;
               FieldByName('TAXCODE').AsString := qryDetails.FieldByName('TAXCODE').AsString;
+              FieldByName('INV_TAX').AsFloat := qryDetails.FieldByName('INV_TAX').AsFloat;
               Edit;
   {
     Added 17.12.2002 GG
@@ -3360,6 +3388,8 @@ begin
            UpdateTotal;
            tvLedgerAMOUNT.Focused := True;
            qryLedgerTYPE.OnChange := qryLedgerTYPEChange;
+           tvLedgerTAXCODE.Visible := False;
+           tvLedgerTAX.Visible := False;
         end
         else
         begin
@@ -3737,7 +3767,7 @@ end;
 procedure TfrmCheque.dbgrLedgerExit(Sender: TObject);
 begin
   UpdateTotal;
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.qryLedgerAfterPost(DataSet: TDataSet);
@@ -3927,7 +3957,7 @@ end;
 procedure TfrmCheque.tbPayeeExit(Sender: TObject);
 begin
    Quickcode(Sender);
-   btnOK.Enabled := OKtoPost(False);
+//   btnOK.Enabled := OKtoPost(False);
    if (sPayee <> tbPayee.Text) then
    begin
       sNName := '';
@@ -3952,12 +3982,12 @@ begin
     lblUnallocated.Visible := True;
   end;
   UpdateTotal;
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.tbChqnoExit(Sender: TObject);
 begin
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -4081,14 +4111,14 @@ end;
 
 procedure TfrmCheque.cbAuthByExit(Sender: TObject);
 begin
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 
 procedure TfrmCheque.cbAuthByPropertiesEditValueChanged(Sender: TObject);
 begin
    lblAuthByName.Caption := TableString('EMPLOYEE', 'CODE', cbAuthBy.Text, 'NAME');
-   btnOK.Enabled := OKtoPost(False);
+//   btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.qryLedgerAMOUNTChange(Sender: TField);
@@ -4481,7 +4511,7 @@ end;
 
 procedure TfrmCheque.cbAuthByChange(Sender: TObject);
 begin
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.popGridDistributeAllocationsClick(Sender: TObject);
@@ -4508,7 +4538,7 @@ end;
 procedure TfrmCheque.chkPrintClick(Sender: TObject);
 begin
   cmbPrinter.Enabled := chkPrint.Checked;
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.chkReplacementChequeClick(Sender: TObject);
@@ -4530,7 +4560,7 @@ begin
       chkPrint.Visible := (TableString('PRINTER','CODE',cmbPrinter.Text,'EFT_PRINTER') = 'N');  //True and (SystemString('SHOW_DD_CHEQUE_NO') = 'N');
   if (tbChqno.Text = '') then
      NextChqno;
-  btnOK.Enabled := OKtoPost(False);
+//  btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.btnImportClick(Sender: TObject);
@@ -5027,7 +5057,7 @@ end;
 procedure TfrmCheque.cxGrid1Exit(Sender: TObject);
 begin
    UpdateTotal;
-   btnOK.Enabled := OKtoPost(False);
+//   btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.tvLedgerREASONPropertiesValidate(Sender: TObject;
@@ -5046,13 +5076,13 @@ end;
 
 procedure TfrmCheque.chkNoExitClick(Sender: TObject);
 begin
-   btnOK.Enabled := OKtoPost(False);
+//   btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.chkNoExitContextPopup(Sender: TObject; MousePos: TPoint;
   var Handled: Boolean);
 begin
-   btnOK.Enabled := OKtoPost(False);
+//   btnOK.Enabled := OKtoPost(False);
 end;
 
 procedure TfrmCheque.tvLedgerEditKeyPress(Sender: TcxCustomGridTableView;
@@ -5146,7 +5176,7 @@ end;
 
 procedure TfrmCheque.dsLedgerTemplateStateChange(Sender: TObject);
 begin
-   ActDeleteUpdate(nil);
+   ActDeleteTemplateUpdate(nil);
 end;
 
 procedure TfrmCheque.dtpDatePropertiesValidate(Sender: TObject;
