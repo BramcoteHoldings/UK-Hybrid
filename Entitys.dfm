@@ -198,7 +198,7 @@ object frmEntity: TfrmEntity
       Width = 376
       Height = 272
       TabOrder = 1
-      Properties.ActivePage = tabCreation
+      Properties.ActivePage = tabInvoice
       Properties.CustomButtons.Buttons = <>
       LookAndFeel.Kind = lfFlat
       LookAndFeel.NativeStyle = True
@@ -513,7 +513,7 @@ object frmEntity: TfrmEntity
         end
         object Label2: TLabel
           Left = 8
-          Top = 202
+          Top = 204
           Width = 94
           Height = 15
           Caption = 'Disbursement Adj'
@@ -798,10 +798,10 @@ object frmEntity: TfrmEntity
           OnExit = dbtbBillAntdDRExit
           Width = 69
         end
-        object dbtbBillDisbAdjDR: TcxDBTextEdit
-          Left = 138
-          Top = 200
-          DataBinding.DataField = 'BILL_DISB_ADJ_DR'
+        object dbtbBillDisbAdjCR: TcxDBTextEdit
+          Left = 173
+          Top = 201
+          DataBinding.DataField = 'BILL_DISB_ADJ_CR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
@@ -809,32 +809,18 @@ object frmEntity: TfrmEntity
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 21
           OnDblClick = dbtbLedgerDblClick
-          OnExit = dbtbBillAntdDRExit
-          Width = 69
-        end
-        object dbtbBillDisbAdjCR: TcxDBTextEdit
-          Left = 211
-          Top = 200
-          DataBinding.DataField = 'BILL_DISB_ADJ_CR'
-          DataBinding.DataSource = dsEntity
-          Style.LookAndFeel.NativeStyle = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          TabOrder = 22
-          OnDblClick = dbtbLedgerDblClick
           Width = 69
         end
         object dbtbBillDisbAdjTaxDR: TcxDBTextEdit
           Left = 283
-          Top = 200
+          Top = 201
           DataBinding.DataField = 'BILL_DISB_ADJ_TAX_DR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
           StyleFocused.LookAndFeel.NativeStyle = True
           StyleHot.LookAndFeel.NativeStyle = True
-          TabOrder = 23
+          TabOrder = 22
           OnDblClick = dbtbLedgerDblClick
           Width = 69
         end
@@ -1578,7 +1564,7 @@ object frmEntity: TfrmEntity
     Left = 392
     Top = 444
     Caption = 'Default Branch / Dept for Ledger Postings'
-    TabOrder = 22
+    TabOrder = 19
     Height = 117
     Width = 336
     object Label14: TLabel
@@ -1626,7 +1612,7 @@ object frmEntity: TfrmEntity
     Left = 18
     Top = 444
     Enabled = False
-    TabOrder = 24
+    TabOrder = 22
     Transparent = True
     Height = 117
     Width = 328
@@ -3908,7 +3894,7 @@ object frmEntity: TfrmEntity
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -5920,7 +5906,7 @@ object frmEntity: TfrmEntity
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -6307,7 +6293,7 @@ object frmEntity: TfrmEntity
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
