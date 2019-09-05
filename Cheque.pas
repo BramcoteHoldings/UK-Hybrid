@@ -1989,10 +1989,10 @@ begin
                              //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
                            begin
                               if cMatterTotal > 0 then
-                                 cMatterTotalTax := qryLedger.FieldByName('TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
+                                 cMatterTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
                                               //  (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                               if cTradeTotal > 0 then
-                                 cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat; //FieldByName('trade_cr_amount').AsFloat/
+                                 cTradeTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat; //FieldByName('trade_cr_amount').AsFloat/
                                                // (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                            end;
                         end;
