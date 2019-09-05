@@ -6351,10 +6351,14 @@ var
    lOrigAmount,
    cAllocDisbAmountDiff,
    cAllocDisbTaxDiff,
-   dGstFree : double;
+   dGstFree,
+   lTax : double;
+   bTaxNoChange: boolean;
 begin
    lAmount := tvBillItemsAMOUNT.EditValue;
+   lTax := tvBillItemsTAX.EditValue;
    lOrigAmount := lAmount;
+   bTaxNoChange:= False;
    case tvBillItemsTYPE.EditValue of
       IMG_DISB:
          begin
@@ -6394,14 +6398,19 @@ begin
          end;
       IMG_UPCRED:
          begin
-            if (InputQueryAmount('Adjust Cheque Req Amount', 'Enter New Amount:', lAmount) = true) then
+            if ( lAmount / SystemFloat('GST_DIVIDER') ) <> lTax then
+               bTaxNoChange:= True;
+            if (InputQueryAmount('Adjust Creditor Invoice Amount', 'Enter New Amount:', lAmount) = true) then
             begin
                with dmAxiom.qryTmp do
                begin
                  Close;
                  SQL.Text := 'update alloc set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where nalloc = :nalloc';
                  ParamByName('amount').AsFloat := lAmount * - 1;
-                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 if bTaxNoChange = True then
+                    ParamByName('tax').AsFloat := lTax * - 1
+                 else
+                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
                  ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
                  ExecSQL;
                end;

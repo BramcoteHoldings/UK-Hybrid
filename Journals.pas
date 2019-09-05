@@ -514,11 +514,14 @@ begin
   begin
      qryJournals.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date);
      qryJournals.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date);
+     qryTotal.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date);
+     qryTotal.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date);
   end
   else
   if (chkDateFrom.Checked and (not chkDateTo.Checked)) then
   begin
      qryJournals.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date);
+     qryTotal.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date);
 //     qryJournals.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1;
   end
   else
@@ -526,6 +529,7 @@ begin
   begin
 //     qryJournals.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date);
      qryJournals.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date);
+     qryTotal.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date);
   end;
   qryTotal.Open;
   ShowTotal;
@@ -673,15 +677,18 @@ end;
 procedure TfrmJournals.ShowLedgers;
 begin
   // Set the allocation grid to display Allocs
-  Screen.Cursor := crSQLWait;
-  qryAllocs.Close;
-  qryTrustAllocs.Close;
-  qryNaccounts.Close;
-  qryNaccounts.ParamByName('P_Acct').AsString := qryJournals.FieldByName('ACCT').AsString;
-  qryNaccounts.ParamByName('P_NJournal').AsInteger := qryJournals.FieldByName('NJOURNAL').AsInteger;
-  tvAllocations.DataController.DataSource := dsNaccounts;
-  qryNaccounts.Open;
-  Screen.Cursor := crDefault;
+   if dmAxiom.bShutDown = False then
+   begin
+      Screen.Cursor := crSQLWait;
+      qryAllocs.Close;
+      qryTrustAllocs.Close;
+      qryNaccounts.Close;
+      qryNaccounts.ParamByName('P_Acct').AsString := qryJournals.FieldByName('ACCT').AsString;
+      qryNaccounts.ParamByName('P_NJournal').AsInteger := qryJournals.FieldByName('NJOURNAL').AsInteger;
+      tvAllocations.DataController.DataSource := dsNaccounts;
+      qryNaccounts.Open;
+      Screen.Cursor := crDefault;
+   end;
 end;
 
 
