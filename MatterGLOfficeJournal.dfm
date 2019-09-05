@@ -28,7 +28,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object Label8: TLabel
     Left = 7
-    Top = 104
+    Top = 107
     Width = 79
     Height = 15
     Caption = 'Default &Reason'
@@ -63,14 +63,14 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object Label11: TLabel
     Left = 334
-    Top = 104
+    Top = 107
     Width = 44
     Height = 15
     Caption = '&Amount'
   end
   object Label3: TLabel
     Left = 7
-    Top = 59
+    Top = 62
     Width = 79
     Height = 15
     Caption = 'General &Ledger'
@@ -155,7 +155,9 @@ object frmPettyJournal: TfrmPettyJournal
       OptionsBehavior.GoToNextCellOnEnter = True
       OptionsBehavior.FocusCellOnCycle = True
       OptionsCustomize.ColumnFiltering = False
+      OptionsCustomize.ColumnSorting = False
       OptionsData.Appending = True
+      OptionsData.Inserting = False
       OptionsSelection.HideSelection = True
       OptionsView.CellEndEllipsis = True
       OptionsView.ColumnAutoWidth = True
@@ -261,7 +263,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object rgSign: TcxRadioGroup
     Left = 89
-    Top = 59
+    Top = 62
     Caption = 'Post General Ledger as'
     Properties.Columns = 2
     Properties.Items = <
@@ -281,7 +283,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object neAmount: TcxCurrencyEdit
     Left = 380
-    Top = 101
+    Top = 104
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
@@ -292,7 +294,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object tbDesc: TcxTextEdit
     Left = 89
-    Top = 101
+    Top = 104
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
@@ -304,7 +306,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object tbPettyCash: TcxButtonEdit
     Left = 267
-    Top = 69
+    Top = 72
     Properties.Buttons = <
       item
         Default = True
@@ -359,7 +361,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object lblPettyCashDescr: TcxLabel
     Left = 376
-    Top = 69
+    Top = 72
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     ParentFont = False
@@ -371,12 +373,12 @@ object frmPettyJournal: TfrmPettyJournal
     Properties.Alignment.Vert = taVCenter
     Height = 24
     Width = 484
-    AnchorY = 81
+    AnchorY = 84
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 89
     Top = 30
-    EditValue = 43682.7891969444d
+    EditValue = 43713.5034762847d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -392,8 +394,8 @@ object frmPettyJournal: TfrmPettyJournal
     Width = 113
   end
   object rgType: TcxRadioGroup
-    Left = 267
-    Top = 29
+    Left = 260
+    Top = 28
     Caption = 'Type'
     Properties.Columns = 2
     Properties.Items = <
@@ -408,7 +410,7 @@ object frmPettyJournal: TfrmPettyJournal
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 11
     Transparent = True
-    Height = 35
+    Height = 38
     Width = 165
   end
   object qryAllocInsert: TUniQuery

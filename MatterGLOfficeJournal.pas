@@ -585,18 +585,18 @@ var
    ADefaultTax: string;
 begin
    if AllocType = '' then
-      qryLedger.FieldByName('TYPE').AsString := 'Matter'
+      DataSet.FieldByName('TYPE').AsString := 'Matter'
    else
-      qryLedger.FieldByName('TYPE').AsString := AllocType;
+      DataSet.FieldByName('TYPE').AsString := AllocType;
 
-   qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+   DataSet.FieldByName('REASON').AsString := tbDesc.Text;
 
 // AES 12/08/2009  Added additional test for default taxcode
    ADefaultTax := LedgerComponentString(tbPettyCash.Text, 'DEFAULT_TAXCODE');
    if ADefaultTax <> '' then
-      qryLedger.FieldByName('TAXCODE').AsString := ADefaultTax
+      DataSet.FieldByName('TAXCODE').AsString := ADefaultTax
    else
-      qryLedger.FieldByName('TAXCODE').AsString := DefaultTax;
+      DataSet.FieldByName('TAXCODE').AsString := DefaultTax;
 end;
 
 procedure TfrmPettyJournal.dbgrLedgerExit(Sender: TObject);
