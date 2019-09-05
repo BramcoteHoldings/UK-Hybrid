@@ -390,7 +390,7 @@ object frmJournals: TfrmJournals
       object lblBank: TLabel
         Left = 54
         Top = 11
-        Width = 59
+        Width = 58
         Height = 13
         Caption = 'Bank/Entity'
         Transparent = True
@@ -406,7 +406,7 @@ object frmJournals: TfrmJournals
       object Label2: TLabel
         Left = 75
         Top = 58
-        Width = 38
+        Width = 39
         Height = 13
         Caption = 'Date To'
         Transparent = True
@@ -422,7 +422,7 @@ object frmJournals: TfrmJournals
       object Label7: TLabel
         Left = 17
         Top = 107
-        Width = 96
+        Width = 97
         Height = 13
         Caption = 'Journal Number To'
         Transparent = True
@@ -1603,7 +1603,7 @@ object frmJournals: TfrmJournals
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1630,6 +1630,7 @@ object frmJournals: TfrmJournals
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1662,7 +1663,7 @@ object frmJournals: TfrmJournals
     XLSSettings.WorksheetName = 'Report'
     Left = 295
     Top = 361
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plJournalsPrint'
     object ppHeaderBand1: TppHeaderBand
@@ -2016,7 +2017,7 @@ object frmJournals: TfrmJournals
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpVertical
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -2027,7 +2028,7 @@ object frmJournals: TfrmJournals
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plAllocsPrint'
           object ppDetailBand2: TppDetailBand
@@ -2761,7 +2762,7 @@ object frmJournals: TfrmJournals
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2789,6 +2790,7 @@ object frmJournals: TfrmJournals
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2821,7 +2823,7 @@ object frmJournals: TfrmJournals
     XLSSettings.WorksheetName = 'Report'
     Left = 644
     Top = 358
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plAllocPrint'
     object ppHeaderBand2: TppHeaderBand
