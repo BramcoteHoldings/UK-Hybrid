@@ -6362,6 +6362,8 @@ begin
    case tvBillItemsTYPE.EditValue of
       IMG_DISB:
          begin
+            if ( lAmount / SystemFloat('GST_DIVIDER') ) <> lTax then
+               bTaxNoChange:= True;
             if (InputQueryAmount('Adjust Disbursement Amount', 'Enter New Amount:', lAmount) = true) then
             begin
                with dmAxiom.qryTmp do
@@ -6369,8 +6371,18 @@ begin
                  Close;
                  SQL.Text := 'update alloc set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where nalloc = :nalloc';
                  ParamByName('amount').AsFloat := lAmount * - 1;
-                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 if bTaxNoChange = True then
+                    ParamByName('tax').AsFloat := lTax * - 1
+                 else
+                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
                  ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+
+                 Close;
+                 SQL.Text := 'update nmemo set BILLED_DISB_ADJUSTMENT = BILLED_DISB_ADJUSTMENT + (:Amount - :OrigAmount) where nmemo = : nmemo';
+                 ParamByName('amount').AsFloat := lAmount;
+                 ParamByName('origamount').AsFloat := lOrigAmount;
+                 ParamByName('nmemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
                  ExecSQL;
                end;
             end;
@@ -6380,6 +6392,8 @@ begin
          end;
       IMG_ANTD:
          begin
+            if ( lAmount / SystemFloat('GST_DIVIDER') ) <> lTax then
+               bTaxNoChange:= True;
             if (InputQueryAmount('Adjust Cheque Req Amount', 'Enter New Amount:', lAmount) = true) then
             begin
                with dmAxiom.qryTmp do
@@ -6387,8 +6401,18 @@ begin
                  Close;
                  SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where ncheqreq = :ncheqreq';
                  ParamByName('amount').AsFloat := lAmount * - 1;
-                 ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                 if bTaxNoChange = True then
+                    ParamByName('tax').AsFloat := lTax * - 1
+                 else
+                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
                  ParamByName('ncheqreq').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+
+                 Close;
+                 SQL.Text := 'update nmemo set BILLED_DISB_ADJUSTMENT = BILLED_DISB_ADJUSTMENT + (:Amount - :OrigAmount) where nmemo = : nmemo';
+                 ParamByName('amount').AsFloat := lAmount;
+                 ParamByName('origamount').AsFloat := lOrigAmount;
+                 ParamByName('nmemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
                  ExecSQL;
                end;
             end;
@@ -6412,6 +6436,13 @@ begin
                  else
                     ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
                  ParamByName('nalloc').AsInteger := tvBillItemsUNIQUEID.EditValue;
+                 ExecSQL;
+
+                 Close;
+                 SQL.Text := 'update nmemo set BILLED_DISB_ADJUSTMENT = BILLED_DISB_ADJUSTMENT + (:Amount - :OrigAmount) where nmemo = : nmemo';
+                 ParamByName('amount').AsFloat := lAmount;
+                 ParamByName('origamount').AsFloat := lOrigAmount;
+                 ParamByName('nmemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
                  ExecSQL;
                end;
             end;
