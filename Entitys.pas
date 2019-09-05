@@ -323,7 +323,6 @@ type
     ppDBText52: TppDBText;
     ppDBMemo1: TppDBMemo;
     Label2: TLabel;
-    dbtbBillDisbAdjDR: TcxDBTextEdit;
     dbtbBillDisbAdjCR: TcxDBTextEdit;
     dbtbBillDisbAdjTaxDR: TcxDBTextEdit;
     Label9: TLabel;
