@@ -597,6 +597,7 @@ begin
                                     ParamByName('BILLED').AsString := 'N';
                                  ParamByName('NINVOICE').AsInteger := BandedTableViewDBBandedNINVOICE.EditValue;
                                  ParamByName('UPCRED').AsCurrency := BandedTableViewDBBandedAMOUNT.EditValue;
+                                 ParamByName('N_WOFF').AsInteger := BandedTableViewDBBandedNALLOC.EditValue;
                                  ExecSQL;
 
                               // 23-Nov-2011 AES un-commented this.  Issue with write-offs.  billed flag should be set to Y i think.
