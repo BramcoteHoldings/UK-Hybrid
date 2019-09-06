@@ -206,7 +206,7 @@ object frmMatters: TfrmMatters
     object lblTotalFeesRecorded: TLabel
       Left = 614
       Top = 126
-      Width = 105
+      Width = 104
       Height = 15
       Caption = 'Total Fees  recorded'
     end
@@ -554,7 +554,7 @@ object frmMatters: TfrmMatters
         object Label15: TLabel
           Left = 10
           Top = 56
-          Width = 32
+          Width = 31
           Height = 15
           Caption = 'Bill To'
           Transparent = True
@@ -762,7 +762,7 @@ object frmMatters: TfrmMatters
         object Label19: TLabel
           Left = 9
           Top = 71
-          Width = 23
+          Width = 22
           Height = 15
           Caption = 'Title'
         end
@@ -1258,7 +1258,7 @@ object frmMatters: TfrmMatters
             object Label36: TLabel
               Left = 1
               Top = 51
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1353,7 +1353,7 @@ object frmMatters: TfrmMatters
             object Label41: TLabel
               Left = 1
               Top = 50
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1448,7 +1448,7 @@ object frmMatters: TfrmMatters
             object lCustomSuburb: TLabel
               Left = 1
               Top = 51
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1617,7 +1617,7 @@ object frmMatters: TfrmMatters
       object lblsClearTrust: TLabel
         Left = 470
         Top = 117
-        Width = 99
+        Width = 98
         Height = 15
         Hint = 
           'Total Cleared Non-Protected Trust less any Unconverted Trust Req' +
@@ -1666,7 +1666,7 @@ object frmMatters: TfrmMatters
       object lblsTrust: TLabel
         Left = 470
         Top = 100
-        Width = 97
+        Width = 95
         Height = 15
         Hint = 
           'Total funds deposited in the trust account on behalf of this mat' +
@@ -1737,7 +1737,7 @@ object frmMatters: TfrmMatters
       object lblsWIP: TLabel
         Left = 9
         Top = 8
-        Width = 59
+        Width = 58
         Height = 15
         Hint = 'Fees that have yet to be billed.'
         Caption = 'WIP - Time'
@@ -1916,7 +1916,7 @@ object frmMatters: TfrmMatters
         object Label53: TLabel
           Left = 18
           Top = 86
-          Width = 70
+          Width = 69
           Height = 15
           Caption = 'Fee Template'
           OnMouseEnter = lblUnderlineEnter
@@ -2070,7 +2070,7 @@ object frmMatters: TfrmMatters
         object lblType: TLabel
           Left = 509
           Top = 114
-          Width = 25
+          Width = 24
           Height = 15
           Caption = 'Type'
         end
@@ -2104,7 +2104,7 @@ object frmMatters: TfrmMatters
         object Label8: TLabel
           Left = 18
           Top = 166
-          Width = 84
+          Width = 85
           Height = 15
           Caption = 'Exp Completion'
           OnMouseEnter = lblUnderlineEnter
@@ -2113,7 +2113,7 @@ object frmMatters: TfrmMatters
         object lblExpCompletion: TLabel
           Left = 116
           Top = 166
-          Width = 94
+          Width = 95
           Height = 15
           Caption = 'lblExpCompletion'
           Color = clBtnFace
@@ -2122,7 +2122,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrans: TLabel
           Left = 773
           Top = 148
-          Width = 85
+          Width = 84
           Height = 15
           Hint = 'Date of the last transaction.'
           Caption = 'Last Transaction'
@@ -2134,7 +2134,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrust: TLabel
           Left = 903
           Top = 143
-          Width = 114
+          Width = 112
           Height = 15
           Hint = 'Date of the last trust transaction.'
           Caption = 'Last Trust Transaction'
@@ -2208,7 +2208,7 @@ object frmMatters: TfrmMatters
           object Label14: TLabel
             Left = 206
             Top = 13
-            Width = 78
+            Width = 79
             Height = 15
             Caption = 'Expected Value'
           end
@@ -3201,7 +3201,7 @@ object frmMatters: TfrmMatters
         object Label52: TLabel
           Left = 8
           Top = 3
-          Width = 68
+          Width = 67
           Height = 15
           Caption = 'Archive Type'
           ParentShowHint = False
@@ -3307,21 +3307,21 @@ object frmMatters: TfrmMatters
       object Label66: TLabel
         Left = 259
         Top = 225
-        Width = 101
+        Width = 100
         Height = 15
         Caption = 'Requisitioned Trust'
       end
       object Label5: TLabel
         Left = 72
         Top = 225
-        Width = 97
+        Width = 95
         Height = 15
         Caption = 'Total Trust Monies'
       end
       object Label50: TLabel
-        Left = 756
+        Left = 755
         Top = 6
-        Width = 47
+        Width = 48
         Height = 15
         Alignment = taRightJustify
         Caption = 'Exposure'
@@ -3391,7 +3391,7 @@ object frmMatters: TfrmMatters
       object Label20: TLabel
         Left = 18
         Top = 79
-        Width = 99
+        Width = 100
         Height = 15
         Caption = 'Actual Expenditure'
       end
@@ -3405,7 +3405,7 @@ object frmMatters: TfrmMatters
       object Label27: TLabel
         Left = 18
         Top = 177
-        Width = 140
+        Width = 139
         Height = 15
         Caption = 'Grand Total (includes fees)'
       end
@@ -3426,7 +3426,7 @@ object frmMatters: TfrmMatters
       object Label11: TLabel
         Left = 18
         Top = 136
-        Width = 126
+        Width = 127
         Height = 15
         Caption = 'Anticipated Expenditure'
       end
@@ -4518,6 +4518,7 @@ object frmMatters: TfrmMatters
             MinWidth = 18
             Options.Editing = False
             Options.Focusing = False
+            VisibleForCustomization = False
           end
           object tvInvoicesSPLIT_BILL: TcxGridDBColumn
             Caption = 'Split Bill'
@@ -5177,7 +5178,7 @@ object frmMatters: TfrmMatters
         object Label61: TLabel
           Left = 401
           Top = 7
-          Width = 138
+          Width = 139
           Height = 15
           Anchors = [akLeft, akBottom]
           Caption = 'Expected Payment Details:'
