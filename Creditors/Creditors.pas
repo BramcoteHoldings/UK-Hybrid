@@ -751,8 +751,9 @@ begin
        if (LfrmCreditorNew.ShowModal = mrOK) then
        begin
          SetReopenList;
-         frmCreditorSearch.RefreshSearch(frmPhoneBookSearch.Search);
-         DisplayCreditor(frmPhoneBookSearch.NName );
+         if Assigned(frmCreditorSearch) = True then
+            frmCreditorSearch.RefreshSearch(LfrmCreditorNew.Search);
+         DisplayCreditor(LfrmCreditorNew.NCreditor);
        end;
     finally
        LfrmCreditorNew.Free;

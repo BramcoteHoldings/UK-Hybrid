@@ -348,6 +348,7 @@ type
     txtFXLoss: TcxDBTextEdit;
     cmbCurrency: TcxDBLookupComboBox;
     cbMultiCurrency: TcxDBCheckBox;
+    dbtbBillDisbAdjDR: TcxDBTextEdit;
     procedure qryEntitySetButtons(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure tbtnFirstClick(Sender: TObject);
