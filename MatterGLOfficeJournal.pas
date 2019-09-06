@@ -80,6 +80,19 @@ type
     btnClose: TdxBarButton;
     rgType: TcxRadioGroup;
     tvLedgerLGRALLOC_ID: TcxGridDBColumn;
+    qryLedgerTYPE: TStringField;
+    qryLedgerREFNO: TStringField;
+    qryLedgerLONGDESC: TStringField;
+    qryLedgerREASON: TStringField;
+    qryLedgerAMOUNT: TFloatField;
+    qryLedgerTAXCODE: TStringField;
+    qryLedgerTAXRATE: TFloatField;
+    qryLedgerTAX: TFloatField;
+    qryLedgerWITHHOLD: TStringField;
+    qryLedgerSUNDRYTYPE: TStringField;
+    qryLedgerCHART: TStringField;
+    qryLedgerLGRALLOC_ID: TFloatField;
+    qryLedgerROWID: TStringField;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure qryLedgerAfterInsert(DataSet: TDataSet);
@@ -127,6 +140,7 @@ type
     procedure tvLedgerAMOUNTPropertiesChange(Sender: TObject);
     procedure tvLedgerAMOUNTPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+    procedure qryLedgerTAXRATEChange(Sender: TField);
   private
     { Private declarations }
     PostingFailed: boolean;
@@ -157,45 +171,45 @@ end;
 
 
 procedure TfrmPettyJournal.UpdateTotal;
-var
-  bmPrevRecord: TBookmark;
+//var
+//  bmPrevRecord: TBookmark;
 begin
 //  if DeletingItems then Exit;		{ don't calculate if deleting all items }
-  bmPrevRecord := qryLedger.GetBookmark;  { returns nil if table is empty }
-  try
-    qryLedger.DisableControls;
-    qryLedger.First;
-    TotalAmt := 0;			{ use temp for efficiency }
-    Balance := 0;
-    Tax := 0;
-    WithholdTax := 0;
-    while not qryLedger.EOF do
-    begin
-      TotalAmt := TotalAmt + qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency;
-      Balance := Balance + qryLedger.FieldByName('AMOUNT').AsCurrency;
-      Tax := Tax + qryLedger.FieldByName('TAX').AsCurrency;
-      if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
-        WithholdTax := WithholdTax + qryLedger.FieldByName('TAX').AsCurrency;
-      qryLedger.Next;
-    end;
-    lblBalance.Caption := Format('%m', [Balance]);
-    lblTax.Caption := Format('%m', [Tax]);
-    lblTotal.Caption := Format('%m', [TotalAmt]);
+//   bmPrevRecord := qryLedger.GetBookmark;  { returns nil if table is empty }
+   try
+      qryLedger.DisableControls;
+      qryLedger.First;
+      TotalAmt := 0;			{ use temp for efficiency }
+      Balance := 0;
+      Tax := 0;
+      WithholdTax := 0;
+      while not qryLedger.EOF do
+      begin
+         TotalAmt := TotalAmt + qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency;
+         Balance := Balance + qryLedger.FieldByName('AMOUNT').AsCurrency;
+         Tax := Tax + qryLedger.FieldByName('TAX').AsCurrency;
+         if qryLedger.FieldByName('WITHHOLD').AsString = 'Y' then
+            WithholdTax := WithholdTax + qryLedger.FieldByName('TAX').AsCurrency;
+         qryLedger.Next;
+      end;
+      lblBalance.Caption := Format('%m', [Balance]);
+      lblTax.Caption := Format('%m', [Tax]);
+      lblTotal.Caption := Format('%m', [TotalAmt]);
 
-    // this will stop rounding errors
-    TotalAmt := round(TotalAmt * 100)/100;
+      // this will stop rounding errors
+      TotalAmt := round(TotalAmt * 100)/100;
 
-  finally
-     qryLedger.EnableControls;
-     if bmPrevRecord <> nil then
-     begin
-       qryLedger.GoToBookmark(bmPrevRecord);
-       qryLedger.FreeBookmark(bmPrevRecord);
-     end;
-  end;
-  if neAmount.Value <> 0 then
-    lblUnallocated.Caption := Format('%m', [neAmount.Value - TotalAmt]);
-  btnSave.Enabled := OKtoPost(False);
+   finally
+      qryLedger.EnableControls;
+{      if bmPrevRecord <> nil then
+      begin
+         qryLedger.GoToBookmark(bmPrevRecord);
+         qryLedger.FreeBookmark(bmPrevRecord);
+      end; }
+   end;
+   if neAmount.Value <> 0 then
+      lblUnallocated.Caption := Format('%m', [neAmount.Value - TotalAmt]);
+   btnSave.Enabled := OKtoPost(False);
 end;
 
 
@@ -584,6 +598,7 @@ procedure TfrmPettyJournal.qryLedgerAfterInsert(DataSet: TDataSet);
 var
    ADefaultTax: string;
 begin
+   DataSet.FieldByName('LGRALLOC_ID').AsInteger := GetSequenceNumber('sqnc_lgralloc_id');
    if AllocType = '' then
       DataSet.FieldByName('TYPE').AsString := 'Matter'
    else
@@ -770,15 +785,20 @@ begin
   CalcTax;
 end;
 
+procedure TfrmPettyJournal.qryLedgerTAXRATEChange(Sender: TField);
+begin
+   CalcTax;
+end;
+
 procedure TfrmPettyJournal.CalcTax;
 var
    dAmount: double;
    taxcode: STRING;
 begin
-   if not qryLedger.Modified then
+   if qryLedger.Modified = True then
    begin
       qryLedger.Edit;
-//      qryLedgerAMOUNT.OnChange := nil;
+      qryLedgerAMOUNT.OnChange := nil;
       dAmount := qryLedger.FieldByName('AMOUNT').AsCurrency;
       if DefaultTax <> qryLedger.FieldByName('TAXCODE').AsString then
       begin
@@ -790,7 +810,7 @@ begin
       qryLedger.FieldByName('AMOUNT').AsCurrency := dAmount;
       if qryLedger.State in [dsInsert, dsEdit] then
          UpdateTotal;
-//      qryLedgerAMOUNT.OnChange := qryLedgerAMOUNTChange;
+      qryLedgerAMOUNT.OnChange := qryLedgerAMOUNTChange;
       if Taxcode <> '' then
          DefaultTax := taxcode;
    end;
@@ -955,11 +975,11 @@ end;
 procedure TfrmPettyJournal.tvLedgerAMOUNTPropertiesValidate(Sender: TObject;
   var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
 begin
-   if not qryLedger.Modified then
+ {  if not qryLedger.Modified then
       qryLedger.Edit;
    qryLedger.FieldByName('AMOUNT').AsCurrency := DisplayValue;
    UpdateTotal;
-   CalcTax;
+   CalcTax;  }
 end;
 
 procedure TfrmPettyJournal.tvLedgerREASONPropertiesValidate(
