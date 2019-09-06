@@ -1517,6 +1517,7 @@ begin
                     // 20 Dec 2017 DW Added sTaxCode
                     //, dmAxiom.DefaultTax);
                     , sTaxCode);
+
               end;
 
               if (qryBill.FieldByName('DISBTAX').AsCurrency <> 0.0) then

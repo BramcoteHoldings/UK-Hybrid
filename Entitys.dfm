@@ -116,7 +116,7 @@ object frmEntity: TfrmEntity
   end
   object Label47: TLabel
     Left = 20
-    Top = 213
+    Top = 211
     Width = 67
     Height = 15
     Alignment = taRightJustify
@@ -281,7 +281,7 @@ object frmEntity: TfrmEntity
         object Label52: TLabel
           Left = 8
           Top = 55
-          Width = 82
+          Width = 83
           Height = 15
           Caption = 'Sundry Expense'
           Transparent = True
@@ -482,7 +482,7 @@ object frmEntity: TfrmEntity
         object Label62: TLabel
           Left = 8
           Top = 103
-          Width = 82
+          Width = 83
           Height = 15
           Caption = 'Sundry Expense'
           Transparent = True
@@ -513,7 +513,7 @@ object frmEntity: TfrmEntity
         end
         object Label2: TLabel
           Left = 8
-          Top = 202
+          Top = 204
           Width = 94
           Height = 15
           Caption = 'Disbursement Adj'
@@ -798,10 +798,10 @@ object frmEntity: TfrmEntity
           OnExit = dbtbBillAntdDRExit
           Width = 69
         end
-        object dbtbBillDisbAdjDR: TcxDBTextEdit
-          Left = 138
-          Top = 200
-          DataBinding.DataField = 'BILL_DISB_ADJ_DR'
+        object dbtbBillDisbAdjCR: TcxDBTextEdit
+          Left = 211
+          Top = 201
+          DataBinding.DataField = 'BILL_DISB_ADJ_CR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
@@ -809,13 +809,12 @@ object frmEntity: TfrmEntity
           StyleHot.LookAndFeel.NativeStyle = True
           TabOrder = 21
           OnDblClick = dbtbLedgerDblClick
-          OnExit = dbtbBillAntdDRExit
           Width = 69
         end
-        object dbtbBillDisbAdjCR: TcxDBTextEdit
-          Left = 211
-          Top = 200
-          DataBinding.DataField = 'BILL_DISB_ADJ_CR'
+        object dbtbBillDisbAdjTaxDR: TcxDBTextEdit
+          Left = 283
+          Top = 201
+          DataBinding.DataField = 'BILL_DISB_ADJ_TAX_DR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
@@ -825,10 +824,10 @@ object frmEntity: TfrmEntity
           OnDblClick = dbtbLedgerDblClick
           Width = 69
         end
-        object dbtbBillDisbAdjTaxDR: TcxDBTextEdit
-          Left = 283
-          Top = 200
-          DataBinding.DataField = 'BILL_DISB_ADJ_TAX_DR'
+        object dbtbBillDisbAdjDR: TcxDBTextEdit
+          Left = 138
+          Top = 201
+          DataBinding.DataField = 'BILL_DISB_ADJ_DR'
           DataBinding.DataSource = dsEntity
           Style.LookAndFeel.NativeStyle = True
           StyleDisabled.LookAndFeel.NativeStyle = True
@@ -853,7 +852,7 @@ object frmEntity: TfrmEntity
         object Label71: TLabel
           Left = 16
           Top = 59
-          Width = 82
+          Width = 83
           Height = 15
           Caption = 'Sundry Expense'
           Transparent = True
@@ -1098,7 +1097,7 @@ object frmEntity: TfrmEntity
         object Label79: TLabel
           Left = 8
           Top = 54
-          Width = 122
+          Width = 123
           Height = 15
           Caption = 'Sundry Expense - Billed'
           Transparent = True
@@ -1368,12 +1367,12 @@ object frmEntity: TfrmEntity
   end
   object dbtRolloverDate: TcxDBLabel
     Left = 94
-    Top = 213
+    Top = 210
     DataBinding.DataField = 'LAST_ROLLOVER'
     DataBinding.DataSource = dsEntity
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
-    Height = 16
+    Height = 19
     Width = 83
   end
   object cxDBTextEdit2: TcxDBTextEdit
@@ -1578,7 +1577,7 @@ object frmEntity: TfrmEntity
     Left = 392
     Top = 444
     Caption = 'Default Branch / Dept for Ledger Postings'
-    TabOrder = 22
+    TabOrder = 19
     Height = 117
     Width = 336
     object Label14: TLabel
@@ -1626,7 +1625,7 @@ object frmEntity: TfrmEntity
     Left = 18
     Top = 444
     Enabled = False
-    TabOrder = 24
+    TabOrder = 21
     Transparent = True
     Height = 117
     Width = 328

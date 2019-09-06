@@ -5,6 +5,10 @@ Build 36
 - Bills tab on Matter now displays Fees and Disbursement write offs
 - fixed issue with bank selection in Cheque Creation to be entity aware.
 - Fixed refresh issues with buttons on Matter Controlled Money tab.
+- Fixed AV when creating Creditor
+- Fixed issue with Part paying Creditor Invoices.
+- Added ability to change amount of Disbursement, Cheq Req and Creditor Invoice at billing time.
+- Fixed data entry issue with Matter GL Journal entry.
 
 
 Build 33 - 35

@@ -28,7 +28,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object Label8: TLabel
     Left = 7
-    Top = 104
+    Top = 107
     Width = 79
     Height = 15
     Caption = 'Default &Reason'
@@ -63,14 +63,14 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object Label11: TLabel
     Left = 334
-    Top = 104
+    Top = 107
     Width = 44
     Height = 15
     Caption = '&Amount'
   end
   object Label3: TLabel
     Left = 7
-    Top = 59
+    Top = 62
     Width = 79
     Height = 15
     Caption = 'General &Ledger'
@@ -88,7 +88,6 @@ object frmPettyJournal: TfrmPettyJournal
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    Visible = False
   end
   object lblUnallocated: TLabel
     Left = 513
@@ -103,7 +102,6 @@ object frmPettyJournal: TfrmPettyJournal
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    Visible = False
   end
   object lblTax: TLabel
     Left = 654
@@ -155,6 +153,10 @@ object frmPettyJournal: TfrmPettyJournal
       OptionsBehavior.GoToNextCellOnEnter = True
       OptionsBehavior.FocusCellOnCycle = True
       OptionsCustomize.ColumnFiltering = False
+      OptionsCustomize.ColumnGrouping = False
+      OptionsCustomize.ColumnHidingOnGrouping = False
+      OptionsCustomize.ColumnMoving = False
+      OptionsCustomize.ColumnSorting = False
       OptionsData.Appending = True
       OptionsSelection.HideSelection = True
       OptionsView.CellEndEllipsis = True
@@ -210,14 +212,15 @@ object frmPettyJournal: TfrmPettyJournal
         Caption = 'Taxcode'
         DataBinding.FieldName = 'TAXCODE'
         PropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.ImmediatePost = True
         Properties.KeyFieldNames = 'CODE'
         Properties.ListColumns = <
           item
             FieldName = 'CODE'
           end>
         Properties.ListOptions.ShowHeader = False
+        Properties.ListOptions.SyncMode = True
         Properties.ListSource = dsTaxtype
-        Properties.OnCloseUp = tvLedgerTAXCODEPropertiesCloseUp
         Width = 55
       end
       object tvLedgerAMOUNT: TcxGridDBColumn
@@ -261,7 +264,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object rgSign: TcxRadioGroup
     Left = 89
-    Top = 59
+    Top = 62
     Caption = 'Post General Ledger as'
     Properties.Columns = 2
     Properties.Items = <
@@ -281,7 +284,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object neAmount: TcxCurrencyEdit
     Left = 380
-    Top = 101
+    Top = 104
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
@@ -292,7 +295,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object tbDesc: TcxTextEdit
     Left = 89
-    Top = 101
+    Top = 104
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
@@ -304,7 +307,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object tbPettyCash: TcxButtonEdit
     Left = 267
-    Top = 69
+    Top = 72
     Properties.Buttons = <
       item
         Default = True
@@ -359,7 +362,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object lblPettyCashDescr: TcxLabel
     Left = 376
-    Top = 69
+    Top = 72
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     ParentFont = False
@@ -371,12 +374,12 @@ object frmPettyJournal: TfrmPettyJournal
     Properties.Alignment.Vert = taVCenter
     Height = 24
     Width = 484
-    AnchorY = 81
+    AnchorY = 84
   end
   object dtpDate: TEnforceCustomDateEdit
     Left = 89
     Top = 30
-    EditValue = 43682.7891969444d
+    EditValue = 43714.4738806829d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -393,7 +396,7 @@ object frmPettyJournal: TfrmPettyJournal
   end
   object rgType: TcxRadioGroup
     Left = 267
-    Top = 29
+    Top = 28
     Caption = 'Type'
     Properties.Columns = 2
     Properties.Items = <
@@ -408,7 +411,7 @@ object frmPettyJournal: TfrmPettyJournal
     StyleDisabled.LookAndFeel.NativeStyle = True
     TabOrder = 11
     Transparent = True
-    Height = 35
+    Height = 38
     Width = 165
   end
   object qryAllocInsert: TUniQuery
@@ -523,6 +526,8 @@ object frmPettyJournal: TfrmPettyJournal
       end>
   end
   object qryLedger: TUniQuery
+    UpdatingTable = 'LGRALLOC'
+    KeyFields = 'LGRALLOC_ID'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
@@ -537,6 +542,56 @@ object frmPettyJournal: TfrmPettyJournal
     BeforeScroll = qryLedgerBeforeScroll
     Left = 430
     Top = 305
+    object qryLedgerTYPE: TStringField
+      FieldName = 'TYPE'
+    end
+    object qryLedgerREFNO: TStringField
+      FieldName = 'REFNO'
+      Size = 40
+    end
+    object qryLedgerLONGDESC: TStringField
+      FieldName = 'LONGDESC'
+      Size = 120
+    end
+    object qryLedgerREASON: TStringField
+      FieldName = 'REASON'
+      Size = 400
+    end
+    object qryLedgerAMOUNT: TFloatField
+      FieldName = 'AMOUNT'
+      OnChange = qryLedgerAMOUNTChange
+    end
+    object qryLedgerTAXCODE: TStringField
+      FieldName = 'TAXCODE'
+      OnChange = qryLedgerTAXCODEChange
+      Size = 8
+    end
+    object qryLedgerTAXRATE: TFloatField
+      FieldName = 'TAXRATE'
+      OnChange = qryLedgerTAXRATEChange
+    end
+    object qryLedgerTAX: TFloatField
+      FieldName = 'TAX'
+    end
+    object qryLedgerWITHHOLD: TStringField
+      FieldName = 'WITHHOLD'
+      Size = 1
+    end
+    object qryLedgerSUNDRYTYPE: TStringField
+      FieldName = 'SUNDRYTYPE'
+      Size = 5
+    end
+    object qryLedgerCHART: TStringField
+      FieldName = 'CHART'
+      Size = 12
+    end
+    object qryLedgerLGRALLOC_ID: TFloatField
+      FieldName = 'LGRALLOC_ID'
+    end
+    object qryLedgerROWID: TStringField
+      FieldName = 'ROWID'
+      Size = 18
+    end
   end
   object dsLedger: TUniDataSource
     DataSet = qryLedger

@@ -117,7 +117,7 @@ object frmInvoice: TfrmInvoice
     Left = 94
     Top = 362
     Width = 340
-    Height = 14
+    Height = 18
     AutoSize = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
@@ -315,7 +315,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblAuthorisedBy: TLabel
     Left = 675
-    Top = 56
+    Top = 57
     Width = 77
     Height = 15
     Caption = 'Authorised By:'
@@ -523,6 +523,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -582,6 +583,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -720,6 +722,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -813,6 +816,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -842,6 +846,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -871,6 +876,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -941,6 +947,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -970,6 +977,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -999,6 +1007,7 @@ object frmInvoice: TfrmInvoice
     DecimalPlaces = 2
     DisplayFormat = dfFloat
     EditText = '0.00'
+    Enabled = False
     FontAbove.Charset = DEFAULT_CHARSET
     FontAbove.Color = clWindowText
     FontAbove.Height = -12
@@ -1980,7 +1989,7 @@ object frmInvoice: TfrmInvoice
     TabOrder = 33
   end
   object lblMatter: TcxLabel
-    Left = 560
+    Left = 554
     Top = 36
     AutoSize = False
     ParentFont = False
@@ -1988,8 +1997,8 @@ object frmInvoice: TfrmInvoice
     Properties.Alignment.Horz = taRightJustify
     Properties.ShowAccelChar = False
     Height = 19
-    Width = 83
-    AnchorX = 643
+    Width = 90
+    AnchorX = 644
   end
   object grpUnprocessed: TGroupBox
     Left = 668
@@ -2181,7 +2190,7 @@ object frmInvoice: TfrmInvoice
   end
   object edtDiscount: TcxTextEdit
     Left = 185
-    Top = 302
+    Top = 301
     Hint = 
       'Discount (% or $ amount. eg 5% or 200).  If discount is whole do' +
       'llar amount, assumption is that the amount is GST inclusive.'
@@ -3685,8 +3694,8 @@ object frmInvoice: TfrmInvoice
       '  FROM alloc, taxrate r'
       ' WHERE'
       '--NMATTER = :P_Matter AND'
-      '    nmemo = :p_invoice AND ninvoice IS NOT NULL'
-      '   AND  alloc.nmemo = :p_invoice'
+      '   alloc.nmemo = :p_invoice AND ninvoice IS NOT NULL'
+      '--   AND  alloc.nmemo = :p_invoice'
       '   AND (NVL (ninvoice, 0) = 0 OR (NVL (ninvoice, 0) > 0 ))'
       '   AND nvl(alloc.billing_taxcode, alloc.taxcode) = r.taxcode(+)'
       '   AND TRUNC (alloc.created) >= r.commence'
@@ -4245,9 +4254,9 @@ object frmInvoice: TfrmInvoice
       OnClick = bbtnShowSingleLineClick
     end
     object bbtnAdjDisbTotal: TdxBarButton
-      Caption = 'Adjust Disbursement Total'
+      Caption = 'Adjust Amount'
       Category = 0
-      Hint = 'Adjust Disbursement Total'
+      Hint = 'Adjust Amount'
       Visible = ivAlways
       OnClick = bbtnAdjDisbTotalClick
     end
@@ -4515,7 +4524,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4935,7 +4944,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5138,7 +5147,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -7354,7 +7363,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -9873,5 +9882,53 @@ object frmInvoice: TfrmInvoice
       '')
     Left = 623
     Top = 136
+  end
+  object procBillAddSingleUpCred: TUniStoredProc
+    StoredProcName = 'BILL_ADD_UPCRED_IND'
+    SQL.Strings = (
+      'begin'
+      '  BILL_ADD_UPCRED_IND(:P_NMEMO, :P_CREATED);'
+      'end;')
+    Connection = dmAxiom.uniInsight
+    Left = 428
+    Top = 489
+    ParamData = <
+      item
+        DataType = ftFloat
+        Name = 'P_NMEMO'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'P_CREATED'
+        ParamType = ptInput
+        Value = nil
+      end>
+    CommandStoredProcName = 'BILL_ADD_UPCRED_IND'
+  end
+  object procBillAddSingleUpAntd: TUniStoredProc
+    StoredProcName = 'BILL_ADD_ANTD_IND'
+    SQL.Strings = (
+      'begin'
+      '  BILL_ADD_ANTD_IND(:P_NMEMO, :P_CREATED);'
+      'end;')
+    Connection = dmAxiom.uniInsight
+    Left = 508
+    Top = 497
+    ParamData = <
+      item
+        DataType = ftFloat
+        Name = 'P_NMEMO'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'P_CREATED'
+        ParamType = ptInput
+        Value = nil
+      end>
+    CommandStoredProcName = 'BILL_ADD_ANTD_IND'
   end
 end

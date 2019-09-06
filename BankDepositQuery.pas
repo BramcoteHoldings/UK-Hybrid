@@ -14,7 +14,8 @@ uses
   ppVar, ppCtrls, ppPrnabl, ppClass, ppBands, ppCache, ppDB, ppDesignLayer,
   ppParameter, ppDBPipe, ppComm, ppRelatv, ppProd, ppReport, cxNavigator,
   cxBarEditItem, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  System.ImageList;
 
 const
   IDX_DEPOSITPRESENT = 0;
@@ -687,24 +688,31 @@ end;
 
 procedure TfrmBankDepositQuery.miChangeDepositDateClick(Sender: TObject);
 var
-  sTmp : TDateTime;
+  sTmp,
+  sOrigTmp : TDateTime;
 begin
    sTmp := qryDeposits.FieldbyName('DEPOSIT_DATE').AsDateTime;
+   sOrigTmp := qryDeposits.FieldbyName('DEPOSIT_DATE').AsDateTime;
    if (InputQueryDate('Change Deposit Date', 'Please enter the new deposit date: ',  sTmp)) then
    begin
-      with qryTmp do
+      if (sTmp < sOrigTmp) then
+         MsgErr('Deposit Date cannot be less than the Receipt Date. Deposit Date not changed.')
+      else
       begin
-         Close;
-         SQL.Text := 'UPDATE BANKDEP SET DEPOSIT_DATE =:DEPOSIT_DATE WHERE NBANKDEP =:NBANKDEP AND ACCT = :ACCT';
-         ParambyName('DEPOSIT_DATE').AsDateTime := sTmp;
-         ParambyName('NBANKDEP').AsInteger := qryDeposits.FieldbyName('NBANKDEP').AsInteger;
-         ParambyName('ACCT').AsString := tvBankDepositsACCT.EditValue;
-         ExecSQL;
-         Close;
-         ShowMessage('Deposit Date successfully changed');
-         qryDeposits.Close;
-         qryDeposits.Open;
-         Close;
+         with qryTmp do
+         begin
+            Close;
+            SQL.Text := 'UPDATE BANKDEP SET DEPOSIT_DATE =:DEPOSIT_DATE WHERE NBANKDEP =:NBANKDEP AND ACCT = :ACCT';
+            ParambyName('DEPOSIT_DATE').AsDateTime := sTmp;
+            ParambyName('NBANKDEP').AsInteger := qryDeposits.FieldbyName('NBANKDEP').AsInteger;
+            ParambyName('ACCT').AsString := tvBankDepositsACCT.EditValue;
+            ExecSQL;
+            Close;
+            ShowMessage('Deposit Date successfully changed');
+            qryDeposits.Close;
+            qryDeposits.Open;
+            Close;
+         end;
       end;
    end;
 end;

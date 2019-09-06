@@ -369,10 +369,6 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -621,7 +617,7 @@ object frmCashpay: TfrmCashpay
       object Label2: TLabel
         Left = 9
         Top = 76
-        Width = 40
+        Width = 39
         Height = 15
         Caption = 'Date To'
         Transparent = True
@@ -637,7 +633,7 @@ object frmCashpay: TfrmCashpay
       object Label7: TLabel
         Left = 9
         Top = 126
-        Width = 104
+        Width = 103
         Height = 15
         Caption = 'Cheque Number To'
         Transparent = True
@@ -1792,7 +1788,7 @@ object frmCashpay: TfrmCashpay
   object mMoveMatter: TPopupMenu
     OnPopup = mMoveMatterPopup
     Left = 561
-    Top = 65
+    Top = 57
     object MoveMatter1: TMenuItem
       Caption = 'Move to different matter'
       OnClick = MoveMatter1Click
@@ -2081,12 +2077,13 @@ object frmCashpay: TfrmCashpay
       OnClick = tbtnBarGraphClick
     end
     object tbtnPresent: TdxBarButton
-      Caption = '&Reverse Selected Cheque'
+      Caption = 'Present Selected Cheque'
       Category = 0
       Enabled = False
+      Hint = 'Present Selected Cheque'
       Visible = ivAlways
       ImageIndex = 6
-      OnClick = btnPresentClick
+      OnClick = tbtnPresentClick
     end
     object bbtnEFTFile: TdxBarButton
       Caption = 'Generate EFT File'

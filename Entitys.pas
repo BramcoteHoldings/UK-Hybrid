@@ -323,7 +323,6 @@ type
     ppDBText52: TppDBText;
     ppDBMemo1: TppDBMemo;
     Label2: TLabel;
-    dbtbBillDisbAdjDR: TcxDBTextEdit;
     dbtbBillDisbAdjCR: TcxDBTextEdit;
     dbtbBillDisbAdjTaxDR: TcxDBTextEdit;
     Label9: TLabel;
@@ -349,6 +348,7 @@ type
     txtFXLoss: TcxDBTextEdit;
     cmbCurrency: TcxDBLookupComboBox;
     cbMultiCurrency: TcxDBCheckBox;
+    dbtbBillDisbAdjDR: TcxDBTextEdit;
     procedure qryEntitySetButtons(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure tbtnFirstClick(Sender: TObject);
