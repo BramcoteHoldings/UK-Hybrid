@@ -1518,24 +1518,6 @@ begin
                     //, dmAxiom.DefaultTax);
                     , sTaxCode);
 
-                    // 05/09/2019  AES this is to post to Adj GL
-                    if (Self.qryBill.FieldByName('BILLED_DISB_ADJUSTMENT').AsFloat <> 0) then
-                    begin
-                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Chart');
-
-                       PostLedger(dtpDispatched.Date
-                          , - Self.qryBill.FieldByName('BILLED_DISB_ADJUSTMENT').AsCurrency
-                          , 0
-                          , Self.qryBill.FieldByName('FILEID').AsString
-                          , 'NMEMO'
-                          , Self.qryBill.FieldByName('NMEMO').AsInteger
-                          , sMemoDesc
-                          , sLedgerKey
-                          , qryMatter.FieldByName('AUTHOR').AsString
-                          , -1
-                          , ''
-                          , sTaxCode);
-                    end;
               end;
 
               if (qryBill.FieldByName('DISBTAX').AsCurrency <> 0.0) then

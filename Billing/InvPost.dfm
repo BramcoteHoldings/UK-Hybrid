@@ -96,7 +96,7 @@ object frmInvPost: TfrmInvPost
   object Label12: TLabel
     Left = 19
     Top = 35
-    Width = 97
+    Width = 98
     Height = 15
     Caption = 'Expected Payment'
   end
@@ -606,7 +606,7 @@ object frmInvPost: TfrmInvPost
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43713.8583102199d
+    EditValue = 43714.6296806366d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

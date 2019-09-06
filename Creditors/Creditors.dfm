@@ -36,7 +36,7 @@ object frmCreditors: TfrmCreditors
   object lblGender: TLabel
     Left = 10
     Top = 112
-    Width = 25
+    Width = 24
     Height = 15
     Caption = 'Type'
   end
@@ -85,10 +85,10 @@ object frmCreditors: TfrmCreditors
   end
   object pagDetails: TcxPageControl
     Left = 0
-    Top = 204
+    Top = 200
     Width = 1270
-    Height = 647
-    Align = alCustom
+    Height = 549
+    Align = alBottom
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 10
     Properties.ActivePage = tabAccounts
@@ -98,22 +98,18 @@ object frmCreditors: TfrmCreditors
     LookAndFeel.NativeStyle = True
     OnChange = pagDetailsChange
     OnPageChanging = pagDetailsPageChanging
-    ClientRectBottom = 643
+    ClientRectBottom = 545
     ClientRectLeft = 4
     ClientRectRight = 1266
     ClientRectTop = 26
     object tabAccounts: TcxTabSheet
       Caption = 'Accounts Payable'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrTransactions: TcxGrid
         Left = 0
         Top = 309
         Width = 1262
-        Height = 308
+        Height = 210
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -214,7 +210,7 @@ object frmCreditors: TfrmCreditors
           29)
         object Label28: TLabel
           Left = 1108
-          Top = 4
+          Top = 5
           Width = 35
           Height = 15
           Anchors = [akTop, akRight]
@@ -222,7 +218,7 @@ object frmCreditors: TfrmCreditors
         end
         object lblTotalSelected: TLabel
           Left = 930
-          Top = 7
+          Top = 5
           Width = 111
           Height = 15
           Alignment = taRightJustify
@@ -237,7 +233,7 @@ object frmCreditors: TfrmCreditors
         end
         object Label30: TLabel
           Left = 676
-          Top = 7
+          Top = 5
           Width = 166
           Height = 15
           Alignment = taRightJustify
@@ -252,7 +248,7 @@ object frmCreditors: TfrmCreditors
         end
         object tbSearch: TEdit
           Left = 1166
-          Top = 1
+          Top = 2
           Width = 92
           Height = 23
           Anchors = [akTop, akRight]
@@ -270,22 +266,22 @@ object frmCreditors: TfrmCreditors
           BevelOuter = bvNone
           TabOrder = 1
           object Label25: TLabel
-            Left = 44
-            Top = 4
+            Left = 37
+            Top = 5
             Width = 28
             Height = 15
             Caption = 'From'
           end
           object Label31: TLabel
             Left = 291
-            Top = 4
-            Width = 13
+            Top = 5
+            Width = 12
             Height = 15
             Caption = 'To'
           end
           object dtpTo: TDateTimePicker
             Left = 345
-            Top = 1
+            Top = 2
             Width = 146
             Height = 23
             Date = 42794.486780578710000000
@@ -296,7 +292,7 @@ object frmCreditors: TfrmCreditors
           end
           object dtpFrom: TDateTimePicker
             Left = 85
-            Top = 1
+            Top = 2
             Width = 146
             Height = 23
             Date = 42794.486780578710000000
@@ -307,7 +303,7 @@ object frmCreditors: TfrmCreditors
           end
           object BitBtn1: TBitBtn
             Left = 508
-            Top = 0
+            Top = 1
             Width = 95
             Height = 26
             Caption = 'Refresh'
@@ -512,7 +508,6 @@ object frmCreditors: TfrmCreditors
         PositionAfterOpen = 34
         MinSize = 34
         Control = dbgrInvoices
-        ExplicitWidth = 8
       end
     end
     object tabBalances: TcxTabSheet
@@ -521,11 +516,11 @@ object frmCreditors: TfrmCreditors
       ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 617
       object Label1: TLabel
         Left = 10
         Top = 10
-        Width = 80
+        Width = 79
         Height = 15
         Caption = 'Terms (in days)'
         Transparent = True
@@ -611,7 +606,7 @@ object frmCreditors: TfrmCreditors
       object Label23: TLabel
         Left = 10
         Top = 136
-        Width = 64
+        Width = 63
         Height = 15
         Caption = 'Total Owing'
         Transparent = True
@@ -764,7 +759,7 @@ object frmCreditors: TfrmCreditors
       ExplicitLeft = 0
       ExplicitTop = 0
       ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 617
       object lblPhoneBookKey: TLabel
         Left = 1
         Top = 15
@@ -784,7 +779,7 @@ object frmCreditors: TfrmCreditors
       object Label9: TLabel
         Left = 2
         Top = 73
-        Width = 23
+        Width = 22
         Height = 15
         Caption = 'Title'
         Transparent = True
@@ -2311,7 +2306,7 @@ object frmCreditors: TfrmCreditors
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Creditor Transactions Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2337,6 +2332,7 @@ object frmCreditors: TfrmCreditors
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2369,7 +2365,7 @@ object frmCreditors: TfrmCreditors
     XLSSettings.WorksheetName = 'Report'
     Left = 1219
     Top = 120
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plInvoices'
     object ppHeaderBand1: TppHeaderBand
@@ -3286,8 +3282,8 @@ object frmCreditors: TfrmCreditors
   object dlFile: TOpenDialog
     Filter = 'All Files (*.*)|*.*'
     Title = 'Select document template'
-    Left = 621
-    Top = 206
+    Left = 661
+    Top = 174
   end
   object qGender: TUniQuery
     Connection = dmAxiom.uniInsight
