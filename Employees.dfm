@@ -825,7 +825,7 @@ object frmEmployees: TfrmEmployees
     Width = 618
     Height = 277
     TabOrder = 29
-    Properties.ActivePage = tabDefaults
+    Properties.ActivePage = tabSecurity
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     ClientRectBottom = 273
@@ -835,6 +835,10 @@ object frmEmployees: TfrmEmployees
     object tabDefaults: TcxTabSheet
       Caption = 'Defaults'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label34: TLabel
         Left = 74
         Top = 43
@@ -1712,10 +1716,6 @@ object frmEmployees: TfrmEmployees
     object tabSecurity: TcxTabSheet
       Caption = 'Security'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label4: TLabel
         Left = 15
         Top = 30
@@ -1869,8 +1869,8 @@ object frmEmployees: TfrmEmployees
         end
       end
       object cxDBCheckBox11: TcxDBCheckBox
-        Left = 14
-        Top = 81
+        Left = 13
+        Top = 82
         Hint = 
           'Ticking this option will allow the employee to view only the Che' +
           'que Requisitions created by them.'
@@ -1911,6 +1911,18 @@ object frmEmployees: TfrmEmployees
         TabOrder = 6
         Height = 22
         Width = 138
+      end
+      object chkMatterProfit: TcxDBCheckBox
+        Left = 13
+        Top = 165
+        Caption = 'Hide Matter Profitability in Individual Dashboard?'
+        DataBinding.DataField = 'HIDE_MATTER_PROFIT'
+        DataBinding.DataSource = dsEmployees
+        Properties.Alignment = taRightJustify
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'Y'
+        Properties.ValueUnchecked = 'N'
+        TabOrder = 7
       end
     end
     object tabOptions: TcxTabSheet
@@ -3198,7 +3210,7 @@ object frmEmployees: TfrmEmployees
     Left = 830
     Top = 104
     Bitmap = {
-      494C01011F002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F0021000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5229,7 +5241,7 @@ object frmEmployees: TfrmEmployees
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
