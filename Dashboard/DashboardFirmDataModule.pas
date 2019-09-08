@@ -120,6 +120,10 @@ type
     qryMattersClosed: TUniQuery;
     dsMattersclosed: TUniDataSource;
     dsGraphWIPGenerated: TUniDataSource;
+    qryTopClientsPY: TUniQuery;
+    dsTopClientsPY: TUniDataSource;
+    qryTopReferrersPY: TUniQuery;
+    dsTopReferrersPY: TUniDataSource;
   private
     { Private declarations }
   public

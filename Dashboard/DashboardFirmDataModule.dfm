@@ -109,18 +109,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
     object qryAgedDebtorsTOTALAGED: TFloatField
       FieldName = 'TOTALAGED'
@@ -193,18 +197,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
   end
   object qryFeesBilledMonth: TUniQuery
@@ -233,10 +241,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
     object qryFeesBilledMonthNVLSUMAMOUNT0: TFloatField
       FieldName = 'NVL(SUM(AMOUNT),0)'
@@ -274,10 +284,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryFeesBilledYTDNVLSUMAMOUNT0: TFloatField
       FieldName = 'NVL(SUM(AMOUNT),0)'
@@ -311,14 +323,17 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryWipGeneratedBudgetMONTH_BUDGET: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -408,18 +423,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
     object qryWIPFiguresTOTALWIP: TFloatField
       FieldName = 'TOTALWIP'
@@ -522,18 +541,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
     object qryWIPGraphDSDesigner1: TFloatField
       FieldName = '1'
@@ -564,10 +587,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsAgedDebtorsMatterCnt: TUniDataSource
@@ -744,18 +769,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'P1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P4'
+        Value = nil
       end>
   end
   object dsFeeReceivedMonth: TUniDataSource
@@ -844,10 +873,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
     object qryFeeReceivedMonthFE_RECEIPT: TFloatField
       FieldName = 'FE_RECEIPT'
@@ -936,10 +967,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryFeeReceivedYearFE_RECEIPT: TFloatField
       FieldName = 'FE_RECEIPT'
@@ -968,18 +1001,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryEstimatedfeesMTD: TFloatField
       FieldName = 'MTD'
@@ -992,7 +1029,7 @@ object dmDashboardFirm: TdmDashboardFirm
   end
   object dsEstimatedfees: TUniDataSource
     DataSet = qryEstimatedfees
-    Left = 623
+    Left = 607
     Top = 177
   end
   object dsTopClients: TUniDataSource
@@ -1011,37 +1048,40 @@ object dmDashboardFirm: TdmDashboardFirm
       'SELECT * '
       'FROM'
       '('
-      'SELECT p2.name, SUM(amount) total'
+      'SELECT p2.name, SUM(f.amount) total'
       'FROM MATTER m, PHONEBOOK p1, PHONEBOOK p2, FEE f'
       'WHERE m.nmatter = f.nmatter'
       'AND m.NCLIENT = p1.nclient '
       'AND p2.nclient = p1.referredby_nclient'
-      'AND billed = '#39'Y'#39
+      'AND f.billed = '#39'Y'#39
       
-        'AND f.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDATE' +
-        ')'
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
       'GROUP BY p2.name'
       'UNION'
-      'SELECT p2.name, SUM(amount) total'
-      'FROM MATTER m, PHONEBOOK p1, PHONEBOOK p2, FEE'
+      'SELECT p2.name, SUM(f.amount) total'
+      'FROM MATTER m, PHONEBOOK p1, PHONEBOOK p2, FEE f'
       'WHERE m.NCLIENT = p1.nclient'
-      'AND FEE.nmatter = m.nmatter '
+      'AND f.nmatter = m.nmatter '
       'AND p2.nname = p1.referredby_nname'
-      'AND billed = '#39'Y'#39
+      'AND f.billed = '#39'Y'#39
       
-        'AND FEE.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDA' +
-        'TE)'
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
       'GROUP BY p2.name'
       'UNION'
-      'SELECT e.name, SUM(amount) total'
-      'FROM MATTER m, EMPLOYEE e, PHONEBOOK p1, FEE'
+      'SELECT e.name, SUM(f.amount) total'
+      'FROM MATTER m, EMPLOYEE e, PHONEBOOK p1, FEE f'
       'WHERE p1.referredby_emp = e.code'
-      'AND FEE.nmatter = m.nmatter'
+      'AND f.nmatter = m.nmatter'
       'AND m.nclient = p1.nclient'
-      'AND billed = '#39'Y'#39
+      'AND f.billed = '#39'Y'#39
       
-        'AND FEE.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDA' +
-        'TE)'
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
       'GROUP BY e.name'
       'ORDER BY total DESC'
       ')'
@@ -1050,6 +1090,17 @@ object dmDashboardFirm: TdmDashboardFirm
       'AND ROWNUM <= 10')
     Left = 651
     Top = 234
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
+      end>
   end
   object dsClientCountMTD: TUniDataSource
     DataSet = qryClientCountMTD
@@ -1068,10 +1119,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
   end
   object dsClientCountYTD: TUniDataSource
@@ -1091,10 +1144,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsTotalMatters: TUniDataSource
@@ -1120,10 +1175,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end>
   end
   object qryGraphWIPGenerated: TUniQuery
@@ -1339,10 +1396,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end>
     object qryGraphWIPGeneratedUNBILLED: TFloatField
       FieldName = 'UNBILLED'
@@ -1411,10 +1470,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'end_date'
+        Value = nil
       end>
   end
   object qryUnbilledDisbs: TUniQuery
@@ -1436,10 +1497,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'end_date'
+        Value = nil
       end>
     object qryUnbilledDisbsUNBILL_DISB: TFloatField
       FieldName = 'UNBILL_DISB'
@@ -1565,10 +1628,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'end_date'
+        Value = nil
       end>
     object qryDebtorLockupDEBTOR_AMOUNT: TFloatField
       FieldName = 'DEBTOR_AMOUNT'
@@ -1604,10 +1669,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'end_date'
+        Value = nil
       end>
   end
   object dsProfit_Loss: TUniDataSource
@@ -1672,7 +1739,7 @@ object dmDashboardFirm: TdmDashboardFirm
       
         ' (select sum(amount) as cheque_amount from cheque where trust = ' +
         #39'T'#39')')
-    Left = 731
+    Left = 787
     Top = 443
   end
   object dsMatterProfitability: TUniDataSource
@@ -1690,11 +1757,18 @@ object dmDashboardFirm: TdmDashboardFirm
       'and matter.type = mattertype.code'
       'and billtype = '#39'Billable'#39' '
       'and billed = '#39'Y'#39
-      'and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      '--and trunc(invoicedate) >= (trunc(sysdate) - 365)'
+      'and trunc(invoicedate) >= :datefrom '
       'group by mattertype.descr'
       'order by total desc')
     Left = 696
     Top = 368
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end>
   end
   object qryPercMatterProfitabilityPercent: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1768,8 +1842,9 @@ object dmDashboardFirm: TdmDashboardFirm
       'and fee.NCLIENT = phonebook.NCLIENT'
       'and billed = '#39'Y'#39
       
-        'and trunc(fee.invoicedate) between trunc(sysdate) - 365 and trun' +
-        'c(sysdate)'
+        '--and fee.invoicedate between (trunc(sysdate) - 365) and trunc(s' +
+        'ysdate)'
+      'and fee.invoicedate between :datefrom and :dateto'
       'group by name'
       'order by total desc'
       ')'
@@ -1778,6 +1853,17 @@ object dmDashboardFirm: TdmDashboardFirm
       'rownum <= 10')
     Left = 699
     Top = 121
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
+      end>
   end
   object qryWIPGenerated: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1805,18 +1891,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryWIPGeneratedMONTH_TOTAL: TFloatField
       FieldName = 'MONTH_TOTAL'
@@ -1914,10 +2004,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end>
   end
   object qryClientMilestones: TUniQuery
@@ -1960,18 +2052,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryMattersOpenedMTD: TFloatField
       FieldName = 'MTD'
@@ -2002,10 +2098,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
     object qryClientTotalAmountMTDNVLSUMESTIMATEDFEE0: TFloatField
       FieldName = 'NVL(SUM(ESTIMATEDFEE),0)'
@@ -2035,10 +2133,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryClientTotalAmountYTDNVLSUMESTIMATEDFEE0: TFloatField
       FieldName = 'NVL(SUM(ESTIMATEDFEE),0)'
@@ -2255,10 +2355,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsWipGeneratedBudget: TUniDataSource
@@ -2320,16 +2422,18 @@ object dmDashboardFirm: TdmDashboardFirm
         'year),'#39'mm-yy'#39') '
       '   BETWEEN :year_start_date and :year_end_date'
       'order by 3,4')
-    Left = 705
-    Top = 11
+    Left = 713
+    Top = 3
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object qryFeesBilledBudgetGraph: TUniQuery
@@ -2348,10 +2452,12 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsLockupGraph: TUniDataSource
@@ -2384,18 +2490,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryFeesReceivedBudgetMONTH_BUDGET: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -2432,14 +2542,17 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryBilledFeesBudgetMONTH_BUDGET: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -2477,18 +2590,22 @@ object dmDashboardFirm: TdmDashboardFirm
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsMattersclosed: TUniDataSource
@@ -2500,5 +2617,110 @@ object dmDashboardFirm: TdmDashboardFirm
     DataSet = qryGraphWIPGenerated
     Left = 183
     Top = 284
+  end
+  object qryTopClientsPY: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select *'
+      'from'
+      '('
+      'select phonebook.NAME, sum(amount) total'
+      'from fee, matter, phonebook'
+      'where fee.nmatter = matter.nmatter'
+      'and fee.NCLIENT = phonebook.NCLIENT'
+      'and billed = '#39'Y'#39
+      
+        '--and fee.invoicedate between (trunc(sysdate) - 365) and trunc(s' +
+        'ysdate)'
+      'and fee.invoicedate between :datefrom and :dateto'
+      'group by name'
+      'order by total desc'
+      ')'
+      'where '
+      'total <> 0 and'
+      'rownum <= 10')
+    Left = 699
+    Top = 177
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
+      end>
+  end
+  object dsTopClientsPY: TUniDataSource
+    DataSet = qryTopClientsPY
+    Left = 781
+    Top = 171
+  end
+  object qryTopReferrersPY: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT * '
+      'FROM'
+      '('
+      'SELECT p2.name, SUM(f.amount) total'
+      'FROM MATTER m, PHONEBOOK p1, PHONEBOOK p2, FEE f'
+      'WHERE m.nmatter = f.nmatter'
+      'AND m.NCLIENT = p1.nclient '
+      'AND p2.nclient = p1.referredby_nclient'
+      'AND f.billed = '#39'Y'#39
+      
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
+      'GROUP BY p2.name'
+      'UNION'
+      'SELECT p2.name, SUM(f.amount) total'
+      'FROM MATTER m, PHONEBOOK p1, PHONEBOOK p2, FEE f'
+      'WHERE m.NCLIENT = p1.nclient'
+      'AND f.nmatter = m.nmatter '
+      'AND p2.nname = p1.referredby_nname'
+      'AND f.billed = '#39'Y'#39
+      
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
+      'GROUP BY p2.name'
+      'UNION'
+      'SELECT e.name, SUM(f.amount) total'
+      'FROM MATTER m, EMPLOYEE e, PHONEBOOK p1, FEE f'
+      'WHERE p1.referredby_emp = e.code'
+      'AND f.nmatter = m.nmatter'
+      'AND m.nclient = p1.nclient'
+      'AND f.billed = '#39'Y'#39
+      
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and f.invoicedate between :datefrom and :dateto'
+      'GROUP BY e.name'
+      'ORDER BY total DESC'
+      ')'
+      'WHERE '
+      'total <> 0'
+      'AND ROWNUM <= 10')
+    Left = 787
+    Top = 226
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
+      end>
+  end
+  object dsTopReferrersPY: TUniDataSource
+    DataSet = qryTopReferrersPY
+    Left = 795
+    Top = 280
   end
 end

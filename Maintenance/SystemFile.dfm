@@ -3,7 +3,7 @@ object frmSystemFile: TfrmSystemFile
   Top = 141
   Caption = 'System Variables'
   ClientHeight = 696
-  ClientWidth = 1654
+  ClientWidth = 1540
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -29,7 +29,7 @@ object frmSystemFile: TfrmSystemFile
   object pcMain: TcxPageControl
     Left = 0
     Top = 28
-    Width = 1654
+    Width = 1540
     Height = 668
     Align = alClient
     Color = clBtnFace
@@ -41,7 +41,7 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = tabEmails
+    Properties.ActivePage = Dashboard
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
@@ -50,17 +50,13 @@ object frmSystemFile: TfrmSystemFile
     LookAndFeel.NativeStyle = True
     OnChange = pcMainChange
     OnPageChanging = pcMainPageChanging
-    ExplicitWidth = 1084
     ClientRectBottom = 664
     ClientRectLeft = 4
-    ClientRectRight = 1650
+    ClientRectRight = 1536
     ClientRectTop = 26
     object tsGeneral: TcxTabSheet
       Caption = '&General'
       ImageIndex = 0
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object DBText1: TDBText
         Left = 102
         Top = 3
@@ -660,11 +656,8 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Libraries'
       ImageIndex = 1
       TabVisible = False
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       DesignSize = (
-        1646
+        1532
         638)
       object lblAppName: TLabel
         Left = 6
@@ -712,13 +705,11 @@ object frmSystemFile: TfrmSystemFile
       object dbgSettings: TcxGrid
         Left = 6
         Top = 52
-        Width = 1640
+        Width = 1526
         Height = 582
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 2
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1070
-        ExplicitHeight = 562
         object tvSettings: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = dsSettings
@@ -763,19 +754,14 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'User &Statements'
       ImageIndex = 2
       TabVisible = False
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object dbgUserStatements: TcxGrid
         Left = 0
         Top = 0
-        Width = 1646
+        Width = 1532
         Height = 638
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1076
-        ExplicitHeight = 618
         object tvUserStatements: TcxGridDBTableView
           OnDblClick = dbgUserStatementsDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -838,19 +824,14 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Field &Mapping'
       ImageIndex = 3
       TabVisible = False
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object dbgDataFieldMapping: TcxGrid
         Left = 0
         Top = 0
-        Width = 1646
+        Width = 1532
         Height = 638
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitWidth = 1076
-        ExplicitHeight = 618
         object tvDataFieldMapping: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.First.Visible = False
@@ -904,9 +885,6 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Outlook'
       ImageIndex = 4
       TabVisible = False
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label21: TLabel
         Left = -14
         Top = 21
@@ -1169,9 +1147,6 @@ object frmSystemFile: TfrmSystemFile
     object tsClients: TcxTabSheet
       Caption = 'Contact/Client'
       ImageIndex = 5
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label23: TLabel
         Left = 19
         Top = 50
@@ -1642,9 +1617,6 @@ object frmSystemFile: TfrmSystemFile
       ImageIndex = 6
       OnExit = tsOther2Exit
       OnShow = tsOther2Show
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object cxGroupBox3: TcxGroupBox
         Left = 14
         Top = 6
@@ -1798,9 +1770,6 @@ object frmSystemFile: TfrmSystemFile
     object tabMatterDefaults: TcxTabSheet
       Caption = 'Matter Defaults'
       ImageIndex = 9
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label50: TLabel
         Left = 405
         Top = 100
@@ -2456,9 +2425,6 @@ object frmSystemFile: TfrmSystemFile
     object cxTabSheet1: TcxTabSheet
       Caption = 'Accounting Defaults'
       ImageIndex = 6
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label56: TLabel
         Left = 11
         Top = 424
@@ -2957,9 +2923,6 @@ object frmSystemFile: TfrmSystemFile
       Caption = 'Billing Defaults'
       ImageIndex = 8
       OnShow = cxTabSheet2Show
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label6: TLabel
         Left = 17
         Top = 174
@@ -3445,9 +3408,6 @@ object frmSystemFile: TfrmSystemFile
     object cxTabSheet4: TcxTabSheet
       Caption = 'Fee/Time  Defaults'
       ImageIndex = 11
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label52: TLabel
         Left = 7
         Top = 218
@@ -3502,8 +3462,8 @@ object frmSystemFile: TfrmSystemFile
         Width = 265
       end
       object cxDBCheckBox1: TcxDBCheckBox
-        Left = 4
-        Top = 75
+        Left = 3
+        Top = 76
         AutoSize = False
         Caption = 'Allow TimeSheet Amount Edit'
         DataBinding.DataField = 'TIMESHEET_AMOUNT_EDIT'
@@ -3792,9 +3752,6 @@ object frmSystemFile: TfrmSystemFile
     object tsGlStructure: TcxTabSheet
       Caption = 'GL Structure'
       ImageIndex = 7
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label24: TLabel
         Left = 11
         Top = 31
@@ -4133,8 +4090,6 @@ object frmSystemFile: TfrmSystemFile
     object tabEmails: TcxTabSheet
       Caption = 'Mail Setting Defaults'
       ImageIndex = 7
-      ExplicitLeft = 5
-      ExplicitTop = 27
       object Label34: TLabel
         Left = 13
         Top = 12
@@ -4622,9 +4577,6 @@ object frmSystemFile: TfrmSystemFile
     object tabDocuments: TcxTabSheet
       Caption = 'Document Defaults'
       ImageIndex = 8
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label55: TLabel
         Left = 208
         Top = 207
@@ -5380,9 +5332,6 @@ object frmSystemFile: TfrmSystemFile
     object tabWorkflow: TcxTabSheet
       Caption = 'WorkFlow Defaults'
       ImageIndex = 7
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object cxDBCheckBox15: TcxDBCheckBox
         Left = 20
         Top = 16
@@ -5670,9 +5619,6 @@ object frmSystemFile: TfrmSystemFile
     object cxTabSheet3: TcxTabSheet
       Caption = 'SMS Settings'
       ImageIndex = 10
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label41: TLabel
         Left = 23
         Top = 26
@@ -5777,9 +5723,6 @@ object frmSystemFile: TfrmSystemFile
     object cxTabSheet5: TcxTabSheet
       Caption = 'InfoTrack Details'
       ImageIndex = 12
-      ExplicitTop = 46
-      ExplicitWidth = 1076
-      ExplicitHeight = 618
       object Label64: TLabel
         Left = 23
         Top = 20
@@ -5928,6 +5871,54 @@ object frmSystemFile: TfrmSystemFile
         DataField = 'INFOTRACK_DEFAULT_DIRECTORY'
         DataSource = dsSystemFile
         TabOrder = 6
+      end
+    end
+    object Dashboard: TcxTabSheet
+      Caption = 'Dashboard'
+      ImageIndex = 13
+      object grpIndividual: TGroupBox
+        Left = 15
+        Top = 16
+        Width = 418
+        Height = 57
+        Caption = 'Individual Dashboard'
+        TabOrder = 0
+        object cxDBCheckBox77: TcxDBCheckBox
+          Left = 16
+          Top = 23
+          Caption = 'Hide Matter Profitability in Individual Dashboard?'
+          DataBinding.DataField = 'HIDE_MATTER_PROFIT'
+          DataBinding.DataSource = dsSystemFile
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
+          TabOrder = 0
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 15
+        Top = 79
+        Width = 418
+        Height = 105
+        Caption = 'All Dashboards'
+        TabOrder = 1
+        object cxDBCheckBox78: TcxDBCheckBox
+          Left = 16
+          Top = 24
+          AutoSize = False
+          Caption = 
+            'Display rolling twelve month figures instead of current financia' +
+            'l year figures for Top 20 clients and referrers?'
+          DataBinding.DataField = 'TOP_20_CLIENTS_ROLLING'
+          DataBinding.DataSource = dsSystemFile
+          Properties.MultiLine = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
+          TabOrder = 0
+          Height = 33
+          Width = 321
+        end
       end
     end
   end
@@ -6576,8 +6567,8 @@ object frmSystemFile: TfrmSystemFile
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from PRECCLASSIFICATION order by descr')
-    Left = 441
-    Top = 288
+    Left = 505
+    Top = 272
   end
   object dsPRECCLASSIFICATION: TUniDataSource
     DataSet = qryPRECCLASSIFICATION

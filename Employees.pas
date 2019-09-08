@@ -359,6 +359,7 @@ type
     dbtxtInitials: TcxDBTextEdit;
     lblInitials: TcxLabel;
     cxDBRichEdit2: TcxDBRichEdit;
+    chkMatterProfit: TcxDBCheckBox;
     procedure qryEmployeesAfterPost(DataSet: TDataSet);
     procedure btnNameFindClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -824,7 +825,7 @@ begin
    edAuthDisbPatmentLimit.Enabled := dmAxiom.Security.Employee.Edit;
    cbBankLineApprover.Enabled := dmAxiom.Security.Employee.Edit;
    cbFinancialDirector.Enabled := dmAxiom.Security.Employee.Edit;
-
+   chkMatterProfit.Enabled := dmAxiom.Security.Employee.Security;
    cbViews.Properties.Items.Clear;
    for I := 0 to dxNavBarViewsFactory.Count - 1 do
       cbViews.Properties.Items.Add(dxNavBarViewsFactory.Names[I]);

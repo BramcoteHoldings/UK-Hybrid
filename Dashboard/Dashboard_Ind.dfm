@@ -1806,7 +1806,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           end
           object cxLabel11: TcxLabel
             Left = 59
-            Top = 15
+            Top = 12
             Caption = 'Figures are for rolling 12 months'
             ParentFont = False
             Style.Font.Charset = DEFAULT_CHARSET
@@ -2042,7 +2042,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           OptionsView.ShowEventsWithoutResource = True
           Storage = cxSchedulerStorage1
           TabOrder = 1
-          Selection = 259
+          Selection = 14
           Splitters = {
             020300007E00000091030000830000003C0400000100000041040000C9010000}
           StoredClientBounds = {01000000010000004D0400001E020000}
@@ -2307,7 +2307,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2331,6 +2331,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2361,7 +2362,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     XLSSettings.WorksheetName = 'Report'
     Left = 696
     Top = 592
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -2461,7 +2462,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.647451701390000000
+      ReportDocument.CreationDate = 43716.518314212960000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2491,7 +2492,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.647452013890000000
+      ReportDocument.CreationDate = 43716.518314317130000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2521,7 +2522,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.647452361110000000
+      ReportDocument.CreationDate = 43716.518314456020000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
