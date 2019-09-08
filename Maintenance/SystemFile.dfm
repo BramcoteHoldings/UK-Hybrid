@@ -3462,8 +3462,8 @@ object frmSystemFile: TfrmSystemFile
         Width = 265
       end
       object cxDBCheckBox1: TcxDBCheckBox
-        Left = 4
-        Top = 75
+        Left = 3
+        Top = 76
         AutoSize = False
         Caption = 'Allow TimeSheet Amount Edit'
         DataBinding.DataField = 'TIMESHEET_AMOUNT_EDIT'
@@ -5879,13 +5879,13 @@ object frmSystemFile: TfrmSystemFile
       object grpIndividual: TGroupBox
         Left = 15
         Top = 16
-        Width = 386
-        Height = 185
-        Caption = 'Individual'
+        Width = 418
+        Height = 57
+        Caption = 'Individual Dashboard'
         TabOrder = 0
         object cxDBCheckBox77: TcxDBCheckBox
           Left = 16
-          Top = 24
+          Top = 23
           Caption = 'Hide Matter Profitability in Individual Dashboard?'
           DataBinding.DataField = 'HIDE_MATTER_PROFIT'
           DataBinding.DataSource = dsSystemFile
@@ -5893,6 +5893,31 @@ object frmSystemFile: TfrmSystemFile
           Properties.ValueChecked = 'Y'
           Properties.ValueUnchecked = 'N'
           TabOrder = 0
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 15
+        Top = 79
+        Width = 418
+        Height = 105
+        Caption = 'All Dashboards'
+        TabOrder = 1
+        object cxDBCheckBox78: TcxDBCheckBox
+          Left = 16
+          Top = 24
+          AutoSize = False
+          Caption = 
+            'Display rolling twelve month figures instead of current financia' +
+            'l year figures for Top 20 clients and referrers?'
+          DataBinding.DataField = 'TOP_20_CLIENTS_ROLLING'
+          DataBinding.DataSource = dsSystemFile
+          Properties.MultiLine = True
+          Properties.NullStyle = nssUnchecked
+          Properties.ValueChecked = 'Y'
+          Properties.ValueUnchecked = 'N'
+          TabOrder = 0
+          Height = 33
+          Width = 321
         end
       end
     end
@@ -6542,8 +6567,8 @@ object frmSystemFile: TfrmSystemFile
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from PRECCLASSIFICATION order by descr')
-    Left = 441
-    Top = 288
+    Left = 505
+    Top = 272
   end
   object dsPRECCLASSIFICATION: TUniDataSource
     DataSet = qryPRECCLASSIFICATION

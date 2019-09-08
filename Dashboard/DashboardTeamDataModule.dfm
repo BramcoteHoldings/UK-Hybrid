@@ -139,26 +139,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
   end
   object qryWipGeneratedBudget: TUniQuery
@@ -211,22 +217,27 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryWipGeneratedBudgetMONTH_BUDGET: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -359,26 +370,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'P1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'P4'
+        Value = nil
       end>
   end
   object dsAgedDebtorsMatterCnt: TUniDataSource
@@ -436,26 +453,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryAgedDebtorsADJ0: TFloatField
       FieldName = 'ADJ0'
@@ -534,18 +557,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
     object qryFeesBilledMonthFEES: TFloatField
       FieldName = 'FEES'
@@ -610,18 +637,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryFeesBilledYTDFEES: TFloatField
       FieldName = 'FEES'
@@ -676,18 +707,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryFeeReceivedMonthFE_RECEIPT: TFloatField
       FieldName = 'FE_RECEIPT'
@@ -781,18 +816,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object qryFeesBilledBudgetGraph: TUniQuery
@@ -822,18 +861,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object qryFeesReceivedBudgetGraph: TUniQuery
@@ -865,18 +908,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object qryFeesReceivedGraph: TUniQuery
@@ -977,18 +1024,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
   end
   object dsFeeReceivedYear: TUniDataSource
@@ -1044,18 +1095,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryFeeReceivedYearFE_RECEIPT: TFloatField
       FieldName = 'FE_RECEIPT'
@@ -1114,22 +1169,27 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryBilledFeesBudgetMONTH_BUDGET: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -1191,26 +1251,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryWIPFiguresDSDesigner0days: TFloatField
       FieldName = '0days'
@@ -1342,26 +1408,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'p1'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p2'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p3'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'p4'
+        Value = nil
       end>
   end
   object qryMattersOpened: TUniQuery
@@ -1401,26 +1473,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryMattersOpenedMTD: TFloatField
       FieldName = 'MTD'
@@ -1453,7 +1531,8 @@ object dmDasboardTeam: TdmDasboardTeam
       'and billtype = '#39'Billable'#39' '
       'and billed = '#39'Y'#39
       'and fee.type not in ('#39'ia'#39','#39'wo'#39')'
-      'and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      '-- and trunc(invoicedate) >= (trunc(sysdate) - 365)'
+      'and trunc(invoicedate) >= :datefrom '
       'group by mattertype.descr'
       'order by total desc')
     Left = 293
@@ -1462,10 +1541,17 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
       end>
   end
   object dsFeesReceivedBudget: TUniDataSource
@@ -1520,22 +1606,27 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object FloatField1: TFloatField
       FieldName = 'MONTH_BUDGET'
@@ -1591,26 +1682,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
     object qryWIPGeneratedMONTH_TOTAL: TFloatField
       FieldName = 'MONTH_TOTAL'
@@ -1646,10 +1743,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryWIPLockupMONTH_TOTAL: TFloatField
       FieldName = 'MONTH_TOTAL'
@@ -1919,18 +2018,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end>
   end
   object qryLockupGraph: TUniQuery
@@ -2088,10 +2191,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
   end
   object dsDebtorLockup: TUniDataSource
@@ -2130,10 +2235,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryDebtorLockupDEBTOR_AMOUNT: TFloatField
       FieldName = 'DEBTOR_AMOUNT'
@@ -2282,18 +2389,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end>
   end
   object qryChargeSummary: TUniQuery
@@ -2356,10 +2467,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
   end
   object dsChargeSummary: TUniDataSource
@@ -2390,7 +2503,8 @@ object dmDasboardTeam: TdmDasboardTeam
       'and matter.type = mattertype.code'
       'and billtype = '#39'Billable'#39' '
       'and billed = '#39'Y'#39
-      'and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      '-- and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      'and trunc(invoicedate) >= :datefrom '
       'group by mattertype.descr'
       'order by total desc')
     Left = 567
@@ -2399,10 +2513,17 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
       end>
     object qryMatterProfitabilityDESCR: TStringField
       FieldName = 'DESCR'
@@ -2441,10 +2562,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
   end
   object dsTotalClients: TUniDataSource
@@ -2483,18 +2606,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'month_end_date'
+        Value = nil
       end>
   end
   object dsClientCountYTD: TUniDataSource
@@ -2527,18 +2654,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsClientMilestones: TUniDataSource
@@ -2585,10 +2716,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
   end
   object dsTotalMatters: TUniDataSource
@@ -2621,8 +2754,9 @@ object dmDasboardTeam: TdmDasboardTeam
       'AND billed = '#39'Y'#39
       'AND f.TYPE NOT IN ('#39'wo'#39', '#39'ia'#39')'
       
-        'AND f.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDATE' +
-        ')'
+        '--and trunc(f.invoicedate) between (trunc(sysdate) - 365) and tr' +
+        'unc(sysdate)'
+      'and trunc(f.invoicedate) between :datefrom and :dateto'
       'GROUP BY p2.name'
       'UNION'
       'SELECT p2.name, SUM(amount) total'
@@ -2644,8 +2778,9 @@ object dmDasboardTeam: TdmDasboardTeam
       'AND billed = '#39'Y'#39
       'AND FEE.TYPE NOT IN ('#39'wo'#39', '#39'ia'#39')'
       
-        'AND FEE.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDA' +
-        'TE)'
+        '--and trunc(fee.invoicedate) between (trunc(sysdate) - 365) and ' +
+        'trunc(sysdate)'
+      'and trunc(fee.invoicedate) between :datefrom and :dateto'
       'GROUP BY p2.name'
       'UNION'
       'SELECT e.name, SUM(amount) total'
@@ -2667,8 +2802,9 @@ object dmDasboardTeam: TdmDasboardTeam
       'AND billed = '#39'Y'#39
       'AND FEE.TYPE NOT IN ('#39'wo'#39', '#39'ia'#39')'
       
-        'AND FEE.invoicedate BETWEEN TRUNC(SYSDATE) - 365 AND TRUNC(SYSDA' +
-        'TE)'
+        '--and trunc(fee.invoicedate) between (trunc(sysdate) - 365) and ' +
+        'trunc(sysdate)'
+      'and trunc(fee.invoicedate) between :datefrom and :dateto'
       'GROUP BY e.name'
       'ORDER BY total DESC'
       ')'
@@ -2681,10 +2817,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
       end>
   end
   object dsTopReferrers: TUniDataSource
@@ -2720,9 +2868,10 @@ object dmDasboardTeam: TdmDasboardTeam
       'and fee.NCLIENT = phonebook.NCLIENT'
       'and billed = '#39'Y'#39
       
-        'and trunc(fee.invoicedate) between trunc(sysdate) - 365 and trun' +
-        'c(sysdate)'
-      'group by name'
+        '-- and trunc(fee.invoicedate) between (trunc(sysdate) - 365) and' +
+        ' trunc(sysdate)'
+      'and trunc(fee.invoicedate) between :datefrom and :dateto'
+      'group by phonebook.NAME'
       'order by total desc'
       ')'
       'where '
@@ -2735,10 +2884,22 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
+        Value = nil
       end>
   end
   object dsMattersClosed: TUniDataSource
@@ -2783,26 +2944,32 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'firstdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'lastdate'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_start_date'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'year_end_date'
+        Value = nil
       end>
   end
   object dsMattersOpened: TUniDataSource
@@ -2840,10 +3007,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryUnbilledDisbsUNBILL_DISB: TFloatField
       FieldName = 'UNBILL_DISB'
@@ -2898,10 +3067,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qryCreditorsLockupCRED_MONTH_TOTAL: TFloatField
       FieldName = 'CRED_MONTH_TOTAL'
@@ -2956,10 +3127,12 @@ object dmDasboardTeam: TdmDasboardTeam
       item
         DataType = ftUnknown
         Name = 'code'
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'dept'
+        Value = nil
       end>
     object qrySundryLockupSUND_MONTH_TOTAL: TFloatField
       FieldName = 'SUND_MONTH_TOTAL'

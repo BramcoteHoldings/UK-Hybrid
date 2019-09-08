@@ -36,8 +36,6 @@ object frmDashboard: TfrmDashboard
       Caption = 'WIP'
       ImageIndex = 0
       OnShow = tsWIPShow
-      ExplicitTop = 28
-      ExplicitHeight = 494
       object pnlWIP: TPanel
         Left = 0
         Top = 0
@@ -53,7 +51,6 @@ object frmDashboard: TfrmDashboard
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 494
         object Label18: TLabel
           Left = 3
           Top = 397
@@ -582,8 +579,6 @@ object frmDashboard: TfrmDashboard
       Caption = 'Fees'
       ImageIndex = 1
       OnShow = tsFeesShow
-      ExplicitTop = 28
-      ExplicitHeight = 494
       object pnlFees: TPanel
         Left = 0
         Top = 0
@@ -594,7 +589,6 @@ object frmDashboard: TfrmDashboard
         Caption = 'pnlFees'
         Color = clWhite
         TabOrder = 0
-        ExplicitHeight = 494
         object Label7: TLabel
           Left = 8
           Top = 68
@@ -1032,8 +1026,6 @@ object frmDashboard: TfrmDashboard
       Caption = 'Clients'
       ImageIndex = 2
       OnShow = tabTopClientShow
-      ExplicitTop = 28
-      ExplicitHeight = 494
       object Panel3: TPanel
         Left = 14
         Top = 7
@@ -1266,8 +1258,6 @@ object frmDashboard: TfrmDashboard
         object cxTabSheet1: TcxTabSheet
           Caption = 'Top 10 Clients'
           ImageIndex = 0
-          ExplicitTop = 28
-          ExplicitHeight = 271
           object cxGrid1: TcxGrid
             Left = 0
             Top = 22
@@ -1276,7 +1266,6 @@ object frmDashboard: TfrmDashboard
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
-            ExplicitHeight = 249
             object cxGrid1DBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dmDashboardFirm.dsTopClients
@@ -1348,8 +1337,6 @@ object frmDashboard: TfrmDashboard
         object cxTabSheet2: TcxTabSheet
           Caption = 'Top 10 Referrers'
           ImageIndex = 1
-          ExplicitTop = 28
-          ExplicitHeight = 271
           object cxGrid2: TcxGrid
             Left = 0
             Top = 22
@@ -1358,7 +1345,6 @@ object frmDashboard: TfrmDashboard
             Align = alClient
             TabOrder = 0
             LookAndFeel.NativeStyle = True
-            ExplicitHeight = 249
             object cxGridDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = dmDashboardFirm.dsTopReferrers
@@ -1469,7 +1455,7 @@ object frmDashboard: TfrmDashboard
             FilterRow.SeparatorWidth = 7
             FixedDataRows.SeparatorWidth = 7
             NewItemRow.SeparatorWidth = 7
-            OptionsData.Editing = False
+            OptionsCustomize.ColumnFiltering = False
             OptionsSelection.CellSelect = False
             OptionsView.CellEndEllipsis = True
             OptionsView.NavigatorOffset = 58
@@ -1823,7 +1809,7 @@ object frmDashboard: TfrmDashboard
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1847,6 +1833,7 @@ object frmDashboard: TfrmDashboard
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1877,7 +1864,7 @@ object frmDashboard: TfrmDashboard
     XLSSettings.WorksheetName = 'Report'
     Left = 518
     Top = 528
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -1934,7 +1921,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.605597893520000000
+      ReportDocument.CreationDate = 43715.611359907410000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1964,7 +1951,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.605598321760000000
+      ReportDocument.CreationDate = 43715.611360046300000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1993,7 +1980,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43607.605598344900000000
+      ReportDocument.CreationDate = 43715.611360057870000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -12

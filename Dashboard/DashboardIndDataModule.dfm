@@ -1930,7 +1930,8 @@ object dmDashboardInd: TdmDashboardInd
       'and billtype = '#39'Billable'#39' '
       'and billed = '#39'Y'#39
       'and fee.type not in ('#39'ia'#39','#39'wo'#39')'
-      'and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      '-- and trunc(invoicedate) >= (trunc(sysdate) - 365) '
+      'and trunc(invoicedate) >= :datefrom '
       'group by mattertype.descr'
       'order by total desc')
     Left = 303
@@ -1939,6 +1940,11 @@ object dmDashboardInd: TdmDashboardInd
       item
         DataType = ftUnknown
         Name = 'author'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
         Value = nil
       end>
   end
@@ -2107,8 +2113,9 @@ object dmDashboardInd: TdmDashboardInd
       'and fee.NCLIENT = phonebook.NCLIENT'
       'and billed = '#39'Y'#39
       
-        'and trunc(fee.invoicedate) between trunc(sysdate) - 365 and trun' +
-        'c(sysdate)'
+        '-- and trunc(fee.invoicedate) between (trunc(sysdate) - 365) and' +
+        ' trunc(sysdate)'
+      'and trunc(fee.invoicedate) between :datefrom and :dateto'
       'group by name'
       'order by total desc'
       ')'
@@ -2122,6 +2129,16 @@ object dmDashboardInd: TdmDashboardInd
       item
         DataType = ftUnknown
         Name = 'author'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
         Value = nil
       end>
   end
@@ -2150,8 +2167,9 @@ object dmDashboardInd: TdmDashboardInd
       'and billed = '#39'Y'#39
       'and f.type not in ('#39'wo'#39', '#39'ia'#39')'
       
-        'and f.invoicedate between trunc(sysdate) - 365 and trunc(sysdate' +
-        ')'
+        '-- and f.invoicedate between (trunc(sysdate) - 365) and trunc(sy' +
+        'sdate)'
+      'and f.invoicedate between :datefrom and :dateto'
       'group by p2.name'
       'union'
       'select p2.name, sum(amount) total'
@@ -2163,8 +2181,9 @@ object dmDashboardInd: TdmDashboardInd
       'and billed = '#39'Y'#39
       'and fee.type not in ('#39'wo'#39', '#39'ia'#39')'
       
-        'and fee.invoicedate between trunc(sysdate) - 365 and trunc(sysda' +
-        'te)'
+        '-- and fee.invoicedate between (trunc(sysdate) - 365) and trunc(' +
+        'sysdate)'
+      'and fee.invoicedate between :datefrom and :dateto'
       'group by p2.name'
       'union'
       'select e.name, sum(amount) total'
@@ -2176,8 +2195,9 @@ object dmDashboardInd: TdmDashboardInd
       'and billed = '#39'Y'#39
       'and fee.type not in ('#39'wo'#39', '#39'ia'#39')'
       
-        'and fee.invoicedate between trunc(sysdate) - 365 and trunc(sysda' +
-        'te)'
+        '-- and fee.invoicedate between (trunc(sysdate) - 365) and trunc(' +
+        'sysdate)'
+      'and fee.invoicedate between :datefrom and :dateto'
       'group by e.name'
       'order by total desc'
       ')'
@@ -2190,6 +2210,16 @@ object dmDashboardInd: TdmDashboardInd
       item
         DataType = ftUnknown
         Name = 'author'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'datefrom'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'dateto'
         Value = nil
       end>
   end

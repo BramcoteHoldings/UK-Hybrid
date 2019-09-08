@@ -317,6 +317,14 @@ procedure TfrmDashboard.tabTopClientShow(Sender: TObject);
 begin
    with dmDashboardFirm.qryMatterProfitability do
    begin
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+       end;
       Open();
    end;
 
@@ -355,11 +363,35 @@ begin
 
    with dmDashboardFirm.qryTopClients do
    begin
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel2.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel2.Caption := 'Figures are for financial year';
+      end;
       open();
    end;
 
    with dmDashboardFirm.qryTopReferrers do
    begin
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel1.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel1.Caption := 'Figures are for financial year';
+      end;
       open();
    end;
 
@@ -636,12 +668,22 @@ end;
 
 procedure TfrmDashboard.bbtnTeamScorecardClick(Sender: TObject);
 begin
-   FindorCreate(TfrmDashboard_Team,IDXDASHBOARD_TEAM).show;
+   //FindorCreate(TfrmDashboard_Team,IDXDASHBOARD_TEAM).show;
+   Application.CreateForm(TfrmDashboard_Team, frmDashboard_Team);
+   if frmDesktop.pagMainControl.ActivePageIndex = 0 then
+     frmDesktop.AddFormToTab(frmDashboard_Team,1);
+   if (not frmDashboard_Team.Visible) then
+     frmDashboard_Team.Show;
 end;
 
 procedure TfrmDashboard.bbtnIndScorecardClick(Sender: TObject);
 begin
-   FindorCreate(TfrmDashboard_Ind,IDXDASHBOARD_IND).show;
+   //FindorCreate(TfrmDashboard_Ind,IDXDASHBOARD_IND).show;
+   Application.CreateForm(TfrmDashboard_Ind, frmDashboard_Ind);
+   if frmDesktop.pagMainControl.ActivePageIndex = 0 then
+     frmDesktop.AddFormToTab(frmDashboard_Ind,1);
+   if (not frmDashboard_Ind.Visible) then
+     frmDashboard_Ind.Show;
 end;
 
 procedure TfrmDashboard.bbtnRefreshClick(Sender: TObject);
