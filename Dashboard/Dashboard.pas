@@ -198,6 +198,20 @@ type
     cxLabel2: TcxLabel;
     Panel2: TPanel;
     cxLabel1: TcxLabel;
+    cxGrid4: TcxGrid;
+    cxGridDBTableView2: TcxGridDBTableView;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridLevel2: TcxGridLevel;
+    cxLabel3: TcxLabel;
+    cxLabel4: TcxLabel;
+    cxGrid6: TcxGrid;
+    cxGridDBTableView3: TcxGridDBTableView;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridDBColumn6: TcxGridDBColumn;
+    cxGridLevel3: TcxGridLevel;
+    cxLabel5: TcxLabel;
+    cxLabel6: TcxLabel;
     procedure dxBtnexitClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -378,6 +392,23 @@ begin
       open();
    end;
 
+   with dmDashboardFirm.qryTopClientsPY do
+   begin
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 710;
+           ParamByName('dateto').AsDate := trunc(Now) - 366;
+           cxLabel2.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now) - 366);
+           ParamByName('dateto').AsDate := trunc(Now) - 366;
+           cxLabel2.Caption := 'Figures are for financial year';
+      end;
+      open();
+   end;
+
    with dmDashboardFirm.qryTopReferrers do
    begin
       if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
@@ -390,6 +421,23 @@ begin
       begin
            ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
            ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel1.Caption := 'Figures are for financial year';
+      end;
+      open();
+   end;
+
+   with dmDashboardFirm.qryTopReferrersPY do
+   begin
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 710;
+           ParamByName('dateto').AsDate := trunc(Now) - 366;
+           cxLabel1.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now) - 366);
+           ParamByName('dateto').AsDate := trunc(Now) - 366;
            cxLabel1.Caption := 'Figures are for financial year';
       end;
       open();
