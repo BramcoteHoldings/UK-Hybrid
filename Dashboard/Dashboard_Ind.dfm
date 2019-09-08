@@ -1806,7 +1806,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           end
           object cxLabel11: TcxLabel
             Left = 59
-            Top = 15
+            Top = 12
             Caption = 'Figures are for rolling 12 months'
             ParentFont = False
             Style.Font.Charset = DEFAULT_CHARSET
@@ -2042,7 +2042,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           OptionsView.ShowEventsWithoutResource = True
           Storage = cxSchedulerStorage1
           TabOrder = 1
-          Selection = 3
+          Selection = 14
           Splitters = {
             020300007E00000091030000830000003C0400000100000041040000C9010000}
           StoredClientBounds = {01000000010000004D0400001E020000}
@@ -2462,7 +2462,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.477522546290000000
+      ReportDocument.CreationDate = 43716.518314212960000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2492,7 +2492,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.477522650460000000
+      ReportDocument.CreationDate = 43716.518314317130000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2522,7 +2522,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.477522812500000000
+      ReportDocument.CreationDate = 43716.518314456020000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
