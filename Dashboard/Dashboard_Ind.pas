@@ -653,7 +653,27 @@ begin
       ParamByName('year_end_date').AsDateTime := Now();
       Open();
    end;
+   if SystemString('HIDE_MATTER_PROFIT') = 'Y' then
+   begin
+     Panel7.Visible := False;
+     grdMatterProfitability.Visible := False;
+   end
+   else
+   begin
+     Panel7.Visible := True;
+     grdMatterProfitability.Visible := True;
 
+     if TableString('EMPLOYEE', 'CODE', dmAxiom.UserID, 'HIDE_MATTER_PROFIT') = 'Y' then
+     begin
+          Panel7.Visible := False;
+          grdMatterProfitability.Visible := False;
+     end
+     else
+     begin
+          Panel7.Visible := True;
+          grdMatterProfitability.Visible := True;
+     end;
+   end;
 end;
 
 procedure TfrmDashboard_Ind.tabFeesBilledShow(Sender: TObject);
