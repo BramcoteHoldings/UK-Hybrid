@@ -24,7 +24,7 @@ object frmDashboard: TfrmDashboard
     Color = clBtnFace
     ParentColor = False
     TabOrder = 0
-    Properties.ActivePage = tsWIP
+    Properties.ActivePage = tabTopClient
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
@@ -1244,26 +1244,26 @@ object frmDashboard: TfrmDashboard
       object cxPageControl1: TcxPageControl
         Left = 277
         Top = 7
-        Width = 263
+        Width = 553
         Height = 303
         TabOrder = 1
-        Properties.ActivePage = cxTabSheet1
+        Properties.ActivePage = cxTabSheet2
         Properties.CustomButtons.Buttons = <>
         Properties.TabSlants.Kind = skCutCorner
         LookAndFeel.NativeStyle = True
         ClientRectBottom = 299
         ClientRectLeft = 4
-        ClientRectRight = 259
+        ClientRectRight = 549
         ClientRectTop = 26
         object cxTabSheet1: TcxTabSheet
           Caption = 'Top 10 Clients'
           ImageIndex = 0
           object cxGrid1: TcxGrid
-            Left = 0
+            Left = 275
             Top = 22
-            Width = 255
+            Width = 270
             Height = 251
-            Align = alClient
+            Align = alRight
             TabOrder = 0
             LookAndFeel.NativeStyle = True
             object cxGrid1DBTableView1: TcxGridDBTableView
@@ -1297,7 +1297,7 @@ object frmDashboard: TfrmDashboard
                 Caption = 'Client'
                 DataBinding.FieldName = 'NAME'
                 MinWidth = 23
-                Width = 150
+                Width = 173
               end
               object cxGrid1DBTableView1TOTAL: TcxGridDBColumn
                 Caption = 'Amount'
@@ -1305,7 +1305,7 @@ object frmDashboard: TfrmDashboard
                 PropertiesClassName = 'TcxCurrencyEditProperties'
                 HeaderGlyphAlignmentHorz = taRightJustify
                 MinWidth = 23
-                Width = 97
+                Width = 95
               end
             end
             object cxGrid1Level1: TcxGridLevel
@@ -1315,12 +1315,12 @@ object frmDashboard: TfrmDashboard
           object Panel1: TPanel
             Left = 0
             Top = 0
-            Width = 255
+            Width = 545
             Height = 22
             Align = alTop
             TabOrder = 1
             object cxLabel2: TcxLabel
-              Left = 22
+              Left = 169
               Top = -2
               Caption = 'Figures are for rolling 12 months'
               ParentFont = False
@@ -1332,17 +1332,97 @@ object frmDashboard: TfrmDashboard
               Style.IsFontAssigned = True
               Transparent = True
             end
+            object cxLabel3: TcxLabel
+              Left = 4
+              Top = -1
+              Caption = 'Previous Year'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clRed
+              Style.Font.Height = -13
+              Style.Font.Name = 'Segoe UI'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+              Transparent = True
+            end
+            object cxLabel4: TcxLabel
+              Left = 481
+              Top = -2
+              Caption = 'This Year'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clRed
+              Style.Font.Height = -13
+              Style.Font.Name = 'Segoe UI'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+              Transparent = True
+            end
+          end
+          object cxGrid4: TcxGrid
+            Left = 0
+            Top = 22
+            Width = 270
+            Height = 251
+            Align = alLeft
+            TabOrder = 2
+            LookAndFeel.NativeStyle = True
+            object cxGridDBTableView2: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = dmDashboardFirm.dsTopClientsPY
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <
+                item
+                  Format = '$,0.00;-$,0.00'
+                  Kind = skSum
+                  FieldName = 'TOTAL'
+                  Column = cxGridDBColumn4
+                end>
+              DataController.Summary.SummaryGroups = <>
+              FilterRow.SeparatorWidth = 7
+              FixedDataRows.SeparatorWidth = 7
+              NewItemRow.SeparatorWidth = 7
+              OptionsBehavior.CellHints = True
+              OptionsBehavior.ColumnHeaderHints = False
+              OptionsCustomize.ColumnFiltering = False
+              OptionsSelection.CellSelect = False
+              OptionsView.CellEndEllipsis = True
+              OptionsView.NavigatorOffset = 58
+              OptionsView.ColumnAutoWidth = True
+              OptionsView.Footer = True
+              OptionsView.GroupByBox = False
+              OptionsView.IndicatorWidth = 14
+              Preview.LeftIndent = 23
+              Preview.RightIndent = 6
+              object cxGridDBColumn3: TcxGridDBColumn
+                Caption = 'Client'
+                DataBinding.FieldName = 'NAME'
+                MinWidth = 23
+                Width = 173
+              end
+              object cxGridDBColumn4: TcxGridDBColumn
+                Caption = 'Amount'
+                DataBinding.FieldName = 'TOTAL'
+                PropertiesClassName = 'TcxCurrencyEditProperties'
+                HeaderGlyphAlignmentHorz = taRightJustify
+                MinWidth = 23
+                Width = 95
+              end
+            end
+            object cxGridLevel2: TcxGridLevel
+              GridView = cxGridDBTableView2
+            end
           end
         end
         object cxTabSheet2: TcxTabSheet
           Caption = 'Top 10 Referrers'
           ImageIndex = 1
           object cxGrid2: TcxGrid
-            Left = 0
+            Left = 275
             Top = 22
-            Width = 255
+            Width = 270
             Height = 251
-            Align = alClient
+            Align = alRight
             TabOrder = 0
             LookAndFeel.NativeStyle = True
             object cxGridDBTableView1: TcxGridDBTableView
@@ -1394,13 +1474,13 @@ object frmDashboard: TfrmDashboard
           object Panel2: TPanel
             Left = 0
             Top = 0
-            Width = 255
+            Width = 545
             Height = 22
             Align = alTop
             TabOrder = 1
             object cxLabel1: TcxLabel
-              Left = 22
-              Top = -1
+              Left = 169
+              Top = 0
               Caption = 'Figures are for rolling 12 months'
               ParentFont = False
               Style.Font.Charset = DEFAULT_CHARSET
@@ -1411,12 +1491,92 @@ object frmDashboard: TfrmDashboard
               Style.IsFontAssigned = True
               Transparent = True
             end
+            object cxLabel5: TcxLabel
+              Left = 0
+              Top = 0
+              Caption = 'Previous Year'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clRed
+              Style.Font.Height = -13
+              Style.Font.Name = 'Segoe UI'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+              Transparent = True
+            end
+            object cxLabel6: TcxLabel
+              Left = 483
+              Top = 0
+              Caption = 'This Year'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clRed
+              Style.Font.Height = -13
+              Style.Font.Name = 'Segoe UI'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+              Transparent = True
+            end
+          end
+          object cxGrid6: TcxGrid
+            Left = 0
+            Top = 22
+            Width = 270
+            Height = 251
+            Align = alLeft
+            TabOrder = 2
+            LookAndFeel.NativeStyle = True
+            object cxGridDBTableView3: TcxGridDBTableView
+              Navigator.Buttons.CustomButtons = <>
+              DataController.DataSource = dmDashboardFirm.dsTopReferrersPY
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <
+                item
+                  Format = '$,0.00;-$,0.00'
+                  Kind = skSum
+                  FieldName = 'TOTAL'
+                  Column = cxGridDBColumn6
+                end>
+              DataController.Summary.SummaryGroups = <>
+              FilterRow.SeparatorWidth = 7
+              FixedDataRows.SeparatorWidth = 7
+              NewItemRow.SeparatorWidth = 7
+              OptionsBehavior.CellHints = True
+              OptionsBehavior.ColumnHeaderHints = False
+              OptionsCustomize.ColumnFiltering = False
+              OptionsSelection.CellSelect = False
+              OptionsView.CellEndEllipsis = True
+              OptionsView.NavigatorOffset = 58
+              OptionsView.ColumnAutoWidth = True
+              OptionsView.Footer = True
+              OptionsView.GroupByBox = False
+              OptionsView.IndicatorWidth = 14
+              Preview.LeftIndent = 23
+              Preview.RightIndent = 6
+              object cxGridDBColumn5: TcxGridDBColumn
+                Caption = 'Referrer'
+                DataBinding.FieldName = 'NAME'
+                MinWidth = 23
+                Width = 150
+              end
+              object cxGridDBColumn6: TcxGridDBColumn
+                Caption = 'Amount'
+                DataBinding.FieldName = 'TOTAL'
+                PropertiesClassName = 'TcxCurrencyEditProperties'
+                HeaderGlyphAlignmentHorz = taRightJustify
+                MinWidth = 23
+                Width = 97
+              end
+            end
+            object cxGridLevel3: TcxGridLevel
+              GridView = cxGridDBTableView3
+            end
           end
         end
       end
       object Panel6: TPanel
-        Left = 545
-        Top = 7
+        Left = 830
+        Top = 6
         Width = 255
         Height = 302
         BevelOuter = bvNone
@@ -1446,6 +1606,7 @@ object frmDashboard: TfrmDashboard
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
+          ExplicitTop = 31
           object cxGrid3DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dmDashboardFirm.dsMatterProfitability
@@ -1901,8 +2062,8 @@ object frmDashboard: TfrmDashboard
   object ComponentPrinter: TdxComponentPrinter
     CurrentLink = ComponentPrinterLink1
     Version = 0
-    Left = 807
-    Top = 124
+    Left = 823
+    Top = 68
     PixelsPerInch = 96
     object ComponentPrinterLink1: TdxCustomContainerReportLink
       Active = True
@@ -1921,7 +2082,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.611359907410000000
+      ReportDocument.CreationDate = 43716.585359791660000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1951,7 +2112,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.611360046300000000
+      ReportDocument.CreationDate = 43716.585359953700000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1980,7 +2141,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43715.611360057870000000
+      ReportDocument.CreationDate = 43716.585359965280000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -12
