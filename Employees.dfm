@@ -825,7 +825,7 @@ object frmEmployees: TfrmEmployees
     Width = 618
     Height = 277
     TabOrder = 29
-    Properties.ActivePage = tabSecurity
+    Properties.ActivePage = tabDefaults
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     ClientRectBottom = 273
@@ -835,10 +835,6 @@ object frmEmployees: TfrmEmployees
     object tabDefaults: TcxTabSheet
       Caption = 'Defaults'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label34: TLabel
         Left = 74
         Top = 43
@@ -3210,7 +3206,7 @@ object frmEmployees: TfrmEmployees
     Left = 830
     Top = 104
     Bitmap = {
-      494C01011F0021000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F002100100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

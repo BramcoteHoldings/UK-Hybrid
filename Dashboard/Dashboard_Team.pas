@@ -347,87 +347,130 @@ end;
 
 procedure TfrmDashboard_Team.tabTopClientShow(Sender: TObject);
 begin
-   with dmDasboardTeam.qryClientMilestones do
+   if UserDept <> '' then
    begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID; // UserDept;
-      ParamByName('dept').AsString := UserDept;
-      Open;
-   end;
-   with dmDasboardTeam.qryClientCountMTD do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('month_end_date').AsDateTime := trunc(Date());
-      Open();
-   end;
-   with dmDasboardTeam.qryClientCountYTD do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open;
-   end;
-      with dmDasboardTeam.qryTotalMatters do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      Open();
-   end;
-   with dmDasboardTeam.qryTotalClients do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      Open();
-   end;
-   with dmDasboardTeam.qryTopClients do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      open();
-   end;
-   with dmDasboardTeam.qryTopReferrers do
-      begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      open();
-   end;
-   with dmDasboardTeam.qryMattersOpened do
-   begin
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('firstdate').AsDateTime := LMonthDateFirst;
-      ParamByName('lastdate').AsDateTime := Now();
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open();
-   end;
+       with dmDasboardTeam.qryClientMilestones do
+       begin
+    //      Close;
+          if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+          begin
+               ParamByName('datefrom').AsDate := trunc(Now) - 365;
+          end
+          else
+          begin
+               ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+          end;
+          ParamByName('code').AsString := dmAxiom.UserID; // UserDept;
+          ParamByName('dept').AsString := UserDept;
+          Open;
+       end;
+       with dmDasboardTeam.qryClientCountMTD do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('month_end_date').AsDateTime := trunc(Date());
+          Open();
+       end;
+       with dmDasboardTeam.qryClientCountYTD do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open;
+       end;
+          with dmDasboardTeam.qryTotalMatters do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          Open();
+       end;
+       with dmDasboardTeam.qryTotalClients do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          Open();
+       end;
+       with dmDasboardTeam.qryTopClients do
+       begin
+    //      Close;
+          if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+          begin
+               ParamByName('datefrom').AsDate := trunc(Now) - 365;
+               ParamByName('dateto').AsDate := trunc(Now);
+               cxLabel2.Caption := 'Figures are for rolling 12 months';
+          end
+          else
+          begin
+               ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+               ParamByName('dateto').AsDate := trunc(Now);
+               cxLabel2.Caption := 'Figures are for financial year';
+          end;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          open();
+       end;
+       with dmDasboardTeam.qryTopReferrers do
+          begin
+    //      Close;
+          if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+          begin
+               ParamByName('datefrom').AsDate := trunc(Now) - 365;
+               ParamByName('dateto').AsDate := trunc(Now);
+               cxLabel3.Caption := 'Figures are for rolling 12 months';
+          end
+          else
+          begin
+               ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+               ParamByName('dateto').AsDate := trunc(Now);
+               cxLabel3.Caption := 'Figures are for financial year';
+          end;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          open();
+       end;
+       with dmDasboardTeam.qryMattersOpened do
+       begin
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('firstdate').AsDateTime := LMonthDateFirst;
+          ParamByName('lastdate').AsDateTime := Now();
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open();
+       end;
 
-   with dmDasboardTeam.qryMattersClosed do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('firstdate').AsDateTime := LMonthDateFirst;
-      ParamByName('lastdate').AsDateTime := Now();
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open();
-   end;
-   with dmDasboardTeam.qryMatterProfitability do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      Open();
+       with dmDasboardTeam.qryMattersClosed do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('firstdate').AsDateTime := LMonthDateFirst;
+          ParamByName('lastdate').AsDateTime := Now();
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open();
+       end;
+       with dmDasboardTeam.qryMatterProfitability do
+       begin
+    //      Close;
+          if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+          begin
+               ParamByName('datefrom').AsDate := trunc(Now) - 365;
+         end
+          else
+          begin
+               ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+          end;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          Open();
+       end;
    end;
 end;
 
@@ -435,157 +478,160 @@ procedure TfrmDashboard_Team.tabFeesShow(Sender: TObject);
 var
    sINClause: string;
 begin
-   with dmDasboardTeam.qryFeesBilledYTD do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open;
-   end;
-   with dmDasboardTeam.qryFeesBilledMonth do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('month_end_date').AsDateTime := trunc(Date());
-      Open();
-   end;
-    with dmDasboardTeam.qryWIPLockup do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-//      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-//      ParamByName('year_end_date').AsDateTime := Now();
-      open;
-      WipLockup := FieldByName('Month_Total'). AsCurrency;
-   end;
-   with dmDasboardTeam.qryUnbilledDisbs do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-//      ParamByName('start_date').AsDateTime := LFinDateFirst;
-//      ParamByName('end_date').AsDateTime := Now();
-      open;
-      UnbillDisbLockup := FieldByName('unbill_disb'). AsCurrency;
-   end;
-   with dmDasboardTeam.qryDebtorLockup do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-//      ParamByName('start_date').AsDateTime := LFinDateFirst;
-//      ParamByName('end_date').AsDateTime := Now();
-      open;
-      DebtorLockup := FieldByName('debtor_amount'). AsCurrency;
-   end;
+  if UserDept <> '' then
+  begin
+       with dmDasboardTeam.qryFeesBilledYTD do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open;
+       end;
+       with dmDasboardTeam.qryFeesBilledMonth do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('month_end_date').AsDateTime := trunc(Date());
+          Open();
+       end;
+        with dmDasboardTeam.qryWIPLockup do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+    //      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+    //      ParamByName('year_end_date').AsDateTime := Now();
+          open;
+          WipLockup := FieldByName('Month_Total'). AsCurrency;
+       end;
+       with dmDasboardTeam.qryUnbilledDisbs do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+    //      ParamByName('start_date').AsDateTime := LFinDateFirst;
+    //      ParamByName('end_date').AsDateTime := Now();
+          open;
+          UnbillDisbLockup := FieldByName('unbill_disb'). AsCurrency;
+       end;
+       with dmDasboardTeam.qryDebtorLockup do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+    //      ParamByName('start_date').AsDateTime := LFinDateFirst;
+    //      ParamByName('end_date').AsDateTime := Now();
+          open;
+          DebtorLockup := FieldByName('debtor_amount'). AsCurrency;
+       end;
 
-   with dmDasboardTeam.qryCreditorsLockup do
-   begin
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      Open;
-      CreditorLockup := FieldByName('CRED_MONTH_TOTAL'). AsCurrency;
-   end;
-   with dmDasboardTeam.qrySundryLockup do
-   begin
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      Open;
-      SundryLockup := FieldByName('SUND_MONTH_TOTAL'). AsCurrency;
-   end;
-   teLockupTotal.Caption :=  CurrToStrF(DebtorLockup + UnbillDisbLockup + WipLockup + CreditorLockup + SundryLockup, ffCurrency, 2);
+       with dmDasboardTeam.qryCreditorsLockup do
+       begin
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          Open;
+          CreditorLockup := FieldByName('CRED_MONTH_TOTAL'). AsCurrency;
+       end;
+       with dmDasboardTeam.qrySundryLockup do
+       begin
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          Open;
+          SundryLockup := FieldByName('SUND_MONTH_TOTAL'). AsCurrency;
+       end;
+       teLockupTotal.Caption :=  CurrToStrF(DebtorLockup + UnbillDisbLockup + WipLockup + CreditorLockup + SundryLockup, ffCurrency, 2);
 
-   with dmDasboardTeam.qryLockupGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-//      ParamByName('start_date').AsDateTime := LFinDateFirst;
-//      ParamByName('end_date').AsDateTime := Now();
-      Open();
-   end;
+       with dmDasboardTeam.qryLockupGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+    //      ParamByName('start_date').AsDateTime := LFinDateFirst;
+    //      ParamByName('end_date').AsDateTime := Now();
+          Open();
+       end;
 
-   with dmDasboardTeam.qryFeeReceivedMonth do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('month_end_date').AsDateTime := trunc(Date());
-      Open();
-   end;
-   with dmDasboardTeam.qryFeesReceivedBudget do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open();
-   end;
+       with dmDasboardTeam.qryFeeReceivedMonth do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('month_end_date').AsDateTime := trunc(Date());
+          Open();
+       end;
+       with dmDasboardTeam.qryFeesReceivedBudget do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open();
+       end;
 
-   with dmDasboardTeam.qryFeeReceivedYear do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open;
-   end;
-   with dmDasboardTeam.qryFeesBilledGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open;
-   end;
-   with dmDasboardTeam.qryFeesBilledBudgetGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open;
-   end;
+       with dmDasboardTeam.qryFeeReceivedYear do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open;
+       end;
+       with dmDasboardTeam.qryFeesBilledGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open;
+       end;
+       with dmDasboardTeam.qryFeesBilledBudgetGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open;
+       end;
 
-   with dmDasboardTeam.qryFeesReceivedBudgetGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open;
-   end;
-   with dmDasboardTeam.qryFeesReceivedGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open;
-   end;
-   with dmDasboardTeam.qryBilledFeesBudget do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      Open();
-   end;
+       with dmDasboardTeam.qryFeesReceivedBudgetGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open;
+       end;
+       with dmDasboardTeam.qryFeesReceivedGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open;
+       end;
+       with dmDasboardTeam.qryBilledFeesBudget do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          Open();
+       end;
+  end;
 end;
 
 procedure TfrmDashboard_Team.tabWIPShow(Sender: TObject);
@@ -593,173 +639,176 @@ var
    sINClause: string;
    sSQL: string;
 begin
-   with dmDasboardTeam.qryAgedDebtors do
-   begin
-//      close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('P1').AsInteger := 29;
-      ParamByName('P2').AsInteger := 59;
-      ParamByName('P3').AsInteger := 89;
-      ParamByName('P4').AsInteger := 119;
-      Open;
-   end;
+  if UserDept <> '' then
+  begin
+       with dmDasboardTeam.qryAgedDebtors do
+       begin
+    //      close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('P1').AsInteger := 29;
+          ParamByName('P2').AsInteger := 59;
+          ParamByName('P3').AsInteger := 89;
+          ParamByName('P4').AsInteger := 119;
+          Open;
+       end;
 
-   with dmDasboardTeam.qryAgedDebtorsGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('P1').AsInteger := 29;
-      ParamByName('P2').AsInteger := 59;
-      ParamByName('P3').AsInteger := 89;
-      ParamByName('P4').AsInteger := 119;
-      Open;
-   end;
+       with dmDasboardTeam.qryAgedDebtorsGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('P1').AsInteger := 29;
+          ParamByName('P2').AsInteger := 59;
+          ParamByName('P3').AsInteger := 89;
+          ParamByName('P4').AsInteger := 119;
+          Open;
+       end;
 
-   with dmDasboardTeam.qryAgedDebtorsMatterCnt do
-   begin
-//      Close;
-{      qryTmp.ParamByName('code').AsString := UserDept;
-      qryTmp.Open;
-      sINClause := qryTmp.FieldByName('inlist').AsString;
-      qryTmp.Close;
-      sSQL := 'SELECT '+
-              '   a.apaid0 + b.apaid1 + c.apaid2 + d.apaid3 + e.apaid10 AS TotalMatters, '+
-              '   a.apaid0 AS adj0, '+
-              '   b.apaid1 AS adj1, '+
-              '   c.apaid2 AS adj2, '+
-              '   d.apaid3 AS adj3, '+
-              '   e.apaid10 AS adj10 '+
-              'from (  '+
-              'select  '+
-              '  count( n.nmatter) AS apaid0 '+
-              'FROM nmemo n '+
-              'WHERE n.author IN '+ sINClause +
-              'AND dispatched IS NOT NULL  '+
-              'AND n.refno <> ''DRAFT''  '+
-              'AND n.rv_type <> ''D''  '+
-              'and owing <> 0  '+
-              'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p1, TRUNC(SYSDATE), n.nmatter) <> 0 ) a,  '+
-              '(select  '+
-              '   count(n.nmatter) as apaid1   '+
-              'FROM nmemo n  '+
-              'WHERE n.author in '+ sINClause +
-              'AND dispatched IS NOT NULL  '+
-              'AND n.refno <> ''DRAFT''  '+
-              'AND n.rv_type <> ''D'' '+
-              'and owing <> 0  '+
-              'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p2, TRUNC(SYSDATE) - (:p1 + 1), n.nmatter) <> 0 ) b, '+
-              '(select  '+
-              '  count(n.nmatter) AS apaid2  '+
-              'FROM nmemo n  '+
-              'WHERE n.author in  '+ sINClause +
-              'AND dispatched IS NOT NULL  '+
-              'AND n.refno <> ''DRAFT''  '+
-              'AND n.rv_type <> ''D'' '+
-              'and owing <> 0  '+
-              'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p3, TRUNC(SYSDATE) - (:p2 + 1), n.nmatter) <> 0) c, '+
-              '(select  '+
-              '  count(n.nmatter) AS apaid3 '+
-              'FROM nmemo n  '+
-              'WHERE n.author in '+ sINClause +
-              'AND dispatched IS NOT NULL '+
-              'AND n.refno <> ''DRAFT'' '+
-              'AND n.rv_type <> ''D''  '+
-              'and owing <> 0 '+
-              'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p4, TRUNC(SYSDATE) - (:p3 + 1), n.nmatter) <> 0) d, '+
-              '(select '+
-              '  count(n.nmatter) AS apaid10  '+
-              'FROM nmemo n  '+
-              'WHERE n.author in '+ sINClause +
-              'AND dispatched IS NOT NULL '+
-              'AND n.refno <> ''DRAFT'' '+
-              'AND n.rv_type <> ''D'' '+
-              'and owing <> 0  '+
-              'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(TO_DATE(''01/01/1900'',''dd/mm/yyyy'')),TRUNC(SYSDATE) - (:p4 + 1),   n.nmatter) <> 0) e ';
-      SQL.Clear;
-      SQL.Text := sSQL;     }
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('P1').AsInteger := 29;
-      ParamByName('P2').AsInteger := 59;
-      ParamByName('P3').AsInteger := 89;
-      ParamByName('P4').AsInteger := 119;
-      Open;
-   end;
+       with dmDasboardTeam.qryAgedDebtorsMatterCnt do
+       begin
+    //      Close;
+    {      qryTmp.ParamByName('code').AsString := UserDept;
+          qryTmp.Open;
+          sINClause := qryTmp.FieldByName('inlist').AsString;
+          qryTmp.Close;
+          sSQL := 'SELECT '+
+                  '   a.apaid0 + b.apaid1 + c.apaid2 + d.apaid3 + e.apaid10 AS TotalMatters, '+
+                  '   a.apaid0 AS adj0, '+
+                  '   b.apaid1 AS adj1, '+
+                  '   c.apaid2 AS adj2, '+
+                  '   d.apaid3 AS adj3, '+
+                  '   e.apaid10 AS adj10 '+
+                  'from (  '+
+                  'select  '+
+                  '  count( n.nmatter) AS apaid0 '+
+                  'FROM nmemo n '+
+                  'WHERE n.author IN '+ sINClause +
+                  'AND dispatched IS NOT NULL  '+
+                  'AND n.refno <> ''DRAFT''  '+
+                  'AND n.rv_type <> ''D''  '+
+                  'and owing <> 0  '+
+                  'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p1, TRUNC(SYSDATE), n.nmatter) <> 0 ) a,  '+
+                  '(select  '+
+                  '   count(n.nmatter) as apaid1   '+
+                  'FROM nmemo n  '+
+                  'WHERE n.author in '+ sINClause +
+                  'AND dispatched IS NOT NULL  '+
+                  'AND n.refno <> ''DRAFT''  '+
+                  'AND n.rv_type <> ''D'' '+
+                  'and owing <> 0  '+
+                  'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p2, TRUNC(SYSDATE) - (:p1 + 1), n.nmatter) <> 0 ) b, '+
+                  '(select  '+
+                  '  count(n.nmatter) AS apaid2  '+
+                  'FROM nmemo n  '+
+                  'WHERE n.author in  '+ sINClause +
+                  'AND dispatched IS NOT NULL  '+
+                  'AND n.refno <> ''DRAFT''  '+
+                  'AND n.rv_type <> ''D'' '+
+                  'and owing <> 0  '+
+                  'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p3, TRUNC(SYSDATE) - (:p2 + 1), n.nmatter) <> 0) c, '+
+                  '(select  '+
+                  '  count(n.nmatter) AS apaid3 '+
+                  'FROM nmemo n  '+
+                  'WHERE n.author in '+ sINClause +
+                  'AND dispatched IS NOT NULL '+
+                  'AND n.refno <> ''DRAFT'' '+
+                  'AND n.rv_type <> ''D''  '+
+                  'and owing <> 0 '+
+                  'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(SYSDATE) - :p4, TRUNC(SYSDATE) - (:p3 + 1), n.nmatter) <> 0) d, '+
+                  '(select '+
+                  '  count(n.nmatter) AS apaid10  '+
+                  'FROM nmemo n  '+
+                  'WHERE n.author in '+ sINClause +
+                  'AND dispatched IS NOT NULL '+
+                  'AND n.refno <> ''DRAFT'' '+
+                  'AND n.rv_type <> ''D'' '+
+                  'and owing <> 0  '+
+                  'and DATE_BETWEEN(TRUNC(n.dispatched), TRUNC(TO_DATE(''01/01/1900'',''dd/mm/yyyy'')),TRUNC(SYSDATE) - (:p4 + 1),   n.nmatter) <> 0) e ';
+          SQL.Clear;
+          SQL.Text := sSQL;     }
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('P1').AsInteger := 29;
+          ParamByName('P2').AsInteger := 59;
+          ParamByName('P3').AsInteger := 89;
+          ParamByName('P4').AsInteger := 119;
+          Open;
+       end;
 
-   with dmDasboardTeam.qryWIPFigures do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('P1').AsInteger := 29;
-      ParamByName('P2').AsInteger := 59;
-      ParamByName('P3').AsInteger := 89;
-      ParamByName('P4').AsInteger := 119;
-      Open;
-      lblWipTotal.Caption := CurrToStrF(Fields.Fields[0].AsCurrency +
-            Fields.Fields[1].AsCurrency +
-            Fields.Fields[2].AsCurrency +
-            Fields.Fields[3].AsCurrency +
-            Fields.Fields[4].AsCurrency, ffCurrency, 2);
-   end;
+       with dmDasboardTeam.qryWIPFigures do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('P1').AsInteger := 29;
+          ParamByName('P2').AsInteger := 59;
+          ParamByName('P3').AsInteger := 89;
+          ParamByName('P4').AsInteger := 119;
+          Open;
+          lblWipTotal.Caption := CurrToStrF(Fields.Fields[0].AsCurrency +
+                Fields.Fields[1].AsCurrency +
+                Fields.Fields[2].AsCurrency +
+                Fields.Fields[3].AsCurrency +
+                Fields.Fields[4].AsCurrency, ffCurrency, 2);
+       end;
 
-   with dmDasboardTeam.qryWIPGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('P1').AsInteger := 29;
-      ParamByName('P2').AsInteger := 59;
-      ParamByName('P3').AsInteger := 89;
-      ParamByName('P4').AsInteger := 119;
-      Open;
-   end;
+       with dmDasboardTeam.qryWIPGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('P1').AsInteger := 29;
+          ParamByName('P2').AsInteger := 59;
+          ParamByName('P3').AsInteger := 89;
+          ParamByName('P4').AsInteger := 119;
+          Open;
+       end;
 
-   with dmDasboardTeam.qryWipGeneratedBudget do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := LFinDateEnd;
-      open;
-   end;
+       with dmDasboardTeam.qryWipGeneratedBudget do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := LFinDateEnd;
+          open;
+       end;
 
 
-   with dmDasboardTeam.qryWIPGenerated do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
-      ParamByName('month_end_date').AsDateTime := trunc(Date());
-      ParamByName('year_start_date').AsDateTime := LFinDateFirst;
-      ParamByName('year_end_date').AsDateTime := Now();
-      Open;
-   end;
+       with dmDasboardTeam.qryWIPGenerated do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('month_start_date').AsDateTime := LMonthDateFirst;
+          ParamByName('month_end_date').AsDateTime := trunc(Date());
+          ParamByName('year_start_date').AsDateTime := LFinDateFirst;
+          ParamByName('year_end_date').AsDateTime := Now();
+          Open;
+       end;
 
-   with dmDasboardTeam.qryWIPGeneratedGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('firstdate').AsDateTime := LFinDateFirst; // IntToStr(LDateFirstMonth) + '-' + IntToStr(LDateFirstYear);
-      ParamByName('lastdate').AsDateTime := LFinDateEnd;  // IntToStr(LFinDateLastMonth) + '-' + IntToStr(LFinDateLastYear);
-      Open();
-   end;
+       with dmDasboardTeam.qryWIPGeneratedGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('firstdate').AsDateTime := LFinDateFirst; // IntToStr(LDateFirstMonth) + '-' + IntToStr(LDateFirstYear);
+          ParamByName('lastdate').AsDateTime := LFinDateEnd;  // IntToStr(LFinDateLastMonth) + '-' + IntToStr(LFinDateLastYear);
+          Open();
+       end;
 
-   with dmDasboardTeam.qryWIPGeneratedBudgetGraph do
-   begin
-//      Close;
-      ParamByName('code').AsString := dmAxiom.UserID;
-      ParamByName('dept').AsString := UserDept;
-      ParamByName('firstdate').AsDateTime := LFinDateFirst; //  IntToStr(LDateFirstMonth) + '-' + IntToStr(LDateFirstYear);
-      ParamByName('lastdate').AsDateTime :=  LFinDateEnd; //IntToStr(LFinDateLastMonth) + '-' + IntToStr(LFinDateLastYear);
-      Open();
-   end;
+       with dmDasboardTeam.qryWIPGeneratedBudgetGraph do
+       begin
+    //      Close;
+          ParamByName('code').AsString := dmAxiom.UserID;
+          ParamByName('dept').AsString := UserDept;
+          ParamByName('firstdate').AsDateTime := LFinDateFirst; //  IntToStr(LDateFirstMonth) + '-' + IntToStr(LDateFirstYear);
+          ParamByName('lastdate').AsDateTime :=  LFinDateEnd; //IntToStr(LFinDateLastMonth) + '-' + IntToStr(LFinDateLastYear);
+          Open();
+       end;
+  end;
 end;
 
 procedure TfrmDashboard_Team.cmbteamsCloseUp(Sender: TObject);
@@ -779,7 +828,12 @@ end;
 
 procedure TfrmDashboard_Team.bbtnInd_ScorecardClick(Sender: TObject);
 begin
-   FindorCreate(TfrmDashboard_Ind,IDXDASHBOARD_IND).show;
+   //FindorCreate(TfrmDashboard_Ind,IDXDASHBOARD_IND).show;
+   Application.CreateForm(TfrmDashboard_Ind, frmDashboard_Ind);
+   if frmDesktop.pagMainControl.ActivePageIndex = 0 then
+     frmDesktop.AddFormToTab(frmDashboard_Ind,1);
+   if (not frmDashboard_Ind.Visible) then
+     frmDashboard_Ind.Show;
 end;
 
 procedure TfrmDashboard_Team.bbtnRefreshClick(Sender: TObject);

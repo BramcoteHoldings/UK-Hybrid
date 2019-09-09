@@ -856,6 +856,7 @@ type
   procedure InvoiceMergeEmail(iInvoice: integer; nMatter: Integer; Template: string = '');
   function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string = ''): boolean;
   function GetFileImage(sFilePath: string): Integer;
+  function GetFinYearStart(dSrcDate: tDateTime): tDateTime;
 
 type
   TRoundToRange = -37..37;
@@ -15232,6 +15233,24 @@ begin
          Result := 9
       else
          Result := 1;
+end;
+
+function GetFinYearStart(dSrcDate: tDateTime): tDateTime;
+var
+    wDay, wMonth, wYear : word;
+    wDay2, wMonth2, wYear2 : word;
+    iFinMonth : integer;
+begin
+    DecodeDate(dSrcDate, wYear, wMonth, wDay);
+    DecodeDate(dSrcDate, wYear2, wMonth2, wDay2);
+    iFinMonth := systeminteger('FINYEAR_START_MONTH');
+    if (iFinMonth > wMonth2) then
+        wYear := wYear2 - 1
+    else
+        wYear := wYear2;
+    wMonth := iFinMonth;
+    wDay := 1;
+    Result := EncodeDate(wYear, wMonth, wDay);
 end;
 
 end.

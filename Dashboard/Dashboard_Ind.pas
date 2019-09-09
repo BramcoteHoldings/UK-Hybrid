@@ -591,6 +591,14 @@ begin
    with dmDashboardInd.qryClientMilestones do
    begin
 //      Close;
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+       end;
       ParamByName('author').AsString := EmpCode;
       Open;
    end;
@@ -625,12 +633,36 @@ begin
    with dmDashboardInd.qryTopReferrers do
    begin
 //      Close;
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel11.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel11.Caption := 'Figures are for financial year';
+      end;
       ParamByName('author').AsString := EmpCode;
       open();
    end;
    with dmDashboardInd.qryTopClients do
    begin
 //      Close;
+      if SystemString('TOP_20_CLIENTS_ROLLING') = 'Y' then
+      begin
+           ParamByName('datefrom').AsDate := trunc(Now) - 365;
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel10.Caption := 'Figures are for rolling 12 months';
+      end
+      else
+      begin
+           ParamByName('datefrom').AsDate := GetFinYearStart(trunc(Now));
+           ParamByName('dateto').AsDate := trunc(Now);
+           cxLabel10.Caption := 'Figures are for financial year';
+      end;
       ParamByName('author').AsString := EmpCode;
       open();
    end;
