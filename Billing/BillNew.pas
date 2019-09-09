@@ -1310,7 +1310,7 @@ begin
       then
       begin
         neDisbTax.AsCurrency := ShowTax(neDisb.AsCurrency, dGstFree, 'ALLOC', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                        qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxDisb := neDisbTax.AsCurrency;
         neDisbTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 1] := Format('%m', [neDisbTax.AsCurrency]);
@@ -1321,7 +1321,7 @@ begin
       then
       begin
         neAntdTax.AsCurrency := ShowTax(neAntd.AsCurrency, dGstFree, 'CHEQREQ', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxAntD := neAntdTax.AsCurrency;
         neAntdTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 2] := Format('%m', [neAntdTax.AsCurrency]);
@@ -4976,7 +4976,7 @@ begin
          if (ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) then
             tbtnEditDescription.Visible := ivAlways;
 
-         bbtnAdjDisbTotal.Enabled := ((ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) or (ImageIndex = IMG_ANTD)) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
+         bbtnAdjDisbTotal.Enabled := ((ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) or (ImageIndex = IMG_UPCRED)) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
          barbtnTaxcodeList.Enabled := ((tvBillItemsTYPE.EditValue = IMG_DISB) or (tvBillItemsTYPE.EditValue = IMG_ANTD));
       end;
 
@@ -5475,7 +5475,7 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
-  begin
+begin
     if (bAlterGSTAmount)
     then
     begin
@@ -5516,7 +5516,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
         End;
       end;
     end;
-  end;
+end;
 
 procedure TfrmInvoice.pbSpellCheckClick(Sender : TObject);
   var
@@ -6399,12 +6399,12 @@ begin
                with dmAxiom.qryTmp do
                begin
                  Close;
-                 SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX = :tax where ncheqreq = :ncheqreq';
-                 ParamByName('amount').AsFloat := lAmount;
+                 SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where ncheqreq = :ncheqreq';
+                 ParamByName('amount').AsFloat := lAmount * - 1;
                  if bTaxNoChange = True then
-                    ParamByName('tax').AsFloat := lTax
+                    ParamByName('tax').AsFloat := lTax * - 1
                  else
-                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now);
+                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
                  ParamByName('ncheqreq').AsInteger := tvBillItemsUNIQUEID.EditValue;
                  ExecSQL;
 

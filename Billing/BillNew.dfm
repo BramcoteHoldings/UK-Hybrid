@@ -3457,9 +3457,7 @@ object frmInvoice: TfrmInvoice
   object qryAntd: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      
-        'SELECT 2 AS TYPE, c.reqdate, c.descr, nvl(billed_amount, c.amoun' +
-        't) as amount, c.author,'
+      'SELECT 2 AS TYPE, c.reqdate, c.descr, c.amount, c.author,'
       
         '       c.ncheqreq AS uniqueid, NVL (c.billing_taxcode, c.taxcode' +
         ') taxcode,'
