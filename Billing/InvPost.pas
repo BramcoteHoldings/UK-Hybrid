@@ -556,6 +556,14 @@ var
   iModResult : integer;
   ReqDate: TDateTime;
   sBillNoTest: integer;
+  cAllocCheqReqAmount,
+  cAllocCheqReqTax,
+  cAllocCheqReqAmountDiff,
+  cAllocCheqReqTaxDiff,
+  cAllocUpCredAmount,
+  cAllocUpCredTax,
+  cAllocUpCredAmountDiff,
+  cAllocUpCredTaxDiff: double;
 begin
  // get the gl component setup
    glComponentSetup := dmAxiom.getGlComponents;
@@ -590,7 +598,7 @@ begin
          end
          else
          begin
-            MsgErr('Bill ' + tbRefno.Text + ' has already been entered, double click on the "bill refno" to get the next available number');
+            MsgErr('Bill ' + tbRefno.Text + ' has already been entered, you can eitherdouble click on the "bill refno" to get the next available number or enter a new Bill No');
             ModalResult := mrNone;
             Exit; // <--- Jumping out here
          end;
@@ -1169,128 +1177,128 @@ begin
 
 //              MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'BILL_SUND',     qrySetup.FieldByName('SUMAMOUNT').AsCurrency);
 
-              if (qrySetup.FieldByName('SUMAMOUNT').AsCurrency <> 0.0) then
-              begin
-                if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
-                begin
-                {post componsnts}
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_CR'),'',true,'Error with New Sundry Chart');
-                  sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR'),'',true,'Error with New Sundry Chart');
+               if (qrySetup.FieldByName('SUMAMOUNT').AsCurrency <> 0.0) then
+               begin
+                  if TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR') <> '' then
+                  begin
+                  {post componsnts}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_CR'),'',true,'Error with New Sundry Chart');
+                     sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'NEW_SUND_DR'),'',true,'Error with New Sundry Chart');
 
-                  PostLedgers(dtpDispatched.Date
-                    , qrySetup.FieldByName('SUMAMOUNT').AsCurrency
-                    , Self.qryBill.FieldByName('FILEID').AsString
-                    , 'NMEMO'
-                    , Self.qryBill.FieldByName('NMEMO').AsInteger
-                    , sMemoDesc
-                    , sLedgerKey
-                    , sLedgerKeyDr
-                    , qryMatter.FieldByName('AUTHOR').AsString
-                    // 20 Dec 2017 DW added sTaxCode
-                    //, dmAxiom.DefaultTax);
-                    , sTaxCode);
-                end;
-              end;
+                     PostLedgers(dtpDispatched.Date
+                       , qrySetup.FieldByName('SUMAMOUNT').AsCurrency
+                       , Self.qryBill.FieldByName('FILEID').AsString
+                       , 'NMEMO'
+                       , Self.qryBill.FieldByName('NMEMO').AsInteger
+                       , sMemoDesc
+                       , sLedgerKey
+                       , sLedgerKeyDr
+                       , qryMatter.FieldByName('AUTHOR').AsString
+                       // 20 Dec 2017 DW added sTaxCode
+                       //, dmAxiom.DefaultTax);
+                       , sTaxCode);
+                  end;
+               end;
 
-              // See if we have to adjust the sundries
-              if Self.qryBill.FieldByName('SUND').AsCurrency <> qrySetup.FieldByName('SUMAMOUNT').AsCurrency then
-              begin
-                // We have to create a sundry adjustment
-                qrySund.ParamByName('CREATED').AsDateTime   := dtpDispatched.Date;
-                qrySund.ParamByName('NMATTER').AsInteger    := Self.qryBill.FieldByName('NMATTER').AsInteger;
-                qrySund.ParamByName('FILEID').AsString      := qryMatter.FieldByName('FILEID').AsString;
-                qrySund.ParamByName('NCLIENT').AsInteger    := qryMatter.FieldByName('NCLIENT').AsInteger;
-                qrySund.ParamByName('NMEMO').AsInteger      := Self.qryBill.FieldByName('NMEMO').AsInteger;
-                qrySund.ParamByName('ACCT').AsString        := Self.qryBill.FieldByName('BANK_ACCT').AsString;
-                qrySund.ParamByName('DESCR').AsString       := 'Sundry Adjustment as per Bill ' + tbRefno.Text;
-                // 20 Dec 2017 DW added sTaxCode
-                // qrySund.ParamByName('TAXCODE').AsString     := dmAxiom.DefaultTax;
-                qrySund.ParamByName('TAXCODE').AsString     := sTaxCode;
-                dAmount                                     := Self.qryBill.FieldByName('SUND').AsCurrency - qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
-                // 20 Dec 2017 DW added sTaxCode
-                //qrySund.ParamByName('TAX').AsFloat          := TaxCalc(dAmount, '', dmAxiom.DefaultTax, Interim);
-                qrySund.ParamByName('TAX').AsFloat          := TaxCalc(dAmount, '', sTaxCode, Interim);
-                qrySund.ParamByName('AMOUNT').AsFloat       := dAmount;
-                qrySund.ExecSQL;
-                qrySund.Close;
-              end;
+               // See if we have to adjust the sundries
+               if Self.qryBill.FieldByName('SUND').AsCurrency <> qrySetup.FieldByName('SUMAMOUNT').AsCurrency then
+               begin
+                   // We have to create a sundry adjustment
+                   qrySund.ParamByName('CREATED').AsDateTime   := dtpDispatched.Date;
+                   qrySund.ParamByName('NMATTER').AsInteger    := Self.qryBill.FieldByName('NMATTER').AsInteger;
+                   qrySund.ParamByName('FILEID').AsString      := qryMatter.FieldByName('FILEID').AsString;
+                   qrySund.ParamByName('NCLIENT').AsInteger    := qryMatter.FieldByName('NCLIENT').AsInteger;
+                   qrySund.ParamByName('NMEMO').AsInteger      := Self.qryBill.FieldByName('NMEMO').AsInteger;
+                   qrySund.ParamByName('ACCT').AsString        := Self.qryBill.FieldByName('BANK_ACCT').AsString;
+                   qrySund.ParamByName('DESCR').AsString       := 'Sundry Adjustment as per Bill ' + tbRefno.Text;
+                   // 20 Dec 2017 DW added sTaxCode
+                   // qrySund.ParamByName('TAXCODE').AsString     := dmAxiom.DefaultTax;
+                   qrySund.ParamByName('TAXCODE').AsString     := sTaxCode;
+                   dAmount                                     := Self.qryBill.FieldByName('SUND').AsCurrency - qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
+                   // 20 Dec 2017 DW added sTaxCode
+                   //qrySund.ParamByName('TAX').AsFloat          := TaxCalc(dAmount, '', dmAxiom.DefaultTax, Interim);
+                   qrySund.ParamByName('TAX').AsFloat          := TaxCalc(dAmount, '', sTaxCode, Interim);
+                   qrySund.ParamByName('AMOUNT').AsFloat       := dAmount;
+                   qrySund.ExecSQL;
+                   qrySund.Close;
+               end;
 
-              qryTmp.Close;
-              qryTmp.SQL.Text := 'SELECT SUM(SUNDRY.AMOUNT) AS LEDGER_AMOUNT, '+
-                                 'SUM(SUNDRY.TAX) AS TAXAMOUNT, SUNDRYTYPE.LEDGER '+
-                                 'FROM SUNDRY, SUNDRYTYPE '+
-                                 'WHERE SUNDRY.NMATTER = ' +
-                                 IntToStr(Self.qryBill.FieldByName('NMATTER').AsInteger) +
-                                 ' AND SUNDRY.NMEMO = ' +
-                                 IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger) +
-                                 ' AND SUNDRYTYPE.CODE = SUNDRY.TYPE(+) '+
-                                 ' AND SUNDRYTYPE.ENTITY = ' + quotedstr(qryMatter.FieldByName('ENTITY').AsString) +
-                                 ' GROUP BY SUNDRYTYPE.LEDGER';
-              qryTmp.Open;
+               qryTmp.Close;
+               qryTmp.SQL.Text := 'SELECT SUM(SUNDRY.AMOUNT) AS LEDGER_AMOUNT, '+
+                                  'SUM(SUNDRY.TAX) AS TAXAMOUNT, SUNDRYTYPE.LEDGER '+
+                                  'FROM SUNDRY, SUNDRYTYPE '+
+                                  'WHERE SUNDRY.NMATTER = ' +
+                                  IntToStr(Self.qryBill.FieldByName('NMATTER').AsInteger) +
+                                  ' AND SUNDRY.NMEMO = ' +
+                                  IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger) +
+                                  ' AND SUNDRYTYPE.CODE = SUNDRY.TYPE(+) '+
+                                  ' AND SUNDRYTYPE.ENTITY = ' + quotedstr(qryMatter.FieldByName('ENTITY').AsString) +
+                                  ' GROUP BY SUNDRYTYPE.LEDGER';
+               qryTmp.Open;
 
                 // Do the appropriate adjustments for sundries recovered.
-              cSundTax := 0;
-              while not qryTmp.EOF do
-              begin
-                cSundTax := cSundTax + qryTmp.FieldByName('TAXAMOUNT').AsFloat;
-                // Post this sundry
-                if qryTmp.FieldByName('LEDGER').AsString = '' then
-                   sLedger := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_SUND_CR')
-                else
-                   sLedger := qryTmp.FieldByName('LEDGER').AsString;
+               cSundTax := 0;
+               while not qryTmp.EOF do
+               begin
+                  cSundTax := cSundTax + qryTmp.FieldByName('TAXAMOUNT').AsFloat;
+                  // Post this sundry
+                  if qryTmp.FieldByName('LEDGER').AsString = '' then
+                     sLedger := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_SUND_CR')
+                  else
+                     sLedger := qryTmp.FieldByName('LEDGER').AsString;
 
-                // calculate the ledger key
-                sLedgerKey :=  glComponentSetup.buildLedgerKey(Self.qryBill.FieldByName('NMATTER').AsString,sLedger,'',false,'Error with Sundry Chart');
+                  // calculate the ledger key
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(Self.qryBill.FieldByName('NMATTER').AsString,sLedger,'',false,'Error with Sundry Chart');
 
-                PostLedger(dtpDispatched.Date
-                  , qryTmp.FieldByName('LEDGER_AMOUNT').AsCurrency
-                  , qryTmp.FieldByName('TAXAMOUNT').AsCurrency
-                  , Self.qryBill.FieldByName('FILEID').AsString
-                  , 'NMEMO'
-                  , Self.qryBill.FieldByName('NMEMO').AsInteger
-                  , sMemoDesc
-                  , sLedgerKey
-                  , qryMatter.FieldByName('AUTHOR').AsString
-                  , -1
-                  , ''
-                  // 20 Dec 2017 DW added sTaxCode
-                  //, dmAxiom.DefaultTax);
-                  , sTaxCode);
+                  PostLedger(dtpDispatched.Date
+                     , qryTmp.FieldByName('LEDGER_AMOUNT').AsCurrency
+                     , qryTmp.FieldByName('TAXAMOUNT').AsCurrency
+                     , Self.qryBill.FieldByName('FILEID').AsString
+                     , 'NMEMO'
+                     , Self.qryBill.FieldByName('NMEMO').AsInteger
+                     , sMemoDesc
+                     , sLedgerKey
+                     , qryMatter.FieldByName('AUTHOR').AsString
+                     , -1
+                     , ''
+                     // 20 Dec 2017 DW added sTaxCode
+                     //, dmAxiom.DefaultTax);
+                     , sTaxCode);
 
-                // Get the next sundry for this matter
-                qryTmp.Next;
-              end;
+                  // Get the next sundry for this matter
+                  qryTmp.Next;
+               end;
 
-              if Self.qryBill.FieldByName('SUND').AsCurrency <> 0.0 then
-              begin
-                // Now adjust the Debtors Chart
-                MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
-                  Self.qryBill.FieldByName('SUND').AsCurrency + cSundTax);
+               if Self.qryBill.FieldByName('SUND').AsCurrency <> 0.0 then
+               begin
+                  // Now adjust the Debtors Chart
+                  MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
+                     Self.qryBill.FieldByName('SUND').AsCurrency + cSundTax);
 
-                {post gl component}
-                sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_SUND_DR'),'',true,'Error with Sundry Chart');
+                  {post gl component}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_SUND_DR'),'',true,'Error with Sundry Chart');
 
-                PostLedger(dtpDispatched.Date
-                  , - Self.qryBill.FieldByName('SUND').AsCurrency
-                  , 0
-                  , Self.qryBill.FieldByName('FILEID').AsString
-                  , 'NMEMO'
-                  , Self.qryBill.FieldByName('NMEMO').AsInteger
-                  , sMemoDesc
-                  , sLedgerKey
-                  , qryMatter.FieldByName('AUTHOR').AsString
-                  , -1
-                  , ''
-                  // 20 Dec 2017 DW Added sTaxCode
-                  //, dmAxiom.DefaultTax);
-                  , sTaxCode);
-              end;
+                  PostLedger(dtpDispatched.Date
+                     , - Self.qryBill.FieldByName('SUND').AsCurrency
+                     , 0
+                     , Self.qryBill.FieldByName('FILEID').AsString
+                     , 'NMEMO'
+                     , Self.qryBill.FieldByName('NMEMO').AsInteger
+                     , sMemoDesc
+                     , sLedgerKey
+                     , qryMatter.FieldByName('AUTHOR').AsString
+                     , -1
+                     , ''
+                     // 20 Dec 2017 DW Added sTaxCode
+                     //, dmAxiom.DefaultTax);
+                     , sTaxCode);
+               end;
 
-              if (Self.qryBill.FieldByName('SUNDTAX').AsCurrency <> 0.0) then
-              begin
+               if (Self.qryBill.FieldByName('SUNDTAX').AsCurrency <> 0.0) then
+               begin
                   // Post the Sundry Tax (BILL_SUND_TAX_DR).    BJ  29/11/2002
-                 if (lsBillSundTaxDR <> '') then
-                 begin
+                  if (lsBillSundTaxDR <> '') then
+                  begin
                       lsBillSundTaxSubDR := lsBillSundTaxDR + lsChartSuffix;
 
                       { rb - removed this, didn't make sense anyway
@@ -1316,92 +1324,91 @@ begin
                         //, dmAxiom.DefaultTax);
                         , sTaxCode);
 
-                end;    //  end if
+                  end;    //  end if
+               end;    //  end if
 
-              end;    //  end if
+               // CHEQREQS
+               // Find out how many actual Anticipated Disbursements there are for this invoice
+               qrySetup.Close;
+               qrySetup.SQL.Clear;
+               qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(TAX) AS TAXAMOUNT');
+               qrySetup.SQL.Add('FROM CHEQREQ');
+               qrySetup.SQL.Add('WHERE FILEID = :FILEID');
+               qrySetup.SQL.Add('  AND NMEMO = :NMEMO');
+               qrySetup.Params[0].AsString   := qryMatter.FieldByName('FILEID').AsString;
+               qrySetup.Params[1].AsInteger  := Self.qryBill.FieldByName('NMEMO').AsInteger;
+               qrySetup.Open;
+               if qrySetup.FieldByName('SUMAMOUNT').AsCurrency <> 0 then
+               begin
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                     'UNBILL_CREQ', - (qrySetup.FieldByName('SUMAMOUNT').AsCurrency));
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                     'BILL_CREQ', qrySetup.FieldByName('SUMAMOUNT').AsCurrency);
+               end;
 
-              // Find out how many actual Anticipated Disbursements there are for this invoice
-              qrySetup.Close;
-              qrySetup.SQL.Clear;
-              qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(TAX) AS TAXAMOUNT');
-              qrySetup.SQL.Add('FROM CHEQREQ');
-              qrySetup.SQL.Add('WHERE FILEID = :FILEID');
-              qrySetup.SQL.Add('  AND NMEMO = :NMEMO');
-              qrySetup.Params[0].AsString   := qryMatter.FieldByName('FILEID').AsString;
-              qrySetup.Params[1].AsInteger  := Self.qryBill.FieldByName('NMEMO').AsInteger;
-              qrySetup.Open;
-              if qrySetup.FieldByName('SUMAMOUNT').AsCurrency <> 0 then
-              begin
-                MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
-                  'UNBILL_CREQ',
-                  - (qrySetup.FieldByName('SUMAMOUNT').AsCurrency));
-                MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
-                  'BILL_CREQ',
-                  qrySetup.FieldByName('SUMAMOUNT').AsCurrency);
-              end;
+               cAllocCheqReqAmount   := qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
+               cAllocCheqReqTax      := qrySetup.FieldByName('TAXAMOUNT').AsCurrency;
 
-              if Self.qryBill.FieldByName('ANTD').AsCurrency <> 0.0 then
-              begin
+               if ((abs(cAllocCheqReqAmount) <>  Self.qryBill.FieldByName('ANTD').AsCurrency)) and (Self.qryBill.FieldByName('ANTD').AsCurrency <> 0) then
+               begin
+                  cAllocCheqReqAmountDiff  := abs(cAllocCheqReqAmount) - Self.qryBill.FieldByName('ANTD').AsFloat;
+                  cAllocCheqReqTaxDiff     := abs(cAllocCheqReqTax) - Self.qryBill.FieldByName('ANTD').AsFloat;
+               end;
 
-              {post componsnts}
-                sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity,'BILL_ANTD_CR'),'',true,'Error with Ant D Chart');
+               if (Self.qryBill.FieldByName('ANTD').AsCurrency <> 0.0) then
+               begin
+                  {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity,'BILL_ANTD_CR'),'',true,'Error with Ant D Chart');
 
+                  PostLedger(dtpDispatched.Date
+                     , Self.qryBill.FieldByName('ANTD').AsCurrency
+                     , qrySetup.FieldByName('TAXAMOUNT').AsCurrency
+                     , Self.qryBill.FieldByName('FILEID').AsString
+                     , 'NMEMO'
+                     , Self.qryBill.FieldByName('NMEMO').AsInteger
+                     , sMemoDesc
+                     , sLedgerKey
+                     , qryMatter.FieldByName('AUTHOR').AsString
+                     , -1
+                     , ''
+                     , sTaxCode);
 
-                PostLedger(dtpDispatched.Date
-                  , Self.qryBill.FieldByName('ANTD').AsCurrency
-                  , qrySetup.FieldByName('TAXAMOUNT').AsCurrency
-                  , Self.qryBill.FieldByName('FILEID').AsString
-                  , 'NMEMO'
-                  , Self.qryBill.FieldByName('NMEMO').AsInteger
-                  , sMemoDesc
-                  , sLedgerKey
-                  , qryMatter.FieldByName('AUTHOR').AsString
-                  , -1
-                  , ''
-                  // 20 Dec 2017 DW Added sTaxCode
-                  //, dmAxiom.DefaultTax);
-                  , sTaxCode);
+                  // Now adjust the Debtors Chart
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
+                     qrySetup.FieldByName('SUMAMOUNT').AsCurrency + qrySetup.FieldByName('TAXAMOUNT').AsCurrency);
 
-                // Now adjust the Debtors Chart
-                MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
-                  qrySetup.FieldByName('SUMAMOUNT').AsCurrency + qrySetup.FieldByName('TAXAMOUNT').AsCurrency);
+                  {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR'),'',true,'Error with Ant D Chart');
 
-                {post componsnts}
-                sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR'),'',true,'Error with Ant D Chart');
+                  PostLedger(dtpDispatched.Date
+                     , - Self.qryBill.FieldByName('ANTD').AsCurrency
+                     , 0
+                     , Self.qryBill.FieldByName('FILEID').AsString
+                     , 'NMEMO'
+                     , Self.qryBill.FieldByName('NMEMO').AsInteger
+                     , sMemoDesc
+                     , sLedgerKey
+                     , qryMatter.FieldByName('AUTHOR').AsString
+                     , -1
+                     , ''
+                     , sTaxCode);
+               end;
 
-
-                PostLedger(dtpDispatched.Date
-                  , - Self.qryBill.FieldByName('ANTD').AsCurrency
-                  , 0
-                  , Self.qryBill.FieldByName('FILEID').AsString
-                  , 'NMEMO'
-                  , Self.qryBill.FieldByName('NMEMO').AsInteger
-                  , sMemoDesc
-                  , sLedgerKey
-                  , qryMatter.FieldByName('AUTHOR').AsString
-                  , -1
-                  , ''
-                  // 20 Dec 2017 DW Added sTaxCode
-                  //, dmAxiom.DefaultTax);
-                  , sTaxCode);
-              end;
-
-              if (Self.qryBill.FieldByName('ANTDTAX').AsCurrency <> 0.0) then
-              begin
+               if (Self.qryBill.FieldByName('ANTDTAX').AsCurrency <> 0.0) then
+               begin
                   // Post the Antd Tax (BILL_ANTD_TAX_DR).    BJ  29/11/2002
                   if (lsBillAntdTaxDR <> '') then
                   begin
-                      lsBillAntdTaxSubDR := lsBillAntdTaxDR + lsChartSuffix;
+                     lsBillAntdTaxSubDR := lsBillAntdTaxDR + lsChartSuffix;
                       { rb - removed this, didn't make sense anyway
                       if (not ValidLedger(dmAxiom.Entity, lsBillAntdTaxSubDR)) then
                         lsBillAntdTaxSubDR := lsBillAntdTaxDR;
                       }
 
-                      {post componsnts}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillAntdTaxSubDR,'',true,'Error with Ant D Tax Chart');
+                     {post componsnts}
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillAntdTaxSubDR,'',true,'Error with Ant D Tax Chart');
 
-
-                      PostLedger(dtpDispatched.Date
+                     PostLedger(dtpDispatched.Date
                         , - Self.qryBill.FieldByName('ANTDTAX').AsCurrency
                         , 0
                         , Self.qryBill.FieldByName('FILEID').AsString
@@ -1416,59 +1423,124 @@ begin
                         //, dmAxiom.DefaultTax);
                         , sTaxCode);
                   end;    //  end if
-              end;   //  end if
+               end;   //  end if
 
-              // AES 15/2/18  changes for disbursement adjustments
-              // Now, let us adjust the disbursements
-              if (Self.qryBill.FieldByName('DISB').AsCurrency > 0.0) then
-              begin
-                qrySetup.Close;
-                qrySetup.SQL.Clear;
-                //qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(alloc.tax,0), 0,DECODE(alloc.billed,''Y'',alloc.tax,');
-                //qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',alloc.tax, ROUND((alloc.amount) * ABS(r.rate)) / 100)),alloc.tax)) AS TAXAMOUNT');
-                // 19 Oct 2018 DW bille tax amount
-                qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(alloc.billed_tax_amount,0), 0,DECODE(alloc.billed,''Y'',alloc.billed_tax_amount,');
-                qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',alloc.billed_tax_amount, ROUND((alloc.amount) * ABS(r.rate)) / 100)),alloc.billed_tax_amount)) AS TAXAMOUNT');
-                qrySetup.SQL.Add('FROM ALLOC,TAXRATE R,SUBBILLS');
-                qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
-                qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
-                qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
-                qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
-                qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
-                qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
-                qrySetup.Open;
-              end
-              else
-              if (Self.qryBill.FieldByName('DISB').AsCurrency < 0.0) then
-              begin
-                qrySetup.Close;
-                qrySetup.SQL.Clear;
-                //qrySetup.SQL.Add('SELECT SUM(0-AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(0-alloc.tax,0), 0,DECODE(alloc.billed,''Y'',0-alloc.tax,');
-                //qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',0-alloc.tax, ROUND((0-alloc.amount) * ABS(r.rate)) / 100)),0-alloc.tax)) AS TAXAMOUNT');
-                // 19 Oct 2018 DW
-                qrySetup.SQL.Add('SELECT SUM(0-AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(0-alloc.billed_tax_amount,0), 0,DECODE(alloc.billed,''Y'',0-alloc.billed_tax_amount,');
-                qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',0-alloc.billed_tax_amount, ROUND((0-alloc.amount) * ABS(r.rate)) / 100)),0-alloc.billed_tax_amount)) AS TAXAMOUNT');
-                qrySetup.SQL.Add('FROM ALLOC,TAXRATE R,SUBBILLS');
-                qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
-                qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
-                qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
-                qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
-                qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
-                qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
-                qrySetup.Open;
-              end;
+               {post cheqreq adjustments if any }
+               if (cAllocCheqReqAmount <> 0) then
+               begin
+                  sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
+
+                  PostLedger(dtpDispatched.Date
+                   , - cAllocCheqReqAmountDiff
+                   , - cAllocCheqReqTaxDiff
+                   , Self.qryBill.FieldByName('FILEID').AsString
+                   , 'NMEMO'
+                   , Self.qryBill.FieldByName('NMEMO').AsInteger
+                   , sMemoDesc
+                   , sLedgerKey
+                   , qryMatter.FieldByName('AUTHOR').AsString
+    			       , -1
+                   , ''
+                   , sTaxCode);
+
+                   // Now adjust the Debtors the other way
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
+                     Self.qryBill.FieldByName('ANTD').AsCurrency - qrySetup.FieldByName('TAXAMOUNT').AsFloat);
+
+                 {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',false,'Error with Disbursement Adjustment Chart');
+
+                  PostLedger(dtpDispatched.Date
+                   , cAllocCheqReqAmountDiff
+                   , 0
+                   , Self.qryBill.FieldByName('FILEID').AsString
+                   , 'NMEMO'
+                   , Self.qryBill.FieldByName('NMEMO').AsInteger
+                   , sMemoDesc
+                   , sLedgerKey
+                   , qryMatter.FieldByName('AUTHOR').AsString
+    			       , -1
+                   , ''
+                   , sTaxCode);
+
+                  if (cAllocDisbTaxDiff <> 0.0) then
+                  begin
+                    // Post the Disb Tax (BILL_DISB_ADJ_TAX_DR).    BJ  29/11/2002
+                     if (lsBillDisbTaxAdjDR <> '') then
+                     begin
+                        lsBillDisbTaxAdjSubDR := lsBillDisbTaxAdjDR + lsChartSuffix;
+
+                        {post componsnts}
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',false,'Error with Disbursement Adjustment Tax Chart');
+
+                        PostLedger(dtpDispatched.Date
+                           , cAllocCheqReqTaxDiff
+                           , 0
+                           , Self.qryBill.FieldByName('FILEID').AsString
+                           , 'NMEMO'
+                           , Self.qryBill.FieldByName('NMEMO').AsInteger
+                           , sMemoDesc
+                           , sLedgerKey
+                           , qryMatter.FieldByName('AUTHOR').AsString
+ 			     	            , -1
+                           , ''
+                           , sTaxCode);
+                     end;    //  end if
+                  end;   //  end if
+               end;  // cheqreq adjustments
+
+
+               // AES 15/2/18  changes for disbursement adjustments
+               // Now, let us adjust the disbursements
+               if (Self.qryBill.FieldByName('DISB').AsCurrency > 0.0) then
+               begin
+                  qrySetup.Close;
+                  qrySetup.SQL.Clear;
+                  //qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(alloc.tax,0), 0,DECODE(alloc.billed,''Y'',alloc.tax,');
+                  //qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',alloc.tax, ROUND((alloc.amount) * ABS(r.rate)) / 100)),alloc.tax)) AS TAXAMOUNT');
+                  // 19 Oct 2018 DW bille tax amount
+                  qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(alloc.billed_tax_amount,0), 0,DECODE(alloc.billed,''Y'',alloc.billed_tax_amount,');
+                  qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',alloc.billed_tax_amount, ROUND((alloc.amount) * ABS(r.rate)) / 100)),alloc.billed_tax_amount)) AS TAXAMOUNT');
+                  qrySetup.SQL.Add('FROM ALLOC,TAXRATE R,SUBBILLS');
+                  qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
+                  qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
+                  qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
+                  qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
+                  qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
+                  qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                  qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
+                  qrySetup.Open;
+               end
+               else
+               if (Self.qryBill.FieldByName('DISB').AsCurrency < 0.0) then
+               begin
+                  qrySetup.Close;
+                  qrySetup.SQL.Clear;
+                  //qrySetup.SQL.Add('SELECT SUM(0-AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(0-alloc.tax,0), 0,DECODE(alloc.billed,''Y'',0-alloc.tax,');
+                  //qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',0-alloc.tax, ROUND((0-alloc.amount) * ABS(r.rate)) / 100)),0-alloc.tax)) AS TAXAMOUNT');
+                  // 19 Oct 2018 DW
+                  qrySetup.SQL.Add('SELECT SUM(0-AMOUNT) AS SUMAMOUNT, SUM(DECODE(NVL(0-alloc.billed_tax_amount,0), 0,DECODE(alloc.billed,''Y'',0-alloc.billed_tax_amount,');
+                  qrySetup.SQL.Add(' DECODE((r.rate - r.bill_rate),''0'',0-alloc.billed_tax_amount, ROUND((0-alloc.amount) * ABS(r.rate)) / 100)),0-alloc.billed_tax_amount)) AS TAXAMOUNT');
+                  qrySetup.SQL.Add('FROM ALLOC,TAXRATE R,SUBBILLS');
+                  qrySetup.SQL.Add('WHERE ALLOC.NMATTER = :NMATTER');
+                  qrySetup.SQL.Add('  AND ALLOC.NMEMO = :NMEMO');
+                  qrySetup.SQL.Add('  AND (nvl(NRECEIPT,0) = 0 OR (nvl(NRECEIPT,0) > 0 AND TYPE = ''DR'')) AND NINVOICE IS NULL ');
+                  qrySetup.SQL.Add('  AND NVL(ALLOC.BILLING_TAXCODE, ALLOC.TAXCODE) = R.TAXCODE (+) AND  TRUNC (alloc.created) >= r.commence and TRUNC(alloc.created) <= nvl(r.end_period,sysdate + 1000) ');
+                  qrySetup.SQL.Add('  AND ALLOC.NMEMO = SUBBILLS.NMEMO (+) AND ALLOC.NSUBBILL = SUBBILLS.NSUBBILL (+) ');
+                  qrySetup.ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                  qrySetup.ParamByName('NMEMO').AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
+                  qrySetup.Open;
+               end;
 
                 // Now adjust the unbilled disbursements chart
-              MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
-                'UNBILL_DISB', - Self.qryBill.FieldByName('DISB').AsCurrency);
-              MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
-                'BILL_DISB', Self.qryBill.FieldByName('DISB').AsCurrency);
+               MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                  'UNBILL_DISB', - Self.qryBill.FieldByName('DISB').AsCurrency);
+               MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                  'BILL_DISB', Self.qryBill.FieldByName('DISB').AsCurrency);
 
-              // 10 Dec 2018 DW these needed to be restricted
-              if (Self.qryBill.FieldByName('DISB').AsCurrency <> 0.0) then
-              begin
+               // 10 Dec 2018 DW these needed to be restricted
+               if (Self.qryBill.FieldByName('DISB').AsCurrency <> 0.0) then
+               begin
                   cAllocDisbAmount   := qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
                   cAllocDisbTax      := qrySetup.FieldByName('TAXAMOUNT').AsCurrency;
 
@@ -1517,15 +1589,14 @@ begin
                     // 20 Dec 2017 DW Added sTaxCode
                     //, dmAxiom.DefaultTax);
                     , sTaxCode);
+               end;
 
-              end;
-
-              if (qryBill.FieldByName('DISBTAX').AsCurrency <> 0.0) then
-              begin
-                 // Post the Disb Adj Tax (BILL_DISB_TAX_DR).
-                 if (lsBillDisbTaxAdjDR <> '') then
-                 begin
-                    lsBillDisbTaxSubDR := lsBillDisbTaxDR + lsChartSuffix;
+               if (qryBill.FieldByName('DISBTAX').AsCurrency <> 0.0) then
+               begin
+                  // Post the Disb Adj Tax (BILL_DISB_TAX_DR).
+                  if (lsBillDisbTaxAdjDR <> '') then
+                  begin
+                     lsBillDisbTaxSubDR := lsBillDisbTaxDR + lsChartSuffix;
 
                     { rb - removed this, didn't make sense anyway
                       if (not ValidLedger(dmAxiom.Entity, lsBillDisbTaxSubDR)) then
@@ -1533,7 +1604,7 @@ begin
                       }
 
                         {post componsnts}
-                    sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillDisbTaxSubDR,'',false,'Error with Disbursement Tax Chart');
+                     sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillDisbTaxSubDR,'',false,'Error with Disbursement Tax Chart');
 
                      PostLedger(dtpDispatched.Date
                         , qrySetup.FieldByName('TAXAMOUNT').AsCurrency   //- Self.qryBill.FieldByName('DISBTAX').AsCurrency
@@ -1549,15 +1620,15 @@ begin
                         // 20 Dec 2017 DW Added sTaxCode
                         //, dmAxiom.DefaultTax);
                         , sTaxCode);
-                 end;    //  end if
-              end;   //  end if
+                  end;    //  end if
+               end;   //  end if
 
-              {post disb adjustments if any }
-              if (cAllocDisbAmountDiff <> 0) then
-              begin
-                 sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
+               {post disb adjustments if any }
+               if (cAllocDisbAmountDiff <> 0) then
+               begin
+                  sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
 
-                 PostLedger(dtpDispatched.Date
+                  PostLedger(dtpDispatched.Date
                    , - cAllocDisbAmountDiff
                    , - cAllocDisbTaxDiff
                    , Self.qryBill.FieldByName('FILEID').AsString
@@ -1573,13 +1644,13 @@ begin
                    , sTaxCode);
 
                    // Now adjust the Debtors the other way
-                 MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
                      Self.qryBill.FieldByName('DISB').AsCurrency - qrySetup.FieldByName('TAXAMOUNT').AsFloat);
 
                  {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',false,'Error with Disbursement Adjustment Chart');
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',false,'Error with Disbursement Adjustment Chart');
 
-                 PostLedger(dtpDispatched.Date
+                  PostLedger(dtpDispatched.Date
                    , cAllocDisbAmountDiff
                    , 0
                    , Self.qryBill.FieldByName('FILEID').AsString
@@ -1594,17 +1665,17 @@ begin
                    //, dmAxiom.DefaultTax);
                    , sTaxCode);
 
-                 if (cAllocDisbTaxDiff <> 0.0) then
-                 begin
+                  if (cAllocDisbTaxDiff <> 0.0) then
+                  begin
                     // Post the Disb Tax (BILL_DISB_ADJ_TAX_DR).    BJ  29/11/2002
-                    if (lsBillDisbTaxAdjDR <> '') then
-                    begin
-                       lsBillDisbTaxAdjSubDR := lsBillDisbTaxAdjDR + lsChartSuffix;
+                     if (lsBillDisbTaxAdjDR <> '') then
+                     begin
+                        lsBillDisbTaxAdjSubDR := lsBillDisbTaxAdjDR + lsChartSuffix;
 
-                       {post componsnts}
-                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',false,'Error with Disbursement Adjustment Tax Chart');
+                        {post componsnts}
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',false,'Error with Disbursement Adjustment Tax Chart');
 
-                       PostLedger(dtpDispatched.Date
+                        PostLedger(dtpDispatched.Date
                            , cAllocDisbTaxDiff
                            , 0
                            , Self.qryBill.FieldByName('FILEID').AsString
@@ -1613,33 +1684,41 @@ begin
                            , sMemoDesc
                            , sLedgerKey
                            , qryMatter.FieldByName('AUTHOR').AsString
-    			     	            , -1
+ 			     	            , -1
                            , ''
-                           // 20 Dec 2017 DW Added sTaxCode
-                           //, dmAxiom.DefaultTax);
                            , sTaxCode);
-                    end;    //  end if
-                 end;   //  end if
-              end;  // disb adjustments
+                     end;    //  end if
+                  end;   //  end if
+               end;  // disb adjustments
 
-
+              // CREDITORS
               // Now, let us adjust the unpaid creditors
-              if qryBill.FieldByName('UPCRED').AsCurrency <> 0.0 then
-              begin
-                 qrySetup.Close;
-                 qrySetup.SQL.Clear;
-                 qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(TAX) AS TAXAMOUNT');
-                 qrySetup.SQL.Add('FROM ALLOC');
-                 qrySetup.SQL.Add('WHERE NMATTER = :NMATTER');
-                 qrySetup.SQL.Add('  AND NMEMO = :NMEMO');
-                 qrySetup.Params[0].AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                 qrySetup.Params[1].AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
-                 qrySetup.Open;
+               if qryBill.FieldByName('UPCRED').AsCurrency <> 0.0 then
+               begin
+                  qrySetup.Close;
+                  qrySetup.SQL.Clear;
+                  qrySetup.SQL.Add('SELECT SUM(AMOUNT) AS SUMAMOUNT, SUM(TAX) AS TAXAMOUNT');
+                  qrySetup.SQL.Add('FROM ALLOC');
+                  qrySetup.SQL.Add('WHERE NMATTER = :NMATTER');
+                  qrySetup.SQL.Add('  AND NMEMO = :NMEMO');
+                  qrySetup.SQL.Add('  and ninvoice is not null');
+                  qrySetup.Params[0].AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                  qrySetup.Params[1].AsInteger := Self.qryBill.FieldByName('NMEMO').AsInteger;
+                  qrySetup.Open;
 
-                 {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR'),'',false,'Error with Unpaid Creditors Chart');
+                  cAllocUpCredAmount   := qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
+                  cAllocUpCredTax      := qrySetup.FieldByName('TAXAMOUNT').AsCurrency;
 
-                 PostLedger(dtpDispatched.Date
+                  if ((abs(cAllocUpCredAmount) <>  Self.qryBill.FieldByName('UPCRED').AsCurrency)) and (Self.qryBill.FieldByName('UPCRED').AsCurrency <> 0) then
+                  begin
+                     cAllocUpCredAmountDiff   := abs(cAllocCheqReqAmount) - Self.qryBill.FieldByName('UPCRED').AsFloat;
+                     cAllocUpCredTaxDiff      := abs(cAllocCheqReqTax) - Self.qryBill.FieldByName('UPCRED').AsFloat;
+                  end;
+
+                  {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_CR'),'',false,'Error with Unpaid Creditors Chart');
+
+                  PostLedger(dtpDispatched.Date
                     , - (Self.qryBill.FieldByName('UPCRED').AsCurrency {+ qryBill.FieldByName('UPCREDTAXFREE').AsCurrency})
                     , 0
                     , Self.qryBill.FieldByName('FILEID').AsString
@@ -1650,20 +1729,18 @@ begin
                     , qryMatter.FieldByName('AUTHOR').AsString
                     , -1
                     , ''
-                    // 20 Dec 2017 DW Added sTaxCode
-                    //, dmAxiom.DefaultTax);
                     , sTaxCode);
 
                   // Now adjust the unbilled creditors chart
-                 MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
                     'UNBILL_UPCRED', 0.0 - Self.qryBill.FieldByName('UPCRED').AsCurrency);
-                 MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger,
                     'BILL_UPCRED', Self.qryBill.FieldByName('UPCRED').AsCurrency);
 
-                 {post componsnts}
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_DR'),'',false,'Error with Unpaid Creditors Chart');
+                  {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_UPCRED_DR'),'',false,'Error with Unpaid Creditors Chart');
 
-                 PostLedger(dtpDispatched.Date
+                  PostLedger(dtpDispatched.Date
                     , (Self.qryBill.FieldByName('UPCRED').AsCurrency {+ Self.qryBill.FieldByName('UPCREDTAXFREE').AsCurrency})
                     , 0
                     , Self.qryBill.FieldByName('FILEID').AsString
@@ -1678,12 +1755,12 @@ begin
                     //, dmAxiom.DefaultTax);
                     , sTaxCode);
 
-                 if (qryBill.FieldByName('UPCREDTAX').AsCurrency <> 0.0) then
-                 begin
-                  // Post the UpCred Tax (BILL_UPCRED_TAX_DR).    BJ  29/11/2002
-                    if (lsBillUpCredTaxDR <> '') then
-                    begin
-                      lsBillUpCredTaxSubDR := lsBillUpCredTaxDR + lsChartSuffix;
+                  if (qryBill.FieldByName('UPCREDTAX').AsCurrency <> 0.0) then
+                  begin
+                     // Post the UpCred Tax (BILL_UPCRED_TAX_DR).    BJ  29/11/2002
+                     if (lsBillUpCredTaxDR <> '') then
+                     begin
+                        lsBillUpCredTaxSubDR := lsBillUpCredTaxDR + lsChartSuffix;
 
                       { rb - removed this, didn't make sense anyway
                       if (not ValidLedger(dmAxiom.Entity, lsBillUpCredTaxSubDR)) then
@@ -1691,26 +1768,89 @@ begin
                       }
 
                       {post componsnts}
-                      sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillUpCredTaxSubDR,'',false,'Error with Unpaid Creditors Tax Chart');
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,lsBillUpCredTaxSubDR,'',false,'Error with Unpaid Creditors Tax Chart');
 
-                      PostLedger(dtpDispatched.Date
-                        , - Self.qryBill.FieldByName('UPCREDTAX').AsCurrency
-                        , 0
-                        , Self.qryBill.FieldByName('FILEID').AsString
-                        , 'NMEMO'
-                        , Self.qryBill.FieldByName('NMEMO').AsInteger
-                        , sMemoDesc
-                        , sLedgerKey
-                        , qryMatter.FieldByName('AUTHOR').AsString
-    			    	          , -1
-                        , ''
-                        // 20 Dec 2017 DW Added sTaxCode
-                        //, dmAxiom.DefaultTax);
-                        , sTaxCode);
+                        PostLedger(dtpDispatched.Date
+                           , - Self.qryBill.FieldByName('UPCREDTAX').AsCurrency
+                           , 0
+                           , Self.qryBill.FieldByName('FILEID').AsString
+                           , 'NMEMO'
+                           , Self.qryBill.FieldByName('NMEMO').AsInteger
+                           , sMemoDesc
+                           , sLedgerKey
+                           , qryMatter.FieldByName('AUTHOR').AsString
+    			    	             , -1
+                           , ''
+                           // 20 Dec 2017 DW Added sTaxCode
+                           //, dmAxiom.DefaultTax);
+                           , sTaxCode);
 
-                    end;    //  end if (lsBillUpCredTaxDR <> '') then
-                 end; // end if (qryBill.FieldByName('UPCREDTAX').AsCurrency <> 0.0) then
-              end; // end if qryBill.FieldByName('UPCRED').AsCurrency <> 0.0 then
+                     end;    //  end if (lsBillUpCredTaxDR <> '') then
+                  end; // end if (qryBill.FieldByName('UPCREDTAX').AsCurrency <> 0.0) then
+               end; // end if qryBill.FieldByName('UPCRED').AsCurrency <> 0.0 then
+
+              {post cheqreq adjustments if any }
+               if (cAllocUpCredAmount <> 0) then
+               begin
+                  sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
+
+                  PostLedger(dtpDispatched.Date
+                   , - cAllocUpCredAmountDiff
+                   , - cAllocUpCredTaxDiff
+                   , Self.qryBill.FieldByName('FILEID').AsString
+                   , 'NMEMO'
+                   , Self.qryBill.FieldByName('NMEMO').AsInteger
+                   , sMemoDesc
+                   , sLedgerKey
+                   , qryMatter.FieldByName('AUTHOR').AsString
+    			       , -1
+                   , ''
+                   , sTaxCode);
+
+                   // Now adjust the Debtors the other way
+                  MatterUpdate(Self.qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS',
+                     Self.qryBill.FieldByName('UPCRED').AsCurrency - qrySetup.FieldByName('TAXAMOUNT').AsFloat);
+
+                 {post componsnts}
+                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_DR'),'',false,'Error with Disbursement Adjustment Chart');
+
+                  PostLedger(dtpDispatched.Date
+                   , cAllocUpCredAmountDiff
+                   , 0
+                   , Self.qryBill.FieldByName('FILEID').AsString
+                   , 'NMEMO'
+                   , Self.qryBill.FieldByName('NMEMO').AsInteger
+                   , sMemoDesc
+                   , sLedgerKey
+                   , qryMatter.FieldByName('AUTHOR').AsString
+    			       , -1
+                   , ''
+                   , sTaxCode);
+
+                  if (cAllocDisbTaxDiff <> 0.0) then
+                  begin
+                     if (lsBillDisbTaxAdjDR <> '') then
+                     begin
+                        lsBillDisbTaxAdjSubDR := lsBillDisbTaxAdjDR + lsChartSuffix;
+
+                        {post componsnts}
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString, lsBillDisbTaxAdjSubDR,'',false,'Error with Disbursement Adjustment Tax Chart');
+
+                        PostLedger(dtpDispatched.Date
+                           , cAllocUpCredTaxDiff
+                           , 0
+                           , Self.qryBill.FieldByName('FILEID').AsString
+                           , 'NMEMO'
+                           , Self.qryBill.FieldByName('NMEMO').AsInteger
+                           , sMemoDesc
+                           , sLedgerKey
+                           , qryMatter.FieldByName('AUTHOR').AsString
+ 			     	            , -1
+                           , ''
+                           , sTaxCode);
+                     end;    //  end if
+                  end;   //  end if
+               end;  // upcred adjustments
 
               // Now, let us adjust the amount paid from trust
               if (qryBill.FieldByName('TRUST').AsCurrency <> 0.0) then

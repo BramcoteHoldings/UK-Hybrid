@@ -322,7 +322,7 @@ object frmMatters: TfrmMatters
       Properties.ScrollBars = ssVertical
       TabOrder = 5
       Height = 78
-      Width = 934
+      Width = 818
     end
     object progBarFeeCredit: TcxProgressBar
       Left = 723

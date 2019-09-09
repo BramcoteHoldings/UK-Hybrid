@@ -4976,7 +4976,7 @@ begin
          if (ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) then
             tbtnEditDescription.Visible := ivAlways;
 
-         bbtnAdjDisbTotal.Enabled := ((ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) or (ImageIndex = IMG_UPCRED)) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
+         bbtnAdjDisbTotal.Enabled := ((ImageIndex = IMG_DISB) or (ImageIndex = IMG_UPCRED) or (ImageIndex = IMG_ANTD)) and (SystemString('ALLOW_DISB_ADJUSTMENT') = 'Y');
          barbtnTaxcodeList.Enabled := ((tvBillItemsTYPE.EditValue = IMG_DISB) or (tvBillItemsTYPE.EditValue = IMG_ANTD));
       end;
 
@@ -5485,7 +5485,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       if (rgFilter.ItemIndex = 2)
       then
       Begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'DISB', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'DISB'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -5496,7 +5496,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       else if (rgFilter.ItemIndex = 4)
       then
       begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'UPCRED', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'UPCRED'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -5507,7 +5507,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       else if (rgFilter.ItemIndex = 5)
       then
       begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'SUND', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'SUND'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -6399,12 +6399,12 @@ begin
                with dmAxiom.qryTmp do
                begin
                  Close;
-                 SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX_AMOUNT = :tax where ncheqreq = :ncheqreq';
-                 ParamByName('amount').AsFloat := lAmount * - 1;
+                 SQL.Text := 'update cheqreq set billed_amount = :amount, BILLED_TAX = :tax where ncheqreq = :ncheqreq';
+                 ParamByName('amount').AsFloat := lAmount;
                  if bTaxNoChange = True then
-                    ParamByName('tax').AsFloat := lTax * - 1
+                    ParamByName('tax').AsFloat := lTax
                  else
-                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now) * - 1;
+                    ParamByName('tax').AsFloat := TaxCalc(lAmount, '', 'GST', Now);
                  ParamByName('ncheqreq').AsInteger := tvBillItemsUNIQUEID.EditValue;
                  ExecSQL;
 
