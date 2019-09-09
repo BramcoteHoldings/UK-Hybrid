@@ -14130,7 +14130,7 @@ begin
          SQL.Add('end  ) AS taxable_amount,');
          // 30 Jan 2019 dw added to handle fub tax codes
          //SQL.Add('SUM (NVL (0 - a.tax, 0)) AS itemtax,');
-         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0 - a.tax, 0)) ');
+         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0-a.billed_tax_amount, 0 - a.tax)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (rate = 0) then 0 ');
          SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax ');
@@ -14155,7 +14155,7 @@ begin
          SQL.Add('end) AS taxable_amount, ');
          // 30 Jan 2019 dw (not Implemeted) change to handle fub tax with item tax
          // SQL.Add('SUM(NVL(a.tax, 0)) AS itemtax,');
-         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (a.tax, 0)) ');
+         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (a.billed_tax, a.tax)) ');
          SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (r.rate = 0) then 0 ');
          SQL.Add('else  ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100) end),2) AS tax ');
