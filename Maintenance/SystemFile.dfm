@@ -41,7 +41,7 @@ object frmSystemFile: TfrmSystemFile
     ParentColor = False
     ParentFont = False
     TabOrder = 0
-    Properties.ActivePage = Dashboard
+    Properties.ActivePage = tsGeneral
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     Properties.ShowFrame = True
@@ -84,7 +84,7 @@ object frmSystemFile: TfrmSystemFile
       object Label1: TLabel
         Left = 7
         Top = 114
-        Width = 62
+        Width = 63
         Height = 15
         Caption = 'Next Matter'
         Transparent = True
@@ -92,7 +92,7 @@ object frmSystemFile: TfrmSystemFile
       object Label2: TLabel
         Left = 514
         Top = 275
-        Width = 112
+        Width = 113
         Height = 15
         Caption = 'Next Archived Matter'
         Transparent = True
@@ -964,9 +964,9 @@ object frmSystemFile: TfrmSystemFile
         Transparent = True
       end
       object Label19: TLabel
-        Left = 47
+        Left = 48
         Top = 182
-        Width = 25
+        Width = 24
         Height = 15
         Alignment = taRightJustify
         Caption = 'Type'
@@ -2934,14 +2934,14 @@ object frmSystemFile: TfrmSystemFile
       object Label53: TLabel
         Left = 20
         Top = 338
-        Width = 141
+        Width = 140
         Height = 15
         Caption = 'Default Draft Bill Template:'
       end
       object Label54: TLabel
         Left = 20
         Top = 362
-        Width = 150
+        Width = 149
         Height = 15
         Caption = 'Default Memo Bill Template:'
       end
@@ -3371,7 +3371,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 18
       end
       object cxDBCheckBox67: TcxDBCheckBox
-        Left = 327
+        Left = 343
         Top = 111
         Caption = 'Allow adjustment of Disbursement amount.'
         DataBinding.DataField = 'ALLOW_DISB_ADJUSTMENT'
@@ -3411,7 +3411,7 @@ object frmSystemFile: TfrmSystemFile
       object Label52: TLabel
         Left = 7
         Top = 218
-        Width = 96
+        Width = 94
         Height = 15
         Caption = 'Default Time Type'
       end
@@ -5768,7 +5768,7 @@ object frmSystemFile: TfrmSystemFile
       object Label77: TLabel
         Left = 502
         Top = 148
-        Width = 256
+        Width = 255
         Height = 30
         Caption = 
           'This entry should be either a UNC or a drive that is visible to ' +
@@ -5876,13 +5876,14 @@ object frmSystemFile: TfrmSystemFile
     object Dashboard: TcxTabSheet
       Caption = 'Dashboard'
       ImageIndex = 13
-      object grpIndividual: TGroupBox
+      object grpIndividual: TcxGroupBox
         Left = 15
-        Top = 16
-        Width = 418
-        Height = 57
+        Top = 12
         Caption = 'Individual Dashboard'
         TabOrder = 0
+        Transparent = True
+        Height = 57
+        Width = 418
         object cxDBCheckBox77: TcxDBCheckBox
           Left = 16
           Top = 23
@@ -5895,16 +5896,17 @@ object frmSystemFile: TfrmSystemFile
           TabOrder = 0
         end
       end
-      object GroupBox1: TGroupBox
+      object cxGroupBox13: TcxGroupBox
         Left = 15
-        Top = 79
-        Width = 418
-        Height = 105
+        Top = 80
         Caption = 'All Dashboards'
         TabOrder = 1
+        Transparent = True
+        Height = 89
+        Width = 417
         object cxDBCheckBox78: TcxDBCheckBox
           Left = 16
-          Top = 24
+          Top = 32
           AutoSize = False
           Caption = 
             'Display rolling twelve month figures instead of current financia' +
@@ -5917,7 +5919,7 @@ object frmSystemFile: TfrmSystemFile
           Properties.ValueUnchecked = 'N'
           TabOrder = 0
           Height = 33
-          Width = 321
+          Width = 385
         end
       end
     end

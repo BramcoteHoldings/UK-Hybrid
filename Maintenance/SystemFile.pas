@@ -553,9 +553,9 @@ type
     cxDBCheckBox75: TcxDBCheckBox;
     cxDBCheckBox76: TcxDBCheckBox;
     Dashboard: TcxTabSheet;
-    grpIndividual: TGroupBox;
+    grpIndividual: TcxGroupBox;
     cxDBCheckBox77: TcxDBCheckBox;
-    GroupBox1: TGroupBox;
+    cxGroupBox13: TcxGroupBox;
     cxDBCheckBox78: TcxDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
