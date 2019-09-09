@@ -38,7 +38,7 @@ object frmInvPost: TfrmInvPost
   end
   object Label7: TLabel
     Left = 8
-    Top = 135
+    Top = 136
     Width = 108
     Height = 15
     Caption = 'Cheque Requisitions'
@@ -122,7 +122,7 @@ object frmInvPost: TfrmInvPost
   end
   object Label14: TLabel
     Left = 27
-    Top = 155
+    Top = 156
     Width = 89
     Height = 15
     Caption = 'Unpaid Creditors'
@@ -228,7 +228,7 @@ object frmInvPost: TfrmInvPost
   end
   object lblAntd: TcxLabel
     Left = 119
-    Top = 133
+    Top = 134
     AutoSize = False
     Caption = 'LABEL HERE'
     Style.BorderStyle = ebsFlat
@@ -606,7 +606,7 @@ object frmInvPost: TfrmInvPost
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43714.6296806366d
+    EditValue = 43717.4503261921d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

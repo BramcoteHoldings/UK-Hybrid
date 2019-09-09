@@ -5,7 +5,7 @@ object frmMatterNew: TfrmMatterNew
   VertScrollBar.Visible = False
   BorderStyle = bsDialog
   Caption = 'Matter Creation'
-  ClientHeight = 614
+  ClientHeight = 616
   ClientWidth = 532
   Color = clBtnFace
   Constraints.MinHeight = 478
@@ -24,7 +24,7 @@ object frmMatterNew: TfrmMatterNew
   OnShow = FormShow
   DesignSize = (
     532
-    614)
+    616)
   PixelsPerInch = 96
   TextHeight = 15
   object lblMatterNo: TLabel
@@ -151,8 +151,14 @@ object frmMatterNew: TfrmMatterNew
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsMatterType
     Properties.OnCloseUp = cbTypeClick
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -177,8 +183,14 @@ object frmMatterNew: TfrmMatterNew
       end>
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsMatterSubType
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -210,8 +222,14 @@ object frmMatterNew: TfrmMatterNew
     Properties.ListSource = dsEntityBranches
     Properties.OnChange = dbcbluBranchPropertiesChange
     Properties.OnCloseUp = dbcbluBranchPropertiesCloseUp
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -227,7 +245,7 @@ object frmMatterNew: TfrmMatterNew
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clWindowText
-    Style.Font.Height = -11
+    Style.Font.Height = -12
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
@@ -245,8 +263,14 @@ object frmMatterNew: TfrmMatterNew
     DataBinding.DataField = 'SHORTDESCR'
     DataBinding.DataSource = dsMatter
     ParentFont = False
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -256,12 +280,18 @@ object frmMatterNew: TfrmMatterNew
   end
   object dbmmoLongDescr: TcxDBMemo
     Left = 77
-    Top = 157
+    Top = 158
     DataBinding.DataField = 'LONGDESCR'
     DataBinding.DataSource = dsMatter
     ParentFont = False
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -277,8 +307,14 @@ object frmMatterNew: TfrmMatterNew
     DataBinding.DataField = 'LABELCODE'
     DataBinding.DataSource = dsMatter
     ParentFont = False
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -299,8 +335,14 @@ object frmMatterNew: TfrmMatterNew
     Properties.ReadOnly = False
     Properties.SaveTime = False
     Properties.ShowTime = False
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -12
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
     Style.StyleController = cxEditStyleController1
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -326,7 +368,7 @@ object frmMatterNew: TfrmMatterNew
   end
   object btnOK: TcxButton
     Left = 352
-    Top = 588
+    Top = 590
     Width = 79
     Height = 23
     Anchors = [akRight, akBottom]
@@ -420,10 +462,11 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 11
     OnClick = btnOKClick
+    ExplicitTop = 588
   end
   object btnCancel: TcxButton
     Left = 437
-    Top = 588
+    Top = 590
     Width = 80
     Height = 23
     Anchors = [akRight, akBottom]
@@ -518,6 +561,7 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 12
     OnClick = btnCancelClick
+    ExplicitTop = 588
   end
   object cbDepartment: TcxDBLookupComboBox
     Left = 77
@@ -630,17 +674,18 @@ object frmMatterNew: TfrmMatterNew
   end
   object cbPrintLabel: TCheckBox
     Left = 6
-    Top = 593
+    Top = 595
     Width = 82
     Height = 16
     Alignment = taLeftJustify
     Anchors = [akLeft, akBottom]
     Caption = 'Print Label?'
     TabOrder = 15
+    ExplicitTop = 593
   end
   object pnlBarcode: TPanel
     Left = 115
-    Top = 588
+    Top = 590
     Width = 196
     Height = 26
     Anchors = [akLeft, akBottom]
@@ -648,6 +693,7 @@ object frmMatterNew: TfrmMatterNew
     ParentColor = True
     ShowCaption = False
     TabOrder = 16
+    ExplicitTop = 588
     object Label43: TLabel
       Left = 0
       Top = 4
@@ -670,7 +716,7 @@ object frmMatterNew: TfrmMatterNew
     Width = 511
     Height = 356
     TabOrder = 17
-    Properties.ActivePage = tabStaff
+    Properties.ActivePage = tabBalances
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pageMatterChange
@@ -681,9 +727,13 @@ object frmMatterNew: TfrmMatterNew
     object tabStaff: TcxTabSheet
       Caption = 'Carriage'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object tabCarriageAdditional: TcxPageControl
-        Left = 3
-        Top = 4
+        Left = 5
+        Top = 3
         Width = 495
         Height = 300
         TabOrder = 0
@@ -794,8 +844,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployeeOperator
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -860,8 +916,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployeeParaLegal
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -926,8 +988,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployeeAuthor
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1136,8 +1204,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployeePartner
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1150,7 +1224,7 @@ object frmMatterNew: TfrmMatterNew
           ImageIndex = 1
           object lblMember1: TLabel
             Left = 8
-            Top = 8
+            Top = 6
             Width = 54
             Height = 15
             Caption = 'Member 1'
@@ -1158,7 +1232,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember10: TLabel
             Left = 7
-            Top = 246
+            Top = 244
             Width = 60
             Height = 15
             Caption = 'Member 10'
@@ -1166,7 +1240,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember9: TLabel
             Left = 7
-            Top = 219
+            Top = 217
             Width = 54
             Height = 15
             Caption = 'Member 9'
@@ -1174,7 +1248,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember8: TLabel
             Left = 7
-            Top = 192
+            Top = 190
             Width = 54
             Height = 15
             Caption = 'Member 8'
@@ -1190,7 +1264,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember6: TLabel
             Left = 7
-            Top = 138
+            Top = 136
             Width = 54
             Height = 15
             Caption = 'Member 6'
@@ -1198,7 +1272,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember5: TLabel
             Left = 8
-            Top = 110
+            Top = 108
             Width = 54
             Height = 15
             Caption = 'Member 5'
@@ -1206,7 +1280,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember4: TLabel
             Left = 8
-            Top = 85
+            Top = 83
             Width = 54
             Height = 15
             Caption = 'Member 4'
@@ -1222,7 +1296,7 @@ object frmMatterNew: TfrmMatterNew
           end
           object lblMember3: TLabel
             Left = 8
-            Top = 60
+            Top = 58
             Width = 54
             Height = 15
             Caption = 'Member 3'
@@ -1288,8 +1362,14 @@ object frmMatterNew: TfrmMatterNew
               end>
             Properties.ListOptions.ShowHeader = False
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1420,8 +1500,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1489,8 +1575,14 @@ object frmMatterNew: TfrmMatterNew
               end>
             Properties.ListOptions.ShowHeader = False
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1556,8 +1648,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1622,8 +1720,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1752,8 +1856,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1818,8 +1928,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1884,8 +2000,14 @@ object frmMatterNew: TfrmMatterNew
                 FieldName = 'code'
               end>
             Properties.ListSource = dsEmployee
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
             Style.LookAndFeel.NativeStyle = True
             Style.StyleController = cxEditStyleController1
+            Style.IsFontAssigned = True
             StyleDisabled.LookAndFeel.NativeStyle = True
             StyleFocused.LookAndFeel.NativeStyle = True
             StyleHot.LookAndFeel.NativeStyle = True
@@ -1896,6 +2018,10 @@ object frmMatterNew: TfrmMatterNew
         object tabMatterAdditionalCarriage: TcxTabSheet
           Caption = 'Additional'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DBCheckBox1: TDBCheckBox
             Left = 31
             Top = 5
@@ -1941,6 +2067,10 @@ object frmMatterNew: TfrmMatterNew
     object tabContacts: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         503
         306)
@@ -2039,7 +2169,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object dbtbContact: TcxDBButtonEdit
         Left = 100
-        Top = 4
+        Top = 5
         AutoSize = False
         DataBinding.DataField = 'CONTACT'
         DataBinding.DataSource = dsMatter
@@ -2086,8 +2216,14 @@ object frmMatterNew: TfrmMatterNew
             Kind = bkGlyph
           end>
         Properties.OnButtonClick = dbtbContactPropertiesButtonClick
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -12
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
         Style.LookAndFeel.NativeStyle = True
         Style.StyleController = cxEditStyleController1
+        Style.IsFontAssigned = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
@@ -2144,8 +2280,14 @@ object frmMatterNew: TfrmMatterNew
             Kind = bkGlyph
           end>
         Properties.OnButtonClick = dbtbRefByPropertiesButtonClick
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -12
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
         Style.LookAndFeel.NativeStyle = True
         Style.StyleController = cxEditStyleController1
+        Style.IsFontAssigned = True
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
@@ -2531,6 +2673,10 @@ object frmMatterNew: TfrmMatterNew
     object tabBalances: TcxTabSheet
       Caption = 'Financial'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lblFeeCode: TLabel
         Left = 20
         Top = 58
@@ -2621,7 +2767,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object cmbBank: TcxDBLookupComboBox
         Left = 224
-        Top = 28
+        Top = 29
         AutoSize = False
         DataBinding.DataField = 'ACCT'
         DataBinding.DataSource = dsMatter
@@ -3190,6 +3336,10 @@ object frmMatterNew: TfrmMatterNew
           Caption = 'Recurring Fees'
           ImageIndex = 2
           OnShow = tabRecurringFeesShow
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label21: TLabel
             Left = 7
             Top = 15
@@ -3351,6 +3501,10 @@ object frmMatterNew: TfrmMatterNew
           Enabled = False
           ImageIndex = 3
           TabVisible = False
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label41: TLabel
             Left = 20
             Top = 119
@@ -3542,6 +3696,10 @@ object frmMatterNew: TfrmMatterNew
         object tabTrustBanks: TcxTabSheet
           Caption = 'Additional Trust Banks'
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object gridTrustBanks: TcxGrid
             Left = 0
             Top = 0
@@ -3597,7 +3755,7 @@ object frmMatterNew: TfrmMatterNew
         Left = 0
         Top = 0
         Width = 161
-        Height = 51
+        Height = 54
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 3
@@ -3632,7 +3790,7 @@ object frmMatterNew: TfrmMatterNew
         end
         object dbtbBillingPlan: TcxDBTextEdit
           Left = 78
-          Top = 28
+          Top = 29
           DataBinding.DataField = 'BILLING_PLAN'
           DataBinding.DataSource = dsMatter
           Style.LookAndFeel.NativeStyle = True
@@ -3950,9 +4108,13 @@ object frmMatterNew: TfrmMatterNew
     object tabDebtor: TcxTabSheet
       Caption = 'Debtor'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label62: TLabel
         Left = 3
-        Top = 107
+        Top = 106
         Width = 98
         Height = 15
         Caption = 'Debtor Comments'
@@ -3960,7 +4122,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object Label61: TLabel
         Left = 3
-        Top = 5
+        Top = 6
         Width = 63
         Height = 15
         Caption = 'Debtor New'
@@ -3994,7 +4156,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object cxDBMemo2: TcxDBMemo
         Left = 118
-        Top = 107
+        Top = 106
         DataBinding.DataField = 'DEBTORDATE'
         DataBinding.DataSource = dsMatter
         Style.LookAndFeel.NativeStyle = True
@@ -4020,7 +4182,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object cxDBSpinEdit1: TcxDBSpinEdit
         Left = 118
-        Top = 231
+        Top = 232
         Hint = 
           'A value in here means that any bill generated on this matter wil' +
           'l be due on that due in the following month after issue.  Valid ' +
@@ -4061,7 +4223,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object cxDBExtLookupComboBox1: TcxDBExtLookupComboBox
         Left = 118
-        Top = 257
+        Top = 258
         DataBinding.DataField = 'ADVERTISING_SOURCE'
         DataBinding.DataSource = dsMatter
         Properties.DropDownAutoSize = True
@@ -4075,6 +4237,10 @@ object frmMatterNew: TfrmMatterNew
     object tabMatterBudgets: TcxTabSheet
       Caption = 'Matter Budgets'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGridBatterBudgets: TcxGrid
         Left = 0
         Top = 0
@@ -4477,6 +4643,10 @@ object frmMatterNew: TfrmMatterNew
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         503
         306)
@@ -4903,8 +5073,8 @@ object frmMatterNew: TfrmMatterNew
     end
   end
   object chkProspectiveMatter: TcxDBCheckBox
-    Left = 5
-    Top = 206
+    Left = 6
+    Top = 208
     AutoSize = False
     Caption = 'Prospective'
     DataBinding.DataField = 'PROSPECTIVE'
@@ -4916,7 +5086,7 @@ object frmMatterNew: TfrmMatterNew
     TabOrder = 18
     Transparent = True
     Height = 20
-    Width = 96
+    Width = 88
   end
   object qryMatter: TUniQuery
     Connection = dmAxiom.uniInsight
