@@ -4096,7 +4096,6 @@ object frmMatters: TfrmMatters
           Action = actAutoReceipt
           Anchors = [akLeft, akBottom]
           Caption = 'Receipt'
-          NumGlyphs = 2
           TabOrder = 2
         end
         object btnDeleteDraft: TBitBtn
@@ -21064,10 +21063,8 @@ object frmMatters: TfrmMatters
       OnClick = btnViewBillClick
     end
     object dxbbtnCreateReceipt: TdxBarButton
-      Caption = 'Create Receipt...'
+      Action = actAutoReceipt
       Category = 10
-      Hint = 'Create Receipt'
-      Visible = ivAlways
     end
     object dxBarButton4: TdxBarButton
       Caption = 'Export Grid to Excel'
@@ -23191,7 +23188,6 @@ object frmMatters: TfrmMatters
       'c.TAXCODE, n.REFNO, c.HELD, c.AMOUNT, c.TAX'
       'order by c.REQDATE'
       '')
-    Active = True
     Left = 640
     Top = 48
     ParamData = <
@@ -23392,7 +23388,6 @@ object frmMatters: TfrmMatters
       'FROM NMEMO'
       'WHERE NMATTER  = :P_Matter'
       'ORDER BY NMEMO DESC    */')
-    Active = True
     Filter = 'rv_nmemo is null'
     AfterScroll = qryInvoicesAfterScroll
     Left = 255
@@ -32270,8 +32265,8 @@ object frmMatters: TfrmMatters
             Name = 'Presidents'#39' Day'
           end>
       end>
-    Left = 1413
-    Top = 601
+    Left = 1437
+    Top = 481
   end
   object ProjSchedulerDBStorage: TcxSchedulerDBStorage
     Resources.Items = <>
