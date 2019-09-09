@@ -407,9 +407,9 @@ begin
 //         AddBanks(cbBank, 'G,T,C');
 
 
-         cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
-//         cbBank.OnClick(Self);
-         cbBank.Properties.OnCloseUp(Self);
+         cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'); //  cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
+         cbBank.OnClick(Self);
+//         cbBank.Properties.OnCloseUp(Self);
 
          cbType.EditValue := 'CQ';
 
@@ -466,7 +466,7 @@ begin
 
    TFormStyleHookBackground.BackGroundSettings.Enabled := True;
    TFormStyleHookBackground.BackGroundSettings.UseColor := True;
-   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.Text);//set
+   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.EditValue);//set
    Self.Invalidate;
    Self.Perform(WM_PAINT, 0, 0);
 
@@ -791,7 +791,7 @@ begin
       if tbDesc.Text = '' then
       begin
          // Create a new one
-         cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
+         cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');  // cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
          cbBankClick(Self);
          tbDesc.Text := 'Payment of Bill ' + qryBill.FieldbyName('REFNO').AsString;
          tbDrawer.Text := tbPayee.Text;
@@ -835,7 +835,7 @@ begin
         cbBank.Text := Bank;
       end
       else
-        cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
+        cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');  //cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
       cbBankClick(Self);
 
       sTrust := TableString('BANK','ACCT',Bank,'TRUST');
@@ -983,7 +983,7 @@ begin
     Open;
     if not IsEmpty then
     begin
-      cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(sBank);
+      cbBank.EditValue := sBank;  //cbBank.Properties.Items.IndexOf(sBank);
       cbBankClick(Self);
       sDesc := 'Trust Transfer from ' + FieldByName('ACCT').AsString + ' ' + FieldByName('CHQNO').AsString;
       tbDesc.Text := sDesc;
@@ -1551,7 +1551,7 @@ begin
             SQL.Text := 'SELECT ACCT FROM BANK WHERE TRUST = ''G'' AND ENTITY = :ENTITY';
             ParamByName('ENTITY').AsString := dmAxiom.Entity;
             open;
-            cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(FieldByName('ACCT').AsString);
+            cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');  //cbBank.Properties.Items.IndexOf(FieldByName('ACCT').AsString);
             cbBankClick(Self);
             Close;
          end;
@@ -4414,7 +4414,7 @@ begin
          cbBank.Text := Bank;
       end
       else
-         cbBank.ItemIndex := cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
+         cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');  //cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
       cbBankClick(Self);
 
       sTrust := TableString('BANK','ACCT',Bank,'TRUST');
