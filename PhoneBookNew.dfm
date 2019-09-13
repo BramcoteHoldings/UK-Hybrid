@@ -134,9 +134,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Caption = 'Given Names:'
       end
       object lGender: TLabel
-        Left = 45
+        Left = 46
         Top = 6
-        Width = 71
+        Width = 70
         Height = 15
         Alignment = taRightJustify
         Caption = 'Type/Gender:'
@@ -162,7 +162,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       object Label14: TLabel
         Left = 51
         Top = 290
-        Width = 29
+        Width = 28
         Height = 15
         Caption = 'Total:'
       end
@@ -737,9 +737,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Caption = 'State:'
           end
           object lStreetSuburb: TLabel
-            Left = 21
+            Left = 22
             Top = 94
-            Width = 80
+            Width = 79
             Height = 15
             Alignment = taRightJustify
             Caption = 'Town/Suburb:*'
@@ -753,9 +753,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Caption = 'Country:'
           end
           object lPostalSuburb: TLabel
-            Left = 26
+            Left = 27
             Top = 294
-            Width = 75
+            Width = 74
             Height = 15
             Alignment = taRightJustify
             Caption = 'Town/Suburb:'
@@ -983,9 +983,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
               ParentFont = False
             end
             object lDXAddress: TLabel
-              Left = 27
+              Left = 26
               Top = 24
-              Width = 75
+              Width = 76
               Height = 15
               Alignment = taRightJustify
               Caption = 'Box / Address:'
@@ -1154,9 +1154,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Caption = 'Address:'
           end
           object Label17: TLabel
-            Left = 23
+            Left = 24
             Top = 95
-            Width = 75
+            Width = 74
             Height = 15
             Alignment = taRightJustify
             Caption = 'Town/Suburb:'
@@ -1409,9 +1409,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Caption = 'Direct:'
       end
       object lPhoneFax: TLabel
-        Left = 81
+        Left = 80
         Top = 109
-        Width = 20
+        Width = 21
         Height = 15
         Alignment = taRightJustify
         Caption = 'Fax:'
@@ -1842,24 +1842,24 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         ExplicitWidth = 414
       end
       object Label3: TLabel
-        Left = 3
-        Top = 480
+        Left = 2
+        Top = 375
         Width = 83
         Height = 15
         Alignment = taRightJustify
         Caption = 'Conflict Search:'
       end
       object Label5: TLabel
-        Left = 15
+        Left = 16
         Top = 72
-        Width = 71
+        Width = 70
         Height = 15
         Alignment = taRightJustify
         Caption = 'Contact Title:'
       end
       object cxButton1: TcxButton
-        Left = 412
-        Top = 480
+        Left = 406
+        Top = 375
         Width = 78
         Height = 24
         Action = ActAddConflictDoc
@@ -1875,8 +1875,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         TabOrder = 1
       end
       object grpCLLData: TGroupBox
-        Left = 3
-        Top = 383
+        Left = 11
+        Top = 442
         Width = 350
         Height = 89
         Caption = 'CLL Data'
@@ -1885,7 +1885,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object Label15: TLabel
           Left = 13
           Top = 27
-          Width = 57
+          Width = 56
           Height = 15
           Caption = 'Client Title'
         end
@@ -1916,8 +1916,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         end
       end
       object lbConflicts: TcxListBox
-        Left = 101
-        Top = 480
+        Left = 95
+        Top = 375
         Width = 302
         Height = 54
         ItemHeight = 15
@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43703.419444675930000000
-        Time = 43703.419444675930000000
+        Date = 43719.419444675930000000
+        Time = 43719.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -2722,17 +2722,17 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             525
             135)
           object Label8: TLabel
-            Left = 24
+            Left = 25
             Top = 14
-            Width = 71
+            Width = 70
             Height = 15
             Alignment = taRightJustify
             Caption = 'Bill Template:'
           end
           object Label23: TLabel
-            Left = 4
+            Left = 5
             Top = 41
-            Width = 91
+            Width = 90
             Height = 15
             Alignment = taRightJustify
             Caption = 'Debtor Template:'
@@ -2910,9 +2910,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Caption = 'Fee Tax Basis:'
           end
           object Label7: TLabel
-            Left = 28
+            Left = 29
             Top = 34
-            Width = 85
+            Width = 84
             Height = 15
             Alignment = taRightJustify
             Caption = 'Disb'#39' Threshold:'
@@ -3097,9 +3097,9 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Caption = 'Creditor Code:'
       end
       object Label12: TLabel
-        Left = 18
+        Left = 19
         Top = 57
-        Width = 83
+        Width = 82
         Height = 15
         Alignment = taRightJustify
         Caption = 'Terms (in days):'
@@ -3627,7 +3627,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object lblReferralType: TLabel
           Left = 11
           Top = 26
-          Width = 71
+          Width = 70
           Height = 15
           Caption = 'Referral Type:'
         end
@@ -3819,7 +3819,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       object Label31: TLabel
         Left = 26
         Top = 20
-        Width = 96
+        Width = 95
         Height = 15
         Caption = 'Relationship Type:'
       end
@@ -3861,7 +3861,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       object Label37: TLabel
         Left = 80
         Top = 193
-        Width = 51
+        Width = 50
         Height = 15
         Caption = 'Turnover:'
       end

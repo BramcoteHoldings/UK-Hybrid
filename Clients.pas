@@ -1712,7 +1712,6 @@ begin
    qryDocReg.Close;
    qryArchived.Close;
    qryPhonebook.Close;
-   qryClient.Close;
    qryMatters.Close;
    qryGroups.Close;
    qryTmpSQL.Close;
@@ -1731,6 +1730,8 @@ begin
    qryFirmContacts.Close;
    qryParticipantEvents.Close;
    qryArchived.Close;
+
+   qryClient.Close;
 
    SettingSaveStream(dmAxiom.UserID,'CLIENT_MATTERS',tvMatters);
    // 20 Sep 2018 dw cleanup stringlist
@@ -3358,12 +3359,15 @@ procedure TfrmClients.actEditClientExecute(Sender: TObject);
 var
   LForm:TfrmPhoneBookNew;
 begin
-   LForm := TfrmPhoneBookNew.Create(Self);
-   LForm.bDoShow := True;
-   LForm.SetupForClient(ANClient);
-   LForm.ShowModal();
-   pagDetailsChange(pagDetails.ActivePage);
-   qryClient.Refresh;
+   if dmAxiom.bShutdown = False then
+   begin
+      LForm := TfrmPhoneBookNew.Create(Self);
+      LForm.bDoShow := True;
+      LForm.SetupForClient(ANClient);
+      LForm.ShowModal();
+      pagDetailsChange(pagDetails.ActivePage);
+      qryClient.Refresh;
+   end;
 end;
 
 procedure TfrmClients.actDeleteClientExecute(Sender: TObject);

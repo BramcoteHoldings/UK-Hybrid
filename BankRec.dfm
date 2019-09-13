@@ -125,9 +125,9 @@ object frmBankRec: TfrmBankRec
       Caption = 'Additions/Errors'
     end
     object Label11: TLabel
-      Left = 734
+      Left = 755
       Top = 92
-      Width = 120
+      Width = 99
       Height = 30
       Alignment = taRightJustify
       Caption = 'Closing Cashbook Balance:'

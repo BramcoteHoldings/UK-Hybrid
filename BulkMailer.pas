@@ -23,7 +23,8 @@ uses
   System.ImageList, ppParameter, ppRichTx, ppBands, ppClass, ppDesignLayer,
   ppModule, raCodMod, ppCtrls, ppReport, ppPrnabl, ppStrtch, ppSubRpt, ppCache,
   ppComm, ppRelatv, ppProd, ppDB, ppDBPipe, IdSASL, IdSASLUserPass, IdSASLLogin,
-  IdUserPassProvider, IdIntercept, IdLogBase, IdLogFile;
+  IdUserPassProvider, IdIntercept, IdLogBase, IdLogFile, cxDBLookupComboBox,
+  cxBarEditItem;
 
 type
   TfrmBulkMailer = class(TForm)
@@ -85,7 +86,7 @@ type
     OpenDialog: TOpenDialog;
     qryEmails: TUniQuery;
     dsEmails: TUniDataSource;
-    tvEmailsNNAME: TcxGridDBColumn;
+    tvEmailsREFNO: TcxGridDBColumn;
     tvEmailsEMAIL: TcxGridDBColumn;
     tvEmailsSELECT: TcxGridDBColumn;
     lvFields: TcxGridLevel;
@@ -232,6 +233,11 @@ type
     Panel3: TPanel;
     rbDebtors: TcxRadioButton;
     rbMatters: TcxRadioButton;
+    cmbStatementTemplate: TcxBarEditItem;
+    qryReportList: TUniQuery;
+    dsReportList: TUniDataSource;
+    tvEmailsNMATTER: TcxGridDBColumn;
+    tvEmailsNNAME: TcxGridDBColumn;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -995,9 +1001,10 @@ procedure TfrmBulkMailer.rbDebtorsClick(Sender: TObject);
 begin
    DebtorStatements := 1;
 
-   EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL '+
+   EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL, 0 as nmatter, NBILL_TO as refno '+
                 'FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
                 'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+   tvEmailsNNAME.Visible := False;
    PopulateGrid;
 end;
 
@@ -1005,9 +1012,18 @@ procedure TfrmBulkMailer.rbMattersClick(Sender: TObject);
 begin
    DebtorStatements := 1;
 
-   EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL '+
-                'FROM AXIOM.MATTER m, nmemo where m.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
-                'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
+   EmailSQL := 'SELECT DISTINCT nmemo.nbill_to AS nname, ap_email AS partyemail, nmemo.nmatter, m.fileid as refno '+
+               '   FROM axiom.phonebook ph, axiom.matter m, nmemo '+
+               'WHERE m.nname = nmemo.nbill_to '+
+               '   AND nmemo.dispatched IS NOT NULL '+
+               '   AND nmemo.owing <> 0 '+
+               '   AND nmemo.rv_type <> ''D'' '+
+               '   AND nmemo.rv_nmemo IS NULL '+
+               '   AND ap_email IS NOT NULL '+
+               '   and ph.nname = nmemo.nbill_to  '+
+               '   and nmemo.nmatter = m.nmatter '+
+               'ORDER BY 2';
+   tvEmailsNNAME.Visible := True;
    PopulateGrid;
 end;
 
@@ -1163,7 +1179,8 @@ var
    Attachment: TIdMessageBuilderAttachment;
    OldDir,
    TempFilePath: string;
-   ANClient: integer;
+   ANClient,
+   ANMatter: integer;
 begin
    Screen.Cursor := crSQLWait;
    if (edFrom.Text = '') then
@@ -1289,12 +1306,19 @@ begin
                begin
                   if IsValidEmail(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
                   begin
-                     ANClient := TableInteger('PHONEBOOK','NNAME', INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index]), 'NCLIENT');
+                     if rbDebtors.Checked = True then
+                        ANClient := TableInteger('PHONEBOOK','NNAME', INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index]), 'NCLIENT')
+                     else
+                        ANMatter := INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNMATTER.Index]);
+
                      //setup mail message
                      MailMessage.From.Address := edFrom.Text;
                      MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
 
                      lsSubject := edSubject.Text;
+
+                     if rbMatters.Checked = True then
+                        lsSubject := lsSubject + ' Our Ref #'+TableString('MATTER','NMATTER', ANMatter, 'FILEID');
 
                      try
                         MailMessage.Subject := lsSubject;
@@ -1323,7 +1347,11 @@ begin
                               Report.Template.DatabaseSettings.DataPipeline := plReports;
                               Report.Template.DatabaseSettings.NameField := 'ITEM_Name';
                               Report.Template.DatabaseSettings.TemplateField := 'Template';
-                              Report.Template.DatabaseSettings.Name := SystemString('DR_TEMPLATE');
+                              if VarIsNull(cmbStatementTemplate.CurEditValue) = True then
+                                 Report.Template.DatabaseSettings.Name := SystemString('DR_TEMPLATE')
+                              else
+                              if (VarToStr(cmbStatementTemplate.CurEditValue) <> '') then
+                                 Report.Template.DatabaseSettings.Name := VarToStr(cmbStatementTemplate.CurEditValue);
                               Report.Template.LoadFromDatabase;
                            except
                               ;
@@ -1334,9 +1362,14 @@ begin
                               with Parameters do
                               begin
                                  Items['NCLIENT'].Value := null;
+                                 Items['NMATTER'].Value := null;
                                  Items['ENTITY'].Value := null;
 
-                                 Items['NCLIENT'].Value := ANClient;
+                                 if rbDebtors.Checked = True then
+                                    Items['NCLIENT'].Value := ANClient
+                                 else
+                                    Items['NMATTER'].Value := ANMatter;
+
                                  Items['ENTITY'].Value := dmAxiom.Entity;
 
                                  Items['EMAILPRINT'].Value := 0;
@@ -1345,10 +1378,22 @@ begin
                         end;
                      finally
                         DateTimeToString(aFileDate,'ddmmyyyy',Now);
-                        ANewDocName := IncludeTrailingBackslash(SystemString('DFLT_DOC_LIST'))+
-                                       tvEmailsNNAME.EditValue +
-                                       '\Debtor_Statement_'+ aFileDate + '.pdf';
-                        AParsedDocName := ParseMacros(ANewDocName, integer(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index] {tvEmailsNNAME.EditValue}));
+
+                        if (rbDebtors.Checked = True) then
+                        begin
+                           ANewDocName := IncludeTrailingBackslash(SystemString('DFLT_DOC_LIST'))+
+                                          tvEmailsNNAME.EditValue +
+                                          '\Debtor_Statement_'+ aFileDate + '.pdf';
+                           AParsedDocName := ParseMacros(ANewDocName, integer(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index]));
+                        end
+                        else
+                        begin
+                           ANewDocName := IncludeTrailingBackslash(SystemString('DFLT_DOC_LIST'))+
+                                          tvEmailsREFNO.EditValue +
+                                          '\Debtor_Statement_'+ aFileDate + '.pdf';
+                           AParsedDocName := ParseMacros(ANewDocName, integer(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNMATTER.Index] ));
+                        end;
+
                         AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
                         // check directory exists, if not create it
                         if not DirectoryExists(AParsedDir) then
@@ -1373,7 +1418,8 @@ begin
                            SMTP.Connect;
                            if SMTP.Connected then
                               SMTP.Send(MailMessage);
-                           SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index], edSubject.Text);
+                           if rbDebtors.Checked = True then
+                              SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index], edSubject.Text);
                            spHTMLEmail.Close;
 //                           DeleteFile(TempFilePath);
 //                           SetCurrentDir(OldDir);
@@ -1638,6 +1684,7 @@ begin
    fDocumentHistory := TStringList.Create();
 //   fSpellcheckerSmartTagHandlerID := HTMLEdit.RegisterSmartTagHandler(TpsSmartTagSpellChecker.Create(fAddictSpell));
    qryEmailTemplates.Open;
+   qryReportList.Open;
 end;
 
 procedure TfrmBulkMailer.FormClose(Sender: TObject;
@@ -1650,6 +1697,7 @@ procedure TfrmBulkMailer.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
    fDocumentHistory.Free;
    qryEmailTemplates.Close;
+   qryReportList.Close;
 end;
 
 procedure TfrmBulkMailer.SaveEmail(ANName: integer; ASubject: string);

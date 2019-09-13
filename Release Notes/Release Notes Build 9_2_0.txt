@@ -1,7 +1,12 @@
 Insight Build 9.2.0
 
-Build 36
+Build 38
 ========
+- Fixed problem with checkbox selection in TimeSheet
+- Fixed problem with creating a Bill Credit Note 
+
+Build 36 - 37
+=============
 - Bills tab on Matter now displays Fees and Disbursement write offs
 - fixed issue with bank selection in Cheque Creation to be entity aware.
 - Fixed refresh issues with buttons on Matter Controlled Money tab.

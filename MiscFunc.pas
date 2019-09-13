@@ -8918,35 +8918,32 @@ end;
 function IsActiveLedger(sEntity : String; sFullLedger : String) : Boolean;
 var
   loQryCharts : TUniQuery;
+  bActiveChart: boolean;
 begin
-  loQryCharts := nil;
+   loQryCharts := nil;
+   bActiveChart := False;
+   try
+      loQryCharts := dmAxiom.qryCharts;
+      loQryCharts.Connection := dmAxiom.uniInsight;
+      loQryCharts.Close;
+      loQryCharts.SQL.Clear;
+      loQryCharts.SQL.Add('SELECT ACTIVE');
+      loQryCharts.SQL.Add('FROM CHART');
+      loQryCharts.SQL.Add('WHERE BANK = :BANK');
+      loQryCharts.SQL.Add('  AND CODE = :CODE');
+      loQryCharts.Params[0].AsString := sEntity;
+      loQryCharts.Params[1].AsString := sFullLedger;
+      loQryCharts.Open;
 
-  try
-    loQryCharts := dmAxiom.qryCharts;
-    loQryCharts.Connection := dmAxiom.uniInsight;
-    loQryCharts.Close;
-    loQryCharts.SQL.Clear;
-    loQryCharts.SQL.Add('SELECT ACTIVE');
-    loQryCharts.SQL.Add('FROM CHART');
-    loQryCharts.SQL.Add('WHERE BANK = :BANK');
-    loQryCharts.SQL.Add('  AND CODE = :CODE');
-    loQryCharts.Params[0].AsString := sEntity;
-    loQryCharts.Params[1].AsString := sFullLedger;
-    loQryCharts.Open;
-
-    if (not loQryCharts.IsEmpty) then
+      if (loQryCharts.IsEmpty = False) then
       begin
-        Result := (loQryCharts.FieldByName('ACTIVE').AsString = 'Y');
+         bActiveChart := (loQryCharts.FieldByName('ACTIVE').AsString = 'Y');
+      end;
 
-      end
-    else
-      Result := False;
-
-  finally
-    loQryCharts.Close;
-
+   finally
+      loQryCharts.Close;
+      Result := bActiveChart;
   end;    //  end try-finally
-
 end;
 
 function AndReplace(AStr: String): String;
