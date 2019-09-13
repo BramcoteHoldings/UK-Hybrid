@@ -34,9 +34,9 @@ object frmBulkMailer: TfrmBulkMailer
     OriginalWidth = 1321
     OriginalHeight = 570
     object dxLayoutDockSite3: TdxLayoutDockSite
-      Left = 199
+      Left = 217
       Top = 0
-      Width = 1122
+      Width = 1104
       Height = 570
       Margins.Left = 4
       Margins.Top = 4
@@ -48,7 +48,7 @@ object frmBulkMailer: TfrmBulkMailer
       object dxLayoutDockSite1: TdxLayoutDockSite
         Left = 0
         Top = 0
-        Width = 1122
+        Width = 1104
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -61,7 +61,7 @@ object frmBulkMailer: TfrmBulkMailer
       object dxDockPanel2: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 1122
+        Width = 1104
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -83,7 +83,7 @@ object frmBulkMailer: TfrmBulkMailer
         object pagMain: TcxPageControl
           Left = 0
           Top = 61
-          Width = 1118
+          Width = 1100
           Height = 482
           Margins.Left = 4
           Margins.Top = 4
@@ -98,7 +98,7 @@ object frmBulkMailer: TfrmBulkMailer
           OnChange = pagMainChange
           ClientRectBottom = 478
           ClientRectLeft = 4
-          ClientRectRight = 1114
+          ClientRectRight = 1096
           ClientRectTop = 4
           object tabRTF: TcxTabSheet
             Margins.Left = 4
@@ -110,7 +110,7 @@ object frmBulkMailer: TfrmBulkMailer
             object Editor: TRichEdit
               Left = 0
               Top = 0
-              Width = 1110
+              Width = 1092
               Height = 474
               Margins.Left = 4
               Margins.Top = 4
@@ -157,7 +157,7 @@ object frmBulkMailer: TfrmBulkMailer
             object HTMLEditor: TEmbeddedWB
               Left = 0
               Top = 0
-              Width = 1110
+              Width = 1092
               Height = 474
               Margins.Left = 4
               Margins.Top = 4
@@ -165,7 +165,6 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
-              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -173,7 +172,8 @@ object frmBulkMailer: TfrmBulkMailer
               PrintOptions.HTMLHeader.Strings = (
                 '<HTML></HTML>')
               PrintOptions.Orientation = poPortrait
-              ExplicitTop = 3
+              ExplicitLeft = 2
+              ExplicitTop = -2
               ControlData = {
                 4C000000136B0000EE2800000000000000000000000000000000000000000000
                 000000004C000000000000000000000001000000E0D057007335CF11AE690800
@@ -216,14 +216,14 @@ object frmBulkMailer: TfrmBulkMailer
                 'MemoRawText')
               TabOrder = 0
               Height = 474
-              Width = 1110
+              Width = 1092
             end
           end
         end
         object dxBarDockControl1: TdxBarDockControl
           Left = 0
           Top = 0
-          Width = 1118
+          Width = 1100
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -234,7 +234,7 @@ object frmBulkMailer: TfrmBulkMailer
         object StatusBar: TdxStatusBar
           Left = 0
           Top = 543
-          Width = 1118
+          Width = 1100
           Height = 23
           Margins.Left = 4
           Margins.Top = 4
@@ -272,7 +272,7 @@ object frmBulkMailer: TfrmBulkMailer
         object Panel2: TPanel
           Left = 0
           Top = 3
-          Width = 1118
+          Width = 1100
           Height = 58
           Align = alTop
           TabOrder = 3
@@ -344,7 +344,7 @@ object frmBulkMailer: TfrmBulkMailer
     object dxTabContainerDockSite1: TdxTabContainerDockSite
       Left = 0
       Top = 0
-      Width = 199
+      Width = 217
       Height = 570
       Margins.Left = 4
       Margins.Top = 4
@@ -359,12 +359,12 @@ object frmBulkMailer: TfrmBulkMailer
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       DockingType = 1
-      OriginalWidth = 199
+      OriginalWidth = 217
       OriginalHeight = 150
       object dxDockPanel3: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 199
+        Width = 217
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -378,12 +378,12 @@ object frmBulkMailer: TfrmBulkMailer
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
         DockingType = 0
-        OriginalWidth = 199
+        OriginalWidth = 217
         OriginalHeight = 150
         object grdEmails: TcxGrid
           Left = 0
           Top = 29
-          Width = 195
+          Width = 213
           Height = 512
           Margins.Left = 4
           Margins.Top = 4
@@ -392,9 +392,6 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitLeft = -3
-          ExplicitTop = 43
-          ExplicitHeight = 541
           object tvEmails: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataModeController.SmartRefresh = True
@@ -473,10 +470,19 @@ object frmBulkMailer: TfrmBulkMailer
               Options.Editing = False
               Options.Focusing = False
             end
-            object tvEmailsNNAME: TcxGridDBColumn
-              DataBinding.FieldName = 'NNAME'
+            object tvEmailsREFNO: TcxGridDBColumn
+              Caption = 'Bill No'
+              DataBinding.FieldName = 'REFNO'
+              Visible = False
               MinWidth = 21
               VisibleForCustomization = False
+            end
+            object tvEmailsNMATTER: TcxGridDBColumn
+              DataBinding.FieldName = 'NMATTER'
+              VisibleForCustomization = False
+            end
+            object tvEmailsNNAME: TcxGridDBColumn
+              DataBinding.FieldName = 'NNAME'
             end
           end
           object lvEmails: TcxGridLevel
@@ -486,14 +492,14 @@ object frmBulkMailer: TfrmBulkMailer
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 195
+          Width = 213
           Height = 29
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
           object rbDebtors: TcxRadioButton
             Tag = 1
-            Left = 8
+            Left = 18
             Top = 5
             Width = 65
             Height = 17
@@ -505,7 +511,7 @@ object frmBulkMailer: TfrmBulkMailer
           end
           object rbMatters: TcxRadioButton
             Tag = 1
-            Left = 94
+            Left = 101
             Top = 5
             Width = 65
             Height = 17
@@ -518,7 +524,7 @@ object frmBulkMailer: TfrmBulkMailer
       object dxDockPanel1: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 199
+        Width = 217
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -538,7 +544,7 @@ object frmBulkMailer: TfrmBulkMailer
         object grdFields: TcxGrid
           Left = 0
           Top = 0
-          Width = 195
+          Width = 213
           Height = 541
           Margins.Left = 4
           Margins.Top = 4
@@ -927,6 +933,13 @@ object frmBulkMailer: TfrmBulkMailer
         end
         item
           BeginGroup = True
+          UserDefine = [udWidth]
+          UserWidth = 147
+          Visible = True
+          ItemName = 'cmbStatementTemplate'
+        end
+        item
+          BeginGroup = True
           Visible = True
           ItemName = 'dxBarButton2'
         end>
@@ -1169,6 +1182,27 @@ object frmBulkMailer: TfrmBulkMailer
       Hint = 'Load Template'
       Visible = ivAlways
       OnClick = dxBarButton3Click
+    end
+    object cmbStatementTemplate: TcxBarEditItem
+      Caption = 'Debtor Template'
+      Category = 0
+      Hint = 'Debtor Template'
+      Visible = ivAlways
+      ShowCaption = True
+      PropertiesClassName = 'TcxLookupComboBoxProperties'
+      Properties.AutoSelect = False
+      Properties.ClearKey = 46
+      Properties.DropDownAutoSize = True
+      Properties.ImmediatePost = True
+      Properties.KeyFieldNames = 'ITEM_NAME'
+      Properties.ListColumns = <
+        item
+          FieldName = 'ITEM_NAME'
+        end>
+      Properties.ListOptions.GridLines = glNone
+      Properties.ListOptions.ShowHeader = False
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = dsReportList
     end
     object dxBarButtonClear: TdxBarLargeButton
       Caption = 'Cle&ar'
@@ -1637,9 +1671,9 @@ object frmBulkMailer: TfrmBulkMailer
       Control = ed_LinkHRef
     end
     object cmbEmailTemplates: TdxBarLookupCombo
-      Caption = 'Templates'
+      Caption = 'Email Templates'
       Category = 8
-      Hint = 'Templates'
+      Hint = 'Email Templates'
       Visible = ivAlways
       Glyph.SourceDPI = 96
       Glyph.Data = {
@@ -1677,6 +1711,7 @@ object frmBulkMailer: TfrmBulkMailer
         FFFF000000FFFF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
         00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
         00FF000000FFFF00FF00FF00FF00FF00FF00FF00FF00}
+      ShowCaption = True
       KeyField = 'ID'
       ListField = 'DESCR'
       ListSource = dsEmailTemplates
@@ -6736,7 +6771,9 @@ object frmBulkMailer: TfrmBulkMailer
       '                                  )'
       '                      )'
       '              ) AS defaultaddress,'
-      '         p.clientid, p.email partyemail, p.nname as id'
+      
+        '         p.clientid, p.email partyemail, p.nname as id, 0 as ref' +
+        'no, 0 as nmatter'
       
         '    FROM phonebook p LEFT JOIN phonebook m ON m.nname = p.nnamem' +
         'aster'
@@ -9154,5 +9191,20 @@ object frmBulkMailer: TfrmBulkMailer
       FieldName = 'TEMPLATE'
       BlobType = ftMemo
     end
+  end
+  object qryReportList: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT item_name'
+      '  FROM rb_folder, rb_item'
+      ' WHERE UPPER (rb_folder.folder_name) = '#39'TRUST ACCOUNT STATEMENT'#39
+      '   AND rb_folder.folder_id = rb_item.folder_id')
+    Left = 936
+    Top = 104
+  end
+  object dsReportList: TUniDataSource
+    DataSet = qryReportList
+    Left = 1008
+    Top = 112
   end
 end
