@@ -47,7 +47,7 @@ object frmClients: TfrmClients
   object lblGender: TLabel
     Left = 9
     Top = 113
-    Width = 59
+    Width = 58
     Height = 15
     Caption = 'Client Type'
   end
@@ -83,7 +83,7 @@ object frmClients: TfrmClients
   object lblMatters: TLabel
     Left = 326
     Top = 113
-    Width = 69
+    Width = 68
     Height = 15
     Caption = 'Total Matters'
   end
@@ -653,6 +653,10 @@ object frmClients: TfrmClients
     object tabArchive: TcxTabSheet
       Caption = 'Archive'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrArchived: TcxGrid
         Left = 0
         Top = 0
@@ -753,7 +757,7 @@ object frmClients: TfrmClients
       object lblTotalTrustCaption: TLabel
         Left = 9
         Top = 117
-        Width = 97
+        Width = 95
         Height = 15
         Caption = 'Total Trust Monies'
         Transparent = True
@@ -761,7 +765,7 @@ object frmClients: TfrmClients
       object Label44: TLabel
         Left = 9
         Top = 141
-        Width = 111
+        Width = 110
         Height = 15
         Caption = 'Cleared Trust Monies'
         Transparent = True
@@ -921,7 +925,7 @@ object frmClients: TfrmClients
         object Label49: TLabel
           Left = 10
           Top = 74
-          Width = 56
+          Width = 55
           Height = 15
           Caption = 'Total Limit'
           Transparent = True
@@ -1713,9 +1717,9 @@ object frmClients: TfrmClients
             Transparent = True
           end
           object Label64: TLabel
-            Left = 3
+            Left = 2
             Top = 60
-            Width = 69
+            Width = 70
             Height = 13
             Alignment = taRightJustify
             Caption = 'Town/Suburb'
@@ -1862,9 +1866,9 @@ object frmClients: TfrmClients
             Transparent = True
           end
           object Label8: TLabel
-            Left = 3
+            Left = 2
             Top = 60
-            Width = 69
+            Width = 70
             Height = 13
             Alignment = taRightJustify
             Caption = 'Town/Suburb'
@@ -1991,9 +1995,9 @@ object frmClients: TfrmClients
             Transparent = True
           end
           object Label13: TLabel
-            Left = 3
+            Left = 2
             Top = 59
-            Width = 69
+            Width = 70
             Height = 13
             Alignment = taRightJustify
             Caption = 'Town/Suburb'
@@ -2215,6 +2219,10 @@ object frmClients: TfrmClients
         object tabCurrentGroups: TcxTabSheet
           Caption = 'Client Groups'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object grdClientGroups: TcxGrid
             Left = 0
             Top = 0
@@ -2378,6 +2386,10 @@ object frmClients: TfrmClients
       Caption = 'Custom Data'
       ImageIndex = 6
       OnShow = tsCustomDataShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -2412,7 +2424,7 @@ object frmClients: TfrmClients
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
             Position = 1
             Text = 'Value'
-            Width = 795
+            Width = 799
           end>
       end
     end
@@ -3998,6 +4010,10 @@ object frmClients: TfrmClients
     object tsOtherClients: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 10
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgOtherClients: TcxGrid
         Left = 0
         Top = 0
@@ -4037,7 +4053,7 @@ object frmClients: TfrmClients
       object Label72: TLabel
         Left = 9
         Top = 10
-        Width = 71
+        Width = 70
         Height = 15
         Caption = 'Referral Type:'
         Transparent = True
@@ -4139,6 +4155,10 @@ object frmClients: TfrmClients
     object tabEvent: TcxTabSheet
       Caption = 'Event'
       ImageIndex = 12
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdParticipantEvents: TcxGrid
         Left = 0
         Top = 0
@@ -7643,7 +7663,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7669,6 +7689,7 @@ object frmClients: TfrmClients
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -7701,7 +7722,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 1227
     Top = 73
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plPacket'
     object ppTitleBand1: TppTitleBand
@@ -8490,7 +8511,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8516,6 +8537,7 @@ object frmClients: TfrmClients
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -8548,7 +8570,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 187
     Top = 485
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -12798,7 +12820,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -12824,6 +12846,7 @@ object frmClients: TfrmClients
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -12856,7 +12879,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 66
     Top = 577
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plPhoneBookRpt'
     object ppHeaderBand2: TppHeaderBand
@@ -14090,7 +14113,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -14100,7 +14123,7 @@ object frmClients: TfrmClients
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plGroupingsRpt'
           object ppTitleBand2: TppTitleBand
@@ -14314,7 +14337,7 @@ object frmClients: TfrmClients
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'Letter'
+          PrinterSetup.PaperName = 'Letter (8.5 x 11")'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -14324,7 +14347,7 @@ object frmClients: TfrmClients
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '19.02'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plRelationshipsRpt'
           object ppTitleBand3: TppTitleBand
@@ -15764,7 +15787,7 @@ object frmClients: TfrmClients
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15791,6 +15814,7 @@ object frmClients: TfrmClients
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -15824,7 +15848,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 794
     Top = 366
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -16292,7 +16316,7 @@ object frmClients: TfrmClients
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16318,6 +16342,7 @@ object frmClients: TfrmClients
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -16350,7 +16375,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 1018
     Top = 146
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 197379
     DataPipelineName = 'ppDocList'
     object ppHeaderBand4: TppHeaderBand
