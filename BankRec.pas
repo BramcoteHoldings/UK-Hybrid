@@ -1128,8 +1128,8 @@ var
 begin
    try
       tvCashBook.BeginUpdate();
-      if dmAxiom.uniInsight.InTransaction then
-         dmAxiom.uniInsight.Commit;
+      if dmAxiom.uniInsight.InTransaction = True then
+         dmAxiom.uniInsight.Rollback;
 
       dmAxiom.uniInsight.StartTransaction;
       for Row := 0 to tvCashBook.DataController.RecordCount - 1 do
