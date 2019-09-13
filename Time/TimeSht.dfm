@@ -497,7 +497,6 @@ object frmTimeSheet: TfrmTimeSheet
       end
       object tvFeeTmpNew: TcxGridDBTableView
         PopupMenu = popGrid
-        OnMouseDown = tvFeeTmpNewMouseDown
         Navigator.Buttons.CustomButtons = <>
         OnCellClick = tvFeeTmpNewCellClick
         OnEditing = tvFeeTmpEditing
@@ -560,7 +559,6 @@ object frmTimeSheet: TfrmTimeSheet
         object tvFeeTmpNewPROCESS: TcxGridDBColumn
           DataBinding.ValueType = 'Boolean'
           PropertiesClassName = 'TcxCheckBoxProperties'
-          Properties.ImmediatePost = True
           Properties.NullStyle = nssUnchecked
           HeaderGlyph.SourceDPI = 96
           HeaderGlyph.Data = {
@@ -600,6 +598,11 @@ object frmTimeSheet: TfrmTimeSheet
             FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
           HeaderGlyphAlignmentHorz = taCenter
           MinWidth = 30
+          Options.Filtering = False
+          Options.AutoWidthSizable = False
+          Options.Grouping = False
+          Options.SortByDisplayText = isbtOff
+          Options.Sorting = False
           VisibleForCustomization = False
           Width = 30
           OnHeaderClick = tvFeeTmpNewPROCESSHeaderClick
@@ -2026,7 +2029,6 @@ object frmTimeSheet: TfrmTimeSheet
       'AND IS_TASK = '#39'N'#39
       'order by FT.uniqueid desc')
     SpecificOptions.Strings = (
-      'Oracle.KeySequence=SQNC_FEETMP'
       'Oracle.SequenceMode=smInsert')
     OnUpdateRecord = qryFeeTmpUpdateRecord
     AfterInsert = qryFeeTmp1AfterInsert
