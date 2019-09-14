@@ -456,6 +456,7 @@ begin
               ExecSQL;
             end;
             // Debtors
+            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_SUND_CR'),'CODE',dmAxiom.Entity);
             PostLedger(dtpDate.Date
               , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
               , qryLedger.FieldByName('TAX').AsCurrency
@@ -463,7 +464,7 @@ begin
               , 'NMEMO'
               , iNMemo
               , qryLedger.FieldByName('REASON').AsString
-              , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_SUND_CR')
+              , sLedgerKey
               , ''
               , -1
               , ''
@@ -501,6 +502,7 @@ begin
           if qryLedger.FieldByName('TYPE').AsString = 'Disburse' then
           begin
             // Debtors
+            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR'),'CODE',dmAxiom.Entity);
             PostLedger(dtpDate.Date
               , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
               , qryLedger.FieldByName('TAX').AsCurrency
@@ -508,7 +510,7 @@ begin
               , 'NMEMO'
               , iNMemo
               , qryLedger.FieldByName('REASON').AsString
-              , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR')
+              , sLedgerKey
               , ''
               , -1
               , ''
@@ -548,6 +550,7 @@ begin
           if qryLedger.FieldByName('TYPE').AsString = 'Creditors' then
           begin
             // Debtors
+            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR'),'CODE',dmAxiom.Entity);
             PostLedger(dtpDate.Date
               , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
               , qryLedger.FieldByName('TAX').AsCurrency
@@ -555,7 +558,7 @@ begin
               , 'NMEMO'
               , iNMemo
               , qryLedger.FieldByName('REASON').AsString
-              , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR')
+              , sLedgerKey    //TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR')
               , ''
               , -1
               , ''
@@ -595,6 +598,7 @@ begin
           if qryLedger.FieldByName('TYPE').AsString = 'AntDisb' then
           begin
             // Debtors
+            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR'),'CODE',dmAxiom.Entity);
             PostLedger(dtpDate.Date
               , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
               , qryLedger.FieldByName('TAX').AsCurrency
@@ -602,7 +606,7 @@ begin
               , 'NMEMO'
               , iNMemo
               , qryLedger.FieldByName('REASON').AsString
-              , TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR')
+              , sLedgerKey     // TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR')
               , ''
               , -1
               , ''

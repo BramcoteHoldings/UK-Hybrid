@@ -1310,7 +1310,7 @@ begin
       then
       begin
         neDisbTax.AsCurrency := ShowTax(neDisb.AsCurrency, dGstFree, 'ALLOC', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                        qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxDisb := neDisbTax.AsCurrency;
         neDisbTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 1] := Format('%m', [neDisbTax.AsCurrency]);
@@ -1321,7 +1321,7 @@ begin
       then
       begin
         neAntdTax.AsCurrency := ShowTax(neAntd.AsCurrency, dGstFree, 'CHEQREQ', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxAntD := neAntdTax.AsCurrency;
         neAntdTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 2] := Format('%m', [neAntdTax.AsCurrency]);
@@ -5475,7 +5475,7 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
-  begin
+begin
     if (bAlterGSTAmount)
     then
     begin
@@ -5485,7 +5485,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       if (rgFilter.ItemIndex = 2)
       then
       Begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'DISB', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'DISB'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -5496,7 +5496,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       else if (rgFilter.ItemIndex = 4)
       then
       begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'UPCRED', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'UPCRED'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -5507,7 +5507,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
       else if (rgFilter.ItemIndex = 5)
       then
       begin
-        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'SUND', qryBillItems)
+        if TfrmAdjustBilledTax.AlterBilledTaxAmount(qryBillItems.FieldByName('UNIQUEID').AsInteger, 'SUND'{, qryBillItems})
         then
         Begin
           qryBillItems.Close;
@@ -5516,7 +5516,7 @@ procedure TfrmInvoice.tbtnEditTaxClick(Sender : TObject);
         End;
       end;
     end;
-  end;
+end;
 
 procedure TfrmInvoice.pbSpellCheckClick(Sender : TObject);
   var
