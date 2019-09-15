@@ -2471,6 +2471,11 @@ begin
                ErrorText := 'You may not Bank money to a matter that is archived.';
                Error := True;
             end
+            else if ((IsMatterClosed(ARefNo)) and (qryBanks.FieldByName('TRUST').AsString = 'T')) then
+            begin
+               ErrorText := 'You may not Bank trust money to a matter that is closed.';
+               Error := True;
+            end
             else
             begin
                if qryLedger.State = dsBrowse then
