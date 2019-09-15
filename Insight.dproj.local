@@ -159,7 +159,6 @@
     <File Path="Advertising\AdvSupplier.dfm"/>
     <File Path="Billing"/>
     <File Path="Billing\AlterBilledTaxAmount.pas"/>
-    <File Path="Billing\AlterBilledTaxAmount.dfm"/>
     <File Path="Billing\BillCreateAsk.pas"/>
     <File Path="Billing\BillCreateAsk.dfm"/>
     <File Path="Billing\BillCredit.pas"/>
