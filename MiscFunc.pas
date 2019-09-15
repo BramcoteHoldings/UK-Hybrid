@@ -699,6 +699,7 @@ type
   function LogIntoCheqReqTool : Boolean;
   function AllowDirectPost(sLedger: string): boolean;
   function IsMatterArchived(FileId: string): boolean;
+  function IsMatterClosed(FileId: string): boolean;
   function IsValidBankForEntity(sAcct: string): boolean;
   function IsValidMatterForEntity(sFileId: string): boolean;
   function IsValidMatterForBank(sFileId: string; sBank: string): boolean;
@@ -9512,6 +9513,39 @@ begin
          loQry.Close;
          loQry.SQL.Clear;
          loQry.SQL.Add('SELECT ''x'' FROM MATTER WHERE CLOSED = 1 AND ARCHIVED IS NOT NULL ');
+         loQry.SQL.Add('AND FILEID = :FILEID');
+//         loQry.SQL.Add('AND NMATTER = :NMATTER');
+         loQry.Params[0].AsString := FileId;
+         loQry.Open;
+
+         Result := not loQry.IsEmpty;
+
+      finally
+      loQry.Close;
+      FreeAndNil(loQry);
+    end;    //  end try-finally
+    except
+       on E : Exception do
+       begin
+          Raise;
+       end;
+    end;
+end;
+
+function IsMatterClosed(FileId: string): boolean;
+var
+  loQry : TUniQuery;
+begin
+   try
+      loQry := nil;
+
+      try
+         loQry := TUniQuery.Create(nil);
+         loQry.Connection := dmAxiom.uniInsight;
+
+         loQry.Close;
+         loQry.SQL.Clear;
+         loQry.SQL.Add('SELECT ''x'' FROM MATTER WHERE CLOSED = 1 ');
          loQry.SQL.Add('AND FILEID = :FILEID');
 //         loQry.SQL.Add('AND NMATTER = :NMATTER');
          loQry.Params[0].AsString := FileId;
