@@ -1295,6 +1295,11 @@ begin
             ErrorText := 'You may not enter transaction for a matter that is archived.';
             Error := True;
          end
+         else if (IsMatterClosed(string(DisplayValue))) then
+         begin
+            ErrorText := 'You may not enter transaction for a matter that is closed.';
+            Error := True;
+         end
          else
          begin
             if qryLedger.State = dsBrowse then
