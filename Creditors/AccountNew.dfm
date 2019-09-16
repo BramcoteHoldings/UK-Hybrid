@@ -160,8 +160,8 @@ object frmAccountNew: TfrmAccountNew
     OnExit = neAmountExit
   end
   object dbgrLedger: TcxGrid
-    Left = 7
-    Top = 113
+    Left = 8
+    Top = 114
     Width = 806
     Height = 295
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -307,7 +307,7 @@ object frmAccountNew: TfrmAccountNew
   object dtpDate: TEnforceCustomDateEdit
     Left = 120
     Top = 4
-    EditValue = 43712.4972780556d
+    EditValue = 43723.6475035764d
     Properties.MinDate = 1.000000000000000000
     Properties.ShowTime = False
     Properties.OnChange = EnforceCustomDateEdit1PropertiesChange
@@ -839,7 +839,7 @@ object frmAccountNew: TfrmAccountNew
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43712.497277835650000000
+      ReportDocument.CreationDate = 43723.647503472220000000
       ShrinkToPageWidth = True
       PixelsPerInch = 96
       BuiltInReportLink = True

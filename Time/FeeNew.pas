@@ -175,6 +175,7 @@ type
     procedure cbDeptPropertiesChange(Sender: TObject);
     procedure mmoNotesKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cmbMatterFindKeyPress(Sender: TObject; var Key: Char);
+    procedure cmbMatterFindPropertiesEditValueChanged(Sender: TObject);
 
   private
     { Private declarations }
@@ -1442,6 +1443,7 @@ var
    lFileID,
    lFoundFileID: string;
 begin
+   bMatterValidated := False;
    AMatterNo := string(DisplayValue);
    lFileID := PadFileID(AMatterNo);
    if cmbMatterFind.Text = 'SEARCH...' then
@@ -1455,13 +1457,19 @@ begin
             if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
             begin
                MsgErr('You may not post Fees to a matter that is archived.');
-               cmbMatterFind.Text := '';
+               //cmbMatterFind.Text := '';
+            end
+            else if (IsMatterclosed(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
+            begin
+               MsgErr('You may not post Fees to a matter that is closed.');
+               //cmbMatterFind.Text := '';
             end
             else if MatterIsCurrent(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) then
             begin
                DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, FEditing);
                DoBillType(cmbMatterFind.Text);
                DisplayValue := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+               bMatterValidated := True;
             end
             else
                MsgErr('Matter ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ' has been closed');
@@ -1473,9 +1481,9 @@ begin
       {dmAxiom.FindMatter(lFoundFileID, lFileID);
       AMatterNo := lFoundFileID;
       DisplayValue := AMatterNo; }
-      lFileID := PadFileID(cmbMatterFind.Text);
-      dmAxiom.FindMatter(lFoundFileID, lFileID);
-      cmbMatterFind.Text := lFoundFileID;
+      //lFileID := PadFileID(cmbMatterFind.Text);
+      //dmAxiom.FindMatter(lFoundFileID, lFileID);
+      //cmbMatterFind.Text := lFoundFileID;
       if MatterExists(cmbMatterFind.Text) then
       begin
          if (MatterString(cmbMatterFind.Text,'PROSPECTIVE') = 'Y') then
@@ -1483,29 +1491,34 @@ begin
             If not (ProspectiveFeesAllowed(cmbMatterFind.Text)) then
             begin
             MsgErr('You may not post Fees to a matter that is Prospective or has exceeded the allowed limit.');
-            cmbMatterFind.Text := '';
+            //cmbMatterFind.Text := '';
             end;
          end
          else if (IsMatterArchived(cmbMatterFind.Text)) then
          begin
             MsgErr('You may not post Fees to a matter that is archived.');
-            cmbMatterFind.Text := '';
+            //cmbMatterFind.Text := '';
+         end
+         else if (IsMatterClosed(cmbMatterFind.Text)) then
+         begin
+            MsgErr('You may not post Fees to a matter that is closed.');
          end
          else
          begin
             bMatterChanged := ((FOldFileID <> cmbMatterFind.EditText) and (FOldFileID <> ''));
             DisplayMatter(cmbMatterFind.Text, FEditing, bMatterChanged);
             DoBillType(cmbMatterFind.Text);
+            bMatterValidated := True;
          end;
       end
       else
       begin
-         bMatterValidated := True;
+         //bMatterValidated := True;
          MsgErr('The selected Matter is not valid.  Please check and re-try.');
-         cmbMatterFind.Text := '';
+         //cmbMatterFind.Text := '';
       end;
    end;
-   bMatterValidated := False;
+
 end;
 
 procedure TfrmFeeNew.cmbMatterFindPropertiesChange(Sender: TObject);
@@ -1573,6 +1586,16 @@ begin
       end;
    end;
    bMatterValidated := False;  }
+end;
+
+procedure TfrmFeeNew.cmbMatterFindPropertiesEditValueChanged(Sender: TObject);
+begin
+    if (bMatterValidated = False) then
+    begin
+        cmbMatterFind.Clear;
+        lblMatterDesc.Caption := '';
+        lblClient.Caption := '';
+    end;
 end;
 
 procedure TfrmFeeNew.cmbMatterFindPropertiesInitPopup(Sender: TObject);
@@ -1658,6 +1681,7 @@ var
 begin
    if (key = #$D) then
    begin
+      bMatterValidated := False;
       if cmbMatterFind.Text = 'SEARCH...' then
       begin
          if not FormExists(frmMatterSearch) then
@@ -1669,23 +1693,26 @@ begin
                if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
                begin
                   MsgErr('You may not post Fees to a matter that is archived.');
-                  cmbMatterFind.Text := '';
+                  //cmbMatterFind.Text := '';
+               end
+               else if (IsMatterClosed(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
+               begin
+                  MsgErr('You may not post Fees to a matter that is closed.');
                end
                else if MatterIsCurrent(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) then
                begin
                   DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, FEditing);
                   DoBillType(cmbMatterFind.Text);
-               end
-               else
-                  MsgErr('Matter ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ' has been closed');
+                  bMatterValidated := True;
+               end;
             end;
          end;
       end
       else
       begin
-         lFileID := PadFileID(cmbMatterFind.Text);
-         dmAxiom.FindMatter(lFoundFileID, lFileID);
-         cmbMatterFind.Text := lFoundFileID;
+         //lFileID := PadFileID(cmbMatterFind.Text);
+         //dmAxiom.FindMatter(lFoundFileID, lFileID);
+         //cmbMatterFind.Text := lFoundFileID;
 //         cmbMatterFind.ValidateEdit();
       end;
    end;
