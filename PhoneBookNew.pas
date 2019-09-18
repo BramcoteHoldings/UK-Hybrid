@@ -3292,7 +3292,10 @@ begin
       qClientCheck.Open;
       LClientCode := IntToStr(qClientCheck.FieldByName('NCLIENT').AsInteger);
       qClientCheck.Close; }
-      LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'));
+      if (qClient.FieldByName('nclient').AsInteger = 0) then
+         LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'))
+      else
+         LClientCode := qClient.FieldByName('nclient').AsString;
 
       qGetCodes.Close;
       qGetCodes.SQL.Clear;
