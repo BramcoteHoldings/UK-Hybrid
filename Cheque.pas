@@ -795,6 +795,7 @@ begin
      begin
        qryLedger.GoToBookmark(bmPrevRecord);
        qryLedger.FreeBookmark(bmPrevRecord);
+       qryLedger.First;
      end;
   end;
   if (neAmount.AsCurrency <> 0) or dmAxiom.Security.Cheque.ForceTally then
@@ -2783,6 +2784,11 @@ begin
    CreateCheque;
    //if cbBank.Items.Count = 0 then
     //AddBanks(cbBank, 'G,T,C');
+    if qryLedger.Active = True then
+    begin
+       qryLedger.Close;
+       qryLedger.Open;
+    end;
    cbBank.Text := sBank;
    //cbBankClick(Self);
    cbBankPropertiesChange(Self);

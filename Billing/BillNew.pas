@@ -4051,7 +4051,8 @@ end;
 procedure TfrmInvoice.tbtnAddGSTClick(Sender : TObject);
 var
    dtTax : TDateTime;
-   iCtr : Integer;
+   iCtr,
+   iSel : Integer;
    cTax : currency;
    AView : TcxGridTableView;
    sTaxCode : string;
@@ -4071,13 +4072,13 @@ begin
            then
              sTaxCode := dmAxiom.DefaultTax;
            // -----------------
-           for iCtr := AView.DataController.RecordCount - 1 downto 0 do
+           for iCtr := 0 to AView.Controller.SelectedRowCount - 1 do
            begin
-             if AView.DataController.IsRowSelected(iCtr)
-             then
-             begin
-               with qryNew do
-               begin
+              iSel := AView.DataController.GetSelectedRowIndex(iCtr);
+              AView.ViewData.Records[iSel].Focused  := True;
+
+              with qryNew do
+              begin
                  dtTax := Now;
                  cTax := 1;
                  SQL.Clear;
@@ -4161,13 +4162,12 @@ begin
                  if cTax = 0
                  then
                  begin
-                   ParamByName('TaxRate').AsFloat := TaxRate('', QuotedStr(sTaxCode), dtTax);
+                   ParamByName('TaxRate').AsFloat := TaxRate('', sTaxCode, dtTax);
                    // ParamByName('TaxRate').AsFloat := TaxRate('', 'GST', dtTax);
                    ExecSQL;
                    Close;
                  end;
-               end;
-             end;
+              end;
            end;
            DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger);
          finally

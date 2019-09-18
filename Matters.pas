@@ -4842,7 +4842,7 @@ begin
   LfrmCheque := TfrmCheque.Create(Self);
   LfrmCheque.Show;
   LfrmCheque.AutoCheque(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'), '', '', qryMatter.FieldByName('FILEID').AsString,
-      '', dmAxiom.UserID, 'N', 0, 0);
+                                    '', dmAxiom.UserID, 'N', 0, 0);
 end;
 
 procedure TfrmMatters.tbtnReceiptClick(Sender: TObject);
