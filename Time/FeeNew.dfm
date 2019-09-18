@@ -666,6 +666,7 @@ object frmFeeNew: TfrmFeeNew
     Properties.ListSource = dsMRUList
     Properties.OnChange = cmbMatterFindPropertiesChange
     Properties.OnCloseUp = cmbMatterFindPropertiesCloseUp
+    Properties.OnEditValueChanged = cmbMatterFindPropertiesEditValueChanged
     Properties.OnInitPopup = cmbMatterFindPropertiesInitPopup
     Properties.OnValidate = cmbMatterFindPropertiesValidate
     Style.LookAndFeel.NativeStyle = True
@@ -1181,7 +1182,7 @@ object frmFeeNew: TfrmFeeNew
     Left = 285
     Top = 39
     Bitmap = {
-      494C010103000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030005000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1330,7 +1331,7 @@ object frmFeeNew: TfrmFeeNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1358,6 +1359,7 @@ object frmFeeNew: TfrmFeeNew
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -1392,7 +1394,7 @@ object frmFeeNew: TfrmFeeNew
     XLSSettings.WorksheetName = 'Report'
     Left = 381
     Top = 261
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear

@@ -57,6 +57,8 @@ object frmSystemFile: TfrmSystemFile
     object tsGeneral: TcxTabSheet
       Caption = '&General'
       ImageIndex = 0
+      ExplicitLeft = 5
+      ExplicitTop = 27
       object DBText1: TDBText
         Left = 102
         Top = 3
@@ -83,7 +85,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label1: TLabel
         Left = 7
-        Top = 114
+        Top = 118
         Width = 63
         Height = 15
         Caption = 'Next Matter'
@@ -100,7 +102,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label3: TLabel
         Left = 7
-        Top = 138
+        Top = 142
         Width = 88
         Height = 15
         Caption = 'Minutes per Unit'
@@ -124,14 +126,14 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label70: TLabel
         Left = 11
-        Top = 230
+        Top = 234
         Width = 38
         Height = 15
         Caption = 'Firm ID'
       end
       object Label75: TLabel
         Left = 7
-        Top = 90
+        Top = 94
         Width = 29
         Height = 15
         Caption = 'Email'
@@ -148,7 +150,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit5: TDBEdit
         Left = 102
-        Top = 41
+        Top = 43
         Width = 222
         Height = 23
         DataField = 'ADD2'
@@ -157,7 +159,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit6: TDBEdit
         Left = 102
-        Top = 63
+        Top = 67
         Width = 125
         Height = 23
         DataField = 'SUBURB'
@@ -166,7 +168,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit7: TDBEdit
         Left = 233
-        Top = 63
+        Top = 67
         Width = 35
         Height = 23
         CharCase = ecUpperCase
@@ -176,7 +178,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit8: TDBEdit
         Left = 274
-        Top = 63
+        Top = 67
         Width = 50
         Height = 23
         DataField = 'POSTCODE'
@@ -185,7 +187,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit1: TDBEdit
         Left = 102
-        Top = 111
+        Top = 115
         Width = 69
         Height = 23
         DataField = 'NEXTMATTER'
@@ -193,7 +195,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 5
       end
       object DBEdit2: TDBEdit
-        Left = 604
+        Left = 633
         Top = 272
         Width = 69
         Height = 23
@@ -204,7 +206,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit3: TDBEdit
         Left = 102
-        Top = 135
+        Top = 139
         Width = 21
         Height = 23
         DataField = 'TIME_UNITS'
@@ -227,7 +229,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object cmbHelpType: TcxComboBox
         Left = 102
-        Top = 159
+        Top = 163
         Properties.Items.Strings = (
           'Winhelp'
           'HtmlHelp')
@@ -246,13 +248,13 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxLabel2: TcxLabel
         Left = 7
-        Top = 161
+        Top = 165
         Caption = 'Help File Format:'
         Transparent = True
       end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 102
-        Top = 204
+        Top = 208
         AutoSize = False
         DataBinding.DataField = 'HOME_PAGE_URL'
         DataBinding.DataSource = dsSystemFile
@@ -270,7 +272,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxLabel4: TcxLabel
         Left = 7
-        Top = 205
+        Top = 209
         Caption = 'Default URL:'
         Style.LookAndFeel.NativeStyle = False
         StyleDisabled.LookAndFeel.NativeStyle = False
@@ -279,8 +281,8 @@ object frmSystemFile: TfrmSystemFile
         Transparent = True
       end
       object cxDBCheckBox2: TcxDBCheckBox
-        Left = 6
-        Top = 274
+        Left = 4
+        Top = 282
         AutoSize = False
         Caption = 'Use Debtor Tasks'
         DataBinding.DataField = 'DEBTOR_TASK'
@@ -296,11 +298,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 13
         Height = 14
-        Width = 197
+        Width = 198
       end
       object cxDBCheckBox3: TcxDBCheckBox
-        Left = 4
-        Top = 252
+        Left = 3
+        Top = 259
         AutoSize = False
         Caption = 'Collection Template BLOB'
         DataBinding.DataField = 'DEBTOR_DOCUMENT_BLOB'
@@ -385,8 +387,8 @@ object frmSystemFile: TfrmSystemFile
         end
       end
       object cxDBCheckBox7: TcxDBCheckBox
-        Left = 6
-        Top = 293
+        Left = 3
+        Top = 300
         AutoSize = False
         Caption = 'Use Diary Notify '
         DataBinding.DataField = 'USE_DIARY_NOTIFY'
@@ -403,11 +405,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 18
         Height = 20
-        Width = 199
+        Width = 201
       end
       object cxDBCheckBox11: TcxDBCheckBox
-        Left = 6
-        Top = 314
+        Left = 3
+        Top = 321
         AutoSize = False
         Caption = 'Use Fee Authority'
         DataBinding.DataField = 'USE_FEE_AUTHORITY'
@@ -424,17 +426,17 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 19
         Height = 22
-        Width = 199
+        Width = 201
       end
       object cxLabel18: TcxLabel
         Left = 7
-        Top = 184
+        Top = 188
         Caption = 'Help File Path'
         Transparent = True
       end
       object edtHelpPath: TcxDBButtonEdit
         Left = 102
-        Top = 183
+        Top = 187
         AutoSize = False
         DataBinding.DataField = 'HELP_FILE_PATH'
         DataBinding.DataSource = dsSystemFile
@@ -457,8 +459,8 @@ object frmSystemFile: TfrmSystemFile
         Width = 221
       end
       object cxDBImage1: TcxDBImage
-        Left = 394
-        Top = 6
+        Left = 437
+        Top = 9
         DataBinding.DataField = 'LOGO_IMAGE'
         DataBinding.DataSource = dsSystemFile
         PopupMenu = dxBarPopupMenu1
@@ -474,8 +476,8 @@ object frmSystemFile: TfrmSystemFile
         Width = 323
       end
       object cbEnforceClientPack: TcxDBCheckBox
-        Left = 6
-        Top = 337
+        Left = 3
+        Top = 344
         AutoSize = False
         Caption = 'Enforce Client Pack'
         DataBinding.DataField = 'ENFORCE_CLIENT_PACK'
@@ -491,11 +493,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 22
         Height = 19
-        Width = 199
+        Width = 201
       end
       object cxDBCheckBox18: TcxDBCheckBox
-        Left = 6
-        Top = 358
+        Left = 3
+        Top = 365
         AutoSize = False
         Caption = 'Expanded Matter Data Fields'
         DataBinding.DataField = 'EXPANDED_MTR_DATA'
@@ -511,11 +513,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 23
         Height = 18
-        Width = 199
+        Width = 201
       end
       object cxDBCheckBox25: TcxDBCheckBox
-        Left = 263
-        Top = 252
+        Left = 256
+        Top = 251
         AutoSize = False
         Caption = 'Search on "Matter" only in Matter Search Screen'
         DataBinding.DataField = 'MATTER_ONLY_SEARCH'
@@ -531,12 +533,12 @@ object frmSystemFile: TfrmSystemFile
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 24
-        Height = 29
-        Width = 199
+        Height = 36
+        Width = 206
       end
       object cxDBCheckBox28: TcxDBCheckBox
-        Left = 263
-        Top = 279
+        Left = 256
+        Top = 286
         AutoSize = False
         Caption = 'Include Creditor Inv # in EFT file'
         DataBinding.DataField = 'USE_CREDITOR_REFERENCE'
@@ -551,12 +553,12 @@ object frmSystemFile: TfrmSystemFile
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 25
-        Height = 31
-        Width = 199
+        Height = 22
+        Width = 206
       end
       object cxDBCheckBox38: TcxDBCheckBox
-        Left = 263
-        Top = 305
+        Left = 256
+        Top = 307
         AutoSize = False
         Caption = 'Generate Controlled Monies Output file'
         DataBinding.DataField = 'GENERATE_INVEST_FILE'
@@ -572,11 +574,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 26
         Height = 31
-        Width = 199
+        Width = 206
       end
       object DBEdit21: TDBEdit
         Left = 102
-        Top = 227
+        Top = 231
         Width = 121
         Height = 23
         DataField = 'LEDES_FIRM_ID'
@@ -584,8 +586,8 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 12
       end
       object cxDBCheckBox64: TcxDBCheckBox
-        Left = 263
-        Top = 334
+        Left = 256
+        Top = 339
         AutoSize = False
         Caption = 'Show Document Center button'
         DataBinding.DataField = 'SHOW_DOCUMENT_CENTER'
@@ -601,11 +603,11 @@ object frmSystemFile: TfrmSystemFile
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 27
         Height = 21
-        Width = 199
+        Width = 206
       end
       object DBEdit27: TDBEdit
         Left = 102
-        Top = 87
+        Top = 91
         Width = 222
         Height = 23
         DataField = 'COMPANY_EMAIL'
@@ -613,7 +615,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 28
       end
       object cxDBMemo3: TcxDBMemo
-        Left = 394
+        Left = 437
         Top = 154
         DataBinding.DataField = 'REGISTERED_MESSAGE'
         DataBinding.DataSource = dsSystemFile
@@ -623,17 +625,17 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxLabel34: TcxLabel
         Left = 329
-        Top = 151
+        Top = 150
         AutoSize = False
         Caption = 'Module Registered Message'
         Properties.WordWrap = True
         Transparent = True
-        Height = 57
-        Width = 63
+        Height = 34
+        Width = 105
       end
       object cxDBCheckBox69: TcxDBCheckBox
-        Left = 263
-        Top = 354
+        Left = 256
+        Top = 360
         AutoSize = False
         Caption = 'Use Project Budgeting\Management '
         DataBinding.DataField = 'USE_PROJECT_BUDGETING'
@@ -648,8 +650,8 @@ object frmSystemFile: TfrmSystemFile
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 31
-        Height = 34
-        Width = 199
+        Height = 35
+        Width = 206
       end
     end
     object tsLibraries: TcxTabSheet
@@ -5894,6 +5896,7 @@ object frmSystemFile: TfrmSystemFile
           Properties.ValueChecked = 'Y'
           Properties.ValueUnchecked = 'N'
           TabOrder = 0
+          Transparent = True
         end
       end
       object cxGroupBox13: TcxGroupBox
@@ -5918,6 +5921,7 @@ object frmSystemFile: TfrmSystemFile
           Properties.ValueChecked = 'Y'
           Properties.ValueUnchecked = 'N'
           TabOrder = 0
+          Transparent = True
           Height = 33
           Width = 385
         end

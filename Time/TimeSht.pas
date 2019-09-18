@@ -452,6 +452,7 @@ type
     procedure tvFeeTmpNewAUTHORPropertiesEditValueChanged(Sender: TObject);
     procedure tvFeeTmpNewNOTESPropertiesChange(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
     FTotalAmount:       currency;
@@ -1623,6 +1624,7 @@ begin
          else
             DataSet.FieldByname('CREATED').AsDateTime := dtpDate.Date;
       end;
+      DataSet.FieldByName('UNIQUEID').AsInteger := GetSequenceNumber('sqnc_feetmp');
       DataSet.FieldByname('FILEID').AsString := FileID;
       DataSet.FieldByname('AUTHOR').AsString := String(cbAuthor.EditValue);
       DataSet.FieldByName('NMATTER').AsInteger := 0;
@@ -1650,6 +1652,39 @@ begin
 //      RichEdit1.Lines.Clear;
       dxBarButtonSave.Enabled := True;
    end;
+end;
+
+procedure TfrmTimeSheet.FormActivate(Sender: TObject);
+var
+   MaxLog: TDateTime;
+begin
+   if tvFeeTmpNew.DataController.RowCount > 1 then
+   BEGIN
+      with dmAxiom.qryTmp2 do
+      begin
+         Close;
+         SQL.Clear;
+         SQL.Add('select trunc(max(logon_time)) as max_log from v$session ');
+         SQL.Add('where username is not null ');
+         SQL.Add('and username = :IUser and and upper(program) = ''INSIGHT.EXE'' ');
+         ParamByName('IUser').AsString := dmAxiom.UserID;
+         Open;
+         MaxLog := FieldByName('max_log').AsDateTime;
+         Close;
+         if MaxLog < Date then
+            MakeSQL;
+      end;
+   END;
+
+{   if tvFeeTmpNew.DataController.RowCount > 0 then
+   begin
+      try
+         tvFeeTmpNew.DataController.BeginUpdate;
+         tvFeeTmpNew.DataController.RefreshExternalData;
+      finally
+         tvFeeTmpNew.DataController.EndUpdate;
+      end;
+   end;  }
 end;
 
 procedure TfrmTimeSheet.FormClose(Sender: TObject;
@@ -2804,85 +2839,87 @@ procedure TfrmTimeSheet.MakeSQL;
 var
    LSql, LOrderBy: string;
 begin
-   Screen.Cursor := crHourglass;
-   LSql := 'SELECT FT.ROWID, FT.CREATED, FT.FILEID, FT.AUTHOR,'+
-           'FT.REASON, FT.UNITS, FT.RATE, FT.AMOUNT, FT.TAXCODE, FT.TAX, '+
-           'FT.TAXRATE, FT.ELAPSED, FT.EMPCODE, FT.UNIQUEID,FT.NFEE, '+
-           'case when FT.BILLTYPE = ''Billable'' then ''Yes'' else ''No'' end as billable, '+
-           'FT.MATLOCATE, FT.BILLTYPE, '+
-//           'decode(FT.TIME_TYPE, ''M'',P.SEARCH || '' '' || M.SHORTDESCR,''O'', '+
-//           ' ''Overhead Time'',''H'', NVL(TRIM(P.SEARCH || '' '' || M.SHORTDESCR),''Hold Time'') ) AS MATLOCATE,'+
-           'FT.NMATTER, FT.FEEBASIS,FT.TIME_TYPE, FT.FEE_TEMPLATE, FT.ITEMS,'+
-           'FT.UNIT, FT.TASK_AMOUNT, FT.LABELCOLOUR, FT.EMP_TYPE, FT.VERSION, FT.MINS, FT.NOTES, '+
-           'FT.STATE, FT.RESOURCEID, FT.OPTIONS, FT.EVENT_TYPE, FT.CAPTION, FT.total_fee_amt_pct, FT.IS_TASK, '+
-           'FT.TASK_COMPLETED, FT.TIME_CODE, FT.ITEM_AMOUNT, FT.PROGRAM_NAME '+
-           'FROM MATTER M, PHONEBOOK P, FEETMP FT '+
-           'WHERE ';
-           if cbTimeSheetViewByRecorder.Checked then
-               LSql := LSql + ' FT.EMPCODE = ' + QuotedStr(dmAxiom.UserID)
-           else
-               LSql := LSql + 'FT.AUTHOR = :AUTHOR ';
-
-   LSql := LSql +' AND FT.FILEID = M.FILEID (+) '+
-           ' AND M.NCLIENT = P.NCLIENT (+)  ';
-
-   if boolean(cbShowTasks.EditValue) and boolean(cbShowFees.EditValue) and boolean(cbShowTime.EditValue) then
-      LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NOT NULL OR FT.NFEE IS NULL) '
-   else
+   if dmAxiom.bShutDown = False then
    begin
-      if boolean(cbShowTasks.EditValue) and boolean(cbShowFees.EditValue) then
-         LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NOT NULL) ';
+      Screen.Cursor := crHourglass;
+      LSql := 'SELECT FT.ROWID, FT.CREATED, FT.FILEID, FT.AUTHOR,'+
+              'FT.REASON, FT.UNITS, FT.RATE, FT.AMOUNT, FT.TAXCODE, FT.TAX, '+
+              'FT.TAXRATE, FT.ELAPSED, FT.EMPCODE, FT.UNIQUEID,FT.NFEE, '+
+              'case when FT.BILLTYPE = ''Billable'' then ''Yes'' else ''No'' end as billable, '+
+              'FT.MATLOCATE, FT.BILLTYPE, '+
+//              'decode(FT.TIME_TYPE, ''M'',P.SEARCH || '' '' || M.SHORTDESCR,''O'', '+
+//              ' ''Overhead Time'',''H'', NVL(TRIM(P.SEARCH || '' '' || M.SHORTDESCR),''Hold Time'') ) AS MATLOCATE,'+
+              'FT.NMATTER, FT.FEEBASIS,FT.TIME_TYPE, FT.FEE_TEMPLATE, FT.ITEMS,'+
+              'FT.UNIT, FT.TASK_AMOUNT, FT.LABELCOLOUR, FT.EMP_TYPE, FT.VERSION, FT.MINS, FT.NOTES, '+
+              'FT.STATE, FT.RESOURCEID, FT.OPTIONS, FT.EVENT_TYPE, FT.CAPTION, FT.total_fee_amt_pct, FT.IS_TASK, '+
+              'FT.TASK_COMPLETED, FT.TIME_CODE, FT.ITEM_AMOUNT, FT.PROGRAM_NAME '+
+              'FROM MATTER M, PHONEBOOK P, FEETMP FT '+
+              'WHERE ';
+              if cbTimeSheetViewByRecorder.Checked then
+                  LSql := LSql + ' FT.EMPCODE = ' + QuotedStr(dmAxiom.UserID)
+              else
+                  LSql := LSql + 'FT.AUTHOR = :AUTHOR ';
 
-      if boolean(cbShowTasks.EditValue) and boolean(cbShowTime.EditValue) then
-         LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NULL) ';
+      LSql := LSql +' AND FT.FILEID = M.FILEID (+) '+
+              ' AND M.NCLIENT = P.NCLIENT (+)  ';
 
-      if boolean(cbShowTime.EditValue) and boolean(cbShowFees.EditValue) then
-         LSql := LSql + ' AND (FT.NFEE IS NULL OR FT.NFEE IS NOT NULL) ';
-
-      if boolean(cbShowTasks.EditValue) and (boolean(cbShowTime.EditValue) = False) and (boolean(cbShowFees.EditValue) = False) then
-         LSql := LSql + ' AND FT.IS_TASK = ''Y'' ';
-
-
-      if boolean(cbShowFees.EditValue) and (boolean(cbShowTasks.EditValue) = False) and (boolean(cbShowTime.EditValue) = False) then
-         LSql := LSql + ' AND (FT.NFEE IS NOT NULL) AND (FT.IS_TASK = ''N'')';
-
-      if boolean(cbShowTime.EditValue) and (boolean(cbShowTasks.EditValue) = False) and (boolean(cbShowFees.EditValue) = False) then
-         LSql := LSql + ' AND (FT.NFEE IS NULL) AND (FT.IS_TASK = ''N'')';
-   end;
-
-   if (boolean(cbSpecificDate.EditValue) = False) then
-      LSql := LSql + ' AND trunc(FT.CREATED) = trunc(:CREATED) ';
-
-   if lvFeeTmp.GridView = tvFeeTmp then
-      LOrderBy :=       ' order by FT.uniqueid desc ';
-{   else
-      LOrderBy :=       ' order by FT.created asc ';   }
-
-   if VarIsNull(cbAuthor.EditValue) = False then
-   begin
-   with qryFeeTmp do
+      if boolean(cbShowTasks.EditValue) and boolean(cbShowFees.EditValue) and boolean(cbShowTime.EditValue) then
+         LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NOT NULL OR FT.NFEE IS NULL) '
+      else
       begin
-         Close;
-         SQL.Clear;
-         SQL.Text := LSql + LOrderBy;
-         if (cbTimeSheetViewByRecorder.Checked = False) then
-            ParambyName('AUTHOR').AsString := String(cbAuthor.EditValue);
-         if (boolean(cbSpecificDate.EditValue) = False) then
-            ParambyName('CREATED').AsDateTime := dtpDate.Date;
-         Open;
+         if boolean(cbShowTasks.EditValue) and boolean(cbShowFees.EditValue) then
+            LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NOT NULL) ';
+
+         if boolean(cbShowTasks.EditValue) and boolean(cbShowTime.EditValue) then
+            LSql := LSql + ' AND (FT.IS_TASK = ''Y'' OR FT.NFEE IS NULL) ';
+
+         if boolean(cbShowTime.EditValue) and boolean(cbShowFees.EditValue) then
+            LSql := LSql + ' AND (FT.NFEE IS NULL OR FT.NFEE IS NOT NULL) ';
+
+         if boolean(cbShowTasks.EditValue) and (boolean(cbShowTime.EditValue) = False) and (boolean(cbShowFees.EditValue) = False) then
+            LSql := LSql + ' AND FT.IS_TASK = ''Y'' ';
+
+
+         if boolean(cbShowFees.EditValue) and (boolean(cbShowTasks.EditValue) = False) and (boolean(cbShowTime.EditValue) = False) then
+            LSql := LSql + ' AND (FT.NFEE IS NOT NULL) AND (FT.IS_TASK = ''N'')';
+
+         if boolean(cbShowTime.EditValue) and (boolean(cbShowTasks.EditValue) = False) and (boolean(cbShowFees.EditValue) = False) then
+            LSql := LSql + ' AND (FT.NFEE IS NULL) AND (FT.IS_TASK = ''N'')';
       end;
 
-      CalcUnpostedTotals;
-      CalcUnpostedAmountTotals;
-      PostMessage(Self.Handle, WM_MYWIP , 1, 0);
-//      SetMyWIP;
-      lblDailyBudgetUnits.Caption := IntToStr(GetEmpDailyUnitsBudget(dtpDate.Date));
+      if (boolean(cbSpecificDate.EditValue) = False) then
+         LSql := LSql + ' AND trunc(FT.CREATED) = trunc(:CREATED) ';
 
-//      lblTimeToday.Caption := cbAuthor.EditValue + ' - time today';
-//      lblTimeMonth.Caption := cbAuthor.EditValue + ' - time this month';
-//      lblTimeYear.Caption := cbAuthor.EditValue + ' - time this year';
+      if lvFeeTmp.GridView = tvFeeTmp then
+         LOrderBy :=       ' order by FT.uniqueid desc ';
+{      else
+         LOrderBy :=       ' order by FT.created asc ';   }
+
+      if VarIsNull(cbAuthor.EditValue) = False then
+      begin
+      with qryFeeTmp do
+         begin
+            Close;
+            SQL.Clear;
+            SQL.Text := LSql + LOrderBy;
+            if (cbTimeSheetViewByRecorder.Checked = False) then
+               ParambyName('AUTHOR').AsString := String(cbAuthor.EditValue);
+            if (boolean(cbSpecificDate.EditValue) = False) then
+               ParambyName('CREATED').AsDateTime := dtpDate.Date;
+            Open;
+         end;
+
+         CalcUnpostedTotals;
+         CalcUnpostedAmountTotals;
+         PostMessage(Self.Handle, WM_MYWIP , 1, 0);
+//         SetMyWIP;
+         lblDailyBudgetUnits.Caption := IntToStr(GetEmpDailyUnitsBudget(dtpDate.Date));
+
+//         lblTimeToday.Caption := cbAuthor.EditValue + ' - time today';
+//         lblTimeMonth.Caption := cbAuthor.EditValue + ' - time this month';
+//         lblTimeYear.Caption := cbAuthor.EditValue + ' - time this year';
+      end;
    end;
-
    Screen.Cursor := crDefault;
 end;
 
@@ -3091,7 +3128,7 @@ begin
       begin
          iUnique := APrevFocusedRecord.Values[ tvFeeTmpNewUNIQUEID.Index ];
 
-         if ADataSet <> nil then
+//         if ADataSet <> nil then
 //            iElapsedNew := ADataSet.FieldByName('ELAPSED').AsInteger;
 
             qryTmp.Close;
@@ -3167,12 +3204,15 @@ begin
       begin
          try
             iUnique := AFocusedRecord.Values[ tvFeeTmpNewUNIQUEID.Index ];
-            qryTmp.Close;
-            qryTmp.SQL.Text := 'select elapsed, units from  feetmp where uniqueid = :p_uniqueid';
-            qryTmp.ParamByName('p_uniqueid').AsInteger := iUnique;
-            qryTmp.Open;
+            if VarIsNull(iUnique) = False then
+            begin
+               qryTmp.Close;
+               qryTmp.SQL.Text := 'select elapsed, units from  feetmp where uniqueid = :p_uniqueid';
+               qryTmp.ParamByName('p_uniqueid').AsInteger := iUnique;
+               qryTmp.Open;
 
-            FElapsedUnits := qryTmp.FieldByName('Elapsed').AsInteger;
+               FElapsedUnits := qryTmp.FieldByName('Elapsed').AsInteger;
+            end;
          finally
             qryTmp.Close;
             CalcStatusBar(FElapsedUnits);
@@ -3967,8 +4007,9 @@ end;
 procedure TfrmTimeSheet.tvFeeTmpEditing(Sender: TcxCustomGridTableView;
   AItem: TcxCustomGridTableItem; var AAllow: Boolean);
 begin
-//   qryFeeTmp.Refresh;
-   if lvFeeTmp.GridView = tvFeeTmp then
+   if dmAxiom.bShutdown = False then
+   begin
+ {  if lvFeeTmp.GridView = tvFeeTmp then
    begin
       if ((VarIsNull(tvFeeTmpNFEE.EditValue) or
          (tvFeeTmpNFEE.EditValue = '')) and
@@ -3979,7 +4020,7 @@ begin
          AAllow := False;
    end
    else
-   begin
+   begin  }
       if ((VarIsNull(tvFeeTmpNewNFEE.EditValue) or
          (tvFeeTmpNewNFEE.EditValue = '')) and
          (not VarIsNull(tvFeeTmpNewTASK_COMPLETED.EditValue) or
@@ -4283,8 +4324,11 @@ begin
 end;
 
 procedure TfrmTimeSheet.bbtnRefreshClick(Sender: TObject);
+var
+   bitmap: TBitmap;
 begin
    try
+      Bitmap:= TBitmap.Create;
       tvFeeTmpNew.OnFocusedRecordChanged := nil;
       if tmrAutocost.Enabled then
       begin
@@ -4295,6 +4339,9 @@ begin
          MakeSQL;
    finally
       tvFeeTmpNew.OnFocusedRecordChanged := tvFeeTmpFocusedRecordChanged;
+      Bitmap.LoadFromFile(ExtractFilePath(Application.EXEName)+'\images\CHECKBOXTICK.bmp');
+      tvFeeTmpNewPROCESS.HeaderGlyph.Assign(Bitmap);
+      Bitmap.Free;
    end;
 end;
 
@@ -4936,7 +4983,8 @@ var
    LStrLen: integer;
 begin
    try
-      if lvFeeTmp.GridView = tvFeeTmp then
+
+ {     if lvFeeTmp.GridView = tvFeeTmp then
       begin
          if (AItem = tvFeeTmpREASON) then
          begin
@@ -4948,7 +4996,7 @@ begin
             else
                PostMessage(InnerControl.Handle, EM_SETSEL, 0, -1);
          end;
-      end;
+      end;  }
 
       if lvFeeTmp.GridView = tvFeeTmpNew then
       begin
@@ -4967,7 +5015,6 @@ begin
             TcxSpinEdit(AEdit).Properties.UseMouseWheel := False;
          If (AEdit is TcxLookupComboBox) then
             TcxLookupComboBox(AEdit).Properties.UseMouseWheel := False;
-
       end;
    except
    //
@@ -5118,13 +5165,15 @@ var
    AFieldName,
    AOrder: string;
 begin
-   AFieldName := TcxGridDBColumn(AColumn).DataBinding.FieldName;
-   case TcxGridDBColumn(AColumn).SortOrder of
-       soNone: FOrderBy := ' order by '+ AFieldName;
-       soAscending: FOrderBy := ' order by '+ AFieldName + ' desc';
-       soDescending: FOrderBy := ' order by '+ AFieldName + ' asc';
+   if AColumn.Index > 0 then
+   begin
+      AFieldName := TcxGridDBColumn(AColumn).DataBinding.FieldName;
+      case TcxGridDBColumn(AColumn).SortOrder of
+          soNone: FOrderBy := ' order by '+ AFieldName;
+          soAscending: FOrderBy := ' order by '+ AFieldName + ' desc';
+          soDescending: FOrderBy := ' order by '+ AFieldName + ' asc';
+      end;
    end;
-
 end;
 
 procedure TfrmTimeSheet.tvFeeTmpNewEditKeyDown(
@@ -5264,7 +5313,7 @@ var
    Data:             TcxCustomDataController;
    DC:               TcxGridTableController;
 begin
-   if ssShift in Shift  then
+{   if ssShift in Shift  then
    begin
        tv := dbgrFeeTmp.FocusedView as TcxGridDBTableView;
        tv.BeginUpdate;
@@ -5294,7 +5343,7 @@ begin
        Data.Values[ARowIndex,0] := True;
 
        tv.EndUpdate;
-   end;
+   end;    }
 end;
 
 procedure TfrmTimeSheet.tvFeeTmpNewNOTESPropertiesChange(Sender: TObject);

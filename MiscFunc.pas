@@ -699,6 +699,7 @@ type
   function LogIntoCheqReqTool : Boolean;
   function AllowDirectPost(sLedger: string): boolean;
   function IsMatterArchived(FileId: string): boolean;
+  function IsMatterClosed(FileId: string): boolean;
   function IsValidBankForEntity(sAcct: string): boolean;
   function IsValidMatterForEntity(sFileId: string): boolean;
   function IsValidMatterForBank(sFileId: string; sBank: string): boolean;
@@ -8918,35 +8919,32 @@ end;
 function IsActiveLedger(sEntity : String; sFullLedger : String) : Boolean;
 var
   loQryCharts : TUniQuery;
+  bActiveChart: boolean;
 begin
-  loQryCharts := nil;
+   loQryCharts := nil;
+   bActiveChart := False;
+   try
+      loQryCharts := dmAxiom.qryCharts;
+      loQryCharts.Connection := dmAxiom.uniInsight;
+      loQryCharts.Close;
+      loQryCharts.SQL.Clear;
+      loQryCharts.SQL.Add('SELECT ACTIVE');
+      loQryCharts.SQL.Add('FROM CHART');
+      loQryCharts.SQL.Add('WHERE BANK = :BANK');
+      loQryCharts.SQL.Add('  AND CODE = :CODE');
+      loQryCharts.Params[0].AsString := sEntity;
+      loQryCharts.Params[1].AsString := sFullLedger;
+      loQryCharts.Open;
 
-  try
-    loQryCharts := dmAxiom.qryCharts;
-    loQryCharts.Connection := dmAxiom.uniInsight;
-    loQryCharts.Close;
-    loQryCharts.SQL.Clear;
-    loQryCharts.SQL.Add('SELECT ACTIVE');
-    loQryCharts.SQL.Add('FROM CHART');
-    loQryCharts.SQL.Add('WHERE BANK = :BANK');
-    loQryCharts.SQL.Add('  AND CODE = :CODE');
-    loQryCharts.Params[0].AsString := sEntity;
-    loQryCharts.Params[1].AsString := sFullLedger;
-    loQryCharts.Open;
-
-    if (not loQryCharts.IsEmpty) then
+      if (loQryCharts.IsEmpty = False) then
       begin
-        Result := (loQryCharts.FieldByName('ACTIVE').AsString = 'Y');
+         bActiveChart := (loQryCharts.FieldByName('ACTIVE').AsString = 'Y');
+      end;
 
-      end
-    else
-      Result := False;
-
-  finally
-    loQryCharts.Close;
-
+   finally
+      loQryCharts.Close;
+      Result := bActiveChart;
   end;    //  end try-finally
-
 end;
 
 function AndReplace(AStr: String): String;
@@ -9515,6 +9513,39 @@ begin
          loQry.Close;
          loQry.SQL.Clear;
          loQry.SQL.Add('SELECT ''x'' FROM MATTER WHERE CLOSED = 1 AND ARCHIVED IS NOT NULL ');
+         loQry.SQL.Add('AND FILEID = :FILEID');
+//         loQry.SQL.Add('AND NMATTER = :NMATTER');
+         loQry.Params[0].AsString := FileId;
+         loQry.Open;
+
+         Result := not loQry.IsEmpty;
+
+      finally
+      loQry.Close;
+      FreeAndNil(loQry);
+    end;    //  end try-finally
+    except
+       on E : Exception do
+       begin
+          Raise;
+       end;
+    end;
+end;
+
+function IsMatterClosed(FileId: string): boolean;
+var
+  loQry : TUniQuery;
+begin
+   try
+      loQry := nil;
+
+      try
+         loQry := TUniQuery.Create(nil);
+         loQry.Connection := dmAxiom.uniInsight;
+
+         loQry.Close;
+         loQry.SQL.Clear;
+         loQry.SQL.Add('SELECT ''x'' FROM MATTER WHERE CLOSED = 1 ');
          loQry.SQL.Add('AND FILEID = :FILEID');
 //         loQry.SQL.Add('AND NMATTER = :NMATTER');
          loQry.Params[0].AsString := FileId;

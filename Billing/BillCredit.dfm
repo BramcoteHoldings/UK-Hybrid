@@ -134,7 +134,7 @@ object frmBillCredit: TfrmBillCredit
   object Label6: TLabel
     Left = 334
     Top = 77
-    Width = 25
+    Width = 24
     Height = 15
     Caption = 'Type'
   end
@@ -368,7 +368,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43697.5439903704d
+    EditValue = 43721.4334844329d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
