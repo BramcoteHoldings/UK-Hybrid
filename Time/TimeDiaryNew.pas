@@ -95,7 +95,6 @@ type
     dxLayoutItem15: TdxLayoutItem;
     dxLayoutItem16: TdxLayoutItem;
     dxLayoutGroup5: TdxLayoutGroup;
-    dxLayoutItem17: TdxLayoutItem;
     dxLayoutItem18: TdxLayoutItem;
     liUnits: TdxLayoutItem;
     liItems: TdxLayoutItem;
@@ -112,6 +111,15 @@ type
     btnPrint: TcxButton;
     dxLayoutItem21: TdxLayoutItem;
     neUnits: TcxSpinEdit;
+    dxLayoutGroup9: TdxLayoutGroup;
+    dxLayoutGroup10: TdxLayoutGroup;
+    dxLayoutGroup11: TdxLayoutGroup;
+    neTimeAmount: TcxCurrencyEdit;
+    dxLayoutItem24: TdxLayoutItem;
+    neItem: TcxCurrencyEdit;
+    dxLayoutItem25: TdxLayoutItem;
+    dxLayoutItem26: TdxLayoutItem;
+    neItemTax: TcxCurrencyEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure teEndPropertiesEditValueChanged(Sender: TObject);
@@ -165,7 +173,7 @@ type
     sBillType: string;
     FEmployee: string;
     function CalculateUnits: extended;
-    procedure CalcTax;
+    procedure CalcTax(AAmount: double = 0);
     procedure UpdateAmount(bFromTimeEdit: boolean = False);
     procedure CalcRate;
     procedure PopulateWithoutMatter;
@@ -267,6 +275,12 @@ begin
       if not VarIsNull(Event.GetCustomFieldValueByIndex(18)) then
          meNotes.Text := Event.GetCustomFieldValueByIndex(18);
 
+      if VarIsNull(Event.GetCustomFieldValueByIndex(20)) = False then
+         neItem.Value := Event.GetCustomFieldValueByIndex(20);
+
+      if VarIsNull(Event.GetCustomFieldValueByIndex(21)) = False then
+         neItemTax.Value := Event.GetCustomFieldValueByIndex(21);
+
       if not FEditing then
       begin
          neUnits.EditValue := CalculateUnits;
@@ -330,8 +344,6 @@ begin
       Event.SetCustomFieldValueByIndex(11, deStart.Date);
       Event.SetCustomFieldValueByIndex(12, cbFeeBasis.EditValue );
       Event.SetCustomFieldValueByIndex(13, cmbTemplate.Text );
-      Event.SetCustomFieldValueByIndex(18, meNotes.Text );
-
 
       if (cmbMatterFind.Text <> '') then
          sBillType := TableString('FEEBASIS','CODE',MatterString(string(cmbMatterFind.EditValue), 'FEEBASIS'),'BILLTYPE');
@@ -342,6 +354,10 @@ begin
       Event.SetCustomFieldValueByIndex(14, sBillType );
 //      Event.SetCustomFieldValueByIndex(15, TableString('EMPLOYEE','CODE',FEmployee {dmAxiom.UserID},'TYPE'));
       Event.SetCustomFieldValueByIndex(17, neTax.Value);
+      Event.SetCustomFieldValueByIndex(18, meNotes.Text);
+      Event.SetCustomFieldValueByIndex(19, lblClient.Caption + ' ' +lblMatterDesc.Caption );
+      Event.SetCustomFieldValueByIndex(20, neItem.Value );
+      Event.SetCustomFieldValueByIndex(21, neItemTax.Value );
    except
       on E: Exception do
         ShowMessage('Can''t post data' + #13#10 + E.Message);
@@ -395,6 +411,7 @@ begin
 //      AutoLiveSpell.LiveSpelling := True;
 //   end;
 
+   neRate.Properties.OnChange := nil;
    if (SystemString('USE_DECIMAL_UNITS') = 'Y') then
    begin
       If (dmAxiom.EMP_USE_DECIMAL_UNITS = 'N') then
@@ -450,6 +467,7 @@ begin
    // 14 Sept 2018
 //   TdxUserSpellCheckerDictionary(dmAxiom.TSSpellChecker.Dictionaries[1]).DictionaryPath := '.\Spelling\USER_' + dmAxiom.UserID + '.DIC';
    //dmAxiom.TSSpellChecker.Check(TcxRichEdit(tvFeeListDESCR));
+
 end;
 
 procedure TfrmTimeDiaryNew.FormShow(Sender: TObject);
@@ -461,6 +479,7 @@ begin
 //   Self.Caption := Self.Caption + ' for ' + dmAxiom.UserName;
    cbFeeBasis.OnClick(Self);
 //   cmbMatterFind.SetFocus;
+   neRate.Properties.OnChange := neRatePropertiesChange;
 end;
 
 procedure TfrmTimeDiaryNew.teEndPropertiesEditValueChanged(
@@ -547,7 +566,7 @@ var
    Hour, Min, Sec, MSec: Word;
 begin
    DecodeTime((teEnd.Time - teStart.Time), Hour, Min, Sec, MSec);
-   CalculateUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits));
+   CalculateUnits := (((Hour*60)+ Min)/dmAxiom.TimeUnits);
 end;
 
 procedure TfrmTimeDiaryNew.btnPrintClick(Sender: TObject);
@@ -585,7 +604,83 @@ procedure TfrmTimeDiaryNew.CreateScale(AsMatter: String; ANMatter: Integer;
   AScaleCode: String; bNewFee: Boolean);
 var
    LabelDesc: string;
+   bRateItem: boolean;
 begin
+   bRateItem := False;
+   if bNewFee then DisplayMatter(AsMatter);
+   qryScaleCost.close;
+   qryScaleCost.ParambyName('p_code').AsString := AScaleCode;
+   qryScaleCost.Open();
+   try
+      bRateItem := ((qryScaleCost.FieldByName('RATE').AsCurrency <> 0) and
+                    (qryScaleCost.FieldByName('DEFAULTTIME').AsInteger <> 0));
+      LabelDesc := trim(qryScaleCost.FieldByName('UNIT').AsString);
+
+      ScaleCode := AScaleCode;
+      if trim(meMessage.Text) = '' then
+         meMessage.Text := qryScaleCost.FieldByName('DESCR').AsString;
+      if LabelDesc <> '' then
+         liItems.Caption := LabelDesc;
+      if bRateItem then
+      begin
+         neRate.Value := FeeRate('N', cmbMatterFind.Text, dmAxiom.UserID, deStart.Date);
+         neTimeAmount.Value := qryScaleCost.FieldByName('RATE').AsCurrency;
+
+         dfItems.Enabled := (LabelDesc <> '');
+//         neItem.Visible := True;
+         if cmbTemplate.Text <> '' then
+         begin
+            if (dfItems.Enabled = True) then
+               dfItems.Text := '1'
+            else
+               dfItems.Text := '0';
+         end;
+      end
+      else
+      if qryScaleCost.FieldByName('AMOUNT').AsCurrency > 0 then
+      begin
+         neAmount.Value := qryScaleCost.FieldByName('AMOUNT').AsCurrency;
+         neRate.Value := qryScaleCost.FieldByName('AMOUNT').AsCurrency;
+         dfItems.Enabled := False;
+      end
+      else
+      begin
+         if qryScaleCost.FieldByName('RATE').AsCurrency > 0 then
+         begin
+            neRate.Value := qryScaleCost.FieldByName('RATE').AsCurrency;
+            neItem.Value := qryScaleCost.FieldByName('RATE').AsCurrency;
+            dfItems.Enabled := (LabelDesc <> '');
+            if cmbTemplate.Text <> '' then
+            begin
+               if (dfItems.Enabled = True) then
+                  dfItems.Text := '1'
+               else
+                  dfItems.Text := '0';
+            end;
+//            UpdateAmount;
+         end;
+      end;
+
+      if qryScaleCost.FieldByName('ZERO_FEE').AsString = 'N' then
+      begin
+         UpdateAmount;
+         ScaleAmount := neAmount.Value;
+         if neItem.Value <> 0 then
+            CalcTax(neItem.Value)
+         else
+            CalcTax;
+      end
+      else
+      begin
+         neAmount.Value := 0;
+         neRate.Value := 0;
+         neTax.Value := 0;
+      end;
+   finally
+//      qryScaleCost.Close();
+   end;
+
+{
    if bNewFee then DisplayMatter(AsMatter);
    qryScaleCost.ParambyName('p_code').AsString := AScaleCode;
    qryScaleCost.Open();
@@ -615,8 +710,8 @@ begin
 //            lblItems.Visible := (LabelDesc <> '');
             if cmbTemplate.Text <> '' then
             begin
-               if (dfItems.Enabled = True){Visible} then
-                  dfItems.Text := '1'
+               if (dfItems.Enabled = True){Visible then
+ {                 dfItems.Text := '1'
                else
                   dfItems.Text := '0';
             end;
@@ -637,30 +732,50 @@ begin
       end;
    finally
       qryScaleCost.Close();
-   end;
+   end;          }
 end;
 
-procedure TfrmTimeDiaryNew.CalcTax;
+procedure TfrmTimeDiaryNew.CalcTax(AAmount: double);
 var
   dAmount : Double;
 begin
-   dAmount := neAmount.EditValue;
+   if AAmount = 0 then
+      dAmount := neAmount.Value
+   else
+      dAmount := AAmount;
 
-   if (cbTaxType.EditValue = 'GSTIN') then
+   if AAmount = 0 then
    begin
-      if (neAmount.Value = FOldAmount) then
-      begin
-         dAmount := neAmount.Value + neTax.Value;
-      end;    //  end if
-   end  //  end if
+      neTax.Value := TaxCalc(dAmount, '', cbTaxType.EditValue, deStart.Date);
+      neAmount.Value := dAmount;
+   end
    else
    begin
-      if FOldAmount <> 0 then
-         neAmount.Value := FOldAmount;
+      neTax.EditValue := TaxCalc(dAmount, '', cbTaxType.EditValue, deStart.Date);
+      if neItem.Value = 0 then
+      begin
+         neAmount.EditValue := dAmount;
+         neAmount.Value := dAmount;
+      end;
    end;
 
-  neTax.Value := TaxCalc(dAmount, '', cbTaxType.EditValue, deStart.Date);
-  neAmount.Value := dAmount;
+   // task items stuff
+   if AAmount = 0 then
+      dAmount := neItem.Value
+   else
+      dAmount := AAmount;
+
+   if AAmount = 0 then
+   begin
+      neItemTax.Value := TaxCalc(dAmount, '', cbTaxType.EditValue, deStart.Date);
+      neItem.Value := dAmount;
+   end
+   else
+   begin
+      neItemTax.EditValue := TaxCalc(dAmount, '', cbTaxType.EditValue, deStart.Date);
+      neItem.EditValue := dAmount;
+      neItem.Value := dAmount;
+   end;
 end;
 
 procedure TfrmTimeDiaryNew.UpdateAmount(bFromTimeEdit: boolean);
@@ -668,7 +783,25 @@ var
    Hour, Min, Sec, MSec: Word;
    ARate: double;
    sTmp: string;
+   bRateItem: boolean;
 begin
+   bRateItem := False;
+   if (cmbTemplate.Text <> '') and (not VarIsNull(cmbTemplate.EditValue)) then
+   begin
+      if (qryScaleCost.Active = false) then
+      begin
+         qryScaleCost.close;
+         qryScaleCost.ParambyName('p_code').AsString := string(cmbTemplate.EditValue);
+         qryScaleCost.Open();
+      end;
+      try
+         bRateItem := ((qryScaleCost.FieldByName('RATE').AsCurrency <> 0) and
+                       (qryScaleCost.FieldByName('DEFAULTTIME').AsInteger <> 0));
+      finally
+//
+      end;
+   end;
+
    if (neRate.Value = 0) then
    begin
       if (AnsiPos('$', neRate.Text) > 0)  then
@@ -690,7 +823,6 @@ begin
       else
          sTmp := neRate.Text;
 
-
       if neRate.Value <> StrToFloat(sTmp) then
          ARate := StrToFloat(sTmp)
       else
@@ -699,139 +831,145 @@ begin
 
    if (SystemInteger('TIME_UNITS') > 0) then
    begin
-   if ((not liItems.Visible) or (cmbTemplate.Text = '') or
-      (TableCurrency('SCALECOST','CODE',string(cmbTemplate.Text), 'RATE') = 0)) then
-   begin
-      try
-         if ARate > 0 then
-            neAmount.Value := StrToFloat(neUnits.Text) * ARate / (60 / SystemInteger('TIME_UNITS'));
-      except
-         neAmount.Value := 0.00;
-      end;
-      try
-         begin
-            neMinutes.Text := FloatToStr(StrToFloat(neUnits.Text) * SystemInteger('TIME_UNITS'));
-            if not bFromTimeEdit then
+      if ((not liItems.Visible) or (cmbTemplate.Text = '') or
+         (TableCurrency('SCALECOST','CODE',string(cmbTemplate.Text), 'RATE') = 0)) then
+      begin
+         try
+            if ARate > 0 then
+               neAmount.Value := neUnits.Value * ARate / (60 / SystemInteger('TIME_UNITS'));
+         except
+            neAmount.Value := 0.00;
+         end;
+         try
             begin
-               DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
-               if StrToInt(neMinutes.Text) >= 60 then
+               neMinutes.Text := FloatToStr(neUnits.Value * SystemInteger('TIME_UNITS'));
+               if not bFromTimeEdit then
                begin
-                  Min := Min + StrToInt(neMinutes.Text);
-                  if Min <= 60 then
+                  DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
+                  if StrToInt(neMinutes.Text) >= 60 then
                   begin
-                     Min := Min - 60;
-                     Hour := Hour + 1;
+                     Min := Min + StrToInt(neMinutes.Text);
+                     if Min <= 60 then
+                     begin
+                        Min := Min - 60;
+                        Hour := Hour + 1;
+                     end
+                     else
+                     begin
+                        Hour := Hour + Min div 60;
+                        Min := Min mod 60;
+                     end;
+                     teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
+                  end
+                  else
+                  begin
+                     Min := Min + StrToInt(neMinutes.Text);
+                     if Min >= 60 then
+                     begin
+                        Min := Min - 60;
+                        Hour := Hour + 1;
+                     end;
+                     teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
+                  end;
+
+               end;
+            end;
+         except
+           neMinutes.Text := '0';
+         end;
+      end
+      else if (liUnits.Caption = 'Mins:') or (cmbTemplate.Text = '') or
+               (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue), 'RATE') = 0) then
+      begin
+         try
+            if ARate > 0 then
+               neAmount.Value := neUnits.Value * ARate / 60;
+         except
+           neAmount.Value := 0.00;
+         end;
+         try
+           neMinutes.Text := neUnits.Text;
+           if not bFromTimeEdit then
+           begin
+              DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
+              if StrToInt(neMinutes.Text) < 60 then
+              begin
+                 Min := Min + StrToInt(neMinutes.Text);
+                 if Min <= 60 then
+                 begin
+                    Min := Min - 60;
+                    Hour := Hour + 1;
+                 end
+                 else
+                 begin
+                    Hour := Hour + Min div 60;
+                    Min := Min mod 60;
+                 end;
+                 teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
+              end;
+           end;
+         except
+           neMinutes.Text := '0';
+         end;
+      end
+      else if (bRateItem = True) and (string(cmbTemplate.EditValue) <> '') then
+      begin
+         try
+            if ARate > 0 then
+            begin
+               neItem.Value := StrToFloat(dfItems.Text) * neTimeAmount.Value;
+               neAmount.Value := neUnits.Value * neRate.Value / (60 / SystemInteger('TIME_UNITS'));
+            end;
+          except
+             neItem.Value := 0.00;
+         end;
+         try
+            if VarIsNull(neUnits.Value) = False then
+            begin
+               neMinutes.Text := FloatToStr(neUnits.Value * SystemInteger('TIME_UNITS'));
+               if not bFromTimeEdit then
+               begin
+                  DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
+                  if StrToInt(neMinutes.Text) < 60 then
+                  begin
+                     Min := Min + StrToInt(neMinutes.Text);
+                     if Min >= 60 then
+                     begin
+                        Min := Min - 60;
+                        Hour := Hour + 1;
+                     end;
                   end
                   else
                   begin
                      Hour := Hour + Min div 60;
                      Min := Min mod 60;
                   end;
-                  teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
-               end
-               else
-               begin
-                  Min := Min + StrToInt(neMinutes.Text);
-                  if Min >= 60 then
-                  begin
-                     Min := Min - 60;
-                     Hour := Hour + 1;
-                  end;
-                  teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
+                   teEnd.Time := EncodeTime(Hour, Min, Sec, MSec);
                end;
-
             end;
+         except
+             neMinutes.Text := '0';
          end;
-      except
-        neMinutes.Text := '0';
-      end;
-    end
-    else if (liUnits.Caption = 'Mins:') or (cmbTemplate.Text = '') or
-            (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue), 'RATE') = 0) then
-    begin
-      try
-         if ARate > 0 then
-            neAmount.Value := StrToFloat(neUnits.Text) * ARate / 60;
-      except
-        neAmount.Value := 0.00;
-      end;
-      try
-        neMinutes.Text := neUnits.Text;
-        if not bFromTimeEdit then
-        begin
-           DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
-           if StrToInt(neMinutes.Text) < 60 then
-           begin
-              Min := Min + StrToInt(neMinutes.Text);
-              if Min <= 60 then
-              begin
-                 Min := Min - 60;
-                 Hour := Hour + 1;
-              end
-              else
-              begin
-                 Hour := Hour + Min div 60;
-                 Min := Min mod 60;
-              end;
-              teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
-           end;
-        end;
-      except
-        neMinutes.Text := '0';
-      end;
-    end
-    else if (liItems.Visible) and (string(cmbTemplate.EditValue) <> '') then
-    begin
-       try
-          if ARate > 0 then
-            neAmount.Value := StrToFloat(dfItems.Text) * ARate;
-       except
-          neAmount.Value := 0.00;
-       end;
-       try
-          neMinutes.Text := IntToStr(StrToInt(neUnits.Text) * SystemInteger('TIME_UNITS'));
-          if not bFromTimeEdit then
-          begin
-             DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
-             if StrToInt(neMinutes.Text) < 60 then
-             begin
-                Min := Min + StrToInt(neMinutes.Text);
-                if Min <= 60 then
-                begin
-                   Min := Min - 60;
-                   Hour := Hour + 1;
-                end;
-             end
-             else
-             begin
-                Hour := Hour + Min div 60;
-                Min := Min mod 60;
-             end;
-//             teEnd.Time := EncodeTime(Hour,Min,Sec, MSec);
-          end;
-       except
-          neMinutes.Text := '0';
-       end;
-    end
-    else
-    begin
-       try
-         if ARate > 0 then
-            neAmount.Value := StrToFloat(neUnits.Text) * ARate;
-       except
-         neAmount.Value := 0.00;
-       end;
-    end;
-    CalcTax;
-    end
-    else
+      end
+      else
       begin
-        if bError = false then
-          begin
-            bError := true;
-            MessageDlg('System Time Units not set in Systemfile', mtError, [mbOK], 0);
+          try
+            if ARate > 0 then
+               neAmount.Value := neUnits.Value * ARate;
+          except
+            neAmount.Value := 0.00;
           end;
       end;
+      CalcTax;
+   end
+   else
+   begin
+      if bError = false then
+      begin
+         bError := true;
+         MessageDlg('System Time Units not set in Systemfile', mtError, [mbOK], 0);
+      end;
+   end;
 end;
 
 procedure TfrmTimeDiaryNew.teStartPropertiesChange(Sender: TObject);
@@ -1074,7 +1212,7 @@ end;
 procedure TfrmTimeDiaryNew.neUnitsPropertiesChange(Sender: TObject);
 begin
   inherited;
-//  UpdateAmount;
+  UpdateAmount;
    Modified := True;
 end;
 
