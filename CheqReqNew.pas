@@ -227,7 +227,8 @@ begin
 end;
 
 procedure TfrmCheqReqNew.DisplayBill(sBill,sBank,sFile : String;cOwing : Currency);
-var cTrust : Currency;
+var
+   cTrust : Currency;
 begin
     if edtBillRef.Visible then
       edtBillRef.Text := sBill
@@ -293,107 +294,91 @@ end;
 
 procedure TfrmCheqReqNew.DisplayCheqReq(iCheqReq : integer);
 begin
-   with qryCheqReq do
-   begin
-      Close;
-      ParamByName('NCHEQREQ').AsInteger := iCheqReq;
-      Open;
-      ToggleFields(True);
-      if not IsEmpty then
+   try
+      cmbExpenseType.Properties.OnChange := nil;
+      with qryCheqReq do
       begin
-         if FieldByName('FILEID').AsString <> '' then
-            DisplayFile(FieldByName('FILEID').AsString);
-         dtpReqDate.Date := FieldByName('REQDATE').AsDateTime;
-         cmbBank.EditValue := FieldByName('BANK').AsString;
-         cmbBank.Properties.OnChange(Self); //  OnChange(Self);
-         //cbBank.Enabled := False;
-         cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(FieldByName('TAXCODE').AsString);
-         if FieldByName('LEDGER').AsString <> '' then
-            DisplayLedger(FieldByName('LEDGER').AsString);
-         tbPayee.Text := FieldByName('PAYEE').AsString;
-         tbDesc.Text := FieldByName('DESCR').AsString;
-         neAmount.EditValue := FieldByName('TOTAL').AsCurrency;  //FieldByName('AMOUNT').AsCurrency;
-         fcCurrentAmount := neAmount.EditValue;
-         neTax.EditValue := FieldByName('TAX').AsCurrency;
-         cOriginalAmount := FieldByName('AMOUNT').AsCurrency;
-         cOriginalTax := FieldByName('TAX').AsCurrency;
-         cmbAuthor.EditValue := FieldByName('AUTHOR').AsString;
-         cmbExpenseType.EditValue := FieldByName('SUNDRYTYPE').AsString;
-         mmoNotes.Text := FieldByName('NOTE').AsString;
-         chkInvoiceSupplied.Checked := FieldByName('INVOICESUPPLIED').AsString = 'Y';
-         dfSlipNo.Text := qryCheqReq.FieldByName('CREDITOR_INVOICE').AsString;
-         lblNMemo.Caption := FieldByName('NMEMO').AsString;
-         FNName := qryCheqReq.FieldByName('NNAME').AsInteger;
-         chkBill.State := cbsUnChecked;
-         chkFunds.State := cbsUnChecked;
-         teChequeNo.Text := qryCheqReq.FieldByName('CHQNO').AsString;
-         if (FieldByName('ANTICIPATED').AsString = 'Y') and
-            (FieldByName('HELD').AsString = 'W') then
+         Close;
+         ParamByName('NCHEQREQ').AsInteger := iCheqReq;
+         Open;
+         ToggleFields(True);
+         if not IsEmpty then
          begin
-            chkBill.State := cbsChecked;
-            chkFunds.State := cbsChecked;
-         end
-         else
+            if FieldByName('FILEID').AsString <> '' then
+               DisplayFile(FieldByName('FILEID').AsString);
+            dtpReqDate.Date := FieldByName('REQDATE').AsDateTime;
+            cmbBank.EditValue := FieldByName('BANK').AsString;
+            cmbBank.Properties.OnChange(Self); //  OnChange(Self);
+            //cbBank.Enabled := False;
+            cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(FieldByName('TAXCODE').AsString);
+            if FieldByName('LEDGER').AsString <> '' then
+               DisplayLedger(FieldByName('LEDGER').AsString);
+            tbPayee.Text := FieldByName('PAYEE').AsString;
+            tbDesc.Text := FieldByName('DESCR').AsString;
+            neAmount.EditValue := FieldByName('AMOUNT').AsCurrency;   //  this value has to be amount not total AES 19/9/2019   FieldByName('TOTAL').AsCurrency;  //FieldByName('AMOUNT').AsCurrency;
+            fcCurrentAmount := neAmount.EditValue;
+            neTax.EditValue := FieldByName('TAX').AsCurrency;
+            cOriginalAmount := FieldByName('AMOUNT').AsCurrency;
+            cOriginalTax := FieldByName('TAX').AsCurrency;
+            cmbAuthor.EditValue := FieldByName('AUTHOR').AsString;
+            cmbExpenseType.EditValue := FieldByName('SUNDRYTYPE').AsString;
+            mmoNotes.Text := FieldByName('NOTE').AsString;
+            chkInvoiceSupplied.Checked := FieldByName('INVOICESUPPLIED').AsString = 'Y';
+            dfSlipNo.Text := qryCheqReq.FieldByName('CREDITOR_INVOICE').AsString;
+            lblNMemo.Caption := FieldByName('NMEMO').AsString;
+            FNName := qryCheqReq.FieldByName('NNAME').AsInteger;
+            chkBill.State := cbsUnChecked;
+            chkFunds.State := cbsUnChecked;
+            teChequeNo.Text := qryCheqReq.FieldByName('CHQNO').AsString;
             if (FieldByName('ANTICIPATED').AsString = 'Y') and
-               (FieldByName('HELD').AsString <> 'W') then
-               chkBill.State := cbsChecked;
-
-         if FieldByName('BILLED').AsString = 'N' then
-//           chkBill.State := cbsChecked
-         else
-         begin
-            if FieldByName('NMEMO').AsString <> '' then
+               (FieldByName('HELD').AsString = 'W') then
             begin
-               chkBill.Enabled := False;
-               chkFunds.Enabled := False;
-               chkFunds.StyleDisabled.Color := Self.Color;
-               chkBill.StyleDisabled.Color := Self.Color;
-               if chkDeposit.Visible then
-                  chkDeposit.StyleDisabled.Color := Self.Color;
+               chkBill.State := cbsChecked;
+               chkFunds.State := cbsChecked;
+            end
+            else
+               if (FieldByName('ANTICIPATED').AsString = 'Y') and
+                  (FieldByName('HELD').AsString <> 'W') then
+                  chkBill.State := cbsChecked;
+
+            if FieldByName('BILLED').AsString = 'N' then
+//              chkBill.State := cbsChecked
+            else
+            begin
+               if FieldByName('NMEMO').AsString <> '' then
+               begin
+                  chkBill.Enabled := False;
+                  chkFunds.Enabled := False;
+                  chkFunds.StyleDisabled.Color := Self.Color;
+                  chkBill.StyleDisabled.Color := Self.Color;
+                  if chkDeposit.Visible then
+                     chkDeposit.StyleDisabled.Color := Self.Color;
+               end;
             end;
-         end;
 
-         if FieldByName('HELD').AsString = 'Y' then
-            chkHeld.State := cbsChecked
-         else if FieldByName('HELD').AsString = 'W' then
-         begin
-            chkFunds.State := cbsChecked;
-            chkFunds.OnClick(Self);
-         end
-         else
-            chkHeld.State := cbsUnChecked;
+            if FieldByName('HELD').AsString = 'Y' then
+               chkHeld.State := cbsChecked
+            else if FieldByName('HELD').AsString = 'W' then
+            begin
+               chkFunds.State := cbsChecked;
+               chkFunds.OnClick(Self);
+            end
+            else
+               chkHeld.State := cbsUnChecked;
 
-         if qryCheqReq.FieldByName('DEP_ACCOUNT').AsString = 'Y' then
-         begin
-            cxCBAccountType.Text := qryCheqReq.FieldByName('DEP_ACCOUNT_TYPE').AsString;
-            chkDeposit.EditValue := qryCheqReq.FieldByName('DEP_ACCOUNT').AsString;
+            if qryCheqReq.FieldByName('DEP_ACCOUNT').AsString = 'Y' then
+            begin
+               cxCBAccountType.Text := qryCheqReq.FieldByName('DEP_ACCOUNT_TYPE').AsString;
+               chkDeposit.EditValue := qryCheqReq.FieldByName('DEP_ACCOUNT').AsString;
 
-            lblAccountType.Visible := True;
-            cxCBAccountType.Visible := True;
-            lblBillNo.Visible := False;
-            edtBillRef.Visible := false;
-            cmbBills.Visible := False;
-         end;
+               lblAccountType.Visible := True;
+               cxCBAccountType.Visible := True;
+               lblBillNo.Visible := False;
+               edtBillRef.Visible := false;
+               cmbBills.Visible := False;
+            end;
 
-{         ToggleFields(False);
-         if (qryCheqReq.FieldByName('NCHEQUE').IsNull) and
-            (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and
-            (qryCheqReq.FieldByName('NMEMO').IsNull) then
-         begin
-            neAmount.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
-            cbTaxType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
-            tbPayee.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
-            cmbExpenseType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
-         end;  }
-
-         chkFunds.Enabled := False;
-         chkBill.Enabled := False;
-
-         //pb- if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsInteger <> 0) then
-         if (FieldByName('BILLED').AsString = 'Y') and
-             FieldByName('invoicedate').IsNull = False {(FieldByName('NMEMO').AsString <> '')} then
-         begin
-            ToggleFields(False);
+{            ToggleFields(False);
             if (qryCheqReq.FieldByName('NCHEQUE').IsNull) and
                (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and
                (qryCheqReq.FieldByName('NMEMO').IsNull) then
@@ -402,30 +387,51 @@ begin
                cbTaxType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
                tbPayee.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
                cmbExpenseType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
-            end;
+            end;  }
 
-            chkHeld.Enabled := False;
-            chkFunds.StyleDisabled.Color := Self.Color;
-            chkHeld.StyleDisabled.Color := Self.Color;
-            chkBill.StyleDisabled.Color := Self.Color;
-            if chkDeposit.Visible then
-               chkDeposit.StyleDisabled.Color := Self.Color;
-            tbFile.Properties.Buttons.Items[0].Visible := False;
+            chkFunds.Enabled := False;
+            chkBill.Enabled := False;
 
-            lblInvoiceMsg.Visible := True;
-            lblInvoice.Visible := True;
+            //pb- if (FieldByName('BILLED').AsString = 'Y') and (FieldByName('NMEMO').AsInteger <> 0) then
+            if (FieldByName('BILLED').AsString = 'Y') and
+                FieldByName('invoicedate').IsNull = False {(FieldByName('NMEMO').AsString <> '')} then
+            begin
+               ToggleFields(False);
+               if (qryCheqReq.FieldByName('NCHEQUE').IsNull) and
+                  (qryCheqReq.FieldByName('REV_NCHEQREQ').IsNull) and
+                  (qryCheqReq.FieldByName('NMEMO').IsNull) then
+               begin
+                  neAmount.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
+                  cbTaxType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
+                  tbPayee.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
+                  cmbExpenseType.Enabled := dmAxiom.Security.CheqReq.ChangeDetails;
+               end;
 
-            lblInvoice.Caption := TableString('NMEMO', 'NMEMO', FieldByName('NMEMO').AsInteger, 'REFNO');
-            cmbBills.EditValue := lblInvoice.Caption;
-            edtBillRef.Text := lblInvoice.Caption;
+               chkHeld.Enabled := False;
+               chkFunds.StyleDisabled.Color := Self.Color;
+               chkHeld.StyleDisabled.Color := Self.Color;
+               chkBill.StyleDisabled.Color := Self.Color;
+               if chkDeposit.Visible then
+                  chkDeposit.StyleDisabled.Color := Self.Color;
+               tbFile.Properties.Buttons.Items[0].Visible := False;
+
+               lblInvoiceMsg.Visible := True;
+               lblInvoice.Visible := True;
+
+               lblInvoice.Caption := TableString('NMEMO', 'NMEMO', FieldByName('NMEMO').AsInteger, 'REFNO');
+               cmbBills.EditValue := lblInvoice.Caption;
+               edtBillRef.Text := lblInvoice.Caption;
+            end
+            else
+            if ((FieldByName('BILLED').AsString = 'Y') and
+               (FieldByName('NMEMO').IsNull = False)) then
+               ToggleFields(False);
          end
          else
-         if ((FieldByName('BILLED').AsString = 'Y') and
-            (FieldByName('NMEMO').IsNull = False)) then
-            ToggleFields(False);
-      end
-      else
-         Self.Close;
+            Self.Close;
+      end;
+   finally
+      cmbExpenseType.Properties.OnChange := cbExpenseTypeChange;
    end;
 end;
 
