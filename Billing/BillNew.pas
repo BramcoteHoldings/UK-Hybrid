@@ -1343,7 +1343,7 @@ begin
       then
       begin
         neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                   qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxSund := neSundTax.Value;
         neSundTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 4] := Format('%m', [neSundTax.Value]);
