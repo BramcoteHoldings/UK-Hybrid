@@ -1252,7 +1252,7 @@ begin
     qryNew.SQL.Text := 'SELECT SUM(AMOUNT) AS TOT FROM CHEQREQ WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
     // QuotedStr(TableString('MATTER', 'NMATTER', qryInvoice.FieldByName('NMATTER').AsInteger, 'FILEID')) +
       ' AND ((NMEMO is null AND BILLED = ''N'' AND TRUST <> ''T'') OR ' + ' (NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger) + '))' +
-      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 /*And ANTICIPATED = ''Y''*/ ';
+      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 AND CONVERTED = ''N'' ';
     qryNew.Open;
     if not qryNew.IsEmpty
     then
