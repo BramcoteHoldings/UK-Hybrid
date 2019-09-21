@@ -1,9 +1,17 @@
 Insight Build 9.2.0
 
+Build 39
+========
+- Fixed issue with Trust cheque creation from matter applying tax
+- Fixed issue with recording time base on Fee Templates in Time Diary
+- Fixed issue with using the "Add Tax" option when creating a bill
+
+
 Build 38
 ========
 - Fixed problem with checkbox selection in TimeSheet
 - Fixed problem with creating a Bill Credit Note 
+
 
 Build 36 - 37
 =============

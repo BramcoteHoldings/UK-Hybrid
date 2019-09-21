@@ -261,7 +261,7 @@ object frmInvoice: TfrmInvoice
     Caption = 'Expected Payment'
   end
   object Label14: TLabel
-    Left = 515
+    Left = 508
     Top = 36
     Width = 35
     Height = 15
@@ -1989,7 +1989,7 @@ object frmInvoice: TfrmInvoice
     TabOrder = 33
   end
   object lblMatter: TcxLabel
-    Left = 554
+    Left = 549
     Top = 36
     AutoSize = False
     ParentFont = False
@@ -1997,7 +1997,7 @@ object frmInvoice: TfrmInvoice
     Properties.Alignment.Horz = taRightJustify
     Properties.ShowAccelChar = False
     Height = 19
-    Width = 90
+    Width = 95
     AnchorX = 644
   end
   object grpUnprocessed: TGroupBox
@@ -3975,9 +3975,9 @@ object frmInvoice: TfrmInvoice
       OnClick = tbtnEditClick
     end
     object tbtnAddGST: TdxBarButton
-      Caption = 'Add GST'
+      Caption = 'Add Tax'
       Category = 0
-      Hint = 'Add GST'
+      Hint = 'Add Tax'
       Visible = ivAlways
       OnClick = tbtnAddGSTClick
     end

@@ -846,22 +846,18 @@ object frmTimeDiary: TfrmTimeDiary
     OnBeforeEditing = SchedulerTimeDiaryBeforeEditing
     OnBeforeSizingEvent = SchedulerTimeDiaryBeforeSizingEvent
     OnGetEventDisplayText = SchedulerTimeDiaryGetEventDisplayText
-    ExplicitTop = 51
-    ExplicitHeight = 698
     Splitters = {
-      010000009F000000A9000000A4000000A900000001000000AE000000B6020000}
+      010000008E0000009000000093000000900000000100000095000000B6020000}
     StoredClientBounds = {0100000001000000E6040000B6020000}
     object pnlControl: TPanel
       Left = 0
       Top = 0
-      Width = 168
-      Height = 530
+      Width = 143
+      Height = 547
       Align = alClient
       BevelOuter = bvNone
       Color = clWhite
       TabOrder = 0
-      ExplicitWidth = 143
-      ExplicitHeight = 243
       object cxMemo1: TcxMemo
         Left = 0
         Top = 0
@@ -880,23 +876,21 @@ object frmTimeDiary: TfrmTimeDiary
         StyleFocused.LookAndFeel.Kind = lfOffice11
         StyleHot.LookAndFeel.Kind = lfOffice11
         TabOrder = 0
-        Height = 372
-        Width = 168
+        Height = 389
+        Width = 143
       end
       object Panel1: TPanel
         Left = 0
-        Top = 372
-        Width = 168
+        Top = 389
+        Width = 143
         Height = 158
         Align = alBottom
         BevelInner = bvRaised
         BorderStyle = bsSingle
         ParentColor = True
         TabOrder = 1
-        ExplicitTop = 85
-        ExplicitWidth = 143
         DesignSize = (
-          164
+          139
           154)
         object Label1: TLabel
           Left = 5
@@ -1162,7 +1156,6 @@ object frmTimeDiary: TfrmTimeDiary
     Height = 26
     Align = dalTop
     BarManager = dxBarManager1
-    ExplicitTop = 50
   end
   object DBStorage: TcxSchedulerDBStorage
     Resources.Items = <>
@@ -1230,6 +1223,12 @@ object frmTimeDiary: TfrmTimeDiary
       end
       item
         FieldName = 'MATLOCATE'
+      end
+      item
+        FieldName = 'ITEM_AMOUNT'
+      end
+      item
+        FieldName = 'TASK_TAX'
       end>
     DataSource = dsDiary
     FieldNames.Caption = 'CAPTION'
@@ -1311,7 +1310,8 @@ object frmTimeDiary: TfrmTimeDiary
       '         ft.end_date, ft.items, ft.uniqueid, ft.billtype,'
       
         '         FT.processed, ft.nfee, ft.notes, ft.program_name, ft.ve' +
-        'rsion'
+        'rsion, ft.item_amount,'
+      '         ft.task_tax'
       '    FROM feetmp ft, matter m'
       '   WHERE ft.author = :empcode'
       '     AND ft.nmatter = m.nmatter(+)'
@@ -3607,7 +3607,7 @@ object frmTimeDiary: TfrmTimeDiary
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Time Diary'
-      ReportDocument.CreationDate = 43605.559129675920000000
+      ReportDocument.CreationDate = 43725.421614745370000000
       ReportDocument.Creator = 'Insight'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3935,6 +3935,7 @@ object frmTimeDiary: TfrmTimeDiary
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3967,7 +3968,7 @@ object frmTimeDiary: TfrmTimeDiary
     XLSSettings.WorksheetName = 'Report'
     Left = 887
     Top = 492
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plFeeTmpRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -5020,6 +5021,7 @@ object frmTimeDiary: TfrmTimeDiary
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -5054,7 +5056,7 @@ object frmTimeDiary: TfrmTimeDiary
     XLSSettings.WorksheetName = 'Report'
     Left = 447
     Top = 604
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plTmpProcess'
     object ppHeaderBand2: TppHeaderBand
