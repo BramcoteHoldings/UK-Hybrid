@@ -92,6 +92,10 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -447,7 +451,7 @@ object frmCheqReqs: TfrmCheqReqs
       object Label1: TLabel
         Left = 8
         Top = 57
-        Width = 40
+        Width = 39
         Height = 15
         Caption = 'Date To'
         Transparent = True
