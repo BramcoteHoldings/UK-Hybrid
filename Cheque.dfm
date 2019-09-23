@@ -849,7 +849,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43725.5886161806d
+    EditValue = 43728.4019548843d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -884,7 +884,7 @@ object frmCheque: TfrmCheque
   end
   object gbChequeTemplate: TcxGroupBox
     Left = 513
-    Top = 484
+    Top = 483
     Anchors = [akRight, akBottom]
     Caption = 'Template'
     TabOrder = 7

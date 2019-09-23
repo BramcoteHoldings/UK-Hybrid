@@ -14139,9 +14139,9 @@ function ShowTax(pdAmount: double; var dgstFree: double; sType, sFileID, sDefaul
                  nNMatter, nNMemo: integer; dTaxDate: TDateTime): double;
 var
 //  dgstFree : Double;
-  dAmount   : Double;
-  dTax      : Double;
-  IsBillItem: string;
+   dAmount   : Double;
+   dTax      : Double;
+   IsBillItem: string;
 begin
    dAmount := 0;
    dTax  := 0;

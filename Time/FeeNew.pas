@@ -126,6 +126,7 @@ type
     neMinutes: TcxTextEdit;
     Label9: TLabel;
     Label16: TLabel;
+    edMatterFind: TcxButtonEdit;
     procedure btnOkClick(Sender: TObject);
     procedure neRateChange(Sender: TObject);
     procedure neUnitsChange(Sender: TObject);
@@ -176,6 +177,12 @@ type
     procedure mmoNotesKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cmbMatterFindKeyPress(Sender: TObject; var Key: Char);
     procedure cmbMatterFindPropertiesEditValueChanged(Sender: TObject);
+    procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure edMatterFindKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edMatterFindPropertiesValidate(Sender: TObject;
+      var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
 
   private
     { Private declarations }
@@ -217,6 +224,8 @@ type
     procedure SetUnitsValue(AValue: string);
     procedure SetDescriptionValue(AValue: string);
     procedure SetTaskValue(AValue: string);
+    procedure ValidateMatter;
+    procedure LoadMatter(var AFileID: string);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent; const Editing: boolean);
@@ -240,24 +249,28 @@ implementation
 
 uses
   MiscFunc, AxiomData, MSearch, ScaleCosts, citfunc, Variants,glComponentUtil, dxSpellCheckerCore,
-  dxSpellChecker;
+  dxSpellChecker, GenericSearch;
 
 {$R *.DFM}
+
+var
+   iMtrSearchLimit:   integer;
 
 // AES 06/09/2017 Added constructor so that we can pass value that determines if editing.
 constructor TfrmFeeNew.Create(AOwner: TComponent; const Editing: boolean);
 begin
-  FEditing := Editing;
-  inherited Create(AOwner);
+   FEditing := Editing;
+   inherited Create(AOwner);
 end;
 
 procedure TfrmFeeNew.DisplayMatter(sMatter: string; AIsEditing: Boolean; AMatterChanged: Boolean);
 var
   lsAuthor : String;
 begin
-   cmbMatterFind.EditValue := sMatter;
-   lblClient.Caption := MatterString(cmbMatterFind.EditText, 'TITLE');
-   lblMatterDesc.Caption := MatterString(cmbMatterFind.EditText, 'SHORTDESCR');
+   edMatterFind.Text := sMatter;
+//   edMatterFind.EditText := sMatter;
+   lblClient.Caption := MatterString(sMatter, 'TITLE');
+   lblMatterDesc.Caption := MatterString(sMatter, 'SHORTDESCR');
 
    PopulateMatterOnly;
 
@@ -265,75 +278,75 @@ begin
 
    if(not AIsEditing) then
    begin
-     if not (TableString('EMPLOYEE', 'CODE', dmAxiom.UserID, 'ISFEEEARNER') = 'Y') then
-     begin
-       lsAuthor := MatterString(cmbMatterFind.EditText, 'AUTHOR');
+      if not (TableString('EMPLOYEE', 'CODE', dmAxiom.UserID, 'ISFEEEARNER') = 'Y') then
+      begin
+         lsAuthor := MatterString(edMatterFind.Text, 'AUTHOR');
 
-       if (lsAuthor <> '') then
-       begin
-           qFeeEarners.Close;
-           qFeeEarners.SQL.Clear;
-           qFeeEarners.SQL.Text := strFeeEarners.Strings.Text;
-           qFeeEarners.ParamByName('Code').AsString := lsAuthor;
-           qFeeEarners.Open;
-       end;    //  end if
+         if (lsAuthor <> '') then
+         begin
+            qFeeEarners.Close;
+            qFeeEarners.SQL.Clear;
+            qFeeEarners.SQL.Text := strFeeEarners.Strings.Text;
+            qFeeEarners.ParamByName('Code').AsString := lsAuthor;
+            qFeeEarners.Open;
+         end;    //  end if
 
  //      cbAuthor.KeyValue := lsAuthor;
 
-       cbAuthor.EditValue := lsAuthor;
-       cbAuthorPropertiesChange(Self);
+         cbAuthor.EditValue := lsAuthor;
+         cbAuthorPropertiesChange(Self);
 
-       if (cmbTemplate.Text = '') or (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') = 0) then
-          neRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
+         if (cmbTemplate.Text = '') or (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') = 0) then
+            neRate.Value := FeeRate('N', edMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
 
        // comented by AES 03/07/2006 replaced by above two lines.
 //       neRate.Value := TableCurrency('EMPLOYEE', 'CODE', String(cbAuthor.EditValue), 'RATE');
 
-       cbDept.EditValue := TableString('EMPLOYEE', 'CODE', String(cbAuthor.EditValue), 'DEPT');
-       cbFeeBasis.EditValue := MatterString(cmbMatterFind.EditText, 'FEEBASIS');
-       cbTaxType.EditValue := MatterString(cmbMatterFind.EditText, 'FEE_TAX_BASIS');
+         cbDept.EditValue := TableString('EMPLOYEE', 'CODE', String(cbAuthor.EditValue), 'DEPT');
+         cbFeeBasis.EditValue := MatterString(edMatterFind.Text, 'FEEBASIS');
+         cbTaxType.EditValue := MatterString(edMatterFind.Text, 'FEE_TAX_BASIS');
  //      cbDeptClick(Self);
-       UpdateAmount;
-       CalcRate;
-     end
-     else
-     begin
+         UpdateAmount;
+         CalcRate;
+      end
+      else
+      begin
 //       cbAuthor.EditValue := dmAxiom.UserID;
 //       cbAuthorChange(Self);
 //       if (cmbTemplate.Text = '') or ((TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') <> 0) and
 //          (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
 //          neRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
 
-       cbFeeBasis.EditValue := MatterString(cmbMatterFind.EditText, 'FEEBASIS');
-       cbTaxType.EditValue := MatterString(cmbMatterFind.EditText, 'FEE_TAX_BASIS');
-       //added by AES 08/10/2008
-       cbAuthorPropertiesChange(Self);
-       dtpStartTime.Time := GetTime;
-       dtpEndTime.Time := GetTime;
-     end;
+         cbFeeBasis.EditValue := MatterString(edMatterFind.Text, 'FEEBASIS');
+         cbTaxType.EditValue := MatterString(edMatterFind.Text, 'FEE_TAX_BASIS');
+         //added by AES 08/10/2008
+         cbAuthorPropertiesChange(Self);
+         dtpStartTime.Time := GetTime;
+         dtpEndTime.Time := GetTime;
+      end;
 //     CalcRate;
-     if Self.Visible then
-        cmbTemplate.SetFocus;
+      if Self.Visible then
+         cmbTemplate.SetFocus;
 //       mmoDesc.SetFocus;
       dtpEndTime.DateTime := IncMinute(dtpStartTime.DateTime, StrToInt(neMinutes.Text));
-
    end;
    if AMatterChanged then
    begin
       if (cmbTemplate.Text = '') then
+      begin
          try
             if (((TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'nvl(AMOUNT,0) as AMOUNT') <> 0) or
                (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'nvl(RATE,0) as RATE') <> 0)) and
                (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
-               neRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
+               neRate.Value := FeeRate('N', edMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
          except
-           neRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
+           neRate.Value := FeeRate('N', edMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
          end;
 
-      cbFeeBasis.EditValue := MatterString(cmbMatterFind.EditText, 'FEEBASIS');
-      cbTaxType.EditValue := MatterString(cmbMatterFind.EditText, 'FEE_TAX_BASIS');
+         cbFeeBasis.EditValue := MatterString(edMatterFind.Text, 'FEEBASIS');
+         cbTaxType.EditValue := MatterString(edMatterFind.Text, 'FEE_TAX_BASIS');
+      end;
    end;
-
 end;
 
 procedure TfrmFeeNew.DisplayFee(iFee : integer; AIsEditing: Boolean);
@@ -392,7 +405,7 @@ begin
          end;
 
  //        teMatter.Properties.Buttons.Items[0].Visible := (FieldByName('BILLED').AsString <> 'Y') and (FieldByName('NMEMO').AsInteger = 0);
-         cmbMatterFind.Enabled := (FieldByName('BILLED').AsString <> 'Y') and (FieldByName('NMEMO').AsInteger = 0);
+         edMatterFind.Enabled := (FieldByName('BILLED').AsString <> 'Y') and (FieldByName('NMEMO').AsInteger = 0);
 // AES 06/09/2017  added this to disable any events when populating existing fee
          if FEditing = True then
          begin
@@ -510,12 +523,12 @@ begin
             MatterUpdate(qryFee.FieldByName('NMATTER').AsInteger, 'UNBILL_FEES', qryFee.FieldByName('AMOUNT').AsCurrency)
          else
          begin
-            if FOldFileID <> cmbMatterFind.EditText then
+            if FOldFileID <> edMatterFind.Text then
             begin
                // Take this amount off the old matter
                MatterUpdate(TableInteger('MATTER', 'FILEID', FOldFileID, 'NMATTER'), 'UNBILL_FEES', 0 - (FOldAmount + FOldAmountTax));
                // And put it on the new
-               MatterUpdate(TableInteger('MATTER', 'FILEID', cmbMatterFind.EditText, 'NMATTER'), 'UNBILL_FEES', neAmount.Value + neTax.Value);
+               MatterUpdate(TableInteger('MATTER', 'FILEID', edMatterFind.Text, 'NMATTER'), 'UNBILL_FEES', neAmount.Value + neTax.Value);
             end
             else if FOldAmount <> qryFee.FieldByName('AMOUNT').AsCurrency then
                MatterUpdate(qryFee.FieldByName('NMATTER').AsInteger, 'UNBILL_FEES', qryFee.FieldByName('AMOUNT').AsCurrency - (FOldAmount + FOldAmountTax));
@@ -527,7 +540,7 @@ begin
          begin
             ANewDocName := SystemString('DRAG_DEFAULT_DIRECTORY')+ '\File Note - ' + qryFee.FieldByName('NFEE').AsString + '_'+
                                      cbAUTHOR.EditValue + '.pdf';
-            AParsedDocName := ParseMacros(ANewDocName, TableInteger('MATTER','FILEID',cmbMatterFind.Text,'NMATTER'));
+            AParsedDocName := ParseMacros(ANewDocName, TableInteger('MATTER','FILEID',edMatterFind.Text,'NMATTER'));
             AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
             // check directory exists, if not create it
             if (DirectoryExists(AParsedDir) = False) then
@@ -543,7 +556,7 @@ begin
                ppFileNoteRpt.Print;
             finally
                SaveFileNotesToDoc(dtpCREATED.Date, mmoNOTES.Text, mmoDesc.Text,
-                                  cmbMatterFind.Text, cbAUTHOR.EditValue, AParsedDocName, qryFee.FieldByName('NFEE').AsInteger);
+                                  edMatterFind.Text, cbAUTHOR.EditValue, AParsedDocName, qryFee.FieldByName('NFEE').AsInteger);
             end;
 
             if cbPrint.Checked = True then
@@ -601,7 +614,7 @@ begin
    if not bOk then
       exit;
 
-   if (cmbMatterFind.EditText = '') AND (icmbType.EditValue = 'M') then
+   if (edMatterFind.Text = '') AND (icmbType.EditValue = 'M') then
       sTmp := sTmp + '       Matter' + Chr(13);
    if cbAuthor.EditValue = '' then
       sTmp := '       Author Code' + Chr(13);
@@ -632,7 +645,7 @@ begin
       ((TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') <> 0) and
       (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
 //      if cmbTemplate.Text = '' then
-      neRate.Value := FeeRate(cbFeeBasis.EditValue, cmbMatterFind.EditText, cbAuthor.EditValue, dtpCreated.Date);
+      neRate.Value := FeeRate(cbFeeBasis.EditValue, edMatterFind.Text, cbAuthor.EditValue, dtpCreated.Date);
    UpdateAmount;
 end;
 
@@ -842,6 +855,7 @@ begin
    cbAuthorChange(Self);
  //  cbDeptClick(Self);
    cbTaxTypeChange(Self);   }
+   iMtrSearchLimit := SystemInteger('MTRSEARCHLIMIT');
    bMatterValidated := False;
    if FEditing then
    begin
@@ -875,7 +889,7 @@ begin
   try
     if LScaleCosts.ShowModal = mrOK then
       begin
-        CreateScale(cmbMatterFind.EditText,0,LScaleCosts.qryScaleCosts.FieldByName('CODE').AsString, False);
+        CreateScale(edMatterFind.Text,0,LScaleCosts.qryScaleCosts.FieldByName('CODE').AsString, False);
         if (neAmount.Value <> FEnterAmount) then
           CalcTax;
 
@@ -1023,7 +1037,7 @@ begin
    qryPracNum.Open;
    DefaultTax := get_default_gst('Fee');
    if DefaultTax = '' then
-     DefaultTax := dmAxiom.DefaultTax;
+      DefaultTax := dmAxiom.DefaultTax;
 
    qryScaleCostsList.Open;
    dtpCreated.Date := Now ;
@@ -1277,7 +1291,7 @@ begin
          lblUnits.Caption := LabelDesc;
       if bRateItem then
       begin
-         neRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);  //qryScaleCost.FieldByName('RATE').AsCurrency;
+         neRate.Value := FeeRate('N', edMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);  //qryScaleCost.FieldByName('RATE').AsCurrency;
          neTimeAmount.Value := qryScaleCost.FieldByName('RATE').AsCurrency;
 //         neTimeRate.Value := FeeRate('N', cmbMatterFind.Text, String(cbAuthor.EditValue), dtpCreated.Date);
          dfItems.Enabled := (LabelDesc <> '');
@@ -1335,6 +1349,77 @@ begin
    end;
 end;
 
+procedure TfrmFeeNew.cxButtonEdit1PropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+   if not FormExists(frmMatterSearch) then
+      Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+   if frmMatterSearch.ShowModal = mrOK then
+   begin
+      if dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '' then
+      begin
+         if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
+         begin
+            MsgErr('You may not post Fees to a matter that is archived.');
+            //cmbMatterFind.Text := '';
+         end
+         else if (IsMatterclosed(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
+         begin
+            MsgErr('You may not post Fees to a matter that is closed.');
+            //cmbMatterFind.Text := '';
+         end
+         else if MatterIsCurrent(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) then
+         begin
+            edMatterFind.Text := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+            DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, FEditing);
+            DoBillType(edMatterFind.Text);
+            bMatterValidated := True;
+         end
+         else
+            MsgErr('Matter ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ' has been closed');
+      end;
+   end;
+end;
+
+procedure TfrmFeeNew.ValidateMatter;
+var
+      bMatterChanged: Boolean;
+begin
+   if MatterExists(edMatterFind.Text) then
+   begin
+      if (MatterString(edMatterFind.Text,'PROSPECTIVE') = 'Y') then
+      begin
+         If not (ProspectiveFeesAllowed(edMatterFind.Text)) then
+         begin
+         MsgErr('You may not post Fees to a matter that is Prospective or has exceeded the allowed limit.');
+         //cmbMatterFind.Text := '';
+         end;
+      end
+      else if (IsMatterArchived(edMatterFind.Text)) then
+      begin
+         MsgErr('You may not post Fees to a matter that is archived.');
+         //cmbMatterFind.Text := '';
+      end
+      else if (IsMatterClosed(edMatterFind.Text)) then
+      begin
+         MsgErr('You may not post Fees to a matter that is closed.');
+      end
+      else
+      begin
+         bMatterChanged := ((FOldFileID <> edMatterFind.Text) and (FOldFileID <> ''));
+         DisplayMatter(edMatterFind.Text, FEditing, bMatterChanged);
+         DoBillType(edMatterFind.Text);
+         bMatterValidated := True;
+      end;
+   end
+   else
+   begin
+      //bMatterValidated := True;
+      MsgErr('The selected Matter is not valid.  Please check and re-try.');
+      //cmbMatterFind.Text := '';
+   end;
+end;
+
 procedure TfrmFeeNew.teMatterPropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
@@ -1375,7 +1460,7 @@ begin
       if ((cmbTemplate.Text <> '') and (not FBilled))
 //         and (neAmount.Value <> FEnterAmount))
       then
-         CreateScale(cmbMatterFind.EditText,0,cmbTemplate.Text, False);
+         CreateScale(edMatterFind.Text,0,cmbTemplate.Text, False);
 
       if (cmbTemplate.Text <> '') and
          (not VarIsNull(cmbTemplate.EditValue)) then
@@ -1408,8 +1493,8 @@ begin
       qryScaleCostsList.Open;
    end
    else
-      if (not VarIsNull(cmbMatterFind.EditValue)) and
-         (MatterString(string(cmbMatterFind.EditValue),'RESTRICT_WIP_TO_TASK') = 'Y') then
+      if (edMatterFind.Text <> '')  and
+         (MatterString(string(edMatterFind.Text),'RESTRICT_WIP_TO_TASK') = 'Y') then
       begin
          if qryScaleCostsList.Active then
             qryScaleCostsList.Close;
@@ -1419,7 +1504,7 @@ begin
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND MB.TASK = S.CODE AND ');
          qryScaleCostsList.SQL.Add('MB.NMATTER = :NMATTER ORDER BY S.CODE');
 
-         qryScaleCostsList.ParamByName('NMATTER').Value := MatterString(string(cmbMatterFind.EditValue), 'NMATTER');
+         qryScaleCostsList.ParamByName('NMATTER').Value := MatterString(string(edMatterFind.Text), 'NMATTER');
 
          qryScaleCostsList.Open;
       end
@@ -1658,10 +1743,10 @@ end;
 procedure TfrmFeeNew.icmbTypePropertiesInitPopup(Sender: TObject);
 begin
    inherited;
-   if cmbMatterFind.Text = '' then
+   if edMatterFind.Text = '' then
       PopulateWithoutMatter
    else
-   if cmbMatterFind.EditValue <> '' then
+   if edMatterFind.EditValue <> '' then
       PopulateMatterOnly
    else
    if icmbType.Properties.Items.Count = 2 then
@@ -1770,6 +1855,141 @@ begin
    bEdited := True;
 end;
 
+procedure TfrmFeeNew.edMatterFindKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+   sNewFileID: string;
+begin
+   if (Key = vk_Return) then
+   begin
+      try
+         sNewFileID := PadFileID(edMatterFind.Text);
+         if (length(sNewFileID) >= iMtrSearchLimit) then
+         begin
+            try
+               LoadMatter(sNewFileID);
+            finally
+//               edMatterFind.Text := sNewFileID;
+            end;
+         end
+      finally
+
+      end;
+   end;
+end;
+
+procedure TfrmFeeNew.edMatterFindPropertiesValidate(Sender: TObject;
+  var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+var
+   sNewFileID: string;
+begin
+   sNewFileID := PadFileID(edMatterFind.Text);
+   if (length(sNewFileID) >= iMtrSearchLimit) then
+   begin
+      try
+         LoadMatter(sNewFileID);
+      finally
+         DisplayValue := sNewFileID;
+      end;
+   end
+end;
+
+procedure TfrmFeeNew.LoadMatter(var AFileID: string);
+var
+  LFileID: String;
+begin
+   LFileID := Uppercase(AFileID);
+   with dmAxiom.qryNew do
+   begin
+      Close;
+      SQL.Text := 'SELECT matter.fileid as code, phonebook.search||'' ''||matter.shortdescr as descr, ''N'' AS DEFAULTITEM '+
+                  'FROM phonebook, matter WHERE matter.nclient = phonebook.nclient ';
+      if dmAxiom.Security.Employee.ChangeEntity = False then
+      begin
+         SQL.Text := SQL.Text + ' AND efematteraccess (matter.nmatter, :author, :entity, :defentity) = 0 ';
+         ParamByName('AUTHOR').AsString := dmAxiom.UserID;
+         ParamByName('DEFENTITY').AsString := dmAxiom.EmpEntity;
+         ParamByName('ENTITY').AsString := dmAxiom.Entity;
+      end
+      else
+         SQL.Text := SQL.Text + 'and matter.entity = '+ QuotedStr(dmAxiom.Entity) ;
+
+      if (Trim(LFileID) <> '') then
+         SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(trim('%'+LFileID+'%')) +') > 0';
+      Prepare;
+      Open;
+      if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) <> '') then
+      begin
+         try
+            frmGenericSearch := TfrmGenericSearch.Create(Self);
+            frmGenericSearch.Caption := 'Select Matter...';
+            frmGenericSearch.SQL := SQL.Text;
+            if frmGenericSearch.ShowModal = mrOK then
+            begin
+               LFileID := frmGenericSearch.qrySource.FieldByName('CODE').AsString;
+               AFileID := LFileID;
+            end
+            else
+               LFileID := '';
+         finally
+            begin
+               frmGenericSearch.Free();
+               Close;
+            end;
+         end;
+      end
+      else
+      if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) = '') then
+      begin
+         if not FormExists(frmMatterSearch) then
+            Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+         if frmMatterSearch.ShowModal = mrOk then
+         begin
+            LFileID := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+            AFileID := LFileID;
+         end;
+      end
+      else
+      begin
+         if (dmAxiom.qryNew.RecordCount = 1) then
+         begin
+            LFileID := dmAxiom.qryNew.FieldByName('code').AsString;
+            AFileID := LFileID;
+         end
+         else
+         begin
+            MsgErr('The selected Matter is not valid.  Please check and re-try.');
+            LFileID := '';
+            Exit;
+         end;
+      end;
+   end;
+
+   if ((Trim(LFileID) <> '') and MatterExists(LFileID)) then
+   begin
+      if (IsMatterPrivate(StrToInt(MatterString(LFileID, 'NMATTER')),MatterString(LFileID, 'RESTRICT_ACCESS')) AND
+          (dmAxiom.SecureMatterAccess = 'N')) then
+      begin
+         MsgInfo('This matter is marked as private. You do not have permission to view it.');
+      end
+      else
+      begin
+         try
+ //           ValidateMatter;
+            DisplayMatter(LFileID);
+         finally
+            edMatterFind.Text := LFileID;
+//            edMatterFind.EditText := LFileID;
+         end;
+      end;
+   end
+   else
+      if (LFileID <> '') then
+         MsgErr('The selected Matter is not valid.  Please check and re-try.');
+
+end;
+
+
 function TfrmFeeNew.FillFeeDataSet: integer;
 begin
    if FEditing then
@@ -1801,14 +2021,14 @@ begin
    qryFee.FieldByName('ITEM_AMOUNT').AsCurrency := neTimeAmount.Value;
    qryFee.FieldByName('AMOUNT').AsCurrency := neAmount.Value;
    qryFee.FieldByName('AUTHOR').AsString := cbAuthor.EditValue;
-   qryFee.FieldByName('PARTNER').AsString := MatterString(cmbMatterFind.EditText, 'PARTNER');
+   qryFee.FieldByName('PARTNER').AsString := MatterString(edMatterFind.Text, 'PARTNER');
    qryFee.FieldByName('BANK_ACCT').AsString := dmAxiom.Entity;
    qryFee.FieldByName('DEPT').AsString := cbDept.EditValue;
    if (mmoDesc.Text <> '') then
       qryFee.FieldByName('DESCR').AsString := mmoDesc.Text;   // Lines.Text;
-   qryFee.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', cmbMatterFind.EditText, 'NMATTER');
-   qryFee.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', cmbMatterFind.EditText, 'NCLIENT');
-   qryFee.FieldByName('FILEID').AsString := cmbMatterFind.EditText;
+   qryFee.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', edMatterFind.Text, 'NMATTER');
+   qryFee.FieldByName('NCLIENT').AsInteger := TableInteger('MATTER', 'FILEID', edMatterFind.Text, 'NCLIENT');
+   qryFee.FieldByName('FILEID').AsString := edMatterFind.Text;
    qryFee.FieldByName('UNIT').AsString := lblUnits.Caption;
    qryFee.FieldByName('UNITS').AsString := neUnits.Text;
    qryFee.FieldByName('RATE').AsCurrency := neRate.Value;
@@ -1849,7 +2069,7 @@ begin
    else
       qryFee.FieldByName('EXCL_FROM_BILL').AsString := 'N';  }
 
-   sBillType := TableString('FEEBASIS','CODE',MatterString(string(cmbMatterFind.EditText), 'FEEBASIS'),'BILLTYPE');
+   sBillType := TableString('FEEBASIS','CODE',MatterString(string(edMatterFind.Text), 'FEEBASIS'),'BILLTYPE');
    if sBillType = '' then sBillType := 'Billable';
 
 	qryFee.FieldByName('BILLTYPE').AsString := sBillType;
@@ -1883,7 +2103,7 @@ begin
          (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'nvl(AMOUNT,0) as RATE') <> 0) and
          (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
       begin
-         CreateScale(cmbMatterFind.EditText,0,cmbTemplate.EditValue, False);
+         CreateScale(edMatterFind.Text,0,cmbTemplate.EditValue, False);
          CalcRate;
       end;
    end
@@ -1957,7 +2177,7 @@ end;
 
 procedure TfrmFeeNew.ppFileNoteRptBeforePrint(Sender: TObject);
 begin
-  pplblMatter.Caption := cmbMatterFind.EditText;
+  pplblMatter.Caption := edMatterFind.Text;
   pplblMatterDesc.Caption := lblMatterDesc.Caption;
   pplblClient.Caption := lblClient.Caption;
   pplblMinutes.Caption := neMinutes.Text;
@@ -1983,7 +2203,7 @@ begin
    FOldFileID := '0';
    FOldAmount := 0;
    FOldAmountTax := 0;
-   cmbMatterFind.EditValue := '';
+   edMatterFind.Text := '';
    lblMatterDesc.Clear;
    lblClient.Clear;
    mmoDesc.Text := '';

@@ -542,7 +542,7 @@ begin
    begin
       if (chkRev.Checked = True) then
       begin
-         sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
+//         sSQLWhere := sSQLWhere + sAND + 'C.CONVERTED = ''N'' ';
 
          sSQLWhere := sSqlWhere + sAND + ' case when (c.rev_ncheqreq IS NOT NULL) then 1  '+
                                          '      when (c.converted IN (''R'', ''N'')) then 1 '+
@@ -1484,7 +1484,7 @@ begin
 //               frmNewCheque.ChequeFromInvoice(integer(tvCheqReqNINVOICE.EditValue))
 //            else
                frmNewCheque.AutoChequeFromCheqReq(qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
-            MakeSQL;
+//            MakeSQL;
          end
       else
          begin
@@ -1556,7 +1556,7 @@ begin
                         frmNewCheque.AutoChequeFromCheqReq(qryCheqReq.FieldByName('NCHEQREQ').AsInteger);
                   end;
                end;
-               MakeSQL;
+//               MakeSQL;  //this slows down the cheque screen as it is trying to populate behind cheque screen   AES 19/9/2019
             end;
          end; // else for case
       end; // case
@@ -4053,13 +4053,21 @@ end;
 
 procedure TfrmCheqReqs.actConvertAllUpdate(Sender: TObject);
 begin
-   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
+ {  TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
                               and (tvCheqReq.GroupedColumnCount = 0)
                               and (not qryCheqReq.IsEmpty) and (not chkRev.Checked)
                               and (not cbConverted.Checked)
                               and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
                               and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
-                              and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'));
+                              and (qryCheqReq.FieldByName('CONVERTED').asString = 'N'));  }
+
+   TAction(Sender).Enabled := dmAxiom.Security.Cheque.Create and (tabCashbook.Visible
+                              and (not qryCheqReq.IsEmpty) and
+                              (not chkRev.Checked) and (not cbConverted.Checked)
+                              and (qryCheqReq.FieldByName('CAN_PAY').asString = 'Y')
+                              and (qryCheqReq.FieldByName('TPAY').asString = 'Y')
+                              and ((qryCheqReq.FieldByName('CONVERTED').asString = 'N') or (qryCheqReq.FieldByName('CONVERTED').asString = 'R'))
+                              and (qryCheqReq.FieldByName('REV_NCHEQREQ').ISNULL = True));
 end;
 
 procedure TfrmCheqReqs.bbtnAuthoriseClick(Sender: TObject);

@@ -219,7 +219,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblDebugStencilID: TLabel
     Left = 239
     Top = 500
-    Width = 121
+    Width = 120
     Height = 15
     Margins.Left = 2
     Margins.Top = 2
@@ -521,8 +521,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Width = 394
   end
   object neAmount: TcxCurrencyEdit
-    Left = 252
-    Top = 267
+    Left = 253
+    Top = 266
     EditValue = 0.000000000000000000
     Properties.ClearKey = 46
     Properties.Nullable = False
@@ -971,7 +971,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43689.795111331d
+    EditValue = 43727.4882524421d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True

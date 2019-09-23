@@ -1252,7 +1252,7 @@ begin
     qryNew.SQL.Text := 'SELECT SUM(AMOUNT) AS TOT FROM CHEQREQ WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
     // QuotedStr(TableString('MATTER', 'NMATTER', qryInvoice.FieldByName('NMATTER').AsInteger, 'FILEID')) +
       ' AND ((NMEMO is null AND BILLED = ''N'' AND TRUST <> ''T'') OR ' + ' (NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger) + '))' +
-      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 /*And ANTICIPATED = ''Y''*/ ';
+      ' AND REV_NCHEQREQ is null AND AMOUNT > 0 AND CONVERTED = ''N'' ';
     qryNew.Open;
     if not qryNew.IsEmpty
     then
@@ -1343,7 +1343,7 @@ begin
       then
       begin
         neSundTax.Value := ShowTax(neSund.AsCurrency, dGstFree, 'SUNDRY', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-          qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                                   qryInvoice.FieldByName('NMATTER').AsInteger, iMemo, qryInvoice.FieldByName('GENERATED').AsDateTime);
         TaxSund := neSundTax.Value;
         neSundTaxFree.AsCurrency := dGstFree;
         // sgrTotals.Cells[0, 4] := Format('%m', [neSundTax.Value]);

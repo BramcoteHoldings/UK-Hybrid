@@ -1,5 +1,10 @@
 Insight Build 9.2.0
 
+Build 40
+========
+- Fixed issue with editing a Fee entry from Fee Enquiry where matter number is not set
+- fixed issue with GL receipt creation - GL code not validated correctly in some circumstances.
+
 Build 39
 ========
 - Fixed issue with Trust cheque creation from matter applying tax
