@@ -1,7 +1,6 @@
 object frmFeeNew: TfrmFeeNew
   Left = 623
   Top = 162
-  ActiveControl = cmbMatterFind
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Fee Creation'
@@ -94,14 +93,14 @@ object frmFeeNew: TfrmFeeNew
   object Label5: TLabel
     Left = 5
     Top = 487
-    Width = 25
+    Width = 24
     Height = 15
     Caption = 'Type'
   end
   object Label6: TLabel
     Left = 5
     Top = 138
-    Width = 23
+    Width = 22
     Height = 15
     Caption = 'Task'
   end
@@ -136,7 +135,7 @@ object frmFeeNew: TfrmFeeNew
   object Label20: TLabel
     Left = 4
     Top = 290
-    Width = 57
+    Width = 58
     Height = 15
     Caption = '(Max 4000)'
   end
@@ -257,7 +256,7 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 20
+    TabOrder = 21
     OnClick = btnCancelClick
   end
   object btnOk: TcxButton
@@ -355,7 +354,7 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 19
+    TabOrder = 20
     OnClick = btnOkClick
   end
   object cbDept: TcxLookupComboBox
@@ -384,7 +383,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 13
+    TabOrder = 14
     Width = 178
   end
   object cbFeeBasis: TcxLookupComboBox
@@ -405,7 +404,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 15
+    TabOrder = 16
     Visible = False
     OnClick = cbFeeBasisClick
     Width = 178
@@ -434,7 +433,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 4
+    TabOrder = 5
     Width = 285
   end
   object chkPrivate: TcxCheckBox
@@ -446,7 +445,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 16
+    TabOrder = 17
     Visible = False
   end
   object cbPrint: TcxCheckBox
@@ -459,7 +458,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 17
+    TabOrder = 18
   end
   object lblInvoice: TcxLabel
     Left = 257
@@ -491,7 +490,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 12
+    TabOrder = 13
     Width = 178
   end
   object lblMatterDesc: TcxLabel
@@ -514,7 +513,7 @@ object frmFeeNew: TfrmFeeNew
     Style.StyleController = dmAxiom.LabelStyle
     Properties.ShowAccelChar = False
     Height = 18
-    Width = 262
+    Width = 285
   end
   object sbPrint: TcxButton
     Left = 158
@@ -592,7 +591,7 @@ object frmFeeNew: TfrmFeeNew
       80007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 18
+    TabOrder = 19
     OnClick = sbPrintClick
   end
   object cmbTemplate: TcxLookupComboBox
@@ -623,7 +622,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 5
+    TabOrder = 6
     Width = 285
   end
   object dfItems: TcxTextEdit
@@ -635,13 +634,13 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 8
+    TabOrder = 9
     Text = '1'
     Width = 48
   end
   object cmbMatterFind: TcxLookupComboBox
-    Left = 79
-    Top = 1
+    Left = 1
+    Top = 180
     Properties.CharCase = ecUpperCase
     Properties.DropDownListStyle = lsEditList
     Properties.DropDownRows = 20
@@ -676,7 +675,8 @@ object frmFeeNew: TfrmFeeNew
     StyleFocused.TextColor = clWindowText
     StyleHot.LookAndFeel.NativeStyle = True
     StyleHot.TextColor = clWindowText
-    TabOrder = 0
+    TabOrder = 1
+    Visible = False
     OnExit = cmbMatterFindExit
     OnKeyPress = cmbMatterFindKeyPress
     Width = 107
@@ -705,7 +705,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 14
+    TabOrder = 15
     Width = 177
   end
   object dtpCreated: TcxDateEdit
@@ -726,7 +726,7 @@ object frmFeeNew: TfrmFeeNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.Kind = lfUltraFlat
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 1
+    TabOrder = 2
     Width = 143
   end
   object chkExcludeFromBill: TCheckBox
@@ -739,7 +739,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Exclude Fee Description from Bill'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 24
+    TabOrder = 25
   end
   object dtpStartTime: TDateTimePicker
     Left = 79
@@ -749,7 +749,7 @@ object frmFeeNew: TfrmFeeNew
     Date = 36221.764170659700000000
     Time = 36221.764170659700000000
     Kind = dtkTime
-    TabOrder = 2
+    TabOrder = 3
     OnChange = dtpStartTimeChange
   end
   object dtpEndTime: TDateTimePicker
@@ -760,7 +760,7 @@ object frmFeeNew: TfrmFeeNew
     Date = 36221.764170659700000000
     Time = 36221.764170659700000000
     Kind = dtkTime
-    TabOrder = 3
+    TabOrder = 4
     OnChange = dtpEndTimeChange
   end
   object chkKeepOpen: TCheckBox
@@ -773,7 +773,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Keep form open after posting'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 25
+    TabOrder = 26
   end
   object neItem: TcxCurrencyEdit
     Left = 282
@@ -784,7 +784,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 10
+    TabOrder = 11
     Width = 82
   end
   object neTimeAmount: TcxCurrencyEdit
@@ -796,7 +796,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 9
+    TabOrder = 10
     Width = 60
   end
   object neItemTax: TcxCurrencyEdit
@@ -807,7 +807,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 26
+    TabOrder = 27
     Visible = False
     Width = 64
   end
@@ -820,7 +820,7 @@ object frmFeeNew: TfrmFeeNew
     BevelKind = bkSoft
     BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 11
+    TabOrder = 12
     object Label7: TLabel
       Left = 140
       Top = 7
@@ -969,7 +969,7 @@ object frmFeeNew: TfrmFeeNew
       end>
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsPracNum
-    TabOrder = 27
+    TabOrder = 28
     Visible = False
     Width = 68
   end
@@ -977,7 +977,7 @@ object frmFeeNew: TfrmFeeNew
     Left = 79
     Top = 162
     Properties.OnChange = mmoDescChange
-    TabOrder = 6
+    TabOrder = 7
     OnEnter = mmoDescEnter
     OnExit = mmoDescExit
     OnKeyPress = mmoDescKeyPress
@@ -989,10 +989,25 @@ object frmFeeNew: TfrmFeeNew
     Top = 236
     Properties.MaxLength = 4000
     Properties.OnChange = mmoDescChange
-    TabOrder = 7
+    TabOrder = 8
     OnKeyUp = mmoNotesKeyUp
     Height = 69
     Width = 285
+  end
+  object edMatterFind: TcxButtonEdit
+    Left = 78
+    Top = 1
+    Properties.Buttons = <
+      item
+        Default = True
+        Kind = bkEllipsis
+      end>
+    Properties.CharCase = ecUpperCase
+    Properties.OnButtonClick = cxButtonEdit1PropertiesButtonClick
+    Properties.OnValidate = edMatterFindPropertiesValidate
+    TabOrder = 0
+    OnKeyDown = edMatterFindKeyDown
+    Width = 105
   end
   object qryFee: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1182,7 +1197,7 @@ object frmFeeNew: TfrmFeeNew
     Left = 285
     Top = 39
     Bitmap = {
-      494C0101030005000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1331,7 +1346,7 @@ object frmFeeNew: TfrmFeeNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

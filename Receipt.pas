@@ -2531,7 +2531,9 @@ begin
       end
       else
       begin
+        Error := False;
         DisplayValue := glInstance.fullCode;
+        qryLedger.FieldByName('REFNO').AsString := glInstance.fullCode;
         qryLedger.FieldByName('DESCR').AsString := glInstance.chartDescription;
       end;
 
@@ -2638,11 +2640,16 @@ procedure TfrmReceipt.tvLedgerTYPEPropertiesCloseUp(Sender: TObject);
 begin
    if tvLedgerTYPE.EditValue = 'Ledger' then
    begin
-      tvLedgerTAXCODE.Visible := True;
-      tvLedgerTAX.Visible     := True;
+      tvLedgerTAXCODE.Visible       := True;
+      tvLedgerTAX.Visible           := True;
+      tvLedgerNSUBBILL_ID.Visible   := False;
    end
    else
    begin
+      if tvLedgerTYPE.EditValue = 'Bill' then
+         tvLedgerNSUBBILL_ID.Visible   := True
+      else
+         tvLedgerNSUBBILL_ID.Visible   := False;
       tvLedgerTAXCODE.Visible := False;
       tvLedgerTAX.Visible     := False;
       tvLedgerTAX.EditValue := 0;
