@@ -165,6 +165,7 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
+              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -375,6 +376,7 @@ object frmBulkMailer: TfrmBulkMailer
         AllowFloating = True
         AutoHide = False
         Caption = 'EMail Addresses'
+        CaptionButtons = [cbMaximize, cbHide]
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
         DockingType = 0
@@ -471,7 +473,7 @@ object frmBulkMailer: TfrmBulkMailer
               Options.Focusing = False
             end
             object tvEmailsREFNO: TcxGridDBColumn
-              Caption = 'Bill No'
+              Caption = 'Ref No'
               DataBinding.FieldName = 'REFNO'
               Visible = False
               MinWidth = 21
@@ -479,10 +481,13 @@ object frmBulkMailer: TfrmBulkMailer
             end
             object tvEmailsNMATTER: TcxGridDBColumn
               DataBinding.FieldName = 'NMATTER'
+              Visible = False
               VisibleForCustomization = False
             end
             object tvEmailsNNAME: TcxGridDBColumn
               DataBinding.FieldName = 'NNAME'
+              Visible = False
+              VisibleForCustomization = False
             end
           end
           object lvEmails: TcxGridLevel
@@ -1184,9 +1189,9 @@ object frmBulkMailer: TfrmBulkMailer
       OnClick = dxBarButton3Click
     end
     object cmbStatementTemplate: TcxBarEditItem
-      Caption = 'Debtor Template'
+      Caption = 'Debtor Template: '
       Category = 0
-      Hint = 'Debtor Template'
+      Hint = 'Debtor Template: '
       Visible = ivAlways
       ShowCaption = True
       PropertiesClassName = 'TcxLookupComboBoxProperties'
@@ -9197,7 +9202,7 @@ object frmBulkMailer: TfrmBulkMailer
     SQL.Strings = (
       'SELECT item_name'
       '  FROM rb_folder, rb_item'
-      ' WHERE UPPER (rb_folder.folder_name) = '#39'TRUST ACCOUNT STATEMENT'#39
+      ' WHERE trim(UPPER (rb_folder.folder_name)) = '#39'DEBTOR STATEMENT'#39
       '   AND rb_folder.folder_id = rb_item.folder_id')
     Left = 936
     Top = 104

@@ -2508,12 +2508,12 @@ begin
                 ' is not valid for the current Entity.';
             Error := True;
       end;
-   end
-   else
-      begin
-         ErrorText := ErrorMessage;
-         Error := True;
-	   end;
+   end;
+//   else
+//      begin
+//         ErrorText := ErrorMessage;
+//         Error := True;
+//	   end;
 //   end;
 
    if tvLedgerTYPE.DataBinding.Field.Text = 'Ledger' then
