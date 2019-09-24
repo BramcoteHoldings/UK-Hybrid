@@ -1004,7 +1004,7 @@ begin
    EmailSQL := 'SELECT distinct NBILL_TO as nname, ap_email as PARTYEMAIL, 0 as nmatter, NBILL_TO as refno '+
                 'FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
                 'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
-   tvEmailsNNAME.Visible := False;
+   tvEmailsREFNO.Visible := False;
    PopulateGrid;
 end;
 
@@ -1023,7 +1023,7 @@ begin
                '   and ph.nname = nmemo.nbill_to  '+
                '   and nmemo.nmatter = m.nmatter '+
                'ORDER BY 2';
-   tvEmailsNNAME.Visible := True;
+   tvEmailsREFNO.Visible := True;
    PopulateGrid;
 end;
 
@@ -1456,6 +1456,7 @@ begin
          if Assigned(SASLLogin) then
             SASLLogin.Free;
          Screen.Cursor := crDefault;
+         MsgInfo('Debtor statements sent.');
          self.Close;
       end;
    end;
