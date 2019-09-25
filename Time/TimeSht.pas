@@ -472,6 +472,7 @@ type
     FOrderBy:           string;
     bLocalUpdate:       boolean;
     iUnits:             integer;
+    bMatterValidated:   boolean;
 
 //    procedure SetMyWIP;
     function GetEmpDailyBudget: currency;
@@ -2512,205 +2513,209 @@ var
    LMATLOCATE,
    sDisplayValue: string;
 begin
-   LMATLOCATE := 'M.TITLE ||'' ''|| SHORTDESCR AS MATLOCATE';
-   Error := False;
-   sDisplayValue := DisplayValue;
-   if (UpperCase(sDisplayValue) = 'SEARCH...') then
+   if bMatterValidated = False then
    begin
-      if not FormExists(frmMatterSearch) then
-         Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
-      if frmMatterSearch.ShowModal = mrOk then
+      bMatterValidated := True;
+      LMATLOCATE := 'M.TITLE ||'' ''|| SHORTDESCR AS MATLOCATE';
+      Error := False;
+      sDisplayValue := DisplayValue;
+      if (UpperCase(sDisplayValue) = 'SEARCH...') then
       begin
-         if (dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '') then
+         if not FormExists(frmMatterSearch) then
+            Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+         if frmMatterSearch.ShowModal = mrOk then
          begin
-            if DebtorStopWork(MatterString(dmAxiom.qryMSearch.FieldByName('FILEID').AsString,'DEBTORSTATUS')) then
+            if (dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '') then
+            begin
+               if DebtorStopWork(MatterString(dmAxiom.qryMSearch.FieldByName('FILEID').AsString,'DEBTORSTATUS')) then
+               begin
+                  Error := True;
+                  ErrorText := 'This matter has been flagged as "Stop Work". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
+                  DisplayValue := '';
+                  qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'O';
+               end
+//                  MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
+               else
+               begin
+                  DisplayValue := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+                  sDisplayValue := DisplayValue;
+                  if not qryFeeTmp.Modified then
+                     qryFeeTmp.Edit;
+//                  tvFeeTmpTYPE.Options.Focusing := False;
+                  if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull or
+                     (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType)) then
+                     qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
+
+//                  qryFeeTmp.FieldByName('BILLTYPE').AsString := 'Billable';
+                  LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
+                  if LBillType = '' then
+                     LBillType := 'Billable';
+                  qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
+                  qryFeeTmp.FieldByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+                  qryFeeTmp.FieldByName('NMATTER').AsInteger := dmAxiom.qryMSearch.FieldByName('NMATTER').AsInteger;
+
+                  if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0) then
+                     qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+
+                  if lvFeeTmp.GridView = tvFeeTmp then
+                  begin
+                     if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
+                        tvFeeTmpTYPE.Options.Focusing := False;
+                     tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                          dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
+                     if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+                        DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                  end
+                  else
+                  begin
+                     if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
+                        tvFeeTmpNewTYPE.Options.Focusing := False;
+                     tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                          dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
+                     if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+                        DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                  end;
+
+                  CalcAmount;
+                  ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
+               end;
+            end;
+         end
+         else
+         begin
+            DisplayValue := '';
+            sDisplayValue := '';
+            qryFeeTmp.FieldByName('FILEID').Clear;
+            qryFeeTmp.FieldByName('NMATTER').Clear;
+
+            if lvFeeTmp.GridView = tvFeeTmp then
+            begin
+               tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
+                tvFeeTmpTYPE.Options.Focusing := True;
+            end
+            else
+            begin
+               tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
+               tvFeeTmpNewTYPE.Options.Focusing := True;
+            end;
+            TcxLookupComboBox(Sender).Text := '';
+
+            qryFeeTmp.FieldByName('ITEMS').AsString := '0';
+            qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+         end;
+      end
+      else
+
+      if (Trim(sDisplayValue) <> '') then
+      begin
+         sDisplayValue := PadFileID(sDisplayValue);
+         if (MatterExists(UpperCase(sDisplayValue))) then
+         begin
+            DisplayValue := sDisplayValue;
+            if DebtorStopWork(MatterString(UpperCase(sDisplayValue),'DEBTORSTATUS')) then
             begin
                Error := True;
                ErrorText := 'This matter has been flagged as "Stop Work". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
                DisplayValue := '';
-               qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'O';
             end
-//               MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
+            else if (MatterString(sDisplayValue, 'PROSPECTIVE') = 'Y') then
+            begin
+               If not (ProspectiveFeesAllowed(sDisplayValue)) then
+               begin
+                 Error := True;
+                 ErrorText := 'This matter has been flagged as "Prospective". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
+                 DisplayValue := '';
+               end;
+            end
             else
             begin
-               DisplayValue := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-               sDisplayValue := DisplayValue;
                if not qryFeeTmp.Modified then
                   qryFeeTmp.Edit;
-//               tvFeeTmpTYPE.Options.Focusing := False;
-               if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull or
-                  (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType)) then
+               if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull  or
+                  (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType))then
                   qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
 
-//               qryFeeTmp.FieldByName('BILLTYPE').AsString := 'Billable';
+               if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
+               begin
+                  if lvFeeTmp.GridView = tvFeeTmp then
+                     tvFeeTmpTYPE.Options.Focusing := False
+                  else
+                     tvFeeTmpNewTYPE.Options.Focusing := False;
+               end;
+
                LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
                if LBillType = '' then
                   LBillType := 'Billable';
                qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
-               qryFeeTmp.FieldByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-               qryFeeTmp.FieldByName('NMATTER').AsInteger := dmAxiom.qryMSearch.FieldByName('NMATTER').AsInteger;
+               qryFeeTmp.FieldByName('FILEID').AsString := UpperCase(sDisplayValue);
+               qryFeeTmp.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryFeeTmp.FieldByName('FILEID').AsString, 'NMATTER');
 
-               if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0) then
+               qryFeeTmp.FieldByName('MATLOCATE').AsString := MatterString(UpperCase(string(DisplayValue)), LMATLOCATE);
+               if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
+                  (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
+                  (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0)then
                   qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
 
-               if lvFeeTmp.GridView = tvFeeTmp then
+               if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
                begin
-                  if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
-                     tvFeeTmpTYPE.Options.Focusing := False;
-                  tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                       dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
                   if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                     DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                     DoBillType(sDisplayValue);
                end
                else
                begin
-                  if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
-                     tvFeeTmpNewTYPE.Options.Focusing := False;
-                  tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                       dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
-                  if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                     DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                  if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+                     DoBillType(sDisplayValue);
                end;
 
                CalcAmount;
                ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
             end;
+         end
+         else
+         begin
+            DisplayValue := '';
+            sDisplayValue := '';
+            ErrorText := 'Matter does not exist!';
+            Error := True;
          end;
       end
       else
+      if ((Trim(sDisplayValue) = '') and (qryFeeTmp.State in [dsEdit, dsInsert])) then
       begin
-         DisplayValue := '';
-         sDisplayValue := '';
          qryFeeTmp.FieldByName('FILEID').Clear;
          qryFeeTmp.FieldByName('NMATTER').Clear;
 
-         if lvFeeTmp.GridView = tvFeeTmp then
+         if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
          begin
             tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
-             tvFeeTmpTYPE.Options.Focusing := True;
+            tvFeeTmpTYPE.Options.Focusing := True;
          end
          else
          begin
             tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
             tvFeeTmpNewTYPE.Options.Focusing := True;
          end;
-         TcxLookupComboBox(Sender).Text := '';
 
          qryFeeTmp.FieldByName('ITEMS').AsString := '0';
-         qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
-      end;
-   end
-   else
+         if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
+               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
+               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0) then
+            qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
 
-   if (Trim(sDisplayValue) <> '') then
-   begin
-      sDisplayValue := PadFileID(sDisplayValue);
-      if (MatterExists(UpperCase(sDisplayValue))) then
-      begin
-         DisplayValue := sDisplayValue;
-         if DebtorStopWork(MatterString(UpperCase(sDisplayValue),'DEBTORSTATUS')) then
+         if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
          begin
-            Error := True;
-            ErrorText := 'This matter has been flagged as "Stop Work". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
-            DisplayValue := '';
-         end
-         else if (MatterString(sDisplayValue, 'PROSPECTIVE') = 'Y') then
-         begin
-            If not (ProspectiveFeesAllowed(sDisplayValue)) then
-            begin
-              Error := True;
-              ErrorText := 'This matter has been flagged as "Prospective". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
-              DisplayValue := '';
-            end;
+            if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+               DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
          end
          else
          begin
-            if not qryFeeTmp.Modified then
-               qryFeeTmp.Edit;
-            if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull  or
-               (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType))then
-               qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
-
-            if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
-            begin
-               if lvFeeTmp.GridView = tvFeeTmp then
-                  tvFeeTmpTYPE.Options.Focusing := False
-               else
-                  tvFeeTmpNewTYPE.Options.Focusing := False;
-            end;
-
-            LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
-            if LBillType = '' then
-               LBillType := 'Billable';
-            qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
-            qryFeeTmp.FieldByName('FILEID').AsString := UpperCase(sDisplayValue);
-            qryFeeTmp.FieldByName('NMATTER').AsInteger := TableInteger('MATTER', 'FILEID', qryFeeTmp.FieldByName('FILEID').AsString, 'NMATTER');
-
-            qryFeeTmp.FieldByName('MATLOCATE').AsString := MatterString(UpperCase(string(DisplayValue)), LMATLOCATE);
-            if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
-               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
-               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0)then
-               qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
-
-            if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
-            begin
-               if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                  DoBillType(sDisplayValue);
-            end
-            else
-            begin
-               if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                  DoBillType(sDisplayValue);
-            end;
-
-            CalcAmount;
-            ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
+            if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+               DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
          end;
-      end
-      else
-      begin
-         DisplayValue := '';
-         sDisplayValue := '';
-         ErrorText := 'Matter does not exist!';
-         Error := True;
+
+         CalcAmount;
+         ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
       end;
-   end
-   else
-   if ((Trim(sDisplayValue) = '') and (qryFeeTmp.State in [dsEdit, dsInsert])) then
-   begin
-      qryFeeTmp.FieldByName('FILEID').Clear;
-      qryFeeTmp.FieldByName('NMATTER').Clear;
-
-      if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
-      begin
-         tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
-         tvFeeTmpTYPE.Options.Focusing := True;
-      end
-      else
-      begin
-         tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
-         tvFeeTmpNewTYPE.Options.Focusing := True;
-      end;
-
-      qryFeeTmp.FieldByName('ITEMS').AsString := '0';
-      if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
-            (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
-            (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0) then
-         qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
-
-      if qryFeeTmp.FieldbyName('TIME_TYPE').AsString <> 'M' then
-      begin
-         if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-            DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
-      end
-      else
-      begin
-         if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-            DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
-      end;
-
-      CalcAmount;
-      ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
    end;
 end;
 
@@ -3035,7 +3040,10 @@ begin
    end
    else
    if AFocusedItem.Caption = 'Matter' then
-      tvFeeTmpNewTYPE.Options.Focusing := True
+   begin
+      tvFeeTmpNewTYPE.Options.Focusing := True;
+      bMatterValidated := False;
+   end
    else
    if AFocusedItem.Caption = 'Items' then
    begin
@@ -4117,65 +4125,171 @@ var
   selectedRow : String;
   LBillType: string;
 begin
-   selectedRow := UpperCase(TcxLookupComboBox(Sender).Text);
-
-   // If search selected, open matter search screen
-   if selectedRow = 'SEARCH...' then
+   if bMatterValidated = False then
    begin
-      TcxCustomDropDownEdit(Sender).DroppedDown := False;
+      bMatterValidated := True;
+      selectedRow := UpperCase(TcxLookupComboBox(Sender).Text);
 
-      TcxLookupComboBox(Sender).Properties.IncrementalFiltering := False;
-      if not FormExists(frmMatterSearch) then
-         Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
-
-      if frmMatterSearch.ShowModal = mrOk then
+      // If search selected, open matter search screen
+      if selectedRow = 'SEARCH...' then
       begin
-         if (dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '') then
+         TcxCustomDropDownEdit(Sender).DroppedDown := False;
+
+         TcxLookupComboBox(Sender).Properties.IncrementalFiltering := False;
+         if not FormExists(frmMatterSearch) then
+            Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+
+         if frmMatterSearch.ShowModal = mrOk then
          begin
-            frmMatterSearch.Invalidate;
+            if (dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '') then
+            begin
+               frmMatterSearch.Invalidate;
+               if not qryFeeTmp.Modified then
+                  qryFeeTmp.Edit;
+               if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull) or
+                  (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType) then
+                  qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
+               LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
+               if LBillType = '' then
+                  LBillType := 'Billable';
+               qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
+               qryFeeTmp.FieldByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+               qryFeeTmp.FieldByName('NMATTER').AsInteger := dmAxiom.qryMSearch.FieldByName('NMATTER').AsInteger;
+
+               if lvFeeTmp.GridView = tvFeeTmp then
+                  tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                                      dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString
+               else
+                  tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                                      dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
+               if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
+                  (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
+                  (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0)then
+                  qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+
+               if lvFeeTmp.GridView = tvFeeTmp then
+               begin
+                  if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+                     DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+               end
+               else
+               begin
+                  if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
+                     DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+               end;
+
+               CalcAmount;
+               TcxLookupComboBox(Sender).Properties.IncrementalFiltering := True;
+               ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString)
+            end;
+         end
+         else begin
+            qryFeeTmp.FieldByName('FILEID').Clear;
+            qryFeeTmp.FieldByName('NMATTER').Clear;
+
+            if lvFeeTmp.GridView = tvFeeTmp then
+            begin
+               tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
+               tvFeeTmpTYPE.Options.Focusing := True;
+            end
+            else
+            begin
+               tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
+               tvFeeTmpNewTYPE.Options.Focusing := True;
+            end;
+
+            TcxLookupComboBox(Sender).Text := '';
+            selectedRow := '';
+            if qryFeeTmp.FieldbyName('TIME_TYPE').IsNull then
+               qryFeeTmp.FieldByName('ITEMS').AsString := dmAxiom.DefaultTimeType;
+            qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+         end;
+      end
+      // If recent matter selected, obtain matter details
+      else
+      if selectedRow <> '' then
+      begin
+         selectedRow := PadFileID(selectedRow);
+         if DebtorStopWork(MatterString(selectedRow,'DEBTORSTATUS')) then
+         begin
+            MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded');
+            selectedRow := '';
+            qryFeeTmp.FieldByName('FILEID').Clear;
+            qryFeeTmp.FieldByName('NMATTER').Clear;
+            qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'O';
+         end
+         else
+         begin
+            qryMSearch.Close;
+            qryMSearch.ParamByName('P_FILEID').AsString :=  selectedRow;
+            qryMSearch.Open;
+
             if not qryFeeTmp.Modified then
-               qryFeeTmp.Edit;
-            if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull) or
-               (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType) then
+              qryFeeTmp.Edit;
+
+            if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull or
+               (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType ))then
                qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
+
+            if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
+            begin
+               if lvFeeTmp.GridView = tvFeeTmp then
+                  tvFeeTmpTYPE.Options.Focusing := False
+               else
+                  tvFeeTmpNewTYPE.Options.Focusing := False;
+            end
+            else
+            begin
+               if lvFeeTmp.GridView = tvFeeTmp then
+                  tvFeeTmpTYPE.Options.Focusing := True
+               else
+                  tvFeeTmpNewTYPE.Options.Focusing := True;
+            end;
+//            qryFeeTmp.FieldByName('BILLTYPE').AsString := 'Billable';
             LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
             if LBillType = '' then
                LBillType := 'Billable';
             qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
-            qryFeeTmp.FieldByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-            qryFeeTmp.FieldByName('NMATTER').AsInteger := dmAxiom.qryMSearch.FieldByName('NMATTER').AsInteger;
-
+            qryFeeTmp.FieldByName('FILEID').AsString := qryMSearch.FieldByName('FILEID').AsString;
+            qryFeeTmp.FieldByName('NMATTER').AsInteger := qryMSearch.FieldByName('NMATTER').AsInteger;
             if lvFeeTmp.GridView = tvFeeTmp then
-               tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                                   dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString
+               tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                                  qryMSearch.FieldByName('SHORTDESCR').AsString
             else
-               tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                                   dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
-            if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
-               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0)  and
-               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0)then
-               qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+               tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := qryMSearch.FieldByName('TITLE').AsString + ' '+
+                                                                  qryMSearch.FieldByName('SHORTDESCR').AsString;
 
+            if (qryScaleCost.Active = False) and not VarIsNull(tvFeeTmpNewFEE_TEMPLATE.EditValue) then
+            begin
+               qryScaleCost.Close();
+               qryScaleCost.ParambyName('p_code').AsString := tvFeeTmpNewFEE_TEMPLATE.EditValue;
+               qryScaleCost.Open();
+            end;
+
+            if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
+               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0) and
+               (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0) and
+               (qryScaleCost.FieldByName('ZERO_FEE').AsString = 'N') then
+               qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
             if lvFeeTmp.GridView = tvFeeTmp then
             begin
                if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                  DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                  DoBillType(selectedRow);
             end
             else
             begin
                if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-                  DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
+                  DoBillType(selectedRow);
             end;
-
             CalcAmount;
-            TcxLookupComboBox(Sender).Properties.IncrementalFiltering := True;
-            ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString)
+            ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
          end;
       end
-      else begin
+      else
+      if ((selectedRow = '') and (qryFeeTmp.State in [dsEdit, dsInsert])) then
+      begin
          qryFeeTmp.FieldByName('FILEID').Clear;
          qryFeeTmp.FieldByName('NMATTER').Clear;
-
          if lvFeeTmp.GridView = tvFeeTmp then
          begin
             tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
@@ -4186,129 +4300,27 @@ begin
             tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
             tvFeeTmpNewTYPE.Options.Focusing := True;
          end;
-
-         TcxLookupComboBox(Sender).Text := '';
-         selectedRow := '';
          if qryFeeTmp.FieldbyName('TIME_TYPE').IsNull then
             qryFeeTmp.FieldByName('ITEMS').AsString := dmAxiom.DefaultTimeType;
-         qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
-      end;
-   end
-   // If recent matter selected, obtain matter details
-   else
-   if selectedRow <> '' then
-   begin
-      selectedRow := PadFileID(selectedRow);
-      if DebtorStopWork(MatterString(selectedRow,'DEBTORSTATUS')) then
-      begin
-         MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded');
-         selectedRow := '';
-         qryFeeTmp.FieldByName('FILEID').Clear;
-         qryFeeTmp.FieldByName('NMATTER').Clear;
-         qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'O';
-      end
-      else
-      begin
-         qryMSearch.Close;
-         qryMSearch.ParamByName('P_FILEID').AsString :=  selectedRow;
-         qryMSearch.Open;
-
-         if not qryFeeTmp.Modified then
-           qryFeeTmp.Edit;
-
-         if (qryFeeTmp.FieldbyName('TIME_TYPE').IsNull or
-            (qryFeeTmp.FieldbyName('TIME_TYPE').AsString = dmAxiom.DefaultTimeType ))then
-            qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'M';
-
-         if qryFeeTmp.FieldbyName('TIME_TYPE').AsString = 'M' then
-         begin
-            if lvFeeTmp.GridView = tvFeeTmp then
-               tvFeeTmpTYPE.Options.Focusing := False
-            else
-               tvFeeTmpNewTYPE.Options.Focusing := False;
-         end
-         else
-         begin
-            if lvFeeTmp.GridView = tvFeeTmp then
-               tvFeeTmpTYPE.Options.Focusing := True
-            else
-               tvFeeTmpNewTYPE.Options.Focusing := True;
-         end;
-//         qryFeeTmp.FieldByName('BILLTYPE').AsString := 'Billable';
-         LBillType := TableString('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'BILLTYPE');
-         if LBillType = '' then
-            LBillType := 'Billable';
-         qryFeeTmp.FieldByName('BILLTYPE').AsString := LBillType;
-         qryFeeTmp.FieldByName('FILEID').AsString := qryMSearch.FieldByName('FILEID').AsString;
-         qryFeeTmp.FieldByName('NMATTER').AsInteger := qryMSearch.FieldByName('NMATTER').AsInteger;
-         if lvFeeTmp.GridView = tvFeeTmp then
-            tvFeeTmpMATTERDETAILS.DataBinding.Field.AsString := qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                               qryMSearch.FieldByName('SHORTDESCR').AsString
-         else
-            tvFeeTmpNewMATTERDETAILS.DataBinding.Field.AsString := qryMSearch.FieldByName('TITLE').AsString + ' '+
-                                                               qryMSearch.FieldByName('SHORTDESCR').AsString;
-
-         if (qryScaleCost.Active = False) and not VarIsNull(tvFeeTmpNewFEE_TEMPLATE.EditValue) then
-         begin
-            qryScaleCost.Close();
-            qryScaleCost.ParambyName('p_code').AsString := tvFeeTmpNewFEE_TEMPLATE.EditValue;
-            qryScaleCost.Open();
-         end;
-
          if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
             (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0) and
             (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0) and
             (qryScaleCost.FieldByName('ZERO_FEE').AsString = 'N') then
             qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
+
          if lvFeeTmp.GridView = tvFeeTmp then
          begin
             if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-               DoBillType(selectedRow);
+               DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
          end
          else
          begin
             if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-               DoBillType(selectedRow);
+               DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
          end;
          CalcAmount;
          ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
       end;
-   end
-   else
-   if ((selectedRow = '') and (qryFeeTmp.State in [dsEdit, dsInsert])) then
-   begin
-      qryFeeTmp.FieldByName('FILEID').Clear;
-      qryFeeTmp.FieldByName('NMATTER').Clear;
-      if lvFeeTmp.GridView = tvFeeTmp then
-      begin
-         tvFeeTmpMATTERDETAILS.DataBinding.Field.Clear;
-         tvFeeTmpTYPE.Options.Focusing := True;
-      end
-      else
-      begin
-         tvFeeTmpNewMATTERDETAILS.DataBinding.Field.Clear;
-         tvFeeTmpNewTYPE.Options.Focusing := True;
-      end;
-      if qryFeeTmp.FieldbyName('TIME_TYPE').IsNull then
-         qryFeeTmp.FieldByName('ITEMS').AsString := dmAxiom.DefaultTimeType;
-      if qryFeeTmp.FieldByName('FEE_TEMPLATE').IsNull or
-         (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'AMOUNT') = 0) and
-         (TableCurrency('SCALECOST','CODE',qryFeeTmp.FieldByName('FEE_TEMPLATE').AsString,'RATE') = 0) and
-         (qryScaleCost.FieldByName('ZERO_FEE').AsString = 'N') then
-         qryFeeTmp.FieldByName('RATE').AsCurrency := FeeRate('N', qryFeeTmp.FieldByName('FILEID').AsString, qryFeeTmp.FieldByName('AUTHOR').AsString, qryFeeTmp.FieldByName('CREATED').AsDateTime);
-
-      if lvFeeTmp.GridView = tvFeeTmp then
-      begin
-         if tvFeeTmpFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-            DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
-      end
-      else
-      begin
-         if tvFeeTmpNewFEE_TEMPLATE.DataBinding.Field.AsString = '' then
-            DoBillType(qryFeeTmp.FieldByName('FILEID').AsString);
-      end;
-      CalcAmount;
-      ReopenListUpdate('MATTER', qryFeeTmp.FieldByName('FILEID').AsString);
    end;
 end;
 
@@ -4731,6 +4743,7 @@ begin
    else
       tvFeeTmpNewTYPE.Options.Focusing := True;
 
+   bMatterValidated := False;
    dxBarButtonSave.Enabled := True;
 end;
 
@@ -4745,13 +4758,13 @@ begin
       qryScaleCostsList.SQL.Clear;
       if SystemString('LIMIT_SCALECOST_NONBILLABLE') = 'Y' then
       begin
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND BILLTYPE = ''NonBillable'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
       end
       else
       begin
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
       end;
@@ -4765,7 +4778,7 @@ begin
             qryScaleCostsList.Close;
 
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM MATTER_BUDGETS MB, SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM MATTER_BUDGETS MB, SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND MB.TASK = S.CODE AND ');
          qryScaleCostsList.SQL.Add('MB.NMATTER = :NMATTER ORDER BY S.CODE');
 
@@ -4781,7 +4794,7 @@ begin
          if qryScaleCostsList.Active then
                qryScaleCostsList.Close;
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND BILLTYPE = ''Billable''  ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
          qryScaleCostsList.Open;
@@ -4791,7 +4804,7 @@ begin
          if qryScaleCostsList.Active then
                qryScaleCostsList.Close;
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
          qryScaleCostsList.Open;

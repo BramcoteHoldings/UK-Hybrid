@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabInvoices
+    Properties.ActivePage = tabDocs
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -1248,10 +1248,6 @@ object frmMatters: TfrmMatters
           object tabStreetAddress: TcxTabSheet
             Caption = 'Street Address'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label35: TLabel
               Left = 1
               Top = 0
@@ -1347,10 +1343,6 @@ object frmMatters: TfrmMatters
           object tabPostalAddress: TcxTabSheet
             Caption = 'Postal Address'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label40: TLabel
               Left = 1
               Top = 2
@@ -1446,10 +1438,6 @@ object frmMatters: TfrmMatters
           object tabCustomAddress: TcxTabSheet
             Caption = 'Custom Address'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label55: TLabel
               Left = 1
               Top = 2
@@ -1545,10 +1533,6 @@ object frmMatters: TfrmMatters
           object tabDX: TcxTabSheet
             Caption = 'DX'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label25: TLabel
               Left = 5
               Top = 14
@@ -3291,10 +3275,6 @@ object frmMatters: TfrmMatters
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 30
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label7: TLabel
         Left = 18
         Top = 156
@@ -3678,10 +3658,6 @@ object frmMatters: TfrmMatters
     object tabParties: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 23
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 489
@@ -3935,7 +3911,7 @@ object frmMatters: TfrmMatters
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
               Text = 'Email'
-              Width = 587
+              Width = 583
             end>
         end
       end
@@ -4000,7 +3976,7 @@ object frmMatters: TfrmMatters
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
                 Text = 'Value'
-                Width = 1209
+                Width = 1205
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4016,10 +3992,6 @@ object frmMatters: TfrmMatters
           Caption = 'Calculation Data'
           ImageIndex = 1
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
         end
       end
     end
@@ -6720,7 +6692,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -7810,10 +7781,6 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
               end
             end
             object pnlPreview: TJamFilePreview
@@ -7826,10 +7793,10 @@ object frmMatters: TfrmMatters
           end
         end
         object DockPanelFolderList: TdxDockPanel
-          Left = 0
+          Left = -193
           Top = 0
           Width = 193
-          Height = 124
+          Height = 0
           Visible = False
           AllowFloating = False
           AutoHide = True
@@ -8064,10 +8031,6 @@ object frmMatters: TfrmMatters
     object tabSubNames: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
@@ -8135,10 +8098,6 @@ object frmMatters: TfrmMatters
     object tabSearches: TcxTabSheet
       Caption = 'Searches'
       ImageIndex = 22
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel11: TPanel
         Left = 0
         Top = 0
@@ -8430,10 +8389,6 @@ object frmMatters: TfrmMatters
         object tsProjectTaskGrid: TcxTabSheet
           Caption = 'Tasks Grid'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
@@ -9156,7 +9111,6 @@ object frmMatters: TfrmMatters
         AlignSplitter = salTop
         PositionAfterOpen = 29
         MinSize = 29
-        ExplicitWidth = 8
       end
       object pnlProject: TPanel
         Left = 0
@@ -9461,10 +9415,6 @@ object frmMatters: TfrmMatters
       Caption = 'Emails'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
@@ -9741,10 +9691,6 @@ object frmMatters: TfrmMatters
       Caption = 'Critical Dates'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0

@@ -8,18 +8,14 @@ uses
   cxEdit, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxDBEdit,
   cxLookAndFeelPainters, cxButtons, DB, OracleUniProvider, Uni, DBAccess, MemDS, cxMemo,
   cxLabel, cxButtonEdit, ImgList, cxImageComboBox, cxRichEdit,
-  cxDBRichEdit, Menus, cxGraphics, cxLookAndFeels, Vcl.Buttons;
+  cxDBRichEdit, Menus, cxGraphics, cxLookAndFeels, Vcl.Buttons,
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, dxLayoutContainer, cxClasses,
+  dxLayoutControl, System.ImageList;
 
 type
   TfrmAddReport = class(TForm)
-    Label1: TLabel;
-    cxLabel1: TcxLabel;
-    cxLabel2: TcxLabel;
-    cxLabel3: TcxLabel;
-    cxLabel4: TcxLabel;
     odlgReports: TOpenDialog;
     ImageList1: TImageList;
-    cxLabel5: TcxLabel;
     teDisplayName: TcxDBTextEdit;
     teReportName: TcxDBButtonEdit;
     qryAddReport: TUniQuery;
@@ -42,6 +38,24 @@ type
     qryAddReportPARAM_LIST: TStringField;
     qryAddReportREPORT_IMAGE: TBlobField;
     qryAddReportFREQUENCY: TStringField;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutGroup4: TdxLayoutGroup;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup5: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutGroup6: TdxLayoutGroup;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
     procedure btnSaveClick(Sender: TObject);
     procedure trReportNamePropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);

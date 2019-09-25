@@ -891,7 +891,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43731.7771054977d
+    EditValue = 43732.8137355208d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

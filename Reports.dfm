@@ -171,6 +171,25 @@ object frmReports: TfrmReports
           MinWidth = 23
         end
       end
+      object tvReportsNotUsed: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsNotUsed
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.Editing = False
+        OptionsView.CellEndEllipsis = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+        object tvReportsNotUsedNAME: TcxGridDBColumn
+          Caption = 'Report'
+          DataBinding.FieldName = 'NAME'
+        end
+        object tvReportsNotUsedACCESSLEVEL: TcxGridDBColumn
+          Caption = 'Access Level'
+          DataBinding.FieldName = 'ACCESSLEVEL'
+        end
+      end
       object lvReports: TcxGridLevel
         Caption = 'All Reports'
         GridView = tvReports
@@ -186,6 +205,10 @@ object frmReports: TfrmReports
       object lvReportsWeekly: TcxGridLevel
         Caption = 'Weekly'
         GridView = tvReportsWeekly
+      end
+      object lvReportsNotUsed: TcxGridLevel
+        Caption = 'Not Used'
+        GridView = tvReportsNotUsed
       end
     end
   end
@@ -407,6 +430,8 @@ object frmReports: TfrmReports
         '_list,'
       '         reports.refresh_proc, reports.ROWID'
       '    FROM reports'
+      'WHERE'
+      '    frequency <> '#39'Not Used'#39
       'ORDER BY NAME')
     Options.StrictUpdate = False
     Left = 223
@@ -483,5 +508,30 @@ object frmReports: TfrmReports
     DataSet = qryReportsWeekly
     Left = 219
     Top = 281
+  end
+  object qryNotUsed: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      
+        'SELECT   reports.NAME, reports.report, reports.descr, reports.pr' +
+        'inter_name,'
+      
+        '         reports.accesslevel, reports.report_type, reports.param' +
+        '_list,'
+      '         reports.refresh_proc, reports.ROWID'
+      '    FROM reports'
+      'WHERE'
+      '    frequency = '#39'Not Used'#39
+      'ORDER BY NAME')
+    Options.StrictUpdate = False
+    Active = True
+    AfterScroll = qryReportsQuarterlyAfterScroll
+    Left = 158
+    Top = 346
+  end
+  object dsNotUsed: TUniDataSource
+    DataSet = qryNotUsed
+    Left = 227
+    Top = 354
   end
 end

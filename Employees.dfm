@@ -32,7 +32,7 @@ object frmEmployees: TfrmEmployees
   object Label3: TLabel
     Left = 29
     Top = 289
-    Width = 80
+    Width = 79
     Height = 15
     Caption = 'Employee Type'
   end
@@ -61,7 +61,7 @@ object frmEmployees: TfrmEmployees
   object Label10: TLabel
     Left = 598
     Top = 747
-    Width = 27
+    Width = 26
     Height = 15
     Caption = 'Time'
     Visible = False
@@ -85,7 +85,7 @@ object frmEmployees: TfrmEmployees
   object Label13: TLabel
     Left = 598
     Top = 771
-    Width = 27
+    Width = 26
     Height = 15
     Caption = 'Time'
     Visible = False
@@ -111,7 +111,7 @@ object frmEmployees: TfrmEmployees
   object Label16: TLabel
     Left = 176
     Top = 340
-    Width = 102
+    Width = 101
     Height = 15
     Hint = 'Controls Matter and Diary refresh.'
     Caption = 'Refresh Time (secs)'
@@ -119,7 +119,7 @@ object frmEmployees: TfrmEmployees
   object Label17: TLabel
     Left = 223
     Top = 163
-    Width = 56
+    Width = 57
     Height = 15
     Caption = 'Experience'
   end
@@ -133,7 +133,7 @@ object frmEmployees: TfrmEmployees
   object Label6: TLabel
     Left = 93
     Top = 164
-    Width = 17
+    Width = 18
     Height = 15
     Caption = 'Fax'
   end
@@ -161,7 +161,7 @@ object frmEmployees: TfrmEmployees
   object Label40: TLabel
     Left = 35
     Top = 238
-    Width = 74
+    Width = 73
     Height = 15
     Caption = 'Position/Title:'
   end
@@ -456,7 +456,7 @@ object frmEmployees: TfrmEmployees
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 14
-    Width = 112
+    Width = 111
   end
   object dfUserName: TcxDBTextEdit
     Left = 278
@@ -558,7 +558,7 @@ object frmEmployees: TfrmEmployees
     Width = 254
   end
   object dfPosition: TcxDBTextEdit
-    Left = 117
+    Left = 118
     Top = 235
     DataBinding.DataField = 'POSITION'
     DataBinding.DataSource = dsEmployees
@@ -572,7 +572,7 @@ object frmEmployees: TfrmEmployees
   end
   object cxGroupBox1: TcxGroupBox
     Left = 439
-    Top = 175
+    Top = 160
     Caption = 'Photo'
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True
@@ -1097,10 +1097,6 @@ object frmEmployees: TfrmEmployees
     object tabRoles: TcxTabSheet
       Caption = 'Roles'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gbShowAs: TcxGroupBox
         Left = 6
         Top = 7
@@ -1230,10 +1226,6 @@ object frmEmployees: TfrmEmployees
     object tabGL: TcxTabSheet
       Caption = 'G/L'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object gbGLPosting: TcxGroupBox
         Left = 6
         Top = 7
@@ -1247,7 +1239,7 @@ object frmEmployees: TfrmEmployees
         object Label7: TLabel
           Left = 12
           Top = 16
-          Width = 68
+          Width = 69
           Height = 15
           Caption = 'Ledger Suffix'
           Transparent = True
@@ -1512,10 +1504,6 @@ object frmEmployees: TfrmEmployees
     object tabSignatory: TcxTabSheet
       Caption = 'Signatory'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label27: TLabel
         Left = 2
         Top = 15
@@ -1927,7 +1915,7 @@ object frmEmployees: TfrmEmployees
       object Label35: TLabel
         Left = 304
         Top = 13
-        Width = 98
+        Width = 97
         Height = 15
         Caption = 'Time Sheet Layout'
       end
@@ -1941,7 +1929,7 @@ object frmEmployees: TfrmEmployees
       object Label41: TLabel
         Left = 5
         Top = 174
-        Width = 69
+        Width = 68
         Height = 15
         Caption = 'Nav Bar Type'
       end
@@ -2187,10 +2175,6 @@ object frmEmployees: TfrmEmployees
     object tabWorkingWeek: TcxTabSheet
       Caption = 'Working Week'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label32: TLabel
         Left = 4
         Top = 193
@@ -2469,7 +2453,7 @@ object frmEmployees: TfrmEmployees
         object Label48: TLabel
           Left = 32
           Top = 51
-          Width = 122
+          Width = 121
           Height = 15
           Caption = 'Total Chargeable hours'
         end
@@ -2682,10 +2666,6 @@ object frmEmployees: TfrmEmployees
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 10
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxDBMemo1: TcxDBMemo
         Left = 0
         Top = 0
@@ -2704,10 +2684,6 @@ object frmEmployees: TfrmEmployees
     object tabMatterOptions: TcxTabSheet
       Caption = 'Matter Options'
       ImageIndex = 11
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 8
         Top = 5
@@ -3206,7 +3182,7 @@ object frmEmployees: TfrmEmployees
     Left = 830
     Top = 104
     Bitmap = {
-      494C01011F002100100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011F002100040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -5237,7 +5213,7 @@ object frmEmployees: TfrmEmployees
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
