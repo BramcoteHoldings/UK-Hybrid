@@ -3,8 +3,8 @@ object frmdtSearch: TfrmdtSearch
   Top = 247
   ActiveControl = btnSearch
   Caption = 'File Search'
-  ClientHeight = 1055
-  ClientWidth = 1635
+  ClientHeight = 717
+  ClientWidth = 1481
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,23 +21,31 @@ object frmdtSearch: TfrmdtSearch
   object pagdtSearch: TcxPageControl
     Left = 0
     Top = 28
-    Width = 1635
-    Height = 997
+    Width = 1481
+    Height = 659
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
     Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
     Properties.ShowFrame = True
-    Properties.Style = 9
+    Properties.Style = 1
     Properties.TabSlants.Kind = skCutCorner
     OnChange = pagdtSearchChange
-    ClientRectBottom = 996
-    ClientRectLeft = 1
-    ClientRectRight = 1634
+    ExplicitWidth = 1635
+    ExplicitHeight = 997
+    ClientRectBottom = 655
+    ClientRectLeft = 4
+    ClientRectRight = 1477
     ClientRectTop = 26
     object cxTabSheet1: TcxTabSheet
       Margins.Left = 4
@@ -46,11 +54,14 @@ object frmdtSearch: TfrmdtSearch
       Margins.Bottom = 4
       Caption = 'Results'
       ImageIndex = 0
+      ExplicitLeft = 1
+      ExplicitWidth = 1633
+      ExplicitHeight = 970
       object grddtDocs: TcxGrid
         Left = 0
         Top = 233
-        Width = 1633
-        Height = 737
+        Width = 1473
+        Height = 396
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -58,6 +69,8 @@ object frmdtSearch: TfrmdtSearch
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
+        ExplicitWidth = 1633
+        ExplicitHeight = 737
         object tvdtDocs: TcxGridTableView
           OnDblClick = tvdtDocsDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -157,7 +170,7 @@ object frmdtSearch: TfrmdtSearch
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1633
+        Width = 1473
         Height = 233
         Margins.Left = 4
         Margins.Top = 4
@@ -166,6 +179,7 @@ object frmdtSearch: TfrmdtSearch
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 1633
         object Label3: TLabel
           Left = 13
           Top = 80
@@ -181,8 +195,8 @@ object frmdtSearch: TfrmdtSearch
         object Label4: TLabel
           Left = 13
           Top = 46
-          Width = 24
-          Height = 19
+          Width = 21
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -194,7 +208,7 @@ object frmdtSearch: TfrmdtSearch
           Left = 1498
           Top = 175
           Width = 18
-          Height = 19
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -204,8 +218,8 @@ object frmdtSearch: TfrmdtSearch
         object Label1: TLabel
           Left = 13
           Top = 14
-          Width = 77
-          Height = 19
+          Width = 67
+          Height = 15
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -305,7 +319,7 @@ object frmdtSearch: TfrmdtSearch
           Left = 566
           Top = 5
           Width = 138
-          Height = 34
+          Height = 25
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -350,8 +364,8 @@ object frmdtSearch: TfrmdtSearch
           object Label6: TLabel
             Left = 12
             Top = 28
-            Width = 31
-            Height = 19
+            Width = 28
+            Height = 15
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -362,8 +376,8 @@ object frmdtSearch: TfrmdtSearch
           object Label7: TLabel
             Left = 12
             Top = 66
-            Width = 39
-            Height = 19
+            Width = 34
+            Height = 15
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -375,7 +389,7 @@ object frmdtSearch: TfrmdtSearch
             Left = 70
             Top = 23
             Width = 154
-            Height = 27
+            Height = 23
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -390,7 +404,7 @@ object frmdtSearch: TfrmdtSearch
             Left = 70
             Top = 60
             Width = 154
-            Height = 27
+            Height = 23
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -435,8 +449,8 @@ object frmdtSearch: TfrmdtSearch
   end
   object statusBar: TdxStatusBar
     Left = 0
-    Top = 1025
-    Width = 1635
+    Top = 687
+    Width = 1481
     Height = 30
     Margins.Left = 4
     Margins.Top = 4
@@ -451,6 +465,8 @@ object frmdtSearch: TfrmdtSearch
     Font.Height = -17
     Font.Name = 'Segoe UI'
     Font.Style = []
+    ExplicitTop = 1025
+    ExplicitWidth = 1635
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET

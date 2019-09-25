@@ -4758,13 +4758,13 @@ begin
       qryScaleCostsList.SQL.Clear;
       if SystemString('LIMIT_SCALECOST_NONBILLABLE') = 'Y' then
       begin
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND BILLTYPE = ''NonBillable'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
       end
       else
       begin
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
       end;
@@ -4778,7 +4778,7 @@ begin
             qryScaleCostsList.Close;
 
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM MATTER_BUDGETS MB, SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM MATTER_BUDGETS MB, SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND MB.TASK = S.CODE AND ');
          qryScaleCostsList.SQL.Add('MB.NMATTER = :NMATTER ORDER BY S.CODE');
 
@@ -4794,7 +4794,7 @@ begin
          if qryScaleCostsList.Active then
                qryScaleCostsList.Close;
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' AND BILLTYPE = ''Billable''  ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
          qryScaleCostsList.Open;
@@ -4804,7 +4804,7 @@ begin
          if qryScaleCostsList.Active then
                qryScaleCostsList.Close;
          qryScaleCostsList.SQL.Clear;
-         qryScaleCostsList.SQL.Add('SELECT distinct S.* FROM SCALECOST S ');
+         qryScaleCostsList.SQL.Add('SELECT distinct S.CODE, S.DESCR, S.BILLTYPE FROM SCALECOST S ');
          qryScaleCostsList.SQL.Add('WHERE S.ACTIVE = ''Y'' ');
          qryScaleCostsList.SQL.Add('ORDER BY S.CODE');
          qryScaleCostsList.Open;

@@ -61,6 +61,12 @@ type
     Label4: TLabel;
     mmoDesc: TDBRichEdit;
     tbJumpTo: TEdit;
+    lvReportsNotUsed: TcxGridLevel;
+    tvReportsNotUsed: TcxGridDBTableView;
+    qryNotUsed: TUniQuery;
+    dsNotUsed: TUniDataSource;
+    tvReportsNotUsedNAME: TcxGridDBColumn;
+    tvReportsNotUsedACCESSLEVEL: TcxGridDBColumn;
     procedure btnClearAllClick(Sender: TObject);
     procedure qryReportsAfterScroll(DataSet: TDataSet);
     procedure btnPrintClick(Sender: TObject);
@@ -162,6 +168,7 @@ begin
       0: lQry := qryReportsAll;
       1: lQry := qryReportsMonth;
       2: lQry := qryReportsQuarterly;
+      3: lQry := qryNotUsed;
    end;
 
    SetCurrentDir(ExtractFilePath(Application.EXEName));
@@ -395,6 +402,17 @@ var
    lSQL: string;
 begin
    case ALevel.Index of
+      0: begin
+            with qryReportsAll do
+            begin
+               Close;
+               lSQL := 'SELECT R.NAME, R.ACCESSLEVEL, R.Frequency, R.DESCR, R.ROWID FROM REPORTS R ';
+               sOrderBy := ' ORDER BY R.NAME';
+               sWhere := ' WHERE ACCESSLEVEL >= ' + InttoStr(dmAxiom.AccessLevel) + ' and frequency <> ''Not Used'' ';
+               SQL.Text := lSQL + sWhere + sOrderBy;
+               Open;
+            end;
+         end;
       1: begin
             with qryReportsMonth do
             begin
@@ -413,6 +431,28 @@ begin
                lSQL := 'SELECT R.*, R.ROWID FROM REPORTS R ';
                sOrderBy := ' ORDER BY R.NAME';
                sWhere := ' WHERE ACCESSLEVEL >= ' + InttoStr(dmAxiom.AccessLevel) + ' and frequency = ''Quarterly'' ';
+               SQL.Text := lSQL + sWhere + sOrderBy;
+               Open;
+            end;
+         end;
+      3: begin
+            with qryReportsWeekly do
+            begin
+               Close;
+               lSQL := 'SELECT R.NAME, R.ACCESSLEVEL, R.DESCR, R.ROWID FROM REPORTS R ';
+               sOrderBy := ' ORDER BY R.NAME';
+               sWhere := ' WHERE ACCESSLEVEL >= ' + InttoStr(dmAxiom.AccessLevel) + ' and frequency = ''Weekly'' ';
+               SQL.Text := lSQL + sWhere + sOrderBy;
+               Open;
+            end;
+         end;
+      4: begin
+            with qryNotUsed do
+            begin
+               Close;
+               lSQL := 'SELECT R.NAME, R.ACCESSLEVEL, R.DESCR, R.ROWID FROM REPORTS R ';
+               sOrderBy := ' ORDER BY R.NAME';
+               sWhere := ' WHERE ACCESSLEVEL >= ' + InttoStr(dmAxiom.AccessLevel) + ' and frequency = ''Not Used'' ';
                SQL.Text := lSQL + sWhere + sOrderBy;
                Open;
             end;
@@ -509,8 +549,8 @@ begin
    LfrmAddReport.ReportName := qryReportsAll.FieldByName('NAME').AsString;
    if LfrmAddReport.ShowModal= mrOk then
    begin
-      qryReportsAll.Refresh;
-//      qryReports.Open;
+      qryReportsAll.Close;
+      qryReportsAll.Open;
    end;
 end;
 
@@ -522,8 +562,8 @@ begin
 //   LfrmAddReport.ReportName := qryReports.FieldByName('NAME').AsString;
    if LfrmAddReport.ShowModal= mrOk then
    begin
-      qryReportsAll.Refresh;
-//      qryReports.Open;
+      qryReportsAll.Close;
+      qryReportsAll.Open;
    end;
 end;
 

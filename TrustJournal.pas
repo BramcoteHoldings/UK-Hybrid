@@ -4,18 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, Grids, Db, DBCtrls, DBGrids, Menus, Buttons,
-  ExtCtrls,citfunc, NumberEdit, OracleUniProvider, Uni, DBAccess, DateTimeAccount,
-  Variants, cxLookAndFeelPainters, cxButtons, cxStyles, cxCustomData,
-  cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData,
-  cxDropDownEdit, cxButtonEdit, cxTextEdit, cxCurrencyEdit,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxControls,
-  cxGridCustomView, cxClasses, cxGridLevel, cxGrid, cxMaskEdit,
-  cxLookAndFeels, cxContainer, cxCalendar, EnforceCustomDateEdit, dxCore,
-  ppDB, ppParameter, ppDesignLayer, ppBands, ppStrtch, ppMemo, ppCtrls,
-  ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv,
-  ppDBPipe, MemDS, cxNavigator, cxDateUtils,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
+  StdCtrls, ComCtrls, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  Vcl.Menus, cxControls, cxStyles, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, dxDateRanges,
+  cxDataControllerConditionalFormattingRulesManagerDialog, Data.DB, cxDBData,
+  cxDropDownEdit, cxButtonEdit, cxTextEdit, cxCurrencyEdit, cxContainer, dxCore,
+  cxDateUtils, ppParameter, ppDesignLayer, ppBands, ppStrtch, ppMemo, ppCtrls,
+  ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport, ppDB, ppComm, ppRelatv,
+  ppDBPipe, DBAccess, Uni, MemDS, cxLookupEdit, cxDBLookupEdit,
+  cxDBLookupComboBox, cxMaskEdit, cxCalendar, EnforceCustomDateEdit,
+  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
+  cxClasses, cxGridCustomView, cxGrid, cxButtons, Variants, vcl.Themes, dxBar,
+  cxCheckBox, cxBarEditItem;
 
 const
   colTYPE = 0;
@@ -45,11 +45,8 @@ type
     lblTotalDebit: TLabel;
     Label1: TLabel;
     lblBankName: TLabel;
-    cbBank: TComboBox;
     qryCheckAlloc: TUniQuery;
     lblWarning: TLabel;
-    btnOK: TcxButton;
-    btnCancel: TcxButton;
     qryCheckMatter: TUniQuery;
     dbgrLedger: TcxGrid;
     dbgrLedgerLevel1: TcxGridLevel;
@@ -62,7 +59,6 @@ type
     tvLedgerCREDIT: TcxGridDBColumn;
     qrySpecPurposeAllocs: TUniQuery;
     dtpDate: TEnforceCustomDateEdit;
-    cbPrintJournal: TCheckBox;
     qryJournalPrint: TUniQuery;
     dsJournalPrint: TUniDataSource;
     plJournalPrint: TppDBPipeline;
@@ -103,9 +99,15 @@ type
     qryNAccountPrint: TUniQuery;
     dsNAccountPrint: TUniDataSource;
     lblEntity: TppLabel;
+    cbBank: TcxLookupComboBox;
+    qryBank: TUniQuery;
+    dxBarManager1: TdxBarManager;
+    dxBarManager1Bar1: TdxBar;
+    btnOk: TdxBarButton;
+    dxBarButton2: TdxBarButton;
+    cbPrintJournal: TcxBarEditItem;
     procedure btnCancelClick(Sender: TObject);
     procedure dbgrLedger12EditButtonClick(Sender: TObject);
-    procedure btnOKClick(Sender: TObject);
     procedure dbgrLedger12ColExit(Sender: TObject);
     procedure qryLedgerAfterInsert(DataSet: TDataSet);
     procedure dbgrLedger12Exit(Sender: TObject);
@@ -120,7 +122,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure dbgrLedger12Enter(Sender: TObject);
     procedure tbDescExit(Sender: TObject);
-    procedure cbBankClick(Sender: TObject);
     procedure qryLedgerDEBITChange(Sender: TField);
     procedure qryLedgerCREDITChange(Sender: TField);
     procedure cxGrid1DBTableView1REFNO1PropertiesButtonClick(
@@ -137,6 +138,10 @@ type
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
     procedure tvLedgerCREDITPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+    procedure cxLookupComboBox1PropertiesChange(Sender: TObject);
+    procedure dxBarButton2Click(Sender: TObject);
+    procedure btnOkClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
 
     function OKtoPost(bShowError : boolean) : Boolean;
@@ -154,20 +159,21 @@ type
 implementation
 
 uses
-  AxiomData, MiscFunc, MSearch;
+  AxiomData, MiscFunc, MSearch, Vcl.Styles, Vcl.Styles.FormStyleHooks, citfunc;
 
 {$R *.DFM}
 
 var
   cTotalDebit, cTotalCredit : Currency;
-  bPostingFailed : boolean;
+  bPostingFailed,
+  bFormClosing : boolean;
   { 27/08/2004 TH - Commented out due to warnings
   val: string;
   }
 
 procedure TfrmTrustJournal.btnCancelClick(Sender: TObject);
 begin
-   Self.Close;
+//   Self.Close;
 //   RemoveFromDesktop(Self);
 end;
 
@@ -218,28 +224,31 @@ var
   bmPrevRecord: TBookmark;
 begin
 //  if DeletingItems then Exit;   { don't calculate if deleting all items }
-  bmPrevRecord := qryLedger.GetBookmark;  { returns nil if table is empty }
-  try
-    qryLedger.DisableControls;
-    qryLedger.First;
-    cTotalDebit := 0;     { use temp for efficiency }
-    cTotalCredit := 0;      { use temp for efficiency }
-    while not qryLedger.EOF do
-    begin
-      cTotalDebit := cTotalDebit + qryLedger.FieldByName('DEBIT').AsCurrency;
-      cTotalCredit := cTotalCredit + qryLedger.FieldByName('CREDIT').AsCurrency;
-      qryLedger.Next;
-    end;
-    lblTotalDebit.Caption := Format('%m', [cTotalDebit]);
-    lblTotalCredit.Caption := Format('%m', [cTotalCredit]);
-  finally
-     qryLedger.EnableControls;
-     if bmPrevRecord <> nil then
-     begin
-       qryLedger.GoToBookmark(bmPrevRecord);
-       qryLedger.FreeBookmark(bmPrevRecord);
-     end;
-  end;
+   if bFormClosing = False then
+   begin
+      bmPrevRecord := qryLedger.GetBookmark;  { returns nil if table is empty }
+      try
+         qryLedger.DisableControls;
+         qryLedger.First;
+         cTotalDebit := 0;     { use temp for efficiency }
+         cTotalCredit := 0;      { use temp for efficiency }
+         while not qryLedger.EOF do
+         begin
+            cTotalDebit := cTotalDebit + qryLedger.FieldByName('DEBIT').AsCurrency;
+            cTotalCredit := cTotalCredit + qryLedger.FieldByName('CREDIT').AsCurrency;
+            qryLedger.Next;
+         end;
+         lblTotalDebit.Caption := Format('%m', [cTotalDebit]);
+         lblTotalCredit.Caption := Format('%m', [cTotalCredit]);
+      finally
+         qryLedger.EnableControls;
+         if bmPrevRecord <> nil then
+         begin
+            qryLedger.GoToBookmark(bmPrevRecord);
+            qryLedger.FreeBookmark(bmPrevRecord);
+         end;
+      end;
+   end;
 end;
 
 
@@ -287,7 +296,220 @@ begin
 end;
 
 
-procedure TfrmTrustJournal.btnOKClick(Sender: TObject);
+procedure TfrmTrustJournal.dbgrLedger12ColExit(Sender: TObject);
+begin
+{  case dbgrLedger1.SelectedIndex of
+    colTYPE:
+    if dbgrLedger1.Columns.Items[colTYPE].Field.Text <> '' then
+    begin
+      if not qryLedger.Modified then
+        qryLedger.Edit;
+      dbgrLedger1.Columns.Items[colTYPE].Field.Text := Trim(dbgrLedger1.Columns.Items[colTYPE].Field.Text);
+    end;
+    colREFNO: // Display the long Description
+    begin
+      if dbgrLedger1.Columns.Items[colREFNO].Field.Text <> '' then
+      begin
+        // Check when user enters matter # manually
+        // 25/08/2004 TH - Check if matter is valid for entity
+        if not (IsValidMatterForEntity(dbgrLedger1.Columns.Items[colREFNO].Field.Text)) then
+        begin
+          MessageDlg('The matter #' + dbgrLedger1.Columns.Items[colREFNO].Field.Text + ' is not valid for the current Entity.', mtWarning, [mbOK], 0);
+          qryLedger.Edit;
+          dbgrLedger1.Columns.Items[colREFNO].Field.Text := '';
+          dbgrLedger1.Columns.Items[colLONGDESC].Field.Text := '';
+          Exit;
+        end;
+
+        // 24/08/2004 TH - Check if acct (bank) for matter is valid for selected bank
+        if qryCheckMatter.Active = True then
+          qryCheckMatter.Close;
+        qryCheckMatter.ParamByName('p_fileid').AsString := dbgrLedger1.Columns.Items[colREFNO].Field.Text;
+        qryCheckMatter.Open;
+
+        if not qryCheckMatter.IsEmpty then
+        begin
+          if not (qryCheckMatter.FieldByName('ACCT').AsString = cbBank.Text) then
+          begin
+            MessageDlg('The matter #' + dbgrLedger1.Columns.Items[colREFNO].Field.Text + ' is not valid for the current Bank', mtWarning, [mbOK], 0);
+            qryLedger.Edit;
+            dbgrLedger1.Columns.Items[colREFNO].Field.Text := '';
+            dbgrLedger1.Columns.Items[colLONGDESC].Field.Text := '';
+            Exit;
+          end
+          else // If all is valid
+          begin
+            if not qryLedger.Modified then
+              qryLedger.Edit;
+            dbgrLedger1.Columns.Items[colREFNO].Field.Text := Trim(dbgrLedger1.Columns.Items[colREFNO].Field.Text);
+            dbgrLedger1.Columns.Items[colREFNO].Field.Text := UpperCase(dbgrLedger1.Columns.Items[colREFNO].Field.Text);
+            if (dbgrLedger1.Columns.Items[colTYPE].Field.Text = 'Matter') or (dbgrLedger1.Columns.Items[colTYPE].Field.Text = 'Protected') then
+              qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger1.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
+          end;
+        end; // end of if not qryCheckMatter.IsEmpty then
+      end;
+    end;
+    colREASON:
+    begin
+      if not qryLedger.Modified then
+        qryLedger.Edit;
+      QuickCode(dbgrLedger1.Columns.Items[colREASON].Field);
+    end;
+    colDEBIT, colCREDIT: // update the total amount
+    begin
+      UpdateTotal;
+    end;
+  end;      }
+end;
+
+procedure TfrmTrustJournal.qryLedgerAfterInsert(DataSet: TDataSet);
+begin
+   DataSet.FieldByName('CREATED').AsDateTime := dtpDate.Date;  // dtpDate.DateTime;
+   DataSet.FieldByName('TYPE').AsString := 'Matter';
+   DataSet.FieldByName('REASON').AsString := tbDesc.Text;
+end;
+
+procedure TfrmTrustJournal.dbgrLedger12Exit(Sender: TObject);
+begin
+  UpdateTotal;
+  btnOK.Enabled := OKtoPost(False);
+end;
+
+procedure TfrmTrustJournal.qryLedgerAfterPost(DataSet: TDataSet);
+begin
+  UpdateTotal;
+end;
+
+procedure TfrmTrustJournal.qryLedgerAfterDelete(DataSet: TDataSet);
+begin
+  UpdateTotal;
+end;
+
+
+procedure TfrmTrustJournal.popRemoveClick(Sender: TObject);
+begin
+  if not qryLedger.IsEmpty then
+    qryLedger.Delete;
+end;
+
+procedure TfrmTrustJournal.popEditClick(Sender: TObject);
+begin
+  if not qryLedger.IsEmpty then
+    qryLedger.Edit;
+end;
+
+
+procedure TfrmTrustJournal.FormCreate(Sender: TObject);
+begin
+   cTotalDebit := 0;
+   cTotalCredit := 0;
+   lblWarning.Caption := '';
+   bFormClosing := False;
+
+   if dmAxiom.qryBankList.Active = True then
+      dmAxiom.qryBankList.Close;
+   dmAxiom.qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   dmAxiom.qryBankList.ParamByName('TRUST').AsString := 'T';
+   dmAxiom.qryBankList.Open;
+
+//  AddBanks(cbBank, 'T');
+  if dmAxiom.qryBankList.RecordCount > 0 then
+  begin
+    cbBank.ItemIndex := 0;
+//    cbBank.OnClick(Self);
+  end;
+
+  dtpDate.EnforceLock:= not dmAxiom.Security.PriorPeriodTransactions.Post;
+end;
+
+
+procedure TfrmTrustJournal.tbDescKeyPress(Sender: TObject; var Key: Char);
+begin
+   if (Key = ' ') then
+      Quickcode(tbDesc);
+end;
+
+
+procedure TfrmTrustJournal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  qryJournal.Close;
+  qryLedger.Close;
+  RemoveFromDesktop(Self);
+//  Self.Release;
+end;
+
+procedure TfrmTrustJournal.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+   bFormClosing := True;
+end;
+
+procedure TfrmTrustJournal.dbgrLedger12KeyPress(Sender: TObject; var Key: Char);
+begin
+//  if (dbgrLedger.SelectedIndex = colCREDIT) or (dbgrLedger.SelectedIndex = colDEBIT) then
+//    if Key = #13 then
+//      UpdateTotal;
+end;
+
+procedure TfrmTrustJournal.FormShow(Sender: TObject);
+begin
+
+{  AddBanks(cbBank, 'T');
+  if cbBank.Items.Count > 0 then
+  begin
+    cbBank.ItemIndex := 0;
+    cbBank.OnClick(Self);
+  end;
+
+  qryLedger.Open;
+  qryLedger.Insert;    }
+
+{
+  Added 25.10.2002 GG
+
+  If the user does not have authority to post into a locked period, prevent
+  them from changing the transaction date into the locked period
+}
+//  dtpDate.EnforceLock:= not dmAxiom.Security.PriorPeriodTransactions.Post;
+
+  qryLedger.Open;
+  qryLedger.Insert;
+end;
+
+procedure TfrmTrustJournal.dbgrLedger12Enter(Sender: TObject);
+begin
+   if qryLedger.IsEmpty then
+      qryLedger.Insert;
+end;
+
+procedure TfrmTrustJournal.tbDescExit(Sender: TObject);
+begin
+   QuickCode(Sender);
+   qryLedger.First;
+   if not qryLedger.Modified then
+      qryLedger.Edit;
+   while (not qryLedger.Eof) do
+   begin
+      qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+      qryLedger.Next;
+      qryLedger.Edit;
+   end;
+end;
+
+procedure TfrmTrustJournal.qryLedgerDEBITChange(Sender: TField);
+begin
+  if qryLedger.FieldByName('DEBIT').AsCurrency <> 0 then
+    qryLedger.FieldByName('CREDIT').AsCurrency := 0;
+end;
+
+procedure TfrmTrustJournal.qryLedgerCREDITChange(Sender: TField);
+begin
+  if qryLedger.FieldByName('CREDIT').AsCurrency <> 0 then
+    qryLedger.FieldByName('DEBIT').AsCurrency := 0;
+end;
+
+
+procedure TfrmTrustJournal.btnOkClick(Sender: TObject);
 var
   iJournal,
   Row : integer;
@@ -509,7 +731,7 @@ begin
 
               if not bPostingFailed then
               begin
-                 if cbPrintJournal.Checked then
+                 if boolean(cbPrintJournal.EditValue) = True then
                  begin
                     try
                        Screen.Cursor := crSQLWait;
@@ -561,213 +783,6 @@ begin
        end;    //  end if-else
    }
 end;
-
-
-procedure TfrmTrustJournal.dbgrLedger12ColExit(Sender: TObject);
-begin
-{  case dbgrLedger1.SelectedIndex of
-    colTYPE:
-    if dbgrLedger1.Columns.Items[colTYPE].Field.Text <> '' then
-    begin
-      if not qryLedger.Modified then
-        qryLedger.Edit;
-      dbgrLedger1.Columns.Items[colTYPE].Field.Text := Trim(dbgrLedger1.Columns.Items[colTYPE].Field.Text);
-    end;
-    colREFNO: // Display the long Description
-    begin
-      if dbgrLedger1.Columns.Items[colREFNO].Field.Text <> '' then
-      begin
-        // Check when user enters matter # manually
-        // 25/08/2004 TH - Check if matter is valid for entity
-        if not (IsValidMatterForEntity(dbgrLedger1.Columns.Items[colREFNO].Field.Text)) then
-        begin
-          MessageDlg('The matter #' + dbgrLedger1.Columns.Items[colREFNO].Field.Text + ' is not valid for the current Entity.', mtWarning, [mbOK], 0);
-          qryLedger.Edit;
-          dbgrLedger1.Columns.Items[colREFNO].Field.Text := '';
-          dbgrLedger1.Columns.Items[colLONGDESC].Field.Text := '';
-          Exit;
-        end;
-
-        // 24/08/2004 TH - Check if acct (bank) for matter is valid for selected bank
-        if qryCheckMatter.Active = True then
-          qryCheckMatter.Close;
-        qryCheckMatter.ParamByName('p_fileid').AsString := dbgrLedger1.Columns.Items[colREFNO].Field.Text;
-        qryCheckMatter.Open;
-
-        if not qryCheckMatter.IsEmpty then
-        begin
-          if not (qryCheckMatter.FieldByName('ACCT').AsString = cbBank.Text) then
-          begin
-            MessageDlg('The matter #' + dbgrLedger1.Columns.Items[colREFNO].Field.Text + ' is not valid for the current Bank', mtWarning, [mbOK], 0);
-            qryLedger.Edit;
-            dbgrLedger1.Columns.Items[colREFNO].Field.Text := '';
-            dbgrLedger1.Columns.Items[colLONGDESC].Field.Text := '';
-            Exit;
-          end
-          else // If all is valid
-          begin
-            if not qryLedger.Modified then
-              qryLedger.Edit;
-            dbgrLedger1.Columns.Items[colREFNO].Field.Text := Trim(dbgrLedger1.Columns.Items[colREFNO].Field.Text);
-            dbgrLedger1.Columns.Items[colREFNO].Field.Text := UpperCase(dbgrLedger1.Columns.Items[colREFNO].Field.Text);
-            if (dbgrLedger1.Columns.Items[colTYPE].Field.Text = 'Matter') or (dbgrLedger1.Columns.Items[colTYPE].Field.Text = 'Protected') then
-              qryLedger.FieldByName('LONGDESC').AsString := MatterString(dbgrLedger1.Columns.Items[colREFNO].Field.Text, 'MATLOCATE');
-          end;
-        end; // end of if not qryCheckMatter.IsEmpty then
-      end;
-    end;
-    colREASON:
-    begin
-      if not qryLedger.Modified then
-        qryLedger.Edit;
-      QuickCode(dbgrLedger1.Columns.Items[colREASON].Field);
-    end;
-    colDEBIT, colCREDIT: // update the total amount
-    begin
-      UpdateTotal;
-    end;
-  end;      }
-end;
-
-
-procedure TfrmTrustJournal.qryLedgerAfterInsert(DataSet: TDataSet);
-begin
-  qryLedger.FieldByName('CREATED').AsDateTime := dtpDate.Date;  // dtpDate.DateTime;
-  qryLedger.FieldByName('TYPE').AsString := 'Matter';
-  qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
-end;
-
-
-procedure TfrmTrustJournal.dbgrLedger12Exit(Sender: TObject);
-begin
-  UpdateTotal;
-  btnOK.Enabled := OKtoPost(False);
-end;
-
-procedure TfrmTrustJournal.qryLedgerAfterPost(DataSet: TDataSet);
-begin
-  UpdateTotal;
-end;
-
-procedure TfrmTrustJournal.qryLedgerAfterDelete(DataSet: TDataSet);
-begin
-  UpdateTotal;
-end;
-
-
-procedure TfrmTrustJournal.popRemoveClick(Sender: TObject);
-begin
-  if not qryLedger.IsEmpty then
-    qryLedger.Delete;
-end;
-
-procedure TfrmTrustJournal.popEditClick(Sender: TObject);
-begin
-  if not qryLedger.IsEmpty then
-    qryLedger.Edit;
-end;
-
-
-procedure TfrmTrustJournal.FormCreate(Sender: TObject);
-begin
-  cTotalDebit := 0;
-  cTotalCredit := 0;
-  lblWarning.Caption := '';
-
-  AddBanks(cbBank, 'T');
-  if cbBank.Items.Count > 0 then
-  begin
-    cbBank.ItemIndex := 0;
-    cbBank.OnClick(Self);
-  end;
-
-  qryLedger.Open;
-  qryLedger.Insert;
-end;
-
-
-procedure TfrmTrustJournal.tbDescKeyPress(Sender: TObject; var Key: Char);
-begin
-   if (Key = ' ') then
-      Quickcode(tbDesc);
-end;
-
-
-procedure TfrmTrustJournal.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  qryJournal.Close;
-  qryLedger.Close;
-  RemoveFromDesktop(Self);
-//  Self.Release;
-end;
-
-procedure TfrmTrustJournal.dbgrLedger12KeyPress(Sender: TObject; var Key: Char);
-begin
-//  if (dbgrLedger.SelectedIndex = colCREDIT) or (dbgrLedger.SelectedIndex = colDEBIT) then
-//    if Key = #13 then
-//      UpdateTotal;
-end;
-
-procedure TfrmTrustJournal.FormShow(Sender: TObject);
-begin
-
-{  AddBanks(cbBank, 'T');
-  if cbBank.Items.Count > 0 then
-  begin
-    cbBank.ItemIndex := 0;
-    cbBank.OnClick(Self);
-  end;
-
-  qryLedger.Open;
-  qryLedger.Insert;    }
-
-{
-  Added 25.10.2002 GG
-
-  If the user does not have authority to post into a locked period, prevent
-  them from changing the transaction date into the locked period
-}
-  dtpDate.EnforceLock:= not dmAxiom.Security.PriorPeriodTransactions.Post;
-end;
-
-procedure TfrmTrustJournal.dbgrLedger12Enter(Sender: TObject);
-begin
-   if qryLedger.IsEmpty then
-      qryLedger.Insert;
-end;
-
-procedure TfrmTrustJournal.tbDescExit(Sender: TObject);
-begin
-   QuickCode(Sender);
-   qryLedger.First;
-   if not qryLedger.Modified then
-      qryLedger.Edit;
-   while (not qryLedger.Eof) do
-   begin
-      qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
-      qryLedger.Next;
-      qryLedger.Edit;
-   end;
-end;
-
-procedure TfrmTrustJournal.cbBankClick(Sender: TObject);
-begin
-  Self.Color := BankColour(cbBank.Text);
-  lblBankName.Caption := TableString('BANK', 'ACCT', cbBank.Text, 'NAME');
-end;
-
-procedure TfrmTrustJournal.qryLedgerDEBITChange(Sender: TField);
-begin
-  if qryLedger.FieldByName('DEBIT').AsCurrency <> 0 then
-    qryLedger.FieldByName('CREDIT').AsCurrency := 0;
-end;
-
-procedure TfrmTrustJournal.qryLedgerCREDITChange(Sender: TField);
-begin
-  if qryLedger.FieldByName('CREDIT').AsCurrency <> 0 then
-    qryLedger.FieldByName('DEBIT').AsCurrency := 0;
-end;
-
 
 function TfrmTrustJournal.CheckAmountAgainstAlloc : Boolean;
 var
@@ -1042,10 +1057,35 @@ begin
       end;
 end;
 
+procedure TfrmTrustJournal.cxLookupComboBox1PropertiesChange(Sender: TObject);
+begin
+   TFormStyleHookBackground.BackGroundSettings.Enabled := True;
+   TFormStyleHookBackground.BackGroundSettings.UseColor := True;
+   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.Text);
+
+   Self.Invalidate;
+   Self.Perform(WM_PAINT, 0, 0);
+
+   with qryBank do
+   begin
+     Close;
+     ParamByName('P_Entity').AsString := dmAxiom.Entity;
+     ParamByName('P_Code').AsString := cbBank.Text;
+     Prepare;
+     Open;
+     lblBankName.Caption := qryBank.FieldByName('NAME').AsString + ' - (' + qryBank.FieldByname('CURRENCY').AsString + ')';
+   end;
+end;
+
 procedure TfrmTrustJournal.dbgrLedgerExit(Sender: TObject);
 begin
    UpdateTotal;
    btnOK.Enabled := OKtoPost(False);
+end;
+
+procedure TfrmTrustJournal.dxBarButton2Click(Sender: TObject);
+begin
+   Self.Close;
 end;
 
 procedure TfrmTrustJournal.tvLedgerCREDITPropertiesValidate(Sender: TObject;
@@ -1095,6 +1135,9 @@ begin
    ppLabel22.Caption := Application.ExeName;
    lblEntity.Caption := 'For entity: ' + dmAxiom.EntityName;
 end;
+
+initialization
+   TStyleManager.Engine.RegisterStyleHook(TfrmTrustJournal, TFormStyleHookBackground);
 
 end.
 
