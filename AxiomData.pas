@@ -3269,110 +3269,113 @@ begin
    qryTempFeeInsert.Open;
 
    try
-      if dmAxiom.uniInsight.InTransaction then dmAxiom.uniInsight.Commit;
+      if dmAxiom.uniInsight.InTransaction then dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
+
       bPostingFailed := False;
       with qryTempFeeInsert do
       begin
          First;
          while (EOF = False) do
          begin
-            if ((MatterIsCurrent(FieldByName('FILEID').AsString) and
-               (FieldByName('REASON').AsString <> '') and
-               (FieldByName('TIME_TYPE').AsString = 'M')) OR
-               (FieldByName('TIME_TYPE').AsString = 'O')) then
+            if (MatterIsCurrent(FieldByName('FILEID').AsString) = True) then
             begin
-               nFee := dmAxiom.GetSeqNumber('SQNC_NFEE');
-
-               if FieldByName('START_DATE').IsNull then
-                  qryFeeInsert.ParamByName('CREATED').AsDateTime := FieldByName('CREATED').AsDateTime
-               else
-                  qryFeeInsert.ParamByName('CREATED').AsDateTime := FieldByName('START_DATE').AsDateTime;
-
-               qryFeeInsert.ParamByName('DESCR').AsString := FieldByName('REASON').AsString;
-               qryFeeInsert.ParamByName('UNITS').AsFloat := FieldByName('UNITS').AsFloat;
-               if iMinsPerUnit > 0 then
+               if ((FieldByName('REASON').AsString <> '') and
+                  (FieldByName('TIME_TYPE').AsString = 'M') OR
+                  (FieldByName('TIME_TYPE').AsString = 'O')) then
                begin
-                  qryFeeInsert.ParamByName('MINS').AsFloat := FieldByName('UNITS').AsFloat * iMinsPerUnit;
-                  qryFeeInsert.ParamByName('UNIT').AsString := 'Units';
-               end
-               else
-               begin
-                  qryFeeInsert.ParamByName('MINS').AsFloat := FieldByName('UNITS').AsFloat;
-                  qryFeeInsert.ParamByName('UNIT').AsString := 'Mins';
-               end;
-               qryFeeInsert.ParamByName('NFEE').AsString := nFee;
-               qryFeeInsert.ParamByName('AUTHOR').AsString := FieldByName('AUTHOR').AsString;
-               qryFeeInsert.ParamByName('RATE').AsFloat := FieldByName('RATE').AsCurrency;
-               qryFeeInsert.ParamByName('NMATTER').AsInteger :=  FieldByName('NMATTER').AsInteger;
-               qryFeeInsert.ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'NMATTER', FieldByName('NMATTER').AsInteger, 'NCLIENT');
-               qryFeeInsert.ParamByName('PARTNER').AsString := MatterString(FieldByName('NMATTER').AsInteger, 'PARTNER');
-               qryFeeInsert.ParamByName('FILEID').AsString := FieldByName('FILEID').AsString;
-               qryFeeInsert.ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
-               qryFeeInsert.ParamByName('DEPT').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'DEPT');
-               qryFeeInsert.ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'TYPE');
-               qryFeeInsert.ParamByName('TAXCODE').AsString := FieldByName('TAXCODE').AsString;
-               qryFeeInsert.ParamByName('START_DATE').AsDateTime := FieldByName('START_DATE').AsDateTime;
-               qryFeeInsert.ParamByName('END_DATE').AsDateTime := FieldByName('END_DATE').AsDateTime;
-               dAmount := FieldByName('AMOUNT').AsCurrency;
-               qryFeeInsert.ParamByName('TAX').AsFloat := TaxCalc(dAmount, '', FieldByName('TAXCODE').AsString, FieldByName('CREATED').AsDateTime);
-               qryFeeInsert.ParamByName('AMOUNT').AsFloat := dAmount;
-               qryFeeInsert.ParamByName('VALUE').AsFloat := dAmount;
-               qryFeeInsert.ParamByName('DISCOUNT').AsFloat := 0;
-               qryFeeInsert.ParamByName('TIME_TYPE').AsString := FieldByName('TIME_TYPE').AsString;
-               qryFeeInsert.ParamByName('ITEMS').AsString := FieldByName('ITEMS').AsString;
-               qryFeeInsert.ParamByName('LABELCOLOUR').AsInteger := $000C1DFC;  //EventLabelColors[5];    RED
-               qryFeeInsert.ParamByName('PROGRAM_NAME').AsString := 'Shutdown';
-               qryFeeInsert.ParamByName('EMPCODE').AsString := FieldByName('EMPCODE').AsString;
-               qryFeeInsert.ParamByName('NOTES').AsString := FieldByName('NOTES').AsString;
-               qryFeeInsert.ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;
-               qryFeeInsert.ParamByName('PROCESSING_UNIT').AsString := 'Shutdown';
-               qryFeeInsert.ParamByName('BILLED').AsString := 'N';
-               qryFeeInsert.ParamByName('TYPE').AsString := 'N';
-               if FieldByName('TIME_TYPE').AsString = 'O' then
-                  qryFeeInsert.ParamByName('BILLTYPE').AsString := 'NonBillable'
-               else
-               begin
-                  qryFeeInsert.ParamByName('BILLTYPE').AsString := FieldByName('BillType').AsString;
-               end;
-               qryFeeInsert.ParamByName('TASK').AsString := FieldByName('FEE_TEMPLATE').AsString;
-               qryFeeInsert.ExecSQL;
+                  nFee := dmAxiom.GetSeqNumber('SQNC_NFEE');
 
-               qryFeeTempUpdate.ParamByName('nfee').AsString := nFee;
-               qryFeeTempUpdate.ParamByName('labelcolour').AsInteger := $000C1DFC;  //EventLabelColors[5];   // RED
-               qryFeeTempUpdate.ParamByName('uniqueid').AsInteger := FieldByName('UNIQUEID').AsInteger;
-               qryFeeTempUpdate.ExecSQL;
+                  if FieldByName('START_DATE').IsNull then
+                     qryFeeInsert.ParamByName('CREATED').AsDateTime := FieldByName('CREATED').AsDateTime
+                  else
+                     qryFeeInsert.ParamByName('CREATED').AsDateTime := FieldByName('START_DATE').AsDateTime;
 
-               if ((dmAxiom.Fee_file_notes = 'Y') and (not FieldByName('NOTES').IsNull) and
-                  (SystemString('DRAG_DEFAULT_DIRECTORY') <> '')) then
-               begin
-                  qryTmpProcess.Close;
-                  qryTmpProcess.ParambyName('uniqueid').AsInteger := qryTempFeeInsert.FieldByName('UNIQUEID').AsInteger;
-                  qryTmpProcess.Open;
+                  qryFeeInsert.ParamByName('DESCR').AsString := FieldByName('REASON').AsString;
+                  qryFeeInsert.ParamByName('UNITS').AsFloat := FieldByName('UNITS').AsFloat;
+                  if iMinsPerUnit > 0 then
+                  begin
+                     qryFeeInsert.ParamByName('MINS').AsFloat := FieldByName('UNITS').AsFloat * iMinsPerUnit;
+                     qryFeeInsert.ParamByName('UNIT').AsString := 'Units';
+                  end
+                  else
+                  begin
+                     qryFeeInsert.ParamByName('MINS').AsFloat := FieldByName('UNITS').AsFloat;
+                     qryFeeInsert.ParamByName('UNIT').AsString := 'Mins';
+                  end;
+                  qryFeeInsert.ParamByName('NFEE').AsString := nFee;
+                  qryFeeInsert.ParamByName('AUTHOR').AsString := FieldByName('AUTHOR').AsString;
+                  qryFeeInsert.ParamByName('RATE').AsFloat := FieldByName('RATE').AsCurrency;
+                  qryFeeInsert.ParamByName('NMATTER').AsInteger :=  FieldByName('NMATTER').AsInteger;
+                  qryFeeInsert.ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'NMATTER', FieldByName('NMATTER').AsInteger, 'NCLIENT');
+                  qryFeeInsert.ParamByName('PARTNER').AsString := MatterString(FieldByName('NMATTER').AsInteger, 'PARTNER');
+                  qryFeeInsert.ParamByName('FILEID').AsString := FieldByName('FILEID').AsString;
+                  qryFeeInsert.ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
+                  qryFeeInsert.ParamByName('DEPT').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'DEPT');
+                  qryFeeInsert.ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'TYPE');
+                  qryFeeInsert.ParamByName('TAXCODE').AsString := FieldByName('TAXCODE').AsString;
+                  qryFeeInsert.ParamByName('START_DATE').AsDateTime := FieldByName('START_DATE').AsDateTime;
+                  qryFeeInsert.ParamByName('END_DATE').AsDateTime := FieldByName('END_DATE').AsDateTime;
+                  dAmount := FieldByName('AMOUNT').AsCurrency;
+                  qryFeeInsert.ParamByName('TAX').AsFloat := TaxCalc(dAmount, '', FieldByName('TAXCODE').AsString, FieldByName('CREATED').AsDateTime);
+                  qryFeeInsert.ParamByName('AMOUNT').AsFloat := dAmount;
+                  qryFeeInsert.ParamByName('VALUE').AsFloat := dAmount;
+                  qryFeeInsert.ParamByName('DISCOUNT').AsFloat := 0;
+                  qryFeeInsert.ParamByName('TIME_TYPE').AsString := FieldByName('TIME_TYPE').AsString;
+                  qryFeeInsert.ParamByName('ITEMS').AsString := FieldByName('ITEMS').AsString;
+                  qryFeeInsert.ParamByName('LABELCOLOUR').AsInteger := $000C1DFC;  //EventLabelColors[5];    RED
+                  qryFeeInsert.ParamByName('PROGRAM_NAME').AsString := 'Shutdown';
+                  qryFeeInsert.ParamByName('EMPCODE').AsString := FieldByName('EMPCODE').AsString;
+                  qryFeeInsert.ParamByName('NOTES').AsString := FieldByName('NOTES').AsString;
+                  qryFeeInsert.ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;
+                  qryFeeInsert.ParamByName('PROCESSING_UNIT').AsString := 'Shutdown';
+                  qryFeeInsert.ParamByName('BILLED').AsString := 'N';
+                  qryFeeInsert.ParamByName('TYPE').AsString := 'N';
+                  if FieldByName('TIME_TYPE').AsString = 'O' then
+                     qryFeeInsert.ParamByName('BILLTYPE').AsString := 'NonBillable'
+                  else
+                  begin
+                     qryFeeInsert.ParamByName('BILLTYPE').AsString := FieldByName('BillType').AsString;
+                  end;
+                  qryFeeInsert.ParamByName('TASK').AsString := FieldByName('FEE_TEMPLATE').AsString;
+                  qryFeeInsert.ExecSQL;
 
-                  ANewDocName := SystemString('DRAG_DEFAULT_DIRECTORY') + '\File Note - ' + nfee + '_'+
-                                             qryTmpProcess.FieldByName('AUTHOR').AsString + '.pdf';
+                  qryFeeTempUpdate.ParamByName('nfee').AsString := nFee;
+                  qryFeeTempUpdate.ParamByName('labelcolour').AsInteger := $000C1DFC;  //EventLabelColors[5];   // RED
+                  qryFeeTempUpdate.ParamByName('uniqueid').AsInteger := FieldByName('UNIQUEID').AsInteger;
+                  qryFeeTempUpdate.ExecSQL;
 
-                  AParsedDocName := ParseMacros(ANewDocName, qryTmpProcess.FieldByName('NMATTER').AsInteger);
-                  AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
-                  // check directory exists, if not create it
-                  if not DirectoryExists(AParsedDir) then
-                     ForceDirectories(AParsedDir);
-
-                  ppFileNoteRpt.AllowPrintToFile := True;
-                  ppFileNoteRpt.ShowPrintDialog := False;
-                  ppFileNoteRpt.DeviceType := dtPDF;
-                  ppFileNoteRpt.PDFSettings.OpenPDFFile := False;
-                  ppFileNoteRpt.TextFileName := AParsedDocName;
-
-                  try
-                     ppFileNoteRpt.Print;
-                  finally
-                     SaveFileNotesToDoc(qryTmpProcess.FieldByName('START_DATE').AsDateTime, qryTmpProcess.FieldByName('NOTES').AsString,
-                                        qryTmpProcess.FieldByName('REASON').AsString,
-                                        qryTmpProcess.FieldByName('FILEID').AsString, qryTmpProcess.FieldByName('AUTHOR').AsString,
-                                        AParsedDocName, StrToInt(nFee) );
+                  if ((dmAxiom.Fee_file_notes = 'Y') and (not FieldByName('NOTES').IsNull) and
+                     (SystemString('DRAG_DEFAULT_DIRECTORY') <> '')) then
+                  begin
                      qryTmpProcess.Close;
+                     qryTmpProcess.ParambyName('uniqueid').AsInteger := qryTempFeeInsert.FieldByName('UNIQUEID').AsInteger;
+                     qryTmpProcess.Open;
+
+                     ANewDocName := SystemString('DRAG_DEFAULT_DIRECTORY') + '\File Note - ' + nfee + '_'+
+                                                qryTmpProcess.FieldByName('AUTHOR').AsString + '.pdf';
+
+                     AParsedDocName := ParseMacros(ANewDocName, qryTmpProcess.FieldByName('NMATTER').AsInteger);
+                     AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
+                     // check directory exists, if not create it
+                     if not DirectoryExists(AParsedDir) then
+                        ForceDirectories(AParsedDir);
+
+                     ppFileNoteRpt.AllowPrintToFile := True;
+                     ppFileNoteRpt.ShowPrintDialog := False;
+                     ppFileNoteRpt.DeviceType := dtPDF;
+                     ppFileNoteRpt.PDFSettings.OpenPDFFile := False;
+                     ppFileNoteRpt.TextFileName := AParsedDocName;
+
+                     try
+                        ppFileNoteRpt.Print;
+                     finally
+                        SaveFileNotesToDoc(qryTmpProcess.FieldByName('START_DATE').AsDateTime, qryTmpProcess.FieldByName('NOTES').AsString,
+                                           qryTmpProcess.FieldByName('REASON').AsString,
+                                           qryTmpProcess.FieldByName('FILEID').AsString, qryTmpProcess.FieldByName('AUTHOR').AsString,
+                                           AParsedDocName, StrToInt(nFee) );
+                        qryTmpProcess.Close;
+                     end;
                   end;
                end;
             end;
