@@ -1,10 +1,11 @@
 object frmAddReport: TfrmAddReport
   Left = 605
   Top = 282
+  AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Add Insight Report'
-  ClientHeight = 281
-  ClientWidth = 395
+  ClientHeight = 328
+  ClientWidth = 465
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,279 +15,476 @@ object frmAddReport: TfrmAddReport
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnShow = FormShow
-  DesignSize = (
-    395
-    281)
   PixelsPerInch = 96
   TextHeight = 15
-  object Label1: TLabel
-    Left = 6
-    Top = 132
-    Width = 106
-    Height = 15
-    Caption = 'Report Description *'
-  end
-  object cxLabel1: TcxLabel
-    Left = 6
-    Top = 7
-    Caption = 'Display Name *'
-    Transparent = True
-  end
-  object cxLabel2: TcxLabel
-    Left = 6
-    Top = 79
-    Caption = 'Report Type *'
-    Transparent = True
-  end
-  object cxLabel3: TcxLabel
-    Left = 6
-    Top = 31
-    Caption = 'Program Name *'
-    Transparent = True
-  end
-  object cxLabel4: TcxLabel
-    Left = 6
-    Top = 56
-    Caption = 'Report Level *'
-    Transparent = True
-  end
-  object cxLabel5: TcxLabel
-    Left = 6
-    Top = 102
-    Caption = 'Parameters'
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    Transparent = True
-  end
-  object teDisplayName: TcxDBTextEdit
-    Left = 95
-    Top = 7
-    Anchors = [akLeft, akTop, akRight]
-    DataBinding.DataField = 'NAME'
-    DataBinding.DataSource = dsAddReport
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 5
-    ExplicitWidth = 278
-    Width = 288
-  end
-  object teReportName: TcxDBButtonEdit
-    Left = 95
-    Top = 31
-    Anchors = [akLeft, akTop, akRight]
-    DataBinding.DataField = 'REPORT'
-    DataBinding.DataSource = dsAddReport
-    Properties.Buttons = <
-      item
-        Default = True
-        Kind = bkEllipsis
-      end
-      item
-        Glyph.Data = {
-          F6000000424DF600000000000000760000002800000010000000100000000100
-          0400000000008000000000000000000000001000000000000000000000000000
-          8000008000000080800080000000800080008080000080808000C0C0C0000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
-          FFFFFFFFFFF00000FFFFFFFFFF0A22220FFFFFFF00AA2222A0FFFFF0A0A00000
-          A0FFFF0AA00A222200FFFF0A00AA2222A0FFFF00A0A00000A0FFFF0AA00A2222
-          00FFFF0A00AA2222A0FFFF00A0A00000A0FFFF0AA00AAAAA00FFFF0A00000000
-          0FFFFF00AAAAA00FFFFFFFF0000000FFFFFFFFFFFFFFFFFFFFFF}
-        Kind = bkGlyph
-      end>
-    Properties.OnButtonClick = trReportNamePropertiesButtonClick
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 6
-    Width = 288
-  end
-  object cmbReportLevel: TcxDBComboBox
-    Left = 94
-    Top = 56
-    DataBinding.DataField = 'ACCESSLEVEL'
-    DataBinding.DataSource = dsAddReport
-    Properties.DropDownListStyle = lsFixedList
-    Properties.DropDownRows = 10
-    Properties.Items.Strings = (
-      '0'
-      '1'
-      '2'
-      '3'
-      '4'
-      '5'
-      '6'
-      '7'
-      '8'
-      '9')
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 7
-    Width = 50
-  end
-  object cmbReportType: TcxDBImageComboBox
-    Left = 94
-    Top = 80
-    Anchors = [akLeft, akTop, akRight]
-    DataBinding.DataField = 'REPORT_TYPE'
-    DataBinding.DataSource = dsAddReport
-    Properties.Images = ImageList1
-    Properties.Items = <
-      item
-        Description = 'Insight Report Builder Report'
-        ImageIndex = 3
-        Value = 'A'
-      end
-      item
-        Description = 'Excel Spreadsheet'
-        ImageIndex = 1
-        Tag = 1
-        Value = 'X'
-      end
-      item
-        Description = 'Crystal Report'
-        ImageIndex = 2
-        Tag = 2
-        Value = 'C'
-      end
-      item
-        Description = 'Crystal Secure Report'
-        ImageIndex = 2
-        Tag = 3
-        Value = 'Z'
-      end
-      item
-        Description = 'Insight Report'
-        ImageIndex = 3
-        Tag = 4
-        Value = 'R'
-      end
-      item
-        Description = 'Insight DB Report Builder Report'
-        ImageIndex = 3
-        Tag = 5
-        Value = 'D'
-      end
-      item
-        Description = 'Web based Report'
-        ImageIndex = 4
-        Tag = 6
-        Value = 'E'
-      end>
-    Properties.LargeImages = ImageList1
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 8
-    Width = 209
-  end
-  object edParameters: TcxDBTextEdit
-    Left = 96
-    Top = 105
-    Anchors = [akLeft, akTop, akRight]
-    DataBinding.DataField = 'PARAM_LIST'
-    DataBinding.DataSource = dsAddReport
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 9
-    Width = 288
-  end
-  object mlDescr: TcxDBRichEdit
-    Left = 6
-    Top = 148
-    Anchors = [akLeft, akTop, akRight]
-    DataBinding.DataField = 'DESCR'
-    DataBinding.DataSource = dsAddReport
-    Properties.PlainText = True
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 10
-    Height = 96
-    Width = 377
-  end
-  object cxButton1: TcxButton
-    Left = 326
-    Top = 128
-    Width = 58
-    Height = 18
-    Anchors = [akTop, akRight]
-    Caption = 'Import'
-    LookAndFeel.NativeStyle = True
-    TabOrder = 11
-    Visible = False
-    OnClick = cxButton1Click
-  end
-  object btnSave: TBitBtn
-    Left = 85
-    Top = 249
-    Width = 75
-    Height = 27
-    Caption = 'Save'
-    Kind = bkOK
-    NumGlyphs = 2
-    TabOrder = 12
-    OnClick = btnSaveClick
-  end
-  object btnCancel: TBitBtn
-    Left = 226
-    Top = 249
-    Width = 75
-    Height = 27
-    Kind = bkCancel
-    NumGlyphs = 2
-    TabOrder = 13
-  end
   object cxLabel6: TcxLabel
     Left = 180
     Top = 56
     Caption = 'Frequency'
     Transparent = True
   end
-  object cxDBComboBox1: TcxDBComboBox
-    Left = 247
-    Top = 56
-    DataBinding.DataField = 'FREQUENCY'
-    DataBinding.DataSource = dsAddReport
-    Properties.DropDownListStyle = lsFixedList
-    Properties.DropDownRows = 10
-    Properties.ImmediatePost = True
-    Properties.Items.Strings = (
-      'N/A'
-      'Weekly'
-      'Monthly'
-      'Quarterly'
-      'Yearly')
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 15
-    Width = 126
+  object dxLayoutControl1: TdxLayoutControl
+    Left = 0
+    Top = 0
+    Width = 465
+    Height = 328
+    Align = alClient
+    ParentBackground = True
+    TabOrder = 1
+    Transparent = True
+    AutoSize = True
+    ExplicitLeft = 161
+    ExplicitTop = 310
+    ExplicitWidth = 600
+    ExplicitHeight = 363
+    DesignSize = (
+      465
+      328)
+    object teDisplayName: TcxDBTextEdit
+      Left = 107
+      Top = 12
+      Anchors = [akLeft, akTop, akRight]
+      DataBinding.DataField = 'NAME'
+      DataBinding.DataSource = dsAddReport
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 0
+      Width = 346
+    end
+    object teReportName: TcxDBButtonEdit
+      Left = 107
+      Top = 42
+      Anchors = [akLeft, akTop, akRight]
+      DataBinding.DataField = 'REPORT'
+      DataBinding.DataSource = dsAddReport
+      Properties.Buttons = <
+        item
+          Default = True
+          Kind = bkEllipsis
+        end
+        item
+          Glyph.SourceDPI = 96
+          Glyph.Data = {
+            424D360400000000000036000000280000001000000010000000010020000000
+            000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000FF000000FF000000FF0000
+            00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00000000FF00FF00FF008000FF008000FF0080
+            00FF008000FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00000000FF000000FF00FF00FF00FF00FF008000FF008000FF0080
+            00FF008000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000FF00FF00FF000000FF00FF00FF000000FF000000FF000000FF0000
+            00FF000000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF00FF00FF000000FF000000FF00FF00FF008000FF008000FF0080
+            00FF008000FF000000FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF000000FF000000FF00FF00FF00FF00FF008000FF008000FF0080
+            00FF008000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF000000FF00FF00FF000000FF00FF00FF000000FF000000FF000000FF0000
+            00FF000000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF00FF00FF000000FF000000FF00FF00FF008000FF008000FF0080
+            00FF008000FF000000FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF000000FF000000FF00FF00FF00FF00FF008000FF008000FF0080
+            00FF008000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF000000FF00FF00FF000000FF00FF00FF000000FF000000FF000000FF0000
+            00FF000000FF00FF00FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF00FF00FF000000FF000000FF00FF00FF00FF00FF00FF00FF00FF
+            00FF00FF00FF000000FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF00FF00FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+            00FF000000FF000000FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+            00FF000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000FF0000
+            00FFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00000000FF000000FF000000FF000000FF000000FF000000FF000000FFFFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+            FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+          Kind = bkGlyph
+        end>
+      Properties.OnButtonClick = trReportNamePropertiesButtonClick
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 1
+      Width = 346
+    end
+    object cmbReportLevel: TcxDBComboBox
+      Left = 107
+      Top = 73
+      DataBinding.DataField = 'ACCESSLEVEL'
+      DataBinding.DataSource = dsAddReport
+      Properties.DropDownListStyle = lsFixedList
+      Properties.DropDownRows = 10
+      Properties.Items.Strings = (
+        '0'
+        '1'
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9')
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 2
+      Width = 50
+    end
+    object cmbReportType: TcxDBImageComboBox
+      Left = 107
+      Top = 103
+      Anchors = [akLeft, akTop, akRight]
+      DataBinding.DataField = 'REPORT_TYPE'
+      DataBinding.DataSource = dsAddReport
+      Properties.Images = ImageList1
+      Properties.Items = <
+        item
+          Description = 'Insight Report Builder Report'
+          ImageIndex = 3
+          Value = 'A'
+        end
+        item
+          Description = 'Excel Spreadsheet'
+          ImageIndex = 1
+          Tag = 1
+          Value = 'X'
+        end
+        item
+          Description = 'Crystal Report'
+          ImageIndex = 2
+          Tag = 2
+          Value = 'C'
+        end
+        item
+          Description = 'Crystal Secure Report'
+          ImageIndex = 2
+          Tag = 3
+          Value = 'Z'
+        end
+        item
+          Description = 'Insight Report'
+          ImageIndex = 3
+          Tag = 4
+          Value = 'R'
+        end
+        item
+          Description = 'Insight DB Report Builder Report'
+          ImageIndex = 3
+          Tag = 5
+          Value = 'D'
+        end
+        item
+          Description = 'Web based Report'
+          ImageIndex = 4
+          Tag = 6
+          Value = 'E'
+        end>
+      Properties.LargeImages = ImageList1
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 4
+      Width = 346
+    end
+    object edParameters: TcxDBTextEdit
+      Left = 107
+      Top = 133
+      Anchors = [akLeft, akTop, akRight]
+      DataBinding.DataField = 'PARAM_LIST'
+      DataBinding.DataSource = dsAddReport
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 5
+      Width = 281
+    end
+    object mlDescr: TcxDBRichEdit
+      Left = 12
+      Top = 184
+      Anchors = [akLeft, akTop, akRight]
+      DataBinding.DataField = 'DESCR'
+      DataBinding.DataSource = dsAddReport
+      Properties.PlainText = True
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 7
+      Height = 96
+      Width = 441
+    end
+    object cxButton1: TcxButton
+      Left = 395
+      Top = 133
+      Width = 58
+      Height = 18
+      Anchors = [akTop, akRight]
+      Caption = 'Import'
+      LookAndFeel.NativeStyle = True
+      TabOrder = 6
+      OnClick = cxButton1Click
+    end
+    object btnSave: TBitBtn
+      Left = 154
+      Top = 287
+      Width = 75
+      Height = 27
+      Caption = 'Save'
+      Kind = bkOK
+      NumGlyphs = 2
+      TabOrder = 8
+      OnClick = btnSaveClick
+    end
+    object btnCancel: TBitBtn
+      Left = 236
+      Top = 287
+      Width = 75
+      Height = 27
+      Kind = bkCancel
+      NumGlyphs = 2
+      TabOrder = 9
+    end
+    object cxDBComboBox1: TcxDBComboBox
+      Left = 225
+      Top = 73
+      DataBinding.DataField = 'FREQUENCY'
+      DataBinding.DataSource = dsAddReport
+      Properties.DropDownListStyle = lsFixedList
+      Properties.DropDownRows = 10
+      Properties.ImmediatePost = True
+      Properties.Items.Strings = (
+        'N/A'
+        'Weekly'
+        'Monthly'
+        'Quarterly'
+        'Yearly'
+        'Not Used')
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.LookAndFeel.NativeStyle = True
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      TabOrder = 3
+      Width = 126
+    end
+    object dxLayoutControl1Group_Root: TdxLayoutGroup
+      AlignHorz = ahClient
+      AlignVert = avTop
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = -1
+    end
+    object dxLayoutGroup1: TdxLayoutGroup
+      Parent = dxLayoutControl1Group_Root
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutGroup2: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutGroup3: TdxLayoutGroup
+      Parent = dxLayoutGroup2
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem1: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Display Name *'
+      Control = teDisplayName
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 840
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem2: TdxLayoutItem
+      Parent = dxLayoutGroup3
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Program Name *'
+      Control = teReportName
+      ControlOptions.OriginalHeight = 24
+      ControlOptions.OriginalWidth = 840
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutGroup4: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahLeft
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem3: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'Report Level *'
+      Control = cmbReportLevel
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 50
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem4: TdxLayoutItem
+      Parent = dxLayoutGroup4
+      CaptionOptions.Text = 'Frequency'
+      Control = cxDBComboBox1
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 126
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem5: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Report Type *'
+      Control = cmbReportType
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 761
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object dxLayoutGroup5: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 3
+    end
+    object dxLayoutItem6: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Parameters'
+      Control = edParameters
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 840
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem7: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      AlignHorz = ahRight
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      Control = cxButton1
+      ControlOptions.OriginalHeight = 18
+      ControlOptions.OriginalWidth = 58
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem8: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      AlignHorz = ahClient
+      CaptionOptions.Text = 'Report Description *'
+      CaptionOptions.Layout = clTop
+      Control = mlDescr
+      ControlOptions.OriginalHeight = 96
+      ControlOptions.OriginalWidth = 929
+      ControlOptions.ShowBorder = False
+      Index = 4
+    end
+    object dxLayoutGroup6: TdxLayoutGroup
+      Parent = dxLayoutGroup1
+      AlignHorz = ahCenter
+      CaptionOptions.Text = 'Hidden Group'
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 5
+    end
+    object dxLayoutItem9: TdxLayoutItem
+      Parent = dxLayoutGroup6
+      CaptionOptions.Text = 'btnSave'
+      CaptionOptions.Visible = False
+      Control = btnSave
+      ControlOptions.OriginalHeight = 27
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem10: TdxLayoutItem
+      Parent = dxLayoutGroup6
+      CaptionOptions.Text = 'btnCancel'
+      CaptionOptions.Visible = False
+      Control = btnCancel
+      ControlOptions.OriginalHeight = 27
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
   end
   object odlgReports: TOpenDialog
     Filter = 
       'Reports (*.exe;*.rtm;*.rpt,*.xls,*.xlsx)|*.exe;*.rtm;*.rpt;*.xls' +
       ';*.xlsx'
     Title = 'Select the Report to add...'
-    Left = 39
-    Top = 7
+    Left = 731
+    Top = 38
   end
   object ImageList1: TImageList
     Left = 21
     Top = 208
     Bitmap = {
-      494C0101050009001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000CC333300CC33
       3300CC3333000000000000000000000000000000000000000000000000000000
