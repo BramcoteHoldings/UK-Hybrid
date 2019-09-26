@@ -3278,11 +3278,11 @@ begin
          First;
          while (EOF = False) do
          begin
-            if (MatterIsCurrent(FieldByName('FILEID').AsString) = True) then
+            if ((MatterIsCurrent(FieldByName('FILEID').AsString) = True) and
+               (FieldByName('TIME_TYPE').AsString = 'M')) OR
+               (FieldByName('TIME_TYPE').AsString = 'O') then
             begin
-               if ((FieldByName('REASON').AsString <> '') and
-                  (FieldByName('TIME_TYPE').AsString = 'M') OR
-                  (FieldByName('TIME_TYPE').AsString = 'O')) then
+               if (FieldByName('REASON').AsString <> '') then
                begin
                   nFee := dmAxiom.GetSeqNumber('SQNC_NFEE');
 
@@ -3306,10 +3306,13 @@ begin
                   qryFeeInsert.ParamByName('NFEE').AsString := nFee;
                   qryFeeInsert.ParamByName('AUTHOR').AsString := FieldByName('AUTHOR').AsString;
                   qryFeeInsert.ParamByName('RATE').AsFloat := FieldByName('RATE').AsCurrency;
-                  qryFeeInsert.ParamByName('NMATTER').AsInteger :=  FieldByName('NMATTER').AsInteger;
-                  qryFeeInsert.ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'NMATTER', FieldByName('NMATTER').AsInteger, 'NCLIENT');
-                  qryFeeInsert.ParamByName('PARTNER').AsString := MatterString(FieldByName('NMATTER').AsInteger, 'PARTNER');
-                  qryFeeInsert.ParamByName('FILEID').AsString := FieldByName('FILEID').AsString;
+                  if (FieldByName('FILEID').IsNull = False) then
+                  begin
+                     qryFeeInsert.ParamByName('NMATTER').AsInteger :=  FieldByName('NMATTER').AsInteger;
+                     qryFeeInsert.ParamByName('NCLIENT').AsInteger := TableInteger('MATTER', 'NMATTER', FieldByName('NMATTER').AsInteger, 'NCLIENT');
+                     qryFeeInsert.ParamByName('FILEID').AsString := FieldByName('FILEID').AsString;
+                     qryFeeInsert.ParamByName('PARTNER').AsString := MatterString(FieldByName('NMATTER').AsInteger, 'PARTNER');
+                  end;
                   qryFeeInsert.ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
                   qryFeeInsert.ParamByName('DEPT').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'DEPT');
                   qryFeeInsert.ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', FieldByName('AUTHOR').AsString, 'TYPE');
