@@ -3,33 +3,34 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
   Top = 192
   BorderStyle = bsDialog
   Caption = 'frmTimeDiaryNew'
-  ClientHeight = 566
-  ClientWidth = 548
+  ClientHeight = 590
+  ClientWidth = 553
   Constraints.MinHeight = 351
   Constraints.MinWidth = 426
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   OldCreateOrder = True
   OnCreate = FormCreate
-  ExplicitWidth = 554
-  ExplicitHeight = 595
+  ExplicitWidth = 559
+  ExplicitHeight = 619
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label14: TLabel [0]
     Left = 194
     Top = 13
-    Width = 46
-    Height = 13
+    Width = 47
+    Height = 15
     Caption = 'Fee Basis'
     Visible = False
   end
   inherited lcMain: TdxLayoutControl
-    Width = 548
-    Height = 566
+    Width = 553
+    Height = 590
     ParentBackground = True
     Transparent = True
     AutoSize = True
     ExplicitWidth = 548
-    ExplicitHeight = 562
+    ExplicitHeight = 566
     inherited cxGroupBox1: TcxGroupBox
       Left = 10000
       Top = 10000
@@ -60,6 +61,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 382
+      ExplicitHeight = 23
       Width = 382
     end
     inherited teLocation: TcxTextEdit
@@ -71,6 +73,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 226
+      ExplicitHeight = 23
       Width = 226
     end
     inherited icbLabel: TcxImageComboBox
@@ -82,6 +85,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 118
+      ExplicitHeight = 23
       Width = 118
     end
     inherited deStart: TcxDateEdit
@@ -94,17 +98,19 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 374
+      ExplicitHeight = 23
       Width = 374
     end
     inherited teStart: TcxTimeEdit
-      Left = 130
-      Top = 524
+      Left = 135
+      Top = 549
       Properties.Use24HourFormat = False
       Properties.OnChange = teStartPropertiesChange
       Properties.OnEditValueChanged = teEndPropertiesEditValueChanged
       TabOrder = 24
-      ExplicitLeft = 130
-      ExplicitTop = 524
+      ExplicitLeft = 135
+      ExplicitTop = 549
+      ExplicitHeight = 23
     end
     inherited cbAllDayEvent: TcxCheckBox
       Left = 10000
@@ -116,7 +122,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 121
-      ExplicitHeight = 17
+      ExplicitHeight = 19
     end
     inherited deEnd: TcxDateEdit
       Left = 10000
@@ -127,32 +133,36 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 374
+      ExplicitHeight = 23
       Width = 374
     end
     inherited teEnd: TcxTimeEdit
-      Left = 323
-      Top = 524
+      Left = 330
+      Top = 549
       AutoSize = False
-      Properties.Use24HourFormat = False
       Properties.OnChange = teStartPropertiesChange
       Properties.OnEditValueChanged = teEndPropertiesEditValueChanged
       TabOrder = 25
-      ExplicitLeft = 323
-      ExplicitTop = 524
+      ExplicitLeft = 330
+      ExplicitTop = 549
+      ExplicitHeight = 23
+      Height = 23
     end
     inherited seTaskComplete: TcxSpinEdit
-      Left = 130
-      Top = 439
+      Left = 135
+      Top = 457
       TabOrder = 15
-      ExplicitLeft = 130
-      ExplicitTop = 439
+      ExplicitLeft = 135
+      ExplicitTop = 457
+      ExplicitHeight = 23
     end
     inherited cbxTaskStatus: TcxComboBox
-      Left = 323
-      Top = 439
+      Left = 330
+      Top = 457
       TabOrder = 16
-      ExplicitLeft = 323
-      ExplicitTop = 439
+      ExplicitLeft = 330
+      ExplicitTop = 457
+      ExplicitHeight = 23
     end
     inherited lbRecurrencePattern: TcxLabel
       Left = 10000
@@ -173,6 +183,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 382
+      ExplicitHeight = 23
       Width = 382
     end
     inherited cbReminder: TcxCheckBox
@@ -184,7 +195,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ExplicitLeft = 10000
       ExplicitTop = 10000
-      ExplicitWidth = 76
+      ExplicitWidth = 78
+      ExplicitHeight = 23
     end
     inherited cbReminderMinutesBeforeStart: TcxComboBox
       Left = 10000
@@ -195,6 +207,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ExplicitLeft = 10000
       ExplicitTop = 10000
+      ExplicitHeight = 23
     end
     inherited icbShowTimeAs: TcxImageComboBox
       Left = 10000
@@ -227,11 +240,12 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ExplicitLeft = 10000
       ExplicitTop = 10000
       ExplicitWidth = 242
+      ExplicitHeight = 23
       Width = 242
     end
     inherited meMessage: TcxMemo
-      Left = 130
-      Top = 140
+      Left = 135
+      Top = 149
       Anchors = [akLeft, akTop, akRight]
       Properties.HideSelection = False
       Properties.OnChange = meMessagePropertiesChange
@@ -239,16 +253,16 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       OnEnter = meMessageEnter
       OnExit = meMessageExit
       OnKeyPress = meMessageKeyPress
-      ExplicitLeft = 130
-      ExplicitTop = 140
+      ExplicitLeft = 135
+      ExplicitTop = 149
       ExplicitWidth = 388
       ExplicitHeight = 101
       Height = 101
       Width = 388
     end
     inherited btnOk: TcxButton
-      Left = 200
-      Top = 622
+      Left = 202
+      Top = 657
       Height = 24
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
@@ -337,13 +351,13 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       OptionsImage.NumGlyphs = 2
       OptionsImage.Spacing = 3
       TabOrder = 36
-      ExplicitLeft = 200
-      ExplicitTop = 622
+      ExplicitLeft = 202
+      ExplicitTop = 657
       ExplicitHeight = 24
     end
     inherited btnCancel: TcxButton
-      Left = 281
-      Top = 622
+      Left = 284
+      Top = 657
       Height = 24
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
@@ -432,30 +446,30 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       OptionsImage.NumGlyphs = 2
       OptionsImage.Spacing = 3
       TabOrder = 37
-      ExplicitLeft = 281
-      ExplicitTop = 622
+      ExplicitLeft = 284
+      ExplicitTop = 657
       ExplicitHeight = 24
     end
     inherited btnDelete: TcxButton
-      Left = 362
-      Top = 622
+      Left = 366
+      Top = 657
       Height = 24
       OptionsImage.Spacing = 3
       TabOrder = 38
-      ExplicitLeft = 362
-      ExplicitTop = 622
+      ExplicitLeft = 366
+      ExplicitTop = 657
       ExplicitHeight = 24
     end
     inherited btnRecurrence: TcxButton
-      Left = 443
-      Top = 622
+      Left = 448
+      Top = 657
       OptionsImage.Spacing = 3
       TabOrder = 39
-      ExplicitLeft = 443
-      ExplicitTop = 622
+      ExplicitLeft = 448
+      ExplicitTop = 657
     end
     object cmbMatterFind: TcxLookupComboBox [22]
-      Left = 130
+      Left = 135
       Top = 13
       Properties.CharCase = ecUpperCase
       Properties.DropDownAutoSize = True
@@ -488,7 +502,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 126
     end
     object lblMatterDesc: TcxLabel [23]
-      Left = 262
+      Left = 268
       Top = 13
       AutoSize = False
       ParentFont = False
@@ -505,7 +519,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     end
     object lblClient: TcxLabel [24]
       Left = 13
-      Top = 48
+      Top = 49
       AutoSize = False
       ParentFont = False
       Style.HotTrack = False
@@ -519,8 +533,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 491
     end
     object meNotes: TcxMemo [25]
-      Left = 130
-      Top = 340
+      Left = 135
+      Top = 356
       Anchors = [akLeft, akTop, akRight]
       Properties.MaxLength = 4000
       Properties.ScrollBars = ssVertical
@@ -532,8 +546,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 388
     end
     object neRate: TcxCurrencyEdit [26]
-      Left = 214
-      Top = 274
+      Left = 215
+      Top = 287
       AutoSize = False
       EditValue = 0c
       Properties.Alignment.Horz = taRightJustify
@@ -550,8 +564,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 68
     end
     object neAmount: TcxCurrencyEdit [27]
-      Left = 338
-      Top = 274
+      Left = 343
+      Top = 287
       AutoSize = False
       EditValue = 0c
       Properties.Alignment.Horz = taRightJustify
@@ -563,11 +577,11 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 11
       Height = 21
-      Width = 81
+      Width = 78
     end
     object neMinutes: TcxTextEdit [28]
-      Left = 130
-      Top = 301
+      Left = 135
+      Top = 315
       AutoSize = False
       Enabled = False
       Properties.Alignment.Horz = taRightJustify
@@ -580,11 +594,11 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       TabOrder = 12
       Text = '0'
       Height = 21
-      Width = 46
+      Width = 41
     end
     object cbTaxType: TcxLookupComboBox [29]
-      Left = 130
-      Top = 74
+      Left = 135
+      Top = 76
       Properties.DropDownAutoSize = True
       Properties.ImmediatePost = True
       Properties.KeyFieldNames = 'CODE'
@@ -608,8 +622,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 153
     end
     object neTax: TcxCurrencyEdit [30]
-      Left = 214
-      Top = 301
+      Left = 215
+      Top = 315
       AutoSize = False
       Enabled = False
       Properties.Alignment.Horz = taRightJustify
@@ -625,8 +639,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 68
     end
     object cmbTemplate: TcxLookupComboBox [31]
-      Left = 130
-      Top = 101
+      Left = 135
+      Top = 106
       Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.ImmediatePost = True
@@ -658,8 +672,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 218
     end
     object dfItems: TcxTextEdit [32]
-      Left = 130
-      Top = 247
+      Left = 135
+      Top = 257
       Properties.Alignment.Horz = taRightJustify
       Properties.OnChange = dfItemsPropertiesChange
       Style.HotTrack = False
@@ -669,11 +683,11 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 6
       Text = '0'
-      Width = 46
+      Width = 41
     end
     object lblDate: TcxLabel [33]
       Left = 13
-      Top = 500
+      Top = 524
       ParentFont = False
       Style.HotTrack = False
       Style.LookAndFeel.NativeStyle = True
@@ -685,8 +699,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Transparent = True
     end
     object icmbType: TcxImageComboBox [34]
-      Left = 130
-      Top = 562
+      Left = 135
+      Top = 591
       Properties.Images = ImageList1
       Properties.ImmediatePost = True
       Properties.Items = <
@@ -712,8 +726,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 112
     end
     object cbFeeBasis: TcxLookupComboBox [35]
-      Left = 302
-      Top = 562
+      Left = 311
+      Top = 591
       Properties.DropDownAutoSize = True
       Properties.DropDownRows = 15
       Properties.ImmediatePost = True
@@ -735,7 +749,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     end
     object btnPrint: TcxButton [36]
       Left = 13
-      Top = 622
+      Top = 657
       Width = 72
       Height = 24
       Caption = 'Print'
@@ -746,8 +760,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       OnClick = btnPrintClick
     end
     object neUnits: TcxSpinEdit [37]
-      Left = 130
-      Top = 274
+      Left = 135
+      Top = 287
       AutoSize = False
       BeepOnEnter = False
       Properties.Alignment.Horz = taRightJustify
@@ -759,11 +773,11 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       TabOrder = 9
       Value = 1.000000000000000000
       Height = 21
-      Width = 46
+      Width = 41
     end
     object neTimeAmount: TcxCurrencyEdit [38]
-      Left = 214
-      Top = 247
+      Left = 215
+      Top = 257
       Properties.Alignment.Horz = taRightJustify
       Style.HotTrack = False
       Style.LookAndFeel.NativeStyle = True
@@ -774,8 +788,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Width = 68
     end
     object neItem: TcxCurrencyEdit [39]
-      Left = 338
-      Top = 247
+      Left = 343
+      Top = 257
       Enabled = False
       Properties.Alignment.Horz = taRightJustify
       Style.HotTrack = False
@@ -784,7 +798,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 8
-      Width = 81
+      Width = 78
     end
     inherited lcMainGroup_Root: TdxLayoutGroup
       ItemIndex = 1
@@ -822,6 +836,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Enabled = False
       Top = 68
     end
@@ -829,6 +844,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Enabled = False
       Left = 256
       Top = 109
@@ -837,6 +853,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 118
       Enabled = False
       Left = 48
@@ -857,6 +874,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Parent = dxLayoutGroup8
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 374
       Left = 9
       Top = 34
@@ -866,6 +884,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       CaptionOptions.Text = 'Start Time:'
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Index = 0
     end
     inherited dxLayoutItem4: TdxLayoutItem
@@ -873,7 +892,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 76
       Enabled = False
     end
@@ -886,6 +905,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Parent = dxLayoutGroup8
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 374
       Left = 191
       Top = 34
@@ -896,6 +916,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       CaptionOptions.Text = 'End Time:'
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
     end
     inherited pnlTaskComplete: TdxLayoutGroup
       ButtonOptions.DefaultHeight = 14
@@ -905,10 +926,12 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     inherited lbTaskComplete: TdxLayoutItem
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
     end
     inherited lbTaskStatus: TdxLayoutItem
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
     end
     inherited pnlRecurrenceInfo: TdxLayoutGroup
       Visible = False
@@ -938,6 +961,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     inherited lbResource: TdxLayoutItem
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Enabled = False
     end
     inherited pnlPlaceHolder: TdxLayoutGroup
@@ -956,12 +980,14 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     inherited dxLayoutItem6: TdxLayoutItem
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalWidth = 76
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 78
       Enabled = False
     end
     inherited dxLayoutItem7: TdxLayoutItem
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Enabled = False
     end
     inherited pnlShowTimeAs: TdxLayoutGroup
@@ -973,6 +999,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Visible = False
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
+      ControlOptions.OriginalHeight = 23
       Enabled = False
       Left = 256
       Top = 64
@@ -1032,7 +1059,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Control = cmbMatterFind
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 126
       ControlOptions.ShowBorder = False
       Index = 0
@@ -1101,7 +1128,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Control = cbTaxType
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 153
       ControlOptions.ShowBorder = False
       Index = 0
@@ -1139,7 +1166,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 65
+      ControlOptions.OriginalWidth = 68
       ControlOptions.ShowBorder = False
       Enabled = False
       Index = 1
@@ -1176,7 +1203,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Control = cmbTemplate
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 218
       ControlOptions.ShowBorder = False
       Index = 0
@@ -1202,7 +1229,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 65
+      ControlOptions.OriginalWidth = 68
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -1219,7 +1246,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 48
+      ControlOptions.OriginalWidth = 46
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -1235,8 +1262,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Control = dfItems
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 47
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 46
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -1287,7 +1314,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.AlignHorz = ahLeft
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 112
       ControlOptions.ShowBorder = False
       Index = 0
@@ -1344,7 +1371,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       Control = cbFeeBasis
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
-      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 153
       ControlOptions.ShowBorder = False
       Index = 1
@@ -1396,8 +1423,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       SizeOptions.SizableHorz = True
       SizeOptions.Width = 100
       Control = neTimeAmount
-      ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 83
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 68
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -1409,8 +1436,8 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       SizeOptions.SizableHorz = True
       SizeOptions.Width = 131
       Control = neItem
-      ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 103
+      ControlOptions.OriginalHeight = 23
+      ControlOptions.OriginalWidth = 81
       ControlOptions.ShowBorder = False
       Enabled = False
       Index = 2
@@ -1802,7 +1829,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
