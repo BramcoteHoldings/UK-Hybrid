@@ -416,15 +416,18 @@ begin
    begin
       If (dmAxiom.EMP_USE_DECIMAL_UNITS = 'N') then
       begin
+         neUnits.Properties.ValueType := vtInt;
          neUnits.Properties.Increment := 1;
       end
       else
       begin
+         neUnits.Properties.ValueType := vtFloat;
          neUnits.Properties.Increment := 0.5;
       end;
    end
    else
    begin
+      neUnits.Properties.ValueType := vtInt;
       neUnits.Properties.Increment := 1;
    end;
 
@@ -566,7 +569,15 @@ var
    Hour, Min, Sec, MSec: Word;
 begin
    DecodeTime((teEnd.Time - teStart.Time), Hour, Min, Sec, MSec);
-   CalculateUnits := (((Hour*60)+ Min)/dmAxiom.TimeUnits);
+   if (SystemString('USE_DECIMAL_UNITS') = 'Y') then
+   begin
+      If (dmAxiom.EMP_USE_DECIMAL_UNITS = 'N') then
+         CalculateUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits))
+      else
+          CalculateUnits := DBNumberRounding((((Hour*60)+ Min)/dmAxiom.TimeUnits));
+   end
+   else
+      CalculateUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits));
 end;
 
 procedure TfrmTimeDiaryNew.btnPrintClick(Sender: TObject);
