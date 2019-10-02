@@ -1,5 +1,16 @@
 Insight Build 9.2.0
 
+Build 43
+========
+- Fixed issue with Matter Search not respecting entity selection.
+- Added entity to Matter additional details section.
+
+
+Build 42
+========
+- Changes to Time Diary entry to better handle decimal units.
+- Changed Bill reversal procedure to default to original Bill Date rather than current date.
+
 Build 41
 ========
 - Fixed AV issue with Trust Journal

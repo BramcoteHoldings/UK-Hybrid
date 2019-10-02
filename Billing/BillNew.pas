@@ -2508,19 +2508,21 @@ procedure TfrmInvoice.tbtnReverseClick(Sender : TObject);
     bOKtoPost : Boolean;
     dReversalDate         : TDateTime;
   begin
-    if not qryInvoice.IsEmpty
-    then
+    if not qryInvoice.IsEmpty then
     begin
       //if MsgAsk('Do you want to reverse invoice ' + qryInvoice.FieldByName('REFNO').AsString + '?') = mrYes
       // RDW - 02/04/2019 - Amended to prompt for a reversal date
-      dReversalDate := Now;
+      dReversalDate := qryInvoice.FieldByName('DISPATCHED').AsDateTime;
+
       if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
          dReversalDate := SystemDate('DFLT_BILL_DISPATCHED_DATE');
+
       if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
       begin
          if (DateOf(qryInvoice.FieldByName('DISPATCHED').AsDateTime) > DateOf(dReversalDate)) then
             dReversalDate := Now;
       end;
+
       if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryInvoice.FieldByName('REFNO').AsString + '?',  dReversalDate)) then
       begin
         bOKtoPost := (PostIntoLockedPeriod(Now) in [prNotLocked, prOKToProceed]);

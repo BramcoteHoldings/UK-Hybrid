@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabDocs
+    Properties.ActivePage = tabOverview
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -1764,7 +1764,7 @@ object frmMatters: TfrmMatters
         Left = 9
         Top = 184
         Width = 1156
-        Height = 188
+        Height = 192
         BevelKind = bkSoft
         BevelOuter = bvNone
         TabOrder = 0
@@ -2010,14 +2010,14 @@ object frmMatters: TfrmMatters
         end
         object lblBranch: TLabel
           Left = 509
-          Top = 131
+          Top = 136
           Width = 37
           Height = 15
           Caption = 'Branch'
         end
         object dblblBranch: TDBText
           Left = 622
-          Top = 131
+          Top = 136
           Width = 64
           Height = 15
           AutoSize = True
@@ -2028,7 +2028,7 @@ object frmMatters: TfrmMatters
         end
         object Label68: TLabel
           Left = 509
-          Top = 148
+          Top = 152
           Width = 94
           Height = 15
           AutoSize = False
@@ -2036,7 +2036,7 @@ object frmMatters: TfrmMatters
         end
         object lblDebtorStatus: TDBText
           Left = 622
-          Top = 148
+          Top = 153
           Width = 81
           Height = 13
           AutoSize = True
@@ -2053,7 +2053,7 @@ object frmMatters: TfrmMatters
         end
         object Label78: TLabel
           Left = 509
-          Top = 165
+          Top = 169
           Width = 99
           Height = 13
           AutoSize = False
@@ -2061,24 +2061,24 @@ object frmMatters: TfrmMatters
         end
         object DBText4: TDBText
           Left = 622
-          Top = 165
+          Top = 169
           Width = 72
-          Height = 17
+          Height = 15
           DataField = 'ADVERTISING_SOURCE'
           DataSource = dsMatter
         end
         object lblType: TLabel
           Left = 509
-          Top = 114
+          Top = 119
           Width = 24
           Height = 15
           Caption = 'Type'
         end
         object dblblType: TDBText
           Left = 622
-          Top = 114
+          Top = 120
           Width = 43
-          Height = 13
+          Height = 15
           Color = clBtnFace
           DataField = 'TYPE'
           DataSource = dsMatter
@@ -2086,7 +2086,7 @@ object frmMatters: TfrmMatters
         end
         object lblOPRef: TLabel
           Left = 509
-          Top = 88
+          Top = 82
           Width = 86
           Height = 15
           Caption = 'Client Reference'
@@ -2171,11 +2171,29 @@ object frmMatters: TfrmMatters
         end
         object lblConflictCheckCompleted: TLabel
           Left = 742
-          Top = 87
+          Top = 81
           Width = 165
           Height = 15
           Caption = 'A conflict check has been done'
           Visible = False
+        end
+        object Label33: TLabel
+          Left = 509
+          Top = 104
+          Width = 30
+          Height = 15
+          Caption = 'Entity'
+        end
+        object DBText7: TDBText
+          Left = 622
+          Top = 104
+          Width = 285
+          Height = 15
+          AutoSize = True
+          Color = clBtnFace
+          DataField = 'ENTITY_NAME'
+          DataSource = dsMatter
+          ParentColor = False
         end
         object gbCreditLimits: TcxGroupBox
           Left = 483
@@ -2322,7 +2340,7 @@ object frmMatters: TfrmMatters
         end
         object dbtbOPRef: TDBEdit
           Left = 611
-          Top = 85
+          Top = 79
           Width = 101
           Height = 23
           AutoSize = False
@@ -2381,7 +2399,7 @@ object frmMatters: TfrmMatters
           Width = 143
         end
         object cxLabel6: TcxLabel
-          Left = 258
+          Left = 260
           Top = 114
           Caption = 'LastTrust'
           Transparent = True
@@ -25287,15 +25305,18 @@ object frmMatters: TfrmMatters
         '       trunc(matter.COST_AGREEMENT_RCVD_DATE) COST_AGREEMENT_RCV' +
         'D_DATE, trunc(matter.DESTRUCTION_AUTH_RCVD_DATE) DESTRUCTION_AUT' +
         'H_RCVD_DATE,'
-      '       matter.ROWID'
+      '       ent.name as entity_name, matter.ROWID'
       '  FROM matter,'
       '       (SELECT code, descr'
       '          FROM branch) bran,'
+      '       (SELECT code, name'
+      '          FROM entity) ent,'
       '       debtorstatus,'
       '       advertising,'
       '       phonebook'
       ' WHERE matter.nmatter = :p_file'
       '   AND matter.branch = bran.code(+)'
+      '   AND matter.entity = ent.code(+)'
       '   AND matter.debtorstatus = debtorstatus.debtorstatus(+)'
       '   AND matter.nclient = phonebook.nclient'
       '   AND matter.advertising_source = advertising.adid(+)')

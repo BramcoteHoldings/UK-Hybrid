@@ -320,10 +320,11 @@ type
     function mergeEmail(sIn: string): string;  //(sIn: tstrings): tstrings;
     procedure SetProcessFlag;
     procedure SaveDocumentAs();
-    procedure SaveEmail(ANName: integer; ASubject: string);
+    procedure SaveEmail(ANName: integer; ASubject: string); overload;
     procedure SearchAndReplace(InSearch, InReplace: string);
     procedure LoadTemplate(ATemplateID: Integer);
     procedure PopulateGrid;
+    procedure SaveEmail(ANMatter: integer; ASubject: string; AEmail, ADocName: string); overload;
   public
     { Public declarations }
     HTMLEditBaseDir:string;
@@ -1419,7 +1420,10 @@ begin
                            if SMTP.Connected then
                               SMTP.Send(MailMessage);
                            if rbDebtors.Checked = True then
-                              SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index], edSubject.Text);
+                              SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index], edSubject.Text)
+                           else
+                              SaveEmail(tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNMATTER.Index], edSubject.Text,
+                                        tvEmails.ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index], AParsedDocName );
                            spHTMLEmail.Close;
 //                           DeleteFile(TempFilePath);
 //                           SetCurrentDir(OldDir);
@@ -1761,6 +1765,66 @@ begin
             FieldByName('IMAGEINDEX').AsInteger := 5;      }
 
          FieldByName('IMAGEINDEX').AsInteger := 6;
+
+//         if cmbCategory.ItemIndex >= 0 then
+            FieldByName('NPRECCATEGORY').AsInteger := SystemInteger('EMAIL_DFLT_CATEGORY');
+//         if cmbClassification.ItemIndex >= 0 then
+            FieldByName('NPRECCLASSIFICATION').AsInteger := SystemInteger('EMAIL_DFLT_CLASSIFICATION');
+//         sDocID := qryPopDetails.FieldByName('DOCID').AsString;
+         Post;
+
+//         dmAxiom.uniInsight.Commit;
+         Close;
+    end;
+end;
+
+procedure TfrmBulkMailer.SaveEmail(ANMatter: integer; ASubject: string; AEmail, ADocName: string) overload;
+var
+   ADocId: integer;
+   APath: string;
+begin
+   ADocId := GetSequenceNumber('DOC_DOCID');
+   APath := SystemString('DOC_DEFAULT_DIRECTORY');
+   if ASubject = '' then
+      ASubject := 'Email';
+//   NewDocName := ParseMacros(APath+ADocName, ANMatter, ADocId, ASubject);
+
+//   HTMLEdit.SaveToFile(NewDocName+'.html',true);
+
+   with qryPopDetails do
+   begin
+      Open;
+      Insert;
+      ParamByName('docid').AsInteger := ADocId;
+
+      FieldByName('docid').AsInteger := ADocId;
+      FieldByName('DOC_NAME').AsString := ExtractFileName(ADocName);
+      FieldByName('SEARCH').AsString := ASubject; // ExtractFileName(APath);
+      FieldByName('AUTH1').AsString := dmAxiom.UserID;
+      FieldByName('DESCR').AsString := ASubject;
+
+      FieldByName('KEYWORDS').AsString := 'Email';
+      FieldByName('nmatter').AsInteger := ANMatter;
+      FieldByName('fileid').AsString := MatterString(ANMatter, 'FILEID');
+
+      FieldByName('EXTERNAL_ACCESS').AsString := 'N';
+      FieldByName('DOC_NOTES').AsString := 'Emailed to '+AEmail;
+
+//         FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(APath),2, Length(ExtractFileExt(APath)));
+         FieldByName('PATH').AsString := IndexPath(ADocName, 'DOC_DEFAULT_DIRECTORY');  //  NewPath;
+         FieldByName('DISPLAY_PATH').AsString := ADocName;
+
+{         AExt := UpperCase(FieldByName('FILE_EXTENSION').AsString);
+         if ((AExt = 'DOC') or (AExt = 'DOCX') or (AExt = 'DOT') or (AExt = 'DOTX')) then
+            FieldByName('IMAGEINDEX').AsInteger := 2
+         else if ((AExt = 'XLS') or (AExt = 'CSV') or (AExt = 'XLST')) then
+            FieldByName('IMAGEINDEX').AsInteger := 3
+         else if ((AExt = 'EML') or (AExt = 'MSG')) then
+            FieldByName('IMAGEINDEX').AsInteger := 4
+         else if AExt = 'PDF' then
+            FieldByName('IMAGEINDEX').AsInteger := 5;      }
+
+         FieldByName('IMAGEINDEX').AsInteger := 5;
 
 //         if cmbCategory.ItemIndex >= 0 then
             FieldByName('NPRECCATEGORY').AsInteger := SystemInteger('EMAIL_DFLT_CATEGORY');

@@ -710,7 +710,7 @@ type
 
   function AddEvoCheckDigit(AFileID: Integer): String;
 
-  function DBNumberRounding(NumberToRound: double): double;
+  function DBNumberRounding(NumberToRound: double; iRounding: integer= 2): double;
 
   procedure TransItemUpdate(nAccount, nMatter, nAlloc: Integer);
 
@@ -9732,7 +9732,7 @@ begin
   Result := IntToStr(AFileID) + IntToStr((10 - (LTotal mod 10)) mod 10);
 end;
 
-function DBNumberRounding(NumberToRound: double): double;
+function DBNumberRounding(NumberToRound: double; iRounding: integer= 2): double;
 var
   loQry : TUniQuery;
 begin
@@ -9745,7 +9745,7 @@ begin
 
          loQry.Close;
          loQry.SQL.Clear;
-         loQry.SQL.Add('SELECT trunc(:NumbertoRound,2) "RoundNumber" FROM DUAL ');
+         loQry.SQL.Add('SELECT trunc(:NumbertoRound,'+IntToStr(iRounding)+') "RoundNumber" FROM DUAL ');
          loQry.Params[0].AsFloat := NumbertoRound;
 
          loQry.Open;
