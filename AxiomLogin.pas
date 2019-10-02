@@ -486,9 +486,9 @@ begin
          begin
             if Trunc(dmAxiom.qryTmp.FieldByName('SERVER_DATE').AsDateTime) > trunc(dtValidDate) then
             begin
-               MessageDlg('Your version of '+CN_PROGRAM_NAME+' is not valid! '#13#10#13#10+
-               'Please contact BHL Software on +61 413 700 200'#13#10+
-               'or email support@bhl.com.au.', mtError, [mbOK], 0);
+               MessageDlg('Your software version has not been updated for 12 months '+
+                          'therefore is now out of date and we may not be able to provide an appropriate level of support to your firm.'#13#10#13#10+
+                          'Please contact BHL Software email support@bhlinsight.com.', mtError, [mbOK], 0);
                Application.Terminate;
                Exit;
             end;
