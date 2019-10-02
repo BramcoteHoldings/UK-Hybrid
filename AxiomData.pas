@@ -1008,6 +1008,7 @@ type
     FIs_Cashier: string;
     FIs_CreditController: string;
     FTabIndex: integer;
+    FTimeUnits: integer;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1021,7 +1022,7 @@ type
     function GetLockDate: TDate;
     function GetMatLocate: string;
     function GetSysInfoPath: string;
-    function GetTimeUnits: integer;
+
     procedure SetEntity(Value: string);
     procedure SetMatLocate(Value: string);
     function GetRunningIde : boolean;
@@ -1098,7 +1099,7 @@ type
     property GSTUseBillTotal: string read GetGSTTreatment;
     property runningide: boolean read GetRunningIde;
     property InstanceName: string read FInstanceName write FInstanceName;
-    property TimeUnits: integer read GetTimeUnits;
+    property TimeUnits: integer read FTimeUnits write FTimeUnits;
     property FeeEarner: string read FFeeEarner write FFeeEarner;
     procedure PrecImagesLoad;
     procedure SecurityLoad;
@@ -1230,6 +1231,7 @@ type
 
     function GetEntityDefaultBranch: string;
     function GetEntityDefaultDepartment: string;
+    function GetTimeUnits: integer;
   end;
 
 var

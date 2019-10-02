@@ -565,19 +565,56 @@ begin
 end;
 
 function TfrmTimeDiaryNew.CalculateUnits: extended;
+   function CalcUnits(ACalculatedUnits: extended): double;
+   var
+      iunits: double;
+      iFracUnits,
+      iElapsedTime: double;
+   begin
+      if iUnits = 0 then
+         iUnits := 1
+      else
+         iUnits := ACalculatedUnits;
+
+      iElapsedTime := teEnd.Time - teStart.Time;
+      if (dmAxiom.TimeUnits <> 0) then
+      begin
+         if ((iUnits * (dmAxiom.TimeUnits*60)) > ACalculatedUnits) then
+             iUnits := (iUnits * dmAxiom.TimeUnits)
+         else
+ //            iUnits := (((FElapsedUnits div 60) div iMinsPerUnit));
+      end;
+      iFracUnits := DBNumberRounding(frac(ACalculatedUnits),1);
+      iUnits := trunc(ACalculatedUnits);
+      if iFracUnits > 0 then
+      begin
+         if (SystemString('USE_DECIMAL_UNITS') = 'Y') then
+         begin
+            If (dmAxiom.EMP_USE_DECIMAL_UNITS = 'N') then
+               iUnits := iUnits + 1
+            else
+               iUnits := (iUnits + 0.5);
+         end
+         else
+            iUnits := iUnits + 1;
+      end;
+      Result := iUnits;
+   end;
 var
    Hour, Min, Sec, MSec: Word;
+   CalculatedUnits: extended;
 begin
    DecodeTime((teEnd.Time - teStart.Time), Hour, Min, Sec, MSec);
    if (SystemString('USE_DECIMAL_UNITS') = 'Y') then
    begin
       If (dmAxiom.EMP_USE_DECIMAL_UNITS = 'N') then
-         CalculateUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits))
+         CalculatedUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits))
       else
-          CalculateUnits := DBNumberRounding((((Hour*60)+ Min)/dmAxiom.TimeUnits));
+          CalculatedUnits := DBNumberRounding((((Hour*60)+ Min)/dmAxiom.TimeUnits), 1);
    end
    else
-      CalculateUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits));
+      CalculatedUnits := Round((((Hour*60)+ Min)/dmAxiom.TimeUnits));
+   Result := CalcUnits(CalculatedUnits);
 end;
 
 procedure TfrmTimeDiaryNew.btnPrintClick(Sender: TObject);
@@ -840,26 +877,26 @@ begin
          ARate := neRate.Value;
    end;
 
-   if (SystemInteger('TIME_UNITS') > 0) then
+   if (dmAxiom.TimeUnits > 0) then
    begin
       if ((not liItems.Visible) or (cmbTemplate.Text = '') or
          (TableCurrency('SCALECOST','CODE',string(cmbTemplate.Text), 'RATE') = 0)) then
       begin
          try
             if ARate > 0 then
-               neAmount.Value := neUnits.Value * ARate / (60 / SystemInteger('TIME_UNITS'));
+               neAmount.Value := neUnits.Value * ARate / (60 / dmAxiom.TimeUnits);
          except
             neAmount.Value := 0.00;
          end;
-         try
+{         try
             begin
-               neMinutes.Text := FloatToStr(neUnits.Value * SystemInteger('TIME_UNITS'));
+               neMinutes.Text := FloatToStr(neUnits.Value * dmAxiom.TimeUnits);
                if not bFromTimeEdit then
                begin
                   DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
-                  if StrToInt(neMinutes.Text) >= 60 then
+                  if neMinutes.EditValue >= 60 then
                   begin
-                     Min := Min + StrToInt(neMinutes.Text);
+                     Min := Min + neMinutes.EditValue;   // StrToInt(neMinutes.Text);
                      if Min <= 60 then
                      begin
                         Min := Min - 60;
@@ -874,7 +911,7 @@ begin
                   end
                   else
                   begin
-                     Min := Min + StrToInt(neMinutes.Text);
+                     Min := Min + neMinutes.EditValue;
                      if Min >= 60 then
                      begin
                         Min := Min - 60;
@@ -887,7 +924,7 @@ begin
             end;
          except
            neMinutes.Text := '0';
-         end;
+         end;   }
       end
       else if (liUnits.Caption = 'Mins:') or (cmbTemplate.Text = '') or
                (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue), 'RATE') = 0) then
@@ -929,7 +966,7 @@ begin
             if ARate > 0 then
             begin
                neItem.Value := StrToFloat(dfItems.Text) * neTimeAmount.Value;
-               neAmount.Value := neUnits.Value * neRate.Value / (60 / SystemInteger('TIME_UNITS'));
+               neAmount.Value := neUnits.Value * neRate.Value / (60 / dmAxiom.TimeUnits);
             end;
           except
              neItem.Value := 0.00;
@@ -937,7 +974,7 @@ begin
          try
             if VarIsNull(neUnits.Value) = False then
             begin
-               neMinutes.Text := FloatToStr(neUnits.Value * SystemInteger('TIME_UNITS'));
+               neMinutes.Text := FloatToStr(neUnits.Value * dmAxiom.TimeUnits);
                if not bFromTimeEdit then
                begin
                   DecodeTime(teStart.Time, Hour, Min, Sec, MSec);
