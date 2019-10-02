@@ -1560,6 +1560,8 @@ type
     tvInvoicesFEES_WOFF: TcxGridDBColumn;
     tvInvoicesWOFF_DISBS: TcxGridDBColumn;
     actAutoReceipt: TAction;
+    Label33: TLabel;
+    DBText7: TDBText;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
