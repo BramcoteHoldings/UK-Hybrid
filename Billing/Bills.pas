@@ -1337,62 +1337,69 @@ var
    dTmp         : TDateTime;
    bOKtoPost    : Boolean;
 begin
-   with qryTmp do
+   if (MatterString(qryBills.FieldByName('NMATTER').AsInteger, 'ENTITY') = dmAxiom.Entity) then
    begin
-      Close;
-      SQL.Clear;
-      SQL.Add('SELECT * FROM CHEQREQ WHERE NMEMO=:NMEMO AND BILLNO IS NOT NULL AND TRUST = ''Y'' AND CONVERTED = ''Y''');
-      ParambyName('NMEMO').AsString := qryBills.FieldByName('NMEMO').AsString;
-      Open;
-      iRecordCount := RecordCount;
-      Close;
-   end;
-
-   if (tvBills.Controller.SelectedRowCount > 1) then
-      MessageDlg('Multiple bills cannot be reversed. Please ensure that only one bill is selected.', mtError,[mbOK], 0)
-   else
-   begin
-      if iRecordCount = 0 then
+      with qryTmp do
       begin
-         if not qryBills.IsEmpty then
-         begin
-//            if MsgAsk('Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?') = mrYes then
-//            begin
-               dTmp := qryBills.FieldByName('DISPATCHED').AsDateTime;
-               if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
-                  dTmp := SystemDate('DFLT_BILL_DISPATCHED_DATE');
+         Close;
+         SQL.Clear;
+         SQL.Add('SELECT * FROM CHEQREQ WHERE NMEMO=:NMEMO AND BILLNO IS NOT NULL AND TRUST = ''Y'' AND CONVERTED = ''Y''');
+         ParambyName('NMEMO').AsString := qryBills.FieldByName('NMEMO').AsString;
+         Open;
+         iRecordCount := RecordCount;
+         Close;
+      end;
 
-               if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
-               begin
-                   if (DateOf(qryBills.FieldByName('DISPATCHED').AsDateTime) > DateOf(dTmp)) then
-                      dTmp := Now;
-               end;
-               if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?',  dTmp)) then
-               begin
-                  bOKtoPost:= (PostIntoLockedPeriod(dTmp) in [prNotLocked, prOKToProceed]);
-                  if bOKtoPost then
-                  begin
-                     with procBillReverse do
-                     begin
-                        ParamByName('P_NMEMO').AsInteger := qryBills.FieldByName('NMEMO').AsInteger;
-                        ParamByName('P_RVDATE').AsDateTime := dTmp;
-    {
-      Added 29.10.2002 GG
-
-      Stored Procedure BILL_REVERSE now has a 'WHO' parameter
-    }
-                        ParamByName('P_WHO').AsString:= dmAxiom.UserID;
-                        Execute;
-                     end;
-                     MakeSQL;
-                  end;
-               end;
-//            end;
-         end;
-      end
+      if (tvBills.Controller.SelectedRowCount > 1) then
+         MessageDlg('Multiple bills cannot be reversed. Please ensure that only one bill is selected.', mtError,[mbOK], 0)
       else
-         MessageDlg('This bill cannot be reversed as it has a cheque requisition which has been converted into a cheque', mtError,[mbOK], 0);
-    end;
+      begin
+         if iRecordCount = 0 then
+         begin
+            if not qryBills.IsEmpty then
+            begin
+//               if MsgAsk('Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?') = mrYes then
+//               begin
+                  dTmp := qryBills.FieldByName('DISPATCHED').AsDateTime;
+                  if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+                     dTmp := SystemDate('DFLT_BILL_DISPATCHED_DATE');
+
+                  if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+                  begin
+                      if (DateOf(qryBills.FieldByName('DISPATCHED').AsDateTime) > DateOf(dTmp)) then
+                         dTmp := Now;
+                  end;
+                  if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?',  dTmp)) then
+                  begin
+                     bOKtoPost:= (PostIntoLockedPeriod(dTmp) in [prNotLocked, prOKToProceed]);
+                     if bOKtoPost then
+                     begin
+                        with procBillReverse do
+                        begin
+                           ParamByName('P_NMEMO').AsInteger := qryBills.FieldByName('NMEMO').AsInteger;
+                           ParamByName('P_RVDATE').AsDateTime := dTmp;
+       {
+         Added 29.10.2002 GG
+
+         Stored Procedure BILL_REVERSE now has a 'WHO' parameter
+       }
+                           ParamByName('P_WHO').AsString:= dmAxiom.UserID;
+                           Execute;
+                        end;
+                        MakeSQL;
+                     end;
+                  end;
+//               end;
+            end;
+         end
+         else
+            MessageDlg('This bill cannot be reversed as it has a cheque requisition which has been converted into a cheque', mtError,[mbOK], 0);
+       end;
+   end
+   else
+      MsgErr('The Entity of this Matter (' + MatterString(qryBills.FieldByName('NMATTER').AsInteger, 'ENTITY') +
+             ') does not match the currently selected Entity ('+dmAxiom.Entity+').  You will need to change the Entity to match the Matters Entity.');
+
 end;
 
 procedure TfrmBills.tbtnPrintClick(Sender: TObject);

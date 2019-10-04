@@ -3685,73 +3685,79 @@ var
   LfrmBillCreateAsk: TfrmBillCreateAsk;
   sDiscount: string;
 begin
-  if dmAxiom.Security.Bill.ConfirmCreate then
-  begin
-    if MsgAsk('Do you want to create a bill for Matter ' + qryMatter.FieldByName('FILEID').AsString + #13 + qryMatter.FieldByName('SEARCH').AsString + #13 + qryMatter.FieldByName('SHORTDESCR').AsString + '?') = mrNo then
-      Exit;
-  end;
-
-  // Check if they want to open an existing, undispatched invoice
-  iOpenInvoice := 0;
-  qryTmp.SQL.Text := 'SELECT NMEMO FROM NMEMO WHERE DISPATCHED IS NULL AND FILEID = ' + QuotedStr(qryMatter.FieldByName('FILEID').AsString);
-  qryTmp.Open;
-  if not qryTmp.EOF then
-    iOpenInvoice := qryTmp.FieldByName('NMEMO').AsInteger;
-  qryTmp.Close;
-
-  if iOpenInvoice <> 0 then
-  begin
-    // Open an existing invoice?
-    LfrmBillCreateAsk := TfrmBillCreateAsk.Create(Self);
-    try
-      with LfrmBillCreateAsk do
+   if (qryMatter.FieldByName('ENTITY').AsString = dmAxiom.Entity) then
+   begin
+      if dmAxiom.Security.Bill.ConfirmCreate then
       begin
-         Label1.Caption := 'A draft bill already exists for this matter.' + chr(13) + chr(13) + 'Do you want to edit this bill instead of creating a new one?';
-//      if MsgAsk('A draft bill already exists for this matter.' + chr(13) + chr(13) + 'Do you want to edit this bill instead of creating a new one?') <> mrYes then
-         if ShowModal = mrYes then
-            iOpenInvoice := 0;
+         if MsgAsk('Do you want to create a bill for Matter ' + qryMatter.FieldByName('FILEID').AsString + #13 + qryMatter.FieldByName('SEARCH').AsString + #13 + qryMatter.FieldByName('SHORTDESCR').AsString + '?') = mrNo then
+            Exit;
       end;
-    finally
-      FreeAndNil(LfrmBillCreateAsk);
-    end;
-  end;
-  // Open or create the invoice
-  if iOpenInvoice <> 0 then
-  begin
-     if FormExists(LfrmInvoice) then
-        LfrmInvoice.Show
-     else
-     begin
-        if Assigned(LfrmInvoice) then
-        begin
-           LfrmInvoice := nil;
-        end;
-        LfrmInvoice := TfrmInvoice.Create(Application);
-     end;
-  end
-  else
-     LfrmInvoice := TfrmInvoice.Create(Application);
 
-  if iOpenInvoice = 0 then
-  begin
-    LfrmInvoice.OwnerForm := Self;
-    iInvoice := CreateInvoice(qryMatter.FieldByName('NMATTER').AsInteger,
-                              qryMatter.FieldByName('NCLIENT').AsInteger, Now, sDiscount, False, Self);
-    LfrmInvoice.edtDiscount.Text := sDiscount;
-    LfrmInvoice.lblDiscount.Caption := LfrmInvoice.edtDiscount.Text;
+      // Check if they want to open an existing, undispatched invoice
+      iOpenInvoice := 0;
+      qryTmp.SQL.Text := 'SELECT NMEMO FROM NMEMO WHERE DISPATCHED IS NULL AND FILEID = ' + QuotedStr(qryMatter.FieldByName('FILEID').AsString);
+      qryTmp.Open;
+      if not qryTmp.EOF then
+         iOpenInvoice := qryTmp.FieldByName('NMEMO').AsInteger;
+      qryTmp.Close;
 
-    LfrmInvoice.lblFeesAvail.Visible := True;
-    LfrmInvoice.lblDisbAvail.Visible := True;
-    LfrmInvoice.lblAntdAvail.Visible := True;
-    LfrmInvoice.lblUnPaidAvail.Visible := True;
-    LfrmInvoice.lblSundAvail.Visible := True;
-    LfrmInvoice.DisplayInvoice(iInvoice, Self);
-  end
-  else
-    LfrmInvoice.DisplayInvoice(iOpenInvoice, Self);
+      if iOpenInvoice <> 0 then
+      begin
+         // Open an existing invoice?
+         LfrmBillCreateAsk := TfrmBillCreateAsk.Create(Self);
+         try
+            with LfrmBillCreateAsk do
+            begin
+               Label1.Caption := 'A draft bill already exists for this matter.' + chr(13) + chr(13) + 'Do you want to edit this bill instead of creating a new one?';
+//          if MsgAsk('A draft bill already exists for this matter.' + chr(13) + chr(13) + 'Do you want to edit this bill instead of creating a new one?') <> mrYes then
+               if ShowModal = mrYes then
+                  iOpenInvoice := 0;
+            end;
+         finally
+            FreeAndNil(LfrmBillCreateAsk);
+         end;
+      end;
+      // Open or create the invoice
+      if iOpenInvoice <> 0 then
+      begin
+         if FormExists(LfrmInvoice) then
+            LfrmInvoice.Show
+         else
+         begin
+            if Assigned(LfrmInvoice) then
+            begin
+               LfrmInvoice := nil;
+            end;
+            LfrmInvoice := TfrmInvoice.Create(Application);
+         end;
+      end
+      else
+         LfrmInvoice := TfrmInvoice.Create(Application);
 
-  if qryInvoices.Active then
-    qryInvoices.Refresh;
+      if iOpenInvoice = 0 then
+      begin
+         LfrmInvoice.OwnerForm := Self;
+         iInvoice := CreateInvoice(qryMatter.FieldByName('NMATTER').AsInteger,
+                                 qryMatter.FieldByName('NCLIENT').AsInteger, Now, sDiscount, False, Self);
+         LfrmInvoice.edtDiscount.Text := sDiscount;
+         LfrmInvoice.lblDiscount.Caption := LfrmInvoice.edtDiscount.Text;
+
+         LfrmInvoice.lblFeesAvail.Visible := True;
+         LfrmInvoice.lblDisbAvail.Visible := True;
+         LfrmInvoice.lblAntdAvail.Visible := True;
+         LfrmInvoice.lblUnPaidAvail.Visible := True;
+         LfrmInvoice.lblSundAvail.Visible := True;
+         LfrmInvoice.DisplayInvoice(iInvoice, Self);
+      end
+      else
+         LfrmInvoice.DisplayInvoice(iOpenInvoice, Self);
+
+      if qryInvoices.Active then
+         qryInvoices.Refresh;
+   end
+   else
+      MsgErr('The Entity of this Matter (' + qryMatter.FieldByName('ENTITY').AsString +
+             ') does not match the currently selected Entity ('+dmAxiom.Entity+').  You will need to change the Entity to match the Matters Entity.');
 end;
 
 procedure TfrmMatters.mnuFileNewDiaryClick(Sender: TObject);
