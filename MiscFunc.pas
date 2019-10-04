@@ -8823,7 +8823,7 @@ begin
   end
   else
   begin
-    msg:= 'This transaction will be posted into a locked period.' +
+    msg:= 'This transaction will be posted into a locked period. This will affect the Management Reports printed as at the end of that locked period.' +
           #13#10#13#10 + 'Do you want to continue?';
     if MessageDlg(msg, mtWarning, [mbYes,mbNo], 0) = mrYes then
       result:= prOKToProceed;

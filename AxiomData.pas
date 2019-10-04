@@ -1009,6 +1009,7 @@ type
     FIs_CreditController: string;
     FTabIndex: integer;
     FTimeUnits: integer;
+    FFEE_ENQUIRY_ACCESS: string;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1232,6 +1233,7 @@ type
     function GetEntityDefaultBranch: string;
     function GetEntityDefaultDepartment: string;
     function GetTimeUnits: integer;
+    property FEE_ENQUIRY_ACCESS: string read FFEE_ENQUIRY_ACCESS write FFEE_ENQUIRY_ACCESS;
   end;
 
 var
@@ -1320,13 +1322,13 @@ begin
       frmDesktop.beEntity.Text   := qryEmployeesFull.FieldByName('NAME').AsString;
       FLoginName                 := qryEmployeesFull.FieldByName('USER_NAME').AsString;
       FLabelPrinter              := qryEmployeesFull.FieldByName('LABEL_PRINTER').AsString;
-      FUserMatterGSTDefault      := qryEmployeesFull.FieldByName( 'MAT_LEDG_GST_TICK').AsString;
+      FUserMatterGSTDefault      := qryEmployeesFull.FieldByName('MAT_LEDG_GST_TICK').AsString;
       FReOpenLength              := qryEmployeesFull.FieldByName('REOPENLENGTH').AsInteger;
       FGridFont                  := qryEmployeesFull.FieldByName('GRID_FONT_SIZE').AsInteger;
       FMatterTabsMultiLine       := qryEmployeesFull.FieldByName('MATTER_MULTILINE_TABS').AsString;
 //     frmDesktopClassic.cmbEntity.EditValue := dmAxiom.Entity;
 //     frmDesktop.StatusBar.Panels[1].Text := dmAxiom.EntityName;
-      PostTimeOnExit             := qryEmployeesFull.FieldByName( 'PROCESS_TIME_ON_EXIT').AsString;
+      PostTimeOnExit             := qryEmployeesFull.FieldByName('PROCESS_TIME_ON_EXIT').AsString;
       FTimeSheetDescAutoDrop     := qryEmployeesFull.FieldByName('time_sheet_descr_drop').AsString;
       FTimeSheetViewLayout       := qryEmployeesFull.FieldByName('TIME_SHEET_VIEW_LAYOUT').AsString;
       FSecureMatterAccess        := qryEmployeesFull.FieldByName('VIEW_RESTRICTED_MATTERS').AsString;
@@ -1373,6 +1375,7 @@ begin
       FAuth_Password             := qryEmployeesFull.FieldByName('AUTHORISATION_PASSWD').AsString;
       FIs_Cashier                := qryEmployeesFull.FieldByName('is_cashier').AsString;
       FIs_CreditController       := qryEmployeesFull.FieldByName('IS_CREDIT_CONTROLLER').AsString;
+      FFEE_ENQUIRY_ACCESS        := qryEmployeesFull.FieldByName('FEE_ENQUIRY_ACCESS').AsString;
    finally
       qryEmployeesFull.Close;
    end;

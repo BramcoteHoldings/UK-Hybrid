@@ -1,11 +1,10 @@
 object frmAddReport: TfrmAddReport
   Left = 605
   Top = 282
-  AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Add Insight Report'
-  ClientHeight = 328
-  ClientWidth = 465
+  ClientHeight = 326
+  ClientWidth = 367
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,20 +25,18 @@ object frmAddReport: TfrmAddReport
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 465
-    Height = 328
+    Width = 367
+    Height = 326
     Align = alClient
     ParentBackground = True
     TabOrder = 1
     Transparent = True
     AutoSize = True
-    ExplicitLeft = 161
-    ExplicitTop = 310
-    ExplicitWidth = 600
-    ExplicitHeight = 363
+    ExplicitWidth = 314
+    ExplicitHeight = 211
     DesignSize = (
-      465
-      328)
+      367
+      326)
     object teDisplayName: TcxDBTextEdit
       Left = 107
       Top = 12
@@ -54,7 +51,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 0
-      Width = 346
+      Width = 248
     end
     object teReportName: TcxDBButtonEdit
       Left = 107
@@ -116,7 +113,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 1
-      Width = 346
+      Width = 248
     end
     object cmbReportLevel: TcxDBComboBox
       Left = 107
@@ -208,7 +205,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 4
-      Width = 346
+      Width = 248
     end
     object edParameters: TcxDBTextEdit
       Left = 107
@@ -224,7 +221,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 5
-      Width = 281
+      Width = 183
     end
     object mlDescr: TcxDBRichEdit
       Left = 12
@@ -242,10 +239,10 @@ object frmAddReport: TfrmAddReport
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 7
       Height = 96
-      Width = 441
+      Width = 343
     end
     object cxButton1: TcxButton
-      Left = 395
+      Left = 297
       Top = 133
       Width = 58
       Height = 18
@@ -256,7 +253,7 @@ object frmAddReport: TfrmAddReport
       OnClick = cxButton1Click
     end
     object btnSave: TBitBtn
-      Left = 154
+      Left = 105
       Top = 287
       Width = 75
       Height = 27
@@ -267,7 +264,7 @@ object frmAddReport: TfrmAddReport
       OnClick = btnSaveClick
     end
     object btnCancel: TBitBtn
-      Left = 236
+      Left = 187
       Top = 287
       Width = 75
       Height = 27

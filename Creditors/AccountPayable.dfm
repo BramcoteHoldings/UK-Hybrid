@@ -40,6 +40,10 @@ object frmAcctPayable: TfrmAcctPayable
     object tabAcctPayable: TcxTabSheet
       Caption = 'Accounts Payable'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrInvoices: TcxGrid
         Left = 0
         Top = 0
@@ -217,7 +221,7 @@ object frmAcctPayable: TfrmAcctPayable
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 313
-        Width = 1079
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -321,7 +325,7 @@ object frmAcctPayable: TfrmAcctPayable
         object Label1: TLabel
           Left = 9
           Top = 50
-          Width = 40
+          Width = 39
           Height = 15
           Caption = 'Date To'
           Transparent = True
@@ -1308,6 +1312,7 @@ object frmAcctPayable: TfrmAcctPayable
     object actReverse: TAction
       Category = 'Credit'
       Caption = 'Reverse'
+      Enabled = False
       ImageIndex = 3
       OnExecute = actReverseExecute
       OnUpdate = actReverseUpdate

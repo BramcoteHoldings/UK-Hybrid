@@ -1890,6 +1890,8 @@ begin
       qFeeEarners.Open;
    end;
 
+   cbAuthor.Enabled := (dmAxiom.FEE_ENQUIRY_ACCESS = 'Y');
+
    if dbgrFeeTmp.Font.Size <> dmAxiom.GridFont then
       dbgrFeeTmp.Font.Size := dmAxiom.GridFont;
 

@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabOverview
+    Properties.ActivePage = tabInvoices
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -2187,7 +2187,7 @@ object frmMatters: TfrmMatters
         object DBText7: TDBText
           Left = 622
           Top = 104
-          Width = 285
+          Width = 41
           Height = 15
           AutoSize = True
           Color = clBtnFace
