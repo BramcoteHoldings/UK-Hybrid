@@ -3293,7 +3293,10 @@ begin
       LClientCode := IntToStr(qClientCheck.FieldByName('NCLIENT').AsInteger);
       qClientCheck.Close; }
       if (qClient.FieldByName('nclient').AsInteger = 0) then
-         LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'))
+      begin
+         LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'));
+         qClient.FieldByName('nclient').AsInteger := StrToInt(LClientCode);
+      end
       else
          LClientCode := qClient.FieldByName('nclient').AsString;
 
@@ -3311,7 +3314,7 @@ begin
 
       repeat
          LPadNum := StrToInt(LClientCode);
-         inc(LPadNum);
+//         inc(LPadNum);
          LNumStr := intToStr(LPadNum);
         // pad the number string
          for i := 1 to (LPadding - Length(LNumStr)) do

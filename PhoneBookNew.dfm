@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43724.419444675930000000
-        Time = 43724.419444675930000000
+        Date = 43742.419444675930000000
+        Time = 43742.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
