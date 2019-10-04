@@ -718,7 +718,7 @@ begin
 //   sWhereClause := sWhereClause + 'AND MATTER.STATUS = MATTERSTATUS.CODE (+) AND MATTER.TYPE = MATTERSUBTYPE.MATTERTYPE (+) ';
 //   sWhereClause := sWhereClause + ' AND MATTER.NCLIENT = PHONEBOOK.NCLIENT AND MATTER.DEBTORSTATUS = DEBTORSTATUS.DEBTORSTATUS(+) ';
    if (dmAxiom.Security.Employee.ChangeEntity = True) then
-      sWhereClause := ' WHERE MATTER.NCLIENT = PHONEBOOK.NCLIENT AND MATTER.NMATTER = al.nmatter(+) '
+      sWhereClause := ' WHERE MATTER.NCLIENT = PHONEBOOK.NCLIENT AND MATTER.NMATTER = al.nmatter(+) AND MATTER.ENTITY = NVL(:ENTITY, MATTER.ENTITY) '
    else
       sWhereClause := ' WHERE MATTER.NCLIENT = PHONEBOOK.NCLIENT AND MATTER.NMATTER = al.nmatter(+) AND efematteraccess(matter.nmatter, :Author, :Entity, :DefEntity) = 0 ';
    if cbShowRecentlyAccessed.Checked then
@@ -1369,7 +1369,7 @@ begin
       end;
    end;
 
-   if (dmAxiom.Security.Employee.ChangeEntity = False) then
+   if (dmAxiom.Security.Employee.ChangeEntity = True) then
    begin
       if chkEntity.Checked then
       begin
@@ -1381,12 +1381,18 @@ begin
          DataSet.ParamByName('entity').AsString := '';
          DataSetTotal.ParamByName('entity').AsString := '';
       end;
+   end
+   else
+   begin
+      DataSet.ParamByName('entity').AsString := dmAxiom.Entity;
+      DataSetTotal.ParamByName('entity').AsString := dmAxiom.Entity;
+
       DataSet.ParamByName('Author').AsString := dmAxiom.UserID;
       DataSetTotal.ParamByName('Author').AsString := dmAxiom.UserID;
 
       DataSet.ParamByName('DefEntity').AsString := dmAxiom.EmpEntity;
       DataSetTotal.ParamByName('DefEntity').AsString := dmAxiom.EmpEntity;
-   end
+   end;
 end;
 
 procedure TfrmMatterSearch.FormCreate(Sender: TObject);

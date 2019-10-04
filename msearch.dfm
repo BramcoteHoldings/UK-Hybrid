@@ -71,10 +71,6 @@ object frmMatterSearch: TfrmMatterSearch
       Caption = '&Matters'
       ImageIndex = 0
       OnShow = tabGridShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrMatters: TcxGrid
         Left = 0
         Top = 0
@@ -746,10 +742,6 @@ object frmMatterSearch: TfrmMatterSearch
       Caption = '&Filter'
       ImageIndex = 1
       OnShow = tabFiltersShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1280
         586)
@@ -1073,7 +1065,7 @@ object frmMatterSearch: TfrmMatterSearch
         object Label18: TLabel
           Left = 5
           Top = 162
-          Width = 56
+          Width = 55
           Height = 15
           Caption = 'Clear Trust'
           Transparent = True
@@ -1081,7 +1073,7 @@ object frmMatterSearch: TfrmMatterSearch
         object lblTrust: TLabel
           Left = 5
           Top = 138
-          Width = 26
+          Width = 25
           Height = 15
           Caption = 'Trust'
           Transparent = True
@@ -1358,7 +1350,7 @@ object frmMatterSearch: TfrmMatterSearch
         object Label25: TLabel
           Left = 9
           Top = 117
-          Width = 32
+          Width = 31
           Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
@@ -1596,7 +1588,7 @@ object frmMatterSearch: TfrmMatterSearch
         object Label3: TLabel
           Left = 206
           Top = 16
-          Width = 25
+          Width = 24
           Height = 15
           Caption = 'Type'
           Transparent = True
@@ -2037,7 +2029,7 @@ object frmMatterSearch: TfrmMatterSearch
         object Label32: TLabel
           Left = 525
           Top = 20
-          Width = 29
+          Width = 30
           Height = 15
           Caption = 'Box #'
           Transparent = True
@@ -2045,7 +2037,7 @@ object frmMatterSearch: TfrmMatterSearch
         object Label34: TLabel
           Left = 9
           Top = 44
-          Width = 13
+          Width = 12
           Height = 15
           Caption = 'To'
           Transparent = True
@@ -3125,7 +3117,7 @@ object frmMatterSearch: TfrmMatterSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3151,6 +3143,7 @@ object frmMatterSearch: TfrmMatterSearch
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3183,7 +3176,7 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.WorksheetName = 'Report'
     Left = 251
     Top = 268
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plMatters'
     object ppHeaderBand1: TppHeaderBand
@@ -3826,7 +3819,7 @@ object frmMatterSearch: TfrmMatterSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3852,6 +3845,7 @@ object frmMatterSearch: TfrmMatterSearch
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3883,7 +3877,7 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.WorksheetName = 'Report'
     Left = 626
     Top = 339
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'ppBDEPipeline2'
     object ppHeaderBand2: TppHeaderBand

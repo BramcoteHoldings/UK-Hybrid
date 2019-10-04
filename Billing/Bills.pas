@@ -1347,6 +1347,7 @@ begin
       iRecordCount := RecordCount;
       Close;
    end;
+
    if (tvBills.Controller.SelectedRowCount > 1) then
       MessageDlg('Multiple bills cannot be reversed. Please ensure that only one bill is selected.', mtError,[mbOK], 0)
    else
@@ -1357,9 +1358,10 @@ begin
          begin
 //            if MsgAsk('Do you want to reverse Bill ' + qryBills.FieldByName('REFNO').AsString + '?') = mrYes then
 //            begin
-               dTmp := Now;
+               dTmp := qryBills.FieldByName('DISPATCHED').AsDateTime;
                if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
                   dTmp := SystemDate('DFLT_BILL_DISPATCHED_DATE');
+
                if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
                begin
                    if (DateOf(qryBills.FieldByName('DISPATCHED').AsDateTime) > DateOf(dTmp)) then

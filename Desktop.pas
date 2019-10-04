@@ -1047,6 +1047,7 @@ begin
          cAItem.Enabled := True;
          dmAxiom.TSSpellChecker.LoadDictionaries();
 
+         dmAxiom.TimeUnits := dmAxiom.GetTimeUnits;
       end;
    finally
       dmAxiom.qryEmpsLogin.Close;

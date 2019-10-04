@@ -1047,7 +1047,7 @@ object frmBills: TfrmBills
       object Label15: TLabel
         Left = 9
         Top = 250
-        Width = 144
+        Width = 145
         Height = 15
         Caption = 'Sundry Expenses Paid/Woff'
       end
@@ -1075,7 +1075,7 @@ object frmBills: TfrmBills
       object Label11: TLabel
         Left = 9
         Top = 117
-        Width = 26
+        Width = 25
         Height = 15
         Caption = 'Total'
       end
@@ -1096,7 +1096,7 @@ object frmBills: TfrmBills
       object Label12: TLabel
         Left = 9
         Top = 134
-        Width = 26
+        Width = 25
         Height = 15
         Caption = 'Trust'
       end
@@ -1117,7 +1117,7 @@ object frmBills: TfrmBills
       object Label9: TLabel
         Left = 9
         Top = 84
-        Width = 87
+        Width = 88
         Height = 15
         Caption = 'Sundry Expenses'
       end
@@ -1195,7 +1195,7 @@ object frmBills: TfrmBills
       object Label7: TLabel
         Left = 325
         Top = 107
-        Width = 79
+        Width = 78
         Height = 15
         Caption = 'Bill Number To'
       end
@@ -1258,7 +1258,7 @@ object frmBills: TfrmBills
       object lblDateTo: TLabel
         Left = 4
         Top = 80
-        Width = 70
+        Width = 69
         Height = 15
         Caption = 'Generated To'
       end
@@ -3841,6 +3841,7 @@ object frmBills: TfrmBills
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3873,7 +3874,7 @@ object frmBills: TfrmBills
     XLSSettings.WorksheetName = 'Report'
     Left = 839
     Top = 176
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 197379
     DataPipelineName = 'plBills'
     object ppHeaderBand1: TppHeaderBand
