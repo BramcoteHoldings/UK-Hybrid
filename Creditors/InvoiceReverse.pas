@@ -9,12 +9,12 @@ uses
   cxControls, cxContainer, cxEdit, cxLabel, cxDBLabel, cxMemo, cxGroupBox,
   Menus, cxGraphics, cxLookAndFeels, cxMaskEdit, cxDropDownEdit,
   cxCalendar, EnforceCustomDateEdit, dxCore, cxDateUtils, System.Actions,
-  Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, dxLayoutContainer, cxClasses,
+  dxLayoutControl;
 
 type
   TfrmInvoiceReverse = class(TForm)
-    Label5: TLabel;
-    Label6: TLabel;
     dsInvoice: TUniDataSource;
     qryTransitems: TUniQuery;
     qryAllocs: TUniQuery;
@@ -24,12 +24,6 @@ type
     btnCancel: TcxButton;
     btnOriginal: TcxButton;
     mlReason: TcxMemo;
-    gbOriginal: TcxGroupBox;
-    Label7: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     cxDBLabel5: TcxDBLabel;
     cxDBLabel4: TcxDBLabel;
     cxDBLabel3: TcxDBLabel;
@@ -40,6 +34,21 @@ type
     dtpReverse: TEnforceCustomDateEdit;
     ActionManager1: TActionManager;
     actOk: TAction;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelClick(Sender: TObject);
@@ -140,6 +149,7 @@ begin
       qryInvoiceReverse.ParamByName('DESCR').AsString := mlReason.Text;  // qryInvoice.FieldByName('DESCR').AsString;
       qryInvoiceReverse.ParamByName('INVOICE_DATE').AsDateTime := dtpReverse.Date;
       qryInvoiceReverse.ParamByName('NINVOICE').AsInteger := liInvoiceNum;
+      qryInvoiceReverse.ParamByName('RV_NINVOICE').AsInteger := qryInvoice.FieldByName('NINVOICE').AsInteger;
       qryInvoiceReverse.ExecSQL;
 
       // need to update original transaction
@@ -186,13 +196,16 @@ begin
       qryInvoice.FieldByName('CREDITED').AsFloat := qryInvoice.FieldByName('AMOUNT').AsFloat;
       qryInvoice.FieldByName('OWING').AsFloat := 0;
       qryInvoice.FieldByName('LAST_PAYMENT').AsDateTime := dtpReverse.Date;
+      qryInvoice.FieldByName('RV_NINVOICE').AsInteger := liInvoiceNum;
+      qryInvoice.FieldByName('REFNO').AsString := Copy(qryInvoice.FieldByName('REFNO').AsString + 'CN', 1, 10);
+      qryInvoice.FieldByName('TYPE').AsString := 'CN';
       qryInvoice.Post;
 
       qryInvoice.ApplyUpdates;
 
       dmAxiom.uniInsight.Commit;
 
-      Close;
+//      Close;
       ModalResult := mrOK;
     except
       On E: Exception do

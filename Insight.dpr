@@ -399,14 +399,14 @@ uses
   LoggingSnippet in 'LoggingSnippet.pas',
   GenericDocNoMerge in 'Workflow\GenericDocNoMerge.pas',
   SubBill in 'Billing\SubBill.pas' {frmSubBill},
-  AlterBilledTaxAmount in 'Billing\AlterBilledTaxAmount.pas' {frmAdjustBilledTax},
   CheqReqs in 'CheqReqs.pas' {frmCheqReqs},
   InvoiceChangeDueDate in 'Creditors\InvoiceChangeDueDate.pas' {frmInvoiceChangeDue},
   InvoiceDebitNote in 'Creditors\InvoiceDebitNote.pas' {frmInvoiceDebit},
   invoicelist in 'Creditors\invoicelist.pas' {frmInvoiceList},
   InvoiceReverse in 'Creditors\InvoiceReverse.pas' {frmInvoiceReverse},
   InvoiceScan in 'Creditors\InvoiceScan.pas' {frmInvScan},
-  InvoiceSearch in 'Billing\InvoiceSearch.pas' {frmInvoiceSearch};
+  InvoiceSearch in 'Billing\InvoiceSearch.pas' {frmInvoiceSearch},
+  BulkMailer in 'BulkMailer.pas' {frmBulkMailer};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}

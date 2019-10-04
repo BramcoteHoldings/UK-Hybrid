@@ -888,7 +888,7 @@ begin
          except
             neAmount.Value := 0.00;
          end;
-{         try
+         try
             begin
                neMinutes.Text := FloatToStr(neUnits.Value * dmAxiom.TimeUnits);
                if not bFromTimeEdit then
@@ -924,7 +924,7 @@ begin
             end;
          except
            neMinutes.Text := '0';
-         end;   }
+         end;
       end
       else if (liUnits.Caption = 'Mins:') or (cmbTemplate.Text = '') or
                (TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue), 'RATE') = 0) then

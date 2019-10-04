@@ -666,8 +666,8 @@ begin
   dtpDateFrom.Date :=  Now;
   dtpDateTo.Date :=  Now;
 
-  cbAuthor.Enabled := (TableString('EMPLOYEE', 'CODE', dmAxiom.UserID, 'FEE_ENQUIRY_ACCESS') = 'Y');
-  cbAuthorType.Enabled := (TableString('EMPLOYEE', 'CODE', dmAxiom.UserID, 'FEE_ENQUIRY_ACCESS') = 'Y');
+  cbAuthor.Enabled := (dmAxiom.FEE_ENQUIRY_ACCESS = 'Y');
+  cbAuthorType.Enabled := (dmAxiom.FEE_ENQUIRY_ACCESS = 'Y');
 
 //  if TableInteger('EMPLOYEE', 'CODE', dmAxiom.UserID, 'ACCESSLEVEL') > 5 then
 //  begin

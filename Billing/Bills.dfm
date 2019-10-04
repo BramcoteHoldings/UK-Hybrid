@@ -38,10 +38,6 @@ object frmBills: TfrmBills
     object tabBills: TcxTabSheet
       Caption = 'Bills'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrBills: TcxGrid
         Left = 0
         Top = 0
@@ -50,8 +46,6 @@ object frmBills: TfrmBills
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitLeft = 48
-        ExplicitTop = -3
         object tvBills: TcxGridDBTableView
           PopupMenu = popAuthorise
           OnDblClick = dbgrBillsDblClick

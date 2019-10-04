@@ -1166,7 +1166,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 68
+      ControlOptions.OriginalWidth = 73
       ControlOptions.ShowBorder = False
       Enabled = False
       Index = 1
@@ -1246,7 +1246,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 40
+      ControlOptions.OriginalWidth = 58
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -1263,7 +1263,7 @@ inherited frmTimeDiaryNew: TfrmTimeDiaryNew
       ControlOptions.MinHeight = 17
       ControlOptions.MinWidth = 17
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 40
+      ControlOptions.OriginalWidth = 58
       ControlOptions.ShowBorder = False
       Index = 0
     end

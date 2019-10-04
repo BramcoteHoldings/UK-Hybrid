@@ -1,5 +1,14 @@
 Insight Build 9.2.0
 
+Build 44
+========
+- Added validation to prevent posting bills and reversing bills for a different entity.
+- Fixed issue with incorrect time calculation in Time Diary.
+- Added ability to prevent the selection of Author in Time Sheet if EMployee Fee Enquiry Access flag is not ticked.
+- Enhanced Creditor invoce reversal by maintining link to original Invoice.
+- Fixed issue with Client Code creation when code is defined as numeric.
+
+
 Build 43
 ========
 - Fixed issue with Matter Search not respecting entity selection.

@@ -1279,8 +1279,9 @@ end;
 procedure TfrmAcctPayable.actReverseUpdate(Sender: TObject);
 begin
    if pagAcctPayable.ActivePageIndex = 0 then
-      actReverse.Enabled := ((tabAcctPayable.Visible) and (dmAxiom.Security.Invoice.Reverse)) OR
-                         (qryAccounts.FieldByName('TAKE_ON').AsString = 'N');
+      actReverse.Enabled := ((tabAcctPayable.Visible) and (dmAxiom.Security.Invoice.Reverse) and
+                           (TableString('ALLOC','NINVOICE', qryAccounts.FieldByName('NINVOICE').AsInteger, 'NMEMO') = '')) OR
+                           (qryAccounts.FieldByName('TAKE_ON').AsString = 'N')  ;
 end;
 
 procedure TfrmAcctPayable.actCreditNoteExecute(Sender: TObject);

@@ -2504,60 +2504,63 @@ procedure TfrmInvoice.popGridRemoveAllClick(Sender : TObject);
   end;
 
 procedure TfrmInvoice.tbtnReverseClick(Sender : TObject);
-  var
-    bOKtoPost : Boolean;
-    dReversalDate         : TDateTime;
-  begin
-    if not qryInvoice.IsEmpty then
-    begin
-      //if MsgAsk('Do you want to reverse invoice ' + qryInvoice.FieldByName('REFNO').AsString + '?') = mrYes
-      // RDW - 02/04/2019 - Amended to prompt for a reversal date
-      dReversalDate := qryInvoice.FieldByName('DISPATCHED').AsDateTime;
-
-      if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
-         dReversalDate := SystemDate('DFLT_BILL_DISPATCHED_DATE');
-
-      if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+var
+    bOKtoPost        : Boolean;
+    dReversalDate    : TDateTime;
+begin
+   if not qryInvoice.IsEmpty then
+   begin
+      if (MatterString(qryInvoice.FieldByName('NMATTER').AsInteger, 'ENTITY') = dmAxiom.Entity) then
       begin
-         if (DateOf(qryInvoice.FieldByName('DISPATCHED').AsDateTime) > DateOf(dReversalDate)) then
-            dReversalDate := Now;
-      end;
+         //if MsgAsk('Do you want to reverse invoice ' + qryInvoice.FieldByName('REFNO').AsString + '?') = mrYes
+         // RDW - 02/04/2019 - Amended to prompt for a reversal date
+         dReversalDate := qryInvoice.FieldByName('DISPATCHED').AsDateTime;
 
-      if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryInvoice.FieldByName('REFNO').AsString + '?',  dReversalDate)) then
-      begin
-        bOKtoPost := (PostIntoLockedPeriod(Now) in [prNotLocked, prOKToProceed]);
-        if bOKtoPost
-        then
-        begin
-          try
-            with procBillReverse do
-            begin
-              ParamByName('P_NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-              ParamByName('P_RVDATE').AsDateTime := dReversalDate;               // Reversal Date, amended RDW from NOW
+         if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+            dReversalDate := SystemDate('DFLT_BILL_DISPATCHED_DATE');
 
-              ParamByName('P_WHO').AsString := dmAxiom.UserID;
-              Execute;
-              bNoSave := true;
-            end;
-            MessageDlg('Bill Reversed', mtInformation, [mbOk], 0);
-            Self.Close;
-          except
-            // on Error  do
+         if (SystemString('DFLT_BILL_DISPATCHED_DATE') <> '') then
+         begin
+            if (DateOf(qryInvoice.FieldByName('DISPATCHED').AsDateTime) > DateOf(dReversalDate)) then
+               dReversalDate := Now;
+         end;
+
+         if (InputQueryDate('Bill Reversal', 'Do you want to reverse Bill ' + qryInvoice.FieldByName('REFNO').AsString + '?',  dReversalDate)) then
+         begin
+            bOKtoPost := (PostIntoLockedPeriod(Now) in [prNotLocked, prOKToProceed]);
+            if bOKtoPost then
             begin
-              if Error = 20100
-              then
-                MessageDlg('Error Bill has been paid', mtError, [mbOk], 0)
-              else if Error = 20101
-              then
-                MessageDlg('Error Bill has trust cheques', mtError, [mbOk], 0)
-              else
-                raise;
+               try
+                  with procBillReverse do
+                  begin
+                     ParamByName('P_NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+                     ParamByName('P_RVDATE').AsDateTime := dReversalDate;               // Reversal Date, amended RDW from NOW
+
+                     ParamByName('P_WHO').AsString := dmAxiom.UserID;
+                     Execute;
+                     bNoSave := true;
+                  end;
+                  MessageDlg('Bill Reversed', mtInformation, [mbOk], 0);
+                  Self.Close;
+               except
+                  // on Error  do
+                  begin
+                     if Error = 20100 then
+                        MessageDlg('Error Bill has been paid', mtError, [mbOk], 0)
+                     else if Error = 20101 then
+                        MessageDlg('Error Bill has trust cheques', mtError, [mbOk], 0)
+                     else
+                        raise;
+                  end;
+               end;
             end;
-          end;
-        end;
-      end;
-    end;
-  end;
+         end;
+      end
+      else
+         MsgErr('The Entity of this Matter (' + qryMatter.FieldByName('ENTITY').AsString +
+               ') does not match the currently selected Entity ('+dmAxiom.Entity+').  You will need to change the Entity to match the Matters Entity.');
+   end;
+end;
 
 procedure TfrmInvoice.FormCreate(Sender : TObject);
 var
