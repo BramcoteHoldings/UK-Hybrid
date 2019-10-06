@@ -1919,8 +1919,7 @@ procedure TfrmInvoice.btnSundRebuildClick(Sender : TObject);
 procedure TfrmInvoice.tbtnPostClick(Sender : TObject);
   begin
 
-    if (IsValidBillForMatter(qryInvoice.FieldByName('FILEID').AsString, qryInvoice.FieldByName('BANK_ACCT').AsString) = true)
-    then
+    if (IsValidBillForMatter(qryInvoice.FieldByName('FILEID').AsString, qryInvoice.FieldByName('BANK_ACCT').AsString) = true) then
     begin
       qrySubBills.Close;
       qrySubBills.ParamByName('NMEMO').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
@@ -2510,7 +2509,7 @@ var
 begin
    if not qryInvoice.IsEmpty then
    begin
-      if (MatterString(qryInvoice.FieldByName('NMATTER').AsInteger, 'ENTITY') = dmAxiom.Entity) then
+      if (IsValidBillForMatter(qryInvoice.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
       begin
          //if MsgAsk('Do you want to reverse invoice ' + qryInvoice.FieldByName('REFNO').AsString + '?') = mrYes
          // RDW - 02/04/2019 - Amended to prompt for a reversal date
