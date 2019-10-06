@@ -206,7 +206,7 @@ object frmMatters: TfrmMatters
     object lblTotalFeesRecorded: TLabel
       Left = 614
       Top = 126
-      Width = 104
+      Width = 105
       Height = 15
       Caption = 'Total Fees  recorded'
     end
@@ -554,7 +554,7 @@ object frmMatters: TfrmMatters
         object Label15: TLabel
           Left = 10
           Top = 56
-          Width = 31
+          Width = 32
           Height = 15
           Caption = 'Bill To'
           Transparent = True
@@ -762,7 +762,7 @@ object frmMatters: TfrmMatters
         object Label19: TLabel
           Left = 9
           Top = 71
-          Width = 22
+          Width = 23
           Height = 15
           Caption = 'Title'
         end
@@ -1248,6 +1248,10 @@ object frmMatters: TfrmMatters
           object tabStreetAddress: TcxTabSheet
             Caption = 'Street Address'
             ImageIndex = 0
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label35: TLabel
               Left = 1
               Top = 0
@@ -1258,7 +1262,7 @@ object frmMatters: TfrmMatters
             object Label36: TLabel
               Left = 1
               Top = 51
-              Width = 71
+              Width = 72
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1343,6 +1347,10 @@ object frmMatters: TfrmMatters
           object tabPostalAddress: TcxTabSheet
             Caption = 'Postal Address'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label40: TLabel
               Left = 1
               Top = 2
@@ -1353,7 +1361,7 @@ object frmMatters: TfrmMatters
             object Label41: TLabel
               Left = 1
               Top = 50
-              Width = 71
+              Width = 72
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1438,6 +1446,10 @@ object frmMatters: TfrmMatters
           object tabCustomAddress: TcxTabSheet
             Caption = 'Custom Address'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label55: TLabel
               Left = 1
               Top = 2
@@ -1448,7 +1460,7 @@ object frmMatters: TfrmMatters
             object lCustomSuburb: TLabel
               Left = 1
               Top = 51
-              Width = 71
+              Width = 72
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1533,6 +1545,10 @@ object frmMatters: TfrmMatters
           object tabDX: TcxTabSheet
             Caption = 'DX'
             ImageIndex = 3
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label25: TLabel
               Left = 5
               Top = 14
@@ -1617,7 +1633,7 @@ object frmMatters: TfrmMatters
       object lblsClearTrust: TLabel
         Left = 470
         Top = 117
-        Width = 98
+        Width = 99
         Height = 15
         Hint = 
           'Total Cleared Non-Protected Trust less any Unconverted Trust Req' +
@@ -1666,7 +1682,7 @@ object frmMatters: TfrmMatters
       object lblsTrust: TLabel
         Left = 470
         Top = 100
-        Width = 95
+        Width = 97
         Height = 15
         Hint = 
           'Total funds deposited in the trust account on behalf of this mat' +
@@ -1737,7 +1753,7 @@ object frmMatters: TfrmMatters
       object lblsWIP: TLabel
         Left = 9
         Top = 8
-        Width = 58
+        Width = 59
         Height = 15
         Hint = 'Fees that have yet to be billed.'
         Caption = 'WIP - Time'
@@ -1916,7 +1932,7 @@ object frmMatters: TfrmMatters
         object Label53: TLabel
           Left = 18
           Top = 86
-          Width = 69
+          Width = 70
           Height = 15
           Caption = 'Fee Template'
           OnMouseEnter = lblUnderlineEnter
@@ -2070,7 +2086,7 @@ object frmMatters: TfrmMatters
         object lblType: TLabel
           Left = 509
           Top = 119
-          Width = 24
+          Width = 25
           Height = 15
           Caption = 'Type'
         end
@@ -2104,7 +2120,7 @@ object frmMatters: TfrmMatters
         object Label8: TLabel
           Left = 18
           Top = 166
-          Width = 85
+          Width = 84
           Height = 15
           Caption = 'Exp Completion'
           OnMouseEnter = lblUnderlineEnter
@@ -2113,7 +2129,7 @@ object frmMatters: TfrmMatters
         object lblExpCompletion: TLabel
           Left = 116
           Top = 166
-          Width = 95
+          Width = 94
           Height = 15
           Caption = 'lblExpCompletion'
           Color = clBtnFace
@@ -2122,7 +2138,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrans: TLabel
           Left = 773
           Top = 148
-          Width = 84
+          Width = 85
           Height = 15
           Hint = 'Date of the last transaction.'
           Caption = 'Last Transaction'
@@ -2134,7 +2150,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrust: TLabel
           Left = 903
           Top = 143
-          Width = 112
+          Width = 114
           Height = 15
           Hint = 'Date of the last trust transaction.'
           Caption = 'Last Trust Transaction'
@@ -2226,7 +2242,7 @@ object frmMatters: TfrmMatters
           object Label14: TLabel
             Left = 206
             Top = 13
-            Width = 79
+            Width = 78
             Height = 15
             Caption = 'Expected Value'
           end
@@ -3219,7 +3235,7 @@ object frmMatters: TfrmMatters
         object Label52: TLabel
           Left = 8
           Top = 3
-          Width = 67
+          Width = 68
           Height = 15
           Caption = 'Archive Type'
           ParentShowHint = False
@@ -3293,6 +3309,10 @@ object frmMatters: TfrmMatters
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 30
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label7: TLabel
         Left = 18
         Top = 156
@@ -3325,21 +3345,21 @@ object frmMatters: TfrmMatters
       object Label66: TLabel
         Left = 259
         Top = 225
-        Width = 100
+        Width = 101
         Height = 15
         Caption = 'Requisitioned Trust'
       end
       object Label5: TLabel
         Left = 72
         Top = 225
-        Width = 95
+        Width = 97
         Height = 15
         Caption = 'Total Trust Monies'
       end
       object Label50: TLabel
-        Left = 755
+        Left = 756
         Top = 6
-        Width = 48
+        Width = 47
         Height = 15
         Alignment = taRightJustify
         Caption = 'Exposure'
@@ -3409,7 +3429,7 @@ object frmMatters: TfrmMatters
       object Label20: TLabel
         Left = 18
         Top = 79
-        Width = 100
+        Width = 99
         Height = 15
         Caption = 'Actual Expenditure'
       end
@@ -3423,7 +3443,7 @@ object frmMatters: TfrmMatters
       object Label27: TLabel
         Left = 18
         Top = 177
-        Width = 139
+        Width = 140
         Height = 15
         Caption = 'Grand Total (includes fees)'
       end
@@ -3444,7 +3464,7 @@ object frmMatters: TfrmMatters
       object Label11: TLabel
         Left = 18
         Top = 136
-        Width = 127
+        Width = 126
         Height = 15
         Caption = 'Anticipated Expenditure'
       end
@@ -3676,6 +3696,10 @@ object frmMatters: TfrmMatters
     object tabParties: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 23
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 489
@@ -3929,7 +3953,7 @@ object frmMatters: TfrmMatters
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
               Text = 'Email'
-              Width = 583
+              Width = 587
             end>
         end
       end
@@ -3994,7 +4018,7 @@ object frmMatters: TfrmMatters
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
                 Text = 'Value'
-                Width = 1205
+                Width = 1209
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4010,6 +4034,10 @@ object frmMatters: TfrmMatters
           Caption = 'Calculation Data'
           ImageIndex = 1
           TabVisible = False
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
         end
       end
     end
@@ -5195,7 +5223,7 @@ object frmMatters: TfrmMatters
         object Label61: TLabel
           Left = 401
           Top = 7
-          Width = 139
+          Width = 138
           Height = 15
           Anchors = [akLeft, akBottom]
           Caption = 'Expected Payment Details:'
@@ -6710,6 +6738,7 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
+        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -7799,6 +7828,10 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
+                ExplicitLeft = 0
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
               end
             end
             object pnlPreview: TJamFilePreview
@@ -7811,10 +7844,10 @@ object frmMatters: TfrmMatters
           end
         end
         object DockPanelFolderList: TdxDockPanel
-          Left = -193
+          Left = 0
           Top = 0
           Width = 193
-          Height = 0
+          Height = 124
           Visible = False
           AllowFloating = False
           AutoHide = True
@@ -8049,6 +8082,10 @@ object frmMatters: TfrmMatters
     object tabSubNames: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 15
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
@@ -8116,6 +8153,10 @@ object frmMatters: TfrmMatters
     object tabSearches: TcxTabSheet
       Caption = 'Searches'
       ImageIndex = 22
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel11: TPanel
         Left = 0
         Top = 0
@@ -8407,6 +8448,10 @@ object frmMatters: TfrmMatters
         object tsProjectTaskGrid: TcxTabSheet
           Caption = 'Tasks Grid'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
@@ -9129,6 +9174,7 @@ object frmMatters: TfrmMatters
         AlignSplitter = salTop
         PositionAfterOpen = 29
         MinSize = 29
+        ExplicitWidth = 8
       end
       object pnlProject: TPanel
         Left = 0
@@ -9433,6 +9479,10 @@ object frmMatters: TfrmMatters
       Caption = 'Emails'
       ImageIndex = 18
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
@@ -9709,6 +9759,10 @@ object frmMatters: TfrmMatters
       Caption = 'Critical Dates'
       ImageIndex = 18
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0
@@ -12874,7 +12928,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14096,7 +14150,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15171,7 +15225,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15906,7 +15960,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16804,7 +16858,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -21229,7 +21283,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22017,7 +22071,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22297,7 +22351,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -26137,7 +26191,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33227,7 +33281,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33929,7 +33983,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

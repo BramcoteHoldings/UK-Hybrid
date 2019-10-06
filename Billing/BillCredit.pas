@@ -262,467 +262,472 @@ begin
 
   Show message if transaction is being posted into a locked period
 }
+   if (IsValidBillForMatter(qryBill.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
+   begin
+      glComponentSetup := dmAxiom.getGlComponents;
+      if OKtoPost(True) then
+      begin
+         if PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed] then
+         begin
+            try
+               if dmAxiom.uniInsight.InTransaction then
+                  dmAxiom.uniInsight.Rollback;
+               dmAxiom.uniInsight.StartTransaction;
 
-  glComponentSetup := dmAxiom.getGlComponents;
-  if OKtoPost(True) then
-  begin
-    if PostIntoLockedPeriod(dtpDate.Date) in [prNotLocked, prOKToProceed] then
-    begin
-      try
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Rollback;
-        dmAxiom.uniInsight.StartTransaction;
+               cDebtors := StrToCurr(ProcString('getDebtorsAmount',qryBill.FieldByName('NMATTER').AsInteger));   // TableCurrency('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'DEBTORS');
 
-        cDebtors := StrToCurr(ProcString('getDebtorsAmount',qryBill.FieldByName('NMATTER').AsInteger));   // TableCurrency('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'DEBTORS');
+               with procBillCreate do
+               begin
+                  ParamByName('P_Entity').AsString    := dmAxiom.Entity;
+                  ParamByName('P_NMatter').AsInteger  := qryBill.FieldByName('NMATTER').AsInteger;
+                  ParamByName('P_CREATEDBY').AsString := dmAxiom.UserID;
+                  Execute;
+                  iNMemo := ParamByName('Result').AsInteger;
+               end;
 
-        with procBillCreate do
-        begin
-          ParamByName('P_Entity').AsString    := dmAxiom.Entity;
-          ParamByName('P_NMatter').AsInteger  := qryBill.FieldByName('NMATTER').AsInteger;
-          ParamByName('P_CREATEDBY').AsString := dmAxiom.UserID;
-          Execute;
-          iNMemo := ParamByName('Result').AsInteger;
-        end;
+               cTaxFees := 0;
+               cTaxDisb := 0;
+               cTaxAntd := 0;
+               cTaxSund := 0;
+               cTaxCred := 0;
 
-        cTaxFees := 0;
-        cTaxDisb := 0;
-        cTaxAntd := 0;
-        cTaxSund := 0;
-        cTaxCred := 0;
-
-        qryLedger.First;
-        while not qryLedger.EOF do
-        begin
-          if qryLedger.FieldByName('TYPE').AsString = 'Fees' then
-          begin
-            with qryFee do
-            begin
-              ParamByName('CREATED').AsDateTime := dtpDate.Date;
-              ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-              ParamByName('AUTHOR').AsString := qryLedger.FieldByName('AUTHOR').AsString;
-              ParamByName('PARTNER').AsString := qryBill.FieldByName('PARTNER').AsString;
-              ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-              ParamByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
-              ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
-              ParamByName('DEPT').AsString := TableString('EMPLOYEE', 'CODE', qryLedger.FieldByName('AUTHOR').AsString, 'DEPT');;
-              ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', qryLedger.FieldByName('AUTHOR').AsString, 'TYPE');
-              ParamByName('INVOICEDATE').AsDateTime := dtpDate.Date;
-              ParamByName('NMEMO').AsInteger := iNMemo;
-              ParamByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
-              ParamByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
-              ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
-              ParamByName('TAX').AsFloat := 0 - qryLedger.FieldByName('TAX').AsCurrency;
-              ParamByName('PROGRAM_NAME').AsString := 'Bill Credit Note';
-              ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;
-              ParamByName('EMPCODE').AsString := dmAxiom.UserID;
-              ParamByName('VALUE').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-              cTaxFees := cTaxFees + qryLedger.FieldByName('TAX').AsCurrency;
-              ExecSQL;
-
-              // Billed Fees
-              MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'BILL_FEES', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
-
-              {post components}
-              sLedgerKey := glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR'),'',true,'');
-
-              // create alloc
-              qryAllocs.Open;
-              qryAllocs.Insert;
-              qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
-              qryAllocs.FieldByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
-              qryAllocs.FieldByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
-              qryAllocs.FieldByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
-              qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-              qryAllocs.FieldByName('CLIENT_NAME').AsString := MatterString(qryBill.FieldByName('FILEID').AsString, 'CLIENT_NAME');
-              qryAllocs.FieldByName('MATTER_DESC').AsString := MatterString(qryBill.FieldByName('FILEID').AsString, 'SHORTDESCR');
-              qryAllocs.FieldByName('CLEARED').AsString := 'Y';
-              qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
-              qryAllocs.FieldByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
-              qryAllocs.FieldByName('TAX').AsCurrency := qryLedger.FieldByName('TAX').AsCurrency;
-              qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
-              qryAllocs.FieldByName('FEE').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
-              qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := 0;
-              qryAllocs.FieldByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
-              qryAllocs.FieldByName('TRUST').AsString := 'G';
- //             qryAllocs.FieldByName('PAYER').AsString := qryCheque.FieldByName('PAYEE').AsString;
-
-              qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
-              qryAllocs.FieldByName('BANK').AsString := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
-
-              qryAllocs.FieldByName('TYPE').AsString := 'J4';   // new credit note entry
-              qryAllocs.FieldByName('NMEMO').AsInteger := iNMemo;
-//              qryAllocs.FieldByName('REFNO').AsString := qryCheque.FieldByName('CHQNO').AsString;
-              qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
-              qryAllocs.FieldByName('BILLED').AsString := 'Y';
-              qryAllocs.Post;
-              qryAllocs.ApplyUpdates;
-
-              // Debtors
-              PostLedger(dtpDate.Date
-                , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
-                , qryLedger.FieldByName('TAX').AsCurrency
-                , qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey
-                , qryLedger.FieldByName('AUTHOR').AsString
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-              // Billed Fees
-
-              {post components}
-              //sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryLedger.FieldByName('REFNO').AsString,'',true,'');
-              sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
-
-              PostLedger(dtpDate.Date
-                , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-                , 0
-                , qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey
-                , qryLedger.FieldByName('AUTHOR').AsString
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-
-              // Tax
-              if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+               qryLedger.First;
+              while not qryLedger.EOF do
+              begin
+                if qryLedger.FieldByName('TYPE').AsString = 'Fees' then
                 begin
-                sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'',true,'');
-                PostLedger(dtpDate.Date
-                  , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                  , 0
-                  , qryBill.FieldByName('FILEID').AsString
-                  , 'NMEMO'
-                  , iNMemo
-                  , qryLedger.FieldByName('REASON').AsString
-                  , sLedgerKey
-                  , qryLedger.FieldByName('AUTHOR').AsString
-                  , -1
-                  , ''
-                  , qryLedger.FieldByName('TAXCODE').AsString);
+                  with qryFee do
+                  begin
+                    ParamByName('CREATED').AsDateTime := dtpDate.Date;
+                    ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                    ParamByName('AUTHOR').AsString := qryLedger.FieldByName('AUTHOR').AsString;
+                    ParamByName('PARTNER').AsString := qryBill.FieldByName('PARTNER').AsString;
+                    ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                    ParamByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
+                    ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
+                    ParamByName('DEPT').AsString := TableString('EMPLOYEE', 'CODE', qryLedger.FieldByName('AUTHOR').AsString, 'DEPT');;
+                    ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', qryLedger.FieldByName('AUTHOR').AsString, 'TYPE');
+                    ParamByName('INVOICEDATE').AsDateTime := dtpDate.Date;
+                    ParamByName('NMEMO').AsInteger := iNMemo;
+                    ParamByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
+                    ParamByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
+                    ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                    ParamByName('TAX').AsFloat := 0 - qryLedger.FieldByName('TAX').AsCurrency;
+                    ParamByName('PROGRAM_NAME').AsString := 'Bill Credit Note';
+                    ParamByName('VERSION').AsString := dmAxiom.GetVersionInfo;
+                    ParamByName('EMPCODE').AsString := dmAxiom.UserID;
+                    ParamByName('VALUE').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                    cTaxFees := cTaxFees + qryLedger.FieldByName('TAX').AsCurrency;
+                    ExecSQL;
+
+                    // Billed Fees
+                    MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'BILL_FEES', 0 - qryLedger.FieldByName('AMOUNT').AsCurrency);
+
+                    {post components}
+                    sLedgerKey := glComponentSetup.buildLedgerKey('',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR'),'',true,'');
+
+                    // create alloc
+                    qryAllocs.Open;
+                    qryAllocs.Insert;
+                    qryAllocs.FieldByName('NALLOC').AsInteger := GetSequenceNumber('SQNC_NALLOC'); //GetSeqnum('NALLOC');
+                    qryAllocs.FieldByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
+                    qryAllocs.FieldByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
+                    qryAllocs.FieldByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
+                    qryAllocs.FieldByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                    qryAllocs.FieldByName('CLIENT_NAME').AsString := MatterString(qryBill.FieldByName('FILEID').AsString, 'CLIENT_NAME');
+                    qryAllocs.FieldByName('MATTER_DESC').AsString := MatterString(qryBill.FieldByName('FILEID').AsString, 'SHORTDESCR');
+                    qryAllocs.FieldByName('CLEARED').AsString := 'Y';
+                    qryAllocs.FieldByName('OVERDRAWN').AsString := 'N';
+                    qryAllocs.FieldByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                    qryAllocs.FieldByName('TAX').AsCurrency := qryLedger.FieldByName('TAX').AsCurrency;
+                    qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
+                    qryAllocs.FieldByName('FEE').AsCurrency := qryLedger.FieldByName('AMOUNT').AsCurrency;
+                    qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := 0;
+                    qryAllocs.FieldByName('SUNDRYTYPE').AsString := qryLedger.FieldByName('SUNDRYTYPE').AsString;
+                    qryAllocs.FieldByName('TRUST').AsString := 'G';
+ //                   qryAllocs.FieldByName('PAYER').AsString := qryCheque.FieldByName('PAYEE').AsString;
+
+                    qryAllocs.FieldByName('ACCT').AsString := dmAxiom.Entity;
+                    qryAllocs.FieldByName('BANK').AsString := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
+
+                    qryAllocs.FieldByName('TYPE').AsString := 'J4';   // new credit note entry
+                    qryAllocs.FieldByName('NMEMO').AsInteger := iNMemo;
+//                    qryAllocs.FieldByName('REFNO').AsString := qryCheque.FieldByName('CHQNO').AsString;
+                    qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
+                    qryAllocs.FieldByName('BILLED').AsString := 'Y';
+                    qryAllocs.Post;
+                    qryAllocs.ApplyUpdates;
+
+                    // Debtors
+                    PostLedger(dtpDate.Date
+                      , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
+                      , qryLedger.FieldByName('TAX').AsCurrency
+                      , qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey
+                      , qryLedger.FieldByName('AUTHOR').AsString
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+                    // Billed Fees
+
+                    {post components}
+                    //sLedgerKey :=  glComponentSetup.buildLedgerKey('',qryLedger.FieldByName('REFNO').AsString,'',true,'');
+                    sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
+
+                    PostLedger(dtpDate.Date
+                      , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                      , 0
+                      , qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey
+                      , qryLedger.FieldByName('AUTHOR').AsString
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+
+                    // Tax
+                    if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                      begin
+                      sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'',true,'');
+                      PostLedger(dtpDate.Date
+                        , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                        , 0
+                        , qryBill.FieldByName('FILEID').AsString
+                        , 'NMEMO'
+                        , iNMemo
+                        , qryLedger.FieldByName('REASON').AsString
+                        , sLedgerKey
+                        , qryLedger.FieldByName('AUTHOR').AsString
+                        , -1
+                        , ''
+                        , qryLedger.FieldByName('TAXCODE').AsString);
+                      end;
+                  end;
+
+                  // saving WRITE OFF amount against original distribution.
+                  qryFeeDist.Close;
+                  qryFeeDist.ParamByName('NMEMO').AsInteger := iNMemo;
+                  TotalFeeDistAmt := 0;
+                  FeeDistCount := 1;
+                  TotalFeeDistCount := qryFeeDist.RecordCount;
+                  while (qryFeeDist.Eof = False) do
+                  begin
+                     if (FeeDistCount = TotalFeeDistCount) and
+                        (TotalFeeDistCount > 1)  then
+                        FeeDistAmt :=  RoundTo(qryLedger.FieldByName('AMOUNT').AsCurrency - TotalFeeDistAmt, -2)
+                     else
+                        FeeDistAmt := RoundTo((qryLedger.FieldByName('AMOUNT').AsCurrency) * (qryFeeDist.FieldByNAme('ALLOC_PC').AsFloat/100), -2);
+                      qryFeeDistInsert.ParamByName('nmemo').AsInteger         := qryFeeDist.FieldByName('nmemo').AsInteger;
+                      qryFeeDistInsert.ParamByName('author').AsString         := qryFeeDist.FieldByName('author').AsString;
+                      qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryFeeDist.FieldByName('nmatter').AsInteger;
+                      qryFeeDistInsert.ParamByName('dept').AsString           := qryFeeDist.FieldByName('dept').AsString;
+                      qryFeeDistInsert.ParamByName('matter_dept').AsString    := qryFeeDist.FieldByName('matter_dept').AsString;
+                      qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
+                      qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',qryFeeDist.FieldByName('author').AsString, 'NAME');
+                      qryFeeDistInsert.ExecSQL;
+                      TotalFeeDistAmt := TotalFeeDistAmt + FeeDistAmt;
+                      qryFeeDist.Next;
+                      FeeDistCount := FeeDistCount + 1;
+                  end;
+                  qryFeeDist.Close;
+                  qryFeeDistInsert.Close;
                 end;
+
+                if qryLedger.FieldByName('TYPE').AsString = 'Sundry' then
+                begin
+                  with qrySundry do
+                  begin
+                    ParamByName('ACCT').AsString := dmAxiom.Entity;
+                    ParamByName('CREATED').AsDateTime := dtpDate.Date;
+                    ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
+                    ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
+                    ParamByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
+                    ParamByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
+                    ParamByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
+                    ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
+                    ParamByName('TAX').AsFloat := 0 - qryLedger.FieldByName('TAX').AsCurrency;
+                    ParamByName('NMEMO').AsInteger := iNMemo;
+
+                    cTaxSund := cTaxSund + qryLedger.FieldByName('TAX').AsCurrency;
+                    ExecSQL;
+                  end;
+                  // Debtors
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_SUND_CR'),'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
+                    , qryLedger.FieldByName('TAX').AsCurrency
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Sundry write off/discount ledger
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                    , 0
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey    //qryLedger.FieldByName('REFNO').AsString
+                    , qryLedger.FieldByName('AUTHOR').AsString
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Tax
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
+                  if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                    PostLedger(dtpDate.Date
+                      , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                      , 0, qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
+                      , qryLedger.FieldByName('AUTHOR').AsString
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+                end;
+
+                if qryLedger.FieldByName('TYPE').AsString = 'Disburse' then
+                begin
+                  // Debtors
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR'),'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
+                    , qryLedger.FieldByName('TAX').AsCurrency
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Irrecoverable Disbursements
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                    , 0
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey                            //qryLedger.FieldByName('REFNO').AsString
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Tax
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
+                  if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                    PostLedger(dtpDate.Date
+                      , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                      , 0
+                      , qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
+                      , ''
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+                  cTaxDisb := cTaxDisb + qryLedger.FieldByName('TAX').AsCurrency;
+                end;
+
+                if qryLedger.FieldByName('TYPE').AsString = 'Creditors' then
+                begin
+                  // Debtors
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR'),'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
+                    , qryLedger.FieldByName('TAX').AsCurrency
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey    //TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR')
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Irrecoverable Disbursements
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                    , 0
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey                         //qryLedger.FieldByName('REFNO').AsString
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Tax
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
+                  if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                    PostLedger(dtpDate.Date
+                      , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                      , 0
+                      , qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
+                      , ''
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+                  cTaxCred := cTaxCred + qryLedger.FieldByName('TAX').AsCurrency;
+                end;
+
+                if qryLedger.FieldByName('TYPE').AsString = 'AntDisb' then
+                begin
+                  // Debtors
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR'),'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
+                    , qryLedger.FieldByName('TAX').AsCurrency
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey     // TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR')
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Anticipated Disbursements
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
+                  PostLedger(dtpDate.Date
+                    , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
+                    , 0
+                    , qryBill.FieldByName('FILEID').AsString
+                    , 'NMEMO'
+                    , iNMemo
+                    , qryLedger.FieldByName('REASON').AsString
+                    , sLedgerKey                      //qryLedger.FieldByName('REFNO').AsString
+                    , ''
+                    , -1
+                    , ''
+                    , qryLedger.FieldByName('TAXCODE').AsString);
+                  // Tax
+                  sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
+                  if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
+                    PostLedger(dtpDate.Date
+                      , 0 - qryLedger.FieldByName('TAX').AsCurrency
+                      , 0
+                      , qryBill.FieldByName('FILEID').AsString
+                      , 'NMEMO'
+                      , iNMemo
+                      , qryLedger.FieldByName('REASON').AsString
+                      , sLedgerKey                          //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
+                      , ''
+                      , -1
+                      , ''
+                      , qryLedger.FieldByName('TAXCODE').AsString);
+                  cTaxAntd := cTaxAntd + qryLedger.FieldByName('TAX').AsCurrency;
+                  // Unbilled disbursements
+                  MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'UNBILL_DISB', qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency);
+                end;
+
+                qryLedger.Next;
+              end;
+
+               with qryBill do
+               begin
+                  Edit;
+                  FieldByName('FEES_CRDIT').AsCurrency := FieldByName('FEES_CRDIT').AsCurrency + TotalFees;
+                  FieldByName('DISB_CRDIT').AsCurrency := FieldByName('DISB_CRDIT').AsCurrency + TotalDisb;
+                  FieldByName('ANTD_CRDIT').AsCurrency := FieldByName('ANTD_CRDIT').AsCurrency + TotalAntd;
+                  FieldByName('SUND_CRDIT').AsCurrency := FieldByName('SUND_CRDIT').AsCurrency + TotalSund;
+                  FieldByName('UPCRED_CRDIT').AsCurrency := FieldByName('UPCRED_CRDIT').AsCurrency + TotalCred;
+                  FieldByName('FEESTAX_CRDIT').AsCurrency := FieldByName('FEESTAX_CRDIT').AsCurrency + cTaxFees;
+                  FieldByName('DISBTAX_CRDIT').AsCurrency := FieldByName('DISBTAX_CRDIT').AsCurrency + cTaxDisb;
+                  FieldByName('ANTDTAX_CRDIT').AsCurrency := FieldByName('ANTDTAX_CRDIT').AsCurrency + cTaxAntd;
+                  FieldByName('SUNDTAX_CRDIT').AsCurrency := FieldByName('SUNDTAX_CRDIT').AsCurrency + cTaxSund;
+                  FieldByName('UPCREDTAX_CRDIT').AsCurrency := FieldByName('UPCREDTAX_CRDIT').AsCurrency + cTaxCred;
+                  FieldByName('TAX_CRDIT').AsCurrency := FieldByName('TAX_CRDIT').AsCurrency + cTaxFees + cTaxDisb + cTaxAntd + cTaxSund + cTaxCred;
+                  Post;
+                  ApplyUpdates;
+               end;
+
+               MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (TotalFees + TotalDisb + TotalAntd + TotalSund + cTaxFees + cTaxDisb + + cTaxAntd + cTaxSund + TotalCred + cTaxCred));
+
+              // We have to commit here so that we can update the bill credit note via the NMemo
+               dmAxiom.uniInsight.Commit;
+
+               if dmAxiom.uniInsight.InTransaction then
+                  dmAxiom.uniInsight.Commit;
+               dmAxiom.uniInsight.StartTransaction;
+
+               with qryBillRV do
+               begin
+                 ParamByName('DISPATCHED').AsDateTime := dtpDate.Date;  //qryBill.FieldByName('DISPATCHED').AsDateTime;
+                 ParamByName('FEES').AsFloat := 0 - TotalFees;
+                 ParamByName('DISB').AsFloat := 0 - TotalDisb;
+                 ParamByName('ANTD').AsFloat := 0 - TotalAntd;
+                 ParamByName('SUND').AsFloat := 0 - TotalSund;
+                 ParamByName('UPCRED').AsFloat := 0 - TotalCred;
+                 ParamByName('FEESTAX').AsFloat := 0 - cTaxFees;
+                 ParamByName('DISBTAX').AsFloat := 0 - cTaxDisb;
+                 ParamByName('ANTDTAX').AsFloat := 0 - cTaxAntd;
+                 ParamByName('SUNDTAX').AsFloat := 0 - cTaxSund;
+                 ParamByName('UPCREDTAX').AsFloat := 0 - cTaxCred;
+                 ParamByName('TAX').AsFloat := 0 - (cTaxFees + cTaxDisb + cTaxAntd + cTaxSund + cTaxCred);
+                 ParamByName('DEBTORS').AsFloat := cDebtors;
+                 ParamByName('NMEMO').AsInteger := iNMemo;
+                 ParamByName('REFNO').AsString := NextRefno(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'LASTCREDITNOTE'));
+                 ParamByName('INV_NOTE').AsString := tbDescr.Text;
+                 ParamByName('CREDITTYPE').AsString := TableString('CREDITTYPE', 'DESCR', cbCreditType.Text, 'CODE');
+                 ParamByName('RV_NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
+                 Execute;
+               end;
+
+              // Update the last bill number
+               with qryLastCreditNote do
+               begin
+                  ParamByName('LASTCREDITNOTE').AsString := qryBillRV.ParamByName('REFNO').AsString;
+                  ParamByName('ENTITY').AsString := dmAxiom.Entity;
+                  ExecSQL;
+               end;
+
+               CheckLedgerTotal;
+
+               dmAxiom.uniInsight.Commit;
+               if boolean(chkPrint.EditValue) then
+               begin
+                  InvoiceMerge(iNmemo, qryBill.FieldByName('NMATTER').AsInteger, False, False, True);
+               end;
+               Self.Close;
+            except
+               On E: Exception do
+               begin
+                  dmAxiom.uniInsight.Rollback;
+                  MsgErr('Error occured writing off' + #13 + #13 + E.Message);
+               end;
             end;
-
-            // saving WRITE OFF amount against original distribution.
-            qryFeeDist.Close;
-            qryFeeDist.ParamByName('NMEMO').AsInteger := iNMemo;
-            TotalFeeDistAmt := 0;
-            FeeDistCount := 1;
-            TotalFeeDistCount := qryFeeDist.RecordCount;
-            while (qryFeeDist.Eof = False) do
-            begin
-               if (FeeDistCount = TotalFeeDistCount) and
-                  (TotalFeeDistCount > 1)  then
-                  FeeDistAmt :=  RoundTo(qryLedger.FieldByName('AMOUNT').AsCurrency - TotalFeeDistAmt, -2)
-               else
-                  FeeDistAmt := RoundTo((qryLedger.FieldByName('AMOUNT').AsCurrency) * (qryFeeDist.FieldByNAme('ALLOC_PC').AsFloat/100), -2);
-                qryFeeDistInsert.ParamByName('nmemo').AsInteger         := qryFeeDist.FieldByName('nmemo').AsInteger;
-                qryFeeDistInsert.ParamByName('author').AsString         := qryFeeDist.FieldByName('author').AsString;
-                qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryFeeDist.FieldByName('nmatter').AsInteger;
-                qryFeeDistInsert.ParamByName('dept').AsString           := qryFeeDist.FieldByName('dept').AsString;
-                qryFeeDistInsert.ParamByName('matter_dept').AsString    := qryFeeDist.FieldByName('matter_dept').AsString;
-                qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
-                qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',qryFeeDist.FieldByName('author').AsString, 'NAME');
-                qryFeeDistInsert.ExecSQL;
-                TotalFeeDistAmt := TotalFeeDistAmt + FeeDistAmt;
-                qryFeeDist.Next;
-                FeeDistCount := FeeDistCount + 1;
-            end;
-            qryFeeDist.Close;
-            qryFeeDistInsert.Close;
-          end;
-
-          if qryLedger.FieldByName('TYPE').AsString = 'Sundry' then
-          begin
-            with qrySundry do
-            begin
-              ParamByName('ACCT').AsString := dmAxiom.Entity;
-              ParamByName('CREATED').AsDateTime := dtpDate.Date;
-              ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('AMOUNT').AsCurrency;
-              ParamByName('DESCR').AsString := qryLedger.FieldByName('REASON').AsString;
-              ParamByName('NMATTER').AsInteger := qryBill.FieldByName('NMATTER').AsInteger;
-              ParamByName('NCLIENT').AsInteger := qryBill.FieldByName('NCLIENT').AsInteger;
-              ParamByName('FILEID').AsString := qryBill.FieldByName('FILEID').AsString;
-              ParamByName('TAXCODE').AsString := qryLedger.FieldByName('TAXCODE').AsString;
-              ParamByName('TAX').AsFloat := 0 - qryLedger.FieldByName('TAX').AsCurrency;
-              ParamByName('NMEMO').AsInteger := iNMemo;
-
-              cTaxSund := cTaxSund + qryLedger.FieldByName('TAX').AsCurrency;
-              ExecSQL;
-            end;
-            // Debtors
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_SUND_CR'),'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
-              , qryLedger.FieldByName('TAX').AsCurrency
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Sundry write off/discount ledger
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-              , 0
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey    //qryLedger.FieldByName('REFNO').AsString
-              , qryLedger.FieldByName('AUTHOR').AsString
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Tax
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
-            if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-              PostLedger(dtpDate.Date
-                , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                , 0, qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
-                , qryLedger.FieldByName('AUTHOR').AsString
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-          end;
-
-          if qryLedger.FieldByName('TYPE').AsString = 'Disburse' then
-          begin
-            // Debtors
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR'),'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
-              , qryLedger.FieldByName('TAX').AsCurrency
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Irrecoverable Disbursements
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-              , 0
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey                            //qryLedger.FieldByName('REFNO').AsString
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Tax
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
-            if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-              PostLedger(dtpDate.Date
-                , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                , 0
-                , qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-            cTaxDisb := cTaxDisb + qryLedger.FieldByName('TAX').AsCurrency;
-          end;
-
-          if qryLedger.FieldByName('TYPE').AsString = 'Creditors' then
-          begin
-            // Debtors
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR'),'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
-              , qryLedger.FieldByName('TAX').AsCurrency
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey    //TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR')
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Irrecoverable Disbursements
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-              , 0
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey                         //qryLedger.FieldByName('REFNO').AsString
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Tax
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
-            if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-              PostLedger(dtpDate.Date
-                , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                , 0
-                , qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey                       //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-            cTaxCred := cTaxCred + qryLedger.FieldByName('TAX').AsCurrency;
-          end;
-
-          if qryLedger.FieldByName('TYPE').AsString = 'AntDisb' then
-          begin
-            // Debtors
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR'),'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency
-              , qryLedger.FieldByName('TAX').AsCurrency
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey     // TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_ANTD_DR')
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Anticipated Disbursements
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',qryLedger.FieldByName('REFNO').AsString,'CODE',dmAxiom.Entity);
-            PostLedger(dtpDate.Date
-              , 0 - qryLedger.FieldByName('AMOUNT').AsCurrency
-              , 0
-              , qryBill.FieldByName('FILEID').AsString
-              , 'NMEMO'
-              , iNMemo
-              , qryLedger.FieldByName('REASON').AsString
-              , sLedgerKey                      //qryLedger.FieldByName('REFNO').AsString
-              , ''
-              , -1
-              , ''
-              , qryLedger.FieldByName('TAXCODE').AsString);
-            // Tax
-            sLedgerKey := TableStringEntity('CHART','COMPONENT_CODE_DISPLAY',TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER'),'CODE',dmAxiom.Entity);
-            if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-              PostLedger(dtpDate.Date
-                , 0 - qryLedger.FieldByName('TAX').AsCurrency
-                , 0
-                , qryBill.FieldByName('FILEID').AsString
-                , 'NMEMO'
-                , iNMemo
-                , qryLedger.FieldByName('REASON').AsString
-                , sLedgerKey                          //TableString('TAXTYPE', 'CODE', qryLedger.FieldByName('TAXCODE').AsString, 'ADJUSTLEDGER')
-                , ''
-                , -1
-                , ''
-                , qryLedger.FieldByName('TAXCODE').AsString);
-            cTaxAntd := cTaxAntd + qryLedger.FieldByName('TAX').AsCurrency;
-            // Unbilled disbursements
-            MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'UNBILL_DISB', qryLedger.FieldByName('AMOUNT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency);
-          end;
-
-          qryLedger.Next;
-        end;
-
-        with qryBill do
-        begin
-          Edit;
-          FieldByName('FEES_CRDIT').AsCurrency := FieldByName('FEES_CRDIT').AsCurrency + TotalFees;
-          FieldByName('DISB_CRDIT').AsCurrency := FieldByName('DISB_CRDIT').AsCurrency + TotalDisb;
-          FieldByName('ANTD_CRDIT').AsCurrency := FieldByName('ANTD_CRDIT').AsCurrency + TotalAntd;
-          FieldByName('SUND_CRDIT').AsCurrency := FieldByName('SUND_CRDIT').AsCurrency + TotalSund;
-          FieldByName('UPCRED_CRDIT').AsCurrency := FieldByName('UPCRED_CRDIT').AsCurrency + TotalCred;
-          FieldByName('FEESTAX_CRDIT').AsCurrency := FieldByName('FEESTAX_CRDIT').AsCurrency + cTaxFees;
-          FieldByName('DISBTAX_CRDIT').AsCurrency := FieldByName('DISBTAX_CRDIT').AsCurrency + cTaxDisb;
-          FieldByName('ANTDTAX_CRDIT').AsCurrency := FieldByName('ANTDTAX_CRDIT').AsCurrency + cTaxAntd;
-          FieldByName('SUNDTAX_CRDIT').AsCurrency := FieldByName('SUNDTAX_CRDIT').AsCurrency + cTaxSund;
-          FieldByName('UPCREDTAX_CRDIT').AsCurrency := FieldByName('UPCREDTAX_CRDIT').AsCurrency + cTaxCred;
-          FieldByName('TAX_CRDIT').AsCurrency := FieldByName('TAX_CRDIT').AsCurrency + cTaxFees + cTaxDisb + cTaxAntd + cTaxSund + cTaxCred;
-          Post;
-          ApplyUpdates;
-        end;
-
-        MatterUpdate(qryBill.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (TotalFees + TotalDisb + TotalAntd + TotalSund + cTaxFees + cTaxDisb + + cTaxAntd + cTaxSund + TotalCred + cTaxCred));
-
-        // We have to commit here so that we can update the bill credit note via the NMemo
-        dmAxiom.uniInsight.Commit;
-
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
-        dmAxiom.uniInsight.StartTransaction;
-
-        with qryBillRV do
-        begin
-           ParamByName('DISPATCHED').AsDateTime := dtpDate.Date;  //qryBill.FieldByName('DISPATCHED').AsDateTime;
-           ParamByName('FEES').AsFloat := 0 - TotalFees;
-           ParamByName('DISB').AsFloat := 0 - TotalDisb;
-           ParamByName('ANTD').AsFloat := 0 - TotalAntd;
-           ParamByName('SUND').AsFloat := 0 - TotalSund;
-           ParamByName('UPCRED').AsFloat := 0 - TotalCred;
-           ParamByName('FEESTAX').AsFloat := 0 - cTaxFees;
-           ParamByName('DISBTAX').AsFloat := 0 - cTaxDisb;
-           ParamByName('ANTDTAX').AsFloat := 0 - cTaxAntd;
-           ParamByName('SUNDTAX').AsFloat := 0 - cTaxSund;
-           ParamByName('UPCREDTAX').AsFloat := 0 - cTaxCred;
-           ParamByName('TAX').AsFloat := 0 - (cTaxFees + cTaxDisb + cTaxAntd + cTaxSund + cTaxCred);
-           ParamByName('DEBTORS').AsFloat := cDebtors;
-           ParamByName('NMEMO').AsInteger := iNMemo;
-           ParamByName('REFNO').AsString := NextRefno(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'LASTCREDITNOTE'));
-           ParamByName('INV_NOTE').AsString := tbDescr.Text;
-           ParamByName('CREDITTYPE').AsString := TableString('CREDITTYPE', 'DESCR', cbCreditType.Text, 'CODE');
-           ParamByName('RV_NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
-           Execute;
-        end;
-
-        // Update the last bill number
-        with qryLastCreditNote do
-        begin
-          ParamByName('LASTCREDITNOTE').AsString := qryBillRV.ParamByName('REFNO').AsString;
-          ParamByName('ENTITY').AsString := dmAxiom.Entity;
-          ExecSQL;
-        end;
-
-        CheckLedgerTotal;
-
-        dmAxiom.uniInsight.Commit;
-        if boolean(chkPrint.EditValue) then
-        begin
-           InvoiceMerge(iNmemo, qryBill.FieldByName('NMATTER').AsInteger, False, False, True);
-        end;
-        Self.Close;
-      except
-        On E: Exception do
-        begin
-          dmAxiom.uniInsight.Rollback;
-          MsgErr('Error occured writing off' + #13 + #13 + E.Message);
-        end;
+         end;
       end;
-    end;
-  end
+   end
+   else
+      MsgErr('The Entity of this Matter (' + MatterString(qryBill.FieldByName('NMATTER').AsInteger, 'ENTITY') +
+             ') does not match the currently selected Entity ('+dmAxiom.Entity+').  You will need to change the Entity to match the Matters Entity.');
 end;
 
 procedure TfrmBillCredit.dbgrLedgerKeyPress(Sender: TObject;
