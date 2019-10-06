@@ -3685,7 +3685,7 @@ var
   LfrmBillCreateAsk: TfrmBillCreateAsk;
   sDiscount: string;
 begin
-   if (qryMatter.FieldByName('ENTITY').AsString = dmAxiom.Entity) then
+   if (IsValidBillForMatter(qryMatter.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
    begin
       if dmAxiom.Security.Bill.ConfirmCreate then
       begin

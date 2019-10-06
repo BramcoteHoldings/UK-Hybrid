@@ -28,7 +28,6 @@ type
     OpenDialog1: TOpenDialog;
     btnSave: TBitBtn;
     btnCancel: TBitBtn;
-    cxLabel6: TcxLabel;
     cxDBComboBox1: TcxDBComboBox;
     qryAddReportNAME: TStringField;
     qryAddReportREPORT: TStringField;

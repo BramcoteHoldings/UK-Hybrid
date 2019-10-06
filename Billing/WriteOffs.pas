@@ -300,481 +300,487 @@ var
    TotalAmount, TotalAmountGST: Currency;
    FeeDistCount, TotalFeeDistCount: integer;
 begin
-  glComponentSetup := dmAxiom.getGlComponents;
+   if (IsValidBillForMatter(qryBill.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
+   begin
+      glComponentSetup := dmAxiom.getGlComponents;
 
-  // create the department override
-  rDepartmentOverride.componentType := EMPDEPT;
-  rDepartmentOverride.value := cbDept.Text;
+      // create the department override
+      rDepartmentOverride.componentType := EMPDEPT;
+      rDepartmentOverride.value := cbDept.Text;
 
-  if (qryBill.FieldByName('SPLIT_BILL').AsString = 'Y') and (cxDBLSubBill.text = '') then
-  begin
-        MsgErr('You need to select a subbill for this invoice');
-        exit;
-  end;
+      if (qryBill.FieldByName('SPLIT_BILL').AsString = 'Y') and (cxDBLSubBill.text = '') then
+      begin
+           MsgErr('You need to select a subbill for this invoice');
+           exit;
+      end;
 
-  if OKtoPost then
-  begin
-    if (PostIntoLockedPeriod(dtpCreated.Date) in [prNotLocked, prOKToProceed]) then
-    begin
-      try
-        Screen.Cursor := crSQLWait;
-        //if (neFeesTax.AsCurrency <> 0) then
-        //  lsTaxCode := 'GST'
-        //else
-        //  lsTaxCode := TableString('TAXTYPE','TAXTYPE','N\A','CODE');
-        //  18 Dec 2017 DW addedd query to get tax code from original transitems for the bill
-        qryBillTransItem.Close;
-        qryBillTransItem.ParamByName('NMEMO').AsInteger := FNMemo;
-        qryBillTransItem.Open;
-        lsTaxCode := qryBillTransItem.FieldByName('TAXCODE').AsString;
-
-        iNJournal := -1;
-        if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Rollback;
-        dmAxiom.uniInsight.StartTransaction;
-        //remove discount if any
-{         with procBillDiscReverse do
+      if OKtoPost then
+      begin
+         if (PostIntoLockedPeriod(dtpCreated.Date) in [prNotLocked, prOKToProceed]) then
          begin
-            ParamByName('P_NMEMO').AsInteger := FNMemo;
-            ParamByName('P_RVDATE').AsDateTime := Now;
+            try
+               Screen.Cursor := crSQLWait;
+           //if (neFeesTax.AsCurrency <> 0) then
+           //  lsTaxCode := 'GST'
+           //else
+           //  lsTaxCode := TableString('TAXTYPE','TAXTYPE','N\A','CODE');
+           //  18 Dec 2017 DW addedd query to get tax code from original transitems for the bill
+               qryBillTransItem.Close;
+               qryBillTransItem.ParamByName('NMEMO').AsInteger := FNMemo;
+               qryBillTransItem.Open;
+               lsTaxCode := qryBillTransItem.FieldByName('TAXCODE').AsString;
 
-            ParamByName('P_WHO').AsString:= dmAxiom.UserID;
-            Execute;
-         end;  }
+               iNJournal := -1;
+               if dmAxiom.uniInsight.InTransaction then
+                  dmAxiom.uniInsight.Rollback;
+               dmAxiom.uniInsight.StartTransaction;
+           //remove discount if any
+{            with procBillDiscReverse do
+            begin
+               ParamByName('P_NMEMO').AsInteger := FNMemo;
+               ParamByName('P_RVDATE').AsDateTime := Now;
 
-        if chkBadDebtWO.Checked = True then
-        begin
-           {post components}
-           sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edBadDebtWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-           sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edBadDebtWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-           sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+               ParamByName('P_WHO').AsString:= dmAxiom.UserID;
+               Execute;
+            end;  }
 
-           TotalAmount     := neFees.AsCurrency + neSund.AsCurrency + neDisb.AsCurrency + neAntD.AsCurrency + neUpCred.AsCurrency;
-           TotalAmountGST  := neFeesTax.AsCurrency + neSundTax.AsCurrency + neDisbTax.AsCurrency + neAntdTax.AsCurrency + neUpCredTax.AsCurrency;
-
-           iNJournal := CreateJournal(cnTYP_DEBTOR, '', TotalAmount,
-                                      TotalAmountGST, beBillNo.Text, FNMemo, lsTaxCode);
-
-           PostLedgersGST(dtpCreated.Date
-                     , TotalAmount
-                     , TotalAmountGST
-                     , qryMatter.FieldByName('FILEID').AsString
-                     , 'JOURNAL'
-                     , iNJournal
-                     , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                     , sLedgerKeyTax
-                     , sLedgerKeyDr
-                     , sLedgerKey
-                     , cbAuthor.Text
-                     , lsTaxCode
-                     , FALSE
-                     ,'0'
-                     , 0
-                     , qryMatter.FieldByName('NMATTER').AsInteger);
-        end
-        else
-        begin
-           // part 1 - process the Fee/Sundry adjustment together as ONE JOURNAL as these are type J1
-           //rb if (neFees.AsCurrency <> 0) and (neSund.AsCurrency <> 0) then
-             if (neFees.AsCurrency <> 0) or (neSund.AsCurrency <> 0) or (neFeesTax.AsCurrency <> 0) or (neSundTax.AsCurrency <> 0) then
-           begin
-              iNJournal := CreateJournal(cnTYP_DEBTOR, '', (neFees.AsCurrency + neSund.AsCurrency), (neFeesTax.AsCurrency + neSundTax.AsCurrency), beBillNo.Text, FNMemo, lsTaxCode);
-//               MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (neFees.AsCurrency + neDisb.AsCurrency + neAntD.AsCurrency + neSund.AsCurrency + neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency));
-
-              if (neFees.AsCurrency <> 0 ) or (neFeesTax.AsCurrency <> 0 ) then
-              begin
-                 if (cbNoDistribute.Checked = False) then
-                 begin
-                     qryFeeAlloc.Close;
-                     qryFeeAlloc.ParamByName('NMEMO').AsInteger := FNMemo;
-                     qryFeeAlloc.Open;
-                     while not qryFeeAlloc.Eof do
-                     begin
-                        if (qryFeeAlloc.FieldByName('split').AsFloat > 0) then
-                        begin
-                           with qryFee do
-                           begin
-                              ParamByName('CREATED').AsDateTime := dtpCreated.Date;
-                              ParamByName('DESCR').AsString := mmoDesc.Lines.Text;
-                              ParamByName('AUTHOR').AsString := qryFeeAlloc.FieldByName('AUTHOR').AsString;  // cbAuthor.Text;
-                              ParamByName('PARTNER').AsString := qryMatter.FieldByName('PARTNER').AsString;
-                              if neFees.AsCurrency > 0 then
-                                 ParamByName('AMOUNT').AsFloat := (0 - neFees.AsCurrency) * qryFeeAlloc.FieldByName('split').AsFloat
-                              else
-                                 ParamByName('AMOUNT').AsFloat := neFees.AsCurrency * qryFeeAlloc.FieldByName('split').AsFloat;
-
-                              if neFeesTax.AsCurrency > 0 then
-                                 ParamByName('TAX').AsFloat := (0 - neFeesTax.AsCurrency) * qryFeeAlloc.FieldByName('split').AsFloat
-                              else
-                                 ParamByName('TAX').AsFloat := neFeesTax.AsCurrency * qryFeeAlloc.FieldByName('split').AsFloat;
-
-                              ParamByName('TAXCODE').AsString := lsTaxCode;
-                              ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                              ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
-                              ParamByName('DEPT').AsString := cbDept.Text;
-                              ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'TYPE');
-                              ParamByName('INVOICEDATE').AsDateTime := dtpCreated.Date;
-                              ParamByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
-                              ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-                              ParamByName('NMEMO').AsInteger := FNMemo;
-                              if chkPrivate.Checked then
-                                 ParamByName('PRIVATE').AsString := 'Y'
-                              else
-                                 ParamByName('PRIVATE').AsString := 'N';
-                              ExecSQL;
-                           end;
-                        end;
-                        qryFeeAlloc.Next;
-                     end;
-                 end;
-                 // Billed Fees
-                 //MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'BILL_FEES', 0 - neFees.AsCurrency);
-                  MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'WIPWOFF', neFees.AsCurrency + neFeesTax.AsCurrency);
-                 //pb-MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'CREQWOFF', neAntd.AsCurrency + neAntdTax.AsCurrency);
-
-                 //if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'FEEWOFF_CHART') <> '') then
-                 //  sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'FEEWOFF_CHART')
-                 //else
-                 //  sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_DR');
-                 //
-                 //sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR');
-                 //
-
-                 {post components}
-                  sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edFeeWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edFeeWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-                  sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-
-                  PostLedgersGST(dtpCreated.Date
-                     , neFees.AsCurrency
-                     , neFeesTax.AsCurrency
-                     , qryMatter.FieldByName('FILEID').AsString
-                     , 'JOURNAL'
-                     , iNJournal
-                     , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                     , sLedgerKeyTax
-                     , sLedgerKeyDr
-                     , sLedgerKey
-                     , cbAuthor.Text
-                     , lsTaxCode
-                     , FALSE
-                     ,'0'
-                     , 0
-                     , qryMatter.FieldByName('NMATTER').AsInteger);
-
-
-                  if (neFees.AsCurrency <> 0) then
-                  begin
-                     if cbNoDistribute.Checked then
-                    begin
-                        try
-                           FeeDistAmt := (neFees.AsCurrency);
-                           qryFeeDistInsert.ParamByName('nmemo').AsInteger         := FNMemo;
-                           qryFeeDistInsert.ParamByName('author').AsString         := cbAuthor.Text;
-                           qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryMatter.FieldByName('NMATTER').AsInteger;
-                           qryFeeDistInsert.ParamByName('dept').AsString           := TableString('EMPLOYEE','CODE',cbAuthor.Text, 'dept');
-                           qryFeeDistInsert.ParamByName('matter_dept').AsString    := TableString('matter','nmatter', qryMatter.FieldByName('NMATTER').AsInteger,'dept');
-                           qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
-                           qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',cbAuthor.Text, 'NAME');
-                           qryFeeDistInsert.ExecSQL;
-                        finally
-                           qryFeeDistInsert.Close;
-                        end;
-                    end
-                    else
-                    begin
-                     // saving WRITE OFF amount against original distribution.
-                        qryFeeDist.Close;
-                        qryFeeDist.ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
-                        qryFeeDist.Open;
-
-                        TotalFeeDistAmt := 0;
-                        FeeDistCount := 1;
-                        TotalFeeDistCount := qryFeeDist.RecordCount;
-                        while (qryFeeDist.Eof = False) do
-                        begin
-                           if (FeeDistCount = TotalFeeDistCount) and
-                              (TotalFeeDistCount > 1)  then
-                              FeeDistAmt :=  (neFees.AsCurrency) - TotalFeeDistAmt
-                           else
-                              FeeDistAmt := (neFees.AsCurrency) * (qryFeeDist.FieldByNAme('ALLOC_PC').AsFloat/100);
-                           qryFeeDistInsert.ParamByName('nmemo').AsInteger         := qryFeeDist.FieldByName('nmemo').AsInteger;
-                           qryFeeDistInsert.ParamByName('author').AsString         := qryFeeDist.FieldByName('author').AsString;
-                           qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryFeeDist.FieldByName('nmatter').AsInteger;
-                           qryFeeDistInsert.ParamByName('dept').AsString           := qryFeeDist.FieldByName('dept').AsString;
-                           qryFeeDistInsert.ParamByName('matter_dept').AsString    := qryFeeDist.FieldByName('matter_dept').AsString;
-                           qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
-                           qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',qryFeeDist.FieldByName('author').AsString, 'NAME');
-                           qryFeeDistInsert.ExecSQL;
-                           TotalFeeDistAmt := TotalFeeDistAmt + FeeDistAmt;
-                           qryFeeDist.Next;
-                           FeeDistCount := FeeDistCount + 1;
-                        end;
-                        qryFeeDist.Close;
-                        qryFeeDistInsert.Close;
-                    end;
-                  end;
-               end;
-
-               if (neSund.AsCurrency <> 0) or (neSundTax.AsCurrency <> 0)  then
+               if chkBadDebtWO.Checked = True then
                begin
-                 with qrySundry do
-                 begin
-                   ParamByName('ACCT').AsString := dmAxiom.Entity;
-                   ParamByName('CREATED').AsDateTime := dtpCreated.Date;
-                   ParamByName('AMOUNT').AsFloat := 0 - neSund.AsCurrency;
-                   ParamByName('TAX').AsFloat := 0 - neSundTax.AsCurrency;
-//                   if neSundTax.AsCurrency <> 0 then
-                     ParamByName('TAXCODE').AsString := lsTaxCode;
-//                   else
-//                     ParamByName('TAXCODE').AsString := lsTaxCode;
-                   ParamByName('DESCR').AsString := mmoDesc.Lines.Text;
-                   ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                   ParamByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
-                   ParamByName('NMEMO').AsInteger := FNMemo;
-                   if chkPrivate.Checked then
-                     ParamByName('PRIVATE').AsString := 'Y'
-                   else
-                     ParamByName('PRIVATE').AsString := 'N';
-                   ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-                   ExecSQL;
-                 end;
-                 // Billed Sundries
-                 MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'SUNDWOFF', neSund.AsCurrency + neSundTax.AsCurrency);
-
                  {post components}
-                 sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edSundWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edSundWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                 sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edBadDebtWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                 sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edBadDebtWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
                  sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
 
+                 TotalAmount     := neFees.AsCurrency + neSund.AsCurrency + neDisb.AsCurrency + neAntD.AsCurrency + neUpCred.AsCurrency;
+                 TotalAmountGST  := neFeesTax.AsCurrency + neSundTax.AsCurrency + neDisbTax.AsCurrency + neAntdTax.AsCurrency + neUpCredTax.AsCurrency;
+
+                 iNJournal := CreateJournal(cnTYP_DEBTOR, '', TotalAmount,
+                                            TotalAmountGST, beBillNo.Text, FNMemo, lsTaxCode);
+
                  PostLedgersGST(dtpCreated.Date
-                   , neSund.AsCurrency
-                   , neSundTax.AsCurrency
-                   , qryMatter.FieldByName('FILEID').AsString
-                   , 'JOURNAL'
-                   , iNJournal
-                   , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                   , sLedgerKeyTax
-                   , sLedgerKeyDr
-                   , sLedgerKey
-                   , cbAuthor.Text
-                   , lsTaxCode
-                   , FALSE
-                   ,'0'
-                   ,0
-                   , qryMatter.FieldByName('NMATTER').AsInteger);
-               end;
-               //if (neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency) = 0 then
-                 //PostLedgers(dtpCreated.Date, (neFeesTax.AsCurrency+neDisbTax.AsCurrency+neAntDTax.AsCurrency+neSundTax.AsCurrency), qryMatter.FieldByName('FILEID').AsString, 'JOURNAL', iNJournal, mmoDesc.Lines.Text, TableString('TAXTYPE', 'CODE', 'GST', 'ADJUSTLEDGER'), TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR'), cbAuthor.Text);
-           end; //part 1
-
-           // part 2 - process the Disbursements/Anticipated Disbs aka Cheque Reqs and Unpaid Creditors together as these are type J2
-           if (neDisb.AsCurrency <> 0) or (neAntd.AsCurrency <> 0) or (neUpCred.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0) or (neAntdTax.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0) then
-           begin
-              if (neDisb.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0)  then
-              begin   //rb
-                   iNJournal := CreateJournal(cnTYP_DEBTOR, 'DISB', neDisb.AsCurrency, neDisbTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
-                   MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DISBSWOFF', neDisb.AsCurrency + neDisbTax.AsCurrency);
-
-                   //if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
-                   //  sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
-                   //else //load the chart from the entity
-                   //  sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_DR');
-
-                  { if rgledgertype.itemindex = 0 then
-                      sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
-                   else if rgledgertype.itemindex = 1 then
-                      sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBUNREC_CHART')
-                   else }
-                      sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_DR');
-
-                   sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR');
-
-                  {post components}
-                  sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edDisbWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edDisbWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-                  sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-
-                   PostLedgersGST(dtpCreated.Date
-                     , neDisb.AsCurrency
-                     , neDisbTax.AsCurrency
-                     , qryMatter.FieldByName('FILEID').AsString
-                     , 'JOURNAL'
-                     , iNJournal
-                     , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                     , sLedgerKeyTax
-                     , sLedgerKeyDr
-                     , sLedgerKey
-                     , cbAuthor.Text
-                     , lsTaxCode
-                     , FALSE
-                     ,'0'
-                     ,0
-                     , qryMatter.FieldByName('NMATTER').AsInteger);
-                   // must create a journal + alloc here
-                  end;
-
-               if (neUpCred.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0)  then
+                           , TotalAmount
+                           , TotalAmountGST
+                           , qryMatter.FieldByName('FILEID').AsString
+                           , 'JOURNAL'
+                           , iNJournal
+                           , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                           , sLedgerKeyTax
+                           , sLedgerKeyDr
+                           , sLedgerKey
+                           , cbAuthor.Text
+                           , lsTaxCode
+                           , FALSE
+                           ,'0'
+                           , 0
+                           , qryMatter.FieldByName('NMATTER').AsInteger);
+               end
+               else
+               begin
+                 // part 1 - process the Fee/Sundry adjustment together as ONE JOURNAL as these are type J1
+                 //rb if (neFees.AsCurrency <> 0) and (neSund.AsCurrency <> 0) then
+                   if (neFees.AsCurrency <> 0) or (neSund.AsCurrency <> 0) or (neFeesTax.AsCurrency <> 0) or (neSundTax.AsCurrency <> 0) then
                  begin
-                   iNJournal := CreateJournal(cnTYP_DEBTOR, 'UPCRED', neUpCred.AsCurrency, neUpCredTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
-                   MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'UPCREDWOFF', neUpCred.AsCurrency + neUpCredTax.AsCurrency);
+                    iNJournal := CreateJournal(cnTYP_DEBTOR, '', (neFees.AsCurrency + neSund.AsCurrency), (neFeesTax.AsCurrency + neSundTax.AsCurrency), beBillNo.Text, FNMemo, lsTaxCode);
+//                     MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (neFees.AsCurrency + neDisb.AsCurrency + neAntD.AsCurrency + neSund.AsCurrency + neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency));
 
-                   if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
-                     sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
-                   else
-                     sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_DR');
+                    if (neFees.AsCurrency <> 0 ) or (neFeesTax.AsCurrency <> 0 ) then
+                    begin
+                       if (cbNoDistribute.Checked = False) then
+                       begin
+                           qryFeeAlloc.Close;
+                           qryFeeAlloc.ParamByName('NMEMO').AsInteger := FNMemo;
+                           qryFeeAlloc.Open;
+                           while not qryFeeAlloc.Eof do
+                           begin
+                              if (qryFeeAlloc.FieldByName('split').AsFloat > 0) then
+                              begin
+                                 with qryFee do
+                                 begin
+                                    ParamByName('CREATED').AsDateTime := dtpCreated.Date;
+                                    ParamByName('DESCR').AsString := mmoDesc.Lines.Text;
+                                    ParamByName('AUTHOR').AsString := qryFeeAlloc.FieldByName('AUTHOR').AsString;  // cbAuthor.Text;
+                                    ParamByName('PARTNER').AsString := qryMatter.FieldByName('PARTNER').AsString;
+                                    if neFees.AsCurrency > 0 then
+                                       ParamByName('AMOUNT').AsFloat := (0 - neFees.AsCurrency) * qryFeeAlloc.FieldByName('split').AsFloat
+                                    else
+                                       ParamByName('AMOUNT').AsFloat := neFees.AsCurrency * qryFeeAlloc.FieldByName('split').AsFloat;
 
-                   sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR');
+                                    if neFeesTax.AsCurrency > 0 then
+                                       ParamByName('TAX').AsFloat := (0 - neFeesTax.AsCurrency) * qryFeeAlloc.FieldByName('split').AsFloat
+                                    else
+                                       ParamByName('TAX').AsFloat := neFeesTax.AsCurrency * qryFeeAlloc.FieldByName('split').AsFloat;
 
-                   {post components}
-                   sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edUpCredWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-                   sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edUpCredWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-                   sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                                    ParamByName('TAXCODE').AsString := lsTaxCode;
+                                    ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                                    ParamByName('BANK_ACCT').AsString := dmAxiom.Entity;
+                                    ParamByName('DEPT').AsString := cbDept.Text;
+                                    ParamByName('EMP_TYPE').AsString := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'TYPE');
+                                    ParamByName('INVOICEDATE').AsDateTime := dtpCreated.Date;
+                                    ParamByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
+                                    ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
+                                    ParamByName('NMEMO').AsInteger := FNMemo;
+                                    if chkPrivate.Checked then
+                                       ParamByName('PRIVATE').AsString := 'Y'
+                                    else
+                                       ParamByName('PRIVATE').AsString := 'N';
+                                    ExecSQL;
+                                 end;
+                              end;
+                              qryFeeAlloc.Next;
+                           end;
+                       end;
+                       // Billed Fees
+                       //MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'BILL_FEES', 0 - neFees.AsCurrency);
+                        MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'WIPWOFF', neFees.AsCurrency + neFeesTax.AsCurrency);
+                       //pb-MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'CREQWOFF', neAntd.AsCurrency + neAntdTax.AsCurrency);
 
-                   PostLedgersGST(dtpCreated.Date
-                     , neUpCred.AsCurrency
-                     , neUpCredTax.AsCurrency
-                     , qryMatter.FieldByName('FILEID').AsString
-                     , 'JOURNAL'
-                     , iNJournal
-                     , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                     , sLedgerKeyTax
-                     , sLedgerKeyDr
-                     , sLedgerKey
-                     , cbAuthor.Text
-                     , lsTaxCode
-                     , FALSE
-                     ,'0'
-                     ,0
-                     , qryMatter.FieldByName('NMATTER').AsInteger);
-                   // must create a journal + alloc here
-                  end;
+                       //if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'FEEWOFF_CHART') <> '') then
+                       //  sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'FEEWOFF_CHART')
+                       //else
+                       //  sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_DR');
+                       //
+                       //sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR');
+                       //
 
-               if (neAntD.AsCurrency <> 0) or (neAntDTax.AsCurrency <> 0) then
-                 begin
-                   // rb
-                   iNJournal := CreateJournal(cnTYP_DEBTOR, 'ANTD', neAntd.AsCurrency, neAntdTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
-                   MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'CREQWOFF', neAntd.AsCurrency + neAntdTax.AsCurrency);
+                       {post components}
+                        sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edFeeWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edFeeWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                        sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
 
-                   // 20 Dec 2017 DW set cheqreqs to converted
-                   qryCheqReqUpdate.Close;
-                   With qryCheqReqUpdate do
-                   begin
-                      ParamByName('NMEMO').AsInteger := FNMemo;
-                      ExecSQL;
-                   end;
+                        PostLedgersGST(dtpCreated.Date
+                           , neFees.AsCurrency
+                           , neFeesTax.AsCurrency
+                           , qryMatter.FieldByName('FILEID').AsString
+                           , 'JOURNAL'
+                           , iNJournal
+                           , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                           , sLedgerKeyTax
+                           , sLedgerKeyDr
+                           , sLedgerKey
+                           , cbAuthor.Text
+                           , lsTaxCode
+                           , FALSE
+                           ,'0'
+                           , 0
+                           , qryMatter.FieldByName('NMATTER').AsInteger);
 
-                   if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
-                     sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
-                   else
-                     sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_ANTD_DR');
 
-                   sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_ANTD_CR');
+                        if (neFees.AsCurrency <> 0) then
+                        begin
+                           if cbNoDistribute.Checked then
+                          begin
+                              try
+                                 FeeDistAmt := (neFees.AsCurrency);
+                                 qryFeeDistInsert.ParamByName('nmemo').AsInteger         := FNMemo;
+                                 qryFeeDistInsert.ParamByName('author').AsString         := cbAuthor.Text;
+                                 qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryMatter.FieldByName('NMATTER').AsInteger;
+                                 qryFeeDistInsert.ParamByName('dept').AsString           := TableString('EMPLOYEE','CODE',cbAuthor.Text, 'dept');
+                                 qryFeeDistInsert.ParamByName('matter_dept').AsString    := TableString('matter','nmatter', qryMatter.FieldByName('NMATTER').AsInteger,'dept');
+                                 qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
+                                 qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',cbAuthor.Text, 'NAME');
+                                 qryFeeDistInsert.ExecSQL;
+                              finally
+                                 qryFeeDistInsert.Close;
+                              end;
+                          end
+                          else
+                          begin
+                           // saving WRITE OFF amount against original distribution.
+                              qryFeeDist.Close;
+                              qryFeeDist.ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
+                              qryFeeDist.Open;
 
-                   {post components}
-                   sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAntdWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
-                   sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAntdWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-                   sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
-
-                   PostLedgersGST(dtpCreated.Date
-                     , neAntD.AsCurrency
-                     , neAntDTax.AsCurrency
-                     , qryMatter.FieldByName('FILEID').AsString
-                     , 'JOURNAL'
-                     , iNJournal
-                     , lblfileid.caption + ':' + mmoDesc.Lines.Text
-                     , sLedgerKeyTax
-                     , sLedgerKeyDr
-                     , sLedgerKey
-                     , cbAuthor.Text
-                     , lsTaxCode
-                     , FALSE
-                     ,'0'
-                     , 0
-                     , qryMatter.FieldByName('NMATTER').AsInteger);
-
-                     fiNCheqReq := GetSequenceNumber('sqnc_ncheqreq');
-
-                     with qryCheqReqInsert do
-                     begin
-                       //ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('DEBIT').AsFloat;
-                       ParamByName('AMOUNT').AsFloat := 0 - neAntd.AsCurrency;
-                       ParamByName('BANK').AsString := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
-                       ParamByName('AUTHOR').AsString := dmAxiom.UserID;
-                       ParamByName('REQDATE').AsDateTime := Trunc(dtpCreated.Date);
-                       ParamByName('NCHEQREQ').AsInteger := fiNCheqReq;
-                       ParamByName('PAYEE').AsString := 'Write Off';
-                       ParamByName('DESCR').AsString := mmoDesc.Lines.Text; //qryLedger.FieldByName('REASON').AsString;
-                       ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
-                       ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-                       // rb do we need to do this?
-                       ExecSQL;
+                              TotalFeeDistAmt := 0;
+                              FeeDistCount := 1;
+                              TotalFeeDistCount := qryFeeDist.RecordCount;
+                              while (qryFeeDist.Eof = False) do
+                              begin
+                                 if (FeeDistCount = TotalFeeDistCount) and
+                                    (TotalFeeDistCount > 1)  then
+                                    FeeDistAmt :=  (neFees.AsCurrency) - TotalFeeDistAmt
+                                 else
+                                    FeeDistAmt := (neFees.AsCurrency) * (qryFeeDist.FieldByNAme('ALLOC_PC').AsFloat/100);
+                                 qryFeeDistInsert.ParamByName('nmemo').AsInteger         := qryFeeDist.FieldByName('nmemo').AsInteger;
+                                 qryFeeDistInsert.ParamByName('author').AsString         := qryFeeDist.FieldByName('author').AsString;
+                                 qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryFeeDist.FieldByName('nmatter').AsInteger;
+                                 qryFeeDistInsert.ParamByName('dept').AsString           := qryFeeDist.FieldByName('dept').AsString;
+                                 qryFeeDistInsert.ParamByName('matter_dept').AsString    := qryFeeDist.FieldByName('matter_dept').AsString;
+                                 qryFeeDistInsert.ParamByName('writeoff_amt').AsCurrency := FeeDistAmt;
+                                 qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',qryFeeDist.FieldByName('author').AsString, 'NAME');
+                                 qryFeeDistInsert.ExecSQL;
+                                 TotalFeeDistAmt := TotalFeeDistAmt + FeeDistAmt;
+                                 qryFeeDist.Next;
+                                 FeeDistCount := FeeDistCount + 1;
+                              end;
+                              qryFeeDist.Close;
+                              qryFeeDistInsert.Close;
+                          end;
+                        end;
                      end;
-                   PostCheqReqTrans(neTotalAntDisbs.AsCurrency, fiNAlloc, fiNCheqReq);
-                 end;
-            end; //part 2
-        end;
 
-        with qryBillUpdate do
-        begin
-          // made everything currency
-          ParamByName('FEES_WOFF').AsCurrency := neFees.AsCurrency;
-          ParamByName('DISB_WOFF').AsCurrency := neDisb.AsCurrency;
-          ParamByName('ANTD_WOFF').AsCurrency := neAntd.AsCurrency;
-          ParamByName('UPCRED_WOFF').AsCurrency := neUpCred.AsCurrency;
-          ParamByName('SUND_WOFF').AsCurrency := neSund.AsCurrency;
-          ParamByName('FEESTAX_WOFF').AsCurrency := neFeesTax.AsCurrency;
-          ParamByName('DISBTAX_WOFF').AsCurrency := neDisbTax.AsCurrency;
-          ParamByName('UPCREDTAX_WOFF').AsCurrency := neUpCredTax.AsCurrency;
-          ParamByName('ANTDTAX_WOFF').AsCurrency := neAntdTax.AsCurrency;
-          ParamByName('SUNDTAX_WOFF').AsCurrency := neSundTax.AsCurrency;
-          ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
-          ExecSQL;
-        end;
+                     if (neSund.AsCurrency <> 0) or (neSundTax.AsCurrency <> 0)  then
+                     begin
+                       with qrySundry do
+                       begin
+                         ParamByName('ACCT').AsString := dmAxiom.Entity;
+                         ParamByName('CREATED').AsDateTime := dtpCreated.Date;
+                         ParamByName('AMOUNT').AsFloat := 0 - neSund.AsCurrency;
+                         ParamByName('TAX').AsFloat := 0 - neSundTax.AsCurrency;
+//                         if neSundTax.AsCurrency <> 0 then
+                           ParamByName('TAXCODE').AsString := lsTaxCode;
+//                         else
+//                           ParamByName('TAXCODE').AsString := lsTaxCode;
+                         ParamByName('DESCR').AsString := mmoDesc.Lines.Text;
+                         ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                         ParamByName('NCLIENT').AsInteger := qryMatter.FieldByName('NCLIENT').AsInteger;
+                         ParamByName('NMEMO').AsInteger := FNMemo;
+                         if chkPrivate.Checked then
+                           ParamByName('PRIVATE').AsString := 'Y'
+                         else
+                           ParamByName('PRIVATE').AsString := 'N';
+                         ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
+                         ExecSQL;
+                       end;
+                       // Billed Sundries
+                       MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'SUNDWOFF', neSund.AsCurrency + neSundTax.AsCurrency);
 
-        if  cxDBLSubBill.text <> '' then
-        begin
-           with qrySubBillUpdate do
-           begin
-             ParamByName('FEES_WOFF').AsFloat := neFees.AsCurrency;
-             ParamByName('DISB_WOFF').AsFloat := neDisb.AsCurrency;
-             ParamByName('ANTD_WOFF').AsFloat := neAntd.AsCurrency;
-             ParamByName('UPCRED_WOFF').AsFloat := neUpCred.AsCurrency;
-             ParamByName('SUND_WOFF').AsFloat := neSund.AsCurrency;
-             ParamByName('FEESTAX_WOFF').AsFloat := neFeesTax.AsCurrency;
-             ParamByName('DISBTAX_WOFF').AsFloat := neDisbTax.AsCurrency;
-             ParamByName('UPCREDTAX_WOFF').AsFloat := neUpCredTax.AsCurrency;
-             ParamByName('ANTDTAX_WOFF').AsFloat := neAntdTax.AsCurrency;
-             ParamByName('SUNDTAX_WOFF').AsFloat := neSundTax.AsCurrency;
-             ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
-             ParamByName('NSUBBILL').AsInteger := cxDBLSubBill.EditValue;
-             ExecSQL;
-           end;
-        end;
+                       {post components}
+                       sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edSundWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                       sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edSundWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                       sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
 
-        CheckLedgerTotal;
+                       PostLedgersGST(dtpCreated.Date
+                         , neSund.AsCurrency
+                         , neSundTax.AsCurrency
+                         , qryMatter.FieldByName('FILEID').AsString
+                         , 'JOURNAL'
+                         , iNJournal
+                         , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                         , sLedgerKeyTax
+                         , sLedgerKeyDr
+                         , sLedgerKey
+                         , cbAuthor.Text
+                         , lsTaxCode
+                         , FALSE
+                         ,'0'
+                         ,0
+                         , qryMatter.FieldByName('NMATTER').AsInteger);
+                     end;
+                     //if (neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency) = 0 then
+                       //PostLedgers(dtpCreated.Date, (neFeesTax.AsCurrency+neDisbTax.AsCurrency+neAntDTax.AsCurrency+neSundTax.AsCurrency), qryMatter.FieldByName('FILEID').AsString, 'JOURNAL', iNJournal, mmoDesc.Lines.Text, TableString('TAXTYPE', 'CODE', 'GST', 'ADJUSTLEDGER'), TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR'), cbAuthor.Text);
+                 end; //part 1
 
-        dmAxiom.uniInsight.Commit;
-        Screen.Cursor := crDefault;
-        MsgInfo('Posted Journal ' + IntToStr(iNJournal));
+                 // part 2 - process the Disbursements/Anticipated Disbs aka Cheque Reqs and Unpaid Creditors together as these are type J2
+                 if (neDisb.AsCurrency <> 0) or (neAntd.AsCurrency <> 0) or (neUpCred.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0) or (neAntdTax.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0) then
+                 begin
+                    if (neDisb.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0)  then
+                    begin   //rb
+                         iNJournal := CreateJournal(cnTYP_DEBTOR, 'DISB', neDisb.AsCurrency, neDisbTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
+                         MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DISBSWOFF', neDisb.AsCurrency + neDisbTax.AsCurrency);
 
-        if chkNoExit.Checked then
-           ResetFields
-        else
-        begin
-           Self.Close;
-//           RemoveFromDesktop(Self);
-        end;
-      except
-        On E: Exception do
-        begin
-          dmAxiom.uniInsight.Rollback;
-          Screen.Cursor := crDefault;
-          MsgErr('Error occured writing off'#13#13 + E.Message);
-        end;
+                         //if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
+                         //  sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
+                         //else //load the chart from the entity
+                         //  sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_DR');
+
+                        { if rgledgertype.itemindex = 0 then
+                            sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
+                         else if rgledgertype.itemindex = 1 then
+                            sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBUNREC_CHART')
+                         else }
+                            sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_DR');
+
+                         sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_DISB_CR');
+
+                        {post components}
+                        sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edDisbWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edDisbWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                        sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+
+                         PostLedgersGST(dtpCreated.Date
+                           , neDisb.AsCurrency
+                           , neDisbTax.AsCurrency
+                           , qryMatter.FieldByName('FILEID').AsString
+                           , 'JOURNAL'
+                           , iNJournal
+                           , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                           , sLedgerKeyTax
+                           , sLedgerKeyDr
+                           , sLedgerKey
+                           , cbAuthor.Text
+                           , lsTaxCode
+                           , FALSE
+                           ,'0'
+                           ,0
+                           , qryMatter.FieldByName('NMATTER').AsInteger);
+                         // must create a journal + alloc here
+                        end;
+
+                     if (neUpCred.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0)  then
+                       begin
+                         iNJournal := CreateJournal(cnTYP_DEBTOR, 'UPCRED', neUpCred.AsCurrency, neUpCredTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
+                         MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'UPCREDWOFF', neUpCred.AsCurrency + neUpCredTax.AsCurrency);
+
+                         if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
+                           sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
+                         else
+                           sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_DR');
+
+                         sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_UPCRED_CR');
+
+                         {post components}
+                         sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edUpCredWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                         sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edUpCredWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                         sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+
+                         PostLedgersGST(dtpCreated.Date
+                           , neUpCred.AsCurrency
+                           , neUpCredTax.AsCurrency
+                           , qryMatter.FieldByName('FILEID').AsString
+                           , 'JOURNAL'
+                           , iNJournal
+                           , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                           , sLedgerKeyTax
+                           , sLedgerKeyDr
+                           , sLedgerKey
+                           , cbAuthor.Text
+                           , lsTaxCode
+                           , FALSE
+                           ,'0'
+                           ,0
+                           , qryMatter.FieldByName('NMATTER').AsInteger);
+                         // must create a journal + alloc here
+                        end;
+
+                     if (neAntD.AsCurrency <> 0) or (neAntDTax.AsCurrency <> 0) then
+                       begin
+                         // rb
+                         iNJournal := CreateJournal(cnTYP_DEBTOR, 'ANTD', neAntd.AsCurrency, neAntdTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
+                         MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'CREQWOFF', neAntd.AsCurrency + neAntdTax.AsCurrency);
+
+                         // 20 Dec 2017 DW set cheqreqs to converted
+                         qryCheqReqUpdate.Close;
+                         With qryCheqReqUpdate do
+                         begin
+                            ParamByName('NMEMO').AsInteger := FNMemo;
+                            ExecSQL;
+                         end;
+
+                         if (TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART') <> '') then
+                           sWoffDr := TableString('EMPLOYEE', 'CODE', cbAuthor.Text, 'DISBWOFF_CHART')
+                         else
+                           sWoffDr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_ANTD_DR');
+
+                         sWoffCr := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_ANTD_CR');
+
+                         {post components}
+                         sLedgerKeyDr :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAntdWODR.Text,cbAuthor.text,false,'',[rDepartmentOverride]);
+                         sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAntdWOCR.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+                         sLedgerKeyTax :=  glComponentSetup.buildLedgerKey(qryMatter.fieldByName('NMATTER').AsString,edAdjust.Text,cbAuthor.text,true,'',[rDepartmentOverride]);
+
+                         PostLedgersGST(dtpCreated.Date
+                           , neAntD.AsCurrency
+                           , neAntDTax.AsCurrency
+                           , qryMatter.FieldByName('FILEID').AsString
+                           , 'JOURNAL'
+                           , iNJournal
+                           , lblfileid.caption + ':' + mmoDesc.Lines.Text
+                           , sLedgerKeyTax
+                           , sLedgerKeyDr
+                           , sLedgerKey
+                           , cbAuthor.Text
+                           , lsTaxCode
+                           , FALSE
+                           ,'0'
+                           , 0
+                           , qryMatter.FieldByName('NMATTER').AsInteger);
+
+                           fiNCheqReq := GetSequenceNumber('sqnc_ncheqreq');
+
+                           with qryCheqReqInsert do
+                           begin
+                             //ParamByName('AMOUNT').AsFloat := 0 - qryLedger.FieldByName('DEBIT').AsFloat;
+                             ParamByName('AMOUNT').AsFloat := 0 - neAntd.AsCurrency;
+                             ParamByName('BANK').AsString := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK');
+                             ParamByName('AUTHOR').AsString := dmAxiom.UserID;
+                             ParamByName('REQDATE').AsDateTime := Trunc(dtpCreated.Date);
+                             ParamByName('NCHEQREQ').AsInteger := fiNCheqReq;
+                             ParamByName('PAYEE').AsString := 'Write Off';
+                             ParamByName('DESCR').AsString := mmoDesc.Lines.Text; //qryLedger.FieldByName('REASON').AsString;
+                             ParamByName('FILEID').AsString := qryMatter.FieldByName('FILEID').AsString;
+                             ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+                             // rb do we need to do this?
+                             ExecSQL;
+                           end;
+                         PostCheqReqTrans(neTotalAntDisbs.AsCurrency, fiNAlloc, fiNCheqReq);
+                       end;
+                  end; //part 2
+               end;
+
+               with qryBillUpdate do
+               begin
+                  // made everything currency
+                  ParamByName('FEES_WOFF').AsCurrency := neFees.AsCurrency;
+                  ParamByName('DISB_WOFF').AsCurrency := neDisb.AsCurrency;
+                  ParamByName('ANTD_WOFF').AsCurrency := neAntd.AsCurrency;
+                  ParamByName('UPCRED_WOFF').AsCurrency := neUpCred.AsCurrency;
+                  ParamByName('SUND_WOFF').AsCurrency := neSund.AsCurrency;
+                  ParamByName('FEESTAX_WOFF').AsCurrency := neFeesTax.AsCurrency;
+                  ParamByName('DISBTAX_WOFF').AsCurrency := neDisbTax.AsCurrency;
+                  ParamByName('UPCREDTAX_WOFF').AsCurrency := neUpCredTax.AsCurrency;
+                  ParamByName('ANTDTAX_WOFF').AsCurrency := neAntdTax.AsCurrency;
+                  ParamByName('SUNDTAX_WOFF').AsCurrency := neSundTax.AsCurrency;
+                  ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
+                  ExecSQL;
+               end;
+
+               if  cxDBLSubBill.text <> '' then
+               begin
+                  with qrySubBillUpdate do
+                  begin
+                     ParamByName('FEES_WOFF').AsFloat := neFees.AsCurrency;
+                     ParamByName('DISB_WOFF').AsFloat := neDisb.AsCurrency;
+                     ParamByName('ANTD_WOFF').AsFloat := neAntd.AsCurrency;
+                     ParamByName('UPCRED_WOFF').AsFloat := neUpCred.AsCurrency;
+                     ParamByName('SUND_WOFF').AsFloat := neSund.AsCurrency;
+                     ParamByName('FEESTAX_WOFF').AsFloat := neFeesTax.AsCurrency;
+                     ParamByName('DISBTAX_WOFF').AsFloat := neDisbTax.AsCurrency;
+                     ParamByName('UPCREDTAX_WOFF').AsFloat := neUpCredTax.AsCurrency;
+                     ParamByName('ANTDTAX_WOFF').AsFloat := neAntdTax.AsCurrency;
+                     ParamByName('SUNDTAX_WOFF').AsFloat := neSundTax.AsCurrency;
+                     ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
+                     ParamByName('NSUBBILL').AsInteger := cxDBLSubBill.EditValue;
+                     ExecSQL;
+                  end;
+               end;
+
+               CheckLedgerTotal;
+
+               dmAxiom.uniInsight.Commit;
+               Screen.Cursor := crDefault;
+               MsgInfo('Posted Journal ' + IntToStr(iNJournal));
+
+               if chkNoExit.Checked then
+                  ResetFields
+               else
+               begin
+                  Self.Close;
+//              RemoveFromDesktop(Self);
+               end;
+            except
+               On E: Exception do
+               begin
+                  dmAxiom.uniInsight.Rollback;
+                  Screen.Cursor := crDefault;
+                  MsgErr('Error occured writing off'#13#13 + E.Message);
+               end;
+            end;
+         end;
       end;
-    end
-  end;
+   end
+   else
+      MsgErr('The Entity of this Matter (' + qryMatter.FieldByName('ENTITY').AsString +
+             ') does not match the currently selected Entity ('+dmAxiom.Entity+').  You will need to change the Entity to match the Matters Entity.');
 end;
 
 function TfrmWriteOff.CreateJournal(sType, sItem: string; dAmount, dTax : Double;

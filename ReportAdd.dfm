@@ -3,8 +3,8 @@ object frmAddReport: TfrmAddReport
   Top = 282
   BorderStyle = bsDialog
   Caption = 'Add Insight Report'
-  ClientHeight = 326
-  ClientWidth = 367
+  ClientHeight = 333
+  ClientWidth = 409
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,27 +16,21 @@ object frmAddReport: TfrmAddReport
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 15
-  object cxLabel6: TcxLabel
-    Left = 180
-    Top = 56
-    Caption = 'Frequency'
-    Transparent = True
-  end
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 367
-    Height = 326
+    Width = 409
+    Height = 333
     Align = alClient
     ParentBackground = True
-    TabOrder = 1
+    TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 314
-    ExplicitHeight = 211
+    ExplicitWidth = 367
+    ExplicitHeight = 326
     DesignSize = (
-      367
-      326)
+      409
+      333)
     object teDisplayName: TcxDBTextEdit
       Left = 107
       Top = 12
@@ -51,7 +45,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 0
-      Width = 248
+      Width = 290
     end
     object teReportName: TcxDBButtonEdit
       Left = 107
@@ -113,7 +107,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 1
-      Width = 248
+      Width = 290
     end
     object cmbReportLevel: TcxDBComboBox
       Left = 107
@@ -205,7 +199,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 4
-      Width = 248
+      Width = 290
     end
     object edParameters: TcxDBTextEdit
       Left = 107
@@ -221,7 +215,7 @@ object frmAddReport: TfrmAddReport
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 5
-      Width = 183
+      Width = 225
     end
     object mlDescr: TcxDBRichEdit
       Left = 12
@@ -239,21 +233,22 @@ object frmAddReport: TfrmAddReport
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 7
       Height = 96
-      Width = 343
+      Width = 385
     end
     object cxButton1: TcxButton
-      Left = 297
+      Left = 339
       Top = 133
       Width = 58
-      Height = 18
+      Height = 23
       Anchors = [akTop, akRight]
       Caption = 'Import'
       LookAndFeel.NativeStyle = True
       TabOrder = 6
+      Visible = False
       OnClick = cxButton1Click
     end
     object btnSave: TBitBtn
-      Left = 105
+      Left = 126
       Top = 287
       Width = 75
       Height = 27
@@ -264,7 +259,7 @@ object frmAddReport: TfrmAddReport
       OnClick = btnSaveClick
     end
     object btnCancel: TBitBtn
-      Left = 187
+      Left = 208
       Top = 287
       Width = 75
       Height = 27
@@ -422,7 +417,7 @@ object frmAddReport: TfrmAddReport
       CaptionOptions.Text = 'cxButton1'
       CaptionOptions.Visible = False
       Control = cxButton1
-      ControlOptions.OriginalHeight = 18
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 58
       ControlOptions.ShowBorder = False
       Index = 1
