@@ -342,7 +342,7 @@ begin
    qryAccounts.SQL.Clear;
    sAND := ' AND ';
 //   sSQLWhere := ' WHERE I.OWING <> 0 AND I.NCREDITOR = C.NCREDITOR AND I.ACCT = :ACCT ';
-   sSQLWhere := ' WHERE I.NCREDITOR = C.NCREDITOR AND I.ACCT = :ACCT ';
+   sSQLWhere := ' WHERE I.NCREDITOR = C.NCREDITOR and i.ninvoice = a.ninvoice(+) AND I.ACCT = :ACCT ';
 
 //   if cbBank.Text <> '' then
 //     sSQLWhere := sSQLWhere + sAND + 'I.BANK = ' + QuotedStr(cbBank.Text);
@@ -382,11 +382,11 @@ begin
            'I.OWING, I.REFNO, I.DESCR, TRUNC(I.DUE_DATE) AS DUE_DATE, I.HOLD, '+
            'I.NINVOICE, I.AMOUNT, I.ACCT, C.NAME, C.CODE, I.NCREDITOR, I.CHEQUE_GROUP_ID, '+
            'I.CREDITOR, I.BILLED, I.TAX, I.TAKE_ON, C.PAY_BY_EFT, I.INVOICE_COPY, I.INVOICE_COPY_EXT, '+
-           '(I.AMOUNT - I.OWING) AS PAID, TAKE_ON, I.HOLD as Held '+
-           'FROM CREDITOR C, INVOICE I ';
+           '(I.AMOUNT - I.OWING) AS PAID, TAKE_ON, I.HOLD as Held, A.NMEMO '+
+           'FROM ALLOC A, CREDITOR C, INVOICE I ';
 
    sSQLTotals := 'SELECT NVL(SUM(LEGAL_CR_AMOUNT),0) "MATTER", NVL(SUM(TRADE_CR_AMOUNT),0) "TRADE" '+
-                 'FROM CREDITOR C, INVOICE I ';
+                 'FROM ALLOC A, CREDITOR C, INVOICE I ';
 
    case rgShowBy.ItemIndex of
       0: begin
@@ -1280,7 +1280,7 @@ procedure TfrmAcctPayable.actReverseUpdate(Sender: TObject);
 begin
    if pagAcctPayable.ActivePageIndex = 0 then
       actReverse.Enabled := ((tabAcctPayable.Visible) and (dmAxiom.Security.Invoice.Reverse) and
-                           (TableString('ALLOC','NINVOICE', qryAccounts.FieldByName('NINVOICE').AsInteger, 'NMEMO') = '')) OR
+                           (qryAccounts.FieldByName('NMEMO').IsNull)) OR
                            (qryAccounts.FieldByName('TAKE_ON').AsString = 'N')  ;
 end;
 
