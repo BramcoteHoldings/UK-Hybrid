@@ -2468,17 +2468,17 @@ procedure TfrmInvoice.popGridRemoveAllClick(Sender : TObject);
         then
           dmAxiom.uniInsight.Commit;
         dmAxiom.uniInsight.StartTransaction;
-        SQL.Text := 'UPDATE FEE SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+        SQL.Text := 'UPDATE FEE SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
         ExecSQL;
         Close;
         // works for disbs and upcred
-        SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+        SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
         ExecSQL;
         Close;
-        SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+        SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
         ExecSQL;
         Close;
-        SQL.Text := 'UPDATE SUNDRY SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+        SQL.Text := 'UPDATE SUNDRY SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
         ExecSQL;
         Close;
         SQL.Text :=
@@ -2909,7 +2909,7 @@ procedure TfrmInvoice.RemoveFees;
   var
     dGstFree : double;
   begin
-    qryNew.SQL.Text := 'UPDATE FEE SET NMEMO = null WHERE ' +
+    qryNew.SQL.Text := 'UPDATE FEE SET NMEMO = null, BILLED = ''N'' WHERE ' +
     // ' NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND '+
       'NMEMO = ' + qryInvoice.FieldByName('NMEMO').AsString;
     qryNew.ExecSQL;
@@ -2950,7 +2950,7 @@ procedure TfrmInvoice.RemoveDisb;
   var
     dGstFree : double;
   begin
-    qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NINVOICE IS NULL AND NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
+    qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NINVOICE IS NULL AND NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
       qryInvoice.FieldByName('NMEMO').AsString;
     qryNew.ExecSQL;
     qryNew.Close;
@@ -2991,7 +2991,7 @@ procedure TfrmInvoice.RemoveAntd;
   var
     dGstFree : double;
   begin
-    qryNew.SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
+    qryNew.SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
       qryInvoice.FieldByName('NMEMO').AsString;
     qryNew.ExecSQL;
     qryNew.Close;
@@ -3034,7 +3034,7 @@ procedure TfrmInvoice.RemoveSund;
   var
     dGstFree : double;
   begin
-    qryNew.SQL.Text := 'UPDATE SUNDRY SET NMEMO = null WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
+    qryNew.SQL.Text := 'UPDATE SUNDRY SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString + ' AND NMEMO = ' +
       qryInvoice.FieldByName('NMEMO').AsString + ' AND created_from_disb = ''N'' ';
     qryNew.ExecSQL;
     qryNew.Close;
@@ -4496,16 +4496,15 @@ begin
             // lvBillItems.DataController.SetFocus;
             if (ImageIndex = IMG_UPCRED)
             then
-              qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NALLOC = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13])
+              qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NALLOC = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13])
               // string(tvBillItems.DataController.Values[iCtr, tvBillItemsUNIQUEID.Index])  // IntToStr(tvBillItemsUNIQUEID.EditValue)
-            else if (ImageIndex = IMG_ANTD)
-            then
+            else if (ImageIndex = IMG_ANTD) then
             begin
               qryNew.SQL.Text := '';
               qryNew.SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NCHEQREQ = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
             end
             else
-              qryNew.SQL.Text := 'UPDATE ' + sTable + ' SET NMEMO = null WHERE N' + sTable + ' = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
+              qryNew.SQL.Text := 'UPDATE ' + sTable + ' SET NMEMO = null, BILLED = ''N'' WHERE N' + sTable + ' = ' + string(AView.ViewData.GetRecordByIndex(iCtr).Values[13]);
             // IntToStr(tvBillItemsUNIQUEID.EditValue);
 
             if qryNew.SQL.Text <> '' then
@@ -4660,7 +4659,7 @@ procedure TfrmInvoice.tbtnRemoveDisbsClick(Sender : TObject);
   var
     dGstFree : double;
   begin
-    qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NINVOICE IS NULL AND NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) +
+    qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NINVOICE IS NULL AND NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) +
       ' AND NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
     qryNew.ExecSQL;
     qryNew.Close;
@@ -4722,7 +4721,7 @@ begin
 
    if bRemove then
    begin
-      qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NINVOICE IS NOT NULL AND NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
+      qryNew.SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NINVOICE IS NOT NULL AND NMATTER = ' + qryInvoice.FieldByName('NMATTER').AsString +
                          ' AND NMEMO = ' + IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
       qryNew.ExecSQL;
       qryNew.Close;
@@ -4759,7 +4758,7 @@ begin
       qryNew.ExecSQL;
       qryNew.Close;
 
-      qryNew.SQL.Text := 'UPDATE SUNDRY SET NMEMO = null WHERE NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) + ' AND NMEMO = ' +
+      qryNew.SQL.Text := 'UPDATE SUNDRY SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + IntToStr(qryInvoice.FieldByName('NMATTER').AsInteger) + ' AND NMEMO = ' +
                          IntToStr(qryInvoice.FieldByName('NMEMO').AsInteger);
       qryNew.ExecSQL;
       qryNew.Close;
@@ -4810,17 +4809,17 @@ procedure TfrmInvoice.tbtnRemoveAllClick(Sender : TObject);
           then
             dmAxiom.uniInsight.Commit;
           dmAxiom.uniInsight.StartTransaction;
-          SQL.Text := 'UPDATE FEE SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+          SQL.Text := 'UPDATE FEE SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
           ExecSQL;
           Close;
           // works for disbs and upcred
-          SQL.Text := 'UPDATE ALLOC SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+          SQL.Text := 'UPDATE ALLOC SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
           ExecSQL;
           Close;
-          SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+          SQL.Text := 'UPDATE CHEQREQ SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
           ExecSQL;
           Close;
-          SQL.Text := 'UPDATE SUNDRY SET NMEMO = null WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
+          SQL.Text := 'UPDATE SUNDRY SET NMEMO = null, BILLED = ''N'' WHERE NMATTER = ' + sMatter + ' AND NMEMO = ' + sInvoice;
           ExecSQL;
           Close;
           SQL.Text :=
