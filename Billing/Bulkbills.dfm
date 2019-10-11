@@ -287,7 +287,7 @@ object frmBulkBills: TfrmBulkBills
         object Label10: TLabel
           Left = 14
           Top = 29
-          Width = 37
+          Width = 36
           Height = 15
           Caption = 'Total >'
           Transparent = True
@@ -1149,7 +1149,7 @@ object frmBulkBills: TfrmBulkBills
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43637.818057418980000000
+      ReportDocument.CreationDate = 43745.627862847220000000
       TimeFormat = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
