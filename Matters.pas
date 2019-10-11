@@ -1562,6 +1562,10 @@ type
     actAutoReceipt: TAction;
     Label33: TLabel;
     DBText7: TDBText;
+    cxDBButtonEdit3: TcxDBButtonEdit;
+    Label67: TLabel;
+    cxDBButtonEdit4: TcxDBButtonEdit;
+    Label75: TLabel;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -2945,10 +2949,11 @@ begin
             lblClearTrust.Caption := Format('%.2m', [qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency] );
       end;
 
-      if qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency < 0 then
-        lblClearTrust.Font.Color := clRed
-      else
-        lblClearTrust.Font.Color := clBlue;
+      if qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency = 0 then
+         lblClearTrust.Font.Color := clBlue;
+
+      lblClearTrust.Font.Color := ifthen((qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency < 0), clRed, clGreen);
+
       lblClearTrust1.Caption := lblClearTrust.Caption;
       lblClearTrust1.Style.Font.Color := lblClearTrust.Font.Color;
 

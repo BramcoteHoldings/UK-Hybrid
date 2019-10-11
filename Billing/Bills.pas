@@ -1337,7 +1337,7 @@ var
    dTmp         : TDateTime;
    bOKtoPost    : Boolean;
 begin
-   if (IsValidBillForMatter(qryBills.FieldByName('FILEID').AsString, 'ENTITY') = True) then
+   if (IsValidBillForMatter(qryBills.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
    begin
       with qryTmp do
       begin

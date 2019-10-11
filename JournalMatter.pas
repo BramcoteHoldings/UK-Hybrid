@@ -871,7 +871,13 @@ begin
 
    if frmMatterSearch.ShowModal = mrOk then
    begin
-      if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
+      if IsValidMatterForEntity(qryLedger.FieldByName('REFNO').AsString) then
+      begin
+         MsgErr('Matter selected does not belong to the currently selected Entity. You need to change the default Entity before you can post this journal.');
+         qryLedger.FieldByName('REFNO').AsString := '';
+         qryLedger.FieldByName('DESCR').AsString := '';
+      end
+      else if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
       begin
          MsgErr('You may not Bank money to a matter that is archived.');
          qryLedger.FieldByName('REFNO').AsString := '';
@@ -879,13 +885,13 @@ begin
       end
       else
       begin
-      qryLedger.Edit;
-      qryLedger.FieldByName('REFNO').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-      qryLedger.FieldByName('LONGDESC').AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-      if qryLedger.FieldByName('REASON').AsString = '' then
-         qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+         qryLedger.Edit;
+         qryLedger.FieldByName('REFNO').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         qryLedger.FieldByName('LONGDESC').AsString := dmAxiom.qryMSearch.FieldByName('TITLE').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString + ' ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         if qryLedger.FieldByName('REASON').AsString = '' then
+            qryLedger.FieldByName('REASON').AsString := tbDesc.Text;
+      end;
    end;
-end;
 end;
 
 procedure TfrmJournalMatter.cxGrid1DBTableView1DEBITPropertiesValidate(

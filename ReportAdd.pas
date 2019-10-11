@@ -133,7 +133,9 @@ procedure TfrmAddReport.trReportNamePropertiesButtonClick(Sender: TObject;
 var
    ReportName, CleanReportName: string;
    frmGenericSearch : TfrmGenericSearch;
+   CurrDirectory: string;
 begin
+   CurrDirectory := GetCurrentDir;
    case AButtonIndex of
       0: begin
             if odlgReports.Execute then
@@ -160,6 +162,7 @@ begin
             cmbReportType.ItemIndex := 5;
          end;
    end;
+   SetCurrentDir(CurrDirectory);
 end;
 
 function TfrmAddReport.RemovePath(FullReportName: string): string;

@@ -1711,9 +1711,11 @@ object frmAcctPayable: TfrmAcctPayable
         'REDITOR, I.TAX, C.PAY_BY_EFT,I.TAKE_ON,'
       
         '  I.INVOICE_COPY, I.INVOICE_COPY_EXT, I.AMOUNT - I.OWING AS Paid' +
-        ', TAKE_ON, I.HOLD as Held, I.ROWID '
-      'FROM CREDITOR C, INVOICE I'
+        ', TAKE_ON, I.HOLD as Held,'
+      '  a.nmemo, I.ROWID '
+      'FROM ALLOC A, CREDITOR C, INVOICE I'
       'WHERE I.OWING <> 0'
+      'and i.ninvoice = a.ninvoice(+)'
       'ORDER BY I.DUE_DATE ASC')
     CachedUpdates = True
     BeforeScroll = qryAccountsBeforeScroll
