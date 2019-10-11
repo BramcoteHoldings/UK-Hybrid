@@ -17,17 +17,11 @@ uses
   DateTimeAccount, cxLookAndFeelPainters, cxTextEdit, cxButtons,
   cxControls, cxContainer, cxEdit, cxLabel, cxDBLabel, cxMemo, cxMaskEdit,
   cxDropDownEdit, cxCalendar, EnforceCustomDateEdit, Menus, cxGraphics,
-  cxLookAndFeels;
+  cxLookAndFeels, dxLayoutcxEditAdapters, dxLayoutControlAdapters,
+  dxLayoutContainer, cxClasses, dxLayoutControl;
 
 type
   TfrmCheqReqReverse = class(TForm)
-    Label6: TLabel;
-    gbOriginal: TGroupBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label7: TLabel;
     dsInvoice: TUniDataSource;
     qryTransitems: TUniQuery;
     qryAllocs: TUniQuery;
@@ -41,6 +35,18 @@ type
     btnOK: TcxButton;
     btnCancel: TcxButton;
     mlReason: TcxMemo;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
     procedure btnOKClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

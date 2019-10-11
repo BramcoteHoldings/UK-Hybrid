@@ -6,15 +6,15 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, StdCtrls, Buttons, ComCtrls, DBCtrls, OracleUniProvider, Uni, MemDS,
   DateTimeAccount, DBAccess, cxLookAndFeelPainters, cxMemo, cxButtons,
-  cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar,
+  cxTextEdit, cxMaskEdit, cxCalendar,
   EnforceCustomDateEdit, cxControls, cxContainer, cxEdit, cxLabel,
   cxDBLabel, cxGroupBox, Menus, cxGraphics, cxLookAndFeels, dxCore, cxDateUtils,
-  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, dxLayoutContainer, cxClasses,
+  dxLayoutControl, cxDropDownEdit;
 
 type
   TfrmChequeReverse = class(TForm)
-    Label5: TLabel;
-    Label6: TLabel;
     dsCheque: TUniDataSource;
     qryChequeRV: TUniQuery;
     qryTransitems: TUniQuery;
@@ -26,17 +26,11 @@ type
     mlReason: TcxMemo;
     cxButton2: TcxButton;
     btnCancel: TcxButton;
-    gbOriginal: TcxGroupBox;
-    Label7: TLabel;
     cxDBLabel1: TcxDBLabel;
-    Label1: TLabel;
     cxDBLabel2: TcxDBLabel;
-    Label2: TLabel;
     cxDBLabel3: TcxDBLabel;
-    Label3: TLabel;
     cxDBLabel4: TcxDBLabel;
     cxDBLabel5: TcxDBLabel;
-    Label4: TLabel;
     qryCreditorCheqReversal: TUniQuery;
     qryInvoice: TUniQuery;
     qryInvUpdate: TUniQuery;
@@ -55,6 +49,21 @@ type
     qryReceiptRV: TUniQuery;
     qryReceiptUpdate: TUniQuery;
     qryTransItemRcpt: TUniQuery;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    dxLayoutItem8: TdxLayoutItem;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem9: TdxLayoutItem;
+    dxLayoutItem10: TdxLayoutItem;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelClick(Sender: TObject);
