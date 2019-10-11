@@ -548,6 +548,8 @@ type
     lblNoEstDisbs: TLabel;
     Label31: TLabel;
     cxDBExtLookupComboBox1: TcxDBExtLookupComboBox;
+    Label13: TLabel;
+    eDebtorEmail: TcxDBButtonEdit;
     procedure FormShow(Sender: TObject);
     procedure sbtnContactClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);

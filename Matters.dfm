@@ -206,7 +206,7 @@ object frmMatters: TfrmMatters
     object lblTotalFeesRecorded: TLabel
       Left = 614
       Top = 126
-      Width = 105
+      Width = 104
       Height = 15
       Caption = 'Total Fees  recorded'
     end
@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabInvoices
+    Properties.ActivePage = tabOverview
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -554,7 +554,7 @@ object frmMatters: TfrmMatters
         object Label15: TLabel
           Left = 10
           Top = 56
-          Width = 32
+          Width = 31
           Height = 15
           Caption = 'Bill To'
           Transparent = True
@@ -731,8 +731,8 @@ object frmMatters: TfrmMatters
         end
       end
       object cxGroupBox1: TcxGroupBox
-        Left = 2
-        Top = 4
+        Left = 1
+        Top = 5
         Caption = 'Details'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -762,7 +762,7 @@ object frmMatters: TfrmMatters
         object Label19: TLabel
           Left = 9
           Top = 71
-          Width = 23
+          Width = 22
           Height = 15
           Caption = 'Title'
         end
@@ -856,6 +856,14 @@ object frmMatters: TfrmMatters
           Width = 25
           Height = 15
           Caption = 'ACN'
+        end
+        object Label67: TLabel
+          Left = 464
+          Top = 276
+          Width = 76
+          Height = 15
+          Alignment = taRightJustify
+          Caption = 'Debtor E-Mail:'
         end
         object dbtbKeyName: TDBEdit
           Left = 90
@@ -975,40 +983,26 @@ object frmMatters: TfrmMatters
               Default = True
               Glyph.SourceDPI = 96
               Glyph.Data = {
-                424D360400000000000036000000280000001000000010000000010020000000
-                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00808080FF808080FFFF00
-                FF00000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-                C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
-                80FF808080FF808080FF808080FF808080FF000000FFFF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
               Kind = bkGlyph
             end>
           Properties.MaxLength = 0
@@ -1088,40 +1082,26 @@ object frmMatters: TfrmMatters
               Default = True
               Glyph.SourceDPI = 96
               Glyph.Data = {
-                424D360400000000000036000000280000001000000010000000010020000000
-                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00808080FF808080FFFF00
-                FF00000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-                C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
-                80FF808080FF808080FF808080FF808080FF000000FFFF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
               Kind = bkGlyph
             end>
           Properties.MaxLength = 0
@@ -1144,40 +1124,26 @@ object frmMatters: TfrmMatters
               Default = True
               Glyph.SourceDPI = 96
               Glyph.Data = {
-                424D360400000000000036000000280000001000000010000000010020000000
-                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00808080FF808080FFFF00
-                FF00000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-                C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
-                80FF808080FF808080FF808080FF808080FF000000FFFF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
               Kind = bkGlyph
             end>
           Properties.MaxLength = 0
@@ -1248,10 +1214,6 @@ object frmMatters: TfrmMatters
           object tabStreetAddress: TcxTabSheet
             Caption = 'Street Address'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label35: TLabel
               Left = 1
               Top = 0
@@ -1262,7 +1224,7 @@ object frmMatters: TfrmMatters
             object Label36: TLabel
               Left = 1
               Top = 51
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1347,10 +1309,6 @@ object frmMatters: TfrmMatters
           object tabPostalAddress: TcxTabSheet
             Caption = 'Postal Address'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label40: TLabel
               Left = 1
               Top = 2
@@ -1361,7 +1319,7 @@ object frmMatters: TfrmMatters
             object Label41: TLabel
               Left = 1
               Top = 50
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1446,10 +1404,6 @@ object frmMatters: TfrmMatters
           object tabCustomAddress: TcxTabSheet
             Caption = 'Custom Address'
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label55: TLabel
               Left = 1
               Top = 2
@@ -1460,7 +1414,7 @@ object frmMatters: TfrmMatters
             object lCustomSuburb: TLabel
               Left = 1
               Top = 51
-              Width = 72
+              Width = 71
               Height = 15
               Caption = 'Town/Suburb'
             end
@@ -1545,10 +1499,6 @@ object frmMatters: TfrmMatters
           object tabDX: TcxTabSheet
             Caption = 'DX'
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label25: TLabel
               Left = 5
               Top = 14
@@ -1600,6 +1550,48 @@ object frmMatters: TfrmMatters
           Height = 98
           Width = 828
         end
+        object cxDBButtonEdit3: TcxDBButtonEdit
+          Left = 576
+          Top = 273
+          DataBinding.DataField = 'EMAIL2'
+          DataBinding.DataSource = dsPhonebook
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
+              Kind = bkGlyph
+            end>
+          Properties.MaxLength = 0
+          Properties.OnButtonClick = eInternetEmailPropertiesButtonClick
+          Style.Color = clWindow
+          Style.LookAndFeel.Kind = lfStandard
+          StyleDisabled.LookAndFeel.Kind = lfStandard
+          StyleFocused.LookAndFeel.Kind = lfStandard
+          StyleHot.LookAndFeel.Kind = lfStandard
+          TabOrder = 16
+          Width = 321
+        end
       end
     end
     object tabOverview: TcxTabSheet
@@ -1633,7 +1625,7 @@ object frmMatters: TfrmMatters
       object lblsClearTrust: TLabel
         Left = 470
         Top = 117
-        Width = 99
+        Width = 98
         Height = 15
         Hint = 
           'Total Cleared Non-Protected Trust less any Unconverted Trust Req' +
@@ -1682,7 +1674,7 @@ object frmMatters: TfrmMatters
       object lblsTrust: TLabel
         Left = 470
         Top = 100
-        Width = 97
+        Width = 95
         Height = 15
         Hint = 
           'Total funds deposited in the trust account on behalf of this mat' +
@@ -1753,7 +1745,7 @@ object frmMatters: TfrmMatters
       object lblsWIP: TLabel
         Left = 9
         Top = 8
-        Width = 59
+        Width = 58
         Height = 15
         Hint = 'Fees that have yet to be billed.'
         Caption = 'WIP - Time'
@@ -1932,7 +1924,7 @@ object frmMatters: TfrmMatters
         object Label53: TLabel
           Left = 18
           Top = 86
-          Width = 70
+          Width = 69
           Height = 15
           Caption = 'Fee Template'
           OnMouseEnter = lblUnderlineEnter
@@ -2034,7 +2026,7 @@ object frmMatters: TfrmMatters
         object dblblBranch: TDBText
           Left = 622
           Top = 136
-          Width = 64
+          Width = 3
           Height = 15
           AutoSize = True
           Color = clBtnFace
@@ -2053,7 +2045,7 @@ object frmMatters: TfrmMatters
         object lblDebtorStatus: TDBText
           Left = 622
           Top = 153
-          Width = 81
+          Width = 3
           Height = 13
           AutoSize = True
           Color = clBtnFace
@@ -2086,7 +2078,7 @@ object frmMatters: TfrmMatters
         object lblType: TLabel
           Left = 509
           Top = 119
-          Width = 25
+          Width = 24
           Height = 15
           Caption = 'Type'
         end
@@ -2120,7 +2112,7 @@ object frmMatters: TfrmMatters
         object Label8: TLabel
           Left = 18
           Top = 166
-          Width = 84
+          Width = 85
           Height = 15
           Caption = 'Exp Completion'
           OnMouseEnter = lblUnderlineEnter
@@ -2129,7 +2121,7 @@ object frmMatters: TfrmMatters
         object lblExpCompletion: TLabel
           Left = 116
           Top = 166
-          Width = 94
+          Width = 95
           Height = 15
           Caption = 'lblExpCompletion'
           Color = clBtnFace
@@ -2138,7 +2130,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrans: TLabel
           Left = 773
           Top = 148
-          Width = 85
+          Width = 84
           Height = 15
           Hint = 'Date of the last transaction.'
           Caption = 'Last Transaction'
@@ -2150,7 +2142,7 @@ object frmMatters: TfrmMatters
         object lblsLastTrust: TLabel
           Left = 903
           Top = 143
-          Width = 114
+          Width = 112
           Height = 15
           Hint = 'Date of the last trust transaction.'
           Caption = 'Last Trust Transaction'
@@ -2203,7 +2195,7 @@ object frmMatters: TfrmMatters
         object DBText7: TDBText
           Left = 622
           Top = 104
-          Width = 41
+          Width = 3
           Height = 15
           AutoSize = True
           Color = clBtnFace
@@ -2242,7 +2234,7 @@ object frmMatters: TfrmMatters
           object Label14: TLabel
             Left = 206
             Top = 13
-            Width = 78
+            Width = 79
             Height = 15
             Caption = 'Expected Value'
           end
@@ -3235,7 +3227,7 @@ object frmMatters: TfrmMatters
         object Label52: TLabel
           Left = 8
           Top = 3
-          Width = 68
+          Width = 67
           Height = 15
           Caption = 'Archive Type'
           ParentShowHint = False
@@ -3309,10 +3301,6 @@ object frmMatters: TfrmMatters
     object tabBalances: TcxTabSheet
       Caption = 'Balances'
       ImageIndex = 30
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label7: TLabel
         Left = 18
         Top = 156
@@ -3345,21 +3333,21 @@ object frmMatters: TfrmMatters
       object Label66: TLabel
         Left = 259
         Top = 225
-        Width = 101
+        Width = 100
         Height = 15
         Caption = 'Requisitioned Trust'
       end
       object Label5: TLabel
         Left = 72
         Top = 225
-        Width = 97
+        Width = 95
         Height = 15
         Caption = 'Total Trust Monies'
       end
       object Label50: TLabel
-        Left = 756
+        Left = 755
         Top = 6
-        Width = 47
+        Width = 48
         Height = 15
         Alignment = taRightJustify
         Caption = 'Exposure'
@@ -3429,7 +3417,7 @@ object frmMatters: TfrmMatters
       object Label20: TLabel
         Left = 18
         Top = 79
-        Width = 99
+        Width = 100
         Height = 15
         Caption = 'Actual Expenditure'
       end
@@ -3443,7 +3431,7 @@ object frmMatters: TfrmMatters
       object Label27: TLabel
         Left = 18
         Top = 177
-        Width = 140
+        Width = 139
         Height = 15
         Caption = 'Grand Total (includes fees)'
       end
@@ -3464,7 +3452,7 @@ object frmMatters: TfrmMatters
       object Label11: TLabel
         Left = 18
         Top = 136
-        Width = 126
+        Width = 127
         Height = 15
         Caption = 'Anticipated Expenditure'
       end
@@ -3696,10 +3684,6 @@ object frmMatters: TfrmMatters
     object tabParties: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 23
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 489
@@ -3953,7 +3937,7 @@ object frmMatters: TfrmMatters
               Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
               Position = 6
               Text = 'Email'
-              Width = 587
+              Width = 583
             end>
         end
       end
@@ -4018,7 +4002,7 @@ object frmMatters: TfrmMatters
                 Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible]
                 Position = 1
                 Text = 'Value'
-                Width = 1209
+                Width = 1205
               end>
           end
           object dxBarDockControl3: TdxBarDockControl
@@ -4034,10 +4018,6 @@ object frmMatters: TfrmMatters
           Caption = 'Calculation Data'
           ImageIndex = 1
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
         end
       end
     end
@@ -5213,43 +5193,50 @@ object frmMatters: TfrmMatters
           71)
         object lDebtorStatusCaption: TLabel
           Left = 1156
-          Top = 19
+          Top = 10
           Width = 74
           Height = 15
           Anchors = [akRight, akBottom]
           Caption = 'Debtor Status:'
-          ExplicitLeft = 1127
         end
         object Label61: TLabel
-          Left = 401
-          Top = 7
-          Width = 138
+          Left = 822
+          Top = 10
+          Width = 139
           Height = 15
           Anchors = [akLeft, akBottom]
           Caption = 'Expected Payment Details:'
           Visible = False
         end
         object Label37: TLabel
-          Left = 1
-          Top = 11
-          Width = 34
+          Left = 4
+          Top = 10
+          Width = 73
           Height = 15
           Alignment = taRightJustify
-          Caption = 'E-Mail'
+          Caption = 'Debtor E-Mail'
         end
         object Label42: TLabel
-          Left = 0
+          Left = 6
           Top = 39
           Width = 65
           Height = 15
           Caption = 'Work Phone'
         end
         object Label56: TLabel
-          Left = 211
+          Left = 223
           Top = 40
           Width = 37
           Height = 15
           Caption = 'Mobile'
+        end
+        object Label75: TLabel
+          Left = 423
+          Top = 10
+          Width = 52
+          Height = 15
+          Alignment = taRightJustify
+          Caption = 'AP E-Mail'
         end
         object btnDeleteDebtorNotes: TcxButton
           Left = 854
@@ -5523,7 +5510,7 @@ object frmMatters: TfrmMatters
         end
         object cbDebtorStatus: TcxDBLookupComboBox
           Left = 1246
-          Top = 14
+          Top = 7
           Anchors = [akRight, akBottom]
           DataBinding.DataField = 'DEBTORSTATUS'
           DataBinding.DataSource = dsMatter
@@ -5544,8 +5531,8 @@ object frmMatters: TfrmMatters
           Width = 193
         end
         object dbtxtExpectedPaymentDate: TDBMemo
-          Left = 544
-          Top = 4
+          Left = 965
+          Top = 7
           Width = 156
           Height = 24
           Anchors = [akLeft, akBottom]
@@ -5627,8 +5614,8 @@ object frmMatters: TfrmMatters
           Width = 263
         end
         object eDebtorEmail: TcxDBButtonEdit
-          Left = 71
-          Top = 9
+          Left = 83
+          Top = 7
           DataBinding.DataField = 'EMAIL'
           DataBinding.DataSource = dsDebtorContactDtls
           Properties.Buttons = <
@@ -5636,43 +5623,30 @@ object frmMatters: TfrmMatters
               Default = True
               Glyph.SourceDPI = 96
               Glyph.Data = {
-                424D360400000000000036000000280000001000000010000000010020000000
-                000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00808080FF808080FFFF00
-                FF00000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-                00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-                C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFF800000FF800000FF800000FF800000FF8000
-                00FF800000FFFFFFFFFFFFFFFFFFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFF000080FF000080FFC0C0C0FF000000FF808080FF808080FFFF00
-                FF00808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                FFFFFFFFFFFFFFFFFFFFFFFFFFFFC0C0C0FF000000FFFF00FF00FF00FF00FF00
-                FF00808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
-                80FF808080FF808080FF808080FF808080FF000000FFFF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
               Kind = bkGlyph
             end>
           Properties.MaxLength = 0
+          Properties.ReadOnly = True
           Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
           Style.Color = clWindow
           Style.LookAndFeel.Kind = lfStandard
@@ -5683,7 +5657,7 @@ object frmMatters: TfrmMatters
           Width = 312
         end
         object DBEdit6: TDBEdit
-          Left = 71
+          Left = 83
           Top = 36
           Width = 130
           Height = 23
@@ -5694,7 +5668,7 @@ object frmMatters: TfrmMatters
           TabOrder = 10
         end
         object DBEdit7: TDBEdit
-          Left = 252
+          Left = 264
           Top = 36
           Width = 131
           Height = 23
@@ -5703,6 +5677,49 @@ object frmMatters: TfrmMatters
           Enabled = False
           ReadOnly = True
           TabOrder = 11
+        end
+        object cxDBButtonEdit4: TcxDBButtonEdit
+          Left = 481
+          Top = 7
+          DataBinding.DataField = 'AP_EMAIL_MATTER'
+          DataBinding.DataSource = dsMatter
+          Properties.Buttons = <
+            item
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+                444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+                4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+                9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+                BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+                55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+                8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+                3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+                7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+                FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+                C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+                3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+                F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+                8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+                8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+                71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+                2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+                1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+                157110505FC30000000049454E44AE426082}
+              Kind = bkGlyph
+            end>
+          Properties.MaxLength = 0
+          Properties.ReadOnly = True
+          Properties.OnButtonClick = cxDBButtonEdit3PropertiesButtonClick
+          Style.Color = clWindow
+          Style.LookAndFeel.Kind = lfStandard
+          StyleDisabled.LookAndFeel.Kind = lfStandard
+          StyleFocused.LookAndFeel.Kind = lfStandard
+          StyleHot.LookAndFeel.Kind = lfStandard
+          TabOrder = 12
+          Width = 312
         end
       end
     end
@@ -6738,7 +6755,6 @@ object frmMatters: TfrmMatters
         Height = 527
         Align = alLeft
         AutoSize = True
-        ExplicitHeight = 268
         DockingType = 5
         OriginalWidth = 136
         OriginalHeight = 311
@@ -7828,10 +7844,6 @@ object frmMatters: TfrmMatters
               object pGenDocuments1: TcxTabSheet
                 Caption = 'Workflow'
                 ImageIndex = 1
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
               end
             end
             object pnlPreview: TJamFilePreview
@@ -7844,10 +7856,10 @@ object frmMatters: TfrmMatters
           end
         end
         object DockPanelFolderList: TdxDockPanel
-          Left = 0
+          Left = -193
           Top = 0
           Width = 193
-          Height = 124
+          Height = 0
           Visible = False
           AllowFloating = False
           AutoHide = True
@@ -8082,10 +8094,6 @@ object frmMatters: TfrmMatters
     object tabSubNames: TcxTabSheet
       Caption = 'Other Names'
       ImageIndex = 15
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdSubNames: TcxGrid
         Left = 0
         Top = 0
@@ -8153,10 +8161,6 @@ object frmMatters: TfrmMatters
     object tabSearches: TcxTabSheet
       Caption = 'Searches'
       ImageIndex = 22
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel11: TPanel
         Left = 0
         Top = 0
@@ -8448,10 +8452,6 @@ object frmMatters: TfrmMatters
         object tsProjectTaskGrid: TcxTabSheet
           Caption = 'Tasks Grid'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object gridProjectTaskItems: TcxGrid
             Left = 0
             Top = 0
@@ -9174,7 +9174,6 @@ object frmMatters: TfrmMatters
         AlignSplitter = salTop
         PositionAfterOpen = 29
         MinSize = 29
-        ExplicitWidth = 8
       end
       object pnlProject: TPanel
         Left = 0
@@ -9479,10 +9478,6 @@ object frmMatters: TfrmMatters
       Caption = 'Emails'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdEmails: TcxGrid
         Left = 0
         Top = 0
@@ -9759,10 +9754,6 @@ object frmMatters: TfrmMatters
       Caption = 'Critical Dates'
       ImageIndex = 18
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgrCriticalDates: TcxGrid
         Left = 0
         Top = 0
@@ -12928,7 +12919,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14150,7 +14141,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -14605,617 +14596,6 @@ object frmMatters: TfrmMatters
     UserName = 'plMatterDetails'
     Left = 638
     Top = 245
-    object plMatterDetailsppField1: TppField
-      FieldAlias = 'SUBTYPE'
-      FieldName = 'SUBTYPE'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 0
-    end
-    object plMatterDetailsppField2: TppField
-      FieldAlias = 'SUBSTATUS'
-      FieldName = 'SUBSTATUS'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 1
-    end
-    object plMatterDetailsppField3: TppField
-      FieldAlias = 'NMATTER'
-      FieldName = 'NMATTER'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 2
-    end
-    object plMatterDetailsppField4: TppField
-      FieldAlias = 'OPENED'
-      FieldName = 'OPENED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 3
-    end
-    object plMatterDetailsppField5: TppField
-      FieldAlias = 'PARTNER'
-      FieldName = 'PARTNER'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 4
-    end
-    object plMatterDetailsppField6: TppField
-      FieldAlias = 'AUTHOR'
-      FieldName = 'AUTHOR'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 5
-    end
-    object plMatterDetailsppField7: TppField
-      FieldAlias = 'TYPE'
-      FieldName = 'TYPE'
-      FieldLength = 5
-      DisplayWidth = 5
-      Position = 6
-    end
-    object plMatterDetailsppField8: TppField
-      FieldAlias = 'FILEID'
-      FieldName = 'FILEID'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 7
-    end
-    object plMatterDetailsppField9: TppField
-      FieldAlias = 'STATUS'
-      FieldName = 'STATUS'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 8
-    end
-    object plMatterDetailsppField10: TppField
-      FieldAlias = 'NARCHIVE'
-      FieldName = 'NARCHIVE'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 9
-    end
-    object plMatterDetailsppField11: TppField
-      FieldAlias = 'SHORTDESCR'
-      FieldName = 'SHORTDESCR'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 10
-    end
-    object plMatterDetailsppField12: TppField
-      FieldAlias = 'LONGDESCR'
-      FieldName = 'LONGDESCR'
-      FieldLength = 400
-      DisplayWidth = 400
-      Position = 11
-    end
-    object plMatterDetailsppField13: TppField
-      FieldAlias = 'ARCHIVED'
-      FieldName = 'ARCHIVED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 12
-    end
-    object plMatterDetailsppField14: TppField
-      FieldAlias = 'ACCT'
-      FieldName = 'ACCT'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 13
-    end
-    object plMatterDetailsppField15: TppField
-      FieldAlias = 'CONTACT'
-      FieldName = 'CONTACT'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 14
-    end
-    object plMatterDetailsppField16: TppField
-      FieldAlias = 'NCLIENT'
-      FieldName = 'NCLIENT'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 15
-    end
-    object plMatterDetailsppField17: TppField
-      FieldAlias = 'LASTTRANS'
-      FieldName = 'LASTTRANS'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 16
-    end
-    object plMatterDetailsppField18: TppField
-      FieldAlias = 'CONTROLLER'
-      FieldName = 'CONTROLLER'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 17
-    end
-    object plMatterDetailsppField19: TppField
-      FieldAlias = 'CLIENTID'
-      FieldName = 'CLIENTID'
-      FieldLength = 30
-      DisplayWidth = 30
-      Position = 18
-    end
-    object plMatterDetailsppField20: TppField
-      FieldAlias = 'NNAME'
-      FieldName = 'NNAME'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 19
-    end
-    object plMatterDetailsppField21: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'CLOSED'
-      FieldName = 'CLOSED'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 20
-    end
-    object plMatterDetailsppField22: TppField
-      FieldAlias = 'BRANCH'
-      FieldName = 'BRANCH'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 21
-    end
-    object plMatterDetailsppField23: TppField
-      FieldAlias = 'SLEDATE'
-      FieldName = 'SLEDATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 22
-    end
-    object plMatterDetailsppField24: TppField
-      FieldAlias = 'OPERATOR'
-      FieldName = 'OPERATOR'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 23
-    end
-    object plMatterDetailsppField25: TppField
-      FieldAlias = 'ENTITY'
-      FieldName = 'ENTITY'
-      FieldLength = 2
-      DisplayWidth = 2
-      Position = 24
-    end
-    object plMatterDetailsppField26: TppField
-      FieldAlias = 'NOTES'
-      FieldName = 'NOTES'
-      FieldLength = 4000
-      DisplayWidth = 4000
-      Position = 25
-    end
-    object plMatterDetailsppField27: TppField
-      FieldAlias = 'JURISDICTION'
-      FieldName = 'JURISDICTION'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 26
-    end
-    object plMatterDetailsppField28: TppField
-      FieldAlias = 'WORKFLOW'
-      FieldName = 'WORKFLOW'
-      FieldLength = 11
-      DisplayWidth = 11
-      Position = 27
-    end
-    object plMatterDetailsppField29: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'DEBTORSTATUS'
-      FieldName = 'DEBTORSTATUS'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 28
-    end
-    object plMatterDetailsppField30: TppField
-      FieldAlias = 'OPREF'
-      FieldName = 'OPREF'
-      FieldLength = 40
-      DisplayWidth = 40
-      Position = 29
-    end
-    object plMatterDetailsppField31: TppField
-      FieldAlias = 'DEBTORDATE'
-      FieldName = 'DEBTORDATE'
-      FieldLength = 500
-      DisplayWidth = 500
-      Position = 30
-    end
-    object plMatterDetailsppField32: TppField
-      FieldAlias = 'DEBTORNOTE'
-      FieldName = 'DEBTORNOTE'
-      FieldLength = 1500
-      DisplayWidth = 1500
-      Position = 31
-    end
-    object plMatterDetailsppField33: TppField
-      FieldAlias = 'BILL_TO'
-      FieldName = 'BILL_TO'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 32
-    end
-    object plMatterDetailsppField34: TppField
-      FieldAlias = 'REFERREDBY'
-      FieldName = 'REFERREDBY'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 33
-    end
-    object plMatterDetailsppField35: TppField
-      FieldAlias = 'PARTY3'
-      FieldName = 'PARTY3'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 34
-    end
-    object plMatterDetailsppField36: TppField
-      FieldAlias = 'PARTY1'
-      FieldName = 'PARTY1'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 35
-    end
-    object plMatterDetailsppField37: TppField
-      FieldAlias = 'PARTY2'
-      FieldName = 'PARTY2'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 36
-    end
-    object plMatterDetailsppField38: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'EXPECTED_VALUE'
-      FieldName = 'EXPECTED_VALUE'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 37
-    end
-    object plMatterDetailsppField39: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'BUDGET_TOTAL'
-      FieldName = 'BUDGET_TOTAL'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 38
-    end
-    object plMatterDetailsppField40: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'BUDGET_DISB'
-      FieldName = 'BUDGET_DISB'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 39
-    end
-    object plMatterDetailsppField41: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'BUDGET_FEES'
-      FieldName = 'BUDGET_FEES'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 40
-    end
-    object plMatterDetailsppField42: TppField
-      FieldAlias = 'SUBJURISDICTION'
-      FieldName = 'SUBJURISDICTION'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 41
-    end
-    object plMatterDetailsppField43: TppField
-      FieldAlias = 'FEEBASIS'
-      FieldName = 'FEEBASIS'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 42
-    end
-    object plMatterDetailsppField44: TppField
-      FieldAlias = 'ARCHIVENUM'
-      FieldName = 'ARCHIVENUM'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 43
-    end
-    object plMatterDetailsppField45: TppField
-      FieldAlias = 'ARCHIVETYPECODE'
-      FieldName = 'ARCHIVETYPECODE'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 44
-    end
-    object plMatterDetailsppField46: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'SPEC_PURPOSE'
-      FieldName = 'SPEC_PURPOSE'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 45
-    end
-    object plMatterDetailsppField47: TppField
-      FieldAlias = 'LASTTRUST'
-      FieldName = 'LASTTRUST'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 46
-    end
-    object plMatterDetailsppField48: TppField
-      FieldAlias = 'COMPLETED'
-      FieldName = 'COMPLETED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 47
-    end
-    object plMatterDetailsppField49: TppField
-      FieldAlias = 'REFRESH'
-      FieldName = 'REFRESH'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 48
-    end
-    object plMatterDetailsppField50: TppField
-      FieldAlias = 'ARCHIVEBOX'
-      FieldName = 'ARCHIVEBOX'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 49
-    end
-    object plMatterDetailsppField51: TppField
-      FieldAlias = 'ARCHIVEREVIEW'
-      FieldName = 'ARCHIVEREVIEW'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 50
-    end
-    object plMatterDetailsppField52: TppField
-      FieldAlias = 'ARCHVLOCN'
-      FieldName = 'ARCHVLOCN'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 51
-    end
-    object plMatterDetailsppField53: TppField
-      FieldAlias = 'ARCHIVENOTES'
-      FieldName = 'ARCHIVENOTES'
-      FieldLength = 2000
-      DisplayWidth = 2000
-      Position = 52
-    end
-    object plMatterDetailsppField54: TppField
-      FieldAlias = 'ARCHIVEDEST'
-      FieldName = 'ARCHIVEDEST'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 53
-    end
-    object plMatterDetailsppField55: TppField
-      FieldAlias = 'ARCHIVETYPECODE_1'
-      FieldName = 'ARCHIVETYPECODE_1'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 54
-    end
-    object plMatterDetailsppField56: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'RATEDESCR'
-      FieldName = 'RATEDESCR'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 55
-    end
-    object plMatterDetailsppField57: TppField
-      FieldAlias = 'BRANCHDESCR'
-      FieldName = 'BRANCHDESCR'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 56
-    end
-    object plMatterDetailsppField58: TppField
-      FieldAlias = 'SEARCH'
-      FieldName = 'SEARCH'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 57
-    end
-    object plMatterDetailsppField59: TppField
-      FieldAlias = 'DESCRIPTION'
-      FieldName = 'DESCRIPTION'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 58
-    end
-    object plMatterDetailsppField60: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'NBILL_TO'
-      FieldName = 'NBILL_TO'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 59
-    end
-    object plMatterDetailsppField61: TppField
-      FieldAlias = 'NCONTACT'
-      FieldName = 'NCONTACT'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 60
-    end
-    object plMatterDetailsppField62: TppField
-      FieldAlias = 'NREFERRED_BY'
-      FieldName = 'NREFERRED_BY'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 61
-    end
-    object plMatterDetailsppField63: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'FEE_ALERT_LIMIT'
-      FieldName = 'FEE_ALERT_LIMIT'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 62
-    end
-    object plMatterDetailsppField64: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ESTIMATEDFEE'
-      FieldName = 'ESTIMATEDFEE'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 63
-    end
-    object plMatterDetailsppField65: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ESTIMATEDDISBPRINC'
-      FieldName = 'ESTIMATEDDISBPRINC'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 64
-    end
-    object plMatterDetailsppField66: TppField
-      FieldAlias = 'FEE_TAX_BASIS'
-      FieldName = 'FEE_TAX_BASIS'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 65
-    end
-    object plMatterDetailsppField67: TppField
-      FieldAlias = 'ADDRESS'
-      FieldName = 'ADDRESS'
-      FieldLength = 120
-      DisplayWidth = 120
-      Position = 66
-    end
-    object plMatterDetailsppField68: TppField
-      FieldAlias = 'SUBURB'
-      FieldName = 'SUBURB'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 67
-    end
-    object plMatterDetailsppField69: TppField
-      FieldAlias = 'STATE'
-      FieldName = 'STATE'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 68
-    end
-    object plMatterDetailsppField70: TppField
-      FieldAlias = 'POSTCODE'
-      FieldName = 'POSTCODE'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 69
-    end
-    object plMatterDetailsppField71: TppField
-      FieldAlias = 'COUNTRY'
-      FieldName = 'COUNTRY'
-      FieldLength = 30
-      DisplayWidth = 30
-      Position = 70
-    end
-    object plMatterDetailsppField72: TppField
-      FieldAlias = 'FEECODE'
-      FieldName = 'FEECODE'
-      FieldLength = 30
-      DisplayWidth = 30
-      Position = 71
-    end
-    object plMatterDetailsppField73: TppField
-      FieldAlias = 'NNAME_1'
-      FieldName = 'NNAME_1'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 72
-    end
-    object plMatterDetailsppField74: TppField
-      FieldAlias = 'ADVERTISING_SOURCE'
-      FieldName = 'ADVERTISING_SOURCE'
-      FieldLength = 400
-      DisplayWidth = 400
-      Position = 73
-    end
-    object plMatterDetailsppField75: TppField
-      FieldAlias = 'EXP_COMPLETION'
-      FieldName = 'EXP_COMPLETION'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 74
-    end
-    object plMatterDetailsppField76: TppField
-      FieldAlias = 'PROSPECTIVE'
-      FieldName = 'PROSPECTIVE'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 75
-    end
-    object plMatterDetailsppField77: TppField
-      FieldAlias = 'CREATED_BY'
-      FieldName = 'CREATED_BY'
-      FieldLength = 10
-      DisplayWidth = 10
-      Position = 76
-    end
-    object plMatterDetailsppField78: TppField
-      FieldAlias = 'TRUST_AUTHORITY_RCVD_DATE'
-      FieldName = 'TRUST_AUTHORITY_RCVD_DATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 77
-    end
-    object plMatterDetailsppField79: TppField
-      FieldAlias = 'COST_AGREEMENT_RCVD_DATE'
-      FieldName = 'COST_AGREEMENT_RCVD_DATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 78
-    end
-    object plMatterDetailsppField80: TppField
-      FieldAlias = 'DESTRUCTION_AUTH_RCVD_DATE'
-      FieldName = 'DESTRUCTION_AUTH_RCVD_DATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 79
-    end
-    object plMatterDetailsppField81: TppField
-      FieldAlias = 'ROWID'
-      FieldName = 'ROWID'
-      FieldLength = 18
-      DisplayWidth = 18
-      Position = 80
-    end
   end
   object rptDocList: TppReport
     AutoStop = False
@@ -15225,7 +14605,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -15960,7 +15340,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -16858,7 +16238,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -21283,7 +20663,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22071,7 +21451,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -22351,7 +21731,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -25359,7 +24739,9 @@ object frmMatters: TfrmMatters
         '       trunc(matter.COST_AGREEMENT_RCVD_DATE) COST_AGREEMENT_RCV' +
         'D_DATE, trunc(matter.DESTRUCTION_AUTH_RCVD_DATE) DESTRUCTION_AUT' +
         'H_RCVD_DATE,'
-      '       ent.name as entity_name, matter.ROWID'
+      
+        '       ent.name as entity_name, matter.AP_EMAIL_MATTER, matter.R' +
+        'OWID'
       '  FROM matter,'
       '       (SELECT code, descr'
       '          FROM branch) bran,'
@@ -25376,6 +24758,7 @@ object frmMatters: TfrmMatters
       '   AND matter.advertising_source = advertising.adid(+)')
     CachedUpdates = True
     RefreshOptions = [roBeforeEdit]
+    Active = True
     AfterScroll = qryMatterAfterScroll
     Left = 178
     Top = 125
@@ -26191,7 +25574,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Debtor Statement'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -26832,6 +26215,8 @@ object frmMatters: TfrmMatters
     SQL.Strings = (
       'SELECT title, workphone, mobile,'
       '       CASE'
+      '          WHEN (ap_email IS NOT NULL)'
+      '             THEN ap_email'
       '          WHEN (whichemailaddress = 1)'
       '             THEN email'
       '          WHEN (whichemailaddress = 2)'
@@ -33281,7 +32666,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -33983,7 +33368,7 @@ object frmMatters: TfrmMatters
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
