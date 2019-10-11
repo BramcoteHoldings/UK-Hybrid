@@ -82,9 +82,9 @@ object frmBulkMailer: TfrmBulkMailer
         OriginalHeight = 150
         object pagMain: TcxPageControl
           Left = 0
-          Top = 61
+          Top = 82
           Width = 1100
-          Height = 482
+          Height = 461
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
@@ -96,7 +96,9 @@ object frmBulkMailer: TfrmBulkMailer
           Properties.HideTabs = True
           LookAndFeel.NativeStyle = True
           OnChange = pagMainChange
-          ClientRectBottom = 478
+          ExplicitTop = 61
+          ExplicitHeight = 482
+          ClientRectBottom = 457
           ClientRectLeft = 4
           ClientRectRight = 1096
           ClientRectTop = 4
@@ -107,11 +109,12 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
+            ExplicitHeight = 474
             object Editor: TRichEdit
               Left = 0
               Top = 0
               Width = 1092
-              Height = 474
+              Height = 453
               Margins.Left = 4
               Margins.Top = 4
               Margins.Right = 4
@@ -130,6 +133,7 @@ object frmBulkMailer: TfrmBulkMailer
               TabOrder = 0
               Zoom = 100
               OnDragOver = EditorDragOver
+              ExplicitHeight = 474
             end
           end
           object tabHTML: TcxTabSheet
@@ -139,6 +143,7 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'tabHTML'
             ImageIndex = 1
+            ExplicitHeight = 474
             object ed_LinkHRef: TcxTextEdit
               Left = 435
               Top = 4
@@ -158,13 +163,14 @@ object frmBulkMailer: TfrmBulkMailer
               Left = 0
               Top = 0
               Width = 1092
-              Height = 474
+              Height = 453
               Margins.Left = 4
               Margins.Top = 4
               Margins.Right = 4
               Margins.Bottom = 4
               Align = alClient
               TabOrder = 1
+              Silent = False
               DisableCtrlShortcuts = 'N'
               DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
               UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
@@ -174,6 +180,7 @@ object frmBulkMailer: TfrmBulkMailer
               PrintOptions.Orientation = poPortrait
               ExplicitLeft = 2
               ExplicitTop = -2
+              ExplicitHeight = 474
               ControlData = {
                 4C000000136B0000EE2800000000000000000000000000000000000000000000
                 000000004C000000000000000000000001000000E0D057007335CF11AE690800
@@ -204,6 +211,7 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
+            ExplicitHeight = 474
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
@@ -215,7 +223,8 @@ object frmBulkMailer: TfrmBulkMailer
               Lines.Strings = (
                 'MemoRawText')
               TabOrder = 0
-              Height = 474
+              ExplicitHeight = 474
+              Height = 453
               Width = 1092
             end
           end
@@ -273,7 +282,7 @@ object frmBulkMailer: TfrmBulkMailer
           Left = 0
           Top = 3
           Width = 1100
-          Height = 58
+          Height = 79
           Align = alTop
           TabOrder = 3
           object cxLabel2: TcxLabel
@@ -295,7 +304,7 @@ object frmBulkMailer: TfrmBulkMailer
           end
           object cxLabel1: TcxLabel
             Left = 5
-            Top = 30
+            Top = 51
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -326,7 +335,7 @@ object frmBulkMailer: TfrmBulkMailer
           end
           object edSubject: TcxTextEdit
             Left = 56
-            Top = 29
+            Top = 50
             Margins.Left = 4
             Margins.Top = 4
             Margins.Right = 4
@@ -336,6 +345,37 @@ object frmBulkMailer: TfrmBulkMailer
             StyleFocused.LookAndFeel.NativeStyle = False
             StyleHot.LookAndFeel.NativeStyle = False
             TabOrder = 3
+            Width = 675
+          end
+          object cxLabel3: TcxLabel
+            Left = 5
+            Top = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Caption = 'CC:'
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clBlack
+            Style.Font.Height = -12
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = []
+            Style.IsFontAssigned = True
+            Transparent = True
+          end
+          object edCC: TcxTextEdit
+            Left = 56
+            Top = 27
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
+            Style.LookAndFeel.NativeStyle = False
+            StyleDisabled.LookAndFeel.NativeStyle = False
+            StyleFocused.LookAndFeel.NativeStyle = False
+            StyleHot.LookAndFeel.NativeStyle = False
+            TabOrder = 5
             Width = 675
           end
         end

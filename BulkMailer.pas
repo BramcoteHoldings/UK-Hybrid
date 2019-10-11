@@ -238,6 +238,8 @@ type
     dsReportList: TUniDataSource;
     tvEmailsNMATTER: TcxGridDBColumn;
     tvEmailsNNAME: TcxGridDBColumn;
+    cxLabel3: TcxLabel;
+    edCC: TcxTextEdit;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -1013,7 +1015,7 @@ procedure TfrmBulkMailer.rbMattersClick(Sender: TObject);
 begin
    DebtorStatements := 1;
 
-   EmailSQL := 'SELECT DISTINCT nmemo.nbill_to AS nname, ap_email AS partyemail, nmemo.nmatter, m.fileid as refno '+
+   EmailSQL := 'SELECT DISTINCT nmemo.nbill_to AS nname, nvl(ap_email_matter, ap_email) AS partyemail, nmemo.nmatter, m.fileid as refno '+
                '   FROM axiom.phonebook ph, axiom.matter m, nmemo '+
                'WHERE m.nname = nmemo.nbill_to '+
                '   AND nmemo.dispatched IS NOT NULL '+
@@ -1314,7 +1316,11 @@ begin
 
                      //setup mail message
                      MailMessage.From.Address := edFrom.Text;
+
                      MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
+
+                     if edCC.Text <> '' then
+                        MailMessage.CCList.EMailAddresses := edCC.Text;
 
                      lsSubject := edSubject.Text;
 
@@ -1808,7 +1814,7 @@ begin
       FieldByName('fileid').AsString := MatterString(ANMatter, 'FILEID');
 
       FieldByName('EXTERNAL_ACCESS').AsString := 'N';
-      FieldByName('DOC_NOTES').AsString := 'Emailed to '+AEmail;
+      FieldByName('DOC_NOTES').AsString := 'Emailed to ' + AEmail;
 
 //         FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(APath),2, Length(ExtractFileExt(APath)));
          FieldByName('PATH').AsString := IndexPath(ADocName, 'DOC_DEFAULT_DIRECTORY');  //  NewPath;
