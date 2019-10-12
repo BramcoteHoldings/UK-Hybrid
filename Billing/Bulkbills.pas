@@ -445,257 +445,268 @@ var
    sDiscount,
    DefaultTax,
    lFileID: string;
+   frmProcess: TfrmProcess;
 begin
    TaxDate := dtpInterim.Date;
    if NumberOfBills > 0 then
    begin
-      with tvMatters do
-      begin
-         BeginUpdate;
-         for nRowCount := 0 to DataController.GetRowCount - 1 do
+      frmProcess := TfrmProcess.Create(Self);
+      try
+         with tvMatters do
          begin
-            ViewData.Records[nRowCount].Focused := True;
-            if (tvMattersSELECTED.EditValue = True) and
-               ((tvMattersNMEMO.EditValue = 0) or VarIsNull(tvMattersNMEMO.EditValue)) then
+            BeginUpdate;
+            for nRowCount := 0 to DataController.GetRowCount - 1 do
             begin
-               ANMemo := CreateInvoice(tvMattersNMATTER.EditValue, tvMattersNCLIENT.EditValue, dtpInterim.Date, sDiscount, True);
-               DefaultTax :=  get_default_gst('Bill');
-               if DefaultTax = ''  then
-                  DefaultTax := dmAxiom.DefaultTax;
-               with dmAxiom.qryTmp do
+               frmProcess.pbProcess.Max := DataController.GetRowCount;
+               frmProcess.Show;
+               ViewData.Records[nRowCount].Focused := True;
+               if (tvMattersSELECTED.EditValue = True) and
+                  ((tvMattersNMEMO.EditValue = 0) or VarIsNull(tvMattersNMEMO.EditValue)) then
                begin
-                  Close;
-                  SQL.Text := 'select FEES, DISB, ANTD, SUND, UPCRED, FILEID, NMATTER from nmemo where nmemo = :nmemo';
-                  ParamByName('nmemo').AsInteger := ANMemo;
-                  Open;
-                  lFileID := FieldByName('FILEID').AsString;
-                  lNmatter := FieldByName('NMATTER').AsInteger;
-                  if FieldByName('fees').AsCurrency <> 0 then
-                  begin
-                     with dmAxiom.procShowtax do
-                     begin
-                        ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('fees').AsCurrency;
-                        ParamByName('dgstfree').AsCurrency := ldgstfree;
-                        ParamByName('stype').AsString := 'FEE';
-                        ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
-                        ParamByName('sdefaulttax').AsString := DefaultTax;
-                        ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
-                        ParamByName('nnmemo').AsInteger := ANMemo;
-                        ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
-                        //ParamByName('dtaxdate').AsDateTime := now;
-                        Execute;
-
-                        procTax := ParambyName('RESULT').AsCurrency;
-                        Close;
-                        with dmAxiom.qryTmp2 do
-                        begin
-                           Close;
-                           SQL.Text := 'update nmemo set feestax = :feestax, tax = tax + :feestax where nmemo = :nmemo';
-                           ParamByName('feestax').AsCurrency := procTax;
-                           ParamByName('nmemo').AsInteger := ANMemo;
-                           ExecSQL;
-                        end;
-                     end;
-                  end;
-                  if FieldByName('sund').AsCurrency <> 0 then
-                  begin
-                     with dmAxiom.procShowtax do
-                     begin
-                        ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('sund').AsCurrency;
-                        ParamByName('dgstfree').AsCurrency := ldgstfree;
-                        ParamByName('stype').AsString := 'SUNDRY';
-                        ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
-                        ParamByName('sdefaulttax').AsString := DefaultTax;
-                        ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
-                        ParamByName('nnmemo').AsInteger := ANMemo;
-                        ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
-                        //ParamByName('dtaxdate').AsDateTime := now;
-                        Execute;
-
-                        procTax := ParambyName('RESULT').AsCurrency;
-                        Close;
-                        with dmAxiom.qryTmp2 do
-                        begin
-                           Close;
-                           SQL.Text := 'update nmemo set sundtax = :sundtax, tax = tax + :sundtax where nmemo = :nmemo';
-                           ParamByName('sundtax').AsCurrency := procTax;
-                           ParamByName('nmemo').AsInteger := ANMemo;
-                           ExecSQL;
-                        end;
-                     end;
-                  end;
-                  if FieldByName('disb').AsCurrency <> 0 then
-                  begin
-                     with dmAxiom.procShowtax do
-                     begin
-                        ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('disb').AsCurrency;
-                        ParamByName('dgstfree').AsCurrency := ldgstfree;
-                        ParamByName('stype').AsString := 'ALLOC';
-                        ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
-                        ParamByName('sdefaulttax').AsString := DefaultTax;
-                        ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
-                        ParamByName('nnmemo').AsInteger := ANMemo;
-                        ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
-                        //ParamByName('dtaxdate').AsDateTime := now;
-                        Execute;
-
-                        procTax := ParambyName('RESULT').AsCurrency;
-                        Close;
-                        with dmAxiom.qryTmp2 do
-                        begin
-                           Close;
-                           SQL.Text := 'update nmemo set disbtax = :disbtax, tax = tax + :disbtax where nmemo = :nmemo';
-                           ParamByName('disbtax').AsCurrency := procTax;
-                           ParamByName('nmemo').AsInteger := ANMemo;
-                           ExecSQL;
-                        end;
-                     end;
-                  end;
-                  if FieldByName('ANTD').AsCurrency <> 0 then
-                  begin
-                     with dmAxiom.procShowtax do
-                     begin
-                        ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('ANTD').AsCurrency;
-                        ParamByName('dgstfree').AsCurrency := ldgstfree;
-                        ParamByName('stype').AsString := 'CHEQREQ';
-                        ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
-                        ParamByName('sdefaulttax').AsString := DefaultTax;
-                        ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
-                        ParamByName('nnmemo').AsInteger := ANMemo;
-                        ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
-                        //ParamByName('dtaxdate').AsDateTime := now;
-                        Execute;
-
-                        procTax := ParambyName('RESULT').AsCurrency;
-                        Close;
-                        with dmAxiom.qryTmp2 do
-                        begin
-                           Close;
-                           SQL.Text := 'update nmemo set ANTDtax = :ANTDtax, tax = tax + :ANTDtax where nmemo = :nmemo';
-                           ParamByName('ANTDtax').AsCurrency := procTax;
-                           ParamByName('nmemo').AsInteger := ANMemo;
-                           ExecSQL;
-                        end;
-                     end;
-                  end;
-
-                  if FieldByName('upcred').AsCurrency <> 0 then
-                  begin
-                     with dmAxiom.procShowtax do
-                     begin
-                        ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('upcred').AsCurrency;
-                        ParamByName('dgstfree').AsCurrency := ldgstfree;
-                        ParamByName('stype').AsString := 'UPCRED';
-                        ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
-                        ParamByName('sdefaulttax').AsString := DefaultTax;
-                        ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
-                        ParamByName('nnmemo').AsInteger := ANMemo;
-                        ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
-                        //ParamByName('dtaxdate').AsDateTime := now;
-                        Execute;
-
-                        procTax := ParambyName('RESULT').AsCurrency;
-                        Close;
-                        with dmAxiom.qryTmp2 do
-                        begin
-                           Close;
-                           SQL.Text := 'update nmemo set UPCREDtax = :UPCREDtax, tax = tax + :UPCREDtax where nmemo = :nmemo';
-                           ParamByName('UPCREDtax').AsCurrency := procTax;
-                           ParamByName('nmemo').AsInteger := ANMemo;
-                           ExecSQL;
-                        end;
-                     end;
-                  end;
-               end;
-               // if we need to apply trust
-               if (tvMattersAPPLYTRUST.EditValue = True) then
-               begin
-                  ApplyTrust := False;
-                  Billtotal := TableCurrency('NMEMO','NMEMO',ANMemo,'TOTAL');   //  vMattersWIP.EditValue;
-                  cTrustBal := ClearTrustFromStoredProc(lFileID);
-                  cProtectedBal := ProtectedTrust(lFileID);
+                  frmProcess.lblProcess.Caption := 'Generating Bill for Matter #'+ tvMattersFILEID.EditValue;
+                  Application.ProcessMessages;
+                  ANMemo := CreateInvoice(tvMattersNMATTER.EditValue, tvMattersNCLIENT.EditValue, dtpInterim.Date, sDiscount, True);
+                  DefaultTax :=  get_default_gst('Bill');
+                  if DefaultTax = ''  then
+                     DefaultTax := dmAxiom.DefaultTax;
                   with dmAxiom.qryTmp do
                   begin
-                     SQL.Clear;
-                     SQL.Text := 'select getTrustUnconCheqReqAmount('+ IntToStr(lNMatter) +') as unconcheqreq from dual';
-                     ExecSQL;
-                     cUnconCheqReq := FieldByName('unconcheqreq').AsCurrency;
-                  end;
-                  TrustDiff := 0;
-                  if SystemString('show_net_trust') = 'Y' then
-                  begin
-                     TrustDiff := (cTrustBal - cUnconCheqReq) - Billtotal;
-                     if (TrustDiff >= 0) then
+                     Close;
+                     SQL.Text := 'select FEES, DISB, ANTD, SUND, UPCRED, FILEID, NMATTER from nmemo where nmemo = :nmemo';
+                     ParamByName('nmemo').AsInteger := ANMemo;
+                     Open;
+                     lFileID := FieldByName('FILEID').AsString;
+                     lNmatter := FieldByName('NMATTER').AsInteger;
+                     if FieldByName('fees').AsCurrency <> 0 then
                      begin
-                        ATrust := Billtotal;
-                        ApplyTrust := True;
-                     end
-                     else
-                     if (cTrustBal - cUnconCheqReq) < 0 then
-                        ATrust := 0
-                     else
-                     if Billtotal >=  (cTrustBal - cUnconCheqReq) then
-                     begin
-                        ApplyTrust := True;
-                        ATrust := (cTrustBal - cUnconCheqReq);
-                     end
-                     else if Billtotal <= cTrustBal then
-                     begin
-                        ATrust := Billtotal ;
-                        ApplyTrust := True;
+                        with dmAxiom.procShowtax do
+                        begin
+                           ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('fees').AsCurrency;
+                           ParamByName('dgstfree').AsCurrency := ldgstfree;
+                           ParamByName('stype').AsString := 'FEE';
+                           ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
+                           ParamByName('sdefaulttax').AsString := DefaultTax;
+                           ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
+                           ParamByName('nnmemo').AsInteger := ANMemo;
+                           ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
+                           //ParamByName('dtaxdate').AsDateTime := now;
+                           Execute;
+
+                           procTax := ParambyName('RESULT').AsCurrency;
+                           Close;
+                           with dmAxiom.qryTmp2 do
+                           begin
+                              Close;
+                              SQL.Text := 'update nmemo set feestax = :feestax, tax = tax + :feestax where nmemo = :nmemo';
+                              ParamByName('feestax').AsCurrency := procTax;
+                              ParamByName('nmemo').AsInteger := ANMemo;
+                              ExecSQL;
+                           end;
+                        end;
                      end;
-                  end
-                  else
-                  begin
-                     TrustDiff := (cTrustBal) - Billtotal;
-                     if (TrustDiff >= 0) then
+                     if FieldByName('sund').AsCurrency <> 0 then
                      begin
-                        ATrust := Billtotal;
-                        ApplyTrust := True;
-                     end
-                     else
-                     if (cTrustBal) < 0 then
-                        ATrust := 0
-                     else
-                     if Billtotal >=  (cTrustBal) then
+                        with dmAxiom.procShowtax do
+                        begin
+                           ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('sund').AsCurrency;
+                           ParamByName('dgstfree').AsCurrency := ldgstfree;
+                           ParamByName('stype').AsString := 'SUNDRY';
+                           ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
+                           ParamByName('sdefaulttax').AsString := DefaultTax;
+                           ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
+                           ParamByName('nnmemo').AsInteger := ANMemo;
+                           ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
+                           //ParamByName('dtaxdate').AsDateTime := now;
+                           Execute;
+
+                           procTax := ParambyName('RESULT').AsCurrency;
+                           Close;
+                           with dmAxiom.qryTmp2 do
+                           begin
+                              Close;
+                              SQL.Text := 'update nmemo set sundtax = :sundtax, tax = tax + :sundtax where nmemo = :nmemo';
+                              ParamByName('sundtax').AsCurrency := procTax;
+                              ParamByName('nmemo').AsInteger := ANMemo;
+                              ExecSQL;
+                           end;
+                        end;
+                     end;
+                     if FieldByName('disb').AsCurrency <> 0 then
                      begin
-                        ApplyTrust := True;
-                        ATrust := (cTrustBal);
-                     end
-                     else if Billtotal <= cTrustBal then
+                        with dmAxiom.procShowtax do
+                        begin
+                           ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('disb').AsCurrency;
+                           ParamByName('dgstfree').AsCurrency := ldgstfree;
+                           ParamByName('stype').AsString := 'ALLOC';
+                           ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
+                           ParamByName('sdefaulttax').AsString := DefaultTax;
+                           ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
+                           ParamByName('nnmemo').AsInteger := ANMemo;
+                           ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
+                           //ParamByName('dtaxdate').AsDateTime := now;
+                           Execute;
+
+                           procTax := ParambyName('RESULT').AsCurrency;
+                           Close;
+                           with dmAxiom.qryTmp2 do
+                           begin
+                              Close;
+                              SQL.Text := 'update nmemo set disbtax = :disbtax, tax = tax + :disbtax where nmemo = :nmemo';
+                              ParamByName('disbtax').AsCurrency := procTax;
+                              ParamByName('nmemo').AsInteger := ANMemo;
+                              ExecSQL;
+                           end;
+                        end;
+                     end;
+                     if FieldByName('ANTD').AsCurrency <> 0 then
                      begin
-                        ATrust := Billtotal ;
-                        ApplyTrust := True;
+                        with dmAxiom.procShowtax do
+                        begin
+                           ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('ANTD').AsCurrency;
+                           ParamByName('dgstfree').AsCurrency := ldgstfree;
+                           ParamByName('stype').AsString := 'CHEQREQ';
+                           ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
+                           ParamByName('sdefaulttax').AsString := DefaultTax;
+                           ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
+                           ParamByName('nnmemo').AsInteger := ANMemo;
+                           ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
+                           //ParamByName('dtaxdate').AsDateTime := now;
+                           Execute;
+
+                           procTax := ParambyName('RESULT').AsCurrency;
+                           Close;
+                           with dmAxiom.qryTmp2 do
+                           begin
+                              Close;
+                              SQL.Text := 'update nmemo set ANTDtax = :ANTDtax, tax = tax + :ANTDtax where nmemo = :nmemo';
+                              ParamByName('ANTDtax').AsCurrency := procTax;
+                              ParamByName('nmemo').AsInteger := ANMemo;
+                              ExecSQL;
+                           end;
+                        end;
+                     end;
+
+                     if FieldByName('upcred').AsCurrency <> 0 then
+                     begin
+                        with dmAxiom.procShowtax do
+                        begin
+                           ParamByName('pdamount').AsCurrency := dmAxiom.qryTmp.FieldByName('upcred').AsCurrency;
+                           ParamByName('dgstfree').AsCurrency := ldgstfree;
+                           ParamByName('stype').AsString := 'UPCRED';
+                           ParamByName('sfileid').AsString := tvMattersFILEID.EditValue;
+                           ParamByName('sdefaulttax').AsString := DefaultTax;
+                           ParamByName('nnmatter').AsInteger := tvMattersNMATTER.EditValue;
+                           ParamByName('nnmemo').AsInteger := ANMemo;
+                           ParamByName('dtaxdate').AsDateTime := dtpInterim.Date;
+                           //ParamByName('dtaxdate').AsDateTime := now;
+                           Execute;
+
+                           procTax := ParambyName('RESULT').AsCurrency;
+                           Close;
+                           with dmAxiom.qryTmp2 do
+                           begin
+                              Close;
+                              SQL.Text := 'update nmemo set UPCREDtax = :UPCREDtax, tax = tax + :UPCREDtax where nmemo = :nmemo';
+                              ParamByName('UPCREDtax').AsCurrency := procTax;
+                              ParamByName('nmemo').AsInteger := ANMemo;
+                              ExecSQL;
+                           end;
+                        end;
                      end;
                   end;
-                  if ApplyTrust then
+                  // if we need to apply trust
+                  if (tvMattersAPPLYTRUST.EditValue = True) then
                   begin
+                     ApplyTrust := False;
+                     Billtotal := TableCurrency('NMEMO','NMEMO',ANMemo,'TOTAL');   //  vMattersWIP.EditValue;
+                     cTrustBal := ClearTrustFromStoredProc(lFileID);
+                     cProtectedBal := ProtectedTrust(lFileID);
                      with dmAxiom.qryTmp do
                      begin
                         SQL.Clear;
-                        SQL.Text := 'update nmemo set trust = :trust where nmemo = :nmemo';
-                        ParamByName('trust').AsCurrency := ATrust;
-                        ParamByName('nmemo').AsInteger := ANMemo;
+                        SQL.Text := 'select getTrustUnconCheqReqAmount('+ IntToStr(lNMatter) +') as unconcheqreq from dual';
                         ExecSQL;
+                        cUnconCheqReq := FieldByName('unconcheqreq').AsCurrency;
+                     end;
+                     TrustDiff := 0;
+                     if SystemString('show_net_trust') = 'Y' then
+                     begin
+                        TrustDiff := (cTrustBal - cUnconCheqReq) - Billtotal;
+                        if (TrustDiff >= 0) then
+                        begin
+                           ATrust := Billtotal;
+                           ApplyTrust := True;
+                        end
+                        else
+                        if (cTrustBal - cUnconCheqReq) < 0 then
+                           ATrust := 0
+                        else
+                        if Billtotal >=  (cTrustBal - cUnconCheqReq) then
+                        begin
+                           ApplyTrust := True;
+                           ATrust := (cTrustBal - cUnconCheqReq);
+                        end
+                        else if Billtotal <= cTrustBal then
+                        begin
+                           ATrust := Billtotal ;
+                           ApplyTrust := True;
+                        end;
+                     end
+                     else
+                     begin
+                        TrustDiff := (cTrustBal) - Billtotal;
+                        if (TrustDiff >= 0) then
+                        begin
+                           ATrust := Billtotal;
+                           ApplyTrust := True;
+                        end
+                        else
+                        if (cTrustBal) < 0 then
+                           ATrust := 0
+                        else
+                        if Billtotal >=  (cTrustBal) then
+                        begin
+                           ApplyTrust := True;
+                           ATrust := (cTrustBal);
+                        end
+                        else if Billtotal <= cTrustBal then
+                        begin
+                           ATrust := Billtotal ;
+                           ApplyTrust := True;
+                        end;
+                     end;
+                     if ApplyTrust then
+                     begin
+                        with dmAxiom.qryTmp do
+                        begin
+                           SQL.Clear;
+                           SQL.Text := 'update nmemo set trust = :trust where nmemo = :nmemo';
+                           ParamByName('trust').AsCurrency := ATrust;
+                           ParamByName('nmemo').AsInteger := ANMemo;
+                           ExecSQL;
+                        end;
                      end;
                   end;
+                  inc(i);
+                  tvMattersNMEMO.EditValue := ANMemo;
+                  dbgrMatters.Invalidate;
+                  frmProcess.pbProcess.Position := i;
                end;
-               inc(i);
-               tvMattersNMEMO.EditValue := ANMemo;
-               dbgrMatters.Invalidate;
             end;
+            EndUpdate;
+            btnPrintBills.Enabled := (pagcontrol.ActivePageIndex = 1);
+            cbPrintBills.Enabled := (pagcontrol.ActivePageIndex = 1);
+
+//            qryMatters.Close;
+//            qryMatters.Open;
+//            MakeSql;
+            pbSelect.Caption := 'Select All';
+
+            if (i > 0) then
+               MsgInfo(IntToStr(i) + ' Bill(s) created');
          end;
-         EndUpdate;
-         btnPrintBills.Enabled := (pagcontrol.ActivePageIndex = 1);
-         cbPrintBills.Enabled := (pagcontrol.ActivePageIndex = 1);
-
-//         qryMatters.Close;
-//         qryMatters.Open;
-//         MakeSql; 
-         pbSelect.Caption := 'Select All';
-
-         if (i > 0) then
-            MsgInfo(IntToStr(i) + ' Bill(s) created');
+      finally
+          frmProcess.Release;
       end;
    end
    else

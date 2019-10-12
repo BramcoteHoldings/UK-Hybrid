@@ -5,7 +5,7 @@ object frmMatterNew: TfrmMatterNew
   VertScrollBar.Visible = False
   BorderStyle = bsDialog
   Caption = 'Matter Creation'
-  ClientHeight = 616
+  ClientHeight = 626
   ClientWidth = 532
   Color = clBtnFace
   Constraints.MinHeight = 478
@@ -24,7 +24,7 @@ object frmMatterNew: TfrmMatterNew
   OnShow = FormShow
   DesignSize = (
     532
-    616)
+    626)
   PixelsPerInch = 96
   TextHeight = 15
   object lblMatterNo: TLabel
@@ -44,7 +44,7 @@ object frmMatterNew: TfrmMatterNew
   object lblType: TLabel
     Left = 204
     Top = 35
-    Width = 33
+    Width = 32
     Height = 15
     Caption = 'Type *'
     Color = clBtnFace
@@ -106,7 +106,7 @@ object frmMatterNew: TfrmMatterNew
   object lblSubType: TLabel
     Left = 204
     Top = 63
-    Width = 48
+    Width = 47
     Height = 15
     Caption = 'Sub Type'
     Color = clBtnFace
@@ -368,7 +368,7 @@ object frmMatterNew: TfrmMatterNew
   end
   object btnOK: TcxButton
     Left = 352
-    Top = 590
+    Top = 600
     Width = 79
     Height = 23
     Anchors = [akRight, akBottom]
@@ -462,11 +462,11 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 11
     OnClick = btnOKClick
-    ExplicitTop = 588
+    ExplicitTop = 590
   end
   object btnCancel: TcxButton
     Left = 437
-    Top = 590
+    Top = 600
     Width = 80
     Height = 23
     Anchors = [akRight, akBottom]
@@ -561,7 +561,7 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 12
     OnClick = btnCancelClick
-    ExplicitTop = 588
+    ExplicitTop = 590
   end
   object cbDepartment: TcxDBLookupComboBox
     Left = 77
@@ -674,18 +674,18 @@ object frmMatterNew: TfrmMatterNew
   end
   object cbPrintLabel: TCheckBox
     Left = 6
-    Top = 595
+    Top = 605
     Width = 82
     Height = 16
     Alignment = taLeftJustify
     Anchors = [akLeft, akBottom]
     Caption = 'Print Label?'
     TabOrder = 15
-    ExplicitTop = 593
+    ExplicitTop = 595
   end
   object pnlBarcode: TPanel
     Left = 115
-    Top = 590
+    Top = 600
     Width = 196
     Height = 26
     Anchors = [akLeft, akBottom]
@@ -693,7 +693,7 @@ object frmMatterNew: TfrmMatterNew
     ParentColor = True
     ShowCaption = False
     TabOrder = 16
-    ExplicitTop = 588
+    ExplicitTop = 590
     object Label43: TLabel
       Left = 0
       Top = 4
@@ -711,26 +711,23 @@ object frmMatterNew: TfrmMatterNew
     end
   end
   object pageMatter: TcxPageControl
-    Left = 7
-    Top = 228
+    Left = 8
+    Top = 234
     Width = 511
-    Height = 356
+    Height = 360
     TabOrder = 17
     Properties.ActivePage = tabBalances
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pageMatterChange
-    ClientRectBottom = 352
+    ClientRectBottom = 356
     ClientRectLeft = 4
     ClientRectRight = 507
     ClientRectTop = 46
     object tabStaff: TcxTabSheet
       Caption = 'Carriage'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 306
       object tabCarriageAdditional: TcxPageControl
         Left = 5
         Top = 3
@@ -2018,10 +2015,6 @@ object frmMatterNew: TfrmMatterNew
         object tabMatterAdditionalCarriage: TcxTabSheet
           Caption = 'Additional'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DBCheckBox1: TDBCheckBox
             Left = 31
             Top = 5
@@ -2067,17 +2060,14 @@ object frmMatterNew: TfrmMatterNew
     object tabContacts: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 306
       DesignSize = (
         503
-        306)
+        310)
       object Label12: TLabel
         Left = 61
         Top = 68
-        Width = 32
+        Width = 31
         Height = 15
         Caption = 'Bill To'
         Transparent = True
@@ -2121,9 +2111,9 @@ object frmMatterNew: TfrmMatterNew
         Caption = 'Address:'
       end
       object lStreetSuburb: TLabel
-        Left = 53
+        Left = 54
         Top = 204
-        Width = 75
+        Width = 74
         Height = 15
         Alignment = taRightJustify
         Caption = 'Town/Suburb:'
@@ -2160,9 +2150,9 @@ object frmMatterNew: TfrmMatterNew
         Shape = bsBottomLine
       end
       object Label42: TLabel
-        Left = 20
+        Left = 21
         Top = 95
-        Width = 71
+        Width = 70
         Height = 15
         Alignment = taRightJustify
         Caption = 'Bill Template:'
@@ -2673,10 +2663,7 @@ object frmMatterNew: TfrmMatterNew
     object tabBalances: TcxTabSheet
       Caption = 'Financial'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 306
       object lblFeeCode: TLabel
         Left = 20
         Top = 58
@@ -2696,7 +2683,7 @@ object frmMatterNew: TfrmMatterNew
       object lblTrustBank: TLabel
         Left = 164
         Top = 31
-        Width = 63
+        Width = 62
         Height = 15
         Caption = 'Trust Bank *'
         Transparent = True
@@ -2862,7 +2849,7 @@ object frmMatterNew: TfrmMatterNew
           object lblNoEstFees: TLabel
             Left = 136
             Top = 100
-            Width = 168
+            Width = 167
             Height = 15
             Caption = 'There are no Estimated Fees set.'
             Visible = False
@@ -2877,7 +2864,7 @@ object frmMatterNew: TfrmMatterNew
           object lblNoEstDisbs: TLabel
             Left = 128
             Top = 123
-            Width = 173
+            Width = 172
             Height = 15
             Caption = 'There are no Estimated Disbs set.'
             Visible = False
@@ -3175,7 +3162,7 @@ object frmMatterNew: TfrmMatterNew
             object lblTotalFeesRecorded: TLabel
               Left = 3
               Top = 125
-              Width = 105
+              Width = 104
               Height = 15
               Caption = 'Total Fees  recorded'
             end
@@ -3336,14 +3323,10 @@ object frmMatterNew: TfrmMatterNew
           Caption = 'Recurring Fees'
           ImageIndex = 2
           OnShow = tabRecurringFeesShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label21: TLabel
             Left = 7
             Top = 15
-            Width = 23
+            Width = 22
             Height = 15
             Caption = 'Task'
           end
@@ -3501,10 +3484,6 @@ object frmMatterNew: TfrmMatterNew
           Enabled = False
           ImageIndex = 3
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label41: TLabel
             Left = 20
             Top = 119
@@ -3515,7 +3494,7 @@ object frmMatterNew: TfrmMatterNew
           object Label40: TLabel
             Left = 20
             Top = 97
-            Width = 73
+            Width = 72
             Height = 15
             Caption = 'Account Type'
           end
@@ -3696,10 +3675,6 @@ object frmMatterNew: TfrmMatterNew
         object tabTrustBanks: TcxTabSheet
           Caption = 'Additional Trust Banks'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object gridTrustBanks: TcxGrid
             Left = 0
             Top = 0
@@ -3807,11 +3782,11 @@ object frmMatterNew: TfrmMatterNew
       ImageIndex = 3
       DesignSize = (
         503
-        306)
+        310)
       object Label3: TLabel
         Left = 10
         Top = 64
-        Width = 81
+        Width = 80
         Height = 15
         Caption = 'WorkFlow Type'
         Transparent = True
@@ -3860,7 +3835,7 @@ object frmMatterNew: TfrmMatterNew
       object Label10: TLabel
         Left = 10
         Top = 117
-        Width = 108
+        Width = 107
         Height = 15
         Caption = 'Trust Statement sent'
         Transparent = True
@@ -3964,7 +3939,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object grpCriticalDates: TcxGroupBox
         Left = 7
-        Top = 186
+        Top = 190
         Anchors = [akLeft, akBottom]
         Caption = 'Critical Dates'
         Style.LookAndFeel.NativeStyle = True
@@ -4108,10 +4083,7 @@ object frmMatterNew: TfrmMatterNew
     object tabDebtor: TcxTabSheet
       Caption = 'Debtor'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitHeight = 306
       object Label62: TLabel
         Left = 3
         Top = 106
@@ -4140,19 +4112,27 @@ object frmMatterNew: TfrmMatterNew
       object Label5: TLabel
         Left = 3
         Top = 208
-        Width = 88
+        Width = 87
         Height = 15
         Caption = 'Debtor Template'
         Transparent = True
       end
       object Label31: TLabel
         Left = 3
-        Top = 261
+        Top = 288
         Width = 109
         Height = 20
         AutoSize = False
         Caption = 'Advertising Source'
         WordWrap = True
+      end
+      object Label13: TLabel
+        Left = 3
+        Top = 261
+        Width = 52
+        Height = 15
+        Alignment = taRightJustify
+        Caption = 'AP E-Mail'
       end
       object cxDBMemo2: TcxDBMemo
         Left = 118
@@ -4163,7 +4143,7 @@ object frmMatterNew: TfrmMatterNew
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 0
+        TabOrder = 1
         Height = 95
         Width = 371
       end
@@ -4176,7 +4156,7 @@ object frmMatterNew: TfrmMatterNew
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 1
+        TabOrder = 0
         Height = 95
         Width = 371
       end
@@ -4199,7 +4179,7 @@ object frmMatterNew: TfrmMatterNew
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 2
+        TabOrder = 3
         Width = 45
       end
       object cmbDebtorTemplate: TcxDBLookupComboBox
@@ -4218,18 +4198,60 @@ object frmMatterNew: TfrmMatterNew
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 3
+        TabOrder = 2
         Width = 201
       end
       object cxDBExtLookupComboBox1: TcxDBExtLookupComboBox
         Left = 118
-        Top = 258
+        Top = 285
         DataBinding.DataField = 'ADVERTISING_SOURCE'
         DataBinding.DataSource = dsMatter
         Properties.DropDownAutoSize = True
         Properties.View = tvAdvertSource
         Properties.KeyFieldNames = 'ADID'
         Properties.ListFieldItem = tvAdvertSourceDESCR
+        TabOrder = 5
+        Width = 371
+      end
+      object eDebtorEmail: TcxDBButtonEdit
+        Left = 118
+        Top = 258
+        DataBinding.DataField = 'AP_EMAIL_MATTER'
+        DataBinding.DataSource = dsMatter
+        Properties.Buttons = <
+          item
+            Default = True
+            Glyph.SourceDPI = 96
+            Glyph.Data = {
+              89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+              610000000E744558745469746C65004D61696C3B4E6577A171F84B0000021F49
+              444154785EA5934D48545D18809FF736A8D834431A9846660B89B285156411FD
+              4C5614DA2290B00F5C652099D6A255C1884AB592C08A68119441D8CE0F246931
+              9416811406C5D4486205E9989160E2CFBDF774DF602E17C5451B1F7839CFD93C
+              BC8B7344555909162B441EF47C02155045F1F14DA818AECBB8AA2280AAC68136
+              55E2A8B6291032C6A3BEA64C00591E5FEE432DDB5B3DA552D003AAB4E18791BB
+              8FDF271062A8A202A83F8AB2A1204CD1C413483E6267633B3363A3840B8B797B
+              3B4E2602589D5DEFD4768CFE8B0F77CEE8AF44932EBC69D6C9FF6B75A0B924D1
+              7F711321401CC7F0F4C5307B7714138DE4E2795EB035960863CF3AF8997C49E9
+              FE7AA6478688E645706CFBB0423C13B05D97A2C228F7BB07A9AADCCAB6D2F538
+              C603605548C8D97D0E275A4D7FE721A4A09C3FE9D700A28ABF816B1B7273B3A9
+              3CB885DE448A642A4D4D7539283CEC7E45EACB144D67634CC52E305552C7CCAD
+              F21B59210151FC0D1CC3F4ACC3F8F82CD547CAF83CFA83CBED3DA4C726A93ABE
+              8BFF4E55F0F5FB6FF2F79C6764F01B0DDDD3D77A6AD7002C06EC39C3B17D9B41
+              8448389B757961003616E591BF76358A32F47182E4F02480000492D3D8D237DF
+              71E528B6F1100565115D22D95916975AFBB877FD64445567820D701D8308842C
+              2B788504E0F909B504015CD7232008780B0BF3CF1BAEF6C6347840A2088A7FCF
+              1801AE3D370098A501D375F3F409DF117F203897B90206B0F161C5DFF92F5E25
+              157110505FC30000000049454E44AE426082}
+            Kind = bkGlyph
+          end>
+        Properties.MaxLength = 0
+        Properties.ReadOnly = True
+        Style.Color = clWindow
+        Style.LookAndFeel.Kind = lfStandard
+        StyleDisabled.LookAndFeel.Kind = lfStandard
+        StyleFocused.LookAndFeel.Kind = lfStandard
+        StyleHot.LookAndFeel.Kind = lfStandard
         TabOrder = 4
         Width = 371
       end
@@ -4237,15 +4259,11 @@ object frmMatterNew: TfrmMatterNew
     object tabMatterBudgets: TcxTabSheet
       Caption = 'Matter Budgets'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGridBatterBudgets: TcxGrid
         Left = 0
         Top = 0
         Width = 503
-        Height = 282
+        Height = 286
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
@@ -4366,7 +4384,7 @@ object frmMatterNew: TfrmMatterNew
       end
       object Panel3: TPanel
         Left = 0
-        Top = 282
+        Top = 286
         Width = 503
         Height = 24
         Align = alBottom
@@ -4399,13 +4417,13 @@ object frmMatterNew: TfrmMatterNew
         Left = 0
         Top = 0
         Width = 503
-        Height = 306
+        Height = 310
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
           503
-          306)
+          310)
         object Label19: TLabel
           Left = 5
           Top = 2
@@ -4426,7 +4444,7 @@ object frmMatterNew: TfrmMatterNew
           Left = 3
           Top = 18
           Width = 200
-          Height = 279
+          Height = 283
           Anchors = [akLeft, akTop, akBottom]
           ItemHeight = 15
           MultiSelect = True
@@ -4441,7 +4459,7 @@ object frmMatterNew: TfrmMatterNew
           Left = 287
           Top = 20
           Width = 201
-          Height = 277
+          Height = 281
           Anchors = [akLeft, akTop, akBottom]
           ItemHeight = 15
           MultiSelect = True
@@ -4643,13 +4661,9 @@ object frmMatterNew: TfrmMatterNew
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         503
-        306)
+        310)
       object memoNotesMain: TcxDBRichEdit
         Left = 3
         Top = 4
@@ -4659,7 +4673,7 @@ object frmMatterNew: TfrmMatterNew
         Properties.MaxLength = 4000
         Properties.ScrollBars = ssVertical
         TabOrder = 0
-        Height = 296
+        Height = 300
         Width = 500
       end
     end
@@ -4823,7 +4837,7 @@ object frmMatterNew: TfrmMatterNew
       ImageIndex = 0
       DesignSize = (
         503
-        306)
+        310)
       object cxGroupBox1: TcxGroupBox
         Left = 4
         Top = 0
@@ -4935,7 +4949,7 @@ object frmMatterNew: TfrmMatterNew
         Left = 8
         Top = 151
         Width = 483
-        Height = 138
+        Height = 142
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 1
         object tvScaleCost: TcxGridTableView
@@ -5095,6 +5109,7 @@ object frmMatterNew: TfrmMatterNew
     CachedUpdates = True
     RefreshOptions = [roBeforeEdit]
     Options.RequiredFields = False
+    Active = True
     AfterScroll = qryMatterAfterScroll
     OnEditError = qryMatterEditError
     Left = 630
@@ -5103,7 +5118,7 @@ object frmMatterNew: TfrmMatterNew
       item
         DataType = ftUnknown
         Name = 'NMATTER'
-        Value = nil
+        Value = Null
       end>
   end
   object dsMatter: TUniDataSource

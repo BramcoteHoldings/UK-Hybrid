@@ -4,7 +4,7 @@ object frmJournalReverse: TfrmJournalReverse
   AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Journal Reversal'
-  ClientHeight = 300
+  ClientHeight = 329
   ClientWidth = 311
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,12 +22,13 @@ object frmJournalReverse: TfrmJournalReverse
     Left = 0
     Top = 0
     Width = 311
-    Height = 300
+    Height = 329
     Align = alClient
     ParentBackground = True
     TabOrder = 0
     Transparent = True
     AutoSize = True
+    ExplicitHeight = 300
     object btnOriginal: TcxButton
       Left = 188
       Top = 187
@@ -110,7 +111,7 @@ object frmJournalReverse: TfrmJournalReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 187
-      EditValue = 43699.4771436806d
+      EditValue = 43746.519862037d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -128,7 +129,7 @@ object frmJournalReverse: TfrmJournalReverse
     end
     object btnOK: TcxButton
       Left = 77
-      Top = 259
+      Top = 287
       Width = 73
       Height = 25
       Caption = '&OK'
@@ -225,7 +226,7 @@ object frmJournalReverse: TfrmJournalReverse
     end
     object btnCancel: TcxButton
       Left = 157
-      Top = 259
+      Top = 287
       Width = 74
       Height = 25
       Caption = '&Cancel'
@@ -325,6 +326,7 @@ object frmJournalReverse: TfrmJournalReverse
       Top = 219
       ParentShowHint = False
       Properties.MaxLength = 120
+      Properties.ScrollBars = ssVertical
       ShowHint = True
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -334,7 +336,7 @@ object frmJournalReverse: TfrmJournalReverse
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
       TabOrder = 7
-      Height = 33
+      Height = 61
       Width = 196
     end
     object cxDBLabel1: TcxDBLabel
@@ -500,7 +502,7 @@ object frmJournalReverse: TfrmJournalReverse
       SizeOptions.SizableVert = False
       SizeOptions.Width = 269
       Control = tbReason
-      ControlOptions.OriginalHeight = 33
+      ControlOptions.OriginalHeight = 61
       ControlOptions.OriginalWidth = 196
       ControlOptions.ShowBorder = False
       Index = 2

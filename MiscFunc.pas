@@ -157,7 +157,7 @@ const
   CN_PROGRAM_NAME = 'Insight';
 //  CN_PROGRAM_NAME = 'NetLawyer';
 
-  CN_COPYRIGHT = '© Bramcote Holdings Pty Ltd 2017-2018 All Rights Reserved';
+  CN_COPYRIGHT = '© Bramcote Holdings Pty Ltd 2017-2019 All Rights Reserved';
 
   // For matter fees types
   MATTER_FEE_WIP        = 0;

@@ -26,8 +26,6 @@ object frmAddReport: TfrmAddReport
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 367
-    ExplicitHeight = 326
     DesignSize = (
       409
       333)
@@ -244,7 +242,6 @@ object frmAddReport: TfrmAddReport
       Caption = 'Import'
       LookAndFeel.NativeStyle = True
       TabOrder = 6
-      Visible = False
       OnClick = cxButton1Click
     end
     object btnSave: TBitBtn
@@ -811,8 +808,8 @@ object frmAddReport: TfrmAddReport
   end
   object dsAddReport: TUniDataSource
     DataSet = qryAddReport
-    Left = 357
-    Top = 92
+    Left = 334
+    Top = 167
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = 'sql'
