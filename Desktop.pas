@@ -2664,8 +2664,10 @@ end;
 procedure TfrmDesktop.LoadMatter(AFileID: string);
 var
   LFileID: String;
+  bSuccess: boolean;
 begin
    LFileID := Uppercase(AFileID);
+   bSuccess := False;
    with dmAxiom.qryNew do
    begin
       Close;
@@ -2739,20 +2741,23 @@ begin
          try
             frmMatters := TfrmMatters.Create(Application);
             frmMatters.Tag := imgMATTER;
-            frmMatters.DisplayMatter(LFileID);
+            bSuccess := (frmMatters.DisplayMatter(LFileID) = true);
          finally
 //            if pagMainControl.ActivePageIndex = 0 then
 //            fdTab.AddForm(frmMatters,True);
-            try
-//               if (subItemMatter.DropDown()) then
-               AddFormToTab(frmMatters, imgMATTER);
-//               fdTab.AddForm(frmMatters,True);
-               beMatterSearch.CurText := '';
-            finally
-               if (not frmMatters.Visible) then
-                  frmMatters.Show;
-               frmMatters.Repaint;
-               frmMatters.Invalidate;
+            if bSuccess = True then
+            begin
+               try
+//                  if (subItemMatter.DropDown()) then
+                  AddFormToTab(frmMatters, imgMATTER);
+//                  fdTab.AddForm(frmMatters,True);
+                  beMatterSearch.CurText := '';
+               finally
+                  if (not frmMatters.Visible) then
+                     frmMatters.Show;
+                  frmMatters.Repaint;
+                  frmMatters.Invalidate;
+               end;
             end;
          end;
       end;

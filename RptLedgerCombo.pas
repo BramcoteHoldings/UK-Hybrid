@@ -8,7 +8,7 @@ uses
   DateChangeButton, NumberEdit, OracleUniProvider, Uni, DBAccess, MemDS, DeskTop,
   ppParameter, ppDesignLayer, ppModule, raCodMod, ppBands, ppVar, ppCtrls,
   ppRegion, ppMemo, ppStrtch, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
-  ppDB, ppComm, ppRelatv, ppDBPipe, ppFileUtils, ppIniStorage;
+  ppDB, ppComm, ppRelatv, ppDBPipe, ppFileUtils, ppIniStorage, ppSubRpt;
 
 type
   TfrmRptLedgerCombo = class(TForm)
@@ -168,6 +168,25 @@ type
     qryPhoneBookWHICHADDRESS: TStringField;
     ppFooterBand1: TppFooterBand;
     ppLine8: TppLine;
+    ppSubReport1: TppSubReport;
+    ppChildReport1: TppChildReport;
+    qryTrustCheqreqs: TUniQuery;
+    dsTrustCheqreqs: TUniDataSource;
+    plTrustCheqreqs: TppDBPipeline;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppTitleBand1: TppTitleBand;
+    ppDetailBand2: TppDetailBand;
+    ppSummaryBand2: TppSummaryBand;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBCalc15: TppDBCalc;
+    ppLine9: TppLine;
+    ppLabel1: TppLabel;
+    ppLine10: TppLine;
+    ppDBText24: TppDBText;
+    ppDBText25: TppDBText;
+    ppLabel34: TppLabel;
     procedure FormShow(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
     procedure btnMatterClick(Sender: TObject);
@@ -948,6 +967,10 @@ begin
    qryRptLedger.ParamByName('reporter').AsString := UserId;
    qryRptLedger.Open;
 
+   qryTrustCheqreqs.Close;
+   qryTrustCheqreqs.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+   qryTrustCheqreqs.Open;
+
    if dmAxiom.runningide then
       qryRptLedger.SQL.SaveToFile('c:\tmp\comborpt.sql');
 
@@ -1019,68 +1042,70 @@ end;
 
 procedure TfrmRptLedgerCombo.FormCreate(Sender: TObject);
 var
-  lsStorageName: String;
+   lsStorageName: String;
 begin
-  frmRptLedgerCombo := Self;
-  lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
-  TppIniStoragePlugIn.SetStorageName(lsStorageName);
-  sTable := 'MATTER M, PHONEBOOK P';
-  //{$IFDEF AXIOM}
-  if Assigned(dmAxiom) then
-    UserId := dmAxiom.UserId;
-  //{$ENDIF}
-  chkFees.Checked := SettingLoadBoolean('COMBO LEDGER', 'Fees');
-  chkUnbilled.Checked :=SettingLoadBoolean('COMBO LEDGER', 'Unbilled');
-  chkWrap.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Wrap');
-  cbHideStripe.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Hide');
-  chkGst.Checked :=SettingLoadBoolean('COMBO LEDGER', 'Gst');
-  chkShowSundry.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Tax');
+   frmRptLedgerCombo := Self;
+   lsStorageName := TppFileUtils.GetApplicationFilePath + '\RBuilder.ini';
+   TppIniStoragePlugIn.SetStorageName(lsStorageName);
+   sTable := 'MATTER M, PHONEBOOK P';
+   //{$IFDEF AXIOM}
+   if Assigned(dmAxiom) then
+      UserId := dmAxiom.UserId;
+   //{$ENDIF}
+   chkFees.Checked := SettingLoadBoolean('COMBO LEDGER', 'Fees');
+   chkUnbilled.Checked :=SettingLoadBoolean('COMBO LEDGER', 'Unbilled');
+   chkWrap.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Wrap');
+   cbHideStripe.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Hide');
+   chkGst.Checked :=SettingLoadBoolean('COMBO LEDGER', 'Gst');
+   chkShowSundry.Checked:=SettingLoadBoolean('COMBO LEDGER', 'Tax');
 end;
 
 procedure TfrmRptLedgerCombo.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  qryMatter.Close;
-  qryFeesLedger.Close;
-  qrySundLedger.Close;
-  qryTmpSQL.Close;
-  qryTmpLedger.Close;
-  Action := caFree;
+   qryMatter.Close;
+   qryFeesLedger.Close;
+   qrySundLedger.Close;
+   qryTmpSQL.Close;
+   qryTmpLedger.Close;
+   qryTrustCheqreqs.Close;
+   Action := caFree;
 end;
 
 procedure TfrmRptLedgerCombo.FormDestroy(Sender: TObject);
 begin
-  SettingSave('COMBO LEDGER', 'Fees', chkFees.Checked);
-  SettingSave('COMBO LEDGER', 'Unbilled', chkUnbilled.Checked);
-  SettingSave('COMBO LEDGER', 'Wrap', chkWrap.Checked);
-  SettingSave('COMBO LEDGER', 'Hide', cbHideStripe.Checked);
-  SettingSave('COMBO LEDGER', 'Gst', chkGst.Checked);
-  SettingSave('COMBO LEDGER', 'Tax', chkShowSundry.Checked);
+   SettingSave('COMBO LEDGER', 'Fees', chkFees.Checked);
+   SettingSave('COMBO LEDGER', 'Unbilled', chkUnbilled.Checked);
+   SettingSave('COMBO LEDGER', 'Wrap', chkWrap.Checked);
+   SettingSave('COMBO LEDGER', 'Hide', cbHideStripe.Checked);
+   SettingSave('COMBO LEDGER', 'Gst', chkGst.Checked);
+   SettingSave('COMBO LEDGER', 'Tax', chkShowSundry.Checked);
 end;
 
 procedure TfrmRptLedgerCombo.chkShowSundryClick(Sender: TObject);
 begin
-  if chkShowSundry.Checked then
-  begin
-    chkFees.Checked := False;
-    chkFees.Enabled := False;
-  end else
-    chkFees.Enabled := True;
+   if chkShowSundry.Checked then
+   begin
+      chkFees.Checked := False;
+      chkFees.Enabled := False;
+   end
+   else
+      chkFees.Enabled := True;
 end;
 
 procedure TfrmRptLedgerCombo.qryMatterAfterOpen(DataSet: TDataSet);
 begin
-  qryPhoneBook.Open;
+   qryPhoneBook.Open;
 end;
 
 procedure TfrmRptLedgerCombo.qryMatterBeforeClose(DataSet: TDataSet);
 begin
-  qryPhoneBook.Close;
+   qryPhoneBook.Close;
 end;
 
 procedure TfrmRptLedgerCombo.ppLabel27Print(Sender: TObject);
 begin
-  ppLabel27.Text := SystemString('COMPANY');
+   ppLabel27.Text := SystemString('COMPANY');
 end;
 
 procedure TfrmRptLedgerCombo.rptComboBeforePrint(Sender: TObject);
