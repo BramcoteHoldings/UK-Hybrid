@@ -2949,15 +2949,15 @@ begin
             lblClearTrust.Caption := Format('%.2m', [qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency] );
       end;
 
+      lblClearTrust.Font.Color := ifthen((qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency < 0), clRed, clGreen);
+
       if qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency = 0 then
          lblClearTrust.Font.Color := clBlue;
-
-      lblClearTrust.Font.Color := ifthen((qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency < 0), clRed, clGreen);
 
       lblClearTrust1.Caption := lblClearTrust.Caption;
       lblClearTrust1.Style.Font.Color := lblClearTrust.Font.Color;
 
-      if SystemString('show_net_trust') = 'Y' then
+      if (SystemString('show_net_trust') = 'Y') then
       begin
          if (qryLedgerBalances.FieldByName('CL_TRUST_BAL').AsCurrency -
              qryAllocs.FieldByName('SPEC_PURPOSE').AsCurrency -
