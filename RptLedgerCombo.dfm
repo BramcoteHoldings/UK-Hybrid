@@ -456,7 +456,6 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     SQL.Strings = (
       'SELECT * FROM VW_CLIENT_ADDRESS WHERE NCLIENT=:NCLIENT')
     MasterSource = dsMatter
-    Active = True
     Left = 275
     ParamData = <
       item
@@ -672,7 +671,6 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       'AND t.paid_date IS NOT NULL'
       'ORDER BY 3,1'
       '')
-    Active = True
     Left = 398
     Top = 65534
     ParamData = <
@@ -730,8 +728,8 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     object plTmpLedgerppField1: TppField
       FieldAlias = 'REPORTER'
       FieldName = 'REPORTER'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 0
+      DisplayWidth = 0
       Position = 0
     end
     object plTmpLedgerppField2: TppField
@@ -745,8 +743,8 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     object plTmpLedgerppField3: TppField
       FieldAlias = 'BANK'
       FieldName = 'BANK'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 2
     end
     object plTmpLedgerppField4: TppField
@@ -1509,8 +1507,8 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 21
-    Top = 115
+    Left = 29
+    Top = 67
     Version = '20.0'
     mmColumnWidth = 288200
     DataPipelineName = 'plRptLedger'
@@ -2933,8 +2931,9 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
     object ppSummaryBand1: TppSummaryBand
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
+      PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 21167
+      mmHeight = 29633
       mmPrintPosition = 0
       object ppDBCalc3: TppDBCalc
         DesignLayer = ppDesignLayer1
@@ -3104,13 +3103,12 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       object ppLine7: TppLine
         DesignLayer = ppDesignLayer1
         UserName = 'Line7'
-        Anchors = [atLeft, atBottom]
         Border.mmPadding = 0
         ParentWidth = True
         Weight = 0.750000000000000000
         mmHeight = 529
         mmLeft = 0
-        mmTop = 20902
+        mmTop = 20888
         mmWidth = 290200
         BandType = 7
         LayerName = Foreground
@@ -3342,6 +3340,247 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
         BandType = 7
         LayerName = Foreground
       end
+      object ppSubReport1: TppSubReport
+        DesignLayer = ppDesignLayer1
+        UserName = 'SubReport1'
+        ExpandAll = False
+        NewPrintJob = False
+        OutlineSettings.CreateNode = True
+        TraverseAllData = False
+        DataPipelineName = 'plTrustCheqreqs'
+        mmHeight = 5027
+        mmLeft = 0
+        mmTop = 22754
+        mmWidth = 290200
+        BandType = 7
+        LayerName = Foreground
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+        object ppChildReport1: TppChildReport
+          AutoStop = False
+          DataPipeline = plTrustCheqreqs
+          PrinterSetup.BinName = 'Default'
+          PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
+          PrinterSetup.Orientation = poLandscape
+          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PrinterName = 'Default'
+          PrinterSetup.SaveDeviceSettings = False
+          PrinterSetup.mmMarginBottom = 6350
+          PrinterSetup.mmMarginLeft = 3350
+          PrinterSetup.mmMarginRight = 3350
+          PrinterSetup.mmMarginTop = 6350
+          PrinterSetup.mmPaperHeight = 209900
+          PrinterSetup.mmPaperWidth = 296900
+          PrinterSetup.PaperSize = 9
+          Units = utMillimeters
+          Version = '20.0'
+          mmColumnWidth = 0
+          DataPipelineName = 'plTrustCheqreqs'
+          object ppTitleBand1: TppTitleBand
+            Background.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 13229
+            mmPrintPosition = 0
+            object ppLabel1: TppLabel
+              DesignLayer = ppDesignLayer2
+              UserName = 'Label1'
+              Border.mmPadding = 0
+              Caption = 'Client Cheque requisitions'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = [fsBold]
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
+              Transparent = True
+              mmHeight = 4233
+              mmLeft = 0
+              mmTop = 7940
+              mmWidth = 44186
+              BandType = 1
+              LayerName = Foreground1
+            end
+            object ppLine10: TppLine
+              DesignLayer = ppDesignLayer2
+              UserName = 'Line10'
+              Border.mmPadding = 0
+              ParentWidth = True
+              Weight = 0.750000000000000000
+              mmHeight = 794
+              mmLeft = 0
+              mmTop = 12181
+              mmWidth = 290200
+              BandType = 1
+              LayerName = Foreground1
+            end
+          end
+          object ppDetailBand2: TppDetailBand
+            Background1.Brush.Style = bsClear
+            Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 5027
+            mmPrintPosition = 0
+            object ppDBText22: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText22'
+              Border.mmPadding = 0
+              DataField = 'DESCR'
+              DataPipeline = plTrustCheqreqs
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = []
+              Transparent = True
+              DataPipelineName = 'plTrustCheqreqs'
+              mmHeight = 4233
+              mmLeft = 65881
+              mmTop = 529
+              mmWidth = 123825
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText23: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText23'
+              Border.mmPadding = 0
+              DataField = 'AMOUNT'
+              DataPipeline = plTrustCheqreqs
+              DisplayFormat = '$#,0.00;($#,0.00)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = []
+              TextAlignment = taRightJustified
+              Transparent = True
+              DataPipelineName = 'plTrustCheqreqs'
+              mmHeight = 4233
+              mmLeft = 197115
+              mmTop = 529
+              mmWidth = 27517
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText24: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText24'
+              Border.mmPadding = 0
+              DataField = 'SYSDATE'
+              DataPipeline = plTrustCheqreqs
+              DisplayFormat = 'dd/mm/yyyy'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = []
+              Transparent = True
+              DataPipelineName = 'plTrustCheqreqs'
+              mmHeight = 4233
+              mmLeft = 14817
+              mmTop = 529
+              mmWidth = 29369
+              BandType = 4
+              LayerName = Foreground1
+            end
+            object ppDBText25: TppDBText
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBText25'
+              Border.mmPadding = 0
+              DataField = 'CHEQREQNO'
+              DataPipeline = plTrustCheqreqs
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = []
+              Transparent = True
+              DataPipelineName = 'plTrustCheqreqs'
+              mmHeight = 4233
+              mmLeft = 46028
+              mmTop = 528
+              mmWidth = 16652
+              BandType = 4
+              LayerName = Foreground1
+            end
+          end
+          object ppSummaryBand2: TppSummaryBand
+            Background.Brush.Style = bsClear
+            Border.mmPadding = 0
+            mmBottomOffset = 0
+            mmHeight = 6879
+            mmPrintPosition = 0
+            object ppDBCalc15: TppDBCalc
+              DesignLayer = ppDesignLayer2
+              UserName = 'DBCalc15'
+              Border.mmPadding = 0
+              DataField = 'BAL'
+              DataPipeline = plTrustCheqreqs
+              DisplayFormat = '$#,0.00;($#,0.00)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = [fsBold]
+              TextAlignment = taRightJustified
+              Transparent = True
+              DataPipelineName = 'plTrustCheqreqs'
+              mmHeight = 4498
+              mmLeft = 197115
+              mmTop = 529
+              mmWidth = 27517
+              BandType = 7
+              LayerName = Foreground1
+            end
+            object ppLine9: TppLine
+              DesignLayer = ppDesignLayer2
+              UserName = 'Line9'
+              Border.mmPadding = 0
+              ParentWidth = True
+              Weight = 0.750000000000000000
+              mmHeight = 1058
+              mmLeft = 0
+              mmTop = -4
+              mmWidth = 290200
+              BandType = 7
+              LayerName = Foreground1
+            end
+            object ppLabel34: TppLabel
+              DesignLayer = ppDesignLayer2
+              UserName = 'Label34'
+              Border.mmPadding = 0
+              Caption = 'Available Client Balance'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Arial'
+              Font.Size = 10
+              Font.Style = [fsBold]
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
+              Transparent = True
+              mmHeight = 4233
+              mmLeft = 65881
+              mmTop = 794
+              mmWidth = 41540
+              BandType = 7
+              LayerName = Foreground1
+            end
+          end
+          object ppDesignLayers2: TppDesignLayers
+            object ppDesignLayer2: TppDesignLayer
+              UserName = 'Foreground1'
+              LayerType = ltBanded
+              Index = 0
+            end
+          end
+        end
+      end
     end
     object raCodeModule1: TraCodeModule
       object raProgramInfo1: TraProgramInfo
@@ -3401,6 +3640,98 @@ object frmRptLedgerCombo: TfrmRptLedgerCombo
       end
     end
     object ppParameterList1: TppParameterList
+    end
+  end
+  object qryTrustCheqreqs: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      
+        'SELECT   1, '#39'Cleared Client Balance'#39' as descr, getclearedtrustam' +
+        'ount (:nmatter) amount,'
+      
+        '         getclearedtrustamount (:nmatter) AS bal, sysdate, NULL ' +
+        'as cheqreqno'
+      '    FROM DUAL'
+      'UNION'
+      
+        'SELECT   2, descr, amount, amount * -1 AS bal, reqdate, ncheqreq' +
+        ' as cheqreqno'
+      '    FROM cheqreq'
+      '   WHERE converted = '#39'N'#39
+      '     AND trust = '#39'T'#39
+      '     AND nmatter = :nmatter'
+      '     AND rev_ncheqreq IS NULL'
+      'ORDER BY 1')
+    Active = True
+    Left = 24
+    Top = 128
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'nmatter'
+        Value = Null
+      end>
+  end
+  object dsTrustCheqreqs: TUniDataSource
+    DataSet = qryTrustCheqreqs
+    Left = 32
+    Top = 160
+  end
+  object plTrustCheqreqs: TppDBPipeline
+    DataSource = dsTrustCheqreqs
+    UserName = 'plTrustCheqreqs'
+    Left = 24
+    Top = 200
+    object plTrustCheqreqsppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = '1'
+      FieldName = '1'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 0
+    end
+    object plTrustCheqreqsppField2: TppField
+      FieldAlias = 'DESCR'
+      FieldName = 'DESCR'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 1
+    end
+    object plTrustCheqreqsppField3: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'AMOUNT'
+      FieldName = 'AMOUNT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 2
+    end
+    object plTrustCheqreqsppField4: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BAL'
+      FieldName = 'BAL'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 3
+    end
+    object plTrustCheqreqsppField5: TppField
+      FieldAlias = 'SYSDATE'
+      FieldName = 'SYSDATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 4
+    end
+    object plTrustCheqreqsppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'CHEQREQNO'
+      FieldName = 'CHEQREQNO'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 5
     end
   end
 end
