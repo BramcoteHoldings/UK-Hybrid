@@ -320,7 +320,7 @@ type
     function SaveDocument: Boolean;
     function SaveEverything: Boolean;
     procedure SaveAndClose;
-    procedure ShowPhoneBook(AClientID: Integer);
+    procedure ShowPhoneBook(ANNameID: Integer);
   protected
     FSaveChanges: Boolean;
   public
@@ -767,18 +767,18 @@ begin
    frmClient.DisplayClient(AClientID);
 end;
 
-procedure TfrmConflictSearch.ShowPhoneBook(AClientID: Integer);
+procedure TfrmConflictSearch.ShowPhoneBook(ANNameID: Integer);
 var
   frmPhonebook: TfrmPhonebook;
 begin
+   //* NNAME is aliased as NCLIENT in sql.
    frmPhonebook := TfrmPhonebook.Create(Self);
-   frmPhoneBook.Search := IntToStr(AClientID);
-   frmPhoneBook.NName := AClientID;
+   frmPhoneBook.Search := ANNameID.ToString;
+   frmPhoneBook.NName := ANNameID;
    if frmDeskTop.pagMainControl.ActivePageIndex = 0 then
       frmDeskTop.AddFormToTab(frmPhonebook,1);
    frmPhoneBook.Show;
 end;
-
 
 procedure TfrmConflictSearch.vConflictsCellDblClick(
   Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;

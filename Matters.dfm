@@ -22619,34 +22619,34 @@ object frmMatters: TfrmMatters
     SQL.Strings = (
       'SELECT c.REQDATE, c.BANK, c.PAYEE, c.DESCR,'
       '       c.INVOICEDATE, c.BILLED, c.AUTHOR, c.HELD,'
-      '       c.CONVERTED, c.NOTE, C.TAXCODE,'
+      '       c.CONVERTED, c.NOTE, C.TAXCODE, '
       '       nvl(sum(nvl(c.amount ,0)),0) AMOUNT,'
       '       nvl(sum(c.tax),0) TAX,  n.REFNO AS BILLNO,'
       '       DECODE(c.HELD,'#39'Y'#39','#39'Held'#39','
       '                     '#39'W'#39','#39'Waiting'#39','
       '                     NULL) STATUS,'
       '       nvl(sum(a.AMOUNT) + SUM(a.TAX) *-1, 0) PAID,'
-      '       nvl(sum(t.AMOUNT), 0) PAYABLE'
-      'FROM cheqreq c, nmemo n, alloc a, cheqreq_trans t'
+      
+        '       (select nvl(sum(t.AMOUNT), 0) from cheqreq_trans t where ' +
+        ' c.NCHEQREQ = t.NCHEQREQ) as  PAYABLE'
+      'FROM cheqreq c, nmemo n, alloc a'
       'WHERE c.NMATTER= :NMATTER'
       'AND c.NMEMO = n.NMEMO (+)'
       'AND c.NCHEQREQ = a.NCHEQREQ (+)'
-      'AND c.NCHEQREQ = t.NCHEQREQ (+)'
       'AND c.CONVERTED = '#39'N'#39
       'AND c.REV_NCHEQREQ IS NULL'
       'AND NVL(a.TYPE,'#39'X'#39') <> '#39'RV'#39
       'GROUP BY c.REQDATE, c.BANK, c.PAYEE, c.DESCR,'
       'c.INVOICEDATE, c.BILLED, c.AUTHOR, c.HELD, c.CONVERTED, c.NOTE,'
-      'c.TAXCODE, n.REFNO, c.HELD, c.AMOUNT, c.TAX'
-      'order by c.REQDATE'
-      '')
+      'c.TAXCODE, n.REFNO, c.HELD, c.AMOUNT, c.TAX, c.NCHEQREQ'
+      'order by c.REQDATE')
     Left = 640
     Top = 48
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'NMATTER'
-        Value = Null
+        Value = nil
       end>
     object qryUnconCheqReqREQDATE: TDateTimeField
       FieldName = 'REQDATE'
