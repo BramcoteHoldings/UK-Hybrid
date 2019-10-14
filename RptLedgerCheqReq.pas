@@ -256,6 +256,8 @@ begin
       ParamByName('DATETO').AsDate := Trunc(dtpTo.Date) + 1;
 
     SQL.Add('ORDER BY 1');
+    if dmAxiom.runningide = True then
+       qryCheqReqLedger.SQL.SaveToFile('c:\tmp\rptcheqreqledgercard.sql');
     Open;
   end;
 //  qrCheqReqLedger.PreviewModal;
