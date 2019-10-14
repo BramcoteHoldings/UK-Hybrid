@@ -832,7 +832,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label18: TLabel
           Left = 7
           Top = 216
-          Width = 56
+          Width = 55
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -844,7 +844,7 @@ object frmConflictSearch: TfrmConflictSearch
         object lblTrust: TLabel
           Left = 7
           Top = 184
-          Width = 26
+          Width = 25
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -1179,7 +1179,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label25: TLabel
           Left = 12
           Top = 156
-          Width = 32
+          Width = 31
           Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
@@ -1485,7 +1485,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label3: TLabel
           Left = 275
           Top = 21
-          Width = 25
+          Width = 24
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -1985,7 +1985,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label32: TLabel
           Left = 700
           Top = 27
-          Width = 29
+          Width = 30
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -1997,7 +1997,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label34: TLabel
           Left = 12
           Top = 59
-          Width = 13
+          Width = 12
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -2993,9 +2993,8 @@ object frmConflictSearch: TfrmConflictSearch
       '    from matter m'
       '    union'
       
-        '    select '#39'Contact NRIC'#39' cat, TO_char(nclient) clientID, nclien' +
-        't nclient, null matterNo,  null FileID, name ClientName, ph.nric' +
-        ','
+        '    select '#39'Contact NRIC'#39' cat, TO_char(nclient) clientID, NNAME ' +
+        'nclient, null matterNo,  null FileID, name ClientName, ph.nric,'
       '    null matterdesc,'
       '    null DataFieldName,'
       '    null Data,'
@@ -3085,7 +3084,7 @@ object frmConflictSearch: TfrmConflictSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
