@@ -1,5 +1,12 @@
 Insight Build 9.2.0
 
+Build 47
+========
+-Fixed the cheqreq ledger card to correctly display billed cheqreqs where the bill has been paid.
+-Fixed issue with folder selection when editing a document record.
+-Fixed issue when viewing contact in the Conflict Search screen.
+-Added Client Fund cheqreqs to Combo Ledger Report
+
 Build 45 - 46
 =============
 -Added Matter specific Accounts Payable email address
