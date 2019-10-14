@@ -1108,7 +1108,7 @@ object frmDocNew: TfrmDocNew
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = nil
+        Value = Null
       end>
   end
   object dsFolders: TUniDataSource

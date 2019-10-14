@@ -957,7 +957,8 @@ begin
 
    if qryMatter.Active = True then
    begin
-      qryFolders.ParamByName('nMatter').AsInteger := AMatter;
+      qryFolders.Close;
+      qryFolders.ParamByName('nMatter').AsInteger := qryMatter.FieldByName('NMatter').AsInteger;
       qryFolders.Open;
    end;
 
