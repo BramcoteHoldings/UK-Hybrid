@@ -273,7 +273,8 @@ type
     DefaultDescr: string;
     Balance, Tax, TotalAmt, WithholdTax: currency;
     Created: boolean;
-    AllocType, DefaultTax, DefaultInvoice: string; //
+    AllocType, DefaultTax, DefaultInvoice,
+    DefaultLedger: string; //
     LastBank: string;
     sNName, sPayee: string;
     FChequePrinter: string;
@@ -3837,11 +3838,18 @@ begin
    DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
    // 27/04/2004 Tony
    // Obtain default tax for DefaultInvoice
-   qryGetTaxCode.Params[0].AsString := 'Invoice';
+   qryGetTaxCode.Params[0].AsString := 'InvoicePayment';
    qryGetTaxCode.Open;
    if not varIsNull(qryGetTaxCode.FieldByName('CODE').AsVariant) then
       if qryGetTaxCode.FieldByName('CODE').AsString <> '' then
          DefaultInvoice := qryGetTaxCode.FieldByName('CODE').AsString;
+
+   qryGetTaxCode.Close;
+   qryGetTaxCode.Params[0].AsString := 'GeneralLedgerTax';
+   qryGetTaxCode.Open;
+   if not varIsNull(qryGetTaxCode.FieldByName('CODE').AsVariant) then
+      if qryGetTaxCode.FieldByName('CODE').AsString <> '' then
+         DefaultLedger := qryGetTaxCode.FieldByName('CODE').AsString;
 
    // Do clearance if needed
    if Trunc(SystemDate('LASTCLEAR')) < Trunc(Now) + 1 then
@@ -4197,6 +4205,9 @@ begin
     qryLedger.FieldByName('TAXCODE').AsString := 'NCR'
   }
     qryLedger.FieldByName('TAXCODE').AsString := DefaultInvoice
+  else
+  if qryLedger.FieldByName('TYPE').AsString = 'Ledger' then
+     qryLedger.FieldByName('TAXCODE').AsString := DefaultLedger
   else
   begin
   {
