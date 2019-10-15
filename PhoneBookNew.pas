@@ -1446,7 +1446,6 @@ begin
                qTmp.ParamByName('newsearch').AsString := FNewSearch;
                qTmp.ParamByName('NName').AsInteger := NName;
                qTmp.ExecSQL();
-
             end;
 
             if (qryMasterPhoneBookEntry.FieldByName('NNAME').AsInteger <> qPhoneBook.FieldByName('NNAMEMASTER').AsInteger) then
@@ -1460,7 +1459,6 @@ begin
 
                qTmp.ParamByName('NNAME').AsInteger := FNName;
                qTmp.ExecSQL();
-
             end;    //  end if
 
             if FClientFromPhonebook then
@@ -3243,6 +3241,7 @@ begin
     LNName := TableString('phonebook','nclient', ANClient, 'nname');
     if LNName <> '' then
       FNName := StrToInt(LNName);
+      eClientCode.ReadOnly := True;
   end;
   tsClient.TabVisible := True;
 
