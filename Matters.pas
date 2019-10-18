@@ -14671,7 +14671,7 @@ begin
    if frmNewTransaction.showModal = mrOk then
    begin
       qryInvestmentTransactions.Close;
-      qryInvestmentTransactions.ParamByName('nmatter').AsInteger := iMatter;
+      qryInvestmentTransactions.ParamByName('ndepositaccount').AsInteger := iDeposit;
       qryInvestmentTransactions.Open;
 
 
