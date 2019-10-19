@@ -1012,7 +1012,7 @@ begin
 
       Next;
     end;
-    Close;
+//    Close;
   end;
 end;
 
@@ -1037,7 +1037,7 @@ begin
 
       Next;
     end;
-    Close;
+//    Close;
   end;
 end;
 
@@ -1074,7 +1074,7 @@ begin
       SQL.Text := 'SELECT COLOUR FROM BANK WHERE ACCT = :ACCT';
       Params[0].AsString := sCode;
       Open;
-      if not IsEmpty then
+      if (IsEmpty = False) then
       begin
          if FieldbyName('COLOUR').AsInteger = 0 then
             BankColour := clGreen
@@ -5615,7 +5615,7 @@ begin
     begin
       try
         if dmAxiom.uniInsight.InTransaction then
-             dmAxiom.uniInsight.Commit;
+             dmAxiom.uniInsight.Rollback;
         dmAxiom.uniInsight.StartTransaction;
         if dmAxiom.qryReceipts.FieldByName('TRUST').AsString = 'T' then
         begin
@@ -5642,7 +5642,7 @@ begin
         dmAxiom.qryNew.Close;
 
         // Update the bank cleared balance
-        with dmAxiom.qryBanks do
+        with dmAxiom.qryTmp do
         begin
           Close;
           SQL.Text := 'UPDATE BANK SET CL_BALANCE = (CL_BALANCE + ' + CurrToStrF(dmAxiom.qryReceipts.FieldByName('AMOUNT').AsFloat, ffFixed, 15) + ') WHERE ACCT = :ACCT';
