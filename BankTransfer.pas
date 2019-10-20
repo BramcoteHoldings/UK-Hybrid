@@ -12,7 +12,8 @@ uses
   cxLookAndFeelPainters, cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons, Data.DB, DBAccess, Uni, MemDS,
-  cxButtonEdit, Vcl.Menus, cxButtons;
+  cxButtonEdit, Vcl.Menus, cxButtons, System.Actions, Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
 
 type
   TfrmTransferMoney = class(TForm)
@@ -45,6 +46,8 @@ type
     qryBanks: TUniQuery;
     cxButton1: TcxButton;
     cxButton2: TcxButton;
+    ActionManager1: TActionManager;
+    actTransfer: TAction;
     procedure BitBtn1Click(Sender: TObject);
     procedure teLedgerREFNOPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
@@ -55,9 +58,10 @@ type
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
     procedure cmbBankFromPropertiesCloseUp(Sender: TObject);
     procedure cmbBankToPropertiesCloseUp(Sender: TObject);
-    procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure tbDescKeyPress(Sender: TObject; var Key: Char);
+    procedure actTransferExecute(Sender: TObject);
+    procedure actTransferUpdate(Sender: TObject);
   private
     { Private declarations }
     DefaultTax     : String;
@@ -78,6 +82,17 @@ implementation
 
 uses
   AxiomData, miscfunc, glComponentUtil, LSearch, citfunc;
+
+procedure TfrmTransferMoney.actTransferExecute(Sender: TObject);
+begin
+   DoTransfer;
+end;
+
+procedure TfrmTransferMoney.actTransferUpdate(Sender: TObject);
+begin
+   TAction(Sender).Enabled := ((cmbBankFrom.Text<>'') and (cmbBankTo.Text<>'') and
+                               (ceAmount.Value <> Null) and (tbDesc.Text<>''));
+end;
 
 procedure TfrmTransferMoney.BitBtn1Click(Sender: TObject);
 begin
@@ -507,11 +522,6 @@ begin
    begin
       AtOGL := TableString('BANK','ACCT',STRING(cmbBanktO.EditValue), 'CASH_AT_BANK');
    end;
-end;
-
-procedure TfrmTransferMoney.cxButton1Click(Sender: TObject);
-begin
-   DoTransfer;
 end;
 
 procedure TfrmTransferMoney.cxButton2Click(Sender: TObject);
