@@ -13,16 +13,14 @@ uses
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons, Data.DB, DBAccess, Uni, MemDS,
   cxButtonEdit, Vcl.Menus, cxButtons, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dxLayoutContainer,
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses, dxLayoutControl;
 
 type
   TfrmTransferMoney = class(TForm)
     dtpDate: TDateTimePicker;
-    Label3: TLabel;
-    Label4: TLabel;
     ceAmount: TcxCurrencyEdit;
     tbDesc: TcxTextEdit;
-    Label5: TLabel;
     qryFromBank: TUniQuery;
     qryToBank: TUniQuery;
     dsFromBank: TUniDataSource;
@@ -31,14 +29,8 @@ type
     qryCheque: TUniQuery;
     qryBank: TUniQuery;
     qryBankBalance: TUniQuery;
-    GroupBox1: TGroupBox;
-    Label1: TLabel;
     cmbBankFrom: TcxLookupComboBox;
-    GroupBox2: TGroupBox;
-    Label2: TLabel;
     cmbBankTo: TcxLookupComboBox;
-    lblGLFromDesc: TLabel;
-    lblGLToDesc: TLabel;
     qryReceipt: TUniQuery;
     qryBankdepInsert: TUniQuery;
     qryBankClearance: TUniQuery;
@@ -48,6 +40,24 @@ type
     cxButton2: TcxButton;
     ActionManager1: TActionManager;
     actTransfer: TAction;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutGroup2: TdxLayoutGroup;
+    dxLayoutGroup3: TdxLayoutGroup;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutGroup4: TdxLayoutGroup;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutGroup6: TdxLayoutGroup;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutGroup8: TdxLayoutGroup;
+    dxLayoutItem6: TdxLayoutItem;
+    dxLayoutItem7: TdxLayoutItem;
+    lblGLFromDesc: TLabel;
+    dxLayoutItem8: TdxLayoutItem;
+    lblGLToDesc: TLabel;
+    dxLayoutItem9: TdxLayoutItem;
     procedure BitBtn1Click(Sender: TObject);
     procedure teLedgerREFNOPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
@@ -91,7 +101,8 @@ end;
 procedure TfrmTransferMoney.actTransferUpdate(Sender: TObject);
 begin
    TAction(Sender).Enabled := ((cmbBankFrom.Text<>'') and (cmbBankTo.Text<>'') and
-                               (ceAmount.Value <> Null) and (tbDesc.Text<>''));
+                               (ceAmount.Value <> Null) and (tbDesc.Text<>'') and
+                               (cmbBankFrom.Text <> cmbBankTo.Text));
 end;
 
 procedure TfrmTransferMoney.BitBtn1Click(Sender: TObject);
@@ -470,10 +481,6 @@ begin
       begin
          lblGLToDesc.Caption := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
 
-//         defaultLedgerTaxCode := 'FREE';  // LedgerString(glInstance.ledgerKey, 'DEFAULT_TAXCODE');
-
-//         if defaultLedgerTaxCode <> '' then
-//            qryLedger.FieldByName('TAXCODE').AsString := defaultLedgerTaxCode;
       end
       else
       begin

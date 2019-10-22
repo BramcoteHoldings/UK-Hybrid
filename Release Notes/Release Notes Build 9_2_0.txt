@@ -1,5 +1,11 @@
 Insight Build 9.2.0
 
+Build 48
+========
+- Fixed issue with creditor invoice payment and the invoice consists of 2 or more segments.
+--fixed issue with sequence generation when doing an Invoice Credit Note.
+-fixed issue with cheque creation immediately after doing a Bank Transfer.
+
 Build 47
 ========
 -Fixed the cheqreq ledger card to correctly display billed cheqreqs where the bill has been paid.

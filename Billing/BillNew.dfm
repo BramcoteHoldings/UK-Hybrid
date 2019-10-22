@@ -4679,10 +4679,10 @@ object frmInvoice: TfrmInvoice
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'plPhonebook'
-        mmHeight = 4498
+        mmHeight = 5292
         mmLeft = 25665
         mmTop = 55298
-        mmWidth = 793
+        mmWidth = 1058
         BandType = 0
         LayerName = Foreground
       end
@@ -4702,10 +4702,10 @@ object frmInvoice: TfrmInvoice
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'plPhonebook'
-        mmHeight = 4498
+        mmHeight = 5292
         mmLeft = 25665
         mmTop = 60854
-        mmWidth = 793
+        mmWidth = 1058
         BandType = 0
         LayerName = Foreground
       end
@@ -4725,10 +4725,10 @@ object frmInvoice: TfrmInvoice
         ParentDataPipeline = False
         Transparent = True
         DataPipelineName = 'plPhonebook'
-        mmHeight = 4497
+        mmHeight = 5291
         mmLeft = 25665
         mmTop = 66411
-        mmWidth = 793
+        mmWidth = 1058
         BandType = 0
         LayerName = Foreground
       end
@@ -5018,29 +5018,6 @@ object frmInvoice: TfrmInvoice
               BandType = 7
               LayerName = Foreground2
             end
-            object ppDBText18: TppDBText
-              DesignLayer = ppDesignLayer3
-              UserName = 'DBText18'
-              Border.mmPadding = 0
-              DataField = 'FEES'
-              DataPipeline = plSummaryBill
-              DisplayFormat = '$#,0.00;($#,0.00)'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Name = 'Segoe UI'
-              Font.Size = 11
-              Font.Style = []
-              ParentDataPipeline = False
-              TextAlignment = taRightJustified
-              Transparent = True
-              DataPipelineName = 'plSummaryBill'
-              mmHeight = 4498
-              mmLeft = 109799
-              mmTop = 529
-              mmWidth = 24342
-              BandType = 7
-              LayerName = Foreground2
-            end
             object ppVarTotal: TppVariable
               DesignLayer = ppDesignLayer3
               UserName = 'VarTotal'
@@ -5082,6 +5059,7 @@ object frmInvoice: TfrmInvoice
                 'rset0 MS Sans Serif Narrow;}{\f1\fnil MS Sans Serif;}}'#13#10'\viewkin' +
                 'd4\uc1\pard\f0\fs24 Fees\f1\fs16\par'#13#10'}'#13#10#0
               RemoveEmptyLines = False
+              Stretch = True
               mmHeight = 4763
               mmLeft = 21167
               mmTop = 529
@@ -5093,6 +5071,29 @@ object frmInvoice: TfrmInvoice
               mmStopPosition = 0
               mmMinHeight = 0
               mmLeftMargin = 794
+            end
+            object ppDBText18: TppDBText
+              DesignLayer = ppDesignLayer3
+              UserName = 'DBText18'
+              Border.mmPadding = 0
+              DataField = 'FEES'
+              DataPipeline = plSummaryBill
+              DisplayFormat = '$#,0.00;($#,0.00)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Name = 'Segoe UI'
+              Font.Size = 11
+              Font.Style = []
+              ParentDataPipeline = False
+              TextAlignment = taRightJustified
+              Transparent = True
+              DataPipelineName = 'plSummaryBill'
+              mmHeight = 4498
+              mmLeft = 109535
+              mmTop = 529
+              mmWidth = 24342
+              BandType = 7
+              LayerName = Foreground2
             end
           end
           object raCodeModule1: TraCodeModule
@@ -5646,22 +5647,22 @@ object frmInvoice: TfrmInvoice
     object plPhonebookppField1: TppField
       FieldAlias = 'TITLE'
       FieldName = 'TITLE'
-      FieldLength = 40
-      DisplayWidth = 40
+      FieldLength = 0
+      DisplayWidth = 0
       Position = 0
     end
     object plPhonebookppField2: TppField
       FieldAlias = 'NAME'
       FieldName = 'NAME'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 65
+      DisplayWidth = 65
       Position = 1
     end
     object plPhonebookppField3: TppField
       FieldAlias = 'ADDRESS'
       FieldName = 'ADDRESS'
-      FieldLength = 120
-      DisplayWidth = 120
+      FieldLength = 250
+      DisplayWidth = 250
       Position = 2
     end
     object plPhonebookppField4: TppField
@@ -5679,13 +5680,14 @@ object frmInvoice: TfrmInvoice
         'SELECT title, name, address, suburb||'#39' '#39'||state||'#39' '#39'||postcode a' +
         's SSP FROM PHONEBOOK'
       ' WHERE nname = :Search')
+    Active = True
     Left = 729
     Top = 85
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'Search'
-        Value = nil
+        Value = Null
       end>
   end
   object dsPhonebook: TUniDataSource
@@ -6984,23 +6986,24 @@ object frmInvoice: TfrmInvoice
       'AND   a.nmemo = :nmemo'
       'AND   m.nmatter = :nmatter '
       'ORDER BY 1, 2')
+    Active = True
     Left = 911
     Top = 102
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'nmemo'
-        Value = nil
+        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'fileid'
-        Value = nil
+        Value = Null
       end>
   end
   object plItems: TppDBPipeline
@@ -7014,7 +7017,7 @@ object frmInvoice: TfrmInvoice
       FieldName = 'TYPE'
       FieldLength = 0
       DataType = dtDouble
-      DisplayWidth = 10
+      DisplayWidth = 0
       Position = 0
     end
     object plItemsppField2: TppField
@@ -7859,7 +7862,7 @@ object frmInvoice: TfrmInvoice
       Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 7408
+      mmHeight = 15610
       mmPrintPosition = 0
       object ppRegion1: TppRegion
         DesignLayer = ppDesignLayer2
@@ -7969,34 +7972,33 @@ object frmInvoice: TfrmInvoice
           BandType = 4
           LayerName = Foreground1
         end
-        object ppDBMemo1: TppDBMemo
-          DesignLayer = ppDesignLayer2
-          UserName = 'DBMemo1'
-          Border.mmPadding = 0
-          CharWrap = False
-          DataField = 'DESCR'
-          DataPipeline = plItems
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Name = 'Segoe UI'
-          Font.Size = 9
-          Font.Style = []
-          RemoveEmptyLines = False
-          Stretch = True
-          Transparent = True
-          DataPipelineName = 'plItems'
-          mmHeight = 3673
-          mmLeft = 45507
-          mmTop = 1323
-          mmWidth = 97896
-          BandType = 4
-          LayerName = Foreground1
-          mmBottomOffset = 0
-          mmOverFlowOffset = 0
-          mmStopPosition = 0
-          mmMinHeight = 0
-          mmLeading = 0
-        end
+      end
+      object ppDBRichText1: TppDBRichText
+        DesignLayer = ppDesignLayer2
+        UserName = 'DBRichText1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 9
+        Font.Style = []
+        Border.mmPadding = 0
+        ExportRTFAsBitmap = False
+        DataField = 'DESCR'
+        DataPipeline = plItems
+        RemoveEmptyLines = False
+        Stretch = True
+        Transparent = True
+        DataPipelineName = 'plItems'
+        mmHeight = 3938
+        mmLeft = 45508
+        mmTop = 1313
+        mmWidth = 97894
+        BandType = 4
+        LayerName = Foreground1
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
       end
     end
     object ppSummaryBand6: TppSummaryBand
@@ -8540,7 +8542,7 @@ object frmInvoice: TfrmInvoice
       FieldName = 'NMEMO'
       FieldLength = 0
       DataType = dtLargeInt
-      DisplayWidth = 15
+      DisplayWidth = 0
       Position = 0
     end
     object plSummaryBillppField2: TppField
@@ -8628,8 +8630,8 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField13: TppField
       FieldAlias = 'BANK_ACCT'
       FieldName = 'BANK_ACCT'
-      FieldLength = 2
-      DisplayWidth = 2
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 12
     end
     object plSummaryBillppField14: TppField
@@ -8664,15 +8666,15 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField18: TppField
       FieldAlias = 'AUTHOR'
       FieldName = 'AUTHOR'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 20
+      DisplayWidth = 20
       Position = 17
     end
     object plSummaryBillppField19: TppField
       FieldAlias = 'PARTNER'
       FieldName = 'PARTNER'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 20
+      DisplayWidth = 20
       Position = 18
     end
     object plSummaryBillppField20: TppField
@@ -8693,8 +8695,8 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField22: TppField
       FieldAlias = 'INV_NOTE'
       FieldName = 'INV_NOTE'
-      FieldLength = 400
-      DisplayWidth = 400
+      FieldLength = 4000
+      DisplayWidth = 4000
       Position = 21
     end
     object plSummaryBillppField23: TppField
@@ -8745,8 +8747,8 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField29: TppField
       FieldAlias = 'CREDITTYPE'
       FieldName = 'CREDITTYPE'
-      FieldLength = 5
-      DisplayWidth = 5
+      FieldLength = 20
+      DisplayWidth = 20
       Position = 28
     end
     object plSummaryBillppField30: TppField
@@ -9200,8 +9202,8 @@ object frmInvoice: TfrmInvoice
       Position = 79
     end
     object plSummaryBillppField81: TppField
-      FieldAlias = 'DRAFT_BILL_NO'
-      FieldName = 'DRAFT_BILL_NO'
+      FieldAlias = 'OLD_DRAFT_BILL_NO'
+      FieldName = 'OLD_DRAFT_BILL_NO'
       FieldLength = 0
       DataType = dtLargeInt
       DisplayWidth = 15
@@ -9272,8 +9274,8 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField90: TppField
       FieldAlias = 'REQUESTED_BY'
       FieldName = 'REQUESTED_BY'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 20
+      DisplayWidth = 20
       Position = 89
     end
     object plSummaryBillppField91: TppField
@@ -9308,8 +9310,8 @@ object frmInvoice: TfrmInvoice
     object plSummaryBillppField95: TppField
       FieldAlias = 'MOD_BY'
       FieldName = 'MOD_BY'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 20
+      DisplayWidth = 20
       Position = 94
     end
     object plSummaryBillppField96: TppField
@@ -9402,11 +9404,815 @@ object frmInvoice: TfrmInvoice
       Position = 105
     end
     object plSummaryBillppField107: TppField
+      FieldAlias = 'SPELL_CHK_DONE'
+      FieldName = 'SPELL_CHK_DONE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 106
+    end
+    object plSummaryBillppField108: TppField
+      FieldAlias = 'PRAC_NUM'
+      FieldName = 'PRAC_NUM'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 107
+    end
+    object plSummaryBillppField109: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ORIGINAL_FEES'
+      FieldName = 'ORIGINAL_FEES'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 108
+    end
+    object plSummaryBillppField110: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ORIGINAL_ITEM_FEES'
+      FieldName = 'ORIGINAL_ITEM_FEES'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 109
+    end
+    object plSummaryBillppField111: TppField
+      FieldAlias = 'IS_DRAFT'
+      FieldName = 'IS_DRAFT'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 110
+    end
+    object plSummaryBillppField112: TppField
+      FieldAlias = 'BILL_DATE'
+      FieldName = 'BILL_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 111
+    end
+    object plSummaryBillppField113: TppField
+      FieldAlias = 'CASHIER_NOTES'
+      FieldName = 'CASHIER_NOTES'
+      FieldLength = 4000
+      DisplayWidth = 4000
+      Position = 112
+    end
+    object plSummaryBillppField114: TppField
+      FieldAlias = 'CURRENCY'
+      FieldName = 'CURRENCY'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 113
+    end
+    object plSummaryBillppField115: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'FX_RATE'
+      FieldName = 'FX_RATE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 114
+    end
+    object plSummaryBillppField116: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES'
+      FieldName = 'BASE_CCY_FEES'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 115
+    end
+    object plSummaryBillppField117: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB'
+      FieldName = 'BASE_CCY_DISB'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 116
+    end
+    object plSummaryBillppField118: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD'
+      FieldName = 'BASE_CCY_ANTD'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 117
+    end
+    object plSummaryBillppField119: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TRUST'
+      FieldName = 'BASE_CCY_TRUST'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 118
+    end
+    object plSummaryBillppField120: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_PAID'
+      FieldName = 'BASE_CCY_FEES_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 119
+    end
+    object plSummaryBillppField121: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_PAID'
+      FieldName = 'BASE_CCY_DISB_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 120
+    end
+    object plSummaryBillppField122: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_PAID'
+      FieldName = 'BASE_CCY_ANTD_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 121
+    end
+    object plSummaryBillppField123: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND'
+      FieldName = 'BASE_CCY_SUND'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 122
+    end
+    object plSummaryBillppField124: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_PAID'
+      FieldName = 'BASE_CCY_SUND_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 123
+    end
+    object plSummaryBillppField125: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_CRDIT'
+      FieldName = 'BASE_CCY_FEES_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 124
+    end
+    object plSummaryBillppField126: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_CRDIT'
+      FieldName = 'BASE_CCY_DISB_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 125
+    end
+    object plSummaryBillppField127: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_CRDIT'
+      FieldName = 'BASE_CCY_ANTD_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 126
+    end
+    object plSummaryBillppField128: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TAX_CRDIT'
+      FieldName = 'BASE_CCY_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 127
+    end
+    object plSummaryBillppField129: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TAX'
+      FieldName = 'BASE_CCY_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 128
+    end
+    object plSummaryBillppField130: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TAX_PAID'
+      FieldName = 'BASE_CCY_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 129
+    end
+    object plSummaryBillppField131: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_TAX'
+      FieldName = 'BASE_CCY_FEES_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 130
+    end
+    object plSummaryBillppField132: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_TAX_PAID'
+      FieldName = 'BASE_CCY_FEES_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 131
+    end
+    object plSummaryBillppField133: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_TAX'
+      FieldName = 'BASE_CCY_DISB_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 132
+    end
+    object plSummaryBillppField134: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_TAX_PAID'
+      FieldName = 'BASE_CCY_DISB_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 133
+    end
+    object plSummaryBillppField135: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_TAX'
+      FieldName = 'BASE_CCY_ANTD_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 134
+    end
+    object plSummaryBillppField136: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_TAX_PAID'
+      FieldName = 'BASE_CCY_ANTD_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 135
+    end
+    object plSummaryBillppField137: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_TAX'
+      FieldName = 'BASE_CCY_SUND_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 136
+    end
+    object plSummaryBillppField138: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_TAX_PAID'
+      FieldName = 'BASE_CCY_SUND_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 137
+    end
+    object plSummaryBillppField139: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_PAID'
+      FieldName = 'BASE_CCY_UPCRED_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 138
+    end
+    object plSummaryBillppField140: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_TAX'
+      FieldName = 'BASE_CCY_UPCRED_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 139
+    end
+    object plSummaryBillppField141: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_TAX_PAID'
+      FieldName = 'BASE_CCY_UPCRED_TAX_PAID'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 140
+    end
+    object plSummaryBillppField142: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_WOFF'
+      FieldName = 'BASE_CCY_FEES_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 141
+    end
+    object plSummaryBillppField143: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_WOFF'
+      FieldName = 'BASE_CCY_DISB_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 142
+    end
+    object plSummaryBillppField144: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_WOFF'
+      FieldName = 'BASE_CCY_ANTD_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 143
+    end
+    object plSummaryBillppField145: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_WOFF'
+      FieldName = 'BASE_CCY_SUND_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 144
+    end
+    object plSummaryBillppField146: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_WOFF'
+      FieldName = 'BASE_CCY_UPCRED_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 145
+    end
+    object plSummaryBillppField147: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEESTAX_WOFF'
+      FieldName = 'BASE_CCY_FEESTAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 146
+    end
+    object plSummaryBillppField148: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISBTAX_WOFF'
+      FieldName = 'BASE_CCY_DISBTAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 147
+    end
+    object plSummaryBillppField149: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTDTAX_WOFF'
+      FieldName = 'BASE_CCY_ANTDTAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 148
+    end
+    object plSummaryBillppField150: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUNDTAX_WOFF'
+      FieldName = 'BASE_CCY_SUNDTAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 149
+    end
+    object plSummaryBillppField151: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TAX_WOFF'
+      FieldName = 'BASE_CCY_TAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 150
+    end
+    object plSummaryBillppField152: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEESTAXFREE'
+      FieldName = 'BASE_CCY_FEESTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 151
+    end
+    object plSummaryBillppField153: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISBTAXFREE'
+      FieldName = 'BASE_CCY_DISBTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 152
+    end
+    object plSummaryBillppField154: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTDTAXFREE'
+      FieldName = 'BASE_CCY_ANTDTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 153
+    end
+    object plSummaryBillppField155: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCREDTAXFREE'
+      FieldName = 'BASE_CCY_UPCREDTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 154
+    end
+    object plSummaryBillppField156: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_OWING'
+      FieldName = 'BASE_CCY_OWING'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 155
+    end
+    object plSummaryBillppField157: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TOTAL'
+      FieldName = 'BASE_CCY_TOTAL'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 156
+    end
+    object plSummaryBillppField158: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ORIGINAL_TOTAL'
+      FieldName = 'BASE_CCY_ORIGINAL_TOTAL'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 157
+    end
+    object plSummaryBillppField159: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_TOTALEXGST'
+      FieldName = 'BASE_CCY_TOTALEXGST'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 158
+    end
+    object plSummaryBillppField160: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISCOUNT'
+      FieldName = 'BASE_CCY_DISCOUNT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 159
+    end
+    object plSummaryBillppField161: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISCOUNT_GST'
+      FieldName = 'BASE_CCY_DISCOUNT_GST'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 160
+    end
+    object plSummaryBillppField162: TppField
+      FieldAlias = 'COPY_TO_CREATED_BY'
+      FieldName = 'COPY_TO_CREATED_BY'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 161
+    end
+    object plSummaryBillppField163: TppField
+      FieldAlias = 'COPY_TO_AUTHORISED_BY'
+      FieldName = 'COPY_TO_AUTHORISED_BY'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 162
+    end
+    object plSummaryBillppField164: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'SUND_CRDIT'
+      FieldName = 'SUND_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 163
+    end
+    object plSummaryBillppField165: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'UPCRED_CRDIT'
+      FieldName = 'UPCRED_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 164
+    end
+    object plSummaryBillppField166: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'FEESTAX_CRDIT'
+      FieldName = 'FEESTAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 165
+    end
+    object plSummaryBillppField167: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'SUNDTAX_CRDIT'
+      FieldName = 'SUNDTAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 166
+    end
+    object plSummaryBillppField168: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'UPCREDTAX_CRDIT'
+      FieldName = 'UPCREDTAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 167
+    end
+    object plSummaryBillppField169: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'DISBTAX_CRDIT'
+      FieldName = 'DISBTAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 168
+    end
+    object plSummaryBillppField170: TppField
+      FieldAlias = 'DISPATCHED_BY'
+      FieldName = 'DISPATCHED_BY'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 169
+    end
+    object plSummaryBillppField171: TppField
+      FieldAlias = 'AUTHORISED_BY'
+      FieldName = 'AUTHORISED_BY'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 170
+    end
+    object plSummaryBillppField172: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_UPCRED'
+      FieldName = 'ENTITY_CCY_UPCRED'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 171
+    end
+    object plSummaryBillppField173: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED'
+      FieldName = 'BASE_CCY_UPCRED'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 172
+    end
+    object plSummaryBillppField174: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_ANTD_TAX_CRDIT'
+      FieldName = 'BASE_CCY_ANTD_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 173
+    end
+    object plSummaryBillppField175: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_ANTD_TAX_CRDIT'
+      FieldName = 'ENTITY_CCY_ANTD_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 174
+    end
+    object plSummaryBillppField176: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_DISB_TAX_CRDIT'
+      FieldName = 'BASE_CCY_DISB_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 175
+    end
+    object plSummaryBillppField177: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_DISB_TAX_CRDIT'
+      FieldName = 'ENTITY_CCY_DISB_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 176
+    end
+    object plSummaryBillppField178: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_FEES_TAX_CRDIT'
+      FieldName = 'BASE_CCY_FEES_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 177
+    end
+    object plSummaryBillppField179: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_FEES_TAX_CRDIT'
+      FieldName = 'ENTITY_CCY_FEES_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 178
+    end
+    object plSummaryBillppField180: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_CRDIT'
+      FieldName = 'BASE_CCY_SUND_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 179
+    end
+    object plSummaryBillppField181: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_SUND_CRDIT'
+      FieldName = 'ENTITY_CCY_SUND_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 180
+    end
+    object plSummaryBillppField182: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUND_TAX_CRDIT'
+      FieldName = 'BASE_CCY_SUND_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 181
+    end
+    object plSummaryBillppField183: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_SUND_TAX_CRDIT'
+      FieldName = 'ENTITY_CCY_SUND_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 182
+    end
+    object plSummaryBillppField184: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_SUNDTAXFREE'
+      FieldName = 'BASE_CCY_SUNDTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 183
+    end
+    object plSummaryBillppField185: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_SUNDTAXFREE'
+      FieldName = 'ENTITY_CCY_SUNDTAXFREE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 184
+    end
+    object plSummaryBillppField186: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_CRDIT'
+      FieldName = 'BASE_CCY_UPCRED_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 185
+    end
+    object plSummaryBillppField187: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_UPCRED_CRDIT'
+      FieldName = 'ENTITY_CCY_UPCRED_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 186
+    end
+    object plSummaryBillppField188: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_TAX_CRDIT'
+      FieldName = 'BASE_CCY_UPCRED_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 187
+    end
+    object plSummaryBillppField189: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_UPCRED_TAX_CRDIT'
+      FieldName = 'ENTITY_CCY_UPCRED_TAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 188
+    end
+    object plSummaryBillppField190: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BASE_CCY_UPCRED_TAX_WOFF'
+      FieldName = 'BASE_CCY_UPCRED_TAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 189
+    end
+    object plSummaryBillppField191: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_UPCRED_TAX_WOFF'
+      FieldName = 'ENTITY_CCY_UPCRED_TAX_WOFF'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 190
+    end
+    object plSummaryBillppField192: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ENTITY_CCY_TAX'
+      FieldName = 'ENTITY_CCY_TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 191
+    end
+    object plSummaryBillppField193: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ANTDTAX_CRDIT'
+      FieldName = 'ANTDTAX_CRDIT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 192
+    end
+    object plSummaryBillppField194: TppField
+      FieldAlias = 'AUTHORISED_DATE'
+      FieldName = 'AUTHORISED_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 193
+    end
+    object plSummaryBillppField195: TppField
+      FieldAlias = 'REJECTED'
+      FieldName = 'REJECTED'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 194
+    end
+    object plSummaryBillppField196: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'TAXABLE_TOTAL'
+      FieldName = 'TAXABLE_TOTAL'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 195
+    end
+    object plSummaryBillppField197: TppField
+      FieldAlias = 'DRAFT_BILL_NO'
+      FieldName = 'DRAFT_BILL_NO'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 196
+    end
+    object plSummaryBillppField198: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BILLED_DISB_ADJUSTMENT'
+      FieldName = 'BILLED_DISB_ADJUSTMENT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 197
+    end
+    object plSummaryBillppField199: TppField
       FieldAlias = 'ROWID'
       FieldName = 'ROWID'
       FieldLength = 18
       DisplayWidth = 18
-      Position = 106
+      Position = 198
     end
   end
   object dsSummaryBill: TUniDataSource
@@ -9586,13 +10392,14 @@ object frmInvoice: TfrmInvoice
       'SELECT M.*, M.ROWID '
       'FROM NMEMO M '
       'WHERE M.NMEMO = :NMEMO')
+    Active = True
     Left = 967
     Top = 36
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'NMEMO'
-        Value = nil
+        Value = Null
       end>
   end
   object procBillCreate: TUniStoredProc

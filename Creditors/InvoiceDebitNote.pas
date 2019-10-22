@@ -364,7 +364,8 @@ begin
              dmAxiom.uniInsight.Commit;
         dmAxiom.uniInsight.StartTransaction;
 
-        liInvoiceNum := GetSeqNum('NINVOICE');
+//       22/10/2019 - AES changed to use sequence rather than seqnum table AGAIN.  needs reset sequence to be run
+        liInvoiceNum := GetSequenceNumber('SQNC_NINVOICE');    ///GetSeqNum('NINVOICE');
 
         qryAccount.FieldByName('ACCT').AsString := dmAxiom.Entity;
         qryAccount.FieldByName('TYPE').AsString := 'CN';

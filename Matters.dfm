@@ -6226,7 +6226,7 @@ object frmMatters: TfrmMatters
         object cxDBNavigator1: TcxDBNavigator
           Left = 19
           Top = 68
-          Width = 225
+          Width = 221
           Height = 26
           Buttons.CustomButtons = <>
           Buttons.PriorPage.Enabled = False
@@ -6251,6 +6251,7 @@ object frmMatters: TfrmMatters
           Buttons.Filter.Enabled = False
           Buttons.Filter.Visible = False
           DataSource = dsControlledTotal
+          InfoPanel.Visible = True
           LookAndFeel.Kind = lfOffice11
           TabOrder = 1
         end
@@ -24528,7 +24529,6 @@ object frmMatters: TfrmMatters
     Top = 316
   end
   object qryInvestmentTransactions: TUniQuery
-    KeyFields = 'ndepositaccount'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT created, descr,'
@@ -24544,12 +24544,13 @@ object frmMatters: TfrmMatters
       
         '       DECODE (SUBSTR (amount, 0, 1), '#39'-'#39', 0 - amount, 0) AS deb' +
         'it, ninvtran,'
-      '       TYPE AS currtype, REFERENCE'
+      '       TYPE AS currtype, REFERENCE,'
+      '       ndepositaccount'
       '  FROM investment_trans'
       '-- WHERE nmatter = :nmatter'
       'where ndepositaccount = :ndepositaccount')
-    MasterSource = dsControlledTotal
-    MasterFields = 'ndepositaccount'
+    SpecificOptions.Strings = (
+      'Oracle.FetchAll=True')
     Left = 1349
     Top = 551
     ParamData = <

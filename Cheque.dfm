@@ -849,7 +849,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43753.628801956d
+    EditValue = 43760.7029603588d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1462,8 +1462,8 @@ object frmCheque: TfrmCheque
       end>
   end
   object cxStyleRepository1: TcxStyleRepository
-    Left = 543
-    Top = 120
+    Left = 653
+    Top = 22
     PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svTextColor]

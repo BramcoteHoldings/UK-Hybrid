@@ -204,7 +204,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   object dtpDate: TEnforceCustomDateEdit
     Left = 119
     Top = 37
-    EditValue = 43651.495926875d
+    EditValue = 43760.619173912d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
