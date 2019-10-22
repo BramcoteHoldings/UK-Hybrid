@@ -378,7 +378,6 @@ type
     cbProforma: TcxBarEditItem;
     cbMasterBill: TcxBarEditItem;
     procBillCreate: TUniStoredProc;
-    ppDBMemo1: TppDBMemo;
     dxBbtnAddExpTemplate: TdxBarButton;
     bbtnShowSingleLine: TdxBarButton;
     bbtnAdjDisbTotal: TdxBarButton;
@@ -418,6 +417,7 @@ type
     cxBarEditItem1: TcxBarEditItem;
     procBillAddSingleUpCred: TUniStoredProc;
     procBillAddSingleUpAntd: TUniStoredProc;
+    ppDBRichText1: TppDBRichText;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -729,8 +729,7 @@ var
     Unprocessed, dGstFree, liAmount, RecoveredPct : double;
     lsAuthorList : string;
 begin
-    if FForm = nil
-    then
+    if FForm = nil then
       FForm := AForm;
 
     lblDraftBillCaption.Visible := False;
