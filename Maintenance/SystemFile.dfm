@@ -57,8 +57,6 @@ object frmSystemFile: TfrmSystemFile
     object tsGeneral: TcxTabSheet
       Caption = '&General'
       ImageIndex = 0
-      ExplicitLeft = 5
-      ExplicitTop = 27
       object DBText1: TDBText
         Left = 102
         Top = 3
@@ -2927,7 +2925,7 @@ object frmSystemFile: TfrmSystemFile
       OnShow = cxTabSheet2Show
       object Label6: TLabel
         Left = 17
-        Top = 174
+        Top = 180
         Width = 100
         Height = 15
         Caption = 'Draft Bill Reference'
@@ -2935,35 +2933,35 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label53: TLabel
         Left = 20
-        Top = 338
+        Top = 347
         Width = 140
         Height = 15
         Caption = 'Default Draft Bill Template:'
       end
       object Label54: TLabel
         Left = 20
-        Top = 362
+        Top = 371
         Width = 149
         Height = 15
         Caption = 'Default Memo Bill Template:'
       end
       object Label58: TLabel
         Left = 20
-        Top = 290
+        Top = 299
         Width = 103
         Height = 15
         Caption = 'Bill Discount Period'
       end
       object Label59: TLabel
         Left = 20
-        Top = 314
+        Top = 323
         Width = 92
         Height = 15
         Caption = 'Bill Discount Rate'
       end
       object Label62: TLabel
         Left = 17
-        Top = 198
+        Top = 204
         Width = 71
         Height = 15
         Caption = 'LEDES Ref No'
@@ -2971,14 +2969,14 @@ object frmSystemFile: TfrmSystemFile
       end
       object Label71: TLabel
         Left = 297
-        Top = 290
+        Top = 299
         Width = 127
         Height = 15
         Caption = 'Default Dispatched Date'
       end
       object Label78: TLabel
         Left = 220
-        Top = 174
+        Top = 180
         Width = 128
         Height = 15
         Caption = 'Authirised Bill Reference'
@@ -3087,7 +3085,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit9: TDBEdit
         Left = 124
-        Top = 171
+        Top = 177
         Width = 83
         Height = 23
         DataField = 'DRAFTBILL'
@@ -3130,7 +3128,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxGroupBox7: TcxGroupBox
         Left = 18
-        Top = 217
+        Top = 226
         Caption = 'Administration Fee on Bills'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -3201,7 +3199,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxGroupBox8: TcxGroupBox
         Left = 19
-        Top = 406
+        Top = 415
         Caption = 'Bill Email Template'
         Style.LookAndFeel.NativeStyle = True
         StyleDisabled.LookAndFeel.NativeStyle = True
@@ -3283,7 +3281,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBLookupComboEdit1: TJvDBLookupComboEdit
         Left = 174
-        Top = 359
+        Top = 368
         Width = 217
         Height = 23
         LookupDisplay = 'ITEM_NAME'
@@ -3296,7 +3294,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBLookupComboEdit2: TJvDBLookupComboEdit
         Left = 174
-        Top = 335
+        Top = 344
         Width = 217
         Height = 23
         LookupDisplay = 'ITEM_NAME'
@@ -3326,7 +3324,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit17: TDBEdit
         Left = 174
-        Top = 287
+        Top = 296
         Width = 112
         Height = 23
         DataField = 'BILL_DISCOUNT_PERIOD'
@@ -3335,7 +3333,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object JvDBSpinEdit1: TJvDBSpinEdit
         Left = 174
-        Top = 311
+        Top = 320
         Width = 112
         Height = 23
         ValueType = vtFloat
@@ -3365,7 +3363,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit20: TDBEdit
         Left = 124
-        Top = 195
+        Top = 201
         Width = 83
         Height = 23
         DataField = 'LEDES_FIRM_ID'
@@ -3373,7 +3371,7 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 18
       end
       object cxDBCheckBox67: TcxDBCheckBox
-        Left = 343
+        Left = 376
         Top = 111
         Caption = 'Allow adjustment of Disbursement amount.'
         DataBinding.DataField = 'ALLOW_DISB_ADJUSTMENT'
@@ -3391,7 +3389,7 @@ object frmSystemFile: TfrmSystemFile
       end
       object cxDBDateEdit1: TcxDBDateEdit
         Left = 434
-        Top = 287
+        Top = 296
         DataBinding.DataField = 'DFLT_BILL_DISPATCHED_DATE'
         DataBinding.DataSource = dsSystemFile
         TabOrder = 20
@@ -3399,12 +3397,29 @@ object frmSystemFile: TfrmSystemFile
       end
       object DBEdit29: TDBEdit
         Left = 357
-        Top = 171
+        Top = 177
         Width = 83
         Height = 23
         DataField = 'AUTH_BILL_REF'
         DataSource = dsSystemFile
         TabOrder = 21
+      end
+      object cxDBCheckBox79: TcxDBCheckBox
+        Left = 376
+        Top = 148
+        Caption = 'Bill Authorisation required prior to posting'
+        DataBinding.DataField = 'BILL_AUTH_REQ'
+        DataBinding.DataSource = dsSystemFile
+        Properties.DisplayChecked = 'Y'
+        Properties.DisplayUnchecked = 'N'
+        Properties.NullStyle = nssUnchecked
+        Properties.ValueChecked = 'Y'
+        Properties.ValueUnchecked = 'N'
+        Style.LookAndFeel.NativeStyle = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        TabOrder = 22
       end
     end
     object cxTabSheet4: TcxTabSheet

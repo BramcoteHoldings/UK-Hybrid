@@ -1109,14 +1109,14 @@ begin
       cbPrivate.Enabled := ((dmAxiom.UserID = qryInvoice.FieldByName('AUTHOR').AsString) Or (dmAxiom.UserID = qryInvoice.FieldByName('CREATEDBY').AsString)) and
         (qryInvoice.FieldByName('AUTHORISED').AsString = 'N') and (qryInvoice.FieldByName('dispatched').IsNull);
 
-      tbtnPost.Enabled := dmAxiom.Security.Bill.Post;
-
       lblInvoice.Enabled := True;
       dtpExpectedPayment.Enabled := True;
 
-{      tbtnPost.Enabled := ((qryInvoice.FieldByName('PRIVATE').AsString = 'N') and (qryInvoice.FieldByName('AUTHORISED').AsString = 'Y') and
-                          (dmAxiom.Security.Bill.Post) and (dmAxiom.Is_Cashier = 'Y'))
-}
+      if (SystemString('BILL_AUTH_REQ') = 'Y') then
+         tbtnPost.Enabled := ((qryInvoice.FieldByName('AUTHORISED').AsString = 'Y') and
+                             (dmAxiom.Security.Bill.Post))
+      else
+         tbtnPost.Enabled := dmAxiom.Security.Bill.Post;
     end;
 
     if (IsBillItem = '') and (qryInvoice.FieldByName('billtemplate').IsNull)
@@ -5594,7 +5594,14 @@ begin
       lblAuthorisedBy.Visible := True;
 //      chkEmailCreator.Visible := True;
 
-      tbtnPost.Enabled := (dmAxiom.Security.Bill.Post = True);  // (dmAxiom.Is_Cashier = 'Y'); // RDW 21/03/2019 - Removed and (dmAxiom.Security.Bill.Post = True);
+      if (SystemString('BILL_AUTH_REQ') = 'Y') then
+         tbtnPost.Enabled := ((qryInvoice.FieldByName('AUTHORISED').AsString = 'Y') and
+                             (dmAxiom.Security.Bill.Post))
+      else
+         tbtnPost.Enabled := dmAxiom.Security.Bill.Post;
+
+//      tbtnPost.Enabled := (dmAxiom.Security.Bill.Post = True);  // (dmAxiom.Is_Cashier = 'Y'); // RDW 21/03/2019 - Removed and (dmAxiom.Security.Bill.Post = True);
+
       //If (dmAxiom.Is_Cashier = 'Y') and (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
       If (qryInvoice.FieldByName('DISPATCHED').AsString = '') then
         ControlEditFields(true)
