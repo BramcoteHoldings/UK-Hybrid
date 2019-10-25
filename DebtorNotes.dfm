@@ -8,7 +8,7 @@ object frmDebtorNotes: TfrmDebtorNotes
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
@@ -18,28 +18,28 @@ object frmDebtorNotes: TfrmDebtorNotes
     545
     470)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object Label1: TLabel
     Left = 9
     Top = 9
-    Width = 27
-    Height = 17
+    Width = 24
+    Height = 15
     Caption = 'Date'
     Transparent = True
   end
   object Label2: TLabel
     Left = 9
     Top = 39
-    Width = 62
-    Height = 17
+    Width = 56
+    Height = 15
     Caption = 'Entered By'
     Transparent = True
   end
   object Label3: TLabel
     Left = 9
     Top = 95
-    Width = 29
-    Height = 17
+    Width = 26
+    Height = 15
     Caption = 'Note'
     Transparent = True
   end
@@ -68,7 +68,7 @@ object frmDebtorNotes: TfrmDebtorNotes
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D360400000000000036000000280000001000000010000000010020000000
-      0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+      000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00AB4F
       4FFF964F4CFFAB4F4FFFC6C4C6FFC6C4C6FFC6C4C6FFC6C4C6FFC6C4C6FFC4C4
@@ -117,7 +117,7 @@ object frmDebtorNotes: TfrmDebtorNotes
     OptionsImage.Glyph.SourceDPI = 96
     OptionsImage.Glyph.Data = {
       424D360400000000000036000000280000001000000010000000010020000000
-      0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+      000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00E6E6E619B2B2B24D9292926D8D8D8D729B9B9B64C7C7
       C738F9F9F906FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FCFCFC0391919F6E2B2B6BD4050563FA000065FF000060FF00004FFF1616
@@ -214,7 +214,9 @@ object frmDebtorNotes: TfrmDebtorNotes
     Left = 82
     Top = 100
     Anchors = [akLeft, akTop, akRight, akBottom]
+    Properties.MaxLength = 4000
     Properties.ScrollBars = ssVertical
+    Properties.StreamModes = [resmTextIzed]
     Lines.Strings = (
       'mlNote')
     Style.LookAndFeel.NativeStyle = True
