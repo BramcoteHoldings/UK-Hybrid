@@ -3228,8 +3228,6 @@ begin
               //SQL.Text := 'SELECT * FROM INVOICE WHERE INVOICE.NINVOICE = ' + InttoStr(NCheque);
           END; }
 
-          sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, '+
-                  ' P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE, 0 AS INV_TAX ' +
           sSQL := 'SELECT NULL AS tax_rate, p.ninvoice, p.acct, p.creditor, p.descr, p.owing, '+
                   '       p.amount, 0 AS tax, p.refno, p.ncreditor, '+
                   '       -1 * (p.amount - p.owing) AS u_amount, 0 AS u_tax, '+
@@ -3404,7 +3402,7 @@ begin
               //if qryDetails.FieldByName('T_AMOUNT').AsFloat > 0 then
               //    FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               //else
-              FieldByName('BAS_TAX').AsFloat := -1 * (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
+              FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               Post;
            end;
            //neAmount.AsCurrency := neAmount.AsCurrency + (abs(qryDetails.FieldByName('T_AMOUNT').AsFloat + qryDetails.FieldByName('T_TAX').AsFloat)) - (abs(qryDetails.FieldByName('U_AMOUNT').AsFloat + qryDetails.FieldByName('U_TAX').AsFloat));
