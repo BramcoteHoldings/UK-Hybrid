@@ -4101,7 +4101,7 @@ begin
                                         'FROM AXIOM.PHONEBOOK ph, nmemo where ph.NNAME = NMEMO.NBILL_TO and NMEMO.DISPATCHED IS NOT NULL '+
                                         'AND NMEMO.OWING <> 0 AND NMEMO.RV_TYPE <> ''D'' AND NMEMO.RV_NMEMO IS NULL and ap_email is not null ORDER BY 2';
                           EmailSQL := DREmailSQL;
-                          ShowModal;
+                          Show;
                         end;
                       finally
                         //

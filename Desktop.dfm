@@ -317,7 +317,7 @@ object frmDesktop: TfrmDesktop
             OriginalHeight = 124
             object Panel2: TPanel
               Left = 0
-              Top = 481
+              Top = -32
               Width = 378
               Height = 32
               Align = alBottom
@@ -9650,8 +9650,8 @@ object frmDesktop: TfrmDesktop
   end
   object popDesktop: TPopupMenu
     OnPopup = popDesktopPopup
-    Left = 255
-    Top = 11
+    Left = 317
+    Top = 24
     object popDesktopOpen: TMenuItem
       Caption = '&Open'
       Default = True
@@ -9767,8 +9767,8 @@ object frmDesktop: TfrmDesktop
   object popHelp: TPopupMenu
     AutoHotkeys = maManual
     Images = ilstHelp
-    Left = 579
-    Top = 6
+    Left = 541
+    Top = 30
     object miCurrentReleaseNotes: TMenuItem
       Caption = 'Current Release Notes'
       OnClick = miCurrentReleaseNotesClick
