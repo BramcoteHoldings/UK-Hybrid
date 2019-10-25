@@ -557,6 +557,7 @@ type
     cxDBCheckBox77: TcxDBCheckBox;
     cxGroupBox13: TcxGroupBox;
     cxDBCheckBox78: TcxDBCheckBox;
+    cxDBCheckBox79: TcxDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
