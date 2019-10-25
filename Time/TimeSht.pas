@@ -853,7 +853,7 @@ begin
                try
                   //test if in middle of transaction
                   if dmAxiom.uniInsight.InTransaction then
-                     dmAxiom.uniInsight.Commit;
+                     dmAxiom.uniInsight.Rollback;
 
                   dmAxiom.uniInsight.StartTransaction;
                   Data := tv.DataController;
@@ -1652,7 +1652,9 @@ begin
 // AES 13-03-2014
 //      RichEdit1.Lines.Clear;
       dxBarButtonSave.Enabled := True;
-   end;
+   end
+   else
+      DataSet.FieldByName('UNIQUEID').AsInteger := GetSequenceNumber('sqnc_feetmp');
 end;
 
 procedure TfrmTimeSheet.FormActivate(Sender: TObject);
@@ -1876,7 +1878,6 @@ begin
 //     memoDescription.AddictSpell := dmAxiom.Addict;
 //     memoDescription.LiveSpelling := true;
    //end;
-
 
    if SystemString('Use_Fee_Authority') = 'Y' then
    begin
