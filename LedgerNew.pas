@@ -398,7 +398,7 @@ begin
 
         if (not bEditing) and (lblLedgerKey.caption = '') then
         begin
-          lblLedgerKey.caption := dmAxiom.GetSeqNumber('SQNC_CHART');
+          lblLedgerKey.caption := GetSequenceNumber('SQNC_CHART').ToString;
         end;
 
         if not bEditing then

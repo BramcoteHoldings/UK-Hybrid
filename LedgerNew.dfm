@@ -1,12 +1,11 @@
 object frmLedgerNew: TfrmLedgerNew
   Left = 743
   Top = 158
-  AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = 'Account Ledger Code Creation'
-  ClientHeight = 574
-  ClientWidth = 362
+  ClientHeight = 571
+  ClientWidth = 356
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,7 +30,7 @@ object frmLedgerNew: TfrmLedgerNew
   object Label9: TLabel
     Left = 6
     Top = 468
-    Width = 71
+    Width = 72
     Height = 13
     Caption = 'GST Category:'
     Visible = False
@@ -111,8 +110,8 @@ object frmLedgerNew: TfrmLedgerNew
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 362
-    Height = 574
+    Width = 356
+    Height = 571
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -124,11 +123,11 @@ object frmLedgerNew: TfrmLedgerNew
     TabOrder = 2
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 357
-    ExplicitHeight = 572
+    ExplicitWidth = 336
+    ExplicitHeight = 508
     DesignSize = (
-      362
-      574)
+      356
+      571)
     object lblEntityName: TLabel
       Left = 116
       Top = 12
@@ -159,7 +158,7 @@ object frmLedgerNew: TfrmLedgerNew
       Left = 102
       Top = 530
       Width = 69
-      Height = 25
+      Height = 26
       Anchors = [akLeft, akBottom]
       Caption = '&Save'
       Default = True
@@ -188,7 +187,7 @@ object frmLedgerNew: TfrmLedgerNew
       Left = 178
       Top = 530
       Width = 71
-      Height = 25
+      Height = 26
       Anchors = [akLeft, akBottom]
       Caption = '&Cancel'
       Glyph.Data = {
@@ -348,7 +347,7 @@ object frmLedgerNew: TfrmLedgerNew
       TabOrder = 2
     end
     object cbType: TcxComboBox
-      Left = 158
+      Left = 157
       Top = 35
       Properties.DropDownListStyle = lsEditFixedList
       Properties.DropDownRows = 20
@@ -793,7 +792,7 @@ object frmLedgerNew: TfrmLedgerNew
       Control = btnSave
       ControlOptions.MinHeight = 19
       ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 26
       ControlOptions.OriginalWidth = 69
       ControlOptions.ShowBorder = False
       Index = 0
@@ -805,7 +804,7 @@ object frmLedgerNew: TfrmLedgerNew
       Control = btnCancel
       ControlOptions.MinHeight = 19
       ControlOptions.MinWidth = 19
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 26
       ControlOptions.OriginalWidth = 71
       ControlOptions.ShowBorder = False
       Index = 1
