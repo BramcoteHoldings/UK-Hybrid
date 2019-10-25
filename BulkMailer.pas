@@ -1017,14 +1017,14 @@ begin
 
    EmailSQL := 'SELECT DISTINCT nmemo.nbill_to AS nname, nvl(ap_email_matter, ap_email) AS partyemail, nmemo.nmatter, m.fileid as refno '+
                '   FROM axiom.phonebook ph, axiom.matter m, nmemo '+
-               'WHERE m.nname = nmemo.nbill_to '+
-               '   AND nmemo.dispatched IS NOT NULL '+
+               'WHERE nmemo.dispatched IS NOT NULL '+
                '   AND nmemo.owing <> 0 '+
                '   AND nmemo.rv_type <> ''D'' '+
                '   AND nmemo.rv_nmemo IS NULL '+
-               '   AND ap_email IS NOT NULL '+
+               '   AND nvl(ap_email_matter, ap_email) IS NOT NULL  '+
                '   and ph.nname = nmemo.nbill_to  '+
                '   and nmemo.nmatter = m.nmatter '+
+               '   and trunc(nmemo.dispatched) < trunc(sysdate) - 31 '+
                'ORDER BY 2';
    tvEmailsREFNO.Visible := True;
    PopulateGrid;
