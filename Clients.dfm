@@ -1146,6 +1146,10 @@ object frmClients: TfrmClients
     object tabAddress: TcxTabSheet
       Caption = 'Address'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label52: TLabel
         Left = 318
         Top = 9
@@ -1699,6 +1703,10 @@ object frmClients: TfrmClients
           Font.Style = []
           ImageIndex = 0
           ParentFont = False
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label6: TLabel
             Left = 32
             Top = 113
@@ -1840,6 +1848,10 @@ object frmClients: TfrmClients
         object tsPostalAddress: TcxTabSheet
           Caption = 'Postal Address'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label10: TLabel
             Left = 32
             Top = 113
@@ -1986,6 +1998,10 @@ object frmClients: TfrmClients
         object tsCustomAddress: TcxTabSheet
           Caption = 'Custom Address'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label12: TLabel
             Left = 29
             Top = 5
@@ -2127,6 +2143,10 @@ object frmClients: TfrmClients
         object tsDX: TcxTabSheet
           Caption = 'DX'
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Label56: TLabel
             Left = 55
             Top = 5
@@ -2203,6 +2223,10 @@ object frmClients: TfrmClients
     object tabClientGroups: TcxTabSheet
       Caption = 'Client Groups'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pagClientGroups: TcxPageControl
         Left = 0
         Top = 0
@@ -2256,6 +2280,10 @@ object frmClients: TfrmClients
           Caption = 'Groups'
           ImageIndex = 1
           OnShow = tabAllGroupsShow
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           DesignSize = (
             1071
             435)
@@ -2513,6 +2541,10 @@ object frmClients: TfrmClients
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1079
         465)
@@ -2697,6 +2729,10 @@ object frmClients: TfrmClients
     object tabSafeCustody: TcxTabSheet
       Caption = 'Safe Custody'
       ImageIndex = 9
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxPageControl2: TcxPageControl
         Left = 0
         Top = 235
@@ -2713,6 +2749,10 @@ object frmClients: TfrmClients
         object tsItems: TcxTabSheet
           Caption = 'Items'
           ImageIndex = 0
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object grdDocuments: TcxGrid
             Left = 0
             Top = 0
@@ -3546,6 +3586,10 @@ object frmClients: TfrmClients
         object tsOtherParties: TcxTabSheet
           Caption = 'Other Parties'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel1: TPanel
             Left = 0
             Top = 170
@@ -4549,6 +4593,7 @@ object frmClients: TfrmClients
           object tvInvoicesINV_NOTE: TcxGridDBColumn
             Caption = 'Notes'
             DataBinding.FieldName = 'INV_NOTE'
+            PropertiesClassName = 'TcxRichEditProperties'
             Options.Editing = False
             Options.Focusing = False
             Width = 80
