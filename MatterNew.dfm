@@ -462,7 +462,6 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 11
     OnClick = btnOKClick
-    ExplicitTop = 590
   end
   object btnCancel: TcxButton
     Left = 437
@@ -561,7 +560,6 @@ object frmMatterNew: TfrmMatterNew
     OptionsImage.NumGlyphs = 2
     TabOrder = 12
     OnClick = btnCancelClick
-    ExplicitTop = 590
   end
   object cbDepartment: TcxDBLookupComboBox
     Left = 77
@@ -681,7 +679,6 @@ object frmMatterNew: TfrmMatterNew
     Anchors = [akLeft, akBottom]
     Caption = 'Print Label?'
     TabOrder = 15
-    ExplicitTop = 595
   end
   object pnlBarcode: TPanel
     Left = 115
@@ -693,7 +690,6 @@ object frmMatterNew: TfrmMatterNew
     ParentColor = True
     ShowCaption = False
     TabOrder = 16
-    ExplicitTop = 590
     object Label43: TLabel
       Left = 0
       Top = 4
@@ -727,7 +723,6 @@ object frmMatterNew: TfrmMatterNew
     object tabStaff: TcxTabSheet
       Caption = 'Carriage'
       ImageIndex = 1
-      ExplicitHeight = 306
       object tabCarriageAdditional: TcxPageControl
         Left = 5
         Top = 3
@@ -2060,7 +2055,6 @@ object frmMatterNew: TfrmMatterNew
     object tabContacts: TcxTabSheet
       Caption = 'Contacts'
       ImageIndex = 2
-      ExplicitHeight = 306
       DesignSize = (
         503
         310)
@@ -2663,7 +2657,6 @@ object frmMatterNew: TfrmMatterNew
     object tabBalances: TcxTabSheet
       Caption = 'Financial'
       ImageIndex = 9
-      ExplicitHeight = 306
       object lblFeeCode: TLabel
         Left = 20
         Top = 58
@@ -2682,10 +2675,10 @@ object frmMatterNew: TfrmMatterNew
       end
       object lblTrustBank: TLabel
         Left = 164
-        Top = 31
-        Width = 62
+        Top = 32
+        Width = 59
         Height = 15
-        Caption = 'Trust Bank *'
+        Caption = 'Trust Bank*'
         Transparent = True
       end
       object Label14: TLabel
@@ -4083,7 +4076,6 @@ object frmMatterNew: TfrmMatterNew
     object tabDebtor: TcxTabSheet
       Caption = 'Debtor'
       ImageIndex = 4
-      ExplicitHeight = 306
       object Label62: TLabel
         Left = 3
         Top = 106
@@ -4246,7 +4238,7 @@ object frmMatterNew: TfrmMatterNew
             Kind = bkGlyph
           end>
         Properties.MaxLength = 0
-        Properties.ReadOnly = True
+        Properties.ReadOnly = False
         Style.Color = clWindow
         Style.LookAndFeel.Kind = lfStandard
         StyleDisabled.LookAndFeel.Kind = lfStandard
@@ -5088,7 +5080,7 @@ object frmMatterNew: TfrmMatterNew
   end
   object chkProspectiveMatter: TcxDBCheckBox
     Left = 6
-    Top = 208
+    Top = 210
     AutoSize = False
     Caption = 'Prospective'
     DataBinding.DataField = 'PROSPECTIVE'
