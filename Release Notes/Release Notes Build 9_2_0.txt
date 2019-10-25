@@ -1,5 +1,26 @@
 Insight Build 9.2.0
 
+Build 50
+========
+-fix more issues with payment of Creditor Invoices where the Invoice consists of 2 or more segments.
+-change to Account Payable screen to display Invoices correctly when Invoice consists of 2 or more segments.
+-made Email Debtor Statements modeless
+-made Notes column in Client->Bills tab a Rich Edit field.
+-fixed issue with editing AP_email in matter edit screen
+-Added system flag to disable Bill Posting if bill not Authorised.
+
+Build 49
+========
+-fix for issue in Timesheet when copying a row.
+-Change to the save routine in the Fee entry screen to remove "Bind..." error.
+-added comments column to search grid in Matter screen. 
+
+Build 48
+========
+-Fixed issue with creditor invoice payment and the invoice consists of 2 or more segments.
+-fixed issue with sequence generation when doing an Invoice Credit Note.
+-fixed issue with cheque creation immediately after doing a Bank Transfer.
+
 Build 47
 ========
 -Fixed the cheqreq ledger card to correctly display billed cheqreqs where the bill has been paid.

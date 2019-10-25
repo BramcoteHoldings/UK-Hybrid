@@ -59,7 +59,6 @@ type
     dfItems: TcxTextEdit;
     qryMRUList: TUniQuery;
     dsMRUList: TUniDataSource;
-    cmbMatterFind: TcxLookupComboBox;
     icmbType: TcxImageComboBox;
     ImageList1: TImageList;
     dsFee: TUniDataSource;
@@ -152,14 +151,10 @@ type
       var Error: Boolean);
     procedure cmbTemplatePropertiesCloseUp(Sender: TObject);
     procedure cmbTemplatePropertiesInitPopup(Sender: TObject);
-    procedure cmbMatterFindPropertiesValidate(Sender: TObject;
-      var DisplayValue: Variant; var ErrorText: TCaption;
-      var Error: Boolean);
     procedure cmbMatterFindPropertiesCloseUp(Sender: TObject);
     procedure cmbMatterFindPropertiesInitPopup(Sender: TObject);
     procedure dfItemsPropertiesChange(Sender: TObject);
     procedure icmbTypePropertiesInitPopup(Sender: TObject);
-    procedure cmbMatterFindExit(Sender: TObject);
     procedure cmbTemplatePropertiesEditValueChanged(Sender: TObject);
     procedure mmoDescEnter(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -175,7 +170,6 @@ type
     procedure mmoDescChange(Sender: TObject);
     procedure cbDeptPropertiesChange(Sender: TObject);
     procedure mmoNotesKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure cmbMatterFindKeyPress(Sender: TObject; var Key: Char);
     procedure cmbMatterFindPropertiesEditValueChanged(Sender: TObject);
     procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
@@ -509,11 +503,12 @@ var
    ANewDocName,
    AParsedDocName,
    AParsedDir : String;
+   lnFee: integer;
 //   sBillType: string;
 begin
 //   glComponentSetup := dmAxiom.getGlComponents;
    ModalResult := mrNone;
-   FillFeeDataSet;
+   lnFee := FillFeeDataSet;
    if OKtoPost then
    begin
       try
@@ -535,6 +530,14 @@ begin
          end;
 
          qryFee.ApplyUpdates;
+
+         with dmAxiom.qryTmp do
+         begin
+            Close;
+            SQL.Text := 'update fee set notes = ' + quotedstr(mmoNotes.Text)+ ' where nfee = :nfee';
+            ParamByName('NFEE').AsInteger := lnFee;
+            ExecSQL;
+         end;
 
          if ((dmAxiom.Fee_file_notes = 'Y') and (mmoNotes.Text <> '')) then
          begin
@@ -1520,92 +1523,6 @@ begin
       end;
 end;
 
-procedure TfrmFeeNew.cmbMatterFindPropertiesValidate(Sender: TObject;
-  var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
-var
-   bMatterChanged: Boolean;
-   AMatterNo,
-   lFileID,
-   lFoundFileID: string;
-begin
-   bMatterValidated := False;
-   AMatterNo := string(DisplayValue);
-   lFileID := PadFileID(AMatterNo);
-   if cmbMatterFind.Text = 'SEARCH...' then
-   begin
-      if not FormExists(frmMatterSearch) then
-         Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
-      if frmMatterSearch.ShowModal = mrOK then
-      begin
-         if dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '' then
-         begin
-            if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
-            begin
-               MsgErr('You may not post Fees to a matter that is archived.');
-               //cmbMatterFind.Text := '';
-            end
-            else if (IsMatterclosed(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
-            begin
-               MsgErr('You may not post Fees to a matter that is closed.');
-               //cmbMatterFind.Text := '';
-            end
-            else if MatterIsCurrent(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) then
-            begin
-               DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, FEditing);
-               DoBillType(cmbMatterFind.Text);
-               DisplayValue := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-               bMatterValidated := True;
-            end
-            else
-               MsgErr('Matter ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ' has been closed');
-         end;
-      end;
-   end
-   else
-   begin
-      {dmAxiom.FindMatter(lFoundFileID, lFileID);
-      AMatterNo := lFoundFileID;
-      DisplayValue := AMatterNo; }
-      //lFileID := PadFileID(cmbMatterFind.Text);
-      //dmAxiom.FindMatter(lFoundFileID, lFileID);
-      //cmbMatterFind.Text := lFoundFileID;
-      if MatterExists(cmbMatterFind.Text) then
-      begin
-         if (MatterString(cmbMatterFind.Text,'PROSPECTIVE') = 'Y') then
-         begin
-            If not (ProspectiveFeesAllowed(cmbMatterFind.Text)) then
-            begin
-            MsgErr('You may not post Fees to a matter that is Prospective or has exceeded the allowed limit.');
-            //cmbMatterFind.Text := '';
-            end;
-         end
-         else if (IsMatterArchived(cmbMatterFind.Text)) then
-         begin
-            MsgErr('You may not post Fees to a matter that is archived.');
-            //cmbMatterFind.Text := '';
-         end
-         else if (IsMatterClosed(cmbMatterFind.Text)) then
-         begin
-            MsgErr('You may not post Fees to a matter that is closed.');
-         end
-         else
-         begin
-            bMatterChanged := ((FOldFileID <> cmbMatterFind.EditText) and (FOldFileID <> ''));
-            DisplayMatter(cmbMatterFind.Text, FEditing, bMatterChanged);
-            DoBillType(cmbMatterFind.Text);
-            bMatterValidated := True;
-         end;
-      end
-      else
-      begin
-         //bMatterValidated := True;
-         MsgErr('The selected Matter is not valid.  Please check and re-try.');
-         //cmbMatterFind.Text := '';
-      end;
-   end;
-
-end;
-
 procedure TfrmFeeNew.cmbMatterFindPropertiesChange(Sender: TObject);
 begin
    bEdited := True;
@@ -1675,12 +1592,11 @@ end;
 
 procedure TfrmFeeNew.cmbMatterFindPropertiesEditValueChanged(Sender: TObject);
 begin
-    if (bMatterValidated = False) then
-    begin
-        cmbMatterFind.Clear;
-        lblMatterDesc.Caption := '';
-        lblClient.Caption := '';
-    end;
+   if (bMatterValidated = False) then
+   begin
+      lblMatterDesc.Caption := '';
+      lblClient.Caption := '';
+   end;
 end;
 
 procedure TfrmFeeNew.cmbMatterFindPropertiesInitPopup(Sender: TObject);
@@ -1751,56 +1667,6 @@ begin
    else
    if icmbType.Properties.Items.Count = 2 then
       PopulateWithMatter;
-end;
-
-procedure TfrmFeeNew.cmbMatterFindExit(Sender: TObject);
-begin
-   if cmbMatterFind.Text = '' then
-      PopulateWithoutMatter;
-end;
-
-procedure TfrmFeeNew.cmbMatterFindKeyPress(Sender: TObject; var Key: Char);
-var
-   lFileID,
-   lFoundFileID: string;
-begin
-   if (key = #$D) then
-   begin
-      bMatterValidated := False;
-      if cmbMatterFind.Text = 'SEARCH...' then
-      begin
-         if not FormExists(frmMatterSearch) then
-            Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
-         if frmMatterSearch.ShowModal = mrOK then
-         begin
-            if dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '' then
-            begin
-               if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
-               begin
-                  MsgErr('You may not post Fees to a matter that is archived.');
-                  //cmbMatterFind.Text := '';
-               end
-               else if (IsMatterClosed(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
-               begin
-                  MsgErr('You may not post Fees to a matter that is closed.');
-               end
-               else if MatterIsCurrent(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) then
-               begin
-                  DisplayMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, FEditing);
-                  DoBillType(cmbMatterFind.Text);
-                  bMatterValidated := True;
-               end;
-            end;
-         end;
-      end
-      else
-      begin
-         //lFileID := PadFileID(cmbMatterFind.Text);
-         //dmAxiom.FindMatter(lFoundFileID, lFileID);
-         //cmbMatterFind.Text := lFoundFileID;
-//         cmbMatterFind.ValidateEdit();
-      end;
-   end;
 end;
 
 procedure TfrmFeeNew.cmbTemplatePropertiesEditValueChanged(
@@ -2041,7 +1907,7 @@ begin
    qryFee.FieldByName('TIME_TYPE').AsString := icmbType.EditValue;
    qryFee.FieldByName('EMP_TYPE').AsString := TableString('EMPLOYEE','CODE',string(cbAuthor.EditValue),'TYPE');
    qryFee.FieldByName('VERSION').AsString := dmAxiom.GetVersionInfo;
-   qryFee.FieldByName('NOTES').AsString := mmoNotes.Text;
+
    qryFee.FieldByName('START_DATE').AsDateTime := dtpStartTime.DateTime;
    qryFee.FieldByName('END_DATE').AsDateTime := dtpEndTime.DateTime;
    if (neValue.Value = 0) then

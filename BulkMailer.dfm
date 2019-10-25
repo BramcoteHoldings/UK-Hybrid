@@ -34,9 +34,9 @@ object frmBulkMailer: TfrmBulkMailer
     OriginalWidth = 1321
     OriginalHeight = 570
     object dxLayoutDockSite3: TdxLayoutDockSite
-      Left = 217
+      Left = 260
       Top = 0
-      Width = 1104
+      Width = 1061
       Height = 570
       Margins.Left = 4
       Margins.Top = 4
@@ -48,12 +48,13 @@ object frmBulkMailer: TfrmBulkMailer
       object dxLayoutDockSite1: TdxLayoutDockSite
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1061
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
+        ExplicitWidth = 1104
         DockingType = 0
         OriginalWidth = 321
         OriginalHeight = 214
@@ -61,7 +62,7 @@ object frmBulkMailer: TfrmBulkMailer
       object dxDockPanel2: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1061
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -77,13 +78,14 @@ object frmBulkMailer: TfrmBulkMailer
         CustomCaptionButtons.Buttons = <>
         ShowCaption = False
         TabsProperties.CustomButtons.Buttons = <>
+        ExplicitWidth = 1104
         DockingType = 0
         OriginalWidth = 1000
         OriginalHeight = 150
         object pagMain: TcxPageControl
           Left = 0
           Top = 82
-          Width = 1100
+          Width = 1057
           Height = 461
           Margins.Left = 4
           Margins.Top = 4
@@ -96,11 +98,10 @@ object frmBulkMailer: TfrmBulkMailer
           Properties.HideTabs = True
           LookAndFeel.NativeStyle = True
           OnChange = pagMainChange
-          ExplicitTop = 61
-          ExplicitHeight = 482
+          ExplicitWidth = 1100
           ClientRectBottom = 457
           ClientRectLeft = 4
-          ClientRectRight = 1096
+          ClientRectRight = 1053
           ClientRectTop = 4
           object tabRTF: TcxTabSheet
             Margins.Left = 4
@@ -109,7 +110,10 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
-            ExplicitHeight = 474
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Editor: TRichEdit
               Left = 0
               Top = 0
@@ -133,7 +137,6 @@ object frmBulkMailer: TfrmBulkMailer
               TabOrder = 0
               Zoom = 100
               OnDragOver = EditorDragOver
-              ExplicitHeight = 474
             end
           end
           object tabHTML: TcxTabSheet
@@ -143,7 +146,7 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'tabHTML'
             ImageIndex = 1
-            ExplicitHeight = 474
+            ExplicitWidth = 1092
             object ed_LinkHRef: TcxTextEdit
               Left = 435
               Top = 4
@@ -162,7 +165,7 @@ object frmBulkMailer: TfrmBulkMailer
             object HTMLEditor: TEmbeddedWB
               Left = 0
               Top = 0
-              Width = 1092
+              Width = 1049
               Height = 453
               Margins.Left = 4
               Margins.Top = 4
@@ -180,6 +183,7 @@ object frmBulkMailer: TfrmBulkMailer
               PrintOptions.Orientation = poPortrait
               ExplicitLeft = 2
               ExplicitTop = -2
+              ExplicitWidth = 1092
               ExplicitHeight = 474
               ControlData = {
                 4C000000136B0000EE2800000000000000000000000000000000000000000000
@@ -211,7 +215,10 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
-            ExplicitHeight = 474
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
@@ -223,27 +230,27 @@ object frmBulkMailer: TfrmBulkMailer
               Lines.Strings = (
                 'MemoRawText')
               TabOrder = 0
-              ExplicitHeight = 474
               Height = 453
-              Width = 1092
+              Width = 1049
             end
           end
         end
         object dxBarDockControl1: TdxBarDockControl
           Left = 0
           Top = 0
-          Width = 1100
+          Width = 1057
           Margins.Left = 4
           Margins.Top = 4
           Margins.Right = 4
           Margins.Bottom = 4
           Align = dalTop
           BarManager = BarManager
+          ExplicitWidth = 1100
         end
         object StatusBar: TdxStatusBar
           Left = 0
           Top = 543
-          Width = 1100
+          Width = 1057
           Height = 23
           Margins.Left = 4
           Margins.Top = 4
@@ -277,14 +284,16 @@ object frmBulkMailer: TfrmBulkMailer
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
+          ExplicitWidth = 1100
         end
         object Panel2: TPanel
           Left = 0
           Top = 3
-          Width = 1100
+          Width = 1057
           Height = 79
           Align = alTop
           TabOrder = 3
+          ExplicitWidth = 1100
           object cxLabel2: TcxLabel
             Left = 5
             Top = 5
@@ -384,7 +393,7 @@ object frmBulkMailer: TfrmBulkMailer
     object dxTabContainerDockSite1: TdxTabContainerDockSite
       Left = 0
       Top = 0
-      Width = 217
+      Width = 260
       Height = 570
       Margins.Left = 4
       Margins.Top = 4
@@ -399,12 +408,12 @@ object frmBulkMailer: TfrmBulkMailer
       CustomCaptionButtons.Buttons = <>
       TabsProperties.CustomButtons.Buttons = <>
       DockingType = 1
-      OriginalWidth = 217
+      OriginalWidth = 260
       OriginalHeight = 150
       object dxDockPanel3: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 217
+        Width = 260
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -418,13 +427,14 @@ object frmBulkMailer: TfrmBulkMailer
         CaptionButtons = [cbMaximize, cbHide]
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
+        ExplicitWidth = 217
         DockingType = 0
-        OriginalWidth = 217
+        OriginalWidth = 260
         OriginalHeight = 150
         object grdEmails: TcxGrid
           Left = 0
           Top = 29
-          Width = 213
+          Width = 256
           Height = 512
           Margins.Left = 4
           Margins.Top = 4
@@ -433,6 +443,7 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 213
           object tvEmails: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataModeController.SmartRefresh = True
@@ -515,17 +526,20 @@ object frmBulkMailer: TfrmBulkMailer
               Caption = 'Ref No'
               DataBinding.FieldName = 'REFNO'
               Visible = False
-              MinWidth = 21
+              MinWidth = 50
+              Options.Editing = False
               VisibleForCustomization = False
             end
             object tvEmailsNMATTER: TcxGridDBColumn
               DataBinding.FieldName = 'NMATTER'
               Visible = False
+              Options.Editing = False
               VisibleForCustomization = False
             end
             object tvEmailsNNAME: TcxGridDBColumn
               DataBinding.FieldName = 'NNAME'
               Visible = False
+              Options.Editing = False
               VisibleForCustomization = False
             end
           end
@@ -536,11 +550,12 @@ object frmBulkMailer: TfrmBulkMailer
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 213
+          Width = 256
           Height = 29
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 213
           object rbDebtors: TcxRadioButton
             Tag = 1
             Left = 18
@@ -568,7 +583,7 @@ object frmBulkMailer: TfrmBulkMailer
       object dxDockPanel1: TdxDockPanel
         Left = 0
         Top = 0
-        Width = 217
+        Width = 260
         Height = 570
         Margins.Left = 4
         Margins.Top = 4
@@ -582,13 +597,14 @@ object frmBulkMailer: TfrmBulkMailer
         Caption = 'Fields'
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
+        ExplicitWidth = 217
         DockingType = 0
         OriginalWidth = 199
         OriginalHeight = 150
         object grdFields: TcxGrid
           Left = 0
           Top = 0
-          Width = 213
+          Width = 256
           Height = 541
           Margins.Left = 4
           Margins.Top = 4
@@ -597,6 +613,7 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
+          ExplicitWidth = 213
           object tvFields: TcxGridTableView
             PopupMenu = pm_FieldAdd
             OnDblClick = MenuItem1Click

@@ -1566,6 +1566,7 @@ type
     Label67: TLabel;
     cxDBButtonEdit4: TcxDBButtonEdit;
     Label75: TLabel;
+    tvSearchesCOMMENTS: TcxGridDBColumn;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -14671,7 +14672,7 @@ begin
    if frmNewTransaction.showModal = mrOk then
    begin
       qryInvestmentTransactions.Close;
-      qryInvestmentTransactions.ParamByName('nmatter').AsInteger := iMatter;
+      qryInvestmentTransactions.ParamByName('ndepositaccount').AsInteger := iDeposit;
       qryInvestmentTransactions.Open;
 
 

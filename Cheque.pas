@@ -372,6 +372,11 @@ begin
 //      dmaxiom.qryBranchList.Open;
 //      dmaxiom.qryDepartment.Close;
 //      dmaxiom.qryDepartment.Open;
+   if dmAxiom.qryBankList.Active = True then
+      dmAxiom.qryBankList.Close;
+   dmAxiom.qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   dmAxiom.qryBankList.Open;
+
 end;
 
 procedure TfrmCheque.CreateCheque;
@@ -497,85 +502,87 @@ end;
 
 procedure TfrmCheque.cbBankPropertiesChange(Sender: TObject);
 begin
-   SaveColumnSettings;
-   RestoreColumnSettings;
-   LastBank := cbBank.Text;
-
-   TFormStyleHookBackground.BackGroundSettings.Enabled := True;
-   TFormStyleHookBackground.BackGroundSettings.UseColor := True;
-   TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.Text);
-
-   Self.Invalidate;
-   Self.Perform(WM_PAINT, 0, 0);
-
-   with qryBank do
+   if VarIsNull(cbBank.EditValue) = False then
    begin
-     Close;
-     ParamByName('P_Entity').AsString := dmAxiom.Entity;
-     ParamByName('P_Code').AsString := cbBank.Text;
-     Prepare;
-     Open;
-     lblBankName.Caption := qryBank.FieldByName('NAME').AsString + ' - (' + qryBank.FieldByname('CURRENCY').AsString + ')';
-   end;
-   TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Clear;
-   tvLedgerTAX.Visible := True;
-   tvLedgerTAXCODE.Visible := True;
+      SaveColumnSettings;
+      RestoreColumnSettings;
+      LastBank := cbBank.Text;
 
-   lblBalance.Visible := True;
-   lblTax.Visible := True;
+      TFormStyleHookBackground.BackGroundSettings.Enabled := True;
+      TFormStyleHookBackground.BackGroundSettings.UseColor := True;
+      TFormStyleHookBackground.BackGroundSettings.Color := BankColour(cbBank.EditValue);
 
-   DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
-   //AES 06/08/2018
-   chkReplacementCheque.Visible := False;
-   if qryBank.FieldByName('TRUST').AsString = 'T' then
-   begin
-      if not dmAxiom.Security.Receipt.ForbidDisbursements
-      then
-      Begin
-        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Disburse');
-        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Bill');
-      End;
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Protected');
-     tvLedgerTAX.Visible := False;
-     tvLedgerTAXCODE.Visible := False;
+      Self.Invalidate;
+      Self.Perform(WM_PAINT, 0, 0);
 
-     DefaultTax := GetDefaultTax('Trust Cheque', 'NOTAX');
+      with qryBank do
+      begin
+        Close;
+        ParamByName('P_Entity').AsString := dmAxiom.Entity;
+        ParamByName('P_Code').AsString := cbBank.Text;
+        Prepare;
+        Open;
+        lblBankName.Caption := qryBank.FieldByName('NAME').AsString + ' - (' + qryBank.FieldByname('CURRENCY').AsString + ')';
+      end;
+      TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Clear;
+      tvLedgerTAX.Visible := True;
+      tvLedgerTAXCODE.Visible := True;
 
-     tvLedgerTAXCODE.EditValue := DefaultTax;
+      lblBalance.Visible := True;
+      lblTax.Visible := True;
 
-     lblBalance.Visible := False;
-     lblTax.Visible := False;
-//     DefaultTax := 'NOTAX';
-     SetBankTransfer(True);
-     grpDirectDebit.Visible := (GetEnforceBSBDD(cbBank.Text) = 'Y') and (rgType.ItemIndex = 1);
-   end
-   else if qryBank.FieldByName('TRUST').AsString = 'G' then
-   begin
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
+      DefaultTax := GetDefaultTax('Cheque', 'NOTAX');
+      //AES 06/08/2018
+      chkReplacementCheque.Visible := False;
+      if qryBank.FieldByName('TRUST').AsString = 'T' then
+      begin
+         if not dmAxiom.Security.Receipt.ForbidDisbursements
+         then
+         Begin
+           TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Disburse');
+           TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Bill');
+         End;
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Protected');
+        tvLedgerTAX.Visible := False;
+        tvLedgerTAXCODE.Visible := False;
 
-     SetBankTransfer(False);
-     chkReplacementCheque.Visible := True;
-   end
-   else if qryBank.FieldByName('TRUST').AsString = 'C' then
-   begin
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
-     TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
-     SetBankTransfer(False);
-   end;
+        DefaultTax := GetDefaultTax('Trust Cheque', 'NOTAX');
 
-   NextChqno;
+        tvLedgerTAXCODE.EditValue := DefaultTax;
 
-   cmbPrinter.Items.Clear;
-   tbChqNo.Text := '';
-   cmbPrinter.Text := '';
-   StringPopulate(cmbPrinter.Items, 'PRINTER', 'CODE', 'TYPE = ''C'' AND BANK_ACCT = ''' + cbBank.Text + '''');
-   cmbPrinter.Enabled := True;
-   StatusDisplay;
+        lblBalance.Visible := False;
+        lblTax.Visible := False;
+//        DefaultTax := 'NOTAX';
+        SetBankTransfer(True);
+        grpDirectDebit.Visible := (GetEnforceBSBDD(cbBank.Text) = 'Y') and (rgType.ItemIndex = 1);
+      end
+      else if qryBank.FieldByName('TRUST').AsString = 'G' then
+      begin
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
 
-end;
+        SetBankTransfer(False);
+        chkReplacementCheque.Visible := True;
+      end
+      else if qryBank.FieldByName('TRUST').AsString = 'C' then
+      begin
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
+        TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Invoice');
+        SetBankTransfer(False);
+      end;
+
+      NextChqno;
+
+      cmbPrinter.Items.Clear;
+      tbChqNo.Text := '';
+      cmbPrinter.Text := '';
+      StringPopulate(cmbPrinter.Items, 'PRINTER', 'CODE', 'TYPE = ''C'' AND BANK_ACCT = ''' + cbBank.Text + '''');
+      cmbPrinter.Enabled := True;
+      StatusDisplay;
+   end;
+end;
 
 procedure TfrmCheque.cbAuthByClick(Sender: TObject);
 begin
@@ -2135,41 +2142,41 @@ begin
                             );
 
 //                    21 nov 2017 --  commented out to remove duplicate tax calculation
-                     if qryLedger.FieldByName('TAX').AsCurrency <> 0 then
-                     begin
-                       //post components
-                        sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE',qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
+                        if (qryLedger.FieldByName('TAX').AsCurrency <> 0) and (tvLedgerTAXCODE.Visible = True) then
+                        begin
+                        //post components
+                           sLedgerKey :=  glComponentSetup.buildLedgerKey('',TableString('TAXTYPE_LEDGER', 'CODE',qryLedger.FieldByName('TAXCODE').AsString, 'LEDGER'),'',true,'');
 
-                         PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
-                         , 0 - qryLedger.FieldByName('TAX').AsCurrency, 0
-                         , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
-                         , qryCheque.FieldByName('NCHEQUE').AsInteger
-                         , qryLedger.FieldByName('REASON').AsString
-                         , sLedgerKey
-                         , ''
-                         , -1
-                         , ''
-                         , qryLedger.FieldByName('TAXCODE').AsString
-                         , FALSE
-                         , '0'
-                         , qryAllocs.FieldByName('NALLOC').AsInteger
-                         , qryAllocs.FieldByName('NMATTER').AsInteger
-                         , 0
-                         , FALSE
-                         , 0
-                         , 0
-                         , '' //sTranCurrency
-                         , 0 // lcFXRate
-                         , 0 //lcValBase
-                         , 0 //lcCurrencyTaxValBase
-                         , 0 //LcValEntity
-                         , 0 //lcCurrencyTaxValEntity
-                         , '' //tvLedgerBRANCH.EditValue
-                         , '' //vartostr(tvLedgerEMP_CODE.EditValue)
-                         , '' //vartostr(tvLedgerDEPT.EditValue)
-                         , 'N'
-                         );
-                     end;
+                           PostLedger(qryCheque.FieldByName('CREATED').AsDateTime
+                              , 0 - qryLedger.FieldByName('TAX').AsCurrency, 0
+                              , qryCheque.FieldByName('CHQNO').AsString, 'CHEQUE'
+                              , qryCheque.FieldByName('NCHEQUE').AsInteger
+                              , qryLedger.FieldByName('REASON').AsString
+                              , sLedgerKey
+                              , ''
+                              , -1
+                              , ''
+                              , qryLedger.FieldByName('TAXCODE').AsString
+                              , FALSE
+                              , '0'
+                              , qryAllocs.FieldByName('NALLOC').AsInteger
+                              , qryAllocs.FieldByName('NMATTER').AsInteger
+                              , 0
+                              , FALSE
+                              , 0
+                              , 0
+                              , '' //sTranCurrency
+                              , 0 // lcFXRate
+                              , 0 //lcValBase
+                              , 0 //lcCurrencyTaxValBase
+                              , 0 //LcValEntity
+                              , 0 //lcCurrencyTaxValEntity
+                              , '' //tvLedgerBRANCH.EditValue
+                              , '' //vartostr(tvLedgerEMP_CODE.EditValue)
+                              , '' //vartostr(tvLedgerDEPT.EditValue)
+                              , 'N'
+                              );
+                        end;
 
                         with qryInvoiceUpdate do
                         begin
@@ -3135,13 +3142,13 @@ begin
    begin
       Connection := dmAxiom.uniInsight;
       //SQL.Text := 'SELECT * FROM INVOICE, ALLOC WHERE ALLOC.NINVOICE = INVOICE.NINVOICE AND INVOICE.NINVOICE = ' + InttoStr(NCheque);
-      iType := 0;
+{      iType := 0;
       if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
       BEGIN
           sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, ';
-          sSQL := sSQL + 'P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, MIN(A.NALLOC), A.TAXCODE, P.TAX AS INV_TAX ';
-          sSQL := sSQL + 'FROM INVOICE P, ALLOC A WHERE A.NINVOICE = P.NINVOICE AND P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
-          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, A.TAXCODE, P.TAX ';
+          sSQL := sSQL + 'P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, /*MIN(A.NALLOC), A.TAXCODE,*/ P.TAX AS INV_TAX ';
+          sSQL := sSQL + 'FROM INVOICE P/*, ALLOC A*/ WHERE /*A.NINVOICE = P.NINVOICE AND*/ P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
+          sSQL := sSQL + 'GROUP BY p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, P.REFNO, P.NCREDITOR, (P.AMOUNT - P.OWING), P.AMOUNT, /*A.TAXCODE,*/ P.TAX ';
           SQL.Text := sSQL;
       END
       ELSE
@@ -3166,8 +3173,8 @@ begin
           sSQL := sSQL + 'INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE = ''CRED'' ';
           sSQL := sSQL + 'LEFT OUTER JOIN TAXRATE R ON T.TAXCODE = R.TAXCODE AND R.COMMENCE <= :COMMENCE ';
           sSQL := sSQL + 'where I.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND I.NINVOICE = ' + InttoStr(NCheque) + ' ';  }
-          sSQL := sSQL + {'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX} ') P ';
-          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
+// AES          sSQL := sSQL + {'group by ABS(R.RATE),  I.NINVOICE, I.ACCT, I.CREDITOR, I.DESCR, I.OWING, I.AMOUNT, I.TAX, I.REFNO, I.NCREDITOR, T.AMOUNT, T.TAX} ') P ';
+{          sSQL := sSQL + 'GROUP BY P.TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.TAXCODE, P.OWING, P.AMOUNT, P.TAX, P.REFNO,P.NCREDITOR ';
           SQL.Text := sSQL;
           ParamByName('COMMENCE').AsDateTime := Trunc(Now);
       END;
@@ -3185,7 +3192,8 @@ begin
           Close;
           if ((DefaultTax = 'NOTAX') OR (DefaultTax = 'N/A')) then
           BEGIN
-              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE, 0 AS INV_TAX ';
+              sSQL := 'SELECT NULL AS TAX_RATE, p.NINVOICE, P.ACCT, P.CREDITOR, P.DESCR, P.OWING, P.AMOUNT, 0 AS TAX, P.REFNO, '+
+                      ' P.NCREDITOR, -1 * (P.AMOUNT - P.OWING) AS U_AMOUNT, 0 AS U_TAX, -1 * P.AMOUNT AS T_AMOUNT, 0 AS T_TAX, ''NOTAX'' AS TAXCODE, 0 AS INV_TAX ';
               sSQL := sSQL + 'FROM INVOICE P WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
               SQL.Text := sSQL;
           END
@@ -3218,11 +3226,25 @@ begin
               SQL.Text := sSQL;
               ParamByName('COMMENCE').AsDateTime := Trunc(Now);
               //SQL.Text := 'SELECT * FROM INVOICE WHERE INVOICE.NINVOICE = ' + InttoStr(NCheque);
-          END;
+          END; }
+
+          sSQL := 'SELECT NULL AS tax_rate, p.ninvoice, p.acct, p.creditor, p.descr, p.owing, '+
+                  '       p.amount, 0 AS tax, p.refno, p.ncreditor, '+
+                  '       -1 * (p.amount - p.owing) AS u_amount, 0 AS u_tax, '+
+                  '       -1 * p.amount AS t_amount, 0 AS t_tax, ''NOTAX'' AS taxcode,'+
+                  '       NVL((SELECT sum(amount) as t_tax '+
+                  '  FROM transitem t '+
+                  ' INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE IN (''GSTINP'') '+
+                  ' WHERE t.ninvoice = p.ninvoice AND owner_code = ''INVOICE''), 0) AS inv_tax '+
+                  '  FROM invoice p '+
+                  ' WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
+
+          SQL.Text := sSQL;
+
           if dmAxiom.RunningIde then
-              SQL.SaveToFile('c:\tmp\CHEQUEINVOICE.sql');
+             SQL.SaveToFile('c:\tmp\CHEQUEINVOICE.sql');
           Open;
-      end;
+//      end;
    end;
 
    if (qryDetails.IsEmpty = False) then
@@ -3380,7 +3402,7 @@ begin
               //if qryDetails.FieldByName('T_AMOUNT').AsFloat > 0 then
               //    FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               //else
-                  FieldByName('BAS_TAX').AsFloat := -1 * (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
+              FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               Post;
            end;
            //neAmount.AsCurrency := neAmount.AsCurrency + (abs(qryDetails.FieldByName('T_AMOUNT').AsFloat + qryDetails.FieldByName('T_TAX').AsFloat)) - (abs(qryDetails.FieldByName('U_AMOUNT').AsFloat + qryDetails.FieldByName('U_TAX').AsFloat));
@@ -3821,6 +3843,7 @@ begin
    FromCheque := False;
    RestoreScreenSettings;
    FNCheque := -1;
+   cbBank.Properties.OnChange := nil;
 
    lblBankName.AutoSize := TRUE;
    lblAuthByName.AutoSize := TRUE;
@@ -3920,6 +3943,8 @@ begin
    dtpDate.Date := Today;
 
    btnQuery.Visible := dmAxiom.runningide;
+
+   cbBank.Properties.OnChange := cbBankPropertiesChange;
 
    if not qryCheque.Modified then
       CreateCheque;

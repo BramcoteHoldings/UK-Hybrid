@@ -515,7 +515,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabOverview
+    Properties.ActivePage = tabMatterNotes
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -1775,6 +1775,7 @@ object frmMatters: TfrmMatters
         Height = 192
         BevelKind = bkSoft
         BevelOuter = bvNone
+        ParentColor = True
         TabOrder = 0
         Visible = False
         object Label16: TLabel
@@ -4746,8 +4747,8 @@ object frmMatters: TfrmMatters
           1539
           35)
         object btnDeleteMatterNote: TcxButton
-          Left = 982
-          Top = 5
+          Left = 1074
+          Top = 3
           Width = 107
           Height = 28
           Anchors = [akRight, akBottom]
@@ -4827,8 +4828,8 @@ object frmMatters: TfrmMatters
           OnClick = btnDeleteMatterNoteClick
         end
         object btnEditMatterNote: TcxButton
-          Left = 1089
-          Top = 5
+          Left = 1181
+          Top = 3
           Width = 97
           Height = 28
           Anchors = [akRight, akBottom]
@@ -4875,8 +4876,8 @@ object frmMatters: TfrmMatters
           OnClick = btnEditMatterNoteClick
         end
         object btnAddMatterNotes: TcxButton
-          Left = 1186
-          Top = 5
+          Left = 1278
+          Top = 3
           Width = 98
           Height = 28
           Anchors = [akRight, akBottom]
@@ -4922,8 +4923,8 @@ object frmMatters: TfrmMatters
           OnClick = btnAddMatterNotesClick
         end
         object cxButton5: TcxButton
-          Left = 1284
-          Top = 5
+          Left = 1376
+          Top = 3
           Width = 75
           Height = 28
           Anchors = [akRight, akBottom]
@@ -4969,8 +4970,8 @@ object frmMatters: TfrmMatters
           OnClick = cxButton5Click
         end
         object btnMatterNotesRefresh: TcxButton
-          Left = 1359
-          Top = 5
+          Left = 1451
+          Top = 3
           Width = 75
           Height = 28
           Anchors = [akRight, akBottom]
@@ -6226,7 +6227,7 @@ object frmMatters: TfrmMatters
         object cxDBNavigator1: TcxDBNavigator
           Left = 19
           Top = 68
-          Width = 225
+          Width = 221
           Height = 26
           Buttons.CustomButtons = <>
           Buttons.PriorPage.Enabled = False
@@ -6251,6 +6252,7 @@ object frmMatters: TfrmMatters
           Buttons.Filter.Enabled = False
           Buttons.Filter.Visible = False
           DataSource = dsControlledTotal
+          InfoPanel.Visible = True
           LookAndFeel.Kind = lfOffice11
           TabOrder = 1
         end
@@ -8227,14 +8229,19 @@ object frmMatters: TfrmMatters
             DataBinding.FieldName = 'DESCRIPTION'
             MinWidth = 18
             Options.Focusing = False
-            Width = 454
+            Width = 290
+          end
+          object tvSearchesCOMMENTS: TcxGridDBColumn
+            Caption = 'Comments'
+            DataBinding.FieldName = 'COMMENTS'
+            Width = 238
           end
           object tvSearchesSTATUS: TcxGridDBColumn
             Caption = 'Status'
             DataBinding.FieldName = 'STATUS'
             MinWidth = 18
             Options.Focusing = False
-            Width = 98
+            Width = 145
           end
           object tvSearchesDATEORDERED: TcxGridDBColumn
             Caption = 'Ordered'
@@ -8243,14 +8250,14 @@ object frmMatters: TfrmMatters
             Properties.ShowTime = False
             MinWidth = 18
             Options.Focusing = False
-            Width = 144
+            Width = 213
           end
           object tvSearchesORDEREDBY: TcxGridDBColumn
             Caption = 'Ordered by'
             DataBinding.FieldName = 'ORDEREDBY'
             MinWidth = 18
             Options.Focusing = False
-            Width = 146
+            Width = 217
           end
           object tvSearchesTOTALFEETOTAL: TcxGridDBColumn
             Caption = 'Total'
@@ -8258,7 +8265,7 @@ object frmMatters: TfrmMatters
             PropertiesClassName = 'TcxCurrencyEditProperties'
             MinWidth = 18
             Options.Focusing = False
-            Width = 123
+            Width = 182
           end
           object tvSearchesView: TcxGridDBColumn
             Caption = 'View'
@@ -8287,7 +8294,7 @@ object frmMatters: TfrmMatters
             Properties.ShowDescriptions = False
             HeaderAlignmentHorz = taCenter
             MinWidth = 18
-            Width = 82
+            Width = 121
           end
           object tvSearchesONLINEURL: TcxGridDBColumn
             Caption = 'Online'
@@ -8320,7 +8327,7 @@ object frmMatters: TfrmMatters
             Properties.ShowDescriptions = False
             HeaderAlignmentHorz = taCenter
             MinWidth = 18
-            Width = 81
+            Width = 120
           end
           object tvSearchesSEARCH_ID: TcxGridDBColumn
             DataBinding.FieldName = 'SEARCH_ID'
@@ -24528,7 +24535,6 @@ object frmMatters: TfrmMatters
     Top = 316
   end
   object qryInvestmentTransactions: TUniQuery
-    KeyFields = 'ndepositaccount'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT created, descr,'
@@ -24544,12 +24550,13 @@ object frmMatters: TfrmMatters
       
         '       DECODE (SUBSTR (amount, 0, 1), '#39'-'#39', 0 - amount, 0) AS deb' +
         'it, ninvtran,'
-      '       TYPE AS currtype, REFERENCE'
+      '       TYPE AS currtype, REFERENCE,'
+      '       ndepositaccount'
       '  FROM investment_trans'
       '-- WHERE nmatter = :nmatter'
       'where ndepositaccount = :ndepositaccount')
-    MasterSource = dsControlledTotal
-    MasterFields = 'ndepositaccount'
+    SpecificOptions.Strings = (
+      'Oracle.FetchAll=True')
     Left = 1349
     Top = 551
     ParamData = <

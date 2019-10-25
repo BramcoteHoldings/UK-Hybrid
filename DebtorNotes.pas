@@ -187,7 +187,7 @@ begin
       with qryTmp do
       begin
          if dmAxiom.uniInsight.InTransaction then
-            dmAxiom.uniInsight.Commit;
+            dmAxiom.uniInsight.Rollback;
          dmAxiom.uniInsight.StartTransaction;
          try
             SQL.Text := 'UPDATE DEBTORNOTES SET '+
@@ -203,7 +203,14 @@ begin
             end;
 
             ParamByName('sequence').AsInteger  := Sequence;
-            ParamByName('note').AsString := mlNote.Text;
+//            ParamByName('note').AsString := mlNote.Text;
+            ExecSQL;
+
+            Close;
+            SQL.Clear;
+            SQL.Text := 'update debtornotes set note = '+quotedstr(mlNote.Text)+' where nmatter = :nmatter and sequence = :sequence';
+            ParamByName('sequence').AsInteger  := Sequence;
+            ParamByName('nmatter').AsInteger := lNMatter;
             ExecSQL;
          finally
             dmAxiom.uniInsight.Commit;
@@ -215,13 +222,13 @@ begin
       with qryTmp do
       begin
          if dmAxiom.uniInsight.InTransaction then
-            dmAxiom.uniInsight.Commit;
+            dmAxiom.uniInsight.Rollback;
          dmAxiom.uniInsight.StartTransaction;
          try
             SQL.Text := 'INSERT INTO DEBTORNOTES '+
-                        '  (NMATTER, CREATED, CREATEDBY, NOTE, REVIEW_DATE, SEQUENCE, NMEMO, COLLECTION_CODE, NDEBTORTASK, REFNO, SYSTEM_DATE)'+
+                        '  (NMATTER, CREATED, CREATEDBY, REVIEW_DATE, SEQUENCE, NMEMO, COLLECTION_CODE, NDEBTORTASK, REFNO, SYSTEM_DATE)'+
                         'VALUES  '+
-                        ' (:NMATTER, :CREATED, :CREATEDBY, :NOTE, :REVIEW_DATE, :SEQUENCE, :NMEMO, :COLLECTION_CODE, :NDEBTORTASK, :REFNO, :SYSTEM_DATE)';
+                        ' (:NMATTER, :CREATED, :CREATEDBY, :REVIEW_DATE, :SEQUENCE, :NMEMO, :COLLECTION_CODE, :NDEBTORTASK, :REFNO, :SYSTEM_DATE)';
             ParamByName('createdby').AsString := dmAxiom.UserID;
             ParamByName('created').AsDateTime := cmbDate.Date;
             ParamByName('nmatter').AsInteger  := lNMatter;
@@ -246,7 +253,14 @@ begin
             Sequence := qryMaxSequence.FieldByName('newsequence').AsInteger;
             if Sequence = 0 then Sequence := 1;
             ParamByName('sequence').AsInteger  := Sequence;
-            ParamByName('note').AsString := mlNote.Text;
+ //           ParamByName('note').AsString := mlNote.Text;
+            ExecSQL;
+
+            Close;
+            SQL.Clear;
+            SQL.Text := 'update debtornotes set note = '+quotedstr(mlNote.Text)+' where nmatter = :nmatter and sequence = :sequence';
+            ParamByName('sequence').AsInteger  := Sequence;
+            ParamByName('nmatter').AsInteger := lNMatter;
             ExecSQL;
          finally
             dmAxiom.uniInsight.Commit;
