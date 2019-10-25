@@ -3232,10 +3232,10 @@ begin
                   '       p.amount, 0 AS tax, p.refno, p.ncreditor, '+
                   '       -1 * (p.amount - p.owing) AS u_amount, 0 AS u_tax, '+
                   '       -1 * p.amount AS t_amount, 0 AS t_tax, ''NOTAX'' AS taxcode,'+
-                  '       (SELECT sum(amount) as t_tax '+
+                  '       NVL((SELECT sum(amount) as t_tax '+
                   '  FROM transitem t '+
                   ' INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE IN (''GSTINP'') '+
-                  ' WHERE t.ninvoice = p.ninvoice AND owner_code = ''INVOICE'') AS inv_tax '+
+                  ' WHERE t.ninvoice = p.ninvoice AND owner_code = ''INVOICE''), 0) AS inv_tax '+
                   '  FROM invoice p '+
                   ' WHERE P.ACCT = ' + QuotedStr(dmAxiom.Entity) + ' AND P.NINVOICE = ' + InttoStr(NCheque) + ' ';
 
