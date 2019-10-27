@@ -163,6 +163,7 @@ object frmDesktop: TfrmDesktop
       Caption = 'tsAxiomNew'
       ImageIndex = 0
       TabVisible = False
+      ExplicitHeight = 572
       DesignSize = (
         1256
         541)
@@ -174,6 +175,7 @@ object frmDesktop: TfrmDesktop
         ManagerFont = False
         ParentFont = True
         Align = alClient
+        ExplicitHeight = 572
         DockingType = 5
         OriginalWidth = 1256
         OriginalHeight = 541
@@ -190,6 +192,7 @@ object frmDesktop: TfrmDesktop
           ManagerFont = False
           ParentShowHint = False
           ShowHint = False
+          ExplicitHeight = 572
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -212,6 +215,7 @@ object frmDesktop: TfrmDesktop
               Top = 0
               Width = 1198
               Height = 541
+              ExplicitHeight = 572
               DockingType = 0
               OriginalWidth = 265
               OriginalHeight = 176
@@ -233,6 +237,7 @@ object frmDesktop: TfrmDesktop
               CustomCaptionButtons.Buttons = <>
               ShowCaption = False
               TabsProperties.CustomButtons.Buttons = <>
+              ExplicitHeight = 572
               DockingType = 0
               OriginalWidth = 163
               OriginalHeight = 124
@@ -251,6 +256,7 @@ object frmDesktop: TfrmDesktop
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
+                ExplicitHeight = 568
                 object pageForms: TcxPageControl
                   Left = 1
                   Top = 1
@@ -286,6 +292,7 @@ object frmDesktop: TfrmDesktop
                   OnPageChanging = pageFormsPageChanging
                   OnStartDrag = pageFormsStartDrag
                   OnUnDock = pageFormsUnDock
+                  ExplicitHeight = 566
                   ClientRectBottom = 535
                   ClientRectRight = 1192
                   ClientRectTop = 0
@@ -371,6 +378,7 @@ object frmDesktop: TfrmDesktop
                 TabOrder = 2
                 Visible = False
                 OnBeforeEditing = TaskSchedulerBeforeEditing
+                Selection = 1
                 Splitters = {
                   180000006E0000008E0000007200000014000000010000001800000010000000}
                 StoredClientBounds = {01000000010000008E00000010000000}
@@ -10542,7 +10550,7 @@ object frmDesktop: TfrmDesktop
     object barDocCenter: TdxBar
       Caption = 'Document Centre'
       CaptionButtons = <>
-      DockedLeft = 857
+      DockedLeft = 856
       DockedTop = 0
       FloatLeft = 1241
       FloatTop = 8
@@ -10567,7 +10575,7 @@ object frmDesktop: TfrmDesktop
     object BarConflicts: TdxBar
       Caption = 'Conflicts'
       CaptionButtons = <>
-      DockedLeft = 957
+      DockedLeft = 956
       DockedTop = 0
       FloatLeft = 1133
       FloatTop = 8

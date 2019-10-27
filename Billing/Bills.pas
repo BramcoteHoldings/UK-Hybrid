@@ -435,6 +435,8 @@ type
     FFileID: string;
     FBillSubject: string;
     FEmailTemplate: ansistring;
+
+    bBILL_AUTH_REQ: boolean;
     
     procedure ShowTotal;
     procedure GetTotals;
@@ -1476,25 +1478,26 @@ begin
 
 //  tbtnReverse.Enabled := dmAxiom.Security.Bill.Reverse;
 //  tbtnAutoReceipt.Enabled := dmAxiom.Security.Receipt.Create;
-  tbMatterSearch.ShowHint := dmAxiom.Security.Receipt.Create;
+   tbMatterSearch.ShowHint := dmAxiom.Security.Receipt.Create;
 
-  neSearchRefresh.AsInteger := SettingLoadInteger('BILLS', 'SEARCHREFRESH');
-  if neSearchRefresh.AsInteger = 0 then
-    neSearchRefresh.AsInteger := 1;
+   neSearchRefresh.AsInteger := SettingLoadInteger('BILLS', 'SEARCHREFRESH');
+   if neSearchRefresh.AsInteger = 0 then
+      neSearchRefresh.AsInteger := 1;
 
-  SettingLoadStream(dmAxiom.UserID, C_BILLSLIST, tvBills );
-  SettingLoadStream(dmAxiom.UserID, C_SUBBILLSLIST, tvSubBills );
+   SettingLoadStream(dmAxiom.UserID, C_BILLSLIST, tvBills );
+   SettingLoadStream(dmAxiom.UserID, C_SUBBILLSLIST, tvSubBills );
 //  LoadColumnData();
-  cbAuthor.Items := dmAxiom.Authors;
-  cbPartner.Items := dmAxiom.Partners;
-  cbEmployees.Items := dmAxiom.Employees;
-  qryControllers.Open;
+   cbAuthor.Items := dmAxiom.Authors;
+   cbPartner.Items := dmAxiom.Partners;
+   cbEmployees.Items := dmAxiom.Employees;
+   qryControllers.Open;
 
   // AES 22/09/2017  set formatting of bills footers
- for iCtr := 0 to tvBills.DataController.Summary.FooterSummaryItems.Count - 1 do
-     tvBills.DataController.Summary.FooterSummaryItems[iCtr].Format := GetCurrencySymbol+',0.00';
+   for iCtr := 0 to tvBills.DataController.Summary.FooterSummaryItems.Count - 1 do
+      tvBills.DataController.Summary.FooterSummaryItems[iCtr].Format := GetCurrencySymbol+',0.00';
 
-  dcToday.Click;
+   bBILL_AUTH_REQ := (SystemString('BILL_AUTH_REQ') = 'Y');
+   dcToday.Click;
 end;
 
 procedure TfrmBills.FormDestroy(Sender: TObject);
@@ -2160,7 +2163,13 @@ begin
 //   btnPrint.Enabled := bEnabled;
    tbtnRefresh.Enabled := bEnabled;
    btnDebtorTask.Enabled := bEnabled;
-   btnPost.Enabled := bEnabled;
+
+   if (bBILL_AUTH_REQ = True) then
+      btnPost.Enabled := ((qryBills.FieldByName('AUTHORISED').AsString = 'Y') and
+                          (dmAxiom.Security.Bill.Post))
+   else
+      btnPost.Enabled := dmAxiom.Security.Bill.Post;
+
    btnMerge.Enabled := bEnabled;
 //   btnPrint.Enabled := bEnabled;
    btnDebtorTask.Enabled := bEnabled;

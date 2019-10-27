@@ -1045,7 +1045,7 @@ object frmBills: TfrmBills
       object Label15: TLabel
         Left = 9
         Top = 250
-        Width = 145
+        Width = 144
         Height = 15
         Caption = 'Sundry Expenses Paid/Woff'
       end
@@ -1073,7 +1073,7 @@ object frmBills: TfrmBills
       object Label11: TLabel
         Left = 9
         Top = 117
-        Width = 25
+        Width = 26
         Height = 15
         Caption = 'Total'
       end
@@ -1094,7 +1094,7 @@ object frmBills: TfrmBills
       object Label12: TLabel
         Left = 9
         Top = 134
-        Width = 25
+        Width = 26
         Height = 15
         Caption = 'Trust'
       end
@@ -1115,7 +1115,7 @@ object frmBills: TfrmBills
       object Label9: TLabel
         Left = 9
         Top = 84
-        Width = 88
+        Width = 87
         Height = 15
         Caption = 'Sundry Expenses'
       end
@@ -1193,7 +1193,7 @@ object frmBills: TfrmBills
       object Label7: TLabel
         Left = 325
         Top = 107
-        Width = 78
+        Width = 79
         Height = 15
         Caption = 'Bill Number To'
       end
@@ -1256,7 +1256,7 @@ object frmBills: TfrmBills
       object lblDateTo: TLabel
         Left = 4
         Top = 80
-        Width = 69
+        Width = 70
         Height = 15
         Caption = 'Generated To'
       end
@@ -3777,7 +3777,7 @@ object frmBills: TfrmBills
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 4350

@@ -54,7 +54,6 @@ object frmBulkMailer: TfrmBulkMailer
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        ExplicitWidth = 1104
         DockingType = 0
         OriginalWidth = 321
         OriginalHeight = 214
@@ -78,7 +77,6 @@ object frmBulkMailer: TfrmBulkMailer
         CustomCaptionButtons.Buttons = <>
         ShowCaption = False
         TabsProperties.CustomButtons.Buttons = <>
-        ExplicitWidth = 1104
         DockingType = 0
         OriginalWidth = 1000
         OriginalHeight = 150
@@ -98,7 +96,6 @@ object frmBulkMailer: TfrmBulkMailer
           Properties.HideTabs = True
           LookAndFeel.NativeStyle = True
           OnChange = pagMainChange
-          ExplicitWidth = 1100
           ClientRectBottom = 457
           ClientRectLeft = 4
           ClientRectRight = 1053
@@ -110,14 +107,10 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Editor: TRichEdit
               Left = 0
               Top = 0
-              Width = 1092
+              Width = 1049
               Height = 453
               Margins.Left = 4
               Margins.Top = 4
@@ -146,7 +139,6 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'tabHTML'
             ImageIndex = 1
-            ExplicitWidth = 1092
             object ed_LinkHRef: TcxTextEdit
               Left = 435
               Top = 4
@@ -162,36 +154,6 @@ object frmBulkMailer: TfrmBulkMailer
               TabOrder = 0
               Width = 261
             end
-            object HTMLEditor: TEmbeddedWB
-              Left = 0
-              Top = 0
-              Width = 1049
-              Height = 453
-              Margins.Left = 4
-              Margins.Top = 4
-              Margins.Right = 4
-              Margins.Bottom = 4
-              Align = alClient
-              TabOrder = 1
-              Silent = False
-              DisableCtrlShortcuts = 'N'
-              DownloadOptions = [DownloadImages, DownloadVideos, DownloadBGSounds, DontExecuteActiveX, DontDownloadActiveX, EnableUrlIfEncodingUTF8]
-              UserInterfaceOptions = [EnablesFormsAutoComplete, EnableThemes]
-              About = ' EmbeddedWB http://bsalsa.com/'
-              PrintOptions.HTMLHeader.Strings = (
-                '<HTML></HTML>')
-              PrintOptions.Orientation = poPortrait
-              ExplicitLeft = 2
-              ExplicitTop = -2
-              ExplicitWidth = 1092
-              ExplicitHeight = 474
-              ControlData = {
-                4C000000136B0000EE2800000000000000000000000000000000000000000000
-                000000004C000000000000000000000001000000E0D057007335CF11AE690800
-                2B2E126208000000000000004C0000000114020000000000C000000000000046
-                8000000000000000000000000000000000000000000000000000000000000000
-                00000000000000000100000000000000000000000000000000000000}
-            end
             object Memo1: TMemo
               Left = 765
               Top = 339
@@ -203,8 +165,25 @@ object frmBulkMailer: TfrmBulkMailer
               Margins.Bottom = 4
               Lines.Strings = (
                 'Memo1')
-              TabOrder = 2
+              TabOrder = 1
               Visible = False
+            end
+            object dxRichEditControl1: TdxRichEditControl
+              Left = 0
+              Top = 0
+              Width = 1049
+              Height = 453
+              ActiveViewType = Simple
+              Align = alClient
+              Options.Export.Html.UseHtml5 = True
+              Options.HorizontalRuler.Visibility = Hidden
+              Options.VerticalRuler.Visibility = Hidden
+              ReadOnly = True
+              TabOrder = 2
+              ExplicitLeft = 52
+              ExplicitTop = 3
+              ExplicitWidth = 757
+              ExplicitHeight = 447
             end
           end
           object tabRAW: TcxTabSheet
@@ -215,10 +194,6 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
@@ -245,7 +220,6 @@ object frmBulkMailer: TfrmBulkMailer
           Margins.Bottom = 4
           Align = dalTop
           BarManager = BarManager
-          ExplicitWidth = 1100
         end
         object StatusBar: TdxStatusBar
           Left = 0
@@ -284,7 +258,6 @@ object frmBulkMailer: TfrmBulkMailer
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
-          ExplicitWidth = 1100
         end
         object Panel2: TPanel
           Left = 0
@@ -293,7 +266,6 @@ object frmBulkMailer: TfrmBulkMailer
           Height = 79
           Align = alTop
           TabOrder = 3
-          ExplicitWidth = 1100
           object cxLabel2: TcxLabel
             Left = 5
             Top = 5
@@ -427,7 +399,6 @@ object frmBulkMailer: TfrmBulkMailer
         CaptionButtons = [cbMaximize, cbHide]
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
-        ExplicitWidth = 217
         DockingType = 0
         OriginalWidth = 260
         OriginalHeight = 150
@@ -443,7 +414,6 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 213
           object tvEmails: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataModeController.SmartRefresh = True
@@ -555,7 +525,6 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 213
           object rbDebtors: TcxRadioButton
             Tag = 1
             Left = 18
@@ -597,7 +566,6 @@ object frmBulkMailer: TfrmBulkMailer
         Caption = 'Fields'
         CustomCaptionButtons.Buttons = <>
         TabsProperties.CustomButtons.Buttons = <>
-        ExplicitWidth = 217
         DockingType = 0
         OriginalWidth = 199
         OriginalHeight = 150
@@ -613,7 +581,6 @@ object frmBulkMailer: TfrmBulkMailer
           Align = alClient
           TabOrder = 0
           LookAndFeel.NativeStyle = True
-          ExplicitWidth = 213
           object tvFields: TcxGridTableView
             PopupMenu = pm_FieldAdd
             OnDblClick = MenuItem1Click
@@ -1177,7 +1144,7 @@ object frmBulkMailer: TfrmBulkMailer
       ImageIndex = 41
       PaintStyle = psCaptionGlyph
       ShortCut = 16499
-      OnClick = dxBarButton2Click
+      OnClick = actCloseExecute
     end
     object btnSendEmails: TdxBarButton
       Caption = 'Send Emails'
@@ -1221,14 +1188,14 @@ object frmBulkMailer: TfrmBulkMailer
         FF00FFFFFF00FFFFFF00F0FBFFFF99CCCCFF99CCCCFF99CCCCFFF0FBFFFFFFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
       PaintStyle = psCaptionGlyph
-      OnClick = btnSendEmailsClick
+      OnClick = actSendEmailsExecute
     end
     object btnExportEmails: TdxBarButton
       Caption = 'Export Email Addresses'
       Category = 0
       Hint = 'Export Email Addresses'
       Visible = ivAlways
-      OnClick = btnExportEmailsClick
+      OnClick = actExportExecute
     end
     object dxBarButton15: TdxBarButton
       Caption = 'View HTML source'
@@ -8620,7 +8587,7 @@ object frmBulkMailer: TfrmBulkMailer
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -8719,7 +8686,7 @@ object frmBulkMailer: TfrmBulkMailer
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -9267,5 +9234,26 @@ object frmBulkMailer: TfrmBulkMailer
     DataSet = qryReportList
     Left = 1008
     Top = 112
+  end
+  object ActionManager1: TActionManager
+    Images = Images
+    Left = 984
+    Top = 282
+    StyleName = 'Platform Default'
+    object actSendEmails: TAction
+      Caption = 'Send Emails'
+      Hint = 'Merge and Send Emails'
+      ImageIndex = 2
+      OnExecute = actSendEmailsExecute
+    end
+    object actExport: TAction
+      Caption = 'Export Email Addresses'
+      OnExecute = actExportExecute
+    end
+    object actClose: TAction
+      Caption = 'Close'
+      ImageIndex = 43
+      OnExecute = actCloseExecute
+    end
   end
 end
