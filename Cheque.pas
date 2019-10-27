@@ -1993,9 +1993,11 @@ begin
                               cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat;// - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
                            if FieldByName('legal_cr_amount').AsFloat <> 0 then
                               cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat; // - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
-                           if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
+ //                          if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
                              //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                              //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
+                           if qryLedger.FieldByName('inv_TAX').AsFloat <> 0 then
+
                            begin
                               if cMatterTotal > 0 then
                                  cMatterTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
@@ -3402,7 +3404,8 @@ begin
               //if qryDetails.FieldByName('T_AMOUNT').AsFloat > 0 then
               //    FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               //else
-              FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
+//              FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('T_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
+              FieldByName('BAS_TAX').AsFloat := (qryDetails.FieldByName('INV_TAX').AsFloat - qryDetails.FieldByName('U_TAX').AsFloat);
               Post;
            end;
            //neAmount.AsCurrency := neAmount.AsCurrency + (abs(qryDetails.FieldByName('T_AMOUNT').AsFloat + qryDetails.FieldByName('T_TAX').AsFloat)) - (abs(qryDetails.FieldByName('U_AMOUNT').AsFloat + qryDetails.FieldByName('U_TAX').AsFloat));
