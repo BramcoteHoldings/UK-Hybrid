@@ -4934,6 +4934,7 @@ begin
                         qryLedger.FieldByName('LONGDESC').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('CREDITOR').AsString;
                         qryLedger.FieldByName('REASON').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('DESCR').AsString;
                         qryLedger.FieldByName('AMOUNT').AsCurrency := frmCreditorAccountsSearch.qryAccounts.FieldByName('OWING').AsCurrency;
+                        qryLedger.FieldByName('NINVOICE').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                         qryLedger.Edit;
                         qryLedger.FieldByName('UNIQUEID').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                      end;
@@ -5087,6 +5088,7 @@ begin
                qryLedger.FieldByName('LONGDESC').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('CREDITOR').AsString;
                qryLedger.FieldByName('REASON').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('DESCR').AsString;
                qryLedger.FieldByName('AMOUNT').AsCurrency := frmCreditorAccountsSearch.qryAccounts.FieldByName('OWING').AsCurrency;
+               qryLedger.FieldByName('NINVOICE').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                qryLedger.Edit;
                qryLedger.FieldByName('UNIQUEID').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
             end
