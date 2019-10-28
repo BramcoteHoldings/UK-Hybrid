@@ -8,6 +8,8 @@ Build 50
 -made Notes column in Client->Bills tab a Rich Edit field.
 -fixed issue with editing AP_email in matter edit screen
 -Added system flag to disable Bill Posting if bill not Authorised.
+-Fix to correctly update creditor invoice owing amount when cheque created.
+-Made change to Bill Write Offs when the bill includes fees. Any rounding differences are added to the last entry processed.
 
 Build 49
 ========

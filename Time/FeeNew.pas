@@ -617,6 +617,12 @@ begin
    if not bOk then
       exit;
 
+   if (edMatterFind.Text <> '') then
+   begin
+      if ((MatterIsCurrent(edMatterFind.Text)) and (IsMatterArchived(edMatterFind.Text) = False)) then
+         sTmp := sTmp + '       Matter: ' + edMatterFind.Text + ' - not found or is closed' + #13;
+   end;
+
    if (edMatterFind.Text = '') AND (icmbType.EditValue = 'M') then
       sTmp := sTmp + '       Matter' + Chr(13);
    if cbAuthor.EditValue = '' then

@@ -204,7 +204,8 @@ var
 implementation
 
 uses
-  AxiomData, MiscFunc, InvoiceSearch, citfunc, forcepay,glComponentUtil;
+  AxiomData, MiscFunc, InvoiceSearch, citfunc, forcepay,glComponentUtil,
+  System.StrUtils;
 
 {$R *.DFM}
 
@@ -298,7 +299,11 @@ var
    rDepartmentOverride : TComponentOverride;
    FeeDistAmt, TotalFeeDistAmt,
    TotalAmount, TotalAmountGST: Currency;
-   FeeDistCount, TotalFeeDistCount: integer;
+   FeeDistCount,
+   TotalFeeDistCount,
+   tmpnfee: integer;
+   tmpFeeTotal,
+   tmpFeeDiff: Currency;
 begin
    if (IsValidBillForMatter(qryBill.FieldByName('FILEID').AsString, dmAxiom.Entity) = True) then
    begin
@@ -396,6 +401,8 @@ begin
                               begin
                                  with qryFee do
                                  begin
+                                    tmpnfee := GetSequenceNumber('sqnc_nfee');
+                                    ParamByName('NFEE').AsInteger := tmpnfee;
                                     ParamByName('CREATED').AsDateTime := dtpCreated.Date;
                                     ParamByName('DESCR').AsString := mmoDesc.Lines.Text;
                                     ParamByName('AUTHOR').AsString := qryFeeAlloc.FieldByName('AUTHOR').AsString;  // cbAuthor.Text;
@@ -424,9 +431,26 @@ begin
                                     else
                                        ParamByName('PRIVATE').AsString := 'N';
                                     ExecSQL;
+                                    tmpFeeTotal := tmpFeeTotal + ParamByName('AMOUNT').AsFloat;
                                  end;
                               end;
                               qryFeeAlloc.Next;
+                           end;
+                           if (abs(tmpFeeTotal) <> abs(neFees.AsCurrency)) then
+                           begin
+                              tmpFeeDiff := abs(tmpFeeTotal) - abs(neFees.AsCurrency);
+                              if (neFees.AsCurrency > 0) then
+                                 tmpFeeDiff := (tmpFeeDiff * -1)
+                              else
+                                 tmpFeeDiff := tmpFeeDiff;  
+                              with dmAxiom.qryTmp do
+                              begin
+                                 Close;
+                                 SQL.Text := 'update fee set amount = amount + :tmpfeeamount where nfee = :nfee';
+                                 ParamByName('tmpfeeamount').AsFloat := tmpFeeDiff;
+                                 ParamByName('NFEE').AsInteger := tmpnfee;
+                                 ExecSQL;
+                              end;
                            end;
                        end;
                        // Billed Fees
