@@ -40,7 +40,6 @@ object frmWriteOff: TfrmWriteOff
     ParentShowHint = False
     ShowHint = True
     SimplePanel = True
-    ExplicitWidth = 546
   end
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
@@ -54,7 +53,6 @@ object frmWriteOff: TfrmWriteOff
     TabOrder = 6
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 546
     DesignSize = (
       614
       483)
@@ -505,7 +503,7 @@ object frmWriteOff: TfrmWriteOff
       OnExit = neEditableAmountsExit
     end
     object edAdjust: TEdit
-      Left = 317
+      Left = 316
       Top = 350
       Width = 90
       Height = 19
@@ -919,7 +917,7 @@ object frmWriteOff: TfrmWriteOff
       Left = 107
       Top = 288
       AutoSize = False
-      EditValue = 43702.3841928819d
+      EditValue = 43766.7369853472d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -1040,7 +1038,7 @@ object frmWriteOff: TfrmWriteOff
       Control = lblMatterDesc
       ControlOptions.AutoColor = True
       ControlOptions.OriginalHeight = 17
-      ControlOptions.OriginalWidth = 516
+      ControlOptions.OriginalWidth = 587
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -1064,7 +1062,7 @@ object frmWriteOff: TfrmWriteOff
       SizeOptions.Width = 237
       Control = cxDBLSubBill
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 138
+      ControlOptions.OriginalWidth = 142
       ControlOptions.ShowBorder = False
       Index = 2
     end
@@ -1615,14 +1613,14 @@ object frmWriteOff: TfrmWriteOff
       
         '  DEPT, EMP_TYPE, UNITS, INVOICEDATE, NCLIENT, FILEID, TAX, TAXC' +
         'ODE,'
-      '  PRIVATE, TYPE, NMEMO, EXCL_FROM_BILL)'
+      '  PRIVATE, TYPE, NMEMO, EXCL_FROM_BILL, NFEE)'
       'VALUES'
       '  (:CREATED, :DESCR, 0, :AUTHOR, :PARTNER, 0,'
       '  :AMOUNT, :NMATTER, '#39'Y'#39', :BANK_ACCT,'
       
         '  :DEPT, :EMP_TYPE, 0, :INVOICEDATE, :NCLIENT, :FILEID, :TAX, :T' +
         'AXCODE,'
-      '  :PRIVATE, '#39'wo'#39', :NMEMO, '#39'Y'#39')')
+      '  :PRIVATE, '#39'wo'#39', :NMEMO, '#39'Y'#39', :NFEE)')
     Left = 8
     Top = 372
     ParamData = <
@@ -1704,6 +1702,11 @@ object frmWriteOff: TfrmWriteOff
       item
         DataType = ftUnknown
         Name = 'NMEMO'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NFEE'
         Value = nil
       end>
   end
