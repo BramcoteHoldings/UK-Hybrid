@@ -4935,6 +4935,8 @@ begin
                         qryLedger.FieldByName('REASON').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('DESCR').AsString;
                         qryLedger.FieldByName('AMOUNT').AsCurrency := frmCreditorAccountsSearch.qryAccounts.FieldByName('OWING').AsCurrency;
                         qryLedger.Edit;
+                        qryLedger.FieldByName('NINVOICE').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
+                        qryLedger.Edit;
                         qryLedger.FieldByName('UNIQUEID').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                      end;
                   end
@@ -4955,6 +4957,8 @@ begin
                      qryLedger.FieldByName('REASON').AsString := qryInvoice.FieldByName('DESCR').AsString;
                      qryLedger.FieldByName('AMOUNT').AsCurrency := qryInvoice.FieldByName('OWING').AsCurrency;
                      qryLedger.FieldByName('UNIQUEID').AsInteger := qryInvoice.FieldByName('NINVOICE').AsInteger;
+                     qryLedger.Edit;
+                     qryLedger.FieldByName('NINVOICE').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                      qryLedgerAMOUNT.OnChange := qryLedgerAMOUNTChange;
                   end
                   else
@@ -5087,6 +5091,8 @@ begin
                qryLedger.FieldByName('LONGDESC').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('CREDITOR').AsString;
                qryLedger.FieldByName('REASON').AsString := frmCreditorAccountsSearch.qryAccounts.FieldByName('DESCR').AsString;
                qryLedger.FieldByName('AMOUNT').AsCurrency := frmCreditorAccountsSearch.qryAccounts.FieldByName('OWING').AsCurrency;
+               qryLedger.Edit;
+               qryLedger.FieldByName('NINVOICE').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
                qryLedger.Edit;
                qryLedger.FieldByName('UNIQUEID').AsInteger := frmCreditorAccountsSearch.qryAccounts.FieldByName('NINVOICE').AsInteger;
             end

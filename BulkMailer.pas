@@ -923,7 +923,7 @@ begin
                begin
                   if IsValidEmail(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index]) then
                   begin
-                     if rbDebtors.Checked = True then
+                     if (rbDebtors.Checked = True) then
                         ANClient := TableInteger('PHONEBOOK','NNAME', INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNNAME.Index]), 'NCLIENT')
                      else
                         ANMatter := INTEGER(ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsNMATTER.Index]);
@@ -931,7 +931,7 @@ begin
                      //setup mail message
                      MailMessage.From.Address := edFrom.Text;
 
-                     MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[ tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
+                     MailMessage.Recipients.EMailAddresses := ViewData.GetRecordByIndex(nRowCount).Values[tvEmailsEMAIL.Index];    //qryEmails.FieldByName('partyemail').AsString;
 
                      if edCC.Text <> '' then
                         MailMessage.CCList.EMailAddresses := edCC.Text;

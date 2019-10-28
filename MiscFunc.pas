@@ -12375,18 +12375,34 @@ function IsValidEmail(const Value: string): Boolean;
       Result:= true;
    end;
 var
-   i: Integer;
-   NamePart, ServerPart: string;
+   i, x: Integer;
+   NamePart,
+   ServerPart,
+   email: string;
+   slEmailList: TStringList;
+   bResult: boolean;
 begin
-   Result:= False;
-   i:=Pos('@', Value);
-   if i=0 then Exit;
-   NamePart:=Copy(Value, 1, i-1);
-   ServerPart:=Copy(Value, i+1, Length(Value));
-   if (Length(NamePart)=0) or ((Length(ServerPart)<5)) then Exit;
-   i:=Pos('.', ServerPart);
-   if (i=0) or (i>(Length(serverPart)-2)) then Exit;
-   Result:= CheckAllowed(NamePart) and CheckAllowed(ServerPart);
+   try
+      slEmailList := TStringList.Create;
+      slEmailList.Delimiter := ';';
+      slEmailList.DelimitedText := Value;
+      for x := 0 to (slEmailList.Count - 1) do
+      begin
+         email := slEmailList.Strings[x];
+         Result:= False;
+         i:=Pos('@', email);
+         if i=0 then Exit;
+         NamePart:=Copy(email, 1, i-1);
+         ServerPart:=Copy(email, i+1, Length(email));
+         if (Length(NamePart)=0) or ((Length(ServerPart)<5)) then Exit;
+         i:=Pos('.', ServerPart);
+         if (i=0) or (i>(Length(serverPart)-2)) then Exit;
+         bResult:= CheckAllowed(NamePart) and CheckAllowed(ServerPart);
+      end;
+   finally
+      slEmailList.Free;
+      Result := bResult;
+   end;
 end;
 
 function ADaysInMonth(aYear, aMonth, aDay: integer): integer;
