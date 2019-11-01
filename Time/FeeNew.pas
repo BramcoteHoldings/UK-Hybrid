@@ -14,7 +14,8 @@ uses
   cxGraphics, cxRichEdit, cxLookAndFeels,
   ppStrtch, ppMemo, ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppComm,
   ppRelatv, ppProd, ppReport, ppParameter, dxCore, cxDateUtils, ppDesignLayer,
-  ppRegion, System.DateUtils, ppTypes, cxClasses, cxSpinEdit, System.ImageList;
+  ppRegion, System.DateUtils, ppTypes, cxClasses, cxSpinEdit, System.ImageList,
+  ppRichTx;
 
 type
   TfrmFeeNew = class(TForm)
@@ -89,7 +90,6 @@ type
     ppSummaryBand1: TppSummaryBand;
     ppRegion1: TppRegion;
     ppLabel8: TppLabel;
-    ppMemoNotes: TppMemo;
     Label17: TLabel;
     dtpStartTime: TDateTimePicker;
     dtpEndTime: TDateTimePicker;
@@ -119,13 +119,14 @@ type
     qryPracNum: TUniQuery;
     dsPracNum: TUniDataSource;
     mmoDesc: TcxRichEdit;
-    mmoNotes: TcxRichEdit;
     neUnits: TcxSpinEdit;
     neTax: TcxCurrencyEdit;
     neMinutes: TcxTextEdit;
     Label9: TLabel;
     Label16: TLabel;
     edMatterFind: TcxButtonEdit;
+    ppMemoNotes: TppRichText;
+    mmoNotes: TcxMemo;
     procedure btnOkClick(Sender: TObject);
     procedure neRateChange(Sender: TObject);
     procedure neUnitsChange(Sender: TObject);

@@ -971,7 +971,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43727.4882524421d
+    EditValue = 43768.6803881944d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True

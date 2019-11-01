@@ -256,7 +256,7 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 20
+    TabOrder = 19
     OnClick = btnCancelClick
   end
   object btnOk: TcxButton
@@ -354,7 +354,7 @@ object frmFeeNew: TfrmFeeNew
       8000008080000080800000808000008080000080800000808000008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 19
+    TabOrder = 18
     OnClick = btnOkClick
   end
   object cbDept: TcxLookupComboBox
@@ -383,7 +383,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 13
+    TabOrder = 12
     Width = 178
   end
   object cbFeeBasis: TcxLookupComboBox
@@ -404,7 +404,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 15
+    TabOrder = 14
     Visible = False
     OnClick = cbFeeBasisClick
     Width = 178
@@ -445,7 +445,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 16
+    TabOrder = 15
     Visible = False
   end
   object cbPrint: TcxCheckBox
@@ -458,15 +458,15 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 17
+    TabOrder = 16
   end
   object lblInvoice: TcxLabel
-    Left = 257
+    Left = 265
     Top = 60
     AutoSize = False
     Transparent = True
     Height = 18
-    Width = 84
+    Width = 99
   end
   object cbTaxType: TcxLookupComboBox
     Left = 79
@@ -490,7 +490,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 12
+    TabOrder = 11
     Width = 178
   end
   object lblMatterDesc: TcxLabel
@@ -591,7 +591,7 @@ object frmFeeNew: TfrmFeeNew
       80007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF008080000080
       80000080800000808000008080000080800000808000}
     OptionsImage.NumGlyphs = 2
-    TabOrder = 18
+    TabOrder = 17
     OnClick = sbPrintClick
   end
   object cmbTemplate: TcxLookupComboBox
@@ -634,7 +634,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 8
+    TabOrder = 7
     Text = '1'
     Width = 48
   end
@@ -662,7 +662,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 14
+    TabOrder = 13
     Width = 177
   end
   object dtpCreated: TcxDateEdit
@@ -696,7 +696,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Exclude Fee Description from Bill'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 24
+    TabOrder = 23
   end
   object dtpStartTime: TDateTimePicker
     Left = 79
@@ -730,7 +730,7 @@ object frmFeeNew: TfrmFeeNew
     Caption = 'Keep form open after posting'
     Ctl3D = False
     ParentCtl3D = False
-    TabOrder = 25
+    TabOrder = 24
   end
   object neItem: TcxCurrencyEdit
     Left = 282
@@ -741,7 +741,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 10
+    TabOrder = 9
     Width = 82
   end
   object neTimeAmount: TcxCurrencyEdit
@@ -753,7 +753,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 9
+    TabOrder = 8
     Width = 60
   end
   object neItemTax: TcxCurrencyEdit
@@ -764,7 +764,7 @@ object frmFeeNew: TfrmFeeNew
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 26
+    TabOrder = 25
     Visible = False
     Width = 64
   end
@@ -777,7 +777,7 @@ object frmFeeNew: TfrmFeeNew
     BevelKind = bkSoft
     BevelOuter = bvNone
     ParentColor = True
-    TabOrder = 11
+    TabOrder = 10
     object Label7: TLabel
       Left = 140
       Top = 7
@@ -926,7 +926,7 @@ object frmFeeNew: TfrmFeeNew
       end>
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsPracNum
-    TabOrder = 27
+    TabOrder = 26
     Visible = False
     Width = 68
   end
@@ -938,17 +938,6 @@ object frmFeeNew: TfrmFeeNew
     OnEnter = mmoDescEnter
     OnExit = mmoDescExit
     OnKeyPress = mmoDescKeyPress
-    Height = 69
-    Width = 285
-  end
-  object mmoNotes: TcxRichEdit
-    Left = 79
-    Top = 236
-    Properties.MaxLength = 4000
-    Properties.ScrollBars = ssVertical
-    Properties.OnChange = mmoDescChange
-    TabOrder = 7
-    OnKeyUp = mmoNotesKeyUp
     Height = 69
     Width = 285
   end
@@ -966,6 +955,13 @@ object frmFeeNew: TfrmFeeNew
     TabOrder = 0
     OnKeyDown = edMatterFindKeyDown
     Width = 105
+  end
+  object mmoNotes: TcxMemo
+    Left = 79
+    Top = 237
+    TabOrder = 27
+    Height = 68
+    Width = 284
   end
   object qryFee: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1035,25 +1031,25 @@ object frmFeeNew: TfrmFeeNew
     SQL.Strings = (
       'select * from empdept'
       'order by descr')
-    Left = 84
-    Top = 232
+    Left = 45
+    Top = 180
   end
   object dsEmpDept: TUniDataSource
     DataSet = qryEmpDept
-    Left = 132
-    Top = 239
+    Left = 125
+    Top = 166
   end
   object qryFeeBasisList: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from feebasis')
-    Left = 245
-    Top = 203
+    Left = 237
+    Top = 105
   end
   object dsFeeBasisList: TUniDataSource
     DataSet = qryFeeBasisList
-    Left = 293
-    Top = 203
+    Left = 299
+    Top = 180
   end
   object qryTaxType: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1064,8 +1060,8 @@ object frmFeeNew: TfrmFeeNew
   end
   object dsTaxType: TUniDataSource
     DataSet = qryTaxType
-    Left = 194
-    Top = 240
+    Left = 186
+    Top = 149
   end
   object qryBillType: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1731,23 +1727,23 @@ object frmFeeNew: TfrmFeeNew
           BandType = 4
           LayerName = Foreground
         end
-        object ppMemoNotes: TppMemo
+        object ppMemoNotes: TppRichText
           DesignLayer = ppDesignLayer1
           UserName = 'MemoNotes'
-          Border.mmPadding = 0
-          Caption = 'MemoNotes'
-          CharWrap = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 9
           Font.Style = []
+          Border.mmPadding = 0
+          Caption = 'MemoNotes'
+          ExportRTFAsBitmap = False
           RemoveEmptyLines = False
           Stretch = True
           Transparent = True
-          mmHeight = 3969
-          mmLeft = 34662
-          mmTop = 43881
+          mmHeight = 3938
+          mmLeft = 34660
+          mmTop = 43920
           mmWidth = 142611
           BandType = 4
           LayerName = Foreground
@@ -1755,7 +1751,6 @@ object frmFeeNew: TfrmFeeNew
           mmOverFlowOffset = 0
           mmStopPosition = 0
           mmMinHeight = 0
-          mmLeading = 0
         end
       end
     end

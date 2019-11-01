@@ -88,7 +88,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Width = 558
     Height = 593
     TabOrder = 5
-    Properties.ActivePage = tsClient
+    Properties.ActivePage = tsMatterData
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pcPagesChange
@@ -1145,10 +1145,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             'nance->Options->Display Names tab.'
           Caption = 'Custom Address'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label16: TLabel
             Left = 53
             Top = 24
@@ -2699,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43753.419444675930000000
-        Time = 43753.419444675930000000
+        Date = 43768.419444675930000000
+        Time = 43768.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -3070,10 +3066,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
       Caption = 'Creditor'
       ImageIndex = 7
       OnShow = tsCreditorShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label13: TLabel
         Left = 36
         Top = 84
@@ -3149,10 +3141,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsCustomData: TcxTabSheet
       Caption = 'Custom Data'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object vtCustomData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3193,17 +3181,13 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Options = [coEnabled, coParentBidiMode, coParentColor, coResizable, coVisible, coAllowFocus]
             Position = 1
             Text = 'Value'
-            Width = 370
+            Width = 366
           end>
       end
     end
     object tsMatterData: TcxTabSheet
       Caption = 'Matter Data'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object vtMatterData: TVirtualStringTree
         Left = 0
         Top = 0
@@ -3231,6 +3215,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         OnPaintText = vtCustomDataPaintText
         OnGetNodeDataSize = vtCustomDataGetNodeDataSize
         OnNewText = vtCustomDataNewText
+        ExplicitTop = 4
         Columns = <
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
@@ -3242,7 +3227,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
             Position = 1
             Text = 'Value'
-            Width = 400
+            Width = 396
           end>
       end
     end
@@ -3304,10 +3289,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tsEventList: TcxTabSheet
       Caption = 'Events'
       ImageIndex = 11
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object grdEventList: TcxGrid
         Left = 0
         Top = 0
