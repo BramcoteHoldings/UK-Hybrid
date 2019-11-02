@@ -740,8 +740,7 @@ object frmTimeSheet: TfrmTimeSheet
         object tvFeeTmpNewNOTES: TcxGridDBColumn
           Caption = 'Notes'
           DataBinding.FieldName = 'NOTES'
-          PropertiesClassName = 'TcxRichEditProperties'
-          Properties.StreamModes = [resmTextIzed]
+          PropertiesClassName = 'TcxMemoProperties'
           Width = 104
         end
         object tvFeeTmpNewITEMS: TcxGridDBColumn

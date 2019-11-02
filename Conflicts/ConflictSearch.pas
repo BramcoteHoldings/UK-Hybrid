@@ -424,7 +424,7 @@ end;
 
 class procedure TfrmConflictSearch.ShowConflictSearch(AConflictText: String);
 begin
-  frmConflictSearch := TFrmConflictSearch.Create(nil);
+  frmConflictSearch := TFrmConflictSearch.Create(Application);
   frmConflictSearch.edtConflictSearch.Text := AConflictText;
 
   frmConflictSearch.Show;
@@ -876,7 +876,7 @@ procedure TfrmConflictSearch.DisplayNewPhoneBookDialog;
 var
   frmPBNew: TfrmPhoneBookNew;
 begin
-  frmPBNew := TfrmPhoneBookNew.Create(frmDesktop);
+  frmPBNew := TfrmPhoneBookNew.Create(Application);
   try
     frmPBNew.Tag := IDXCLIENTNEW;
     frmPBNew.NewClient := True;

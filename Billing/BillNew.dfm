@@ -1280,13 +1280,7 @@ object frmInvoice: TfrmInvoice
       object tvBillItemsDESCR: TcxGridDBColumn
         Caption = 'Description'
         DataBinding.FieldName = 'DESCR'
-        PropertiesClassName = 'TcxButtonEditProperties'
-        Properties.Buttons = <
-          item
-            Default = True
-            Kind = bkEllipsis
-          end>
-        Properties.OnButtonClick = tvBillItemsDESCRPropertiesButtonClick
+        PropertiesClassName = 'TcxRichEditProperties'
         MinWidth = 18
         Options.Editing = False
         Options.Focusing = False

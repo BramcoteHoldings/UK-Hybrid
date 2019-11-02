@@ -1384,7 +1384,7 @@ begin
 
    try
       if dmAxiom.uniInsight.InTransaction then
-         dmAxiom.uniInsight.Commit;
+         dmAxiom.uniInsight.Rollback;
       dmAxiom.uniInsight.StartTransaction;
       if(MasterNName = 0) then
          if(not CheckhasGroup()) then
@@ -3080,7 +3080,7 @@ begin
           begin
             qTmp2.SQL.Add('INSERT INTO fieldtypelink');
             qTmp2.SQL.Add(' (nunique, nunique2, linktable, fieldname, textvalue, datevalue, modified, numbervalue)');
-            qTmp2.SQL.Add(' VALUES (:nunique, :nunique2, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue, nname, nmatter)');
+            qTmp2.SQL.Add(' VALUES (:nunique, :nunique2, :linktable, :fieldname, :textvalue, :datevalue, SYSDATE, :numbervalue, :nname, :nmatter)');
           end else
           begin
             qTmp2.SQL.Add('UPDATE fieldtypelink SET');

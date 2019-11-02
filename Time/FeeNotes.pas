@@ -13,7 +13,7 @@ uses
   cxDataStorage, cxNavigator, cxDBData, cxGridLevel, cxClasses,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxGroupBox, cxCurrencyEdit, cxCheckBox,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 type
   TfrmFeeNotes = class(TForm)
@@ -541,7 +541,7 @@ begin
          Bitmap:= TBitmap.Create;
          if tvFeesSELECTED.Tag = 0 then
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+            Bitmap.LoadFromFile('.\images\CHECKBOXUNTICK.bmp');        //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
             AColumn.HeaderGlyph.Assign(Bitmap);
             AColumn.Tag := 1;
             GV.ViewData.Records[0].Focused := True;
@@ -557,7 +557,7 @@ begin
          end
          else
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+            Bitmap.LoadFromFile('.\images\checkboxtick.bmp');        //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
             AColumn.HeaderGlyph.Assign(Bitmap);
             AColumn.Tag := 0;
             GV.ViewData.Records[0].Focused := True;

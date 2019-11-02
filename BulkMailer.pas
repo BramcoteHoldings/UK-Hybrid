@@ -1434,7 +1434,7 @@ begin
                '   AND nvl(ap_email_matter, ap_email) IS NOT NULL  '+
                '   and ph.nname = nmemo.nbill_to  '+
                '   and nmemo.nmatter = m.nmatter '+
-               '   and trunc(nmemo.dispatched) < trunc(sysdate) - 31 '+
+               '   and trunc(nmemo.dispatched) < trunc(sysdate) - nvl(:NumOfDays, 0) '+
                'ORDER BY 2';
    tvEmailsREFNO.Visible := True;
    PopulateGrid;

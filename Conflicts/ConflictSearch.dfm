@@ -397,6 +397,10 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Filter'
       ImageIndex = 1
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1280
         611)

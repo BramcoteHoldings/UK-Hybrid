@@ -1,9 +1,10 @@
 object frmReports: TfrmReports
   Left = 399
   Top = 200
+  AutoSize = True
   Caption = 'Management Reports'
-  ClientHeight = 654
-  ClientWidth = 1027
+  ClientHeight = 691
+  ClientWidth = 1301
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,260 +18,73 @@ object frmReports: TfrmReports
   OnShow = FormShow
   PixelsPerInch = 106
   TextHeight = 15
-  object Panel1: TPanel
-    Left = 0
-    Top = 0
-    Width = 703
-    Height = 654
-    Align = alClient
-    TabOrder = 0
-    object dbgrReports: TcxGrid
-      Left = 1
-      Top = 1
-      Width = 701
-      Height = 652
-      Align = alClient
-      TabOrder = 0
-      LookAndFeel.NativeStyle = True
-      RootLevelOptions.DetailTabsPosition = dtpTop
-      OnActiveTabChanged = dbgrReportsActiveTabChanged
-      object tvReports: TcxGridDBTableView
-        OnDblClick = dbgrReportsDblClick
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsReportsAll
-        DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        FilterRow.SeparatorWidth = 7
-        FixedDataRows.SeparatorWidth = 7
-        NewItemRow.SeparatorWidth = 7
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.PullFocusing = True
-        OptionsCustomize.ColumnFiltering = False
-        OptionsData.Inserting = False
-        OptionsSelection.CellSelect = False
-        OptionsSelection.HideSelection = True
-        OptionsView.CellEndEllipsis = True
-        OptionsView.NavigatorOffset = 58
-        OptionsView.ColumnAutoWidth = True
-        OptionsView.GroupByBox = False
-        OptionsView.HeaderEndEllipsis = True
-        OptionsView.Indicator = True
-        OptionsView.IndicatorWidth = 14
-        Preview.LeftIndent = 23
-        Preview.RightIndent = 6
-        object tvReportsNAME: TcxGridDBColumn
-          Caption = 'Report Name'
-          DataBinding.FieldName = 'NAME'
-          MinWidth = 23
-          Width = 470
-        end
-        object tvReportsACCESSLEVEL: TcxGridDBColumn
-          Caption = 'Security Level'
-          DataBinding.FieldName = 'ACCESSLEVEL'
-          MinWidth = 104
-          Options.HorzSizing = False
-          Options.Moving = False
-          Width = 104
-        end
-        object tvReportsFREQUENCY: TcxGridDBColumn
-          Caption = 'Frequency'
-          DataBinding.FieldName = 'FREQUENCY'
-          MinWidth = 74
-        end
-      end
-      object tvReportsMonthly: TcxGridDBTableView
-        OnDblClick = dbgrReportsDblClick
-        Navigator.Buttons.CustomButtons = <>
-        OnCellClick = tvReportsMonthlyCellClick
-        DataController.DataSource = dsReportsMonth
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        FilterRow.SeparatorWidth = 7
-        FixedDataRows.SeparatorWidth = 7
-        NewItemRow.SeparatorWidth = 7
-        OptionsCustomize.ColumnMoving = False
-        OptionsData.Deleting = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
-        OptionsSelection.CellSelect = False
-        OptionsView.NavigatorOffset = 58
-        OptionsView.ColumnAutoWidth = True
-        OptionsView.GroupByBox = False
-        OptionsView.IndicatorWidth = 14
-        Preview.LeftIndent = 23
-        Preview.RightIndent = 6
-        object tvReportsMonthlyNAME: TcxGridDBColumn
-          Caption = 'Report'
-          DataBinding.FieldName = 'NAME'
-          MinWidth = 23
-          Width = 429
-        end
-        object tvReportsMonthlyACCESSLEVEL: TcxGridDBColumn
-          Caption = 'Access Level'
-          DataBinding.FieldName = 'ACCESSLEVEL'
-          MinWidth = 23
-          Width = 160
-        end
-      end
-      object tvReportsQuarterly: TcxGridDBTableView
-        OnDblClick = dbgrReportsDblClick
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsReportsQuarterly
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        FilterRow.SeparatorWidth = 7
-        FixedDataRows.SeparatorWidth = 7
-        NewItemRow.SeparatorWidth = 7
-        OptionsData.Deleting = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
-        OptionsSelection.CellSelect = False
-        OptionsView.NavigatorOffset = 58
-        OptionsView.ColumnAutoWidth = True
-        OptionsView.GroupByBox = False
-        OptionsView.IndicatorWidth = 14
-        Preview.LeftIndent = 23
-        Preview.RightIndent = 6
-        object tvReportsQuarterlyNAME: TcxGridDBColumn
-          Caption = 'Report'
-          DataBinding.FieldName = 'NAME'
-          MinWidth = 23
-        end
-        object tvReportsQuarterlyACCESSLEVEL: TcxGridDBColumn
-          Caption = 'Access Level'
-          DataBinding.FieldName = 'ACCESSLEVEL'
-          MinWidth = 23
-        end
-      end
-      object tvReportsWeekly: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsReportsWeekly
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        FilterRow.SeparatorWidth = 7
-        FixedDataRows.SeparatorWidth = 7
-        NewItemRow.SeparatorWidth = 7
-        OptionsView.NavigatorOffset = 58
-        OptionsView.GroupByBox = False
-        OptionsView.IndicatorWidth = 14
-        Preview.LeftIndent = 23
-        Preview.RightIndent = 6
-        object tvReportsWeeklyNAME: TcxGridDBColumn
-          Caption = 'Report'
-          DataBinding.FieldName = 'NAME'
-          MinWidth = 23
-        end
-        object tvReportsWeeklyACCESSLEVEL: TcxGridDBColumn
-          Caption = 'Access Level'
-          DataBinding.FieldName = 'ACCESSLEVEL'
-          MinWidth = 23
-        end
-      end
-      object tvReportsNotUsed: TcxGridDBTableView
-        Navigator.Buttons.CustomButtons = <>
-        DataController.DataSource = dsNotUsed
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsData.Editing = False
-        OptionsView.CellEndEllipsis = True
-        OptionsView.ColumnAutoWidth = True
-        OptionsView.GroupByBox = False
-        object tvReportsNotUsedNAME: TcxGridDBColumn
-          Caption = 'Report'
-          DataBinding.FieldName = 'NAME'
-        end
-        object tvReportsNotUsedACCESSLEVEL: TcxGridDBColumn
-          Caption = 'Access Level'
-          DataBinding.FieldName = 'ACCESSLEVEL'
-        end
-      end
-      object lvReports: TcxGridLevel
-        Caption = 'All Reports'
-        GridView = tvReports
-      end
-      object lvReportsMonthly: TcxGridLevel
-        Caption = 'Monthly Reports'
-        GridView = tvReportsMonthly
-      end
-      object lvReportsQuarterly: TcxGridLevel
-        Caption = 'Quarterly Reports'
-        GridView = tvReportsQuarterly
-      end
-      object lvReportsWeekly: TcxGridLevel
-        Caption = 'Weekly'
-        GridView = tvReportsWeekly
-      end
-      object lvReportsNotUsed: TcxGridLevel
-        Caption = 'Not Used'
-        GridView = tvReportsNotUsed
-      end
-    end
-  end
   object Panel2: TPanel
-    Left = 703
+    Left = 1003
     Top = 0
-    Width = 324
-    Height = 654
+    Width = 298
+    Height = 691
     Align = alRight
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitLeft = 0
+    ExplicitHeight = 657
     DesignSize = (
-      324
-      654)
+      298
+      691)
     object Label1: TLabel
       Left = 10
       Top = 7
       Width = 98
       Height = 15
-      Anchors = [akTop, akRight]
+      AutoSize = False
       Caption = 'Report Description'
     end
     object Label3: TLabel
-      Left = 9
-      Top = 606
-      Width = 78
+      Left = 5
+      Top = 643
+      Width = 83
       Height = 15
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akBottom]
+      AutoSize = False
       Caption = '&Jump to report'
       FocusControl = tbJumpTo
+      ExplicitTop = 609
     end
     object Label4: TLabel
-      Left = 9
-      Top = 561
-      Width = 105
+      Left = 6
+      Top = 598
+      Width = 120
       Height = 15
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akBottom]
+      AutoSize = False
       Caption = '&Filter on description'
       FocusControl = edtSearch
+      ExplicitTop = 564
     end
     object btnAddReport: TBitBtn
-      Left = 203
-      Top = 498
+      Left = 180
+      Top = 535
       Width = 103
       Height = 27
       Anchors = [akRight, akBottom]
       Caption = 'Add Report'
       TabOrder = 0
       OnClick = btnAddReportClick
+      ExplicitTop = 501
     end
     object btnEditReport: TBitBtn
-      Left = 203
-      Top = 530
+      Left = 180
+      Top = 567
       Width = 103
       Height = 26
       Anchors = [akRight, akBottom]
       Caption = 'Edit Report'
       TabOrder = 1
       OnClick = btnEditReportClick
+      ExplicitTop = 533
     end
     object btnExit: TBitBtn
-      Left = 203
-      Top = 620
+      Left = 180
+      Top = 657
       Width = 103
       Height = 26
       Anchors = [akRight, akBottom]
@@ -313,10 +127,11 @@ object frmReports: TfrmReports
         FD5DE1E1F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
       TabOrder = 2
       OnClick = btnExitClick
+      ExplicitTop = 623
     end
     object btnPrint: TBitBtn
-      Left = 203
-      Top = 590
+      Left = 180
+      Top = 627
       Width = 103
       Height = 26
       Anchors = [akRight, akBottom]
@@ -338,10 +153,11 @@ object frmReports: TfrmReports
       NumGlyphs = 2
       TabOrder = 3
       OnClick = btnPrintClick
+      ExplicitTop = 593
     end
     object btnSnapshot: TBitBtn
-      Left = 203
-      Top = 560
+      Left = 180
+      Top = 597
       Width = 103
       Height = 26
       Anchors = [akRight, akBottom]
@@ -357,21 +173,23 @@ object frmReports: TfrmReports
         0088888888700788888888888888888888888888888888888888}
       TabOrder = 4
       OnClick = btnSnapshotClick
+      ExplicitTop = 563
     end
     object edtSearch: TEdit
-      Left = 9
-      Top = 577
+      Left = 6
+      Top = 614
       Width = 131
       Height = 23
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akBottom]
       TabOrder = 5
       OnChange = edtSearchChange
+      ExplicitTop = 580
     end
     object mmoDesc: TDBRichEdit
-      Left = 9
-      Top = 27
-      Width = 297
-      Height = 461
+      Left = 10
+      Top = 28
+      Width = 273
+      Height = 498
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataField = 'DESCR'
       DataSource = dsReportsAll
@@ -382,15 +200,208 @@ object frmReports: TfrmReports
       Font.Style = []
       TabOrder = 6
       Zoom = 100
+      ExplicitHeight = 464
     end
     object tbJumpTo: TEdit
-      Left = 9
-      Top = 623
+      Left = 6
+      Top = 660
       Width = 131
       Height = 23
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akBottom]
       TabOrder = 7
       OnChange = tbJumpToChange
+      ExplicitTop = 626
+    end
+  end
+  object dbgrReports: TcxGrid
+    Left = 0
+    Top = 0
+    Width = 1003
+    Height = 691
+    Align = alClient
+    TabOrder = 1
+    LookAndFeel.NativeStyle = True
+    RootLevelOptions.DetailTabsPosition = dtpTop
+    OnActiveTabChanged = dbgrReportsActiveTabChanged
+    ExplicitLeft = -4
+    ExplicitTop = 80
+    ExplicitWidth = 727
+    ExplicitHeight = 655
+    object tvReports: TcxGridDBTableView
+      OnDblClick = dbgrReportsDblClick
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsReportsAll
+      DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.SeparatorWidth = 7
+      FixedDataRows.SeparatorWidth = 7
+      NewItemRow.SeparatorWidth = 7
+      OptionsBehavior.FocusCellOnTab = True
+      OptionsBehavior.PullFocusing = True
+      OptionsCustomize.ColumnFiltering = False
+      OptionsData.Inserting = False
+      OptionsSelection.CellSelect = False
+      OptionsSelection.HideSelection = True
+      OptionsView.CellEndEllipsis = True
+      OptionsView.NavigatorOffset = 58
+      OptionsView.ColumnAutoWidth = True
+      OptionsView.GroupByBox = False
+      OptionsView.HeaderEndEllipsis = True
+      OptionsView.Indicator = True
+      OptionsView.IndicatorWidth = 14
+      Preview.LeftIndent = 23
+      Preview.RightIndent = 6
+      object tvReportsNAME: TcxGridDBColumn
+        Caption = 'Report Name'
+        DataBinding.FieldName = 'NAME'
+        MinWidth = 23
+        Width = 470
+      end
+      object tvReportsACCESSLEVEL: TcxGridDBColumn
+        Caption = 'Security Level'
+        DataBinding.FieldName = 'ACCESSLEVEL'
+        MinWidth = 104
+        Options.HorzSizing = False
+        Options.Moving = False
+        Width = 104
+      end
+      object tvReportsFREQUENCY: TcxGridDBColumn
+        Caption = 'Frequency'
+        DataBinding.FieldName = 'FREQUENCY'
+        MinWidth = 74
+      end
+    end
+    object tvReportsMonthly: TcxGridDBTableView
+      OnDblClick = dbgrReportsDblClick
+      Navigator.Buttons.CustomButtons = <>
+      OnCellClick = tvReportsMonthlyCellClick
+      DataController.DataSource = dsReportsMonth
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.SeparatorWidth = 7
+      FixedDataRows.SeparatorWidth = 7
+      NewItemRow.SeparatorWidth = 7
+      OptionsCustomize.ColumnMoving = False
+      OptionsData.Deleting = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsSelection.CellSelect = False
+      OptionsView.NavigatorOffset = 58
+      OptionsView.ColumnAutoWidth = True
+      OptionsView.GroupByBox = False
+      OptionsView.IndicatorWidth = 14
+      Preview.LeftIndent = 23
+      Preview.RightIndent = 6
+      object tvReportsMonthlyNAME: TcxGridDBColumn
+        Caption = 'Report'
+        DataBinding.FieldName = 'NAME'
+        MinWidth = 23
+        Width = 429
+      end
+      object tvReportsMonthlyACCESSLEVEL: TcxGridDBColumn
+        Caption = 'Access Level'
+        DataBinding.FieldName = 'ACCESSLEVEL'
+        MinWidth = 23
+        Width = 160
+      end
+    end
+    object tvReportsQuarterly: TcxGridDBTableView
+      OnDblClick = dbgrReportsDblClick
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsReportsQuarterly
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.SeparatorWidth = 7
+      FixedDataRows.SeparatorWidth = 7
+      NewItemRow.SeparatorWidth = 7
+      OptionsData.Deleting = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsSelection.CellSelect = False
+      OptionsView.NavigatorOffset = 58
+      OptionsView.ColumnAutoWidth = True
+      OptionsView.GroupByBox = False
+      OptionsView.IndicatorWidth = 14
+      Preview.LeftIndent = 23
+      Preview.RightIndent = 6
+      object tvReportsQuarterlyNAME: TcxGridDBColumn
+        Caption = 'Report'
+        DataBinding.FieldName = 'NAME'
+        MinWidth = 23
+      end
+      object tvReportsQuarterlyACCESSLEVEL: TcxGridDBColumn
+        Caption = 'Access Level'
+        DataBinding.FieldName = 'ACCESSLEVEL'
+        MinWidth = 23
+      end
+    end
+    object tvReportsWeekly: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsReportsWeekly
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.SeparatorWidth = 7
+      FixedDataRows.SeparatorWidth = 7
+      NewItemRow.SeparatorWidth = 7
+      OptionsView.NavigatorOffset = 58
+      OptionsView.GroupByBox = False
+      OptionsView.IndicatorWidth = 14
+      Preview.LeftIndent = 23
+      Preview.RightIndent = 6
+      object tvReportsWeeklyNAME: TcxGridDBColumn
+        Caption = 'Report'
+        DataBinding.FieldName = 'NAME'
+        MinWidth = 23
+      end
+      object tvReportsWeeklyACCESSLEVEL: TcxGridDBColumn
+        Caption = 'Access Level'
+        DataBinding.FieldName = 'ACCESSLEVEL'
+        MinWidth = 23
+      end
+    end
+    object tvReportsNotUsed: TcxGridDBTableView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsNotUsed
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsData.Editing = False
+      OptionsView.CellEndEllipsis = True
+      OptionsView.ColumnAutoWidth = True
+      OptionsView.GroupByBox = False
+      object tvReportsNotUsedNAME: TcxGridDBColumn
+        Caption = 'Report'
+        DataBinding.FieldName = 'NAME'
+      end
+      object tvReportsNotUsedACCESSLEVEL: TcxGridDBColumn
+        Caption = 'Access Level'
+        DataBinding.FieldName = 'ACCESSLEVEL'
+      end
+    end
+    object lvReports: TcxGridLevel
+      Caption = 'All Reports'
+      GridView = tvReports
+    end
+    object lvReportsMonthly: TcxGridLevel
+      Caption = 'Monthly Reports'
+      GridView = tvReportsMonthly
+    end
+    object lvReportsQuarterly: TcxGridLevel
+      Caption = 'Quarterly Reports'
+      GridView = tvReportsQuarterly
+    end
+    object lvReportsWeekly: TcxGridLevel
+      Caption = 'Weekly'
+      GridView = tvReportsWeekly
+    end
+    object lvReportsNotUsed: TcxGridLevel
+      Caption = 'Not Used'
+      GridView = tvReportsNotUsed
     end
   end
   object dsReportsAll: TUniDataSource

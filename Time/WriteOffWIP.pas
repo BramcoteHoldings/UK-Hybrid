@@ -10,7 +10,7 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxContainer, dxBar, Vcl.StdCtrls, cxTextEdit, cxMaskEdit, cxButtonEdit,
   DBAccess, Uni, MemDS, cxCheckBox, cxGroupBox, cxRadioGroup,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
 
 const
   UM_CHECK = WM_USER + 10000;
@@ -247,7 +247,7 @@ begin
          Bitmap:= TBitmap.Create;
          if tvFeeListSelect.Tag = 0 then
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
+            Bitmap.LoadFromFile('.\images\checkboxuntick.bmp');    //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXUNTICK');
             tvFeeListSelect.HeaderGlyph.Assign(Bitmap);
             tvFeeListSelect.Tag := 1;
             GV.ViewData.Records[0].Focused := True;
@@ -263,7 +263,7 @@ begin
          end
          else
          begin
-            Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
+            Bitmap.LoadFromFile('.\images\checkboxtick.bmp');        //Bitmap.LoadFromResourceName(HInstance,'CHECKBOXTICK');
             tvFeeListSelect.HeaderGlyph.Assign(Bitmap);
             tvFeeListSelect.Tag := 0;
             GV.ViewData.Records[0].Focused := True;

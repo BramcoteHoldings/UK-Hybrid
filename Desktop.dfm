@@ -1,8 +1,8 @@
 object frmDesktop: TfrmDesktop
   Left = 347
   Top = 226
-  Width = 1280
-  Height = 758
+  Width = 1358
+  Height = 798
   AlphaBlend = True
   AutoScroll = True
   Caption = 'Desktop'
@@ -35,8 +35,8 @@ object frmDesktop: TfrmDesktop
   end
   object StatusBar: TdxStatusBar
     Left = 0
-    Top = 692
-    Width = 1264
+    Top = 732
+    Width = 1342
     Height = 27
     Panels = <
       item
@@ -88,7 +88,7 @@ object frmDesktop: TfrmDesktop
     ParentFont = True
     OnDblClick = sbarStatusDblClick
     object dxStatusBar1Container1: TdxStatusBarContainerControl
-      Left = 229
+      Left = 250
       Top = 2
       Width = 242
       Height = 25
@@ -112,14 +112,14 @@ object frmDesktop: TfrmDesktop
       end
     end
     object StatusBarContainer5: TdxStatusBarContainerControl
-      Left = 1082
+      Left = 1150
       Top = 2
-      Width = 114
+      Width = 124
       Height = 25
       object pnlTimeTrack: TPanel
         Left = 0
         Top = 0
-        Width = 114
+        Width = 124
         Height = 25
         Align = alClient
         ShowCaption = False
@@ -129,7 +129,7 @@ object frmDesktop: TfrmDesktop
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 106
+          Width = 116
           Height = 17
           Align = alClient
           Alignment = taCenter
@@ -149,41 +149,39 @@ object frmDesktop: TfrmDesktop
   object pagMainControl: TcxPageControl
     Left = 0
     Top = 143
-    Width = 1264
-    Height = 549
+    Width = 1342
+    Height = 589
     Align = alClient
     TabOrder = 2
     Properties.ActivePage = tsAxiomNew
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 545
+    ClientRectBottom = 585
     ClientRectLeft = 4
-    ClientRectRight = 1260
+    ClientRectRight = 1338
     ClientRectTop = 4
     object tsAxiomNew: TcxTabSheet
       Caption = 'tsAxiomNew'
       ImageIndex = 0
       TabVisible = False
-      ExplicitHeight = 572
       DesignSize = (
-        1256
-        541)
+        1334
+        581)
       object dxDockSite1: TdxDockSite
         Left = 0
         Top = 0
-        Width = 1256
-        Height = 541
+        Width = 1334
+        Height = 581
         ManagerFont = False
         ParentFont = True
         Align = alClient
-        ExplicitHeight = 572
         DockingType = 5
-        OriginalWidth = 1256
-        OriginalHeight = 541
+        OriginalWidth = 1334
+        OriginalHeight = 581
         object dxLayoutDockSite2: TdxLayoutDockSite
           Left = 0
           Top = 0
-          Width = 1198
-          Height = 541
+          Width = 1276
+          Height = 581
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -192,15 +190,14 @@ object frmDesktop: TfrmDesktop
           ManagerFont = False
           ParentShowHint = False
           ShowHint = False
-          ExplicitHeight = 572
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
           object dxLayoutDockSite1: TdxLayoutDockSite
             Left = 0
             Top = 0
-            Width = 1198
-            Height = 541
+            Width = 1276
+            Height = 581
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -213,9 +210,8 @@ object frmDesktop: TfrmDesktop
             object dxLayoutDockSite3: TdxLayoutDockSite
               Left = 0
               Top = 0
-              Width = 1198
-              Height = 541
-              ExplicitHeight = 572
+              Width = 1276
+              Height = 581
               DockingType = 0
               OriginalWidth = 265
               OriginalHeight = 176
@@ -223,8 +219,8 @@ object frmDesktop: TfrmDesktop
             object dxDockPanel1: TdxDockPanel
               Left = 0
               Top = 0
-              Width = 1198
-              Height = 541
+              Width = 1276
+              Height = 581
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
@@ -237,15 +233,14 @@ object frmDesktop: TfrmDesktop
               CustomCaptionButtons.Buttons = <>
               ShowCaption = False
               TabsProperties.CustomButtons.Buttons = <>
-              ExplicitHeight = 572
               DockingType = 0
               OriginalWidth = 163
               OriginalHeight = 124
               object pnlNewDesktop: TPanel
                 Left = 0
                 Top = 0
-                Width = 1194
-                Height = 537
+                Width = 1272
+                Height = 577
                 Align = alClient
                 AutoSize = True
                 Caption = 'pnlNewDesktop'
@@ -256,12 +251,11 @@ object frmDesktop: TfrmDesktop
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                ExplicitHeight = 568
                 object pageForms: TcxPageControl
                   Left = 1
                   Top = 1
-                  Width = 1192
-                  Height = 535
+                  Width = 1270
+                  Height = 575
                   Align = alClient
                   DockSite = True
                   DragKind = dkDock
@@ -292,9 +286,8 @@ object frmDesktop: TfrmDesktop
                   OnPageChanging = pageFormsPageChanging
                   OnStartDrag = pageFormsStartDrag
                   OnUnDock = pageFormsUnDock
-                  ExplicitHeight = 566
-                  ClientRectBottom = 535
-                  ClientRectRight = 1192
+                  ClientRectBottom = 575
+                  ClientRectRight = 1270
                   ClientRectTop = 0
                 end
               end
@@ -324,7 +317,7 @@ object frmDesktop: TfrmDesktop
             OriginalHeight = 124
             object Panel2: TPanel
               Left = 0
-              Top = -32
+              Top = -20
               Width = 378
               Height = 32
               Align = alBottom
@@ -378,7 +371,6 @@ object frmDesktop: TfrmDesktop
                 TabOrder = 2
                 Visible = False
                 OnBeforeEditing = TaskSchedulerBeforeEditing
-                Selection = 1
                 Splitters = {
                   180000006E0000008E0000007200000014000000010000001800000010000000}
                 StoredClientBounds = {01000000010000008E00000010000000}
@@ -1292,8 +1284,8 @@ object frmDesktop: TfrmDesktop
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1256
-        Height = 541
+        Width = 1334
+        Height = 581
         Align = alClient
         BevelOuter = bvNone
         Caption = 'Panel1'
@@ -1301,7 +1293,7 @@ object frmDesktop: TfrmDesktop
         object lvClassicDesktop: TListView
           Left = 0
           Top = 3
-          Width = 1256
+          Width = 1334
           Height = 216
           Align = alTop
           Color = clTeal
@@ -1335,8 +1327,8 @@ object frmDesktop: TfrmDesktop
         object lvClassicSnapshots: TListView
           Left = 0
           Top = 227
-          Width = 1256
-          Height = 314
+          Width = 1334
+          Height = 354
           Align = alClient
           Color = clTeal
           Columns = <
@@ -1367,7 +1359,7 @@ object frmDesktop: TfrmDesktop
         object cxSplitter1: TcxSplitter
           Left = 0
           Top = 219
-          Width = 1256
+          Width = 1334
           Height = 8
           HotZoneClassName = 'TcxXPTaskBarStyle'
           AlignSplitter = salTop
@@ -1379,7 +1371,7 @@ object frmDesktop: TfrmDesktop
         object dxBarDockControl2: TdxBarDockControl
           Left = 0
           Top = 0
-          Width = 1256
+          Width = 1334
           Align = dalTop
           BarManager = dxBarManager
         end
@@ -1389,7 +1381,7 @@ object frmDesktop: TfrmDesktop
   object RibbonMain: TdxRibbon
     Left = 0
     Top = 0
-    Width = 1264
+    Width = 1342
     Height = 143
     ApplicationButton.Menu = dxBarApplicationMenu
     BarManager = dxBarManager
@@ -10550,7 +10542,7 @@ object frmDesktop: TfrmDesktop
     object barDocCenter: TdxBar
       Caption = 'Document Centre'
       CaptionButtons = <>
-      DockedLeft = 856
+      DockedLeft = 857
       DockedTop = 0
       FloatLeft = 1241
       FloatTop = 8
@@ -10575,7 +10567,7 @@ object frmDesktop: TfrmDesktop
     object BarConflicts: TdxBar
       Caption = 'Conflicts'
       CaptionButtons = <>
-      DockedLeft = 956
+      DockedLeft = 957
       DockedTop = 0
       FloatLeft = 1133
       FloatTop = 8
