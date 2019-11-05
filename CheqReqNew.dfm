@@ -219,7 +219,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblDebugStencilID: TLabel
     Left = 239
     Top = 500
-    Width = 120
+    Width = 121
     Height = 15
     Margins.Left = 2
     Margins.Top = 2
@@ -427,6 +427,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Properties.DropDownAutoSize = True
     Properties.DropDownRows = 10
     Properties.DropDownWidth = 200
+    Properties.ImmediatePost = True
     Properties.KeyFieldNames = 'ACCT'
     Properties.ListColumns = <
       item
@@ -549,7 +550,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 14
-    Width = 175
+    Width = 173
   end
   object cbTaxType: TcxComboBox
     Left = 114
@@ -971,7 +972,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43768.6803881944d
+    EditValue = 43774.7470179977d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1432,7 +1433,7 @@ object frmCheqReqNew: TfrmCheqReqNew
         Value = nil
       end>
   end
-  object qryInv: TUniQuery
+  object qryInvBilled: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
@@ -1455,8 +1456,30 @@ object frmCheqReqNew: TfrmCheqReqNew
       end>
   end
   object dsInv: TUniDataSource
-    DataSet = qryInv
+    DataSet = qryInvBilled
     Left = 24
     Top = 312
+  end
+  object qryInvUnbilled: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      
+        'Select  a.ninvoice, a.descr, i.refno, i.owing, i.creditor, min(n' +
+        'alloc) as nalloc'
+      'from alloc a '
+      'inner join invoice i on a.ninvoice = i.ninvoice'
+      'where a.nmatter = :nmatter'
+      'and i.owing <> 0'
+      'and a.nmemo is null'
+      'and a.billed = '#39'N'#39
+      'group by a.ninvoice, a.descr, i.refno, i.owing, i.creditor')
+    Left = 64
+    Top = 336
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'nmatter'
+        Value = nil
+      end>
   end
 end
