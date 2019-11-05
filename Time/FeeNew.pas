@@ -620,7 +620,7 @@ begin
 
    if (edMatterFind.Text <> '') then
    begin
-      if ((MatterIsCurrent(edMatterFind.Text)) and (IsMatterArchived(edMatterFind.Text) = False)) then
+      if ((MatterIsCurrent(edMatterFind.Text) = False) and (IsMatterArchived(edMatterFind.Text) = True)) then
          sTmp := sTmp + '       Matter: ' + edMatterFind.Text + ' - not found or is closed' + #13;
    end;
 

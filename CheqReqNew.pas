@@ -89,9 +89,10 @@ type
     qryChequeRange: TUniQuery;
     lblDebugStencilID: TLabel;
     cmbInvoice: TcxLookupComboBox;
-    qryInv: TUniQuery;
+    qryInvBilled: TUniQuery;
     dsInv: TUniDataSource;
     chkPreviewPDF: TcxCheckBox;
+    qryInvUnbilled: TUniQuery;
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure cbBankChange(Sender: TObject);
@@ -508,6 +509,14 @@ begin
       MsgInfo('Please complete the following Cheque Requisition details before saving:    ' + #13#13 + sTmp);
       bOKtoPost := False;
    end;
+
+   if (IsValidMatterForBank(tbFile.Text, cmbBank.EditValue) = False) then
+   begin
+      MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
+      cmbBank.ClearSelection;
+      bOKtoPost := False;
+   end;
+
    result:= bOKtoPost
 end;
 
@@ -593,7 +602,7 @@ begin
          bContinuePosting := False;
       end
       // AES 20/01/2010 cast neAmount.Value to currency
-      else if (cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency ) then
+      else if {(cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and} (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency ) then
       begin
          MsgErr('There are insufficient funds in Trust in order to pay this Creditor Invoice.');
          bContinuePosting := false;
@@ -1251,7 +1260,7 @@ begin
         // no reason to not allow cheqreq to be held
 //        chkHeld.State := cbsUnchecked;
         chkHeld.Checked := dmAxiom.Security.CheqReq.Held.Checked;
-        chkHeld.Enabled := True; //False;
+        chkHeld.Enabled := False;
 
         chkBill.State := cbsUnchecked;
         chkBill.Enabled := False;
@@ -1900,18 +1909,32 @@ begin
    if (tbFile.Text <> '') and (cmbBills.Text <> '') then
    begin
       try
+         dsInv.DataSet := qryInvBilled;
          iNmatter := StrToInt(MatterString(tbFile.Text, 'NMATTER'));
          iNmemo := StrToInt(TableString('NMEMO','REFNO', string(cmbBills.EditValue), 'NMEMO'));
-         qryInv.Close;
+         qryInvBilled.Close;
          //qryBillCrd.ParamByName('NMATTER').AsInteger := iNmatter;
-         qryInv.ParamByName('NMEMO').AsInteger := iNmemo;
+         qryInvBilled.ParamByName('NMEMO').AsInteger := iNmemo;
          //qryBillInv.ParamByName('NMATTER').AsString := MatterString(tbFile.Text, 'NMATTER');
          //qryBillInv.ParamByName('NMEMO').AsString := TableString('NMEMO','REFNO', string(cmbBills.EditValue), 'NMEMO');
-         qryInv.Open;
+         qryInvBilled.Open;
       except
          //
       end;
-   end;
+   end
+   else
+   if (tbFile.Text <> '') and (dmAxiom.qryEntityBank.FieldByName('TRUST').AsString = 'T') then
+   begin
+      try
+         dsInv.DataSet := qryInvUnbilled;
+         qryInvUnbilled.Close;
+         iNmatter := StrToInt(MatterString(tbFile.Text, 'NMATTER'));
+         qryInvUnbilled.ParamByName('NMATTER').AsInteger := iNmatter;
+         qryInvUnbilled.Open;
+      except
+         //
+      end;
+   end
 end;
 
 procedure TfrmCheqReqNew.cmbBillsPropertiesInitPopup(Sender: TObject);
@@ -2122,53 +2145,65 @@ begin
       StatusBar.Panels[1].Text := '';
       if FBankType = 'T' then
       begin
-        tbLedger.Text := '';
-        tbLedger.Enabled := False;
-    //    btnLedger.Enabled := False;
-        tbFile.Enabled := True;
-    //    btnMatter.Enabled := True;
-        edtBillRef.Visible := False;
-        chkFunds.Checked := False;
-        chkFunds.Enabled := False;
-        // changed by AES 26/06/2009
-        // no reason to not allow cheqreq to be held
-        chkHeld.Checked := dmAxiom.Security.CheqReq.Held.Checked;  // State := cbsUnchecked;
-        chkHeld.Enabled := True;  // False;
-
-        chkBill.State := cbsUnchecked;
-        chkBill.Enabled := False;
-        chkDeposit.Visible := (SystemString('DEPOSIT_CHEQ_REQ') = 'Y');
-        cmbBills.visible := True;
-
-
-        if (SystemString('INVOICE_FROM_TRUST') = 'Y') then
+        if (tbFile.Text <> '') then
         begin
-           cmbInvoice.Visible := True;
-           lblInv.Visible := True;
+           if (IsValidMatterForBank(tbFile.Text, cmbBank.EditValue) = False) then
+           begin
+              MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
+              cmbBank.ClearSelection;
+              Exit;
+           end;
+        end
+        else
+        begin
+           tbLedger.Text := '';
+           tbLedger.Enabled := False;
+    //       btnLedger.Enabled := False;
+           tbFile.Enabled := True;
+    //       btnMatter.Enabled := True;
+           edtBillRef.Visible := False;
+           chkFunds.Checked := False;
+           chkFunds.Enabled := False;
+           // changed by AES 26/06/2009
+           // no reason to not allow cheqreq to be held
+           chkHeld.Checked := dmAxiom.Security.CheqReq.Held.Checked;  // State := cbsUnchecked;
+           chkHeld.Enabled := False;
 
-           lblLgr.Visible := False;
-           tbLedger.Visible := False;
+           chkBill.State := cbsUnchecked;
+           chkBill.Enabled := False;
+           chkDeposit.Visible := (SystemString('DEPOSIT_CHEQ_REQ') = 'Y');
+           cmbBills.visible := True;
+
+
+           if (SystemString('INVOICE_FROM_TRUST') = 'Y') then
+           begin
+              cmbInvoice.Visible := True;
+              lblInv.Visible := True;
+
+              lblLgr.Visible := False;
+              tbLedger.Visible := False;
+           end;
+
+		     chkFunds.StyleDisabled.Color := Self.Color;
+           chkHeld.StyleDisabled.Color := Self.Color;
+           chkBill.StyleDisabled.Color := Self.Color;
+           if chkDeposit.Visible then
+             chkDeposit.StyleDisabled.Color := Self.Color;
+           {
+             Instead of hard coding the default tax, we will request it from the
+             TaxDefault table.
+
+             BJ 07/01/2003
+           }
+
+           lsDefaultTax := get_default_gst('ChequeRequisitionTrust');
+
+           if lsDefaultTax = '' then
+             lsDefaultTax := 'NOTAX';
+           cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(lsDefaultTax);
+           if tbFile.Text <> '' then
+               DisplayTrust(MatterString(tbFile.Text, 'NMATTER'));
         end;
-
-		  chkFunds.StyleDisabled.Color := Self.Color;
-        chkHeld.StyleDisabled.Color := Self.Color;
-        chkBill.StyleDisabled.Color := Self.Color;
-        if chkDeposit.Visible then
-          chkDeposit.StyleDisabled.Color := Self.Color;
-        {
-          Instead of hard coding the default tax, we will request it from the
-          TaxDefault table.
-
-          BJ 07/01/2003
-        }
-
-        lsDefaultTax := get_default_gst('ChequeRequisitionTrust');
-
-        if lsDefaultTax = '' then
-          lsDefaultTax := 'NOTAX';
-        cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(lsDefaultTax);
-        if tbFile.Text <> '' then
-            DisplayTrust(MatterString(tbFile.Text, 'NMATTER'));
       end
       else if FBankType = 'C' then
       begin
@@ -2251,54 +2286,65 @@ begin
       StatusBar.Panels[1].Text := '';
       if FBankType = 'T' then
       begin
-        tbLedger.Text := '';
-        tbLedger.Enabled := False;
-    //    btnLedger.Enabled := False;
-        tbFile.Enabled := True;
-    //    btnMatter.Enabled := True;
-        edtBillRef.Visible := False;
-        chkFunds.Checked := False;
-        chkFunds.Enabled := False;
-
-        // changed by AES 26/06/2009
-        // no reason to not allow cheqreq to be held
-        chkHeld.Checked := dmAxiom.Security.CheqReq.Held.Checked; //  State := cbsUnchecked;
-        chkHeld.Enabled := True;   //False;
-
-        chkBill.State := cbsUnchecked;
-        chkBill.Enabled := False;
-        chkDeposit.Visible := (SystemString('DEPOSIT_CHEQ_REQ') = 'Y');
-        cmbBills.visible := True;
-
-
-        if (SystemString('INVOICE_FROM_TRUST') = 'Y') then
+        if (tbFile.Text <> '') then
         begin
-           cmbInvoice.Visible := True;
-           lblInv.Visible := True;
+           if (IsValidMatterForBank(tbFile.Text, cmbBank.EditValue) = False) then
+           begin
+              MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
+              cmbBank.ClearSelection;
+              Exit;
+           end;
+        end
+        else
+        begin
+           tbLedger.Text := '';
+           tbLedger.Enabled := False;
+    //       btnLedger.Enabled := False;
+           tbFile.Enabled := True;
+    //       btnMatter.Enabled := True;
+           edtBillRef.Visible := False;
+           chkFunds.Checked := False;
+           chkFunds.Enabled := False;
 
-           lblLgr.Visible := False;
-           tbLedger.Visible := False;
+           // changed by AES 26/06/2009
+           // no reason to not allow cheqreq to be held
+           chkHeld.Checked := False;  //dmAxiom.Security.CheqReq.Held.Checked; //  State := cbsUnchecked;
+           chkHeld.Enabled := False;
+
+           chkBill.State := cbsUnchecked;
+           chkBill.Enabled := False;
+           chkDeposit.Visible := (SystemString('DEPOSIT_CHEQ_REQ') = 'Y');
+           cmbBills.visible := True;
+
+           if (SystemString('INVOICE_FROM_TRUST') = 'Y') then
+           begin
+              cmbInvoice.Visible := True;
+              lblInv.Visible := True;
+
+              lblLgr.Visible := False;
+              tbLedger.Visible := False;
+           end;
+
+		     chkFunds.StyleDisabled.Color := Self.Color;
+           chkHeld.StyleDisabled.Color := Self.Color;
+           chkBill.StyleDisabled.Color := Self.Color;
+           if chkDeposit.Visible then
+             chkDeposit.StyleDisabled.Color := Self.Color;
+           {
+             Instead of hard coding the default tax, we will request it from the
+             TaxDefault table.
+
+             BJ 07/01/2003
+           }
+
+           lsDefaultTax := get_default_gst('ChequeRequisitionTrust');
+
+           if lsDefaultTax = '' then
+             lsDefaultTax := 'NOTAX';
+           cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(lsDefaultTax);
+           if tbFile.Text <> '' then
+               DisplayTrust(MatterString(tbFile.Text, 'NMATTER'));
         end;
-
-		  chkFunds.StyleDisabled.Color := Self.Color;
-        chkHeld.StyleDisabled.Color := Self.Color;
-        chkBill.StyleDisabled.Color := Self.Color;
-        if chkDeposit.Visible then
-          chkDeposit.StyleDisabled.Color := Self.Color;
-        {
-          Instead of hard coding the default tax, we will request it from the
-          TaxDefault table.
-
-          BJ 07/01/2003
-        }
-
-        lsDefaultTax := get_default_gst('ChequeRequisitionTrust');
-
-        if lsDefaultTax = '' then
-          lsDefaultTax := 'NOTAX';
-        cbTaxType.ItemIndex := cbTaxType.Properties.Items.IndexOf(lsDefaultTax);
-        if tbFile.Text <> '' then
-            DisplayTrust(MatterString(tbFile.Text, 'NMATTER'));
       end
       else if FBankType = 'C' then
       begin

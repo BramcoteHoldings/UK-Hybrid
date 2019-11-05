@@ -149,7 +149,6 @@ type
 
     procedure UpdateTotal;
     function CheckClearedTrust: Boolean;
-    function IsValidTrustForMatter(AFiledID: string): boolean;
   public
     { Public declarations }
 
@@ -952,7 +951,7 @@ begin
       Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
       if frmMatterSearch.ShowModal = mrOk then
       begin
-         bValidBank := IsValidTrustForMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString) ;
+         bValidBank := IsValidTrustForMatter(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, cbBank.Text) ;
          if (IsMatterArchived(dmAxiom.qryMSearch.FieldByName('FILEID').AsString)) then
          begin
             MessageDlg('The matter #' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ' is Archived.  You cannot journal this matter.', mtWarning, [mbOK], 0);
@@ -989,19 +988,6 @@ begin
     end;
 end;
 
-function TfrmTrustJournal.IsValidTrustForMatter(AFiledID: string): boolean;
-begin
-   with dmAxiom.qryValidateMatterTrust do
-   begin
-      Close;
-      ParamByName('acct').AsString     := cbBank.Text;
-      ParamByName('nmatter').AsInteger := StrToInt(MatterString(AFiledID, 'NMATTER'));
-      Open;
-      Result := (RecordCount > 0);
-      Close;
-   end;
-end;
-
 procedure TfrmTrustJournal.cxGrid1DBTableView1REFNO1PropertiesValidate(
   Sender: TObject; var DisplayValue: Variant; var ErrorText: TCaption;
   var Error: Boolean);
@@ -1016,7 +1002,7 @@ begin
       tvLedgerREFNO.DataBinding.Field.Text := '';
       tvLedgerLONGDESC.DataBinding.Field.Text := '';
    end
-   else if IsValidTrustForMatter(ARefNo) = False then  //not (IsValidMatterForEntity(ARefNo)) then
+   else if IsValidTrustForMatter(ARefNo, cbBank.Text) = False then  //not (IsValidMatterForEntity(ARefNo)) then
    begin
       MessageDlg('The matter #' + ARefNo + ' is not valid for the current Entity.', mtWarning, [mbOK], 0);
       qryLedger.Edit;
@@ -1033,7 +1019,7 @@ begin
    qryCheckMatter.ParamByName('p_fileid').AsString := ARefNo;
    qryCheckMatter.Open;   }
 
-   if IsValidTrustForMatter(ARefNo) = False {not qryCheckMatter.IsEmpty} then
+   if IsValidTrustForMatter(ARefNo, cbBank.Text) = False {not qryCheckMatter.IsEmpty} then
    begin
       if not (qryCheckMatter.FieldByName('ACCT').AsString = cbBank.Text) then
       begin

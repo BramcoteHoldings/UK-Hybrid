@@ -80,7 +80,7 @@ object frmTrustJournal: TfrmTrustJournal
   object Label1: TLabel
     Left = 261
     Top = 39
-    Width = 57
+    Width = 58
     Height = 15
     Caption = 'Trust &Bank '
   end
@@ -230,7 +230,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 110
     Top = 36
     AutoSize = False
-    EditValue = 43733.6579747106d
+    EditValue = 43774.7434103241d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -580,7 +580,7 @@ object frmTrustJournal: TfrmTrustJournal
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

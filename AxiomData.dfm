@@ -18,7 +18,7 @@ object dmAxiom: TdmAxiom
     Pooling = True
     Debug = True
     Username = 'axiom'
-    Server = 'dev-oracle:1521:marketing'
+    Server = 'dev-oracle:1521:hohlaw'
     Connected = True
     LoginPrompt = False
     AfterConnect = uniInsightAfterConnect
@@ -910,7 +910,7 @@ object dmAxiom: TdmAxiom
   object qryBanks: TUniQuery
     Connection = uniInsight
     SQL.Strings = (
-      'SELECT * FROM BANK')
+      'SELECT * FROM BANK where active = '#39'Y'#39)
     Left = 32
     Top = 128
   end
@@ -6777,7 +6777,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

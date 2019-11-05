@@ -1,5 +1,13 @@
 Insight Build 9.2.0
 
+Build 51
+========
+-removed test in cheqreqs that limited the creation of a CheqReq to be greater than 1.
+-Added validation to the re-assignment of cheques to prevent the same cheque from being re-assigned multiple times.
+-allow the payment of creditors from Trust (Client Funds)
+-validation when creating a receipt has been enhanced to try and prevent incorrect Type posting.
+-enhanced the Conflict Search screen to display related matters if a client is found as having a conflict.
+
 Build 50
 ========
 -fix more issues with payment of Creditor Invoices where the Invoice consists of 2 or more segments.

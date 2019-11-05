@@ -168,7 +168,7 @@ procedure TfrmFeeEditQuick.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
    qryScaleCostsList.Close;
-   qryFee.Close;
+//   qryFee.Close;
 end;
 
 procedure TfrmFeeEditQuick.cxDBButtonEdit1PropertiesButtonClick(
@@ -226,7 +226,7 @@ procedure TfrmFeeEditQuick.cxButton1Click(Sender: TObject);
 begin
    qryFee.Post;
    qryFee.ApplyUpdates;
-   ModalResult := mrOk;
+//   ModalResult := mrOk;
 //   Close;
 end;
 

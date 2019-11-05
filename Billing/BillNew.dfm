@@ -144,7 +144,7 @@ object frmInvoice: TfrmInvoice
   object Label11: TLabel
     Left = 6
     Top = 389
-    Width = 48
+    Width = 49
     Height = 15
     Caption = '&Template'
   end
@@ -156,9 +156,9 @@ object frmInvoice: TfrmInvoice
     Caption = 'Less Client Funds'
   end
   object Label13: TLabel
-    Left = 591
+    Left = 590
     Top = 68
-    Width = 47
+    Width = 48
     Height = 15
     Alignment = taRightJustify
     Caption = 'Net Total'
@@ -256,7 +256,7 @@ object frmInvoice: TfrmInvoice
   object Label8: TLabel
     Left = 6
     Top = 280
-    Width = 98
+    Width = 97
     Height = 15
     Caption = 'Expected Payment'
   end
@@ -301,7 +301,7 @@ object frmInvoice: TfrmInvoice
   object Label20: TLabel
     Left = 6
     Top = 87
-    Width = 60
+    Width = 61
     Height = 15
     Caption = 'Fees - Time'
   end
@@ -1878,7 +1878,7 @@ object frmInvoice: TfrmInvoice
       AnchorX = 101
     end
     object cxLabel4: TcxLabel
-      Left = 40
+      Left = 39
       Top = 17
       Caption = 'Gross Total'
       Properties.Alignment.Horz = taRightJustify
@@ -4518,7 +4518,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -4938,7 +4938,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -5142,7 +5142,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -7360,7 +7360,7 @@ object frmInvoice: TfrmInvoice
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
