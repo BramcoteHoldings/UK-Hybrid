@@ -6148,32 +6148,28 @@ var
     Data : TcxCustomDataController; // TcxGridDataController;
     I : Integer;
 begin
-    if (AFocusedRecord = nil) or (APrevFocusedRecord = nil)
-    then
-      Exit;
+//    if (AFocusedRecord = nil) or (APrevFocusedRecord = nil) then
+//      Exit;
 
-    if IsGroupedRecord(AFocusedRecord)
+  {  if IsGroupedRecord(AFocusedRecord)
     then
     begin
       Data := Sender.DataController;
       GroupItemCount := Data.Groups.GroupingItemCount;
 
       if (FLastKey = VK_NONAME) or // record is clicked by mouse
-        (APrevFocusedRecord.Index < AFocusedRecord.Index)
-      then // move down
+        (APrevFocusedRecord.Index < AFocusedRecord.Index) then // move down
       begin
         Data.FocusedRowIndex := AFocusedRecord.Index + (GroupItemCount - AFocusedRecord.Level);
       end
       else // move up
       begin
-        if AFocusedRecord.Index < GroupItemCount
-        then
+        if AFocusedRecord.Index < GroupItemCount then
           Data.FocusedRowIndex := AFocusedRecord.Index + (GroupItemCount - AFocusedRecord.Level)
         else
         begin
           for I := AFocusedRecord.Index - 1 downto 0 do
-            if not IsGroupedRecord(Sender.ViewData.Records[I])
-            then
+            if not IsGroupedRecord(Sender.ViewData.Records[I]) then
             begin
               Sender.ViewData.Records[I].Focused := true;
               break;
@@ -6184,10 +6180,9 @@ begin
         end;
       end;
     end
-    else
+{    else
     begin
-      if (tvBillItemsTYPE.EditValue = IMG_FEES) and (qryInvoice.FieldByName('DISPATCHED').IsNull)
-      then
+      if (tvBillItemsTYPE.EditValue = IMG_FEES) and (qryInvoice.FieldByName('DISPATCHED').IsNull) then
       begin
         tvBillItemsDESCR.Options.Editing := true;
         tvBillItemsDESCR.Options.Focusing := true;
@@ -6197,7 +6192,7 @@ begin
         tvBillItemsDESCR.Options.Editing := False;
         tvBillItemsDESCR.Options.Focusing := False;
       end
-    end;
+    end; }
 
 end;
 
@@ -6752,13 +6747,12 @@ procedure TfrmInvoice.tvBillItemsEditing(
   Sender     : TcxCustomGridTableView;
   AItem      : TcxCustomGridTableItem;
   var AAllow : Boolean);
-  begin
-    if (qryInvoice.FieldByName('DISPATCHED').IsNull)
-    then
+begin
+{    if (qryInvoice.FieldByName('DISPATCHED').IsNull) then
       AAllow := true
     else
-      AAllow := False;
-  end;
+      AAllow := False;}
+end;
 
 procedure TfrmInvoice.RemoveDisbSund;
   begin
@@ -6769,54 +6763,55 @@ procedure TfrmInvoice.RemoveDisbSund;
   end;
 
 procedure TfrmInvoice.tbtnQuickEditClick(Sender : TObject);
-  var
+var
     LFeeNew : TfrmFeeEditQuick;
     LUnique, LReturn : Integer;
     dGstFree : double;
-  begin
-    SaveSelectedItems();
-    try
+begin
+   SaveSelectedItems();
+   try
       LUnique := tvBillItemsUNIQUEID.EditValue;
       case tvBillItemsTYPE.EditValue of
         IMG_FEES :
-          begin
-            if dmAxiom.Security.Fee.QuickEdit
-            then
+         begin
+            if dmAxiom.Security.Fee.QuickEdit then
             begin
-              LFeeNew := TfrmFeeEditQuick.create(Self);
+               LFeeNew := TfrmFeeEditQuick.create(Self);
 
-              LFeeNew.DisplayFee(Integer(LUnique), true);
+               LFeeNew.DisplayFee(Integer(LUnique), true);
 
-              LReturn := LFeeNew.ShowModal();
-              if LReturn <> mrCancel
-              then
-              begin
-                if LFeeNew.cmbMatterFind.Text <> qryInvoice.FieldByName('FILEID').AsString
-                then
-                begin
-                  qryNew.SQL.Text := 'UPDATE FEE SET NMEMO = null WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
-                  qryNew.ExecSQL;
-                  qryNew.Close;
+               try
+                  if LFeeNew.ShowModal = mrOk then
+                  begin
+                     if (LFeeNew.qryFee.FieldByName('FILEID').AsString <> qryInvoice.FieldByName('FILEID').AsString) then
+                     begin
+                        qryNew.SQL.Text := 'UPDATE FEE SET NMEMO = null WHERE NFEE = ' + IntToStr(tvBillItemsUNIQUEID.EditValue);
+                        qryNew.ExecSQL;
+                        qryNew.Close;
 
-                  procBillAddFeesOnly.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
-                  procBillAddFeesOnly.Execute;
-                  DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
+                        procBillAddFeesOnly.ParamByName('P_NMemo').AsInteger := qryInvoice.FieldByName('NMEMO').AsInteger;
+                        procBillAddFeesOnly.Execute;
+                        DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
 
-                  neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
-                    qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
-                  TaxFees := neFeesTax.AsCurrency;
-                  neFeesTaxFree.AsCurrency := dGstFree;
-                  // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
-                  lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
-                end;
-              end;
+                        neFeesTax.AsCurrency := ShowTax(neFees.AsCurrency, dGstFree, 'FEE', qryInvoice.FieldByName('FILEID').AsString, DefaultTax,
+                           qryInvoice.FieldByName('NMATTER').AsInteger, qryInvoice.FieldByName('NMEMO').AsInteger, qryInvoice.FieldByName('GENERATED').AsDateTime);
+                        TaxFees := neFeesTax.AsCurrency;
+                        neFeesTaxFree.AsCurrency := dGstFree;
+                        // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
+                        lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
+                     end;
+                  end;
+               finally
+                  LFeeNew.qryFee.Close;
+                  LFeeNew.Free;
+               end;
             end;
-          end;
+         end;
       end;
-    finally
+   finally
       RestoreSelectedItems();
-    end;
-  end;
+   end;
+end;
 
 procedure TfrmInvoice.btnMergePrintClick(Sender : TObject);
   begin
