@@ -259,6 +259,16 @@ type
     ppLabel10: TppLabel;
     ppDBCalc2: TppDBCalc;
     vConflictsNMatter: TcxGridDBColumn;
+    dbGrConflictsLevel2: TcxGridLevel;
+    vtMatterList: TcxGridDBTableView;
+    qryMatterList: TUniQuery;
+    dsMatterList: TUniDataSource;
+    vtMatterListNCLIENT: TcxGridDBColumn;
+    vtMatterListMATTERNO: TcxGridDBColumn;
+    vtMatterListFILEID: TcxGridDBColumn;
+    vtMatterListMATTERDESC: TcxGridDBColumn;
+    vtMatterListDATA: TcxGridDBColumn;
+    vtMatterListSEARCHTEXT: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure EnableTimer(Sender: TObject);
@@ -354,6 +364,7 @@ const
 
 procedure TfrmConflictSearch.FormShow(Sender: TObject);
 begin
+  qryMatterList.Open;
   // Get rid of this page control.
    pageSearch.ActivePage := tabGrid;
 
@@ -927,6 +938,7 @@ begin
   FSaveChanges := not CanClose;
   if FSaveChanges then
     SaveAndClose;
+  qryMatterList.Close;
 end;
 
 procedure TfrmConflictSearch.FormKeyDown(Sender: TObject; var Key: Word;

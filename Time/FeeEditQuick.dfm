@@ -4,7 +4,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
   BorderStyle = bsDialog
   Caption = 'Fee Edit'
   ClientHeight = 293
-  ClientWidth = 344
+  ClientWidth = 389
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    344
+    389
     293)
   PixelsPerInch = 96
   TextHeight = 15
@@ -63,7 +63,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     Caption = 'x'
   end
   object cxButton1: TcxButton
-    Left = 150
+    Left = 200
     Top = 261
     Width = 80
     Height = 27
@@ -111,7 +111,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     OnClick = cxButton1Click
   end
   object btnCancel: TcxButton
-    Left = 248
+    Left = 298
     Top = 261
     Width = 80
     Height = 27
@@ -209,7 +209,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     TabOrder = 5
   end
   object lblMatterDesc: TcxLabel
-    Left = 159
+    Left = 206
     Top = 2
     AutoSize = False
     ParentFont = False
@@ -227,7 +227,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     Style.StyleController = dmAxiom.LabelStyle
     Properties.ShowAccelChar = False
     Height = 18
-    Width = 256
+    Width = 303
   end
   object cmbCreated: TcxDBDateEdit
     Left = 75
@@ -265,7 +265,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 2
-    Width = 256
+    Width = 303
   end
   object cmbMatterFind: TcxDBButtonEdit
     Left = 75
@@ -285,7 +285,7 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
     TabOrder = 0
-    Width = 81
+    Width = 130
   end
   object mmoDesc: TcxDBRichEdit
     Left = 75
@@ -294,16 +294,18 @@ object frmFeeEditQuick: TfrmFeeEditQuick
     DataBinding.DataSource = dsFee
     TabOrder = 7
     Height = 110
-    Width = 256
+    Width = 303
   end
   object qryFee: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select'
-      'fee.*, fee.rowid'
+      'fee.fileid, fee.nmatter, fee.created, fee.task, fee.descr, '
+      'fee.author, fee.rowid'
       'from fee'
       'where nfee = :nfee')
     CachedUpdates = True
+    AutoCalcFields = False
     Left = 13
     Top = 173
     ParamData = <

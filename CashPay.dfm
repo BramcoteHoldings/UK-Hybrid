@@ -180,6 +180,11 @@ object frmCashpay: TfrmCashpay
               HeaderAlignmentHorz = taRightJustify
               Width = 65
             end
+            object tvAllocationsMRV_NALLOC: TcxGridDBColumn
+              DataBinding.FieldName = 'MRV_NALLOC'
+              Visible = False
+              VisibleForCustomization = False
+            end
           end
           object dbgrAllocationsLevel1: TcxGridLevel
             GridView = tvAllocations
@@ -617,7 +622,7 @@ object frmCashpay: TfrmCashpay
       object Label2: TLabel
         Left = 9
         Top = 76
-        Width = 39
+        Width = 40
         Height = 15
         Caption = 'Date To'
         Transparent = True
@@ -633,7 +638,7 @@ object frmCashpay: TfrmCashpay
       object Label7: TLabel
         Left = 9
         Top = 126
-        Width = 103
+        Width = 104
         Height = 15
         Caption = 'Cheque Number To'
         Transparent = True
@@ -1086,7 +1091,9 @@ object frmCashpay: TfrmCashpay
       
         '       alloc.descr AS alloc_descr, tax, TYPE, alloc.taxcode, all' +
         'oc.ncheque,'
-      '       alloc.nmemo, (alloc.amount * -1) as amount_extax'
+      
+        '       alloc.nmemo, (alloc.amount * -1) as amount_extax, nvl(mrv' +
+        '_nalloc,0) mrv_nalloc '
       '  FROM alloc'
       ' WHERE ncheque = :p_ncheque AND ncheque <> 0'
       ''
@@ -1169,7 +1176,7 @@ object frmCashpay: TfrmCashpay
     SQL.Strings = (
       
         'SELECT CHART.COMPONENT_CODE_DISPLAY AS "CODE", CHART.REPORT_DESC' +
-        ' AS DESCR, TRANSITEM.AMOUNT AS "AMOUNT" '
+        ' AS DESCR, TRANSITEM.AMOUNT AS "AMOUNT" , 0 as mrv_nalloc'
       'FROM TRANSITEM, CHART '
       'WHERE TRANSITEM.OWNER_CODE = '#39'CHEQUE'#39' '
       'AND TRANSITEM.NOWNER = :P_Ncheque '
@@ -1819,7 +1826,9 @@ object frmCashpay: TfrmCashpay
       
         '             tax, priorbalance, disb_crdit, antd_crdit, fees_crd' +
         'it, tax_crdit,'
-      '             disb, ncheqreq, billed_amount, billed_tax_amount)'
+      
+        '             disb, ncheqreq, billed_amount, billed_tax_amount, m' +
+        'rv_nalloc)'
       
         '   SELECT :alloc_new, a.bank, :descr, a.ncheque, a.approval, a.n' +
         'receipt,'
@@ -1844,7 +1853,9 @@ object frmCashpay: TfrmCashpay
       
         '          a.disb_crdit, a.antd_crdit, a.fees_crdit, a.tax_crdit,' +
         ' a.disb,'
-      '          a.ncheqreq, billed_amount, billed_tax_amount'
+      
+        '          a.ncheqreq, billed_amount, billed_tax_amount, :mrv_nal' +
+        'loc'
       '     FROM alloc a, matter m'
       '    WHERE nalloc = :alloc_old AND m.fileid = :fileid')
     Left = 496
@@ -1888,6 +1899,11 @@ object frmCashpay: TfrmCashpay
       item
         DataType = ftUnknown
         Name = 'TAX'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mrv_nalloc'
         Value = nil
       end
       item
@@ -2618,7 +2634,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3170,7 +3186,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3704,9 +3720,10 @@ object frmCashpay: TfrmCashpay
     SQL.Strings = (
       
         'select i.creditor as "CODE", '#39'Invoice: '#39'|| i.refno || '#39' Date: '#39' ' +
-        '|| to_char(i.invoice_date, '#39'DD/MM/YYYY'#39') || '#39' Invoice amount: '#39' ' +
-        '|| to_char(i.amount, '#39'9,999.99'#39') as "DESCR", (t.amount + t.tax) ' +
-        'as "AMOUNT"'
+        '|| to_char(i.invoice_date, '#39'DD/MM/YYYY'#39') || '
+      
+        #39' Invoice amount: '#39' || to_char(i.amount, '#39'9,999.99'#39') as "DESCR",' +
+        ' (t.amount + t.tax) as "AMOUNT", 0 as mrv_nalloc'
       'from cheque c, transitem t, invoice i'
       'where t.ncheque = c.ncheque and i.ninvoice = t.ninvoice'
       'and c.ncheque = :P_Ncheque')

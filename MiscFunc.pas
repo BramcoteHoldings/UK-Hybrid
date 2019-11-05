@@ -858,6 +858,7 @@ type
   function CanAuthoriseBills(sEmp: string; pnMatter: integer; pDept: string = ''): boolean;
   function GetFileImage(sFilePath: string): Integer;
   function GetFinYearStart(dSrcDate: tDateTime): tDateTime;
+  function IsValidTrustForMatter(AFiledID, ABank: string): boolean;
 
 type
   TRoundToRange = -37..37;
@@ -11839,12 +11840,15 @@ end;
 procedure ClearCheques;
 var
   frmProcess: TfrmProcess;
+  LOraQuery: TUniQuery;
 begin
    // Do clearance if needed
    if Trunc(SystemDate('LASTCLEAR')) < Trunc(Now) + 1 then
    begin
       try
-         with dmAxiom.qryTmp do
+         LOraQuery := TUniQuery.Create(nil);
+         LOraQuery.Connection := dmAxiom.uniInsight;
+         with LOraQuery do
          begin
             Close;
             SQL.Text := 'SELECT COUNT(AMOUNT) AS CLEARS FROM RECEIPT where trunc(DCLEARDATE) < :TODAY '+
@@ -11881,8 +11885,8 @@ begin
             ExecSQL;
             Close;
          end;
-      except
-        //
+      finally
+         LOraQuery.Free;
       end;
    end;
 end;
@@ -15298,6 +15302,19 @@ begin
     wMonth := iFinMonth;
     wDay := 1;
     Result := EncodeDate(wYear, wMonth, wDay);
+end;
+
+function IsValidTrustForMatter(AFiledID, ABank: string): boolean;
+begin
+   with dmAxiom.qryValidateMatterTrust do
+   begin
+      Close;
+      ParamByName('acct').AsString     := ABank;
+      ParamByName('nmatter').AsInteger := StrToInt(MatterString(AFiledID, 'NMATTER'));
+      Open;
+      Result := (RecordCount > 0);
+      Close;
+   end;
 end;
 
 end.

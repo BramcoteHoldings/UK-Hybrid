@@ -287,6 +287,7 @@ object frmConflictSearch: TfrmConflictSearch
           OnCellDblClick = vConflictsCellDblClick
           OnEditDblClick = vConflictsEditDblClick
           DataController.DataSource = dsConflicts
+          DataController.KeyFieldNames = 'NCLIENT'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <
@@ -307,6 +308,7 @@ object frmConflictSearch: TfrmConflictSearch
           OptionsSelection.HideFocusRectOnExit = False
           OptionsView.NavigatorOffset = 63
           OptionsView.ColumnAutoWidth = True
+          OptionsView.ExpandButtonsForEmptyDetails = False
           OptionsView.IndicatorWidth = 15
           Preview.LeftIndent = 25
           Preview.RightIndent = 7
@@ -384,8 +386,55 @@ object frmConflictSearch: TfrmConflictSearch
             Visible = False
           end
         end
+        object vtMatterList: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = dsMatterList
+          DataController.DetailKeyFieldNames = 'NCLIENT'
+          DataController.KeyFieldNames = 'NCLIENT'
+          DataController.MasterKeyFieldNames = 'NCLIENT'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.GroupByBox = False
+          object vtMatterListFILEID: TcxGridDBColumn
+            Caption = 'Matter No'
+            DataBinding.FieldName = 'FILEID'
+          end
+          object vtMatterListMATTERDESC: TcxGridDBColumn
+            Caption = 'Matter Description'
+            DataBinding.FieldName = 'MATTERDESC'
+          end
+          object vtMatterListDATA: TcxGridDBColumn
+            DataBinding.FieldName = 'DATA'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object vtMatterListSEARCHTEXT: TcxGridDBColumn
+            DataBinding.FieldName = 'SEARCHTEXT'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object vtMatterListNCLIENT: TcxGridDBColumn
+            DataBinding.FieldName = 'NCLIENT'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object vtMatterListMATTERNO: TcxGridDBColumn
+            DataBinding.FieldName = 'MATTERNO'
+            Visible = False
+            VisibleForCustomization = False
+          end
+        end
         object dbGrConflictsLevel1: TcxGridLevel
           GridView = vConflicts
+          object dbGrConflictsLevel2: TcxGridLevel
+            GridView = vtMatterList
+          end
         end
       end
     end
@@ -397,10 +446,6 @@ object frmConflictSearch: TfrmConflictSearch
       Caption = '&Filter'
       ImageIndex = 1
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1280
         611)
@@ -836,7 +881,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label18: TLabel
           Left = 7
           Top = 216
-          Width = 55
+          Width = 56
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -848,7 +893,7 @@ object frmConflictSearch: TfrmConflictSearch
         object lblTrust: TLabel
           Left = 7
           Top = 184
-          Width = 25
+          Width = 26
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -1183,7 +1228,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label25: TLabel
           Left = 12
           Top = 156
-          Width = 31
+          Width = 32
           Height = 15
           Hint = 
             'Enter any part of the Notes to locate matters containing that st' +
@@ -1489,7 +1534,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label3: TLabel
           Left = 275
           Top = 21
-          Width = 24
+          Width = 25
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -1989,7 +2034,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label32: TLabel
           Left = 700
           Top = 27
-          Width = 30
+          Width = 29
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -2001,7 +2046,7 @@ object frmConflictSearch: TfrmConflictSearch
         object Label34: TLabel
           Left = 12
           Top = 59
-          Width = 12
+          Width = 13
           Height = 15
           Margins.Left = 4
           Margins.Top = 4
@@ -2950,6 +2995,7 @@ object frmConflictSearch: TfrmConflictSearch
     end
   end
   object qryConflicts: TUniQuery
+    KeyFields = 'nclient'
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from'
@@ -3072,7 +3118,7 @@ object frmConflictSearch: TfrmConflictSearch
       end>
   end
   object dsConflicts: TUniDataSource
-    DataSet = vtConflicts
+    DataSet = qryConflicts
     Left = 119
     Top = 387
   end
@@ -3088,7 +3134,7 @@ object frmConflictSearch: TfrmConflictSearch
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3993,6 +4039,7 @@ object frmConflictSearch: TfrmConflictSearch
     end
   end
   object vtConflicts: TVirtualTable
+    Active = True
     Left = 192
     Top = 312
     Data = {04000000000000000000}
@@ -4173,5 +4220,26 @@ object frmConflictSearch: TfrmConflictSearch
         Name = 'nconflict'
         Value = nil
       end>
+  end
+  object qryMatterList: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select nclient, nmatter matterNo,'
+      
+        '    FILEID FileID, null ClientName, null nric, longdescr matterd' +
+        'esc,'
+      '    null DataFieldName,'
+      '    null Data,'
+      '    upper(longdescr) searchtext, '#39'N'#39' Exclude'
+      '    from matter m'
+      'order by nclient')
+    DetailFields = 'NCLIENT'
+    Left = 348
+    Top = 494
+  end
+  object dsMatterList: TUniDataSource
+    DataSet = qryMatterList
+    Left = 404
+    Top = 502
   end
 end
