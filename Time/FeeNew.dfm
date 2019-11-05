@@ -93,14 +93,14 @@ object frmFeeNew: TfrmFeeNew
   object Label5: TLabel
     Left = 5
     Top = 487
-    Width = 24
+    Width = 25
     Height = 15
     Caption = 'Type'
   end
   object Label6: TLabel
     Left = 5
     Top = 138
-    Width = 22
+    Width = 23
     Height = 15
     Caption = 'Task'
   end
@@ -135,7 +135,7 @@ object frmFeeNew: TfrmFeeNew
   object Label20: TLabel
     Left = 4
     Top = 290
-    Width = 58
+    Width = 57
     Height = 15
     Caption = '(Max 4000)'
   end
@@ -510,6 +510,8 @@ object frmFeeNew: TfrmFeeNew
     Top = 38
     AutoSize = False
     ParentFont = False
+    Style.BorderStyle = ebsNone
+    Style.Edges = [bLeft, bTop, bRight, bBottom]
     Style.StyleController = dmAxiom.LabelStyle
     Properties.ShowAccelChar = False
     Height = 18
@@ -1300,7 +1302,7 @@ object frmFeeNew: TfrmFeeNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
