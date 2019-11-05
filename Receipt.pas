@@ -480,6 +480,7 @@ begin
    TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Clear;
    if qryBanks.FieldByName('TRUST').AsString = 'T' then
    begin
+      qryLedger.Close;
       TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Matter');
       iOptCount := iOptCount + 1;
       TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Protected');
@@ -489,6 +490,7 @@ begin
    end
    else if qryBanks.FieldByName('TRUST').AsString = 'G' then
    begin
+      qryLedger.Close;
       if not dmAxiom.Security.Receipt.ForbidDisbursements then
       begin
          TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Disburse');
@@ -501,9 +503,10 @@ begin
    end
    else if qryBanks.FieldByName('TRUST').AsString = 'C' then
    begin
-    TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
-    iOptCount := iOptCount + 1;
-    if (qryLedger.State = dsEdit) or (qryLedger.State = dsInsert) then
+      qryLedger.Close;
+      TcxComboBoxProperties(tvLedgerTYPE.Properties).Items.Add('Ledger');
+      iOptCount := iOptCount + 1;
+      if (qryLedger.State = dsEdit) or (qryLedger.State = dsInsert) then
          qryLedger.FieldByName('TYPE').AsString := 'Ledger';
    end;
    TcxComboBoxProperties(tvLedgerTYPE.Properties).DropDownRows := iOptCount;
@@ -4051,8 +4054,7 @@ end;
 procedure TfrmReceipt.cbBankPropertiesChange(Sender: TObject);
 begin
  // this is to stop the qryledger being reset during a trust transfer
-    if ((not bTrustTrans) and (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0))
-    then
+    if ((not bTrustTrans) and (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0)) then
     begin
       qryLedger.Close;
       qryLedger.Open;
@@ -4064,8 +4066,7 @@ begin
       lblTotal.Caption := '';
     end;
 
-    if (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0)
-    then
+    if (qryLedger.State <> dsInsert) and (qryLedger.RecordCount = 0) then
     begin
       tbRcptno.Text := '';
       cmbPrinter.Properties.Items.Clear;
