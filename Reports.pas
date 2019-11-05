@@ -30,18 +30,6 @@ type
     dsReportsQuarterly: TUniDataSource;
     qryReportsWeekly: TUniQuery;
     dsReportsWeekly: TUniDataSource;
-    Panel2: TPanel;
-    btnAddReport: TBitBtn;
-    btnEditReport: TBitBtn;
-    btnExit: TBitBtn;
-    btnPrint: TBitBtn;
-    btnSnapshot: TBitBtn;
-    edtSearch: TEdit;
-    Label1: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    mmoDesc: TDBRichEdit;
-    tbJumpTo: TEdit;
     qryNotUsed: TUniQuery;
     dsNotUsed: TUniDataSource;
     dbgrReports: TcxGrid;
@@ -66,6 +54,17 @@ type
     lvReportsQuarterly: TcxGridLevel;
     lvReportsWeekly: TcxGridLevel;
     lvReportsNotUsed: TcxGridLevel;
+    Label1: TLabel;
+    mmoDesc: TDBRichEdit;
+    btnAddReport: TBitBtn;
+    btnEditReport: TBitBtn;
+    btnSnapshot: TBitBtn;
+    btnPrint: TBitBtn;
+    btnExit: TBitBtn;
+    tbJumpTo: TEdit;
+    Label3: TLabel;
+    edtSearch: TEdit;
+    Label4: TLabel;
     procedure btnClearAllClick(Sender: TObject);
     procedure qryReportsAfterScroll(DataSet: TDataSet);
     procedure btnPrintClick(Sender: TObject);
@@ -88,6 +87,7 @@ type
       ALevel: TcxGridLevel);
     procedure qryReportsMonthAfterScroll(DataSet: TDataSet);
     procedure qryReportsQuarterlyAfterScroll(DataSet: TDataSet);
+    procedure FormCreate(Sender: TObject);
   protected
    procedure CloseFrm(var Message: TMessage); message CM_CLOSEFORM;
   private
@@ -381,6 +381,11 @@ begin
 //  Self.Release;
 end;
 
+procedure TfrmReports.FormCreate(Sender: TObject);
+begin
+   Self.Invalidate;
+end;
+
 procedure TfrmReports.tbJumpToChange(Sender: TObject);
 var
   iSel : integer;
@@ -405,7 +410,7 @@ begin
             with qryReportsAll do
             begin
                Close;
-               lSQL := 'SELECT R.NAME, R.ACCESSLEVEL, R.Frequency, R.DESCR, R.ROWID FROM REPORTS R ';
+               lSQL := 'SELECT R.NAME, R.ACCESSLEVEL, R.Frequency, R.DESCR, R.Report_TYPE, R.ROWID FROM REPORTS R ';
                sOrderBy := ' ORDER BY R.NAME';
                sWhere := ' WHERE ACCESSLEVEL >= ' + InttoStr(dmAxiom.AccessLevel) + ' and frequency <> ''Not Used'' ';
                SQL.Text := lSQL + sWhere + sOrderBy;
