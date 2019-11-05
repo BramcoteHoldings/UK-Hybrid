@@ -278,6 +278,7 @@ type
     Label23: TLabel;
     ActionManager1: TActionManager;
     actReverse: TAction;
+    tvAllocationsMRV_NALLOC: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure qryChequesAfterScroll(DataSet: TDataSet);
     procedure mnuFileNewClick(Sender: TObject);
@@ -1193,7 +1194,8 @@ end;
 
 procedure TfrmCashpay.mMoveMatterPopup(Sender: TObject);
 begin
-   MoveMatter1.Enabled := rbMatters.Checked and (tvAllocations.ViewData.RowCount > 0);
+   MoveMatter1.Enabled := rbMatters.Checked and (tvAllocations.ViewData.RowCount > 0) and
+                          (VarToStr(tvAllocationsMRV_NALLOC.EditValue) = '0') ;
 end;
 
 procedure TfrmCashpay.mnuFileExitClick(Sender: TObject);
@@ -1342,6 +1344,8 @@ begin
 end;
 
 procedure TfrmCashpay.MoveMatter1Click(Sender: TObject);
+VAR
+   iMrv_Alloc: integer;
 begin
 // make sure the alloc is unbilled and not trust !
 
@@ -1374,15 +1378,17 @@ begin
        begin
          close;
          //ParamByName('FILDID').AsString := frmMatterSearch.qryMatters.ParamByName('FILEID').AsString;
+         iMrv_Alloc := GetSequenceNumber('SQNC_NALLOC');
          ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
          ParamByName('DESCR').AsString := 'Transferred to file ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ':' + qryAllocs.FieldByName('ALLOC_DESCR').AsString;
          ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
-         ParamByName('ALLOC_NEW').AsInteger := GetSequenceNumber('SQNC_NALLOC');  //GetSeqNum('NALLOC');
+         ParamByName('ALLOC_NEW').AsInteger := iMrv_Alloc;   //GetSeqNum('NALLOC');
          ParamByName('AMOUNT').AsCurrency := qryAllocs.FieldByName('AMOUNT_EXTAX').AsCurrency;
          ParamByName('TAX').AsCurrency := 0-qryAllocs.FieldByName('TAX').AsCurrency;
          ParamByName('TYPE').AsString := 'RV';
          ParamByName('BILLED').AsString := 'Y';
          ParamByName('PRIVATE').AsString := 'Y';
+         ParamByName('MRV_NALLOC').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
          ExecSql;
          Close;
        end;
@@ -1410,12 +1416,13 @@ begin
        begin
           Close;
           sql.cLEAR;
-          SQL.ADD('UPDATE ALLOC SET BILLED = :billed, PRIVATE = :private ');
+          SQL.ADD('UPDATE ALLOC SET BILLED = :billed, PRIVATE = :private, mrv_nalloc = :mrv_nalloc ');
           SQL.Add(' WHERE FILEID = :FILEID AND NALLOC = :NALLOC ' );
           ParamByName('BILLED').AsString := 'Y';
           ParamByName('PRIVATE').AsString := 'Y';
           ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
           ParamByName('NALLOC').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+          ParamByName('MRV_NALLOC').AsInteger := iMrv_Alloc;
           ExecSql;
        end;
     end;
