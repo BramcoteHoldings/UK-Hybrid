@@ -651,12 +651,15 @@ end;
 
 procedure TfrmFeeNew.CalcRate;
 begin
-   if (cmbTemplate.Text = '') or
-      ((TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') <> 0) and
-      (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
-//      if cmbTemplate.Text = '' then
-      neRate.Value := FeeRate(cbFeeBasis.EditValue, edMatterFind.Text, cbAuthor.EditValue, dtpCreated.Date);
-   UpdateAmount;
+   if dmAxiom.bShutDown = False then
+   begin
+      if (cmbTemplate.Text = '') or
+         ((TableCurrency('SCALECOST','CODE',string(cmbTemplate.EditValue),'AMOUNT') <> 0) and
+         (TableString('SCALECOST','CODE',string(cmbTemplate.EditValue),'ZERO_FEE') = 'N')) then
+//         if cmbTemplate.Text = '' then
+         neRate.Value := FeeRate(cbFeeBasis.EditValue, edMatterFind.Text, cbAuthor.EditValue, dtpCreated.Date);
+      UpdateAmount;
+   end;
 end;
 
 procedure TfrmFeeNew.UpdateAmount;
@@ -778,7 +781,7 @@ begin
          else
             CalcTax;
 //         dtpEndTime.DateTime := IncMinute(dtpStartTime.DateTime, StrToInt(neMinutes.Text));
-         dtpStartTime.DateTime := IncMinute(dtpEndTime.DateTime, StrToInt(neMinutes.Text)*-1);
+         dtpendTime.DateTime := IncMinute(dtpEndTime.DateTime, StrToInt(neMinutes.Text)*1);
       end
       else
       begin
@@ -1079,6 +1082,8 @@ begin
         ParamByName('P_Nfee').AsInteger := -1;
         Open;
       end;
+      dtpStartTime.Time := GetTime;
+      dtpEndTime.Time := GetTime;
    end;
    cbPrint.Checked := SettingLoadBoolean('FEECREATE', 'AUTOPRINTNOTE');
 

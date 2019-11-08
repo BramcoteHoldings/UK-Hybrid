@@ -8142,27 +8142,30 @@ var
   lcAmount  : Currency;
   // lcTaxTmp  : Currency;
 begin
-  lcAmount := FloatToCurr(Amount);
-  if TaxDate = NullDate then
-     TaxDate := Now;
+   if dmAxiom.bShutDown = False then
+   begin
+      lcAmount := FloatToCurr(Amount);
+      if TaxDate = NullDate then
+         TaxDate := Now;
 
-  lcTaxRate := FloatToCurr(TaxRate(RateType, TaxCode, TaxDate));
+      lcTaxRate := FloatToCurr(TaxRate(RateType, TaxCode, TaxDate));
 
-  if (lcTaxRate < 0) then
-  begin
-    lcTaxRate := Abs(lcTaxRate);
+      if (lcTaxRate < 0) then
+      begin
+         lcTaxRate := Abs(lcTaxRate);
 
-    if (TableString('TAXTYPE', 'CODE', TaxCode, 'WITHHOLDING') = 'Y') then
-      lcTax := TruncateTax((lcAmount * lcTaxRate * 100) / 100)
-    else
-      lcTax := TruncateTax(((lcAmount * (lcTaxRate / (1 + lcTaxRate))) * 100) / 100);
+         if (TableString('TAXTYPE', 'CODE', TaxCode, 'WITHHOLDING') = 'Y') then
+            lcTax := TruncateTax((lcAmount * lcTaxRate * 100) / 100)
+         else
+            lcTax := TruncateTax(((lcAmount * (lcTaxRate / (1 + lcTaxRate))) * 100) / 100);
 
-    Amount := lcAmount - lcTax;
-  end
-  else
-     lcTax := TruncateTax((lcAmount * lcTaxRate * 100) / 100);
+         Amount := lcAmount - lcTax;
+      end
+      else
+         lcTax := TruncateTax((lcAmount * lcTaxRate * 100) / 100);
 
-  Result := lcTax;
+      Result := lcTax;
+   end;
 end;
 
 function TaxCalc(var Amount: Currency; RateType, TaxCode: string; TaxDate: TDateTime): Currency; overload;
