@@ -800,6 +800,9 @@ begin
          tbDrawer.Text := tbPayee.Text;
       end;
 
+      if qryLedger.Active = False then
+         qryLedger.Open;
+
       with qryLedger do
       begin
          Append;

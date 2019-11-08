@@ -60,7 +60,7 @@ object frmReceipt: TfrmReceipt
   object Label7: TLabel
     Left = 6
     Top = 62
-    Width = 78
+    Width = 77
     Height = 15
     Caption = 'Payment Type:'
   end
@@ -142,7 +142,7 @@ object frmReceipt: TfrmReceipt
   object Label18: TLabel
     Left = 462
     Top = 48
-    Width = 121
+    Width = 120
     Height = 15
     Margins.Left = 2
     Margins.Top = 2
@@ -891,7 +891,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43772.9194864815d
+    EditValue = 43776.5738244907d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
