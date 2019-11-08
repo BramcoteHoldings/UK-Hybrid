@@ -6777,7 +6777,7 @@ object dmAxiom: TdmAxiom
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -7727,7 +7727,8 @@ object dmAxiom: TdmAxiom
       ')')
     Connection = uniInsight
     SQL.Strings = (
-      'select * from DIARYLOC')
+      'select * from DIARYLOC'
+      'order by location')
     Left = 1003
     Top = 746
   end
