@@ -33,7 +33,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   object Label2: TLabel
     Left = 10
     Top = 120
-    Width = 13
+    Width = 12
     Height = 15
     Caption = 'To'
   end
