@@ -510,14 +510,17 @@ begin
       bOKtoPost := False;
    end;
 
-   if (IsValidMatterForBank(tbFile.Text, cmbBank.EditValue) = False) then
+   if (TableString('BANK', 'ACCT', string(cmbBank.EditValue) , 'TRUST') = 'T') then
    begin
-      MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
-      cmbBank.ClearSelection;
-      bOKtoPost := False;
+      if (IsValidMatterForBank(tbFile.Text, cmbBank.EditValue) = False) then
+      begin
+         MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
+         cmbBank.ClearSelection;
+         bOKtoPost := False;
+      end;
    end;
 
-   result:= bOKtoPost
+   result:= bOKtoPost;
 end;
 
 procedure TfrmCheqReqNew.btnSaveClick(Sender: TObject);
@@ -572,6 +575,7 @@ begin
       end;
 
       iTransId := 0;
+      qryGetTrust.Open;
    // Added 18.08.2003 AES
    // check if matter is valid for current entity
       if (tbFile.Text <> '') and (not IsValidMatterForEntity(tbFile.Text) or
@@ -602,9 +606,15 @@ begin
          bContinuePosting := False;
       end
       // AES 20/01/2010 cast neAmount.Value to currency
-      else if {(cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and} (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency ) then
+      else if (cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency ) then
       begin
          MsgErr('There are insufficient funds in Trust in order to pay this Creditor Invoice.');
+         bContinuePosting := false;
+      end
+      else if (TableString('BANK', 'ACCT', string(cmbBank.EditValue) , 'TRUST') = 'T') and
+         (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency) then
+      begin
+         MsgErr('There are insufficient funds in Trust for this Cheque Request.');
          bContinuePosting := false;
       end
       else if (cmbBills.Visible) and (cmbBills.Text <> '')  then
@@ -1171,6 +1181,7 @@ begin
 
              end;
              qryCheqReq.Close;
+             qryGetTrust.Close;
 
              if not chkNoExit.Checked then
                Self.Close
@@ -2105,7 +2116,9 @@ end;
 procedure TfrmCheqReqNew.cmbBankPropertiesChange(Sender: TObject);
 var
   lsDefaultTax : String;
+  bValidBank: boolean;
 begin
+   bValidBank := True;
    if cmbBank.Text <> '' then
    begin
       FBankType := TableString('BANK', 'ACCT', string(cmbBank.EditValue) , 'TRUST');
@@ -2151,10 +2164,12 @@ begin
            begin
               MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
               cmbBank.ClearSelection;
+              bValidBank := False;
               Exit;
            end;
-        end
-        else
+        end;
+
+        if bValidBank = True then
         begin
            tbLedger.Text := '';
            tbLedger.Enabled := False;
@@ -2254,7 +2269,9 @@ procedure TfrmCheqReqNew.cmbBankPropertiesEditValueChanged(
   Sender: TObject);
 var
   lsDefaultTax : String;
+  bValidBank : boolean;
 begin
+   bValidBank := True;
    if cmbBank.Text <> '' then
    begin
       FBankType := TableString('BANK', 'ACCT', string(cmbBank.EditValue) , 'TRUST');
@@ -2292,10 +2309,12 @@ begin
            begin
               MsgErr('The Client Bank selected ('+cmbBank.EditValue +') does not match the Client bank for the matter('+MatterString(tbFile.Text, 'ACCT') +')');
               cmbBank.ClearSelection;
+              bValidBank := False;
               Exit;
            end;
-        end
-        else
+        end;
+
+        if bValidBank = True then
         begin
            tbLedger.Text := '';
            tbLedger.Enabled := False;
