@@ -255,8 +255,8 @@ var
 begin
    screen.Cursor := crHourGlass;
    glComponentSetup := dmAxiom.getGlComponents;
-   if qryLedger.Modified then
-      qryLedger.Post;
+//   if qryLedger.Modified then
+//      qryLedger.Post;
 
    for Row := 0 to tvLedger.DataController.RecordCount - 1 do
    begin

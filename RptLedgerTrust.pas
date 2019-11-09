@@ -512,6 +512,7 @@ begin
 
    chkFrom.Checked := False;
    chkTo.Checked := False;
+   rgOrderBy.Enabled := SystemString('TRUST_AS_OFFICE') = 'Y';
 end;
 
 procedure TfrmRptLedgerTrust.BitBtn1Click(Sender: TObject);

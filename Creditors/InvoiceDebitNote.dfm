@@ -204,7 +204,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
   object dtpDate: TEnforceCustomDateEdit
     Left = 119
     Top = 37
-    EditValue = 43760.619173912d
+    EditValue = 43776.6783140046d
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
     Style.LookAndFeel.NativeStyle = True
@@ -274,6 +274,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
             Kind = bkEllipsis
           end>
         Properties.OnButtonClick = tvLedgerREFNOPropertiesButtonClick
+        Properties.OnValidate = tvLedgerREFNOPropertiesValidate
         Width = 79
       end
       object tvLedgerLONGDESC: TcxGridDBColumn
@@ -284,7 +285,7 @@ object frmInvoiceDebit: TfrmInvoiceDebit
         Width = 192
       end
       object tvLedgerREASON: TcxGridDBColumn
-        Caption = 'Rwason'
+        Caption = 'Reason'
         DataBinding.FieldName = 'REASON'
         Width = 225
       end

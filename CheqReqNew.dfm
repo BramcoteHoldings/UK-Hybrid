@@ -219,7 +219,7 @@ object frmCheqReqNew: TfrmCheqReqNew
   object lblDebugStencilID: TLabel
     Left = 239
     Top = 500
-    Width = 121
+    Width = 120
     Height = 15
     Margins.Left = 2
     Margins.Top = 2
@@ -972,7 +972,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43774.7470179977d
+    EditValue = 43776.446891169d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True

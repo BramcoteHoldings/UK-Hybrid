@@ -595,7 +595,7 @@ type
     // procedure tbtnRemoveClick(Sender: TObject);
     private
       { Private declarations }
-      iTotal, TaxFees, TaxDisb, TaxAntD, TaxUpCred, TaxSund : currency;
+      iTotal, TaxFees, TaxDisb, TaxAntD, TaxUpCred, TaxSund, Discount : currency;
       TaxDate : TDateTime;
       InterimDate : TDateTime;
       cTrustBal : currency;
@@ -1430,6 +1430,8 @@ procedure TfrmInvoice.CalcTotal;
       lblTotalBill.Style.Font.Color := clBlue
     else
       lblTotalBill.Style.Font.Color := clRed;
+    if qryInvoice.Active = False then
+      qryInvoice.Open;
     lblTotalBill.Caption := Format('%10.2f', [neFees.AsCurrency + neDisb.AsCurrency + neAntd.AsCurrency + neUpCred.AsCurrency +
       neSund.AsCurrency { + neFeesTaxFree.AsCurrency + neDisbTaxFree.AsCurrency +
         neAntdTaxFree.AsCurrency + neUpCredTaxFree.AsCurrency +
@@ -6800,6 +6802,8 @@ begin
                         // sgrTotals.Cells[0, 0] := Format('%10.2f', [neFeesTax.AsCurrency]);
                         lblTotalFees.Caption := Format('%10.2f', [neFeesTax.AsCurrency]);
                      end;
+                     SaveInvoice;
+                     DisplayInvoice(qryInvoice.FieldByName('NMEMO').AsInteger, FForm);
                   end;
                finally
                   LFeeNew.qryFee.Close;

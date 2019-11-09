@@ -93,14 +93,14 @@ object frmFeeNew: TfrmFeeNew
   object Label5: TLabel
     Left = 5
     Top = 487
-    Width = 25
+    Width = 24
     Height = 15
     Caption = 'Type'
   end
   object Label6: TLabel
     Left = 5
     Top = 138
-    Width = 23
+    Width = 22
     Height = 15
     Caption = 'Task'
   end
@@ -135,7 +135,7 @@ object frmFeeNew: TfrmFeeNew
   object Label20: TLabel
     Left = 4
     Top = 290
-    Width = 57
+    Width = 58
     Height = 15
     Caption = '(Max 4000)'
   end
@@ -1302,7 +1302,7 @@ object frmFeeNew: TfrmFeeNew
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

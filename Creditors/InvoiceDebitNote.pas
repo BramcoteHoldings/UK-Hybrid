@@ -13,7 +13,7 @@ uses
   dxDateRanges, cxDataControllerConditionalFormattingRulesManagerDialog,
   cxDBData, cxButtonEdit, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxGridCustomView, cxGrid, cxCurrencyEdit,
-  cxDBLookupComboBox;
+  cxDBLookupComboBox, Variants;
 
 const
   colTYPE = 0;
@@ -98,6 +98,8 @@ type
       AButtonIndex: Integer);
     procedure tvLedgerTYPEPropertiesChange(Sender: TObject);
     procedure tvLedgerAMOUNTPropertiesChange(Sender: TObject);
+    procedure tvLedgerREFNOPropertiesValidate(Sender: TObject;
+      var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
   private
     { Private declarations }
     Balance, Tax, TotalAmt, WithholdTax: currency;
@@ -176,6 +178,49 @@ begin
     end;
 end;
 
+procedure TfrmInvoiceDebit.tvLedgerREFNOPropertiesValidate(Sender: TObject;
+  var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+var
+  glInstance: TglComponentInstance;
+begin
+   begin
+      if not qryLedger.Modified then
+         qryLedger.Edit;
+      if tvLedgerTYPE.EditValue = 'Matter' then
+         qryLedger.FieldByName('LONGDESC').AsString := MatterString(string(DisplayValue ), 'MATLOCATE');
+      if tvLedgerTYPE.EditValue = 'Ledger' then
+      begin
+   //    lookup the ledger code based on the value entered
+         if (VarIsNull(DisplayValue) = False) then
+         begin
+            glInstance := dmAxiom.getGlComponents.parseString(DisplayValue, true);
+            if not glInstance.valid then
+            begin
+               glInstance.displayError;
+               tvLedgerREFNO.EditValue := '';
+               tvLedgerLONGDESC.EditValue := '';
+               glInstance.free;
+               exit;
+            end
+            else
+            begin
+               tvLedgerREFNO.EditValue := glInstance.fullCode;
+               qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
+               tvLedgerLONGDESC.EditValue := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
+            end;
+
+            if not AllowDirectPost(glInstance.ledgerKey) then
+            begin
+               MsgErr('You may not post to ledger Reference #' + glInstance.fullCode);
+               tvLedgerREFNO.EditValue := '';
+               tvLedgerLONGDESC.EditValue := '';
+            end;
+            SetDefaultTaxType;
+         end;
+      end;
+   end;
+end;
+
 procedure TfrmInvoiceDebit.tvLedgerTYPEPropertiesChange(
   Sender: TObject);
 var
@@ -189,28 +234,31 @@ begin
       if tvLedgerTYPE.EditValue = 'Ledger' then
       begin
    //    lookup the ledger code based on the value entered
-         glInstance := dmAxiom.getGlComponents.parseString(tvLedgerREFNO.EditValue, true);
-         if not glInstance.valid then
+         if (VarIsNull(tvLedgerREFNO.EditValue) = False) then
          begin
-            glInstance.displayError;
-            tvLedgerREFNO.EditValue := '';
-            tvLedgerLONGDESC.EditValue := '';
-            glInstance.free;
-            exit;
-         end
-         else
-         begin
-            tvLedgerREFNO.EditValue := glInstance.fullCode;
-            qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
-         end;
+            glInstance := dmAxiom.getGlComponents.parseString(tvLedgerREFNO.EditValue, true);
+            if not glInstance.valid then
+            begin
+               glInstance.displayError;
+               tvLedgerREFNO.EditValue := '';
+               tvLedgerLONGDESC.EditValue := '';
+               glInstance.free;
+               exit;
+            end
+            else
+            begin
+               tvLedgerREFNO.EditValue := glInstance.fullCode;
+               qryLedger.FieldByName('LONGDESC').AsString := LedgerString(glInstance.ledgerKey, 'REPORT_DESC');
+            end;
 
-         if not AllowDirectPost(glInstance.ledgerKey) then
-         begin
-            MsgErr('You may not post to ledger Reference #' + glInstance.fullCode);
-            tvLedgerREFNO.EditValue := '';
-            tvLedgerLONGDESC.EditValue := '';
+            if not AllowDirectPost(glInstance.ledgerKey) then
+            begin
+               MsgErr('You may not post to ledger Reference #' + glInstance.fullCode);
+               tvLedgerREFNO.EditValue := '';
+               tvLedgerLONGDESC.EditValue := '';
+            end;
+            SetDefaultTaxType;
          end;
-         SetDefaultTaxType;
       end;
    end;
 end;
