@@ -24,7 +24,7 @@ object frmDashboard: TfrmDashboard
     Color = clBtnFace
     ParentColor = False
     TabOrder = 0
-    Properties.ActivePage = tabTopClient
+    Properties.ActivePage = tsWIP
     Properties.CustomButtons.Buttons = <>
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
@@ -54,7 +54,7 @@ object frmDashboard: TfrmDashboard
         object Label18: TLabel
           Left = 3
           Top = 397
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
           Transparent = True
@@ -62,7 +62,7 @@ object frmDashboard: TfrmDashboard
         object Label19: TLabel
           Left = 5
           Top = 427
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -592,7 +592,7 @@ object frmDashboard: TfrmDashboard
         object Label7: TLabel
           Left = 8
           Top = 68
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
           Transparent = True
@@ -600,7 +600,7 @@ object frmDashboard: TfrmDashboard
         object Label10: TLabel
           Left = 9
           Top = 93
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -634,7 +634,7 @@ object frmDashboard: TfrmDashboard
         object Label27: TLabel
           Left = 8
           Top = 242
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
           Transparent = True
@@ -670,7 +670,7 @@ object frmDashboard: TfrmDashboard
         object Label28: TLabel
           Left = 8
           Top = 269
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -1037,7 +1037,7 @@ object frmDashboard: TfrmDashboard
         object Label29: TLabel
           Left = 3
           Top = 33
-          Width = 26
+          Width = 25
           Height = 15
           Caption = 'MTD'
           Transparent = True
@@ -1045,7 +1045,7 @@ object frmDashboard: TfrmDashboard
         object Label30: TLabel
           Left = 3
           Top = 61
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -1053,7 +1053,7 @@ object frmDashboard: TfrmDashboard
         object Label35: TLabel
           Left = 7
           Top = 125
-          Width = 26
+          Width = 25
           Height = 15
           Caption = 'MTD'
           Transparent = True
@@ -1061,7 +1061,7 @@ object frmDashboard: TfrmDashboard
         object Label36: TLabel
           Left = 7
           Top = 150
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -1606,7 +1606,6 @@ object frmDashboard: TfrmDashboard
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
-          ExplicitTop = 31
           object cxGrid3DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dmDashboardFirm.dsMatterProfitability
@@ -1760,7 +1759,7 @@ object frmDashboard: TfrmDashboard
         object Label8: TLabel
           Left = 8
           Top = 35
-          Width = 26
+          Width = 25
           Height = 15
           Caption = 'Total'
           Transparent = True
@@ -1970,7 +1969,7 @@ object frmDashboard: TfrmDashboard
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2082,7 +2081,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.585359791660000000
+      ReportDocument.CreationDate = 43780.753562060180000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2112,7 +2111,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.585359953700000000
+      ReportDocument.CreationDate = 43780.753562094910000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2141,7 +2140,7 @@ object frmDashboard: TfrmDashboard
       PrinterPage.PageSize.Y = 297000
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.585359965280000000
+      ReportDocument.CreationDate = 43780.753562129630000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -12

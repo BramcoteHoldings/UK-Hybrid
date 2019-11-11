@@ -4,16 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DB, OracleUniProvider, Uni, DBAccess, MemDS, ImgList,
-  ActnCtrls, ToolWin, ActnMan, ActnMenus, ActnList,
-  Grids, DBGrids, ExtCtrls, DBActns, LedgerBudget, cxStyles, cxCustomData,
-  cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, cxRadioGroup, dxBar,
-  dxBarExtDBItems, dxBarExtItems, dxBarDBNav, cxCurrencyEdit, cxCalendar,
-  DALoader, cxLookAndFeels, cxLookAndFeelPainters, UniLoader, cxNavigator,
-  cxBarEditItem, cxDBLookupComboBox,
-  cxDataControllerConditionalFormattingRulesManagerDialog;
+  Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
+  dxDateRanges, Data.DB, cxDBData, cxCurrencyEdit, cxRadioGroup,
+  cxDBLookupComboBox, DALoader, UniLoader, dxBarDBNav, cxBarEditItem, dxBar,
+  dxBarExtDBItems, cxClasses, DBAccess, Uni, MemDS, System.ImageList,
+  Vcl.ImgList, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid;
 
 const
   C_FEEEARNERS  = 'SELECT CODE AS KEY,CODE AS DISPLAY_KEY, NAME AS DISPLAY FROM EMPLOYEE WHERE ACTIVE = ''Y'' AND ISFEEEARNER = ''Y'' AND ENTITY = :entity ORDER BY 2';
@@ -145,7 +142,7 @@ var
 
 implementation
 
-uses AxiomData, BudgetEntryDialog, miscfunc, EmployeeBudget, Process;
+uses AxiomData, BudgetEntryDialog, miscfunc, EmployeeBudget, Process, LedgerBudget;
 
 {$R *.dfm}
 
