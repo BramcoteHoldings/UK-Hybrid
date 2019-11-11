@@ -406,13 +406,17 @@ begin
    sLocation := trim(AppointmentItem.Location);
    if (sLocation <> '') then
    begin
-      if dmAxiom.qryDiaryLoc.Locate('LOCATION', sLocation, [loCaseInsensitive]) = False then
+      dmAxiom.qryDiaryLoc.Close;
+      dmAxiom.qryDiaryLoc.ParamByName('LOCATION').AsString := sLocation;
+      dmAxiom.qryDiaryLoc.Open;
+      if dmAxiom.qryDiaryLoc.IsEmpty = True then
       begin
          with dmAxiom.qryTmp do
          begin
             SQL.Text := 'insert into DIARYLOC (LOCATION) values (' + QuotedStr(sLocation) + ')';
             ExecSQL;
-            dmAxiom.qryDiaryLoc.Refresh;
+            dmAxiom.qryDiaryLoc.Close;
+            dmAxiom.qryDiaryLoc.Open;
          end;
       end;
    end;
@@ -688,8 +692,11 @@ end;
 
 procedure TfrmDiary99.actOutlookSyncExecute(Sender: TObject);
 begin
-   DoOutlookSynchronise;
-   MakeSQL;
+   try
+      DoOutlookSynchronise;
+   finally
+      MakeSQL;
+   end;
 end;
 
 procedure TfrmDiary99.actOutlookSyncUpdate(Sender: TObject);
