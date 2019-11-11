@@ -1589,6 +1589,8 @@ begin
             begin
                with qryLedger do
                begin
+                  if Active = False then
+                     Open;
                   Insert;
 
                   FieldByName('TYPE').AsString := 'Bill';
