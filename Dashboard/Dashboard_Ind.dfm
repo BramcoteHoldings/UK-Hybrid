@@ -146,7 +146,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object Label18: TLabel
           Left = 6
           Top = 267
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
           Transparent = True
@@ -154,7 +154,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object Label19: TLabel
           Left = 7
           Top = 285
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
           Transparent = True
@@ -682,21 +682,21 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object Label7: TLabel
           Left = 214
           Top = 128
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
         end
         object Label10: TLabel
           Left = 214
           Top = 141
-          Width = 22
+          Width = 21
           Height = 15
           Caption = 'YTD'
         end
         object Label27: TLabel
           Left = 267
           Top = 539
-          Width = 45
+          Width = 44
           Height = 15
           Caption = 'MONTH'
           Transparent = True
@@ -2307,7 +2307,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2462,7 +2462,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.518314212960000000
+      ReportDocument.CreationDate = 43780.754561516200000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2492,7 +2492,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.518314317130000000
+      ReportDocument.CreationDate = 43780.754561539350000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2522,7 +2522,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43716.518314456020000000
+      ReportDocument.CreationDate = 43780.754561562500000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2656,6 +2656,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     Version = 0
     Left = 516
     Top = 111
+    PixelsPerInch = 96
   end
   object dxPSEngineController1: TdxPSEngineController
     Active = True

@@ -26,8 +26,6 @@ object fmBudgets: TfmBudgets
     TabOrder = 0
     LookAndFeel.Kind = lfFlat
     LookAndFeel.NativeStyle = True
-    ExplicitWidth = 777
-    ExplicitHeight = 429
     object tvBudget: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = dsBudgets
@@ -753,7 +751,7 @@ object fmBudgets: TfmBudgets
       item
         DataType = ftUnknown
         Name = 'entity'
-        Value = nil
+        Value = Null
       end>
     object qBudgetsNBUDGET: TFloatField
       FieldName = 'NBUDGET'
