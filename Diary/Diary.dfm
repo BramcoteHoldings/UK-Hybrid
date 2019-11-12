@@ -186,6 +186,10 @@ object frmDiary99: TfrmDiary99
     object tabGrid: TcxTabSheet
       Caption = 'List'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdDiary: TcxGrid
         Left = 0
         Top = 58
@@ -3532,7 +3536,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43780.726650081020000000
+      ReportDocument.CreationDate = 43781.473002789350000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
