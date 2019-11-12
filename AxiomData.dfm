@@ -7728,9 +7728,17 @@ object dmAxiom: TdmAxiom
     Connection = uniInsight
     SQL.Strings = (
       'select * from DIARYLOC'
+      'WHERE'
+      'upper(LOCATION) = upper(nvl(:LOCATION, LOCATION))'
       'order by location')
     Left = 1003
     Top = 746
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'LOCATION'
+        Value = nil
+      end>
   end
   object qryDiarySub: TUniQuery
     Connection = uniInsight

@@ -125,8 +125,8 @@ type
     Label9: TLabel;
     Label16: TLabel;
     edMatterFind: TcxButtonEdit;
-    ppMemoNotes: TppRichText;
     mmoNotes: TcxMemo;
+    ppMemoNotes: TppMemo;
     procedure btnOkClick(Sender: TObject);
     procedure neRateChange(Sender: TObject);
     procedure neUnitsChange(Sender: TObject);

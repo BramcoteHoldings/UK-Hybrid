@@ -306,6 +306,9 @@ type
     procedure ppLblIsConflictGroupGetText(Sender: TObject; var Text: string);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure ppGroup1BeforeGroupBreak(Sender: TObject);
+    procedure vtMatterListCellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     { Private declarations }
     SaveFilter, SaveConfig, RefreshSearch: Boolean;
@@ -695,6 +698,16 @@ begin
 
 end;
 
+procedure TfrmConflictSearch.vtMatterListCellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+var
+   ColIdx: integer;
+begin
+    ColIdx := vtMatterList.DataController.GetItemByFieldName('FileID').Index;
+    ShowMatter(ACellViewInfo.GridRecord.Values[ColIdx])
+end;
+
 procedure TfrmConflictSearch.cmbOPCategoryChange(Sender: TObject);
 begin
 
@@ -814,7 +827,7 @@ end;
 class procedure TfrmConflictSearch.ShowConflictSearch(
   APreviousInteger: Integer);
 begin
-// This might be were we open up a previously created conflict search.
+// This might be where we open up a previously created conflict search.
 // ...It's left here to remind me of the planned design of it.
 end;
 
@@ -826,7 +839,7 @@ begin
   ColIdx := vConflicts.DataController.GetItemByFieldName('cat').Index;
   Category := ACellViewInfo.GridRecord.Values[ColIdx];
 
-  if StrMatches('Client*', Category) then
+  if StrMatches('Contact/Client*', Category) then
   begin
     ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
     ShowClient(ACellViewInfo.GridRecord.Values[ColIdx])

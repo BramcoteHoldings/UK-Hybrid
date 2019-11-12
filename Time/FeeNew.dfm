@@ -1447,15 +1447,15 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3968
-        mmLeft = 19579
+        mmLeft = 18521
         mmTop = 3440
-        mmWidth = 11377
+        mmWidth = 12435
         BandType = 4
         LayerName = Foreground
       end
@@ -1468,15 +1468,15 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 22225
+        mmLeft = 21167
         mmTop = 9525
-        mmWidth = 8731
+        mmWidth = 9789
         BandType = 4
         LayerName = Foreground
       end
@@ -1489,7 +1489,7 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
@@ -1510,7 +1510,7 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
@@ -1531,15 +1531,15 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 19579
+        mmLeft = 19050
         mmTop = 27781
-        mmWidth = 11377
+        mmWidth = 11906
         BandType = 4
         LayerName = Foreground
       end
@@ -1552,7 +1552,7 @@ object frmFeeNew: TfrmFeeNew
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 9
-        Font.Style = []
+        Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
@@ -1679,8 +1679,8 @@ object frmFeeNew: TfrmFeeNew
         Stretch = True
         Transparent = True
         mmHeight = 6085
-        mmLeft = 34661
-        mmTop = 34660
+        mmLeft = 34663
+        mmTop = 34655
         mmWidth = 142611
         BandType = 4
         LayerName = Foreground
@@ -1717,7 +1717,7 @@ object frmFeeNew: TfrmFeeNew
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 9
-          Font.Style = []
+          Font.Style = [fsBold]
           FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
           FormFieldSettings.FormFieldType = fftNone
           TextAlignment = taRightJustified
@@ -1729,23 +1729,23 @@ object frmFeeNew: TfrmFeeNew
           BandType = 4
           LayerName = Foreground
         end
-        object ppMemoNotes: TppRichText
+        object ppMemoNotes: TppMemo
           DesignLayer = ppDesignLayer1
           UserName = 'MemoNotes'
+          Border.mmPadding = 0
+          Caption = 'MemoNotes'
+          CharWrap = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
           Font.Size = 9
           Font.Style = []
-          Border.mmPadding = 0
-          Caption = 'MemoNotes'
-          ExportRTFAsBitmap = False
           RemoveEmptyLines = False
           Stretch = True
           Transparent = True
-          mmHeight = 3938
-          mmLeft = 34660
-          mmTop = 43920
+          mmHeight = 4233
+          mmLeft = 34663
+          mmTop = 43921
           mmWidth = 142611
           BandType = 4
           LayerName = Foreground
@@ -1753,6 +1753,7 @@ object frmFeeNew: TfrmFeeNew
           mmOverFlowOffset = 0
           mmStopPosition = 0
           mmMinHeight = 0
+          mmLeading = 0
         end
       end
     end

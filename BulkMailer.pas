@@ -1030,13 +1030,16 @@ begin
 //                        CopyFile(PWideChar(AParsedDocName), PWideChar(TempFilePath),True);
                      end;
 
+                     MessageBuilder.Attachments.Clear;
+
                      MessageBuilder.Attachments.Add(AParsedDocName);
 
                      MessageBuilder.FillMessage(MailMessage);
                      try
                         SMTP.UseEhlo := True;
                         try
-                           SMTP.Connect;
+                           if SMTP.Connected = False then
+                              SMTP.Connect;
                            if SMTP.Connected then
                               SMTP.Send(MailMessage);
                            if rbDebtors.Checked = True then

@@ -723,7 +723,7 @@ uses
   BillCreditTypes, BillTemplates, Bills, CashPay, CashRcp, CheqReqNew, CheqReqs,
   Cheque, ChequePresent, Clients, ClientGroups, EntityChange, FeeBasis,
   CodeRules, Creditors,  DataForm, Diary, DiaryNotify, BatchReport,
-  DiaryNew, DiaryLoc, DiaryJur, DiaryEvt, DocSearch, Employees,
+  DiaryNew, DiaryLoc, DiaryJur, {DiaryEvt,} DocSearch, Employees,
   Entitys, FeeNew, FeeCodes, {FeeType,} FieldTypes, Genders,
   JournalBill, JournalMatter, Journals, Ledgers,
   Matters, MatterType, MatterReportBuilder, AxiomData,  TableCache, MatterStatus,
@@ -3673,7 +3673,7 @@ begin
 
     IDXDIARYJUR: FindorCreate(TfrmDiaryJur, iProgramID).Show;
 
-    IDXDIARYEVT: FindorCreate(TfrmDiaryEvt, iProgramID).Show;
+//    IDXDIARYEVT: FindorCreate(TfrmDiaryEvt, iProgramID).Show;
 
     IDXDIARYNEW:
       with TfrmDiaryNew.Create(frmDesktop) do

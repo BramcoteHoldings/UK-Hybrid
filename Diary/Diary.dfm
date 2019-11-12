@@ -65,6 +65,7 @@ object frmDiary99: TfrmDiary99
         ContentPopupMenu.UseBuiltInPopupMenu = False
         ContentPopupMenu.Items = [cpmiNewEvent, cpmiNewAllDayEvent, cpmiNewReccuringEvent, cpmiGoToDate, cpmiGoToThisDay, cpmiResourcesLayout]
         ControlBox.Control = grdPhoneMessage
+        DialogsStyle = 'Ribbon2019'
         EventOperations.DialogEditing = False
         EventOperations.DialogShowing = False
         EventOperations.InplaceEditing = False
@@ -92,7 +93,6 @@ object frmDiary99: TfrmDiary99
         OnEndDrag = DiarySchedulerEndDrag
         OnEventSelectionChanged = DiarySchedulerEventSelectionChanged
         OnKeyDown = DiarySchedulerKeyDown
-        Selection = 1
         Splitters = {
           610400008E000000F0040000920000005D0400000100000061040000C2020000}
         StoredClientBounds = {0100000001000000F0040000C2020000}
@@ -181,12 +181,15 @@ object frmDiary99: TfrmDiary99
         OnCustomDrawDayNumber = DiarySchedulerDateNavigatorCustomDrawDayNumber
         OnPeriodChanged = DiarySchedulerDateNavigatorPeriodChanged
         OnDblClick = cxDateNavigator1DblClick
-        Selection = 1
       end
     end
     object tabGrid: TcxTabSheet
       Caption = 'List'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object grdDiary: TcxGrid
         Left = 0
         Top = 58
@@ -359,7 +362,7 @@ object frmDiary99: TfrmDiary99
         object Label2: TLabel
           Left = 9
           Top = 34
-          Width = 40
+          Width = 39
           Height = 15
           Caption = 'Date To'
           Transparent = True
@@ -572,7 +575,7 @@ object frmDiary99: TfrmDiary99
         object Label7: TLabel
           Left = 9
           Top = 168
-          Width = 25
+          Width = 24
           Height = 15
           Caption = 'Type'
           Transparent = True
@@ -2299,6 +2302,7 @@ object frmDiary99: TfrmDiary99
     FieldNames.Message = 'DESCR'
     FieldNames.Options = 'OPTIONS'
     FieldNames.RecurrenceIndex = 'RECURRENCEINDEX'
+    FieldNames.RecurrenceInfo = 'RECURRENCEINFO'
     FieldNames.ReminderMinutesBeforeStart = 'NOTIFY_MINS'
     FieldNames.ResourceID = 'RESOURCEID'
     FieldNames.Start = 'START_DT'
@@ -2524,7 +2528,8 @@ object frmDiary99: TfrmDiary99
         'tdescr,'
       
         '         NULL AS clientname, d.event_type, d.entryid, d.descr, d' +
-        '.notify_mins, D.MODIFIED, d.private, d.eventtype'
+        '.notify_mins, D.MODIFIED, d.private, d.eventtype, D.RECURRENCEIN' +
+        'FO'
       
         '    FROM diary d LEFT OUTER JOIN phonebook p ON (d.nname = p.nna' +
         'me)'
@@ -2552,7 +2557,8 @@ object frmDiary99: TfrmDiary99
         ', '
       
         '         p.search as clientname, d.event_type, d.entryid, d.desc' +
-        'r, d.notify_mins, D.MODIFIED, d.private, d.eventtype'
+        'r, d.notify_mins, D.MODIFIED, d.private, d.eventtype, D.RECURREN' +
+        'CEINFO'
       '    FROM matter m JOIN phonebook p ON (m.nclient = p.nclient)'
       '         JOIN diary d ON (d.fileid = m.fileid)'
       '   WHERE (    d.reminder_for = :reminder_for'
@@ -2659,7 +2665,7 @@ object frmDiary99: TfrmDiary99
       item
         DataType = ftUnknown
         Name = 'reminder_for'
-        Value = nil
+        Value = Null
       end>
   end
   object qryEmployee: TUniQuery
@@ -2833,6 +2839,7 @@ object frmDiary99: TfrmDiary99
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2865,7 +2872,7 @@ object frmDiary99: TfrmDiary99
     XLSSettings.WorksheetName = 'Report'
     Left = 610
     Top = 184
-    Version = '19.02'
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plDiaryListRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -3529,7 +3536,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43602.475223425930000000
+      ReportDocument.CreationDate = 43781.473002789350000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3580,6 +3587,7 @@ object frmDiary99: TfrmDiary99
     FieldNames.Message = 'DESCR1'
     FieldNames.Options = 'OPTIONS'
     FieldNames.RecurrenceIndex = 'RECURRENCEINDEX'
+    FieldNames.RecurrenceInfo = 'RECURRENCEINFO'
     FieldNames.ReminderMinutesBeforeStart = 'NOTIFY_MINS'
     FieldNames.ResourceID = 'RESOURCEID'
     FieldNames.Start = 'START_DT'
