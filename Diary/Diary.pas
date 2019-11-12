@@ -390,8 +390,9 @@ var
    sSubject,
    sBody, sMessage,
    sReminder_for,
-   sTmpSub: string;
-
+   sTmpSub,
+   sNewLocation: string;
+   x: integer;
 begin
    if AppointmentItem.Sensitivity = olPrivate then
       AEvent.SetCustomFieldValueByName('private','Y')
@@ -403,17 +404,25 @@ begin
    if sSubject <> '' then
       AEvent.Caption := sSubject;
 
+   if AppointmentItem.IsRecurring = True then
+      AEvent.Caption := Aevent.Caption + ' recurring';
+
    sLocation := trim(AppointmentItem.Location);
    if (sLocation <> '') then
    begin
+       for x := 1 to length(sLocation) do
+       begin
+          if ((sLocation[x] in ['A'..'Z', '0'..'9', 'a'..'z', '.', '-', ' '])) then
+             sNewLocation := sNewLocation + sLocation[x];
+       end;
       dmAxiom.qryDiaryLoc.Close;
-      dmAxiom.qryDiaryLoc.ParamByName('LOCATION').AsString := sLocation;
+      dmAxiom.qryDiaryLoc.ParamByName('LOCATION').AsString := sNewLocation;
       dmAxiom.qryDiaryLoc.Open;
-      if dmAxiom.qryDiaryLoc.IsEmpty = True then
+      if (dmAxiom.qryDiaryLoc.IsEmpty = True) then
       begin
          with dmAxiom.qryTmp do
          begin
-            SQL.Text := 'insert into DIARYLOC (LOCATION) values (' + QuotedStr(sLocation) + ')';
+            SQL.Text := 'insert into DIARYLOC (LOCATION) values (' + QuotedStr(sNewLocation) + ')';
             ExecSQL;
             dmAxiom.qryDiaryLoc.Close;
             dmAxiom.qryDiaryLoc.Open;
