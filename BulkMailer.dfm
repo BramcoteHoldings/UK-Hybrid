@@ -107,6 +107,10 @@ object frmBulkMailer: TfrmBulkMailer
             Margins.Bottom = 4
             Caption = 'RTF'
             ImageIndex = 0
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Editor: TRichEdit
               Left = 0
               Top = 0
@@ -190,6 +194,10 @@ object frmBulkMailer: TfrmBulkMailer
             Caption = 'tabRAW'
             ImageIndex = 2
             TabVisible = False
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object MemoRawText: TcxMemo
               Left = 0
               Top = 0
