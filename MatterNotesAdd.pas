@@ -22,7 +22,6 @@ type
     lBy: TcxDBLabel;
     qryMatterNotes: TUniQuery;
     dsMatterNotes: TUniDataSource;
-    mlNote: TcxDBRichEdit;
     qryMaxSequence: TUniQuery;
     qryMaxSequenceNEWSEQUENCE: TFloatField;
     dsMatterNotesType: TUniDataSource;
@@ -51,10 +50,15 @@ type
     ppLine1: TppLine;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
+    Label19: TLabel;
+    Label20: TLabel;
+    mlNote: TcxDBRichEdit;
     procedure qryMatterNotesAfterInsert(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure btnNotePrintClick(Sender: TObject);
     procedure ppMatterNoteRptBeforePrint(Sender: TObject);
+    procedure mlNoteKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     lNoteType: string;
@@ -133,6 +137,12 @@ end;
 procedure TfrmMatterNotesAdd.btnNotePrintClick(Sender: TObject);
 begin
    ppMatterNoteRpt.Print;
+end;
+
+procedure TfrmMatterNotesAdd.mlNoteKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   Label19.Caption := IntToStr(length(mlNote.Text) )+'/4000';
 end;
 
 procedure TfrmMatterNotesAdd.FormShow(Sender: TObject);

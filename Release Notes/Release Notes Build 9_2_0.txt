@@ -1,5 +1,9 @@
 Insight Build 9.2.0
 
+Build 52
+========
+-Added character count to Matter Notes entry form
+
 Build 51
 ========
 -removed test in cheqreqs that limited the creation of a CheqReq to be greater than 1.

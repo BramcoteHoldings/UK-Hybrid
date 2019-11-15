@@ -974,26 +974,24 @@ begin
                               if (VarToStr(cmbStatementTemplate.CurEditValue) <> '') then
                                  Report.Template.DatabaseSettings.Name := VarToStr(cmbStatementTemplate.CurEditValue);
                               Report.Template.LoadFromDatabase;
-                           except
-                              ;
-                           end;
-
-                           if (Parameters.Count > 0) then
-                           begin
-                              with Parameters do
+                           finally
+                              if (Parameters.Count > 0) then
                               begin
-                                 Items['NCLIENT'].Value := null;
-                                 Items['NMATTER'].Value := null;
-                                 Items['ENTITY'].Value := null;
+                                 with Parameters do
+                                 begin
+                                    Items['NCLIENT'].Value := null;
+                                    Items['NMATTER'].Value := null;
+                                    Items['ENTITY'].Value := null;
 
-                                 if rbDebtors.Checked = True then
-                                    Items['NCLIENT'].Value := ANClient
-                                 else
-                                    Items['NMATTER'].Value := ANMatter;
+                                    if rbDebtors.Checked = True then
+                                       Items['NCLIENT'].Value := ANClient
+                                    else
+                                       Items['NMATTER'].Value := ANMatter;
 
-                                 Items['ENTITY'].Value := dmAxiom.Entity;
+                                    Items['ENTITY'].Value := dmAxiom.Entity;
 
-                                 Items['EMAILPRINT'].Value := 0;
+                                    Items['EMAILPRINT'].Value := 0;
+                                 end;
                               end;
                            end;
                         end;
@@ -1017,17 +1015,17 @@ begin
 
                         AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
                         // check directory exists, if not create it
-                        if not DirectoryExists(AParsedDir) then
-                           ForceDirectories(AParsedDir);
-                        Report.AllowPrintToFile := True;
-                        Report.ShowPrintDialog := False;
-                        Report.DeviceType := dtPDF;
-                        Report.PDFSettings.OpenPDFFile := False;
-                        Report.TextFileName := AParsedDocName;
-                        Report.Print;
-//                        OldDir := GetCurrentDir;
-//                        TempFilePath := ExtractFilePath(Application.EXEName) + ExtractFileName(AParsedDocName);
-//                        CopyFile(PWideChar(AParsedDocName), PWideChar(TempFilePath),True);
+                        try
+                           if not DirectoryExists(AParsedDir) then
+                              ForceDirectories(AParsedDir);
+                           Report.AllowPrintToFile := True;
+                           Report.ShowPrintDialog := False;
+                           Report.DeviceType := dtPDF;
+                           Report.PDFSettings.OpenPDFFile := False;
+                           Report.TextFileName := AParsedDocName;
+                        finally
+                           Report.Print;
+                        end;
                      end;
 
                      MessageBuilder.Attachments.Clear;

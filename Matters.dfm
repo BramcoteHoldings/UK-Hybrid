@@ -7891,6 +7891,7 @@ object frmMatters: TfrmMatters
             DataController.StateIndexField = 'FOLDER_LEVEL'
             DragMode = dmAutomatic
             Navigator.Buttons.CustomButtons = <>
+            OptionsBehavior.CopyCaptionsToClipboard = False
             OptionsCustomizing.DynamicSizing = True
             OptionsData.Editing = False
             OptionsData.Deleting = False
@@ -15404,8 +15405,8 @@ object frmMatters: TfrmMatters
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 1296
-    Top = 680
+    Left = 1280
+    Top = 652
     Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plUnpresentedCheques'
@@ -23466,9 +23467,9 @@ object frmMatters: TfrmMatters
   object qryMatterNotes: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      
-        'select E.NAME as CREATEDBY, M.CREATED AS CREATED, M.NOTE AS NOTE' +
-        'S,M.SEQUENCE, MT.DESCR'
+      'select E.NAME as CREATEDBY, M.CREATED AS CREATED, '
+      'M.NOTE AS NOTES,'
+      'M.SEQUENCE, MT.DESCR'
       'from'
       'MATTER_NOTES_TYPE MT, MatterNotes M, Employee E'
       'where'
@@ -26411,8 +26412,8 @@ object frmMatters: TfrmMatters
   end
   object dsProjectScaleLinks: TUniDataSource
     DataSet = qryProjectScaleLinks
-    Left = 1428
-    Top = 620
+    Left = 1448
+    Top = 584
   end
   object dsProjectMatter: TUniDataSource
     DataSet = qryProjectMatter
