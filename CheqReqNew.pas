@@ -606,13 +606,13 @@ begin
          bContinuePosting := False;
       end
       // AES 20/01/2010 cast neAmount.Value to currency
-      else if (cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency ) then
+      else if (cmbInvoice.Visible) and  (cmbInvoice.Text <> '') and (Double(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsFloat ) then
       begin
          MsgErr('There are insufficient funds in Trust in order to pay this Creditor Invoice.');
          bContinuePosting := false;
       end
       else if (TableString('BANK', 'ACCT', string(cmbBank.EditValue) , 'TRUST') = 'T') and
-         (Currency(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsCurrency) then
+         (Double(neAmount.Value) > qryGetTrust.FieldByName('cl_trust_bal').AsFloat) then
       begin
          MsgErr('There are insufficient funds in Trust for this Cheque Request.');
          bContinuePosting := false;
