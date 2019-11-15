@@ -961,7 +961,9 @@ object frmFeeNew: TfrmFeeNew
   object mmoNotes: TcxMemo
     Left = 79
     Top = 237
+    Properties.MaxLength = 4000
     TabOrder = 27
+    OnKeyUp = mmoNotesKeyUp
     Height = 68
     Width = 284
   end
