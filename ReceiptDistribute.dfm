@@ -3,7 +3,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   Top = 405
   BorderStyle = bsDialog
   Caption = 'Receipt Distribution'
-  ClientHeight = 246
+  ClientHeight = 255
   ClientWidth = 516
   Color = clBtnFace
   Constraints.MinHeight = 269
@@ -19,7 +19,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   OnCreate = FormCreate
   DesignSize = (
     516
-    246)
+    255)
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
@@ -38,41 +38,41 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label3: TLabel
     Left = 8
-    Top = 63
+    Top = 67
     Width = 29
     Height = 15
     Caption = 'Billed'
   end
   object Label4: TLabel
     Left = 8
-    Top = 83
+    Top = 87
     Width = 47
     Height = 15
     Caption = 'Received'
   end
   object Label5: TLabel
     Left = 8
-    Top = 107
+    Top = 111
     Width = 35
     Height = 15
     Caption = 'Owing'
   end
   object Label6: TLabel
     Left = 8
-    Top = 130
+    Top = 134
     Width = 50
     Height = 15
     Caption = 'Allocated'
   end
   object Label7: TLabel
     Left = 8
-    Top = 153
+    Top = 157
     Width = 41
     Height = 15
     Caption = 'Balance'
   end
   object Label8: TLabel
-    Left = 106
+    Left = 111
     Top = 23
     Width = 59
     Height = 15
@@ -80,35 +80,35 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label9: TLabel
     Left = 8
-    Top = 182
-    Width = 26
+    Top = 186
+    Width = 25
     Height = 15
     Caption = 'Total'
   end
   object Label10: TLabel
     Left = 8
-    Top = 204
+    Top = 208
     Width = 56
     Height = 15
     Caption = 'Receipting'
   end
   object Label11: TLabel
     Left = 8
-    Top = 227
+    Top = 231
     Width = 63
     Height = 15
     Caption = 'Unallocated'
   end
   object Bevel1: TBevel
     Left = 11
-    Top = 173
+    Top = 177
     Width = 488
     Height = 3
     Shape = bsBottomLine
   end
   object Label12: TLabel
     Left = 127
-    Top = 38
+    Top = 42
     Width = 23
     Height = 13
     Alignment = taRightJustify
@@ -122,7 +122,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label13: TLabel
     Left = 164
-    Top = 38
+    Top = 42
     Width = 77
     Height = 13
     Alignment = taRightJustify
@@ -136,7 +136,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label14: TLabel
     Left = 449
-    Top = 38
+    Top = 42
     Width = 45
     Height = 13
     Alignment = taRightJustify
@@ -150,7 +150,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label15: TLabel
     Left = 351
-    Top = 38
+    Top = 42
     Width = 63
     Height = 13
     Alignment = taRightJustify
@@ -164,7 +164,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object Label16: TLabel
     Left = 273
-    Top = 38
+    Top = 42
     Width = 47
     Height = 13
     Alignment = taRightJustify
@@ -178,7 +178,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object btnCancel: TcxButton
     Left = 425
-    Top = 187
+    Top = 191
     Width = 72
     Height = 25
     Caption = '&Cancel'
@@ -274,7 +274,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object btnOK: TcxButton
     Left = 425
-    Top = 214
+    Top = 218
     Width = 72
     Height = 25
     Caption = '&OK'
@@ -371,7 +371,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object neFees: TcxCurrencyEdit
     Left = 86
-    Top = 125
+    Top = 129
     BeepOnEnter = False
     EditValue = 0c
     Properties.Alignment.Horz = taRightJustify
@@ -386,7 +386,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object neDisb: TcxCurrencyEdit
     Left = 170
-    Top = 125
+    Top = 129
     EditValue = 0c
     Properties.Alignment.Horz = taRightJustify
     Properties.OnChange = CalcTotals
@@ -399,7 +399,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object neUpCred: TcxCurrencyEdit
     Left = 256
-    Top = 125
+    Top = 129
     EditValue = '0'
     Properties.Alignment.Horz = taRightJustify
     Properties.OnChange = CalcTotals
@@ -412,7 +412,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object neAntd: TcxCurrencyEdit
     Left = 343
-    Top = 125
+    Top = 129
     EditValue = '0'
     Properties.Alignment.Horz = taRightJustify
     Properties.OnChange = CalcTotals
@@ -425,7 +425,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object neSund: TcxCurrencyEdit
     Left = 431
-    Top = 125
+    Top = 129
     EditValue = '0'
     Properties.Alignment.Horz = taRightJustify
     Properties.OnChange = CalcTotals
@@ -437,7 +437,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     Width = 64
   end
   object lblRcptno: TcxLabel
-    Left = 51
+    Left = 54
     Top = 3
     AutoSize = False
     ParentFont = False
@@ -446,7 +446,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     Width = 50
   end
   object lblBillRefno: TcxLabel
-    Left = 51
+    Left = 54
     Top = 22
     AutoSize = False
     ParentFont = False
@@ -455,7 +455,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     Width = 50
   end
   object lblDispatched: TcxLabel
-    Left = 169
+    Left = 174
     Top = 22
     AutoSize = False
     ParentFont = False
@@ -471,7 +471,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     Left = 6
     Top = 248
     Width = 496
-    Height = 0
+    Height = 9
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 10
     Properties.ActivePage = tsCheqReqs
@@ -480,7 +480,6 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     Properties.HotTrack = True
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = True
-    ExplicitHeight = 135
     ClientRectRight = 0
     ClientRectTop = 0
     object tsCheqReqs: TcxTabSheet
@@ -579,7 +578,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlFeesBilled: TcxNumberLabel
     Left = 86
-    Top = 61
+    Top = 65
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -607,7 +606,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlDisbBilled: TcxNumberLabel
     Left = 172
-    Top = 61
+    Top = 65
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -635,7 +634,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlUpCredBilled: TcxNumberLabel
     Left = 256
-    Top = 61
+    Top = 65
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -663,7 +662,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlAntdBilled: TcxNumberLabel
     Left = 345
-    Top = 61
+    Top = 65
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -691,7 +690,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlSundBilled: TcxNumberLabel
     Left = 430
-    Top = 61
+    Top = 65
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -719,7 +718,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlFeesRec: TcxNumberLabel
     Left = 86
-    Top = 81
+    Top = 85
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -747,7 +746,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlDisbRec: TcxNumberLabel
     Left = 172
-    Top = 81
+    Top = 85
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -775,7 +774,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlUpCredRec: TcxNumberLabel
     Left = 256
-    Top = 81
+    Top = 85
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -803,7 +802,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlAntdRec: TcxNumberLabel
     Left = 344
-    Top = 81
+    Top = 85
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -831,7 +830,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlSundRec: TcxNumberLabel
     Left = 430
-    Top = 81
+    Top = 85
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -859,7 +858,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlFeesOwing: TcxNumberLabel
     Left = 86
-    Top = 105
+    Top = 109
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -887,7 +886,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlDisbOwing: TcxNumberLabel
     Left = 172
-    Top = 105
+    Top = 109
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -915,7 +914,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlUpCredOwing: TcxNumberLabel
     Left = 255
-    Top = 105
+    Top = 109
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -943,7 +942,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlAntdOwing: TcxNumberLabel
     Left = 345
-    Top = 105
+    Top = 109
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -971,7 +970,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlSundOwing: TcxNumberLabel
     Left = 430
-    Top = 105
+    Top = 109
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -999,7 +998,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlFeesBalance: TcxNumberLabel
     Left = 86
-    Top = 151
+    Top = 155
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1027,7 +1026,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlDisbBalance: TcxNumberLabel
     Left = 172
-    Top = 151
+    Top = 155
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1055,7 +1054,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlUpCredBalance: TcxNumberLabel
     Left = 256
-    Top = 151
+    Top = 155
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1083,7 +1082,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlAntdBalance: TcxNumberLabel
     Left = 345
-    Top = 151
+    Top = 155
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1111,7 +1110,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlSundBalance: TcxNumberLabel
     Left = 430
-    Top = 151
+    Top = 155
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1139,7 +1138,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlTotal: TcxNumberLabel
     Left = 86
-    Top = 180
+    Top = 184
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1167,7 +1166,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlReceipt: TcxNumberLabel
     Left = 86
-    Top = 202
+    Top = 206
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1195,7 +1194,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object nlUnallocated: TcxNumberLabel
     Left = 86
-    Top = 225
+    Top = 229
     AutoSize = False
     Caption = '$0.00'
     DecimalPlaces = 2
@@ -1223,7 +1222,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
   end
   object lblBillCredit: TcxLabel
     Left = 218
-    Top = 183
+    Top = 187
     AutoSize = False
     Caption = 
       'If you continue with this transaction, this bill will be in cred' +
@@ -1231,13 +1230,14 @@ object frmReceiptDistribute: TfrmReceiptDistribute
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clRed
-    Style.Font.Height = -13
+    Style.Font.Height = -12
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = [fsBold]
     Style.IsFontAssigned = True
     Properties.WordWrap = True
+    Transparent = True
     Visible = False
-    Height = 56
+    Height = 49
     Width = 169
   end
   object qryBill: TUniQuery
@@ -1287,7 +1287,7 @@ object frmReceiptDistribute: TfrmReceiptDistribute
       item
         DataType = ftUnknown
         Name = 'nmemo'
-        Value = nil
+        Value = Null
       end>
   end
   object dsDist: TUniDataSource

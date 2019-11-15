@@ -12,7 +12,8 @@ uses
   cxCheckBox, cxCurrencyEdit, cxTextEdit, cxGridBandedTableView,
   cxGridDBBandedTableView, cxPC, Menus, cxLookAndFeels, cxPCdxBarPopupMenu,
   cxNavigator, dxBarBuiltInMenu,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxNumberLabel;
+  cxDataControllerConditionalFormattingRulesManagerDialog, cxNumberLabel,
+  dxDateRanges;
 
 type
   TfrmReceiptDistribute = class(TForm)
@@ -124,7 +125,7 @@ begin
     working with a sub bill and pull the params from that
     }
 
-   if NSubBill > 0 then
+   if (NSubBill > 0) then
    begin
       dataSet := qrySubBill;
       dataSet.ParamByName('NMEMO').AsInteger := NMemo;
@@ -149,6 +150,8 @@ begin
          qryDist.Close;
          qryDist.ParamByName('NMEMO').AsInteger := NMemo;
          qryDist.Open;
+
+         lblDispatched.Caption := DateToStr(FieldByName('DISPATCHED').AsDateTime);
 
          lblBillRefno.Caption := FieldByName('REFNO').AsString;
 
@@ -177,6 +180,7 @@ begin
          end;
 
          neFees.Value := Fees;
+
 
 //         nlFeesBilled.AsCurrency := FieldByName('FEES').AsCurrency + FieldByName('FEESTAX').AsCurrency - FieldByName('FEES_WOFF').AsCurrency - FieldByName('FEESTAX_WOFF').AsCurrency;
          nlFeesBilled.AsCurrency := FieldByName('FEES').AsCurrency + FieldByName('FEESTAX').AsCurrency - FieldByName('FEES_WOFF').AsCurrency - FieldByName('FEESTAX_WOFF').AsCurrency;
