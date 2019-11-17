@@ -42,9 +42,23 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   object Label4: TLabel
     Left = 9
     Top = 57
-    Width = 25
+    Width = 24
     Height = 15
     Caption = 'Type'
+  end
+  object Label19: TLabel
+    Left = 6
+    Top = 370
+    Width = 35
+    Height = 15
+    Caption = '0/4000'
+  end
+  object Label20: TLabel
+    Left = 6
+    Top = 387
+    Width = 58
+    Height = 15
+    Caption = '(Max 4000)'
   end
   object cxButton1: TcxButton
     Left = 399
@@ -92,7 +106,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       C6FFFF6183FF963635FF964F4CFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-    TabOrder = 3
+    TabOrder = 2
   end
   object cxButton2: TcxButton
     Left = 481
@@ -139,7 +153,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       F2D2A6A6CD5CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    TabOrder = 4
+    TabOrder = 3
   end
   object lBy: TcxDBLabel
     Left = 75
@@ -149,22 +163,6 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     DataBinding.DataSource = dsMatterNotes
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
-  end
-  object mlNote: TcxDBRichEdit
-    Left = 75
-    Top = 79
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    DataBinding.DataField = 'NOTE'
-    DataBinding.DataSource = dsMatterNotes
-    Properties.PlainText = True
-    Properties.ScrollBars = ssVertical
-    Style.LookAndFeel.NativeStyle = True
-    StyleDisabled.LookAndFeel.NativeStyle = True
-    StyleFocused.LookAndFeel.NativeStyle = True
-    StyleHot.LookAndFeel.NativeStyle = True
-    TabOrder = 2
-    Height = 325
-    Width = 476
   end
   object cmbNoteType: TcxDBLookupComboBox
     Left = 75
@@ -232,8 +230,20 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       4087F846161E4DE3EAB99DEB0054490EC94E2AA54490085FA3655BD6ABDCFDA9
       6DF1B6A9F8ADC2756B1300BE91C75EEA31F9B94BFDFB00A44866EC44FCB23D92
       DB6CF80BF54A6944F3A08E160000000049454E44AE426082}
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnNotePrintClick
+  end
+  object mlNote: TcxDBRichEdit
+    Left = 75
+    Top = 82
+    DataBinding.DataField = 'NOTE'
+    DataBinding.DataSource = dsMatterNotes
+    Properties.MaxLength = 4000
+    Properties.PlainText = True
+    TabOrder = 6
+    OnKeyUp = mlNoteKeyUp
+    Height = 323
+    Width = 476
   end
   object qryMatterNotes: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -257,8 +267,8 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
         'select nvl(max(nvl(sequence,0))+1,1) as newsequence from mattern' +
         'otes'
       'where nmatter = :nmatter')
-    Left = 14
-    Top = 172
+    Left = 233
+    Top = 15
     ParamData = <
       item
         DataType = ftUnknown
@@ -271,15 +281,15 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   end
   object dsMatterNotesType: TUniDataSource
     DataSet = qryMatterNotesType
-    Left = 54
-    Top = 222
+    Left = 482
+    Top = 16
   end
   object qryMatterNotesType: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select * from MATTER_NOTES_TYPE')
-    Left = 11
-    Top = 208
+    Left = 409
+    Top = 16
   end
   object ppMatterNoteRpt: TppReport
     NoDataBehaviors = [ndBlankReport]
@@ -314,6 +324,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -346,9 +357,9 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 45
-    Top = 309
-    Version = '19.02'
+    Left = 298
+    Top = 22
+    Version = '20.0'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
