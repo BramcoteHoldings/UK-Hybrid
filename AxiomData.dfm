@@ -5592,7 +5592,9 @@ object dmAxiom: TdmAxiom
       '     AND ft.nmatter = m.nmatter(+)'
       '     AND NVL (ft.time_type, '#39'M'#39') <> '#39'H'#39
       '     AND ft.nfee IS NULL'
-      '     AND TRUNC (ft.created) = trunc(:created)'
+      
+        '     AND TRUNC (ft.created) = nvl(trunc(:created), TRUNC (ft.cre' +
+        'ated))'
       'ORDER BY ft.uniqueid'
       ''
       ''
@@ -5623,12 +5625,12 @@ object dmAxiom: TdmAxiom
     Top = 187
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'empcode'
-        Value = nil
+        Value = ''
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'created'
         Value = nil
       end>
@@ -6077,21 +6079,21 @@ object dmAxiom: TdmAxiom
   end
   object qryTmp3: TUniQuery
     Connection = uniInsight
-    Left = 274
-    Top = 658
+    Left = 275
+    Top = 633
   end
   object tblCountryList: TUniTable
     TableName = 'country_list'
     OrderFields = 'NAME'
     Connection = uniInsight
     KeyFields = 'name'
-    Left = 420
-    Top = 648
+    Left = 415
+    Top = 629
   end
   object dsCountryList: TUniDataSource
     DataSet = tblCountryList
-    Left = 488
-    Top = 651
+    Left = 491
+    Top = 632
   end
   object tbFolders: TUniTable
     TableName = 'AXIOM.RB_FOLDER'
@@ -6526,8 +6528,8 @@ object dmAxiom: TdmAxiom
       '        AND reason IS NULL'
       '        AND fileid IS NULL'
       '        AND author = :author')
-    Left = 557
-    Top = 658
+    Left = 558
+    Top = 645
     ParamData = <
       item
         DataType = ftString
@@ -6756,12 +6758,17 @@ object dmAxiom: TdmAxiom
         'e,'
       
         '         ft.end_date, ft.items, ft.uniqueid, ft.billtype, ft.emp' +
-        '_type, ft.notes, ft.mins'
+        '_type, ft.notes, ft.mins, m.title,'
+      
+        '         (select name from employee where code = ft.author) as e' +
+        'mp_name,'
+      '         m.longdescr'
       '    FROM feetmp ft, matter m'
       '   WHERE ft.nmatter = m.nmatter(+)'
       '     AND ft.uniqueid = :uniqueid')
-    Left = 341
-    Top = 681
+    Active = True
+    Left = 259
+    Top = 684
     ParamData = <
       item
         DataType = ftInteger
@@ -6772,7 +6779,7 @@ object dmAxiom: TdmAxiom
   end
   object ppFileNoteRpt: TppReport
     AutoStop = False
-    DataPipeline = frmTimeDiary.plTmpProcess
+    DataPipeline = plTmpProcess
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
@@ -6790,6 +6797,7 @@ object dmAxiom: TdmAxiom
     Units = utMillimeters
     AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    BeforePrint = ppFileNoteRptBeforePrint
     DeviceType = 'PDF'
     DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
@@ -6836,8 +6844,8 @@ object dmAxiom: TdmAxiom
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 416
-    Top = 691
+    Left = 487
+    Top = 690
     Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plTmpProcess'
@@ -7038,26 +7046,6 @@ object dmAxiom: TdmAxiom
         BandType = 4
         LayerName = Foreground1
       end
-      object pplblClient: TppLabel
-        DesignLayer = ppDesignLayer2
-        UserName = 'lblClient'
-        Border.mmPadding = 0
-        Caption = 'lblClient'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 9
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 4234
-        mmLeft = 34660
-        mmTop = 15610
-        mmWidth = 11907
-        BandType = 4
-        LayerName = Foreground1
-      end
       object ppRegion2: TppRegion
         DesignLayer = ppDesignLayer2
         UserName = 'Region1'
@@ -7103,7 +7091,7 @@ object dmAxiom: TdmAxiom
           Border.mmPadding = 0
           CharWrap = False
           DataField = 'NOTES'
-          DataPipeline = frmTimeDiary.plTmpProcess
+          DataPipeline = plTmpProcess
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Name = 'Arial'
@@ -7131,7 +7119,7 @@ object dmAxiom: TdmAxiom
         UserName = 'DBText2'
         Border.mmPadding = 0
         DataField = 'FILEID'
-        DataPipeline = frmTimeDiary.plTmpProcess
+        DataPipeline = plTmpProcess
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -7152,7 +7140,7 @@ object dmAxiom: TdmAxiom
         UserName = 'DBText10'
         Border.mmPadding = 0
         DataField = 'UNITS'
-        DataPipeline = frmTimeDiary.plTmpProcess
+        DataPipeline = plTmpProcess
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -7172,7 +7160,7 @@ object dmAxiom: TdmAxiom
         UserName = 'DBText11'
         Border.mmPadding = 0
         DataField = 'MINS'
-        DataPipeline = frmTimeDiary.plTmpProcess
+        DataPipeline = plTmpProcess
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -7187,32 +7175,13 @@ object dmAxiom: TdmAxiom
         BandType = 4
         LayerName = Foreground1
       end
-      object pplblMatterDesc: TppLabel
-        DesignLayer = ppDesignLayer2
-        UserName = 'lblMatterDesc'
-        Border.mmPadding = 0
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 9
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 3968
-        mmLeft = 34660
-        mmTop = 9790
-        mmWidth = 794
-        BandType = 4
-        LayerName = Foreground1
-      end
       object ppDBMemo2: TppDBMemo
         DesignLayer = ppDesignLayer2
         UserName = 'DBMemo2'
         Border.mmPadding = 0
         CharWrap = False
         DataField = 'REASON'
-        DataPipeline = frmTimeDiary.plTmpProcess
+        DataPipeline = plTmpProcess
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
@@ -7233,6 +7202,46 @@ object dmAxiom: TdmAxiom
         mmStopPosition = 0
         mmMinHeight = 0
         mmLeading = 0
+      end
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer2
+        UserName = 'DBText1'
+        Border.mmPadding = 0
+        DataField = 'LONGDESCR'
+        DataPipeline = plTmpProcess
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plTmpProcess'
+        mmHeight = 4233
+        mmLeft = 34660
+        mmTop = 9790
+        mmWidth = 148167
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer2
+        UserName = 'DBText3'
+        Border.mmPadding = 0
+        DataField = 'TITLE'
+        DataPipeline = plTmpProcess
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plTmpProcess'
+        mmHeight = 4233
+        mmLeft = 34660
+        mmTop = 15610
+        mmWidth = 148197
+        BandType = 4
+        LayerName = Foreground1
       end
     end
     object ppSummaryBand2: TppSummaryBand
@@ -7616,8 +7625,8 @@ object dmAxiom: TdmAxiom
       '          FROM bank_matter_trust'
       '         WHERE nmatter = :nmatter)'
       ' WHERE acct = :acct')
-    Left = 535
-    Top = 720
+    Left = 562
+    Top = 694
     ParamData = <
       item
         DataType = ftUnknown
@@ -8198,5 +8207,231 @@ object dmAxiom: TdmAxiom
     DataSet = qryTaxList
     Left = 865
     Top = 293
+  end
+  object dsTmpProcess: TUniDataSource
+    DataSet = qryTmpProcess
+    Left = 350
+    Top = 694
+  end
+  object plTmpProcess: TppDBPipeline
+    DataSource = dsTmpProcess
+    UserName = 'plTmpProcess'
+    Left = 421
+    Top = 697
+    object plTmpProcessppField1: TppField
+      FieldAlias = 'ROWID'
+      FieldName = 'ROWID'
+      FieldLength = 18
+      DisplayWidth = 18
+      Position = 0
+    end
+    object plTmpProcessppField2: TppField
+      FieldAlias = 'CREATED'
+      FieldName = 'CREATED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 1
+    end
+    object plTmpProcessppField3: TppField
+      FieldAlias = 'FILEID'
+      FieldName = 'FILEID'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 2
+    end
+    object plTmpProcessppField4: TppField
+      FieldAlias = 'AUTHOR'
+      FieldName = 'AUTHOR'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 3
+    end
+    object plTmpProcessppField5: TppField
+      FieldAlias = 'REASON'
+      FieldName = 'REASON'
+      FieldLength = 4000
+      DisplayWidth = 4000
+      Position = 4
+    end
+    object plTmpProcessppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'UNITS'
+      FieldName = 'UNITS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 5
+    end
+    object plTmpProcessppField7: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'RATE'
+      FieldName = 'RATE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 6
+    end
+    object plTmpProcessppField8: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'AMOUNT'
+      FieldName = 'AMOUNT'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 7
+    end
+    object plTmpProcessppField9: TppField
+      FieldAlias = 'TAXCODE'
+      FieldName = 'TAXCODE'
+      FieldLength = 8
+      DisplayWidth = 8
+      Position = 8
+    end
+    object plTmpProcessppField10: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'TAX'
+      FieldName = 'TAX'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 9
+    end
+    object plTmpProcessppField11: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'TAXRATE'
+      FieldName = 'TAXRATE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 10
+    end
+    object plTmpProcessppField12: TppField
+      FieldAlias = 'ELAPSED'
+      FieldName = 'ELAPSED'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 11
+    end
+    object plTmpProcessppField13: TppField
+      FieldAlias = 'EMPCODE'
+      FieldName = 'EMPCODE'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 12
+    end
+    object plTmpProcessppField14: TppField
+      FieldAlias = 'MATLOCATE'
+      FieldName = 'MATLOCATE'
+      FieldLength = 201
+      DisplayWidth = 201
+      Position = 13
+    end
+    object plTmpProcessppField15: TppField
+      FieldAlias = 'NMATTER'
+      FieldName = 'NMATTER'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 14
+    end
+    object plTmpProcessppField16: TppField
+      FieldAlias = 'TIME_TYPE'
+      FieldName = 'TIME_TYPE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 15
+    end
+    object plTmpProcessppField17: TppField
+      FieldAlias = 'FEE_TEMPLATE'
+      FieldName = 'FEE_TEMPLATE'
+      FieldLength = 15
+      DisplayWidth = 15
+      Position = 16
+    end
+    object plTmpProcessppField18: TppField
+      FieldAlias = 'START_DATE'
+      FieldName = 'START_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 17
+    end
+    object plTmpProcessppField19: TppField
+      FieldAlias = 'END_DATE'
+      FieldName = 'END_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 18
+    end
+    object plTmpProcessppField20: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ITEMS'
+      FieldName = 'ITEMS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 19
+    end
+    object plTmpProcessppField21: TppField
+      FieldAlias = 'UNIQUEID'
+      FieldName = 'UNIQUEID'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 20
+    end
+    object plTmpProcessppField22: TppField
+      FieldAlias = 'BILLTYPE'
+      FieldName = 'BILLTYPE'
+      FieldLength = 22
+      DisplayWidth = 22
+      Position = 21
+    end
+    object plTmpProcessppField23: TppField
+      FieldAlias = 'EMP_TYPE'
+      FieldName = 'EMP_TYPE'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 22
+    end
+    object plTmpProcessppField24: TppField
+      FieldAlias = 'NOTES'
+      FieldName = 'NOTES'
+      FieldLength = 4000
+      DisplayWidth = 4000
+      Position = 23
+    end
+    object plTmpProcessppField25: TppField
+      FieldAlias = 'MINS'
+      FieldName = 'MINS'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 24
+    end
+    object plTmpProcessppField26: TppField
+      FieldAlias = 'TITLE'
+      FieldName = 'TITLE'
+      FieldLength = 140
+      DisplayWidth = 140
+      Position = 25
+    end
+    object plTmpProcessppField27: TppField
+      FieldAlias = 'EMP_NAME'
+      FieldName = 'EMP_NAME'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 26
+    end
+    object plTmpProcessppField28: TppField
+      FieldAlias = 'LONGDESCR'
+      FieldName = 'LONGDESCR'
+      FieldLength = 400
+      DisplayWidth = 400
+      Position = 27
+    end
   end
 end
