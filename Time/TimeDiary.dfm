@@ -846,6 +846,7 @@ object frmTimeDiary: TfrmTimeDiary
     OnBeforeEditing = SchedulerTimeDiaryBeforeEditing
     OnBeforeSizingEvent = SchedulerTimeDiaryBeforeSizingEvent
     OnGetEventDisplayText = SchedulerTimeDiaryGetEventDisplayText
+    ExplicitTop = 60
     Splitters = {
       010000008E0000009000000093000000900000000100000095000000B6020000}
     StoredClientBounds = {0100000001000000E6040000B6020000}
@@ -3607,7 +3608,7 @@ object frmTimeDiary: TfrmTimeDiary
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Time Diary'
-      ReportDocument.CreationDate = 43725.421614745370000000
+      ReportDocument.CreationDate = 43789.588746458340000000
       ReportDocument.Creator = 'Insight'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -3687,8 +3688,8 @@ object frmTimeDiary: TfrmTimeDiary
     object plFeeTmpRptppField1: TppField
       FieldAlias = 'ROWID'
       FieldName = 'ROWID'
-      FieldLength = 0
-      DisplayWidth = 0
+      FieldLength = 18
+      DisplayWidth = 18
       Position = 0
     end
     object plFeeTmpRptppField2: TppField
@@ -3788,12 +3789,11 @@ object frmTimeDiary: TfrmTimeDiary
       Position = 12
     end
     object plFeeTmpRptppField14: TppField
-      Alignment = taRightJustify
       FieldAlias = 'UNIQUEID'
       FieldName = 'UNIQUEID'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtLargeInt
+      DisplayWidth = 15
       Position = 13
     end
     object plFeeTmpRptppField15: TppField
@@ -3814,8 +3814,8 @@ object frmTimeDiary: TfrmTimeDiary
     object plFeeTmpRptppField17: TppField
       FieldAlias = 'MATLOCATE'
       FieldName = 'MATLOCATE'
-      FieldLength = 161
-      DisplayWidth = 161
+      FieldLength = 201
+      DisplayWidth = 201
       Position = 16
     end
     object plFeeTmpRptppField18: TppField
@@ -4771,6 +4771,7 @@ object frmTimeDiary: TfrmTimeDiary
       '    FROM feetmp ft, matter m'
       '   WHERE ft.nmatter = m.nmatter(+)'
       '     AND ft.uniqueid = :uniqueid')
+    Active = True
     Left = 238
     Top = 612
     ParamData = <
@@ -4790,7 +4791,7 @@ object frmTimeDiary: TfrmTimeDiary
     DataSource = dsTmpProcess
     UserName = 'plTmpProcess'
     Left = 369
-    Top = 603
+    Top = 609
     object plTmpProcessppField1: TppField
       FieldAlias = 'ROWID'
       FieldName = 'ROWID'
@@ -4897,8 +4898,8 @@ object frmTimeDiary: TfrmTimeDiary
     object plTmpProcessppField14: TppField
       FieldAlias = 'MATLOCATE'
       FieldName = 'MATLOCATE'
-      FieldLength = 146
-      DisplayWidth = 146
+      FieldLength = 201
+      DisplayWidth = 201
       Position = 13
     end
     object plTmpProcessppField15: TppField
@@ -4949,12 +4950,11 @@ object frmTimeDiary: TfrmTimeDiary
       Position = 19
     end
     object plTmpProcessppField21: TppField
-      Alignment = taRightJustify
       FieldAlias = 'UNIQUEID'
       FieldName = 'UNIQUEID'
       FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
+      DataType = dtLargeInt
+      DisplayWidth = 15
       Position = 20
     end
     object plTmpProcessppField22: TppField

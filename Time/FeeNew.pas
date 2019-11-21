@@ -178,6 +178,7 @@ type
       Shift: TShiftState);
     procedure edMatterFindPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+    procedure icmbTypePropertiesEditValueChanged(Sender: TObject);
 
   private
     { Private declarations }
@@ -1625,16 +1626,21 @@ end;
 procedure TfrmFeeNew.PopulateWithoutMatter;
 begin
    icmbType.Properties.Items.Clear;
-   icmbType.Properties.Items.Add;
-   icmbType.Properties.Items.Items[0].Description := 'Overhead';
-   icmbType.Properties.Items.Items[0].Value := 'O';
+    icmbType.Properties.Items.Add;
+   icmbType.Properties.Items.Items[0].Description := 'Matter';
+   icmbType.Properties.Items.Items[0].Value := 'M';
    icmbType.Properties.Items.Items[0].Tag := 0;
-   icmbType.Properties.Items.Items[0].ImageIndex := 1;
+   icmbType.Properties.Items.Items[0].ImageIndex := 0;
    icmbType.Properties.Items.Add;
-   icmbType.Properties.Items.Items[1].Description := 'Held';
-   icmbType.Properties.Items.Items[1].Value := 'H';
-   icmbType.Properties.Items.Items[1].Tag := 1;
-   icmbType.Properties.Items.Items[1].ImageIndex := 2;
+   icmbType.Properties.Items.Items[1].Description := 'Overhead';
+   icmbType.Properties.Items.Items[1].Value := 'O';
+   icmbType.Properties.Items.Items[1].Tag := 0;
+   icmbType.Properties.Items.Items[1].ImageIndex := 1;
+   icmbType.Properties.Items.Add;
+   icmbType.Properties.Items.Items[2].Description := 'Held';
+   icmbType.Properties.Items.Items[2].Value := 'H';
+   icmbType.Properties.Items.Items[2].Tag := 1;
+   icmbType.Properties.Items.Items[2].ImageIndex := 2;
    icmbType.EditValue := 'O';
 end;
 
@@ -1666,6 +1672,26 @@ begin
    icmbType.Properties.Items.Items[0].Value := 'M';
    icmbType.Properties.Items.Items[0].Tag := 0;
    icmbType.Properties.Items.Items[0].ImageIndex := 0;
+   icmbType.Properties.Items.Add;
+   icmbType.Properties.Items.Items[1].Description := 'Overhead';
+   icmbType.Properties.Items.Items[1].Value := 'O';
+   icmbType.Properties.Items.Items[1].Tag := 1;
+   icmbType.Properties.Items.Items[1].ImageIndex := 1;
+   icmbType.Properties.Items.Add;
+   icmbType.Properties.Items.Items[2].Description := 'Held';
+   icmbType.Properties.Items.Items[2].Value := 'H';
+   icmbType.Properties.Items.Items[2].Tag := 2;
+   icmbType.Properties.Items.Items[2].ImageIndex := 2;
+end;
+
+procedure TfrmFeeNew.icmbTypePropertiesEditValueChanged(Sender: TObject);
+begin
+   if icmbType.EditValue = 'O' then
+   begin
+      edMatterFind.Clear;
+      lblMatterDesc.Clear;
+      lblClient.Clear;
+   end;
 end;
 
 procedure TfrmFeeNew.icmbTypePropertiesInitPopup(Sender: TObject);

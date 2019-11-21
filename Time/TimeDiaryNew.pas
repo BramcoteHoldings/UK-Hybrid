@@ -161,6 +161,7 @@ type
     procedure meMessagePropertiesChange(Sender: TObject);
     procedure meNotesPropertiesChange(Sender: TObject);
     procedure cmbMatterFindKeyPress(Sender: TObject; var Key: Char);
+    procedure icmbTypePropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     FEditing: boolean;
@@ -1262,6 +1263,17 @@ begin
   inherited;
   UpdateAmount;
    Modified := True;
+end;
+
+procedure TfrmTimeDiaryNew.icmbTypePropertiesEditValueChanged(Sender: TObject);
+begin
+   inherited;
+   if icmbType.EditValue = 'O' then
+   begin
+      cmbMatterFind.Clear;
+      lblMatterDesc.Clear;
+      lblClient.Clear;
+   end;
 end;
 
 procedure TfrmTimeDiaryNew.icmbTypePropertiesInitPopup(Sender: TObject);
