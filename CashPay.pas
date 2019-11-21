@@ -1408,6 +1408,7 @@ begin
          ParamByName('TYPE').AsString := qryAllocs.FieldByName('TYPE').AsString;
          ParamByName('BILLED').AsString := 'N';
          ParamByName('PRIVATE').AsString := 'N';
+         ParamByName('MRV_NALLOC').Clear;
          ExecSql;
          Close;
        end;

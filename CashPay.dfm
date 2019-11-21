@@ -622,7 +622,7 @@ object frmCashpay: TfrmCashpay
       object Label2: TLabel
         Left = 9
         Top = 76
-        Width = 40
+        Width = 39
         Height = 15
         Caption = 'Date To'
         Transparent = True
@@ -638,7 +638,7 @@ object frmCashpay: TfrmCashpay
       object Label7: TLabel
         Left = 9
         Top = 126
-        Width = 104
+        Width = 103
         Height = 15
         Caption = 'Cheque Number To'
         Transparent = True
@@ -1093,7 +1093,7 @@ object frmCashpay: TfrmCashpay
         'oc.ncheque,'
       
         '       alloc.nmemo, (alloc.amount * -1) as amount_extax, nvl(mrv' +
-        '_nalloc,0) mrv_nalloc '
+        '_nalloc, 0) mrv_nalloc '
       '  FROM alloc'
       ' WHERE ncheque = :p_ncheque AND ncheque <> 0'
       ''
@@ -1794,8 +1794,8 @@ object frmCashpay: TfrmCashpay
   end
   object mMoveMatter: TPopupMenu
     OnPopup = mMoveMatterPopup
-    Left = 561
-    Top = 57
+    Left = 600
+    Top = 101
     object MoveMatter1: TMenuItem
       Caption = 'Move to different matter'
       OnClick = MoveMatter1Click
@@ -2634,7 +2634,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3186,7 +3186,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
