@@ -201,12 +201,9 @@ type
     ppLabel67: TppLabel;
     ppLabel54: TppLabel;
     plMatterDetails: TppDBPipeline;
-    ppDBText22: TppDBText;
     ppLabel44: TppLabel;
-    ppDBText23: TppDBText;
     ppLabel45: TppLabel;
-    ppRichText1: TppRichText;
-    raCodeModule1: TraCodeModule;
+    ppmemoNotes: TppRichText;
     styRed: TcxStyle;
     styGreen: TcxStyle;
     styDefault: TcxStyle;
@@ -1567,6 +1564,8 @@ type
     cxDBButtonEdit4: TcxDBButtonEdit;
     Label75: TLabel;
     tvSearchesCOMMENTS: TcxGridDBColumn;
+    pplblClientName: TppLabel;
+    pplblMatterNo: TppLabel;
     procedure tbtnFindClick(Sender: TObject);
     procedure pageMatterChange(Sender: TObject);
     procedure tbtnSnapshotClick(Sender: TObject);
@@ -2034,6 +2033,7 @@ type
     procedure actViewBillUpdate(Sender: TObject);
     procedure actAutoReceiptUpdate(Sender: TObject);
     procedure actAutoReceiptExecute(Sender: TObject);
+    procedure rptMatterNotesBeforePrint(Sender: TObject);
   protected
       procedure RefreshSearch(var Message: TMessage); message SEARCH_REFRESH;
   private
@@ -9435,12 +9435,12 @@ end;
 procedure TfrmMatters.bbtnMatterNotesClick(Sender: TObject);
 begin
    try
-      with qryMatterNotes do
+{      with qryMatterNotes do
       begin
          close;
          ParamByName('NMATTER').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          Open;
-      end;
+      end;}
       rptMatterNotes.Print;
    except
          // error
@@ -13003,6 +13003,14 @@ end;
 procedure TfrmMatters.rgDisplayOptionClick(Sender: TObject);
 begin
    UpdateDebtorNotes;
+end;
+
+procedure TfrmMatters.rptMatterNotesBeforePrint(Sender: TObject);
+begin
+   pplblMatterNo.Caption := qryMatter.FieldByName('fileid').AsString;
+   pplblClientName.Caption := lblClientCode.Caption +' - '+ dblblTitle.Caption;
+   ppLabel40.Caption := dmAxiom.EntityName;
+   ppMemoNotes.RichText := qryMatter.FieldByName('notes').AsString;
 end;
 
 procedure TfrmMatters.chkExcludeBillReversalsClick(Sender: TObject);
