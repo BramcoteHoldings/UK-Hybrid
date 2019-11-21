@@ -4613,42 +4613,48 @@ var
   bPrefixing: boolean;
   iCtr: integer;
 begin
-  try
-    if (PrevRefno <> '') then
-      sTmp := '000000' + IntToStr(StrToInt(PrevRefno) + 1)
-    else
-      sTmp := '0000001';
-    NextRefno := Copy(sTmp, Length(sTmp) + 1 - Length(PrevRefno), Length(PrevRefno));
-  except
-    // They have characters in their reference number
-    sTmp := PrevRefno;
-    bPrefixing := False;
-    sPrefix := '';
-    sValue := '';
-    for iCtr := Length(sTmp) downto 1 do
-    begin
-      if not bPrefixing then
-        if Pos(Copy(sTmp, iCtr, 1), '0123456789') > 0 then
-          sValue := Copy(sTmp, iCtr, 1) + sValue
-        else
-          bPrefixing := True;
-      if bPrefixing then
-        sPrefix := Copy(sTmp, iCtr, 1) + sPrefix;
-    end;
-    try
-     if sValue = '' then
-      sValue := '0';
-
-      sTmp := '000000' + IntToStr(StrToInt(sValue) + 1);
-//      NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - 1, Length(sValue));
-      if PadLength = -1  then
-         NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - Length(sValue), Length(sValue))
+   try
+      if (PrevRefno <> '') then
+      begin
+         sTmp := '000000' + IntToStr(StrToInt(PrevRefno) + 1);
+         if PadLength = -1  then
+            NextRefno := Copy(sTmp, Length(sTmp) + 1 - Length(PrevRefno), Length(PrevRefno))
+         else
+            NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - PadLength, PadLength);
+      end
       else
-         NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - PadLength, PadLength);
-    except
-      NextRefno := '1';
-    end;
-  end;
+         NextRefno := '1';
+  //  NextRefno := sTmp;  // Copy(sTmp, Length(sTmp) + 1 - Length(PrevRefno), Length(PrevRefno));
+   except
+      // They have characters in their reference number
+      sTmp := PrevRefno;
+      bPrefixing := False;
+      sPrefix := '';
+      sValue := '';
+      for iCtr := Length(sTmp) downto 1 do
+      begin
+         if not bPrefixing then
+            if Pos(Copy(sTmp, iCtr, 1), '0123456789') > 0 then
+               sValue := Copy(sTmp, iCtr, 1) + sValue
+         else
+            bPrefixing := True;
+         if bPrefixing then
+            sPrefix := Copy(sTmp, iCtr, 1) + sPrefix;
+      end;
+      try
+         if sValue = '' then
+            sValue := '0';
+
+         sTmp := '000000' + IntToStr(StrToInt(sValue) + 1);
+//       NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - 1, Length(sValue));
+         if PadLength = -1  then
+            NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - Length(sValue), Length(sValue))
+         else
+            NextRefno := sPrefix + Copy(sTmp, Length(sTmp) + 1 - PadLength, PadLength);
+      except
+         NextRefno := '1';
+      end;
+   end;
 end;
 
 procedure OpenPrecedent(FileName: string);
@@ -12132,8 +12138,8 @@ begin
    Result := StringReplace(Result,C_MACRO_USERPROFILE,GUserProfile,[rfReplaceAll, rfIgnoreCase]);
    Result := StringReplace(Result,C_MACRO_TEMPDIR,GTempPath,[rfReplaceAll, rfIgnoreCase]);
    Result := StringReplace(Result,C_MACRO_NMATTER,IntToStr(ANMatter),[rfReplaceAll, rfIgnoreCase]);
-   Result := StringReplace(Result,C_MACRO_FILEID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'FILEID'),[rfReplaceAll, rfIgnoreCase]);
-   Result := StringReplace(Result,C_MACRO_CLIENTID, TableString('MATTER','NMATTER',IntToStr(ANMatter),'CLIENTID'),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_FILEID, TableString('MATTER','NMATTER', ANMatter,'FILEID'),[rfReplaceAll, rfIgnoreCase]);
+   Result := StringReplace(Result,C_MACRO_CLIENTID, TableString('MATTER','NMATTER', ANMatter,'CLIENTID'),[rfReplaceAll, rfIgnoreCase]);
 
    Result := StringReplace(Result,C_MACRO_DATE,FormatDateTime('dd-mm-yyyy',Now()) ,[rfReplaceAll, rfIgnoreCase]);
    Result := StringReplace(Result,C_MACRO_TIME,FormatDateTime('hh-nn-ss',Now()),[rfReplaceAll, rfIgnoreCase]);
