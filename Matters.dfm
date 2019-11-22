@@ -495,7 +495,7 @@ object frmMatters: TfrmMatters
     end
     object lblProspectiveMatter: TcxLabel
       Left = 820
-      Top = -1
+      Top = 0
       Caption = 'Prospective Matter'
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -12800,8 +12800,8 @@ object frmMatters: TfrmMatters
     object ppUnconCheqReqppField2: TppField
       FieldAlias = 'BANK'
       FieldName = 'BANK'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 1
     end
     object ppUnconCheqReqppField3: TppField
@@ -14144,8 +14144,6 @@ object frmMatters: TfrmMatters
     end
   end
   object rptMatterNotes: TppReport
-    AutoStop = False
-    DataPipeline = plMatterNotes
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
@@ -14162,6 +14160,7 @@ object frmMatters: TfrmMatters
     Units = utMillimeters
     AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    BeforePrint = rptMatterNotesBeforePrint
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
@@ -14210,10 +14209,10 @@ object frmMatters: TfrmMatters
     Top = 258
     Version = '20.0'
     mmColumnWidth = 0
-    DataPipelineName = 'plMatterNotes'
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
+      PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 25665
       mmPrintPosition = 0
@@ -14429,12 +14428,13 @@ object frmMatters: TfrmMatters
         Font.Style = [fsBold]
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
+        TextAlignment = taRightJustified
         Transparent = True
         WordWrap = True
-        mmHeight = 4233
-        mmLeft = 3440
+        mmHeight = 4498
+        mmLeft = 1323
         mmTop = 29369
-        mmWidth = 32015
+        mmWidth = 34131
         BandType = 4
         LayerName = Foreground4
       end
@@ -14459,28 +14459,6 @@ object frmMatters: TfrmMatters
         BandType = 4
         LayerName = Foreground4
       end
-      object ppDBText22: TppDBText
-        DesignLayer = ppDesignLayer5
-        UserName = 'DBText22'
-        AutoSize = True
-        Border.Weight = 1.000000000000000000
-        Border.mmPadding = 0
-        DataField = 'FILEID'
-        DataPipeline = plMatterNotes
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Segoe UI'
-        Font.Size = 10
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'plMatterNotes'
-        mmHeight = 4022
-        mmLeft = 38100
-        mmTop = 11113
-        mmWidth = 10922
-        BandType = 4
-        LayerName = Foreground4
-      end
       object ppLabel44: TppLabel
         DesignLayer = ppDesignLayer5
         UserName = 'Label44'
@@ -14499,28 +14477,6 @@ object frmMatters: TfrmMatters
         mmLeft = 23548
         mmTop = 11113
         mmWidth = 11906
-        BandType = 4
-        LayerName = Foreground4
-      end
-      object ppDBText23: TppDBText
-        DesignLayer = ppDesignLayer5
-        UserName = 'DBText23'
-        AutoSize = True
-        Border.Weight = 1.000000000000000000
-        Border.mmPadding = 0
-        DataField = 'SEARCH'
-        DataPipeline = plMatterNotes
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Segoe UI'
-        Font.Size = 10
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'plMatterNotes'
-        mmHeight = 4022
-        mmLeft = 38100
-        mmTop = 18785
-        mmWidth = 14605
         BandType = 4
         LayerName = Foreground4
       end
@@ -14545,27 +14501,69 @@ object frmMatters: TfrmMatters
         BandType = 4
         LayerName = Foreground4
       end
-      object ppRichText1: TppRichText
+      object pplblClientName: TppLabel
         DesignLayer = ppDesignLayer5
-        UserName = 'RichText1'
+        UserName = 'Label4'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Label4'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4498
+        mmLeft = 38091
+        mmTop = 18798
+        mmWidth = 148167
+        BandType = 4
+        LayerName = Foreground4
+      end
+      object pplblMatterNo: TppLabel
+        DesignLayer = ppDesignLayer5
+        UserName = 'MatterNo'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'MatterNo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Segoe UI'
+        Font.Size = 10
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4498
+        mmLeft = 38099
+        mmTop = 11112
+        mmWidth = 90752
+        BandType = 4
+        LayerName = Foreground4
+      end
+      object ppmemoNotes: TppRichText
+        DesignLayer = ppDesignLayer5
+        UserName = 'memoNotes'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Segoe UI'
-        Font.Size = 8
+        Font.Size = 10
         Font.Style = []
         Border.Weight = 1.000000000000000000
         Border.mmPadding = 0
-        Caption = 'RichText1'
+        Caption = 'memoNotes'
         ExportRTFAsBitmap = False
         RichText = 
-          '{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Aria' +
-          'l;}{\f1\fnil MS Sans Serif;}}'#13#10'\viewkind4\uc1\pard\lang3081\f0\f' +
-          's20  \lang1033\f1\fs16\par'#13#10'}'#13#10#0
+          '{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil Sego' +
+          'e UI;}}'#13#10'\viewkind4\uc1\pard\lang3081\f0\fs20  \lang1033\par'#13#10'}'#13 +
+          #10#0
         RemoveEmptyLines = False
         Stretch = True
         mmHeight = 18521
         mmLeft = 38100
-        mmTop = 52917
+        mmTop = 52652
         mmWidth = 148167
         BandType = 4
         LayerName = Foreground4
@@ -14574,19 +14572,6 @@ object frmMatters: TfrmMatters
         mmStopPosition = 0
         mmMinHeight = 0
         mmLeftMargin = 794
-      end
-    end
-    object raCodeModule1: TraCodeModule
-      object raProgramInfo1: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'RichText1OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure RichText1OnPrint;'#13#10'begin'#13#10'   RichText1.RichText := plM' +
-          'atterDetails['#39'NOTES'#39'];'#13#10'end;'#13#10
-        raProgram.ComponentName = 'RichText1'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
       end
     end
     object ppDesignLayers5: TppDesignLayers
@@ -14604,6 +14589,631 @@ object frmMatters: TfrmMatters
     UserName = 'plMatterDetails'
     Left = 638
     Top = 245
+    object plMatterDetailsppField1: TppField
+      FieldAlias = 'SUBTYPE'
+      FieldName = 'SUBTYPE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 0
+    end
+    object plMatterDetailsppField2: TppField
+      FieldAlias = 'SUBSTATUS'
+      FieldName = 'SUBSTATUS'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 1
+    end
+    object plMatterDetailsppField3: TppField
+      FieldAlias = 'NMATTER'
+      FieldName = 'NMATTER'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 2
+    end
+    object plMatterDetailsppField4: TppField
+      FieldAlias = 'OPENED'
+      FieldName = 'OPENED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 3
+    end
+    object plMatterDetailsppField5: TppField
+      FieldAlias = 'PARTNER'
+      FieldName = 'PARTNER'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 4
+    end
+    object plMatterDetailsppField6: TppField
+      FieldAlias = 'AUTHOR'
+      FieldName = 'AUTHOR'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 5
+    end
+    object plMatterDetailsppField7: TppField
+      FieldAlias = 'TYPE'
+      FieldName = 'TYPE'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 6
+    end
+    object plMatterDetailsppField8: TppField
+      FieldAlias = 'FILEID'
+      FieldName = 'FILEID'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 7
+    end
+    object plMatterDetailsppField9: TppField
+      FieldAlias = 'STATUS'
+      FieldName = 'STATUS'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 8
+    end
+    object plMatterDetailsppField10: TppField
+      FieldAlias = 'NARCHIVE'
+      FieldName = 'NARCHIVE'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 9
+    end
+    object plMatterDetailsppField11: TppField
+      FieldAlias = 'SHORTDESCR'
+      FieldName = 'SHORTDESCR'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 10
+    end
+    object plMatterDetailsppField12: TppField
+      FieldAlias = 'LONGDESCR'
+      FieldName = 'LONGDESCR'
+      FieldLength = 400
+      DisplayWidth = 400
+      Position = 11
+    end
+    object plMatterDetailsppField13: TppField
+      FieldAlias = 'ARCHIVED'
+      FieldName = 'ARCHIVED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 12
+    end
+    object plMatterDetailsppField14: TppField
+      FieldAlias = 'ACCT'
+      FieldName = 'ACCT'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 13
+    end
+    object plMatterDetailsppField15: TppField
+      FieldAlias = 'CONTACT'
+      FieldName = 'CONTACT'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 14
+    end
+    object plMatterDetailsppField16: TppField
+      FieldAlias = 'NCLIENT'
+      FieldName = 'NCLIENT'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 15
+    end
+    object plMatterDetailsppField17: TppField
+      FieldAlias = 'LASTTRANS'
+      FieldName = 'LASTTRANS'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 16
+    end
+    object plMatterDetailsppField18: TppField
+      FieldAlias = 'CONTROLLER'
+      FieldName = 'CONTROLLER'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 17
+    end
+    object plMatterDetailsppField19: TppField
+      FieldAlias = 'CLIENTID'
+      FieldName = 'CLIENTID'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 18
+    end
+    object plMatterDetailsppField20: TppField
+      FieldAlias = 'NNAME'
+      FieldName = 'NNAME'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 19
+    end
+    object plMatterDetailsppField21: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'CLOSED'
+      FieldName = 'CLOSED'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 20
+    end
+    object plMatterDetailsppField22: TppField
+      FieldAlias = 'BRANCH'
+      FieldName = 'BRANCH'
+      FieldLength = 5
+      DisplayWidth = 5
+      Position = 21
+    end
+    object plMatterDetailsppField23: TppField
+      FieldAlias = 'SLEDATE'
+      FieldName = 'SLEDATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 22
+    end
+    object plMatterDetailsppField24: TppField
+      FieldAlias = 'OPERATOR'
+      FieldName = 'OPERATOR'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 23
+    end
+    object plMatterDetailsppField25: TppField
+      FieldAlias = 'ENTITY'
+      FieldName = 'ENTITY'
+      FieldLength = 2
+      DisplayWidth = 2
+      Position = 24
+    end
+    object plMatterDetailsppField26: TppField
+      FieldAlias = 'NOTES'
+      FieldName = 'NOTES'
+      FieldLength = 4000
+      DisplayWidth = 4000
+      Position = 25
+    end
+    object plMatterDetailsppField27: TppField
+      FieldAlias = 'JURISDICTION'
+      FieldName = 'JURISDICTION'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 26
+    end
+    object plMatterDetailsppField28: TppField
+      FieldAlias = 'WORKFLOW'
+      FieldName = 'WORKFLOW'
+      FieldLength = 11
+      DisplayWidth = 11
+      Position = 27
+    end
+    object plMatterDetailsppField29: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'DEBTORSTATUS'
+      FieldName = 'DEBTORSTATUS'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 28
+    end
+    object plMatterDetailsppField30: TppField
+      FieldAlias = 'OPREF'
+      FieldName = 'OPREF'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 29
+    end
+    object plMatterDetailsppField31: TppField
+      FieldAlias = 'DEBTORDATE'
+      FieldName = 'DEBTORDATE'
+      FieldLength = 500
+      DisplayWidth = 500
+      Position = 30
+    end
+    object plMatterDetailsppField32: TppField
+      FieldAlias = 'DEBTORNOTE'
+      FieldName = 'DEBTORNOTE'
+      FieldLength = 1500
+      DisplayWidth = 1500
+      Position = 31
+    end
+    object plMatterDetailsppField33: TppField
+      FieldAlias = 'BILL_TO'
+      FieldName = 'BILL_TO'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 32
+    end
+    object plMatterDetailsppField34: TppField
+      FieldAlias = 'REFERREDBY'
+      FieldName = 'REFERREDBY'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 33
+    end
+    object plMatterDetailsppField35: TppField
+      FieldAlias = 'PARTY3'
+      FieldName = 'PARTY3'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 34
+    end
+    object plMatterDetailsppField36: TppField
+      FieldAlias = 'PARTY1'
+      FieldName = 'PARTY1'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 35
+    end
+    object plMatterDetailsppField37: TppField
+      FieldAlias = 'PARTY2'
+      FieldName = 'PARTY2'
+      FieldLength = 85
+      DisplayWidth = 85
+      Position = 36
+    end
+    object plMatterDetailsppField38: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'EXPECTED_VALUE'
+      FieldName = 'EXPECTED_VALUE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 37
+    end
+    object plMatterDetailsppField39: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BUDGET_TOTAL'
+      FieldName = 'BUDGET_TOTAL'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 38
+    end
+    object plMatterDetailsppField40: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BUDGET_DISB'
+      FieldName = 'BUDGET_DISB'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 39
+    end
+    object plMatterDetailsppField41: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'BUDGET_FEES'
+      FieldName = 'BUDGET_FEES'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 40
+    end
+    object plMatterDetailsppField42: TppField
+      FieldAlias = 'SUBJURISDICTION'
+      FieldName = 'SUBJURISDICTION'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 41
+    end
+    object plMatterDetailsppField43: TppField
+      FieldAlias = 'FEEBASIS'
+      FieldName = 'FEEBASIS'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 42
+    end
+    object plMatterDetailsppField44: TppField
+      FieldAlias = 'ARCHIVENUM'
+      FieldName = 'ARCHIVENUM'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 43
+    end
+    object plMatterDetailsppField45: TppField
+      FieldAlias = 'ARCHIVETYPECODE'
+      FieldName = 'ARCHIVETYPECODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 44
+    end
+    object plMatterDetailsppField46: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'SPEC_PURPOSE'
+      FieldName = 'SPEC_PURPOSE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 45
+    end
+    object plMatterDetailsppField47: TppField
+      FieldAlias = 'LASTTRUST'
+      FieldName = 'LASTTRUST'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 46
+    end
+    object plMatterDetailsppField48: TppField
+      FieldAlias = 'COMPLETED'
+      FieldName = 'COMPLETED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 47
+    end
+    object plMatterDetailsppField49: TppField
+      FieldAlias = 'REFRESH'
+      FieldName = 'REFRESH'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 48
+    end
+    object plMatterDetailsppField50: TppField
+      FieldAlias = 'ARCHIVEBOX'
+      FieldName = 'ARCHIVEBOX'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 49
+    end
+    object plMatterDetailsppField51: TppField
+      FieldAlias = 'ARCHIVEREVIEW'
+      FieldName = 'ARCHIVEREVIEW'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 50
+    end
+    object plMatterDetailsppField52: TppField
+      FieldAlias = 'ARCHVLOCN'
+      FieldName = 'ARCHVLOCN'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 51
+    end
+    object plMatterDetailsppField53: TppField
+      FieldAlias = 'ARCHIVENOTES'
+      FieldName = 'ARCHIVENOTES'
+      FieldLength = 2000
+      DisplayWidth = 2000
+      Position = 52
+    end
+    object plMatterDetailsppField54: TppField
+      FieldAlias = 'ARCHIVEDEST'
+      FieldName = 'ARCHIVEDEST'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 53
+    end
+    object plMatterDetailsppField55: TppField
+      FieldAlias = 'ARCHIVETYPECODE_1'
+      FieldName = 'ARCHIVETYPECODE_1'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 54
+    end
+    object plMatterDetailsppField56: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'RATEDESCR'
+      FieldName = 'RATEDESCR'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 55
+    end
+    object plMatterDetailsppField57: TppField
+      FieldAlias = 'BRANCHDESCR'
+      FieldName = 'BRANCHDESCR'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 56
+    end
+    object plMatterDetailsppField58: TppField
+      FieldAlias = 'SEARCH'
+      FieldName = 'SEARCH'
+      FieldLength = 140
+      DisplayWidth = 140
+      Position = 57
+    end
+    object plMatterDetailsppField59: TppField
+      FieldAlias = 'DESCRIPTION'
+      FieldName = 'DESCRIPTION'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 58
+    end
+    object plMatterDetailsppField60: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'NBILL_TO'
+      FieldName = 'NBILL_TO'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 59
+    end
+    object plMatterDetailsppField61: TppField
+      FieldAlias = 'NCONTACT'
+      FieldName = 'NCONTACT'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 60
+    end
+    object plMatterDetailsppField62: TppField
+      FieldAlias = 'NREFERRED_BY'
+      FieldName = 'NREFERRED_BY'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 61
+    end
+    object plMatterDetailsppField63: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'FEE_ALERT_LIMIT'
+      FieldName = 'FEE_ALERT_LIMIT'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 62
+    end
+    object plMatterDetailsppField64: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ESTIMATEDFEE'
+      FieldName = 'ESTIMATEDFEE'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 63
+    end
+    object plMatterDetailsppField65: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ESTIMATEDDISBPRINC'
+      FieldName = 'ESTIMATEDDISBPRINC'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 64
+    end
+    object plMatterDetailsppField66: TppField
+      FieldAlias = 'FEE_TAX_BASIS'
+      FieldName = 'FEE_TAX_BASIS'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 65
+    end
+    object plMatterDetailsppField67: TppField
+      FieldAlias = 'ADDRESS'
+      FieldName = 'ADDRESS'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 66
+    end
+    object plMatterDetailsppField68: TppField
+      FieldAlias = 'SUBURB'
+      FieldName = 'SUBURB'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 67
+    end
+    object plMatterDetailsppField69: TppField
+      FieldAlias = 'STATE'
+      FieldName = 'STATE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 68
+    end
+    object plMatterDetailsppField70: TppField
+      FieldAlias = 'POSTCODE'
+      FieldName = 'POSTCODE'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 69
+    end
+    object plMatterDetailsppField71: TppField
+      FieldAlias = 'COUNTRY'
+      FieldName = 'COUNTRY'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 70
+    end
+    object plMatterDetailsppField72: TppField
+      FieldAlias = 'FEECODE'
+      FieldName = 'FEECODE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 71
+    end
+    object plMatterDetailsppField73: TppField
+      FieldAlias = 'NNAME_1'
+      FieldName = 'NNAME_1'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 72
+    end
+    object plMatterDetailsppField74: TppField
+      FieldAlias = 'ADVERTISING_SOURCE'
+      FieldName = 'ADVERTISING_SOURCE'
+      FieldLength = 400
+      DisplayWidth = 400
+      Position = 73
+    end
+    object plMatterDetailsppField75: TppField
+      FieldAlias = 'EXP_COMPLETION'
+      FieldName = 'EXP_COMPLETION'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 74
+    end
+    object plMatterDetailsppField76: TppField
+      FieldAlias = 'PROSPECTIVE'
+      FieldName = 'PROSPECTIVE'
+      FieldLength = 1
+      DisplayWidth = 1
+      Position = 75
+    end
+    object plMatterDetailsppField77: TppField
+      FieldAlias = 'CREATED_BY'
+      FieldName = 'CREATED_BY'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 76
+    end
+    object plMatterDetailsppField78: TppField
+      FieldAlias = 'TRUST_AUTHORITY_RCVD_DATE'
+      FieldName = 'TRUST_AUTHORITY_RCVD_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 77
+    end
+    object plMatterDetailsppField79: TppField
+      FieldAlias = 'COST_AGREEMENT_RCVD_DATE'
+      FieldName = 'COST_AGREEMENT_RCVD_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 78
+    end
+    object plMatterDetailsppField80: TppField
+      FieldAlias = 'DESTRUCTION_AUTH_RCVD_DATE'
+      FieldName = 'DESTRUCTION_AUTH_RCVD_DATE'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 79
+    end
+    object plMatterDetailsppField81: TppField
+      FieldAlias = 'ENTITY_NAME'
+      FieldName = 'ENTITY_NAME'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 80
+    end
+    object plMatterDetailsppField82: TppField
+      FieldAlias = 'AP_EMAIL_MATTER'
+      FieldName = 'AP_EMAIL_MATTER'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 81
+    end
+    object plMatterDetailsppField83: TppField
+      FieldAlias = 'ROWID'
+      FieldName = 'ROWID'
+      FieldLength = 18
+      DisplayWidth = 18
+      Position = 82
+    end
   end
   object rptDocList: TppReport
     AutoStop = False
@@ -16303,8 +16913,8 @@ object frmMatters: TfrmMatters
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 269
-    Top = 394
+    Left = 587
+    Top = 502
     Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterNotes'
@@ -16606,8 +17216,8 @@ object frmMatters: TfrmMatters
     object plMatterNotesppField1: TppField
       FieldAlias = 'CREATEDBY'
       FieldName = 'CREATEDBY'
-      FieldLength = 0
-      DisplayWidth = 0
+      FieldLength = 40
+      DisplayWidth = 40
       Position = 0
     end
     object plMatterNotesppField2: TppField
@@ -20768,8 +21378,8 @@ object frmMatters: TfrmMatters
   object plReceipts: TppDBPipeline
     DataSource = dsReceiptRpt
     UserName = 'plReceipts'
-    Left = 1170
-    Top = 236
+    Left = 1208
+    Top = 243
   end
   object popCheque: TdxBarPopupMenu
     BarManager = MatterBarManager
@@ -22648,20 +23258,21 @@ object frmMatters: TfrmMatters
       'c.INVOICEDATE, c.BILLED, c.AUTHOR, c.HELD, c.CONVERTED, c.NOTE,'
       'c.TAXCODE, n.REFNO, c.HELD, c.AMOUNT, c.TAX, c.NCHEQREQ'
       'order by c.REQDATE')
+    Active = True
     Left = 640
     Top = 48
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'NMATTER'
-        Value = nil
+        Value = Null
       end>
     object qryUnconCheqReqREQDATE: TDateTimeField
       FieldName = 'REQDATE'
     end
     object qryUnconCheqReqBANK: TStringField
       FieldName = 'BANK'
-      Size = 3
+      Size = 10
     end
     object qryUnconCheqReqPAYEE: TStringField
       FieldName = 'PAYEE'
@@ -23477,13 +24088,14 @@ object frmMatters: TfrmMatters
       'AND E.CODE = M.CREATEDBY'
       'AND M.NMATTERNOTEID = MT.ID(+)'
       'order by M.CREATED desc')
+    Active = True
     Left = 984
     Top = 784
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'NMATTER'
-        Value = nil
+        Value = Null
       end>
   end
   object qryDebtorNotes: TUniQuery

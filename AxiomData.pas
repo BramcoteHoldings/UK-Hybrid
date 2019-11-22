@@ -810,14 +810,12 @@ type
     ppLabel22: TppLabel;
     ppLabel23: TppLabel;
     ppLabel24: TppLabel;
-    pplblClient: TppLabel;
     ppRegion2: TppRegion;
     ppLabel25: TppLabel;
     ppDBMemo3: TppDBMemo;
     ppDBText2: TppDBText;
     ppDBText10: TppDBText;
     ppDBText11: TppDBText;
-    pplblMatterDesc: TppLabel;
     ppDBMemo2: TppDBMemo;
     ppSummaryBand2: TppSummaryBand;
     pplblFooter: TppLabel;
@@ -861,6 +859,10 @@ type
     dsEmpAuthor: TUniDataSource;
     qryTaxList: TUniQuery;
     dsTaxList: TUniDataSource;
+    dsTmpProcess: TUniDataSource;
+    plTmpProcess: TppDBPipeline;
+    ppDBText1: TppDBText;
+    ppDBText3: TppDBText;
     procedure DataModuleCreate(Sender: TObject);
     procedure uniInsightConnectChange(Sender: TObject;
       Connected: Boolean);
@@ -887,6 +889,7 @@ type
     procedure TSSpellCheckerAddWord(
       AUserDictionary: TdxUserSpellCheckerDictionary; const AWord: WideString;
       var AHandled: Boolean);
+    procedure ppFileNoteRptBeforePrint(Sender: TObject);
   private
     { Private declarations }
     FAdminMode,
@@ -3270,7 +3273,7 @@ begin
    iMinsPerUnit := SystemInteger('TIME_UNITS');
    qryTempFeeInsert.Close;
    qryTempFeeInsert.ParambyName('EMPCODE').AsString := dmAxiom.UserId;
-   qryTempFeeInsert.ParambyName('CREATED').AsDate   := Now;
+//   qryTempFeeInsert.ParambyName('CREATED').AsDate   := Now;
    qryTempFeeInsert.Open;
 
    try
@@ -3360,8 +3363,8 @@ begin
                      qryTmpProcess.ParambyName('uniqueid').AsInteger := qryTempFeeInsert.FieldByName('UNIQUEID').AsInteger;
                      qryTmpProcess.Open;
 
-                     ANewDocName := SystemString('DRAG_DEFAULT_DIRECTORY') + '\File Note - ' + nfee + '_'+
-                                                qryTmpProcess.FieldByName('AUTHOR').AsString + '.pdf';
+                     ANewDocName :=  IncludeTrailingPathDelimiter(SystemString('DRAG_DEFAULT_DIRECTORY')) + 'File Note - ' + nfee + '_'+
+                                     qryTmpProcess.FieldByName('AUTHOR').AsString + '.pdf';
 
                      AParsedDocName := ParseMacros(ANewDocName, qryTmpProcess.FieldByName('NMATTER').AsInteger);
                      AParsedDir := Copy(ExtractFilePath(AParsedDocName),1 ,length(ExtractFilePath(AParsedDocName))-1);
@@ -3369,6 +3372,9 @@ begin
                      if not DirectoryExists(AParsedDir) then
                         ForceDirectories(AParsedDir);
 
+                     qryTmpProcess.Close;
+                     qryTmpProcess.ParamByName('uniqueid').AsInteger := FieldByName('UNIQUEID').AsInteger;
+                     qryTmpProcess.Open;
                      ppFileNoteRpt.AllowPrintToFile := True;
                      ppFileNoteRpt.ShowPrintDialog := False;
                      ppFileNoteRpt.DeviceType := dtPDF;
@@ -3539,6 +3545,13 @@ begin
       result := False;
 
    MyIdIcmpClient.Free;
+end;
+
+procedure TdmAxiom.ppFileNoteRptBeforePrint(Sender: TObject);
+begin
+   pplblFooter.Caption := 'Fee entry dated ' + FormatDateTime('dd/mm/yyyy hh:nn:ss', qryTmpProcess.FieldByName('start_date').AsDateTime) +
+                         ' entered for ' + qryTmpProcess.FieldByName('author').AsString + ' (' + qryTmpProcess.FieldByName('emp_name').AsString + ')';
+   pplblTransTitle.Caption := dmAxiom.EntityName;
 end;
 
 end.

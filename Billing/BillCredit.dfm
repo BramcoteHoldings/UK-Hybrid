@@ -368,7 +368,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43721.4334844329d
+    EditValue = 43788.4448993519d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -894,7 +894,8 @@ object frmBillCredit: TfrmBillCredit
       '  UPCREDTAX_PAID = :UPCREDTAX,'
       '  RV_TYPE = '#39'X'#39','
       '  TRUST = 0,'
-      '  RV_NMEMO = :RV_NMEMO'
+      '  RV_NMEMO = :RV_NMEMO,'
+      '  IS_DRAFT = '#39'N'#39
       'WHERE NMEMO = :NMEMO')
     Left = 278
     Top = 248

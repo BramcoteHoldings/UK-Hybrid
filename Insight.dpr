@@ -288,7 +288,6 @@ uses
   TaskNew in 'Tasks\TaskNew.pas' {frmTaskNew},
   Tasks in 'Tasks\Tasks.pas' {frmTasks},
   TaskDecisions in 'Tasks\TaskDecisions.pas' {frmTaskDecision},
-  TaskTempNew in 'Tasks\TaskTempNew.pas' {frmTaskTempNew},
   TaskSearch in 'Tasks\TaskSearch.pas' {frmTaskSearch},
   TaskItemSearch in 'Tasks\TaskItemSearch.pas' {frmTaskItemSearch},
   MatterDataForm in 'Workflow\MatterDataForm.pas' {frmMatterDataForm},
@@ -403,7 +402,8 @@ uses
   InvoiceReverse in 'Creditors\InvoiceReverse.pas' {frmInvoiceReverse},
   InvoiceScan in 'Creditors\InvoiceScan.pas' {frmInvScan},
   InvoiceSearch in 'Billing\InvoiceSearch.pas' {frmInvoiceSearch},
-  BulkMailer in 'BulkMailer.pas' {frmBulkMailer};
+  BulkMailer in 'BulkMailer.pas' {frmBulkMailer},
+  TaskTempNew in 'Tasks\TaskTempNew.pas' {frmTaskTempNew};
 
 {$R *.RES}
 //{$R ADDITIONAL.RES}
