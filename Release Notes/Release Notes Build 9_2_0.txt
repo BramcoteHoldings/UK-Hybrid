@@ -1,5 +1,15 @@
 Insight Build 9.2.0
 
+Build 53
+========
+-Fixed issue with generating Bill Credit Note number
+-Fixed issue with printing Matter Note.
+-Fixed issue with setting bill credit note draft flag to 'N'
+-Fix to cheque re-assign procedure.  Now allows re-assigning.
+-Fix to printing of Matter notes.
+-Fix to the time processing routine on shutdown when the save file note setting is selected.
+-Fix to Time Diary, Time Sheet and Fee Creation to prevent the creation of Overhead time entry for a matter.
+
 Build 52
 ========
 -Added character count to Matter Notes entry form
