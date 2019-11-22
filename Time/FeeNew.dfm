@@ -659,6 +659,7 @@ object frmFeeNew: TfrmFeeNew
         Value = 'H'
       end>
     Properties.LargeImages = ImageList1
+    Properties.OnEditValueChanged = icmbTypePropertiesEditValueChanged
     Properties.OnInitPopup = icmbTypePropertiesInitPopup
     Style.LookAndFeel.NativeStyle = True
     StyleDisabled.LookAndFeel.NativeStyle = True

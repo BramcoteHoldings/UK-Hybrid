@@ -155,8 +155,6 @@ object frmDesktop: TfrmDesktop
     TabOrder = 2
     Properties.ActivePage = tsAxiomNew
     Properties.CustomButtons.Buttons = <>
-    ExplicitTop = 143
-    ExplicitHeight = 589
     ClientRectBottom = 575
     ClientRectLeft = 4
     ClientRectRight = 1338
@@ -165,7 +163,7 @@ object frmDesktop: TfrmDesktop
       Caption = 'tsAxiomNew'
       ImageIndex = 0
       TabVisible = False
-      ExplicitHeight = 612
+      ExplicitHeight = 602
       DesignSize = (
         1334
         571)
@@ -177,7 +175,7 @@ object frmDesktop: TfrmDesktop
         ManagerFont = False
         ParentFont = True
         Align = alClient
-        ExplicitHeight = 612
+        ExplicitHeight = 602
         DockingType = 5
         OriginalWidth = 1334
         OriginalHeight = 571
@@ -194,7 +192,7 @@ object frmDesktop: TfrmDesktop
           ManagerFont = False
           ParentShowHint = False
           ShowHint = False
-          ExplicitHeight = 612
+          ExplicitHeight = 602
           DockingType = 0
           OriginalWidth = 265
           OriginalHeight = 176
@@ -217,7 +215,7 @@ object frmDesktop: TfrmDesktop
               Top = 0
               Width = 1276
               Height = 571
-              ExplicitHeight = 612
+              ExplicitHeight = 602
               DockingType = 0
               OriginalWidth = 265
               OriginalHeight = 176
@@ -239,7 +237,7 @@ object frmDesktop: TfrmDesktop
               CustomCaptionButtons.Buttons = <>
               ShowCaption = False
               TabsProperties.CustomButtons.Buttons = <>
-              ExplicitHeight = 612
+              ExplicitHeight = 602
               DockingType = 0
               OriginalWidth = 163
               OriginalHeight = 124
@@ -258,7 +256,7 @@ object frmDesktop: TfrmDesktop
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                ExplicitHeight = 608
+                ExplicitHeight = 598
                 object pageForms: TcxPageControl
                   Left = 1
                   Top = 1
@@ -294,7 +292,7 @@ object frmDesktop: TfrmDesktop
                   OnPageChanging = pageFormsPageChanging
                   OnStartDrag = pageFormsStartDrag
                   OnUnDock = pageFormsUnDock
-                  ExplicitHeight = 606
+                  ExplicitHeight = 596
                   ClientRectBottom = 565
                   ClientRectRight = 1270
                   ClientRectTop = 0
@@ -306,7 +304,7 @@ object frmDesktop: TfrmDesktop
             Left = 0
             Top = 0
             Width = 382
-            Height = 0
+            Height = 124
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -943,7 +941,7 @@ object frmDesktop: TfrmDesktop
           Left = -206
           Top = 0
           Width = 206
-          Height = 0
+          Height = 124
           ManagerFont = False
           ParentFont = True
           Visible = False
@@ -1290,7 +1288,6 @@ object frmDesktop: TfrmDesktop
       Caption = 'tsClassicAxiom'
       ImageIndex = 1
       TabVisible = False
-      ExplicitHeight = 581
       object Panel1: TPanel
         Left = 0
         Top = 0
@@ -1300,7 +1297,6 @@ object frmDesktop: TfrmDesktop
         BevelOuter = bvNone
         Caption = 'Panel1'
         TabOrder = 0
-        ExplicitHeight = 581
         object lvClassicDesktop: TListView
           Left = 0
           Top = 3
@@ -1378,6 +1374,7 @@ object frmDesktop: TfrmDesktop
           PositionAfterOpen = 26
           MinSize = 26
           Control = lvClassicDesktop
+          ExplicitWidth = 8
         end
         object dxBarDockControl2: TdxBarDockControl
           Left = 0
