@@ -111,6 +111,7 @@ type
     procedure ppDBRichText1Print(Sender: TObject);
     procedure ppLabel26GetText(Sender: TObject; var Text: string);
     procedure ppLabel27GetText(Sender: TObject; var Text: string);
+    procedure rptMatterPositionBeforePrint(Sender: TObject);
   private
     { Private declarations }
     FNMatter: integer;
@@ -224,6 +225,11 @@ begin
       qInvestments.Close;
       qryMatter.Close;
    end;
+end;
+
+procedure TfrmPositionReport.rptMatterPositionBeforePrint(Sender: TObject);
+begin
+   ppLabel1.Caption := dmAxiom.EntityName;
 end;
 
 end.

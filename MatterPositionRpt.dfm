@@ -19,6 +19,7 @@ object frmPositionReport: TfrmPositionReport
     NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
@@ -32,6 +33,7 @@ object frmPositionReport: TfrmPositionReport
     Units = utMillimeters
     AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    BeforePrint = rptMatterPositionBeforePrint
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
@@ -44,18 +46,26 @@ object frmPositionReport: TfrmPositionReport
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
     PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
     PDFSettings.EncryptSettings.Enabled = False
     PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.PageSeparation = 1
     PreviewFormSettings.WindowState = wsMaximized
     PreviewFormSettings.ZoomSetting = zs100Percent
-    PreviewFormSettings.PageSeparation = 1
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
     RTFSettings.DefaultFont.Color = clWindowText
     RTFSettings.DefaultFont.Height = -13
@@ -68,13 +78,15 @@ object frmPositionReport: TfrmPositionReport
     XLSSettings.Author = 'ReportBuilder'
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
-    Left = 19
-    Top = 1
-    Version = '16.03'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 31
+    Top = 8
+    Version = '20.0'
     mmColumnWidth = 0
     DataPipelineName = 'plClientDetails'
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
+      Border.mmPadding = 0
       mmBottomOffset = 0
       mmHeight = 26988
       mmPrintPosition = 0
@@ -97,13 +109,15 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'Label1'
         AutoSize = False
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Label1'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Times New Roman'
         Font.Size = 20
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 8297
@@ -117,13 +131,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label2'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter Position Report'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 14
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 5821
@@ -137,6 +153,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'SystemVariable1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         VarType = vtDateTime
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -155,13 +172,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label14'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Printed:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4234
         mmLeft = 141023
@@ -174,6 +193,7 @@ object frmPositionReport: TfrmPositionReport
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
       PrintHeight = phDynamic
       mmBottomOffset = 0
       mmHeight = 200290
@@ -197,13 +217,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Client Details'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5027
         mmLeft = 7144
@@ -216,13 +238,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label4'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Code:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -236,13 +260,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label5'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'PB Search:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -256,13 +282,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label6'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Name:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -276,13 +304,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label7'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Home Phone:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -296,13 +326,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label8'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Work Phone:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -316,13 +348,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label9'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Fax:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -336,13 +370,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label10'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'E-Mail Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -356,13 +392,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label11'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Partner:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -376,13 +414,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label12'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Introduced Date:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -396,6 +436,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText1'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'NAME'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -418,6 +459,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText2'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'CODE'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -428,7 +470,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4233
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 16140
         mmWidth = 794
         BandType = 4
@@ -438,6 +480,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText3'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'SEARCH'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -459,6 +502,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText4'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'HOMEPHONE'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -469,7 +513,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4233
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 26988
         mmWidth = 794
         BandType = 4
@@ -480,6 +524,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText5'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'WORKPHONE'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -490,7 +535,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4234
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 32279
         mmWidth = 794
         BandType = 4
@@ -501,6 +546,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText6'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'FAX'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -511,7 +557,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4234
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 43127
         mmWidth = 794
         BandType = 4
@@ -522,6 +568,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText7'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'EMAIL'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -532,7 +579,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4233
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 48419
         mmWidth = 794
         BandType = 4
@@ -543,6 +590,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText8'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'PARTNER'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -553,7 +601,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4233
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 53446
         mmWidth = 794
         BandType = 4
@@ -564,6 +612,7 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'DBText9'
         AutoSize = True
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'INTRODUCED'
         DataPipeline = plClientDetails
         DisplayFormat = 'dd-mmmm-yyyy'
@@ -575,7 +624,7 @@ object frmPositionReport: TfrmPositionReport
         Transparent = True
         DataPipelineName = 'plClientDetails'
         mmHeight = 4233
-        mmLeft = 38082
+        mmLeft = 38100
         mmTop = 69586
         mmWidth = 794
         BandType = 4
@@ -585,13 +634,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label13'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Address:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 102923
@@ -604,13 +655,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label15'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Current Balance'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5027
         mmLeft = 2910
@@ -623,13 +676,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label16'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Unbilled Fees:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -643,13 +698,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label17'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Unbilled Disbursements:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -663,13 +720,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label18'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Amount Billed:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -683,13 +742,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label19'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Amount Paid:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -703,13 +764,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label20'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Amount Written Off:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -723,13 +786,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label21'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Amount Outstanding:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -743,6 +808,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText10'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'UNBILL_FEES'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -766,6 +832,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText11'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TOTAL'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -789,6 +856,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText12'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TOTALBILLED'
         DataPipeline = plClientDetails
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -812,6 +880,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText13'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TOTALPAID'
         DataPipeline = plClientDetails
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -835,6 +904,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText14'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TOTALWRITEOFF'
         DataPipeline = plClientDetails
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -858,6 +928,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText15'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TOTALOWING'
         DataPipeline = plClientDetails
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -887,6 +958,7 @@ object frmPositionReport: TfrmPositionReport
         Font.Size = 10
         Font.Style = []
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         ExportRTFAsBitmap = False
         DataField = 'ADDRESS'
         DataPipeline = plClientDetails
@@ -909,13 +981,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label22'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = '(at time of report)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = []
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3704
         mmLeft = 3440
@@ -929,13 +1003,15 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'lblController'
         OnGetText = ppLabel26GetText
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'lblController'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4233
@@ -950,13 +1026,15 @@ object frmPositionReport: TfrmPositionReport
         UserName = 'ppLabel27'
         OnGetText = ppLabel27GetText
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'ppLabel27'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -970,13 +1048,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label26'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Matter Description:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         WordWrap = True
@@ -991,13 +1071,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label27'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Cheques'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 73819
@@ -1010,13 +1092,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label28'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Sundries'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4234
         mmLeft = 73819
@@ -1029,13 +1113,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label29'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Anticipated'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 73819
@@ -1048,13 +1134,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label30'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Unbilled:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 41010
@@ -1067,6 +1155,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText17'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'UNBILL_DISB'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1090,6 +1179,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText18'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'UNBILL_SUND'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1113,6 +1203,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText19'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'UNBILL_ANTD'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1136,13 +1227,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label31'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Creditors'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4233
         mmLeft = 74083
@@ -1155,6 +1248,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText20'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'UNBILL_CRED'
         DataPipeline = plPositionTotals
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1178,13 +1272,15 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label46'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         Caption = 'Total Cleared Trust:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -1198,6 +1294,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText24'
         Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
         DataField = 'TRUST'
         DataPipeline = plClientDetails
         DisplayFormat = '$#,0.00;($#,0.00)'
@@ -1241,6 +1338,7 @@ object frmPositionReport: TfrmPositionReport
           DataPipeline = plInvestments
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
+          PrinterSetup.Duplex = dpNone
           PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
@@ -1252,11 +1350,12 @@ object frmPositionReport: TfrmPositionReport
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '16.03'
+          Version = '20.0'
           mmColumnWidth = 0
           DataPipelineName = 'plInvestments'
           object ppTitleBand2: TppTitleBand
             Background.Brush.Style = bsClear
+            Border.mmPadding = 0
             mmBottomOffset = 0
             mmHeight = 14288
             mmPrintPosition = 0
@@ -1264,13 +1363,15 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'Label47'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               Caption = 'Account'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4233
               mmLeft = 5556
@@ -1283,13 +1384,15 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'Label48'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               Caption = 'Details'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4233
               mmLeft = 49213
@@ -1302,13 +1405,15 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'Label49'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               Caption = 'Balance'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4233
               mmLeft = 171186
@@ -1321,6 +1426,7 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'Line9'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -1336,13 +1442,15 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'Label50'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               Caption = 'Investment Balance'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 12
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 5027
               mmLeft = 3704
@@ -1354,13 +1462,15 @@ object frmPositionReport: TfrmPositionReport
             object ppLabel52: TppLabel
               DesignLayer = ppDesignLayer9
               UserName = 'Label52'
+              Border.mmPadding = 0
               Caption = 'Type'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Name = 'Arial'
               Font.Size = 10
               Font.Style = [fsBold]
-              FormField = False
+              FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+              FormFieldSettings.FormFieldType = fftNone
               Transparent = True
               mmHeight = 4233
               mmLeft = 124354
@@ -1372,6 +1482,7 @@ object frmPositionReport: TfrmPositionReport
             object ppLine12: TppLine
               DesignLayer = ppDesignLayer9
               UserName = 'Line12'
+              Border.mmPadding = 0
               Pen.Color = clSilver
               Pen.Width = 2
               ParentWidth = True
@@ -1387,6 +1498,7 @@ object frmPositionReport: TfrmPositionReport
           object ppDetailBand4: TppDetailBand
             Background1.Brush.Style = bsClear
             Background2.Brush.Style = bsClear
+            Border.mmPadding = 0
             PrintHeight = phDynamic
             mmBottomOffset = 0
             mmHeight = 6879
@@ -1395,6 +1507,7 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'DBText25'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               DataField = 'BALANCE'
               DataPipeline = plInvestments
               DisplayFormat = '$#,0.00;-$#,0.00'
@@ -1417,6 +1530,7 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'DBText26'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               DataField = 'DETAILS'
               DataPipeline = plInvestments
               Font.Charset = DEFAULT_CHARSET
@@ -1437,6 +1551,7 @@ object frmPositionReport: TfrmPositionReport
               DesignLayer = ppDesignLayer9
               UserName = 'DBText27'
               Border.Weight = 1.000000000000000000
+              Border.mmPadding = 0
               DataField = 'ACCOUNT'
               DataPipeline = plInvestments
               Font.Charset = DEFAULT_CHARSET
@@ -1456,6 +1571,7 @@ object frmPositionReport: TfrmPositionReport
             object ppDBText29: TppDBText
               DesignLayer = ppDesignLayer9
               UserName = 'DBText29'
+              Border.mmPadding = 0
               DataField = 'TYPE'
               DataPipeline = plInvestments
               Font.Charset = DEFAULT_CHARSET
@@ -1485,13 +1601,15 @@ object frmPositionReport: TfrmPositionReport
       object ppLabel51: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label32'
+        Border.mmPadding = 0
         Caption = 'Matter:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4234
         mmLeft = 23548
@@ -1504,6 +1622,7 @@ object frmPositionReport: TfrmPositionReport
         DesignLayer = ppDesignLayer2
         UserName = 'DBText28'
         AutoSize = True
+        Border.mmPadding = 0
         DataField = 'FILEID'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -1524,13 +1643,15 @@ object frmPositionReport: TfrmPositionReport
       object ppLabel53: TppLabel
         DesignLayer = ppDesignLayer2
         UserName = 'Label33'
+        Border.mmPadding = 0
         Caption = 'Mobile Phone:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = [fsBold]
-        FormField = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4234
@@ -1543,6 +1664,7 @@ object frmPositionReport: TfrmPositionReport
       object ppDBText30: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText30'
+        Border.mmPadding = 0
         DataField = 'MOBILE'
         DataPipeline = plClientDetails
         Font.Charset = DEFAULT_CHARSET
@@ -1567,6 +1689,7 @@ object frmPositionReport: TfrmPositionReport
         Font.Name = 'Arial'
         Font.Size = 10
         Font.Style = []
+        Border.mmPadding = 0
         ExportRTFAsBitmap = False
         DataField = 'LONGDESCR'
         DataPipeline = plMatter
@@ -1588,6 +1711,7 @@ object frmPositionReport: TfrmPositionReport
       object ppDBText16: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText16'
+        Border.mmPadding = 0
         DataField = 'MAUTHOR'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -1608,6 +1732,7 @@ object frmPositionReport: TfrmPositionReport
       object ppDBText21: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText21'
+        Border.mmPadding = 0
         DataField = 'MCONTROLLER'
         DataPipeline = plMatter
         Font.Charset = DEFAULT_CHARSET
@@ -1728,7 +1853,7 @@ object frmPositionReport: TfrmPositionReport
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = nil
+        Value = Null
       end>
   end
   object dsInvestments: TUniDataSource
@@ -2172,7 +2297,7 @@ object frmPositionReport: TfrmPositionReport
       item
         DataType = ftUnknown
         Name = 'P_File'
-        Value = nil
+        Value = Null
       end>
   end
   object dsPositionTotals: TUniDataSource
@@ -2212,22 +2337,22 @@ object frmPositionReport: TfrmPositionReport
     object plClientDetailsppField4: TppField
       FieldAlias = 'LASTNAME'
       FieldName = 'LASTNAME'
-      FieldLength = 60
-      DisplayWidth = 60
+      FieldLength = 200
+      DisplayWidth = 200
       Position = 3
     end
     object plClientDetailsppField5: TppField
       FieldAlias = 'SEARCH'
       FieldName = 'SEARCH'
-      FieldLength = 100
-      DisplayWidth = 100
+      FieldLength = 140
+      DisplayWidth = 140
       Position = 4
     end
     object plClientDetailsppField6: TppField
       FieldAlias = 'ADDRESS'
       FieldName = 'ADDRESS'
-      FieldLength = 246
-      DisplayWidth = 246
+      FieldLength = 376
+      DisplayWidth = 376
       Position = 5
     end
     object plClientDetailsppField7: TppField
@@ -2275,8 +2400,8 @@ object frmPositionReport: TfrmPositionReport
     object plClientDetailsppField13: TppField
       FieldAlias = 'LONGNAME'
       FieldName = 'LONGNAME'
-      FieldLength = 150
-      DisplayWidth = 150
+      FieldLength = 300
+      DisplayWidth = 300
       Position = 12
     end
     object plClientDetailsppField14: TppField
@@ -2289,8 +2414,8 @@ object frmPositionReport: TfrmPositionReport
     object plClientDetailsppField15: TppField
       FieldAlias = 'MOBILE'
       FieldName = 'MOBILE'
-      FieldLength = 30
-      DisplayWidth = 30
+      FieldLength = 40
+      DisplayWidth = 40
       Position = 14
     end
     object plClientDetailsppField16: TppField
@@ -2406,7 +2531,7 @@ object frmPositionReport: TfrmPositionReport
       item
         DataType = ftUnknown
         Name = 'nmatter'
-        Value = nil
+        Value = Null
       end>
   end
   object dsMatter: TDataSource
