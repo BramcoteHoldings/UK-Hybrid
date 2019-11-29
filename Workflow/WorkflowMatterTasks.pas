@@ -17,7 +17,7 @@ uses
   ppDB, ppParameter, ppDesignLayer, ppBands, ppCtrls, ppClass, ppVar, ppStrtch,
   ppMemo, ppPrnabl, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, DB,
   OracleUniProvider, Uni, DBAccess, MemDS, cxClasses, System.Actions,
-  Vcl.PlatformDefaultStyleActnCtrls;
+  Vcl.PlatformDefaultStyleActnCtrls, System.ImageList;
 
 const
   C_SETTINGOWNER = 'WKFTASKS';
@@ -174,9 +174,6 @@ type
 {    procedure vtTasksGetHint(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Column: TColumnIndex; TextType: TVSTTextType;
       var CellText: WideString);  }
-    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree;
-      Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-      var Ghosted: Boolean; var ImageIndex: Integer);
     procedure aMergeUpdate(Sender: TObject);
     procedure aMergeExecute(Sender: TObject);
     procedure aNotesUpdate(Sender: TObject);
@@ -239,6 +236,9 @@ type
     procedure vtTasksGetHint(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Column: TColumnIndex; var LineBreakStyle: TVTTooltipLineBreakStyle;
       var HintText: string);
+    procedure vtTasksGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: TImageIndex);
   private
     FMatterClient: String;
     FNMatter: Integer;
@@ -854,9 +854,10 @@ begin
    end;
 end;
 
-procedure TfmWorkFlowMatterTasks.vtTasksGetImageIndex(
-  Sender: TBaseVirtualTree; Node: PVirtualNode; Kind: TVTImageKind;
-  Column: TColumnIndex; var Ghosted: Boolean; var ImageIndex: Integer);
+
+procedure TfmWorkFlowMatterTasks.vtTasksGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: TImageIndex);
 var
   LData: PTaskData;
 begin
