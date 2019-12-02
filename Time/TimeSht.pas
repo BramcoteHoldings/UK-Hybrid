@@ -4347,8 +4347,13 @@ begin
       tvFeeTmpNew.OnFocusedRecordChanged := nil;
       if tmrAutocost.Enabled then
       begin
-         MessageDlg('You must stop the Timer before you can Refresh the grid.',mtWarning, [mbOK], 0);
-         Exit;
+         if (MessageDlg('The Timer is currently running. Would you like to Stop the Timer and refresh the grid.', mtConfirmation , [mbYes, mbNo], 0, mbYes) = mrNo) then
+            Exit
+         else
+         begin
+            btnTimer.Click;
+            MakeSQL;
+         end;
       end
       else
          MakeSQL;
