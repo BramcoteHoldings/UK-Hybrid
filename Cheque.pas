@@ -1997,7 +1997,6 @@ begin
                              //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                              //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
                            if qryLedger.FieldByName('inv_TAX').AsFloat <> 0 then
-
                            begin
                               if cMatterTotal > 0 then
                                  cMatterTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
@@ -3233,8 +3232,9 @@ begin
           sSQL := 'SELECT NULL AS tax_rate, p.ninvoice, p.acct, p.creditor, p.descr, p.owing, '+
                   '       p.amount, 0 AS tax, p.refno, p.ncreditor, '+
                   '       -1 * (p.amount - p.owing) AS u_amount, 0 AS u_tax, '+
-                  '       -1 * p.amount AS t_amount, 0 AS t_tax, ''NOTAX'' AS taxcode,'+
-                  '       NVL((SELECT sum(amount) as t_tax '+
+                  '       -1 * p.amount AS t_amount, 0 AS t_tax, '+
+                  '      (select nvl(code,''NOTAX'') from taxdefault where type = ''InvoicePayment'') AS taxcode,'+
+                  '       -1 * NVL((SELECT sum(amount) as t_tax '+
                   '  FROM transitem t '+
                   ' INNER JOIN CHART C ON T.CHART = C.CODE AND C.CHARTTYPE IN (''GSTINP'') '+
                   ' WHERE t.ninvoice = p.ninvoice AND owner_code = ''INVOICE''), 0) AS inv_tax '+
