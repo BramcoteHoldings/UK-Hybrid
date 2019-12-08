@@ -234,8 +234,8 @@ begin
             if qryTransitems.FieldByName('NINVOICE').AsInteger > 0 then
             begin
               // Reversing an invoice - reset the amount owing
-               qryInvoiceUpdate.ParamByName('AMOUNT').AsCurrency := qryTransitems.FieldByName('AMOUNT').AsCurrency +
-                                                                    qryTransitems.FieldByName('TAX').AsCurrency;
+               qryInvoiceUpdate.ParamByName('AMOUNT').AsCurrency := qryTransitems.FieldByName('AMOUNT').AsCurrency;
+                                                                  // + qryTransitems.FieldByName('TAX').AsCurrency;
               {
                  Modified 6.12.2002 GG
 
