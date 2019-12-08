@@ -907,6 +907,9 @@ begin
    end;
 
    // AES 12/08/2009  Added additional test for default taxcode
+   if qryLedger.State = dsBrowse then
+      qryLedger.Edit;
+
    ADefaultTax := LedgerComponentString(tbPettyCash.Text, 'DEFAULT_TAXCODE');
    if ADefaultTax <> '' then
       qryLedger.FieldByName('TAXCODE').AsString := ADefaultTax
