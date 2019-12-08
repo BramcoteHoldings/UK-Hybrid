@@ -859,6 +859,9 @@ begin
                beEntity.StyleDisabled.Color := TableInteger('ENTITY','CODE',dmAxiom.Entity,'COLOUR');
             end;
 
+            if (SettingLoadString(dmAxiom.UserID, 'Desktop', 'Entity') = '') then
+               SettingSave('Desktop', 'Entity', dmAxiom.Entity);
+
             if (dmAxiom.UserAutoTimer = 'Y') then
                btnAutoTimer.Visible := ivAlways
             else
@@ -872,7 +875,6 @@ begin
             if (pagMainControl.ActivePageIndex = 0) then
             begin
                dpNavBar.AutoHide := (dmAxiom.ShowMenuBar = 'N');
-
 
                nbMain.View := dmAxiom.ViewType;
 
