@@ -33,6 +33,7 @@ object frmAcctPayable: TfrmAcctPayable
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
     OnChange = pagAcctPayableChange
+    ExplicitTop = 26
     ClientRectBottom = 602
     ClientRectLeft = 4
     ClientRectRight = 1083
@@ -1707,8 +1708,8 @@ object frmAcctPayable: TfrmAcctPayable
         'REDITOR, I.TAX, C.PAY_BY_EFT,I.TAKE_ON,'
       
         '  I.INVOICE_COPY, I.INVOICE_COPY_EXT, I.AMOUNT - I.OWING AS Paid' +
-        ', TAKE_ON, I.HOLD as Held,'
-      '  a.nmemo, I.ROWID '
+        ', TAKE_ON, I.HOLD as Held/*,'
+      '  a.nmemo,*/ I.ROWID '
       'FROM ALLOC A, CREDITOR C, INVOICE I'
       'WHERE I.OWING <> 0'
       'and i.ninvoice = a.ninvoice(+)'

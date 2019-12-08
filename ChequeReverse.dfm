@@ -65,12 +65,10 @@ object frmChequeReverse: TfrmChequeReverse
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 925
-    ExplicitHeight = 493
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 174
-      EditValue = 43747.594590463d
+      EditValue = 43807.4062312269d
       Properties.ButtonGlyph.SourceDPI = 96
       Properties.ButtonGlyph.Data = {
         424DF6030000000000003600000028000000100000000F000000010020000000
@@ -118,10 +116,10 @@ object frmChequeReverse: TfrmChequeReverse
       TabOrder = 5
       DataSet = dmAxiom.qryEntity
       Field = 'LOCKDATE'
-      Width = 105
+      Width = 110
     end
     object btnOriginal: TcxButton
-      Left = 197
+      Left = 202
       Top = 174
       Width = 111
       Height = 26
@@ -552,9 +550,12 @@ object frmChequeReverse: TfrmChequeReverse
     object dxLayoutItem6: TdxLayoutItem
       Parent = dxLayoutGroup2
       CaptionOptions.Text = 'Reverse as at'
+      SizeOptions.AssignedValues = [sovSizableHorz]
+      SizeOptions.SizableHorz = True
+      SizeOptions.Width = 183
       Control = dtpReverse
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 105
+      ControlOptions.OriginalWidth = 103
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -596,6 +597,7 @@ object frmChequeReverse: TfrmChequeReverse
       ControlOptions.OriginalHeight = 27
       ControlOptions.OriginalWidth = 81
       ControlOptions.ShowBorder = False
+      Enabled = False
       Index = 0
     end
     object dxLayoutItem10: TdxLayoutItem
@@ -757,7 +759,7 @@ object frmChequeReverse: TfrmChequeReverse
     SQL.Strings = (
       'UPDATE invoice'
       '   SET owing = (owing - :amount),'
-      '       credited = (credited - :amount),'
+      '       credited = (credited - :amount*-1),'
       '       ncheque = NULL,'
       '       legal_cr_amount_owing ='
       '          CASE'
