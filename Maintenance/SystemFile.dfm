@@ -4443,7 +4443,7 @@ object frmSystemFile: TfrmSystemFile
         Top = 85
         Width = 178
         Height = 15
-        Caption = 'Listen for incoming eMails'
+        Caption = 'Listen for Sent eMails'
         DataField = 'EMAILS_LISTENER'
         DataSource = dsSystemFile
         TabOrder = 3
@@ -5610,12 +5610,6 @@ object frmSystemFile: TfrmSystemFile
         TabOrder = 12
         Height = 19
         Width = 320
-      end
-      object cxDBCheckBox73: TcxDBCheckBox
-        Left = 480
-        Top = 288
-        Caption = 'cxDBCheckBox73'
-        TabOrder = 14
       end
       object cxDBCheckBox74: TcxDBCheckBox
         Left = 22
