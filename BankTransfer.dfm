@@ -4,8 +4,8 @@ object frmTransferMoney: TfrmTransferMoney
   AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Transfer Money'
-  ClientHeight = 317
-  ClientWidth = 431
+  ClientHeight = 329
+  ClientWidth = 449
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,18 +21,18 @@ object frmTransferMoney: TfrmTransferMoney
   object dxLayoutControl1: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 431
-    Height = 317
+    Width = 449
+    Height = 329
     Align = alClient
     ParentBackground = True
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitWidth = 426
-    ExplicitHeight = 273
+    ExplicitWidth = 427
+    ExplicitHeight = 315
     object dtpDate: TDateTimePicker
       Left = 87
-      Top = 12
+      Top = 19
       Width = 155
       Height = 22
       Date = 42064.579310601850000000
@@ -41,26 +41,26 @@ object frmTransferMoney: TfrmTransferMoney
     end
     object ceAmount: TcxCurrencyEdit
       Left = 87
-      Top = 215
+      Top = 222
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 3
+      TabOrder = 5
       Width = 155
     end
     object tbDesc: TcxTextEdit
       Left = 87
-      Top = 245
+      Top = 252
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      TabOrder = 4
+      TabOrder = 6
       OnKeyPress = tbDescKeyPress
       Width = 326
     end
     object cmbBankFrom: TcxLookupComboBox
       Left = 58
-      Top = 62
+      Top = 69
       Properties.DropDownAutoSize = True
       Properties.KeyFieldNames = 'ACCT'
       Properties.ListColumns = <
@@ -79,11 +79,11 @@ object frmTransferMoney: TfrmTransferMoney
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 1
-      Width = 341
+      Width = 300
     end
     object cmbBankTo: TcxLookupComboBox
       Left = 58
-      Top = 149
+      Top = 156
       Properties.KeyFieldNames = 'ACCT'
       Properties.ListColumns = <
         item
@@ -100,12 +100,12 @@ object frmTransferMoney: TfrmTransferMoney
       Style.HotTrack = False
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
-      TabOrder = 2
-      Width = 341
+      TabOrder = 3
+      Width = 300
     end
     object cxButton1: TcxButton
-      Left = 245
-      Top = 275
+      Left = 261
+      Top = 282
       Width = 80
       Height = 27
       Action = actTransfer
@@ -137,11 +137,11 @@ object frmTransferMoney: TfrmTransferMoney
         008D4E90548AB72C03A529582B362DD9B7A47AE12F93FE004275012A9EC04FFE
         BEA21ABF2CDAEC97CAD76719A627B0792926830E18396A980CD3D42944D19BA3
         07B45985CFB9FFA36D686F88080000000049454E44AE426082}
-      TabOrder = 5
+      TabOrder = 7
     end
     object cxButton2: TcxButton
-      Left = 332
-      Top = 275
+      Left = 348
+      Top = 282
       Width = 81
       Height = 27
       Caption = 'Cancel'
@@ -179,20 +179,38 @@ object frmTransferMoney: TfrmTransferMoney
         CF738AAF6ED6EA4B006882CE77A14ABFD255D2799903606830E4EF28E274070C
         1C67D74255041044C25C9CE43B4149F8B16735F41B8038DB9300E07F6924ECFB
         01D589CC0000000049454E44AE426082}
-      TabOrder = 6
+      TabOrder = 8
       OnClick = cxButton2Click
     end
     object lblGLFromDesc: TLabel
       Left = 26
-      Top = 92
-      Width = 373
+      Top = 99
+      Width = 389
       Height = 15
     end
     object lblGLToDesc: TLabel
       Left = 26
-      Top = 179
-      Width = 373
+      Top = 186
+      Width = 389
       Height = 15
+    end
+    object lblFrmBank: TcxLabel
+      Left = 365
+      Top = 69
+      AutoSize = False
+      Style.HotTrack = False
+      Transparent = True
+      Height = 19
+      Width = 50
+    end
+    object lblToBank: TcxLabel
+      Left = 365
+      Top = 156
+      AutoSize = False
+      Style.HotTrack = False
+      Transparent = True
+      Height = 21
+      Width = 50
     end
     object dxLayoutControl1Group_Root: TdxLayoutGroup
       AlignHorz = ahLeft
@@ -208,7 +226,7 @@ object frmTransferMoney: TfrmTransferMoney
       CaptionOptions.Text = 'Hidden Group'
       ButtonOptions.Buttons = <>
       Hidden = True
-      ItemIndex = 2
+      ItemIndex = 3
       ShowBorder = False
       Index = 0
     end
@@ -218,7 +236,7 @@ object frmTransferMoney: TfrmTransferMoney
       ButtonOptions.Buttons = <>
       Hidden = True
       ShowBorder = False
-      Index = 3
+      Index = 4
     end
     object dxLayoutItem1: TdxLayoutItem
       Parent = dxLayoutGroup2
@@ -228,17 +246,16 @@ object frmTransferMoney: TfrmTransferMoney
       ControlOptions.OriginalHeight = 22
       ControlOptions.OriginalWidth = 155
       ControlOptions.ShowBorder = False
-      Index = 0
+      Index = 1
     end
     object dxLayoutGroup4: TdxLayoutGroup
       Parent = dxLayoutGroup2
       CaptionOptions.Text = 'Transfer Money From'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
-      Index = 1
+      Index = 2
     end
     object dxLayoutItem2: TdxLayoutItem
-      Parent = dxLayoutGroup4
+      Parent = dxLayoutGroup1
       CaptionOptions.Text = 'Bank'
       Control = cmbBankFrom
       ControlOptions.OriginalHeight = 23
@@ -251,11 +268,10 @@ object frmTransferMoney: TfrmTransferMoney
       CaptionOptions.ShowAccelChar = False
       CaptionOptions.Text = 'Transfer money To'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
-      Index = 2
+      Index = 3
     end
     object dxLayoutItem3: TdxLayoutItem
-      Parent = dxLayoutGroup6
+      Parent = dxLayoutGroup5
       CaptionOptions.Text = 'Bank'
       Control = cmbBankTo
       ControlOptions.OriginalHeight = 23
@@ -291,7 +307,7 @@ object frmTransferMoney: TfrmTransferMoney
       Hidden = True
       LayoutDirection = ldHorizontal
       ShowBorder = False
-      Index = 4
+      Index = 5
     end
     object dxLayoutItem6: TdxLayoutItem
       Parent = dxLayoutGroup8
@@ -334,6 +350,54 @@ object frmTransferMoney: TfrmTransferMoney
       ControlOptions.OriginalWidth = 3
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+    object dxLayoutGroup1: TdxLayoutGroup
+      Parent = dxLayoutGroup4
+      AlignHorz = ahCenter
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem10: TdxLayoutItem
+      Parent = dxLayoutGroup1
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = lblFrmBank
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 50
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutItem11: TdxLayoutItem
+      Parent = dxLayoutGroup2
+      CaptionOptions.Text = 'cxLabel1'
+      CaptionOptions.Visible = False
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 50
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object dxLayoutItem12: TdxLayoutItem
+      Parent = dxLayoutGroup5
+      CaptionOptions.Text = 'cxLabel1'
+      CaptionOptions.Visible = False
+      Control = lblToBank
+      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalWidth = 50
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutGroup5: TdxLayoutGroup
+      Parent = dxLayoutGroup6
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      ItemIndex = 1
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 0
     end
   end
   object qryFromBank: TUniQuery

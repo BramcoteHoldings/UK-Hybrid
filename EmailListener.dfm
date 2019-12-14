@@ -16,7 +16,6 @@ object frmEmailMsgListener: TfrmEmailMsgListener
   PixelsPerInch = 96
   TextHeight = 13
   object qryCheckEmail: TUniQuery
-    Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select 1 as rec_found'
       'from '

@@ -40,6 +40,7 @@ type
     function GetSenderMsgStore(ASender: TObject): string;
     function WriteFileToDisk(var ANewDocName: string; AOldDocName: string; ADeleteFile: boolean = False): boolean;
     property OldDocName: string read FOldDocName write FOldDocName;
+    function StripNonAscii(s: string): string;
   public
     { Public declarations }
   end;
@@ -114,6 +115,10 @@ begin
       end;
 
 	   sSubject := Msg.PropByName(PR_SUBJECT).AsString;
+
+       // strip all UTF8 and unicode characters from subject
+      sSubject := StripNonAscii(sSubject);
+
       if (pos('#',sSubject) > 0) then
       begin
          // clean up subject line
@@ -258,7 +263,10 @@ begin
                   end;
 
                   dmAxiom.qryMatterAttachments.FieldByName('display_path').AsString := AParsedDir + AParsedDocName;
-                  dmAxiom.qryMatterAttachments.FieldByName('path').AsString := IndexPath(AParsedDir, 'DOC_SHARE_PATH') + AParsedDocName;
+                  if (ExtractFileDrive(AParsedDir) = '') then
+                     dmAxiom.qryMatterAttachments.FieldByName('path').AsString := AParsedDir + AParsedDocName
+                  else
+                     dmAxiom.qryMatterAttachments.FieldByName('path').AsString := IndexPath(AParsedDir, 'DOC_SHARE_PATH') + AParsedDocName;
                   dmAxiom.qryMatterAttachments.Post;
                except
                   on e: Exception do
@@ -459,7 +467,7 @@ begin
 
          if Parent.PropByName(PR_FOLDER_TYPE).AsInteger =  2 {Search Folder} then exit; // Ignore objects created in SearchFolders.
 
-         if  Parent.PropByName(PR_DISPLAY_NAME).AsString = 'Inbox' then // dmAxiom.MsgStore.CompareEntryIDs(dmAxiom.InboxFolderID, ParentEntryID) then
+{         if  Parent.PropByName(PR_DISPLAY_NAME).AsString = 'Inbox' then // dmAxiom.MsgStore.CompareEntryIDs(dmAxiom.InboxFolderID, ParentEntryID) then
          begin
             try
                StrMsgId := StrNew(PChar(EntryIDToStr(ObjectEntryID)));
@@ -468,7 +476,7 @@ begin
                //
             end;
          end
-         else
+         else  }
          begin
             Fldr := dmAxiom.MsgStore.OpenFolder(ParentEntryID);
             LFolder := Fldr.PropByName(PR_DISPLAY_NAME).AsString;
@@ -565,6 +573,29 @@ begin
       MsgStoreEvents.Stop;
    except
    //
+   end;
+end;
+
+function TfrmEmailMsgListener.StripNonAscii(s: string): string;
+var
+   Count, i:Integer;
+begin
+   Count := 0;
+   for i:=1 to Length(s) do
+      if ((s[i] >= #32) and (s[i] <= #127)) or (s[i] in [#10, #13]) then
+         Inc(Count);
+   if Count = Length(s) then
+      Result := s // No characters need to be removed, return the original string (no mem allocation!)
+   else
+   begin
+      SetLength(Result, Count);
+      Count := 1;
+      for i:=1 to Length(s) do
+         if ((s[i] >= #32) and (s[i] <= #127)) or (s[i] in [#10, #13]) then
+         begin
+            Result[Count] := s[i];
+            Inc(Count);
+         end;
    end;
 end;
 

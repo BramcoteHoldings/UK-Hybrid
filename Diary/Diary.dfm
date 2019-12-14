@@ -1,4 +1,4 @@
-object frmDiary99: TfrmDiary99
+object frmDiary: TfrmDiary
   Left = 278
   Top = 176
   Caption = 'Insight Diary'
@@ -2665,7 +2665,7 @@ object frmDiary99: TfrmDiary99
       item
         DataType = ftUnknown
         Name = 'reminder_for'
-        Value = Null
+        Value = nil
       end>
   end
   object qryEmployee: TUniQuery
@@ -2814,7 +2814,7 @@ object frmDiary99: TfrmDiary99
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3536,7 +3536,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43781.473002789350000000
+      ReportDocument.CreationDate = 43813.354690659730000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

@@ -5785,7 +5785,8 @@ begin
 end;
 
 function RvAlloc(qryOldAlloc: TUniQuery; dtReversal: TDateTime; sRefno: string; sReason: string; iNewNcheque: integer;
-                  iNewNreceipt: integer; iNewNjournal: integer; sLedger: string; sType: string; iNewNInvoice: integer; bFromReceipt: boolean; ABilled: string): integer;
+                  iNewNreceipt: integer; iNewNjournal: integer; sLedger: string; sType: string; iNewNInvoice: integer;
+                  bFromReceipt: boolean; ABilled: string): integer;
 var
    sComma: string;
    cValue,
@@ -5933,8 +5934,8 @@ begin
            qryAlloc.SQL.Clear;
            if iNewNjournal <> 0 then
            begin
-              qryAlloc.SQL.Add('update alloc set billed = ''N'', private = ''N'', N_WOFF = NULL where nalloc = :nalloc');
-              qryAlloc.ParamByName('NALLOC').AsInteger:= qryOldAlloc.FieldByName('N_WOFF').AsInteger;
+              qryAlloc.SQL.Add('update alloc set billed = ''Y'', private = ''Y'', N_WOFF = NULL where nalloc = :nalloc');
+              qryAlloc.ParamByName('NALLOC').AsInteger:= qryOldAlloc.FieldByName('NALLOC').AsInteger;
            end
            ELSE
            begin
@@ -14888,7 +14889,7 @@ begin
             if Succeeded(r) then
             begin
                //set operations flags
-               r := fileOp.SetOperationFlags(FOF_NOCONFIRMATION OR FOFX_NOMINIMIZEBOX);
+               r := fileOp.SetOperationFlags(FOF_NOCONFIRMATION OR FOFX_NOMINIMIZEBOX OR FOF_NOCONFIRMMKDIR);
                if Succeeded(r) then
                begin
                   //get source shell item

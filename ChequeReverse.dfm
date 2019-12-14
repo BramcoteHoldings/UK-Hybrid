@@ -68,7 +68,7 @@ object frmChequeReverse: TfrmChequeReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 174
-      EditValue = 43807.4062312269d
+      EditValue = 43810.4649207523d
       Properties.ButtonGlyph.SourceDPI = 96
       Properties.ButtonGlyph.Data = {
         424DF6030000000000003600000028000000100000000F000000010020000000
@@ -122,7 +122,7 @@ object frmChequeReverse: TfrmChequeReverse
       Left = 202
       Top = 174
       Width = 111
-      Height = 26
+      Height = 23
       Caption = 'Original &date'
       LookAndFeel.NativeStyle = True
       OptionsImage.Glyph.SourceDPI = 96
@@ -199,7 +199,7 @@ object frmChequeReverse: TfrmChequeReverse
     end
     object mlReason: TcxMemo
       Left = 85
-      Top = 207
+      Top = 204
       Properties.MaxLength = 120
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -214,7 +214,7 @@ object frmChequeReverse: TfrmChequeReverse
     end
     object cxButton2: TcxButton
       Left = 96
-      Top = 285
+      Top = 282
       Width = 81
       Height = 27
       Action = actOk
@@ -310,7 +310,7 @@ object frmChequeReverse: TfrmChequeReverse
     end
     object btnCancel: TcxButton
       Left = 184
-      Top = 285
+      Top = 282
       Width = 80
       Height = 27
       Caption = '&Cancel'
@@ -412,8 +412,14 @@ object frmChequeReverse: TfrmChequeReverse
       DataBinding.DataSource = dsCheque
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
       Style.HotTrack = False
       Style.StyleController = dmAxiom.LabelStyle
+      Style.IsFontAssigned = True
       Height = 19
       Width = 242
       AnchorX = 334
@@ -426,9 +432,15 @@ object frmChequeReverse: TfrmChequeReverse
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
       Style.BorderStyle = ebsFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
       Style.HotTrack = False
       Style.LookAndFeel.NativeStyle = True
       Style.StyleController = dmAxiom.LabelStyle
+      Style.IsFontAssigned = True
       StyleDisabled.LookAndFeel.NativeStyle = True
       StyleFocused.LookAndFeel.NativeStyle = True
       StyleHot.LookAndFeel.NativeStyle = True
@@ -443,8 +455,14 @@ object frmChequeReverse: TfrmChequeReverse
       DataBinding.DataSource = dsCheque
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
       Style.HotTrack = False
       Style.StyleController = dmAxiom.LabelStyle
+      Style.IsFontAssigned = True
       Height = 18
       Width = 242
       AnchorX = 334
@@ -456,8 +474,14 @@ object frmChequeReverse: TfrmChequeReverse
       DataBinding.DataSource = dsCheque
       ParentFont = False
       Properties.Alignment.Horz = taLeftJustify
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
       Style.HotTrack = False
       Style.StyleController = dmAxiom.LabelStyle
+      Style.IsFontAssigned = True
       Height = 19
       Width = 242
     end
@@ -468,8 +492,14 @@ object frmChequeReverse: TfrmChequeReverse
       DataBinding.DataSource = dsCheque
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
       Style.HotTrack = False
       Style.StyleController = dmAxiom.LabelStyle
+      Style.IsFontAssigned = True
       Height = 18
       Width = 242
       AnchorX = 334
@@ -555,7 +585,7 @@ object frmChequeReverse: TfrmChequeReverse
       SizeOptions.Width = 183
       Control = dtpReverse
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 103
+      ControlOptions.OriginalWidth = 110
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -564,7 +594,7 @@ object frmChequeReverse: TfrmChequeReverse
       CaptionOptions.Text = 'New Item'
       CaptionOptions.Visible = False
       Control = btnOriginal
-      ControlOptions.OriginalHeight = 26
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 111
       ControlOptions.ShowBorder = False
       Index = 1
@@ -759,7 +789,7 @@ object frmChequeReverse: TfrmChequeReverse
     SQL.Strings = (
       'UPDATE invoice'
       '   SET owing = (owing - :amount),'
-      '       credited = (credited - :amount*-1),'
+      '--       credited = (credited + :amount),'
       '       ncheque = NULL,'
       '       legal_cr_amount_owing ='
       '          CASE'

@@ -541,7 +541,6 @@ type
     cxDBTextEdit19: TcxDBTextEdit;
     popMenuBillMacroList: TPopupMenu;
     DBCheckBox7: TDBCheckBox;
-    cxDBCheckBox73: TcxDBCheckBox;
     cxDBCheckBox74: TcxDBCheckBox;
     cxDBDateEdit1: TcxDBDateEdit;
     Label78: TLabel;
@@ -637,7 +636,7 @@ implementation
 {$R *.DFM}
 
 uses
-  AxiomData, UserStatementEditor, MiscFunc, Desktop, glComponentUtil,
+  AxiomData, {UserStatementEditor,} MiscFunc, Desktop, glComponentUtil,
   cxRichEdit, citFunc, CreditorSearch
   {, GenEditorHTML}
   ;
@@ -952,8 +951,8 @@ procedure TfrmSystemFile.dbgUserStatementsDblClick(Sender: TObject);
 begin
   if qryUserStatements.Modified then
     qryUserStatements.Post;
-  with TfrmUserStatementEditor.Create(Self) do
-    ShowStatement(Self.qryUserStatements.FieldByName('CODE').AsString);
+{  with TfrmUserStatementEditor.Create(Self) do
+    ShowStatement(Self.qryUserStatements.FieldByName('CODE').AsString);     }
   qryUserStatements.Refresh;
 end;
 
