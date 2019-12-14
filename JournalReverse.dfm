@@ -28,7 +28,6 @@ object frmJournalReverse: TfrmJournalReverse
     TabOrder = 0
     Transparent = True
     AutoSize = True
-    ExplicitHeight = 300
     object btnOriginal: TcxButton
       Left = 188
       Top = 187
@@ -111,7 +110,7 @@ object frmJournalReverse: TfrmJournalReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 187
-      EditValue = 43746.519862037d
+      EditValue = 43811.9057324074d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -990,7 +989,7 @@ object frmJournalReverse: TfrmJournalReverse
       '  (:AMOUNT, :DESCR, :CREATED, :ACCT, :NMATTER, :REFNO,'
       '   :TYPE, :NCLIENT, :NJOURNAL, :PAYER, '#39'G'#39', '#39'Y'#39', :FILEID,'
       '   :NALLOC, null, :CLIENT_NAME, SysDate, :MATTER_DESC,'
-      '   '#39'N'#39', :TAXCODE, :TAX, :SUNDRYTYPE,'#39'Y'#39')')
+      '   '#39'Y'#39', :TAXCODE, :TAX, :SUNDRYTYPE,'#39'Y'#39')')
     Left = 57
     Top = 187
     ParamData = <
