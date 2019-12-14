@@ -1,5 +1,22 @@
 Insight Build 9.2.0
 
+Build 55
+========
+- Change to document saving when default document path is UNC
+- Modified Bank Transfer screen - now shows the bank code selected
+- Bank Transfer "Transfer" button state set by comparing Bank code rather than Bank name.
+- change to default document path creation when path is set as UNC.
+- Trim the description to a value less than 4000 to avoid SQL error.
+
+Build 54
+========
+- Fixed issue with Creditor Invoice Payment when using Cash Based reporting for GST
+- Fixed issue with the update of the Creditor Invoice owing amount when reversing a Creditor Payment Cheque
+- Fixed issue with Dataset not in Insert/Edit mode when doing MatterGL Office Journal
+- Fixed error in AccountPayable grid when Invoice attached to multiple matters.
+- Fix to Creditor Invoice payment.  Now selects value defined in Tax Type definition for CreditorInvoice Payment.
+- Change to Time Sheet program when clicking the Refresh button and the Timer is Active.  It will now prompt user whether to stop Timer prior to refresh. 
+
 Build 53
 ========
 -Fixed issue with generating Bill Credit Note number
