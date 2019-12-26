@@ -2536,6 +2536,7 @@ begin
                   ErrorText := 'This matter has been flagged as "Stop Work". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
                   DisplayValue := '';
                   qryFeeTmp.FieldbyName('TIME_TYPE').AsString := 'O';
+                  bMatterValidated := False;
                end
 //                  MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
                else
@@ -2620,6 +2621,7 @@ begin
                Error := True;
                ErrorText := 'This matter has been flagged as "Stop Work". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
                DisplayValue := '';
+               bMatterValidated := False;
             end
             else if (MatterString(sDisplayValue, 'PROSPECTIVE') = 'Y') then
             begin
@@ -2628,6 +2630,7 @@ begin
                  Error := True;
                  ErrorText := 'This matter has been flagged as "Prospective". No time can be recorded'; // MsgInfo('This matter has been flagged as "Stop Work". No time can be recorded')
                  DisplayValue := '';
+                 bMatterValidated := False;
                end;
             end
             else
@@ -2680,6 +2683,7 @@ begin
             sDisplayValue := '';
             ErrorText := 'Matter does not exist!';
             Error := True;
+            bMatterValidated := False;
          end;
       end
       else
