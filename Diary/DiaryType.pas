@@ -8,7 +8,7 @@ uses
   ToolWin, ExtCtrls, Menus, Buttons, OracleUniProvider, Uni,
   DBAccess, dxBarDBNav, dxBar, ppDB, ppDBPipe, ppBands, ppCtrls,
   ppPrnabl, ppClass, ppVar, ppCache, ppComm, ppRelatv, ppProd, ppReport,
-  ppParameter, cxClasses, ppDesignLayer, MemDS;
+  ppParameter, cxClasses, ppDesignLayer, MemDS, System.ImageList;
 
 type
   TfrmDiaryType = class(TfrmMaint)
