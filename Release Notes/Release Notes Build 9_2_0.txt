@@ -1,5 +1,9 @@
 Insight Build 9.2.0
 
+Build 56
+========
+- Changes to posting to eliminate duplication of transactions.
+
 Build 55
 ========
 - Change to document saving when default document path is UNC
