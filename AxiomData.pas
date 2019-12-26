@@ -35,6 +35,7 @@ const
    PATCH_VERSION = '9_2_0';
    LOGFILESIZE =     30000;
 
+
 type
    // A custom DragObject  derived from TcxDragControlObject (cxControls.pas) that is derived from TDragControlObject
   TcxDragCellControlObject = class(TcxDragControlObject)
@@ -1013,6 +1014,7 @@ type
     FTabIndex: integer;
     FTimeUnits: integer;
     FFEE_ENQUIRY_ACCESS: string;
+    ExeVersion: string;
 
     procedure SetUserID(sUserID: string);
     function GetBuildFlags: string;
@@ -1763,6 +1765,8 @@ begin
 end;
 
 function TdmAxiom.GetVersionInfo: string;
+const
+   Version: String = '';
 var
    VerInfoSize:  DWORD;
    VerInfo:      Pointer;
@@ -1773,49 +1777,56 @@ var
 
    iLastError: DWord;
 begin
-   try
+  If (Version <> '') Then
+  Begin
+    Result := Version;
+  End
+  Else
+  Begin
+    try
       ExeName := Application.ExeName;
       Application.ProcessMessages;
 
       VerInfoSize := GetFileVersionInfoSize(PChar(ExeName), Dummy);
       if VerInfoSize > 0 then
       begin
-         try
-            GetMem(VerInfo, VerInfoSize);
-            if GetFileVersionInfo(PChar(ExeName), 0, VerInfoSize, VerInfo) then
-            begin
-               if VerQueryValue(VerInfo, '\', Pointer(VerValue), VerValueSize) then
-                  with VerValue^ do
-                     Result := Format('%d.%d.%d.%d', [
-                               HiWord(dwFileVersionMS), //Major
-                               LoWord(dwFileVersionMS), //Minor
-                               HiWord(dwFileVersionLS), //Release
-                               LoWord(dwFileVersionLS)]); //Build
+        try
+          GetMem(VerInfo, VerInfoSize);
+          if GetFileVersionInfo(PChar(ExeName), 0, VerInfoSize, VerInfo)
+          then
+          begin
+            if VerQueryValue(VerInfo, '\', Pointer(VerValue), VerValueSize)
+            then
+              with VerValue^ do
+                Version := Format('%d.%d.%d.%d', [HiWord(dwFileVersionMS), // Major
+                  LoWord(dwFileVersionMS), // Minor
+                  HiWord(dwFileVersionLS), // Release
+                  LoWord(dwFileVersionLS)]); // Build
 
-            end
-            else
-            begin
-               iLastError := GetLastError;
-               Result := Format('GetFileVersionInfo failed: (%d) %s',
-                              [iLastError, SysErrorMessage(iLastError)]);
-            end;
-         finally
-            FreeMem(VerInfo, VerInfoSize);
-         end;
+          end
+          else
+          begin
+            iLastError := GetLastError;
+            Version := Format('GetFileVersionInfo failed: (%d) %s', [iLastError, SysErrorMessage(iLastError)]);
+          end;
+        finally
+          FreeMem(VerInfo, VerInfoSize);
+        end;
       end
       else
       begin
-         iLastError := GetLastError;
-         Result := Format('GetFileVersionInfo failed: (%d) %s',
-                           [iLastError, SysErrorMessage(iLastError)]);
+        iLastError := GetLastError;
+        Version := Format('GetFileVersionInfo failed: (%d) %s', [iLastError, SysErrorMessage(iLastError)]);
       end;
-   finally
-//      SplashScreen.Close;
-//      SplashScreen.Free;
-   end;
+
+      Result := Version;
+
+    finally
+      // SplashScreen.Close;
+      // SplashScreen.Free;
+    end;
+  End;
 end;
-
-
 procedure TdmAxiom.PrecImagesLoad;
 var
   TempFileName: string;
@@ -2238,6 +2249,7 @@ begin
    QueryTracing := False;
    QueryTolerance := 1;
    FSqlLogFile := ExtractFilePath(ParamStr(0)) + 'sql.log';
+   ExeVersion := '';
 //   TSSpellChecker.Dictionaries[2].Load();
 end;
 
