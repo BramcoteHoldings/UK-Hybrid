@@ -10,7 +10,8 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, cxContainer, dxBar, Vcl.StdCtrls, cxTextEdit, cxMaskEdit, cxButtonEdit,
   DBAccess, Uni, MemDS, cxCheckBox, cxGroupBox, cxRadioGroup,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  dxScrollbarAnnotations;
 
 const
   UM_CHECK = WM_USER + 10000;
@@ -45,6 +46,7 @@ type
     sqlFeeUpdate: TUniSQL;
     rgWIPActions: TcxRadioGroup;
     sqlFeeUndo: TUniSQL;
+    rgBillable: TcxRadioGroup;
     procedure cxButtonEdit1PropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure btnedMatterPropertiesValidate(Sender: TObject;
@@ -58,6 +60,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure rgWIPActionsClick(Sender: TObject);
     procedure tvFeeListSelectHeaderClick(Sender: TObject);
+    procedure rgBillableClick(Sender: TObject);
   private
     { Private declarations }
     lNMatter: integer;
@@ -172,9 +175,25 @@ begin
                   sMsgText := 'Written off WIP undone.';
                end;
          end;
+         case rgBillable.ItemIndex of
+            0: begin
+                  ParamByName('BILLTYPE').Clear;
+               end;
+            1: begin
+                  ParamByName('BILLTYPE').AsString := 'Billable';
+               end;
+            2: begin
+                  ParamByName('BILLTYPE').AsString := 'NonBillable';
+               end;
+         end;
          Open;
       end;
    end;
+end;
+
+procedure TfrmWIPWriteOff.rgBillableClick(Sender: TObject);
+begin
+   PopulateGrid(lNMatter);
 end;
 
 procedure TfrmWIPWriteOff.rgWIPActionsClick(Sender: TObject);
