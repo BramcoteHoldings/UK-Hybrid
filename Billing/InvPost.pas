@@ -14,7 +14,8 @@ uses
   cxCalendar, cxCurrencyEdit,DateUtils, cxCheckBox, cxMemo, cxMaskEdit,
   cxDropDownEdit, EnforceCustomDateEdit, cxLookAndFeels, dxCore, cxNavigator,
   cxDateUtils, cxDBLookupComboBox, cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxBarBuiltInMenu, dxDPIAwareUtils, dxDateRanges, System.ImageList, cxSpinEdit;
+  dxBarBuiltInMenu, dxDPIAwareUtils, dxDateRanges, System.ImageList, cxSpinEdit,
+  dxScrollbarAnnotations;
 
 const
   COL_AUTHOR = 0;
@@ -164,6 +165,7 @@ type
     FRefreshBill: boolean;
     FClickPost: boolean;
     bFromNavigator: boolean;
+    LoggingErrorMessage: String;
 
     procedure CalcTotals;
     procedure SetupDistFees;
@@ -173,6 +175,8 @@ type
     procedure postSubBills(iNmemo : integer);    }
 
     property ClickPost: boolean read FClickPost write FClickPost;
+    procedure CheckBillUndispatched(nmemo:integer);
+    function CheckNMEMOBeforePosting(nmemo:integer; DebtorsLedgerControl: String):Boolean;
   public
     { Public declarations }
     property RefreshBillGrid: boolean read FRefreshBill write FRefreshBill;
@@ -587,7 +591,11 @@ begin
       cAllocDisbTax := 0;
       cAllocDisbTaxDiff := 0;
 
-    // Make sure that this number has not been entered
+      cDebtors := qryMatter.FieldByName('DEBTORS').AsCurrency;
+      iInvoice := Self.qryBill.FieldByName('NMEMO').AsInteger;
+      iNMatter := qryMatter.FieldByName('NMATTER').AsInteger;
+
+      // Make sure that this number has not been entered
       if IsRefnoExisting(tbRefno.Text, qryBill.FieldByName('NMEMO').AsInteger) then
       begin
          if ClickPost then
@@ -624,10 +632,13 @@ begin
               dmAxiom.uniInsight.Rollback;
             dmAxiom.uniInsight.StartTransaction;
 
-            cDebtors := qryMatter.FieldByName('DEBTORS').AsCurrency;
-            iInvoice := Self.qryBill.FieldByName('NMEMO').AsInteger;
-            iNMatter := qryMatter.FieldByName('NMATTER').AsInteger;
-            {  Need to do the following code in order to cater for transactions that have
+            //
+            // Before we start posting, check that the bill has not been posted by anyone else.
+            // This will raise an error if the DISPATCHED date is not null
+            //
+            CheckBillUndispatched(iInvoice);
+
+           {  Need to do the following code in order to cater for transactions that have
                a taxcode value of GSTNC.  These transactions do not have any GST calculated
                at time of posting.  GST is only recorded at time of billing.  Prior to posting
                the bill we need to calculate the GST value for any transactions that have a GST
@@ -650,7 +661,7 @@ begin
                                  'FROM TAXRATE WHERE TAXCODE=CR.TAXCODE AND TRUNC(CR.REQDATE) >= commence and TRUNC(CR.REQDATE) <= nvl(end_period,sysdate+1000)), '+
                                  'CR.BILLED_AMOUNT = CR.AMOUNT '+
                                  'WHERE TAX = 0 AND FILEID = ' + QuotedStr(Self.qryBill.FieldByName('FILEID').AsString) + ' AND '+
-                                 'NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger);
+                                 'NMEMO = ' + iInvoice.ToString;
             qrySetup.ExecSQL;
             qrySetup.Close;
               // Sundries
@@ -658,7 +669,7 @@ begin
                                  ' TAX =(SELECT (A.AMOUNT*(ABS(RATE)/100)) '+
                                  ' FROM TAXRATE WHERE TAXCODE=A.TAXCODE AND TRUNC(A.CREATED) >= commence and TRUNC(A.CREATED) <= nvl(end_period,sysdate+1000)) WHERE TAX = 0 AND NMATTER = ' +
                                    IntToStr(Self.qryBill.FieldByName('NMATTER').AsInteger) +
-                                   ' AND NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger);
+                                   ' AND NMEMO = ' + iInvoice.ToString;
             qrySetup.ExecSQL;
             qrySetup.Close;
 
@@ -666,7 +677,7 @@ begin
                                  'TAX =(SELECT (F.AMOUNT*(ABS(RATE)/100)) FROM TAXRATE WHERE TAXCODE = F.TAXCODE AND TRUNC(F.CREATED) >= commence and TRUNC(F.CREATED) <= nvl(end_period, sysdate+1000) ) '+
                                    'WHERE TAX = 0 AND TYPE = ''ia'' AND Billed = ''N'' AND '+
                                    'NMATTER = ' + IntToStr(Self.qryBill.FieldByName('NMATTER').AsInteger) + ' AND '+
-                                   'NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger);
+                                   'NMEMO = ' + iInvoice.ToString;
             qrySetup.ExecSQL;
             qrySetup.Close;
 
@@ -787,11 +798,11 @@ begin
                  qrySetup.SQL.Add(' nvl(EMPLOYEE.FEE_CHART,EMP_AUTH.FEE_CHART) as FEE_CHART, nvl(EMPLOYEE.FEEWOFF_CHART,EMP_AUTH.FEEWOFF_CHART) as FEEWOFF_CHART,nvl(EMPLOYEE.DISBWOFF_CHART,EMP_AUTH.DISBWOFF_CHART) as DISBWOFF_CHART ');
                  qrySetup.SQL.Add('FROM FEE, EMPLOYEE, MATTER, EMPLOYEE EMP_AUTH, NMEMO ');
                  qrySetup.SQL.Add('WHERE FEE.NMATTER = ' + IntToStr(Self.qryBill.FieldByName('NMATTER').AsInteger));
-                 qrySetup.SQL.Add('  AND FEE.NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger));
+                 qrySetup.SQL.Add('  AND FEE.NMEMO = ' + iInvoice.ToString);
                  qrySetup.SQL.Add('  AND FEE.NMATTER = MATTER.NMATTER ');
                  qrySetup.SQL.Add('  AND UPPER(FEE.AUTHOR) = UPPER(EMPLOYEE.CODE(+))');
                  qrySetup.SQL.Add('  AND UPPER(MATTER.AUTHOR) = UPPER(EMP_AUTH.CODE(+))');
-                 qrySetup.SQL.Add('  AND NMEMO.NMEMO = ' + IntToStr(Self.qryBill.FieldByName('NMEMO').AsInteger));
+                 qrySetup.SQL.Add('  AND NMEMO.NMEMO = ' + iInvoice.ToString);
                  qrySetup.SQL.Add(') GROUP BY AUTHOR, CHART_SUFFIX,');
                  qrySetup.SQL.Add(' FEE_CHART, FEEWOFF_CHART, DISBWOFF_CHART ');
                  if dmAxiom.runningide then
@@ -2035,7 +2046,6 @@ begin
                  sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,
                                 lsBillFeeTaxSubDR,'',true,'Error with Fee Tax Chart');
 
-
                  PostLedger(dtpDispatched.Date
                    , FeeAllocTaxDiff - cFeesTax
                    , 0
@@ -2157,7 +2167,7 @@ begin
 
             // update the dispatched date in fee dist in case it changed since creation of bill
             qrySetup.SQL.Text := 'UPDATE FEEDIST SET CREATED_DATE = :DISPATCHED '+
-                                 ' WHERE NMEMO = ' + IntToStr(iInvoice) + ' AND NMATTER = ' + qryMatter.FieldByName('NMATTER').AsString;
+                                 ' WHERE NMEMO = ' + iInvoice.ToString + ' AND NMATTER = ' + qryMatter.FieldByName('NMATTER').AsString;
             qrySetup.ParamByName('DISPATCHED').AsDateTime := dtpDispatched.Date;
             qrySetup.ExecSQL;
             qrySetup.Close;
@@ -2237,14 +2247,15 @@ begin
                SQL.Add('WHERE NMEMO = ' + IntToStr(iInvoice));
                Open;
             end;
+
             if Self.qryBill.FieldByName('BPAY_REFERENCE').IsNull then
             begin
-//               if (not qryBill.FieldByName('DRAFT_BILL_NO').IsNull) then
-//               begin
-                  qryBill.Edit;
-                  qryBill.FieldByName('BPAY_REFERENCE').AsString  := CreateBPayReference(Self.qryBill.FieldByName('REFNO').AsString);
-                  qryBill.Post;
-//                end;
+//             if (not qryBill.FieldByName('DRAFT_BILL_NO').IsNull) then
+//             begin
+               qryBill.Edit;
+               qryBill.FieldByName('BPAY_REFERENCE').AsString  := CreateBPayReference(Self.qryBill.FieldByName('REFNO').AsString);
+               qryBill.Post;
+//             end;
             end;
             Self.qryBill.Close;
 
@@ -2637,13 +2648,20 @@ end;
 
 procedure TfrmInvPost.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   if not bPosted then
-   begin
-//      qryDistFees.CancelUpdates;
-      qryTmp.Close;
-      qryTmp.SQL.Text := 'DELETE FROM FEEDIST WHERE NMEMO = ' + IntToStr(AMemo);
-      qryTmp.Execute;
-   end;
+   try
+      CheckBillUndispatched(AMemo);
+      if not bPosted  then
+      begin
+         qryTmp.Close;
+         qryTmp.SQL.Text := 'DELETE FROM FEEDIST WHERE NMEMO = ' + IntToStr(AMemo);	      qryTmp.SQL.Text := 'DELETE FROM FEEDIST WHERE NMEMO = ' + IntToStr(AMemo);
+         qryTmp.Execute;
+      end;
+  Except
+    //
+    // CheckBillUndispatched will throw an error if the bill was posted by another instance before we got here.
+    // So just soak up the error.
+    //
+  end;
 
    Self.qryBill.Close;
    qryTotalFees.Close;
@@ -3135,6 +3153,127 @@ begin
       bFromNavigator := True;
    end;
 end;
+
+Procedure TfrmInvPost.CheckBillUndispatched(nmemo:integer);
+var
+   iCount: Integer;
+begin
+    //
+    // If the bill has already been posted, then dispathced will have a value and we will
+    // get no records.
+    //
+   qryTmp.Close;
+   qryTmp.SQL.Text := 'SELECT DISPATCHED FROM NMEMO WHERE DISPATCHED Is Null And NMEMO = ' + IntToStr(nmemo);
+   qryTmp.Open;
+   iCount := qryTmp.RecordCount;
+   qryTmp.Close;
+
+   if iCount = 0 Then
+      //
+      // No records, so we have an error condition.
+      //
+      raise Exception.Create('This bill appears to have already been posted.');
+end;
+
+function TfrmInvPost.CheckNMEMOBeforePosting(nmemo:integer; DebtorsLedgerControl: String):Boolean;
+var
+  dNmemoFees: Double;
+  dNmemoFeesTax: Double;
+  dCalcFeesTax: Double;
+  dFeeDistFees: Double;
+  dBillTotal: Double;
+  dGLTotal: Double;
+begin
+   try
+      LoggingErrorMessage := '';
+
+      dmAxiom.qryTmp.Close;
+      dmAxiom.qryTmp.SQL.Clear;
+      dmAxiom.qryTmp.SQL.Add('select fees ,feestax');
+      dmAxiom.qryTmp.SQL.Add(' ,fees + disb + antd + sund + upcred TotalExTaxCalc');
+      dmAxiom.qryTmp.SQL.Add(' ,feestax + disbtax + antdtax +sundtax + upcredtax TotalCalcTax');
+      dmAxiom.qryTmp.SQL.Add(' ,fees + disb + antd + sund + upcred + feestax + disbtax + antdtax +sundtax + upcredtax AllTaxIncCalc');
+      dmAxiom.qryTmp.SQL.Add(' ,TOTAL NmemoTotal, TAX NmemoTax ');
+      dmAxiom.qryTmp.SQL.Add(' FROM NMEMO where NMEMO = :nmemo');
+
+      dmAxiom.qryTmp.ParamByName('nmemo').AsInteger := nmemo;
+      dmAxiom.qryTmp.Open;
+
+      dNmemoFees := dmAxiom.qryTmp.FieldByName('Fees').AsCurrency;
+      dNmemoFeesTax := dmAxiom.qryTmp.FieldByName('FeesTax').AsCurrency;
+      dCalcFeesTax := roundto(dNmemoFees * 0.2, -2);
+      dBillTotal := dmAxiom.qryTmp.FieldByName('NmemoTotal').AsCurrency;
+
+      // Check if Tax within tolerance +/- 0.10
+      // But only when  tax is being charged.
+      if (dNmemoFeesTax <> 0) And (Abs(dNmemoFeesTax - dCalcFeesTax) > 0.10) then
+      begin
+         LoggingErrorMessage := LoggingErrorMessage + 'Fees Tax not correct.' + #13;
+      end;
+
+      if dmAxiom.qryTmp.FieldByName('TotalCalcTax').AsCurrency <> dmAxiom.qryTmp.FieldByName('NmemoTax').AsCurrency then
+      begin
+         LoggingErrorMessage := LoggingErrorMessage + 'Total Bill Tax does not match Total Component Tax.' + #13;
+      end;
+
+      //
+      // Now check NMEMO.fees to FEEDIST
+      //
+      dmAxiom.qryTmp.Close;
+      dmAxiom.qryTmp.SQL.Clear;
+      dmAxiom.qryTmp.SQL.Add('Select Sum(ALLOC_AMT) FeeDistTotal');
+      dmAxiom.qryTmp.SQL.Add('FROM FEEDIST where NMEMO = :nmemo');
+
+      dmAxiom.qryTmp.ParamByName('nmemo').AsInteger := nmemo;
+      dmAxiom.qryTmp.Open;
+
+      dFeeDistFees := dmAxiom.qryTmp.FieldByName('FeeDistTotal').AsCurrency;
+
+      If abs(dNmemoFees - dFeeDistFees) > 0.001 then
+      begin
+         LoggingErrorMessage := LoggingErrorMessage + 'Fee distribution does not match the fee total.' + #13;
+      end;
+
+      dmAxiom.qryTmp.Close;
+
+      //
+      // Get the total from the debtors ledger.
+      //
+      dmAxiom.qryTmp.SQL.Clear;
+      dmAxiom.qryTmp.SQL.Add('Select Sum(AMOUNT * -1) GLTotal');
+      dmAxiom.qryTmp.SQL.Add('FROM TRANSITEM where OWNER_CODE = ''NMEMO'' And NOWNER = :nmemo And CHART = :DEBTORSCONTROL');
+      dmAxiom.qryTmp.ParamByName('nmemo').AsInteger := nmemo;
+      dmAxiom.qryTmp.ParamByName('DEBTORSCONTROL').AsString := DebtorsLedgerControl;
+      dmAxiom.qryTmp.Open;
+
+      dGLTotal := dmAxiom.qryTmp.FieldByName('GLTotal').AsCurrency;
+      dmAxiom.qryTmp.Close;
+
+      If abs(dBillTotal - dGLTotal) > 0.001 then
+      begin
+         LoggingErrorMessage := LoggingErrorMessage + Format('The Bill total does not match the Debtors Control. Bill = %.2n, GL = %.2n.' + #13,
+                                [dBillTotal, dGLTotal]);
+      end;
+
+      if LoggingErrorMessage <> '' then
+      begin
+         MsgInfo(LoggingErrorMessage);
+         Result := False;
+      end
+      else
+      begin
+         Result := True;
+      end;
+
+   except
+      on e : Exception do
+      begin
+         dmAxiom.qryTmp.Close;
+         raise;
+      end;
+   end;
+end;
+
 
 end.
 
