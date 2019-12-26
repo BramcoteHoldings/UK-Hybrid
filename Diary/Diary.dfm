@@ -107,6 +107,7 @@ object frmDiary: TfrmDiary
           object tvPhoneMessage: TcxGridDBTableView
             PopupMenu = dxBarPopupMenu1
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsPhoneMessage
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -200,6 +201,7 @@ object frmDiary: TfrmDiary
         LookAndFeel.NativeStyle = True
         object tvDiary: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataModeController.SmartRefresh = True
           DataController.DataSource = dsDiaryList
           DataController.KeyFieldNames = 'NDIARY'
@@ -2872,7 +2874,7 @@ object frmDiary: TfrmDiary
     XLSSettings.WorksheetName = 'Report'
     Left = 610
     Top = 184
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plDiaryListRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -3536,7 +3538,7 @@ object frmDiary: TfrmDiary
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43813.354690659730000000
+      ReportDocument.CreationDate = 43816.535855879630000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
