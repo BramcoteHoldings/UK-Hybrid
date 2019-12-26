@@ -17,7 +17,8 @@ uses
   cxGroupBox, Vcl.CheckLst, cxCheckListBox, cxMemo, cxRichEdit, cxDBRichEdit,
   Vcl.Graphics, cxDropDownEdit, cxCustomListBox, cxListBox, cxButtons,
   cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, cxButtonEdit, Vcl.Buttons,
-  Vcl.Mask, cxPC, uRwMapiInterfaces, SyncObjs, System.Character;
+  Vcl.Mask, cxPC, uRwMapiInterfaces, SyncObjs, System.Character,
+  dxScrollbarAnnotations;
 
 //  9 Nov 2017 DW - added Entity Group code
 
@@ -3269,249 +3270,257 @@ var
   LTakeFirst: Boolean;
   i,x, LPadNum,LPadding,LTmpEntityLen : Integer;
 begin
-  if eClientcode.Text = '' then
-  begin
-    if not (qClient.state in [dsEdit,dsInsert]) then
-    begin
-       qClient.ParamByName('nclient').AsInteger := 0;
-       qClient.Open;
-       qClient.Append;
-    end;
-    if qClient.FieldByName('INTRODUCED').IsNull then
-       qClient.FieldByName('INTRODUCED').AsDateTime := Now;
+   if (eClientcode.Text = '') then
+   begin
+      if not (qClient.state in [dsEdit,dsInsert]) then
+      begin
+         qClient.ParamByName('nclient').AsInteger := 0;
+         qClient.Open;
+         qClient.Append;
+      end;
+      if qClient.FieldByName('INTRODUCED').IsNull then
+         qClient.FieldByName('INTRODUCED').AsDateTime := Now;
     // Create the Client Code
-    LClientCode := '';
-    if (qCodeRules.FieldByName('CLIENTCODE').AsString = 'N') then
-    begin
-      // Use the system number
-      //AES 09/08/2017 changed to use nclient from client table rather than value from seqnums table
-      //AES 29/05/2019 changed to use sequence
-{      qClientCheck.Close;
-      qClientCheck.SQL.Text :=  'SELECT max(NCLIENT) + 1 as NCLIENT FROM CLIENT';  //   'SELECT NCLIENT FROM SEQNUMS';
-      qClientCheck.Open;
-      LClientCode := IntToStr(qClientCheck.FieldByName('NCLIENT').AsInteger);
-      qClientCheck.Close; }
-      if (qClient.FieldByName('nclient').AsInteger = 0) then
+      LClientCode := '';
+      if (qCodeRules.FieldByName('CLIENTCODE').AsString = 'N') then
       begin
-         LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'));
-         qClient.FieldByName('nclient').AsInteger := StrToInt(LClientCode);
-      end
-      else
-         LClientCode := qClient.FieldByName('nclient').AsString;
-
-      qGetCodes.Close;
-      qGetCodes.SQL.Clear;
-      qGetCodes.SQL.Add('SELECT CODE FROM CLIENT WHERE CODE LIKE ''' + LClientCode + '%''' + ' order by nclient');
-      qGetCodes.Open;
-      qGetCodes.Last;
-      LTmpCode := qGetCodes.FieldByName('CODE').AsString;
-      if (LTmpCode <> '') then
-      begin
-         if Length(LClientCode) < qCodeRules.FieldByName('CLIENTPAD').AsInteger then
-            LClientCode := Copy('000000' + LClientCode, Length(LClientCode) + 7 - qCodeRules.FieldByName('CLIENTPAD').AsInteger, qCodeRules.FieldByName('CLIENTPAD').AsInteger);
-      end;
-
-      repeat
-         LPadNum := StrToInt(LClientCode);
-//         inc(LPadNum);
-         LNumStr := intToStr(LPadNum);
-        // pad the number string
-         for i := 1 to (LPadding - Length(LNumStr)) do
-            LNumStr := '0' + LNumStr;
-
-         if (not qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull) then
-            LTmp := LClientCode + qCodeRules.FieldByName('CLIENTSEPARATOR').AsString + LNumStr
-         else
-            if True then
-
-            LTmp := LNumStr;
-
-      until not qGetCodes.Locate('CODE',LTmp,[]);
-
-      LClientCode := LTmp;
-
-      // and pad it
-      if Length(LClientCode) < qCodeRules.FieldByName('CLIENTPAD').AsInteger then
-        LClientCode := Copy('000000' + LClientCode, Length(LClientCode) + 7 - qCodeRules.FieldByName('CLIENTPAD').AsInteger, qCodeRules.FieldByName('CLIENTPAD').AsInteger);
-	  // add entity prefix
-      if qCodeRules.FieldByName('USE_ENTITY_CODE').AsString = 'Y' then
-      begin
-          LTmpEntityLen := qCodeRules.FieldByName('USE_ENTITY_LENGTH').AsInteger;
-          // if set too long for number of chars - set to 2
-          if LTmpEntityLen > 2 then
-              LTmpEntityLen := 2;
-          // set the prefix character/s
-          if Length(qCodeRules.FieldByName('ENTITY_CODE').AsString) = 1 then
-              LTmpEntityChar := qCodeRules.FieldByName('ENTITY_CODE').AsString
-          Else
-              LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_CODE').AsString, 1, LTmpEntityLen);
-          // set the temp client code
-          LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTITY_SEPARATOR').AsString + LClientCode;
-          LClientCode := LTmpEntity;
-      end;
-	  // add entity  group prefix prefix - 9 Nov 2017
-      if qCodeRules.FieldByName('USE_ENTGRP_CODE').AsString = 'Y' then
-      begin
-          LTmpEntityLen := qCodeRules.FieldByName('USE_ENTGRP_LENGTH').AsInteger;
-          // if set too long for number of chars - set to 2
-          if LTmpEntityLen > 2 then
-              LTmpEntityLen := 2;
-          // set the prefix character/s
-          if Length(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString) = 1 then
-              LTmpEntityChar := qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString
-          Else
-              LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString, 1, LTmpEntityLen);
-          // set the temp client code
-          LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTGRP_SEPARATOR').AsString + LClientCode;
-          LClientCode := LTmpEntity;
-      end;
-    end
-    else
-    if qCodeRules.FieldByName('CLIENTCODE').AsString = 'A' then
-    begin
-      // We are making a partial name
-      LTakeFirst := True;
-      if (cbGender.Text = '') then
-         GenderValue := 'I'
-      else
-         GenderValue := cbGender.EditValue;
-      if (qCodeRules.FieldByName('USE_PHONEBOOK_NAME').AsString = 'Y') and (GenderValue = 'E') then
-         AccronymCode := eName.Text
-      else
-         AccronymCode := eLastName.Text;
-      if (qCodeRules.FieldByName('CLIENTACRONYM').AsString = 'Y') and (Pos(' ', AccronymCode) > 0) then
-      begin
-         LTakeFirst := False;
-         LClientCode := Uppercase(Copy(AccronymCode, 1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
-         LTmp := AccronymCode; //eLastName.Text;
-         // Strip the apostrophes
-         while Pos('''', LTmp) > 0 do
-            LTmp := Copy(LTmp, 1, Pos('''', LTmp) - 1) + Copy(LTmp, Pos('''', LTmp) + 1, 99);
-
-         NewSearch := '';
-         for x := 1 to Length(LTmp) do
+         // Use the system number
+         //AES 09/08/2017 changed to use nclient from client table rather than value from seqnums table
+         //AES 29/05/2019 changed to use sequence
+{         qClientCheck.Close;
+         qClientCheck.SQL.Text :=  'SELECT max(NCLIENT) + 1 as NCLIENT FROM CLIENT';  //   'SELECT NCLIENT FROM SEQNUMS';
+         qClientCheck.Open;
+         LClientCode := IntToStr(qClientCheck.FieldByName('NCLIENT').AsInteger);
+         qClientCheck.Close; }
+         if (qClient.FieldByName('nclient').AsInteger = 0) then
          begin
-           if LTmp[x] <> ' ' then
-               NewSearch := NewSearch + Uppercase(LTmp[x]);
-         end;
-         LClientCode := copy(NewSearch,1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger);
-
-        {
-        while (Pos(' ', LTmp) > 0) and (i < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger) do
-        begin
-          LTmp := Copy(LTmp, Pos(' ', LTmp) + 1, 99);
-          LClientCode := LClientCode + Uppercase(Copy(LTmp, 1, 1));
-          Inc(i);
-        end;  }
-
-         if Length(LClientCode) < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger then
-            LClientCode := Uppercase(Copy(eLastName.Text, 1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger - Length(LClientCode) + 1) + Copy(LClientCode, 2, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
-      end;
-
-      if LTakeFirst then
-      begin
-         LTmp := AccronymCode;
-         // Strip the apostrophes
-         while Pos('''', LTmp) > 0 do
-            LTmp := Copy(LTmp, 1, Pos('''', LTmp) - 1) + Copy(LTmp, Pos('''', LTmp) + 1, 99);
-
-         LClientCode := Uppercase(Copy(LTmp, 1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
-      end;
-	  // add entity prefix
-      if qCodeRules.FieldByName('USE_ENTITY_CODE').AsString = 'Y' then
-      begin
-          LTmpEntityLen := qCodeRules.FieldByName('USE_ENTITY_LENGTH').AsInteger;
-          // if set too long for number of chars - set to 2
-          if LTmpEntityLen > 2 then
-              LTmpEntityLen := 2;
-          // set the prefix character/s
-          if Length(qCodeRules.FieldByName('ENTITY_CODE').AsString) = 1 then
-              LTmpEntityChar := qCodeRules.FieldByName('ENTITY_CODE').AsString
-          Else
-              LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_CODE').AsString, 1, LTmpEntityLen);
-          // set the temp client code
-          LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTITY_SEPARATOR').AsString + LClientCode;
-          LClientCode := LTmpEntity;
-      end;
-	  // add entity  group prefix prefix - 9 Nov 2017
-      if qCodeRules.FieldByName('USE_ENTGRP_CODE').AsString = 'Y' then
-      begin
-          LTmpEntityLen := qCodeRules.FieldByName('USE_ENTGRP_LENGTH').AsInteger;
-          // if set too long for number of chars - set to 2
-          if LTmpEntityLen > 2 then
-              LTmpEntityLen := 2;
-          // set the prefix character/s
-          if Length(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString) = 1 then
-              LTmpEntityChar := qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString
-          Else
-              LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString, 1, LTmpEntityLen);
-          // set the temp client code
-          LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTGRP_SEPARATOR').AsString + LClientCode;
-          LClientCode := LTmpEntity;
-      end;
-      // try this !
-      // get all the client codes like this one and loop through them
-      LPadding := qCodeRules.FieldByName('CLIENTPAD').AsInteger;
-      LPadNum := 0;
-
-      qGetCodes.Close;
-      qGetCodes.SQL.Clear;
-      qGetCodes.SQL.Add('SELECT CODE FROM CLIENT WHERE CODE LIKE ''' + LClientCode + '%''' + ' order by nclient');
-      qGetCodes.Open;
-      qGetCodes.Last;
-      LTmpCode := qGetCodes.FieldByName('CODE').AsString;
-      if LTmpCode <> '' then
-      begin
-         if (qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull = False) then
-         begin
-            if (Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+2, LPadding) = '') then
-               LPadNum := 1
-            else
-               LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+2, LPadding));
+            LClientCode := IntToStr(GetSequenceNumber('SQNC_NCLIENT'));
+            qClient.FieldByName('nclient').AsInteger := StrToInt(LClientCode);
          end
          else
+            LClientCode := qClient.FieldByName('nclient').AsString;
+
+         qGetCodes.Close;
+         qGetCodes.SQL.Clear;
+         qGetCodes.SQL.Add('SELECT CODE FROM CLIENT WHERE CODE LIKE ''' + LClientCode + '%''' + ' order by nclient');
+         qGetCodes.Open;
+         qGetCodes.Last;
+         LTmpCode := qGetCodes.FieldByName('CODE').AsString;
+         if (LTmpCode <> '') then
          begin
-            if (length(LTmpCode) < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger) then
-            for I := 1 to length(LTmpCode) do
-            begin
-               if ((IsLetter(LTmpCode[I]) = False) and
-                  (IsSeparator(LTmpCode[I]) = False)) then
-                  LNumStr := LNumStr+LTmpCode[I];
-            end;
-            if LNumStr = '' then
-               LNumStr := '1';
-            LPadNum := StrToInt(LNumStr);
+            if Length(LClientCode) < qCodeRules.FieldByName('CLIENTPAD').AsInteger then
+               LClientCode := Copy('000000' + LClientCode, Length(LClientCode) + 7 - qCodeRules.FieldByName('CLIENTPAD').AsInteger, qCodeRules.FieldByName('CLIENTPAD').AsInteger);
          end;
 
-{         if (qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull = False) then
-            LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+2, LPadding))
-         else
-            LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+1, LPadding));}
-
-      end;
-        // find a code that's not in the database
-      repeat
-         inc(LPadNum);
-         LNumStr := intToStr(LPadNum);
+         repeat
+            LPadNum := StrToInt(LClientCode);
+//         inc(LPadNum);
+            LNumStr := intToStr(LPadNum);
         // pad the number string
-         for i := 1 to (LPadding - Length(LNumStr)) do
-            LNumStr := '0' + LNumStr;
+            for i := 1 to (LPadding - Length(LNumStr)) do
+               LNumStr := '0' + LNumStr;
 
-         if (not qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull) then
-            LTmp := LClientCode + qCodeRules.FieldByName('CLIENTSEPARATOR').AsString + LNumStr
+            if (not qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull) then
+               LTmp := LClientCode + qCodeRules.FieldByName('CLIENTSEPARATOR').AsString + LNumStr
+            else
+               if True then
+                  LTmp := LNumStr;
+
+         until not qGetCodes.Locate('CODE',LTmp,[]);
+
+         LClientCode := LTmp;
+
+         // and pad it
+         if Length(LClientCode) < qCodeRules.FieldByName('CLIENTPAD').AsInteger then
+            LClientCode := Copy('000000' + LClientCode, Length(LClientCode) + 7 - qCodeRules.FieldByName('CLIENTPAD').AsInteger, qCodeRules.FieldByName('CLIENTPAD').AsInteger);
+	      // add entity prefix
+         if qCodeRules.FieldByName('USE_ENTITY_CODE').AsString = 'Y' then
+         begin
+            LTmpEntityLen := qCodeRules.FieldByName('USE_ENTITY_LENGTH').AsInteger;
+            // if set too long for number of chars - set to 2
+            if LTmpEntityLen > 2 then
+               LTmpEntityLen := 2;
+            // set the prefix character/s
+            if Length(qCodeRules.FieldByName('ENTITY_CODE').AsString) = 1 then
+               LTmpEntityChar := qCodeRules.FieldByName('ENTITY_CODE').AsString
+            Else
+               LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_CODE').AsString, 1, LTmpEntityLen);
+            // set the temp client code
+            LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTITY_SEPARATOR').AsString + LClientCode;
+            LClientCode := LTmpEntity;
+         end;
+	      // add entity  group prefix prefix - 9 Nov 2017
+         if qCodeRules.FieldByName('USE_ENTGRP_CODE').AsString = 'Y' then
+         begin
+            LTmpEntityLen := qCodeRules.FieldByName('USE_ENTGRP_LENGTH').AsInteger;
+            // if set too long for number of chars - set to 2
+            if LTmpEntityLen > 2 then
+               LTmpEntityLen := 2;
+            // set the prefix character/s
+            if Length(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString) = 1 then
+               LTmpEntityChar := qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString
+            Else
+               LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString, 1, LTmpEntityLen);
+            // set the temp client code
+            LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTGRP_SEPARATOR').AsString + LClientCode;
+            LClientCode := LTmpEntity;
+         end;
+      end
+      else
+      if qCodeRules.FieldByName('CLIENTCODE').AsString = 'A' then
+      begin
+         // We are making a partial name
+         LTakeFirst := True;
+         if (cbGender.Text = '') then
+            GenderValue := 'I'
          else
-            LTmp := LClientCode + LNumStr;
+            GenderValue := cbGender.EditValue;
 
-      until not qGetCodes.Locate('CODE',LTmp,[]);
+         if (qCodeRules.FieldByName('USE_PHONEBOOK_NAME').AsString = 'Y') and (GenderValue = 'E') then
+            AccronymCode := eName.Text
+         else
+            AccronymCode := eLastName.Text;
 
-      LClientCode := LTmp;
-    end;
+         if ((qCodeRules.FieldByName('CLIENTACRONYM').AsString = 'Y') and (Pos(' ', AccronymCode) > 0)) then
+         begin
+            LTakeFirst := False;
+            LClientCode := Uppercase(Copy(AccronymCode, 1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
+            LTmp := AccronymCode; //eLastName.Text;
+            // Strip the apostrophes
+            while Pos('''', LTmp) > 0 do
+               LTmp := Copy(LTmp, 1, Pos('''', LTmp) - 1) + Copy(LTmp, Pos('''', LTmp) + 1, 99);
 
-    eClientCode.Text := LClientCode;
-    if qClient.State = dsBrowse then
-       qClient.Edit;
-    qClient.FieldByName('CODE').AsString := LClientCode;
-  end;
+            NewSearch := '';
+            for x := 1 to Length(LTmp) do
+            begin
+               if LTmp[x] <> ' ' then
+                  NewSearch := NewSearch + Uppercase(LTmp[x]);
+            end;
+            LClientCode := copy(NewSearch,1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger);
+
+            {
+            while (Pos(' ', LTmp) > 0) and (i < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger) do
+            begin
+               LTmp := Copy(LTmp, Pos(' ', LTmp) + 1, 99);
+               LClientCode := LClientCode + Uppercase(Copy(LTmp, 1, 1));
+               Inc(i);
+            end;  }
+
+            if Length(LClientCode) < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger then
+               LClientCode := Uppercase(Copy(eLastName.Text, 1,
+                              qCodeRules.FieldByName('CLIENTLENGTH').AsInteger - Length(LClientCode) + 1) +
+                              Copy(LClientCode, 2, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
+         end;
+
+         if LTakeFirst then
+         begin
+            LTmp := AccronymCode;
+            // Strip the apostrophes
+            while Pos('''', LTmp) > 0 do
+               LTmp := Copy(LTmp, 1, Pos('''', LTmp) - 1) + Copy(LTmp, Pos('''', LTmp) + 1, 99);
+
+            LClientCode := Uppercase(Copy(LTmp, 1, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger));
+         end;
+
+	      // add entity prefix
+         if (qCodeRules.FieldByName('USE_ENTITY_CODE').AsString = 'Y') then
+         begin
+            LTmpEntityLen := qCodeRules.FieldByName('USE_ENTITY_LENGTH').AsInteger;
+            // if set too long for number of chars - set to 2
+            if LTmpEntityLen > 2 then
+               LTmpEntityLen := 2;
+            // set the prefix character/s
+            if Length(qCodeRules.FieldByName('ENTITY_CODE').AsString) = 1 then
+               LTmpEntityChar := qCodeRules.FieldByName('ENTITY_CODE').AsString
+            Else
+               LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_CODE').AsString, 1, LTmpEntityLen);
+            // set the temp client code
+            LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTITY_SEPARATOR').AsString + LClientCode;
+            LClientCode := LTmpEntity;
+         end;
+
+	      // add entity  group prefix prefix - 9 Nov 2017
+         if qCodeRules.FieldByName('USE_ENTGRP_CODE').AsString = 'Y' then
+         begin
+            LTmpEntityLen := qCodeRules.FieldByName('USE_ENTGRP_LENGTH').AsInteger;
+            // if set too long for number of chars - set to 2
+            if LTmpEntityLen > 2 then
+               LTmpEntityLen := 2;
+            // set the prefix character/s
+            if Length(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString) = 1 then
+               LTmpEntityChar := qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString
+            Else
+               LTmpEntityChar := Copy(qCodeRules.FieldByName('ENTITY_GROUP_CODE').AsString, 1, LTmpEntityLen);
+            // set the temp client code
+            LTmpEntity := LTmpEntityChar + qCodeRules.FieldByName('USE_ENTGRP_SEPARATOR').AsString + LClientCode;
+            LClientCode := LTmpEntity;
+         end;
+
+         // try this !
+         // get all the client codes like this one and loop through them
+         LPadding := qCodeRules.FieldByName('CLIENTPAD').AsInteger;
+         LPadNum := 0;
+
+         qGetCodes.Close;
+         qGetCodes.SQL.Clear;
+         qGetCodes.SQL.Add('SELECT CODE FROM CLIENT WHERE CODE LIKE ''' + LClientCode + '%''' + ' order by nclient');
+         qGetCodes.Open;
+         qGetCodes.Last;
+         LTmpCode := qGetCodes.FieldByName('CODE').AsString;
+         if (LTmpCode <> '') then
+         begin
+            if (qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull = False) then
+            begin
+               if (Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger + 2, LPadding) = '') then
+                  LPadNum := 1
+               else
+                  LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger + 2, LPadding));
+            end
+            else
+            begin
+               if (length(LTmpCode) < qCodeRules.FieldByName('CLIENTLENGTH').AsInteger) then
+               begin
+                  for I := 1 to length(LTmpCode) do
+                  begin
+                     if ((IsLetter(LTmpCode[I]) = False) and
+                        (IsSeparator(LTmpCode[I]) = False)) then
+                        LNumStr := LNumStr+LTmpCode[I];
+                  end;
+               end;
+               if LNumStr = '' then
+                  LNumStr := '1';
+               LPadNum := StrToInt(LNumStr);
+            end;
+
+{           if (qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull = False) then
+               LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+2, LPadding))
+            else
+               LPadNum := StrToInt(Copy(LTmpCode, qCodeRules.FieldByName('CLIENTLENGTH').AsInteger+1, LPadding));}
+
+         end;
+         // find a code that's not in the database
+         repeat
+            inc(LPadNum);
+            LNumStr := intToStr(LPadNum);
+            // pad the number string
+            for i := 1 to (LPadding - Length(LNumStr)) do
+               LNumStr := '0' + LNumStr;
+
+            if (not qCodeRules.FieldByName('CLIENTSEPARATOR').IsNull) then
+               LTmp := LClientCode + qCodeRules.FieldByName('CLIENTSEPARATOR').AsString + LNumStr
+            else
+               LTmp := LClientCode + LNumStr;
+
+         until not qGetCodes.Locate('CODE',LTmp,[]);
+
+         LClientCode := LTmp;
+      end;
+
+      eClientCode.Text := LClientCode;
+      if qClient.State = dsBrowse then
+         qClient.Edit;
+      qClient.FieldByName('CODE').AsString := LClientCode;
+   end;
 end;
 
 procedure TfrmPhoneBookNew.eClientCodeExit(Sender: TObject);

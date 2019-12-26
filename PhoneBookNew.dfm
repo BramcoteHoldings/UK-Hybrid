@@ -88,7 +88,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Width = 558
     Height = 593
     TabOrder = 5
-    Properties.ActivePage = tsMatterData
+    Properties.ActivePage = tsName
     Properties.CustomButtons.Buttons = <>
     Properties.MultiLine = True
     OnChange = pcPagesChange
@@ -2695,8 +2695,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         Top = 155
         Width = 200
         Height = 23
-        Date = 43768.419444675930000000
-        Time = 43768.419444675930000000
+        Date = 43817.419444675930000000
+        Time = 43817.419444675930000000
         ShowCheckbox = True
         Checked = False
         TabOrder = 7
@@ -3215,7 +3215,6 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         OnPaintText = vtCustomDataPaintText
         OnGetNodeDataSize = vtCustomDataGetNodeDataSize
         OnNewText = vtCustomDataNewText
-        ExplicitTop = 4
         Columns = <
           item
             Options = [coEnabled, coParentBidiMode, coParentColor, coVisible]
@@ -3246,6 +3245,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object cxGrid1DBTableView1: TcxGridDBTableView
           OnDblClick = dbgChildrenDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsListChildren
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -3302,6 +3302,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
         object tvEventList: TcxGridDBTableView
           OnDblClick = grdEventListDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dmMarketEventDataModule.dsParticipantEvents
           DataController.Filter.MaxValueListCount = 1000
           DataController.KeyFieldNames = 'EVENT_PART_ID'
@@ -6184,15 +6185,19 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       
-        'SELECT e.CLIENTCODE, e.CLIENTACRONYM, nvl(e.CLIENTPAD,0) CLIENTP' +
-        'AD, e.CLIENTLENGTH,'
+        'SELECT e.CLIENTCODE, nvl(e.CLIENTACRONYM, '#39'N'#39') CLIENTACRONYM, nv' +
+        'l(e.CLIENTPAD,0) CLIENTPAD, e.CLIENTLENGTH,'
       
-        'e.CREDITORCODE, e.CREDITORACRONYM, nvl(e.CREDITORPAD,0) CREDITOR' +
-        'PAD, e.CREDITORLENGTH, e.CLIENTSEPARATOR,'
+        'e.CREDITORCODE, nvl(e.CREDITORACRONYM, '#39'N'#39') CREDITORACRONYM, nvl' +
+        '(e.CREDITORPAD,0) CREDITORPAD, e.CREDITORLENGTH, e.CLIENTSEPARAT' +
+        'OR,'
       
         'e.USE_ENTITY_CODE, e.USE_ENTITY_LENGTH, e.USE_ENTITY_SEPARATOR, ' +
         'e.CODE AS ENTITY_CODE,'
-      'e.USE_ENTGRP_CODE, e.USE_ENTGRP_LENGTH, e.USE_ENTGRP_SEPARATOR,'
+      
+        'nvl(e.USE_ENTGRP_CODE, '#39'N'#39') USE_ENTGRP_CODE, e.USE_ENTGRP_LENGTH' +
+        ' USE_ENTGRP_LENGTH, '
+      'nvl(e.USE_ENTGRP_SEPARATOR, '#39'N'#39') USE_ENTGRP_SEPARATOR,'
       'e.USE_PHONEBOOK_NAME, egl.ENTITY_GROUP_CODE, e.ROWID'
       'FROM ENTITY e'
       
@@ -6753,6 +6758,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     object tvPostcode: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       FilterBox.Visible = fvAlways
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.KeyFieldNames = 'PCODE'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -6770,6 +6776,7 @@ object frmPhoneBookNew: TfrmPhoneBookNew
     end
     object tvIndustry: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsIndustry
       DataController.KeyFieldNames = 'CODE'
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -6796,8 +6803,8 @@ object frmPhoneBookNew: TfrmPhoneBookNew
   end
   object popCopyStreetAddress: TPopupMenu
     OnPopup = popCopyStreetAddressPopup
-    Left = 77
-    Top = 56
+    Left = 29
+    Top = 16
     object CopyToPostalAddress: TMenuItem
       Caption = 'Copy Address To Postal Address'
       OnClick = aCopyAddressDownExecute
