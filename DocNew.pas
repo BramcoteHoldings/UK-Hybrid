@@ -406,30 +406,6 @@ begin
       try
          if FileList.Count > 0 then
          begin
-           // 28 Aug 2018 DW add email connection
-           if (dmAxiom.EMailProfileDefault <> '') then
-           begin
-               if (dmAxiom.MapiSession.Active = False) then
-               begin
-                  OldCursor := Screen.Cursor;
-                  Screen.Cursor := crHourGlass;
-                  try
-                     dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
-                     dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
-                     dmAxiom.MapiSession.LogonInfo.Password           := '';
-                     dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
-                     dmAxiom.MapiSession.LogonInfo.NewSession         := False;
-                     dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
-                     dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
-                     dmAxiom.MapiSession.Active                       := True;
-                  finally
-                    Screen.Cursor := OldCursor;
-                  end;
-               end;
-            end;
-
-            if FMsgStore = Nil then
-               FMsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadwrite, False);
 
             for I := 0 to FileList.Count - 1 do
             begin
@@ -573,7 +549,10 @@ begin
                               if (FileImg <> 4) then
                                   FieldByName('d_create').AsDateTime := FileDateToDateTime(FileAge(FileList.Strings[i])) {edPath.Text};
 
-                              FieldByName('PATH').AsString := IndexPath(LNewDocPath, 'DOC_SHARE_PATH');  //  NewPath;
+                              if (ExtractFileDrive(LNewDocPath) = '') then
+                                 FieldByName('PATH').AsString := LNewDocPath
+                              else
+                                 FieldByName('PATH').AsString := IndexPath(LNewDocPath, 'DOC_SHARE_PATH');  //  NewPath;
                               FieldByName('DISPLAY_PATH').AsString := LNewDocPath;
                            end
                            else
@@ -602,6 +581,10 @@ begin
 
                               //FieldByName('FILE_EXTENSION').AsString := Copy(ExtractFileExt(AParsedDocName),2, Length(ExtractFileExt(AParsedDocName)));
 
+                                 if (ExtractFileDrive(AParsedDocName) = '') then
+                                    FieldByName('PATH').AsString := AParsedDocName
+                                 else
+                                    FieldByName('PATH').AsString := IndexPath(AParsedDocName, 'DOC_SHARE_PATH');
                                  FieldByName('PATH').AsString := IndexPath(AParsedDocName, 'DOC_SHARE_PATH');  //  NewPath;
                                  FieldByName('DISPLAY_PATH').AsString := AParsedDocName;
                                  edtPath.Text := AParsedDocName;
@@ -640,6 +623,31 @@ begin
               // begin
                    if (FileImg = 4) then
                    begin
+                      // 28 Aug 2018 DW add email connection
+                     if (dmAxiom.EMailProfileDefault <> '') then
+                     begin
+                        if (dmAxiom.MapiSession.Active = False) then
+                        begin
+                           OldCursor := Screen.Cursor;
+                           Screen.Cursor := crHourGlass;
+                           try
+                              dmAxiom.MapiSession.LogonInfo.UseExtendedMapi    := True;
+                              dmAxiom.MapiSession.LogonInfo.ProfileName        := dmAxiom.EMailProfileDefault; // 'Outlook';
+                              dmAxiom.MapiSession.LogonInfo.Password           := '';
+                              dmAxiom.MapiSession.LogonInfo.ProfileRequired    := True;
+                              dmAxiom.MapiSession.LogonInfo.NewSession         := False;
+                              dmAxiom.MapiSession.LogonInfo.ShowPasswordDialog := False;
+                              dmAxiom.MapiSession.LogonInfo.ShowLogonDialog    := True;
+                              dmAxiom.MapiSession.Active                       := True;
+                           finally
+                             Screen.Cursor := OldCursor;
+                           end;
+                        end;
+                     end;
+
+                     if FMsgStore = Nil then
+                        FMsgStore := dmAxiom.MapiSession.OpenDefaultMsgStore(alReadwrite, False);
+
                       try
     //                     FSavedMsg := dmAxiom.MapiSession.GetDefaultMsgStore(alReadwrite).OpenSavedMessage(AParsedDocName);
                          FSavedMsg := FMsgStore.OpenSavedMessage(AParsedDocName);

@@ -976,7 +976,10 @@ begin
       ADocumentPath := ParseMacros(DocumentPath,0,0,DocumentDescr);
       dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('anmatter').AsInteger             := NMatter;
       dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('adocumentid').AsInteger          := DocumentID;
-      dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('afilepath').AsString             := IndexPath(ADocumentPath, 'DOC_SHARE_PATH');  //DocumentPath;
+      if (ExtractFileDrive(ADocumentPath) = '') then
+         dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('afilepath').AsString          := ADocumentPath  //DocumentPath;
+      else
+         dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('afilepath').AsString          := IndexPath(ADocumentPath, 'DOC_SHARE_PATH');
       dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('atemplatepath').AsString         := TemplatePath;
       dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('adatafilepath').AsString         := DataFilePath;
       dmWorkFlowDataModuleMerge.spInsertGenericDocument.ParamByName('adataform').AsString             := DataForm;
@@ -1045,7 +1048,10 @@ begin
       dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('awho').AsString                := dmWorkFlowDataModule.UserID;
       dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('apreccategory').AsString       := PrecCategory;
       dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('aprecclassification').AsString := PrecClassification;
-      dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('adocfilepath').AsString        := IndexPath(DocumentPath, 'DOC_SHARE_PATH');
+      if (ExtractFileDrive(DocumentPath) = '') then
+         dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('adocfilepath').AsString     := DocumentPath
+      else
+         dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('adocfilepath').AsString     := IndexPath(DocumentPath, 'DOC_SHARE_PATH');
       dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('adocdescr').AsString           := DocumentDescr;
 //      dmWorkFlowDataModuleMerge.spInsertGenDocument.ParamByName('ADocDocID').AsInteger          := DocDocID;
 

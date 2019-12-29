@@ -1,4 +1,4 @@
-object frmDiary99: TfrmDiary99
+object frmDiary: TfrmDiary
   Left = 278
   Top = 176
   Caption = 'Insight Diary'
@@ -107,6 +107,7 @@ object frmDiary99: TfrmDiary99
           object tvPhoneMessage: TcxGridDBTableView
             PopupMenu = dxBarPopupMenu1
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsPhoneMessage
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -200,6 +201,7 @@ object frmDiary99: TfrmDiary99
         LookAndFeel.NativeStyle = True
         object tvDiary: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataModeController.SmartRefresh = True
           DataController.DataSource = dsDiaryList
           DataController.KeyFieldNames = 'NDIARY'
@@ -2665,7 +2667,7 @@ object frmDiary99: TfrmDiary99
       item
         DataType = ftUnknown
         Name = 'reminder_for'
-        Value = Null
+        Value = nil
       end>
   end
   object qryEmployee: TUniQuery
@@ -2814,7 +2816,7 @@ object frmDiary99: TfrmDiary99
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'Letter (8.5 x 11")'
+    PrinterSetup.PaperName = 'Letter'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2872,7 +2874,7 @@ object frmDiary99: TfrmDiary99
     XLSSettings.WorksheetName = 'Report'
     Left = 610
     Top = 184
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plDiaryListRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -3536,7 +3538,7 @@ object frmDiary99: TfrmDiary99
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Diary'
-      ReportDocument.CreationDate = 43781.473002789350000000
+      ReportDocument.CreationDate = 43816.535855879630000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack

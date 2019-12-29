@@ -859,6 +859,9 @@ begin
                beEntity.StyleDisabled.Color := TableInteger('ENTITY','CODE',dmAxiom.Entity,'COLOUR');
             end;
 
+            if (SettingLoadString(dmAxiom.UserID, 'Desktop', 'Entity') = '') then
+               SettingSave('Desktop', 'Entity', dmAxiom.Entity);
+
             if (dmAxiom.UserAutoTimer = 'Y') then
                btnAutoTimer.Visible := ivAlways
             else
@@ -872,7 +875,6 @@ begin
             if (pagMainControl.ActivePageIndex = 0) then
             begin
                dpNavBar.AutoHide := (dmAxiom.ShowMenuBar = 'N');
-
 
                nbMain.View := dmAxiom.ViewType;
 
@@ -941,11 +943,11 @@ begin
            if Systemstring('EMAILS_LISTENER') = 'Y' then
            begin
               // test to see if Outlook installed
-              try
+
+              if IsObjectActive('Outlook.Application') = False then
+                 OutlookApp := CreateOleObject('Outlook.Application')
+              else
                   OutlookApp := GetActiveOleObject('Outlook.Application');
-              except
-                     // silent
-              end;
 
               if (VarIsNull(OutlookApp) = False) then
                  OutlookApp := CreateOleObject('Outlook.Application');
@@ -2351,14 +2353,14 @@ end;
 
 procedure TfrmDesktop.tbtnDiaryClick(Sender: TObject);
 var
-  LfrmDiary: TfrmDiary99;
+  LfrmDiary: TfrmDiary;
 begin
    if pagMainControl.ActivePage = tsClassicAxiom then
    begin
       //  tbtnDiary.OnClick := nil;
       if not frmDesktop.WindowReShow('frmDiary') then
       begin
-         LfrmDiary := TfrmDiary99.Create(Self);
+         LfrmDiary := TfrmDiary.Create(Self);
          LfrmDiary.Show;
       end;
    end
@@ -3659,7 +3661,7 @@ begin
 
     IDXDATAREPORT: FindorCreate(TfrmMatterReportBuilder, iProgramID).Show;
 
-    IDXDIARY:  FindorCreate(TfrmDiary99, iProgramID).Show;
+    IDXDIARY:  FindorCreate(TfrmDiary, iProgramID).Show;
       {begin
         if(Not Assigned(FOutlookIntegrator)) then
           FOutlookIntegrator := TOutlookIntegrator.Create();

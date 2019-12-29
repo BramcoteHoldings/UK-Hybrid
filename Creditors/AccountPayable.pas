@@ -383,7 +383,10 @@ begin
            'I.NINVOICE, I.AMOUNT, I.ACCT, C.NAME, C.CODE, I.NCREDITOR, I.CHEQUE_GROUP_ID, '+
            'I.CREDITOR, I.BILLED, I.TAX, I.TAKE_ON, C.PAY_BY_EFT, I.INVOICE_COPY, I.INVOICE_COPY_EXT, '+
            '(I.AMOUNT - I.OWING) AS PAID, TAKE_ON, I.HOLD as Held, '+
-           '(select distinct nmemo from alloc where alloc.ninvoice = i.ninvoice and alloc.acct = i.acct) as nmemo '+
+           ' nvl((SELECT  case when (max(nmemo) is not null) then ''Y'' else ''N'' end '+
+           '          FROM alloc  '+
+           '         WHERE alloc.ninvoice = i.ninvoice '+
+           '           AND alloc.acct = i.acct group by ninvoice), ''N'') AS nmemo '+
            'FROM  CREDITOR C, INVOICE I ';
 
    sSQLTotals := 'SELECT NVL(SUM(LEGAL_CR_AMOUNT),0) "MATTER", NVL(SUM(TRADE_CR_AMOUNT),0) "TRADE" '+
@@ -1282,7 +1285,7 @@ begin
    if (pagAcctPayable.ActivePageIndex = 0) and
       (qryAccounts.Active = True) then
       actReverse.Enabled := ((tabAcctPayable.Visible) and (dmAxiom.Security.Invoice.Reverse) and
-                           (qryAccounts.FieldByName('NMEMO').IsNull)) OR
+                           (qryAccounts.FieldByName('NMEMO').AsString = 'N')) OR
                            (qryAccounts.FieldByName('TAKE_ON').AsString = 'N') ;
 end;
 

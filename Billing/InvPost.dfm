@@ -386,6 +386,7 @@ object frmInvPost: TfrmInvPost
       Navigator.Buttons.GotoBookmark.Visible = False
       Navigator.Buttons.Filter.Visible = False
       Navigator.Visible = True
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsDistFees
       DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -606,7 +607,7 @@ object frmInvPost: TfrmInvPost
   object dtpDispatched: TEnforceCustomDateEdit
     Left = 119
     Top = 6
-    EditValue = 43717.4503261921d
+    EditValue = 43824.0358856366d
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

@@ -14,7 +14,8 @@ uses
   Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Buttons, Data.DB, DBAccess, Uni, MemDS,
   cxButtonEdit, Vcl.Menus, cxButtons, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dxLayoutContainer,
-  dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses, dxLayoutControl;
+  dxLayoutcxEditAdapters, dxLayoutControlAdapters, cxClasses, dxLayoutControl,
+  cxLabel;
 
 type
   TfrmTransferMoney = class(TForm)
@@ -58,6 +59,13 @@ type
     dxLayoutItem8: TdxLayoutItem;
     lblGLToDesc: TLabel;
     dxLayoutItem9: TdxLayoutItem;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem10: TdxLayoutItem;
+    lblFrmBank: TcxLabel;
+    dxLayoutItem11: TdxLayoutItem;
+    lblToBank: TcxLabel;
+    dxLayoutItem12: TdxLayoutItem;
+    dxLayoutGroup5: TdxLayoutGroup;
     procedure BitBtn1Click(Sender: TObject);
     procedure teLedgerREFNOPropertiesValidate(Sender: TObject;
       var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
@@ -102,7 +110,7 @@ procedure TfrmTransferMoney.actTransferUpdate(Sender: TObject);
 begin
    TAction(Sender).Enabled := ((cmbBankFrom.Text<>'') and (cmbBankTo.Text<>'') and
                                (ceAmount.Value <> Null) and (tbDesc.Text<>'') and
-                               (cmbBankFrom.Text <> cmbBankTo.Text));
+                               (cmbBankFrom.EditValue <> cmbBankTo.EditValue));
 end;
 
 procedure TfrmTransferMoney.BitBtn1Click(Sender: TObject);
@@ -517,17 +525,19 @@ end;
 
 procedure TfrmTransferMoney.cmbBankFromPropertiesCloseUp(Sender: TObject);
 begin
-   if cmbBankFrom.Text <> '' then
+   if (cmbBankFrom.Text <> '') then
    begin
       AFromGL := TableString('BANK','ACCT',STRING(cmbBankFrom.EditValue), 'CASH_AT_BANK');
+      lblFrmBank.Caption := STRING(cmbBankFrom.EditValue);
    end;
 end;
 
 procedure TfrmTransferMoney.cmbBankToPropertiesCloseUp(Sender: TObject);
 begin
-   if cmbBanktO.Text <> '' then
+   if (cmbBanktO.Text <> '') then
    begin
       AtOGL := TableString('BANK','ACCT',STRING(cmbBanktO.EditValue), 'CASH_AT_BANK');
+      lblToBank.Caption := STRING(cmbBanktO.EditValue);
    end;
 end;
 

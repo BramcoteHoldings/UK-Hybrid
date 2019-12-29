@@ -2,8 +2,8 @@ object frmWIPWriteOff: TfrmWIPWriteOff
   Left = 0
   Top = 0
   Caption = 'WIP Write Off'
-  ClientHeight = 414
-  ClientWidth = 780
+  ClientHeight = 477
+  ClientWidth = 1038
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,8 +13,8 @@ object frmWIPWriteOff: TfrmWIPWriteOff
   OldCreateOrder = False
   OnClose = FormClose
   DesignSize = (
-    780
-    414)
+    1038
+    477)
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
@@ -27,12 +27,15 @@ object frmWIPWriteOff: TfrmWIPWriteOff
   object grdFeeList: TcxGrid
     Left = 8
     Top = 79
-    Width = 762
-    Height = 324
+    Width = 1020
+    Height = 387
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
+    ExplicitWidth = 762
+    ExplicitHeight = 324
     object tvFeeList: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       OnFocusedRecordChanged = tvFeeListFocusedRecordChanged
       DataController.DataModeController.SmartRefresh = True
       DataController.DataSource = dsFees
@@ -195,7 +198,7 @@ object frmWIPWriteOff: TfrmWIPWriteOff
     Width = 146
   end
   object rgWIPActions: TcxRadioGroup
-    Left = 256
+    Left = 245
     Top = 31
     Caption = 'Action'
     Properties.Columns = 2
@@ -210,7 +213,29 @@ object frmWIPWriteOff: TfrmWIPWriteOff
     TabOrder = 6
     OnClick = rgWIPActionsClick
     Height = 41
-    Width = 226
+    Width = 215
+  end
+  object rgBillable: TcxRadioGroup
+    Left = 472
+    Top = 31
+    Caption = 'Billable\NonBillable'
+    Properties.Columns = 3
+    Properties.Items = <
+      item
+        Caption = 'All (Billable and Non Billable)'
+      end
+      item
+        Caption = 'Billable'
+      end
+      item
+        Caption = 'NonBillable'
+      end>
+    Properties.ShowEndEllipsis = True
+    ItemIndex = 0
+    TabOrder = 7
+    OnClick = rgBillableClick
+    Height = 41
+    Width = 537
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -227,7 +252,7 @@ object frmWIPWriteOff: TfrmWIPWriteOff
     ImageOptions.Images = dmAxiom.ilstToolbar
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 676
+    Left = 388
     Top = 6
     PixelsPerInch = 96
     DockControlHeights = (
@@ -299,7 +324,8 @@ object frmWIPWriteOff: TfrmWIPWriteOff
       'AND TYPE = :type '
       'AND nmemo IS NULL '
       'AND WOFF = :WOFF'
-      'AND nmatter = :nmatter')
+      'AND nmatter = :nmatter'
+      'AND BILLTYPE = nvl(:BILLTYPE, BILLTYPE)')
     IndexFieldNames = 'nfee'
     Left = 306
     Top = 133
@@ -322,6 +348,11 @@ object frmWIPWriteOff: TfrmWIPWriteOff
       item
         DataType = ftUnknown
         Name = 'nmatter'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BILLTYPE'
         Value = nil
       end>
   end
