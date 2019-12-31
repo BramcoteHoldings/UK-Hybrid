@@ -182,6 +182,7 @@ object frmReceipt: TfrmReceipt
     LookAndFeel.NativeStyle = True
     object tvLedger: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       OnFocusedItemChanged = tvLedgerFocusedItemChanged
       OnInitEdit = tvLedgerInitEdit
       DataController.DataModeController.SmartRefresh = True
@@ -376,6 +377,7 @@ object frmReceipt: TfrmReceipt
     end
     object dbgrSubBill: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsSubBills
       DataController.KeyFieldNames = 'NSUBBILL'
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -891,7 +893,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43784.4103925116d
+    EditValue = 43829.5314982986d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

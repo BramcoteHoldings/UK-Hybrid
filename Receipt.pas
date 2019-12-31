@@ -19,7 +19,7 @@ uses
   dxSkinsCore, cxDataControllerConditionalFormattingRulesManagerDialog,
   dxBarBuiltInMenu, System.Actions, Vcl.PlatformDefaultStyleActnCtrls,
   VCL.uRwMAPISession, uRwMAPIInterfaces, uRwEasyMAPI, cxPropertiesStore,
-  VirtualTable, dxDateRanges;
+  VirtualTable, dxDateRanges, dxScrollbarAnnotations;
 
 const
   colTYPE = 0;
@@ -2559,33 +2559,43 @@ begin
 
    if tvLedgerTYPE.DataBinding.Field.Text = 'Bill' then
    begin
-      if DisplayValue <> '' then
+      if (DisplayValue <> '') then
       begin
-         if IsRefnoExisting(ARefNo) then
+         if (TableFloat('NMEMO', 'REFNO', ARefNo, 'OWING') <> 0) then
          begin
-            if Tablestring('NMEMO', 'REFNO', ARefNo, 'IS_Draft') = 'N' then
+            if IsRefnoExisting(ARefNo) then
             begin
-               qryBill.Close;
-               qryBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',ARefNo,'NMEMO');
-               qryBill.Open;
-               SetupBill;
-               DistributeBill;
+               if Tablestring('NMEMO', 'REFNO', ARefNo, 'IS_Draft') = 'N' then
+               begin
+                  qryBill.Close;
+                  qryBill.ParamByName('NMEMO').AsInteger := TableINTEGER('NMEMO','REFNO',ARefNo,'NMEMO');
+                  qryBill.Open;
+                  SetupBill;
+                  DistributeBill;
 
-               CheckUnpaidCreditors(ARefNo);
+                  CheckUnpaidCreditors(ARefNo);
+               end
+               else
+               begin
+                  ErrorText := 'This Bill #' + ARefNo +
+                     ' is a DRAFT Bill.  Please post prior to receipting.';
+                  Error := True;
+                  DisplayValue := '';
+               end;
             end
             else
             begin
                ErrorText := 'This Bill #' + ARefNo +
-                  ' is a DRAFT Bill.  Please post prior to receipting.';
+                   ' is not valid for the current Entity.';
                Error := True;
-               DisplayValue := '';
             end;
          end
          else
          begin
             ErrorText := 'This Bill #' + ARefNo +
-                ' is not valid for the current Entity.';
+                         ' has already been fully receipted.';
             Error := True;
+            DisplayValue := '';
          end;
       end;
    end;
@@ -2599,13 +2609,12 @@ end;
 
 procedure TfrmReceipt.tvLedgerCREDITPropertiesValidate(Sender: TObject;
   var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+var
+   bProcess: boolean;
 begin
+   bProcess := True;
    if not VarIsNull(DisplayValue) and (Error = False) then
    begin
-     //* for this to work, had to change code in unit cxGridCustomTableView - no longer needed
-     ValidateCurrentRecord(Currency(DisplayValue));
-     ValidateBillTotal(Currency(DisplayValue));
-
       if not qryLedger.Modified then
          qryLedger.Edit;
 
@@ -2616,11 +2625,25 @@ begin
          if DisplayValue > qryLedger.FieldByName('DEBIT').AsCurrency then
          begin
             if qryLedger.FieldByName('DEBIT').AsCurrency <> 0.0 then
-               MsgErr('There is only ' + Format('%m', [qryLedger.FieldByName('DEBIT').AsCurrency]) + ' owing on this Bill')
+            begin
+               MsgErr('There is only ' + Format('%m', [qryLedger.FieldByName('DEBIT').AsCurrency]) + ' owing on this Bill');
+               bProcess := False;
+            end
             else
+            begin
                MsgErr('There is nothing owing on this Bill');
+               bProcess := False;
+               Error := True;
+            end;
             tvLedgerCREDIT.DataBinding.Field.AsCurrency := qryLedger.FieldByName('DEBIT').AsCurrency;
             DisplayValue := qryLedger.FieldByName('DEBIT').AsCurrency;
+         end;
+
+         if bProcess = True then
+         begin
+            //* for this to work, had to change code in unit cxGridCustomTableView - no longer needed
+            ValidateCurrentRecord(Currency(DisplayValue));
+            ValidateBillTotal(Currency(DisplayValue));
          end;
       end;
    end;
