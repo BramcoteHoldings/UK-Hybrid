@@ -45,7 +45,7 @@ uses
   cxSchedulerDialogs, cxGridDBDataDefinitions, Messages, AxiomData,
   RestClientt, RestUtils, REST.Client, Vcl.Grids,
   dxPScxEditorLnks, JamFilePreview, cxTL, cxTLdxBarBuiltInMenu,
-  cxInplaceContainer, cxTLData, cxDBTL, dxPSTextLnk;
+  cxInplaceContainer, cxTLData, cxDBTL, dxPSTextLnk, dxScrollbarAnnotations;
 
 
 const
