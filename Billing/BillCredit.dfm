@@ -257,6 +257,7 @@ object frmBillCredit: TfrmBillCredit
       Navigator.Buttons.GotoBookmark.Visible = False
       Navigator.Buttons.Filter.Visible = False
       Navigator.Visible = True
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsLedger
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -368,7 +369,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43788.4448993519d
+    EditValue = 43829.5276591667d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard

@@ -13,7 +13,8 @@ uses
   cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxMaskEdit,
   cxCalendar, EnforceCustomDateEdit, dxCore, Math, cxNavigator, cxDateUtils,
   cxCheckBox, dxBar, cxBarEditItem,
-  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges;
+  cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
+  dxScrollbarAnnotations;
 
 const
   colTYPE = 0;
@@ -281,6 +282,7 @@ begin
                   ParamByName('P_Entity').AsString    := dmAxiom.Entity;
                   ParamByName('P_NMatter').AsInteger  := qryBill.FieldByName('NMATTER').AsInteger;
                   ParamByName('P_CREATEDBY').AsString := dmAxiom.UserID;
+                  ParamByName('P_CREATED').AsDate     := dtpDate.Date;
                   Execute;
                   iNMemo := ParamByName('Result').AsInteger;
                end;
