@@ -1777,56 +1777,53 @@ var
 
    iLastError: DWord;
 begin
-  If (Version <> '') Then
-  Begin
-    Result := Version;
-  End
-  Else
-  Begin
-    try
-      ExeName := Application.ExeName;
-      Application.ProcessMessages;
+   If (Version <> '') Then
+   Begin
+      Result := Version;
+   End
+   Else
+   Begin
+      try
+         ExeName := Application.ExeName;
+         Application.ProcessMessages;
 
-      VerInfoSize := GetFileVersionInfoSize(PChar(ExeName), Dummy);
-      if VerInfoSize > 0 then
-      begin
-        try
-          GetMem(VerInfo, VerInfoSize);
-          if GetFileVersionInfo(PChar(ExeName), 0, VerInfoSize, VerInfo)
-          then
-          begin
-            if VerQueryValue(VerInfo, '\', Pointer(VerValue), VerValueSize)
-            then
-              with VerValue^ do
-                Version := Format('%d.%d.%d.%d', [HiWord(dwFileVersionMS), // Major
-                  LoWord(dwFileVersionMS), // Minor
-                  HiWord(dwFileVersionLS), // Release
-                  LoWord(dwFileVersionLS)]); // Build
-
-          end
-          else
-          begin
+         VerInfoSize := GetFileVersionInfoSize(PChar(ExeName), Dummy);
+         if VerInfoSize > 0 then
+         begin
+            try
+               GetMem(VerInfo, VerInfoSize);
+               if GetFileVersionInfo(PChar(ExeName), 0, VerInfoSize, VerInfo) then
+               begin
+               if VerQueryValue(VerInfo, '\', Pointer(VerValue), VerValueSize) then
+                  with VerValue^ do
+                     Version := Format('%d.%d.%d.%d', [HiWord(dwFileVersionMS), // Major
+                        LoWord(dwFileVersionMS), // Minor
+                        HiWord(dwFileVersionLS), // Release
+                        LoWord(dwFileVersionLS)]); // Build
+               end
+               else
+               begin
+                  iLastError := GetLastError;
+                  Version := Format('GetFileVersionInfo failed: (%d) %s', [iLastError, SysErrorMessage(iLastError)]);
+               end;
+            finally
+               FreeMem(VerInfo, VerInfoSize);
+            end;
+         end
+         else
+         begin
             iLastError := GetLastError;
             Version := Format('GetFileVersionInfo failed: (%d) %s', [iLastError, SysErrorMessage(iLastError)]);
-          end;
-        finally
-          FreeMem(VerInfo, VerInfoSize);
-        end;
-      end
-      else
-      begin
-        iLastError := GetLastError;
-        Version := Format('GetFileVersionInfo failed: (%d) %s', [iLastError, SysErrorMessage(iLastError)]);
-      end;
+         end;
 
-      Result := Version;
-
-    finally
+         Result := Version;
+      finally
       // SplashScreen.Close;
       // SplashScreen.Free;
-    end;
-  End;
+      end;
+   End;
 end;
+
 procedure TdmAxiom.PrecImagesLoad;
 var
   TempFileName: string;
