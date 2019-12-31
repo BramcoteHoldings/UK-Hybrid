@@ -513,6 +513,7 @@ begin
    chkFrom.Checked := False;
    chkTo.Checked := False;
    rgOrderBy.Enabled := SystemString('TRUST_AS_OFFICE') = 'Y';
+
 end;
 
 procedure TfrmRptLedgerTrust.BitBtn1Click(Sender: TObject);
@@ -561,6 +562,9 @@ begin
       dtpFrom.Date := qryMatter.FieldByName('OPENED').AsDateTime;
    chkFrom.Checked := false;
    chkTo.Checked := false;
+
+   if (rgOrderBy.Enabled = True) then
+      rgOrderBy.ItemIndex := 1;
 end;
 
 procedure TfrmRptLedgerTrust.qryTrustLedgerCalcFields(DataSet: TDataSet);
