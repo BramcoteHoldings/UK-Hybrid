@@ -258,7 +258,7 @@ object frmMatters: TfrmMatters
     end
     object progBarDisbTotal: TcxProgressBar
       Left = 962
-      Top = 122
+      Top = 124
       Anchors = [akLeft, akBottom]
       AutoSize = False
       Properties.BarStyle = cxbsGradient
@@ -379,6 +379,7 @@ object frmMatters: TfrmMatters
       DataBinding.DataField = 'SEARCH'
       DataBinding.DataSource = dsMatter
       ParentFont = False
+      Properties.ShowAccelChar = False
       Properties.WordWrap = True
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clBlue
@@ -515,7 +516,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabMatterNotes
+    Properties.ActivePage = tabOverview
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -2027,7 +2028,7 @@ object frmMatters: TfrmMatters
         object dblblBranch: TDBText
           Left = 622
           Top = 136
-          Width = 3
+          Width = 64
           Height = 15
           AutoSize = True
           Color = clBtnFace
@@ -2046,7 +2047,7 @@ object frmMatters: TfrmMatters
         object lblDebtorStatus: TDBText
           Left = 622
           Top = 153
-          Width = 3
+          Width = 81
           Height = 13
           AutoSize = True
           Color = clBtnFace
@@ -2196,7 +2197,7 @@ object frmMatters: TfrmMatters
         object DBText7: TDBText
           Left = 622
           Top = 104
-          Width = 3
+          Width = 41
           Height = 15
           AutoSize = True
           Color = clBtnFace
@@ -3089,6 +3090,7 @@ object frmMatters: TfrmMatters
           Navigator.Buttons.GotoBookmark.Visible = False
           Navigator.Buttons.Filter.Visible = False
           Navigator.Visible = True
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsArchiveLocation
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -3551,6 +3553,7 @@ object frmMatters: TfrmMatters
         LookAndFeel.NativeStyle = True
         object cxGrid1DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsMatterAgedDebtors
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -4289,6 +4292,7 @@ object frmMatters: TfrmMatters
           PopupMenu = dxBarPopupMenuBills
           OnDblClick = dbgrInvoicesDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsInvoices
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -4606,6 +4610,7 @@ object frmMatters: TfrmMatters
         end
         object tvSubBills: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsSubBill
           DataController.DetailKeyFieldNames = 'NMEMO'
           DataController.KeyFieldNames = 'NMEMO;NSUBBILL_ID'
@@ -5034,6 +5039,7 @@ object frmMatters: TfrmMatters
         object tvMatterNotes: TcxGridDBTableView
           OnDblClick = tvMatterNotesDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvMatterNotesCellClick
           DataController.DataSource = dsMatterNotes
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -5107,6 +5113,7 @@ object frmMatters: TfrmMatters
         LookAndFeel.NativeStyle = True
         object tvDebtorNotes: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvDebtorNotesCellClick
           OnCellDblClick = tvDebtorNotesCellDblClick
           DataController.DataSource = dsDebtorNotes
@@ -5756,6 +5763,7 @@ object frmMatters: TfrmMatters
             LookAndFeel.ScrollbarMode = sbmDefault
             object tvReceipts: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsReceipts
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <
@@ -5980,6 +5988,7 @@ object frmMatters: TfrmMatters
             TabOrder = 1
             object tvReceiptReqs: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsReceiptReqs
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
@@ -6267,6 +6276,7 @@ object frmMatters: TfrmMatters
         LookAndFeel.NativeStyle = True
         object tvTransactions: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsInvestmentTransactions
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -6562,6 +6572,7 @@ object frmMatters: TfrmMatters
             object tvTemplates: TcxGridDBTableView
               OnDblClick = btnModifyCreateNewClick
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsPrecendents
               DataController.Filter.Options = [fcoCaseInsensitive]
               DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoFocusTopRowAfterSorting, dcoGroupsAlwaysExpanded]
@@ -6961,6 +6972,7 @@ object frmMatters: TfrmMatters
                     object tvEmailAttachments: TcxGridDBTableView
                       OnDblClick = tvEmailAttachmentsDblClick
                       Navigator.Buttons.CustomButtons = <>
+                      ScrollbarAnnotations.CustomAnnotations = <>
                       DataController.DataSource = dsDocChildren
                       DataController.DetailKeyFieldNames = 'PARENTDOCID'
                       DataController.KeyFieldNames = 'DOCID'
@@ -7170,6 +7182,7 @@ object frmMatters: TfrmMatters
                     end
                     object tvParties: TcxGridDBTableView
                       Navigator.Buttons.CustomButtons = <>
+                      ScrollbarAnnotations.CustomAnnotations = <>
                       DataController.DetailKeyFieldNames = 'WORKFLOWGENDOCUMENT'
                       DataController.KeyFieldNames = 'WORKFLOWGENDOCUMENT;DOCID'
                       DataController.MasterKeyFieldNames = 'DOCID'
@@ -7224,6 +7237,7 @@ object frmMatters: TfrmMatters
                       OnDblClick = tvDocsDblClick
                       OnMouseUp = tvDocsMouseUp
                       Navigator.Buttons.CustomButtons = <>
+                      ScrollbarAnnotations.CustomAnnotations = <>
                       DataController.DataModeController.SmartRefresh = True
                       DataController.DataSource = dsDocs
                       DataController.KeyFieldNames = 'DOCID'
@@ -7590,6 +7604,7 @@ object frmMatters: TfrmMatters
                     end
                     object dbgrDocsDBTableView1: TcxGridDBTableView
                       Navigator.Buttons.CustomButtons = <>
+                      ScrollbarAnnotations.CustomAnnotations = <>
                       DataController.Summary.DefaultGroupSummaryItems = <>
                       DataController.Summary.FooterSummaryItems = <>
                       DataController.Summary.SummaryGroups = <>
@@ -7600,6 +7615,7 @@ object frmMatters: TfrmMatters
                     object tvDocsVersion: TcxGridDBTableView
                       OnDblClick = tvDocsVersionDblClick
                       Navigator.Buttons.CustomButtons = <>
+                      ScrollbarAnnotations.CustomAnnotations = <>
                       DataController.DataSource = dsDocVersions
                       DataController.DetailKeyFieldNames = 'PARENTDOCID'
                       DataController.KeyFieldNames = 'DOCID'
@@ -7902,6 +7918,7 @@ object frmMatters: TfrmMatters
             OptionsView.Headers = False
             PopupMenu = pmDocFolders
             RootValue = 0
+            ScrollbarAnnotations.CustomAnnotations = <>
             TabOrder = 0
             OnClick = cxDBTreeList1Click
             OnDragDrop = lvFoldersDragDrop
@@ -7970,6 +7987,7 @@ object frmMatters: TfrmMatters
           PopupMenu = popTransit
           OnDblClick = dbgrTransitDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsTransit
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -8114,6 +8132,7 @@ object frmMatters: TfrmMatters
         object tvSubNames: TcxGridDBTableView
           OnDblClick = tvSubNamesDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsListChildren
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -8200,6 +8219,7 @@ object frmMatters: TfrmMatters
         TabOrder = 1
         object tvSearches: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvSearchesCellClick
           OnEditing = tvSearchesEditing
           DataController.DataModeController.SmartRefresh = True
@@ -8469,6 +8489,7 @@ object frmMatters: TfrmMatters
             TabOrder = 0
             object tvProjectTaskItems1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsProjectTasks
               DataController.KeyFieldNames = 'UNIQUEID'
               DataController.Summary.DefaultGroupSummaryItems = <>
@@ -8602,6 +8623,7 @@ object frmMatters: TfrmMatters
             end
             object tvProjectTaskItems: TcxGridTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>
@@ -9200,6 +9222,7 @@ object frmMatters: TfrmMatters
           TabOrder = 0
           object tvProjects: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCellClick = tvProjectsCellClick
             DataController.DataSource = dsProjectMatter
             DataController.Summary.DefaultGroupSummaryItems = <>
@@ -9265,6 +9288,7 @@ object frmMatters: TfrmMatters
             TabOrder = 0
             object tvTaskQuoting: TcxGridTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
               DataController.Summary.SummaryGroups = <>
@@ -9425,6 +9449,7 @@ object frmMatters: TfrmMatters
         LookAndFeel.NativeStyle = True
         object tvDiary: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsDiary
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -9503,6 +9528,7 @@ object frmMatters: TfrmMatters
         object tvEmails: TcxGridDBTableView
           OnDblClick = tvEmailsDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoSortByDisplayText, dcoFocusTopRowAfterSorting]
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -9630,6 +9656,7 @@ object frmMatters: TfrmMatters
         TabOrder = 1
         object tvTasks: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvTasksCellClick
           DataController.Filter.Options = [fcoCaseInsensitive]
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -9790,6 +9817,7 @@ object frmMatters: TfrmMatters
           Navigator.Buttons.SaveBookmark.Visible = False
           Navigator.Buttons.GotoBookmark.Visible = False
           Navigator.Buttons.Filter.Visible = False
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsCriticalDates
           DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -9849,6 +9877,7 @@ object frmMatters: TfrmMatters
         TabOrder = 0
         object tvMatterAuthor: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsMatterAuthor
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -12794,14 +12823,14 @@ object frmMatters: TfrmMatters
       FieldName = 'REQDATE'
       FieldLength = 0
       DataType = dtDateTime
-      DisplayWidth = 0
+      DisplayWidth = 18
       Position = 0
     end
     object ppUnconCheqReqppField2: TppField
       FieldAlias = 'BANK'
       FieldName = 'BANK'
-      FieldLength = 10
-      DisplayWidth = 10
+      FieldLength = 3
+      DisplayWidth = 3
       Position = 1
     end
     object ppUnconCheqReqppField3: TppField
@@ -12986,7 +13015,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1095
     Top = 379
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppUnconCheqReq'
     object ppTitleBand1: TppTitleBand
@@ -14207,7 +14236,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 409
     Top = 258
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -15282,7 +15311,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 320
     Top = 385
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 197379
     DataPipelineName = 'ppDocList'
     object ppHeaderBand4: TppHeaderBand
@@ -16017,7 +16046,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1280
     Top = 652
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plUnpresentedCheques'
     object ppHeaderBand5: TppHeaderBand
@@ -16915,7 +16944,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 587
     Top = 502
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterNotes'
     object ppHeaderBand6: TppHeaderBand
@@ -21336,7 +21365,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 871
     Top = 75
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand8: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -22131,7 +22160,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1238
     Top = 518
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand9: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -22408,7 +22437,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1399
     Top = 300
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plDep'
     object ppDetailBand11: TppDetailBand
@@ -23272,7 +23301,7 @@ object frmMatters: TfrmMatters
     end
     object qryUnconCheqReqBANK: TStringField
       FieldName = 'BANK'
-      Size = 10
+      Size = 3
     end
     object qryUnconCheqReqPAYEE: TStringField
       FieldName = 'PAYEE'
@@ -23525,32 +23554,50 @@ object frmMatters: TfrmMatters
   object qryReceipts: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT ALLOC.CREATED, ALLOC.ACCT, ALLOC.REFNO, ALLOC.DESCR, '
-      'ALLOC.AMOUNT, '
-      'ALLOC.NMEMO, '
-      'ALLOC.TYPE, ALLOC.CLEARED, '
-      'ALLOC.DCLEARDATE, '
-      'RECEIPT.REVERSED,'
       
-        'DECODE(ALLOC.TYPE,'#39'RV'#39','#39'Reversal'#39',DECODE(REVERSED,'#39'Y'#39','#39'Reversed'#39 +
-        ',DECODE(ALLOC.CLEARED,'#39'Y'#39','#39'Cleared'#39',DECODE(ALLOC.DCLEARDATE,NULL' +
-        ',NULL,to_char(ALLOC.DCLEARDATE,'#39'DD/MM/YYYY'#39'))))) AS Clearance,'
+        'SELECT   alloc.created, alloc.acct, alloc.refno, alloc.descr, al' +
+        'loc.amount,'
       
-        'NVL(DECODE(SUBSTR(ALLOC.AMOUNT,0,1),'#39'-'#39',ABS(ALLOC.AMOUNT),0),0) ' +
-        'DEBIT,'
+        '         alloc.nmemo, alloc.TYPE, alloc.cleared, alloc.dcleardat' +
+        'e,'
+      '         receipt.reversed,'
+      '         DECODE'
+      '             (alloc.TYPE,'
+      '              '#39'RV'#39', '#39'Reversal'#39','
+      '              DECODE (reversed,'
+      '                      '#39'Y'#39', '#39'Reversed'#39','
+      '                      DECODE (alloc.cleared,'
+      '                              '#39'Y'#39', '#39'Cleared'#39','
+      '                              DECODE (alloc.dcleardate,'
+      '                                      NULL, NULL,'
       
-        'NVL(DECODE(SUBSTR(ALLOC.AMOUNT,0,1),'#39'-'#39',0,ABS(ALLOC.AMOUNT)),0) ' +
-        'CREDIT, '
-      'RECEIPT.ACCT as BANK, RECEIPT.RCPTNO, ALLOC.PAYER,'
-      
-        '(SELECT NMEMO.REFNO  FROM NMEMO WHERE ALLOC.NMEMO = NMEMO.NMEMO)' +
-        '  AS BILLNO'
-      'FROM  ALLOC, RECEIPT'
-      'WHERE'
-      'ALLOC.FILEID = :FILEID AND'
-      'ALLOC.NRECEIPT > 0 AND '
-      'ALLOC.NRECEIPT = RECEIPT.NRECEIPT(+) '
-      'ORDER BY CREATED DESC')
+        '                                      TO_CHAR (alloc.dcleardate,' +
+        ' '#39'DD/MM/YYYY'#39')'
+      '                                     )'
+      '                             )'
+      '                     )'
+      '             ) AS clearance,'
+      '         NVL (DECODE (SUBSTR (alloc.amount, 0, 1),'
+      '                      '#39'-'#39', ABS (alloc.amount),'
+      '                      0'
+      '                     ),'
+      '              0'
+      '             ) debit,'
+      '         NVL (DECODE (SUBSTR (alloc.amount, 0, 1),'
+      '                      '#39'-'#39', 0,'
+      '                      ABS (alloc.amount)'
+      '                     ),'
+      '              0'
+      '             ) credit,'
+      '         receipt.acct AS bank, receipt.rcptno, alloc.payer,'
+      '         (SELECT nmemo.refno'
+      '            FROM nmemo'
+      '           WHERE alloc.nmemo = nmemo.nmemo) AS billno'
+      '    FROM alloc, receipt'
+      '   WHERE alloc.fileid = :fileid AND alloc.nreceipt > 0'
+      '         AND alloc.nreceipt = receipt.nreceipt(+)'
+      '         AND alloc.disb_nalloc_receipt IS NULL'
+      'ORDER BY created DESC')
     Left = 407
     Top = 856
     ParamData = <
@@ -25378,7 +25425,6 @@ object frmMatters: TfrmMatters
       '   AND matter.advertising_source = advertising.adid(+)')
     CachedUpdates = True
     RefreshOptions = [roBeforeEdit]
-    Active = True
     AfterScroll = qryMatterAfterScroll
     Left = 178
     Top = 125
@@ -26255,7 +26301,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 954
     Top = 665
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand10: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -33344,7 +33390,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1368
     Top = 458
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plReceipts'
     object ppHeaderBand11: TppHeaderBand
@@ -34044,7 +34090,7 @@ object frmMatters: TfrmMatters
     XLSSettings.WorksheetName = 'Report'
     Left = 1037
     Top = 326
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plMatterAuthor'
     object ppHeaderBand7: TppHeaderBand
