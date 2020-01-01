@@ -222,7 +222,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
   end
   object btnPrint: TBitBtn
     Left = 554
-    Top = 264
+    Top = 267
     Width = 97
     Height = 31
     Anchors = [akRight, akBottom]
@@ -701,7 +701,7 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     XLSSettings.WorksheetName = 'Report'
     Left = 481
     Top = 4
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plTrustLedger'
     object ppHeaderBand1: TppHeaderBand
