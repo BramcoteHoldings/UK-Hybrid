@@ -1985,7 +1985,7 @@ begin
       Open;
       if not EOF then
       begin
-         StatusBar.Panels[0].Text := 'Cleared Trust: ' + CurrToStrF(FieldByName('cl_trust_bal').AsCurrency, ffCurrency, 2);
+         StatusBar.Panels[0].Text := 'Cleared Trust: ' + CurrToStrF(FieldByName('cl_trust_bal').AsCurrency - FieldByName('trust_uncon_cheqreq_amt').AsCurrency, ffCurrency, 2);
          StatusBar.Panels[1].Text := 'Total Trust: ' + CurrToStrF(FieldByName('trust_bal').AsCurrency, ffCurrency, 2);
       end;
    end;

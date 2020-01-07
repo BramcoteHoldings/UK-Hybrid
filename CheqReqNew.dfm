@@ -972,7 +972,7 @@ object frmCheqReqNew: TfrmCheqReqNew
     Left = 114
     Top = 5
     Anchors = [akLeft, akTop, akRight]
-    EditValue = 43783.6681684028d
+    EditValue = 43837.6649479977d
     Properties.ShowTime = False
     Properties.OnCloseUp = dtpReqDatePropertiesCloseUp
     Style.LookAndFeel.NativeStyle = True
@@ -1077,6 +1077,8 @@ object frmCheqReqNew: TfrmCheqReqNew
     Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
+    ExplicitLeft = 5
+    ExplicitTop = 571
   end
   object cxLabel1: TcxLabel
     Left = 9
@@ -1296,11 +1298,14 @@ object frmCheqReqNew: TfrmCheqReqNew
     SQL.Strings = (
       'select'
       ' getClearedTrustAmount(:P_File ) AS cl_trust_bal,'
-      ' getTrustBalAmount(:P_File ) AS trust_bal'
+      ' getTrustBalAmount(:P_File ) AS trust_bal,'
+      
+        ' getTrustUnconCheqReqAmount (:P_File ) AS trust_uncon_cheqreq_am' +
+        't'
       'from'
       'dual')
-    Left = 26
-    Top = 579
+    Left = 48
+    Top = 522
     ParamData = <
       item
         DataType = ftUnknown
