@@ -118,6 +118,8 @@ const
   EmailBillMacrosDescr: array[0..7] of string = ('[CLIENTID] = Client Code','[FILEID]=File Number','[AUTHOR]=Matter Author', '[OPREF]=Client Reference', '[SHORTDESCR]=Matter Description', '[REFNO]=Bill Number', '[NAME]=Entity', '[CLIENTNAME]=Client Name');
   EmailBillMacrosValues: array[0..7] of string = ('[CLIENTID]','[FILEID]','[AUTHOR]','[OPREF]', '[SHORTDESCR]','[REFNO]','[NAME],','[CLIENTNAME]');
 
+  // OS version array used when saving documents
+  CheckOSVersion: array[0..3] of string = ('Windows 8', 'Windows 10', 'Windows Server 2012', 'Windows Server 2008 R2');
 
   // Axiom variables
   AFFVAR_FILEID = '%FILEID%';

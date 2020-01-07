@@ -223,7 +223,7 @@ begin
                bMoveSuccess := True
             else
             begin
-               if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows Server 2012') or (TOSVersion.Name = 'Windows 10'))
+               if (MatchText(TOSVersion.Name, CheckOSVersion)
                   and (SystemString('THIN_PROVISIONED_DISK') = 'N')) then
                   bMoveSuccess := CopyFileIFileOperationForceDirectories(FileName, AParsedDocName, bCopyMove)
                else
