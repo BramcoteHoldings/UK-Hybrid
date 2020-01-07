@@ -1,5 +1,11 @@
 Insight Build 9.2.0
 
+Build 57
+========
+- Fix to Bill Credit Note.  Now uses the selected date during creation.
+- Fix to Receipt display in Matter screen to exclude disbursment receipts.
+- Added extra validation to Receipt creation screen to prevent creating receipt for a bill that is 0.
+
 Build 56
 ========
 - Changes to posting to eliminate duplication of transactions.
