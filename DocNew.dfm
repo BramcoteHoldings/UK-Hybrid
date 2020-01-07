@@ -710,7 +710,7 @@ object frmDocNew: TfrmDocNew
       CaptionOptions.Visible = False
       Control = cbPortalAccess
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 128
+      ControlOptions.OriginalWidth = 126
       ControlOptions.ShowBorder = False
       Index = 1
     end

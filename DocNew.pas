@@ -569,7 +569,7 @@ begin
 //                                    {$IFDEF DEBUG}
 //                                       MsgInfo('OS version detected = ' + TOSVersion.Name);
 //                                    {$ENDIF}
-                                    if (((TOSVersion.Name = 'Windows 8') or (TOSVersion.Name = 'Windows 10') or (TOSVersion.Name = 'Windows Server 2012'))) then
+                                    if MatchText(TOSVersion.Name, CheckOSVersion) then
                                        bMoveSuccess := CopyFileIFileOperationForceDirectories(FileList.Strings[i] {edtPath.Text}, AParsedDocName, bMoveFiles)
                                     else
                                        bMoveSuccess := MoveMatterDoc(AParsedDocName, FileList.Strings[i] {edtPath.Text}, bMoveFiles, False);
