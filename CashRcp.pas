@@ -17,7 +17,7 @@ uses
   cxClasses, Vcl.ImgList, DBAccess, Uni, MemDS, Variants, ppIniStorage, ppFileUtils,
   cxGridExportLink, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog, cxPC, Vcl.ExtCtrls,
-  dxDateRanges, System.ImageList;
+  dxDateRanges, System.ImageList, dxScrollbarAnnotations;
 
 type
   TfrmCashRcp = class(TForm)
@@ -455,9 +455,11 @@ end;
 
 procedure TfrmCashRcp.MakeSQL;
 var
-  sAND, sOR, sTmp : string;
+   sAND, sOR, sTmp,
+   lsTrustasOffice: string;
 begin
    // Build the SQL Filter query
+   lsTrustasOffice := SystemString('TRUST_AS_OFFICE');
    FWhere := '';
    qryReceipts.Close;
    qryTotal.Close;
@@ -528,7 +530,13 @@ begin
           qryReceipts.SQL.Add(' BANK, BRANCH, CHQNO, REVERSED, RVBY, DCLEARDATE, CCTYPE, BANKED, CLEARED,');
           qryReceipts.SQL.Add(' NTRANS, TRUST, SUFCHQ, DESCR, NBANKDEP, SYSTEM_DATE, PRINTED, NNAME, AMOUNT,');
           qryReceipts.SQL.Add(' DECODE(BANKED,''Y'',AMOUNT,0) AS BANKED_AMT, NCHEQUE, WHO, RECEIPT_NO, TAKE_ON, rvby as rcpt_by, ');
-          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere );
+          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE ');
+          qryReceipts.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto ) THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto ) THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+          qryReceipts.SQL.Add(' ELSE 0 ');
+          qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere);
+//          trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere );
           qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RCPTNO  ');
           sSQLWhere := sSQLWhere + ' ORDER BY trunc(CREATED), RCPTNO  ';
        end;
@@ -545,10 +553,18 @@ begin
           qryReceipts.SQL.Add(' BANK, BRANCH, CHQNO, REVERSED, RVBY, DCLEARDATE, CCTYPE, BANKED, CLEARED,');
           qryReceipts.SQL.Add(' NTRANS, TRUST, SUFCHQ, DESCR, NBANKDEP, SYSTEM_DATE, PRINTED, NNAME, AMOUNT,');
           qryReceipts.SQL.Add(' DECODE(BANKED,''Y'',AMOUNT,0) AS BANKED_AMT, NCHEQUE, WHO, RECEIPT_NO, TAKE_ON, rvby as rcpt_by, ');
-          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere + ' ORDER BY RECEIPT_NO ASC');
+          qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE ');
+          qryReceipts.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+          qryReceipts.SQL.Add(' ELSE 0 ');
+          qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere );
+           qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RECEIPT_NO ASC ');
+//          trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere + ' ORDER BY RECEIPT_NO ASC');
           sSQLWhere := sSQLWhere + ' ORDER BY RECEIPT_NO ASC ';
        end;
    end;
+
    FWhere := sSQLWhere;
    //  MessageDlg(qryReceipts.SQL.Text, mtinformation, [mbOK], 0);
    if chkDateFrom.Checked then
@@ -558,15 +574,37 @@ begin
    if chkDateTo.Checked then
       qryReceipts.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1
    else
-      qryReceipts.ParamByName('P_DateTo').AsDate := Now()+1;
-   qryReceipts.Open;
+      qryReceipts.ParamByName('P_DateTo').AsDate := trunc(Now()) + 1;
+
+   qryReceipts.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+   qryReceipts.ParamByName('trust').Clear;
+
+   if (cbBank.Text <> '') then
+   begin
+      if IsTrustAccount(cbBank.Text) = True then
+      begin
+         qryReceipts.ParamByName('trust').AsString := 'T';
+      end;
+   end;
 
    if dmAxiom.runningide = True then
-      qryReceipts.SQL.SaveToFile('c:\tmp\cashrcp.sql');   stmp :=  qryReceipts.SQL.Text;
+      qryReceipts.SQL.SaveToFile('c:\tmp\cashrcp.sql');
+
+   stmp :=  qryReceipts.SQL.Text;
+
+   qryReceipts.Open;
 
    qryTotal.SQL.Clear;
    qryTotal.SQL.Add('SELECT SUM(AMOUNT) AS AMT, COUNT(AMOUNT) AS CNT FROM ');
-   qryTotal.SQL.Add('RECEIPT WHERE CREATED >= :P_DateFrom AND CREATED < :P_DateTo ' + sSQLWhere + '');
+   qryTotal.SQL.Add('RECEIPT WHERE ');
+   qryTotal.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' );
+   qryTotal.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' );
+   qryTotal.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+   qryTotal.SQL.Add(' ELSE 0 ');
+   qryTotal.SQL.Add(' END = 1 ' + sSQLWhere + '');
+
+//   'CREATED >= :P_DateFrom AND CREATED < :P_DateTo ' + sSQLWhere + '');
  //  MessageDlg(qryTotal.SQL.Text, mtinformation, [mbOK], 0);
    if chkDateFrom.Checked then
       qryTotal.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
@@ -576,6 +614,21 @@ begin
       qryTotal.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1
    else
       qryTotal.ParamByName('P_DateTo').AsDate := Now()+1;
+
+   qryTotal.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+   qryTotal.ParamByName('trust').Clear;
+
+   if (cbBank.Text <> '') then
+   begin
+      if IsTrustAccount(cbBank.Text) = True then
+      begin
+         qryTotal.ParamByName('trust').AsString := 'T';
+      end;
+   end;
+
+   if dmAxiom.runningide = True then
+      qryTotal.SQL.SaveToFile('c:\tmp\cashrcptotal.sql');
 
    qryTotal.Open;
    ShowTotal;
