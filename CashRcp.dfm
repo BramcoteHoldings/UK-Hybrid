@@ -128,6 +128,7 @@ object frmCashRcp: TfrmCashRcp
             OnDblClick = tvReceiptsDblClick
             OnKeyDown = tvReceiptsKeyDown
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCellClick = tvReceiptsCellClick
             DataController.DataSource = dsReceipts
             DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoFocusTopRowAfterSorting]
@@ -301,6 +302,7 @@ object frmCashRcp: TfrmCashRcp
           LookAndFeel.NativeStyle = True
           object tvAllocations: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsNallocs
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -356,7 +358,7 @@ object frmCashRcp: TfrmCashRcp
       object Label7: TLabel
         Left = 8
         Top = 138
-        Width = 102
+        Width = 101
         Height = 15
         Caption = 'Receipt Number To'
         Transparent = True
@@ -396,7 +398,7 @@ object frmCashRcp: TfrmCashRcp
       object Label2: TLabel
         Left = 8
         Top = 82
-        Width = 40
+        Width = 39
         Height = 15
         Caption = 'Date To'
         Transparent = True
@@ -1947,7 +1949,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 694
     Top = 337
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 284427
     DataPipelineName = 'plReceiptsBankDepsRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -2413,7 +2415,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plNallocsRpt'
           object ppDetailBand2: TppDetailBand
@@ -3740,7 +3742,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 970
     Top = 295
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plReceiptPrint'
     object ppHeaderBand2: TppHeaderBand
@@ -3850,7 +3852,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plAllocPrint'
           object ppDetailBand4: TppDetailBand
@@ -4896,7 +4898,7 @@ object frmCashRcp: TfrmCashRcp
     XLSSettings.WorksheetName = 'Report'
     Left = 885
     Top = 394
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 197200
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear

@@ -345,6 +345,7 @@ object frmBankRec: TfrmBankRec
       object tvLedger: TcxGridDBTableView
         PopupMenu = popGrid
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataSource = dsLedger
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -436,6 +437,7 @@ object frmBankRec: TfrmBankRec
       object tvCashBook: TcxGridDBTableView
         PopupMenu = popPaymentReceipt
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataModeController.SmartRefresh = True
         DataController.DataSource = dsCashbook
         DataController.KeyFieldNames = 'BANKREC_ID'
@@ -957,7 +959,7 @@ object frmBankRec: TfrmBankRec
     XLSSettings.WorksheetName = 'Report'
     Left = 945
     Top = 345
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plBankRec'
     object ppHeaderBand1: TppHeaderBand
@@ -1945,18 +1947,18 @@ object frmBankRec: TfrmBankRec
       ' WHERE CASE'
       '          WHEN (:trust in ('#39'T'#39','#39'I'#39')) AND (:trustasoffice = '#39'N'#39')'
       '          AND (    TRUNC (system_date) >= :p_datefrom AND '
-      '                   TRUNC (system_date) <= :p_dateto'
+      '                   TRUNC (system_date) < :p_dateto'
       '              )'
       '             THEN 1'
       '          WHEN (:trust in ('#39'T'#39','#39'I'#39')) AND (:trustasoffice = '#39'Y'#39')'
       '          AND (    TRUNC (created) >= :p_datefrom AND '
-      '                   TRUNC (created) <= :p_dateto'
+      '                   TRUNC (created) < :p_dateto'
       '              )'
       '             THEN 1'
       '          WHEN (:trust <> '#39'T'#39')'
       
         '          AND (TRUNC (created) >= :p_datefrom AND TRUNC (created' +
-        ') <= :p_dateto)'
+        ') < :p_dateto)'
       '             THEN 1'
       '          ELSE 0'
       '       END = 1'
@@ -1999,18 +2001,18 @@ object frmBankRec: TfrmBankRec
       ' WHERE CASE'
       '          WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoffice = '#39'N'#39')'
       '          AND (    TRUNC (system_date) >= :p_datefrom'
-      '               AND TRUNC (system_date) <= :p_dateto'
+      '               AND TRUNC (system_date) < :p_dateto'
       '              )'
       '             THEN 1'
       '          WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoffice = '#39'Y'#39')'
       '          AND (    TRUNC (created) >= :p_datefrom'
-      '               AND TRUNC (created) <= :p_dateto'
+      '               AND TRUNC (created) < :p_dateto'
       '              )'
       '             THEN 1'
       '          WHEN (:trust <> '#39'T'#39')'
       
         '          AND (TRUNC (created) >= :p_datefrom AND TRUNC (created' +
-        ') <= :p_dateto)'
+        ') < :p_dateto)'
       '             THEN 1'
       '          ELSE 0'
       '       END = 1'
