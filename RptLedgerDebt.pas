@@ -192,6 +192,7 @@ begin
       SQL.Add('FROM ALLOC, NMEMO');
       SQL.Add('WHERE ALLOC.NMEMO = NMEMO.NMEMO(+)');
       SQL.Add('AND ALLOC.NMATTER = ' + IntToStr(qryMatter.FieldByName('NMATTER').AsInteger));
+      SQL.Add('AND alloc.disb_nalloc_receipt IS NULL');
       SQL.Add('AND ALLOC.TRUST <> ''T'' AND ALLOC.TYPE <> ''DR'' AND (ALLOC.NRECEIPT <> 0 OR ALLOC.TYPE = ''J1'' OR ALLOC.TYPE = ''RF'') ');
       if chkFrom.Checked then
       begin
