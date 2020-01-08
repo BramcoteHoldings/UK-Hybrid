@@ -3337,7 +3337,7 @@ begin
                   qryFeeInsert.ParamByName('START_DATE').AsDateTime := FieldByName('START_DATE').AsDateTime;
                   qryFeeInsert.ParamByName('END_DATE').AsDateTime := FieldByName('END_DATE').AsDateTime;
                   dAmount := FieldByName('AMOUNT').AsCurrency;
-                  qryFeeInsert.ParamByName('TAX').AsFloat := TaxCalc(dAmount, '', FieldByName('TAXCODE').AsString, FieldByName('CREATED').AsDateTime);
+                  qryFeeInsert.ParamByName('TAX').AsFloat := FieldByName('TAX').AsFloat;  // AES 05/01/20 TaxCalc(dAmount, '', FieldByName('TAXCODE').AsString, FieldByName('CREATED').AsDateTime);
                   qryFeeInsert.ParamByName('AMOUNT').AsFloat := dAmount;
                   qryFeeInsert.ParamByName('VALUE').AsFloat := dAmount;
                   qryFeeInsert.ParamByName('DISCOUNT').AsFloat := 0;
