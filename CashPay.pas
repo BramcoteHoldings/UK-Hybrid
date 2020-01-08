@@ -48,7 +48,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   cxSplitter, cxPC, System.Classes, citfunc, DateUtils, Variants, ppFileUtils,
   ppIniStorage, dxCore, cxGridExportLink, cxGridDBDataDefinitions,
-  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  dxScrollbarAnnotations;
 
 
 
@@ -524,10 +525,13 @@ end;
 
 procedure TfrmCashpay.MakeSQL(FromGrid: Boolean = False);
 var
-  sAND, sOR, sTmp : string;
+  sAND, sOR, sTmp,
+  lsTrustasOffice : string;
   sSQL, sSQLTotal1, sSQLTotal2 : string;
+  iChqNoOut: integer;
 begin
    // Build the SQL Filter query
+   lsTrustasOffice := SystemString('TRUST_AS_OFFICE');
    qryCheques.Close;
    qryTotal.Close;
    sAND := ' AND ';
@@ -548,7 +552,13 @@ begin
           ' case when (PRESENTED is not null) '+
           ' then AMOUNT '+
           ' else 0.00 ' +
-          ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo ';
+          ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE '+
+          ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto ) THEN 1 ' +
+          '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto ) THEN 1 ' +
+          '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+          ' ELSE 0 '+
+          ' END = 1 ';
+//          C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo ';
 //      sSQLTotal := 'SELECT SUM(C.AMOUNT) AS AMT, COUNT(C.AMOUNT) AS CNT FROM CHEQUE C WHERE C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo';
       sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE C.PRESENTED >= :P_DateFrom AND c.PRESENTED < :p_dateto ';
       sSQLTotal2 := '), (select sum(amount) * -1 as tax from transitem t, chart c where T.CHART = C.CODE and C.CHARTTYPE = ''GSTINP'' and owner_code = ''CHEQUE'' and ncheque in (SELECT ncheque '+
@@ -570,12 +580,31 @@ begin
           ' case when (PRESENTED is not null) '+
           ' then AMOUNT '+
           ' else 0.00 ' +
-          ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE C.CREATED >= :P_DateFrom AND C.CREATED < :P_DateTo ';
+          ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE ' +
+          ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
+          '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
+          '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+          ' ELSE 0 '+
+          ' END = 1 ';
+//           C.CREATED >= :P_DateFrom AND C.CREATED < :P_DateTo ';
 //      sSQLTotal := 'SELECT SUM(C.AMOUNT) AS AMT, COUNT(C.AMOUNT) AS CNT FROM CHEQUE C WHERE C.CREATED >= :P_DateFrom AND C.CREATED < :P_DateTo';
 
-      sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE trunc(C.CREATED) >= :P_DateFrom AND trunc(c.created) < :p_dateto ';
+      sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE '+
+                    ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
+                    '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
+                    '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+                    ' ELSE 0 '+
+                    ' END = 1 ';
+//      trunc(C.CREATED) >= :P_DateFrom AND trunc(c.created) < :p_dateto ';
       sSQLTotal2 := '), (select sum(amount) * -1 as tax from transitem t, chart c where T.CHART = C.CODE and C.CHARTTYPE = ''GSTINP'' and owner_code = ''CHEQUE'' and ncheque in (SELECT ncheque '+
-                   ' FROM cheque c WHERE trunc(C.CREATED) >= :P_DateFrom AND trunc(c.created) < :p_dateto ';
+                   ' FROM cheque c WHERE  '+
+                   ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
+                   '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
+                   '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+                   ' ELSE 0 '+
+                   ' END = 1 ';
+
+//                   trunc(C.CREATED) >= :P_DateFrom AND trunc(c.created) < :p_dateto ';
 
 //      QRDBText1.DataField := 'CREATED';
    end;
@@ -587,7 +616,9 @@ begin
       sSQLWhere := sSQLWhere + sAND + ' ncheque in (select a.ncheque from alloc a, phonebook p where a.nclient = p.nclient and a.NCHEQUE is not null and CONTAINS(dummy,'+ QuotedStr('%'+ edClient.Text + '%') + ', 1) > 0 )';
 
    if cbBank.Text <> '' then
-     sSQLWhere := sSQLWhere + sAND + 'C.ACCT = ' + QuotedStr(cbBank.Text)
+   begin
+     sSQLWhere := sSQLWhere + sAND + 'C.ACCT = ' + QuotedStr(cbBank.Text);
+   end
    else
    begin
      with qryBanks do
@@ -614,12 +645,27 @@ begin
    end;
    if cbAuthby.Text <> '' then
      sSQLWhere := sSQLWhere + sAND + 'C.REQBY = ' + QuotedStr(cbAuthby.Text);
+
+
    if tbChqnoFrom.Text <> '' then
-     sSQLWhere := sSQLWhere + sAND + 'C.CHQNO >= ' + QuotedStr(tbChqnoFrom.Text);
+   begin
+     if TryStrToInt(tbChqnoFrom.Text, iChqNoOut) = True then
+       sSQLWhere := sSQLWhere + sAND + 'C.CHEQUE_NO >= ' + QuotedStr(tbChqnoFrom.Text)
+     else
+       sSQLWhere := sSQLWhere + sAND + 'C.CHQNO >= ' + QuotedStr(tbChqnoFrom.Text);
+   end;
+
    if tbChqnoTo.Text <> '' then
-     sSQLWhere := sSQLWhere + sAND + 'C.CHQNO <= ' + QuotedStr(tbChqnoTo.Text);
+   begin
+     if TryStrToInt(tbChqnoTo.Text, iChqNoOut) = True then
+        sSQLWhere := sSQLWhere + sAND + 'C.CHEQUE_NO <= ' + QuotedStr(tbChqnoTo.Text)
+     else
+       sSQLWhere := sSQLWhere + sAND + 'C.CHQNO <= ' + QuotedStr(tbChqnoTo.Text);
+   end;
+
    if tbChqNoLike.Text <> '' then
      sSQLWhere := sSQLWhere + sAND + 'CHQNO LIKE ''%' + tbChqNoLike.Text + '%''';
+
    if tbPayee.Text <> '' then
      sSQLWhere := sSQLWhere + sAND + 'UPPER(C.PAYEE) LIKE ' + QuotedStr('%' + UpperCase(tbPayee.Text) + '%');
    if tbDesc.Text <> '' then
@@ -656,17 +702,29 @@ begin
    qryCheques.SQL.Text := sSQL + sSQLWhere + FOrderBy;
 
    if chkDateFrom.Checked then
-     qryCheques.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
+      qryCheques.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
    else
-     qryCheques.ParamByName('P_DateFrom').AsDate := 0;
+      qryCheques.ParamByName('P_DateFrom').AsDate := 0;
 
    if chkDateTo.Checked then
-     qryCheques.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1
+      qryCheques.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1
    else
-     qryCheques.ParamByName('P_DateTo').AsDate := Now() + 1;
+      qryCheques.ParamByName('P_DateTo').AsDate := Now() + 1;
 
    if edtMatter.Text <> '' then
       qryCheques.ParamByName('fileid').AsString := edtMatter.Text;
+
+   qryCheques.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+   qryCheques.ParamByName('trust').Clear;
+
+   if (cbBank.Text <> '') then
+   begin
+      if IsTrustAccount(cbBank.Text) = True then
+      begin
+         qryCheques.ParamByName('trust').AsString := 'T';
+      end;
+   end;
 
    if dmAxiom.runningide then
      qryCheques.SQL.SaveToFile('c:\tmp\cheques.sql');
@@ -687,6 +745,17 @@ begin
      qryTotal.ParamByName('P_DateTo').AsDate := Trunc(dtpDateTo.Date) + 1
    else
      qryTotal.ParamByName('P_DateTo').AsDate := Now() + 1;
+
+   qryTotal.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+   qryTotal.ParamByName('trust').Clear;
+   if (cbBank.Text <> '') then
+   begin
+      if IsTrustAccount(cbBank.Text) = True then
+      begin
+         qryTotal.ParamByName('trust').AsString := 'T';
+      end;
+   end;
 
    if dmAxiom.runningide then
       qryTotal.SQL.SaveToFile('c:\tmp\total.sql');

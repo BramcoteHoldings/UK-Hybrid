@@ -75,6 +75,7 @@ object frmCashpay: TfrmCashpay
         HotZone.SizePercent = 58
         AlignSplitter = salBottom
         Control = Panel3
+        ExplicitWidth = 8
       end
       object Panel1: TPanel
         Left = 0
@@ -150,6 +151,7 @@ object frmCashpay: TfrmCashpay
           object tvAllocations: TcxGridDBTableView
             PopupMenu = mMoveMatter
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsAllocs
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -260,6 +262,7 @@ object frmCashpay: TfrmCashpay
             OnDblClick = dbgrChequesDblClick
             OnKeyDown = dbgrChequesKeyDown
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnFocusedRecordChanged = tvChequesFocusedRecordChanged
             DataController.DataModeController.GridMode = True
             DataController.DataModeController.SmartRefresh = True
@@ -374,6 +377,10 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -2694,7 +2701,7 @@ object frmCashpay: TfrmCashpay
     XLSSettings.WorksheetName = 'Report'
     Left = 697
     Top = 185
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReq'
     object ppHeaderBand2: TppHeaderBand
@@ -3197,7 +3204,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.mmPaperWidth = 297000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plAlloc'
           object ppDetailBand1: TppDetailBand
