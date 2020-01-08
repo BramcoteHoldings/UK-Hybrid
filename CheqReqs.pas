@@ -63,7 +63,8 @@ uses
   System.Actions, Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ImgList,
   dxBar, cxClasses, Uni, MemDS, DBAccess, cxProgressBar, dxStatusBar, ppFileUtils,
   ppIniStorage, Variants, cxGridDBDataDefinitions, dxDateRanges,
-  dxPScxEditorLnks, System.ImageList, dxPSDBTCLnk, ppStrtch, ppMemo;
+  dxPScxEditorLnks, System.ImageList, dxPSDBTCLnk, ppStrtch, ppMemo,
+  dxScrollbarAnnotations;
 
 const
   isREQUISITION = 0;
@@ -3379,23 +3380,26 @@ begin
    EColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('NMEMO');
    FColumn := (Sender as TcxGridDBTableView).GetColumnByFieldName('REV_NCHEQREQ');
 
+   AStyle := cxStyleD;
    if (VarToStr(ARecord.Values[AColumn.Index]) = 'W') or
       (VarToStr(ARecord.Values[BColumn.Index]) = 'N')  or
       (VarToStr(ARecord.Values[CColumn.Index]) = 'N') then
-      AStyle := cxStyleB
+      AStyle := cxStyleB;
 
-   else if VarToStr(ARecord.Values[AColumn.Index]) = 'Y' then
-      AStyle := cxStyleY
+   if ((VarToStr(ARecord.Values[AColumn.Index]) = 'N') and
+      (VarToStr(ARecord.Values[BColumn.Index]) = 'Y')  and
+      (VarToStr(ARecord.Values[CColumn.Index]) = 'Y') and
+      (VarToStr(ARecord.Values[DColumn.Index]) = 'N')) then
+      AStyle := cxStyleN;
 
-   else if (VarToStr(ARecord.Values[DColumn.Index]) = 'R') or
-           (VarToStr(ARecord.Values[EColumn.Index]) <> '') or
-           (VarToStr(ARecord.Values[FColumn.Index]) <> '')  then
-      AStyle := cxStyleR
+   if VarToStr(ARecord.Values[AColumn.Index]) = 'Y' then
+      AStyle := cxStyleY;
 
-   else if VarToStr(ARecord.Values[AColumn.Index]) = 'N' then
-      AStyle := cxStyleN
-   else
-      AStyle := cxStyleD;
+   if (VarToStr(ARecord.Values[DColumn.Index]) = 'R') or
+      (VarToStr(ARecord.Values[DColumn.Index]) = 'Y') or
+      ((VarToStr(ARecord.Values[EColumn.Index]) <> '') and (VarToStr(ARecord.Values[DColumn.Index]) = 'Y')) or
+      (VarToStr(ARecord.Values[FColumn.Index]) <> '')  then
+      AStyle := cxStyleR;
 end;
 
 function TfrmCheqReqs.PostCheques(DefaultPrinter: string; AuthBy: string; bPrint: boolean): boolean;

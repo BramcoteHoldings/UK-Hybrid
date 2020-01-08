@@ -92,10 +92,6 @@ object frmCheqReqs: TfrmCheqReqs
     object tabCashbook: TcxTabSheet
       Caption = 'Cheque Requisitions'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Splitter1: TSplitter
         Left = 0
         Top = 249
@@ -128,6 +124,7 @@ object frmCheqReqs: TfrmCheqReqs
             OnDblClick = mnuFileOpenClick
             OnKeyDown = tvCheqReqKeyDown
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCanSelectRecord = tvCheqReqCanSelectRecord
             OnFocusedRecordChanged = tvCheqReqFocusedRecordChanged
             DataController.DataModeController.SmartRefresh = True
@@ -391,6 +388,7 @@ object frmCheqReqs: TfrmCheqReqs
           LookAndFeel.NativeStyle = True
           object cxGrid1DBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsData
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -662,6 +660,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 4
+        Transparent = True
       end
       object cbConverted: TcxCheckBox
         Left = 456
@@ -673,6 +672,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 5
+        Transparent = True
       end
       object cbExcludeTrust: TcxCheckBox
         Left = 5
@@ -689,6 +689,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 6
+        Transparent = True
         Height = 25
         Width = 224
       end
@@ -704,6 +705,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 7
+        Transparent = True
         Height = 25
         Width = 203
       end
@@ -722,6 +724,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 8
+        Transparent = True
         Height = 25
         Width = 224
       end
@@ -735,6 +738,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 9
+        Transparent = True
       end
       object cbTrustCreditorPayments: TcxCheckBox
         Left = 252
@@ -751,6 +755,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 10
+        Transparent = True
         Height = 25
         Width = 203
       end
@@ -780,6 +785,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 13
+        Transparent = True
       end
       object chkOwing: TcxCheckBox
         Left = 252
@@ -793,6 +799,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 14
+        Transparent = True
         Height = 25
         Width = 203
       end
@@ -806,6 +813,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 15
+        Transparent = True
       end
       object chkRev: TcxCheckBox
         Left = 252
@@ -819,6 +827,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 16
+        Transparent = True
         Height = 25
         Width = 203
       end
@@ -838,6 +847,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleHot.LookAndFeel.Kind = lfFlat
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 17
+        Transparent = True
         Height = 25
         Width = 224
       end
@@ -853,7 +863,8 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 18
-        Height = 25
+        Transparent = True
+        Height = 26
         Width = 224
       end
       object chkUrgent: TcxCheckBox
@@ -866,6 +877,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 19
+        Transparent = True
       end
       object chkWaiting: TcxCheckBox
         Left = 140
@@ -877,6 +889,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 20
+        Transparent = True
       end
       object DateChangeButton1: TDateChangeButton
         Left = 264
@@ -1090,6 +1103,7 @@ object frmCheqReqs: TfrmCheqReqs
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 40
+        Transparent = True
       end
     end
   end
@@ -2815,7 +2829,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 823
     Top = 252
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqs'
     object ppHeaderBand1: TppHeaderBand
@@ -4936,7 +4950,7 @@ object frmCheqReqs: TfrmCheqReqs
     XLSSettings.WorksheetName = 'Report'
     Left = 847
     Top = 312
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plCheqReqsEffect'
     object ppHeaderBand2: TppHeaderBand
