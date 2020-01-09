@@ -179,8 +179,8 @@ begin
          end
          else
          begin
-          try
-             begin
+            try
+               begin
 //                 Report.Template.DatabaseSettings
                  dmAxiom.qryRB_Items.Close;
                  Report.Template.DatabaseSettings.DataPipeline := dmAxiom.plReports;
@@ -196,75 +196,85 @@ begin
                  i := 0;
                  nmatter := LNMatter;
 
-                 lDataModule := daGetDataModule(Report);
-
-                 if (lDataModule <> nil) then
-                    CompTotal := lDataModule.DataViewCount;
-
-                 Dest := '';
-                 Buffer := '';
-                 sSQL := '';
-                 for CompCount := 0 to CompTotal - 1 do
+                 if (Report.Parameters.Count > 0) then
                  begin
-                    {get SQL object}
+                    with Report.Parameters do
+                    begin
+                       Items['NMATTER'].Value := StrToInt(nmatter);
+                    end;
+                 end
+                 else
+                 begin
+                    lDataModule := daGetDataModule(Report);
+
+                    if (lDataModule <> nil) then
+                       CompTotal := lDataModule.DataViewCount;
+
                     Dest := '';
                     Buffer := '';
                     sSQL := '';
-                    x := 0;
-                    i := 0;
-                    if (GetSQLObject(Report, lSQL, CompCount)) then
+                    for CompCount := 0 to CompTotal - 1 do
                     begin
-                       sSQL := lSQL.SQLText.Text;
-
-                       while i < Length(sSQL) do
+                       {get SQL object}
+                       Dest := '';
+                       Buffer := '';
+                       sSQL := '';
+                       x := 0;
+                       i := 0;
+                       if (GetSQLObject(Report, lSQL, CompCount)) then
                        begin
-                          if (sSQL[i] <> ':') then
+                          sSQL := lSQL.SQLText.Text;
+
+                          while i < Length(sSQL) do
                           begin
-                             if sSQL[i] = #10 then
-                                Dest := Dest + ' ';
-                             if ((sSQL[i] > chr(64)) and (sSQL[i] < chr(91))) or
-                                ((sSQL[i] > chr(96)) and (sSQL[i] < chr(123))) or
-                                (sSQL[i] = chr(46)) or (sSQL[i] = chr(124)) or (sSQL[i] = chr(40)) or
-                                (sSQL[i] = chr(41)) or (sSQL[i] = chr(43)) or (sSQL[i] = chr(45)) or
-                                (sSQL[i] = chr(42)) or (sSQL[i] = chr(47)) or
-                                ((sSQL[i] > chr(47)) and (sSQL[i] < chr(58)) or
-                                (sSQL[i] = chr(60)) or (sSQL[i] = chr(61)) or (sSQL[i] = chr(62))) or
-                                (sSQL[i] = chr(32)) or (sSQL[i] = chr(44)) or (sSQL[i] = chr(39)) or
-                                (sSQL[i] = chr(95)) or (sSQL[i] = chr(38)) then
-                                Dest := Dest + sSQL[i];
-                             inc(i);
-                          end
-                          else
-                          begin
-                             if (sSQL[i+1] <> ' ') and (sSQL[i+1] <> chr(39)) then
+                             if (sSQL[i] <> ':') then
                              begin
-                                Buffer := Dest;
-                                x := i;
-                                Bind := '';
-                                NewChar := sSQL[x];
-                                while (NewChar <> ' ') and (NewChar <> #10) do
-                                begin
-                                   Bind := Bind + NewChar;
-                                   inc(x);
-                                   NewChar := sSQL[x];
-                                end;
-                                if Trim(UpperCase(Bind)) = ':NMATTER' then
-                                begin
-                                   if NMATTER = '' then NMATTER := '0';
-                                   Dest := Dest + NMATTER + ' ';
-                                end;
-                                i := x;
+                                if sSQL[i] = #10 then
+                                   Dest := Dest + ' ';
+                                if ((sSQL[i] > chr(64)) and (sSQL[i] < chr(91))) or
+                                   ((sSQL[i] > chr(96)) and (sSQL[i] < chr(123))) or
+                                   (sSQL[i] = chr(46)) or (sSQL[i] = chr(124)) or (sSQL[i] = chr(40)) or
+                                   (sSQL[i] = chr(41)) or (sSQL[i] = chr(43)) or (sSQL[i] = chr(45)) or
+                                   (sSQL[i] = chr(42)) or (sSQL[i] = chr(47)) or
+                                   ((sSQL[i] > chr(47)) and (sSQL[i] < chr(58)) or
+                                   (sSQL[i] = chr(60)) or (sSQL[i] = chr(61)) or (sSQL[i] = chr(62))) or
+                                   (sSQL[i] = chr(32)) or (sSQL[i] = chr(44)) or (sSQL[i] = chr(39)) or
+                                   (sSQL[i] = chr(95)) or (sSQL[i] = chr(38)) then
+                                   Dest := Dest + sSQL[i];
+                                inc(i);
                              end
                              else
                              begin
-                                Dest := Dest + ':';
-                                inc(i);
+                                if (sSQL[i+1] <> ' ') and (sSQL[i+1] <> chr(39)) then
+                                begin
+                                   Buffer := Dest;
+                                   x := i;
+                                   Bind := '';
+                                   NewChar := sSQL[x];
+                                   while (NewChar <> ' ') and (NewChar <> #10) do
+                                   begin
+                                      Bind := Bind + NewChar;
+                                      inc(x);
+                                      NewChar := sSQL[x];
+                                   end;
+                                   if Trim(UpperCase(Bind)) = ':NMATTER' then
+                                   begin
+                                      if NMATTER = '' then NMATTER := '0';
+                                      Dest := Dest + NMATTER + ' ';
+                                   end;
+                                   i := x;
+                                end
+                                else
+                                begin
+                                   Dest := Dest + ':';
+                                   inc(i);
+                                end;
                              end;
                           end;
-                       end;
 
-                       lSQL.DatabaseName := dmAxiom.orsAxiom.Name;
-                       lSQL.SQLText.Text := Dest;
+                          lSQL.DatabaseName := dmAxiom.orsAxiom.Name;
+                          lSQL.SQLText.Text := Dest;
+                       end;
                     end;
                  end;
                  if PrinterName <> '' then
@@ -274,11 +284,11 @@ begin
                  else
                     Report.DeviceType := 'Screen';
                  Report.Print;
-             end;
-          except
+               end;
+            except
 //
-          end;
-       end;
+            end;
+         end;
       end;
    end;
 end;

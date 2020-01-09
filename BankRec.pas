@@ -413,7 +413,7 @@ begin
       with qryCurrentReceipts do
       begin
          Close;
-         ParamByName('P_DateFrom').AsDate := Trunc(dtpLastReconciled.Date);
+         ParamByName('P_DateFrom').AsDate := Trunc(dtpLastReconciled.Date) + 1;
          ParamByName('P_DateTo').AsDate   := Trunc(dtpStatementDate.Date) + 1;
          ParamByName('P_Acct').AsString   := cbBank.Text;
          ParamByName('trust').AsString    := TableString('BANK','ACCT', cbBank.Text, 'TRUST');
@@ -431,7 +431,7 @@ begin
       with qryCurrentCheques do
       begin
          Close;
-         ParamByName('P_DateFrom').AsDate := Trunc(dtpLastReconciled.Date) ;
+         ParamByName('P_DateFrom').AsDate := Trunc(dtpLastReconciled.Date) +1 ;
          ParamByName('P_DateTo').AsDate   := Trunc(dtpStatementDate.Date) + 1;
          ParamByName('P_Acct').AsString   := cbBank.Text;
          ParamByName('trust').AsString    := TableString('BANK','ACCT', cbBank.Text, 'TRUST');

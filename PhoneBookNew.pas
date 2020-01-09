@@ -5425,19 +5425,19 @@ begin
    if not FormExists(frmPhoneBookSearch) then
       Application.CreateForm(TfrmPhoneBookSearch, frmPhoneBookSearch);
    frmPhoneBookSearch.SelectingCLients := False;
-   if(frmPhoneBookSearch.ShowModal() = mrOk) then
+   if (frmPhoneBookSearch.ShowModal() = mrOk) then
    begin
-//      if (frmPhoneBookSearch.NClient > 0) then
-//         MsgInfo('Selected entry is a client.  Client cannot be converted to Client.')
-//      else
-//      begin
+      if (frmPhoneBookSearch.NClient > 0) then
+         MsgInfo('Selected entry is already a client. Contact cannot be converted to Client.')
+      else
+      begin
          NName := frmPhoneBookSearch.NName;
          if NewClient = true then
             NClient := 0;
 //         SetupForClient(0);
          pbConvertFromPhonebook.Enabled := False;
          DoShow;
-//      end;
+      end;
    end;
 end;
 
