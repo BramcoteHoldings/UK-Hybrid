@@ -1885,12 +1885,12 @@ object frmCashRcp: TfrmCashRcp
   object rptCashReceiptsBook: TppReport
     AutoStop = False
     DataPipeline = plReceiptsBankDepsRpt
-    PassSetting = psTwoPass
+    NoDataBehaviors = [ndBlankReport]
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -1906,6 +1906,7 @@ object frmCashRcp: TfrmCashRcp
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.Enabled = True
     LanguageID = 'Default'
     OpenFile = False
     OutlineSettings.CreateNode = True
@@ -2404,7 +2405,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3001,7 +3002,7 @@ object frmCashRcp: TfrmCashRcp
       end
     end
     object ppGroup1: TppGroup
-      BreakName = 'RECEIPT_NO'
+      BreakName = 'RCPTNO'
       DataPipeline = plReceiptsBankDepsRpt
       GroupFileSettings.NewFile = False
       GroupFileSettings.EmailFile = False
@@ -3028,6 +3029,7 @@ object frmCashRcp: TfrmCashRcp
           ParentWidth = True
           Pen.Style = psClear
           Shape = stRoundRect
+          Visible = False
           mmHeight = 9635
           mmLeft = 0
           mmTop = 0
@@ -3063,7 +3065,7 @@ object frmCashRcp: TfrmCashRcp
           DesignLayer = ppDesignLayer1
           UserName = 'DBText2'
           Border.mmPadding = 0
-          DataField = 'RECEIPT_NO'
+          DataField = 'RCPTNO'
           DataPipeline = plReceiptsBankDepsRpt
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -3076,7 +3078,7 @@ object frmCashRcp: TfrmCashRcp
           mmHeight = 4233
           mmLeft = 25400
           mmTop = 793
-          mmWidth = 17198
+          mmWidth = 26988
           BandType = 3
           GroupNo = 0
           LayerName = Foreground
@@ -3239,6 +3241,23 @@ object frmCashRcp: TfrmCashRcp
         raProgram.Source = 
           'procedure Variables;'#13#10'var'#13#10'   fBanked : Currency;'#13#10'   fUnbanked ' +
           ': Currency;'#13#10'   fTotalBanked : Currency;'#13#10#13#10'begin'#13#10#13#10'end;'#13#10
+        raProgram.CaretPos = (
+          3
+          2)
+      end
+      object raProgramInfo2: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'ReportBeforePrint'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure ReportBeforePrint;'#13#10'begin'#13#10'//  Shape1.Visible := ('#13#10'en' +
+          'd;'#13#10
+        raProgram.ComponentName = 'Report'
+        raProgram.EventName = 'BeforePrint'
+        raProgram.EventID = 1
+        raProgram.CaretPos = (
+          3
+          3)
       end
     end
     object ppDesignLayers1: TppDesignLayers
@@ -3387,8 +3406,8 @@ object frmCashRcp: TfrmCashRcp
     object plReceiptsBankDepsRptppField5: TppField
       FieldAlias = 'ACCT'
       FieldName = 'ACCT'
-      FieldLength = 2
-      DisplayWidth = 2
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 4
     end
     object plReceiptsBankDepsRptppField6: TppField
@@ -3443,8 +3462,8 @@ object frmCashRcp: TfrmCashRcp
     object plReceiptsBankDepsRptppField13: TppField
       FieldAlias = 'RVBY'
       FieldName = 'RVBY'
-      FieldLength = 3
-      DisplayWidth = 3
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 12
     end
     object plReceiptsBankDepsRptppField14: TppField
@@ -3683,7 +3702,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3841,7 +3860,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4839,7 +4858,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350

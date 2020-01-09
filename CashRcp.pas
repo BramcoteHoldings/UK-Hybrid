@@ -278,6 +278,7 @@ type
     tvAllocationsDESCR1: TcxGridDBColumn;
     tvAllocationsAMOUNT1: TcxGridDBColumn;
     dbgrAllocationsLevel1: TcxGridLevel;
+    raProgramInfo2: TraProgramInfo;
     procedure FormShow(Sender: TObject);
     procedure qryReceiptsAfterScroll(DataSet: TDataSet);
     procedure mnuFileNewClick(Sender: TObject);
@@ -533,7 +534,7 @@ begin
           qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE ');
           qryReceipts.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto ) THEN 1 ' );
           qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto ) THEN 1 ' );
-          qryReceipts.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
           qryReceipts.SQL.Add(' ELSE 0 ');
           qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere);
 //          trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere );
@@ -556,7 +557,7 @@ begin
           qryReceipts.SQL.Add(' WASCONVERTED FROM RECEIPT WHERE ');
           qryReceipts.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' );
           qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' );
-          qryReceipts.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+          qryReceipts.SQL.Add('      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
           qryReceipts.SQL.Add(' ELSE 0 ');
           qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere );
            qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RECEIPT_NO ASC ');
@@ -600,7 +601,7 @@ begin
    qryTotal.SQL.Add('RECEIPT WHERE ');
    qryTotal.SQL.Add(' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' );
    qryTotal.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' );
-   qryTotal.SQL.Add('      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
+   qryTotal.SQL.Add('      WHEN (nvl(:trust,''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
    qryTotal.SQL.Add(' ELSE 0 ');
    qryTotal.SQL.Add(' END = 1 ' + sSQLWhere + '');
 
@@ -751,13 +752,27 @@ begin
 end;
 
 procedure TfrmCashRcp.mnuFilePrintCashBookClick(Sender: TObject);
-//var
-//  loTqrCashReceiptsBook : TqrCashReceiptsBook;
+var
+  lsTrustasOffice: string;
 begin
    try
+      lsTrustasOffice := SystemString('TRUST_AS_OFFICE');
       qryReceiptsBankDepsRpt.Close;
       qryReceiptsBankDepsRpt.SQL.Clear;
       qryReceiptsBankDepsRpt.SQL.Text := qryReceipts.SQL.Text;
+
+      qryReceiptsBankDepsRpt.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+      qryReceiptsBankDepsRpt.ParamByName('trust').Clear;
+
+      if (cbBank.Text <> '') then
+      begin
+         if IsTrustAccount(cbBank.Text) = True then
+         begin
+            qryReceiptsBankDepsRpt.ParamByName('trust').AsString := 'T';
+         end;
+      end;
+
       if chkDateFrom.Checked then
          qryReceiptsBankDepsRpt.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
       else
@@ -771,21 +786,6 @@ begin
    except
 
    end;
- { loTqrCashReceiptsBook := nil;
-
-  try
-    try
-      loTqrCashReceiptsBook := GetReport;
-      loTqrCashReceiptsBook. Print;
-      MessageDlg('The report has been printed.', mtInformation, [mbOK], 0);
-
-    finally
-      FreeAndNil(loTqrCashReceiptsBook);
-    end;    //  end try-finally
-
-  except
-    Raise;
-  end;    //  end try-except       }
 end;
 
 
