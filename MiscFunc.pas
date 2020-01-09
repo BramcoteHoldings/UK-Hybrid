@@ -14187,16 +14187,21 @@ begin
       if (sType = 'ALLOC') or (sType = 'UPCRED') then
       begin
          SQL.Add('select sum(amount) amount, sum(taxable_amount) taxable_amount,');
-         SQL.Add(' sum(itemtax) itemtax, sum(tax) tax from (');
+         SQL.Add(' sum(itemtax) itemtax, sum(0 - tax) tax from (');
          SQL.Add('SELECT nalloc, SUM(0 - a.amount) AS amount, ');
          SQL.Add('SUM(case when (rate = 0) then 0 else 0 - amount ');
          SQL.Add('end  ) AS taxable_amount,');
          // 30 Jan 2019 dw added to handle fub tax codes
          //SQL.Add('SUM (NVL (0 - a.tax, 0)) AS itemtax,');
-         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (0-a.billed_tax_amount, 0 - a.tax)) ');
-         SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
+         SQL.Add('round(sum(case when (nvl(r.rate,0)-nvl(r.bill_rate,0) = 0) then (NVL (a.billed_tax_amount*-1,  a.tax*-1)) ');
+         SQL.Add('else (NVL(a.amount*-1, 0) * (NVL(r.rate, 0)) / 100) end),2) AS itemtax, ');
+         SQL.Add('round(SUM(case when (rate = 0) then 0 ');
+         SQL.Add('else  NVL (a.amount*-1, 0) * (NVL (r.rate, 0) / 100) end),2) AS tax ');
+
+{         SQL.Add('else (ABS(NVL(a.amount, 0) * (NVL(r.rate, 0)) / 100)) end),2) AS itemtax, ');
          SQL.Add('round(SUM(case when (rate = 0) then 0 ');
          SQL.Add('else  ABS(NVL (a.amount, 0) * (NVL (r.rate, 0)) / 100) end),2) AS tax ');
+         }
 
 //        SQL.Add('SELECT SUM(0 - AMOUNT) AS AMOUNT,sum(decode(decode(NVL(R.RATE-R.BILL_RATE, 0), 0, NVL(a.tax, 0), NVL(a.amount, 0)),0,0,0-AMOUNT)) as TAXABLE_AMOUNT, ');
 //        SQL.Add('SUM(NVL(0 - A.TAX, 0)) as ITEMTAX, ');

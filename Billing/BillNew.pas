@@ -26,7 +26,7 @@ uses
   cxGridDBBandedTableView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridCustomView, cxGrid, cxLabel, cxRadioGroup,
   NumberEdit, Vcl.Buttons, Vcl.DBCtrls, Variants, ppIniStorage, cxGridExportLink,
-  DateUtils, ppFileUtils;
+  DateUtils, ppFileUtils, dxScrollbarAnnotations;
 
 const
   // The images for the lvItems
@@ -418,6 +418,7 @@ type
     procBillAddSingleUpCred: TUniStoredProc;
     procBillAddSingleUpAntd: TUniStoredProc;
     ppDBRichText1: TppDBRichText;
+    qryCheqReqDescription: TUniQuery;
     procedure qryInvoiceAfterScroll(DataSet: TDataSet);
     procedure btnBillToClick(Sender: TObject);
     procedure lvItemsDblClick(Sender: TObject);
@@ -5339,8 +5340,7 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
 
     // lvBillItems.DataController.FocusedRowIndex := lvBillItems.DataController.GetSelectedRowIndex(iLoop);
     ImageIndex := tvBillItemsTYPE.EditValue;
-    if (ImageIndex = IMG_DISB) OR (ImageIndex = IMG_UPCRED)
-    then
+    if (ImageIndex = IMG_DISB) OR (ImageIndex = IMG_UPCRED) OR (ImageIndex = IMG_ANTD) then
     begin
       with TfrmEditText.create(Self) do
       begin
@@ -5436,10 +5436,20 @@ procedure TfrmInvoice.tbtnEditDescriptionClick(Sender : TObject);
 
       if iResult = mrOK then
       begin
-        qryAllocDescription.Close;
-        qryAllocDescription.ParamByName('DESCR').AsString := sDescr;
-        qryAllocDescription.ParamByName('NALLOC').AsInteger := tvBillItemsUNIQUEID.EditValue;
-        qryAllocDescription.ExecSQL;
+        if (ImageIndex = IMG_DISB) OR (ImageIndex = IMG_UPCRED) then
+        begin
+            qryAllocDescription.Close;
+            qryAllocDescription.ParamByName('DESCR').AsString := sDescr;
+            qryAllocDescription.ParamByName('NALLOC').AsInteger := tvBillItemsUNIQUEID.EditValue;
+            qryAllocDescription.ExecSQL;
+        end;
+        if (ImageIndex = IMG_ANTD) then
+        begin
+           qryCheqReqDescription.Close;
+           qryCheqReqDescription.ParamByName('DESCR').AsString := sDescr;
+           qryCheqReqDescription.ParamByName('NCHEQREQ').AsInteger := tvBillItemsUNIQUEID.EditValue;
+           qryCheqReqDescription.ExecSQL;
+        end;
       end;
     end;
     qryBillItems.Close;
