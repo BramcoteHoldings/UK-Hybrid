@@ -1133,6 +1133,7 @@ object frmInvoice: TfrmInvoice
       OnDblClick = tbtnEditClick
       OnMouseDown = tvBillItemsMouseDown
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       OnEditing = tvBillItemsEditing
       OnEditKeyDown = tvBillItemsEditKeyDown
       OnFocusedRecordChanged = tvBillItemsFocusedRecordChanged
@@ -1365,6 +1366,7 @@ object frmInvoice: TfrmInvoice
     end
     object grdBillItemsDBBandedTableView1: TcxGridDBBandedTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataModeController.SmartRefresh = True
       DataController.DataSource = dsBillItems
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -1577,6 +1579,7 @@ object frmInvoice: TfrmInvoice
       PopupMenu = pmGrid
       OnDblClick = tbtnEditClick
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       OnEditing = tvBillItemsEditing
       OnEditKeyDown = tvBillItemsEditKeyDown
       OnFocusedRecordChanged = tvBillItemsFocusedRecordChanged
@@ -1770,6 +1773,7 @@ object frmInvoice: TfrmInvoice
     end
     object tvBillNotes: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsBillNotes
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -4611,7 +4615,7 @@ object frmInvoice: TfrmInvoice
     XLSSettings.WorksheetName = 'Report'
     Left = 1181
     Top = 35
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -4949,7 +4953,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plSummaryBill'
           object ppDetailBand2: TppDetailBand
@@ -5153,7 +5157,7 @@ object frmInvoice: TfrmInvoice
           PrinterSetup.mmPaperWidth = 210000
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plSummaryBill'
           object ppDetailBand3: TppDetailBand
@@ -7456,7 +7460,7 @@ object frmInvoice: TfrmInvoice
     XLSSettings.WorksheetName = 'Report'
     Left = 1053
     Top = 100
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plItems'
     object ppHeaderBand2: TppHeaderBand
@@ -10731,5 +10735,25 @@ object frmInvoice: TfrmInvoice
         Value = nil
       end>
     CommandStoredProcName = 'BILL_ADD_ANTD_IND'
+  end
+  object qryCheqReqDescription: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'update cheqreq'
+      'set descr = :descr'
+      'where ncheqreq= :ncheqreq')
+    Left = 670
+    Top = 370
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'descr'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ncheqreq'
+        Value = nil
+      end>
   end
 end
