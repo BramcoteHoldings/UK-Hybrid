@@ -555,7 +555,7 @@ begin
           ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE '+
           ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto ) THEN 1 ' +
           '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto ) THEN 1 ' +
-          '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+          '      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
           ' ELSE 0 '+
           ' END = 1 ';
 //          C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo ';
@@ -583,7 +583,7 @@ begin
           ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE ' +
           ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
           '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
-          '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+          '      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
           ' ELSE 0 '+
           ' END = 1 ';
 //           C.CREATED >= :P_DateFrom AND C.CREATED < :P_DateTo ';
@@ -592,7 +592,7 @@ begin
       sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE '+
                     ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
                     '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
-                    '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+                    '      WHEN (NVL(:trust,''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
                     ' ELSE 0 '+
                     ' END = 1 ';
 //      trunc(C.CREATED) >= :P_DateFrom AND trunc(c.created) < :p_dateto ';
@@ -600,7 +600,7 @@ begin
                    ' FROM cheque c WHERE  '+
                    ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
                    '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
-                   '      WHEN (:trust <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+                   '      WHEN (NVL(:trust,''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
                    ' ELSE 0 '+
                    ' END = 1 ';
 
@@ -1013,12 +1013,28 @@ begin
 end;
 
 procedure TfrmCashpay.tbtnPrintClick(Sender: TObject);
+var
+  lsTrustasOffice: string;
 begin
    bPrint := True;
+   lsTrustasOffice := SystemString('TRUST_AS_OFFICE');
    with qryChequesRpt do
    begin
       Close;
       SQL.Text := qryCheques.SQL.Text;
+
+      ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+      ParamByName('trust').Clear;
+
+      if (cbBank.Text <> '') then
+      begin
+         if IsTrustAccount(cbBank.Text) = True then
+         begin
+            ParamByName('trust').AsString := 'T';
+         end;
+      end;
+
       if chkDateFrom.Checked then
          ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
       else
@@ -1596,7 +1612,7 @@ end;
 
 procedure TfrmCashpay.popChequePopup(Sender: TObject);
 begin
-   tbtnPresent.Enabled := (qryCheques.FieldByName('CHQNO').AsString <> '') {and
+   tbtnPresent.Enabled := (qryCheques.FieldByName('CHQNO').AsString <> '') and (qryCheques.FieldByName('REVERSED').AsString = 'N') {and
                           (tvCheques.DataController.GetValue(tvCheques.DataController.FocusedRowIndex, tvChequesTYPE.Index) = 'BP')};
 
    if qryCheques.FieldByName('PRESENTED').IsNull then
