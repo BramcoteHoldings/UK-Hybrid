@@ -39,7 +39,8 @@ type
     property nNMatter: integer read FnNMatter write FnNMatter;
 
     procedure RVInvoice(ANInvoice, ANCheque: integer);
-    procedure RvCheque(iOldNcheque : integer; dtReverse : TDateTime; sReason : string);
+    procedure RvCheque(iOldNcheque : integer; dtReverse : TDateTime; sReason : string;
+                       iNMemo: integer = -1 );
   end;
 
 var
@@ -183,7 +184,8 @@ begin
    end;
 end;
 
-procedure TdmChequeRev.RvCheque(iOldNcheque : integer; dtReverse : TDateTime; sReason : string);
+procedure TdmChequeRev.RvCheque(iOldNcheque : integer; dtReverse : TDateTime; sReason : string;
+                                iNMemo: integer = -1 );
 var
    iRvNcheque : integer;
    sRVChqno : string;
@@ -375,6 +377,19 @@ begin
                         iRevTotal := iRevTotal + qryAllocRev.FieldByName('TAX').AsCurrency;
                   end;
                end;
+            end;
+         end;
+         if (iNMemo > 0) then
+         begin
+            with dmAxiom.qryTmp do
+            begin
+               Close;
+               SQL.Text := 'UPDATE ALLOC SET NMEMO = :NMEMO, BILLED = ''Y'' ' +
+                           'WHERE NALLOC = :NALLOC ';
+               ParamByName('NALLOC').AsInteger := lNewNAlloc;
+               ParamByName('NMEMO').AsInteger := iNMemo;
+               ExecSql;
+               Close;
             end;
          end;
          qryAllocRev.Next;
