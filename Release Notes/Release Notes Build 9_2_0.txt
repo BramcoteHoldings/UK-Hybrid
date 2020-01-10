@@ -1,5 +1,29 @@
 Insight Build 9.2.0
 
+Build 58 - 59
+=============
+- Saving original bill no when doing a cheque re-issue for a billed cheque
+- Receipt and Cheque Cashbook now respect selected bank when displaying transactions for a period
+- Fixed issue with Negative amounts when doing bills
+- Fixed Receipts cashbook report so that it displays reversed transactions.
+- Added validation to prevent duplicating a client when using the create from Phonebook option.
+- Trust Cheque Requisition screen now shows the Net Available Trust amount.
+- Cheqreq colour description
+	At the start all lines are set to the colour Black
+	If Held = ‘W’  or Can Pay = ‘N’ or Trust Pay = ‘N’ then the colour will be Blue
+	Otherwise
+	If Held = ‘N’ (Not Held) and Can Pay = ‘Y’ and Trust Pay = ‘Y’ Converted = ‘N’ then the colour will be Green
+	Otherwise
+	If Held = ‘Y’ then the colour will be Fuchsia
+	Otherwise 
+	(If Converted = ‘R’ (Reversed) or Converted = ‘Y’ or it has been billed and Converted = ‘Y’) 
+	or if the Cheque Requisition has been reversed then the colour will be Red
+
+	Can Pay = If it is a Trust requisition and the amount owing on the bill it is paying is less than the Cheque Requisition then Can Pay = ‘N’ otherwise Can Pay = ‘Y’
+
+	TPay = If it is a Trust requisition and the Cheque Requisition Amount + Tax is greater than the available Trust Funds then Trust Pay = ‘N’ otherwise Trust Pay =  ‘Y’
+
+
 Build 57
 ========
 - Fix to Bill Credit Note.  Now uses the selected date during creation.

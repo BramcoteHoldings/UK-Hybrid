@@ -52,10 +52,14 @@ object frmCashRcp: TfrmCashRcp
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 250
-        Width = 1196
+        Width = 8
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -1890,7 +1894,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2401,11 +2405,12 @@ object frmCashRcp: TfrmCashRcp
         object ppChildReport1: TppChildReport
           AutoStop = False
           DataPipeline = plNallocsRpt
+          PassSetting = psTwoPass
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3228,7 +3233,7 @@ object frmCashRcp: TfrmCashRcp
         Border.mmPadding = 0
         HideWhenOneDetail = False
         mmBottomOffset = 0
-        mmHeight = 529
+        mmHeight = 0
         mmPrintPosition = 0
       end
     end
@@ -3628,8 +3633,8 @@ object frmCashRcp: TfrmCashRcp
     object plNallocsRptppField1: TppField
       FieldAlias = 'AUTHOR'
       FieldName = 'AUTHOR'
-      FieldLength = 0
-      DisplayWidth = 0
+      FieldLength = 10
+      DisplayWidth = 10
       Position = 0
     end
     object plNallocsRptppField2: TppField
@@ -3702,7 +3707,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3860,7 +3865,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4'
+          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4858,7 +4863,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
