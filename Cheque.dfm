@@ -468,6 +468,7 @@ object frmCheque: TfrmCheque
     object tvLedger: TcxGridDBTableView
       PopupMenu = popGrid
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       OnEditing = tvLedgerEditing
       OnEditKeyPress = tvLedgerEditKeyPress
       DataController.DataModeController.GridMode = True
@@ -849,7 +850,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43805.7897332523d
+    EditValue = 43840.445773044d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday

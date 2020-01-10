@@ -15,7 +15,8 @@ uses
   cxMemo, cxImageComboBox, DateUtils, EnforceCustomDateEdit, cxLookAndFeels,
   dxCore, vcl.Themes, cxNavigator, cxDateUtils, System.Win.ComObj,
   cxDataControllerConditionalFormattingRulesManagerDialog,
-  System.Actions, Vcl.ActnList, dxDateRanges, cxLookupEdit, cxDBLookupEdit;
+  System.Actions, Vcl.ActnList, dxDateRanges, cxLookupEdit, cxDBLookupEdit,
+  dxScrollbarAnnotations;
 
 const
   colTYPE = 0;
@@ -2600,7 +2601,7 @@ begin
                      dmChequeRev.sReason := tbDesc.Text;
                      dmChequeRev.nNMemo := FNMemo;
                      dmChequeRev.nNMatter := qryAllocs.FieldByName('NMATTER').AsInteger;
-                     dmChequeRev.RvCheque(FNCheque, dtpDate.Date, 'Cheque reissue');
+                     dmChequeRev.RvCheque(FNCheque, dtpDate.Date, 'Cheque reissue', FNMemo);
                      if FNMemo > 0 then
                      begin
                         with dmAxiom.qryTmp do
@@ -5151,6 +5152,14 @@ end;
 procedure TfrmCheque.tvLedgerAMOUNTPropertiesValidate(Sender: TObject;
   var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
 begin
+   if (FNMemo > 0) and (chkReplacementCheque.Checked = True) then
+   begin
+      if (FAmount + FTax ) <> (DisplayValue + tvLedgerTAX.EditValue ) then
+      begin
+         MsgErr('The cheque selected has been billed.  Replacement cheque has to be for the same amount.');
+         DisplayValue := False;
+      end;
+   end;
 {   try
       if SystemString('show_net_trust') = 'Y' then
       begin
@@ -5293,9 +5302,10 @@ begin
                      FBilled := FieldByName('billed').AsString;
                      FNMemo := FieldByName('nmemo').AsInteger;
                      FNAlloc := FieldByName('nalloc').AsInteger;
-                     FAmount := FieldByName('amount').AsFloat;
-                     FTax := FieldByName('tax').AsFloat;
+                     FAmount := FieldByName('amount').AsFloat * -1;
+                     FTax := FieldByName('tax').AsFloat * -1;
                      Close;
+                     tvLedgerAMOUNT.EditValue := FAmount + FTax;
                   end;
                end
                else
