@@ -1417,11 +1417,25 @@ end;
 procedure TfrmCashRcp.tbtnPrevCashbookClick(Sender: TObject);
 //var
 //  loTqrCashReceiptsBook : TqrCashReceiptsBook;
+var
+   lsTrustasOffice: string;
 begin
-      try
+   try
+      lsTrustasOffice := SystemString('TRUST_AS_OFFICE');
       qryReceiptsBankDepsRpt.Close;
       qryReceiptsBankDepsRpt.SQL.Clear;
       qryReceiptsBankDepsRpt.SQL.Text := qryReceipts.SQL.Text;
+
+      qryReceiptsBankDepsRpt.ParamByName('trustasoffice').AsString := lsTrustasOffice;
+
+      if (cbBank.Text <> '') then
+      begin
+         if IsTrustAccount(cbBank.Text) = True then
+         begin
+            qryReceiptsBankDepsRpt.ParamByName('trust').AsString := 'T';
+         end;
+      end;
+
       if chkDateFrom.Checked then
          qryReceiptsBankDepsRpt.ParamByName('P_DateFrom').AsDate := Trunc(dtpDateFrom.Date)
       else
