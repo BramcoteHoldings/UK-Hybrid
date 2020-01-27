@@ -280,6 +280,8 @@ type
     ActionManager1: TActionManager;
     actReverse: TAction;
     tvAllocationsMRV_NALLOC: TcxGridDBColumn;
+    ppDBText5: TppDBText;
+    ppLabel2: TppLabel;
     procedure FormShow(Sender: TObject);
     procedure qryChequesAfterScroll(DataSet: TDataSet);
     procedure mnuFileNewClick(Sender: TObject);
@@ -694,7 +696,14 @@ begin
    if (not FromGrid) then
    begin
      case rgOrderby.ItemIndex of
-       0:  FOrderBy := ' ORDER BY C.CREATED';
+       0:  begin
+            FOrderBy := ' ORDER BY (CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') THEN TRUNC(system_date) '+
+                        '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') ) THEN TRUNC(created) ' +
+                        '      WHEN (NVL(:trust, ''G'') <> ''T'') THEN TRUNC(created) ' +
+                        ' ELSE TRUNC(created) '+
+                        ' END), CHQNO ';
+//            FOrderBy := ' ORDER BY C.CREATED';
+       end;
        1:  FOrderBy := ' ORDER BY C.CHEQUE_NO';
      end;
    end;
