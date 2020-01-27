@@ -538,7 +538,12 @@ begin
           qryReceipts.SQL.Add(' ELSE 0 ');
           qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere);
 //          trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere );
-          qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RCPTNO  ');
+//          qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RCPTNO  ');
+          qryReceipts.SQL.Add(' ORDER BY (CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'')) THEN TRUNC(system_date) ' );
+          qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'')) THEN trunc(created) ' );
+          qryReceipts.SQL.Add('      WHEN (NVL(:trust, ''G'') <> ''T'') THEN TRUNC(created) ' );
+          qryReceipts.SQL.Add(' ELSE TRUNC(created) ');
+          qryReceipts.SQL.Add(' END), RCPTNO ');
           sSQLWhere := sSQLWhere + ' ORDER BY trunc(CREATED), RCPTNO  ';
        end;
     1: begin
@@ -560,7 +565,12 @@ begin
           qryReceipts.SQL.Add('      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' );
           qryReceipts.SQL.Add(' ELSE 0 ');
           qryReceipts.SQL.Add(' END = 1 ' + sSQLWhere );
-           qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RECEIPT_NO ASC ');
+          qryReceipts.SQL.Add(' ORDER BY (CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'')) THEN TRUNC(system_date) ' );
+          qryReceipts.SQL.Add('      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'')) THEN TRUNC(created) ' );
+          qryReceipts.SQL.Add('      WHEN (NVL(:trust, ''G'') <> ''T'') THEN TRUNC(created) ' );
+          qryReceipts.SQL.Add(' ELSE TRUNC(created) ');
+          qryReceipts.SQL.Add(' END), RCPTNO ');
+//           qryReceipts.SQL.Add(' ORDER BY trunc(CREATED), RECEIPT_NO ASC ');
 //          trunc(CREATED) >= :P_DateFrom AND trunc(CREATED) < :P_DateTo ' + sSQLWhere + ' ORDER BY RECEIPT_NO ASC');
           sSQLWhere := sSQLWhere + ' ORDER BY RECEIPT_NO ASC ';
        end;
