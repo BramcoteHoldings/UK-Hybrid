@@ -75,7 +75,6 @@ object frmCashpay: TfrmCashpay
         HotZone.SizePercent = 58
         AlignSplitter = salBottom
         Control = Panel3
-        ExplicitWidth = 8
       end
       object Panel1: TPanel
         Left = 0
@@ -377,10 +376,6 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -2347,241 +2342,6 @@ object frmCashpay: TfrmCashpay
     UserName = 'plCheqReq'
     Left = 811
     Top = 212
-    object plCheqReqppField1: TppField
-      FieldAlias = 'PRINTER'
-      FieldName = 'PRINTER'
-      FieldLength = 0
-      DisplayWidth = 0
-      Position = 0
-    end
-    object plCheqReqppField2: TppField
-      FieldAlias = 'NCHEQUE'
-      FieldName = 'NCHEQUE'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 1
-    end
-    object plCheqReqppField3: TppField
-      FieldAlias = 'CREATED'
-      FieldName = 'CREATED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 2
-    end
-    object plCheqReqppField4: TppField
-      FieldAlias = 'ACCT'
-      FieldName = 'ACCT'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 3
-    end
-    object plCheqReqppField5: TppField
-      FieldAlias = 'TYPE'
-      FieldName = 'TYPE'
-      FieldLength = 2
-      DisplayWidth = 2
-      Position = 4
-    end
-    object plCheqReqppField6: TppField
-      FieldAlias = 'PAYEE'
-      FieldName = 'PAYEE'
-      FieldLength = 120
-      DisplayWidth = 120
-      Position = 5
-    end
-    object plCheqReqppField7: TppField
-      FieldAlias = 'CHQNO'
-      FieldName = 'CHQNO'
-      FieldLength = 12
-      DisplayWidth = 12
-      Position = 6
-    end
-    object plCheqReqppField8: TppField
-      FieldAlias = 'APPROVAL'
-      FieldName = 'APPROVAL'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 7
-    end
-    object plCheqReqppField9: TppField
-      FieldAlias = 'REQBY'
-      FieldName = 'REQBY'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 8
-    end
-    object plCheqReqppField10: TppField
-      FieldAlias = 'RVBY'
-      FieldName = 'RVBY'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 9
-    end
-    object plCheqReqppField11: TppField
-      FieldAlias = 'REVERSED'
-      FieldName = 'REVERSED'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 10
-    end
-    object plCheqReqppField12: TppField
-      FieldAlias = 'NTRANS'
-      FieldName = 'NTRANS'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 11
-    end
-    object plCheqReqppField13: TppField
-      FieldAlias = 'BANKED'
-      FieldName = 'BANKED'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 12
-    end
-    object plCheqReqppField14: TppField
-      FieldAlias = 'TRUST'
-      FieldName = 'TRUST'
-      FieldLength = 2
-      DisplayWidth = 2
-      Position = 13
-    end
-    object plCheqReqppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'SUFCHQ'
-      FieldName = 'SUFCHQ'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 14
-    end
-    object plCheqReqppField16: TppField
-      FieldAlias = 'PRESENTED'
-      FieldName = 'PRESENTED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 15
-    end
-    object plCheqReqppField17: TppField
-      FieldAlias = 'DESCR'
-      FieldName = 'DESCR'
-      FieldLength = 200
-      DisplayWidth = 200
-      Position = 16
-    end
-    object plCheqReqppField18: TppField
-      FieldAlias = 'SYSTEM_DATE'
-      FieldName = 'SYSTEM_DATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 17
-    end
-    object plCheqReqppField19: TppField
-      FieldAlias = 'PRINTED'
-      FieldName = 'PRINTED'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 18
-    end
-    object plCheqReqppField20: TppField
-      FieldAlias = 'RECONDATE'
-      FieldName = 'RECONDATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 19
-    end
-    object plCheqReqppField21: TppField
-      FieldAlias = 'NNAME'
-      FieldName = 'NNAME'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 20
-    end
-    object plCheqReqppField22: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'AMOUNT'
-      FieldName = 'AMOUNT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 21
-    end
-    object plCheqReqppField23: TppField
-      FieldAlias = 'EFT'
-      FieldName = 'EFT'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 22
-    end
-    object plCheqReqppField24: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'CHEQUE_GROUP_ID'
-      FieldName = 'CHEQUE_GROUP_ID'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 23
-    end
-    object plCheqReqppField25: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'CHEQUE_NO'
-      FieldName = 'CHEQUE_NO'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 24
-    end
-    object plCheqReqppField26: TppField
-      FieldAlias = 'TAKE_ON'
-      FieldName = 'TAKE_ON'
-      FieldLength = 1
-      DisplayWidth = 1
-      Position = 25
-    end
-    object plCheqReqppField27: TppField
-      FieldAlias = 'NJOURNAL'
-      FieldName = 'NJOURNAL'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 26
-    end
-    object plCheqReqppField28: TppField
-      FieldAlias = 'WHO'
-      FieldName = 'WHO'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 27
-    end
-    object plCheqReqppField29: TppField
-      FieldAlias = 'PRESENTDATE'
-      FieldName = 'PRESENTDATE'
-      FieldLength = 11
-      DisplayWidth = 11
-      Position = 28
-    end
-    object plCheqReqppField30: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'PRESENTAMOUNT'
-      FieldName = 'PRESENTAMOUNT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 29
-    end
-    object plCheqReqppField31: TppField
-      FieldAlias = 'ROWID'
-      FieldName = 'ROWID'
-      FieldLength = 18
-      DisplayWidth = 18
-      Position = 30
-    end
   end
   object plAlloc: TppDBPipeline
     DataSource = dsAllocs
@@ -2641,7 +2401,7 @@ object frmCashpay: TfrmCashpay
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2729,7 +2489,7 @@ object frmCashpay: TfrmCashpay
         UserName = 'Label16'
         Border.Weight = 1.000000000000000000
         Border.mmPadding = 0
-        Caption = 'Date'
+        Caption = 'Date Recorded'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
@@ -2740,8 +2500,8 @@ object frmCashpay: TfrmCashpay
         Transparent = True
         mmHeight = 3969
         mmLeft = 1058
-        mmTop = 23548
-        mmWidth = 6880
+        mmTop = 28046
+        mmWidth = 21961
         BandType = 0
         LayerName = Foreground
       end
@@ -2760,7 +2520,7 @@ object frmCashpay: TfrmCashpay
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 3969
-        mmLeft = 20108
+        mmLeft = 22228
         mmTop = 23283
         mmWidth = 13230
         BandType = 0
@@ -3008,6 +2768,27 @@ object frmCashpay: TfrmCashpay
         BandType = 0
         LayerName = Foreground
       end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label2'
+        Border.Weight = 1.000000000000000000
+        Border.mmPadding = 0
+        Caption = 'Date Entered'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3968
+        mmLeft = 1055
+        mmTop = 23538
+        mmWidth = 19050
+        BandType = 0
+        LayerName = Foreground
+      end
     end
     object ppDetailBand3: TppDetailBand
       Background1.Brush.Style = bsClear
@@ -3034,7 +2815,7 @@ object frmCashpay: TfrmCashpay
         DataPipelineName = 'plCheqReq'
         mmHeight = 4233
         mmLeft = 1058
-        mmTop = 1323
+        mmTop = 6093
         mmWidth = 17727
         BandType = 4
         LayerName = Foreground
@@ -3051,10 +2832,11 @@ object frmCashpay: TfrmCashpay
         Font.Name = 'Arial'
         Font.Size = 8
         Font.Style = [fsBold]
+        TextAlignment = taCentered
         Transparent = True
         DataPipelineName = 'plCheqReq'
         mmHeight = 4233
-        mmLeft = 20373
+        mmLeft = 20638
         mmTop = 1323
         mmWidth = 17727
         BandType = 4
@@ -3193,7 +2975,7 @@ object frmCashpay: TfrmCashpay
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3342,6 +3124,27 @@ object frmCashpay: TfrmCashpay
             end
           end
         end
+      end
+      object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText5'
+        Border.mmPadding = 0
+        DataField = 'SYSTEM_DATE'
+        DataPipeline = plCheqReq
+        DisplayFormat = 'dd/mm/yyyy'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'plCheqReq'
+        mmHeight = 4233
+        mmLeft = 1058
+        mmTop = 1323
+        mmWidth = 17727
+        BandType = 4
+        LayerName = Foreground
       end
     end
     object ppFooterBand2: TppFooterBand
@@ -3614,11 +3417,11 @@ object frmCashpay: TfrmCashpay
       '     case when PRESENTED is not null then Amount'
       '     else 0.00'
       '     end'
-      '   end as PresentAmount,'
-      '   ROWID '
+      '   end as PresentAmount'
       'FROM CHEQUE '
       'WHERE CREATED >= :P_DateFrom '
       '  AND CREATED <= :P_DateTo')
+    Active = True
     AfterScroll = qryChequesRptAfterScroll
     Left = 518
     Top = 271

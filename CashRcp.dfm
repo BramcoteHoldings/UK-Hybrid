@@ -1894,7 +1894,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2410,7 +2410,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
           PrinterSetup.Orientation = poLandscape
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -3289,7 +3289,6 @@ object frmCashRcp: TfrmCashRcp
       '  FROM ALLOC, MATTER'
       'WHERE ALLOC.NMATTER = MATTER.NMATTER'
       'AND ALLOC.NRECEIPT = :P_Nreceipt AND ALLOC.NRECEIPT <> 0')
-    Active = True
     Left = 498
     Top = 399
     ParamData = <
@@ -3325,7 +3324,6 @@ object frmCashRcp: TfrmCashRcp
         'FROM RECEIPT WHERE CREATED >= :P_DateFrom AND CREATED < :P_DateT' +
         'o '
       'ORDER BY RECEIPT_NO ASC')
-    Active = True
     AfterScroll = qryReceiptsBankDepsRptAfterScroll
     Left = 660
     Top = 413
@@ -3707,7 +3705,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3865,7 +3863,7 @@ object frmCashRcp: TfrmCashRcp
           PrinterSetup.BinName = 'Default'
           PrinterSetup.DocumentName = 'Report'
           PrinterSetup.Duplex = dpNone
-          PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+          PrinterSetup.PaperName = 'A4'
           PrinterSetup.PrinterName = 'Default'
           PrinterSetup.SaveDeviceSettings = False
           PrinterSetup.mmMarginBottom = 6350
@@ -4863,7 +4861,7 @@ object frmCashRcp: TfrmCashRcp
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
+    PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
