@@ -29,7 +29,7 @@ uses
   cxSchedulerUtils, cxSchedulerWeekView, cxSchedulerYearView,
   cxSchedulerGanttView, cxSchedulerRecurrence,
   cxSchedulerRibbonStyleEventEditor, cxSchedulerTreeListBrowser,
-  System.ImageList, dxDateRanges
+  System.ImageList, dxDateRanges, dxScrollbarAnnotations
   {, Cromis.DirectoryWatch};
 
 {$DEFINE AXIOM}
@@ -4119,9 +4119,12 @@ begin
    aformClass.DragMode := dmManual; //dmAutomatic;
    aformclass.WindowState := wsMaximized;
    aformclass.ManualDock(frmDesktop.pageForms);
-   pageForms.ActivePageIndex := frmDesktop.pageForms.PageCount - 1;
-   pageForms.Pages[frmDesktop.pageForms.PageCount - 1].TabVisible := True;
+   frmDesktop.pageForms.ActivePage := (frmDesktop.pageForms.Pages[pageForms.PageCount - 1]);
+   frmDesktop.pageForms.ActivePageIndex := (frmDesktop.pageForms.PageCount - 1);
+   frmDesktop.pageForms.Pages[frmDesktop.pageForms.PageCount - 1].TabVisible := True;
    aformclass.Show;
+
+
 
    Result := nil; // ToDo: This doesn't need to be a function. Called in many places.
 end;
@@ -4386,7 +4389,7 @@ begin
          LfrmClients.DisplayClient(TableString('CLIENT','CODE', LNClient, 'NCLIENT'));  //  cmbClientFind.Properties.DataController.GetValue(cmbClientFind.ItemIndex-1 ,1));
       end;
       cmbClientFind.Text := '';
-   end; 
+   end;
 end;
 
 procedure TfrmDesktop.LoadClient(Sender: TObject; clientid: string);
@@ -4411,7 +4414,6 @@ begin
       TcxLookupComboBox(Sender).Text := '';  // cmbClientFind.Text := '';
    if (Sender is TdxBarEdit) then
       TdxBarEdit(Sender).Text := '';
-
 end;
 
 procedure TfrmDesktop.cmbPhonebookFindPropertiesCloseUp(Sender: TObject);
@@ -5332,7 +5334,7 @@ begin
    begin
       Close;
       SQL.Clear;
-      SQL.Text := 'SELECT clientid as code, search as descr, ''N'' AS DEFAULTITEM '+
+      SQL.Text := 'SELECT clientid as code, search as descr, ''N'' AS DEFAULTITEM, nclient '+
                   'FROM phonebook ';
       if (systemstring('locale_name') <> '') then
       begin
@@ -5367,7 +5369,7 @@ begin
 
                LNClient := LfrmClientSearch.qryClientList.FieldByName('NCLIENT').AsString;
                AddFormToTab(LfrmClients,1);
-               LfrmClients.DisplayClient(StrToInt(LNClient));
+//               LfrmClients.DisplayClient(StrToInt(LNClient));
 
                if (Sender is TcxLookupComboBox) then
                   TcxLookupComboBox(Sender).Text := '';
@@ -5392,7 +5394,15 @@ begin
          // only 1 record found.  display it
          if (RecordCount = 1) then
          begin
-            LoadClient(Sender, dmAxiom.qryNew.FieldByName('Code').AsString);
+            LfrmClients := TfrmClients.Create(Self);
+
+            LNClient := dmAxiom.qryNew.FieldByName('Code').AsString;
+            LfrmClients.ANClient := dmAxiom.qryNew.FieldByName('nclient').AsInteger;
+            AddFormToTab(LfrmClients,1);
+
+//            LfrmClients.DisplayClient(LNClient);
+
+//            LoadClient(Sender, dmAxiom.qryNew.FieldByName('Code').AsString);
             if (Sender is TcxLookupComboBox) then
                TcxLookupComboBox(Sender).Text := '';
             if (Sender is TdxBarEdit) then

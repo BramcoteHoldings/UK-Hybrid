@@ -28,7 +28,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
   cxGrid, cxPC, cxImage, cxGroupBox, Vcl.ExtCtrls, cxDBLabel, Vcl.DBCtrls,
   Variants, uRwMapiInterfaces, ppTypes, cxGridExportLink, dxCore, dxPSDBTCLnk,
-  cxDBRichEdit, cxDateUtils;
+  cxDBRichEdit, cxDateUtils, dxScrollbarAnnotations;
 
 
 
@@ -1301,6 +1301,7 @@ type
     FAttachFileName: TStringList;
     FAttachDoc: Boolean;
     FFileAttachList: string;
+    FANClient: integer;
 
     procedure DisplayDocItems;
     procedure MakeMatterLedger;
@@ -1330,7 +1331,7 @@ type
     procedure ChooseClient; overload;
     procedure ChooseClient(AClientID: Integer); overload;
     procedure SetReopenList;
-    property ANClient: Integer read GetNClicent;
+    property ANClient: Integer read GetNClicent write FANClient default -1;
     property MultiClientGroup: String read FMultiClientGroup write SetMultiClientGroup;
     property LookupValue : string read FLookupValue write FLookupValue;
     property ShowDataOnlyGroup: String        read FShowDataOnlyGroup     write FShowDataOnlyGroup;
@@ -1390,8 +1391,8 @@ begin
                         '     WHEN (C.CLIENT_PACK = ''NOCL'') THEN ''No - Development NOCL Only'' '+
                         '     ELSE '''' '+
                         'END as DISP_CLIENT_PACK, P.ARCHIVED, P.NNAME, P.DOB, P.CLIENT_IMAGE, P.CONTACT, P.DATE_OF_DEATH, P.PROSPECTIVE, SC.DESCR, P.ACN '+
-                        'FROM SUPERCLIENT SC, PHONEBOOK P, CLIENT C WHERE C.CODE = ' + quotedstr(Search) +
-                        ' AND C.NCLIENT = P.NCLIENT AND P.SUPERCLIENT(+) = SC.CODE';
+                        'FROM SUPERCLIENT SC, PHONEBOOK P, CLIENT C WHERE UPPER(C.CODE) = ' + quotedstr(UpperCase(Search)) +
+                        ' AND C.NCLIENT = P.NCLIENT AND P.SUPERCLIENT = SC.CODE(+)';
    qryClient.Open();
    if qryClient.IsEmpty then
    begin
@@ -1464,6 +1465,8 @@ begin
          qryArchMatterCount.Close();
          qryArchMatterCount.ParamByName('nclient').AsInteger := qryClient.FieldByName('nclient').AsInteger;
          qryArchMatterCount.Open();
+         if ANClient < 1 then
+            ANClient := PNClient;
          ShowDetails();
       end;
       Screen.Cursor := crDefault;
@@ -1479,19 +1482,20 @@ var
    ASearch,
    sMatterFilter: string;
 begin
-  ASearch := qryClient.FieldByName('SEARCH').AsString;
-  if (Pos('&',ASearch)) > 0 then
-     Insert('&', ASearch, Pos('&',ASearch));
-
    if Self.Parent <> nil then
    begin
-      if frmDesktop.pagMainControl.ActivePageIndex = 0 then
-         frmDesktop.pageForms.ActivePage.Caption :=
-                      'Client: ' + ASearch;
-   end
-   else
-      self.Caption := 'Client: ' + ASearch;
+      ASearch := qryClient.FieldByName('SEARCH').AsString;
+      if (Pos('&',ASearch)) > 0 then
+         Insert('&', ASearch, Pos('&',ASearch));
+
+      if frmDesktop.pageForms.ActivePageIndex = 0 then
+         frmDesktop.pageForms.ActivePage.Caption := 'Client: ' + ASearch
+      else
+         self.Caption := 'Client: ' + ASearch
+   end;
+
    ReopenListUpdate('CLIENT', {qryClient.FieldByName('Code').AsString} qryClient.FieldByName('NCLIENT').AsString);
+
 
    if qryClient.FieldByName('ARCHIVED').AsString = 'Y' then
    begin
@@ -2867,7 +2871,9 @@ end;
 
 function TfrmClients.GetNClicent: Integer;
 begin
-  if qryClient.Active then
+  if FANClient <> -1 then
+     Result := FANClient
+  else if qryClient.Active then
      Result := qryClient.FieldByName('NCLIENT').AsInteger;
 end;
 
@@ -3155,6 +3161,8 @@ begin
    begin
       tsCustomAddress.Caption :=  sCustomAddress;
    end;   }
+   if ANClient > 0 then
+      DisplayClient(ANClient);
    Self.Refresh;
 end;
 

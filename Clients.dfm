@@ -427,6 +427,7 @@ object frmClients: TfrmClients
         object tvMatters: TcxGridDBTableView
           OnDblClick = dbgrMattersDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = dbgrMattersDBTableView1CellClick
           DataController.DataModeController.GridMode = True
           DataController.DataSource = dsMatters
@@ -667,6 +668,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object tvArchived: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsArchived
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -795,6 +797,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object cxGrid2DBTableView1: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
             item
@@ -1146,10 +1149,6 @@ object frmClients: TfrmClients
     object tabAddress: TcxTabSheet
       Caption = 'Address'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label52: TLabel
         Left = 318
         Top = 9
@@ -1703,10 +1702,6 @@ object frmClients: TfrmClients
           Font.Style = []
           ImageIndex = 0
           ParentFont = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label6: TLabel
             Left = 32
             Top = 113
@@ -1848,10 +1843,6 @@ object frmClients: TfrmClients
         object tsPostalAddress: TcxTabSheet
           Caption = 'Postal Address'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label10: TLabel
             Left = 32
             Top = 113
@@ -1998,10 +1989,6 @@ object frmClients: TfrmClients
         object tsCustomAddress: TcxTabSheet
           Caption = 'Custom Address'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label12: TLabel
             Left = 29
             Top = 5
@@ -2143,10 +2130,6 @@ object frmClients: TfrmClients
         object tsDX: TcxTabSheet
           Caption = 'DX'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label56: TLabel
             Left = 55
             Top = 5
@@ -2223,10 +2206,6 @@ object frmClients: TfrmClients
     object tabClientGroups: TcxTabSheet
       Caption = 'Client Groups'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pagClientGroups: TcxPageControl
         Left = 0
         Top = 0
@@ -2257,6 +2236,7 @@ object frmClients: TfrmClients
             LookAndFeel.NativeStyle = True
             object grdClientGroupsDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsGroups
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
@@ -2280,10 +2260,6 @@ object frmClients: TfrmClients
           Caption = 'Groups'
           ImageIndex = 1
           OnShow = tabAllGroupsShow
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           DesignSize = (
             1071
             435)
@@ -2363,6 +2339,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object tvRelationship: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsRelationships
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -2490,6 +2467,7 @@ object frmClients: TfrmClients
           Navigator.Buttons.Filter.Enabled = False
           Navigator.Buttons.Filter.Visible = False
           Navigator.Visible = True
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsContactNotes
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -2541,10 +2519,6 @@ object frmClients: TfrmClients
     object tabNotes: TcxTabSheet
       Caption = 'Notes'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         1079
         465)
@@ -2688,6 +2662,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object tvNotes: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsNotes
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -2729,10 +2704,6 @@ object frmClients: TfrmClients
     object tabSafeCustody: TcxTabSheet
       Caption = 'Safe Custody'
       ImageIndex = 9
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxPageControl2: TcxPageControl
         Left = 0
         Top = 235
@@ -2749,10 +2720,6 @@ object frmClients: TfrmClients
         object tsItems: TcxTabSheet
           Caption = 'Items'
           ImageIndex = 0
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object grdDocuments: TcxGrid
             Left = 0
             Top = 0
@@ -2765,6 +2732,7 @@ object frmClients: TfrmClients
             object tvDocuments1: TcxGridDBTableView
               OnDblClick = actEditExecute
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.Filter.MaxValueListCount = 1000
               DataController.KeyFieldNames = 'NDOCUMENT'
               DataController.Options = [dcoAnsiSort, dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoFocusTopRowAfterSorting]
@@ -2906,6 +2874,7 @@ object frmClients: TfrmClients
               PopupMenu = pmViewAttachment
               OnDblClick = actEditExecute
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dsDocReg2
               DataController.Filter.Options = [fcoCaseInsensitive, fcoShowOperatorDescription]
               DataController.Summary.DefaultGroupSummaryItems = <>
@@ -3586,10 +3555,6 @@ object frmClients: TfrmClients
         object tsOtherParties: TcxTabSheet
           Caption = 'Other Parties'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel1: TPanel
             Left = 0
             Top = 170
@@ -3725,6 +3690,7 @@ object frmClients: TfrmClients
               Navigator.Buttons.SaveBookmark.Visible = False
               Navigator.Buttons.GotoBookmark.Visible = False
               Navigator.Buttons.Filter.Visible = False
+              ScrollbarAnnotations.CustomAnnotations = <>
               OnEditing = tvSafeCustOtherPartiesEditing
               DataController.DataSource = dsDocRegOtherParties
               DataController.DetailKeyFieldNames = 'NDOCREG;NNAME'
@@ -3942,6 +3908,7 @@ object frmClients: TfrmClients
             Navigator.Buttons.GotoBookmark.Visible = False
             Navigator.Buttons.Filter.Visible = True
             Navigator.Visible = True
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCellClick = tvPacketsCellClick
             OnEditing = tvPacketsEditing
             DataController.DataSource = dsDocReg
@@ -4069,6 +4036,7 @@ object frmClients: TfrmClients
         object tvOtherClients: TcxGridDBTableView
           OnDblClick = dbgOtherClientsDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsOtherClients
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -4214,6 +4182,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object tvParticipantEvents: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsParticipantEvents
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -4352,6 +4321,7 @@ object frmClients: TfrmClients
         LookAndFeel.NativeStyle = True
         object tvInvoices: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsInvoices
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -4613,6 +4583,7 @@ object frmClients: TfrmClients
         end
         object tvSubBills: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsSubBill
           DataController.DetailKeyFieldNames = 'NMEMO'
           DataController.KeyFieldNames = 'NMEMO;NSUBBILL_ID'
@@ -4739,6 +4710,7 @@ object frmClients: TfrmClients
           PopupMenu = popEmailDoc
           OnDblClick = tvClientDocsDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvClientDocsCellClick
           DataController.DataSource = dsDocs
           DataController.Summary.DefaultGroupSummaryItems = <>
@@ -7767,7 +7739,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 1227
     Top = 73
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plPacket'
     object ppTitleBand1: TppTitleBand
@@ -8615,7 +8587,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 187
     Top = 485
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -12924,7 +12896,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 66
     Top = 577
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plPhoneBookRpt'
     object ppHeaderBand2: TppHeaderBand
@@ -14168,7 +14140,7 @@ object frmClients: TfrmClients
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plGroupingsRpt'
           object ppTitleBand2: TppTitleBand
@@ -14392,7 +14364,7 @@ object frmClients: TfrmClients
           PrinterSetup.mmPaperHeight = 279401
           PrinterSetup.mmPaperWidth = 215900
           PrinterSetup.PaperSize = 1
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plRelationshipsRpt'
           object ppTitleBand3: TppTitleBand
@@ -15893,7 +15865,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 794
     Top = 366
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand3: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -16420,7 +16392,7 @@ object frmClients: TfrmClients
     XLSSettings.WorksheetName = 'Report'
     Left = 1018
     Top = 146
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 197379
     DataPipelineName = 'ppDocList'
     object ppHeaderBand4: TppHeaderBand
