@@ -273,6 +273,7 @@ object frmDesktop: TfrmDesktop
                   ParentFont = False
                   PopupMenu = popCloseTabs
                   TabOrder = 0
+                  Properties.CloseTabWithMiddleClick = True
                   Properties.CustomButtons.Buttons = <
                     item
                       HeaderImageIndex = 41
@@ -283,6 +284,7 @@ object frmDesktop: TfrmDesktop
                   Properties.CustomButtons.HeaderImages = dmAxiom.ilstToolbar
                   Properties.CustomButtons.Mode = cbmEveryTab
                   Properties.CustomButtons.TabImages = dmAxiom.ilstToolbar
+                  Properties.HotTrack = True
                   Properties.MultiLine = True
                   Properties.Style = 9
                   Properties.TabSlants.Kind = skCutCorner
@@ -398,6 +400,7 @@ object frmDesktop: TfrmDesktop
               TabOrder = 1
               object tvTaskList: TcxGridTableView
                 Navigator.Buttons.CustomButtons = <>
+                ScrollbarAnnotations.CustomAnnotations = <>
                 DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoGroupsAlwaysExpanded]
                 DataController.Summary.DefaultGroupSummaryItems = <>
                 DataController.Summary.FooterSummaryItems = <>

@@ -3236,24 +3236,26 @@ procedure TfrmPhoneBookNew.SetupForClient(ANClient: Integer);
 var
   lNName: string;
 begin
-  FNClient := ANClient;
-  if ANClient > 0 then
-  begin
-    LNName := TableString('phonebook','nclient', ANClient, 'nname');
-    if LNName <> '' then
-      FNName := StrToInt(LNName);
-      eClientCode.ReadOnly := True;
-  end;
-  tsClient.TabVisible := True;
+   FNClient := ANClient;
+   if ANClient > 0 then
+   begin
+      LNName := TableString('phonebook','nclient', ANClient, 'nname');
+      if LNName <> '' then
+      begin
+         FNName := StrToInt(LNName);
+         eClientCode.ReadOnly := True;
+      end;
+   end;
+   tsClient.TabVisible := True;
 
-  // ANClient of 0 means new client.
-  if(ANClient = 0) then
-  begin
-    InitialGroups := 'Client';
-    eClientIntroduced.Date := Now;
-    if not (SettingExists(C_EMP,C_OWNERCLIENT,C_LIMITCLIENTCREATE)) and chkProspectiveClient.Checked = False then
-      pbConvertFromPhonebook.Visible := True;
-  end
+   // ANClient of 0 means new client.
+   if(ANClient = 0) then
+   begin
+      InitialGroups := 'Client';
+      eClientIntroduced.Date := Now;
+      if not (SettingExists(C_EMP,C_OWNERCLIENT,C_LIMITCLIENTCREATE)) and chkProspectiveClient.Checked = False then
+         pbConvertFromPhonebook.Visible := True;
+   end
 end;
 
 procedure TfrmPhoneBookNew.eClientCodeEnter(Sender: TObject);
