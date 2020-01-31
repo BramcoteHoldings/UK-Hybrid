@@ -516,7 +516,7 @@ object frmMatters: TfrmMatters
     Height = 577
     Align = alClient
     TabOrder = 5
-    Properties.ActivePage = tabOverview
+    Properties.ActivePage = tabMatterNotes
     Properties.CustomButtons.Buttons = <>
     Properties.Images = ilstToolbar
     Properties.MultiLine = True
@@ -23301,7 +23301,7 @@ object frmMatters: TfrmMatters
     end
     object qryUnconCheqReqBANK: TStringField
       FieldName = 'BANK'
-      Size = 3
+      Size = 10
     end
     object qryUnconCheqReqPAYEE: TStringField
       FieldName = 'PAYEE'
