@@ -52,7 +52,7 @@ type
     ppDesignLayer1: TppDesignLayer;
     Label19: TLabel;
     Label20: TLabel;
-    mlNote: TcxDBRichEdit;
+    mlNote: TcxMemo;
     procedure qryMatterNotesAfterInsert(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
     procedure btnNotePrintClick(Sender: TObject);

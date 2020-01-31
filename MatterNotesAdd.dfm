@@ -2,8 +2,8 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   Left = 910
   Top = 333
   Caption = 'Matter Note Entry'
-  ClientHeight = 442
-  ClientWidth = 559
+  ClientHeight = 470
+  ClientWidth = 600
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   Position = poMainFormCenter
   OnShow = FormShow
   DesignSize = (
-    559
-    442)
+    600
+    470)
   PixelsPerInch = 96
   TextHeight = 15
   object Label1: TLabel
@@ -48,23 +48,27 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
   end
   object Label19: TLabel
     Left = 6
-    Top = 370
+    Top = 398
     Width = 35
     Height = 15
+    Anchors = [akLeft, akBottom]
     Caption = '0/4000'
+    ExplicitTop = 370
   end
   object Label20: TLabel
     Left = 6
-    Top = 387
+    Top = 415
     Width = 58
     Height = 15
+    Anchors = [akLeft, akBottom]
     Caption = '(Max 4000)'
+    ExplicitTop = 387
   end
   object cxButton1: TcxButton
-    Left = 399
-    Top = 411
+    Left = 446
+    Top = 439
     Width = 70
-    Height = 25
+    Height = 27
     Anchors = [akRight, akBottom]
     Caption = 'OK'
     Default = True
@@ -106,13 +110,15 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       C6FFFF6183FF963635FF964F4CFFFF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
-    TabOrder = 2
+    TabOrder = 3
+    ExplicitLeft = 405
+    ExplicitTop = 411
   end
   object cxButton2: TcxButton
-    Left = 481
-    Top = 411
+    Left = 522
+    Top = 439
     Width = 70
-    Height = 25
+    Height = 27
     Anchors = [akRight, akBottom]
     Caption = 'Cancel'
     LookAndFeel.NativeStyle = True
@@ -153,7 +159,9 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       F2D2A6A6CD5CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00F2F2FE0DBDBEFD488889FC947F7FFEBC7F7FFCA3AAAAFD5DE1E1
       F81EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
-    TabOrder = 3
+    TabOrder = 4
+    ExplicitLeft = 481
+    ExplicitTop = 411
   end
   object lBy: TcxDBLabel
     Left = 75
@@ -199,10 +207,10 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     Width = 135
   end
   object btnNotePrint: TcxButton
-    Left = 290
-    Top = 411
+    Left = 331
+    Top = 439
     Width = 97
-    Height = 25
+    Height = 27
     Anchors = [akRight, akBottom]
     Caption = 'Print Note'
     LookAndFeel.NativeStyle = True
@@ -230,20 +238,25 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
       4087F846161E4DE3EAB99DEB0054490EC94E2AA54490085FA3655BD6ABDCFDA9
       6DF1B6A9F8ADC2756B1300BE91C75EEA31F9B94BFDFB00A44866EC44FCB23D92
       DB6CF80BF54A6944F3A08E160000000049454E44AE426082}
-    TabOrder = 5
-    OnClick = btnNotePrintClick
-  end
-  object mlNote: TcxDBRichEdit
-    Left = 75
-    Top = 82
-    DataBinding.DataField = 'NOTE'
-    DataBinding.DataSource = dsMatterNotes
-    Properties.MaxLength = 4000
-    Properties.PlainText = True
     TabOrder = 6
+    OnClick = btnNotePrintClick
+    ExplicitLeft = 290
+    ExplicitTop = 411
+  end
+  object mlNote: TcxMemo
+    Left = 75
+    Top = 83
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    Lines.Strings = (
+      'mlNote')
+    Properties.MaxLength = 4000
+    Properties.ScrollBars = ssVertical
+    TabOrder = 2
     OnKeyUp = mlNoteKeyUp
-    Height = 323
-    Width = 476
+    ExplicitWidth = 476
+    ExplicitHeight = 322
+    Height = 350
+    Width = 517
   end
   object qryMatterNotes: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -359,7 +372,7 @@ object frmMatterNotesAdd: TfrmMatterNotesAdd
     XLSSettings.WorksheetName = 'Report'
     Left = 298
     Top = 22
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear

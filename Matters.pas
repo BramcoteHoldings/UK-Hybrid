@@ -12123,7 +12123,7 @@ begin
 
       frmMatterNotesAdd.qryMatterNotes.ApplyUpdates;
 
- {     lsNotes := Copy(frmMatterNotesAdd.mlNote.text, 1, 4000);
+      lsNotes := Copy(frmMatterNotesAdd.mlNote.text, 1, 4000);
 
       with qryTmp do
       begin
@@ -12133,7 +12133,7 @@ begin
          ParamByName('note').AsString := lsNotes;
          ExecSQL;
       end;
-
+{
       lsNotes := '';
 
       if length(frmMatterNotesAdd.mlNote.text) > 4000 then
@@ -12198,45 +12198,50 @@ begin
    lsUserName := dmAxiom.GetUserName;
 
    try
-
       LDate := Now();
-      frmMatterNotesAdd.EntryDate := LDate;
-      frmMatterNotesAdd.By        := lsUserName;
-      frmMatterNotesAdd.Note      := '';
-      frmMatterNotesAdd.NoteType  := '';
-      frmMatterNotesAdd.NMatter   := qryMatter.FieldByName('NMATTER').AsInteger;
+      with frmMatterNotesAdd do
+      begin
+         EntryDate   := LDate;
+         By          := lsUserName;
+         Note        := '';
+         NoteType    := '';
+         NMatter     := qryMatter.FieldByName('NMATTER').AsInteger;
 
-      frmMatterNotesAdd.qryMatterNotes.Close;
-      frmMatterNotesAdd.qryMatterNotes.SQL.Clear;
-      frmMatterNotesAdd.qryMatterNotes.SQL.Text := 'SELECT Matternotes.* , Matternotes.ROWID '+
-                                                   'FROM Matternotes where nmatter = :nmatter '+
-                                                   'and sequence = :seqno';
-      frmMatterNotesAdd.qryMatterNotes.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-      frmMatterNotesAdd.qryMatterNotes.ParamByName('seqno').AsInteger := Self.qryMatterNotes.FieldByName('sequence').AsInteger;
-      frmMatterNotesAdd.qryMatterNotes.Open;
+         qryMatterNotes.Close;
+         qryMatterNotes.SQL.Clear;
+         qryMatterNotes.SQL.Text := 'SELECT Matternotes.* , Matternotes.ROWID '+
+                                    'FROM Matternotes where nmatter = :nmatter '+
+                                    'and sequence = :seqno';
+         qryMatterNotes.ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+         qryMatterNotes.ParamByName('seqno').AsInteger := Self.qryMatterNotes.FieldByName('sequence').AsInteger;
+         qryMatterNotes.Open;
+
+         Note        := qryMatterNotes.FieldByName('NOTE').AsString;
+
 //      frmMatterNotesAdd.mlNote.Lines.Add(frmMatterNotesAdd.qryMatterNotes.FieldByName('NOTE').AsString + ' ' + frmMatterNotesAdd.qryMatterNotes.FieldByName('NOTE2').AsString + ' '+
 //                                       frmMatterNotesAdd.qryMatterNotes.FieldByName('NOTE3').AsString + ' ' +frmMatterNotesAdd.qryMatterNotes.FieldByName('NOTE4').AsString);
 
-      frmMatterNotesAdd.Label19.Caption := IntToStr(length(frmMatterNotesAdd.mlNote.Text) )+'/4000';
+         Label19.Caption := length(frmMatterNotesAdd.mlNote.Text).ToString + '/4000';
 
-      frmMatterNotesAdd.qryMatterNotes.Edit;
+         qryMatterNotes.Edit;
 
-      if(frmMatterNotesAdd.ShowModal <> mrOk) then
-         Exit;
+         if (ShowModal <> mrOk) then
+            Exit;
 
-      frmMatterNotesAdd.qryMatterNotes.ApplyUpdates;
+         qryMatterNotes.ApplyUpdates;
 
- {     lsNotes := Copy(frmMatterNotesAdd.mlNote.text, 1, 4000);
+         lsNotes := Copy(frmMatterNotesAdd.mlNote.text, 1, 4000);
 
-      with qryTmp do
-      begin
-         SQL.Text := 'update matternotes set note = :note where nmatter = :nmatter and sequence = :sequence';
-         ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
-         ParamByName('sequence').AsInteger := frmMatterNotesAdd.qryMatterNotes.FieldByName('sequence').AsInteger;
-         ParamByName('note').AsString := lsNotes;
-         ExecSQL;
+         with qryTmp do
+         begin
+            SQL.Text := 'update matternotes set note = :note where nmatter = :nmatter and sequence = :sequence';
+            ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
+            ParamByName('sequence').AsInteger := frmMatterNotesAdd.qryMatterNotes.FieldByName('sequence').AsInteger;
+            ParamByName('note').AsString := lsNotes;
+            ExecSQL;
+         end;
       end;
-
+ {
       lsNotes := '';
 
       if length(frmMatterNotesAdd.mlNote.text) > 4000 then
