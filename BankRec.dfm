@@ -900,7 +900,7 @@ object frmBankRec: TfrmBankRec
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2947,9 +2947,6 @@ object frmBankRec: TfrmBankRec
     SQL.Strings = (
       'SELECT NVL (SUM (amount), 0) * -1 AS adj_total FROM ('
       
-        '  ---- UNPRESENTED CHEQUES presented after the period the period' +
-        ' (increase balance) '
-      
         '  SELECT '#39'CHEQUE'#39' AS grp, created, descr, chqno AS refno, TYPE, ' +
         'payee,'
       '               (0 - amount) AS amount, '#39'chq1'#39' AS subx'
@@ -2975,9 +2972,7 @@ object frmBankRec: TfrmBankRec
         'nted IS NULL AND bankrec_saved = '#39'N'#39')) THEN 1'
       '               ELSE 0'
       '          END = 1'
-      '        ---- this was removed'
       '  UNION ALL'
-      '  ---- Withdrawal adjustment within the period (reduce balance)'
       
         '  SELECT '#39'CHEQUN'#39' AS grp, bankrec.banked, NULL, bankrec.refno AS' +
         ' refno, NULL, bankrec.descr AS payee, (0 - bankrec.amount) AS am' +
@@ -2987,101 +2982,6 @@ object frmBankRec: TfrmBankRec
         '  WHERE bankrec.bank = :p_acct AND TRUNC(bankrec.banked) <= :p_d' +
         'ateto AND bankrec.TYPE = '#39'C'#39' AND bankrec.recondate IS NULL'
       '  UNION ALL'
-      '/*  ---- doesn'#39't make sense '
-      '  SELECT '#39'CHEQUE1'#39' AS grp, cheque.created, cheque.descr,'
-      '               cheque.chqno AS refno, cheque.TYPE, cheque.payee,'
-      '               (cheque.amount) AS amount, '#39'chq3'#39' AS subx'
-      '  FROM cheque'
-      
-        '  WHERE cheque.acct = :p_acct AND TRUNC(cheque.created) <= :p_da' +
-        'teto'
-      
-        '      AND CASE WHEN ((:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoffice ' +
-        '= '#39'N'#39') AND TRUNC (cheque.system_date) > :p_dateto AND bankrec_sa' +
-        'ved = '#39'N'#39') THEN 1'
-      
-        '               WHEN ((:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoffice ' +
-        '= '#39'Y'#39') AND TRUNC (cheque.created) > :p_dateto AND bankrec_saved ' +
-        '= '#39'N'#39') THEN 1'
-      
-        '               WHEN ((:trust <> '#39'T'#39') AND TRUNC (cheque.created) ' +
-        '> :p_dateto  AND bankrec_saved = '#39'N'#39') THEN 1'
-      '               ELSE 0'
-      '          END = 1'
-      '  UNION ALL */'
-      
-        '  --- banked trust receipts keyed within the period, deposited i' +
-        'n the period, not reconciled or reconciled after period (reduce ' +
-        'balance)'
-      
-        'SELECT '#39'DEPOSIT'#39' AS grp, bankdep.deposit_date, receipt.descr, ba' +
-        'nkdep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor, rec' +
-        'eipt.amount, '#39'dep1'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct --AND bankdep.acct = receipt.acct' +
-        ' AND bankdep.nbankdep = receipt.nbankdep'
-      
-        '      AND CASE WHEN (:trustasoffice = '#39'N'#39') AND TRUNC(receipt.sys' +
-        'tem_date) <= :p_dateto THEN 1 -- this was missing an equal sign'
-      
-        '               WHEN (:trustasoffice = '#39'Y'#39') AND TRUNC(receipt.cre' +
-        'ated) <= :p_dateto THEN 1'
-      '          END = 1 -- this was one'
-      '      --AND bankdep.last_nreceipt = receipt.nreceipt '
-      '      AND (:trust IN ('#39'T'#39', '#39'I'#39'))'
-      
-        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND ((bankdep' +
-        '.bankrec_saved = '#39'N'#39' AND bankdep.recondate IS NULL) OR (TRUNC(ba' +
-        'nkdep.recondate) > :p_dateto))'
-      '      AND receipt.nbankdep = bankdep.nbankdep(+)'
-      '      AND bankdep.acct = receipt.acct  '
-      '  UNION ALL'
-      
-        '  --- banked office receipts created within the period, deposite' +
-        'd in the period, not reconciled or reconciled after period (redu' +
-        'ce balance)'
-      
-        '  SELECT '#39'DEPOSIT'#39' AS grp, bankdep.deposit_date, receipt.descr, ' +
-        'bankdep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor,'
-      '               --receipt.amount, '#39'dep1a'#39' AS subx'
-      '       bankdep.amount, '#39'dep1a'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct --AND bankdep.acct = receipt.acct' +
-        ' AND bankdep.nbankdep = receipt.nbankdep'
-      
-        '      AND TRUNC (receipt.created) <= :p_dateto AND bankdep.last_' +
-        'nreceipt = receipt.nreceipt '
-      '      AND (:trust <> '#39'T'#39')'
-      
-        '      AND (TRUNC(bankdep.deposit_date) <= :p_dateto AND (bankdep' +
-        '.bankrec_saved = '#39'N'#39' AND bankdep.recondate IS NULL OR TRUNC(bank' +
-        'dep.recondate) > :p_dateto))'
-      '      AND receipt.nbankdep = bankdep.nbankdep(+)'
-      '      AND bankdep.acct = receipt.acct'
-      '  UNION ALL'
-      
-        '  --- banked office receipts created within the period, deposite' +
-        'd after the period, not reconciled or reconciled after period (r' +
-        'educe balance)'
-      
-        '  SELECT '#39'DEPOSIT'#39' AS grp, receipt.created, receipt.descr, bankd' +
-        'ep.nbankdep || '#39' '#39' AS refno, receipt.TYPE, receipt.payor, (recei' +
-        'pt.amount) AS amount, '#39'dep1a'#39' as subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '     AND TRUNC(receipt.created) <= :p_dateto AND TRUNC(receipt.s' +
-        'ystem_date) <= :p_dateto '
-      
-        '     AND (TRUNC(bankdep.deposit_date) > :p_dateto AND (bankdep.b' +
-        'ankrec_saved = '#39'N'#39' AND bankdep.recondate IS NULL OR TRUNC(bankde' +
-        'p.recondate) > :p_dateto)) '
-      '  UNION ALL'
-      '  --- Adjustment deposits keyed in the period (increase balance)'
       
         '  SELECT '#39'DEPOSITUN'#39' AS grp, bankrec.banked, bankrec.descr, bank' +
         'rec.refno AS refno, NULL, NULL,(0 - bankrec.amount) AS amount, '#39 +
@@ -3090,122 +2990,12 @@ object frmBankRec: TfrmBankRec
       
         '  WHERE bankrec.bank = :p_acct AND TRUNC(bankrec.banked) <= :p_d' +
         'ateto AND bankrec.TYPE = '#39'D'#39' AND bankrec.recondate IS NULL'
-      '        --- was removed'
       '  UNION ALL'
-      
-        '  --- deposited receipts reconciled after the period, deposited ' +
-        'in the period, keyed after the period (increase Balance)'
-      
-        '  SELECT DISTINCT '#39'DEPOSITUN'#39' AS grp, bankdep.recondate, NULL, b' +
-        'ankdep.nbankdep || '#39' '#39' AS refno, NULL, NULL, (0 - receipt.amount' +
-        ') AS amount, '#39'dep3'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '       AND TRUNC(receipt.system_date) >= :p_dateto AND TRUNC(ban' +
-        'kdep.deposit_date) <= :p_dateto AND TRUNC(bankdep.recondate) > :' +
-        'p_dateto'
-      '       AND bankdep.bankrec_saved = '#39'N'#39
-      '  UNION ALL'
-      
-        '  --- deposited receipts - keyed in the period, deposited after ' +
-        'the period, reconciled in the period, not ticked in bank rec (in' +
-        'crease Balance)'
-      
-        '  SELECT '#39'DEPOSITUN'#39' AS grp, bankdep.recondate, NULL, bankdep.nb' +
-        'ankdep || '#39' '#39' AS refno, NULL, NULL,(0 - receipt.amount) AS amoun' +
-        't, '#39'dep4'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '      AND TRUNC(receipt.system_date) <= :p_dateto AND TRUNC(bank' +
-        'dep.deposit_date) > :p_dateto'
-      
-        '      AND TRUNC(bankdep.recondate) <= :p_dateto AND bankdep.bank' +
-        'rec_saved = '#39'N'#39
-      '  UNION ALL'
-      
-        '  --- deposited receipts - keyed after the period, deposited in ' +
-        'the period, ticked in bank rec (increase balance)'
-      
-        '  SELECT DISTINCT '#39'DEPOSIT1'#39' AS grp, bankdep.deposit_date, recei' +
-        'pt.descr, bankdep.nbankdep || '#39' '#39' AS refno,  '
-      
-        '       receipt.TYPE, receipt.payor,(receipt.amount) AS amount, '#39 +
-        'dep7'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep '
-      
-        '       AND TRUNC(receipt.system_date) > :p_dateto AND (((:trusta' +
-        'soffice = '#39'N'#39') AND (TRUST = '#39'G'#39')) OR (:trustasoffice = '#39'Y'#39'))'
-      
-        '       AND TRUNC(bankdep.deposit_date) <= :p_dateto AND bankdep.' +
-        'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39' '
-      '  UNION ALL'
-      
-        '  --- deposited receipts - keyed in the period, deposited in the' +
-        ' period, ticked in bank rec (reduce balance)'
-      '  SELECT DISTINCT '#39'DEPOSIT1'#39' AS grp, bankdep.deposit_date,'
-      
-        '          receipt.descr, bankdep.nbankdep || '#39' '#39' AS refno, recei' +
-        'pt.TYPE, receipt.payor, (receipt.amount) AS amount, '#39'dep8'#39' AS su' +
-        'bx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '       AND TRUNC(receipt.system_date) <= :p_dateto -- missing eq' +
-        'ual sign'
-      
-        '       AND TRUNC(bankdep.deposit_date) <= :p_dateto AND bankdep.' +
-        'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39
-      '  UNION ALL'
-      
-        '/*  --- deposited receipts - deposited in period, reconciled aft' +
-        'er period'
-      
-        '  SELECT DISTINCT '#39'DEPOSIT2'#39' AS grp, bankdep.deposit_date,  rece' +
-        'ipt.descr, bankdep.nbankdep || '#39' '#39' AS refno,'
-      
-        '       receipt.TYPE, receipt.payor, (0 - receipt.amount) AS amou' +
-        'nt, '#39'dep9'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '       AND CASE WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39') ' +
-        'AND TRUNC(receipt.system_date) > :p_dateto'
-      '                                 --AND receipt.banked = '#39'N'#39
-      '                                ) THEN 1'
-      
-        '                WHEN ((:trust = '#39'T'#39')  AND (:trustasoffice = '#39'Y'#39')' +
-        ' AND TRUNC(receipt.created) > :p_dateto'
-      '                                 --AND receipt.banked = '#39'N'#39
-      '                                ) THEN 1'
-      '                END = 1'
-      
-        '--                    AND TRUNC (receipt.system_date) > :p_datet' +
-        'o'
-      
-        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND TRUNC(ban' +
-        'kdep.recondate) >= :p_dateto'
-      '      --AND (:trust = '#39'T'#39')'
-      '  UNION ALL */'
-      '  --- receipts - not banked - (reduce amount)'
       
         '  SELECT '#39'RECEIPT'#39' AS grp, receipt.created, receipt.descr, recei' +
         'pt.rcptno AS refno, receipt.TYPE, receipt.payor,'
-      '               --(0 - receipt.amount), '#39'rec1'#39' AS subx'
       '      (receipt.amount), '#39'rec1'#39' AS subx'
-      '  FROM receipt'
+      '  FROM receipt, bankdep'
       '  WHERE receipt.acct = :p_acct'
       
         '      AND CASE  WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Z'#39') ' +
@@ -3220,135 +3010,13 @@ object frmBankRec: TfrmBankRec
         ' <= :p_dateto AND receipt.banked = '#39'N'#39') THEN 1'
       '                ELSE 0'
       '          END = 1'
-      '  UNION ALL'
       
-        '/*        SELECT '#39'RECEIPT1'#39' AS grp, receipt.created, receipt.des' +
-        'cr,'
+        ' AND bankdep.acct = receipt.acct AND bankdep.nbankdep = receipt.' +
+        'nbankdep'
       
-        '               receipt.rcptno AS refno, receipt.TYPE, receipt.pa' +
-        'yor,'
-      
-        '               CASE WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'N'#39') AND (TRUNC(receipt.system_date) > :p_dateto AND recei' +
-        'pt.banked = '#39'Y'#39') THEN 0 - receipt.amount'
-      
-        '                    WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'N'#39') AND (TRUNC(receipt.system_date) = :p_dateto AND recei' +
-        'pt.banked = '#39'Y'#39') THEN receipt.amount'
-      
-        '                    WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'Y'#39') AND (TRUNC(receipt.created) > :p_dateto AND receipt.b' +
-        'anked = '#39'Y'#39') THEN 0 - receipt.amount'
-      
-        '                    WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'Y'#39') AND (TRUNC(receipt.created) = :p_dateto AND receipt.b' +
-        'anked = '#39'Y'#39') THEN receipt.amount'
-      
-        '                    WHEN ((:trust <> '#39'T'#39') AND TRUNC (receipt.cre' +
-        'ated) > :p_dateto) THEN 0 - receipt.amount'
-      '                    ELSE 0 - receipt.amount'
-      '               END AS amount,'
-      '               '#39'rec2'#39' AS subx'
-      '          FROM bankdep, receipt'
-      
-        '         WHERE receipt.acct = :p_acct AND TRUNC (receipt.created' +
-        ') <= :p_dateto'
-      
-        '           AND CASE WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'N'#39') '
-      
-        '                     AND (TRUNC(receipt.system_date) >= :p_datet' +
-        'o AND receipt.banked = '#39'Y'#39' AND receipt.bankrec_saved = '#39'N'#39') THEN' +
-        ' 1'
-      
-        '                    WHEN (:trust IN ('#39'T'#39', '#39'I'#39')) AND (:trustasoff' +
-        'ice = '#39'Y'#39')'
-      
-        '                     AND (TRUNC(receipt.created) >= :p_dateto AN' +
-        'D receipt.banked = '#39'Y'#39' AND receipt.bankrec_saved = '#39'N'#39') THEN 1'
-      '                  ELSE 0'
-      '               END = 1'
-      '           AND bankdep.bankrec_saved = '#39'N'#39
-      
-        '           AND ((bankdep.recondate IS NULL) OR (bankdep.deposit_' +
-        'date IS NULL) OR (TRUNC (bankdep.deposit_date) > :p_dateto))'
-      '           AND receipt.nbankdep = bankdep.nbankdep(+)'
-      '           AND bankdep.acct = receipt.acct'
-      '        UNION ALL */'
-      
-        '   --- TRUST deposited receipts - keyed receipt after period, no' +
-        't deposited or deposited in period (bit funny)'
-      
-        '   SELECT '#39'RECEIPT1'#39' AS grp, receipt.created, receipt.descr, rec' +
-        'eipt.rcptno AS refno, receipt.TYPE, receipt.payor,(receipt.amoun' +
-        't) AS amount, '#39'rec3'#39' AS subx'
-      '   FROM bankdep, receipt'
-      
-        '   WHERE receipt.acct = :p_acct AND receipt.nbankdep = bankdep.n' +
-        'bankdep  AND bankdep.acct = receipt.acct'
-      '       AND TRUNC(receipt.system_date) > :p_dateto'
-      
-        '       AND (:trust = '#39'T'#39') AND (bankdep.deposit_date IS NULL OR (' +
-        'TRUNC(bankdep.deposit_date) <= :p_dateto)) '
-      
-        '       AND BANKDEP.RECONDATE is null and bankdep.bankrec_saved =' +
-        ' '#39'N'#39' AND :trustasoffice = '#39'N'#39
-      '       --AND CASE WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'N'#39')'
-      
-        '       --           AND (bankdep.deposit_date IS NULL OR ((TRUNC' +
-        '(bankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.system_da' +
-        'te) > :p_dateto)) THEN 1'
-      
-        '       --         WHEN (:trust = '#39'T'#39') AND (:trustasoffice = '#39'Y'#39')' +
-        ' '
-      
-        '       --             AND (bankdep.deposit_date IS NULL OR ((TRU' +
-        'NC(bankdep.deposit_date) <= :p_dateto) AND TRUNC(bankdep.deposit' +
-        '_date) > :p_dateto)) THEN 1'
-      '       --    END = 1'
-      '  UNION ALL '
-      
-        '  ----  any deposits which have been ticked but not reconciled f' +
-        'or trust created in the period'
-      
-        '  SELECT DISTINCT '#39'RECEIPT2'#39' AS grp, bankdep.deposit_date, recei' +
-        'pt.descr, bankdep.nbankdep || '#39' '#39' AS refno,'
-      
-        '                        receipt.TYPE, receipt.payor, (0 - receip' +
-        't.amount) AS amount, '#39'rec4'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '      AND CASE WHEN (:trustasoffice = '#39'N'#39') AND TRUNC(receipt.sys' +
-        'tem_date) <= :p_dateto THEN 1'
-      
-        '               WHEN (:trustasoffice = '#39'Y'#39') AND TRUNC(receipt.cre' +
-        'ated) <= :p_dateto THEN 1'
-      '               END = 1'
-      
-        '      AND TRUNC (bankdep.deposit_date) <= :p_dateto AND bankdep.' +
-        'recondate IS NULL AND bankdep.bankrec_saved = '#39'Y'#39' AND (:trust = ' +
-        #39'T'#39')'
-      '  UNION ALL'
-      
-        '  ----  any deposits which have been ticked but not reconciled f' +
-        'or office'
-      
-        '  SELECT DISTINCT '#39'RECEIPT2'#39' AS grp, bankdep.deposit_date, recei' +
-        'pt.descr, bankdep.nbankdep || '#39' '#39' AS refno,'
-      
-        '          receipt.TYPE, receipt.payor, (0 - receipt.amount) AS a' +
-        'mount, '#39'rec5'#39' AS subx'
-      '  FROM bankdep, receipt'
-      
-        '  WHERE bankdep.acct = :p_acct AND bankdep.acct = receipt.acct A' +
-        'ND bankdep.nbankdep = receipt.nbankdep'
-      
-        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND (:trust <' +
-        '> '#39'T'#39') AND bankdep.recondate IS NULL AND bankdep.bankrec_saved =' +
-        ' '#39'Y'#39
+        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND (bankdep.' +
+        'recondate IS NULL or bankdep.recondate > :p_dateto) AND bankdep.' +
+        'bankrec_saved = '#39'N'#39
       '  UNION ALL'
       '  ---  any unprocessed receipt requisitions'
       
@@ -3359,7 +3027,34 @@ object frmBankRec: TfrmBankRec
       
         '  WHERE TRUNC(exp_date) <= :p_dateto AND nreceipt IS NULL  AND b' +
         'ankrec_saved = '#39'Y'#39
-      ' )'
+      'UNION ALL'
+      '  --- receipts - not banked - (reduce amount)'
+      
+        '  SELECT '#39'RECEIPT'#39' AS grp, receipt.created, receipt.descr, recei' +
+        'pt.rcptno AS refno, receipt.TYPE, receipt.payor,'
+      '      (receipt.amount), '#39'rec1'#39' AS subx'
+      '  FROM receipt, bankdep'
+      '  WHERE receipt.acct = :p_acct'
+      
+        '      AND CASE  WHEN ((:trust = '#39'T'#39') AND (:trustasoffice = '#39'Z'#39') ' +
+        'AND TRUNC(receipt.system_date) <= :p_dateto AND receipt.banked =' +
+        ' '#39'N'#39') THEN 1'
+      
+        '                WHEN ((:trust = '#39'T'#39') AND (:trustasoffice <> '#39'Z'#39')' +
+        ' AND TRUNC(receipt.created) <= :p_dateto AND receipt.banked = '#39'N' +
+        #39') THEN 1'
+      
+        '                WHEN ((:trust <> '#39'T'#39') AND TRUNC(receipt.created)' +
+        ' <= :p_dateto AND receipt.banked = '#39'N'#39') THEN 1'
+      '                ELSE 0'
+      '          END = 1'
+      
+        ' AND bankdep.acct = receipt.acct AND bankdep.nbankdep = receipt.' +
+        'nbankdep'
+      
+        '      AND TRUNC(bankdep.deposit_date) <= :p_dateto AND bankdep.b' +
+        'ankrec_saved = '#39'Y'#39
+      ')'
       ''
       ''
       ''
