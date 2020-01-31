@@ -5936,12 +5936,12 @@ begin
            qryAlloc.SQL.Clear;
            if iNewNjournal <> 0 then
            begin
-              qryAlloc.SQL.Add('update alloc set billed = ''Y'', private = ''Y'', N_WOFF = NULL where nalloc = :nalloc');
+              qryAlloc.SQL.Add('update alloc set billed = ''Y'', private = ''Y'', N_WOFF = NULL, disb_nalloc_receipt = null where nalloc = :nalloc');
               qryAlloc.ParamByName('NALLOC').AsInteger:= qryOldAlloc.FieldByName('NALLOC').AsInteger;
            end
            ELSE
            begin
-              qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'' where nalloc = :nalloc');
+              qryAlloc.SQL.Add('update alloc set rv_nalloc = :rv_nalloc , billed = ''Y'', private = ''Y'', disb_nalloc_receipt = null where nalloc = :nalloc');
               qryAlloc.ParamByName('NALLOC').AsString:= qryOldAlloc.FieldByName('NALLOC').AsString;
               qryAlloc.ParamByName('RV_NALLOC').AsString:= ParamByName('NALLOC').AsString;
            end;
@@ -7685,13 +7685,13 @@ end;
 
 function SystemFloat(sField: string): double;
 begin
-  with dmAxiom.qrySysfile do
-  begin
-    SQL.Text := 'SELECT ' + sField + ' FROM SYSTEMFILE';
-    Open;
-    SystemFloat := FieldByName(sField).AsFloat;
-    Close;
-  end;
+   with dmAxiom.qrySysfile do
+   begin
+      SQL.Text := 'SELECT ' + sField + ' FROM SYSTEMFILE';
+      Open;
+      SystemFloat := FieldByName(sField).AsFloat;
+      Close;
+   end;
 end;
 
 function SystemVal(Field: string): boolean;
@@ -7701,19 +7701,19 @@ end;
 
 function TableInteger(Table, LookupField, LookupValue, ReturnField: string): integer; overload;
 var
-  qryLookup: TUniQuery;
+   qryLookup: TUniQuery;
 begin
-  qryLookup := TUniQuery.Create(nil);
-  qryLookup.Connection := dmAxiom.uniInsight;
-  with qryLookup do
-  begin
-    SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :' + LookupField;
-    Params[0].AsString := LookupValue;
-    Open;
-    Result := Fields[0].AsInteger;
-    Close;
-  end;
-  qryLookup.Free;
+   qryLookup := TUniQuery.Create(nil);
+   qryLookup.Connection := dmAxiom.uniInsight;
+   with qryLookup do
+   begin
+      SQL.Text := 'SELECT ' + ReturnField + ' FROM ' + Table + ' WHERE ' + LookupField + ' = :' + LookupField;
+      Params[0].AsString := LookupValue;
+      Open;
+      Result := Fields[0].AsInteger;
+      Close;
+   end;
+   qryLookup.Free;
 end;
 
 function TableIntegerx(Table, LookupField, LookupValue, ExtraWhere, ReturnField: string): integer; overload;
