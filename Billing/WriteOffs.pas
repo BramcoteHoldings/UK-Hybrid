@@ -384,8 +384,8 @@ begin
                  // part 1 - process the Fee/Sundry adjustment together as ONE JOURNAL as these are type J1
                  //rb if (neFees.AsCurrency <> 0) and (neSund.AsCurrency <> 0) then
                    if (neFees.AsCurrency <> 0) or (neSund.AsCurrency <> 0) or (neFeesTax.AsCurrency <> 0) or (neSundTax.AsCurrency <> 0) then
-                 begin
-                    iNJournal := CreateJournal(cnTYP_DEBTOR, '', (neFees.AsCurrency + neSund.AsCurrency), (neFeesTax.AsCurrency + neSundTax.AsCurrency), beBillNo.Text, FNMemo, lsTaxCode);
+                  begin
+                     iNJournal := CreateJournal(cnTYP_DEBTOR, '', (neFees.AsCurrency + neSund.AsCurrency), (neFeesTax.AsCurrency + neSundTax.AsCurrency), beBillNo.Text, FNMemo, lsTaxCode);
 //                     MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DEBTORS', 0 - (neFees.AsCurrency + neDisb.AsCurrency + neAntD.AsCurrency + neSund.AsCurrency + neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency));
 
                     if (neFees.AsCurrency <> 0 ) or (neFeesTax.AsCurrency <> 0 ) then
@@ -442,7 +442,7 @@ begin
                               if (neFees.AsCurrency > 0) then
                                  tmpFeeDiff := (tmpFeeDiff * -1)
                               else
-                                 tmpFeeDiff := tmpFeeDiff;  
+                                 tmpFeeDiff := tmpFeeDiff;
                               with dmAxiom.qryTmp do
                               begin
                                  Close;
@@ -492,7 +492,7 @@ begin
                         if (neFees.AsCurrency <> 0) then
                         begin
                            if cbNoDistribute.Checked then
-                          begin
+                           begin
                               try
                                  FeeDistAmt := (neFees.AsCurrency);
                                  qryFeeDistInsert.ParamByName('nmemo').AsInteger         := FNMemo;
@@ -506,9 +506,9 @@ begin
                               finally
                                  qryFeeDistInsert.Close;
                               end;
-                          end
-                          else
-                          begin
+                           end
+                           else
+                           begin
                            // saving WRITE OFF amount against original distribution.
                               qryFeeDist.Close;
                               qryFeeDist.ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
@@ -538,7 +538,7 @@ begin
                               end;
                               qryFeeDist.Close;
                               qryFeeDistInsert.Close;
-                          end;
+                           end;
                         end;
                      end;
 
@@ -592,13 +592,13 @@ begin
                      end;
                      //if (neFeesTax.AsCurrency + neDisbTax.AsCurrency + neAntDTax.AsCurrency + neSundTax.AsCurrency) = 0 then
                        //PostLedgers(dtpCreated.Date, (neFeesTax.AsCurrency+neDisbTax.AsCurrency+neAntDTax.AsCurrency+neSundTax.AsCurrency), qryMatter.FieldByName('FILEID').AsString, 'JOURNAL', iNJournal, mmoDesc.Lines.Text, TableString('TAXTYPE', 'CODE', 'GST', 'ADJUSTLEDGER'), TableString('ENTITY', 'CODE', dmAxiom.Entity, 'WOFF_FEE_CR'), cbAuthor.Text);
-                 end; //part 1
+                  end; //part 1
 
                  // part 2 - process the Disbursements/Anticipated Disbs aka Cheque Reqs and Unpaid Creditors together as these are type J2
-                 if (neDisb.AsCurrency <> 0) or (neAntd.AsCurrency <> 0) or (neUpCred.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0) or (neAntdTax.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0) then
-                 begin
-                    if (neDisb.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0)  then
-                    begin   //rb
+                  if (neDisb.AsCurrency <> 0) or (neAntd.AsCurrency <> 0) or (neUpCred.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0) or (neAntdTax.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0) then
+                  begin
+                     if (neDisb.AsCurrency <> 0) or (neDisbTax.AsCurrency <> 0)  then
+                     begin   //rb
                          iNJournal := CreateJournal(cnTYP_DEBTOR, 'DISB', neDisb.AsCurrency, neDisbTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
                          MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'DISBSWOFF', neDisb.AsCurrency + neDisbTax.AsCurrency);
 
@@ -638,10 +638,10 @@ begin
                            ,0
                            , qryMatter.FieldByName('NMATTER').AsInteger);
                          // must create a journal + alloc here
-                        end;
+                     end;
 
                      if (neUpCred.AsCurrency <> 0) or (neUpCredTax.AsCurrency <> 0)  then
-                       begin
+                     begin
                          iNJournal := CreateJournal(cnTYP_DEBTOR, 'UPCRED', neUpCred.AsCurrency, neUpCredTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
                          MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'UPCREDWOFF', neUpCred.AsCurrency + neUpCredTax.AsCurrency);
 
@@ -674,10 +674,10 @@ begin
                            ,0
                            , qryMatter.FieldByName('NMATTER').AsInteger);
                          // must create a journal + alloc here
-                        end;
+                     end;
 
                      if (neAntD.AsCurrency <> 0) or (neAntDTax.AsCurrency <> 0) then
-                       begin
+                     begin
                          // rb
                          iNJournal := CreateJournal(cnTYP_DEBTOR, 'ANTD', neAntd.AsCurrency, neAntdTax.AsCurrency, beBillNo.Text, FNMemo, lsTaxCode);
                          MatterUpdate(qryMatter.FieldByName('NMATTER').AsInteger, 'CREQWOFF', neAntd.AsCurrency + neAntdTax.AsCurrency);
@@ -737,7 +737,7 @@ begin
                              ExecSQL;
                            end;
                          PostCheqReqTrans(neTotalAntDisbs.AsCurrency, fiNAlloc, fiNCheqReq);
-                       end;
+                     end;
                   end; //part 2
                end;
 
@@ -834,7 +834,7 @@ begin
       ParamByName('TAX').AsFloat := dTax;
       // 20 Dec 2017 DW Tax code passed as a parameter
       //if ParamByName('TAX').AsFloat <> 0 then
-        ParamByName('TAXCODE').AsString := 'GST';
+        ParamByName('TAXCODE').AsString := sTaxCode;
       //else
       //  ParamByName('TAXCODE').AsString := 'NOTAX';
       if sType = cnTYP_DEBTOR then  // debtors adjustment
@@ -1140,7 +1140,6 @@ begin
     lblClient.Caption := '';
     lblMatterDesc.Caption := '';
   end;
-
 end;
 
 procedure TfrmWriteOff.DisplaySubBill(iNSubBill : integer);

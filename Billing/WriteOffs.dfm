@@ -90,7 +90,7 @@ object frmWriteOff: TfrmWriteOff
       ShowAccelChar = False
     end
     object Label10: TLabel
-      Left = 119
+      Left = 117
       Top = 102
       Width = 52
       Height = 15
@@ -105,7 +105,7 @@ object frmWriteOff: TfrmWriteOff
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 178
+      Left = 176
       Top = 102
       Width = 61
       Height = 15
@@ -120,7 +120,7 @@ object frmWriteOff: TfrmWriteOff
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 332
+      Left = 330
       Top = 102
       Width = 95
       Height = 15
@@ -135,7 +135,7 @@ object frmWriteOff: TfrmWriteOff
       ParentFont = False
     end
     object Label15: TLabel
-      Left = 434
+      Left = 432
       Top = 102
       Width = 91
       Height = 15
@@ -157,7 +157,7 @@ object frmWriteOff: TfrmWriteOff
       AutoSize = False
     end
     object Label16: TLabel
-      Left = 246
+      Left = 244
       Top = 102
       Width = 79
       Height = 15
@@ -917,7 +917,7 @@ object frmWriteOff: TfrmWriteOff
       Left = 107
       Top = 288
       AutoSize = False
-      EditValue = 43766.7369853472d
+      EditValue = 43858.7020250232d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -1055,11 +1055,11 @@ object frmWriteOff: TfrmWriteOff
     object dxLayoutItem5: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
       AlignHorz = ahLeft
-      CaptionOptions.Text = 'Subbill'
       SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
       SizeOptions.SizableHorz = True
       SizeOptions.SizableVert = False
       SizeOptions.Width = 237
+      CaptionOptions.Text = 'Subbill'
       Control = cxDBLSubBill
       ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 142
@@ -1580,7 +1580,7 @@ object frmWriteOff: TfrmWriteOff
       CaptionOptions.Visible = False
       Control = chkBadDebtWO
       ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 100
+      ControlOptions.OriginalWidth = 98
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -2189,7 +2189,7 @@ object frmWriteOff: TfrmWriteOff
       FloatClientHeight = 44
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = []
       ItemLinks = <
