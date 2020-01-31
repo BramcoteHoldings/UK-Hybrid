@@ -1,5 +1,15 @@
 Insight Build 9.2.0
 
+Build 60
+========
+- Fix to Bill Write-Off program to use the taxcode originally used during the bill posting.
+- Fixed issue with Disbursement Receipts duplicating when printing Matter Disbursement Ledger
+- Change to the way Adjustments are calculated in Bank Rec screen.
+- Changed name of desbursement ledger card export report to be 'DisbursementLedger.PDF'
+- Change to the way Clients/Contacts are opened in the Conflict Search screen.
+- Fix to Matter Notes saving when lenght of text exceeded 1333 characters.
+- Fixed issue with Fee Enquiry tab label changing under certain circumstances whem searching for A Client.
+
 Build 58 - 59
 =============
 - Saving original bill no when doing a cheque re-issue for a billed cheque
@@ -10,19 +20,16 @@ Build 58 - 59
 - Trust Cheque Requisition screen now shows the Net Available Trust amount.
 - Cheqreq colour description
 	At the start all lines are set to the colour Black
-	If Held = ‘W’  or Can Pay = ‘N’ or Trust Pay = ‘N’ then the colour will be Blue
+	If Held = 'W'  or Can Pay = 'N' or Trust Pay = 'N' then the colour will be Blue
 	Otherwise
-	If Held = ‘N’ (Not Held) and Can Pay = ‘Y’ and Trust Pay = ‘Y’ Converted = ‘N’ then the colour will be Green
+	If Held = 'N' (Not Held) and Can Pay = 'Y' and Trust Pay = 'Y' Converted = 'N' then the colour will be Green
 	Otherwise
-	If Held = ‘Y’ then the colour will be Fuchsia
+	If Held = 'Y' then the colour will be Fuchsia
 	Otherwise 
-	(If Converted = ‘R’ (Reversed) or Converted = ‘Y’ or it has been billed and Converted = ‘Y’) 
+	(If Converted = 'R' (Reversed) or Converted = 'Y' or it has been billed and Converted = 'Y') 
 	or if the Cheque Requisition has been reversed then the colour will be Red
-
-	Can Pay = If it is a Trust requisition and the amount owing on the bill it is paying is less than the Cheque Requisition then Can Pay = ‘N’ otherwise Can Pay = ‘Y’
-
-	TPay = If it is a Trust requisition and the Cheque Requisition Amount + Tax is greater than the available Trust Funds then Trust Pay = ‘N’ otherwise Trust Pay =  ‘Y’
-
+	Can Pay = If it is a Trust requisition and the amount owing on the bill it is paying is less than the Cheque Requisition then Can Pay = 'N' otherwise Can Pay = 'Y'
+	TPay = If it is a Trust requisition and the Cheque Requisition Amount + Tax is greater than the available Trust Funds then Trust Pay = 'N' otherwise Trust Pay = 'Y'
 
 Build 57
 ========
