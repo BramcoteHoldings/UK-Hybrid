@@ -57,6 +57,8 @@ type
     tdbEGSeparator: TDBEdit;
     dbrgMatterCode: TcxDBRadioGroup;
     dbchkCreditorAcronym: TcxDBCheckBox;
+    Label11: TLabel;
+    DBEdit4: TDBEdit;
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
