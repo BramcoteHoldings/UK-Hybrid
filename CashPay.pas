@@ -555,14 +555,20 @@ begin
           ' then AMOUNT '+
           ' else 0.00 ' +
           ' end end PresentAmount, C.*, C.ROWID FROM CHEQUE C WHERE '+
-          ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto ) THEN 1 ' +
-          '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto ) THEN 1 ' +
+          ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
+          '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
           '      WHEN (NVL(:trust, ''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
           ' ELSE 0 '+
           ' END = 1 ';
 //          C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo ';
 //      sSQLTotal := 'SELECT SUM(C.AMOUNT) AS AMT, COUNT(C.AMOUNT) AS CNT FROM CHEQUE C WHERE C.PRESENTED >= :P_DateFrom AND C.PRESENTED < :P_DateTo';
-      sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE C.PRESENTED >= :P_DateFrom AND c.PRESENTED < :p_dateto ';
+      sSQLTotal1 := 'select amt, cnt, tax from (SELECT SUM (c.amount) AS amt, COUNT (c.amount) AS cnt FROM cheque c WHERE '+
+                    ' CASE WHEN ((:trust = ''T'') AND (:trustasoffice = ''N'') AND (TRUNC(system_date) >= :p_datefrom and TRUNC(system_date) < :p_dateto )) THEN 1 ' +
+                    '      WHEN ((:trust = ''T'') AND (:trustasoffice = ''Y'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )) THEN 1 ' +
+                    '      WHEN (NVL(:trust,''G'') <> ''T'') AND (TRUNC(created) >= :p_datefrom and TRUNC(created) < :p_dateto )  THEN 1 ' +
+                    ' ELSE 0 '+
+                    ' END = 1 ';
+//                    ' AND C.PRESENTED >= :P_DateFrom AND c.PRESENTED < :p_dateto ';
       sSQLTotal2 := '), (select sum(amount) * -1 as tax from transitem t, chart c where T.CHART = C.CODE and C.CHARTTYPE = ''GSTINP'' and owner_code = ''CHEQUE'' and ncheque in (SELECT ncheque '+
                    ' FROM cheque c WHERE trunc(C.PRESENTED) >= :P_DateFrom AND trunc(c.PRESENTED) < :p_dateto ';
 //      QRDBText1.DataField := 'CREATED';
