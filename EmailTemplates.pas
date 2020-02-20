@@ -65,7 +65,8 @@ implementation
 {$R *.dfm}
 
 uses
-   AxiomData, EmailTemplateAddEdit, EmailTemplateRichEdit, GenEditor;
+   AxiomData, EmailTemplateAddEdit, EmailTemplateRichEdit, GenEditor,
+   MiscFunc;
 
 procedure TfrmEmailTemplates.barbtnEditTemplateClick(Sender: TObject);
 var
@@ -122,6 +123,7 @@ begin
         dmAxiom.uniInsight.Commit;
         qryEmailTemplate.Close;
     end;
+    RemoveFromDesktop(Self);
 end;
 
 procedure TfrmEmailTemplates.FormCreate(Sender: TObject);
