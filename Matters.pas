@@ -24,7 +24,7 @@ uses
   dxPScxExtEditorProducers, IPPeerClient, dxGDIPlusClasses, ppCtrls,
   cxSchedulercxGridConnection, cxSchedulerDBStorage,
   cxImageList, Data.Bind.Components, Data.Bind.ObjectScope, DAScript, UniScript,
-  Uni, DBAccess, uRwMAPIMsgStoreEvents, uRwMAPIFormManager, JvBaseDlg,
+  Uni, DBAccess, uRwMAPIFormManager, JvBaseDlg,
   JvSelectDirectory, dxPSGraphicLnk, dxPSTCLnk, dxDockControl, dxBar,
   dxBarDBNav, cxBarEditItem, cxClasses, dxPSCore, dxPScxCommon, Vcl.Dialogs,
   ppMemo, ppStrtch, ppRegion, MemDS, ppRichTx, raCodMod, ppModule, ppParameter,
@@ -386,7 +386,6 @@ type
     FormMgr: TRwMAPIFormManager;
     ppDesignLayers5: TppDesignLayers;
     ppDesignLayer5: TppDesignLayer;
-    RwMAPIMsgStoreEvents1: TRwMAPIMsgStoreEvents;
     lblNoEstDisbs: TLabel;
     progBarDisbTotal: TcxProgressBar;
     tmrAutocost: TTimer;
@@ -12127,10 +12126,9 @@ begin
 
       with qryTmp do
       begin
-         SQL.Text := 'update matternotes set note = :note where nmatter = :nmatter and sequence = :sequence';
+         SQL.Text := 'update matternotes set note = ' + quotedstr(lsNotes) + ' where nmatter = :nmatter and sequence = :sequence';
          ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
          ParamByName('sequence').AsInteger := frmMatterNotesAdd.qryMatterNotes.FieldByName('sequence').AsInteger;
-         ParamByName('note').AsString := lsNotes;
          ExecSQL;
       end;
 {
@@ -12234,10 +12232,9 @@ begin
 
          with qryTmp do
          begin
-            SQL.Text := 'update matternotes set note = :note where nmatter = :nmatter and sequence = :sequence';
+            SQL.Text := 'update matternotes set note = '+ quotedstr(lsNotes) +'where nmatter = :nmatter and sequence = :sequence';
             ParamByName('nmatter').AsInteger := qryMatter.FieldByName('NMATTER').AsInteger;
             ParamByName('sequence').AsInteger := frmMatterNotesAdd.qryMatterNotes.FieldByName('sequence').AsInteger;
-            ParamByName('note').AsString := lsNotes;
             ExecSQL;
          end;
       end;
@@ -13926,8 +13923,8 @@ begin
                        FieldByName('IMAGEINDEX').AsInteger := 7;
                        Post;
                        close;
-                       blobF.Free;
-                       bs.Free;
+//                       FreeAndNil(blobF);
+//                       FreeAndNil(bs);
                     end;
                   end;
                end;
@@ -13936,7 +13933,7 @@ begin
             end;
          end
          else
-            MsgInfo('Mobile Number not setup.');
+            MsgInfo('Client Mobile Number not setup.');
       end
       else
          MsgInfo('SMS not setup.');

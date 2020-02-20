@@ -13,6 +13,7 @@ object frmGenEditor: TfrmGenEditor
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -50,18 +51,11 @@ object frmGenEditor: TfrmGenEditor
     Align = alClient
     DataBinding.DataField = 'NOTES'
     DataBinding.DataSource = dsMatterNotes
-    ParentFont = False
-    Properties.MaxLength = 4000
-    Properties.ScrollBars = ssVertical
-    Properties.SelectionBar = True
-    Properties.OnChange = EditorPropertiesChange
-    Style.Font.Charset = DEFAULT_CHARSET
-    Style.Font.Color = clWindowText
-    Style.Font.Height = -13
-    Style.Font.Name = 'Arial'
-    Style.Font.Style = []
-    Style.IsFontAssigned = True
     TabOrder = 5
+    ExplicitLeft = 405
+    ExplicitTop = 138
+    ExplicitWidth = 185
+    ExplicitHeight = 89
     Height = 428
     Width = 766
   end
@@ -302,15 +296,10 @@ object frmGenEditor: TfrmGenEditor
       LargeImageIndex = 35
     end
     object dxBarButtonSave: TdxBarLargeButton
-      Caption = '&Save'
+      Action = actSave
       Category = 0
       Enabled = False
-      Hint = 'Save'
-      Visible = ivAlways
-      ShortCut = 16467
-      OnClick = dxBarButtonSaveClick
       HotImageIndex = 5
-      LargeImageIndex = 5
       ShowCaption = False
     end
     object dxBarButtonSaveAs: TdxBarLargeButton
@@ -5663,7 +5652,7 @@ object frmGenEditor: TfrmGenEditor
   object qryMatterNotes: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select matter.notes, matter.rowid '
+      'select matter.notes, matter.nmatter, matter.rowid '
       'from '
       ' matter '
       'where'
@@ -5686,7 +5675,7 @@ object frmGenEditor: TfrmGenEditor
   object qryBillNotes: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select nmemo.inv_note as notes, nmemo.rowid '
+      'select nmemo.inv_note as notes, nmemo.nmemo, nmemo.rowid '
       'from '
       ' nmemo'
       'where'
@@ -5704,7 +5693,9 @@ object frmGenEditor: TfrmGenEditor
   object qryEmailNote: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'select EMAIL_TEMPLATES.RICHTEXT as notes, EMAIL_TEMPLATES.rowid '
+      
+        'select EMAIL_TEMPLATES.RICHTEXT as notes, EMAIL_TEMPLATES.ID,  E' +
+        'MAIL_TEMPLATES.rowid '
       'from '
       ' EMAIL_TEMPLATES'
       'where'
@@ -5718,5 +5709,25 @@ object frmGenEditor: TfrmGenEditor
         Name = 'ID'
         Value = nil
       end>
+  end
+  object qryTmp: TUniQuery
+    Connection = dmAxiom.uniInsight
+    Left = 560
+    Top = 88
+  end
+  object ActionManager1: TActionManager
+    DisabledImages = ilDisabledImages
+    LargeImages = Images
+    Images = Images
+    Left = 624
+    Top = 168
+    StyleName = 'Platform Default'
+    object actSave: TAction
+      Caption = '&Save'
+      Hint = 'Save Notes'
+      ImageIndex = 5
+      OnExecute = dxBarButtonSaveClick
+      OnUpdate = actSaveUpdate
+    end
   end
 end
