@@ -284,6 +284,7 @@ object frmConflictSearch: TfrmConflictSearch
         TabOrder = 1
         object vConflicts: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellDblClick = vConflictsCellDblClick
           OnEditDblClick = vConflictsEditDblClick
           DataController.DataSource = dsConflicts
@@ -388,6 +389,7 @@ object frmConflictSearch: TfrmConflictSearch
         end
         object vtMatterList: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellDblClick = vtMatterListCellDblClick
           DataController.DataSource = dsMatterList
           DataController.DetailKeyFieldNames = 'NCLIENT'
@@ -498,7 +500,7 @@ object frmConflictSearch: TfrmConflictSearch
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
-        Width = 74
+        Width = 72
       end
       object edtClientSearch: TEdit
         Left = 40
@@ -3196,7 +3198,7 @@ object frmConflictSearch: TfrmConflictSearch
     XLSSettings.WorksheetName = 'Report'
     Left = 299
     Top = 260
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plConflicts'
     object ppHeaderBand1: TppHeaderBand

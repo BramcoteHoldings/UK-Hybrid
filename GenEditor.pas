@@ -8,7 +8,8 @@ uses
   cxDBRichEdit, cxControls, dxStatusBar, ImgList, ActnList, dxBar,
   dxBarExtItems, DB, OracleUniProvider, Uni, DBAccess, MemDS, ComCtrls,
   cxLookAndFeels, cxLookAndFeelPainters, cxClasses, System.Actions,
-  cxRichEditUtils, cxMemo, cxRichEdit;
+  cxRichEditUtils, cxMemo, cxRichEdit, System.ImageList,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
 
 type
   TfrmGenEditor = class(TForm)
@@ -74,10 +75,13 @@ type
     FindDialog: TFindDialog;
     ReplaceDialog: TReplaceDialog;
     qryMatterNotes: TUniQuery;
-    Editor: TcxDBRichEdit;
     dsMatterNotes: TUniDataSource;
     qryBillNotes: TUniQuery;
     qryEmailNote: TUniQuery;
+    qryTmp: TUniQuery;
+    ActionManager1: TActionManager;
+    actSave: TAction;
+    Editor: TcxDBRichEdit;
     procedure dxBarButtonBoldClick(Sender: TObject);
     procedure dxBarButtonItalicClick(Sender: TObject);
     procedure dxBarButtonUnderlineClick(Sender: TObject);
@@ -100,11 +104,17 @@ type
     procedure dxBarButtonSelectAllClick(Sender: TObject);
     procedure dxBarButtonClearClick(Sender: TObject);
     procedure dxBarButtonBulletsClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure actSaveUpdate(Sender: TObject);
   private
     { Private declarations }
     FEditorValue: TMemoryStream;
     FileName: string;
     FUpdating: Boolean;
+
+    FBillNotes: boolean;
+    FEmailtemplate: boolean;
+    FMatterNotes: boolean;
   public
     { Public declarations }
     procedure FindDialogFind(Sender: TObject);
@@ -123,6 +133,9 @@ implementation
 
 {$R *.dfm}
 
+uses
+   AxiomData;
+
 
 procedure TfrmGenEditor.dxBarButtonBoldClick(Sender: TObject);
 begin
@@ -131,6 +144,8 @@ begin
       Style := Style + [fsBold]
     else
       Style := Style - [fsBold];
+
+   Editor.ModifiedAfterEnter := True;
 end;
 
 procedure TfrmGenEditor.dxBarButtonBulletsClick(Sender: TObject);
@@ -188,20 +203,30 @@ begin
 end;
 
 procedure TfrmGenEditor.dxBarButtonSaveClick(Sender: TObject);
+var
+   sTmpStr: PChar;
 begin
-   if qryMatterNotes.Active then
+   if (FMatterNotes = True) then
    begin
-    if qryMatterNotes.State = dsBrowse then
-      qryMatterNotes.Edit;
+      if qryMatterNotes.State = dsBrowse then
+         qryMatterNotes.Edit;
 
-    if qryMatterNotes.State = dsEdit then
-    begin
+      if qryMatterNotes.State = dsEdit then
+      begin
 //      qryMatterNotes.FieldByName('NOTES').AsString := Editor.;
-      qryMatterNotes.Post;
-      qryMatterNotes.ApplyUpdates;
-    end;
+         qryMatterNotes.Post;
+         qryMatterNotes.ApplyUpdates;
+
+
+{         with qryTmp do
+         begin
+            SQL.Text := 'update matter set notes = ' + quotedstr(Editor.EditValue ) + ' where nmatter = :nmatter';
+            ParamByName('nmatter').AsInteger := qryMatterNotes.FieldByName('nmatter').AsInteger;
+            ExecSQL;
+         end;    }
+      end;
    end
-   else if qryBillNotes.Active then
+   else if (FBillNotes = True) then
    begin
       if qryBillNotes.State = dsBrowse then
          qryBillNotes.Edit;
@@ -212,9 +237,16 @@ begin
 
          qryBillNotes.Post;
          qryBillNotes.ApplyUpdates;
+
+ {        with qryTmp do
+         begin
+            SQL.Text := 'update nmemo set inv_note = ' + quotedstr(Editor.EditValue) + ' where nmemo = :nmemo';
+            ParamByName('nmemo').AsInteger := qryBillNotes.FieldByName('nmemo').AsInteger;
+            ExecSQL;
+         end;    }
       end;
    end
-   else
+   else if (FEmailtemplate = True) then
    begin
       if qryEmailNote.State = dsBrowse then
          qryEmailNote.Edit;
@@ -223,6 +255,13 @@ begin
       begin
          qryEmailNote.Post;
          qryEmailNote.ApplyUpdates;
+
+ {        with qryTmp do
+         begin
+            SQL.Text := 'update EMAIL_TEMPLATES set richtext = ' + quotedstr(Editor.EditValue) + ' where id = :id';
+            ParamByName('id').AsInteger := qryEmailNote.FieldByName('id').AsInteger;
+            ExecSQL;
+         end;   }
       end;
    end;
    ModalResult := mrOK;
@@ -258,6 +297,13 @@ begin
    TdxStatusBarTextPanelStyle(dxStatusBar.Panels[1].PanelStyle).ImageIndex := 0;
    TdxStatusBarTextPanelStyle(dxStatusBar.Panels[0].PanelStyle).ImageIndex := 2;
    dxBarButtonUndo.Enabled := SendMessage(Editor.Handle, EM_CANUNDO, 0, 0) <> 0;
+end;
+
+procedure TfrmGenEditor.FormCreate(Sender: TObject);
+begin
+   FBillNotes     := False;
+   FEmailtemplate:= False;
+   FMatterNotes  := False;
 end;
 
 procedure TfrmGenEditor.FormShow(Sender: TObject);
@@ -423,6 +469,7 @@ end;
 
 procedure TfrmGenEditor.DisplayMatterNotes(pNMatter: integer);
 begin
+   FMatterNotes := True;
    Self.Caption := 'Matter Notes';
    with qryMatterNotes do
    begin
@@ -431,14 +478,20 @@ begin
       ParamByName('NMATTER').AsInteger := pNMatter;
       Open;
       Edit;
-//      Editor.Text := FieldByName('NOTES').AsString;
+      Editor.Text := FieldByName('NOTES').AsString;
    end;
    Editor.EditModified := False;
    SetModified(False);
 end;
 
+procedure TfrmGenEditor.actSaveUpdate(Sender: TObject);
+begin
+   actSave.Enabled := Editor.EditModified;
+end;
+
 procedure TfrmGenEditor.DisplayBillNotes(pNMemo: integer);
 begin
+   FBillNotes := True;
    Self.Caption := 'Bill Notes';
    with qryBillNotes do
    begin
@@ -450,17 +503,17 @@ begin
          Edit;
 
 //         Editor.Properties.PlainText := False;
-//         Editor.Text := FieldByName('NOTES').AsString;
+         Editor.Text := FieldByName('NOTES').AsString;
       finally
          Editor.EditModified := False;
          SetModified(False);
       end;
-//    Editor.  Text := FieldByName('NOTES').AsString;
    end;
 end;
 
 procedure TfrmGenEditor.DisplayEmailNotes(pID: integer);
 begin
+   FEmailtemplate := True;
    Self.Caption := 'Email Template';
    with qryEmailNote do
    begin
@@ -471,13 +524,12 @@ begin
          Open;
          Edit;
 
-//         Editor.Properties.PlainText := False;
+         Editor.Properties.PlainText := False;
 //         Editor.Text := FieldByName('NOTES').AsString;
       finally
          Editor.EditModified := False;
          SetModified(False);
       end;
-//    Editor.  Text := FieldByName('NOTES').AsString;
    end;
 end;
 

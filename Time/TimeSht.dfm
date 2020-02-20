@@ -169,6 +169,7 @@ object frmTimeSheet: TfrmTimeSheet
         OnKeyDown = tvFeeTmpKeyDown
         OnMouseDown = tvFeeTmpNewMouseDown
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnEditing = tvFeeTmpEditing
         OnEditKeyDown = tvFeeTmpEditKeyDown
         OnEditKeyPress = tvFeeTmpEditKeyPress
@@ -498,6 +499,7 @@ object frmTimeSheet: TfrmTimeSheet
       object tvFeeTmpNew: TcxGridDBTableView
         PopupMenu = popGrid
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCellClick = tvFeeTmpNewCellClick
         OnEditing = tvFeeTmpEditing
         OnEditKeyDown = tvFeeTmpNewEditKeyDown
@@ -559,7 +561,6 @@ object frmTimeSheet: TfrmTimeSheet
         object tvFeeTmpNewPROCESS: TcxGridDBColumn
           DataBinding.ValueType = 'Boolean'
           PropertiesClassName = 'TcxCheckBoxProperties'
-          Properties.NullStyle = nssUnchecked
           HeaderGlyph.SourceDPI = 96
           HeaderGlyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
@@ -600,6 +601,7 @@ object frmTimeSheet: TfrmTimeSheet
           MinWidth = 30
           Options.Filtering = False
           Options.AutoWidthSizable = False
+          Options.CellMerging = True
           Options.Grouping = False
           Options.SortByDisplayText = isbtOff
           Options.Sorting = False
@@ -3550,7 +3552,7 @@ object frmTimeSheet: TfrmTimeSheet
     XLSSettings.WorksheetName = 'Report'
     Left = 378
     Top = 390
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plFeeTmpRpt'
     object ppHeaderBand1: TppHeaderBand
@@ -4789,7 +4791,7 @@ object frmTimeSheet: TfrmTimeSheet
     XLSSettings.WorksheetName = 'Report'
     Left = 375
     Top = 540
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plTmpProcess'
     object ppHeaderBand2: TppHeaderBand

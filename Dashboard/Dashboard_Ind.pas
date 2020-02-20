@@ -26,7 +26,7 @@ uses
   Vcl.StdCtrls, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxGridChartView, cxGridDBChartView, cxGridCustomView, cxGrid,
   VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, VCLTee.DBChart,
-  cxLabel, cxDBLabel, Vcl.ExtCtrls, cxPC, DateUtils;
+  cxLabel, cxDBLabel, Vcl.ExtCtrls, cxPC, DateUtils, dxScrollbarAnnotations;
 
   const
    pnlDebtorsCaption = 'Debtors';

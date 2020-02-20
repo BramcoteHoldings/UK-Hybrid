@@ -377,9 +377,16 @@ object frmCodeRules: TfrmCodeRules
       object Label7: TLabel
         Left = 396
         Top = 85
-        Width = 67
+        Width = 68
         Height = 15
         Caption = 'Matter Prefix'
+      end
+      object Label11: TLabel
+        Left = 396
+        Top = 117
+        Width = 68
+        Height = 15
+        Caption = 'Matter Suffix'
       end
       object dbtbMatterPad: TDBEdit
         Left = 567
@@ -446,11 +453,24 @@ object frmCodeRules: TfrmCodeRules
           item
             Caption = 'Matter Number + Type'
             Value = 'M'
+          end
+          item
+            Caption = 'Matter Number + Suffix'
+            Value = 'S'
           end>
         TabOrder = 3
         Transparent = True
         Height = 284
         Width = 370
+      end
+      object DBEdit4: TDBEdit
+        Left = 567
+        Top = 113
+        Width = 44
+        Height = 23
+        DataField = 'MATTERSUFFIX'
+        DataSource = dsCodeRules
+        TabOrder = 4
       end
     end
   end
@@ -463,12 +483,13 @@ object frmCodeRules: TfrmCodeRules
       'FROM ENTITY E'
       'WHERE E.CODE = :Entity')
     CachedUpdates = True
+    Active = True
     Left = 363
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'Entity'
-        Value = nil
+        Value = Null
       end>
   end
   object dsCodeRules: TUniDataSource

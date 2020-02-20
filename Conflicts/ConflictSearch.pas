@@ -16,7 +16,8 @@ uses
   Vcl.ExtCtrls, System.ImageList, Vcl.ImgList, cxLabel, cxMaskEdit,
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, NumberEdit,
   cxGroupBox, cxRadioGroup, cxGridLevel, cxGridCustomTableView, cxGridTableView,
-  cxGridDBTableView, cxGridCustomView, cxGrid, cxButtons, cxPC, dxCore;
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxButtons, cxPC, dxCore,
+  dxScrollbarAnnotations;
 
 const
   imgWORD = 2;
@@ -690,12 +691,10 @@ procedure TfrmConflictSearch.vMattersStylesGetContentStyle(
   Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
   AItem: TcxCustomGridTableItem; var AStyle: TcxStyle);
 begin
-
    if ((ARecord.Level = 0) and (ARecord.Expandable = True))then
    begin
-    AStyle := styArchivedMatter;
+      AStyle := styArchivedMatter;
    end;
-
 end;
 
 procedure TfrmConflictSearch.vtMatterListCellDblClick(
@@ -808,13 +807,12 @@ procedure TfrmConflictSearch.vConflictsCellDblClick(
   Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
-  if ACellViewInfo.Item.Caption = vConflictsExclude.Caption then
-    exit
-  else
-  begin
-    ShowDetailLink(ACellViewInfo);
-  end;
-
+   if ACellViewInfo.Item.Caption = vConflictsExclude.Caption then
+      exit
+   else
+   begin
+      ShowDetailLink(ACellViewInfo);
+   end;
 end;
 
 procedure TfrmConflictSearch.vConflictsEditDblClick(
@@ -833,31 +831,34 @@ end;
 
 procedure TfrmConflictSearch.ShowDetailLink(ACellViewInfo: TcxGridTableDataCellViewInfo);
 var
-  ColIdx: Integer;
-  Category: String;
+   ColIdx: Integer;
+   Category: String;
 begin
-  ColIdx := vConflicts.DataController.GetItemByFieldName('cat').Index;
-  Category := ACellViewInfo.GridRecord.Values[ColIdx];
+   ColIdx := vConflicts.DataController.GetItemByFieldName('cat').Index;
+   Category := ACellViewInfo.GridRecord.Values[ColIdx];
 
-  if StrMatches('Contact/Client*', Category) then
-  begin
-    ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
-    ShowClient(ACellViewInfo.GridRecord.Values[ColIdx])
-  end
-  else if (StrMatches('Matter*', Category))
-    // Field data is matter related. Handle as matter.
-    or (StrMatches('Field*', Category)) then
-  begin
-    ColIdx := vConflicts.DataController.GetItemByFieldName('FileID').Index;
-    ShowMatter(ACellViewInfo.GridRecord.Values[ColIdx])
-  end
-  else if StrMatches('Contact*', Category) then
-  begin
-    ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
-    ShowPhoneBook(ACellViewInfo.GridRecord.Values[ColIdx])
-  end
-  else
-    raise exception.Create('Unable to display details for this conflict');
+   if StrMatches('Client*', Category) then
+   begin
+      ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
+      ShowClient(ACellViewInfo.GridRecord.Values[ColIdx]);
+   end
+   else if (StrMatches('Matter*', Category))
+      // Field data is matter related. Handle as matter.
+      or (StrMatches('Field*', Category)) then
+   begin
+      ColIdx := vConflicts.DataController.GetItemByFieldName('FileID').Index;
+      ShowMatter(ACellViewInfo.GridRecord.Values[ColIdx])
+   end
+   else if StrMatches('Contact*', Category) then
+   begin
+      ColIdx := vConflicts.DataController.GetItemByFieldName('NClient').Index;
+      if (TableInteger('PHONEBOOK', 'NCLIENT', integer(ACellViewInfo.GridRecord.Values[ColIdx]), 'NCLIENT') <> 0) then
+         ShowClient(ACellViewInfo.GridRecord.Values[ColIdx])
+      else
+         ShowPhoneBook(ACellViewInfo.GridRecord.Values[ColIdx]);
+   end
+   else
+      raise exception.Create('Unable to display details for this conflict');
 end;
 
 procedure TfrmConflictSearch.vConflictsOldColumnHeaderClick(

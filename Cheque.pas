@@ -4705,11 +4705,13 @@ begin
 
         if (TotalAmt > lcCashTotal) then
         begin
-           if Trim(SystemString('STATE')) = 'TAS' then
-           begin
-              LMsg := 'This transaction will overdraw your cashbook bank balance. ' +
-                       #13 + #10 + 'Organise a transfer of monies from the Statutory Deposit.';
-              if(InputQueryPassword('Insight', LMsg + #13#10'To continue, please enter the password',LEntered)) then
+//           if Trim(SystemString('STATE')) = 'TAS' then
+//           begin
+              MessageDlg('This transaction will overdraw your cashbook bank balance. ' +
+                       #13 + #10 + 'Organise a transfer of monies from the Statutory Deposit.',
+                       mtWarning, [mbOK], 0);
+                       Result := False;
+ {             if(InputQueryPassword('Insight', LMsg + #13#10'To continue, please enter the password',LEntered)) then
               begin
                  LTrustODPasswd := SystemString('TRUST_OD_PASSWD');
                  if LTrustODPasswd = '' then
@@ -4719,15 +4721,15 @@ begin
                     Result := False
                  else
                     Result := True;
-              end;
-           end
+              end;}
+{           end
            else
            begin
                MessageDlg('This transaction will overdraw your cashbook bank balance. ' +
                         #13 + #10 + 'Organise a transfer of monies from the Statutory Deposit.',
                         mtWarning, [mbOK], 0);
                Result := True;
-           end;
+           end; }
         end
         else
           Result := False;

@@ -1,5 +1,16 @@
 Insight Build 9.2.0
 
+Build 62
+========
+- Added ability to delete multiple TimeSheet entries.
+- Fixed sql error when selecting Presented cheques in the Cheque screen (Financials->Cheques)
+- Updates to the Individual Dashboard for Billed Fees to better reflect reversals\adjustments\write offs.
+- Re-instate Rich Edit functionality to Matter notes filed.
+
+Build 61
+========
+- Change to SMS API call
+
 Build 60
 ========
 - Fix to Bill Write-Off program to use the taxcode originally used during the bill posting.
@@ -8,7 +19,10 @@ Build 60
 - Changed name of desbursement ledger card export report to be 'DisbursementLedger.PDF'
 - Change to the way Clients/Contacts are opened in the Conflict Search screen.
 - Fix to Matter Notes saving when lenght of text exceeded 1333 characters.
-- Fixed issue with Fee Enquiry tab label changing under certain circumstances whem searching for A Client.
+- Fixed issue with Fee Enquiry tab label changing under certain circumstances when searching for a Client.
+- Fixed error when sending SMS
+- Added new Matter creation code rule.  It allows the addition of a suffix to matter number creation. eg 12345/20
+- Fixed issue when searching for client when using the Client search box on the Search tab.
 
 Build 58 - 59
 =============

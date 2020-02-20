@@ -104,6 +104,7 @@ type
     btnCancel: TdxBarButton;
     chkPrint: TcxBarEditItem;
     qryAllocs: TUniQuery;
+    qryCheckCreditNote: TUniQuery;
     procedure btnBillFindClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -173,61 +174,77 @@ end;
 procedure TfrmBillCredit.DisplayInvoice(iNMemo : integer);
 var
    sError: string;
+   bCreditNoteExist: boolean;
 begin
-  sError := '';
-  qryLedger.Close;
-  with qryBill do
-  begin
-    Close;
-    ParamByName('NMEMO').AsInteger := frmInvoiceSearch.qryInvoices.FieldByName('NMEMO').AsInteger;
-    Open;
-  end;
-  if not qryBill.IsEmpty then
-  begin
-    if not qryBill.FieldByName('DISPATCHED').IsNull then
-    begin
-      qryLedger.Open;
-      BillFees := qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency;
-      sbarDetails.Panels[pnlFEES].Text := 'Fees: ' + Format('%.2n', [BillFees]);
-      BillDisb := qryBill.FieldByName('DISB').AsCurrency - qryBill.FieldByName('DISB_PAID').AsCurrency;
-      sbarDetails.Panels[pnlDISB].Text := 'Disb: ' + Format('%.2n', [BillDisb]);
-      BillAntd := qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency;
-      sbarDetails.Panels[pnlANTD].Text := 'Ant Disb: ' + Format('%.2n', [BillAntd]);
-      BillSund := qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency;
-      sbarDetails.Panels[pnlSUND].Text := 'Sundry: ' + Format('%.2n', [BillSund]);
-//      sbarDetails.Panels[pnlDEBTORS].Text := 'Debtors: ' + Format('%.2n', [TableCurrency('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'DEBTORS')]);
-      BillCred := qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency;
-      sbarDetails.Panels[pnlCREDITORS].Text := 'Creditors: ' + Format('%.2n', [BillCred]);
+   sError := '';
+   bCreditNoteExist := False;
+   qryLedger.Close;
+   with qryBill do
+   begin
+      Close;
+      ParamByName('NMEMO').AsInteger := frmInvoiceSearch.qryInvoices.FieldByName('NMEMO').AsInteger;
+      Open;
+   end;
 
-      //if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency) > 0 then
-      if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency + qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency) > 0 then
+   if not qryBill.IsEmpty then
+   begin
+      with qryCheckCreditNote do
       begin
-        if MatterIsCurrent(qryBill.FieldByName('FILEID').AsString) then
-        begin
-          lblBill.Caption := qryBill.FieldByName('REFNO').AsString;
-          lblClient.Caption := TableString('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'TITLE');
-          lblMatterDesc.Caption := TableString('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'SHORTDESCR');
-        end
-        else
-          sError := 'Matter ' + qryBill.FieldByName('FILEID').AsString + ' is not current';
+         Close;
+         ParamByName('NMEMO').AsInteger := frmInvoiceSearch.qryInvoices.FieldByName('NMEMO').AsInteger;
+         Open;
+         bCreditNoteExist := ((not IsEmpty) and (FieldByName('OWING').AsFloat = 0));
+         Close;
+      end;
+
+      if bCreditNoteExist = False then
+      begin
+         if not qryBill.FieldByName('DISPATCHED').IsNull then
+         begin
+            qryLedger.Open;
+            BillFees := qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency;
+            sbarDetails.Panels[pnlFEES].Text := 'Fees: ' + Format('%.2n', [BillFees]);
+            BillDisb := qryBill.FieldByName('DISB').AsCurrency - qryBill.FieldByName('DISB_PAID').AsCurrency;
+            sbarDetails.Panels[pnlDISB].Text := 'Disb: ' + Format('%.2n', [BillDisb]);
+            BillAntd := qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency;
+            sbarDetails.Panels[pnlANTD].Text := 'Ant Disb: ' + Format('%.2n', [BillAntd]);
+            BillSund := qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency;
+            sbarDetails.Panels[pnlSUND].Text := 'Sundry: ' + Format('%.2n', [BillSund]);
+//         sbarDetails.Panels[pnlDEBTORS].Text := 'Debtors: ' + Format('%.2n', [TableCurrency('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'DEBTORS')]);
+            BillCred := qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency;
+            sbarDetails.Panels[pnlCREDITORS].Text := 'Creditors: ' + Format('%.2n', [BillCred]);
+
+            //if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency) > 0 then
+            if (qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldByName('ANTD_PAID').AsCurrency + qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency + qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldByName('UPCRED_PAID').AsCurrency) > 0 then
+            begin
+               if MatterIsCurrent(qryBill.FieldByName('FILEID').AsString) then
+               begin
+                  lblBill.Caption := qryBill.FieldByName('REFNO').AsString;
+                  lblClient.Caption := TableString('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'TITLE');
+                  lblMatterDesc.Caption := TableString('MATTER', 'FILEID', qryBill.FieldByName('FILEID').AsString, 'SHORTDESCR');
+               end
+               else
+                  sError := 'Matter ' + qryBill.FieldByName('FILEID').AsString + ' is not current';
+            end
+            else
+               sError := 'There is no money outstanding on this Bill';
+         end
+         else
+            sError := 'This Bill has not been dispatched';
       end
       else
-        sError := 'There is no money outstanding on this Bill';
-    end
-    else
-      sError := 'This Bill has not been dispatched';
+         sError := 'This bill already has a credit note.';
+   end
+   else
+      sError := 'No such Bill';
 
-  end
-  else
-    sError := 'No such Bill';
-
-  if sError <> '' then
-  begin
-    MsgErr(sError);
-    lblBill.Caption := '';
-    lblClient.Caption := '';
-    lblMatterDesc.Caption := '';
-  end;
+   if sError <> '' then
+   begin
+      MsgErr(sError);
+      lblBill.Caption := '';
+      lblClient.Caption := '';
+      lblMatterDesc.Caption := '';
+   end;
 end;
 
 procedure TfrmBillCredit.FormCreate(Sender: TObject);

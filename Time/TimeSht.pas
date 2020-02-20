@@ -18,7 +18,7 @@ uses
   DBAccess, cxLookupEdit, cxDBLookupEdit, cxMaskEdit, cxGroupBox, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridCustomView,
   cxGrid, cxButtons, ppTypes, DateUtils, ppFileUtils, ppIniStorage,
-  cxDBEdit, dxCore;
+  cxDBEdit, dxCore, dxScrollbarAnnotations;
 
 
 const
@@ -1565,6 +1565,14 @@ procedure TfrmTimeSheet.popRemoveClick(Sender: TObject);
   Removed compiler hint
 var icount : integer;
 }
+var
+   iCtr:                   integer;
+   tv:                     TcxGridDBTableView;
+   Data:                   TcxCustomDataController;
+   DC:                     TcxGridTableController;
+   tView:                  TcxGridViewData;
+   ANFee: variant;
+   bSelected: boolean;
 begin
 {
   Modified 25.10.2002 GG
@@ -1578,7 +1586,48 @@ icount := qryFeeTmp.RecordCount;
    end
    else
    begin
-     if not qryFeeTmp.IsEmpty then
+      if not qryFeeTmp.IsEmpty then
+      begin
+         tv := dbgrFeeTmp.FocusedView as TcxGridDBTableView;
+         tv.BeginUpdate;
+         dmAxiom.uniInsight.StartTransaction;
+         Data := tv.DataController;
+         DC := tv.Controller;
+         tView := tv.ViewData;
+         try
+            for iCtr := 0 to Data.RecordCount - 1 do
+            begin
+               bSelected := False;
+               tView.Records[iCtr].Focused  := True;
+               ANFee := tView.GetRecordByIndex(iCtr).Values[tvFeeTmpNewNFEE.Index];
+
+               if (VarIsNull(ANFee) = True) then
+               begin
+                  try
+                     if VarIsNull(tView.GetRecordByIndex(iCtr).Values[tvFeeTmpPROCESS.Index]) then
+                        bSelected := False
+                     else
+                        bSelected := tView.GetRecordByIndex(iCtr).Values[tvFeeTmpPROCESS.Index];
+                  except
+                     bSelected := False;
+                  end;
+
+                  if bSelected then
+                  begin
+                     qryFeeTmp.Delete;
+                  end;
+               end;
+            end;
+         finally
+            dmAxiom.uniInsight.Commit;
+            MakeSql;
+            tv.EndUpdate;
+            if tvFeeTmpNew.DataController.RowCount = 0 then
+               lblTimerDisp.Visible := False;
+         end;
+      end;
+
+ {    if not qryFeeTmp.IsEmpty then
      begin
         qryFeeTmp.Delete;
 //       CalcAmount;
@@ -1587,7 +1636,7 @@ icount := qryFeeTmp.RecordCount;
         MakeSql;
         if tvFeeTmpNew.DataController.RowCount = 0 then
            lblTimerDisp.Visible := False;
-      end;
+      end;  }
    end;
 end;
 
@@ -3928,12 +3977,15 @@ end;
 
 procedure TfrmTimeSheet.popGridPopup(Sender: TObject);
 var
-   bEnabled:   boolean;
+   bEnabled,
+   bSelected:  boolean;
    aBillType:  string;
    I:          string;
    tv:         TcxGridDBTableView;
+   tView:      TcxGridViewData;
 begin
    tv := dbgrFeeTmp.FocusedView as TcxGridDBTableView;
+   tView := tv.ViewData;
    if (lvFeeTmp.GridView = tvFeeTmp) then
    begin
       bEnabled    := (tvFeeTmpNFEE.DataBinding.Field.AsString = '');
@@ -3948,7 +4000,12 @@ begin
       bbtnCompleteTask.Enabled := (tvFeeTmpNewIS_TASK.DataBinding.Field.AsString = 'Y');
    end;
 
-   popRemove.Enabled := bEnabled and (tv.DataController.RecordCount > 0) and (tv.Controller.SelectedRowCount > 0);
+   if VarIsNull(tView.GetRecordByIndex(tv.Controller.FocusedRowIndex).Values[tvFeeTmpPROCESS.Index]) then
+      bSelected := False
+   else
+      bSelected := tView.GetRecordByIndex(tv.Controller.FocusedRowIndex).Values[tvFeeTmpPROCESS.Index];
+
+   popRemove.Enabled := bEnabled and (tv.DataController.RecordCount > 0) and (tv.Controller.SelectedRowCount > 0) and bSelected;
    popEdit.Enabled := bEnabled;
    popGridDateStamp.Enabled := bEnabled and (tv.DataController.RecordCount > 0) and (tv.Controller.SelectedRowCount > 0);
    popDescription.Enabled := bEnabled;

@@ -4,23 +4,29 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxControls, cxContainer, cxEdit, cxLabel, StdCtrls,
-  cxLookAndFeelPainters, cxButtons, cxTextEdit, DB, OracleUniProvider, Uni, DBAccess, MemDS,
-  Menus, cxGraphics, cxLookAndFeels;
+  Dialogs, cxControls, cxGraphics, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, Vcl.Menus, dxLayoutcxEditAdapters,
+  dxLayoutControlAdapters, dxLayoutContainer, cxClasses, dxLayoutControl,
+  Data.DB, MemDS, DBAccess, Uni, Vcl.StdCtrls, cxButtons, cxTextEdit, cxLabel;
 
 type
   TfrmChequeRenumber = class(TForm)
     lblPrinter: TcxLabel;
     teCheqNo: TcxTextEdit;
-    cxLabel2: TcxLabel;
     btnOK: TcxButton;
     cxButton2: TcxButton;
     lblCurrentCheque: TcxLabel;
-    cxLabel4: TcxLabel;
-    cxLabel5: TcxLabel;
     qryChequeRenumber: TUniQuery;
     lblDate: TcxLabel;
-    cxLabel7: TcxLabel;
+    dxLayoutControl1Group_Root: TdxLayoutGroup;
+    dxLayoutControl1: TdxLayoutControl;
+    dxLayoutItem1: TdxLayoutItem;
+    dxLayoutItem2: TdxLayoutItem;
+    dxLayoutItem3: TdxLayoutItem;
+    dxLayoutItem4: TdxLayoutItem;
+    dxLayoutGroup1: TdxLayoutGroup;
+    dxLayoutItem5: TdxLayoutItem;
+    dxLayoutItem6: TdxLayoutItem;
     procedure btnOKClick(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -105,14 +111,14 @@ begin
    if FromCheque then
    begin
       Self.Caption := 'Re Number Cheque';
-      cxLabel4.Caption := 'Current Cheque #';
-      cxLabel2.Caption := 'New Cheque #';
+      dxLayoutItem3.CaptionOptions.Text := 'Current Cheque #';
+      dxLayoutItem4.CaptionOptions.Text := 'New Cheque #';
    end
    else
    begin
       Self.Caption := 'Re Number Receipt';
-      cxLabel4.Caption := 'Current Receipt #';
-      cxLabel2.Caption := 'New Receipt #';
+      dxLayoutItem3.CaptionOptions.Text := 'Current Receipt #';
+      dxLayoutItem4.CaptionOptions.Text := 'New Receipt #';
    end;
    lblDate.Caption := ChequeDate;
    lblPrinter.Caption := Printer;
