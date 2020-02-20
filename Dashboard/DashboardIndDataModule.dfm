@@ -2538,52 +2538,212 @@ object dmDashboardInd: TdmDashboardInd
         'od) period,'
       '         CASE'
       '            WHEN (NVL (fees_budget, 0) > 0)'
-      '               THEN round((NVL (fees, 0) / fees_budget)*100)'
+      '               THEN ROUND ((NVL (fees, 0) / fees_budget) * 100)'
       '            ELSE 0'
       '         END AS ratio'
-      '    FROM (SELECT   SUM (amount) AS fees,'
       
-        '                   TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS disp_perio' +
-        'd,'
-      '                   get_fin_year (invoicedate),'
-      '                   DECODE (TO_CHAR (invoicedate, '#39'MM'#39'),'
-      '                           1, 7,'
-      '                           2, 8,'
-      '                           3, 9,'
-      '                           4, 10,'
-      '                           5, 11,'
-      '                           6, 12,'
-      '                           7, 1,'
-      '                           8, 2,'
-      '                           9, 3,'
-      '                           10, 4,'
-      '                           11, 5,'
-      '                           12, 6'
-      '                          ) AS period'
-      '              FROM fee f'
-      '             WHERE author = :author'
-      '               AND billed = '#39'Y'#39
+        '    FROM (SELECT   SUM (fees) AS fees, disp_period, fin_year, pe' +
+        'riod'
+      '              FROM (SELECT   SUM (amount) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      
+        '                             get_fin_year (invoicedate) AS fin_y' +
+        'ear,'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee f'
+      '                       WHERE author = :author'
+      '                         AND billed = '#39'Y'#39
       '--               AND TYPE <> '#39'wo'#39
-      '               AND billtype = '#39'Billable'#39
+      '                         AND billtype = '#39'Billable'#39
       
-        '               AND TRUNC (invoicedate) BETWEEN :year_start_date ' +
-        'AND :year_end_date'
-      '          GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
-      '                   get_fin_year (invoicedate),'
-      '                   DECODE (TO_CHAR (invoicedate, '#39'MM'#39'),'
-      '                           1, 7,'
-      '                           2, 8,'
-      '                           3, 9,'
-      '                           4, 10,'
-      '                           5, 11,'
-      '                           6, 12,'
-      '                           7, 1,'
-      '                           8, 2,'
-      '                           9, 3,'
-      '                           10, 4,'
-      '                           11, 5,'
-      '                           12, 6'
-      '                          )'
+        '                         AND TRUNC (invoicedate) BETWEEN :year_s' +
+        'tart_date'
+      
+        '                                                     AND :year_e' +
+        'nd_date'
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    )'
+      '                    UNION'
+      '                    SELECT   SUM (fee_hist.amount) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      
+        '                             get_fin_year (invoicedate) AS fin_y' +
+        'ear,'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (fee_hist.invoicedate)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:ye' +
+        'ar_end_date,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:ye' +
+        'ar_end_date,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      '                                    AND :year_end_date'
+      '                         AND TRUNC (fee_hist.system_date) >'
+      '                                TO_DATE (   '#39'01-'#39
+      
+        '                                         || TO_CHAR (:year_end_d' +
+        'ate, '#39'Mon'#39')'
+      '                                         || '#39'-'#39
+      
+        '                                         || TO_CHAR (:year_end_d' +
+        'ate, '#39'yyyy'#39')'
+      '                                        )'
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      '                         AND (   (fee_hist.reversed = '#39'Y'#39')'
+      '                              OR (fee_hist.deleted = '#39'Y'#39')'
+      '                             )'
+      '                         AND fee_hist.nmemo = n.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                         AND r.rv_type = '#39'R'#39
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    )'
+      '                    UNION'
+      '                    SELECT   SUM (fee_hist.amount * -1) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (n.dispatched)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:ye' +
+        'ar_end_date,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:ye' +
+        'ar_end_date,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      '                                    AND :year_end_date'
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      '                         AND (   (fee_hist.reversed = '#39'Y'#39')'
+      '                              OR (fee_hist.deleted = '#39'Y'#39')'
+      '                             )'
+      '                         AND fee_hist.nmemo = r.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ))'
+      '          GROUP BY disp_period, fin_year, period'
       '          UNION'
       '          SELECT 0,'
       '                 TO_CHAR (TO_DATE (   DECODE (fin_period,'
@@ -2673,7 +2833,554 @@ object dmDashboardInd: TdmDashboardInd
       
         '          GROUP BY MONTH, calendar_year, period) b ON (a.period ' +
         '= b.period)'
-      'ORDER BY 4')
+      'ORDER BY 4'
+      ''
+      ''
+      '/*'
+      
+        'SELECT   NVL (disp_period, budg_disp) disp_period, NVL (fees, 0)' +
+        ' fees,'
+      
+        '         NVL (fees_budget, 0) fees_budget, NVL (a.period, b.peri' +
+        'od) period,'
+      '         CASE'
+      '            WHEN (NVL (fees_budget, 0) > 0)'
+      '               THEN ROUND ((NVL (fees, 0) / fees_budget) * 100)'
+      '            ELSE 0'
+      '         END AS ratio'
+      
+        '    FROM (SELECT   SUM (fees) AS fees, disp_period, fin_year, pe' +
+        'riod'
+      '              FROM (SELECT   SUM (amount) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      
+        '                             get_fin_year (invoicedate) AS fin_y' +
+        'ear,'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee f'
+      '                       WHERE author = :author'
+      '                         AND billed = '#39'Y'#39
+      '--               AND TYPE <> '#39'wo'#39
+      '                         AND billtype = '#39'Billable'#39
+      
+        '                         AND TRUNC (invoicedate) BETWEEN :year_s' +
+        'tart_date'
+      
+        '                                                     AND :year_e' +
+        'nd_date'
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    )'
+      '                    UNION'
+      '                    SELECT   SUM (fee_hist.amount) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      
+        '                             get_fin_year (invoicedate) AS fin_y' +
+        'ear,'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (fee_hist.invoicedate)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      '                                    AND :currperiodend'
+      '                         AND TRUNC (fee_hist.system_date) >'
+      '                                TO_DATE (   '#39'01-'#39
+      
+        '                                         || TO_CHAR (:currperiod' +
+        'end, '#39'Mon'#39')'
+      '                                         || '#39'-'#39
+      
+        '                                         || TO_CHAR (:currperiod' +
+        'end, '#39'yyyy'#39')'
+      '                                        )'
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      '                         AND (   (fee_hist.reversed = '#39'Y'#39')'
+      '                              OR (fee_hist.deleted = '#39'Y'#39')'
+      '                             )'
+      '                         AND fee_hist.nmemo = n.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                         AND r.rv_type = '#39'R'#39
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    )'
+      '                    UNION'
+      '                    SELECT   SUM (fee_hist.amount * -1) AS fees,'
+      
+        '                             TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS ' +
+        'disp_period,'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ) AS period'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (n.dispatched)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      '                                    AND :currperiodend'
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      '                         AND (   (fee_hist.reversed = '#39'Y'#39')'
+      '                              OR (fee_hist.deleted = '#39'Y'#39')'
+      '                             )'
+      '                         AND fee_hist.nmemo = r.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                    GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                             get_fin_year (invoicedate),'
+      
+        '                             DECODE (TO_CHAR (invoicedate, '#39'MM'#39')' +
+        ','
+      '                                     1, 7,'
+      '                                     2, 8,'
+      '                                     3, 9,'
+      '                                     4, 10,'
+      '                                     5, 11,'
+      '                                     6, 12,'
+      '                                     7, 1,'
+      '                                     8, 2,'
+      '                                     9, 3,'
+      '                                     10, 4,'
+      '                                     11, 5,'
+      '                                     12, 6'
+      '                                    ))'
+      '          GROUP BY disp_period, fin_year, period'
+      '          UNION'
+      '          SELECT 0,'
+      '                 TO_CHAR (TO_DATE (   DECODE (fin_period,'
+      '                                              1, '#39'Jul'#39','
+      '                                              2, '#39'Aug'#39','
+      '                                              3, '#39'Sep'#39','
+      '                                              4, '#39'Oct'#39','
+      '                                              5, '#39'Nov'#39','
+      '                                              6, '#39'Dec'#39','
+      '                                              7, '#39'Jan'#39','
+      '                                              8, '#39'Feb'#39','
+      '                                              9, '#39'Mar'#39','
+      '                                              10, '#39'Apr'#39','
+      '                                              11, '#39'May'#39','
+      '                                              12, '#39'Jun'#39
+      '                                             )'
+      '                                   || '#39'-'#39
+      '                                   || DECODE (fin_period,'
+      '                                              1, fin_year - 1,'
+      '                                              2, fin_year - 1,'
+      '                                              3, fin_year - 1,'
+      '                                              4, fin_year - 1,'
+      '                                              5, fin_year - 1,'
+      '                                              6, fin_year - 1,'
+      '                                              fin_year'
+      '                                             ),'
+      '                                   '#39'mm-yyyy'#39
+      '                                  ),'
+      '                          '#39'Mon-yy'#39
+      '                         ),'
+      '                 TO_CHAR (fin_year), fin_period'
+      '            FROM calendar'
+      '           WHERE NOT EXISTS ('
+      '                    SELECT 1'
+      '                      FROM fee'
+      '                     WHERE author = :author'
+      '                       AND inv_period = fin_period'
+      '                       AND inv_year = fin_year'
+      '                       AND billtype = '#39'Billable'#39
+      '                       AND billed = '#39'Y'#39
+      '--                       AND TYPE <> '#39'wo'#39
+      '                       AND billtype = '#39'Billable'#39')'
+      '             AND TO_DATE (   DECODE (fin_period,'
+      '                                     1, '#39'Jul'#39','
+      '                                     2, '#39'Aug'#39','
+      '                                     3, '#39'Sep'#39','
+      '                                     4, '#39'Oct'#39','
+      '                                     5, '#39'Nov'#39','
+      '                                     6, '#39'Dec'#39','
+      '                                     7, '#39'Jan'#39','
+      '                                     8, '#39'Feb'#39','
+      '                                     9, '#39'Mar'#39','
+      '                                     10, '#39'Apr'#39','
+      '                                     11, '#39'May'#39','
+      '                                     12, '#39'Jun'#39
+      '                                    )'
+      '                          || '#39'-'#39
+      '                          || DECODE (fin_period,'
+      '                                     1, fin_year - 1,'
+      '                                     2, fin_year - 1,'
+      '                                     3, fin_year - 1,'
+      '                                     4, fin_year - 1,'
+      '                                     5, fin_year - 1,'
+      '                                     6, fin_year - 1,'
+      '                                     fin_year'
+      '                                    ),'
+      '                          '#39'mm-yy'#39
+      
+        '                         ) BETWEEN :year_start_date AND :year_en' +
+        'd_date) a'
+      '         FULL OUTER JOIN'
+      
+        '         (SELECT   SUM (NVL (billedfees, 0)) fees_budget, period' +
+        ','
+      
+        '                   TO_CHAR (TO_DATE (MONTH || '#39'-'#39' || calendar_ye' +
+        'ar, '#39'MM-YYYY'#39'),'
+      '                            '#39'Mon-YY'#39
+      '                           ) AS budg_disp'
+      '              FROM budget'
+      '             WHERE employee = :author'
+      
+        '               AND TO_DATE (MONTH || '#39'-'#39' || calendar_year, '#39'MM-Y' +
+        'YYY'#39')'
+      '                      BETWEEN :year_start_date'
+      '                          AND :year_end_date'
+      
+        '          GROUP BY MONTH, calendar_year, period) b ON (a.period ' +
+        '= b.period)'
+      'ORDER BY 4'
+      ''
+      ''
+      ''
+      
+        'SELECT   NVL (disp_period, budg_disp) disp_period, NVL (fees, 0)' +
+        ' fees,'
+      
+        '         NVL (fees_budget, 0) fees_budget, NVL (a.period, b.peri' +
+        'od) period,'
+      '         CASE'
+      '            WHEN (NVL (fees_budget, 0) > 0)'
+      '               THEN round((NVL (fees, 0) / fees_budget)*100)'
+      '            ELSE 0'
+      '         END AS ratio'
+      '    FROM (SELECT   SUM (amount) AS fees,'
+      
+        '                   TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS disp_perio' +
+        'd,'
+      '                   get_fin_year (invoicedate),'
+      '                   DECODE (TO_CHAR (invoicedate, '#39'MM'#39'),'
+      '                           1, 7,'
+      '                           2, 8,'
+      '                           3, 9,'
+      '                           4, 10,'
+      '                           5, 11,'
+      '                           6, 12,'
+      '                           7, 1,'
+      '                           8, 2,'
+      '                           9, 3,'
+      '                           10, 4,'
+      '                           11, 5,'
+      '                           12, 6'
+      '                          ) AS period'
+      '              FROM fee f'
+      '             WHERE author = :author'
+      '               AND billed = '#39'Y'#39
+      '--               AND TYPE <> '#39'wo'#39
+      '               AND billtype = '#39'Billable'#39
+      
+        '               AND TRUNC (invoicedate) BETWEEN :year_start_date ' +
+        'AND :year_end_date'
+      '          GROUP BY TO_CHAR (invoicedate, '#39'Mon-YY'#39'),'
+      '                   get_fin_year (invoicedate),'
+      '                   DECODE (TO_CHAR (invoicedate, '#39'MM'#39'),'
+      '                           1, 7,'
+      '                           2, 8,'
+      '                           3, 9,'
+      '                           4, 10,'
+      '                           5, 11,'
+      '                           6, 12,'
+      '                           7, 1,'
+      '                           8, 2,'
+      '                           9, 3,'
+      '                           10, 4,'
+      '                           11, 5,'
+      '                           12, 6'
+      '                          )'
+      'UNION'
+      '                    SELECT  SUM (fee_hist.amount) AS fees,'
+      'TO_CHAR (invoicedate, '#39'Mon-YY'#39') AS disp_period,'
+      '                   get_fin_year (invoicedate),'
+      '                   DECODE (TO_CHAR (invoicedate, '#39'MM'#39'),'
+      '                           1, 7,'
+      '                           2, 8,'
+      '                           3, 9,'
+      '                           4, 10,'
+      '                           5, 11,'
+      '                           6, 12,'
+      '                           7, 1,'
+      '                           8, 2,'
+      '                           9, 3,'
+      '                           10, 4,'
+      '                           11, 5,'
+      '                           12, 6'
+      '                          ) AS period'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (fee_hist.invoicedate)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      '                                    AND :currperiodend'
+      '                         AND TRUNC (fee_hist.system_date) >'
+      '                                TO_DATE (   '#39'01-'#39
+      
+        '                                         || TO_CHAR (:currperiod' +
+        'end, '#39'Mon'#39')'
+      '                                         || '#39'-'#39
+      
+        '                                         || TO_CHAR (:currperiod' +
+        'end, '#39'yyyy'#39')'
+      '                                        )'
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      
+        '                         AND ((fee_hist.reversed = '#39'Y'#39') or (fee_' +
+        'hist.deleted = '#39'Y'#39'))'
+      '                         AND fee_hist.nmemo = n.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                         AND r.rv_type = '#39'R'#39
+      '                    GROUP BY fee_hist.author'
+      '                    UNION'
+      '                    SELECT   fee_hist.author,'
+      
+        '                             SUM (fee_hist.amount * -1) AS mtdfe' +
+        'es'
+      '                        FROM fee_hist, nmemo n, nmemo r'
+      '                       WHERE TRUNC (n.dispatched)'
+      '                                BETWEEN TO_DATE (   '#39'01-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'Mo' +
+        'n'#39
+      '                                                            )'
+      '                                                 || '#39'-'#39
+      
+        '                                                 || TO_CHAR (:cu' +
+        'rrperiodend,'
+      
+        '                                                             '#39'yy' +
+        'yy'#39
+      '                                                            )'
+      '                                                )'
+      
+        '                                    AND :currperiodend          ' +
+        '               '
+      '                         AND fee_hist.billtype = '#39'Billable'#39
+      '                         AND fee_hist.billed = '#39'Y'#39
+      
+        '                         AND ((fee_hist.reversed = '#39'Y'#39') or (fee_' +
+        'hist.deleted = '#39'Y'#39'))'
+      '                         AND fee_hist.nmemo = r.nmemo'
+      '                         AND n.rv_nmemo = r.nmemo'
+      '                    GROUP BY fee_hist.author'
+      '          UNION'
+      '          SELECT 0,'
+      '                 TO_CHAR (TO_DATE (   DECODE (fin_period,'
+      '                                              1, '#39'Jul'#39','
+      '                                              2, '#39'Aug'#39','
+      '                                              3, '#39'Sep'#39','
+      '                                              4, '#39'Oct'#39','
+      '                                              5, '#39'Nov'#39','
+      '                                              6, '#39'Dec'#39','
+      '                                              7, '#39'Jan'#39','
+      '                                              8, '#39'Feb'#39','
+      '                                              9, '#39'Mar'#39','
+      '                                              10, '#39'Apr'#39','
+      '                                              11, '#39'May'#39','
+      '                                              12, '#39'Jun'#39
+      '                                             )'
+      '                                   || '#39'-'#39
+      '                                   || DECODE (fin_period,'
+      '                                              1, fin_year - 1,'
+      '                                              2, fin_year - 1,'
+      '                                              3, fin_year - 1,'
+      '                                              4, fin_year - 1,'
+      '                                              5, fin_year - 1,'
+      '                                              6, fin_year - 1,'
+      '                                              fin_year'
+      '                                             ),'
+      '                                   '#39'mm-yyyy'#39
+      '                                  ),'
+      '                          '#39'Mon-yy'#39
+      '                         ),'
+      '                 TO_CHAR (fin_year), fin_period'
+      '            FROM calendar'
+      '           WHERE NOT EXISTS ('
+      '                    SELECT 1'
+      '                      FROM fee'
+      '                     WHERE author = :author'
+      '                       AND inv_period = fin_period'
+      '                       AND inv_year = fin_year'
+      '                       AND billtype = '#39'Billable'#39
+      '                       AND billed = '#39'Y'#39
+      '--                       AND TYPE <> '#39'wo'#39
+      '                       AND billtype = '#39'Billable'#39')'
+      '             AND TO_DATE (   DECODE (fin_period,'
+      '                                     1, '#39'Jul'#39','
+      '                                     2, '#39'Aug'#39','
+      '                                     3, '#39'Sep'#39','
+      '                                     4, '#39'Oct'#39','
+      '                                     5, '#39'Nov'#39','
+      '                                     6, '#39'Dec'#39','
+      '                                     7, '#39'Jan'#39','
+      '                                     8, '#39'Feb'#39','
+      '                                     9, '#39'Mar'#39','
+      '                                     10, '#39'Apr'#39','
+      '                                     11, '#39'May'#39','
+      '                                     12, '#39'Jun'#39
+      '                                    )'
+      '                          || '#39'-'#39
+      '                          || DECODE (fin_period,'
+      '                                     1, fin_year - 1,'
+      '                                     2, fin_year - 1,'
+      '                                     3, fin_year - 1,'
+      '                                     4, fin_year - 1,'
+      '                                     5, fin_year - 1,'
+      '                                     6, fin_year - 1,'
+      '                                     fin_year'
+      '                                    ),'
+      '                          '#39'mm-yy'#39
+      
+        '                         ) BETWEEN :year_start_date AND :year_en' +
+        'd_date) a'
+      '         FULL OUTER JOIN'
+      
+        '         (SELECT   SUM (NVL (billedfees, 0)) fees_budget, period' +
+        ','
+      
+        '                   TO_CHAR (TO_DATE (MONTH || '#39'-'#39' || calendar_ye' +
+        'ar, '#39'MM-YYYY'#39'),'
+      '                            '#39'Mon-YY'#39
+      '                           ) AS budg_disp'
+      '              FROM budget'
+      '             WHERE employee = :author'
+      
+        '               AND TO_DATE (MONTH || '#39'-'#39' || calendar_year, '#39'MM-Y' +
+        'YYY'#39')'
+      '                      BETWEEN :year_start_date'
+      '                          AND :year_end_date'
+      
+        '          GROUP BY MONTH, calendar_year, period) b ON (a.period ' +
+        '= b.period)'
+      'ORDER BY 4'
+      '*/')
     Left = 748
     Top = 316
     ParamData = <

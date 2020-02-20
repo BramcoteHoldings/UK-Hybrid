@@ -2,8 +2,8 @@ object frmDashboard_Ind: TfrmDashboard_Ind
   Left = 98
   Top = -55
   Caption = 'Dashboard - Individual'
-  ClientHeight = 688
-  ClientWidth = 1112
+  ClientHeight = 692
+  ClientWidth = 1247
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,8 +22,8 @@ object frmDashboard_Ind: TfrmDashboard_Ind
   object pagMain: TcxPageControl
     Left = 0
     Top = 47
-    Width = 1112
-    Height = 641
+    Width = 1247
+    Height = 645
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -37,19 +37,23 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     Properties.ScrollOpposite = True
     Properties.TabSlants.Kind = skCutCorner
     LookAndFeel.NativeStyle = True
-    ClientRectBottom = 637
+    ExplicitWidth = 1112
+    ExplicitHeight = 641
+    ClientRectBottom = 641
     ClientRectLeft = 4
-    ClientRectRight = 1108
+    ClientRectRight = 1243
     ClientRectTop = 26
     object tabWIP: TcxTabSheet
       Caption = 'WIP'
       ImageIndex = 0
       OnShow = tabWIPShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlWIP: TPanel
         Left = 0
         Top = 0
-        Width = 1104
-        Height = 611
+        Width = 1239
+        Height = 615
         Align = alClient
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
@@ -59,9 +63,11 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 1104
+        ExplicitHeight = 611
         DesignSize = (
-          1104
-          611)
+          1239
+          615)
         object Label11: TLabel
           Left = 11
           Top = 54
@@ -162,7 +168,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object pnlUnbilledWIP: TPanel
           Left = 1
           Top = 1
-          Width = 1102
+          Width = 1237
           Height = 18
           Align = alTop
           Caption = 'Unbilled WIP'
@@ -173,11 +179,12 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ExplicitWidth = 1102
         end
         object pnlWIPGenerated: TPanel
           Left = 0
           Top = 194
-          Width = 1105
+          Width = 1240
           Height = 18
           Align = alCustom
           Anchors = [akLeft, akTop, akRight]
@@ -189,6 +196,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+          ExplicitWidth = 1105
         end
         object lblWipCurrent: TcxDBLabel
           Left = 72
@@ -196,6 +204,14 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           DataBinding.DataField = '0days'
           DataBinding.DataSource = dmDashboardInd.dsWIPFigures
           Properties.Alignment.Horz = taRightJustify
+          Style.LookAndFeel.Kind = lfStandard
+          Style.LookAndFeel.NativeStyle = True
+          StyleDisabled.LookAndFeel.Kind = lfStandard
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.Kind = lfStandard
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.Kind = lfStandard
+          StyleHot.LookAndFeel.NativeStyle = True
           Transparent = True
           Height = 16
           Width = 74
@@ -299,7 +315,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Tag = 1
           Left = 201
           Top = 20
-          Width = 904
+          Width = 1039
           Height = 164
           BackWall.Brush.Style = bsClear
           Foot.Font.Name = 'Segoe UI'
@@ -334,6 +350,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Anchors = [akLeft, akTop, akRight]
           Locked = True
           OnClick = chartWIPClick
+          ExplicitWidth = 904
           DefaultCanvas = 'TGDIPlusCanvas'
           ColorPaletteIndex = 13
           object Series2: TBarSeries
@@ -355,11 +372,12 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object cxGrid3: TcxGrid
           Left = 199
           Top = 211
-          Width = 903
+          Width = 1038
           Height = 146
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 13
           LookAndFeel.Kind = lfOffice11
+          ExplicitWidth = 903
           object cxGrid3DBChartView1: TcxGridDBChartView
             Categories.DataBinding.FieldName = 'VIEWDATE'
             DataController.DataSource = dmDashboardInd.dsWIPGeneratedGraph
@@ -389,9 +407,11 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Debtors'
       ImageIndex = 5
       OnShow = tabDebtorsShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       DesignSize = (
-        1104
-        611)
+        1239
+        615)
       object Label1: TLabel
         Left = 11
         Top = 43
@@ -443,7 +463,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       object pnlDebtors: TPanel
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1239
         Height = 19
         Align = alTop
         Caption = 'Debtors'
@@ -454,6 +474,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 1104
         object Label8: TLabel
           Left = 53
           Top = 3
@@ -472,7 +493,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       object chartDebtors: TDBChart
         Left = 198
         Top = 20
-        Width = 908
+        Width = 1043
         Height = 347
         BackWall.Brush.Style = bsClear
         Title.Text.Strings = (
@@ -485,6 +506,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         TabOrder = 1
         Anchors = [akLeft, akTop, akRight]
         OnClick = chartDebtorsClick
+        ExplicitWidth = 908
         DefaultCanvas = 'TGDIPlusCanvas'
         ColorPaletteIndex = 13
         object Series10: TBarSeries
@@ -642,16 +664,19 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Fees Billed'
       ImageIndex = 1
       OnShow = tabFeesBilledShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlFees: TPanel
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1239
         Height = 299
         Align = alTop
         Color = clWhite
         TabOrder = 0
+        ExplicitWidth = 1104
         DesignSize = (
-          1104
+          1239
           299)
         object Label17: TLabel
           Left = 267
@@ -779,7 +804,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object pnlFeesBilled: TPanel
           Left = 1
           Top = 1
-          Width = 1102
+          Width = 1237
           Height = 18
           Align = alTop
           BevelInner = bvRaised
@@ -792,6 +817,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
+          ExplicitWidth = 1102
         end
         object cxDBLabel20: TcxDBLabel
           Left = 371
@@ -822,6 +848,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           LookAndFeel.NativeStyle = True
           object tvFeeBilled: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dmDashboardInd.dsFeesListBudget
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <
@@ -937,13 +964,15 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object grdFeesBilled: TcxGrid
           Left = 221
           Top = 18
-          Width = 881
+          Width = 1016
           Height = 280
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 10
           LookAndFeel.Kind = lfStandard
+          ExplicitWidth = 881
           object grdFeesBilledDBTableView1: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dmDashboardInd.dsFeesListBudget
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -994,13 +1023,16 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Fees Received'
       ImageIndex = 6
       OnShow = tabFeesReceivedShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlFeesReceived: TPanel
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1239
         Height = 299
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 1104
         object Label28: TLabel
           Left = 8
           Top = 279
@@ -1057,6 +1089,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           LookAndFeel.NativeStyle = True
           object tvFeeReceived: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dmDashboardInd.dsFeesReceivedGrid
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <
@@ -1131,11 +1164,12 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object grdFeesReceived: TcxGrid
           Left = 221
           Top = 18
-          Width = 877
+          Width = 1012
           Height = 279
           Align = alCustom
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 3
+          ExplicitWidth = 877
           object tvFeesReceived: TcxGridDBChartView
             Categories.DataBinding.FieldName = 'DISP_PERIOD'
             DataController.DataSource = dmDashboardInd.dsFeesReceivedGrid
@@ -1159,7 +1193,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object pnlFeesReceivedTitle: TPanel
           Left = 1
           Top = 1
-          Width = 1102
+          Width = 1237
           Height = 18
           Align = alTop
           BevelInner = bvRaised
@@ -1172,6 +1206,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
+          ExplicitWidth = 1102
         end
       end
     end
@@ -1179,15 +1214,19 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Lock Up'
       ImageIndex = 4
       OnShow = tabLockUpShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlLockupGraph: TPanel
         Left = 0
         Top = 0
-        Width = 1104
-        Height = 611
+        Width = 1239
+        Height = 615
         Align = alClient
         BevelOuter = bvNone
         Color = clWhite
         TabOrder = 0
+        ExplicitWidth = 1104
+        ExplicitHeight = 611
         object Label22: TLabel
           Left = 7
           Top = 32
@@ -1245,7 +1284,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object pnlLockup: TPanel
           Left = 0
           Top = 0
-          Width = 1104
+          Width = 1239
           Height = 19
           Align = alTop
           Caption = 'Lock Up'
@@ -1256,11 +1295,12 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ExplicitWidth = 1104
         end
         object chartLockup: TDBChart
           Left = 191
           Top = 19
-          Width = 913
+          Width = 1048
           Height = 175
           BackWall.Brush.Style = bsClear
           Title.Text.Strings = (
@@ -1277,6 +1317,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Anchors = [akLeft, akTop, akRight]
           Locked = True
           OnUnDock = chartLockupUnDock
+          ExplicitWidth = 913
           DefaultCanvas = 'TGDIPlusCanvas'
           ColorPaletteIndex = 13
           object Series4: TBarSeries
@@ -1409,14 +1450,17 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Clients'
       ImageIndex = 2
       OnShow = tabTopClientShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlClients: TPanel
         Left = 0
         Top = 0
-        Width = 1104
+        Width = 1239
         Height = 489
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1104
         object pnlMatterProfit: TPanel
           Left = 11
           Top = 160
@@ -1450,6 +1494,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
             LookAndFeel.NativeStyle = True
             object tvMatterProfitability: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dmDashboardInd.dsClientMilestones
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <>
@@ -1686,6 +1731,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
             LookAndFeel.NativeStyle = True
             object tvTopClients: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dmDashboardInd.dsTopClients
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <
@@ -1760,6 +1806,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
             LookAndFeel.NativeStyle = True
             object cxGridDBTableView1: TcxGridDBTableView
               Navigator.Buttons.CustomButtons = <>
+              ScrollbarAnnotations.CustomAnnotations = <>
               DataController.DataSource = dmDashboardInd.dsTopReferrers
               DataController.Summary.DefaultGroupSummaryItems = <>
               DataController.Summary.FooterSummaryItems = <
@@ -1824,17 +1871,21 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       Caption = 'Monthly Chargeable/Non Chargeable Units - Summary'
       ImageIndex = 3
       OnShow = tabCalendarShow
+      ExplicitWidth = 1104
+      ExplicitHeight = 611
       object pnlCalendar: TPanel
         Left = 0
         Top = 0
-        Width = 1104
-        Height = 611
+        Width = 1239
+        Height = 615
         Align = alClient
         TabOrder = 0
+        ExplicitWidth = 1104
+        ExplicitHeight = 611
         object Panel5: TPanel
           Left = 1
-          Top = 569
-          Width = 1102
+          Top = 573
+          Width = 1237
           Height = 41
           Align = alBottom
           Font.Charset = DEFAULT_CHARSET
@@ -1844,6 +1895,8 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ExplicitTop = 569
+          ExplicitWidth = 1102
           object cxGroupBox1: TcxGroupBox
             Left = 6
             Top = 2
@@ -2009,8 +2062,8 @@ object frmDashboard_Ind: TfrmDashboard_Ind
         object Scheduler: TcxScheduler
           Left = 1
           Top = 26
-          Width = 1102
-          Height = 543
+          Width = 1237
+          Height = 547
           DateNavigator.ShowDatesContainingHolidaysInColor = True
           DateNavigator.Visible = False
           ViewDay.CanShow = False
@@ -2042,15 +2095,17 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           OptionsView.ShowEventsWithoutResource = True
           Storage = cxSchedulerStorage1
           TabOrder = 1
-          Selection = 14
+          ExplicitWidth = 1102
+          ExplicitHeight = 543
+          Selection = 21
           Splitters = {
             020300007E00000091030000830000003C0400000100000041040000C9010000}
-          StoredClientBounds = {01000000010000004D0400001E020000}
+          StoredClientBounds = {0100000001000000D404000022020000}
         end
         object Panel8: TPanel
           Left = 1
           Top = 1
-          Width = 1102
+          Width = 1237
           Height = 25
           Align = alTop
           BevelOuter = bvNone
@@ -2062,6 +2117,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+          ExplicitWidth = 1102
         end
       end
     end
@@ -2069,7 +2125,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
   object pnlTop: TPanel
     Left = 0
     Top = 28
-    Width = 1112
+    Width = 1247
     Height = 19
     Align = alTop
     Caption = 'WALLMANS -  BALANCED SCORECARD'
@@ -2080,10 +2136,12 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 1112
   end
   object cmbEmployee: TcxLookupComboBox
     Left = 7
     Top = 494
+    ParentFont = False
     Properties.DropDownRows = 20
     Properties.KeyFieldNames = 'CODE'
     Properties.ListColumns = <
@@ -2093,7 +2151,13 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     Properties.ListOptions.ShowHeader = False
     Properties.ListSource = dsEmployeeList
     Properties.OnCloseUp = cmbEmployeePropertiesCloseUp
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -11
+    Style.Font.Name = 'Segoe UI'
+    Style.Font.Style = []
     Style.LookAndFeel.NativeStyle = True
+    Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.NativeStyle = True
     StyleFocused.LookAndFeel.NativeStyle = True
     StyleHot.LookAndFeel.NativeStyle = True
@@ -2362,7 +2426,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
     XLSSettings.WorksheetName = 'Report'
     Left = 696
     Top = 592
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand1: TppHeaderBand
       Background.Brush.Style = bsClear
@@ -2462,7 +2526,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43780.754561516200000000
+      ReportDocument.CreationDate = 43879.488431689820000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2492,7 +2556,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43780.754561539350000000
+      ReportDocument.CreationDate = 43879.488431712960000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -2522,7 +2586,7 @@ object frmDashboard_Ind: TfrmDashboard_Ind
       PrinterPage.ScaleMode = smFit
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
-      ReportDocument.CreationDate = 43780.754561562500000000
+      ReportDocument.CreationDate = 43879.488431736110000000
       ShrinkToPageWidth = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
