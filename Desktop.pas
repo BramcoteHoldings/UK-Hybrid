@@ -5368,6 +5368,7 @@ begin
                LfrmClients := TfrmClients.Create(Self);
 
                LNClient := LfrmClientSearch.qryClientList.FieldByName('NCLIENT').AsString;
+               LfrmClients.ANClient := LfrmClientSearch.qryClientList.FieldByName('NCLIENT').AsInteger;
                AddFormToTab(LfrmClients,1);
 //               LfrmClients.DisplayClient(StrToInt(LNClient));
 
