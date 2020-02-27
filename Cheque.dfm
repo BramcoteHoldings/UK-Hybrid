@@ -288,7 +288,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 123
     Width = 87
-    Height = 25
+    Height = 23
     Alignment = taRightJustify
     DecimalPlaces = 2
     DisplayFormat = dfCurrency
@@ -850,7 +850,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43868.4358797454d
+    EditValue = 43885.7521742014d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -1486,13 +1486,13 @@ object frmCheque: TfrmCheque
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'select code from taxtype')
-    Left = 232
-    Top = 337
+    Left = 247
+    Top = 350
   end
   object dsTaxRate: TUniDataSource
     DataSet = qryTaxRate
-    Left = 265
-    Top = 336
+    Left = 279
+    Top = 312
   end
   object qrySundryType: TUniQuery
     Connection = dmAxiom.uniInsight
@@ -1503,8 +1503,8 @@ object frmCheque: TfrmCheque
       'and active = '#39'Y'#39
       'and code not in ('#39'ia'#39','#39'wo'#39')'
       'order by descr')
-    Left = 241
-    Top = 381
+    Left = 252
+    Top = 390
     ParamData = <
       item
         DataType = ftUnknown
@@ -1514,8 +1514,8 @@ object frmCheque: TfrmCheque
   end
   object dsSundryType: TUniDataSource
     DataSet = qrySundryType
-    Left = 278
-    Top = 376
+    Left = 355
+    Top = 394
   end
   object qryInvestmentTrans: TUniQuery
     KeyFields = 'NINVTRAN'
@@ -1539,8 +1539,8 @@ object frmCheque: TfrmCheque
       '  TAX_PAID = TAX_PAID + :TAX_PAID'
       'WHERE NMEMO = :NMemo')
     CachedUpdates = True
-    Left = 512
-    Top = 332
+    Left = 556
+    Top = 328
     ParamData = <
       item
         DataType = ftUnknown
@@ -1575,8 +1575,8 @@ object frmCheque: TfrmCheque
         '    (:CREATED, :ACCT, :AMOUNT, :NJOURNAL, :REASON,'#39'1'#39', '#39'G'#39', SysD' +
         'ate, :NMEMO)')
     CachedUpdates = True
-    Left = 418
-    Top = 337
+    Left = 452
+    Top = 328
     ParamData = <
       item
         DataType = ftUnknown

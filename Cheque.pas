@@ -2000,11 +2000,10 @@ begin
                            if qryLedger.FieldByName('inv_TAX').AsFloat <> 0 then
                            begin
                               if cMatterTotal > 0 then
-                                 cMatterTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat;  //FieldByName('legal_cr_amount').AsFloat/
-                                              //  (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                                 cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('inv_TAX').AsFloat;
+
                               if cTradeTotal > 0 then
-                                 cTradeTotalTax := qryLedger.FieldByName('inv_TAX').AsFloat; //FieldByName('trade_cr_amount').AsFloat/
-                                               // (FieldByName('amount').AsFloat - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                                 cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('inv_TAX').AsFloat; // - qryLedger.FieldByName('TAX').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
                            end;
                         end;
 
@@ -2062,18 +2061,16 @@ begin
 
                            if cTradeTotal <> 0 then
                            begin
-                              if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
-                                 cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cMatterTotal
-                              else
-                                 cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat;// - cMatterTotal;
-                              cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat;// - cMatterTotalTax;
+                           //   if (TaxRate('BILL',qryLedger.FieldByName('TAXCODE').AsString,Now) < 0) then
+                           //      cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat + qryLedger.FieldByName('TAX').AsFloat - cMatterTotal
+                           //   else
+                           //      cTradeTotal := qryLedger.FieldByName('AMOUNT').AsFloat;// - cMatterTotal;
+                           //   cTradeTotalTax := qryLedger.FieldByName('TAX').AsFloat;// - cMatterTotalTax;
                            end;
                         end;
 
                         // Check if totals are equal to Ledger amount??
                         // Post for trade
-
-
 
                         {post components}
                         sLedgerKey :=  glComponentSetup.buildLedgerKey('',sLedgerCode,'',true,'');
