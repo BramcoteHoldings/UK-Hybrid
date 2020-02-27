@@ -21,7 +21,8 @@ uses
   cxLabel, Vcl.Mask, NumberLabel, cxSplitter, Vcl.Buttons, Vcl.ComCtrls,
   Vcl.ExtCtrls, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, cxImage, System.Classes,
-  AxiomData, SysUtils, ppFileUtils, ppIniStorage, Variants, cxGridExportLink, Windows;
+  AxiomData, SysUtils, ppFileUtils, ppIniStorage, Variants, cxGridExportLink, Windows,
+  dxScrollbarAnnotations;
 
 
 
