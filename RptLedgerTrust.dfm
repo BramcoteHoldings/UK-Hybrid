@@ -482,6 +482,64 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
     UserName = 'plMatter'
     Left = 611
     Top = 3
+    object plMatterppField1: TppField
+      FieldAlias = 'FILEID'
+      FieldName = 'FILEID'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 0
+    end
+    object plMatterppField2: TppField
+      FieldAlias = 'NMATTER'
+      FieldName = 'NMATTER'
+      FieldLength = 0
+      DataType = dtLargeInt
+      DisplayWidth = 15
+      Position = 1
+    end
+    object plMatterppField3: TppField
+      FieldAlias = 'SEARCH'
+      FieldName = 'SEARCH'
+      FieldLength = 140
+      DisplayWidth = 140
+      Position = 2
+    end
+    object plMatterppField4: TppField
+      FieldAlias = 'SHORTDESCR'
+      FieldName = 'SHORTDESCR'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 3
+    end
+    object plMatterppField5: TppField
+      FieldAlias = 'OPENED'
+      FieldName = 'OPENED'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 4
+    end
+    object plMatterppField6: TppField
+      FieldAlias = 'LONGDESCR'
+      FieldName = 'LONGDESCR'
+      FieldLength = 400
+      DisplayWidth = 400
+      Position = 5
+    end
+    object plMatterppField7: TppField
+      FieldAlias = 'ADDRESS'
+      FieldName = 'ADDRESS'
+      FieldLength = 250
+      DisplayWidth = 250
+      Position = 6
+    end
+    object plMatterppField8: TppField
+      FieldAlias = 'SUBURB'
+      FieldName = 'SUBURB'
+      FieldLength = 126
+      DisplayWidth = 126
+      Position = 7
+    end
   end
   object plTrustLedger: TppDBPipeline
     DataSource = dsTrustLedger
@@ -1313,10 +1371,11 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           BandType = 4
           LayerName = Foreground
         end
-        object ppDBText4: TppDBText
+        object ppDBMemo1: TppDBMemo
           DesignLayer = ppDesignLayer1
-          UserName = 'DBText4'
+          UserName = 'DBMemo1'
           Border.mmPadding = 0
+          CharWrap = False
           DataField = 'PAYER'
           DataPipeline = plTrustLedger
           Font.Charset = DEFAULT_CHARSET
@@ -1324,15 +1383,21 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
           Font.Name = 'Segoe UI'
           Font.Size = 9
           Font.Style = []
+          RemoveEmptyLines = False
+          Stretch = True
           Transparent = True
-          WordWrap = True
           DataPipelineName = 'plTrustLedger'
-          mmHeight = 3704
-          mmLeft = 44716
+          mmHeight = 3673
+          mmLeft = 44979
           mmTop = 1058
-          mmWidth = 75141
+          mmWidth = 73593
           BandType = 4
           LayerName = Foreground
+          mmBottomOffset = 0
+          mmOverFlowOffset = 0
+          mmStopPosition = 0
+          mmMinHeight = 0
+          mmLeading = 0
         end
       end
       object ppRegion3: TppRegion
@@ -1782,23 +1847,6 @@ object frmRptLedgerTrust: TfrmRptLedgerTrust
         raProgram.CaretPos = (
           3
           3)
-      end
-      object raProgramInfo6: TraProgramInfo
-        raClassName = 'TraEventHandler'
-        raProgram.ProgramName = 'DBText4OnPrint'
-        raProgram.ProgramType = ttProcedure
-        raProgram.Source = 
-          'procedure DBText4OnPrint;'#13#10'var'#13#10'   LineNo: integer;'#13#10'begin'#13#10'   D' +
-          'BText4.Height := 3.704;'#13#10'   if Length(plTrustLedger['#39'PAYER'#39']) > ' +
-          '53 then'#13#10'   begin'#13#10'     LineNo := (Length(plTrustLedger['#39'PAYER'#39']' +
-          ')/53);'#13#10'     DBText4.Height := 3.704 * (LineNo+1);'#13#10'   end;'#13#10'end' +
-          ';'#13#10
-        raProgram.ComponentName = 'DBText4'
-        raProgram.EventName = 'OnPrint'
-        raProgram.EventID = 32
-        raProgram.CaretPos = (
-          3
-          5)
       end
     end
     object ppDesignLayers1: TppDesignLayers

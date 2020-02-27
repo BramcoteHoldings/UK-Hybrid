@@ -84,7 +84,6 @@ type
     ppRegion2: TppRegion;
     ppDBText2: TppDBText;
     ppDBText3: TppDBText;
-    ppDBText4: TppDBText;
     ppRegion3: TppRegion;
     ppDBText13: TppDBText;
     ppLabel12: TppLabel;
@@ -111,6 +110,7 @@ type
     Label4: TLabel;
     qryBanks: TUniQuery;
     dsBanks: TUniDataSource;
+    ppDBMemo1: TppDBMemo;
     procedure btnPrinClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnMatterClick(Sender: TObject);
