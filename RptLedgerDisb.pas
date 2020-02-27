@@ -256,7 +256,7 @@ begin
       if chkTo.Checked then
         SQL.Add('  AND DISPATCHED < :P_DateTo ');
       // 25 Jan 2019 dw add in disbursement receipts
-      SQL.Add('UNION ');
+      SQL.Add('UNION ALL');
       SQL.Add('SELECT A.CREATED, A.TAXCODE, A.REFNO, A.PAYER, NULL AS INVOICEDATE, '''' AS BILL, A.AMOUNT, A.DESCR, A.SUNDRYTYPE, A.TAX, ');
       SQL.Add(' calc_disb_percent(a.nmatter) as disb_percent ');
       SQL.ADD(',NVL(to_number(DECODE(SUBSTR(A.AMOUNT,0,1),''0'',to_number(NULL),''-'',ABS(A.AMOUNT))),0) DEBIT ');

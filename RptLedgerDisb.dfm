@@ -298,7 +298,6 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
       'SELECT OPENED, FILEID, P.SEARCH, LONGDESCR, SHORTDESCR, NMATTER'
       'FROM MATTER M, PHONEBOOK P  WHERE FILEID = :P_File'
       'AND M.NCLIENT = P.NCLIENT')
-    Active = True
     Left = 157
     Top = 5
     ParamData = <
@@ -395,7 +394,6 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
         'AND RV_TYPE <> '#39'D'#39
       'ORDER BY CREATED'
       '*/')
-    Active = True
     Left = 248
     Top = 2
   end
@@ -404,50 +402,6 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
     UserName = 'plMatter'
     Left = 85
     Top = 3
-    object plMatterppField1: TppField
-      FieldAlias = 'OPENED'
-      FieldName = 'OPENED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 0
-    end
-    object plMatterppField2: TppField
-      FieldAlias = 'FILEID'
-      FieldName = 'FILEID'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 1
-    end
-    object plMatterppField3: TppField
-      FieldAlias = 'SEARCH'
-      FieldName = 'SEARCH'
-      FieldLength = 140
-      DisplayWidth = 140
-      Position = 2
-    end
-    object plMatterppField4: TppField
-      FieldAlias = 'LONGDESCR'
-      FieldName = 'LONGDESCR'
-      FieldLength = 400
-      DisplayWidth = 400
-      Position = 3
-    end
-    object plMatterppField5: TppField
-      FieldAlias = 'SHORTDESCR'
-      FieldName = 'SHORTDESCR'
-      FieldLength = 60
-      DisplayWidth = 60
-      Position = 4
-    end
-    object plMatterppField6: TppField
-      FieldAlias = 'NMATTER'
-      FieldName = 'NMATTER'
-      FieldLength = 0
-      DataType = dtLargeInt
-      DisplayWidth = 15
-      Position = 5
-    end
   end
   object dsMatter: TUniDataSource
     DataSet = qryMatter
@@ -854,7 +808,7 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3968
-        mmLeft = 137584
+        mmLeft = 135464
         mmTop = 41540
         mmWidth = 8202
         BandType = 0
@@ -957,7 +911,7 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3969
-        mmLeft = 135202
+        mmLeft = 133082
         mmTop = 37306
         mmWidth = 10584
         BandType = 0
@@ -1119,7 +1073,7 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
         Transparent = True
         DataPipelineName = 'plTmpLedger'
         mmHeight = 3852
-        mmLeft = 124619
+        mmLeft = 122499
         mmTop = 794
         mmWidth = 21167
         BandType = 4
@@ -1255,9 +1209,9 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
         Transparent = True
         DataPipelineName = 'plTmpLedger'
         mmHeight = 3852
-        mmLeft = 119856
+        mmLeft = 118798
         mmTop = 5292
-        mmWidth = 25929
+        mmWidth = 24871
         BandType = 4
         LayerName = Foreground
       end
@@ -1530,117 +1484,5 @@ object frmRptLedgerDisb: TfrmRptLedgerDisb
     DataSource = dsTmpLedger
     UserName = 'plTmpLedger'
     Left = 323
-    object plTmpLedgerppField1: TppField
-      FieldAlias = 'CREATED'
-      FieldName = 'CREATED'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 0
-    end
-    object plTmpLedgerppField2: TppField
-      FieldAlias = 'TAXCODE'
-      FieldName = 'TAXCODE'
-      FieldLength = 8
-      DisplayWidth = 8
-      Position = 1
-    end
-    object plTmpLedgerppField3: TppField
-      FieldAlias = 'REFNO'
-      FieldName = 'REFNO'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 2
-    end
-    object plTmpLedgerppField4: TppField
-      FieldAlias = 'PAYER'
-      FieldName = 'PAYER'
-      FieldLength = 85
-      DisplayWidth = 85
-      Position = 3
-    end
-    object plTmpLedgerppField5: TppField
-      FieldAlias = 'INVOICEDATE'
-      FieldName = 'INVOICEDATE'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 4
-    end
-    object plTmpLedgerppField6: TppField
-      FieldAlias = 'BILL'
-      FieldName = 'BILL'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 5
-    end
-    object plTmpLedgerppField7: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'AMOUNT'
-      FieldName = 'AMOUNT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 6
-    end
-    object plTmpLedgerppField8: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'BALANCE'
-      FieldName = 'BALANCE'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 7
-    end
-    object plTmpLedgerppField9: TppField
-      FieldAlias = 'DESCR'
-      FieldName = 'DESCR'
-      FieldLength = 400
-      DisplayWidth = 400
-      Position = 8
-    end
-    object plTmpLedgerppField10: TppField
-      FieldAlias = 'SUNDRYTYPE'
-      FieldName = 'SUNDRYTYPE'
-      FieldLength = 5
-      DisplayWidth = 5
-      Position = 9
-    end
-    object plTmpLedgerppField11: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'TAX'
-      FieldName = 'TAX'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 10
-    end
-    object plTmpLedgerppField12: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'DISB_PERCENT'
-      FieldName = 'DISB_PERCENT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 11
-    end
-    object plTmpLedgerppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'DEBIT'
-      FieldName = 'DEBIT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 12
-    end
-    object plTmpLedgerppField14: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'CREDIT'
-      FieldName = 'CREDIT'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 13
-    end
   end
 end
