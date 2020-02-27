@@ -214,6 +214,8 @@ type
     Label18: TLabel;
     lblBankName: TLabel;
     cbBank: TcxLookupComboBox;
+    tvLedgerORIGINAL_AMOUNT: TcxGridDBColumn;
+    qryLedgerORIGINAL_AMOUNT: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure dbgrLedgerExit(Sender: TObject);
@@ -299,7 +301,7 @@ type
 
     bUpdateStatus       : Boolean;
     bTrustTrans         : Boolean;
-    TotalAmt            : Currency;
+    TotalAmt            : Double;
     DefaultDescr        : String;
     AllocType           : String;
     DefaultTax          : String;
@@ -320,7 +322,7 @@ type
 
     FBank               : string;
 
-    FCreditorTotal      : currency;
+    FCreditorTotal      : double;
     Fnreceiptreq        : string;
     FReqBy              : string;
 
@@ -333,30 +335,30 @@ type
     procedure DistributeBill(bDoPost : boolean); overload;
     procedure StatusDisplay;
     procedure SetupBill;
-    procedure PostCheqReqTrans(cAmount : currency; iNALLOC, iNCHEQREQ : integer);
+    procedure PostCheqReqTrans(cAmount : double; iNALLOC, iNCHEQREQ : integer);
     procedure setQuerySessions;
-    procedure AddToRunningTotalForMatter(cTrustAmount : Currency);
+    procedure AddToRunningTotalForMatter(cTrustAmount : double);
     procedure ChequeGroupEnabled(bFlag : Boolean);
     procedure CheckForMultipleMatters(sRefNo : String);
-    procedure ValidateCurrentRecord(ValidateValue: Currency = 0; ADebitValue: Currency = 0);
-    procedure DeleteFromRunningTotalForBill(sRefNo : String; cTrustAmount : Currency);
-    procedure AddToRunningTotalForBill(sRefNo : String; cTrustAmount : Currency);
-    procedure ValidateBillTotal(AddValue: Currency = 0; ADebitValue: Currency = 0);
+    procedure ValidateCurrentRecord(ValidateValue: double = 0; ADebitValue: double = 0);
+    procedure DeleteFromRunningTotalForBill(sRefNo : String; cTrustAmount : double);
+    procedure AddToRunningTotalForBill(sRefNo : String; cTrustAmount : double);
+    procedure ValidateBillTotal(AddValue: double = 0; ADebitValue: double = 0);
     procedure DisplayDistributionScreen;
     procedure ProcessImportedBill;
     procedure setUpSubBill(iNSubBill : Integer);
 
     function  OKtoPost(bShowError: boolean): Boolean;
     function  CheckReceipt(inreceipt : integer) : integer;
-    function  GetRunningTotalForMatter : Currency;
+    function  GetRunningTotalForMatter : double;
     function  OverdrawTheTrust : Boolean;
     function  ValidateReceipt: Boolean;
     function  CheckForOverdrawnTrust : Boolean;
-    function  GetRunningTotalForBill(sRefNo : String) : Currency;
+    function  GetRunningTotalForBill(sRefNo : String) : double;
     function  HasRunningTotalForBill(sRefNo : String) : Boolean;
     function  IsValidMatterForAccount(sRefNo : String; var lsMessage: string; bFromValidate: boolean = False) : Boolean;
-    function CalcTax(var AAmount: Currency; ATaxCode: string): Currency;
-    procedure SaveTaxAmount(iReceipt: Integer; cAmt: Currency; sParent: String; ATaxCode: string);
+    function CalcTax(var AAmount: double; ATaxCode: string): double;
+    procedure SaveTaxAmount(iReceipt: Integer; cAmt: double; sParent: String; ATaxCode: string);
     procedure CalcGridTax;
     procedure SetDefaultMessageData;
     procedure ClearHeaderControls;
@@ -388,8 +390,9 @@ uses
 {$R *.DFM}
 
 var
-  lcTrust        : Currency;
-  lcRunningTotal : Currency;
+  lcTrust        : Double;
+  lcRunningTotal : Double;
+  fDisbAmount    : Double;
   VisualColumnFieldNames : Array of string;
 
 const
@@ -397,7 +400,6 @@ const
 
 procedure TfrmReceipt.FormShow(Sender: TObject);
 begin
-
    dtpDate.Properties.MaxDate := Today;
    Screen.Cursor := crSQLWait;
    if not Created then
@@ -405,7 +407,6 @@ begin
       try
          dtpDate.Properties.OnChange := nil;
 //         AddBanks(cbBank, 'G,T,C');
-
 
          cbBank.EditValue := TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'); //  cbBank.Properties.Items.IndexOf(TableString('ENTITY', 'CODE', dmAxiom.Entity, 'DEFAULT_BANK'));
          cbBank.OnClick(Self);
@@ -425,7 +426,6 @@ begin
       them from changing the transaction date into the locked period
 }
          dtpDate.EnforceLock := not dmAxiom.Security.PriorPeriodTransactions.Post;
-
 
          if (qryLedger.RecordCount = 0) then
          begin
@@ -552,9 +552,9 @@ begin
         FCreditorTotal := 0;
         if not IsEmpty then
         begin
-          sbarBalances.Panels[pnlCREDITORS].Text := 'Creditors: ' + Format('%m', [FieldByName('BILL_CRED_OWING').AsCurrency]);
-          sbarBalances.Panels[pnlTRUST].Text := 'Trust: ' + Format('%m', [FieldByName('cl_trust_bal').AsCurrency]);
-          FCreditorTotal := FieldByName('BILL_CRED_OWING').AsCurrency;
+          sbarBalances.Panels[pnlCREDITORS].Text := 'Creditors: ' + Format('%m', [FieldByName('BILL_CRED_OWING').AsFloat]);
+          sbarBalances.Panels[pnlTRUST].Text := 'Trust: ' + Format('%m', [FieldByName('cl_trust_bal').AsFloat]);
+          FCreditorTotal := FieldByName('BILL_CRED_OWING').AsFloat;
           bDisplayed := True;
           bUpdateStatus := False;
         end;
@@ -573,7 +573,7 @@ begin
       Open;
       if not IsEmpty then
       begin
-        sbarBalances.Panels[pnlCREDITORS].Text := 'Balance: ' + Format('%m', [FieldByName('BALANCE').AsCurrency]);
+        sbarBalances.Panels[pnlCREDITORS].Text := 'Balance: ' + Format('%m', [FieldByName('BALANCE').AsFloat]);
         sbarBalances.Panels[pnlDEBTORS].Text := '';
         sbarBalances.Panels[pnlTRUST].Text := '';
         sbarBalances.Panels[pnlFEES].Text := '';
@@ -605,57 +605,57 @@ end;
 
 procedure TfrmReceipt.DistributeBill(bDoPost : boolean);
 var
-  cRemainder : Currency;
+  cRemainder : double;
 begin
    Screen.Cursor := crSQLWait;
    qryLedger.Edit;
-   cRemainder := qryLedger.FieldByName('CREDIT').AsCurrency;
+   cRemainder := qryLedger.FieldByName('CREDIT').AsFloat;
 
-   if qryLedger.FieldByName('ANTDDR').AsCurrency <= cRemainder then
+   if qryLedger.FieldByName('ANTDDR').AsFloat <= cRemainder then
    begin
-      qryLedger.FieldByName('ANTDCR').AsCurrency := qryLedger.FieldByName('ANTDDR').AsCurrency;
-      cRemainder := cRemainder - qryLedger.FieldByName('ANTDCR').AsCurrency;
+      qryLedger.FieldByName('ANTDCR').AsFloat := qryLedger.FieldByName('ANTDDR').AsFloat;
+      cRemainder := cRemainder - qryLedger.FieldByName('ANTDCR').AsFloat;
    end
    else
    begin
-      qryLedger.FieldByName('ANTDCR').AsCurrency := cRemainder;
+      qryLedger.FieldByName('ANTDCR').AsFloat := cRemainder;
       cRemainder := 0.0;
    end;
 
-   if qryLedger.FieldByName('DISBDR').AsCurrency <= cRemainder then
+   if qryLedger.FieldByName('DISBDR').AsFloat <= cRemainder then
    begin
-      qryLedger.FieldByName('DISBCR').AsCurrency := qryLedger.FieldByName('DISBDR').AsCurrency;
-      cRemainder := cRemainder - qryLedger.FieldByName('DISBCR').AsCurrency;
+      qryLedger.FieldByName('DISBCR').AsFloat := qryLedger.FieldByName('DISBDR').AsFloat;
+      cRemainder := cRemainder - qryLedger.FieldByName('DISBCR').AsFloat;
    end
    else
    begin
-      qryLedger.FieldByName('DISBCR').AsCurrency := cRemainder;
+      qryLedger.FieldByName('DISBCR').AsFloat := cRemainder;
       cRemainder := 0.0;
    end;
 
-   if qryLedger.FieldByName('UPCREDDR').AsCurrency <= cRemainder then
+   if qryLedger.FieldByName('UPCREDDR').AsFloat <= cRemainder then
    begin
-      qryLedger.FieldByName('UPCREDCR').AsCurrency := qryLedger.FieldByName('UPCREDDR').AsCurrency;
-      cRemainder := cRemainder - qryLedger.FieldByName('UPCREDCR').AsCurrency;
+      qryLedger.FieldByName('UPCREDCR').AsFloat := qryLedger.FieldByName('UPCREDDR').AsFloat;
+      cRemainder := cRemainder - qryLedger.FieldByName('UPCREDCR').AsFloat;
    end
    else
    begin
-      qryLedger.FieldByName('UPCREDCR').AsCurrency := cRemainder;
+      qryLedger.FieldByName('UPCREDCR').AsFloat := cRemainder;
       cRemainder := 0.0;
    end;
 
-   if qryLedger.FieldByName('SUNDDR').AsCurrency <= cRemainder then
+   if qryLedger.FieldByName('SUNDDR').AsFloat <= cRemainder then
    begin
-      qryLedger.FieldByName('SUNDCR').AsCurrency := qryLedger.FieldByName('SUNDDR').AsCurrency;
-      cRemainder := cRemainder - qryLedger.FieldByName('SUNDCR').AsCurrency;
+      qryLedger.FieldByName('SUNDCR').AsFloat := qryLedger.FieldByName('SUNDDR').AsFloat;
+      cRemainder := cRemainder - qryLedger.FieldByName('SUNDCR').AsFloat;
    end
    else
    begin
-      qryLedger.FieldByName('SUNDCR').AsCurrency := cRemainder;
+      qryLedger.FieldByName('SUNDCR').AsFloat := cRemainder;
       cRemainder := 0.0;
    end;
 
-   qryLedger.FieldByName('FEESCR').AsCurrency := cRemainder;
+   qryLedger.FieldByName('FEESCR').AsFloat := cRemainder;
    if bDoPost then
       qryLedger.Post;
    Screen.Cursor := crDefault;
@@ -756,7 +756,7 @@ begin
    CheckReceipt := iret;
 end;
 
-procedure TfrmReceipt.PostCheqReqTrans(cAmount : currency; iNALLOC, iNCHEQREQ : integer);
+procedure TfrmReceipt.PostCheqReqTrans(cAmount : double; iNALLOC, iNCHEQREQ : integer);
 begin
   with qryCheqReqTrans do
     begin
@@ -765,7 +765,7 @@ begin
         Open;
       Insert;
       FieldbyName('CREATED').AsDateTime := Trunc(Now);
-      FieldbyName('AMOUNT').AsCurrency := cAmount;
+      FieldbyName('AMOUNT').AsFloat := cAmount;
       FieldbyName('NALLOC').AsInteger := iNALLOC;
       FieldbyName('NCHEQREQ').AsInteger := iNCHEQREQ;
       FieldbyName('OPERATOR').AsString := dmAxiom.UserId;
@@ -809,7 +809,7 @@ begin
          FieldByName('TYPE').AsString := 'Bill';
          SetupBill;
          DistributeBill;
-         neAmount.EditValue := neAmount.EditValue + FieldByName('CREDIT').AsCurrency;
+         neAmount.EditValue := neAmount.EditValue + FieldByName('CREDIT').AsFloat;
          foMultipleMatters.Add(qryLedger.FieldByName('REFNO').AsString);
          if State <> dsInsert then
             Edit;
@@ -889,10 +889,10 @@ begin
 end;
 
 
-function TfrmReceipt.CalcTax(var AAmount: Currency; ATaxCode: string): Currency;
+function TfrmReceipt.CalcTax(var AAmount: double; ATaxCode: string): double;
 var
   cAmount,
-  cTax: currency;
+  cTax: double;
 begin
   Result := 0;
   if ATaxCode <> '' then
@@ -918,12 +918,12 @@ end;
 
 -------------------------------------------------------------------------------}
 
-procedure TfrmReceipt.SaveTaxAmount(iReceipt: Integer; cAmt: Currency; sParent: String; ATaxCode: string);
+procedure TfrmReceipt.SaveTaxAmount(iReceipt: Integer; cAmt: double; sParent: String; ATaxCode: string);
 var
   lsLedger      : String;
   lsDefaultTax  : String;
   lsAccountCode : String;
-  lcTax         : Currency;
+  lcTax         : double;
   glComponentSetup : TglComponentSetup;
   sLedgerKey    : String;
 begin
@@ -997,7 +997,7 @@ begin
       tbBranch.Text := TableString('BANK', 'ACCT', FieldByName('ACCT').AsString, 'SUBURB');
       tbChqBank.Text := TableString('BANK', 'ACCT', FieldByName('ACCT').AsString, 'BANK_ABBREV');
       tbChqno.Text := FieldByName('CHQNO').AsString;
-      neAmount.EditValue := FieldByName('AMOUNT').AsCurrency;
+      neAmount.EditValue := FieldByName('AMOUNT').AsFloat;
     end;
   end;
   //show;
@@ -1015,7 +1015,7 @@ begin
         FieldByName('REFNO').AsString := qryChequeNallocs.FieldByName('FILEID').AsString;
         FieldByName('DESCR').AsString :=  qryChequeNallocs.FieldByName('CLIENT_NAME').AsString + ' ' + qryChequeNallocs.FieldByName('MATTER_DESC').AsString + ' ' + qryChequeNallocs.FieldByName('FILEID').AsString;
         FieldByName('REASON').AsString := sDesc;
-        FieldByName('CREDIT').AsCurrency := 0 - qryChequeNallocs.FieldbyName('AMOUNT').AsCurrency;
+        FieldByName('CREDIT').AsFloat := 0 - qryChequeNallocs.FieldbyName('AMOUNT').AsFloat;
         Post;
       end;
       Next;
@@ -1032,7 +1032,7 @@ end;
 
 procedure TfrmReceipt.UpdateTotal;
 var
-  Unallocated: Currency;
+  Unallocated: double;
   Row: integer;
 begin
    bUpdateStatus := False;
@@ -1119,11 +1119,11 @@ begin
       qryLedger.FieldByName('TYPE').AsString := AllocType;
 
    qryLedger.FieldByName('REASON').AsString := DefaultDescr;
-   qryLedger.FieldByName('DEBIT').AsCurrency := 0.0;
-   qryLedger.FieldByName('FEESDR').AsCurrency := 0.0;
-   qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
-   qryLedger.FieldByName('ANTDDR').AsCurrency := 0.0;
-   qryLedger.FieldByName('SUNDDR').AsCurrency := 0.0;
+   qryLedger.FieldByName('DEBIT').AsFloat := 0.0;
+   qryLedger.FieldByName('FEESDR').AsFloat := 0.0;
+   qryLedger.FieldByName('ANTDDR').AsFloat := 0.0;
+   qryLedger.FieldByName('ANTDDR').AsFloat := 0.0;
+   qryLedger.FieldByName('SUNDDR').AsFloat := 0.0;
 end;
 
 
@@ -1435,13 +1435,13 @@ begin
   if (tbDesc.Text = '') then
     tbDesc.Text := qryLedger.FieldByName('REASON').AsString;
 
-  qryLedger.FieldByName('CREDIT').AsCurrency := qryBill.FieldbyName('OWING').AsCurrency;  //  qryBill.FieldbyName('FEES').AsCurrency + qryBill.FieldbyName('DISB').AsCurrency + qryBill.FieldbyName('UPCRED').AsCurrency + qryBill.FieldbyName('ANTD').AsCurrency + qryBill.FieldbyName('SUND').AsCurrency + qryBill.FieldbyName('TAX').AsCurrency - qryBill.FieldbyName('FEES_PAID').AsCurrency - qryBill.FieldbyName('DISB_PAID').AsCurrency - qryBill.FieldbyName('ANTD_PAID').AsCurrency - qryBill.FieldbyName('UPCRED_PAID').AsCurrency - qryBill.FieldbyName('SUND_PAID').AsCurrency - qryBill.FieldByName('TAX_PAID').AsCurrency;
-  qryLedger.FieldByName('DEBIT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-  qryLedger.FieldByName('FEESDR').AsCurrency := qryBill.FieldByName('FEES').AsCurrency - qryBill.FieldByName('FEES_PAID').AsCurrency + qryBill.FieldByName('FEESTAX').AsCurrency - qryBill.FieldByName('FEESTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('DISBDR').AsCurrency := qryBill.FieldByName('DISB').AsCurrency - qryBill.FieldByName('DISB_PAID').AsCurrency + qryBill.FieldByName('DISBTAX').AsCurrency - qryBill.FieldByName('DISBTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('UPCREDDR').AsCurrency := qryBill.FieldByName('UPCRED').AsCurrency - qryBill.FieldbyName('UPCRED_PAID').AsCurrency + qryBill.FieldByName('UPCREDTAX').AsCurrency - qryBill.FieldByName('UPCREDTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('ANTDDR').AsCurrency := qryBill.FieldByName('ANTD').AsCurrency - qryBill.FieldbyName('ANTD_PAID').AsCurrency + qryBill.FieldByName('ANTDTAX').AsCurrency - qryBill.FieldByName('ANTDTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('SUNDDR').AsCurrency := qryBill.FieldByName('SUND').AsCurrency - qryBill.FieldByName('SUND_PAID').AsCurrency + qryBill.FieldByName('SUNDTAX').AsCurrency - qryBill.FieldByName('SUNDTAX_PAID').AsCurrency;
+  qryLedger.FieldByName('CREDIT').AsFloat := qryBill.FieldbyName('OWING').AsFloat;  //  qryBill.FieldbyName('FEES').AsFloat + qryBill.FieldbyName('DISB').AsFloat + qryBill.FieldbyName('UPCRED').AsFloat + qryBill.FieldbyName('ANTD').AsFloat + qryBill.FieldbyName('SUND').AsFloat + qryBill.FieldbyName('TAX').AsFloat - qryBill.FieldbyName('FEES_PAID').AsFloat - qryBill.FieldbyName('DISB_PAID').AsFloat - qryBill.FieldbyName('ANTD_PAID').AsFloat - qryBill.FieldbyName('UPCRED_PAID').AsFloat - qryBill.FieldbyName('SUND_PAID').AsFloat - qryBill.FieldByName('TAX_PAID').AsFloat;
+  qryLedger.FieldByName('DEBIT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+  qryLedger.FieldByName('FEESDR').AsFloat := qryBill.FieldByName('FEES').AsFloat - qryBill.FieldByName('FEES_PAID').AsFloat + qryBill.FieldByName('FEESTAX').AsFloat - qryBill.FieldByName('FEESTAX_PAID').AsFloat;
+  qryLedger.FieldByName('DISBDR').AsFloat := qryBill.FieldByName('DISB').AsFloat - qryBill.FieldByName('DISB_PAID').AsFloat + qryBill.FieldByName('DISBTAX').AsFloat - qryBill.FieldByName('DISBTAX_PAID').AsFloat;
+  qryLedger.FieldByName('UPCREDDR').AsFloat := qryBill.FieldByName('UPCRED').AsFloat - qryBill.FieldbyName('UPCRED_PAID').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat - qryBill.FieldByName('UPCREDTAX_PAID').AsFloat;
+  qryLedger.FieldByName('ANTDDR').AsFloat := qryBill.FieldByName('ANTD').AsFloat - qryBill.FieldbyName('ANTD_PAID').AsFloat + qryBill.FieldByName('ANTDTAX').AsFloat - qryBill.FieldByName('ANTDTAX_PAID').AsFloat;
+  qryLedger.FieldByName('SUNDDR').AsFloat := qryBill.FieldByName('SUND').AsFloat - qryBill.FieldByName('SUND_PAID').AsFloat + qryBill.FieldByName('SUNDTAX').AsFloat - qryBill.FieldByName('SUNDTAX_PAID').AsFloat;
   qryLedger.FieldByName('INVOICE').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
 
   qryLedger.Post;
@@ -1576,7 +1576,7 @@ begin
                tbBranch.Text := TableString('BANK', 'ACCT', FieldByName('ACCT').AsString, 'SUBURB');
                tbChqBank.Text := TableString('BANK', 'ACCT', FieldByName('ACCT').AsString, 'BANK_ABBREV');
                tbChqno.Text := FieldByName('CHQNO').AsString;
-               neAmount.EditValue := FieldByName('AMOUNT').AsCurrency;
+               neAmount.EditValue := FieldByName('AMOUNT').AsFloat;
             end;
             close;
          end;
@@ -1608,7 +1608,7 @@ begin
                   FieldByName('REASON').AsString := sDesc;
 
                   if (State <> dsInsert) and (State <> dsEdit) then Edit;
-                  FieldByName('CREDIT').AsCurrency := qryCheqNCheqReq.FieldbyName('AMOUNT').AsCurrency;
+                  FieldByName('CREDIT').AsFloat := qryCheqNCheqReq.FieldbyName('AMOUNT').AsFloat;
 
                   if (State <> dsInsert) and (State <> dsEdit) then Edit;
                   Post;
@@ -1644,7 +1644,7 @@ begin
    qryCheqReqTrans.Connection := dmAxiom.uniInsight;
 end;
 
-procedure TfrmReceipt.ValidateCurrentRecord(ValidateValue: Currency; ADebitValue: Currency);
+procedure TfrmReceipt.ValidateCurrentRecord(ValidateValue: double; ADebitValue: double);
 begin
    if (qryLedger.FieldByName('TYPE').AsString = 'Bill') then
    begin
@@ -1653,7 +1653,7 @@ begin
          begin
             if not qryLedger.Modified then
                qryLedger.Edit;
-            qryLedger.FieldByName('CREDIT').AsCurrency := ValidateValue;
+            qryLedger.FieldByName('CREDIT').AsFloat := ValidateValue;
             DistributeBill;
             DisplayDistributionScreen;
          end;    //  end if
@@ -1681,13 +1681,13 @@ begin
    lcTrust := ClearTrust(GetNMemoRef('FILEID', tvLedgerREFNO.DataBinding.Field.Text));
    lcRunningTotal :=   GetRunningTotalForMatter;
 
-   lcRunningTotal := lcRunningTotal + qryLedger.FieldByName('CREDIT').AsCurrency;
+   lcRunningTotal := lcRunningTotal + qryLedger.FieldByName('CREDIT').AsFloat;
 
    if (lcRunningTotal > lcTrust) then
    begin
       if OverDrawTheTrust then
       begin
-         AddToRunningTotalForMatter(qryLedger.FieldByName('CREDIT').AsCurrency);
+         AddToRunningTotalForMatter(qryLedger.FieldByName('CREDIT').AsFloat);
          tvLedgerCREDIT.Styles.Content := styTrustOD;
          Result := FALSE;
       end
@@ -1698,7 +1698,7 @@ begin
       end;    //  end if-else
    end
    else
-      AddToRunningTotalForMatter(qryLedger.FieldByName('CREDIT').AsCurrency);
+      AddToRunningTotalForMatter(qryLedger.FieldByName('CREDIT').AsFloat);
 end;
 
 {-------------------------------------------------------------------------------
@@ -1706,14 +1706,14 @@ end;
   Description:  For the entered receipt or matter, receive the running total.
                 The user may have entered more than one receipt for a matter.
                 The sum must not exceed the amount in the trust.
-  Return:       Sum of the running total as a currency.
+  Return:       Sum of the running total as a double.
   Parameters:   Reference number for the current record in the grid.
   Programmer:   Brendan Jagtenberg
   Date:         28-10-2002
 
 -------------------------------------------------------------------------------}
 
-function TfrmReceipt.GetRunningTotalForMatter : Currency;
+function TfrmReceipt.GetRunningTotalForMatter : double;
 var
   liPos : Integer;
 begin
@@ -1738,10 +1738,10 @@ end;
 
 -------------------------------------------------------------------------------}
 
-procedure TfrmReceipt.AddToRunningTotalForMatter(cTrustAmount : Currency);
+procedure TfrmReceipt.AddToRunningTotalForMatter(cTrustAmount : double);
 var
   liPos   : Integer;
-  lcTotal : Currency;
+  lcTotal : double;
 begin
   liPos := foMatterTotals.IndexOfName(fsMatter);
 
@@ -1935,17 +1935,17 @@ end;
   Description:  For the entered receipt or matter, receive the running total.
                 The user may have entered more than one bill for a matter.
                 The sum must not exceed the amount in the trust.
-  Return:       Sum of the running total as a currency.
+  Return:       Sum of the running total as a double.
   Parameters:   Reference number for the current record in the grid.
   Programmer:   Brendan Jagtenberg
   Date:         09-01-2003
 
 -------------------------------------------------------------------------------}
 
-function TfrmReceipt.GetRunningTotalForBill(sRefNo : String) : Currency;
+function TfrmReceipt.GetRunningTotalForBill(sRefNo : String) : double;
 var
   liPos : Integer;
-  lcTotal : Currency;
+  lcTotal : double;
 begin
   liPos := foBillsTotal.IndexOfName(sRefNo);
 
@@ -1974,10 +1974,10 @@ end;
 
 -------------------------------------------------------------------------------}
 
-procedure TfrmReceipt.DeleteFromRunningTotalForBill(sRefNo : String; cTrustAmount : Currency);
+procedure TfrmReceipt.DeleteFromRunningTotalForBill(sRefNo : String; cTrustAmount : double);
 var
   liPos   : Integer;
-  lcTotal : Currency;
+  lcTotal : double;
 begin
   liPos := foBillsTotal.IndexOfName(sRefNo);
 
@@ -2045,10 +2045,10 @@ begin
   ClearHeaderControls;
 end;
 
-procedure TfrmReceipt.AddToRunningTotalForBill(sRefNo : String; cTrustAmount : Currency);
+procedure TfrmReceipt.AddToRunningTotalForBill(sRefNo : String; cTrustAmount : double);
 var
   liPos   : Integer;
-  lcTotal : Currency;
+  lcTotal : double;
 begin
   liPos := foBillsTotal.IndexOfName(sRefNo);
 
@@ -2089,10 +2089,10 @@ end;
 
 -------------------------------------------------------------------------------}
 
-procedure TfrmReceipt.ValidateBillTotal(AddValue: Currency; ADebitValue: Currency);
+procedure TfrmReceipt.ValidateBillTotal(AddValue: double; ADebitValue: double);
 var
   lsRefNo : String;
-  lcTotal : Currency;
+  lcTotal : double;
 begin
   lsRefNo := qryLedger.FieldByName('REFNO').AsString;
 
@@ -2103,14 +2103,14 @@ begin
         if (HasRunningTotalForBill(lsRefNo)) then
         begin
            if AddValue = 0 then
-              DeleteFromRunningTotalForBill(lsRefNo, Currency(tvLedgerCREDIT.EditValue))        //  qryLedger.FieldByName('CREDIT').AsCurrency)
+              DeleteFromRunningTotalForBill(lsRefNo, double(tvLedgerCREDIT.EditValue))        //  qryLedger.FieldByName('CREDIT').AsFloat)
            else
               DeleteFromRunningTotalForBill(lsRefNo, AddValue);
         end
         else
         begin
            if AddValue = 0 then
-              AddToRunningTotalForBill(lsRefNo, Currency(tvLedgerCREDIT.EditValue) )  //   qryLedger.FieldByName('CREDIT').AsCurrency);
+              AddToRunningTotalForBill(lsRefNo, double(tvLedgerCREDIT.EditValue) )  //   qryLedger.FieldByName('CREDIT').AsFloat);
            else
               AddToRunningTotalForBill(lsRefNo, AddValue );
         end;
@@ -2119,9 +2119,9 @@ begin
 
         if (lcTotal < 0) then
           begin
-            AddToRunningTotalForBill(lsRefNo, Currency(tvLedgerCREDIT.EditValue));   //qryLedger.FieldByName('CREDIT').AsCurrency);
+            AddToRunningTotalForBill(lsRefNo, double(tvLedgerCREDIT.EditValue));   //qryLedger.FieldByName('CREDIT').AsFloat);
             qryLedger.Edit;
-            qryLedger.FieldByName('CREDIT').AsCurrency := GetRunningTotalForBill(lsRefNo);
+            qryLedger.FieldByName('CREDIT').AsFloat := GetRunningTotalForBill(lsRefNo);
           end;    //  end if
       end;    //  end if
     end;
@@ -2160,11 +2160,11 @@ begin
       if(LfrmReceiptDistribute.SetupDistribution(tbRcptno.Text,
                         qryLedger.FieldByName('INVOICE').AsInteger,
                         qryLedger.FieldByName('NSUBBILL').AsInteger,
-                        qryLedger.FieldByName('FEESCR').AsCurrency,
-                        qryLedger.FieldByName('DISBCR').AsCurrency,
-                        qryLedger.FieldByName('UPCREDCR').AsCurrency,
-                        qryLedger.FieldByName('ANTDCR').AsCurrency,
-                        qryLedger.FieldByName('SUNDCR').AsCurrency)) then
+                        qryLedger.FieldByName('FEESCR').AsFloat,
+                        qryLedger.FieldByName('DISBCR').AsFloat,
+                        qryLedger.FieldByName('UPCREDCR').AsFloat,
+                        qryLedger.FieldByName('ANTDCR').AsFloat,
+                        qryLedger.FieldByName('SUNDCR').AsFloat)) then
       begin
          if(LfrmReceiptDistribute.ShowModal = mrOk) then
          begin
@@ -2187,11 +2187,11 @@ begin
                      end;
                   end;
 
-                  qryLedger.FieldByName('FEESCR').AsCurrency := LfrmReceiptDistribute.neFees.Value;
-                  qryLedger.FieldByName('DISBCR').AsCurrency := LfrmReceiptDistribute.neDisb.Value;
-                  qryLedger.FieldByName('UPCREDCR').AsCurrency := LfrmReceiptDistribute.neUpCred.Value;
-                  qryLedger.FieldByName('ANTDCR').AsCurrency := LfrmReceiptDistribute.neAntd.Value;
-                  qryLedger.FieldByName('SUNDCR').AsCurrency := LfrmReceiptDistribute.neSund.Value;
+                  qryLedger.FieldByName('FEESCR').AsFloat := LfrmReceiptDistribute.neFees.Value;
+                  qryLedger.FieldByName('DISBCR').AsFloat := LfrmReceiptDistribute.neDisb.Value;
+                  qryLedger.FieldByName('UPCREDCR').AsFloat := LfrmReceiptDistribute.neUpCred.Value;
+                  qryLedger.FieldByName('ANTDCR').AsFloat := LfrmReceiptDistribute.neAntd.Value;
+                  qryLedger.FieldByName('SUNDCR').AsFloat := LfrmReceiptDistribute.neSund.Value;
                finally
                   AView.EndUpdate;
                end;
@@ -2222,17 +2222,17 @@ end;
 
 procedure TfrmReceipt.ProcessImportedBill;
 var
-  lcBillAmount   : Currency;
-  lcImportedBill : Currency;
+  lcBillAmount   : double;
+  lcImportedBill : double;
 begin
 
    qryBill.Close;
    qryBill.ParamByName('NMEMO').AsString :=  GetNMemoRef('NMEMO', qryLedger.FieldByName('REFNO').AsString);
    qryBill.Open;
 
-   lcBillAmount := qryBill.FieldbyName('OWING').AsCurrency;
+   lcBillAmount := qryBill.FieldbyName('OWING').AsFloat;
 
-   lcImportedBill := qryLedger.FieldByName('CREDIT').AsCurrency;
+   lcImportedBill := qryLedger.FieldByName('CREDIT').AsFloat;
 
    if (lcBillAmount = lcImportedBill) then
    begin
@@ -2407,9 +2407,12 @@ begin
                qryLedger.FieldByName('CREDIT').AsFloat := frmDisbSearch.qryLedgers.FieldByName('AMOUNT').AsFloat;
                qryLedger.FieldByName('FILEID').AsString := frmDisbSearch.qryLedgers.FieldByName('FILEID').AsString;
                qryLedger.FieldByName('NALLOC').AsInteger := frmDisbSearch.qryLedgers.FieldByName('NALLOC').AsInteger;
+               qryLedger.FieldByName('ORIGINAL_AMOUNT').AsFloat := frmDisbSearch.qryLedgers.FieldByName('AMOUNT').AsFloat;
                if qryLedger.FieldByName('REASON').AsString = '' then
                   qryLedger.FieldByName('REASON').AsString := DefaultDescr;
                tvLedgerCREDIT.EditValue := frmDisbSearch.qryLedgers.FieldByName('AMOUNT').AsFloat;
+               tvLedgerORIGINAL_AMOUNT.EditValue := fDisbAmount + frmDisbSearch.qryLedgers.FieldByName('AMOUNT').AsFloat;
+
             end;
          end;
       finally
@@ -2618,15 +2621,15 @@ begin
       if not qryLedger.Modified then
          qryLedger.Edit;
 
-      qryLedger.FieldByName('CREDIT').AsCurrency := DisplayValue;
+      qryLedger.FieldByName('CREDIT').AsFloat := DisplayValue;
 
       if (tvLedgerTYPE.DataBinding.Field.Text = 'Bill') then
       begin
-         if DisplayValue > qryLedger.FieldByName('DEBIT').AsCurrency then
+         if DisplayValue > qryLedger.FieldByName('DEBIT').AsFloat then
          begin
-            if qryLedger.FieldByName('DEBIT').AsCurrency <> 0.0 then
+            if qryLedger.FieldByName('DEBIT').AsFloat <> 0.0 then
             begin
-               MsgErr('There is only ' + Format('%m', [qryLedger.FieldByName('DEBIT').AsCurrency]) + ' owing on this Bill');
+               MsgErr('There is only ' + Format('%m', [qryLedger.FieldByName('DEBIT').AsFloat]) + ' owing on this Bill');
                bProcess := False;
             end
             else
@@ -2635,15 +2638,15 @@ begin
                bProcess := False;
                Error := True;
             end;
-            tvLedgerCREDIT.DataBinding.Field.AsCurrency := qryLedger.FieldByName('DEBIT').AsCurrency;
-            DisplayValue := qryLedger.FieldByName('DEBIT').AsCurrency;
+            tvLedgerCREDIT.DataBinding.Field.AsFloat := qryLedger.FieldByName('DEBIT').AsFloat;
+            DisplayValue := qryLedger.FieldByName('DEBIT').AsFloat;
          end;
 
          if bProcess = True then
          begin
             //* for this to work, had to change code in unit cxGridCustomTableView - no longer needed
-            ValidateCurrentRecord(Currency(DisplayValue));
-            ValidateBillTotal(Currency(DisplayValue));
+            ValidateCurrentRecord(double(DisplayValue));
+            ValidateBillTotal(double(DisplayValue));
          end;
       end;
    end;
@@ -2654,7 +2657,7 @@ procedure TfrmReceipt.tvLedgerTcxGridDBDataControllerTcxDataSummaryFooterSummary
   Sender: TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean;
   var AText: String);
 var
-   ATotal: Currency;
+   ATotal: double;
 begin
    if not VarIsNull(tvLedger.DataController.Summary.FooterSummaryValues[0]) then
    begin
@@ -2695,7 +2698,7 @@ var
    NBankdep: integer;
    iCtr: integer;
    bFormUpdated: boolean;
-   cBalance, cAllocAmnt : Currency;
+   cBalance, cAllocAmnt : double;
    lsMessage : String;
    nAccount, i, Row, TempCheqReq, nListRow: integer;
    ErrorMessage: string;
@@ -2714,7 +2717,7 @@ var
    cAmt,
    cTax,
    TotalFeeRcptAmt,
-   cTotalReceiptFees: Currency;
+   cTotalReceiptFees: double;
    GLDefaultTaxCode,
    AValue: string;
    FeeDistCount, TotalFeeDistCount,
@@ -2864,7 +2867,7 @@ begin
                      qryReceipt.FieldByName('BRANCH').AsString := tbBranch.Text;
                      qryReceipt.FieldByName('CHQNO').AsString := tbChqno.Text;
                      qryReceipt.FieldByName('DESCR').AsString := tbDesc.Text;
-                     qryReceipt.FieldByName('AMOUNT').AsCurrency := TotalAmt;
+                     qryReceipt.FieldByName('AMOUNT').AsFloat := TotalAmt;
                      qryReceipt.FieldByName('TRUST').AsString := qryBanks.FieldByName('TRUST').AsString;
                      qryReceipt.FieldByName('CLEARED').AsString := 'Y';
                      qryReceipt.FieldByName('DCLEARDATE').AsDateTime := Date;
@@ -2915,7 +2918,7 @@ begin
                         begin
                            ParamByName('ACCT').AsString := qryReceipt.FieldByName('ACCT').AsString;
                            ParamByName('DEPOSIT_DATE').AsDateTime := qryReceipt.FieldByName('CREATED').AsDateTime;
-                           ParamByName('AMOUNT').AsCurrency := qryReceipt.FieldByName('AMOUNT').AsCurrency;
+                           ParamByName('AMOUNT').AsFloat := qryReceipt.FieldByName('AMOUNT').AsFloat;
                            ParamByName('LAST_NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                            NBankdep := TableInteger('BANK', 'ACCT', qryReceipt.FieldByName('ACCT').AsString, 'NBANKDEP') + 1;
                            ParamByName('NBANKDEP').AsInteger := Nbankdep;
@@ -2976,7 +2979,7 @@ begin
                         for iRows := 0 to RecordCount - 1 do  // while (not qryLedger.EOF) do
                         begin
                            tvLedger.ViewData.Records[iRows].Focused := True;
-                           if (qryLedger.FieldByName('CREDIT').AsCurrency <> 0) then
+                           if (qryLedger.FieldByName('CREDIT').AsFloat <> 0) then
                            begin
                               if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
                                  (qryLedger.FieldByName('TYPE').AsString = 'Protected') then
@@ -3009,14 +3012,14 @@ begin
                                        qryAllocs.FieldByName('NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                                        qryAllocs.FieldByName('REFNO').AsString := qryReceipt.FieldByName('RCPTNO').AsString;
                                        qryAllocs.FieldByName('BILLED').AsString := 'Y';
-                                       qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-                                       qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-                                       qryAllocs.FieldByName('TAX').AsCurrency := 0;
+                                       qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+                                       qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+                                       qryAllocs.FieldByName('TAX').AsFloat := 0;
                                        qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
                                        if qryLedger.FieldByName('TYPE').AsString = 'Disburse' then
-                                          qryAllocs.FieldByName('OUTLAY').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
+                                          qryAllocs.FieldByName('OUTLAY').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
                                        if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
-                                          qryAllocs.FieldByName('SPEC_PURPOSE').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
+                                          qryAllocs.FieldByName('SPEC_PURPOSE').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
 
                                        if qryLedger.fieldByname('NSUBBILL').AsInteger <> 0 then
                                           qryAllocs.fieldByname('NSUBBILL').AsInteger := qryLedger.fieldByname('NSUBBILL').AsInteger;
@@ -3033,9 +3036,9 @@ begin
                                        if (qryReceipt.FieldByName('TRUST').AsString = 'T') then
                                        begin
                                           cClearedTrust := ClearTrust( qryLedger.FieldbyName('REFNO').AsString);  //GetNMemoRef('FILEID', qryLedger.FieldbyName('REFNO').AsString));
-                                          if (qryLedger.FieldByName('CREDIT').AsCurrency < 0) then
+                                          if (qryLedger.FieldByName('CREDIT').AsFloat < 0) then
                                           begin
-                                             if (cClearedTrust + qryLedger.FieldByName('CREDIT').AsCurrency) < 0 then
+                                             if (cClearedTrust + qryLedger.FieldByName('CREDIT').AsFloat) < 0 then
                                                 raise EInvalidBill.Create('This transaction will overdraw trust: ' + qryLedger.FieldByName('REFNO').AsString + chr(13) + chr(13) + 'Posting cancelled');
                                           end;
                                           sBank := TableString('MATTER','FILEID',qryLedger.FieldbyName('REFNO').AsString,'ACCT');
@@ -3054,13 +3057,13 @@ begin
                                           // and say we recovered some fees
                                           // Now make the General Ledger entries
                                           // Fees, Disbursements and Sundries
-                                          if qryLedger.FieldByName('CREDIT').AsCurrency <> 0.0 then
+                                          if qryLedger.FieldByName('CREDIT').AsFloat <> 0.0 then
 		      			     	               begin
                                           {post components}
                                              sLedgerKey := glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,sCreditChart,'',true,'');
 
                                              PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                               , qryLedger.FieldByName('CREDIT').AsCurrency
+                                               , qryLedger.FieldByName('CREDIT').AsFloat
                                                , 0
                                                , qryReceipt.FieldByName('RCPTNO').AsString
                                                , 'RECEIPT'
@@ -3118,14 +3121,14 @@ begin
                                        qryAllocs.FieldByName('NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                                        qryAllocs.FieldByName('REFNO').AsString := qryReceipt.FieldByName('RCPTNO').AsString;
                                        qryAllocs.FieldByName('BILLED').AsString := 'Y';
-                                       qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-                                       qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-                                       qryAllocs.FieldByName('TAX').AsCurrency := 0;
+                                       qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+                                       qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+                                       qryAllocs.FieldByName('TAX').AsFloat := 0;
                                        qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
                                        qryAllocs.FieldByName('DISB_NALLOC_RECEIPT').AsInteger := qryLedger.FieldByName('NALLOC').AsInteger;
                                        qryAllocs.FieldByName('TAXCODE').AsString := TableString('TAXDEFAULT', 'TYPE', 'Receipt', 'CODE');;
 
-                                       qryAllocs.FieldByName('OUTLAY').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
+                                       qryAllocs.FieldByName('OUTLAY').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
 
                                        if nAccount > 0 then
                                        begin
@@ -3139,9 +3142,9 @@ begin
                                        if qryReceipt.FieldByName('TRUST').AsString = 'T' then
                                        begin
                                           cClearedTrust := ClearTrust( qryLedger.FieldbyName('FILEID').AsString);  //GetNMemoRef('FILEID', qryLedger.FieldbyName('REFNO').AsString));
-                                          if (qryLedger.FieldByName('CREDIT').AsCurrency < 0) then
+                                          if (qryLedger.FieldByName('CREDIT').AsFloat < 0) then
                                           begin
-                                             if (cClearedTrust + qryLedger.FieldByName('CREDIT').AsCurrency) < 0 then
+                                             if (cClearedTrust + qryLedger.FieldByName('CREDIT').AsFloat) < 0 then
                                                 raise EInvalidBill.Create('This transaction will overdraw trust: ' + qryLedger.FieldByName('REFNO').AsString + chr(13) + chr(13) + 'Posting cancelled');
                                           end;
                                           sBank := TableString('MATTER','FILEID',qryLedger.FieldbyName('FILEID').AsString,'ACCT');
@@ -3160,13 +3163,13 @@ begin
                                           // and say we recovered some Disbursements
                                           // Now make the General Ledger entries
                                           // Disbursements
-                                          if qryLedger.FieldByName('CREDIT').AsCurrency <> 0.0 then
+                                          if qryLedger.FieldByName('CREDIT').AsFloat <> 0.0 then
 		      			     	               begin
                                              {post components}
                                              sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,sCreditChart,'',true,'');
 
                                              PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                                , qryLedger.FieldByName('CREDIT').AsCurrency
+                                                , qryLedger.FieldByName('CREDIT').AsFloat
                                                 , 0
                                                 , qryReceipt.FieldByName('RCPTNO').AsString
                                                 , 'RECEIPT'
@@ -3186,8 +3189,12 @@ begin
                                        // update original alloc
                                        with qryTmp do
                                        begin
-                                          SQL.Text := 'UPDATE ALLOC SET BILLED = ''Y'' WHERE NALLOC = :NALLOC';
+                                          SQL.Text := 'UPDATE ALLOC SET BILLED = :BILLED WHERE NALLOC = :NALLOC';
                                           ParambyName('NALLOC').AsInteger := qryLedger.FieldByName('NALLOC').AsInteger;
+                                          IF double(tvLedgerORIGINAL_AMOUNT.EditValue) = qryLedger.FieldByName('CREDIT').AsFloat then
+                                             ParambyName('BILLED').AsString := 'Y'
+                                          else
+                                             ParambyName('BILLED').AsString := 'N';
                                           ExecSQL;
                                           Close;
                                        end;
@@ -3202,7 +3209,7 @@ begin
 
                               if (qryLedger.FieldByName('TYPE').AsString = 'Bill') then
                               begin
-                                 cDiff := qryLedger.FieldByName('CREDIT').AsCurrency - (qryLedger.FieldByName('FEESCR').AsCurrency + qryLedger.FieldByName('DISBCR').AsCurrency + qryLedger.FieldByName('UPCREDCR').AsCurrency + qryLedger.FieldByName('ANTDCR').AsCurrency + qryLedger.FieldByName('SUNDCR').AsCurrency);
+                                 cDiff := qryLedger.FieldByName('CREDIT').AsFloat - (qryLedger.FieldByName('FEESCR').AsFloat + qryLedger.FieldByName('DISBCR').AsFloat + qryLedger.FieldByName('UPCREDCR').AsFloat + qryLedger.FieldByName('ANTDCR').AsFloat + qryLedger.FieldByName('SUNDCR').AsFloat);
                                  if abs(cDiff) > 0.001 then
                                     raise EInvalidBill.Create(formatcurr('0.00',cDiff) + ' Total does not agree with Fees, Disbursements, Cheque Reqs, Unpaid Creditors, and Sundries allocation on Bill number : ' + qryLedger.FieldByName('REFNO').AsString + #13 + #13 + 'Posting cancelled');
 
@@ -3239,29 +3246,29 @@ begin
                                  if qryBill.FieldByName('RV_TYPE').AsString = 'D' then
                                  begin
                                     qryAllocs.FieldByName('TYPE').AsString := 'J2';
-                                    qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency;
-                                    qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency;
+                                    qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat;
+                                    qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat;
                                  end
                                  else
                                  begin
                                     qryAllocs.FieldByName('TYPE').AsString := qryReceipt.FieldByName('TYPE').AsString;
-                                    qryAllocs.FieldByName('AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-                                    qryAllocs.FieldByName('BILLED_AMOUNT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
+                                    qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+                                    qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
                                  end;
-                                 qryAllocs.FieldByName('TAX').AsCurrency := 0;
+                                 qryAllocs.FieldByName('TAX').AsFloat := 0;
                                  qryAllocs.FieldByName('CLEARED').AsString := qryReceipt.FieldByName('CLEARED').AsString;
                                  qryAllocs.FieldByName('DCLEARDATE').AsDateTime := qryReceipt.FieldByName('DCLEARDATE').AsDateTime;
                                  qryAllocs.FieldByName('NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                                  qryAllocs.FieldByName('REFNO').AsString := qryReceipt.FieldByName('RCPTNO').AsString;
                                  qryAllocs.FieldByName('BILLED').AsString := 'N';
-                                 qryAllocs.FieldByName('FEE').AsCurrency := qryLedger.FieldByName('FEESCR').AsCurrency;
-                                 qryAllocs.FieldByName('OUTLAY').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency + qryLedger.FieldByName('ANTDCR').AsCurrency;
-                                 qryAllocs.FieldByName('SUNDRY').AsCurrency := qryLedger.FieldByName('SUNDCR').AsCurrency;
-                                 qryAllocs.FieldByName('DISB').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency;
-                                 qryAllocs.FieldByName('ANTD').AsCurrency := qryLedger.FieldByName('ANTDCR').AsCurrency;
-                                 qryAllocs.FieldByName('SUNDRY').AsCurrency := qryLedger.FieldByName('SUNDCR').AsCurrency;
+                                 qryAllocs.FieldByName('FEE').AsFloat := qryLedger.FieldByName('FEESCR').AsFloat;
+                                 qryAllocs.FieldByName('OUTLAY').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat + qryLedger.FieldByName('ANTDCR').AsFloat;
+                                 qryAllocs.FieldByName('SUNDRY').AsFloat := qryLedger.FieldByName('SUNDCR').AsFloat;
+                                 qryAllocs.FieldByName('DISB').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat;
+                                 qryAllocs.FieldByName('ANTD').AsFloat := qryLedger.FieldByName('ANTDCR').AsFloat;
+                                 qryAllocs.FieldByName('SUNDRY').AsFloat := qryLedger.FieldByName('SUNDCR').AsFloat;
 
-                                 qryAllocs.FieldByName('UPCRED').AsCurrency := qryLedger.FieldByName('UPCREDCR').AsCurrency;
+                                 qryAllocs.FieldByName('UPCRED').AsFloat := qryLedger.FieldByName('UPCREDCR').AsFloat;
                                  qryAllocs.FieldByName('CREATED').AsDateTime := dtpDate.Date;
                                  qryAllocs.FieldByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
 
@@ -3290,13 +3297,13 @@ begin
 
                                     {post components}
 
-                                    if qryLedger.FieldByName('FEESCR').AsCurrency <> 0.0 then
+                                    if qryLedger.FieldByName('FEESCR').AsFloat <> 0.0 then
                                     begin
                                        sLedgerKey := glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,
                                                      TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_FEE_CR'),'',true,'');
 
                                        PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                          , qryLedger.FieldByName('FEESCR').AsCurrency
+                                          , qryLedger.FieldByName('FEESCR').AsFloat
                                           , 0
                                           , qryReceipt.FieldByName('RCPTNO').AsString
                                           , 'RECEIPT'
@@ -3313,14 +3320,14 @@ begin
                                           , qryMatters.FieldByName('NMATTER').AsInteger);
                                     end;
 
-                                    if (qryLedger.FieldByName('DISBCR').AsCurrency <> 0.0) then
+                                    if (qryLedger.FieldByName('DISBCR').AsFloat <> 0.0) then
                                     begin
                                        {post components}
                                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,
                                                       TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_DISB_CR'),'',true,'');
 
                                        PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                          , qryLedger.FieldByName('DISBCR').AsCurrency
+                                          , qryLedger.FieldByName('DISBCR').AsFloat
                                           , 0
                                           , qryReceipt.FieldByName('RCPTNO').AsString
                                           , 'RECEIPT'
@@ -3337,14 +3344,14 @@ begin
                                           , qryMatters.FieldByName('NMATTER').AsInteger);
                                     end;
 
-                                    if (qryLedger.FieldByName('ANTDCR').AsCurrency <> 0.0) then
+                                    if (qryLedger.FieldByName('ANTDCR').AsFloat <> 0.0) then
                                     begin
                                        {post components}
                                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,
                                                       TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_ANTD_CR'),'',true,'');
 
                                        PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                          , qryLedger.FieldByName('ANTDCR').AsCurrency
+                                          , qryLedger.FieldByName('ANTDCR').AsFloat
                                           , 0
                                           , qryReceipt.FieldByName('RCPTNO').AsString
                                           , 'RECEIPT'
@@ -3361,14 +3368,14 @@ begin
                                           , qryMatters.FieldByName('NMATTER').AsInteger);
                                     end;
 
-                                    if (qryLedger.FieldByName('UPCREDCR').AsCurrency <> 0.0) then
+                                    if (qryLedger.FieldByName('UPCREDCR').AsFloat <> 0.0) then
                                     begin
                                        {post components}
                                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,
                                                       TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_UPCRED_CR'),'',true,'');
 
                                        PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                          , qryLedger.FieldByName('UPCREDCR').AsCurrency
+                                          , qryLedger.FieldByName('UPCREDCR').AsFloat
                                           , 0
                                           , qryReceipt.FieldByName('RCPTNO').AsString
                                           , 'RECEIPT'
@@ -3385,14 +3392,14 @@ begin
                                           , qryMatters.FieldByName('NMATTER').AsInteger);
                                     end;
 
-                                    if (qryLedger.FieldByName('SUNDCR').AsCurrency <> 0.0) then
+                                    if (qryLedger.FieldByName('SUNDCR').AsFloat <> 0.0) then
                                     begin
                                        {post components}
                                        sLedgerKey :=  glComponentSetup.buildLedgerKey(qryMatters.fieldByName('NMATTER').AsString,
                                                       TableString('ENTITY', 'CODE', dmAxiom.Entity, 'REC_SUND_CR'),'',true,'');
 
                                        PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                          , qryLedger.FieldByName('SUNDCR').AsCurrency
+                                          , qryLedger.FieldByName('SUNDCR').AsFloat
                                           , 0
                                           , qryReceipt.FieldByName('RCPTNO').AsString
                                           , 'RECEIPT'
@@ -3414,20 +3421,20 @@ begin
                                  begin
                                     ParamByName('DATE_LAST_RECPT').AsDateTime := qryReceipt.FieldByName('CREATED').AsDateTime;
 
-                                    if (qryLedger.FieldByName('FEESCR').AsCurrency = 0) then
+                                    if (qryLedger.FieldByName('FEESCR').AsFloat = 0) then
                                     begin
-                                       ParamByName('FEES_PAID').AsCurrency := 0;
-                                       ParamByName('FEESTAX_PAID').AsCurrency := 0;
+                                       ParamByName('FEES_PAID').AsFloat := 0;
+                                       ParamByName('FEESTAX_PAID').AsFloat := 0;
                                     end
                                     else
                                     begin
-                                       if (qryBill.FieldByName('FEES').AsCurrency <> 0) then
+                                       if (qryBill.FieldByName('FEES').AsFloat <> 0) then
                                        begin
-                                          SplitPercent := (qryLedger.FieldByName('FEESCR').AsCurrency/
-                                                          (qryBill.FieldByName('FEES').AsCurrency + qryBill.FieldByName('FEESTAX').AsCurrency));
-                                          TaxCalc := RoundTo((qryBill.FieldByName('FEESTAX').AsCurrency * SplitPercent),-2);
-                                          ParamByName('FEESTAX_PAID').AsCurrency := TaxCalc;
-                                          ParamByName('FEES_PAID').AsCurrency := (qryLedger.FieldByName('FEESCR').AsCurrency - TaxCalc);
+                                          SplitPercent := (qryLedger.FieldByName('FEESCR').AsFloat/
+                                                          (qryBill.FieldByName('FEES').AsFloat + qryBill.FieldByName('FEESTAX').AsFloat));
+                                          TaxCalc := RoundTo((qryBill.FieldByName('FEESTAX').AsFloat * SplitPercent),-2);
+                                          ParamByName('FEESTAX_PAID').AsFloat := TaxCalc;
+                                          ParamByName('FEES_PAID').AsFloat := (qryLedger.FieldByName('FEESCR').AsFloat - TaxCalc);
 
                                           // saving receipt amount against original distribution.
                                           qryFeeDist.Close;
@@ -3436,7 +3443,7 @@ begin
                                           TotalFeeDistAmt := 0;
                                           FeeDistCount := 1;
                                           TotalFeeDistCount := qryFeeDist.RecordCount;
-                                          TotalFees := RoundTo((qryLedger.FieldByName('FEESCR').AsCurrency - TaxCalc), -2);
+                                          TotalFees := RoundTo((qryLedger.FieldByName('FEESCR').AsFloat - TaxCalc), -2);
                                           while (qryFeeDist.Eof = False) do
                                           begin
                                              if (FeeDistCount = TotalFeeDistCount) and
@@ -3450,7 +3457,7 @@ begin
                                              qryFeeDistInsert.ParamByName('nmatter').AsInteger       := qryFeeDist.FieldByName('nmatter').AsInteger;
                                              qryFeeDistInsert.ParamByName('dept').AsString           := qryFeeDist.FieldByName('dept').AsString;
                                              qryFeeDistInsert.ParamByName('matter_dept').AsString    := qryFeeDist.FieldByName('matter_dept').AsString;
-                                             qryFeeDistInsert.ParamByName('receipt_amt').AsCurrency  := FeeDistAmt;
+                                             qryFeeDistInsert.ParamByName('receipt_amt').AsFloat  := FeeDistAmt;
                                              qryFeeDistInsert.ParamByName('name').AsString           := TableString('EMPLOYEE','CODE',qryFeeDist.FieldByName('author').AsString, 'NAME');
                                              qryFeeDistInsert.ParamByName('created_date').AsDateTime := dtpDate.Date;
                                              qryFeeDistInsert.ExecSQL;
@@ -3469,22 +3476,22 @@ begin
                                           qryFeeReceiptTotal.Close;
                                           qryFeeReceiptTotal.ParamByName('NMEMO').AsInteger := tvLedgerINVOICE.EditValue;
                                           qryFeeReceiptTotal.Open;
-                                          cTotalReceiptFees := qryFeeReceiptTotal.FieldByName('total_fees').AsCurrency;
+                                          cTotalReceiptFees := qryFeeReceiptTotal.FieldByName('total_fees').AsFloat;
                                           qryFeeReceiptTotal.Close;
 
                                           TotalFeeRcptAmt := 0;
                                           TotalFeeDistCount := qryFeeReceipt.RecordCount;
-                                          TotalFees := RoundTo((qryLedger.FieldByName('FEESCR').AsCurrency - TaxCalc), -2);
+                                          TotalFees := RoundTo((qryLedger.FieldByName('FEESCR').AsFloat - TaxCalc), -2);
                                           nfeeRatio := RoundTo(TotalFees/cTotalReceiptFees, -2);
                                           while (qryFeeReceipt.Eof = False) do
                                           begin
 
-                                             qryFeeRcptUpdate.ParamByName('FEES_RECVD').AsCurrency := (qryFeeReceipt.FieldByName('AMOUNT').AsCurrency * nfeeRatio);
+                                             qryFeeRcptUpdate.ParamByName('FEES_RECVD').AsFloat := (qryFeeReceipt.FieldByName('AMOUNT').AsFloat * nfeeRatio);
                                              qryFeeRcptUpdate.ParamByName('DATE_LAST_RECPT').AsDateTime := dtpDate.Date;
                                              qryFeeRcptUpdate.ParamByName('NFEE').AsInteger := qryFeeReceipt.FieldByName('NFEE').AsInteger;
                                              qryFeeRcptUpdate.ExecSQL;
 
-                                             TotalFees := TotalFees - (qryFeeReceipt.FieldByName('AMOUNT').AsCurrency * nfeeRatio);
+                                             TotalFees := TotalFees - (qryFeeReceipt.FieldByName('AMOUNT').AsFloat * nfeeRatio);
                                              qryFeeReceipt.Next;
                                           end;
                                           qryFeeReceipt.Close;
@@ -3492,56 +3499,56 @@ begin
                                        end;
                                     end;
 
-                                    if (qryLedger.FieldByName('DISBCR').AsCurrency = 0) then
+                                    if (qryLedger.FieldByName('DISBCR').AsFloat = 0) then
                                     begin
-                                       ParamByName('DISB_PAID').AsCurrency := 0;
-                                       ParamByName('DISBTAX_PAID').AsCurrency := 0;
+                                       ParamByName('DISB_PAID').AsFloat := 0;
+                                       ParamByName('DISBTAX_PAID').AsFloat := 0;
                                     end
                                     else
                                     begin
-                                       SplitPercent := (qryLedger.FieldByName('DISBCR').AsCurrency/(qryBill.FieldByName('DISB').AsCurrency + qryBill.FieldByName('DISBTAX').AsCurrency));
-                                       TaxCalc := RoundTo((qryBill.FieldByName('DISBTAX').AsCurrency * SplitPercent),-2);
-                                       ParamByName('DISBTAX_PAID').AsCurrency := TaxCalc;
-                                       ParamByName('DISB_PAID').AsCurrency := (qryLedger.FieldByName('DISBCR').AsCurrency - TaxCalc);
+                                       SplitPercent := (qryLedger.FieldByName('DISBCR').AsFloat/(qryBill.FieldByName('DISB').AsFloat + qryBill.FieldByName('DISBTAX').AsFloat));
+                                       TaxCalc := RoundTo((qryBill.FieldByName('DISBTAX').AsFloat * SplitPercent),-2);
+                                       ParamByName('DISBTAX_PAID').AsFloat := TaxCalc;
+                                       ParamByName('DISB_PAID').AsFloat := (qryLedger.FieldByName('DISBCR').AsFloat - TaxCalc);
                                     end;
 
-                                    if (qryLedger.FieldByName('UPCREDCR').AsCurrency = 0) then
+                                    if (qryLedger.FieldByName('UPCREDCR').AsFloat = 0) then
                                     begin
-                                       ParamByName('UPCRED_PAID').AsCurrency := 0;
-                                       ParamByName('UPCREDTAX_PAID').AsCurrency := 0;
+                                       ParamByName('UPCRED_PAID').AsFloat := 0;
+                                       ParamByName('UPCREDTAX_PAID').AsFloat := 0;
                                     end
                                     else
                                     begin
-                                       SplitPercent := (qryLedger.FieldByName('UPCREDCR').AsCurrency/(qryBill.FieldByName('UPCRED').AsCurrency + qryBill.FieldByName('UPCREDTAX').AsCurrency));
-                                       TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsCurrency * SplitPercent),-2);
-                                       ParamByName('UPCREDTAX_PAID').AsCurrency := TaxCalc;
-                                       ParamByName('UPCRED_PAID').AsCurrency := (qryLedger.FieldByName('UPCREDCR').AsCurrency - TaxCalc);
+                                       SplitPercent := (qryLedger.FieldByName('UPCREDCR').AsFloat/(qryBill.FieldByName('UPCRED').AsFloat + qryBill.FieldByName('UPCREDTAX').AsFloat));
+                                       TaxCalc := RoundTo((qryBill.FieldByName('UPCREDTAX').AsFloat * SplitPercent),-2);
+                                       ParamByName('UPCREDTAX_PAID').AsFloat := TaxCalc;
+                                       ParamByName('UPCRED_PAID').AsFloat := (qryLedger.FieldByName('UPCREDCR').AsFloat - TaxCalc);
                                     end;
 
-                                    if (qryLedger.FieldByName('ANTDCR').AsCurrency = 0) then
+                                    if (qryLedger.FieldByName('ANTDCR').AsFloat = 0) then
                                     begin
-                                       ParamByName('ANTD_PAID').AsCurrency := 0;
-                                       ParamByName('ANTDTAX_PAID').AsCurrency := 0;
+                                       ParamByName('ANTD_PAID').AsFloat := 0;
+                                       ParamByName('ANTDTAX_PAID').AsFloat := 0;
                                     end
                                     else
                                     begin
-                                       SplitPercent := (qryLedger.FieldByName('ANTDCR').AsCurrency/(qryBill.FieldByName('ANTD').AsCurrency + qryBill.FieldByName('ANTDTAX').AsCurrency));
-                                       TaxCalc := RoundTo((qryBill.FieldByName('ANTDTAX').AsCurrency * SplitPercent),-2);
-                                       ParamByName('ANTDTAX_PAID').AsCurrency := TaxCalc;
-                                       ParamByName('ANTD_PAID').AsCurrency := (qryLedger.FieldByName('ANTDCR').AsCurrency - TaxCalc);
+                                       SplitPercent := (qryLedger.FieldByName('ANTDCR').AsFloat/(qryBill.FieldByName('ANTD').AsFloat + qryBill.FieldByName('ANTDTAX').AsFloat));
+                                       TaxCalc := RoundTo((qryBill.FieldByName('ANTDTAX').AsFloat * SplitPercent),-2);
+                                       ParamByName('ANTDTAX_PAID').AsFloat := TaxCalc;
+                                       ParamByName('ANTD_PAID').AsFloat := (qryLedger.FieldByName('ANTDCR').AsFloat - TaxCalc);
                                     end;
 
-                                    if (qryLedger.FieldByName('SUNDCR').AsCurrency = 0) then
+                                    if (qryLedger.FieldByName('SUNDCR').AsFloat = 0) then
                                     begin
-                                       ParamByName('SUND_PAID').AsCurrency := 0;
-                                       ParamByName('SUNDTAX_PAID').AsCurrency := 0;
+                                       ParamByName('SUND_PAID').AsFloat := 0;
+                                       ParamByName('SUNDTAX_PAID').AsFloat := 0;
                                     end
                                     else
                                     begin
-                                       SplitPercent := (qryLedger.FieldByName('SUNDCR').AsCurrency/(qryBill.FieldByName('SUND').AsCurrency + qryBill.FieldByName('SUNDTAX').AsCurrency));
-                                       TaxCalc := RoundTo((qryBill.FieldByName('SUNDTAX').AsCurrency * SplitPercent),-2);
-                                       ParamByName('SUNDTAX_PAID').AsCurrency := TaxCalc;
-                                       ParamByName('SUND_PAID').AsCurrency := (qryLedger.FieldByName('SUNDCR').AsCurrency - TaxCalc);
+                                       SplitPercent := (qryLedger.FieldByName('SUNDCR').AsFloat/(qryBill.FieldByName('SUND').AsFloat + qryBill.FieldByName('SUNDTAX').AsFloat));
+                                       TaxCalc := RoundTo((qryBill.FieldByName('SUNDTAX').AsFloat * SplitPercent),-2);
+                                       ParamByName('SUNDTAX_PAID').AsFloat := TaxCalc;
+                                       ParamByName('SUND_PAID').AsFloat := (qryLedger.FieldByName('SUNDCR').AsFloat - TaxCalc);
                                     end;
                                     ParamByName('NMEMO').AsInteger := qryBill.FieldByName('NMEMO').AsInteger;
                                     ExecSQL;
@@ -3561,121 +3568,121 @@ begin
 
                                     with qrySubBillUpdate do
                                     begin
-                                       if (qryLedger.FieldByName('FEESCR').AsCurrency = 0) then
+                                       if (qryLedger.FieldByName('FEESCR').AsFloat = 0) then
                                        begin
-                                          ParamByName('FEES_PAID').AsCurrency := 0;
-                                          ParamByName('FEESTAX_PAID').AsCurrency := 0;
+                                          ParamByName('FEES_PAID').AsFloat := 0;
+                                          ParamByName('FEESTAX_PAID').AsFloat := 0;
                                        end
                                        else
                                        begin
-                                          if (qryLedger.FieldByName('FEESCR').AsCurrency = (qrySubBillLocate.FieldByName('FEES').AsCurrency - qrySubBillLocate.FieldByName('FEES_PAID').AsCurrency + qrySubBillLocate.FieldByName('FEESTAX').AsCurrency - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsCurrency)) then
+                                          if (qryLedger.FieldByName('FEESCR').AsFloat = (qrySubBillLocate.FieldByName('FEES').AsFloat - qrySubBillLocate.FieldByName('FEES_PAID').AsFloat + qrySubBillLocate.FieldByName('FEESTAX').AsFloat - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsFloat)) then
                                           begin
-                                             ParamByName('FEES_PAID').AsCurrency := qrySubBillLocate.FieldByName('FEES').AsCurrency - qrySubBillLocate.FieldByName('FEES_PAID').AsCurrency;
-                                             ParamByName('FEESTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('FEESTAX').AsCurrency - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsCurrency;
+                                             ParamByName('FEES_PAID').AsFloat := qrySubBillLocate.FieldByName('FEES').AsFloat - qrySubBillLocate.FieldByName('FEES_PAID').AsFloat;
+                                             ParamByName('FEESTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('FEESTAX').AsFloat - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsFloat;
                                           end
                                           else
                                           begin
                                              // We have to proportion the tax out of the fees
-                                             if (qrySubBillLocate.FieldByName('FEES').AsCurrency - qrySubBillLocate.FieldByName('FEES_PAID').AsCurrency + qrySubBillLocate.FieldByName('FEESTAX').AsCurrency - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsCurrency) = 0 then
-                                                ParamByName('FEESTAX_PAID').AsCurrency := 0
+                                             if (qrySubBillLocate.FieldByName('FEES').AsFloat - qrySubBillLocate.FieldByName('FEES_PAID').AsFloat + qrySubBillLocate.FieldByName('FEESTAX').AsFloat - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsFloat) = 0 then
+                                                ParamByName('FEESTAX_PAID').AsFloat := 0
                                              else
-                                                ParamByName('FEESTAX_PAID').AsCurrency := qryLedger.FieldByName('FEESCR').AsCurrency * ((qrySubBillLocate.FieldByName('FEESTAX').AsCurrency - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsCurrency) / (qrySubBillLocate.FieldByName('FEES').AsCurrency - qrySubBillLocate.FieldByName('FEES_PAID').AsCurrency + qrySubBillLocate.FieldByName('FEESTAX').AsCurrency - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsCurrency));
-                                             ParamByName('FEES_PAID').AsCurrency := qryLedger.FieldByName('FEESCR').AsCurrency - ParamByName('FEESTAX_PAID').AsCurrency;
+                                                ParamByName('FEESTAX_PAID').AsFloat := qryLedger.FieldByName('FEESCR').AsFloat * ((qrySubBillLocate.FieldByName('FEESTAX').AsFloat - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsFloat) / (qrySubBillLocate.FieldByName('FEES').AsFloat - qrySubBillLocate.FieldByName('FEES_PAID').AsFloat + qrySubBillLocate.FieldByName('FEESTAX').AsFloat - qrySubBillLocate.FieldByName('FEESTAX_PAID').AsFloat));
+                                             ParamByName('FEES_PAID').AsFloat := qryLedger.FieldByName('FEESCR').AsFloat - ParamByName('FEESTAX_PAID').AsFloat;
                                           end;
                                        end;
 
-                                       if (qryLedger.FieldByName('DISBCR').AsCurrency = 0) then
+                                       if (qryLedger.FieldByName('DISBCR').AsFloat = 0) then
                                        begin
-                                         ParamByName('DISB_PAID').AsCurrency := 0;
-                                         ParamByName('DISBTAX_PAID').AsCurrency := 0;
+                                         ParamByName('DISB_PAID').AsFloat := 0;
+                                         ParamByName('DISBTAX_PAID').AsFloat := 0;
                                        end
                                        else
                                        begin
-                                          if qryLedger.FieldByName('DISBCR').AsCurrency = (qrySubBillLocate.FieldByName('DISB').AsCurrency - qrySubBillLocate.FieldByName('DISB_PAID').AsCurrency + qrySubBillLocate.FieldByName('DISBTAX').AsCurrency - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency) then
+                                          if qryLedger.FieldByName('DISBCR').AsFloat = (qrySubBillLocate.FieldByName('DISB').AsFloat - qrySubBillLocate.FieldByName('DISB_PAID').AsFloat + qrySubBillLocate.FieldByName('DISBTAX').AsFloat - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat) then
                                           begin
-                                            ParamByName('DISB_PAID').AsCurrency := qrySubBillLocate.FieldByName('DISB').AsCurrency - qrySubBillLocate.FieldByName('DISB_PAID').AsCurrency;
-                                            ParamByName('DISBTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('DISBTAX').AsCurrency - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency;
+                                            ParamByName('DISB_PAID').AsFloat := qrySubBillLocate.FieldByName('DISB').AsFloat - qrySubBillLocate.FieldByName('DISB_PAID').AsFloat;
+                                            ParamByName('DISBTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('DISBTAX').AsFloat - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat;
                                           end
                                           else
                                           begin
                                              // We have to proportion the tax out of the disbursements
-                                            if (qrySubBillLocate.FieldByName('DISB').AsCurrency - qrySubBillLocate.FieldByName('DISB_PAID').AsCurrency + qrySubBillLocate.FieldByName('DISBTAX').AsCurrency - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency) <> 0 then
+                                            if (qrySubBillLocate.FieldByName('DISB').AsFloat - qrySubBillLocate.FieldByName('DISB_PAID').AsFloat + qrySubBillLocate.FieldByName('DISBTAX').AsFloat - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat) <> 0 then
                                             begin
                                                try
-                                                   ParamByName('DISBTAX_PAID').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency * ((qrySubBillLocate.FieldByName('DISBTAX').AsCurrency - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency) / (qrySubBillLocate.FieldByName('DISB').AsCurrency - qrySubBillLocate.FieldByName('DISB_PAID').AsCurrency + qrySubBillLocate.FieldByName('DISBTAX').AsCurrency - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency));
+                                                   ParamByName('DISBTAX_PAID').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat * ((qrySubBillLocate.FieldByName('DISBTAX').AsFloat - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat) / (qrySubBillLocate.FieldByName('DISB').AsFloat - qrySubBillLocate.FieldByName('DISB_PAID').AsFloat + qrySubBillLocate.FieldByName('DISBTAX').AsFloat - qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat));
                                                except
-                                                 on EZeroDivide do ParamByName('DISBTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('DISBTAX_PAID').AsCurrency;
+                                                 on EZeroDivide do ParamByName('DISBTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('DISBTAX_PAID').AsFloat;
                                                 end;
                                             end;
-                                            ParamByName('DISB_PAID').AsCurrency := qryLedger.FieldByName('DISBCR').AsCurrency - ParamByName('DISBTAX_PAID').AsCurrency;
+                                            ParamByName('DISB_PAID').AsFloat := qryLedger.FieldByName('DISBCR').AsFloat - ParamByName('DISBTAX_PAID').AsFloat;
                                           end;
                                        end;
-                                       if (qryLedger.FieldByName('UPCREDCR').AsCurrency = 0) then
+                                       if (qryLedger.FieldByName('UPCREDCR').AsFloat = 0) then
                                        begin
-                                          ParamByName('UPCRED_PAID').AsCurrency := 0;
-                                          ParamByName('UPCREDTAX_PAID').AsCurrency := 0;
+                                          ParamByName('UPCRED_PAID').AsFloat := 0;
+                                          ParamByName('UPCREDTAX_PAID').AsFloat := 0;
                                        end
                                        else
                                        begin
-                                          if (qryLedger.FieldByName('UPCREDCR').AsCurrency = (qrySubBillLocate.FieldByName('UPCRED').AsCurrency - qrySubBillLocate.FieldByName('UPCRED_PAID').AsCurrency + qrySubBillLocate.FieldByName('UPCREDTAX').AsCurrency - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsCurrency)) then
+                                          if (qryLedger.FieldByName('UPCREDCR').AsFloat = (qrySubBillLocate.FieldByName('UPCRED').AsFloat - qrySubBillLocate.FieldByName('UPCRED_PAID').AsFloat + qrySubBillLocate.FieldByName('UPCREDTAX').AsFloat - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsFloat)) then
                                           begin
-                                             ParamByName('UPCRED_PAID').AsCurrency := qrySubBillLocate.FieldByName('UPCRED').AsCurrency - qrySubBillLocate.FieldByName('UPCRED_PAID').AsCurrency;
-                                             ParamByName('UPCREDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('UPCREDTAX').AsCurrency - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsCurrency;
+                                             ParamByName('UPCRED_PAID').AsFloat := qrySubBillLocate.FieldByName('UPCRED').AsFloat - qrySubBillLocate.FieldByName('UPCRED_PAID').AsFloat;
+                                             ParamByName('UPCREDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('UPCREDTAX').AsFloat - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsFloat;
                                           end
                                           else
                                           begin
                                           // We have to proportion the tax out of the Anticipated Disbursements
                                              try
-                                                ParamByName('UPCREDTAX_PAID').AsCurrency := qryLedger.FieldByName('UPCREDCR').AsCurrency * ((qrySubBillLocate.FieldByName('UPCREDTAX').AsCurrency - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency) / (qrySubBillLocate.FieldByName('ANTD').AsCurrency - qrySubBillLocate.FieldByName('UPCRED_PAID').AsCurrency + qrySubBillLocate.FieldByName('UPCREDTAX').AsCurrency - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsCurrency));
+                                                ParamByName('UPCREDTAX_PAID').AsFloat := qryLedger.FieldByName('UPCREDCR').AsFloat * ((qrySubBillLocate.FieldByName('UPCREDTAX').AsFloat - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat) / (qrySubBillLocate.FieldByName('ANTD').AsFloat - qrySubBillLocate.FieldByName('UPCRED_PAID').AsFloat + qrySubBillLocate.FieldByName('UPCREDTAX').AsFloat - qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsFloat));
                                              except
-                                                on EZeroDivide do ParamByName('UPCREDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsCurrency;
+                                                on EZeroDivide do ParamByName('UPCREDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('UPCREDTAX_PAID').AsFloat;
                                              end;
-                                             ParamByName('UPCRED_PAID').AsCurrency := qryLedger.FieldByName('UPCREDCR').AsCurrency - ParamByName('UPCREDTAX_PAID').AsCurrency;
+                                             ParamByName('UPCRED_PAID').AsFloat := qryLedger.FieldByName('UPCREDCR').AsFloat - ParamByName('UPCREDTAX_PAID').AsFloat;
                                           end;
                                        end;
 
-                                       if (qryLedger.FieldByName('ANTDCR').AsCurrency = 0) then
+                                       if (qryLedger.FieldByName('ANTDCR').AsFloat = 0) then
                                        begin
-                                          ParamByName('ANTD_PAID').AsCurrency := 0;
-                                          ParamByName('ANTDTAX_PAID').AsCurrency := 0;
+                                          ParamByName('ANTD_PAID').AsFloat := 0;
+                                          ParamByName('ANTDTAX_PAID').AsFloat := 0;
                                        end
                                        else
                                        begin
-                                          if qryLedger.FieldByName('ANTDCR').AsCurrency = (qrySubBillLocate.FieldByName('ANTD').AsCurrency - qrySubBillLocate.FieldByName('ANTD_PAID').AsCurrency + qrySubBillLocate.FieldByName('ANTDTAX').AsCurrency - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency) then
+                                          if qryLedger.FieldByName('ANTDCR').AsFloat = (qrySubBillLocate.FieldByName('ANTD').AsFloat - qrySubBillLocate.FieldByName('ANTD_PAID').AsFloat + qrySubBillLocate.FieldByName('ANTDTAX').AsFloat - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat) then
                                           begin
-                                             ParamByName('ANTD_PAID').AsCurrency := qrySubBillLocate.FieldByName('ANTD').AsCurrency - qrySubBillLocate.FieldByName('ANTD_PAID').AsCurrency;
-                                             ParamByName('ANTDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('ANTDTAX').AsCurrency - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency;
+                                             ParamByName('ANTD_PAID').AsFloat := qrySubBillLocate.FieldByName('ANTD').AsFloat - qrySubBillLocate.FieldByName('ANTD_PAID').AsFloat;
+                                             ParamByName('ANTDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('ANTDTAX').AsFloat - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat;
                                           end
                                           else
                                           begin
                                           // We have to proportion the tax out of the Anticipated Disbursements
                                              try
-                                                ParamByName('ANTDTAX_PAID').AsCurrency := qryLedger.FieldByName('ANTDCR').AsCurrency * ((qrySubBillLocate.FieldByName('ANTDTAX').AsCurrency - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency) / (qrySubBillLocate.FieldByName('ANTD').AsCurrency - qrySubBillLocate.FieldByName('ANTD_PAID').AsCurrency + qrySubBillLocate.FieldByName('ANTDTAX').AsCurrency - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency));
+                                                ParamByName('ANTDTAX_PAID').AsFloat := qryLedger.FieldByName('ANTDCR').AsFloat * ((qrySubBillLocate.FieldByName('ANTDTAX').AsFloat - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat) / (qrySubBillLocate.FieldByName('ANTD').AsFloat - qrySubBillLocate.FieldByName('ANTD_PAID').AsFloat + qrySubBillLocate.FieldByName('ANTDTAX').AsFloat - qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat));
                                              except
-                                                on EZeroDivide do ParamByName('ANTDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsCurrency;
+                                                on EZeroDivide do ParamByName('ANTDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('ANTDTAX_PAID').AsFloat;
                                              end;
-                                             ParamByName('ANTD_PAID').AsCurrency := qryLedger.FieldByName('ANTDCR').AsCurrency - ParamByName('ANTDTAX_PAID').AsCurrency;
+                                             ParamByName('ANTD_PAID').AsFloat := qryLedger.FieldByName('ANTDCR').AsFloat - ParamByName('ANTDTAX_PAID').AsFloat;
                                           end;
-                                          if (qryLedger.FieldByName('SUNDCR').AsCurrency = 0) then
+                                          if (qryLedger.FieldByName('SUNDCR').AsFloat = 0) then
                                           begin
-                                             ParamByName('SUND_PAID').AsCurrency := 0;
-                                             ParamByName('SUNDTAX_PAID').AsCurrency := 0;
+                                             ParamByName('SUND_PAID').AsFloat := 0;
+                                             ParamByName('SUNDTAX_PAID').AsFloat := 0;
                                           end
                                           else
-                                          if qryLedger.FieldByName('SUNDCR').AsCurrency = (qrySubBillLocate.FieldByName('SUND').AsCurrency - qrySubBillLocate.FieldByName('SUND_PAID').AsCurrency + qrySubBillLocate.FieldByName('SUNDTAX').AsCurrency - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsCurrency) then
+                                          if qryLedger.FieldByName('SUNDCR').AsFloat = (qrySubBillLocate.FieldByName('SUND').AsFloat - qrySubBillLocate.FieldByName('SUND_PAID').AsFloat + qrySubBillLocate.FieldByName('SUNDTAX').AsFloat - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsFloat) then
                                           begin
-                                             ParamByName('SUND_PAID').AsCurrency := qrySubBillLocate.FieldByName('SUND').AsCurrency - qrySubBillLocate.FieldByName('SUND_PAID').AsCurrency;
-                                             ParamByName('SUNDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('SUNDTAX').AsCurrency - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsCurrency;
+                                             ParamByName('SUND_PAID').AsFloat := qrySubBillLocate.FieldByName('SUND').AsFloat - qrySubBillLocate.FieldByName('SUND_PAID').AsFloat;
+                                             ParamByName('SUNDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('SUNDTAX').AsFloat - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsFloat;
                                           end
                                           else
                                           begin
                                           // We have to proportion the tax out of the fees
                                              try
-                                                ParamByName('SUNDTAX_PAID').AsCurrency := qryLedger.FieldByName('SUNDCR').AsCurrency * ((qrySubBillLocate.FieldByName('SUNDTAX').AsCurrency - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsCurrency) / (qrySubBillLocate.FieldByName('SUND').AsCurrency - qrySubBillLocate.FieldByName('SUND_PAID').AsCurrency + qrySubBillLocate.FieldByName('SUNDTAX').AsCurrency - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsCurrency));
+                                                ParamByName('SUNDTAX_PAID').AsFloat := qryLedger.FieldByName('SUNDCR').AsFloat * ((qrySubBillLocate.FieldByName('SUNDTAX').AsFloat - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsFloat) / (qrySubBillLocate.FieldByName('SUND').AsFloat - qrySubBillLocate.FieldByName('SUND_PAID').AsFloat + qrySubBillLocate.FieldByName('SUNDTAX').AsFloat - qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsFloat));
                                              except
-                                                on EZeroDivide do ParamByName('SUNDTAX_PAID').AsCurrency := qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsCurrency;
+                                                on EZeroDivide do ParamByName('SUNDTAX_PAID').AsFloat := qrySubBillLocate.FieldByName('SUNDTAX_PAID').AsFloat;
                                              end;
-                                             ParamByName('SUND_PAID').AsCurrency := qryLedger.FieldByName('SUNDCR').AsCurrency - ParamByName('SUNDTAX_PAID').AsCurrency;
+                                             ParamByName('SUND_PAID').AsFloat := qryLedger.FieldByName('SUNDCR').AsFloat - ParamByName('SUNDTAX_PAID').AsFloat;
                                           end;
                                           ParamByName('NMEMO').AsInteger := qrySubBillLocate.FieldByName('NMEMO').AsInteger;
                                           ParamByName('NSUBBILL').AsInteger := qryLedger.FieldByName('NSUBBILL').AsInteger;
@@ -3686,7 +3693,7 @@ begin
                                  end;
                               // endupdate subbills
 
-                                 if (qryLedger.FieldByName('ANTDCR').AsCurrency > 0) then
+                                 if (qryLedger.FieldByName('ANTDCR').AsFloat > 0) then
                                  begin
                                     with qryTmp do
                                     begin
@@ -3703,13 +3710,13 @@ begin
                                        SQL.Add('order by nmemo, reqdate asc');
                                        ParambyName('NMEMO').AsInteger := qryAllocs.FieldbyName('NMEMO').AsInteger;
                                        Open;
-                                       cBalance := qryLedger.FieldByName('ANTDCR').AsCurrency;
+                                       cBalance := qryLedger.FieldByName('ANTDCR').AsFloat;
 
                                        while (EOF = False) do
                                        begin
-                                          if (FieldbyName('AMOUNT').AsCurrency > FieldbyName('ALLOC').AsCurrency) and (cBalance > 0) then
+                                          if (FieldbyName('AMOUNT').AsFloat > FieldbyName('ALLOC').AsFloat) and (cBalance > 0) then
                                           begin
-                                             cAllocAmnt := (FieldbyName('AMOUNT').AsCurrency - FieldbyName('ALLOC').AsCurrency);
+                                             cAllocAmnt := (FieldbyName('AMOUNT').AsFloat - FieldbyName('ALLOC').AsFloat);
 
                                              if ((fsCheqreqList <> nil) and (fsCheqreqList.Count > 0)) then
                                              begin
@@ -3791,7 +3798,7 @@ begin
                                     DefaultTax := qryLedger.FieldByName('TAXCODE').AsString;
                                  end;
 
-                                 cAmt := qryLedger.FieldByName('CREDIT').AsCurrency + qryLedger.FieldByName('TAX').AsCurrency;
+                                 cAmt := qryLedger.FieldByName('CREDIT').AsFloat + qryLedger.FieldByName('TAX').AsFloat;
 
                                  if (DefaultTax <> '') and (qryLedger.FieldByName('TAX').AsFloat = 0) then
                                     cTax := CalcTax(cAmt, DefaultTax)
@@ -3799,7 +3806,7 @@ begin
                                     cTax := qryLedger.FieldByName('TAX').AsFloat;
 
                                  PostLedger(qryReceipt.FieldByName('CREATED').AsDateTime
-                                   , qryLedger.FieldByName('CREDIT').AsCurrency
+                                   , qryLedger.FieldByName('CREDIT').AsFloat
                                    , cTax
                                    , qryReceipt.FieldByName('RCPTNO').AsString
                                    , 'RECEIPT'
@@ -3830,9 +3837,9 @@ begin
                        // Update the last Receipt number and balance
                         with qryTmp do
                         begin
-                         sSQL := 'UPDATE BANK SET BALANCE = ' + CurrToStrF(qryBanks.FieldByName('BALANCE').AsCurrency + qryReceipt.FieldByName('AMOUNT').AsCurrency, ffFixed, 15);
+                         sSQL := 'UPDATE BANK SET BALANCE = ' + CurrToStrF(qryBanks.FieldByName('BALANCE').AsFloat + qryReceipt.FieldByName('AMOUNT').AsFloat, ffFixed, 15);
                          if qryReceipt.FieldByName('CLEARED').AsString = 'Y' then
-                           sSQL := sSQL + ', CL_BALANCE = ' + CurrToStrF(qryBanks.FieldByName('CL_BALANCE').AsCurrency + qryReceipt.FieldByName('AMOUNT').AsCurrency, ffFixed, 15);
+                           sSQL := sSQL + ', CL_BALANCE = ' + CurrToStrF(qryBanks.FieldByName('CL_BALANCE').AsFloat + qryReceipt.FieldByName('AMOUNT').AsFloat, ffFixed, 15);
                          sSQL := sSQL + ', LASTRCP = ' + QuotedStr(tbRcptno.Text);
                          sSQLWhere := ' WHERE ACCT = ' + QuotedStr(qryReceipt.FieldByName('ACCT').AsString);
                          Close;
@@ -3863,13 +3870,13 @@ begin
                               ParamByName('NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                               Open;
                               Edit;
-                              if (qryLedger.FieldByName('CREDIT').AsCurrency = qryBill.FieldByName('OWING').AsCurrency) then
-                                 FieldByName('TAX').AsCurrency := qryBill.FieldByName('TAX').AsCurrency
+                              if (qryLedger.FieldByName('CREDIT').AsFloat = qryBill.FieldByName('OWING').AsFloat) then
+                                 FieldByName('TAX').AsFloat := qryBill.FieldByName('TAX').AsFloat
                               else
                               begin
-                                 FieldByName('TAX').AsCurrency :=
-                                                (qryLedger.FieldByName('CREDIT').AsCurrency/qryBill.FieldByName('OWING').AsCurrency) *
-                                                (qryBill.FieldByName('TAX').AsCurrency - qryBill.FieldByName('TAX_PAID').AsCurrency);
+                                 FieldByName('TAX').AsFloat :=
+                                                (qryLedger.FieldByName('CREDIT').AsFloat/qryBill.FieldByName('OWING').AsFloat) *
+                                                (qryBill.FieldByName('TAX').AsFloat - qryBill.FieldByName('TAX_PAID').AsFloat);
                               end;
                               Post;
                            end;
@@ -4130,15 +4137,15 @@ begin
   qrySubBillLookup.paramByName('NMEMO').AsInteger := qryLedger.fieldByName('INVOICE').AsInteger;
   qrySubBillLookup.Open;
 
-  qryLedger.FieldByName('CREDIT').AsCurrency := qrySubBillLookup.fieldByName('OWING').AsCurrency;
-  qryLedger.FieldByName('DEBIT').AsCurrency := qryLedger.FieldByName('CREDIT').AsCurrency;
-  qryLedger.FieldByName('FEESDR').AsCurrency := qrySubBillLookup.FieldByName('FEES').AsCurrency - qrySubBillLookup.FieldByName('FEES_PAID').AsCurrency + qrySubBillLookup.FieldByName('FEESTAX').AsCurrency - qrySubBillLookup.FieldByName('FEESTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('DISBDR').AsCurrency := qrySubBillLookup.FieldByName('DISB').AsCurrency - qrySubBillLookup.FieldByName('DISB_PAID').AsCurrency + qrySubBillLookup.FieldByName('DISBTAX').AsCurrency - qrySubBillLookup.FieldByName('DISBTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('UPCREDDR').AsCurrency := qrySubBillLookup.FieldByName('UPCRED').AsCurrency - qrySubBillLookup.FieldbyName('UPCRED_PAID').AsCurrency + qrySubBillLookup.FieldByName('UPCREDTAX').AsCurrency - qrySubBillLookup.FieldByName('UPCREDTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('ANTDDR').AsCurrency := qrySubBillLookup.FieldByName('ANTD').AsCurrency - qrySubBillLookup.FieldbyName('ANTD_PAID').AsCurrency + qrySubBillLookup.FieldByName('ANTDTAX').AsCurrency - qrySubBillLookup.FieldByName('ANTDTAX_PAID').AsCurrency;
-  qryLedger.FieldByName('SUNDDR').AsCurrency := qrySubBillLookup.FieldByName('SUND').AsCurrency - qrySubBillLookup.FieldByName('SUND_PAID').AsCurrency + qrySubBillLookup.FieldByName('SUNDTAX').AsCurrency - qrySubBillLookup.FieldByName('SUNDTAX_PAID').AsCurrency;
+  qryLedger.FieldByName('CREDIT').AsFloat := qrySubBillLookup.fieldByName('OWING').AsFloat;
+  qryLedger.FieldByName('DEBIT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
+  qryLedger.FieldByName('FEESDR').AsFloat := qrySubBillLookup.FieldByName('FEES').AsFloat - qrySubBillLookup.FieldByName('FEES_PAID').AsFloat + qrySubBillLookup.FieldByName('FEESTAX').AsFloat - qrySubBillLookup.FieldByName('FEESTAX_PAID').AsFloat;
+  qryLedger.FieldByName('DISBDR').AsFloat := qrySubBillLookup.FieldByName('DISB').AsFloat - qrySubBillLookup.FieldByName('DISB_PAID').AsFloat + qrySubBillLookup.FieldByName('DISBTAX').AsFloat - qrySubBillLookup.FieldByName('DISBTAX_PAID').AsFloat;
+  qryLedger.FieldByName('UPCREDDR').AsFloat := qrySubBillLookup.FieldByName('UPCRED').AsFloat - qrySubBillLookup.FieldbyName('UPCRED_PAID').AsFloat + qrySubBillLookup.FieldByName('UPCREDTAX').AsFloat - qrySubBillLookup.FieldByName('UPCREDTAX_PAID').AsFloat;
+  qryLedger.FieldByName('ANTDDR').AsFloat := qrySubBillLookup.FieldByName('ANTD').AsFloat - qrySubBillLookup.FieldbyName('ANTD_PAID').AsFloat + qrySubBillLookup.FieldByName('ANTDTAX').AsFloat - qrySubBillLookup.FieldByName('ANTDTAX_PAID').AsFloat;
+  qryLedger.FieldByName('SUNDDR').AsFloat := qrySubBillLookup.FieldByName('SUND').AsFloat - qrySubBillLookup.FieldByName('SUND_PAID').AsFloat + qrySubBillLookup.FieldByName('SUNDTAX').AsFloat - qrySubBillLookup.FieldByName('SUNDTAX_PAID').AsFloat;
   DistributeBill(false);
-  ValidateCurrentRecord(qrySubBillLookup.fieldByName('OWING').AsCurrency);
+  ValidateCurrentRecord(qrySubBillLookup.fieldByName('OWING').AsFloat);
 
   qrySubBillLookup.close;
 end;
@@ -4163,7 +4170,7 @@ begin
       // sometimes qry closes prior to doing the next step
       if qryLedger.State = dsBrowse then
          qryLedger.edit;
-      qryLedger.FieldByName('CREDIT').AsCurrency := TableCurrency('SUBBILLS','NSUBBILL_ID',integer(tvLedgerNSUBBILL_ID.EditValue),'OWING');
+      qryLedger.FieldByName('CREDIT').AsFloat := TableCurrency('SUBBILLS','NSUBBILL_ID',integer(tvLedgerNSUBBILL_ID.EditValue),'OWING');
    finally
       setUpSubBill(StrToInt(tvLedgerNSUBBILL_ID.EditValue));
    end;
@@ -4221,7 +4228,7 @@ begin
       // sometimes qry closes prior to doing the next step
       if qryLedger.State = dsBrowse then
          qryLedger.edit;
-      qryLedger.FieldByName('CREDIT').AsCurrency := TableCurrency('SUBBILLS','NSUBBILL_ID',integer(tvLedgerNsubbill.EditValue),'OWING');
+      qryLedger.FieldByName('CREDIT').AsFloat := TableCurrency('SUBBILLS','NSUBBILL_ID',integer(tvLedgerNsubbill.EditValue),'OWING');
    except
    //
    end;
@@ -4404,13 +4411,12 @@ end;
 procedure TfrmReceipt.tvLedgerFocusedItemChanged(
   Sender: TcxCustomGridTableView; APrevFocusedItem,
   AFocusedItem: TcxCustomGridTableItem);
-
 begin
-  if (AFocusedItem = tvLedgerCREDIT) then
-  begin
-    tvLedgerCREDIT.Editing := (tvLedgerTYPE.EditValue <> 'Disburse');
-    tvLedgerCREDIT.Focused := tvLedgerCREDIT.Editing;
-  end;
+//   if (AFocusedItem = tvLedgerCREDIT) then
+//   begin
+//      tvLedgerCREDIT.Editing := (tvLedgerTYPE.EditValue <> 'Disburse');
+//      tvLedgerCREDIT.Focused := tvLedgerCREDIT.Editing;
+//   end;
 end;
 
 procedure TfrmReceipt.CalcGridTax;
@@ -4423,14 +4429,14 @@ begin
       if qryLedger.State = dsBrowse  then
          qryLedger.Edit;
 
-      dAmount := qryLedger.FieldByName('CREDIT').AsCurrency;
+      dAmount := qryLedger.FieldByName('CREDIT').AsFloat;
       if DefaultTax <> qryLedger.FieldByName('TAXCODE').AsString then
       begin
          taxcode := DefaultTax;
          DefaultTax := qryLedger.FieldByName('TAXCODE').AsString;
       end;
       qryLedger.FieldByName('TAX').AsFloat := TaxCalc(dAmount, 'BILL', DefaultTax, dtpDate.Date);
-      qryLedger.FieldByName('CREDIT').AsCurrency := dAmount;
+      qryLedger.FieldByName('CREDIT').AsFloat := dAmount;
       if qryLedger.State in [dsInsert, dsEdit] then
          UpdateTotal;
       if Taxcode <> '' then
