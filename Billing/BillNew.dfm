@@ -27,14 +27,14 @@ object frmInvoice: TfrmInvoice
   TextHeight = 15
   object Label1: TLabel
     Left = 6
-    Top = 106
+    Top = 112
     Width = 63
     Height = 15
     Caption = 'Fees - Items'
   end
   object Label2: TLabel
     Left = 121
-    Top = 69
+    Top = 77
     Width = 48
     Height = 15
     Caption = 'Available'
@@ -42,7 +42,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblFeesAvail: TLabel
     Left = 102
-    Top = 87
+    Top = 93
     Width = 79
     Height = 14
     Alignment = taRightJustify
@@ -51,7 +51,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label3: TLabel
     Left = 255
-    Top = 69
+    Top = 77
     Width = 16
     Height = 15
     Alignment = taRightJustify
@@ -59,14 +59,14 @@ object frmInvoice: TfrmInvoice
   end
   object Label5: TLabel
     Left = 4
-    Top = 124
+    Top = 130
     Width = 78
     Height = 15
     Caption = 'Disbursements'
   end
   object lblDisbAvail: TLabel
     Left = 108
-    Top = 124
+    Top = 130
     Width = 73
     Height = 14
     Alignment = taRightJustify
@@ -75,14 +75,14 @@ object frmInvoice: TfrmInvoice
   end
   object Label7: TLabel
     Left = 6
-    Top = 149
+    Top = 155
     Width = 64
     Height = 15
     Caption = 'Cheque Req'
   end
   object lblAntdAvail: TLabel
     Left = 108
-    Top = 150
+    Top = 156
     Width = 73
     Height = 14
     Alignment = taRightJustify
@@ -91,14 +91,14 @@ object frmInvoice: TfrmInvoice
   end
   object Label9: TLabel
     Left = 6
-    Top = 199
+    Top = 205
     Width = 45
     Height = 15
     Caption = 'Sundries'
   end
   object lblSundAvail: TLabel
     Left = 108
-    Top = 199
+    Top = 205
     Width = 73
     Height = 19
     Alignment = taRightJustify
@@ -115,7 +115,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblBillTo: TLabel
     Left = 94
-    Top = 362
+    Top = 366
     Width = 340
     Height = 18
     AutoSize = False
@@ -129,35 +129,35 @@ object frmInvoice: TfrmInvoice
   end
   object Label10: TLabel
     Left = 6
-    Top = 35
+    Top = 34
     Width = 36
     Height = 15
     Caption = 'Bill Ref'
   end
   object lblDispatchMsg: TLabel
-    Left = 309
-    Top = 36
+    Left = 311
+    Top = 34
     Width = 55
     Height = 15
     Caption = 'Posted On'
   end
   object Label11: TLabel
     Left = 6
-    Top = 389
+    Top = 393
     Width = 48
     Height = 15
     Caption = '&Template'
   end
   object lblLessTrust: TLabel
     Left = 6
-    Top = 227
+    Top = 233
     Width = 91
     Height = 15
     Caption = 'Less Client Funds'
   end
   object Label13: TLabel
     Left = 591
-    Top = 68
+    Top = 77
     Width = 47
     Height = 15
     Alignment = taRightJustify
@@ -171,7 +171,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label4: TLabel
     Left = 6
-    Top = 254
+    Top = 260
     Width = 97
     Height = 15
     Caption = 'Bill to &interim date'
@@ -179,7 +179,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblBillTemplate: TLabel
     Left = 94
-    Top = 389
+    Top = 393
     Width = 129
     Height = 14
     AutoSize = False
@@ -193,21 +193,21 @@ object frmInvoice: TfrmInvoice
   end
   object Label15: TLabel
     Left = 6
-    Top = 57
+    Top = 56
     Width = 38
     Height = 15
     Caption = 'Bill Key'
   end
   object Label16: TLabel
     Left = 6
-    Top = 174
+    Top = 180
     Width = 48
     Height = 15
     Caption = 'Creditors'
   end
   object lblUnPaidAvail: TLabel
     Left = 108
-    Top = 176
+    Top = 182
     Width = 73
     Height = 14
     Alignment = taRightJustify
@@ -216,7 +216,7 @@ object frmInvoice: TfrmInvoice
   end
   object nlTrustAvail: TLabel
     Left = 108
-    Top = 227
+    Top = 233
     Width = 73
     Height = 14
     Alignment = taRightJustify
@@ -224,14 +224,14 @@ object frmInvoice: TfrmInvoice
   end
   object lblGst: TLabel
     Left = 349
-    Top = 69
+    Top = 77
     Width = 17
     Height = 15
     Caption = 'Tax'
   end
   object DBText1: TDBText
     Left = 375
-    Top = 278
+    Top = 284
     Width = 27
     Height = 13
     DataField = 'ACCT'
@@ -240,14 +240,14 @@ object frmInvoice: TfrmInvoice
   end
   object lblEntity: TLabel
     Left = 280
-    Top = 228
+    Top = 234
     Width = 43
     Height = 15
     Caption = 'lblEntity'
   end
   object Label18: TLabel
     Left = 419
-    Top = 69
+    Top = 77
     Width = 42
     Height = 15
     Alignment = taRightJustify
@@ -255,21 +255,21 @@ object frmInvoice: TfrmInvoice
   end
   object Label8: TLabel
     Left = 6
-    Top = 280
+    Top = 286
     Width = 98
     Height = 15
     Caption = 'Expected Payment'
   end
   object Label14: TLabel
     Left = 508
-    Top = 36
+    Top = 34
     Width = 35
     Height = 15
     Caption = 'Matter'
   end
   object lblDiscountCaption: TLabel
     Left = 6
-    Top = 299
+    Top = 305
     Width = 174
     Height = 28
     Hint = 'Discount (% or $ amount. eg 5% or 200)'
@@ -281,7 +281,7 @@ object frmInvoice: TfrmInvoice
   end
   object Label19: TLabel
     Left = 309
-    Top = 304
+    Top = 310
     Width = 17
     Height = 15
     Hint = 'Discount (% or $ amount. eg 5% or 200)'
@@ -292,7 +292,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblUnitFeesAvail: TLabel
     Left = 108
-    Top = 106
+    Top = 112
     Width = 73
     Height = 14
     Alignment = taRightJustify
@@ -300,14 +300,14 @@ object frmInvoice: TfrmInvoice
   end
   object Label20: TLabel
     Left = 6
-    Top = 87
+    Top = 93
     Width = 60
     Height = 15
     Caption = 'Fees - Time'
   end
   object Label6: TLabel
     Left = 6
-    Top = 334
+    Top = 340
     Width = 42
     Height = 15
     Caption = 'Bill date'
@@ -344,7 +344,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnFeesRebuild: TBitBtn
     Left = 468
-    Top = 94
+    Top = 100
     Width = 81
     Height = 25
     Caption = 'Rebuild'
@@ -368,7 +368,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnDisbRebuild: TBitBtn
     Left = 468
-    Top = 120
+    Top = 126
     Width = 81
     Height = 25
     Caption = 'Rebuild'
@@ -430,7 +430,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnAntdRebuild: TBitBtn
     Left = 468
-    Top = 146
+    Top = 152
     Width = 81
     Height = 24
     Caption = 'Rebuild'
@@ -492,7 +492,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnSundRebuild: TBitBtn
     Left = 468
-    Top = 197
+    Top = 203
     Width = 81
     Height = 25
     Caption = 'Rebuild'
@@ -516,7 +516,7 @@ object frmInvoice: TfrmInvoice
   end
   object neDisb: TNumberEdit
     Left = 185
-    Top = 120
+    Top = 126
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -546,7 +546,7 @@ object frmInvoice: TfrmInvoice
   end
   object neFees: TNumberEdit
     Left = 185
-    Top = 94
+    Top = 100
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -576,7 +576,7 @@ object frmInvoice: TfrmInvoice
   end
   object neAntd: TNumberEdit
     Left = 185
-    Top = 146
+    Top = 152
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -606,7 +606,7 @@ object frmInvoice: TfrmInvoice
   end
   object neSund: TNumberEdit
     Left = 185
-    Top = 197
+    Top = 203
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -635,7 +635,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnBillTo: TBitBtn
     Left = 63
-    Top = 360
+    Top = 364
     Width = 27
     Height = 23
     Hint = 'Search PhoneBook for Address'
@@ -655,7 +655,7 @@ object frmInvoice: TfrmInvoice
   end
   object neTrust: TNumberEdit
     Left = 185
-    Top = 223
+    Top = 229
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -684,7 +684,7 @@ object frmInvoice: TfrmInvoice
   end
   object dtpInterim: TDateTimePicker
     Left = 185
-    Top = 249
+    Top = 255
     Width = 114
     Height = 23
     CalAlignment = dtaRight
@@ -698,7 +698,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnBillTemplate: TBitBtn
     Left = 63
-    Top = 385
+    Top = 389
     Width = 27
     Height = 22
     Glyph.Data = {
@@ -715,7 +715,7 @@ object frmInvoice: TfrmInvoice
   end
   object neUpCred: TNumberEdit
     Left = 185
-    Top = 171
+    Top = 177
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -745,7 +745,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnUpCredRebuild: TBitBtn
     Left = 468
-    Top = 171
+    Top = 177
     Width = 81
     Height = 25
     Caption = 'Rebuild'
@@ -769,7 +769,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnAddTrust: TBitBtn
     Left = 280
-    Top = 223
+    Top = 229
     Width = 113
     Height = 22
     Caption = 'Apply Trust'
@@ -780,7 +780,7 @@ object frmInvoice: TfrmInvoice
   end
   object neFeesTax: TNumberEdit
     Left = 280
-    Top = 94
+    Top = 100
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -809,7 +809,7 @@ object frmInvoice: TfrmInvoice
   end
   object neDisbTax: TNumberEdit
     Left = 280
-    Top = 120
+    Top = 126
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -839,7 +839,7 @@ object frmInvoice: TfrmInvoice
   end
   object neAntdTax: TNumberEdit
     Left = 280
-    Top = 146
+    Top = 152
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -869,7 +869,7 @@ object frmInvoice: TfrmInvoice
   end
   object neUpCredTax: TNumberEdit
     Left = 280
-    Top = 171
+    Top = 177
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -911,7 +911,7 @@ object frmInvoice: TfrmInvoice
   end
   object neSundTaxFree: TNumberEdit
     Left = 375
-    Top = 197
+    Top = 203
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -940,7 +940,7 @@ object frmInvoice: TfrmInvoice
   end
   object neUpCredTaxFree: TNumberEdit
     Left = 375
-    Top = 171
+    Top = 177
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -970,7 +970,7 @@ object frmInvoice: TfrmInvoice
   end
   object neAntdTaxFree: TNumberEdit
     Left = 375
-    Top = 146
+    Top = 152
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -1000,7 +1000,7 @@ object frmInvoice: TfrmInvoice
   end
   object neDisbTaxFree: TNumberEdit
     Left = 375
-    Top = 120
+    Top = 126
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -1030,7 +1030,7 @@ object frmInvoice: TfrmInvoice
   end
   object neFeesTaxFree: TNumberEdit
     Left = 375
-    Top = 94
+    Top = 100
     Width = 86
     Height = 23
     Alignment = taRightJustify
@@ -1098,7 +1098,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblDispatched: TcxLabel
     Left = 380
-    Top = 36
+    Top = 33
     AutoSize = False
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
@@ -1108,20 +1108,20 @@ object frmInvoice: TfrmInvoice
   end
   object lblNMemo: TcxLabel
     Left = 53
-    Top = 56
+    Top = 55
     AutoSize = False
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
     Properties.Alignment.Horz = taRightJustify
     Height = 18
-    Width = 66
-    AnchorX = 119
+    Width = 74
+    AnchorX = 127
   end
   object grdBillItems: TcxGrid
     Left = 8
-    Top = 413
+    Top = 417
     Width = 873
-    Height = 220
+    Height = 216
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -1826,7 +1826,7 @@ object frmInvoice: TfrmInvoice
   end
   object cxGroupBox1: TcxGroupBox
     Left = 416
-    Top = 222
+    Top = 228
     Style.BorderStyle = ebsOffice11
     Style.LookAndFeel.NativeStyle = False
     Style.Shadow = True
@@ -1970,7 +1970,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnInterimDate: TBitBtn
     Left = 302
-    Top = 249
+    Top = 255
     Width = 87
     Height = 23
     Caption = 'Apply Interim'
@@ -1979,7 +1979,7 @@ object frmInvoice: TfrmInvoice
   end
   object dtpExpectedPayment: TDateTimePicker
     Left = 185
-    Top = 275
+    Top = 281
     Width = 114
     Height = 23
     Date = 35855.939284826410000000
@@ -1988,7 +1988,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblMatter: TcxLabel
     Left = 549
-    Top = 36
+    Top = 33
     AutoSize = False
     ParentFont = False
     Style.StyleController = dmAxiom.LabelStyle
@@ -2060,7 +2060,7 @@ object frmInvoice: TfrmInvoice
   end
   object edtDiscountGST: TEdit
     Left = 333
-    Top = 301
+    Top = 307
     Width = 71
     Height = 23
     Hint = 'Discount GST'
@@ -2071,7 +2071,7 @@ object frmInvoice: TfrmInvoice
   end
   object btnNotes: TBitBtn
     Left = 556
-    Top = 359
+    Top = 363
     Width = 87
     Height = 24
     Caption = 'Notes'
@@ -2080,7 +2080,7 @@ object frmInvoice: TfrmInvoice
   end
   object neSundTax: TcxCurrencyEdit
     Left = 280
-    Top = 197
+    Top = 203
     AutoSize = False
     EditValue = 0.000000000000000000
     ParentFont = False
@@ -2099,7 +2099,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblDraftBillCaption: TcxLabel
     Left = 140
-    Top = 27
+    Top = 26
     Caption = 'Draft Bill'
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
@@ -2113,7 +2113,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblTotalFees: TcxLabel
     Left = 556
-    Top = 96
+    Top = 102
     AutoSize = False
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
@@ -2123,7 +2123,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblDisbTotal: TcxLabel
     Left = 556
-    Top = 123
+    Top = 129
     AutoSize = False
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
@@ -2133,7 +2133,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblAntdTotal: TcxLabel
     Left = 556
-    Top = 148
+    Top = 154
     AutoSize = False
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
@@ -2143,7 +2143,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblCredTotal: TcxLabel
     Left = 556
-    Top = 174
+    Top = 180
     AutoSize = False
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
@@ -2153,7 +2153,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblSundTotal: TcxLabel
     Left = 556
-    Top = 199
+    Top = 205
     AutoSize = False
     Properties.Alignment.Horz = taRightJustify
     Transparent = True
@@ -2176,7 +2176,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblRecoveryPct: TcxLabel
     Left = 174
-    Top = 55
+    Top = 54
     ParentFont = False
     Style.Font.Charset = DEFAULT_CHARSET
     Style.Font.Color = clWindowText
@@ -2188,7 +2188,7 @@ object frmInvoice: TfrmInvoice
   end
   object edtDiscount: TcxTextEdit
     Left = 185
-    Top = 301
+    Top = 307
     Hint = 
       'Discount (% or $ amount. eg 5% or 200).  If discount is whole do' +
       'llar amount, assumption is that the amount is GST inclusive.'
@@ -2199,7 +2199,7 @@ object frmInvoice: TfrmInvoice
   end
   object dtpBillDate: TcxDateEdit
     Left = 185
-    Top = 328
+    Top = 334
     Properties.SaveTime = False
     Properties.ShowTime = False
     Properties.UseNullString = True
@@ -2208,7 +2208,7 @@ object frmInvoice: TfrmInvoice
   end
   object lblInvoice: TcxTextEdit
     Left = 53
-    Top = 30
+    Top = 31
     AutoSize = False
     BeepOnEnter = False
     Properties.Alignment.Horz = taRightJustify
@@ -2218,8 +2218,8 @@ object frmInvoice: TfrmInvoice
     StyleFocused.LookAndFeel.NativeStyle = False
     StyleHot.LookAndFeel.NativeStyle = False
     TabOrder = 52
-    Height = 23
-    Width = 66
+    Height = 20
+    Width = 74
   end
   object ilstItems: TImageList
     Left = 832
@@ -5682,7 +5682,6 @@ object frmInvoice: TfrmInvoice
         'SELECT title, name, address, suburb||'#39' '#39'||state||'#39' '#39'||postcode a' +
         's SSP FROM PHONEBOOK'
       ' WHERE nname = :Search')
-    Active = True
     Left = 729
     Top = 85
     ParamData = <
@@ -6988,7 +6987,6 @@ object frmInvoice: TfrmInvoice
       'AND   a.nmemo = :nmemo'
       'AND   m.nmatter = :nmatter '
       'ORDER BY 1, 2')
-    Active = True
     Left = 911
     Top = 102
     ParamData = <
@@ -10394,7 +10392,6 @@ object frmInvoice: TfrmInvoice
       'SELECT M.*, M.ROWID '
       'FROM NMEMO M '
       'WHERE M.NMEMO = :NMEMO')
-    Active = True
     Left = 967
     Top = 36
     ParamData = <

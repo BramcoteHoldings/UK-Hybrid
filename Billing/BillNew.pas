@@ -813,19 +813,19 @@ begin
    if qryInvoice.FieldByName('IS_DRAFT').AsString = 'Y' then
    begin
 //     tvBillItemsInclude.Visible := True;
-     lblDraftBillCaption.Visible := True;
-     if PreassignBill() then
-     begin
-       if VarIsNull(qryInvoice.FieldByName('DRAFT_BILL_NO').AsVariant) = True then
-       begin
-         qryInvoice.Edit;
-         qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := NextRefno();
-         if SystemInteger('BPAY_CODE_DEFAULT') = 0 then
-            qryInvoice.FieldByName('BPAY_REFERENCE').AsString  := CreateBPayReference(qryInvoice.FieldByName('DRAFT_BILL_NO').AsString);
-         qryInvoice.Post;
-       end;
-       lblInvoice.Text := qryInvoice.FieldByName('DRAFT_BILL_NO').AsString;
-     end;
+      lblDraftBillCaption.Visible := True;
+      if PreassignBill() then
+      begin
+         if VarIsNull(qryInvoice.FieldByName('DRAFT_BILL_NO').AsVariant) = True then
+         begin
+            qryInvoice.Edit;
+            qryInvoice.FieldByName('DRAFT_BILL_NO').AsString := NextRefno();
+            if SystemInteger('BPAY_CODE_DEFAULT') = 0 then
+               qryInvoice.FieldByName('BPAY_REFERENCE').AsString  := CreateBPayReference(qryInvoice.FieldByName('DRAFT_BILL_NO').AsString);
+            qryInvoice.Post;
+         end;
+         lblInvoice.Text := qryInvoice.FieldByName('DRAFT_BILL_NO').AsString;
+      end;
 
       with procUnprocessedTime do
       begin
