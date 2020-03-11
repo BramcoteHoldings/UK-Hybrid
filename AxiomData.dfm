@@ -6452,6 +6452,73 @@ object dmAxiom: TdmAxiom
         '                  WHERE  object_type IN ('#39'PACKAGE'#39', '#39'PACKAGE BOD' +
         'Y'#39', '#39'PROCEDURE'#39', '#39'FUNCTION'#39')'
       '                  AND    owner = '#39'AXIOM'#39
+      '                  AND    status = '#39'INVALID'#39
+      '                  ORDER BY 4)'
+      '  LOOP'
+      '    BEGIN'
+      '      IF cur_rec.object_type != '#39'PACKAGE BODY'#39' THEN'
+      '        EXECUTE IMMEDIATE '#39'ALTER '#39' || cur_rec.object_type ||'
+      
+        '            '#39' "'#39' || cur_rec.owner || '#39'"."'#39' || cur_rec.object_nam' +
+        'e || '#39'" COMPILE'#39';'
+      '      ElSE'
+      '        EXECUTE IMMEDIATE '#39'ALTER PACKAGE "'#39' || cur_rec.owner ||'
+      '            '#39'"."'#39' || cur_rec.object_name || '#39'" COMPILE BODY'#39';'
+      '      END IF;'
+      '    EXCEPTION'
+      '      WHEN OTHERS THEN'
+      '           null;'
+      '    END;'
+      '  END LOOP;'
+      'END;'
+      '/'
+      'BEGIN'
+      '  FOR cur_rec IN (SELECT owner,'
+      '                         object_name,'
+      '                         object_type,'
+      '                         DECODE(object_type, '#39'PACKAGE'#39', 1,'
+      
+        '                                             '#39'PACKAGE BODY'#39', 2, ' +
+        '2) AS recompile_order'
+      '                  FROM   dba_objects'
+      
+        '                  WHERE  object_type IN ('#39'PACKAGE'#39', '#39'PACKAGE BOD' +
+        'Y'#39', '#39'PROCEDURE'#39', '#39'FUNCTION'#39')'
+      '                  AND    owner = '#39'AXIOM'#39
+      '                  AND    status = '#39'INVALID'#39
+      '                  ORDER BY 4)'
+      '  LOOP'
+      '    BEGIN'
+      '      IF cur_rec.object_type != '#39'PACKAGE BODY'#39' THEN'
+      '        EXECUTE IMMEDIATE '#39'ALTER '#39' || cur_rec.object_type ||'
+      
+        '            '#39' "'#39' || cur_rec.owner || '#39'"."'#39' || cur_rec.object_nam' +
+        'e || '#39'" COMPILE'#39';'
+      '      ElSE'
+      '        EXECUTE IMMEDIATE '#39'ALTER PACKAGE "'#39' || cur_rec.owner ||'
+      '            '#39'"."'#39' || cur_rec.object_name || '#39'" COMPILE BODY'#39';'
+      '      END IF;'
+      '    EXCEPTION'
+      '      WHEN OTHERS THEN'
+      '           null;'
+      '    END;'
+      '  END LOOP;'
+      'END;'
+      '/'
+      'BEGIN'
+      '  FOR cur_rec IN (SELECT owner,'
+      '                         object_name,'
+      '                         object_type,'
+      '                         DECODE(object_type, '#39'PACKAGE'#39', 1,'
+      
+        '                                             '#39'PACKAGE BODY'#39', 2, ' +
+        '2) AS recompile_order'
+      '                  FROM   dba_objects'
+      
+        '                  WHERE  object_type IN ('#39'PACKAGE'#39', '#39'PACKAGE BOD' +
+        'Y'#39', '#39'PROCEDURE'#39', '#39'FUNCTION'#39')'
+      '                  AND    owner = '#39'AXIOM'#39
+      '                  AND    status = '#39'INVALID'#39
       '                  ORDER BY 4)'
       '  LOOP'
       '    BEGIN'
