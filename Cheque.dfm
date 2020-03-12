@@ -288,7 +288,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 123
     Width = 87
-    Height = 23
+    Height = 25
     Alignment = taRightJustify
     DecimalPlaces = 2
     DisplayFormat = dfCurrency
@@ -850,7 +850,7 @@ object frmCheque: TfrmCheque
     Left = 94
     Top = 10
     AutoSize = False
-    EditValue = 43885.7521742014d
+    EditValue = 43901.4471107986d
     Properties.AutoSelect = False
     Properties.DateButtons = [btnClear, btnNow, btnToday]
     Properties.DateOnError = deToday
@@ -976,8 +976,8 @@ object frmCheque: TfrmCheque
     OnContextPopup = chkNoExitContextPopup
   end
   object chkReplacementCheque: TcxCheckBox
-    Left = 246
-    Top = 509
+    Left = 247
+    Top = 510
     Anchors = [akLeft, akBottom]
     Caption = 'Issue replacement cheque'
     TabOrder = 19
@@ -1003,7 +1003,7 @@ object frmCheque: TfrmCheque
       end>
     Properties.ListOptions.ShowHeader = False
     Properties.ListOptions.SyncMode = True
-    Properties.ListSource = dmAxiom.dsBankList
+    Properties.ListSource = dsBankList
     Properties.OnChange = cbBankPropertiesChange
     TabOrder = 20
     Width = 73
@@ -1827,5 +1827,32 @@ object frmCheque: TfrmCheque
         Name = 'NINVOICE'
         Value = nil
       end>
+  end
+  object qryBankList: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'SELECT * FROM BANK'
+      'where entity = nvl(:entity, entity)'
+      'and trust = nvl(:trust, trust)'
+      'and active = '#39'Y'#39
+      'Order By ACCT')
+    Left = 728
+    Top = 68
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'entity'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'trust'
+        Value = nil
+      end>
+  end
+  object dsBankList: TUniDataSource
+    DataSet = qryBankList
+    Left = 746
+    Top = 61
   end
 end

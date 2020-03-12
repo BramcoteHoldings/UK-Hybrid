@@ -185,6 +185,8 @@ type
     cbAuthBy: TcxLookupComboBox;
     qryLedgerINV_TAX: TFloatField;
     actOK: TAction;
+    qryBankList: TUniQuery;
+    dsBankList: TUniDataSource;
     procedure FormShow(Sender: TObject);
     procedure cbBankClick(Sender: TObject);
     procedure cbAuthByClick(Sender: TObject);
@@ -373,10 +375,10 @@ begin
 //      dmaxiom.qryBranchList.Open;
 //      dmaxiom.qryDepartment.Close;
 //      dmaxiom.qryDepartment.Open;
-   if dmAxiom.qryBankList.Active = True then
-      dmAxiom.qryBankList.Close;
-   dmAxiom.qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
-   dmAxiom.qryBankList.Open;
+   if qryBankList.Active = True then
+      qryBankList.Close;
+   qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   qryBankList.Open;
 
 end;
 
@@ -1989,12 +1991,14 @@ begin
                            ParamByName('p_ninvoice').AsInteger := qryLedger.FieldByName('UNIQUEID').AsInteger;
                            Open;
                            cMatterTotalTax := (FieldByName('legal_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
-                           cTradeTotalTax := (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+                           cTradeTotalTax := qryLedger.FieldByName('amount').AsFloat/FieldByName('amount').AsFloat * qryLedger.FieldByName('tax').AsFloat;  //   (FieldByName('trade_cr_amount').AsFloat/FieldByName('amount').AsFloat) * qryLedger.FieldByName('tax').AsFloat;
+
                            if FieldByName('trade_cr_amount').AsFloat <> 0 then
-                              cTradeTotal :=  FieldByName('trade_cr_amount').AsFloat;// - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
+                              cTradeTotal := qryLedger.FieldByName('amount').AsFloat;   //FieldByName('trade_cr_amount').AsFloat;      // - qryLedger.FieldByName('amount').AsFloat - cTradeTotalTax;
                            if FieldByName('legal_cr_amount').AsFloat <> 0 then
-                              cMatterTotal :=  FieldByName('legal_cr_amount').AsFloat; // - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
- //                          if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
+                              cMatterTotal := FieldByName('legal_cr_amount').AsFloat;     // - qryLedger.FieldByName('amount').AsFloat - cMatterTotalTax;
+ //
+                           if (TaxRate('BILL', qryLedger.FieldByName('TAXCODE').AsString, Now) <> 0) then
                              //(qryLedger.FieldByName('TAXCODE').AsString = 'GST')
                              //or (qryLedger.FieldByName('TAXCODE').AsString = 'GSTIN')) then
                            if qryLedger.FieldByName('inv_TAX').AsFloat <> 0 then
@@ -3850,10 +3854,10 @@ begin
    lblAuthByName.AutoSize := TRUE;
 
    dmAxiom.qryCurrencyList.Open;
-   if dmAxiom.qryBankList.Active = True then
-      dmAxiom.qryBankList.Close;
-   dmAxiom.qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
-   dmAxiom.qryBankList.Open;
+   if qryBankList.Active = True then
+      qryBankList.Close;
+   qryBankList.ParamByName('ENTITY').AsString := dmAxiom.Entity;
+   qryBankList.Open;
 
    if dmAxiom.qryEmplyeeList.Active = False then
    dmAxiom.qryEmplyeeList.Open;
@@ -4047,6 +4051,7 @@ begin
   qryBankBalance.Close;
   qryTmp.Close;
   qryInvoiceCRAmount.Close;
+  qryBankList.Close;
 
 //  RemoveFromDesktop(Self);
   Action := caFree;
@@ -4681,7 +4686,7 @@ end;
 function TfrmCheque.IsBankOverDrawn : Boolean;
 var
   loQryTmp    : TUniQuery;
-  lcCashTotal : Currency;
+  lcCashTotal : double;
   LMsg: string;
   LEntered,
   LTrustODPasswd: String;
@@ -4698,12 +4703,12 @@ begin
                               QuotedStr(cbBank.Text);
 
         loQryTmp.Open;
-        lcCashTotal := loQryTmp.FieldByName('CASHTOTAL').AsCurrency;
+        lcCashTotal := loQryTmp.FieldByName('CASHTOTAL').AsFloat;
 
         if (TotalAmt > lcCashTotal) then
         begin
 //           if Trim(SystemString('STATE')) = 'TAS' then
-//           begin
+//           begin                                                                     abc
               MessageDlg('This transaction will overdraw your cashbook bank balance. ' +
                        #13 + #10 + 'Organise a transfer of monies from the Statutory Deposit.',
                        mtWarning, [mbOK], 0);
@@ -4753,7 +4758,7 @@ begin
       while (qryLedger.EOF = False) do
       begin
 
-         if (qryLedger.FieldByName('TYPE').AsString = 'Matter') or
+         if ((qryLedger.FieldByName('TYPE').AsString = 'Matter') or (qryLedger.FieldByName('TYPE').AsString = 'Protected')) or
             ((qryLedger.FieldByName('TYPE').AsString = 'Invoice') and (qryLedger.FieldByName('FILEID').AsString <> '')) then
          begin
             lsAcct := MatterString(qryLedger.FieldByName('FILEID').AsString, 'ACCT');
