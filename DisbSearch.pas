@@ -11,7 +11,7 @@ uses
   cxGrid, cxCurrencyEdit,cxContainer, cxGroupBox, cxPC, cxLookAndFeels,
   cxLookAndFeelPainters, cxPCdxBarPopupMenu, cxNavigator, Vcl.ExtCtrls,
   dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  cxCalendar, dxDateRanges;
+  cxCalendar, dxDateRanges, dxScrollbarAnnotations;
 
 type
   TfrmDisbSearch = class(TForm)
@@ -78,7 +78,8 @@ var
   frmDisbSearch: TfrmDisbSearch;
   sSQL : string;
   sWhereClause : string;
-  sOrderBy : string;
+  sOrderBy,
+  sGroupBy : string;
 
 implementation
 
@@ -135,25 +136,24 @@ var
 begin
    // Build the SQL Filter query
    qryLedgers.Close;
-   sWhereClause := ' AND ACCT = ' + QuotedStr(dmAxiom.Entity);
-
+   sWhereClause := ' AND a.ACCT = ' + QuotedStr(dmAxiom.Entity);
 
    if tbDesc.Text <> '' then
-      sWhereClause := sWhereClause + ' AND DESCR LIKE ' + QuotedStr('%' + tbDesc.Text + '%');
+      sWhereClause := sWhereClause + ' AND a.DESCR LIKE ' + QuotedStr('%' + tbDesc.Text + '%');
    if tbBalanceGreater.Text <> '' then
-      sWhereClause := sWhereClause + ' AND AMOUNT > ' + tbBalanceGreater.Text;
+      sWhereClause := sWhereClause + ' AND a.AMOUNT > ' + tbBalanceGreater.Text;
    if tbBalanceLess.Text <> '' then
-      sWhereClause := sWhereClause + ' AND AMOUNT > ' + tbBalanceLess.Text;
+      sWhereClause := sWhereClause + ' AND a.AMOUNT > ' + tbBalanceLess.Text;
 
 
    if tbLedgerSearch.Text <> '' then
-      sWhereClause := sWhereClause + ' AND FILEID like ' + QuotedStr('%' + tbLedgerSearch.Text + '%');
+      sWhereClause := sWhereClause + ' AND a.FILEID like ' + QuotedStr('%' + tbLedgerSearch.Text + '%');
 
    if TaxFreeOnly then
-      sWhereClause := sWhereClause + ' AND TAX = 0';
+      sWhereClause := sWhereClause + ' AND a.TAX = 0';
 
    qryLedgers.SQL.Clear;
-   qryLedgers.SQL.Add(sSQL + sWhereClause + sOrderBy);
+   qryLedgers.SQL.Add(sSQL + sWhereClause + sGroupBy + sOrderBy);
    qryLedgers.Open;
 
 end;
@@ -186,17 +186,51 @@ end;
 
 procedure TfrmDisbSearch.FormCreate(Sender: TObject);
 begin
-  sSQL := 'SELECT DESCR, CREATED, ACCT, NMATTER, REFNO, PAYER, TRUST, BILLED, '+
+   sSQL := 'SELECT   MIN (a.descr) AS descr, MIN (a.created) AS created, a.acct, '+
+           '    a.nmatter, a.payer AS payer, a.fileid fileid, '+
+           '    a.client_name client_name, a.matter_desc matter_desc,'+
+           '    a.taxcode taxcode, SUM (a.amount + NVL (b.amount, 0)) AS amount,'+
+           '    SUM (a.tax + NVL (b.tax, 0)) AS tax, a.refno, a.nalloc '+
+           ' FROM (SELECT descr, created, acct, nmatter, refno, payer, trust, billed, '+
+           '            fileid, client_name, matter_desc, taxcode, nalloc,'+
+           '            NVL (amount * -1, 0) AS amount, NVL (tax * -1, 0) AS tax, '+
+           '            0 AS disb_nalloc_receipt '+
+           '       FROM alloc  '+
+           '      WHERE ((billed = ''N'') or (nalloc in (select disb_nalloc_receipt from alloc))) '+
+           '        AND nmemo IS NULL '+
+           '        AND ncheque IS NOT NULL '+
+           '        AND trust = ''G'' '+
+           '        AND rv_nalloc IS NULL '+
+           '        AND ninvoice IS NULL  '+
+           '        AND (   NVL (ncheque, 0) > 0 '+
+           '             OR (NVL (njournal, 0) > 0 AND TYPE = ''J2'')  '+
+           '            )) a,  '+
+           '    (SELECT NVL (SUM(amount) * -1, 0) AS amount, NVL (SUM(tax), 0) AS tax,'+
+           '            disb_nalloc_receipt '+
+           '       FROM alloc '+
+           '      WHERE nreceipt IS NOT NULL  '+
+           '        AND trust = ''G'' '+
+           '        AND rv_nalloc IS NULL '+
+           '        AND ninvoice IS NULL '+
+           '        AND disb_nalloc_receipt IS NOT NULL '+
+           '        AND (NVL (nreceipt, 0) > 0) '+
+           '      GROUP BY disb_nalloc_receipt) b '+
+           ' WHERE a.nalloc = b.disb_nalloc_receipt(+) ';
+
+   {'SELECT DESCR, CREATED, ACCT, NMATTER, REFNO, PAYER, TRUST, BILLED, '+
            ' FILEID, CLIENT_NAME, MATTER_DESC, TAXCODE, '+
            ' NALLOC, nvl(amount * -1,0) as amount, nvl(tax * -1,0) as tax '+
            ' FROM ALLOC WHERE BILLED = ''N'' AND NMEMO IS NULL AND '+
            ' NCHEQUE IS NOT NULL AND TRUST = ''G'' AND RV_NALLOC IS NULL AND ninvoice is null AND (nvl(ncheque,0) > 0 '+
-           ' or (nvl(njournal,0) > 0 and type = ''J2''))';
-  sOrderBy := ' ORDER BY created ';
-  TaxFreeOnly := False;
+           ' or (nvl(njournal,0) > 0 and type = ''J2''))';  }
 
-  SettingLoadStream(dmAxiom.UserID, 'tvDisbSearch Layout', tvDisbSearch);
+   sGroupBy := ' GROUP BY a.nmatter, a.fileid, a.client_name, a.matter_desc, a.taxcode, '+
+               ' a.descr, a.acct, a.payer, a.taxcode, a.refno, a.nalloc ' +
+               ' having SUM (a.amount + NVL (b.amount, 0)) <> 0 ';
 
+   TaxFreeOnly := False;
+
+   SettingLoadStream(dmAxiom.UserID, 'tvDisbSearch Layout', tvDisbSearch);
 end;
 
 
@@ -225,7 +259,6 @@ begin
     FreeAndNil(loTfrmLedgerNew);
 
   end;    //  end try-finally
-
 end;
 
 procedure TfrmDisbSearch.tbLedgerSearchChange(Sender: TObject);
@@ -233,9 +266,7 @@ begin
 //  if tbLedgerSearch.Text <> '' then
 //    qryLedgers.Locate('CODE', tbLedgerSearch.Text, [loPartialKey]);
   makesql;
-
 end;
-
 
 procedure TfrmDisbSearch.tbLedgerSearchKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);

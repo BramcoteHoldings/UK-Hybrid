@@ -2388,8 +2388,10 @@ var
    x: Integer;
    FileSize: DWord;
    LList: TStringDynArray;
+   bPWDResetFail: boolean;
 begin
-  LFrmPassword := nil;
+   bPWDResetFail := False;
+   LFrmPassword := nil;
    try
       Fail := False;
       LTmp := '';
@@ -2510,8 +2512,8 @@ begin
                  Fail := False;
             20003: begin
                  raise EDAError.Create(20003,'Object is Invalid.');
-//                     Fail := False;
-//                     ScriptRebuildObjects.Execute;
+                     Fail := False;
+                     ScriptRebuildObjects.Execute;
 //                     raise EDAError.Create(20003,'There was an error.  Please ty again.'+ #13#10 + 'If error continues, please contact the BHL Insight Help Desk');
                    end;
             12003:
@@ -2527,29 +2529,39 @@ begin
             28001:
                  begin
                     MessageDlg('Password has expired.  You will need to enter a new password.',mtInformation,[mbOk],0);
-                   try
-                      with UniConnPasswdReset do
-                      begin
-                         Disconnect;
-                         Server   := uniInsight.Server;
-                         UserName := 'axiom';
-                         Password := 'axiom';
-                         Connect;
-                      end;
+                    try
+                       try
+                         with UniConnPasswdReset do
+                         begin
+                            Disconnect;
+                            Server   := uniInsight.Server;
+                            UserName := 'axiom';
+                            Password := 'regdel99';
+                            Connect;
+                         end;
+                       except
+                          MessageDlg('There was an error trying to reset password.  Please contact your System Administrator.', mtError, [mbOk],0);
+                          Fail := false;
+                          bPWDResetFail := True;
+                       end;
 
-                      Fail := false;
-                      LfrmPassword := TfrmPassword.Create(Self);
+                       if bPWDResetFail = False then
+                       begin
+                          Fail := false;
+                          LfrmPassword := TfrmPassword.Create(Self);
 
-                      LfrmPassword.qryPassword.Connection := UniConnPasswdReset;
-                      procAlterUser.Connection := UniConnPasswdReset;
+                          LfrmPassword.qryPassword.Connection := UniConnPasswdReset;
+                          procAlterUser.Connection := UniConnPasswdReset;
 
-                      LfrmPassword.AUser := uniInsight.Username;
-                      LfrmPassword.ShowModal;
-                   finally
-                      LfrmPassword.Free;
-                      UniConnPasswdReset.Disconnect;
-                      procAlterUser.Connection := uniInsight;
-                   end;
+                          LfrmPassword.AUser := uniInsight.Username;
+                          LfrmPassword.ShowModal;
+                       end;
+                    finally
+                       FreeAndNil(LfrmPassword);
+                       UniConnPasswdReset.Disconnect;
+                       procAlterUser.Connection := uniInsight;
+                    end;
+
                  end;
             20000 :
                   Fail := false;

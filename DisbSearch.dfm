@@ -36,8 +36,6 @@ object frmDisbSearch: TfrmDisbSearch
     object tabGrid: TcxTabSheet
       Caption = 'Display Grid'
       ImageIndex = 0
-      ExplicitTop = 28
-      ExplicitHeight = 583
       object grdDisbSearch: TcxGrid
         Left = 0
         Top = 0
@@ -46,10 +44,10 @@ object frmDisbSearch: TfrmDisbSearch
         Align = alClient
         TabOrder = 0
         LookAndFeel.NativeStyle = True
-        ExplicitHeight = 541
         object tvDisbSearch: TcxGridDBTableView
           OnDblClick = dbgrLedgersDblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsLedgers
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -136,7 +134,6 @@ object frmDisbSearch: TfrmDisbSearch
         Height = 42
         Align = alBottom
         TabOrder = 1
-        ExplicitTop = 541
         DesignSize = (
           697
           42)
@@ -205,6 +202,10 @@ object frmDisbSearch: TfrmDisbSearch
     object tabFilters: TcxTabSheet
       Caption = 'Filters'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         697
         585)

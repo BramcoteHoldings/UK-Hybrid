@@ -130,6 +130,7 @@ object frmCheqReqs: TfrmCheqReqs
             DataController.DataModeController.SmartRefresh = True
             DataController.DataSource = dsCheqReq
             DataController.KeyFieldNames = 'NCHEQREQ'
+            DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoFocusTopRowAfterSorting]
             DataController.Summary.DefaultGroupSummaryItems = <
               item
                 Format = 'Total for Cheque = $,0.00;-$,0.00'

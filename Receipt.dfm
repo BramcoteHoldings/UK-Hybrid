@@ -160,7 +160,7 @@ object frmReceipt: TfrmReceipt
   end
   object edtSaveNeAmount: TEdit
     Left = 203
-    Top = 159
+    Top = 160
     Width = 91
     Height = 23
     Margins.Left = 2
@@ -371,6 +371,11 @@ object frmReceipt: TfrmReceipt
       end
       object tvLedgerFILEID: TcxGridDBColumn
         DataBinding.FieldName = 'FILEID'
+        Visible = False
+        VisibleForCustomization = False
+      end
+      object tvLedgerORIGINAL_AMOUNT: TcxGridDBColumn
+        DataBinding.FieldName = 'ORIGINAL_AMOUNT'
         Visible = False
         VisibleForCustomization = False
       end
@@ -893,7 +898,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43829.5314982986d
+    EditValue = 43889.5149524768d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True
@@ -1071,13 +1076,13 @@ object frmReceipt: TfrmReceipt
     end
   end
   object gbTemplateOps: TcxGroupBox
-    Left = 553
-    Top = 470
+    Left = 558
+    Top = 471
     Anchors = [akRight, akBottom]
     Caption = 'Template'
     TabOrder = 21
-    Height = 51
-    Width = 210
+    Height = 46
+    Width = 217
     object btnChooseTemplate: TcxButton
       Left = 11
       Top = 18
@@ -1266,7 +1271,7 @@ object frmReceipt: TfrmReceipt
         ' FEESCR, DISBDR, DISBCR, ANTDDR, ANTDCR, '
       
         'SUNDDR, SUNDCR, INVOICE, UPCREDDR, UPCREDCR,NSUBBILL, NSUBBILL_I' +
-        'D, TAXCODE, TAX, FILEID, NALLOC'
+        'D, TAXCODE, TAX, FILEID, NALLOC, ORIGINAL_AMOUNT'
       'FROM LEDGER'
       'WHERE 1=2')
     CachedUpdates = True
@@ -1349,6 +1354,9 @@ object frmReceipt: TfrmReceipt
     end
     object qryLedgerNALLOC: TLargeintField
       FieldName = 'NALLOC'
+    end
+    object qryLedgerORIGINAL_AMOUNT: TFloatField
+      FieldName = 'ORIGINAL_AMOUNT'
     end
   end
   object dsLedger: TUniDataSource

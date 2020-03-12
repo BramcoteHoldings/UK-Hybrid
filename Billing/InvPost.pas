@@ -1720,10 +1720,10 @@ begin
                   cAllocUpCredAmount   := qrySetup.FieldByName('SUMAMOUNT').AsCurrency;
                   cAllocUpCredTax      := qrySetup.FieldByName('TAXAMOUNT').AsCurrency;
 
-                  if ((abs(cAllocUpCredAmount) <>  Self.qryBill.FieldByName('UPCRED').AsCurrency)) and (Self.qryBill.FieldByName('UPCRED').AsCurrency <> 0) then
+                  if ((abs(cAllocUpCredAmount) <>  Self.qryBill.FieldByName('UPCRED').AsFloat)) and (Self.qryBill.FieldByName('UPCRED').AsFloat <> 0) then
                   begin
-                     cAllocUpCredAmountDiff   := abs(cAllocCheqReqAmount) - Self.qryBill.FieldByName('UPCRED').AsFloat;
-                     cAllocUpCredTaxDiff      := abs(cAllocCheqReqTax) - Self.qryBill.FieldByName('UPCRED').AsFloat;
+                     cAllocUpCredAmountDiff   := abs(cAllocUpCredAmount) - Self.qryBill.FieldByName('UPCRED').AsFloat;
+                     cAllocUpCredTaxDiff      := abs(cAllocUpCredTax) - Self.qryBill.FieldByName('UPCRED').AsFloat;
                   end;
 
                   {post componsnts}
@@ -1801,7 +1801,7 @@ begin
                end; // end if qryBill.FieldByName('UPCRED').AsCurrency <> 0.0 then
 
               {post cheqreq adjustments if any }
-               if (cAllocUpCredAmount <> 0) then
+               if (cAllocUpCredAmountDiff <> 0) then
                begin
                   sLedgerKey := glComponentSetup.buildLedgerKey(qryMatter.FieldByName('NMATTER').AsString,TableString('ENTITY', 'CODE', dmAxiom.Entity, 'BILL_DISB_ADJ_CR'),'',false,'Error with Disbursement Adjustment Chart');
 

@@ -65,14 +65,10 @@ object frmCashpay: TfrmCashpay
     object tabCashbook: TcxTabSheet
       Caption = 'Cashbook'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 251
-        Width = 8
+        Width = 1110
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -380,10 +376,6 @@ object frmCashpay: TfrmCashpay
       Caption = 'Present'
       ImageIndex = 2
       TabVisible = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dblblAcct: TDBText
         Left = 326
         Top = 17
@@ -1117,8 +1109,8 @@ object frmCashpay: TfrmCashpay
         ',TAX,TYPE, ALLOC.TAXCODE, ALLOC.NCHEQUE, ALLOC.NMEMO'
       'FROM ALLOC WHERE NCHEQUE = :P_Ncheque AND NCHEQUE <> 0'
       '*/')
-    Left = 408
-    Top = 248
+    Left = 409
+    Top = 249
     ParamData = <
       item
         DataType = ftUnknown
@@ -1129,8 +1121,8 @@ object frmCashpay: TfrmCashpay
   object dsAllocs: TUniDataSource
     AutoEdit = False
     DataSet = qryAllocs
-    Left = 440
-    Top = 248
+    Left = 453
+    Top = 244
   end
   object dsCheques: TUniDataSource
     AutoEdit = False
@@ -1804,8 +1796,8 @@ object frmCashpay: TfrmCashpay
   end
   object mMoveMatter: TPopupMenu
     OnPopup = mMoveMatterPopup
-    Left = 600
-    Top = 101
+    Left = 601
+    Top = 102
     object MoveMatter1: TMenuItem
       Caption = 'Move to different matter'
       OnClick = MoveMatter1Click
@@ -2400,7 +2392,7 @@ object frmCashpay: TfrmCashpay
       end>
     UseBuiltInPopupMenus = False
     Left = 860
-    Top = 12
+    Top = 13
   end
   object ppPrintpay: TppReport
     AutoStop = False

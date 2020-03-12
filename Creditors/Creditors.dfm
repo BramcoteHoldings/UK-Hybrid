@@ -115,6 +115,7 @@ object frmCreditors: TfrmCreditors
         LookAndFeel.NativeStyle = True
         object tvTransactions: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsTransactions
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
@@ -359,6 +360,7 @@ object frmCreditors: TfrmCreditors
           PopupMenu = popPay
           OnMouseDown = tvInvoicesMouseDown
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCellClick = tvInvoicesCellClick
           OnCellDblClick = tvInvoicesCellDblClick
           OnFocusedRecordChanged = tvInvoicesFocusedRecordChanged
@@ -2186,7 +2188,9 @@ object frmCreditors: TfrmCreditors
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
       'SELECT'
-      '  nvl(CH.COMPONENT_CODE_DISPLAY,T.CHART)as CHART,'
+      
+        '  nvl(CH.COMPONENT_CODE_DISPLAY,T.CHART)|| '#39' - '#39'||CH.descr as CH' +
+        'ART,'
       
         '  DECODE(T.OWNER_CODE, '#39'CHEQUE'#39', '#39'Chq'#39', '#39#39', T.OWNER_CODE, '#39'INVOI' +
         'CE'#39', '#39'Inv'#39', '#39#39', T.OWNER_CODE, '#39'CREDIT_NOTE'#39', '#39'C/N'#39', '#39#39') as OWNER' +
@@ -2365,7 +2369,7 @@ object frmCreditors: TfrmCreditors
     XLSSettings.WorksheetName = 'Report'
     Left = 1219
     Top = 120
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plInvoices'
     object ppHeaderBand1: TppHeaderBand

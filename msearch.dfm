@@ -83,6 +83,7 @@ object frmMatterSearch: TfrmMatterSearch
         object vMatters: TcxGridDBTableView
           OnDblClick = dbgrMatters1DblClick
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           OnCanSelectRecord = vMattersCanSelectRecord
           OnCustomDrawCell = vMattersCustomDrawCell
           DataController.DataModeController.GridMode = True
@@ -352,6 +353,7 @@ object frmMatterSearch: TfrmMatterSearch
         end
         object tvMatterArch: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
+          ScrollbarAnnotations.CustomAnnotations = <>
           DataController.DataSource = dsMatterArch
           DataController.DetailKeyFieldNames = 'NMATTER'
           DataController.KeyFieldNames = 'NMATTER'
@@ -742,6 +744,10 @@ object frmMatterSearch: TfrmMatterSearch
       Caption = '&Filter'
       ImageIndex = 1
       OnShow = tabFiltersShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         1280
         586)
@@ -782,7 +788,7 @@ object frmMatterSearch: TfrmMatterSearch
         StyleHot.LookAndFeel.NativeStyle = True
         TabOrder = 0
         OnClick = FilterItemChange
-        Width = 114
+        Width = 112
       end
       object edtClientSearch: TEdit
         Left = 30
@@ -1114,7 +1120,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 17
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1142,7 +1148,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 41
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1170,7 +1176,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 65
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1198,7 +1204,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 89
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1226,7 +1232,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 111
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1254,7 +1260,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 135
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -1282,7 +1288,7 @@ object frmMatterSearch: TfrmMatterSearch
           Left = 115
           Top = 159
           Width = 70
-          Height = 21
+          Height = 23
           Alignment = taRightJustify
           DecimalPlaces = 2
           DisplayFormat = dfCurrency
@@ -3176,7 +3182,7 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.WorksheetName = 'Report'
     Left = 251
     Top = 268
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plMatters'
     object ppHeaderBand1: TppHeaderBand
@@ -3877,7 +3883,7 @@ object frmMatterSearch: TfrmMatterSearch
     XLSSettings.WorksheetName = 'Report'
     Left = 626
     Top = 339
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppBDEPipeline2'
     object ppHeaderBand2: TppHeaderBand

@@ -21,7 +21,7 @@ uses
   daQueryDataView, daUniDAC, daDataModule, dxCore, cxNavigator,
   dxGDIPlusClasses, dxDPIAwareUtils, dxBarBuiltInMenu,
   cxDataControllerConditionalFormattingRulesManagerDialog, dxDateRanges,
-  System.ImageList;
+  System.ImageList, dxScrollbarAnnotations;
 
 const
   isCASHBOOK = 0;
@@ -707,21 +707,21 @@ begin
       try
          with qryTransitems do
          begin
-          // Now find the Transactions for this Period
-          Close;
-          SQL.Clear;
+            // Now find the Transactions for this Period
+            Close;
+            SQL.Clear;
           {
             Code Modified 26.9.2002 GG
 
             Made this so that it works in a similar way to the query showing in the allocs grid
           }
 
-          DecodeDate(dtpDateFrom.Date, wYear, wMonth, wDay);
-          if wMonth < iFinYearStart then
-            dtFinYearStart := EncodeDate(wYear - 1, iFinYearStart, 1)
-          else
-            dtFinYearStart := EncodeDate(wYear, iFinYearStart, 1);
-          SQL.Clear;
+            DecodeDate(dtpDateFrom.Date, wYear, wMonth, wDay);
+            if wMonth < iFinYearStart then
+               dtFinYearStart := EncodeDate(wYear - 1, iFinYearStart, 1)
+            else
+               dtFinYearStart := EncodeDate(wYear, iFinYearStart, 1);
+            SQL.Clear;
 
           {
             Code modified 26.9.2002 GG
@@ -748,9 +748,9 @@ begin
 
   //        if ((qryCharts.FieldByName('TYPE').AsString = 'E') or (qryCharts.FieldByName('TYPE').AsString = 'I')) and (Trunc(dtpDateFrom.Date) = Trunc(dtFinYearStart)) then
 
-          sSELECT := 'insert into GL_REPORT_TRANS( CHART,CREATED,DESCR,DEBIT,CREDIT,AMOUNT,REFNO,OWNER_CODE,NOWNER,CREDITORCODE,REPORT_DESC,TAXCODE,empcode,ordtype,x, code, naccount, type,chart_desc) ';
-          if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') and (Trunc(dtpDateFrom.Date) = Trunc(dtFinYearStart)) then
-          begin
+            sSELECT := 'insert into GL_REPORT_TRANS( CHART,CREATED,DESCR,DEBIT,CREDIT,AMOUNT,REFNO,OWNER_CODE,NOWNER,CREDITORCODE,REPORT_DESC,TAXCODE,empcode,ordtype,x, code, naccount, type,chart_desc) ';
+            if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') and (Trunc(dtpDateFrom.Date) = Trunc(dtFinYearStart)) then
+            begin
             // we want this case to return an opening balance of zero - hence nvl(sum(amount) * 0, 0) in this line : GG 26.9.02.
                if (IsCreatedDate) then
                  sSELECT:= sSELECT +'SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE) AS CHART, TO_DATE('''+ FormatDateTime('DD-MMM-YY',dtpDateFrom.Date) + ''') as CREATED, ''Opening Balance'' as DESCR,'+
@@ -765,7 +765,7 @@ begin
                          'nvl(SUM(T.AMOUNT) * 0, 0) as AMOUNT, '''' as REFNO, ''BBF'' as OWNER_CODE, 0 as NOWNER, Null as CREDITORCODE,REPORT_DESC, max(T.TAXCODE) as TAXCODE,'''+
                          dmAxiom.UserID+''' as empcode, 1 as ordtype, DECODE(SUBSTR((sum(T.AMOUNT)),0,1),''-'',ABS(sum(T.Amount)),sum(T.AMOUNT) * -1) as x, c.code,1 as naccount, ''BBF'' as type, c.descr as chart_desc ';
             end
-          else
+            else
             begin
               if (IsCreatedDate) then
                 sSELECT:= sSELECT + 'SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE)  AS CHART, TO_DATE('''+ FormatDateTime('DD-MMM-YY',dtpDateFrom.Date) + ''') as CREATED, ''Opening Balance'' as DESCR,'+
@@ -781,8 +781,8 @@ begin
                           dmAxiom.UserID+''' as empcode, 1 as ordtype, DECODE(SUBSTR((sum(T.AMOUNT)),0,1),''-'',ABS(sum(T.Amount)),sum(T.AMOUNT) * -1) as x, c.code,1 as naccount, ''BBF'' as type, c.descr as chart_desc ';
             end;    //  end if-else
 
-          SQL.Add(sSELECT);
-          SQL.Add('FROM TRANSITEM T, CHARTTYPE CT, CHART C ');
+            SQL.Add(sSELECT);
+            SQL.Add('FROM TRANSITEM T, CHARTTYPE CT, CHART C ');
 
           {  Code Modified 25.9.2002 GG
              Want to start from beginning of time for non-P&L accounts
@@ -791,45 +791,45 @@ begin
               SQL.Add('WHERE CREATED < :P_DateFrom ');
           }
 
-          SQL.Add('WHERE');
-          SQL.Add('  T.CHART(+) = C.CODE AND');
-          SQL.Add('  T.ACCT(+) = C.BANK AND');
-          SQL.ADD('  C.TYPE = CT.CODE(+) ');
-          //    SQL.Add('  C.BANK = ''' + dmAxiom.Entity + ''' AND');
-          //    SQL.Add('  C.CODE BETWEEN ''' + tbLedgerFrom.Text ''' AND ''' + tbLedgerTo.Text + '''');
-          SQL.Add('  AND C.BANK = ''' + dmAxiom.Entity + '''');
-          SQL.Add(       SQLWhere(True));
+            SQL.Add('WHERE');
+            SQL.Add('  T.CHART(+) = C.CODE AND');
+            SQL.Add('  T.ACCT(+) = C.BANK AND');
+            SQL.ADD('  C.TYPE = CT.CODE(+) ');
+            //    SQL.Add('  C.BANK = ''' + dmAxiom.Entity + ''' AND');
+            //    SQL.Add('  C.CODE BETWEEN ''' + tbLedgerFrom.Text ''' AND ''' + tbLedgerTo.Text + '''');
+            SQL.Add('  AND C.BANK = ''' + dmAxiom.Entity + '''');
+            SQL.Add(       SQLWhere(True));
 
   //        if (qryCharts.FieldByName('TYPE').AsString = 'E') or (qryCharts.FieldByName('TYPE').AsString = 'I')  then
-         if (IsCreatedDate) then
-         begin
-            SQL.Add(' AND trunc(T.created) >= ');
-            // P_DateStart is financial year start
-            SQL.Add('case when (reporttype = ''P'') then :P_DateStart  ');
-            SQL.Add('   else  :P_OldDate ');
-	         SQL.Add('end  ');
+            if (IsCreatedDate) then
+            begin
+               SQL.Add(' AND trunc(T.created) >= ');
+               // P_DateStart is financial year start
+               SQL.Add('case when (reporttype = ''P'') then :P_DateStart  ');
+               SQL.Add('   else  :P_OldDate ');
+	            SQL.Add('end  ');
 //********* opening balance should always be transactions less than from date chosen
-            SQL.Add(' AND trunc(T.created) < :P_DateFrom ');
+               SQL.Add(' AND trunc(T.created) < :P_DateFrom ');
 //            SQL.Add('case when (reporttype = ''P'' ) then  to_date(null) ');
 //            SQL.Add('   else  :P_DateFrom  ');
 //	         SQL.Add('end  ');
 //            SQL.Add(' AND trunc(T.created) < :P_DateFrom ');
-         end
-         else
-         begin
-            SQL.Add(' AND trunc(T.SYSTEMDATE) >= ');
+            end
+            else
+            begin
+               SQL.Add(' AND trunc(T.SYSTEMDATE) >= ');
             // P_DateStart is financial year start
-            SQL.Add('case when (reporttype = ''P'') then :P_DateStart  ');
-            SQL.Add('   else  :P_OldDate ');
-	         SQL.Add('end  ');
+               SQL.Add('case when (reporttype = ''P'') then :P_DateStart  ');
+               SQL.Add('   else  :P_OldDate ');
+	            SQL.Add('end  ');
 //          opening balance should always be transactions less than from date chosen
-            SQL.Add(' AND trunc(T.SYSTEMDATE) < :P_DateFrom ');
+               SQL.Add(' AND trunc(T.SYSTEMDATE) < :P_DateFrom ');
 
 //            SQL.Add('case when (reporttype = ''P'' ) then to_date(null) ');
 //            SQL.Add('   else  :P_DateFrom  ');
 //	         SQL.Add('end  ');
 //            SQL.Add(' AND trunc(T.SYSTEMDATE) < :P_DateFrom ');
-         end;
+            end;
 
 
  {         if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
@@ -850,7 +850,7 @@ begin
 
             end;    //  end if-else    }
 
-          SQL.Add('GROUP BY c.code, nvl(C.COMPONENT_CODE_DISPLAY,C.CODE),REPORT_DESC, c.descr ');
+            SQL.Add('GROUP BY c.code, nvl(C.COMPONENT_CODE_DISPLAY,C.CODE),REPORT_DESC, c.descr ');
 
           // *******************************************************************************
           //**** all of this is not needed handled by the sql above.  this duplicates the opening balance
@@ -873,62 +873,62 @@ begin
           SQL.Add(       SQLWhere);
           SQL.Add('GROUP BY c.code, nvl(C.COMPONENT_CODE_DISPLAY,C.CODE),REPORT_DESC ');      }
 
-          SQL.Add('UNION ALL');
+            SQL.Add('UNION ALL');
 
-          if (IsCreatedDate) then
-            SQL.Add('SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE) as CHART, T.CREATED, T.DESCR,'+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''0'',to_number(NULL),''-'',ABS(T.AMOUNT ),to_number(NULL)) DEBIT,'+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',to_number(NULL),ABS(T.AMOUNT)) CREDIT,t.amount,'+
-                    'T.REFNO, T.OWNER_CODE,T.NOWNER, T.CREDITORCODE,REPORT_DESC, T.TAXCODE,'''+
-                    dmAxiom.UserID + ''' AS EMPCODE, 2 as ordtype, '+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',ABS(T.Amount),T.AMOUNT * -1) as x, c.code, t.naccount,'+
-                    'case when (owner_code = ''CHEQUE'') then ''CHQ'' '+
-                    '     when (owner_code = ''RECEIPT'') then ''RCP'' '+
-	                 '     when (owner_code = ''NMEMO'') then ''BLL'' '+
-	                 '     when (owner_code = ''JOURNAL'') then ''JNL'' '+
-	                 '     when (owner_code = ''CHEQREQ'') then ''CRQ'' '+
-                    'ELSE  '+
-                    '     substr(owner_code,1,3) '+
-                    'end as type, c.descr as chart_desc' )
-          else
-            SQL.Add('SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE) as CHART, T.SYSTEMDATE AS CREATED, T.DESCR,'+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''0'',to_number(NULL),''-'',ABS(T.AMOUNT ),to_number(NULL)) DEBIT,'+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',to_number(NULL),ABS(T.AMOUNT)) CREDIT,t.amount,'+
-                    'T.REFNO, T.OWNER_CODE, T.NOWNER, T.CREDITORCODE,REPORT_DESC, T.TAXCODE,'''+
-                    dmAxiom.UserID + ''' AS EMPCODE, 2 as ordtype, '+
-                    'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',ABS(T.Amount),T.AMOUNT * -1) as x, c.code, t.naccount, '+
-                    'case when (owner_code = ''CHEQUE'') then ''CHQ'' '+
-                    '     when (owner_code = ''RECEIPT'') then ''RCP'' '+
-	                 '     when (owner_code = ''NMEMO'') then ''BLL'' '+
-	                 '     when (owner_code = ''JOURNAL'') then ''JNL'' '+
-	                 '     when (owner_code = ''CHEQREQ'') then ''CRQ'' '+
-                    'ELSE  '+
-                    '     substr(owner_code,1,3) '+
-                    'end as type , c.descr as chart_desc' );
-          SQL.Add('FROM TRANSITEM T, CHART C');
+            if (IsCreatedDate) then
+               SQL.Add('SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE) as CHART, T.CREATED, T.DESCR,'+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''0'',to_number(NULL),''-'',ABS(T.AMOUNT ),to_number(NULL)) DEBIT,'+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',to_number(NULL),ABS(T.AMOUNT)) CREDIT,t.amount,'+
+                       'T.REFNO, T.OWNER_CODE,T.NOWNER, T.CREDITORCODE,REPORT_DESC, T.TAXCODE,'''+
+                       dmAxiom.UserID + ''' AS EMPCODE, 2 as ordtype, '+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',ABS(T.Amount),T.AMOUNT * -1) as x, c.code, t.naccount,'+
+                       'case when (owner_code = ''CHEQUE'') then ''CHQ'' '+
+                       '     when (owner_code = ''RECEIPT'') then ''RCP'' '+
+	                    '     when (owner_code = ''NMEMO'') then ''BLL'' '+
+	                    '     when (owner_code = ''JOURNAL'') then ''JNL'' '+
+	                    '     when (owner_code = ''CHEQREQ'') then ''CRQ'' '+
+                       'ELSE  '+
+                       '     substr(owner_code,1,3) '+
+                       'end as type, c.descr as chart_desc' )
+            else
+               SQL.Add('SELECT nvl(C.COMPONENT_CODE_DISPLAY,C.CODE) as CHART, T.SYSTEMDATE AS CREATED, T.DESCR,'+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''0'',to_number(NULL),''-'',ABS(T.AMOUNT ),to_number(NULL)) DEBIT,'+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',to_number(NULL),ABS(T.AMOUNT)) CREDIT,t.amount,'+
+                       'T.REFNO, T.OWNER_CODE, T.NOWNER, T.CREDITORCODE,REPORT_DESC, T.TAXCODE,'''+
+                       dmAxiom.UserID + ''' AS EMPCODE, 2 as ordtype, '+
+                       'DECODE(SUBSTR((T.AMOUNT),0,1),''-'',ABS(T.Amount),T.AMOUNT * -1) as x, c.code, t.naccount, '+
+                       'case when (owner_code = ''CHEQUE'') then ''CHQ'' '+
+                       '     when (owner_code = ''RECEIPT'') then ''RCP'' '+
+	                    '     when (owner_code = ''NMEMO'') then ''BLL'' '+
+	                    '     when (owner_code = ''JOURNAL'') then ''JNL'' '+
+	                    '     when (owner_code = ''CHEQREQ'') then ''CRQ'' '+
+                       'ELSE  '+
+                       '     substr(owner_code,1,3) '+
+                       'end as type , c.descr as chart_desc' );
+            SQL.Add('FROM TRANSITEM T, CHART C');
 
-          if (IsCreatedDate) then
-            SQL.Add('WHERE TRUNC(T.CREATED) BETWEEN :P_DateFrom AND :P_DateTo')
-          else
-            SQL.Add('WHERE TRUNC(T.SYSTEMDATE) BETWEEN :P_DateFrom AND :P_DateTo');
+            if (IsCreatedDate) then
+               SQL.Add('WHERE TRUNC(T.CREATED) BETWEEN :P_DateFrom AND :P_DateTo')
+            else
+               SQL.Add('WHERE TRUNC(T.SYSTEMDATE) BETWEEN :P_DateFrom AND :P_DateTo');
 
-          SQL.Add('  AND T.CHART = C.CODE ');
-          SQL.Add('  AND T.ACCT = C.BANK ');
-          SQL.Add('  AND NVL(T.REFNO,''*'') <> ''BBF''');
-          SQL.Add('  AND T.ACCT = ' + QuotedStr(dmAxiom.Entity));
-          SQL.Add('  AND T.CHART IN ');
-          SQL.Add('  (');
-          SQL.Add('    SELECT C.CODE AS CODE');
-          SQL.Add('    FROM CHART C');
-          SQL.Add('    WHERE ');
-          SQL.Add('    C.BANK = ''' + dmAxiom.Entity + '''');
-          SQL.Add(       SQLWhere(True));
-          SQL.Add('  )');
+            SQL.Add('  AND T.CHART = C.CODE ');
+            SQL.Add('  AND T.ACCT = C.BANK ');
+            SQL.Add('  AND NVL(T.REFNO,''*'') <> ''BBF''');
+            SQL.Add('  AND T.ACCT = ' + QuotedStr(dmAxiom.Entity));
+            SQL.Add('  AND T.CHART IN ');
+            SQL.Add('  (');
+            SQL.Add('    SELECT C.CODE AS CODE');
+            SQL.Add('    FROM CHART C');
+            SQL.Add('    WHERE ');
+            SQL.Add('    C.BANK = ''' + dmAxiom.Entity + '''');
+            SQL.Add(       SQLWhere(True));
+            SQL.Add('  )');
 
-          if (IsCreatedDate) then
-            SQL.Add('ORDER BY CHART, CREATED')
-          else
-            SQL.Add('ORDER BY CHART, SYSTEMDATE');
+            if (IsCreatedDate) then
+               SQL.Add('ORDER BY CHART, CREATED')
+            else
+               SQL.Add('ORDER BY CHART, SYSTEMDATE');
 
 
 //          if chMovementOnly.Checked then
@@ -944,21 +944,21 @@ begin
 
   //          if (qryCharts.FieldByName('REPORTTYPE').AsString = 'P') then
 
-          ParamByName('P_DateStart').AsDate := Trunc(dtFinYearStart);
+            ParamByName('P_DateStart').AsDate := Trunc(dtFinYearStart);
 
-          ParamByName('P_OldDate').AsDate := StrToDate('01/01/1899');
+            ParamByName('P_OldDate').AsDate := StrToDate('01/01/1899');
 
-          if (dmAxiom.runningide) then
-             qryTransitems.SQL.SaveToFile('C:\tmp\qryTransitems.sql');
+            if (dmAxiom.runningide) then
+               qryTransitems.SQL.SaveToFile('C:\tmp\qryTransitems.sql');
 
-          Prepare;
-          try
-            ExecSQL;
-          except
+            Prepare;
+            try
+               ExecSQL;
+            except
              //
-          end;
+            end;
 //          Open;
-        end;
+         end;
 
          with qryTransitems do
          begin

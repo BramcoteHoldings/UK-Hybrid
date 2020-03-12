@@ -84,7 +84,7 @@ begin
                   'FROM JOURNAL WHERE (ACCT = :ENTITY )' +
 //                  OR ACCT IN (SELECT ACCT FROM BANK WHERE ENTITY = :ENTITY)) '+
                   'AND NJOURNAL = :NJOURNAL ';
-      if (NMemo > 0) then
+{      if (NMemo > 0) then
       begin
          SQL.Text := SQL.Text + 'UNION '+
                                 'SELECT ACCT, NJOURNAL, CREATED, REASON, AMOUNT, TRUST, REFNO, NMEMO, TYPE '+
@@ -92,7 +92,7 @@ begin
 //                                OR ACCT IN (SELECT ACCT FROM BANK WHERE ENTITY = :ENTITY)) '+
                                 'AND NMEMO= :NMEMO ';
          ParamByName('NMEMO').AsInteger := NMemo;
-      end;
+      end;    }
       ParamByName('ENTITY').AsString := Acct;
       ParamByName('NJOURNAL').AsInteger := NJournal;
       Open;

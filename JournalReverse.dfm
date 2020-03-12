@@ -32,7 +32,7 @@ object frmJournalReverse: TfrmJournalReverse
       Left = 188
       Top = 187
       Width = 94
-      Height = 25
+      Height = 23
       Caption = 'Original &date'
       LookAndFeel.NativeStyle = True
       OptionsImage.Glyph.SourceDPI = 96
@@ -110,7 +110,7 @@ object frmJournalReverse: TfrmJournalReverse
     object dtpReverse: TEnforceCustomDateEdit
       Left = 85
       Top = 187
-      EditValue = 43811.9057324074d
+      EditValue = 43896.5409395949d
       Properties.ShowTime = False
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -128,7 +128,7 @@ object frmJournalReverse: TfrmJournalReverse
     end
     object btnOK: TcxButton
       Left = 77
-      Top = 287
+      Top = 285
       Width = 73
       Height = 25
       Caption = '&OK'
@@ -225,7 +225,7 @@ object frmJournalReverse: TfrmJournalReverse
     end
     object btnCancel: TcxButton
       Left = 157
-      Top = 287
+      Top = 285
       Width = 74
       Height = 25
       Caption = '&Cancel'
@@ -322,7 +322,7 @@ object frmJournalReverse: TfrmJournalReverse
     end
     object tbReason: TcxMemo
       Left = 85
-      Top = 219
+      Top = 217
       ParentShowHint = False
       Properties.MaxLength = 120
       Properties.ScrollBars = ssVertical
@@ -486,7 +486,7 @@ object frmJournalReverse: TfrmJournalReverse
       CaptionOptions.Text = 'New Item'
       CaptionOptions.Visible = False
       Control = btnOriginal
-      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalHeight = 23
       ControlOptions.OriginalWidth = 94
       ControlOptions.ShowBorder = False
       Index = 1
@@ -494,12 +494,12 @@ object frmJournalReverse: TfrmJournalReverse
     object dxLayoutItem8: TdxLayoutItem
       Parent = dxLayoutControl1Group_Root
       AlignHorz = ahLeft
-      CaptionOptions.AlignVert = tavTop
-      CaptionOptions.Text = 'Reason'
       SizeOptions.AssignedValues = [sovSizableHorz, sovSizableVert]
       SizeOptions.SizableHorz = True
       SizeOptions.SizableVert = False
       SizeOptions.Width = 269
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'Reason'
       Control = tbReason
       ControlOptions.OriginalHeight = 61
       ControlOptions.OriginalWidth = 196

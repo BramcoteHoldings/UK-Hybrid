@@ -9,7 +9,8 @@ uses
   cxDBData, DBAccess, OracleUniProvider, Uni, MemDS, StdCtrls, Buttons, cxGridLevel,
   cxClasses, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, ExtCtrls, cxContainer, cxGridExportLink,
-  cxLabel, cxDBLabel, Vcl.DBCtrls, cxCurrencyEdit, cxNavigator;
+  cxLabel, cxDBLabel, Vcl.DBCtrls, cxCurrencyEdit, cxNavigator, dxDateRanges,
+  dxScrollbarAnnotations;
 
 type
   TfrmBillGLPostings = class(TForm)
