@@ -13,7 +13,7 @@ object frmBillGLPostings: TfrmBillGLPostings
   OldCreateOrder = False
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 15
   object Panel1: TPanel
     Left = 0
     Top = 278
@@ -28,8 +28,8 @@ object frmBillGLPostings: TfrmBillGLPostings
     object Label1: TLabel
       Left = 9
       Top = 10
-      Width = 52
-      Height = 14
+      Width = 47
+      Height = 15
       Caption = 'Bill Total:'
     end
     object DBText1: TDBText
@@ -140,6 +140,7 @@ object frmBillGLPostings: TfrmBillGLPostings
       TabOrder = 0
       object tvBillGLPostings: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
         DataController.DataSource = dsBillGLPostings
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <
@@ -174,7 +175,7 @@ object frmBillGLPostings: TfrmBillGLPostings
         end
         object tvBillGLPostingsCREATED_1: TcxGridDBColumn
           Caption = 'Trans Date'
-          DataBinding.FieldName = 'CREATED_1'
+          DataBinding.FieldName = 'CREATED'
           Width = 101
         end
         object tvBillGLPostingsDESCR_1: TcxGridDBColumn
@@ -204,12 +205,15 @@ object frmBillGLPostings: TfrmBillGLPostings
   object qryBillGLPostings: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT *'
-      '  FROM chart, transitem'
-      ' WHERE transitem.chart = chart.code AND owner_code = '#39'NMEMO'#39
-      '       AND nowner = :nmemo'
-      '       and bank = :entity'
-      'order by naccount')
+      'SELECT   component_code_display, chart.descr, transitem.created,'
+      '         transitem.descr, transitem.amount * -1 AS amount,'
+      '         transitem.tax * -1 AS tax'
+      '    FROM chart, transitem'
+      '   WHERE transitem.chart = chart.code'
+      '     AND owner_code = '#39'NMEMO'#39
+      '     AND nowner = :nmemo'
+      '     AND bank = :entity'
+      'ORDER BY naccount')
     Left = 107
     Top = 81
     ParamData = <
