@@ -162,7 +162,7 @@ object frmReceipt: TfrmReceipt
     Left = 203
     Top = 160
     Width = 91
-    Height = 21
+    Height = 23
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -898,7 +898,7 @@ object frmReceipt: TfrmReceipt
     Left = 89
     Top = 8
     AutoSize = False
-    EditValue = 43888.424447581d
+    EditValue = 43889.5149524768d
     Properties.AutoSelect = False
     Properties.DateOnError = deToday
     Properties.ImmediatePost = True

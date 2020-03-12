@@ -3120,7 +3120,10 @@ begin
                                        qryAllocs.FieldByName('DCLEARDATE').AsDateTime := qryReceipt.FieldByName('DCLEARDATE').AsDateTime;
                                        qryAllocs.FieldByName('NRECEIPT').AsInteger := qryReceipt.FieldByName('NRECEIPT').AsInteger;
                                        qryAllocs.FieldByName('REFNO').AsString := qryReceipt.FieldByName('RCPTNO').AsString;
-                                       qryAllocs.FieldByName('BILLED').AsString := 'Y';
+                                       IF double(tvLedgerORIGINAL_AMOUNT.EditValue) = qryLedger.FieldByName('CREDIT').AsFloat then
+                                          qryAllocs.FieldByName('BILLED').AsString := 'Y'
+                                       else
+                                          qryAllocs.FieldByName('BILLED').AsString := 'N';
                                        qryAllocs.FieldByName('AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
                                        qryAllocs.FieldByName('BILLED_AMOUNT').AsFloat := qryLedger.FieldByName('CREDIT').AsFloat;
                                        qryAllocs.FieldByName('TAX').AsFloat := 0;
