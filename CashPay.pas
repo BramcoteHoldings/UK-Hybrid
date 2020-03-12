@@ -1480,6 +1480,7 @@ begin
          //ParamByName('FILDID').AsString := frmMatterSearch.qryMatters.ParamByName('FILEID').AsString;
          iMrv_Alloc := GetSequenceNumber('SQNC_NALLOC');
          ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
+         ParamByName('NCLIENT').AsInteger := qryAllocs.FieldByName('NCLIENT').AsInteger;
          ParamByName('DESCR').AsString := 'Transferred to file ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ':' + qryAllocs.FieldByName('ALLOC_DESCR').AsString;
          ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
          ParamByName('ALLOC_NEW').AsInteger := iMrv_Alloc;   //GetSeqNum('NALLOC');
@@ -1489,6 +1490,8 @@ begin
          ParamByName('BILLED').AsString := 'Y';
          ParamByName('PRIVATE').AsString := 'Y';
          ParamByName('MRV_NALLOC').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+         ParamByName('CLIENT_NAME').AsString := qryAllocs.FieldByName('CLIENT_NAME').AsString;
+         ParamByName('MATTER_DESC').AsString := qryAllocs.FieldByName('MATTER_DESC').AsString;
          ExecSql;
          Close;
        end;
@@ -1499,6 +1502,7 @@ begin
        begin
          close;
          ParamByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         ParamByName('NCLIENT').AsInteger := dmAxiom.qryMSearch.FieldByName('NCLIENT').AsInteger;
          //ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
          ParamByName('DESCR').AsString := qryAllocs.FieldByName('ALLOC_DESCR').AsString;
          ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
@@ -1509,6 +1513,8 @@ begin
          ParamByName('BILLED').AsString := 'N';
          ParamByName('PRIVATE').AsString := 'N';
          ParamByName('MRV_NALLOC').Clear;
+         ParamByName('CLIENT_NAME').AsString := MatterString(dmAxiom.qryMSearch.FieldByName('FILEID').AsString, 'TITLE');
+         ParamByName('MATTER_DESC').AsString := dmAxiom.qryMSearch.FieldByName('SHORTDESCR').AsString;
          ExecSql;
          Close;
        end;

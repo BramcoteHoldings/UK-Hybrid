@@ -148,7 +148,8 @@ object frmJournals: TfrmJournals
               HeaderAlignmentHorz = taRightJustify
               Width = 99
             end
-            object tvAllocationsColumn2: TcxGridDBColumn
+            object tvAllocationsMRV_NALLOC: TcxGridDBColumn
+              DataBinding.FieldName = 'MRV_NALLOC'
             end
           end
           object dbgrAllocationsLevel1: TcxGridLevel
@@ -831,7 +832,9 @@ object frmJournals: TfrmJournals
       
         '       END AS credit, nmemo, trust, descr as alloc_descr, nalloc' +
         ', type,'
-      '       (alloc.amount * -1) as amount_extax, tax'
+      
+        '       (alloc.amount * -1) as amount_extax, tax, nclient, client' +
+        '_name, matter_desc, nvl(mrv_nalloc, 0) mrv_nalloc'
       '  FROM alloc'
       
         ' WHERE njournal = :p_njournal AND njournal <> 0 AND alloc.acct =' +
@@ -847,7 +850,7 @@ object frmJournals: TfrmJournals
         'LOC.ACCT = :P_Acct'
       '*/')
     Left = 271
-    Top = 8
+    Top = 9
     ParamData = <
       item
         DataType = ftUnknown
@@ -2502,8 +2505,8 @@ object frmJournals: TfrmJournals
       'AND'
       '   NVL(TRUST,:TRUST) = :TRUST')
     Active = True
-    Left = 438
-    Top = 360
+    Left = 433
+    Top = 349
     ParamData = <
       item
         DataType = ftUnknown
@@ -3552,11 +3555,11 @@ object frmJournals: TfrmJournals
         '          a.cleared, a.dcleardate, a.created, a.acct, m.nmatter,' +
         ' a.refno,'
       
-        '          :TYPE, a.nclient, a.njournal, a.payer, a.trust, :bille' +
-        'd, :fileid,'
+        '          :TYPE, :nclient, a.njournal, a.payer, a.trust, :billed' +
+        ', :fileid,'
       
-        '          a.ntrans, a.nmemo, a.client_name, SYSDATE, a.matter_de' +
-        'sc,'
+        '          a.ntrans, a.nmemo, :client_name, SYSDATE, :matter_desc' +
+        ','
       
         '          a.overdrawn, a.disb_only, :private, a.taxcode, a.sundr' +
         'ytype, a.disbtext,'
@@ -3594,12 +3597,27 @@ object frmJournals: TfrmJournals
       end
       item
         DataType = ftUnknown
+        Name = 'nclient'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
         Name = 'billed'
         Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'FILEID'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'client_name'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'matter_desc'
         Value = nil
       end
       item
