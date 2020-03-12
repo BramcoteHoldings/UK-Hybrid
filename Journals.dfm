@@ -41,10 +41,6 @@ object frmJournals: TfrmJournals
     object tabCashbook: TcxTabSheet
       Caption = 'Journals'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlAllocations: TPanel
         Left = 0
         Top = 161
@@ -64,7 +60,7 @@ object frmJournals: TfrmJournals
           TabOrder = 0
           object Label9: TLabel
             Left = 9
-            Top = 3
+            Top = 2
             Width = 69
             Height = 17
             Caption = 'Allocations'
@@ -77,7 +73,7 @@ object frmJournals: TfrmJournals
           end
           object rbLedger: TcxRadioButton
             Left = 112
-            Top = 3
+            Top = 2
             Width = 113
             Height = 17
             Caption = 'General Ledger'
@@ -106,8 +102,11 @@ object frmJournals: TfrmJournals
           Align = alClient
           TabOrder = 1
           LookAndFeel.NativeStyle = True
+          ExplicitTop = 19
           object tvAllocations: TcxGridDBTableView
+            PopupMenu = mMoveMatter
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsNaccounts
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -149,6 +148,8 @@ object frmJournals: TfrmJournals
               HeaderAlignmentHorz = taRightJustify
               Width = 99
             end
+            object tvAllocationsColumn2: TcxGridDBColumn
+            end
           end
           object dbgrAllocationsLevel1: TcxGridLevel
             GridView = tvAllocations
@@ -158,7 +159,7 @@ object frmJournals: TfrmJournals
       object cxSplitter1: TcxSplitter
         Left = 0
         Top = 153
-        Width = 8
+        Width = 1124
         Height = 8
         Cursor = crVSplit
         HotZoneClassName = 'TcxSimpleStyle'
@@ -166,6 +167,8 @@ object frmJournals: TfrmJournals
         AlignSplitter = salTop
         InvertDirection = True
         Control = pnlJournals
+        ExplicitLeft = 3
+        ExplicitTop = 202
       end
       object pnlJournals: TPanel
         Left = 0
@@ -186,7 +189,7 @@ object frmJournals: TfrmJournals
           TabOrder = 0
           object Label10: TLabel
             Left = 6
-            Top = 1
+            Top = 0
             Width = 52
             Height = 17
             Caption = 'Journals'
@@ -209,6 +212,7 @@ object frmJournals: TfrmJournals
           object tvJournals: TcxGridDBTableView
             PopupMenu = dxBarPopupMenu1
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCellClick = tvJournalsCellClick
             OnSelectionChanged = tvJournalsSelectionChanged
             DataController.DataSource = dsJournals
@@ -314,6 +318,7 @@ object frmJournals: TfrmJournals
           end
           object dbgrJournalsDBBandedTableView1: TcxGridDBBandedTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsJournals
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -462,14 +467,14 @@ object frmJournals: TfrmJournals
       object edRefNo: TEdit
         Left = 120
         Top = 200
-        Width = 99
+        Width = 101
         Height = 21
         TabOrder = 8
       end
       object neAmountTo: TNumberEdit
         Left = 120
         Top = 176
-        Width = 99
+        Width = 101
         Height = 21
         Alignment = taRightJustify
         DecimalPlaces = 2
@@ -498,7 +503,7 @@ object frmJournals: TfrmJournals
       object neAmountFrom: TNumberEdit
         Left = 120
         Top = 152
-        Width = 99
+        Width = 101
         Height = 21
         Alignment = taRightJustify
         DecimalPlaces = 2
@@ -534,7 +539,7 @@ object frmJournals: TfrmJournals
       object neJnlTo: TNumberEdit
         Left = 120
         Top = 104
-        Width = 99
+        Width = 101
         Height = 21
         Alignment = taRightJustify
         DecimalPlaces = 0
@@ -563,7 +568,7 @@ object frmJournals: TfrmJournals
       object neJnlFrom: TNumberEdit
         Left = 120
         Top = 80
-        Width = 99
+        Width = 101
         Height = 21
         Alignment = taRightJustify
         DecimalPlaces = 0
@@ -609,8 +614,8 @@ object frmJournals: TfrmJournals
       end
       object edAcct: TEdit
         Left = 120
-        Top = 8
-        Width = 99
+        Top = 6
+        Width = 101
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
@@ -823,7 +828,10 @@ object frmJournals: TfrmJournals
       '          WHEN (alloc.amount + NVL (alloc.tax, 0)) > 0'
       '             THEN ((alloc.amount + NVL (alloc.tax, 0)))'
       '          ELSE 0'
-      '       END AS credit'
+      
+        '       END AS credit, nmemo, trust, descr as alloc_descr, nalloc' +
+        ', type,'
+      '       (alloc.amount * -1) as amount_extax, tax'
       '  FROM alloc'
       
         ' WHERE njournal = :p_njournal AND njournal <> 0 AND alloc.acct =' +
@@ -838,7 +846,7 @@ object frmJournals: TfrmJournals
         'FROM ALLOC WHERE NJOURNAL = :P_NJournal AND NJOURNAL <> 0 AND AL' +
         'LOC.ACCT = :P_Acct'
       '*/')
-    Left = 272
+    Left = 271
     Top = 8
     ParamData = <
       item
@@ -1663,7 +1671,7 @@ object frmJournals: TfrmJournals
     XLSSettings.WorksheetName = 'Report'
     Left = 295
     Top = 361
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plJournalsPrint'
     object ppHeaderBand1: TppHeaderBand
@@ -2028,7 +2036,7 @@ object frmJournals: TfrmJournals
           PrinterSetup.mmPaperWidth = 209900
           PrinterSetup.PaperSize = 9
           Units = utMillimeters
-          Version = '20.0'
+          Version = '20.01'
           mmColumnWidth = 0
           DataPipelineName = 'plAllocsPrint'
           object ppDetailBand2: TppDetailBand
@@ -2823,7 +2831,7 @@ object frmJournals: TfrmJournals
     XLSSettings.WorksheetName = 'Report'
     Left = 644
     Top = 358
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plAllocPrint'
     object ppHeaderBand2: TppHeaderBand
@@ -3499,5 +3507,125 @@ object frmJournals: TfrmJournals
     DataSet = qryTrustAllocs
     Left = 464
     Top = 136
+  end
+  object mMoveMatter: TPopupMenu
+    OnPopup = mMoveMatterPopup
+    Left = 816
+    Top = 352
+    object MoveMatter1: TMenuItem
+      Caption = 'Move to different matter'
+      OnClick = MoveMatter1Click
+    end
+  end
+  object qryCopyAlloc: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'INSERT INTO alloc'
+      
+        '            (nalloc, bank, descr, ncheque, approval, nreceipt, c' +
+        'leared,'
+      
+        '             dcleardate, created, acct, nmatter, refno, TYPE, nc' +
+        'lient,'
+      
+        '             njournal, payer, trust, billed, fileid, ntrans, nme' +
+        'mo,'
+      
+        '             client_name, system_date, matter_desc, overdrawn, d' +
+        'isb_only,'
+      
+        '             PRIVATE, taxcode, sundrytype, disbtext, ninvoice, u' +
+        'pcred,'
+      
+        '             pmnt_to_upcred, antd, amount, fee, outlay, sundry, ' +
+        'spec_purpose,'
+      
+        '             tax, priorbalance, disb_crdit, antd_crdit, fees_crd' +
+        'it, tax_crdit,'
+      
+        '             disb, ncheqreq, billed_amount, billed_tax_amount, m' +
+        'rv_nalloc)'
+      
+        '   SELECT :alloc_new, a.bank, :descr, a.ncheque, a.approval, a.n' +
+        'receipt,'
+      
+        '          a.cleared, a.dcleardate, a.created, a.acct, m.nmatter,' +
+        ' a.refno,'
+      
+        '          :TYPE, a.nclient, a.njournal, a.payer, a.trust, :bille' +
+        'd, :fileid,'
+      
+        '          a.ntrans, a.nmemo, a.client_name, SYSDATE, a.matter_de' +
+        'sc,'
+      
+        '          a.overdrawn, a.disb_only, :private, a.taxcode, a.sundr' +
+        'ytype, a.disbtext,'
+      
+        '          a.ninvoice, a.upcred, a.pmnt_to_upcred, a.antd, :amoun' +
+        't, a.fee,'
+      
+        '          a.outlay, a.sundry, a.spec_purpose, :tax, a.priorbalan' +
+        'ce,'
+      
+        '          a.disb_crdit, a.antd_crdit, a.fees_crdit, a.tax_crdit,' +
+        ' a.disb,'
+      
+        '          a.ncheqreq, billed_amount, billed_tax_amount, :mrv_nal' +
+        'loc'
+      '     FROM alloc a, matter m'
+      '    WHERE nalloc = :alloc_old AND m.fileid = :fileid')
+    Left = 920
+    Top = 282
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ALLOC_NEW'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DESCR'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TYPE'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'billed'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FILEID'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'private'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'AMOUNT'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TAX'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'mrv_nalloc'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ALLOC_OLD'
+        Value = nil
+      end>
   end
 end

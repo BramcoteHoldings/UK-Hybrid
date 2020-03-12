@@ -2,25 +2,28 @@ object frmBillNarrations: TfrmBillNarrations
   Left = 201
   Top = 226
   Caption = 'Bill Narration'
-  ClientHeight = 375
-  ClientWidth = 642
+  ClientHeight = 418
+  ClientWidth = 673
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
+  DesignSize = (
+    673
+    418)
   PixelsPerInch = 106
-  TextHeight = 17
+  TextHeight = 15
   object tvLaunch: TcxTreeView
     Left = 0
     Top = 0
     Width = 171
-    Height = 338
+    Height = 381
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -41,6 +44,7 @@ object frmBillNarrations: TfrmBillNarrations
       006F006F00740065007200}
     ReadOnly = True
     RowSelect = True
+    ExplicitHeight = 338
   end
   object cxDBLabel1: TcxDBLabel
     Left = 251
@@ -76,7 +80,7 @@ object frmBillNarrations: TfrmBillNarrations
   end
   object cxLabel1: TcxLabel
     Left = 182
-    Top = 15
+    Top = 16
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -84,6 +88,7 @@ object frmBillNarrations: TfrmBillNarrations
     Caption = 'Type'
     Style.TextStyle = [fsBold]
     Properties.Alignment.Vert = taVCenter
+    Transparent = True
     AnchorY = 26
   end
   object cxLabel2: TcxLabel
@@ -95,17 +100,20 @@ object frmBillNarrations: TfrmBillNarrations
     Margins.Bottom = 4
     Caption = 'Position'
     Style.TextStyle = [fsBold]
+    Transparent = True
   end
   object Panel1: TPanel
     Left = 0
-    Top = 338
-    Width = 642
+    Top = 381
+    Width = 673
     Height = 37
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 5
+    ExplicitTop = 338
+    ExplicitWidth = 642
     DesignSize = (
-      642
+      673
       37)
     object cbKeepOpen: TcxCheckBox
       Left = 7
@@ -123,7 +131,7 @@ object frmBillNarrations: TfrmBillNarrations
       TabOrder = 0
     end
     object btnDelete: TcxButton
-      Left = 330
+      Left = 361
       Top = 3
       Width = 91
       Height = 31
@@ -138,7 +146,7 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D460500000000000036000000280000001200000012000000010020000000
-        0000000000004D1000004D1000000000000000000000FFFFFF00FFFFFF00FFFF
+        000000000000C40E0000C40E00000000000000000000FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -183,9 +191,10 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.Spacing = 5
       TabOrder = 1
       OnClick = btnDeleteClick
+      ExplicitLeft = 330
     end
     object btnOk: TcxButton
-      Left = 442
+      Left = 473
       Top = 3
       Width = 92
       Height = 31
@@ -200,7 +209,7 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D360400000000000036000000280000001000000010000000010020000000
-        0000000000004D1000004D1000000000000000000000FF00FF00FF00FF00FF00
+        000000000000C40E0000C40E00000000000000000000FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -236,9 +245,10 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.Spacing = 5
       TabOrder = 2
       OnClick = btnOkClick
+      ExplicitLeft = 442
     end
     object btnCancel: TcxButton
-      Left = 541
+      Left = 572
       Top = 3
       Width = 91
       Height = 31
@@ -253,7 +263,7 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.Glyph.SourceDPI = 96
       OptionsImage.Glyph.Data = {
         424D560A00000000000036000000280000002400000012000000010020000000
-        0000000000004D1000004D100000000000000000000000808000008080000080
+        000000000000C40E0000C40E0000000000000000000000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
         8000008080000080800000808000008080000080800000808000008080000080
@@ -338,18 +348,22 @@ object frmBillNarrations: TfrmBillNarrations
       OptionsImage.NumGlyphs = 2
       OptionsImage.Spacing = 5
       TabOrder = 3
+      ExplicitLeft = 541
     end
   end
   object aRichEdit: TcxDBRichEdit
     Left = 182
     Top = 81
+    Anchors = [akLeft, akTop, akRight, akBottom]
     DataBinding.DataField = 'TYPE_TEXT'
     DataBinding.DataSource = dsBillNarrations
     Properties.WantTabs = True
     TabOrder = 6
     OnKeyDown = aRichEditKeyDown
-    Height = 257
-    Width = 452
+    ExplicitWidth = 452
+    ExplicitHeight = 257
+    Height = 300
+    Width = 483
   end
   object qryBillNarrations: TUniQuery
     Connection = dmAxiom.uniInsight

@@ -18,7 +18,7 @@ uses
   ppProd, ppComm, ppRelatv, ppDBPipe, ppModule, raCodMod, dxCore, cxNavigator,
   cxCheckBox, cxGridBandedTableView, cxGridDBBandedTableView, System.Actions,
   dxBarBuiltInMenu, cxDataControllerConditionalFormattingRulesManagerDialog,
-  dxDateRanges, System.ImageList;
+  dxDateRanges, System.ImageList, dxScrollbarAnnotations;
 
 const
   isCASHBOOK = 0;
@@ -226,6 +226,10 @@ type
     qryTrustAllocs: TUniQuery;
     dsTrustAllocs: TUniDataSource;
     tvJournalsTRUST1: TcxGridDBColumn;
+    mMoveMatter: TPopupMenu;
+    MoveMatter1: TMenuItem;
+    qryCopyAlloc: TUniQuery;
+    tvAllocationsColumn2: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure qryJournalsAfterScroll(DataSet: TDataSet);
     procedure pagJournalChange(Sender: TObject);
@@ -263,6 +267,8 @@ type
       var AStyle: TcxStyle);
     procedure btnMarkRecurringClick(Sender: TObject);
     procedure tvJournalsRECURRINGPropertiesChange(Sender: TObject);
+    procedure MoveMatter1Click(Sender: TObject);
+    procedure mMoveMatterPopup(Sender: TObject);
   private
     { Private declarations }
     sOrderBy: string;
@@ -287,7 +293,7 @@ var
 implementation
 
 uses
-  Journal, JournalReverse, AxiomData, MiscFunc;
+  Journal, JournalReverse, AxiomData, MiscFunc, MSearch, citfunc;
 
 {$R *.DFM}
 
@@ -534,6 +540,106 @@ begin
   qryTotal.Open;
   ShowTotal;
   Screen.Cursor := crDefault;
+end;
+
+procedure TfrmJournals.mMoveMatterPopup(Sender: TObject);
+begin
+   MoveMatter1.Enabled := (rbMatters.Checked = True);
+end;
+
+procedure TfrmJournals.MoveMatter1Click(Sender: TObject);
+var
+   iMrv_Alloc: integer;
+begin
+// make sure the alloc is unbilled and not trust !
+
+   if (not qryAllocs.FieldByName('NMEMO').IsNull) then
+   begin
+      MessageDlg('Cannot move a billed Journal',mtError, [mbOk], 0);
+      exit;
+   end
+   else if qryAllocs.FieldByName('TRUST').AsString = 'T' then
+   begin
+      MessageDlg('Cannot move a trust Journal',mtError, [mbOk], 0);
+      exit;
+   end;
+
+  // get the new matter number
+
+   if not FormExists(frmMatterSearch) then
+      Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+
+   if frmMatterSearch.ShowModal = mrOk then
+   try
+      if dmAxiom.qryMSearch.FieldByName('FILEID').AsString <> '' then
+      begin
+         if dmAxiom.uniInsight.InTransaction = True then
+            dmAxiom.uniInsight.Rollback;
+         dmAxiom.uniInsight.StartTransaction;
+       // create an oposite alloc entry
+
+         with qryCopyAlloc do
+         begin
+            close;
+            //ParamByName('FILDID').AsString := frmMatterSearch.qryMatters.ParamByName('FILEID').AsString;
+            iMrv_Alloc := GetSequenceNumber('SQNC_NALLOC');
+            ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
+            ParamByName('DESCR').AsString := 'Transferred to file ' + dmAxiom.qryMSearch.FieldByName('FILEID').AsString + ':' + qryAllocs.FieldByName('ALLOC_DESCR').AsString;
+            ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+            ParamByName('ALLOC_NEW').AsInteger := iMrv_Alloc;   //GetSeqNum('NALLOC');
+            ParamByName('AMOUNT').AsCurrency := qryAllocs.FieldByName('AMOUNT_EXTAX').AsCurrency;
+            ParamByName('TAX').AsCurrency := 0-qryAllocs.FieldByName('TAX').AsCurrency;
+            ParamByName('TYPE').AsString := 'RV';
+            ParamByName('BILLED').AsString := 'Y';
+            ParamByName('PRIVATE').AsString := 'Y';
+            ParamByName('MRV_NALLOC').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+            ExecSql;
+            Close;
+         end;
+
+  //   / create a new alloc
+
+         with qryCopyAlloc do
+         begin
+            close;
+            ParamByName('FILEID').AsString := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+            //ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
+            ParamByName('DESCR').AsString := qryAllocs.FieldByName('ALLOC_DESCR').AsString;
+            ParamByName('ALLOC_OLD').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+            ParamByName('ALLOC_NEW').AsInteger := GetSequenceNumber('SQNC_NALLOC');  //GetSeqNum('NALLOC');
+            ParamByName('AMOUNT').AsCurrency := 0 - qryAllocs.FieldByName('AMOUNT_EXTAX').AsCurrency;
+            ParamByName('TAX').AsCurrency := qryAllocs.FieldByName('TAX').AsCurrency;
+            ParamByName('TYPE').AsString := qryAllocs.FieldByName('TYPE').AsString;
+            ParamByName('BILLED').AsString := 'N';
+            ParamByName('PRIVATE').AsString := 'N';
+            ParamByName('MRV_NALLOC').Clear;
+            ExecSql;
+            Close;
+         end;
+
+         with dmAxiom.qryTmp do
+         begin
+            Close;
+            sql.cLEAR;
+            SQL.ADD('UPDATE ALLOC SET BILLED = :billed, PRIVATE = :private, mrv_nalloc = :mrv_nalloc ');
+            SQL.Add(' WHERE FILEID = :FILEID AND NALLOC = :NALLOC ' );
+            ParamByName('BILLED').AsString := 'Y';
+            ParamByName('PRIVATE').AsString := 'Y';
+            ParamByName('FILEID').AsString := qryAllocs.FieldByName('CODE').AsString;
+            ParamByName('NALLOC').AsInteger := qryAllocs.FieldByName('NALLOC').AsInteger;
+            ParamByName('MRV_NALLOC').AsInteger := iMrv_Alloc;
+            ExecSql;
+         end;
+      end;
+   except
+      on Exception do
+      begin
+         dmAxiom.uniInsight.Rollback;
+         raise;
+      end;
+   end;
+   dmAxiom.uniInsight.commit;
+   qryAllocs.Refresh;
 end;
 
 procedure TfrmJournals.pagJournalChange(Sender: TObject);
