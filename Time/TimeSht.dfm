@@ -561,6 +561,9 @@ object frmTimeSheet: TfrmTimeSheet
         object tvFeeTmpNewPROCESS: TcxGridDBColumn
           DataBinding.ValueType = 'Boolean'
           PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taCenter
+          Properties.ImmediatePost = True
+          Properties.NullStyle = nssUnchecked
           HeaderGlyph.SourceDPI = 96
           HeaderGlyph.Data = {
             424D360400000000000036000000280000001000000010000000010020000000
@@ -600,8 +603,8 @@ object frmTimeSheet: TfrmTimeSheet
           HeaderGlyphAlignmentHorz = taCenter
           MinWidth = 30
           Options.Filtering = False
+          Options.FilteringMRUItemsList = False
           Options.AutoWidthSizable = False
-          Options.CellMerging = True
           Options.Grouping = False
           Options.SortByDisplayText = isbtOff
           Options.Sorting = False
