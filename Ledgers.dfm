@@ -76,6 +76,7 @@ object frmLedgers: TfrmLedgers
           LookAndFeel.NativeStyle = True
           object tvTransactions: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            ScrollbarAnnotations.CustomAnnotations = <>
             DataController.DataSource = dsNaccounts
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -165,6 +166,7 @@ object frmLedgers: TfrmLedgers
             Navigator.Buttons.Cancel.Visible = False
             Navigator.Buttons.SaveBookmark.Visible = False
             Navigator.Buttons.GotoBookmark.Visible = False
+            ScrollbarAnnotations.CustomAnnotations = <>
             OnCellClick = tvLedgersCellClick
             DataController.DataModeController.GridMode = True
             DataController.DataSource = dsCharts
@@ -331,6 +333,7 @@ object frmLedgers: TfrmLedgers
         HotZoneClassName = 'TcxSimpleStyle'
         AlignSplitter = salTop
         Control = Panel2
+        ExplicitWidth = 8
       end
     end
     object tabFilter: TcxTabSheet
@@ -353,7 +356,7 @@ object frmLedgers: TfrmLedgers
         object Label3: TLabel
           Left = 8
           Top = 16
-          Width = 30
+          Width = 29
           Height = 15
           Caption = 'Types'
           Transparent = True
@@ -361,7 +364,7 @@ object frmLedgers: TfrmLedgers
         object Label14: TLabel
           Left = 8
           Top = 40
-          Width = 81
+          Width = 80
           Height = 15
           Caption = 'To Report Level'
           Transparent = True
@@ -453,7 +456,7 @@ object frmLedgers: TfrmLedgers
         object Label15: TLabel
           Left = 15
           Top = 45
-          Width = 37
+          Width = 36
           Height = 15
           Caption = 'DateTo'
           Transparent = True
@@ -625,7 +628,7 @@ object frmLedgers: TfrmLedgers
         object Label2: TLabel
           Left = 8
           Top = 48
-          Width = 40
+          Width = 39
           Height = 15
           Caption = 'Date To'
           Transparent = True
@@ -2348,7 +2351,7 @@ object frmLedgers: TfrmLedgers
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -2374,6 +2377,7 @@ object frmLedgers: TfrmLedgers
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -2411,7 +2415,7 @@ object frmLedgers: TfrmLedgers
     XLSSettings.WorksheetName = 'Report'
     Left = 792
     Top = 151
-    Version = '19.02'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plGeneralLedger'
     object ppHeaderBand1: TppHeaderBand
@@ -3666,7 +3670,7 @@ object frmLedgers: TfrmLedgers
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.Orientation = poLandscape
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -3691,6 +3695,7 @@ object frmLedgers: TfrmLedgers
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
     ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
     PDFSettings.EmbedFontOptions = [efUseSubset]
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
@@ -3721,7 +3726,7 @@ object frmLedgers: TfrmLedgers
     XLSSettings.WorksheetName = 'Report'
     Left = 877
     Top = 341
-    Version = '19.02'
+    Version = '20.01'
     mmColumnWidth = 0
     object ppHeaderBand2: TppHeaderBand
       Background.Brush.Style = bsClear
