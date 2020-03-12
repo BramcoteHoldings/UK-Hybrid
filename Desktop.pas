@@ -2533,80 +2533,83 @@ end;
 procedure TfrmDesktop.popMatterPopup(Sender: TObject);
 begin
 // rb Opt for WAN
-  ReopenListSet('MATTER',popMatter);
+   ReopenListSet('MATTER',popMatter);
 end;
 
 procedure TfrmDesktop.LoadMatter(Sender: TObject);
 var
-  LFileID: String;
-  bExtraScan: boolean;
+   LFileID: String;
+   bExtraScan: boolean;
 begin
-      bExtraScan := True;
-      if (Sender is TdxBarButton) then
-      begin
-         LFileID := Copy((Sender as TdxBarButton).Caption, 1, Pos(' ', (Sender as TdxBarButton).Caption)-1);
-         bExtraScan := False;
-      end
-      else if (sender is TdxBarEdit) then
-         LFileID := Uppercase((Sender as TdxBarEdit).CurText)
-      else if (sender is TcxLookupComboBox) then
-      begin
-         LFileID := Uppercase((Sender as TcxLookupComboBox).Text);
-         if LFileID = 'SEARCH...' then
-            MattersFind;
-         bExtraScan := False;
-      end;
+   bExtraScan := True;
+   if (Sender is TdxBarButton) then
+   begin
+      LFileID := Copy((Sender as TdxBarButton).Caption, 1, Pos(' ', (Sender as TdxBarButton).Caption)-1);
+      bExtraScan := False;
+   end
+   else if (sender is TdxBarEdit) then
+      LFileID := Uppercase((Sender as TdxBarEdit).CurText)
+   else if (sender is TcxLookupComboBox) then
+   begin
+      LFileID := Uppercase((Sender as TcxLookupComboBox).Text);
+      if LFileID = 'SEARCH...' then
+         MattersFind;
+      bExtraScan := False;
+   end;
 
-      if bExtraScan then
+   if bExtraScan then
+   begin
+      with dmAxiom.qryNew do
       begin
-        with dmAxiom.qryNew do
-        begin
-           Close;
-           SQL.Text := 'SELECT matter.fileid as code, phonebook.search||'' ''||matter.shortdescr as descr, ''N'' AS DEFAULTITEM '+
-                       'FROM phonebook, matter WHERE matter.nclient = phonebook.nclient ';
-           if boolean(chkIncludeClosed.EditValue) = False then
-               SQL.Text := SQL.Text + ' and closed = 0 ';
-           if dmAxiom.Security.Employee.ChangeEntity = False then
-              SQL.Text := SQL.Text + ' AND efematteraccess (matter.nmatter, :author, :entity, :defentity) = 0 ';
-           if (Trim(LFileID) <> '') then
-               SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(LFileID) +') > 0';
-           Open;
-           if (dmAxiom.qryNew.RecordCount > 1) and (LFileID <> '') then
-           begin
-              try
-                 frmGenericSearch := TfrmGenericSearch.Create(Self);
-                 frmGenericSearch.Caption := 'Select Matter...';
-                 frmGenericSearch.SQL := SQL.Text;
-                 if frmGenericSearch.ShowModal = mrOK then
-                 begin
-                    LFileID := frmGenericSearch.qrySource.FieldByName('CODE').AsString;
-                 end
-                 else
-                    LFileID := '';
-              finally
-                 begin
-                    frmGenericSearch.Free();
-                    Close;
-                 end;
-              end;
-           end
+         LFileID := StringReplace(LFileID, '/', '\/',[rfReplaceAll, rfIgnoreCase]);
+         LFileID := StringReplace(LFileID, '-', '\-',[rfReplaceAll, rfIgnoreCase]);
+         LFileID := LFileID + '%';
+         Close;
+         SQL.Text := 'SELECT matter.fileid as code, phonebook.search||'' ''||matter.shortdescr as descr, ''N'' AS DEFAULTITEM '+
+                    'FROM phonebook, matter WHERE matter.nclient = phonebook.nclient ';
+         if boolean(chkIncludeClosed.EditValue) = False then
+            SQL.Text := SQL.Text + ' and closed = 0 ';
+         if dmAxiom.Security.Employee.ChangeEntity = False then
+           SQL.Text := SQL.Text + ' AND efematteraccess (matter.nmatter, :author, :entity, :defentity) = 0 ';
+         if (Trim(LFileID) <> '') then
+            SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(LFileID) +') > 0';
+         Open;
+         if (dmAxiom.qryNew.RecordCount > 1) and (LFileID <> '') then
+         begin
+            try
+               frmGenericSearch := TfrmGenericSearch.Create(Self);
+               frmGenericSearch.Caption := 'Select Matter...';
+               frmGenericSearch.SQL := SQL.Text;
+               if frmGenericSearch.ShowModal = mrOK then
+               begin
+                  LFileID := frmGenericSearch.qrySource.FieldByName('CODE').AsString;
+               end
+               else
+                  LFileID := '';
+            finally
+               begin
+                  frmGenericSearch.Free();
+                  Close;
+               end;
+            end;
+         end
+         else
+         if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) = '') then
+         begin
+            if not FormExists(frmMatterSearch) then
+               Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
+            if frmMatterSearch.ShowModal = mrOk then
+               LFileID := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
+         end
+         else
+         begin
+           if (dmAxiom.qryNew.RecordCount = 1) then
+              LFileID := dmAxiom.qryNew.FieldByName('code').AsString
            else
-           if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) = '') then
-           begin
-              if not FormExists(frmMatterSearch) then
-                 Application.CreateForm(TfrmMatterSearch, frmMatterSearch);
-              if frmMatterSearch.ShowModal = mrOk then
-                 LFileID := dmAxiom.qryMSearch.FieldByName('FILEID').AsString;
-           end
-           else
-           begin
-              if (dmAxiom.qryNew.RecordCount = 1) then
-                 LFileID := dmAxiom.qryNew.FieldByName('code').AsString
-              else
-                 LFileID := '';
-           end;
-        end;
+              LFileID := '';
+         end;
       end;
+   end;
 {   end;
    else if (Sender is TdxBarButton) then
       LFileID :=  Copy((Sender as TdxBarButton).Caption, 1, Pos(' ', (Sender as TdxBarButton).Caption)-1)
@@ -2688,7 +2691,12 @@ begin
          SQL.Text := SQL.Text + 'and matter.entity = '+ QuotedStr(dmAxiom.Entity) ;
 
       if (Trim(LFileID) <> '') then
-         SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(trim('%'+LFileID+'%')) +') > 0';
+      begin
+         LFileID := StringReplace(LFileID, '/', '\/',[rfReplaceAll, rfIgnoreCase]);
+         LFileID := StringReplace(LFileID, '-', '\-',[rfReplaceAll, rfIgnoreCase]);
+         LFileID := LFileID + '%';
+         SQL.Text := SQL.Text + ' and contains(matter.dummy,'+ QuotedStr(trim(LFileID)) +') > 0';
+      end;
       Prepare;
       Open;
       if (dmAxiom.qryNew.RecordCount > 1) and (Trim(LFileID) <> '') then

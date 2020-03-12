@@ -24,7 +24,8 @@ uses
   NumberEdit, cxGroupBox, cxRadioGroup, Vcl.ComCtrls, cxButtons, cxCheckBox,
   cxTextEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridCustomView, cxGrid, cxPC, cxGridExportLink, ppIniStorage,
-  cxDateUtils, ComObj, ppFileUtils, DateUtils, Types, dxCore, dxPSDBTCLnk;
+  cxDateUtils, ComObj, ppFileUtils, DateUtils, Types, dxCore, dxPSDBTCLnk,
+  dxScrollbarAnnotations;
 
 
 const
@@ -698,7 +699,8 @@ end;
 
 procedure TfrmMatterSearch.MakeSQL(bSearch: boolean);
 var
-  sAND, unionSQL, childSQL, sTotalWhereClause : string;
+  sAND, unionSQL, childSQL, sTotalWhereClause,
+  LFileID : string;
   LHasSelection: Boolean;
 begin
    Screen.Cursor := crSQLWait;
@@ -741,7 +743,13 @@ begin
 //         sWhereClause := sWhereClause + sAND + ' MATTER.NCLIENT = PHONEBOOK.NCLIENT ';
 // AES 23/06/2010 changed this to use function based index with concatenated columns.
        if SystemString('MATTER_ONLY_SEARCH') = 'N' then
-          sWhereClause := sWhereClause + sAND + ' CONTAINS (matter.dummy,' + QuotedStr('%' + tbClientMatterSearch.Text + '%') + ') > 0'
+       begin
+          LFileID := tbClientMatterSearch.Text;
+          LFileID := StringReplace(LFileID, '/', '\/',[rfReplaceAll, rfIgnoreCase]);
+          LFileID := StringReplace(LFileID, '-', '\-',[rfReplaceAll, rfIgnoreCase]);
+          LFileID := LFileID + '%';
+          sWhereClause := sWhereClause + sAND + ' CONTAINS (matter.dummy,' + QuotedStr(LFileID) + ') > 0';
+       end
        else
           sWhereClause := sWhereClause + sAND + ' UPPER(MATTER.FILEID) LIKE ' + QuotedStr(UpperCase(tbClientMatterSearch.Text) + '%');
 
