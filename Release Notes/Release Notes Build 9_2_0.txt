@@ -1,11 +1,20 @@
 Insight Build 9.2.0
 
+Build 63
+========
+- Made the "Description" field in the Matter Trust Ledger wider and allow word wrapping.
+- Fixed error when doing a part payment of a GL Creditor Invoice
+- Added ability to make a part payment of a Disbursement.
+- Added ability to transfer Matter Journal to another Matter.
+
+
 Build 62
 ========
 - Added ability to delete multiple TimeSheet entries.
 - Fixed sql error when selecting Presented cheques in the Cheque screen (Financials->Cheques)
 - Updates to the Individual Dashboard for Billed Fees to better reflect reversals\adjustments\write offs.
 - Re-instate Rich Edit functionality to Matter notes filed.
+- Fix to invoice payment when Original invoice has both GL and Matter transactions.
 
 Build 61
 ========
@@ -34,7 +43,7 @@ Build 58 - 59
 - Trust Cheque Requisition screen now shows the Net Available Trust amount.
 - Cheqreq colour description
 	At the start all lines are set to the colour Black
-	If Held = 'W'  or Can Pay = 'N' or Trust Pay = 'N' then the colour will be Blue
+	If Held = 'W' or Can Pay = 'N' or Trust Pay = 'N' then the colour will be Blue
 	Otherwise
 	If Held = 'N' (Not Held) and Can Pay = 'Y' and Trust Pay = 'Y' Converted = 'N' then the colour will be Green
 	Otherwise
