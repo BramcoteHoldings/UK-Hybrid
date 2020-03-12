@@ -369,7 +369,7 @@ object frmBillCredit: TfrmBillCredit
   object dtpDate: TEnforceCustomDateEdit
     Left = 489
     Top = 34
-    EditValue = 43829.5276591667d
+    EditValue = 43880.4579054861d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -384,7 +384,8 @@ object frmBillCredit: TfrmBillCredit
   object qryBill: TUniQuery
     Connection = dmAxiom.uniInsight
     SQL.Strings = (
-      'SELECT M.ROWID, M.* FROM NMEMO M WHERE M.NMEMO = :NMEMO')
+      'SELECT M.ROWID, M.* FROM NMEMO M '
+      'WHERE M.NMEMO = :NMEMO')
     CachedUpdates = True
     Left = 195
     Top = 201
@@ -1104,5 +1105,22 @@ object frmBillCredit: TfrmBillCredit
     CachedUpdates = True
     Left = 520
     Top = 372
+  end
+  object qryCheckCreditNote: TUniQuery
+    Connection = dmAxiom.uniInsight
+    SQL.Strings = (
+      'select n.*'
+      'from nmemo nc, nmemo n'
+      'where nc.rv_nmemo = :nmemo'
+      'and nc.rv_nmemo = n.nmemo'
+      'and nc.rv_type = '#39'X'#39)
+    Left = 913
+    Top = 51
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'nmemo'
+        Value = nil
+      end>
   end
 end
