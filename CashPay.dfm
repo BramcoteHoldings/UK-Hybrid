@@ -1095,7 +1095,7 @@ object frmCashpay: TfrmCashpay
         'oc.ncheque,'
       
         '       alloc.nmemo, (alloc.amount * -1) as amount_extax, nvl(mrv' +
-        '_nalloc, 0) mrv_nalloc '
+        '_nalloc, 0) mrv_nalloc, nclient, matter_desc, client_name '
       '  FROM alloc'
       ' WHERE ncheque = :p_ncheque AND ncheque <> 0'
       ''
@@ -1796,8 +1796,8 @@ object frmCashpay: TfrmCashpay
   end
   object mMoveMatter: TPopupMenu
     OnPopup = mMoveMatterPopup
-    Left = 601
-    Top = 102
+    Left = 727
+    Top = 81
     object MoveMatter1: TMenuItem
       Caption = 'Move to different matter'
       OnClick = MoveMatter1Click
@@ -1838,11 +1838,11 @@ object frmCashpay: TfrmCashpay
         '          a.cleared, a.dcleardate, a.created, a.acct, m.nmatter,' +
         ' a.refno,'
       
-        '          :TYPE, a.nclient, a.njournal, a.payer, a.trust, :bille' +
-        'd, :fileid,'
+        '          :TYPE, :nclient, a.njournal, a.payer, a.trust, :billed' +
+        ', :fileid,'
       
-        '          a.ntrans, a.nmemo, a.client_name, SYSDATE, a.matter_de' +
-        'sc,'
+        '          a.ntrans, a.nmemo, :client_name, SYSDATE, :matter_desc' +
+        ','
       
         '          a.overdrawn, a.disb_only, :private, a.taxcode, a.sundr' +
         'ytype, a.disbtext,'
@@ -1880,12 +1880,27 @@ object frmCashpay: TfrmCashpay
       end
       item
         DataType = ftUnknown
+        Name = 'nclient'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
         Name = 'billed'
         Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'FILEID'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'client_name'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'matter_desc'
         Value = nil
       end
       item
@@ -1953,8 +1968,8 @@ object frmCashpay: TfrmCashpay
         Index = 0
         PopupMenu = mMoveMatter
       end>
-    Left = 639
-    Top = 252
+    Left = 693
+    Top = 293
   end
   object dxBarManager1: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -3439,8 +3454,8 @@ object frmCashpay: TfrmCashpay
   end
   object OraDataSource1: TUniDataSource
     DataSet = qryChequesRpt
-    Left = 571
-    Top = 254
+    Left = 600
+    Top = 238
   end
   object qryAllocsRpt: TUniQuery
     SQLInsert.Strings = (

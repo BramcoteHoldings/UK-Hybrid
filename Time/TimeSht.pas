@@ -3346,6 +3346,8 @@ var
    ASort: string;
    ASortColumn: integer;
 begin
+   if (qryMRUList.Active = False) then
+      qryMRUList.Open;
    qryMRUList.Refresh;
    ASort := SettingLoadString('TIME_SHEET','MATTER_ORDER_TYPE');
    ASortColumn := SettingLoadInteger('TIME_SHEET','MATTER_ORDER_COLUMN');
@@ -3382,8 +3384,6 @@ begin
       end;
    end;
 end;
-
-
 
 procedure TfrmTimeSheet.tvFeeTmpFEE_TEMPLATEPropertiesCloseUp(
   Sender: TObject);

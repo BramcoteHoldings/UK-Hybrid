@@ -6,6 +6,7 @@ Build 63
 - Fixed error when doing a part payment of a GL Creditor Invoice
 - Added ability to make a part payment of a Disbursement.
 - Added ability to transfer Matter Journal to another Matter.
+- Amended Matter search to better handle some characters such as '-' and '/'
 
 
 Build 62
