@@ -80,7 +80,7 @@ object frmTrustJournal: TfrmTrustJournal
   object Label1: TLabel
     Left = 261
     Top = 39
-    Width = 58
+    Width = 57
     Height = 15
     Caption = 'Trust &Bank '
   end
@@ -128,6 +128,7 @@ object frmTrustJournal: TfrmTrustJournal
     object tvLedger: TcxGridDBTableView
       PopupMenu = popGrid
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       DataController.DataSource = dsLedger
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -230,7 +231,7 @@ object frmTrustJournal: TfrmTrustJournal
     Left = 110
     Top = 36
     AutoSize = False
-    EditValue = 43774.7434103241d
+    EditValue = 43901.4185511458d
     Properties.SaveTime = False
     Properties.ShowTime = False
     Style.LookAndFeel.Kind = lfStandard
@@ -580,7 +581,7 @@ object frmTrustJournal: TfrmTrustJournal
     PrinterSetup.BinName = 'Default'
     PrinterSetup.DocumentName = 'Report'
     PrinterSetup.Duplex = dpVertical
-    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PaperName = 'A4 (210 x 297mm)'
     PrinterSetup.PrinterName = 'Default'
     PrinterSetup.SaveDeviceSettings = False
     PrinterSetup.mmMarginBottom = 6350
@@ -640,7 +641,7 @@ object frmTrustJournal: TfrmTrustJournal
     XLSSettings.WorksheetName = 'Report'
     Left = 444
     Top = 366
-    Version = '20.0'
+    Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'plAllocPrint'
     object ppHeaderBand2: TppHeaderBand

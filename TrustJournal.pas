@@ -15,7 +15,7 @@ uses
   cxDBLookupComboBox, cxMaskEdit, cxCalendar, EnforceCustomDateEdit,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxButtons, Variants, vcl.Themes, dxBar,
-  cxCheckBox, cxBarEditItem;
+  cxCheckBox, cxBarEditItem, dxScrollbarAnnotations;
 
 const
   colTYPE = 0;
@@ -262,36 +262,36 @@ begin
 
   Show message if transaction is being posted into a locked period
 }
-  bOKtoPost:= True;
+   bOKtoPost:= True;
 
-  sTmp := '';
-  lsText := '';
+   sTmp := '';
+   lsText := '';
 
-  if (cTotalDebit <> cTotalCredit) then
-  begin
-     sTmp := sTmp + '       Journal does not balance' + #13;
-     lsText := 'Journal does not balance.';
-  end;    // end if
+   if (cTotalDebit <> cTotalCredit) then
+   begin
+      sTmp := sTmp + '       Journal does not balance' + #13;
+      lsText := 'Journal does not balance.';
+   end;    // end if
 
-  if (tvLedger.DataController.RowCount = 0) then
-  begin
-     sTmp := sTmp + '       No entries to process.' + #13;
-     lsText := 'No entries to process.';
-  end;    // end if
+   if (tvLedger.DataController.RowCount = 0) then
+   begin
+      sTmp := sTmp + '       No entries to process.' + #13;
+      lsText := 'No entries to process.';
+   end;    // end if
 
-  if sTmp <> '' then
-  begin
-    if bShowError then
-      MsgInfo('Please complete the following Journal details before posting:    ' + Chr(13) + Chr(13) + sTmp);
+   if sTmp <> '' then
+   begin
+      if bShowError then
+         MsgInfo('Please complete the following Journal details before posting:    ' + Chr(13) + Chr(13) + sTmp);
 
-    lsText := 'Please complete the following Journal details before posting:' + #13#10 + lsText;
+      lsText := 'Please complete the following Journal details before posting:' + #13#10 + lsText;
 
-    bOKtoPost := False
-  end;
+      bOKtoPost := False
+   end;
 
-  lblWarning.Caption := lsText;
+   lblWarning.Caption := lsText;
 
-  result:= bOKtoPost;
+   result:= bOKtoPost;
 end;
 
 
@@ -433,6 +433,7 @@ procedure TfrmTrustJournal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   qryJournal.Close;
   qryLedger.Close;
+  dmAxiom.qryBankList.Close;
   RemoveFromDesktop(Self);
 //  Self.Release;
 end;
@@ -551,13 +552,12 @@ begin
               Exit;
             end;
 
-
-          if ((qryLedger.FieldByName('DEBIT').AsCurrency > 0) and
-             (qryLedger.FieldByName('CREDIT').AsCurrency > 0)) then
-          begin
-            MessageDlg('A transaction line cannot have a DEBIT and CREDIT amount. Please zero one of the amounts.', mtWarning, [mbOK], 0);
-            Exit;
-          end;
+            if ((qryLedger.FieldByName('DEBIT').AsCurrency > 0) and
+               (qryLedger.FieldByName('CREDIT').AsCurrency > 0)) then
+            begin
+               MessageDlg('A transaction line cannot have a DEBIT and CREDIT amount. Please zero one of the amounts.', mtWarning, [mbOK], 0);
+               Exit;
+            end;
          {
           if (qryLedger.FieldByName('CREDIT').AsString = '') or
              (qryLedger.FieldByName('CREDIT').AsString = '0') then
@@ -606,10 +606,10 @@ begin
           begin
             if (CheckAmountAgainstAlloc) then
             begin
-              try
+               try
                   bPostingFailed := False;
                   if dmAxiom.uniInsight.InTransaction then
-                     dmAxiom.uniInsight.Commit;
+                     dmAxiom.uniInsight.Rollback;
                   dmAxiom.uniInsight.StartTransaction;
                   qryJournal.Open;
 
@@ -700,7 +700,7 @@ begin
                      qryJournal.ApplyUpdates;
                      qryLedger.CancelUpdates;
                      dmAxiom.uniInsight.Commit;
-
+                     tvLedger.EndUpdate();
                   end
                   else
                   begin
@@ -715,21 +715,21 @@ begin
       //          qryLedger.CancelUpdates;
       //          dmAxiom.uniInsight.Commit;
 
-              except
-                on E: Exception do
-                begin
-                  if qryJournal.UpdatesPending then
-                    qryJournal.CancelUpdates;
-                  if qryLedger.UpdatesPending then
-                    qryLedger.CancelUpdates;
-                  dmAxiom.uniInsight.Rollback;
-                  bPostingFailed := True;
-                  MsgErr('Posting failed:' + chr(13) + chr(13) + E.Message);
-                end;
-              end;
+               except
+                  on E: Exception do
+                  begin
+                     if qryJournal.UpdatesPending then
+                        qryJournal.CancelUpdates;
+                     if qryLedger.UpdatesPending then
+                        qryLedger.CancelUpdates;
+                     dmAxiom.uniInsight.Rollback;
+                     bPostingFailed := True;
+                     MsgErr('Posting failed:' + chr(13) + chr(13) + E.Message);
+                  end;
+               end;
 
-              if not bPostingFailed then
-              begin
+               if not bPostingFailed then
+               begin
                  if boolean(cbPrintJournal.EditValue) = True then
                  begin
                     try
@@ -754,7 +754,7 @@ begin
 
                  MsgInfo('Posted Journal ' + IntToStr(iJournal));
                  Self.Close;
-              end;
+               end;
             end
             else
             begin
@@ -875,7 +875,7 @@ end;
 
 function TfrmTrustJournal.CheckClearedTrust: boolean;
 var
-  cTrust, cProtected: Currency;
+   cTrust, cProtected: double;
   // 27/08/2004 TH - Commented out due to warnings
   // cPriorBalance: Currency;
   // sSQL, sSQLWhere : string;
@@ -886,9 +886,10 @@ var
   // AmountList : TStringList;
   // n,
   // nAccount: integer;
-  LMsg: String;
+   LMsg: String;
+   bReturn: boolean;
 begin
-   Result := True;
+   bReturn := True;
    if qryCheckAlloc.Active then
       qryCheckAlloc.Close;
    qryCheckAlloc.ParamByName('FILEID').AsString := qryLedger.FieldByName('REFNO').AsString;
@@ -905,37 +906,37 @@ begin
 
    cTrust := ClearTrust(qryLedger.FieldByName('REFNO').AsString);
 
-   cProtected := qrySpecPurposeAllocs.FieldByName('SPEC_PURPOSE').AsCurrency;
+   cProtected := qrySpecPurposeAllocs.FieldByName('SPEC_PURPOSE').AsFloat;
 //   cProtected := TableCurrency('MATTER', 'FILEID', qryLedger.FieldByName('REFNO').AsString, 'SPEC_PURPOSE');
    if (qryLedger.FieldByName('TYPE').AsString = 'Matter') then
    begin
-      if ((qryLedger.FieldByName('DEBIT').AsCurrency * -1) + cTrust) < 0 then
+      if ((qryLedger.FieldByName('DEBIT').AsFloat * -1) + cTrust) < 0 then
       begin
         if(cTrust >= 0) then
            LMsg := Format('There is %m in cleared Trust funds on File %s'#13#10'This will result in the Trust funds being overdrawn by %m',
-                           [cTrust,qryLedger.FieldByName('REFNO').AsString, -(cTrust - qryLedger.FieldByName('Debit').AsCurrency) ])
+                           [cTrust,qryLedger.FieldByName('REFNO').AsString, -(cTrust - qryLedger.FieldByName('Debit').AsFloat) ])
          else
            LMsg := Format('The Trust funds for File %s is overdrawn by %m.'#13#10'This will result in the Trust funds being overdrawn by %m',
-                           [qryLedger.FieldByName('REFNO').AsString, -(cTrust), -(cTrust - qryLedger.FieldByName('Debit').AsCurrency) ]);
+                           [qryLedger.FieldByName('REFNO').AsString, -(cTrust), -(cTrust - qryLedger.FieldByName('Debit').AsFloat) ]);
          Application.MessageBox(PChar(LMsg),'Insight',MB_OK + MB_ICONEXCLAMATION);
-         Result := False;
+         bReturn := False;
       end
       else
-      if ((cTrust - Abs(qryLedger.FieldByName('DEBIT').AsCurrency)) - cProtected) < -0.001 then
+      if ((cTrust - Abs(qryLedger.FieldByName('DEBIT').AsFloat)) - cProtected) < -0.001 then
       begin
         //check to see if it's a stat deposit transaction
         if not (TableInteger('BANK', 'ACCT', cbBank.Text, 'STAT_DEP_MATTER') = qryCheckAlloc.FieldbyName('NMATTER').AsInteger) then
            raise ETrustOverDraw.Create('Not enough unprotected Trust funds on File ' + qryLedger.FieldByName('REFNO').AsString);
-           Result := False;
+        bReturn := False;
       end
-      else if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
-      begin
-         if Abs(qryLedger.FieldByName('Debit').AsCurrency) > cProtected then
-            raise ETrustOverDraw.Create('There is only ' + Format('%m', [cProtected]) + ' in the Protected Trust Balance of File ' + qryLedger.FieldByName('REFNO').AsString);
-            Result := False;
-      end;
+   end
+   else if qryLedger.FieldByName('TYPE').AsString = 'Protected' then
+   begin
+      if Abs(qryLedger.FieldByName('Debit').AsFloat) > cProtected then
+         raise ETrustOverDraw.Create('There is ' + Format('%m', [cProtected]) + ' in the Protected Trust Balance of File ' + qryLedger.FieldByName('REFNO').AsString);
+      bReturn := False;
    end;
-
+   Result := bReturn;
 end;
 
 procedure TfrmTrustJournal.cxGrid1DBTableView1REFNO1PropertiesButtonClick(
